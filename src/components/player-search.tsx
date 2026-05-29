@@ -24,7 +24,7 @@ export function PlayerSearch() {
     const trimmed = nickname.trim();
     if (!trimmed) return;
     startTransition(() => {
-      router.push(`/${region}/player/${encodeURIComponent(trimmed)}`);
+      router.push(`/${region}/players/${encodeURIComponent(trimmed)}`);
     });
   }
 
