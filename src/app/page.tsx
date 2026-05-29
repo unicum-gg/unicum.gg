@@ -9,7 +9,7 @@ export default function Home() {
             unicum.gg
           </h1>
           <p className="max-w-md text-base text-muted-foreground sm:text-lg">
-            Stats World of Tanks. Cherchez un joueur par pseudo.
+            World of Tanks stats. Find a player by nickname.
           </p>
         </div>
         <PlayerSearch />

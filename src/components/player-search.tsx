@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { REGION_LABEL, REGIONS, type Region } from "@/services/wargaming";
+import { REGION_LABEL, REGIONS, type Region } from "@/services/wargaming/wot";
 
 export function PlayerSearch() {
   const router = useRouter();
@@ -53,7 +53,7 @@ export function PlayerSearch() {
       <Input
         type="search"
         name="nickname"
-        placeholder="Pseudo du joueur"
+        placeholder="Player nickname"
         value={nickname}
         onValueChange={setNickname}
         autoComplete="off"
@@ -61,7 +61,7 @@ export function PlayerSearch() {
         className="flex-1"
       />
       <Button type="submit" loading={isPending} disabled={!nickname.trim()}>
-        Rechercher
+        Search
       </Button>
     </form>
   );
