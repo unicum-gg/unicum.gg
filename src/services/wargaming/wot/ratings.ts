@@ -186,13 +186,13 @@ export function computeWN8(
     Math.min(rDAMAGEc + 0.1, (rDef - 0.1) / (1 - 0.1)),
   );
 
-  return (
+  const result =
     980 * rDAMAGEc +
     210 * rDAMAGEc * rFRAGc +
     155 * rFRAGc * rSPOTc +
     75 * rDEFc * rFRAGc +
-    145 * Math.min(1.8, rWINc)
-  );
+    145 * Math.min(1.8, rWINc);
+  return Number.isFinite(result) ? result : null;
 }
 
 export type WNXExpected = {
@@ -287,5 +287,6 @@ export function computeWNX(
   );
 
   const raw = 750 * rDmgC + 200 * rFragsC + 50 * rSpotsC;
-  return raw * (raw / 1000) ** 0.45 * 1.65;
+  const result = raw * (raw / 1000) ** 0.45 * 1.65;
+  return Number.isFinite(result) ? result : null;
 }
