@@ -1,6 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import {
   Tooltip,
@@ -8,7 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ClanStint } from "@/services/wargaming/wot/clans";
+import type { Region } from "@/services/wargaming/wot";
+import type { ClanStint } from "@/services/wargaming/wot/clans/player";
 
 function prettyRole(role: string): string {
   if (!role) return "—";
@@ -39,9 +41,11 @@ function yearTicks(start: Date, end: Date): Date[] {
 }
 
 export function PlayerClansTimeline({
+  region,
   accountCreatedAt,
   stints,
 }: {
+  region: Region;
   accountCreatedAt: Date;
   stints: ClanStint[];
 }) {
@@ -82,12 +86,14 @@ export function PlayerClansTimeline({
             const showLabel = width > 4;
             const showEmblem = width > 8;
             const tag = s.clan.tag;
+            const clanHref = `/${region}/clans/${encodeURIComponent(tag)}`;
             return (
               <Tooltip key={`${s.clan.id}-${stintStartMs}`}>
                 <TooltipTrigger
                   render={
-                    <div
-                      className="absolute top-0 bottom-0 flex cursor-default items-center justify-center gap-1 overflow-hidden rounded-sm px-1 text-[10px] font-semibold tracking-wide"
+                    <Link
+                      href={clanHref}
+                      className="absolute top-0 bottom-0 flex items-center justify-center gap-1 overflow-hidden rounded-sm px-1 text-[10px] font-semibold tracking-wide transition-opacity hover:opacity-80"
                       style={{
                         left: `${left}%`,
                         width: `${width}%`,
@@ -105,7 +111,7 @@ export function PlayerClansTimeline({
                         />
                       )}
                       {showLabel && <span className="truncate">{tag}</span>}
-                    </div>
+                    </Link>
                   }
                 />
                 <TooltipContent>

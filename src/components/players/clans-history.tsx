@@ -6,6 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format, formatDistanceStrict } from "date-fns";
+import Link from "next/link";
 import { useState } from "react";
 import { PlayerClansTimeline } from "@/components/players/clans-timeline";
 import {
@@ -17,10 +18,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
+import type { Region } from "@/services/wargaming/wot";
 import type {
   ClanStint,
   PlayerClanHistoryFull,
-} from "@/services/wargaming/wot/clans";
+} from "@/services/wargaming/wot/clans/player";
 
 function prettyRole(role: string): string {
   if (!role) return "—";
@@ -142,9 +144,11 @@ function SortableHead({
 }
 
 export function PlayerClansHistory({
+  region,
   accountCreatedAt,
   clanHistory,
 }: {
+  region: Region;
   accountCreatedAt: Date;
   clanHistory: PlayerClanHistoryFull;
 }) {
@@ -184,6 +188,7 @@ export function PlayerClansHistory({
       ) : (
         <>
           <PlayerClansTimeline
+            region={region}
             accountCreatedAt={accountCreatedAt}
             stints={stints}
           />
@@ -213,34 +218,42 @@ export function PlayerClansHistory({
               </TableRow>
             </TableHeader>
             <TableBody>
-              {sortedStints.map((s) => (
-                <TableRow key={`${s.clan.id}-${s.joinedAt.getTime()}`}>
-                  <TableCell className="font-semibold">
-                    <span style={{ color: s.clan.color }}>[</span>
-                    {s.clan.tag}
-                    <span style={{ color: s.clan.color }}>]</span>
-                  </TableCell>
-                  <TableCell>
-                    <span className="flex items-center gap-2">
-                      <img
-                        src={s.clan.emblem}
-                        alt={`${s.clan.tag} emblem`}
-                        width={20}
-                        height={20}
-                        className="size-5 shrink-0 rounded-sm"
-                      />
-                      {s.clan.name}
-                    </span>
-                  </TableCell>
-                  <TableCell>{prettyRole(s.role)}</TableCell>
-                  <TableCell className="tabular-nums">
-                    {formatPeriod(s.joinedAt, s.leftAt)}
-                  </TableCell>
-                  <TableCell className="text-right tabular-nums">
-                    {formatDuration(s.joinedAt, s.leftAt)}
-                  </TableCell>
-                </TableRow>
-              ))}
+              {sortedStints.map((s) => {
+                const clanHref = `/${region}/clans/${encodeURIComponent(s.clan.tag)}`;
+                return (
+                  <TableRow key={`${s.clan.id}-${s.joinedAt.getTime()}`}>
+                    <TableCell className="font-semibold">
+                      <Link href={clanHref} className="hover:underline">
+                        <span style={{ color: s.clan.color }}>[</span>
+                        {s.clan.tag}
+                        <span style={{ color: s.clan.color }}>]</span>
+                      </Link>
+                    </TableCell>
+                    <TableCell>
+                      <Link
+                        href={clanHref}
+                        className="flex items-center gap-2 hover:underline"
+                      >
+                        <img
+                          src={s.clan.emblem}
+                          alt={`${s.clan.tag} emblem`}
+                          width={20}
+                          height={20}
+                          className="size-5 shrink-0 rounded-sm"
+                        />
+                        {s.clan.name}
+                      </Link>
+                    </TableCell>
+                    <TableCell>{prettyRole(s.role)}</TableCell>
+                    <TableCell className="tabular-nums">
+                      {formatPeriod(s.joinedAt, s.leftAt)}
+                    </TableCell>
+                    <TableCell className="text-right tabular-nums">
+                      {formatDuration(s.joinedAt, s.leftAt)}
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </>

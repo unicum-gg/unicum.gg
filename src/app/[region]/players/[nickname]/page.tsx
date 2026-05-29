@@ -16,7 +16,7 @@ import {
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
 import { isRegion } from "@/services/wargaming/wot";
-import { getFullPlayerClanHistory } from "@/services/wargaming/wot/clans";
+import { getFullPlayerClanHistory } from "@/services/wargaming/wot/clans/player";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
@@ -81,6 +81,7 @@ export default async function PlayerPage({
   return (
     <div className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
       <PlayerHeader
+        region={region}
         nickname={info.nickname}
         createdAt={new Date(info.created_at * 1000)}
         lastBattleAt={new Date(info.last_battle_time * 1000)}
@@ -99,6 +100,7 @@ export default async function PlayerPage({
       />
 
       <PlayerClansHistory
+        region={region}
         accountCreatedAt={new Date(info.created_at * 1000)}
         clanHistory={clanHistory}
       />

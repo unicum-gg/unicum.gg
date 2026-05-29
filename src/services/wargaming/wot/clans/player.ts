@@ -1,4 +1,8 @@
-import { type Region, REGION_PORTAL_HOST, wgFetch } from ".";
+import {
+  portalFetch,
+  type Region,
+  REGION_PORTAL_HOST,
+} from "@/services/wargaming/wot";
 
 export type ClanRef = {
   id: number;
@@ -107,20 +111,6 @@ function stintFromHistory(
   };
 }
 
-async function portalFetch<T>(url: URL): Promise<T> {
-  const res = await fetch(url, {
-    headers: {
-      "x-requested-with": "XMLHttpRequest",
-      accept: "application/json",
-      "accept-language": "en",
-    },
-  });
-  if (!res.ok) {
-    throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
-  }
-  return (await res.json()) as T;
-}
-
 export async function getFullPlayerClanHistory(
   region: Region,
   accountId: number,
@@ -156,56 +146,4 @@ export async function getFullPlayerClanHistory(
     totalClans: card.clans_count + (currentStint ? 1 : 0),
     timeInClansSeconds: card.time_in_clans,
   };
-}
-
-export type ClanMember = { account_id: number; account_name: string };
-
-const CLAN_LIST_PAGE_SIZE = 100;
-const CLAN_INFO_BATCH_SIZE = 100;
-
-export async function listTopClansByMembers(
-  region: Region,
-  topN: number,
-): Promise<number[]> {
-  const ids: number[] = [];
-  let pageNo = 1;
-  while (ids.length < topN) {
-    const limit = Math.min(CLAN_LIST_PAGE_SIZE, topN - ids.length);
-    const result = await wgFetch<Array<{ clan_id: number }>>(
-      region,
-      "/wot/clans/list/",
-      {
-        limit: String(limit),
-        page_no: String(pageNo),
-        order_by: "-members_count",
-        fields: "clan_id",
-      },
-    );
-    if (result.length === 0) break;
-    ids.push(...result.map((c) => c.clan_id));
-    if (result.length < limit) break;
-    pageNo += 1;
-  }
-  return ids;
-}
-
-export async function getClansMembers(
-  region: Region,
-  clanIds: number[],
-): Promise<Map<number, ClanMember[]>> {
-  const out = new Map<number, ClanMember[]>();
-  for (let i = 0; i < clanIds.length; i += CLAN_INFO_BATCH_SIZE) {
-    const batch = clanIds.slice(i, i + CLAN_INFO_BATCH_SIZE);
-    const data = await wgFetch<
-      Record<string, { members: ClanMember[] } | null>
-    >(region, "/wot/clans/info/", {
-      clan_id: batch.join(","),
-      fields: "members.account_id,members.account_name",
-    });
-    for (const [id, clan] of Object.entries(data)) {
-      if (!clan) continue;
-      out.set(Number(id), clan.members);
-    }
-  }
-  return out;
 }

@@ -1,17 +1,21 @@
 import { format, formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
-import type { ClanStint } from "@/services/wargaming/wot/clans";
+import type { Region } from "@/services/wargaming/wot";
+import type { ClanStint } from "@/services/wargaming/wot/clans/player";
 
 const MONTH_FORMAT = "MMM yyyy";
 const DAY_FORMAT = "MMM d, yyyy";
 
 export function PlayerHeader({
+  region,
   nickname,
   createdAt,
   lastBattleAt,
   updatedAt,
   currentStint,
 }: {
+  region: Region;
   nickname: string;
   createdAt: Date;
   lastBattleAt: Date;
@@ -43,7 +47,10 @@ export function PlayerHeader({
         </div>
       </div>
       {currentStint && (
-        <div className="flex items-center gap-3 text-sm">
+        <Link
+          href={`/${region}/clans/${encodeURIComponent(currentStint.clan.tag)}`}
+          className="flex items-center gap-3 text-sm hover:opacity-80"
+        >
           <div className="text-right">
             <div>
               <span className="font-semibold">
@@ -65,7 +72,7 @@ export function PlayerHeader({
             height={40}
             className="size-10 shrink-0 rounded-md"
           />
-        </div>
+        </Link>
       )}
     </header>
   );
