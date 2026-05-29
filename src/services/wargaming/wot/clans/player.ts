@@ -42,14 +42,14 @@ type PortalRole = { name: string; localized: string };
 type PortalCurrentClan = {
   clan: PortalClan;
   joined_at: string;
-  role: PortalRole;
+  role: PortalRole | null;
 };
 
 type PortalHistoryStint = {
   clan: PortalClan;
   since: string;
   until: string;
-  role: PortalRole;
+  role: PortalRole | null;
 };
 
 type PortalAccountCard = {
@@ -93,8 +93,8 @@ function stintFromCurrent(
     clan: clanRefFromPortal(region, cur.clan),
     joinedAt: new Date(cur.joined_at),
     leftAt: null,
-    role: cur.role.name,
-    roleLocalized: cur.role.localized,
+    role: cur.role?.name ?? "",
+    roleLocalized: cur.role?.localized ?? "",
   };
 }
 
@@ -106,8 +106,8 @@ function stintFromHistory(
     clan: clanRefFromPortal(region, h.clan),
     joinedAt: new Date(h.since),
     leftAt: new Date(h.until),
-    role: h.role.name,
-    roleLocalized: h.role.localized,
+    role: h.role?.name ?? "",
+    roleLocalized: h.role?.localized ?? "",
   };
 }
 
