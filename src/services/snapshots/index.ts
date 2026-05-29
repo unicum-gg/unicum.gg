@@ -1,14 +1,18 @@
-import { and, desc, eq, lte } from "drizzle-orm";
+import { and, desc, eq, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   type NewPlayerSnapshot,
+  type NewTankSnapshot,
   type Player,
   type PlayerSnapshot,
   playerSnapshots,
   players,
+  type TankSnapshot,
+  tankSnapshots,
 } from "@/services/db/schema";
 import type { PlayerInfo } from "@/services/wargaming/wot/accounts";
 import type { Region } from "@/services/wargaming/wot";
+import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -26,6 +30,8 @@ export type Stats = {
   droppedCapturePoints: number;
   hits: number;
   shots: number;
+  globalRating: number;
+  wtr: number | null;
 };
 
 export function statsFromSnapshot(s: PlayerSnapshot): Stats {
@@ -43,6 +49,8 @@ export function statsFromSnapshot(s: PlayerSnapshot): Stats {
     droppedCapturePoints: s.droppedCapturePoints,
     hits: s.hits,
     shots: s.shots,
+    globalRating: s.globalRating,
+    wtr: s.wtr,
   };
 }
 
@@ -61,10 +69,17 @@ export function diffStats(curr: Stats, prev: Stats): Stats {
     droppedCapturePoints: curr.droppedCapturePoints - prev.droppedCapturePoints,
     hits: curr.hits - prev.hits,
     shots: curr.shots - prev.shots,
+    globalRating: curr.globalRating - prev.globalRating,
+    wtr:
+      curr.wtr !== null && prev.wtr !== null ? curr.wtr - prev.wtr : null,
   };
 }
 
-function snapshotFromInfo(playerId: number, info: PlayerInfo): NewPlayerSnapshot {
+function snapshotFromInfo(
+  playerId: number,
+  info: PlayerInfo,
+  wtr: number | null,
+): NewPlayerSnapshot {
   const s = info.statistics.all;
   return {
     playerId,
@@ -85,6 +100,7 @@ function snapshotFromInfo(playerId: number, info: PlayerInfo): NewPlayerSnapshot
     shots: s.shots,
     hitsPercents: s.hits_percents,
     globalRating: info.global_rating,
+    wtr,
   };
 }
 
@@ -93,9 +109,50 @@ export type SnapshotContext = {
   latest: PlayerSnapshot;
 };
 
+const TANK_INSERT_CHUNK = 500;
+
+function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot {
+  return {
+    playerId,
+    tankId: t.tank_id,
+    battles: t.all.battles,
+    wins: t.all.wins,
+    damageDealt: t.all.damage_dealt,
+    spotted: t.all.spotted,
+    frags: t.all.frags,
+    droppedCapturePoints: t.all.dropped_capture_points,
+    radioAssistedDamage: t.all.radio_assisted_damage,
+    trackAssistedDamage: t.all.track_assisted_damage,
+  };
+}
+
+async function bulkInsertTankSnapshots(
+  playerId: number,
+  tanks: TankStats[],
+): Promise<void> {
+  const rows = tanks
+    .filter((t) => t.all.battles > 0)
+    .map((t) => tankSnapshotFromStats(playerId, t));
+  for (let i = 0; i < rows.length; i += TANK_INSERT_CHUNK) {
+    const chunk = rows.slice(i, i + TANK_INSERT_CHUNK);
+    await db
+      .insert(tankSnapshots)
+      .values(chunk)
+      .onConflictDoNothing({
+        target: [
+          tankSnapshots.playerId,
+          tankSnapshots.tankId,
+          tankSnapshots.battles,
+        ],
+      });
+  }
+}
+
 export async function recordCurrentSnapshot(
   region: Region,
   info: PlayerInfo,
+  wtr: number | null = null,
+  tanks: TankStats[] = [],
 ): Promise<SnapshotContext> {
   const [player] = await db
     .insert(players)
@@ -114,7 +171,7 @@ export async function recordCurrentSnapshot(
     .select()
     .from(playerSnapshots)
     .where(eq(playerSnapshots.playerId, player.id))
-    .orderBy(desc(playerSnapshots.takenAt))
+    .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
 
   const stale =
@@ -123,16 +180,19 @@ export async function recordCurrentSnapshot(
     latest.battles !== info.statistics.all.battles;
 
   if (!stale) {
-    return { player, latest };
+    if (tanks.length > 0) await bulkInsertTankSnapshots(player.id, tanks);
+    return { player, latest: await backfillWtr(latest, wtr) };
   }
 
   const [inserted] = await db
     .insert(playerSnapshots)
-    .values(snapshotFromInfo(player.id, info))
+    .values(snapshotFromInfo(player.id, info, wtr))
     .onConflictDoNothing({
       target: [playerSnapshots.playerId, playerSnapshots.battles],
     })
     .returning();
+
+  if (tanks.length > 0) await bulkInsertTankSnapshots(player.id, tanks);
 
   if (inserted) return { player, latest: inserted };
 
@@ -140,9 +200,21 @@ export async function recordCurrentSnapshot(
     .select()
     .from(playerSnapshots)
     .where(eq(playerSnapshots.playerId, player.id))
-    .orderBy(desc(playerSnapshots.takenAt))
+    .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
-  return { player, latest: winner };
+  return { player, latest: await backfillWtr(winner, wtr) };
+}
+
+async function backfillWtr(
+  snapshot: PlayerSnapshot,
+  wtr: number | null,
+): Promise<PlayerSnapshot> {
+  if (snapshot.wtr !== null || wtr === null) return snapshot;
+  await db
+    .update(playerSnapshots)
+    .set({ wtr })
+    .where(eq(playerSnapshots.id, snapshot.id));
+  return { ...snapshot, wtr };
 }
 
 export type PeriodComparators = {
@@ -183,4 +255,101 @@ export async function getPeriodComparators(
   ]);
 
   return { h24, d7, d30 };
+}
+
+export type TankSnapshotMap = Map<number, TankSnapshot>;
+
+export type PeriodTankComparators = {
+  h24: TankSnapshotMap;
+  d7: TankSnapshotMap;
+  d30: TankSnapshotMap;
+};
+
+export async function getPeriodTankComparators(
+  playerId: number,
+): Promise<PeriodTankComparators> {
+  const now = Date.now();
+  const cutoffs = {
+    h24: new Date(now - 24 * 60 * 60 * 1000).toISOString(),
+    d7: new Date(now - 7 * 24 * 60 * 60 * 1000).toISOString(),
+    d30: new Date(now - 30 * 24 * 60 * 60 * 1000).toISOString(),
+  };
+
+  async function tanksBefore(cutoff: string): Promise<TankSnapshotMap> {
+    const rows = await db.execute(sql`
+      SELECT DISTINCT ON (tank_id) *
+      FROM ${tankSnapshots}
+      WHERE player_id = ${playerId} AND taken_at < ${cutoff}
+      ORDER BY tank_id, taken_at DESC, id DESC
+    `);
+    const map: TankSnapshotMap = new Map();
+    for (const row of rows as unknown as Array<{
+      id: number;
+      player_id: number;
+      tank_id: number;
+      taken_at: Date;
+      battles: number;
+      wins: number;
+      damage_dealt: number;
+      spotted: number;
+      frags: number;
+      dropped_capture_points: number;
+      radio_assisted_damage: number;
+      track_assisted_damage: number;
+    }>) {
+      map.set(row.tank_id, {
+        id: row.id,
+        playerId: row.player_id,
+        tankId: row.tank_id,
+        takenAt: row.taken_at,
+        battles: row.battles,
+        wins: row.wins,
+        damageDealt: row.damage_dealt,
+        spotted: row.spotted,
+        frags: row.frags,
+        droppedCapturePoints: row.dropped_capture_points,
+        radioAssistedDamage: row.radio_assisted_damage,
+        trackAssistedDamage: row.track_assisted_damage,
+      });
+    }
+    return map;
+  }
+
+  const [h24, d7, d30] = await Promise.all([
+    tanksBefore(cutoffs.h24),
+    tanksBefore(cutoffs.d7),
+    tanksBefore(cutoffs.d30),
+  ]);
+
+  return { h24, d7, d30 };
+}
+
+export function diffTanks(
+  current: TankStats[],
+  past: TankSnapshotMap,
+): TankStats[] {
+  const out: TankStats[] = [];
+  for (const t of current) {
+    const p = past.get(t.tank_id);
+    if (!p) continue;
+    const battlesDiff = t.all.battles - p.battles;
+    if (battlesDiff <= 0) continue;
+    out.push({
+      tank_id: t.tank_id,
+      all: {
+        battles: battlesDiff,
+        wins: t.all.wins - p.wins,
+        damage_dealt: t.all.damage_dealt - p.damageDealt,
+        spotted: t.all.spotted - p.spotted,
+        frags: t.all.frags - p.frags,
+        dropped_capture_points:
+          t.all.dropped_capture_points - p.droppedCapturePoints,
+        radio_assisted_damage:
+          t.all.radio_assisted_damage - p.radioAssistedDamage,
+        track_assisted_damage:
+          t.all.track_assisted_damage - p.trackAssistedDamage,
+      },
+    });
+  }
+  return out;
 }

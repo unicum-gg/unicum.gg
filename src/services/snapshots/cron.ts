@@ -3,13 +3,17 @@ import cron from "node-cron";
 import { db } from "@/services/db";
 import { players } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
-import { getPlayerInfo } from "@/services/wargaming/wot/accounts";
+import {
+  getAccountWTR,
+  getPlayerInfo,
+} from "@/services/wargaming/wot/accounts";
+import { getTanksStats } from "@/services/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from ".";
 
 const SCHEDULE = "* * * * *";
-const BATCH_SIZE = 10;
+const BATCH_SIZE = 200;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
-const REQUEST_DELAY_MS = 100;
+const REQUEST_DELAY_MS = 200;
 
 export function startSnapshotCron() {
   cron.schedule(SCHEDULE, () => {
@@ -47,9 +51,13 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
   for (const player of due) {
     try {
       const region = player.region as Region;
-      const info = await getPlayerInfo(region, player.accountId);
+      const [info, wtr, tanks] = await Promise.all([
+        getPlayerInfo(region, player.accountId),
+        getAccountWTR(region, player.accountId),
+        getTanksStats(region, player.accountId),
+      ]);
       if (info) {
-        await recordCurrentSnapshot(region, info);
+        await recordCurrentSnapshot(region, info, wtr, tanks);
         succeeded += 1;
       }
     } catch (err) {

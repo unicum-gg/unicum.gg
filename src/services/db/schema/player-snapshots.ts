@@ -36,6 +36,7 @@ export const playerSnapshots = pgTable(
     shots: integer("shots").notNull(),
     hitsPercents: real("hits_percents").notNull(),
     globalRating: integer("global_rating").notNull(),
+    wtr: integer("wtr"),
   },
   (t) => [
     index("snapshots_player_id_taken_at_idx").on(t.playerId, t.takenAt),
