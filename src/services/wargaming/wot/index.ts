@@ -39,6 +39,35 @@ export class WargamingApiError extends Error {
   }
 }
 
+const RETRIABLE_WG_CODES = new Set([
+  "SOURCE_NOT_AVAILABLE",
+  "REQUEST_LIMIT_EXCEEDED",
+]);
+const MAX_RETRIES = 2;
+const RETRY_DELAYS_MS = [250, 750];
+
+function isRetriable(err: unknown): boolean {
+  if (err instanceof WargamingApiError) return RETRIABLE_WG_CODES.has(err.code);
+  if (err instanceof Error && /HTTP (5\d\d|408|429)/.test(err.message)) {
+    return true;
+  }
+  return false;
+}
+
+async function withRetries<T>(fn: () => Promise<T>): Promise<T> {
+  let lastErr: unknown;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await fn();
+    } catch (err) {
+      lastErr = err;
+      if (attempt === MAX_RETRIES || !isRetriable(err)) throw err;
+      await new Promise((r) => setTimeout(r, RETRY_DELAYS_MS[attempt] ?? 1000));
+    }
+  }
+  throw lastErr;
+}
+
 export async function wgFetch<T>(
   region: Region,
   path: string,
@@ -51,14 +80,32 @@ export async function wgFetch<T>(
     url.searchParams.set(key, value);
   }
 
-  const res = await fetch(url, { next: { revalidate } });
-  if (!res.ok) {
-    throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
-  }
+  return withRetries(async () => {
+    const res = await fetch(url, { next: { revalidate } });
+    if (!res.ok) {
+      throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
+    }
 
-  const body = (await res.json()) as WgResponse<T>;
-  if (body.status === "error") {
-    throw new WargamingApiError(body.error.message, body.error.field);
-  }
-  return body.data;
+    const body = (await res.json()) as WgResponse<T>;
+    if (body.status === "error") {
+      throw new WargamingApiError(body.error.message, body.error.field);
+    }
+    return body.data;
+  });
+}
+
+export async function portalFetch<T>(url: URL): Promise<T> {
+  return withRetries(async () => {
+    const res = await fetch(url, {
+      headers: {
+        "x-requested-with": "XMLHttpRequest",
+        accept: "application/json",
+        "accept-language": "en",
+      },
+    });
+    if (!res.ok) {
+      throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
+    }
+    return (await res.json()) as T;
+  });
 }

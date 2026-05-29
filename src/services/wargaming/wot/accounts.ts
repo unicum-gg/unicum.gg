@@ -71,6 +71,28 @@ export async function getPlayerInfo(
   return data[String(accountId)] ?? null;
 }
 
+const ACCOUNT_INFO_BATCH_SIZE = 100;
+
+export async function getPlayersInfoBatch(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, PlayerInfo>> {
+  const out = new Map<number, PlayerInfo>();
+  const unique = Array.from(new Set(accountIds));
+  for (let i = 0; i < unique.length; i += ACCOUNT_INFO_BATCH_SIZE) {
+    const batch = unique.slice(i, i + ACCOUNT_INFO_BATCH_SIZE);
+    const data = await wgFetch<Record<string, PlayerInfo | null>>(
+      region,
+      "/wot/account/info/",
+      { account_id: batch.join(",") },
+    );
+    for (const [id, info] of Object.entries(data)) {
+      if (info) out.set(Number(id), info);
+    }
+  }
+  return out;
+}
+
 export async function getAccountWTR(
   region: Region,
   accountId: number,
