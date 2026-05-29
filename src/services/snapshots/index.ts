@@ -1,4 +1,4 @@
-import { and, desc, eq, lte, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   type NewPlayerSnapshot,
@@ -322,6 +322,175 @@ export async function getPeriodTankComparators(
   ]);
 
   return { h24, d7, d30 };
+}
+
+export async function getPlayerIdsByAccounts(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, number>> {
+  if (accountIds.length === 0) return new Map();
+  const rows = await db
+    .select({ id: players.id, accountId: players.accountId })
+    .from(players)
+    .where(
+      and(
+        eq(players.region, region),
+        inArray(players.accountId, accountIds),
+      ),
+    );
+  const map = new Map<number, number>();
+  for (const r of rows) map.set(r.accountId, r.id);
+  return map;
+}
+
+export async function getLatestPlayerSnapshotsByAccounts(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, PlayerSnapshot>> {
+  if (accountIds.length === 0) return new Map();
+  const idMap = await getPlayerIdsByAccounts(region, accountIds);
+  const playerIds = Array.from(idMap.values());
+  if (playerIds.length === 0) return new Map();
+
+  const rows = (await db.execute(sql`
+    SELECT DISTINCT ON (player_id) *
+    FROM ${playerSnapshots}
+    WHERE player_id IN ${sql.raw(`(${playerIds.join(",")})`)}
+    ORDER BY player_id, taken_at DESC, id DESC
+  `)) as unknown as Array<{
+    id: number;
+    player_id: number;
+    taken_at: Date;
+    battles: number;
+    wins: number;
+    losses: number;
+    draws: number;
+    survived_battles: number;
+    frags: number;
+    damage_dealt: number;
+    damage_received: number;
+    xp: number;
+    battle_avg_xp: number;
+    spotted: number;
+    capture_points: number;
+    dropped_capture_points: number;
+    hits: number;
+    shots: number;
+    hits_percents: number;
+    global_rating: number;
+    wtr: number | null;
+  }>;
+
+  const playerIdToAccount = new Map<number, number>();
+  for (const [accountId, playerId] of idMap) {
+    playerIdToAccount.set(playerId, accountId);
+  }
+
+  const out = new Map<number, PlayerSnapshot>();
+  for (const row of rows) {
+    const accountId = playerIdToAccount.get(row.player_id);
+    if (accountId === undefined) continue;
+    out.set(accountId, {
+      id: row.id,
+      playerId: row.player_id,
+      takenAt: row.taken_at,
+      battles: row.battles,
+      wins: row.wins,
+      losses: row.losses,
+      draws: row.draws,
+      survivedBattles: row.survived_battles,
+      frags: row.frags,
+      damageDealt: row.damage_dealt,
+      damageReceived: row.damage_received,
+      xp: row.xp,
+      battleAvgXp: row.battle_avg_xp,
+      spotted: row.spotted,
+      capturePoints: row.capture_points,
+      droppedCapturePoints: row.dropped_capture_points,
+      hits: row.hits,
+      shots: row.shots,
+      hitsPercents: row.hits_percents,
+      globalRating: row.global_rating,
+      wtr: row.wtr,
+    });
+  }
+  return out;
+}
+
+export async function getLatestTankSnapshotsByAccounts(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, TankSnapshot[]>> {
+  if (accountIds.length === 0) return new Map();
+  const idMap = await getPlayerIdsByAccounts(region, accountIds);
+  const playerIds = Array.from(idMap.values());
+  if (playerIds.length === 0) return new Map();
+
+  const rows = (await db.execute(sql`
+    SELECT DISTINCT ON (player_id, tank_id) *
+    FROM ${tankSnapshots}
+    WHERE player_id IN ${sql.raw(`(${playerIds.join(",")})`)}
+    ORDER BY player_id, tank_id, taken_at DESC, id DESC
+  `)) as unknown as Array<{
+    id: number;
+    player_id: number;
+    tank_id: number;
+    taken_at: Date;
+    battles: number;
+    wins: number;
+    damage_dealt: number;
+    spotted: number;
+    frags: number;
+    dropped_capture_points: number;
+    radio_assisted_damage: number;
+    track_assisted_damage: number;
+  }>;
+
+  const playerIdToAccount = new Map<number, number>();
+  for (const [accountId, playerId] of idMap) {
+    playerIdToAccount.set(playerId, accountId);
+  }
+
+  const out = new Map<number, TankSnapshot[]>();
+  for (const row of rows) {
+    const accountId = playerIdToAccount.get(row.player_id);
+    if (accountId === undefined) continue;
+    const arr = out.get(accountId) ?? [];
+    arr.push({
+      id: row.id,
+      playerId: row.player_id,
+      tankId: row.tank_id,
+      takenAt: row.taken_at,
+      battles: row.battles,
+      wins: row.wins,
+      damageDealt: row.damage_dealt,
+      spotted: row.spotted,
+      frags: row.frags,
+      droppedCapturePoints: row.dropped_capture_points,
+      radioAssistedDamage: row.radio_assisted_damage,
+      trackAssistedDamage: row.track_assisted_damage,
+    });
+    out.set(accountId, arr);
+  }
+  return out;
+}
+
+export function tankSnapshotsToTankStats(
+  snapshots: TankSnapshot[],
+): TankStats[] {
+  return snapshots.map((s) => ({
+    tank_id: s.tankId,
+    all: {
+      battles: s.battles,
+      wins: s.wins,
+      damage_dealt: s.damageDealt,
+      spotted: s.spotted,
+      frags: s.frags,
+      dropped_capture_points: s.droppedCapturePoints,
+      radio_assisted_damage: s.radioAssistedDamage,
+      track_assisted_damage: s.trackAssistedDamage,
+    },
+  }));
 }
 
 export function diffTanks(
