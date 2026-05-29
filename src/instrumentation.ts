@@ -9,4 +9,7 @@ export async function register() {
 
   const { startSnapshotCron } = await import("@/services/snapshots/cron");
   startSnapshotCron();
+
+  const { startDiscoveryCron } = await import("@/services/discovery/cron");
+  startDiscoveryCron();
 }
