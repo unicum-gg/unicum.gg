@@ -1,4 +1,4 @@
-import { and, asc, count, eq, lt } from "drizzle-orm";
+import { and, asc, count, eq, lt, sql } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
@@ -89,6 +89,10 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
             `[cron] failed for ${player.nickname} (${region}):`,
             err,
           );
+          await db
+            .update(players)
+            .set({ lastSeenAt: sql`NOW()` })
+            .where(eq(players.id, player.id));
         }
         await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
       }
