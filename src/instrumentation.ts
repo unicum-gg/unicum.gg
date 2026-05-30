@@ -15,4 +15,7 @@ export async function register() {
 
   const { startDiscoveryCron } = await import("@/services/discovery/cron");
   startDiscoveryCron();
+
+  const { startTopClansCron } = await import("@/services/top-clans/cron");
+  startTopClansCron();
 }

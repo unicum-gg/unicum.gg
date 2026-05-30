@@ -1,7 +1,6 @@
-import { and, eq, isNotNull, sql } from "drizzle-orm";
-import { unstable_cache } from "next/cache";
+import { and, asc, eq, isNotNull, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { players, playerSnapshots } from "@/services/db/schema";
+import { players, playerSnapshots, topClans } from "@/services/db/schema";
 import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
@@ -27,7 +26,7 @@ export type TopClanResult = {
 const MIN_MEMBERS = 50;
 const ENRICH_CANDIDATES = 30;
 
-async function computeTopClansByWnx(
+export async function computeTopClansByWnx(
   region: Region,
   limit: number,
 ): Promise<TopClanResult[]> {
@@ -145,8 +144,25 @@ async function getLatestClanMembershipsByRegion(
     .where(eq(ranked.rn, 1));
 }
 
-export const getTopClansByWnx = unstable_cache(
-  computeTopClansByWnx,
-  ["top-clans-by-wnx"],
-  { revalidate: 60 * 60 * 24, tags: ["top-clans"] },
-);
+export async function getTopClansByWnx(
+  region: Region,
+  limit: number,
+): Promise<TopClanResult[]> {
+  const rows = await db
+    .select()
+    .from(topClans)
+    .where(eq(topClans.region, region))
+    .orderBy(asc(topClans.rank))
+    .limit(limit);
+
+  return rows.map((r) => ({
+    clan_id: r.clanId,
+    tag: r.tag,
+    name: r.name,
+    color: r.color,
+    emblem: r.emblem,
+    members_count: r.membersCount,
+    rated_members_count: r.ratedMembersCount,
+    avg_wnx: Number(r.avgWnx),
+  }));
+}
