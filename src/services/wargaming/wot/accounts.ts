@@ -123,3 +123,25 @@ export async function getAccountWTR(
   );
   return data[String(accountId)]?.rating ?? null;
 }
+
+const ACCOUNT_WTR_BATCH_SIZE = 100;
+
+export async function getAccountsWTRBatch(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, number>> {
+  const out = new Map<number, number>();
+  const unique = Array.from(new Set(accountIds));
+  for (let i = 0; i < unique.length; i += ACCOUNT_WTR_BATCH_SIZE) {
+    const batch = unique.slice(i, i + ACCOUNT_WTR_BATCH_SIZE);
+    const data = await wgFetch<Record<string, { rating: number } | null>>(
+      region,
+      "/wot/account/wtr/",
+      { account_id: batch.join(",") },
+    );
+    for (const [id, entry] of Object.entries(data)) {
+      if (entry?.rating != null) out.set(Number(id), entry.rating);
+    }
+  }
+  return out;
+}

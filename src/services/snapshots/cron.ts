@@ -5,7 +5,7 @@ import { db } from "@/services/db";
 import { players } from "@/services/db/schema";
 import { REGIONS } from "@/services/wargaming/wot";
 import {
-  getAccountWTR,
+  getAccountsWTRBatch,
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
 import { getTanksStats } from "@/services/wargaming/wot/tanks";
@@ -72,14 +72,22 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
 
   await Promise.all(
     dueByRegion.map(async ({ region, rows }) => {
+      const wtrByAccount = await getAccountsWTRBatch(
+        region,
+        rows.map((r) => r.accountId),
+      ).catch((err) => {
+        console.error(`[cron] wtr batch failed (${region}):`, err);
+        return new Map<number, number>();
+      });
+
       for (const player of rows) {
         try {
-          const [info, wtr, tanks] = await Promise.all([
+          const [info, tanks] = await Promise.all([
             getPlayerInfo(region, player.accountId),
-            getAccountWTR(region, player.accountId),
             getTanksStats(region, player.accountId),
           ]);
           if (info) {
+            const wtr = wtrByAccount.get(player.accountId) ?? null;
             await recordCurrentSnapshot(region, info, wtr, tanks);
             succeeded += 1;
           }
