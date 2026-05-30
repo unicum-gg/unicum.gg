@@ -96,20 +96,14 @@ export async function wgFetch<T>(
   params: Record<string, string>,
   revalidate = 60,
 ): Promise<T> {
-  const url = region === Region.ASIA
-    ? new URL(`${env.WG_ASIA_PROXY_URL}/papi${path}`)
-    : new URL(`https://${REGION_API_HOST[region]}${path}`);
+  const url = new URL(`https://${REGION_API_HOST[region]}${path}`);
   url.searchParams.set("application_id", applicationIdFor(region));
   for (const [key, value] of Object.entries(params)) {
     url.searchParams.set(key, value);
   }
 
-  const headers: HeadersInit = region === Region.ASIA
-    ? { Authorization: `Bearer ${env.WG_ASIA_PROXY_SECRET}` }
-    : {};
-
   return withRetries(async () => {
-    const res = await fetch(url, { headers, next: { revalidate } });
+    const res = await fetch(url, { next: { revalidate } });
     if (!res.ok) {
       throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
     }
@@ -123,21 +117,14 @@ export async function wgFetch<T>(
 }
 
 export async function portalFetch<T>(url: URL): Promise<T> {
-  const target = url.host === REGION_PORTAL_HOST.asia
-    ? new URL(`${env.WG_ASIA_PROXY_URL}/portal${url.pathname}${url.search}`)
-    : url;
-
   const headers: Record<string, string> = {
     "x-requested-with": "XMLHttpRequest",
     accept: "application/json",
     "accept-language": "en",
   };
-  if (url.host === REGION_PORTAL_HOST.asia) {
-    headers.Authorization = `Bearer ${env.WG_ASIA_PROXY_SECRET}`;
-  }
 
   return withRetries(async () => {
-    const res = await fetch(target, { headers });
+    const res = await fetch(url, { headers });
     if (!res.ok) {
       throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
     }
