@@ -1,22 +1,35 @@
 import React from "react";
 import { cn } from "@/lib/utils";
 
-function Panel({ className, ...props }: React.ComponentProps<"section">) {
+function Panel({
+  className,
+  screenLines = true,
+  ...props
+}: React.ComponentProps<"section"> & { screenLines?: boolean }) {
   return (
     <section
       className={cn(
-        "screen-line-before screen-line-after border-x border-fd-border",
-        className
+        "border-x border-fd-border",
+        screenLines && "screen-line-before screen-line-after",
+        className,
       )}
       {...props}
     />
   );
 }
 
-function PanelHeader({ className, ...props }: React.ComponentProps<"div">) {
+function PanelHeader({
+  className,
+  screenLines = true,
+  ...props
+}: React.ComponentProps<"div"> & { screenLines?: boolean }) {
   return (
     <div
-      className={cn("screen-line-after px-4 py-3", className)}
+      className={cn(
+        "px-4 py-3",
+        screenLines && "screen-line-after",
+        className,
+      )}
       {...props}
     />
   );

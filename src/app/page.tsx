@@ -1,5 +1,7 @@
-import { DiscordLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { Card, Cards } from "fumadocs-ui/components/card";
+import {
+  DiscordLogoIcon,
+  GithubLogoIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import Link from "next/link";
 import {
@@ -43,6 +45,116 @@ export default function HomePage() {
 
       <Separator />
 
+      <div className="grid lg:grid-cols-3">
+        <Panel className="flex flex-col lg:border-r-0">
+          <PanelHeader>
+            <PanelTitle>Top players · Past 24 hours</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Day}
+              description="Ranked by WNX over the past 24 hours (min. 20 battles)."
+            />
+          </PanelContent>
+        </Panel>
+
+        <Panel
+          className="flex flex-col lg:border-r-0"
+          screenLines={false}
+        >
+          <PanelHeader screenLines={false}>
+            <PanelTitle>Top players · Past 7 days</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Week}
+              description="Ranked by WNX over the past 7 days (min. 140 battles)."
+            />
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col" screenLines={false}>
+          <PanelHeader screenLines={false}>
+            <PanelTitle>Top players · Overall</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Overall}
+              description="Ranked by all-time WNX (min. 20,000 battles)."
+            />
+          </PanelContent>
+        </Panel>
+      </div>
+
+      <Separator />
+
+      <div className="grid lg:grid-cols-2">
+        <Panel className="flex flex-col">
+          <PanelHeader>
+            <PanelTitle>Top clans</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopClans />
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col lg:border-l-0" screenLines={false}>
+          <PanelHeader screenLines={false}>
+            <PanelTitle>Rating scale</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <RatingScale />
+          </PanelContent>
+        </Panel>
+      </div>
+
+      <Separator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Join the community</PanelTitle>
+        </PanelHeader>
+
+        <PanelContent>
+          <div
+            className={`relative overflow-hidden rounded-lg ${styles.cardBorder} bg-linear-to-br from-fd-primary/5 via-fd-primary/10 to-fd-primary/5 p-8`}
+          >
+            <div className="absolute inset-0 bg-linear-to-br from-transparent via-fd-primary/5 to-transparent" />
+            <div className="relative space-y-4 text-center">
+              <h3 className="mb-2 text-xl font-semibold">
+                Connect with WoT players
+              </h3>
+              <p className={`${styles.mutedText} mx-auto mb-6 max-w-md`}>
+                Join our Discord to chat WoT stats, request features and
+                report bugs. Or hop on GitHub to inspect the code and contribute.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-3">
+                <Link
+                  href="https://discord.gg/pxSQgmzPTG"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "primary" })}
+                >
+                  <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
+                  Join Discord
+                </Link>
+                <Link
+                  href="https://github.com/unicum-gg/unicum.gg"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline" })}
+                >
+                  <GithubLogoIcon weight="fill" className="mr-2 size-4" />
+                  View on GitHub
+                </Link>
+              </div>
+            </div>
+          </div>
+        </PanelContent>
+      </Panel>
+
+      <Separator />
+
       <Panel>
         <PanelHeader>
           <PanelTitle>What you&apos;ll find here</PanelTitle>
@@ -71,14 +183,14 @@ export default function HomePage() {
               description="Tracked players refresh in the background every 24h via our snapshot system."
             />
             <FeatureBlock
-              icon="🌍"
-              title="EU / NA / ASIA"
-              description="Coverage of all three Wargaming PC regions in one place."
+              icon="🏆"
+              title="Leaderboards"
+              description="Top players (24h, 7d, all-time) and top clans ranked by WNX, computed from our snapshots."
             />
             <FeatureBlock
-              icon="🆓"
-              title="No login required"
-              description="Browse stats freely. No account needed, no ads, just the data."
+              icon="🛠️"
+              title="Open source · AGPL"
+              description="Code's on GitHub. Inspect, fork, contribute. No login required, no ads, no tracking."
             />
           </div>
         </PanelContent>
@@ -94,165 +206,39 @@ export default function HomePage() {
         <PanelContent>
           <div className="grid gap-3 sm:grid-cols-2">
             <HomeCard>
-              <CardTitle>🔍 Find a player</CardTitle>
+              <CardTitle>🔍 Search players or clans</CardTitle>
               <CardDescription>
-                Search by nickname above. Pick your region in the dropdown.
+                Press{" "}
+                <code className="text-fd-foreground">⌘ K</code> /{" "}
+                <code className="text-fd-foreground">Ctrl K</code> to open the
+                search, then type a nickname or clan tag.
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>🛡️ Browse a clan</CardTitle>
+              <CardTitle>🌍 Switch region</CardTitle>
               <CardDescription>
-                Visit{" "}
-                <code className="text-fd-foreground">/eu/clans/[TAG]</code> — e.g.{" "}
-                <Link
-                  href="/eu/clans/KAISN"
-                  className="text-fd-foreground underline underline-offset-2"
-                >
-                  /eu/clans/KAISN
-                </Link>
-                .
+                Use the{" "}
+                <span className="text-fd-foreground">EU / NA / ASIA</span>{" "}
+                selector in the navbar. Leaderboards update accordingly.
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>📈 Compare ratings</CardTitle>
+              <CardTitle>🏆 Browse leaderboards</CardTitle>
               <CardDescription>
-                WN7, WN8, WNX side by side with standard color thresholds.
+                Top players (24h, 7d, all-time) and top clans ranked by average
+                WNX, computed from our snapshots.
               </CardDescription>
             </HomeCard>
             <HomeCard>
-              <CardTitle>🕒 Activity timeline</CardTitle>
+              <CardTitle>📊 Read the colors</CardTitle>
               <CardDescription>
-                See every clan a player has been in on one visual timeline.
+                WR, WN7, WN8 and WNX share the same tier colors (orange → green
+                → cyan → purple). See the scale above.
               </CardDescription>
             </HomeCard>
           </div>
         </PanelContent>
       </Panel>
-
-      <Separator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>Join the community</PanelTitle>
-        </PanelHeader>
-
-        <PanelContent>
-          <div
-            className={`relative overflow-hidden rounded-lg ${styles.cardBorder} bg-gradient-to-br from-fd-primary/5 via-fd-primary/10 to-fd-primary/5 p-8`}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-transparent via-fd-primary/5 to-transparent" />
-            <div className="relative space-y-4 text-center">
-              <h3 className="mb-2 text-xl font-semibold">
-                Connect with WoT players
-              </h3>
-              <p className={`${styles.mutedText} mx-auto mb-6 max-w-md`}>
-                Join our Discord to chat about WoT stats, request features,
-                report bugs and share your hot takes on the meta.
-              </p>
-              <Link
-                href="https://discord.gg/pxSQgmzPTG"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={buttonVariants({ variant: "primary" })}
-              >
-                <DiscordLogoIcon weight="fill" className="mr-2 size-4" />
-                Join Discord server
-              </Link>
-            </div>
-          </div>
-        </PanelContent>
-      </Panel>
-
-      <Separator />
-
-      <div className="grid lg:grid-cols-3">
-        <Panel className="flex flex-col lg:border-r-0">
-          <PanelHeader>
-            <PanelTitle>Top players · Past 24 hours</PanelTitle>
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              period={TopPlayersPeriod.Day}
-              description="Ranked by WNX over the past 24 hours (min. 20 battles)."
-            />
-          </PanelContent>
-        </Panel>
-
-        <Panel className="flex flex-col lg:border-r-0">
-          <PanelHeader>
-            <PanelTitle>Top players · Past 7 days</PanelTitle>
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              period={TopPlayersPeriod.Week}
-              description="Ranked by WNX over the past 7 days (min. 140 battles)."
-            />
-          </PanelContent>
-        </Panel>
-
-        <Panel className="flex flex-col">
-          <PanelHeader>
-            <PanelTitle>Top players · Overall</PanelTitle>
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              period={TopPlayersPeriod.Overall}
-              description="Ranked by all-time WNX (min. 20,000 battles)."
-            />
-          </PanelContent>
-        </Panel>
-      </div>
-
-      <Separator />
-
-      <div className="grid lg:grid-cols-2">
-        <Panel className="flex flex-col">
-          <PanelHeader>
-            <PanelTitle>Top clans</PanelTitle>
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            <TopClans />
-          </PanelContent>
-        </Panel>
-
-        <Panel className="flex flex-col lg:border-l-0">
-          <PanelHeader>
-            <PanelTitle>Rating scale</PanelTitle>
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            <RatingScale />
-          </PanelContent>
-        </Panel>
-      </div>
-
-      <Separator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>Explore</PanelTitle>
-        </PanelHeader>
-
-        <PanelContent>
-          <Cards>
-            <Card
-              title="Top EU clan"
-              description="Stats and members of KAISN, the top clan on EU server."
-              href="/eu/clans/KAISN"
-            />
-            <Card
-              title="Top NA clan"
-              description="Stats and members of OTTER, the top clan on NA server."
-              href="/na/clans/OTTER"
-            />
-            <Card
-              title="Sample player"
-              description="See what the profile page looks like."
-              href="/eu/players/_Winnie"
-            />
-          </Cards>
-        </PanelContent>
-      </Panel>
-
     </div>
   );
 }
