@@ -50,7 +50,7 @@ const DESCRIPTION_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   },
 };
 
-const URL_REGEX = /(https?:\/\/[^\s<>"']+)/g;
+const URL_REGEX = /(?<!["'=>])(https?:\/\/[^\s<>"']+)/g;
 const TRAILING_PUNCT_REGEX = /([.,;:!?)\]}>]+)$/;
 const DOUBLE_ENCODED_ENTITY_REGEX = /&amp;(#?\w+;)/g;
 
