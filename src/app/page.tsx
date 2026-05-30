@@ -8,6 +8,8 @@ import {
   CardTitle,
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
+import { RatingScale } from "@/components/home/rating-scale";
+import { TopClans } from "@/components/home/top-clans";
 import { HeroVideo } from "@/components/hero-video";
 import {
   Panel,
@@ -158,6 +160,28 @@ export default function HomePage() {
           </div>
         </PanelContent>
       </Panel>
+
+      <Separator />
+
+      <div className="grid lg:grid-cols-2">
+        <Panel className="flex flex-col">
+          <PanelHeader>
+            <PanelTitle>Top clans</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopClans />
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col lg:border-l-0">
+          <PanelHeader>
+            <PanelTitle>Rating scale</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <RatingScale />
+          </PanelContent>
+        </Panel>
+      </div>
 
       <Separator />
 

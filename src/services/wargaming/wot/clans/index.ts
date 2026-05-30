@@ -355,3 +355,52 @@ export async function getClansMembers(
   }
   return out;
 }
+
+export type ClanBriefInfo = {
+  clan_id: number;
+  tag: string;
+  name: string;
+  color: string;
+  emblem: string | null;
+  members: ClanMember[];
+};
+
+type RawClanBriefInfo = {
+  clan_id: number;
+  tag: string;
+  name: string;
+  color: string;
+  emblems: Record<string, { portal?: string; wot?: string }>;
+  members: ClanMember[];
+};
+
+export async function getClansBriefInfo(
+  region: Region,
+  clanIds: number[],
+): Promise<ClanBriefInfo[]> {
+  const out: ClanBriefInfo[] = [];
+  for (let i = 0; i < clanIds.length; i += CLAN_INFO_BATCH_SIZE) {
+    const batch = clanIds.slice(i, i + CLAN_INFO_BATCH_SIZE);
+    const data = await wgFetch<Record<string, RawClanBriefInfo | null>>(
+      region,
+      "/wot/clans/info/",
+      {
+        clan_id: batch.join(","),
+        fields:
+          "clan_id,tag,name,color,emblems,members.account_id,members.account_name",
+      },
+    );
+    for (const [_id, raw] of Object.entries(data)) {
+      if (!raw) continue;
+      out.push({
+        clan_id: raw.clan_id,
+        tag: raw.tag,
+        name: raw.name,
+        color: raw.color,
+        emblem: raw.emblems.x64?.portal ?? raw.emblems.x64?.wot ?? null,
+        members: raw.members ?? [],
+      });
+    }
+  }
+  return out;
+}
