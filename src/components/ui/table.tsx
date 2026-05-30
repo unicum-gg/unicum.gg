@@ -6,7 +6,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
   return (
     <div
       data-slot="table-container"
-      className="-mx-(--page-padding) my-[1.25em] flex overflow-x-auto prose-table:m-0"
+      className="-mx-(--page-padding) flex overflow-x-auto prose-table:my-[1.25em]"
     >
       <div className="grow px-(--page-padding)">
         <table
