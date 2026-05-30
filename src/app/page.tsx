@@ -10,6 +10,8 @@ import {
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
 import { TopClans } from "@/components/home/top-clans";
+import { TopPlayers } from "@/components/home/top-players";
+import { TopPlayersPeriod } from "@/services/wargaming/wot/players/top";
 import { HeroVideo } from "@/components/hero-video";
 import {
   Panel,
@@ -160,6 +162,46 @@ export default function HomePage() {
           </div>
         </PanelContent>
       </Panel>
+
+      <Separator />
+
+      <div className="grid lg:grid-cols-3">
+        <Panel className="flex flex-col lg:border-r-0">
+          <PanelHeader>
+            <PanelTitle>Top players · Past 24 hours</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Day}
+              description="Ranked by WNX over the past 24 hours (min. 20 battles)."
+            />
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col lg:border-r-0">
+          <PanelHeader>
+            <PanelTitle>Top players · Past 7 days</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Week}
+              description="Ranked by WNX over the past 7 days (min. 140 battles)."
+            />
+          </PanelContent>
+        </Panel>
+
+        <Panel className="flex flex-col">
+          <PanelHeader>
+            <PanelTitle>Top players · Overall</PanelTitle>
+          </PanelHeader>
+          <PanelContent className="flex-1 p-0">
+            <TopPlayers
+              period={TopPlayersPeriod.Overall}
+              description="Ranked by all-time WNX (min. 20,000 battles)."
+            />
+          </PanelContent>
+        </Panel>
+      </div>
 
       <Separator />
 
