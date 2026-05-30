@@ -37,6 +37,7 @@ export const playerSnapshots = pgTable(
     hitsPercents: real("hits_percents").notNull(),
     globalRating: integer("global_rating").notNull(),
     wtr: integer("wtr"),
+    clanId: bigint("clan_id", { mode: "number" }),
   },
   (t) => [
     index("snapshots_player_id_taken_at_idx").on(t.playerId, t.takenAt),
@@ -44,6 +45,7 @@ export const playerSnapshots = pgTable(
       t.playerId,
       t.battles,
     ),
+    index("snapshots_clan_id_idx").on(t.clanId),
   ],
 );
 

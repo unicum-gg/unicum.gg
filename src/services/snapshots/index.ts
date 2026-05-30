@@ -101,6 +101,7 @@ function snapshotFromInfo(
     hitsPercents: s.hits_percents,
     globalRating: info.global_rating,
     wtr,
+    clanId: info.clan_id,
   };
 }
 
@@ -379,6 +380,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     hits_percents: number;
     global_rating: number;
     wtr: number | null;
+    clan_id: number | null;
   }>;
 
   const playerIdToAccount = new Map<number, number>();
@@ -412,6 +414,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       hitsPercents: Number(row.hits_percents),
       globalRating: Number(row.global_rating),
       wtr: row.wtr === null ? null : Number(row.wtr),
+      clanId: row.clan_id === null ? null : Number(row.clan_id),
     });
   }
   return out;
