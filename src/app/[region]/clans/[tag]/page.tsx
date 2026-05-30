@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
+import { ClanMetrics } from "@/components/clans/metrics";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import {
   getClanMembersRatings,
@@ -66,24 +67,27 @@ export default async function ClanPage({
         />
       )}
 
-      <section>
-        <h2 className="mb-3 text-lg font-semibold">Members</h2>
-        <Suspense
-          fallback={
-            <ClanMembersTable
-              region={region}
-              members={members}
-              ratingsByAccount={new Map()}
-            />
-          }
-        >
-          <MembersTableWithRatings
-            region={region}
-            members={members}
-            ratingsPromise={ratingsPromise}
-          />
-        </Suspense>
-      </section>
+      <Suspense
+        fallback={
+          <>
+            <ClanMetrics members={members} ratingsByAccount={new Map()} />
+            <section>
+              <h2 className="mb-3 text-lg font-semibold">Members</h2>
+              <ClanMembersTable
+                region={region}
+                members={members}
+                ratingsByAccount={new Map()}
+              />
+            </section>
+          </>
+        }
+      >
+        <MembersWithRatings
+          region={region}
+          members={members}
+          ratingsPromise={ratingsPromise}
+        />
+      </Suspense>
 
       <Suspense fallback={null}>
         <RecentActivityStreamed region={region} promise={eventsPromise} />
@@ -92,7 +96,7 @@ export default async function ClanPage({
   );
 }
 
-async function MembersTableWithRatings({
+async function MembersWithRatings({
   region,
   members,
   ratingsPromise,
@@ -103,11 +107,17 @@ async function MembersTableWithRatings({
 }) {
   const ratings = await ratingsPromise;
   return (
-    <ClanMembersTable
-      region={region}
-      members={members}
-      ratingsByAccount={ratings}
-    />
+    <>
+      <ClanMetrics members={members} ratingsByAccount={ratings} />
+      <section>
+        <h2 className="mb-3 text-lg font-semibold">Members</h2>
+        <ClanMembersTable
+          region={region}
+          members={members}
+          ratingsByAccount={ratings}
+        />
+      </section>
+    </>
   );
 }
 

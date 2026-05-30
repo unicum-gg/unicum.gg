@@ -1,0 +1,39 @@
+import Link from "next/link";
+import { styles } from "@/lib/styles";
+
+export function Footer() {
+  return (
+    <div className="mx-auto w-full max-w-7xl">
+      <div
+        className={`relative flex h-8 w-full ${styles.borderX} diagonal-pattern`}
+      />
+      <footer className="screen-line-before border-x border-fd-border">
+        <div className="space-y-3 p-4 text-center">
+          <div className="text-sm text-fd-muted-foreground">
+            Built for the World of Tanks community
+          </div>
+          <div className="flex justify-center gap-4 text-sm">
+            <Link href="/eu/players/_Winnie" className={styles.linkHover}>
+              Player example
+            </Link>
+            <Link href="/eu/clans/KAISN" className={styles.linkHover}>
+              Clan example
+            </Link>
+            <Link
+              href="https://github.com/unicum-gg/unicum.gg"
+              className={styles.linkHover}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </Link>
+          </div>
+          <div className="space-y-1 text-xs text-fd-muted-foreground">
+            <div>© 2026 unicum.gg</div>
+            <div>Not affiliated with Wargaming</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}

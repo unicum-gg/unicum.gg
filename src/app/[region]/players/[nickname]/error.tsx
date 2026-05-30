@@ -1,7 +1,9 @@
 "use client";
 
+import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import Link from "next/link";
 import { useEffect } from "react";
+import { styles } from "@/lib/styles";
 
 export default function PlayerError({
   error,
@@ -15,27 +17,26 @@ export default function PlayerError({
   }, [error]);
 
   return (
-    <div className="flex flex-1 items-center justify-center px-6">
-      <div className="flex flex-col items-center gap-4 text-center">
+    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
+      <div
+        className={`relative ${styles.borderX} ${styles.screenLines} flex flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center`}
+      >
         <h1 className="font-heading text-3xl font-bold tracking-tight">
           Something went wrong
         </h1>
-        <p className="max-w-md text-muted-foreground">
-          The Wargaming API didn't respond properly. This is usually a temporary
-          issue on their side.
+        <p className="max-w-md text-fd-muted-foreground">
+          The Wargaming API didn&apos;t respond properly. This is usually a
+          temporary issue on their side.
         </p>
-        <div className="flex gap-3 text-sm font-medium">
+        <div className="flex gap-3">
           <button
             type="button"
             onClick={reset}
-            className="cursor-pointer underline underline-offset-2 hover:text-foreground"
+            className={`${buttonVariants({ variant: "primary" })} cursor-pointer`}
           >
             Try again
           </button>
-          <Link
-            href="/"
-            className="underline underline-offset-2 hover:text-foreground"
-          >
+          <Link href="/" className={buttonVariants({ variant: "outline" })}>
             Back to home
           </Link>
         </div>
