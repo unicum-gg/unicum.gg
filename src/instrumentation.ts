@@ -7,6 +7,9 @@ export async function register() {
   if (globalThis.__cronStarted) return;
   globalThis.__cronStarted = true;
 
+  const { getInstanceId } = await import("@/services/cron/lease");
+  console.log(`[cron] instance ${getInstanceId()}`);
+
   const { startSnapshotCron } = await import("@/services/snapshots/cron");
   startSnapshotCron();
 
