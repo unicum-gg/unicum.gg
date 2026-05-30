@@ -25,6 +25,12 @@ export const REGION_LABEL: Record<Region, string> = {
   asia: "ASIA",
 };
 
+export const REGION_EMOJI: Record<Region, string> = {
+  eu: "🌍",
+  na: "🌎",
+  asia: "🌏",
+};
+
 type WgResponse<T> =
   | { status: "ok"; data: T; meta?: { count: number } }
   | { status: "error"; error: { code: number; message: string; field?: string; value?: string } };

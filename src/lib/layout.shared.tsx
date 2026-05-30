@@ -1,4 +1,5 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { RegionSelector } from "@/components/region-selector";
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -31,7 +32,13 @@ export function baseOptions(): BaseLayoutProps {
         </>
       ),
     },
-    links: [],
+    links: [
+      {
+        type: "custom",
+        secondary: true,
+        children: <RegionSelector />,
+      },
+    ],
     githubUrl: "https://github.com/unicum-gg/unicum.gg",
   };
 }

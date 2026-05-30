@@ -12,14 +12,22 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
 import type {
   PlayerSearchResponse,
   SearchPlayerResult,
 } from "@/app/api/[region]/players/search/route";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@/services/wargaming/wot/clans";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { isRegion, REGIONS, type Region } from "@/services/wargaming/wot";
 
 type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }
@@ -136,7 +144,12 @@ function selectableRows(rows: Row[]): SelectableRow[] {
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
-  const [region, setRegion] = useState<Region>("eu");
+  const [storedRegion, setStoredRegion] = useLocalStorage<string>(
+    "unicum.region",
+    "eu",
+  );
+  const region: Region = isRegion(storedRegion) ? storedRegion : "eu";
+  const setRegion = (r: Region) => setStoredRegion(r);
   const [searchType, setSearchType] = useState<SearchType>(SearchType.All);
   const [query, setQuery] = useState("");
   const [playersOutcome, setPlayersOutcome] =
@@ -391,21 +404,21 @@ function FilterBar({
       </div>
       <div className="flex items-center gap-2">
         <span className="text-fd-muted-foreground">Show:</span>
-        {SEARCH_TYPES.map((t) => (
-          <button
-            type="button"
-            key={t}
-            onClick={() => onSearchTypeChange(t)}
-            className={cn(
-              "rounded px-2 py-1 font-medium uppercase transition-colors",
-              t === searchType
-                ? "bg-fd-primary text-fd-primary-foreground"
-                : "text-fd-muted-foreground hover:text-fd-foreground",
-            )}
-          >
-            {SEARCH_TYPE_LABEL[t]}
-          </button>
-        ))}
+        <Select
+          value={searchType}
+          onValueChange={(v) => onSearchTypeChange(v as SearchType)}
+        >
+          <SelectTrigger size="sm" aria-label="Search type">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {SEARCH_TYPES.map((t) => (
+              <SelectItem key={t} value={t}>
+                {SEARCH_TYPE_LABEL[t]}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
