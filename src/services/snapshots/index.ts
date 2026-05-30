@@ -127,7 +127,7 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
   };
 }
 
-async function bulkInsertTankSnapshots(
+export async function bulkInsertTankSnapshots(
   playerId: number,
   tanks: TankStats[],
 ): Promise<void> {
