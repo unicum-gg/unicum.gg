@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
 
 const SearchDialog = dynamic(
-  () => import("@/components/player-search-dialog"),
+  () => import("@/components/search-dialog"),
 );
 
 export function Provider({ children }: { children: ReactNode }) {

@@ -24,6 +24,25 @@ export async function findPlayerByNickname(
   }
 }
 
+export async function findPlayersByPrefix(
+  region: Region,
+  prefix: string,
+  limit = 10,
+): Promise<PlayerSearchResult[]> {
+  try {
+    return await wgFetch<PlayerSearchResult[]>(region, "/wot/account/list/", {
+      search: prefix,
+      type: "startswith",
+      limit: String(limit),
+    });
+  } catch (err) {
+    if (err instanceof WargamingApiError && err.code === "INVALID_SEARCH") {
+      return [];
+    }
+    throw err;
+  }
+}
+
 export type PlayerStatistics = {
   battles: number;
   wins: number;

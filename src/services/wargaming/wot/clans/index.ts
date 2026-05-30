@@ -85,6 +85,79 @@ export async function findClanIdByTag(
   return match?.clan_id ?? null;
 }
 
+export type ClanSearchResult = {
+  clan_id: number;
+  tag: string;
+  name: string;
+  color: string;
+  members_count: number;
+  emblem: string | null;
+};
+
+type RawClanSearchResult = {
+  clan_id: number;
+  tag: string;
+  name: string;
+  color: string;
+  members_count: number;
+  emblems: Record<string, { portal?: string; wot?: string }>;
+};
+
+export async function findClansByPrefix(
+  region: Region,
+  prefix: string,
+  limit = 10,
+): Promise<ClanSearchResult[]> {
+  const raw = await wgFetch<RawClanSearchResult[]>(
+    region,
+    "/wot/clans/list/",
+    {
+      search: prefix,
+      limit: String(limit),
+      fields: "clan_id,tag,name,color,members_count,emblems",
+    },
+  );
+  return raw.map((c) => ({
+    clan_id: c.clan_id,
+    tag: c.tag,
+    name: c.name,
+    color: c.color,
+    members_count: c.members_count,
+    emblem: c.emblems.x32?.portal ?? c.emblems.x32?.wot ?? null,
+  }));
+}
+
+export type PlayerClanInfo = {
+  tag: string;
+  color: string;
+};
+
+type RawMembersInfo = {
+  clan: { tag: string; color: string } | null;
+} | null;
+
+export async function getPlayerClansBatch(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, PlayerClanInfo>> {
+  if (accountIds.length === 0) return new Map();
+  const data = await wgFetch<Record<string, RawMembersInfo>>(
+    region,
+    "/wgn/clans/membersinfo/",
+    {
+      account_id: accountIds.join(","),
+      fields: "clan.tag,clan.color",
+    },
+  );
+  const out = new Map<number, PlayerClanInfo>();
+  for (const [id, info] of Object.entries(data)) {
+    if (info?.clan) {
+      out.set(Number(id), { tag: info.clan.tag, color: info.clan.color });
+    }
+  }
+  return out;
+}
+
 export async function getClanFullInfo(
   region: Region,
   clanId: number,
