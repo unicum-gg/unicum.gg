@@ -8,8 +8,6 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: z.string(),
     DATABASE_URL: z.url(),
     CRON_SECRET: z.string(),
-    WG_ASIA_PROXY_URL: z.url(),
-    WG_ASIA_PROXY_SECRET: z.string(),
   },
   client: {},
   runtimeEnv: {
@@ -18,8 +16,6 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: process.env.WARGAMING_APPLICATION_ID_ASIA,
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
-    WG_ASIA_PROXY_URL: process.env.WG_ASIA_PROXY_URL,
-    WG_ASIA_PROXY_SECRET: process.env.WG_ASIA_PROXY_SECRET,
   },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
