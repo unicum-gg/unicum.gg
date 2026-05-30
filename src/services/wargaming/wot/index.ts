@@ -1,34 +1,50 @@
 import { env } from "env";
 
-export const REGIONS = ["eu", "na", "asia"] as const;
-export type Region = (typeof REGIONS)[number];
+export enum Region {
+  EU = "eu",
+  NA = "na",
+  ASIA = "asia",
+}
+
+export const REGIONS: Region[] = [Region.EU, Region.NA, Region.ASIA];
 
 export function isRegion(value: string): value is Region {
   return (REGIONS as readonly string[]).includes(value);
 }
 
 const REGION_API_HOST: Record<Region, string> = {
-  eu: "api.worldoftanks.eu",
-  na: "api.worldoftanks.com",
-  asia: "api.worldoftanks.asia",
+  [Region.EU]: "api.worldoftanks.eu",
+  [Region.NA]: "api.worldoftanks.com",
+  [Region.ASIA]: "api.worldoftanks.asia",
 };
 
+function applicationIdFor(region: Region): string {
+  switch (region) {
+    case Region.EU:
+      return env.WARGAMING_APPLICATION_ID_EU;
+    case Region.NA:
+      return env.WARGAMING_APPLICATION_ID_NA;
+    case Region.ASIA:
+      return env.WARGAMING_APPLICATION_ID_ASIA;
+  }
+}
+
 export const REGION_PORTAL_HOST: Record<Region, string> = {
-  eu: "eu.wargaming.net",
-  na: "na.wargaming.net",
-  asia: "asia.wargaming.net",
+  [Region.EU]: "eu.wargaming.net",
+  [Region.NA]: "na.wargaming.net",
+  [Region.ASIA]: "asia.wargaming.net",
 };
 
 export const REGION_LABEL: Record<Region, string> = {
-  eu: "EU",
-  na: "NA",
-  asia: "ASIA",
+  [Region.EU]: "EU",
+  [Region.NA]: "NA",
+  [Region.ASIA]: "ASIA",
 };
 
 export const REGION_EMOJI: Record<Region, string> = {
-  eu: "🌍",
-  na: "🌎",
-  asia: "🌏",
+  [Region.EU]: "🌍",
+  [Region.NA]: "🌎",
+  [Region.ASIA]: "🌏",
 };
 
 type WgResponse<T> =
@@ -80,15 +96,15 @@ export async function wgFetch<T>(
   params: Record<string, string>,
   revalidate = 60,
 ): Promise<T> {
-  const url = region === "asia"
+  const url = region === Region.ASIA
     ? new URL(`${env.WG_ASIA_PROXY_URL}/papi${path}`)
     : new URL(`https://${REGION_API_HOST[region]}${path}`);
-  url.searchParams.set("application_id", env.WARGAMING_APPLICATION_ID);
+  url.searchParams.set("application_id", applicationIdFor(region));
   for (const [key, value] of Object.entries(params)) {
     url.searchParams.set(key, value);
   }
 
-  const headers: HeadersInit = region === "asia"
+  const headers: HeadersInit = region === Region.ASIA
     ? { Authorization: `Bearer ${env.WG_ASIA_PROXY_SECRET}` }
     : {};
 

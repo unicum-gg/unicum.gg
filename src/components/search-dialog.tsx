@@ -27,7 +27,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@/services/wargaming/wot/clans";
-import { isRegion, REGIONS, type Region } from "@/services/wargaming/wot";
+import { isRegion, Region, REGIONS } from "@/services/wargaming/wot";
 
 type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }
@@ -146,9 +146,9 @@ export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
   const [storedRegion, setStoredRegion] = useLocalStorage<string>(
     "unicum.region",
-    "eu",
+    Region.EU,
   );
-  const region: Region = isRegion(storedRegion) ? storedRegion : "eu";
+  const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
   const setRegion = (r: Region) => setStoredRegion(r);
   const [searchType, setSearchType] = useState<SearchType>(SearchType.All);
   const [query, setQuery] = useState("");

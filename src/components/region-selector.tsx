@@ -13,11 +13,11 @@ import {
   REGION_EMOJI,
   REGION_LABEL,
   REGIONS,
-  type Region,
+  Region,
 } from "@/services/wargaming/wot";
 
 const STORAGE_KEY = "unicum.region";
-const DEFAULT_REGION: Region = "eu";
+const DEFAULT_REGION: Region = Region.EU;
 
 export function RegionSelector() {
   const [stored, setStored] = useLocalStorage<string>(
