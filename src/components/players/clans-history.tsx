@@ -192,7 +192,7 @@ export function PlayerClansHistory({
             accountCreatedAt={accountCreatedAt}
             stints={stints}
           />
-          <Table variant="card" className="mt-6">
+          <Table className="mt-6">
             <TableHeader>
               <TableRow>
                 <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>

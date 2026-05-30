@@ -72,7 +72,7 @@ export function PlayerClansTimeline({
   const ticks = yearTicks(start, new Date(nowMs));
 
   return (
-    <TooltipProvider delay={100} closeDelay={50}>
+    <TooltipProvider delayDuration={100}>
       <div className="mt-6">
         <div className="relative h-14 w-full rounded-md bg-muted/40">
           {stints.map((s) => {
@@ -89,31 +89,29 @@ export function PlayerClansTimeline({
             const clanHref = `/${region}/clans/${encodeURIComponent(tag)}`;
             return (
               <Tooltip key={`${s.clan.id}-${stintStartMs}`}>
-                <TooltipTrigger
-                  render={
-                    <Link
-                      href={clanHref}
-                      className="absolute top-0 bottom-0 flex items-center justify-center gap-1 overflow-hidden rounded-sm px-1 text-[10px] font-semibold tracking-wide transition-opacity hover:opacity-80"
-                      style={{
-                        left: `${left}%`,
-                        width: `${width}%`,
-                        backgroundColor: baseColor,
-                        color: textColor,
-                      }}
-                    >
-                      {showEmblem && (
-                        <img
-                          src={s.clan.emblem}
-                          alt=""
-                          width={20}
-                          height={20}
-                          className="size-5 shrink-0 rounded-sm"
-                        />
-                      )}
-                      {showLabel && <span className="truncate">{tag}</span>}
-                    </Link>
-                  }
-                />
+                <TooltipTrigger asChild>
+                  <Link
+                    href={clanHref}
+                    className="absolute top-0 bottom-0 flex items-center justify-center gap-1 overflow-hidden rounded-sm px-1 text-[10px] font-semibold tracking-wide transition-opacity hover:opacity-80"
+                    style={{
+                      left: `${left}%`,
+                      width: `${width}%`,
+                      backgroundColor: baseColor,
+                      color: textColor,
+                    }}
+                  >
+                    {showEmblem && (
+                      <img
+                        src={s.clan.emblem}
+                        alt=""
+                        width={20}
+                        height={20}
+                        className="size-5 shrink-0 rounded-sm"
+                      />
+                    )}
+                    {showLabel && <span className="truncate">{tag}</span>}
+                  </Link>
+                </TooltipTrigger>
                 <TooltipContent>
                   <div className="flex items-center gap-2 text-xs">
                     <img

@@ -292,10 +292,7 @@ export function PlayerStatsTable({
   return (
     <section>
       <h2 className="mb-3 text-lg font-semibold">Overall stats</h2>
-      <Table
-        variant="card"
-        className="table-fixed [&_tr>*+*]:border-l [&_tr>*]:border-border"
-      >
+      <Table className="table-fixed [&_tr>*+*]:border-l [&_tr>*]:border-border">
         <colgroup>
           <col />
           <col className="w-[9%]" />

@@ -199,7 +199,7 @@ export function ClanMembersTable({
   }
 
   return (
-    <Table variant="card" className="mt-6">
+    <Table className="mt-6">
       <TableHeader>
         <TableRow>
           <TableHead className="w-10 text-right">#</TableHead>
