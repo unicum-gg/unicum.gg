@@ -9,7 +9,7 @@ import {
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
 import { getTanksStats } from "@/services/wargaming/wot/tanks";
-import { recordCurrentSnapshot } from ".";
+import { recordCurrentSnapshot } from "./player";
 
 const SCHEDULE = "* * * * *";
 const BATCH_SIZE_PER_REGION = 200;

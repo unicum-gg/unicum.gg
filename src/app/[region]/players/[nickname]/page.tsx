@@ -4,13 +4,15 @@ import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import {
   diffStats,
-  diffTanks,
   findPlayerByNicknameInDB,
   getPeriodComparators,
-  getPeriodTankComparators,
   recordCurrentSnapshot,
   statsFromSnapshot,
-} from "@/services/snapshots";
+} from "@/services/snapshots/player";
+import {
+  diffTanks,
+  getPeriodTankComparators,
+} from "@/services/snapshots/tank";
 import {
   findPlayerByNickname,
   getAccountWTR,

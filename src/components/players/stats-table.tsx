@@ -7,7 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { type Stats } from "@/services/snapshots";
+import { type Stats } from "@/services/snapshots/player";
 import {
   computeAvgTier,
   type VehicleMeta,
