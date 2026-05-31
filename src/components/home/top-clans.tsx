@@ -1,9 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import type { TopClansResponse } from "@/app/api/[region]/clans/top/route";
 import { RelativeTime } from "@/components/relative-time";
 import {
   Table,
@@ -26,85 +24,54 @@ import {
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
-type State =
-  | { status: "loading" }
-  | { status: "ok"; results: TopClanResult[]; computedAt: Date | null }
-  | { status: "error" };
+export type TopClansInitial = Record<
+  Region,
+  { results: TopClanResult[]; computedAt: Date | null }
+>;
 
-export function TopClans() {
+export function TopClans({ initial }: { initial: TopClansInitial }) {
   const [storedRegion] = useLocalStorage<string>("unicum.region", Region.EU);
   const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
-  const [state, setState] = useState<State>({ status: "loading" });
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setState({ status: "loading" });
-    fetch(`/api/${region}/clans/top?limit=9`, { signal: controller.signal })
-      .then(async (res) => {
-        if (!res.ok) {
-          setState({ status: "error" });
-          return;
-        }
-        const body = (await res.json()) as TopClansResponse;
-        setState({
-          status: "ok",
-          results: body.results,
-          computedAt: body.computed_at ? new Date(body.computed_at) : null,
-        });
-      })
-      .catch((err) => {
-        if (err?.name === "AbortError") return;
-        setState({ status: "error" });
-      });
-    return () => controller.abort();
-  }, [region]);
+  const { results, computedAt } = initial[region];
 
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
         Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
         more than 50 members, ranked by average WNX.
-        {state.status === "ok" && state.computedAt ? (
+        {computedAt ? (
           <>
             {" "}
-            Updated <RelativeTime date={state.computedAt} />.
+            Updated <RelativeTime date={computedAt} />.
           </>
         ) : null}
       </div>
-      {state.status === "error" ? (
-        <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
-          Couldn&apos;t load top clans. Try again later.
-        </div>
-      ) : state.status === "ok" && state.results.length === 0 ? (
+      {results.length === 0 ? (
         <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
           No clan data available yet for this region.
         </div>
       ) : (
         <div className="mt-auto">
           <Table className="mb-px! [&_td]:min-w-0 [&_tr]:h-11">
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-[1%] whitespace-nowrap px-4! text-center!">
-                #
-              </TableHead>
-              <TableHead>Clan</TableHead>
-              <TableHead className="pr-4 text-right!">Avg WNX</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {state.status === "loading"
-              ? Array.from({ length: 9 }, (_, i) => `skeleton-${i}`).map(
-                  (key) => <SkeletonRow key={key} />,
-                )
-              : state.results.map((c, i) => (
-                  <ClanRow
-                    key={c.clan_id}
-                    clan={c}
-                    rank={i + 1}
-                    region={region}
-                  />
-                ))}
-          </TableBody>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-[1%] whitespace-nowrap px-4! text-center!">
+                  #
+                </TableHead>
+                <TableHead>Clan</TableHead>
+                <TableHead className="pr-4 text-right!">Avg WNX</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {results.map((c, i) => (
+                <ClanRow
+                  key={c.clan_id}
+                  clan={c}
+                  rank={i + 1}
+                  region={region}
+                />
+              ))}
+            </TableBody>
           </Table>
         </div>
       )}
@@ -160,25 +127,6 @@ function ClanRow({
         )}
       >
         {intFmt.format(clan.avg_wnx)}
-      </TableCell>
-    </TableRow>
-  );
-}
-
-function SkeletonRow() {
-  return (
-    <TableRow>
-      <TableCell className="px-4! text-center">
-        <span className="inline-block h-4 w-4 animate-pulse rounded bg-muted" />
-      </TableCell>
-      <TableCell>
-        <div className="flex items-center gap-3">
-          <span className="size-6 shrink-0 animate-pulse rounded bg-muted" />
-          <span className="block h-4 w-40 animate-pulse rounded bg-muted" />
-        </div>
-      </TableCell>
-      <TableCell className="pr-4 text-right">
-        <span className="inline-block h-6 w-14 animate-pulse rounded bg-muted" />
       </TableCell>
     </TableRow>
   );

@@ -11,9 +11,19 @@ import {
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
-import { TopClans } from "@/components/home/top-clans";
-import { TopPlayers } from "@/components/home/top-players";
-import { TopPlayersPeriod } from "@/services/wargaming/wot/players/top";
+import {
+  TopClans,
+  type TopClansInitial,
+} from "@/components/home/top-clans";
+import {
+  TopPlayers,
+  type TopPlayersInitial,
+} from "@/components/home/top-players";
+import { getTopClansByWnx } from "@/services/wargaming/wot/clans/top";
+import {
+  getTopPlayersByWnx,
+  TopPlayersPeriod,
+} from "@/services/wargaming/wot/players/top";
 import { HeroVideo } from "@/components/hero-video";
 import {
   Panel,
@@ -22,8 +32,41 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { styles } from "@/lib/styles";
+import { REGIONS } from "@/services/wargaming/wot";
 
-export default function HomePage() {
+const TOP_LIMIT = 9;
+
+async function loadTopClansInitial(): Promise<TopClansInitial> {
+  const entries = await Promise.all(
+    REGIONS.map(async (region) => {
+      const snapshot = await getTopClansByWnx(region, TOP_LIMIT);
+      return [region, snapshot] as const;
+    }),
+  );
+  return Object.fromEntries(entries) as TopClansInitial;
+}
+
+async function loadTopPlayersInitial(
+  period: TopPlayersPeriod,
+): Promise<TopPlayersInitial> {
+  const entries = await Promise.all(
+    REGIONS.map(async (region) => {
+      const snapshot = await getTopPlayersByWnx(region, period, TOP_LIMIT);
+      return [region, snapshot] as const;
+    }),
+  );
+  return Object.fromEntries(entries) as TopPlayersInitial;
+}
+
+export default async function HomePage() {
+  const [topClans, topPlayersDay, topPlayersWeek, topPlayersOverall] =
+    await Promise.all([
+      loadTopClansInitial(),
+      loadTopPlayersInitial(TopPlayersPeriod.Day),
+      loadTopPlayersInitial(TopPlayersPeriod.Week),
+      loadTopPlayersInitial(TopPlayersPeriod.Overall),
+    ]);
+
   return (
     <div className="mx-auto w-full max-w-7xl">
       <div
@@ -52,8 +95,8 @@ export default function HomePage() {
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              period={TopPlayersPeriod.Day}
               description="Ranked by WNX over the past 24 hours (min. 20 battles)."
+              initial={topPlayersDay}
             />
           </PanelContent>
         </Panel>
@@ -67,8 +110,8 @@ export default function HomePage() {
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              period={TopPlayersPeriod.Week}
               description="Ranked by WNX over the past 7 days (min. 140 battles)."
+              initial={topPlayersWeek}
             />
           </PanelContent>
         </Panel>
@@ -79,8 +122,8 @@ export default function HomePage() {
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              period={TopPlayersPeriod.Overall}
               description="Ranked by all-time WNX (min. 20,000 battles)."
+              initial={topPlayersOverall}
             />
           </PanelContent>
         </Panel>
@@ -94,7 +137,7 @@ export default function HomePage() {
             <PanelTitle>Top clans</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            <TopClans />
+            <TopClans initial={topClans} />
           </PanelContent>
         </Panel>
 
