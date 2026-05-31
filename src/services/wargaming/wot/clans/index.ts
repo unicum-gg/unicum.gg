@@ -143,6 +143,7 @@ export async function getClanFullInfo(
   const raw = data[String(clanId)];
   if (!raw) return null;
   const emblem =
+    raw.emblems.x195?.portal ??
     raw.emblems.x64?.portal ??
     raw.emblems.x64?.wot ??
     raw.emblems.x32?.portal ??
