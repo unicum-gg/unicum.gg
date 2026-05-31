@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
-import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
+import {
+  Panel,
+  PanelContent,
+  PanelHeader,
+  PanelSeparator,
+  PanelTitle,
+} from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
@@ -101,15 +107,22 @@ export default async function PlayerPage({
 
       <PanelSeparator />
 
-      <PlayerStatsTable
-        current={current}
-        periods={periods}
-        tanks={tanks}
-        periodTanks={periodTanks}
-        encyclopedia={encyclopedia}
-        wn8Expected={wn8Expected}
-        wnxExpected={wnxExpected}
-      />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Overall stats</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <PlayerStatsTable
+            current={current}
+            periods={periods}
+            tanks={tanks}
+            periodTanks={periodTanks}
+            encyclopedia={encyclopedia}
+            wn8Expected={wn8Expected}
+            wnxExpected={wnxExpected}
+          />
+        </PanelContent>
+      </Panel>
 
       <PlayerClansHistory
         region={region}

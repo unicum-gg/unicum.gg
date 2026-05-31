@@ -290,9 +290,7 @@ export function PlayerStatsTable({
   };
 
   return (
-    <section>
-      <h2 className="mb-3 text-lg font-semibold">Overall stats</h2>
-      <Table className="table-fixed [&_tr>*+*]:border-l [&_tr>*]:border-border">
+    <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
         <colgroup>
           <col />
           <col className="w-[9%]" />
@@ -371,7 +369,6 @@ export function PlayerStatsTable({
             <PeriodCells cell={wnxCells.d30} />
           </TableRow>
         </TableBody>
-      </Table>
-    </section>
+    </Table>
   );
 }
