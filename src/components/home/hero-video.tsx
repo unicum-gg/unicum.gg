@@ -2,12 +2,13 @@
 
 import { PauseIcon, PlayIcon, SpinnerIcon } from '@phosphor-icons/react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
+import STORAGE from '@/constants/storage';
 import { useVideoControl } from '@/hooks/use-video-control';
 import { cn } from '@/lib/utils';
 
 export function HeroVideo() {
   const { videoRef, isPlaying, isLoading, isVideoVisible, toggle } = useVideoControl({
-    storageKey: 'hero-video-playing',
+    storageKey: STORAGE.LOCAL_STORAGE.HERO_VIDEO_PLAYING,
     defaultPlaying: true
   });
 

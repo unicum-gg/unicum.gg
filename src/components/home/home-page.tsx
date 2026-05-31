@@ -11,15 +11,9 @@ import {
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
-import {
-  TopClans,
-  type TopClansInitial,
-} from "@/components/home/top-clans";
-import {
-  TopPlayers,
-  type TopPlayersInitial,
-} from "@/components/home/top-players";
-import { HeroVideo } from "@/components/hero-video";
+import { TopClans } from "@/components/home/top-clans";
+import { TopPlayers } from "@/components/home/top-players";
+import { HeroVideo } from "@/components/home/hero-video";
 import {
   Panel,
   PanelContent,
