@@ -65,8 +65,8 @@ const RETRIABLE_WG_CODES = new Set([
   "SOURCE_NOT_AVAILABLE",
   "REQUEST_LIMIT_EXCEEDED",
 ]);
-const MAX_RETRIES = 2;
-const RETRY_DELAYS_MS = [250, 750];
+const MAX_RETRIES = 4;
+const RETRY_DELAYS_MS = [250, 500, 1000, 2000];
 
 function isRetriable(err: unknown): boolean {
   if (err instanceof WargamingApiError) return RETRIABLE_WG_CODES.has(err.code);
