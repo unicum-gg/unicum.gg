@@ -38,11 +38,6 @@ function prettyRole(role: string): string {
 
 const DAY_FORMAT = "MMM d, yyyy";
 
-function formatPeriod(from: Date, to: Date | null): string {
-  if (!to) return `${format(from, DAY_FORMAT)} → current`;
-  return `${format(from, DAY_FORMAT)} — ${format(to, DAY_FORMAT)}`;
-}
-
 function formatDuration(from: Date, to: Date | null): string {
   return formatDistanceStrict(from, to ?? new Date());
 }
@@ -74,7 +69,8 @@ enum SortColumn {
   Tag = "tag",
   Name = "name",
   Role = "role",
-  Period = "period",
+  From = "from",
+  To = "to",
   Duration = "duration",
 }
 
@@ -100,8 +96,14 @@ function compareStints(a: ClanStint, b: ClanStint, state: SortState): number {
       return mul * a.clan.name.localeCompare(b.clan.name);
     case SortColumn.Role:
       return mul * ((ROLE_ORDER[a.role] ?? 0) - (ROLE_ORDER[b.role] ?? 0));
-    case SortColumn.Period:
+    case SortColumn.From:
       return mul * (a.joinedAt.getTime() - b.joinedAt.getTime());
+    case SortColumn.To:
+      return (
+        mul *
+        ((a.leftAt?.getTime() ?? Date.now()) -
+          (b.leftAt?.getTime() ?? Date.now()))
+      );
     case SortColumn.Duration: {
       const aDur = (a.leftAt?.getTime() ?? Date.now()) - a.joinedAt.getTime();
       const bDur = (b.leftAt?.getTime() ?? Date.now()) - b.joinedAt.getTime();
@@ -207,7 +209,7 @@ export function PlayerClansHistory({
                 nowMs={nowMs}
               />
             </div>
-            <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_thead_th:first-child>button]:pl-4!">
+            <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
               <TableHeader>
               <TableRow>
                 <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>
@@ -219,8 +221,11 @@ export function PlayerClansHistory({
                 <SortableHead column={SortColumn.Role} state={sort} onToggle={toggleSort}>
                   Role
                 </SortableHead>
-                <SortableHead column={SortColumn.Period} state={sort} onToggle={toggleSort}>
-                  Period
+                <SortableHead column={SortColumn.From} state={sort} onToggle={toggleSort}>
+                  From
+                </SortableHead>
+                <SortableHead column={SortColumn.To} state={sort} onToggle={toggleSort}>
+                  To
                 </SortableHead>
                 <SortableHead
                   column={SortColumn.Duration}
@@ -261,7 +266,14 @@ export function PlayerClansHistory({
                     </TableCell>
                     <TableCell>{prettyRole(s.role)}</TableCell>
                     <TableCell className="tabular-nums">
-                      {formatPeriod(s.joinedAt, s.leftAt)}
+                      {format(s.joinedAt, DAY_FORMAT)}
+                    </TableCell>
+                    <TableCell className="tabular-nums">
+                      {s.leftAt ? (
+                        format(s.leftAt, DAY_FORMAT)
+                      ) : (
+                        <span className="text-muted-foreground">current</span>
+                      )}
                     </TableCell>
                     <TableCell className="text-right tabular-nums">
                       {formatDuration(s.joinedAt, s.leftAt)}
