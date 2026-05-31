@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
 import Link from "next/link";
+import ROUTES from "@/constants/routes";
 import {
   ClanEventType,
   type ClanRecentEvent,
@@ -105,7 +106,7 @@ export function ClanRecentActivity({
           >
             <EventIcon event={e} />
             <Link
-              href={`/${region}/players/${encodeURIComponent(e.accountName)}`}
+              href={ROUTES.PLAYER(region, e.accountName)}
               className="font-medium hover:underline"
             >
               {e.accountName || `#${e.accountId}`}

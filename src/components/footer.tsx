@@ -1,5 +1,7 @@
 import Link from "next/link";
+import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
+import { Region } from "@/services/wargaming/wot";
 
 export function Footer() {
   return (
@@ -13,14 +15,20 @@ export function Footer() {
             Built for the World of Tanks community
           </div>
           <div className="flex justify-center gap-4 text-sm">
-            <Link href="/eu/players/_Winnie" className={styles.linkHover}>
+            <Link
+              href={ROUTES.PLAYER(Region.EU, "_Winnie")}
+              className={styles.linkHover}
+            >
               Player example
             </Link>
-            <Link href="/eu/clans/KAISN" className={styles.linkHover}>
+            <Link
+              href={ROUTES.CLAN(Region.EU, "KAISN")}
+              className={styles.linkHover}
+            >
               Clan example
             </Link>
             <Link
-              href="https://github.com/unicum-gg/unicum.gg"
+              href={ROUTES.EXTERNAL.GITHUB}
               className={styles.linkHover}
               target="_blank"
               rel="noopener noreferrer"

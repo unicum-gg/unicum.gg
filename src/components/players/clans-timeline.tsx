@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
+import ROUTES from "@/constants/routes";
 import {
   Tooltip,
   TooltipContent,
@@ -86,7 +87,7 @@ export function PlayerClansTimeline({
             const showLabel = width > 4;
             const showEmblem = width > 8;
             const tag = s.clan.tag;
-            const clanHref = `/${region}/clans/${encodeURIComponent(tag)}`;
+            const clanHref = ROUTES.CLAN(region, tag);
             return (
               <Tooltip key={`${s.clan.id}-${stintStartMs}`}>
                 <TooltipTrigger asChild>

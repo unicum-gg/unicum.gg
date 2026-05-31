@@ -8,6 +8,7 @@ import {
 import { format, formatDistanceStrict } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
+import ROUTES from "@/constants/routes";
 import { PlayerClansTimeline } from "@/components/players/clans-timeline";
 import {
   Table,
@@ -219,7 +220,7 @@ export function PlayerClansHistory({
             </TableHeader>
             <TableBody>
               {sortedStints.map((s) => {
-                const clanHref = `/${region}/clans/${encodeURIComponent(s.clan.tag)}`;
+                const clanHref = ROUTES.CLAN(region, s.clan.tag);
                 return (
                   <TableRow key={`${s.clan.id}-${s.joinedAt.getTime()}`}>
                     <TableCell className="font-semibold">

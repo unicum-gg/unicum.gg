@@ -1,5 +1,6 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { RegionSelector } from "@/components/region-selector";
+import ROUTES from "@/constants/routes";
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -39,6 +40,6 @@ export function baseOptions(): BaseLayoutProps {
         children: <RegionSelector />,
       },
     ],
-    githubUrl: "https://github.com/unicum-gg/unicum.gg",
+    githubUrl: ROUTES.EXTERNAL.GITHUB,
   };
 }

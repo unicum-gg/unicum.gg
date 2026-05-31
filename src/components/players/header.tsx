@@ -1,6 +1,7 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
+import ROUTES from "@/constants/routes";
 import type { Region } from "@/services/wargaming/wot";
 import type { ClanStint } from "@/services/wargaming/wot/clans/player";
 
@@ -48,7 +49,7 @@ export function PlayerHeader({
       </div>
       {currentStint && (
         <Link
-          href={`/${region}/clans/${encodeURIComponent(currentStint.clan.tag)}`}
+          href={ROUTES.CLAN(region, currentStint.clan.tag)}
           className="flex items-center gap-3 text-sm hover:opacity-80"
         >
           <div className="text-right">

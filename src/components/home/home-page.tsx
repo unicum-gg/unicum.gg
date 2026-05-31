@@ -26,6 +26,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
+import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
 import { getTopClansByWnxByRegions } from "@/services/wargaming/wot/clans/top";
 import {
@@ -167,7 +168,7 @@ export async function HomePage({
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Link
-                  href="https://discord.gg/pxSQgmzPTG"
+                  href={ROUTES.EXTERNAL.DISCORD}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({ variant: "primary" })}
@@ -176,7 +177,7 @@ export async function HomePage({
                   Join Discord
                 </Link>
                 <Link
-                  href="https://github.com/unicum-gg/unicum.gg"
+                  href={ROUTES.EXTERNAL.GITHUB}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({ variant: "outline" })}

@@ -8,6 +8,7 @@ import {
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
+import ROUTES from "@/constants/routes";
 import {
   Table,
   TableBody,
@@ -239,7 +240,7 @@ export function ClanMembersTable({
               </TableCell>
               <TableCell className="font-medium">
                 <Link
-                  href={`/${region}/players/${encodeURIComponent(m.name)}`}
+                  href={ROUTES.PLAYER(region, m.name)}
                   className="hover:underline"
                 >
                   {m.name}

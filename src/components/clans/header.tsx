@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import Link from "next/link";
+import ROUTES from "@/constants/routes";
 import type {
   ClanFullInfo,
   ClanMemberStats,
@@ -46,7 +47,7 @@ export function ClanHeader({
         <div>
           <span className="font-medium">Commander:</span>{" "}
           <Link
-            href={`/${region}/players/${encodeURIComponent(clan.leaderName)}`}
+            href={ROUTES.PLAYER(region, clan.leaderName)}
             className="underline-offset-2 hover:underline"
           >
             {clan.leaderName}
