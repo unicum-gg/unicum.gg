@@ -1,10 +1,10 @@
-import sanitizeHtml from "sanitize-html";
 import {
   portalFetch,
   type Region,
   REGION_PORTAL_HOST,
   wgFetch,
 } from "@/services/wargaming/wot";
+import { sanitizeClanDescription } from "./description";
 
 export type ClanFullInfo = {
   id: number;
@@ -35,37 +35,6 @@ type RawClanFullInfo = {
   is_clan_disbanded: boolean;
   emblems: Record<string, { portal?: string; wot?: string }>;
 };
-
-const DESCRIPTION_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
-  allowedTags: ["p", "br", "strong", "em", "b", "i", "u", "a", "ul", "ol", "li"],
-  allowedAttributes: {
-    a: ["href", "title", "target", "rel"],
-  },
-  allowedSchemes: ["http", "https", "mailto"],
-  transformTags: {
-    a: sanitizeHtml.simpleTransform("a", {
-      target: "_blank",
-      rel: "noopener noreferrer",
-    }),
-  },
-};
-
-const URL_REGEX = /(?<!["'=>])(https?:\/\/[^\s<>"']+)/g;
-const TRAILING_PUNCT_REGEX = /([.,;:!?)\]}>]+)$/;
-const DOUBLE_ENCODED_ENTITY_REGEX = /&amp;(#?\w+;)/g;
-
-function linkifyPlainUrls(html: string): string {
-  return html.replace(URL_REGEX, (match) => {
-    const trail = match.match(TRAILING_PUNCT_REGEX);
-    const url = trail ? match.slice(0, -trail[0].length) : match;
-    const tail = trail ? trail[0] : "";
-    return `<a href="${url}">${url}</a>${tail}`;
-  });
-}
-
-function unescapeDoubleEntities(html: string): string {
-  return html.replace(DOUBLE_ENCODED_ENTITY_REGEX, "&$1");
-}
 
 export async function findClanIdByTag(
   region: Region,
@@ -185,10 +154,7 @@ export async function getClanFullInfo(
     color: raw.color,
     emblem,
     motto: raw.motto ?? "",
-    descriptionHtml: sanitizeHtml(
-      linkifyPlainUrls(unescapeDoubleEntities(raw.description_html ?? "")),
-      DESCRIPTION_SANITIZE_OPTIONS,
-    ),
+    descriptionHtml: sanitizeClanDescription(raw.description_html),
     createdAt: new Date(raw.created_at * 1000),
     membersCount: raw.members_count,
     leaderId: raw.leader_id,
