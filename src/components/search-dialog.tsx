@@ -12,8 +12,10 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocalStorage } from "usehooks-ts";
 import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
+import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { useCookie } from "@/hooks/use-cookie";
 import type {
   PlayerSearchResponse,
   SearchPlayerResult,
@@ -144,8 +146,8 @@ function selectableRows(rows: Row[]): SelectableRow[] {
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
-  const [storedRegion, setStoredRegion] = useLocalStorage<string>(
-    "unicum.region",
+  const [storedRegion, setStoredRegion] = useCookie(
+    STORAGE.COOKIES.REGION,
     Region.EU,
   );
   const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
@@ -294,12 +296,12 @@ export default function SearchDialog(props: SharedProps) {
 
   function pickPlayer(p: SearchPlayerResult) {
     close();
-    router.push(`/${region}/players/${encodeURIComponent(p.nickname)}`);
+    router.push(ROUTES.PLAYER(region, p.nickname));
   }
 
   function pickClan(c: ClanSearchResult) {
     close();
-    router.push(`/${region}/clans/${encodeURIComponent(c.tag)}`);
+    router.push(ROUTES.CLAN(region, c.tag));
   }
 
   function pickRow(row: SelectableRow) {
@@ -313,9 +315,7 @@ export default function SearchDialog(props: SharedProps) {
         e.preventDefault();
         if (trimmedQuery.length >= MIN_QUERY_LENGTH) {
           close();
-          router.push(
-            `/${region}/players/${encodeURIComponent(trimmedQuery)}`,
-          );
+          router.push(ROUTES.PLAYER(region, trimmedQuery));
         }
       }
       return;

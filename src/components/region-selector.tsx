@@ -1,7 +1,9 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import { useLocalStorage } from "usehooks-ts";
+import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { useCookie } from "@/hooks/use-cookie";
 import {
   Select,
   SelectContent,
@@ -17,13 +19,6 @@ import {
   Region,
 } from "@/services/wargaming/wot";
 
-const STORAGE_KEY = "unicum.region";
-const DEFAULT_REGION: Region = Region.EU;
-
-function homePathFor(region: Region): string {
-  return region === Region.EU ? "/" : `/${region}`;
-}
-
 function regionFromPath(pathname: string): Region | undefined {
   if (pathname === "/") return Region.EU;
   const segment = pathname.split("/")[1];
@@ -31,16 +26,12 @@ function regionFromPath(pathname: string): Region | undefined {
 }
 
 export function RegionSelector() {
-  const [stored, setStored] = useLocalStorage<string>(
-    STORAGE_KEY,
-    DEFAULT_REGION,
-  );
+  const [stored, setStored] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const pathname = usePathname();
   const router = useRouter();
 
-  const pathRegion = regionFromPath(pathname);
   const region: Region =
-    pathRegion ?? (isRegion(stored) ? stored : DEFAULT_REGION);
+    regionFromPath(pathname) ?? (isRegion(stored) ? stored : Region.EU);
 
   return (
     <Select
@@ -48,7 +39,7 @@ export function RegionSelector() {
       onValueChange={(v) => {
         if (!isRegion(v)) return;
         setStored(v);
-        router.push(homePathFor(v));
+        router.push(ROUTES.HOME(v));
       }}
     >
       <SelectTrigger

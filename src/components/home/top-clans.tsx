@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useLocalStorage } from "usehooks-ts";
 import { RelativeTime } from "@/components/relative-time";
+import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { useCookie } from "@/hooks/use-cookie";
 import {
   Table,
   TableBody,
@@ -36,7 +38,7 @@ export function TopClans({
   initial: TopClansInitial;
   regionOverride?: Region;
 }) {
-  const [storedRegion] = useLocalStorage<string>("unicum.region", Region.EU);
+  const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const { results, computedAt } = initial[region];
@@ -103,7 +105,7 @@ function ClanRow({
       </TableCell>
       <TableCell>
         <Link
-          href={`/${region}/clans/${encodeURIComponent(clan.tag)}`}
+          href={ROUTES.CLAN(region, clan.tag)}
           className="flex items-center gap-3 hover:underline"
         >
           {clan.emblem ? (

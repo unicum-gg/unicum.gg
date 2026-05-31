@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useLocalStorage } from "usehooks-ts";
 import { RelativeTime } from "@/components/relative-time";
+import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { useCookie } from "@/hooks/use-cookie";
 import {
   Table,
   TableBody,
@@ -33,7 +35,7 @@ export function TopPlayers({
   initial: TopPlayersInitial;
   regionOverride?: Region;
 }) {
-  const [storedRegion] = useLocalStorage<string>("unicum.region", Region.EU);
+  const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const { results, computedAt } = initial[region];
@@ -99,7 +101,7 @@ function PlayerRow({
       </TableCell>
       <TableCell>
         <Link
-          href={`/${region}/players/${encodeURIComponent(player.nickname)}`}
+          href={ROUTES.PLAYER(region, player.nickname)}
           className="block truncate hover:underline"
         >
           <span className="font-medium">{player.nickname}</span>
