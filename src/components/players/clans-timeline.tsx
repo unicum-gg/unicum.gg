@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import ROUTES from "@/constants/routes";
 import {
   Tooltip,
@@ -45,16 +45,13 @@ export function PlayerClansTimeline({
   region,
   accountCreatedAt,
   stints,
+  nowMs,
 }: {
   region: Region;
   accountCreatedAt: Date;
   stints: ClanStint[];
+  nowMs: number;
 }) {
-  const [nowMs, setNowMs] = useState(() => Date.now());
-  useEffect(() => {
-    setNowMs(Date.now());
-  }, []);
-
   const start = useMemo(() => {
     const oldest = stints.reduce<number>(
       (min, s) => Math.min(min, s.joinedAt.getTime()),

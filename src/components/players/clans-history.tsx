@@ -148,10 +148,12 @@ export function PlayerClansHistory({
   region,
   accountCreatedAt,
   clanHistory,
+  nowMs,
 }: {
   region: Region;
   accountCreatedAt: Date;
   clanHistory: PlayerClanHistoryFull;
+  nowMs: number;
 }) {
   const [sort, setSort] = useState<SortState>(null);
 
@@ -192,6 +194,7 @@ export function PlayerClansHistory({
             region={region}
             accountCreatedAt={accountCreatedAt}
             stints={stints}
+            nowMs={nowMs}
           />
           <Table className="mt-6">
             <TableHeader>

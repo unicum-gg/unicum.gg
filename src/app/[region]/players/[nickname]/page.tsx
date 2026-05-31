@@ -103,6 +103,8 @@ export default async function PlayerPage({
         region={region}
         accountCreatedAt={new Date(info.created_at * 1000)}
         clanHistory={clanHistory}
+        // eslint-disable-next-line react-hooks/purity -- server component, evaluated once at request time, value is then serialized for hydration
+        nowMs={Date.now()}
       />
     </div>
   );
