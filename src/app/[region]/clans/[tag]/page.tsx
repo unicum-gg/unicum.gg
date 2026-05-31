@@ -1,9 +1,15 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { ExpandableDescription } from "@/components/clans/description";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
 import { ClanMetrics } from "@/components/clans/metrics";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
+import {
+  Panel,
+  PanelContent,
+  PanelSeparator,
+} from "@/components/panel";
 import {
   getClanMembersRatings,
   type MemberRatings,
@@ -57,15 +63,37 @@ export default async function ClanPage({
   const eventsPromise = getClanRecentEvents(region, clanId, 30);
 
   return (
-    <div className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
-      <ClanHeader region={region} clan={clan} members={members} />
+    <div className="mx-auto w-full max-w-7xl">
+      <Suspense
+        fallback={
+          <ClanHeaderPanel
+            region={region}
+            clan={clan}
+            members={members}
+            ratings={null}
+          />
+        }
+      >
+        <ClanHeaderWithRatings
+          region={region}
+          clan={clan}
+          members={members}
+          ratingsPromise={ratingsPromise}
+        />
+      </Suspense>
 
       {clan.descriptionHtml && (
-        <section
-          className="mb-8 space-y-2 text-sm text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-2"
-          dangerouslySetInnerHTML={{ __html: clan.descriptionHtml }}
-        />
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelContent>
+              <ExpandableDescription html={clan.descriptionHtml} />
+            </PanelContent>
+          </Panel>
+        </>
       )}
+
+      <PanelSeparator />
 
       <Suspense
         fallback={
@@ -93,6 +121,53 @@ export default async function ClanPage({
         <RecentActivityStreamed region={region} promise={eventsPromise} />
       </Suspense>
     </div>
+  );
+}
+
+function ClanHeaderPanel({
+  region,
+  clan,
+  members,
+  ratings,
+}: {
+  region: Region;
+  clan: NonNullable<Awaited<ReturnType<typeof getClanFullInfo>>>;
+  members: ClanMemberStats[];
+  ratings: Map<number, MemberRatings> | null;
+}) {
+  return (
+    <Panel>
+      <PanelContent className="p-0">
+        <ClanHeader
+          region={region}
+          clan={clan}
+          members={members}
+          ratings={ratings}
+        />
+      </PanelContent>
+    </Panel>
+  );
+}
+
+async function ClanHeaderWithRatings({
+  region,
+  clan,
+  members,
+  ratingsPromise,
+}: {
+  region: Region;
+  clan: NonNullable<Awaited<ReturnType<typeof getClanFullInfo>>>;
+  members: ClanMemberStats[];
+  ratingsPromise: Promise<Map<number, MemberRatings>>;
+}) {
+  const ratings = await ratingsPromise;
+  return (
+    <ClanHeaderPanel
+      region={region}
+      clan={clan}
+      members={members}
+      ratings={ratings}
+    />
   );
 }
 
