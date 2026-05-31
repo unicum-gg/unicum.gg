@@ -34,6 +34,8 @@ import {
 import { styles } from "@/lib/styles";
 import { REGIONS } from "@/services/wargaming/wot";
 
+export const dynamic = "force-dynamic";
+
 const TOP_LIMIT = 9;
 
 async function loadTopClansInitial(): Promise<TopClansInitial> {
