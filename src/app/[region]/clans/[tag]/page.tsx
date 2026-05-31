@@ -3,12 +3,13 @@ import { Suspense } from "react";
 import { ExpandableDescription } from "@/components/clans/description";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
-import { ClanMetrics } from "@/components/clans/metrics";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import {
   Panel,
   PanelContent,
+  PanelHeader,
   PanelSeparator,
+  PanelTitle,
 } from "@/components/panel";
 import {
   getClanMembersRatings,
@@ -97,17 +98,11 @@ export default async function ClanPage({
 
       <Suspense
         fallback={
-          <>
-            <ClanMetrics members={members} ratingsByAccount={new Map()} />
-            <section>
-              <h2 className="mb-3 text-lg font-semibold">Members</h2>
-              <ClanMembersTable
-                region={region}
-                members={members}
-                ratingsByAccount={new Map()}
-              />
-            </section>
-          </>
+          <MembersPanel
+            region={region}
+            members={members}
+            ratings={new Map()}
+          />
         }
       >
         <MembersWithRatings
@@ -116,6 +111,8 @@ export default async function ClanPage({
           ratingsPromise={ratingsPromise}
         />
       </Suspense>
+
+      <PanelSeparator />
 
       <Suspense fallback={null}>
         <RecentActivityStreamed region={region} promise={eventsPromise} />
@@ -171,6 +168,31 @@ async function ClanHeaderWithRatings({
   );
 }
 
+function MembersPanel({
+  region,
+  members,
+  ratings,
+}: {
+  region: Region;
+  members: ClanMemberStats[];
+  ratings: Map<number, MemberRatings>;
+}) {
+  return (
+    <Panel>
+      <PanelHeader>
+        <PanelTitle>Members</PanelTitle>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        <ClanMembersTable
+          region={region}
+          members={members}
+          ratingsByAccount={ratings}
+        />
+      </PanelContent>
+    </Panel>
+  );
+}
+
 async function MembersWithRatings({
   region,
   members,
@@ -181,19 +203,7 @@ async function MembersWithRatings({
   ratingsPromise: Promise<Map<number, MemberRatings>>;
 }) {
   const ratings = await ratingsPromise;
-  return (
-    <>
-      <ClanMetrics members={members} ratingsByAccount={ratings} />
-      <section>
-        <h2 className="mb-3 text-lg font-semibold">Members</h2>
-        <ClanMembersTable
-          region={region}
-          members={members}
-          ratingsByAccount={ratings}
-        />
-      </section>
-    </>
-  );
+  return <MembersPanel region={region} members={members} ratings={ratings} />;
 }
 
 async function RecentActivityStreamed({
@@ -204,5 +214,15 @@ async function RecentActivityStreamed({
   promise: Promise<ClanRecentEvent[]>;
 }) {
   const events = await promise;
-  return <ClanRecentActivity region={region} events={events} />;
+  if (events.length === 0) return null;
+  return (
+    <Panel>
+      <PanelHeader>
+        <PanelTitle>Recent activity</PanelTitle>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        <ClanRecentActivity region={region} events={events} />
+      </PanelContent>
+    </Panel>
+  );
 }

@@ -96,28 +96,25 @@ export function ClanRecentActivity({
 }) {
   if (events.length === 0) return null;
   return (
-    <section className="mt-8">
-      <h2 className="mb-3 text-lg font-semibold">Recent activity</h2>
-      <ul className="divide-y divide-border rounded-lg border border-border bg-card">
-        {events.map((e, i) => (
-          <li
-            key={`${e.createdAt.getTime()}-${e.accountId}-${e.type}-${i}`}
-            className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 text-sm"
+    <ul className="divide-y divide-fd-border">
+      {events.map((e, i) => (
+        <li
+          key={`${e.createdAt.getTime()}-${e.accountId}-${e.type}-${i}`}
+          className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 text-sm"
+        >
+          <EventIcon event={e} />
+          <Link
+            href={ROUTES.PLAYER(region, e.accountName)}
+            className="font-medium hover:underline"
           >
-            <EventIcon event={e} />
-            <Link
-              href={ROUTES.PLAYER(region, e.accountName)}
-              className="font-medium hover:underline"
-            >
-              {e.accountName || `#${e.accountId}`}
-            </Link>
-            <span>{changeText(e)}</span>
-            <span className="ms-auto text-xs text-muted-foreground tabular-nums">
-              {format(e.createdAt, "MMM d, yyyy 'at' h:mm a")}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </section>
+            {e.accountName || `#${e.accountId}`}
+          </Link>
+          <span>{changeText(e)}</span>
+          <span className="ms-auto text-xs text-muted-foreground tabular-nums">
+            {format(e.createdAt, "MMM d, yyyy 'at' h:mm a")}
+          </span>
+        </li>
+      ))}
+    </ul>
   );
 }

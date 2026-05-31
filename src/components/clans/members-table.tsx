@@ -200,10 +200,10 @@ export function ClanMembersTable({
   }
 
   return (
-    <Table className="mt-6">
+    <Table className="my-0! [&_td]:min-w-0 [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_tr>*:first-child]:w-12 [&_thead_th:nth-child(2)>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-10 text-right">#</TableHead>
+          <TableHead className="px-3! py-2! text-right!">#</TableHead>
           <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
             Player
           </SortableHead>
