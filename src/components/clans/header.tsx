@@ -103,7 +103,13 @@ export function ClanHeader({
           <span>·</span>
           <span>
             <span className="font-medium">Created:</span>{" "}
-            {format(clan.createdAt, DAY_FORMAT)}
+            {format(clan.createdAt, DAY_FORMAT)} by{" "}
+            <Link
+              href={ROUTES.PLAYER(region, clan.creatorName)}
+              className="underline-offset-2 hover:underline"
+            >
+              {clan.creatorName}
+            </Link>
           </span>
           <span>·</span>
           <span>

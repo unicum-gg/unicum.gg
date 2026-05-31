@@ -18,6 +18,8 @@ export type ClanFullInfo = {
   membersCount: number;
   leaderId: number;
   leaderName: string;
+  creatorId: number;
+  creatorName: string;
   isDisbanded: boolean;
 };
 
@@ -31,6 +33,8 @@ type RawClanFullInfo = {
   members_count: number;
   leader_id: number;
   leader_name: string;
+  creator_id: number;
+  creator_name: string;
   created_at: number;
   is_clan_disbanded: boolean;
   emblems: Record<string, { portal?: string; wot?: string }>;
@@ -137,7 +141,7 @@ export async function getClanFullInfo(
     {
       clan_id: String(clanId),
       fields:
-        "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,created_at,is_clan_disbanded,emblems",
+        "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,creator_id,creator_name,created_at,is_clan_disbanded,emblems",
     },
   );
   const raw = data[String(clanId)];
@@ -160,6 +164,8 @@ export async function getClanFullInfo(
     membersCount: raw.members_count,
     leaderId: raw.leader_id,
     leaderName: raw.leader_name,
+    creatorId: raw.creator_id,
+    creatorName: raw.creator_name,
     isDisbanded: raw.is_clan_disbanded,
   };
 }
