@@ -1,0 +1,41 @@
+const LANGUAGE_TO_COUNTRY: Record<string, string> = {
+  en: "GB-UKM",
+  fr: "FR",
+  de: "DE",
+  es: "ES",
+  it: "IT",
+  pt: "PT",
+  nl: "NL",
+  ru: "RU",
+  pl: "PL",
+  cs: "CZ",
+  sk: "SK",
+  hu: "HU",
+  ro: "RO",
+  bg: "BG",
+  hr: "HR",
+  sr: "RS",
+  sl: "SI",
+  uk: "UA",
+  be: "BY",
+  el: "GR",
+  tr: "TR",
+  fi: "FI",
+  sv: "SE",
+  no: "NO",
+  da: "DK",
+  ja: "JP",
+  ko: "KR",
+  vi: "VN",
+  th: "TH",
+  zh: "CN",
+  "zh-cn": "CN",
+  "zh-tw": "TW",
+  ar: "SA",
+  he: "IL",
+};
+
+export function languageToCountryCode(language: string): string | null {
+  const normalized = language.toLowerCase();
+  return LANGUAGE_TO_COUNTRY[normalized] ?? null;
+}

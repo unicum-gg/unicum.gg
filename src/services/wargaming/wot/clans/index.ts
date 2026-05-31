@@ -21,7 +21,33 @@ export type ClanFullInfo = {
   creatorId: number;
   creatorName: string;
   isDisbanded: boolean;
+  languages: string[];
 };
+
+type PortalClanInfo = {
+  clanview?: {
+    profiles?: Array<{
+      type?: string;
+      languages_list?: string[];
+    }>;
+  };
+};
+
+async function getClanLanguages(
+  region: Region,
+  clanId: number,
+): Promise<string[]> {
+  try {
+    const url = new URL(
+      `https://${REGION_PORTAL_HOST[region]}/clans/wot/${clanId}/api/claninfo/`,
+    );
+    const data = await portalFetch<PortalClanInfo>(url);
+    const profile = data.clanview?.profiles?.find((p) => p.type === "clan");
+    return profile?.languages_list ?? [];
+  } catch {
+    return [];
+  }
+}
 
 type RawClanFullInfo = {
   clan_id: number;
@@ -135,15 +161,14 @@ export async function getClanFullInfo(
   region: Region,
   clanId: number,
 ): Promise<ClanFullInfo | null> {
-  const data = await wgFetch<Record<string, RawClanFullInfo | null>>(
-    region,
-    "/wot/clans/info/",
-    {
+  const [data, languages] = await Promise.all([
+    wgFetch<Record<string, RawClanFullInfo | null>>(region, "/wot/clans/info/", {
       clan_id: String(clanId),
       fields:
         "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,creator_id,creator_name,created_at,is_clan_disbanded,emblems",
-    },
-  );
+    }),
+    getClanLanguages(region, clanId),
+  ]);
   const raw = data[String(clanId)];
   if (!raw) return null;
   const emblem =
@@ -167,6 +192,7 @@ export async function getClanFullInfo(
     creatorId: raw.creator_id,
     creatorName: raw.creator_name,
     isDisbanded: raw.is_clan_disbanded,
+    languages,
   };
 }
 

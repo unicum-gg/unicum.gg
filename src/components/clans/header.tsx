@@ -1,6 +1,7 @@
 import { format } from "date-fns";
 import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
+import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type {
@@ -126,6 +127,13 @@ export function ClanHeader({
               <span>·</span>
               <span className="font-medium text-destructive">Disbanded</span>
             </>
+          )}
+          {clan.languages.length > 0 && (
+            <LanguageFlags
+              languages={clan.languages}
+              size="l"
+              className="-mr-4 mb-px ml-auto h-[calc(100%-1px)]"
+            />
           )}
         </div>
       </div>
