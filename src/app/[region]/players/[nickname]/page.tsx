@@ -124,6 +124,8 @@ export default async function PlayerPage({
         </PanelContent>
       </Panel>
 
+      <PanelSeparator />
+
       <PlayerClansHistory
         region={region}
         accountCreatedAt={new Date(info.created_at * 1000)}

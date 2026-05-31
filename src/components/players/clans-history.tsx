@@ -9,6 +9,12 @@ import { format, formatDistanceStrict } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
+import {
+  Panel,
+  PanelContent,
+  PanelHeader,
+  PanelTitle,
+} from "@/components/panel";
 import { PlayerClansTimeline } from "@/components/players/clans-timeline";
 import {
   Table,
@@ -176,28 +182,33 @@ export function PlayerClansHistory({
   }
 
   return (
-    <section className="mt-8">
-      <div className="mb-3 flex items-baseline justify-between gap-4">
-        <h2 className="text-lg font-semibold">Clans history</h2>
-        {stints.length > 0 && (
-          <p className="text-xs text-muted-foreground tabular-nums">
-            {clanHistory.totalClans} clans ·{" "}
-            {formatTotalDuration(clanHistory.timeInClansSeconds)} in clans
-          </p>
-        )}
-      </div>
-      {stints.length === 0 ? (
-        <p className="text-sm text-muted-foreground">No clan history.</p>
-      ) : (
-        <>
-          <PlayerClansTimeline
-            region={region}
-            accountCreatedAt={accountCreatedAt}
-            stints={stints}
-            nowMs={nowMs}
-          />
-          <Table className="mt-6">
-            <TableHeader>
+    <Panel>
+      <PanelHeader>
+        <div className="flex items-baseline justify-between gap-4">
+          <PanelTitle>Clans history</PanelTitle>
+          {stints.length > 0 && (
+            <p className="text-xs text-muted-foreground tabular-nums">
+              {clanHistory.totalClans} clans ·{" "}
+              {formatTotalDuration(clanHistory.timeInClansSeconds)} in clans
+            </p>
+          )}
+        </div>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        {stints.length === 0 ? (
+          <p className="p-4 text-sm text-muted-foreground">No clan history.</p>
+        ) : (
+          <>
+            <div className="p-4">
+              <PlayerClansTimeline
+                region={region}
+                accountCreatedAt={accountCreatedAt}
+                stints={stints}
+                nowMs={nowMs}
+              />
+            </div>
+            <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_thead_th:first-child>button]:pl-4!">
+              <TableHeader>
               <TableRow>
                 <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>
                   Tag
@@ -258,10 +269,11 @@ export function PlayerClansHistory({
                   </TableRow>
                 );
               })}
-            </TableBody>
-          </Table>
-        </>
-      )}
-    </section>
+              </TableBody>
+            </Table>
+          </>
+        )}
+      </PanelContent>
+    </Panel>
   );
 }

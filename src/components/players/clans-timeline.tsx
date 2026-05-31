@@ -71,7 +71,7 @@ export function PlayerClansTimeline({
 
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="mt-6">
+      <div>
         <div className="relative h-14 w-full rounded-md bg-muted/40">
           {stints.map((s) => {
             const stintStartMs = s.joinedAt.getTime();
@@ -148,15 +148,19 @@ export function PlayerClansTimeline({
 
         <div className="relative mt-1 h-4 w-full text-[10px] text-muted-foreground">
           <span className="absolute left-0">{format(start, "MMM yyyy")}</span>
-          {ticks.map((t) => (
-            <span
-              key={t.getTime()}
-              className="absolute -translate-x-1/2 tabular-nums"
-              style={{ left: `${pct(t.getTime())}%` }}
-            >
-              {t.getUTCFullYear()}
-            </span>
-          ))}
+          {ticks.map((t) => {
+            const p = pct(t.getTime());
+            if (p < 6 || p > 94) return null;
+            return (
+              <span
+                key={t.getTime()}
+                className="absolute -translate-x-1/2 tabular-nums"
+                style={{ left: `${p}%` }}
+              >
+                {t.getUTCFullYear()}
+              </span>
+            );
+          })}
           <span className="absolute right-0">today</span>
         </div>
       </div>
