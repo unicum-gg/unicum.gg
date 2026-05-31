@@ -72,7 +72,7 @@ function absolutePortalUrl(region: Region, path: string): string {
 }
 
 function upgradeEmblemSize(url: string): string {
-  return url.replace("_32x32", "_64x64");
+  return url.replace(/_(32x32|64x64)/, "_195x195");
 }
 
 function clanRefFromPortal(region: Region, c: PortalClan): ClanRef {
