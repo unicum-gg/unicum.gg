@@ -18,6 +18,7 @@ import {
   Panel,
   PanelContent,
   PanelHeader,
+  PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
 import ROUTES from "@/constants/routes";
@@ -72,7 +73,7 @@ export async function HomePage({
         </div>
       </div>
 
-      <Separator />
+      <PanelSeparator />
 
       <div className="grid lg:grid-cols-3">
         <Panel className="flex flex-col lg:border-r-0">
@@ -118,7 +119,7 @@ export async function HomePage({
         </Panel>
       </div>
 
-      <Separator />
+      <PanelSeparator />
 
       <div className="grid lg:grid-cols-2">
         <Panel className="flex flex-col">
@@ -140,7 +141,7 @@ export async function HomePage({
         </Panel>
       </div>
 
-      <Separator />
+      <PanelSeparator />
 
       <Panel>
         <PanelHeader>
@@ -185,7 +186,7 @@ export async function HomePage({
         </PanelContent>
       </Panel>
 
-      <Separator />
+      <PanelSeparator />
 
       <Panel>
         <PanelHeader>
@@ -228,7 +229,7 @@ export async function HomePage({
         </PanelContent>
       </Panel>
 
-      <Separator />
+      <PanelSeparator />
 
       <Panel>
         <PanelHeader>
@@ -275,10 +276,3 @@ export async function HomePage({
   );
 }
 
-function Separator({ className }: { className?: string }) {
-  return (
-    <div
-      className={`relative flex h-8 w-full ${styles.borderX} diagonal-pattern ${className || ""}`}
-    />
-  );
-}

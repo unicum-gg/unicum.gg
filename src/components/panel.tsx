@@ -1,4 +1,5 @@
 import React from "react";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 function Panel({
@@ -53,4 +54,16 @@ function PanelContent({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-export { Panel, PanelContent, PanelHeader, PanelTitle };
+function PanelSeparator({ className }: { className?: string }) {
+  return (
+    <div
+      className={cn(
+        "relative flex h-8 w-full diagonal-pattern",
+        styles.borderX,
+        className,
+      )}
+    />
+  );
+}
+
+export { Panel, PanelContent, PanelHeader, PanelSeparator, PanelTitle };
