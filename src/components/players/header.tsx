@@ -24,12 +24,12 @@ export function PlayerHeader({
   currentStint: ClanStint | null;
 }) {
   return (
-    <header className="mb-8 flex items-start justify-between gap-4">
-      <div>
-        <h1 className="font-heading text-4xl font-bold tracking-tight">
+    <header className="flex items-stretch">
+      <div className="flex flex-1 flex-col">
+        <h1 className="flex flex-1 items-center px-4 py-3 font-heading text-4xl font-bold tracking-tight">
           {nickname}
         </h1>
-        <div className="mt-1 flex flex-wrap gap-x-2 gap-y-0.5 text-xs text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-fd-border px-4 py-2 text-xs text-muted-foreground">
           <span title={format(createdAt, DAY_FORMAT)}>
             Joined {format(createdAt, MONTH_FORMAT)}
           </span>
@@ -50,9 +50,9 @@ export function PlayerHeader({
       {currentStint && (
         <Link
           href={ROUTES.CLAN(region, currentStint.clan.tag)}
-          className="flex items-center gap-3 text-sm hover:opacity-80"
+          className="flex items-stretch border-l border-fd-border text-sm hover:opacity-80"
         >
-          <div className="text-right">
+          <div className="flex flex-col justify-center whitespace-nowrap p-4 text-right">
             <div>
               <span className="font-semibold">
                 <span style={{ color: currentStint.clan.color }}>[</span>
@@ -66,13 +66,13 @@ export function PlayerHeader({
               {format(currentStint.joinedAt, DAY_FORMAT)}
             </div>
           </div>
-          <img
-            src={currentStint.clan.emblem}
-            alt={`${currentStint.clan.tag} emblem`}
-            width={40}
-            height={40}
-            className="size-10 shrink-0 rounded-md"
-          />
+          <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">
+            <img
+              src={currentStint.clan.emblem}
+              alt={`${currentStint.clan.tag} emblem`}
+              className="size-full object-contain"
+            />
+          </div>
         </Link>
       )}
     </header>

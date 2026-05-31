@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
@@ -84,15 +85,21 @@ export default async function PlayerPage({
   };
 
   return (
-    <div className="mx-auto w-full max-w-7xl flex-1 px-6 py-10">
-      <PlayerHeader
-        region={region}
-        nickname={info.nickname}
-        createdAt={new Date(info.created_at * 1000)}
-        lastBattleAt={new Date(info.last_battle_time * 1000)}
-        updatedAt={player.lastSeenAt}
-        currentStint={clanHistory.currentStint}
-      />
+    <div className="mx-auto w-full max-w-7xl">
+      <Panel>
+        <PanelContent className="p-0">
+          <PlayerHeader
+            region={region}
+            nickname={info.nickname}
+            createdAt={new Date(info.created_at * 1000)}
+            lastBattleAt={new Date(info.last_battle_time * 1000)}
+            updatedAt={player.lastSeenAt}
+            currentStint={clanHistory.currentStint}
+          />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
 
       <PlayerStatsTable
         current={current}
