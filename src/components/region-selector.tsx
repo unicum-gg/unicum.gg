@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useLocalStorage } from "usehooks-ts";
 import {
   Select,
@@ -19,18 +20,35 @@ import {
 const STORAGE_KEY = "unicum.region";
 const DEFAULT_REGION: Region = Region.EU;
 
+function homePathFor(region: Region): string {
+  return region === Region.EU ? "/" : `/${region}`;
+}
+
+function regionFromPath(pathname: string): Region | undefined {
+  if (pathname === "/") return Region.EU;
+  const segment = pathname.split("/")[1];
+  return isRegion(segment) ? segment : undefined;
+}
+
 export function RegionSelector() {
   const [stored, setStored] = useLocalStorage<string>(
     STORAGE_KEY,
     DEFAULT_REGION,
   );
-  const region: Region = isRegion(stored) ? stored : DEFAULT_REGION;
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const pathRegion = regionFromPath(pathname);
+  const region: Region =
+    pathRegion ?? (isRegion(stored) ? stored : DEFAULT_REGION);
 
   return (
     <Select
       value={region}
       onValueChange={(v) => {
-        if (isRegion(v)) setStored(v);
+        if (!isRegion(v)) return;
+        setStored(v);
+        router.push(homePathFor(v));
       }}
     >
       <SelectTrigger

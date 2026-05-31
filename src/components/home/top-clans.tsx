@@ -29,9 +29,16 @@ export type TopClansInitial = Record<
   { results: TopClanResult[]; computedAt: Date | null }
 >;
 
-export function TopClans({ initial }: { initial: TopClansInitial }) {
+export function TopClans({
+  initial,
+  regionOverride,
+}: {
+  initial: TopClansInitial;
+  regionOverride?: Region;
+}) {
   const [storedRegion] = useLocalStorage<string>("unicum.region", Region.EU);
-  const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
+  const region: Region =
+    regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const { results, computedAt } = initial[region];
 
   return (

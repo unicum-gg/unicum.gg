@@ -27,12 +27,15 @@ export type TopPlayersInitial = Record<
 export function TopPlayers({
   description,
   initial,
+  regionOverride,
 }: {
   description: string;
   initial: TopPlayersInitial;
+  regionOverride?: Region;
 }) {
   const [storedRegion] = useLocalStorage<string>("unicum.region", Region.EU);
-  const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
+  const region: Region =
+    regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const { results, computedAt } = initial[region];
 
   return (

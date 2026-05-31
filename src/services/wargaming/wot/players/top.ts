@@ -1,8 +1,8 @@
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import { topPlayers } from "@/services/db/schema";
 import { getPlayerClansBatch } from "@/services/wargaming/wot/clans";
-import type { Region } from "@/services/wargaming/wot";
+import { isRegion, type Region } from "@/services/wargaming/wot";
 import {
   computeWNX,
   getWNXExpectedValues,
@@ -207,4 +207,41 @@ export async function getTopPlayersByWnx(
     })),
     computedAt: rows[0]?.computedAt ?? null,
   };
+}
+
+export async function getTopPlayersByWnxByRegions(
+  regions: Region[],
+  period: TopPlayersPeriod,
+  limit: number,
+): Promise<Record<Region, TopPlayersSnapshot>> {
+  const rows = await db
+    .select()
+    .from(topPlayers)
+    .where(
+      and(
+        inArray(topPlayers.region, regions),
+        eq(topPlayers.period, period),
+        sql`rank <= ${limit}`,
+      ),
+    )
+    .orderBy(asc(topPlayers.region), asc(topPlayers.rank));
+
+  const out = {} as Record<Region, TopPlayersSnapshot>;
+  for (const region of regions) {
+    out[region] = { results: [], computedAt: null };
+  }
+  for (const r of rows) {
+    if (!isRegion(r.region)) continue;
+    const bucket = out[r.region];
+    bucket.results.push({
+      account_id: r.accountId,
+      nickname: r.nickname,
+      clan_tag: r.clanTag,
+      clan_color: r.clanColor,
+      battles: r.battles,
+      wnx: Number(r.wnx),
+    });
+    if (bucket.computedAt === null) bucket.computedAt = r.computedAt;
+  }
+  return out;
 }
