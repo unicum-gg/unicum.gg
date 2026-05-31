@@ -10,7 +10,10 @@ import {
   type TankSnapshot,
   tankSnapshots,
 } from "@/services/db/schema";
-import type { PlayerInfo } from "@/services/wargaming/wot/accounts";
+import type {
+  PlayerInfo,
+  PlayerSearchResult,
+} from "@/services/wargaming/wot/accounts";
 import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 
@@ -33,6 +36,24 @@ export type Stats = {
   globalRating: number;
   wtr: number | null;
 };
+
+export async function findPlayerByNicknameInDB(
+  region: Region,
+  nickname: string,
+): Promise<PlayerSearchResult | null> {
+  const [row] = await db
+    .select({ accountId: players.accountId, nickname: players.nickname })
+    .from(players)
+    .where(
+      and(
+        eq(players.region, region),
+        sql`LOWER(${players.nickname}) = LOWER(${nickname})`,
+      ),
+    )
+    .limit(1);
+  if (!row) return null;
+  return { account_id: row.accountId, nickname: row.nickname };
+}
 
 export function statsFromSnapshot(s: PlayerSnapshot): Stats {
   return {

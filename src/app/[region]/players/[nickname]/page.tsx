@@ -5,6 +5,7 @@ import { PlayerStatsTable } from "@/components/players/stats-table";
 import {
   diffStats,
   diffTanks,
+  findPlayerByNicknameInDB,
   getPeriodComparators,
   getPeriodTankComparators,
   recordCurrentSnapshot,
@@ -33,7 +34,9 @@ export default async function PlayerPage({
   if (!isRegion(region)) notFound();
 
   const decoded = decodeURIComponent(nickname);
-  const found = await findPlayerByNickname(region, decoded);
+  const found =
+    (await findPlayerByNicknameInDB(region, decoded)) ??
+    (await findPlayerByNickname(region, decoded));
   if (!found) notFound();
 
   const info = await getPlayerInfo(region, found.account_id);
