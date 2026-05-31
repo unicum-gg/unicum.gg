@@ -20,6 +20,9 @@
 # production
 /build
 
+# react-flagpack assets (copied via postinstall)
+/public/flags
+
 # misc
 .DS_Store
 *.pem
