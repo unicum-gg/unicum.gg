@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import type { TopPlayersResponse } from "@/app/api/[region]/players/top/route";
+import { RelativeTime } from "@/components/relative-time";
 import {
   Table,
   TableBody,
@@ -25,7 +26,7 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 type State =
   | { status: "loading" }
-  | { status: "ok"; results: TopPlayerResult[] }
+  | { status: "ok"; results: TopPlayerResult[]; computedAt: Date | null }
   | { status: "error" };
 
 export function TopPlayers({
@@ -51,7 +52,11 @@ export function TopPlayers({
           return;
         }
         const body = (await res.json()) as TopPlayersResponse;
-        setState({ status: "ok", results: body.results });
+        setState({
+          status: "ok",
+          results: body.results,
+          computedAt: body.computed_at ? new Date(body.computed_at) : null,
+        });
       })
       .catch((err) => {
         if (err?.name === "AbortError") return;
@@ -62,7 +67,15 @@ export function TopPlayers({
 
   return (
     <div className="flex h-full flex-col">
-      <div className={cn("p-4", styles.mutedDescription)}>{description}</div>
+      <div className={cn("p-4", styles.mutedDescription)}>
+        {description}
+        {state.status === "ok" && state.computedAt ? (
+          <>
+            {" "}
+            Updated <RelativeTime date={state.computedAt} />.
+          </>
+        ) : null}
+      </div>
       {state.status === "error" ? (
         <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
           Couldn&apos;t load. Try again later.

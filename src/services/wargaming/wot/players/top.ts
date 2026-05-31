@@ -1,6 +1,6 @@
-import { sql } from "drizzle-orm";
-import { unstable_cache } from "next/cache";
+import { and, asc, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
+import { topPlayers } from "@/services/db/schema";
 import { getPlayerClansBatch } from "@/services/wargaming/wot/clans";
 import type { Region } from "@/services/wargaming/wot";
 import {
@@ -49,7 +49,7 @@ type DiffRow = {
   diff_assist: string | number;
 };
 
-async function computeTopPlayersByWnx(
+export async function computeTopPlayersByWnx(
   region: Region,
   period: TopPlayersPeriod,
   limit: number,
@@ -179,8 +179,32 @@ async function computeTopPlayersByWnx(
   return candidates.slice(0, limit);
 }
 
-export const getTopPlayersByWnx = unstable_cache(
-  computeTopPlayersByWnx,
-  ["top-players-by-wnx"],
-  { revalidate: 60 * 60 * 24, tags: ["top-players"] },
-);
+export type TopPlayersSnapshot = {
+  results: TopPlayerResult[];
+  computedAt: Date | null;
+};
+
+export async function getTopPlayersByWnx(
+  region: Region,
+  period: TopPlayersPeriod,
+  limit: number,
+): Promise<TopPlayersSnapshot> {
+  const rows = await db
+    .select()
+    .from(topPlayers)
+    .where(and(eq(topPlayers.region, region), eq(topPlayers.period, period)))
+    .orderBy(asc(topPlayers.rank))
+    .limit(limit);
+
+  return {
+    results: rows.map((r) => ({
+      account_id: r.accountId,
+      nickname: r.nickname,
+      clan_tag: r.clanTag,
+      clan_color: r.clanColor,
+      battles: r.battles,
+      wnx: Number(r.wnx),
+    })),
+    computedAt: rows[0]?.computedAt ?? null,
+  };
+}
