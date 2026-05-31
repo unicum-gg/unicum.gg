@@ -144,10 +144,15 @@ async function getLatestClanMembershipsByRegion(
     .where(eq(ranked.rn, 1));
 }
 
+export type TopClansSnapshot = {
+  results: TopClanResult[];
+  computedAt: Date | null;
+};
+
 export async function getTopClansByWnx(
   region: Region,
   limit: number,
-): Promise<TopClanResult[]> {
+): Promise<TopClansSnapshot> {
   const rows = await db
     .select()
     .from(topClans)
@@ -155,14 +160,17 @@ export async function getTopClansByWnx(
     .orderBy(asc(topClans.rank))
     .limit(limit);
 
-  return rows.map((r) => ({
-    clan_id: r.clanId,
-    tag: r.tag,
-    name: r.name,
-    color: r.color,
-    emblem: r.emblem,
-    members_count: r.membersCount,
-    rated_members_count: r.ratedMembersCount,
-    avg_wnx: Number(r.avgWnx),
-  }));
+  return {
+    results: rows.map((r) => ({
+      clan_id: r.clanId,
+      tag: r.tag,
+      name: r.name,
+      color: r.color,
+      emblem: r.emblem,
+      members_count: r.membersCount,
+      rated_members_count: r.ratedMembersCount,
+      avg_wnx: Number(r.avgWnx),
+    })),
+    computedAt: rows[0]?.computedAt ?? null,
+  };
 }

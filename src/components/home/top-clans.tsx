@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import type { TopClansResponse } from "@/app/api/[region]/clans/top/route";
+import { RelativeTime } from "@/components/relative-time";
 import {
   Table,
   TableBody,
@@ -27,7 +28,7 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 type State =
   | { status: "loading" }
-  | { status: "ok"; results: TopClanResult[] }
+  | { status: "ok"; results: TopClanResult[]; computedAt: Date | null }
   | { status: "error" };
 
 export function TopClans() {
@@ -45,7 +46,11 @@ export function TopClans() {
           return;
         }
         const body = (await res.json()) as TopClansResponse;
-        setState({ status: "ok", results: body.results });
+        setState({
+          status: "ok",
+          results: body.results,
+          computedAt: body.computed_at ? new Date(body.computed_at) : null,
+        });
       })
       .catch((err) => {
         if (err?.name === "AbortError") return;
@@ -59,6 +64,12 @@ export function TopClans() {
       <div className={cn("p-4", styles.mutedDescription)}>
         Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
         more than 50 members, ranked by average WNX.
+        {state.status === "ok" && state.computedAt ? (
+          <>
+            {" "}
+            Updated <RelativeTime date={state.computedAt} />.
+          </>
+        ) : null}
       </div>
       {state.status === "error" ? (
         <div className="mt-auto border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">

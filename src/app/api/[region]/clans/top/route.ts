@@ -6,6 +6,7 @@ import { isRegion } from "@/services/wargaming/wot";
 
 export type TopClansResponse = {
   results: TopClanResult[];
+  computed_at: string | null;
 };
 
 const DEFAULT_LIMIT = 10;
@@ -27,8 +28,11 @@ export async function GET(
   );
 
   try {
-    const results = await getTopClansByWnx(region, limit);
-    return Response.json({ results });
+    const { results, computedAt } = await getTopClansByWnx(region, limit);
+    return Response.json({
+      results,
+      computed_at: computedAt?.toISOString() ?? null,
+    });
   } catch (err) {
     console.error(`[api/${region}/clans/top] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
