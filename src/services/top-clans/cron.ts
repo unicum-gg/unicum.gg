@@ -26,13 +26,8 @@ export function startTopClansCron() {
 
 async function runInitialIfEmpty(): Promise<void> {
   try {
-    const [{ count }] = (await db.execute(
-      "SELECT COUNT(*)::int AS count FROM top_clans",
-    )) as unknown as Array<{ count: number }>;
-    if (count > 0) return;
-
-    const isLeader = await tryAcquireLease();
-    if (!isLeader) return;
+    const existing = await db.select({ rank: topClans.rank }).from(topClans).limit(1);
+    if (existing.length > 0) return;
 
     console.log("[top-clans cron] empty table, running initial refresh");
     await refreshAllRegions();
