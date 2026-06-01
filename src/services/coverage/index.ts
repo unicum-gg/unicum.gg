@@ -1,6 +1,5 @@
 import { sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { getRailwayBilling, type RailwayBilling } from "@/services/railway";
 import type { Region } from "@/services/wargaming/wot";
 
 export type DailyPoint = { day: string; count: number };
@@ -38,7 +37,6 @@ export type CoverageStats = {
   infrastructure: {
     databaseBytes: number;
     tables: TableSize[];
-    billing: RailwayBilling | null;
   };
 };
 
@@ -66,10 +64,6 @@ function buildDaySeries(
 }
 
 export async function getCoverageStats(region: Region): Promise<CoverageStats> {
-  const billingPromise = getRailwayBilling().catch((err) => {
-    console.warn("[coverage] railway billing fetch failed:", err);
-    return null;
-  });
   const [
     players,
     clans,
@@ -258,7 +252,6 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
         name: r.name,
         bytes: Number(r.bytes),
       })),
-      billing: await billingPromise,
     },
   };
 }

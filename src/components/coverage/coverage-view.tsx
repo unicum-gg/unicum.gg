@@ -9,22 +9,13 @@ import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { getCoverageStats } from "@/services/coverage";
-import { type Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
+import { Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
 import { CoverageAreaChart } from "./coverage-charts";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
-});
-const usdFmt = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 2,
-});
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  month: "short",
-  day: "numeric",
 });
 
 function formatYear(d: Date | null): string {
@@ -84,35 +75,45 @@ export async function CoverageView({ region }: { region: Region }) {
         <PanelHeader>
           <PanelTitle>Activity, last 24 hours</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2">
-          <StatCell
-            label="Last player snapshot"
-            value={
-              stats.activity.lastPlayerSnapshotAt ? (
-                <RelativeTime date={stats.activity.lastPlayerSnapshotAt} />
-              ) : (
-                "n/a"
-              )
-            }
-          />
-          <StatCell
-            label="Last clan refresh"
-            value={
-              stats.activity.lastClanRefreshAt ? (
-                <RelativeTime date={stats.activity.lastClanRefreshAt} />
-              ) : (
-                "n/a"
-              )
-            }
-          />
-          <StatCell
-            label="Player snapshots in 24h"
-            value={intFmt.format(stats.activity.playerSnapshotsLast24h)}
-          />
-          <StatCell
-            label="Clans refreshed in 24h"
-            value={intFmt.format(stats.activity.clansRefreshedLast24h)}
-          />
+        <PanelContent className="space-y-4 p-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+            <StatCell
+              label="Last player snapshot"
+              value={
+                stats.activity.lastPlayerSnapshotAt ? (
+                  <RelativeTime date={stats.activity.lastPlayerSnapshotAt} />
+                ) : (
+                  "n/a"
+                )
+              }
+            />
+            <StatCell
+              label="Last clan refresh"
+              value={
+                stats.activity.lastClanRefreshAt ? (
+                  <RelativeTime date={stats.activity.lastClanRefreshAt} />
+                ) : (
+                  "n/a"
+                )
+              }
+            />
+            <StatCell
+              label="Player snapshots in 24h"
+              value={intFmt.format(stats.activity.playerSnapshotsLast24h)}
+            />
+            <StatCell
+              label="Clans refreshed in 24h"
+              value={intFmt.format(stats.activity.clansRefreshedLast24h)}
+            />
+          </div>
+          {region === Region.ASIA && (
+            <p className="text-xs text-fd-muted-foreground">
+              Asia throughput is intentionally serialized (one in-flight request
+              at a time): the network path between Europe and Wargaming Asia
+              drops concurrent flows. Snapshots progress slower than EU/NA but
+              every player gets refreshed eventually.
+            </p>
+          )}
         </PanelContent>
       </Panel>
 
@@ -198,55 +199,11 @@ export async function CoverageView({ region }: { region: Region }) {
           <PanelTitle>Infrastructure</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-6 p-4">
-          {stats.infrastructure.billing && (
-            <div className="space-y-1">
-              <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-                Estimated annual cost
-              </div>
-              <div className="font-heading text-4xl font-bold tabular-nums text-[#f25322]">
-                {usdFmt.format(
-                  stats.infrastructure.billing.estimated.total * 12,
-                )}
-              </div>
-              <div className="text-sm text-fd-muted-foreground">
-                Based on{" "}
-                {usdFmt.format(stats.infrastructure.billing.estimated.total)}
-                /month at current usage, billed by Railway. Will grow as the
-                player and clan corpus expands.
-              </div>
-            </div>
-          )}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <StatCell
               label="Database size"
               value={formatBytes(stats.infrastructure.databaseBytes)}
             />
-            {stats.infrastructure.billing && (
-              <>
-                <StatCell
-                  label="This period so far"
-                  value={usdFmt.format(
-                    stats.infrastructure.billing.current.total,
-                  )}
-                />
-                <StatCell
-                  label="This period estimate"
-                  value={
-                    <span>
-                      {usdFmt.format(
-                        stats.infrastructure.billing.estimated.total,
-                      )}{" "}
-                      <span className="text-xs text-fd-muted-foreground">
-                        by{" "}
-                        {dateFmt.format(
-                          stats.infrastructure.billing.billingPeriod.end,
-                        )}
-                      </span>
-                    </span>
-                  }
-                />
-              </>
-            )}
           </div>
           {stats.infrastructure.tables.length > 0 && (
             <div className="space-y-1.5">
@@ -268,46 +225,9 @@ export async function CoverageView({ region }: { region: Region }) {
               </ul>
             </div>
           )}
-          {stats.infrastructure.billing && (
-            <div className="space-y-1.5">
-              <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-                Cost breakdown · estimated end of period
-              </div>
-              <ul className="divide-y divide-fd-border text-sm">
-                {(
-                  [
-                    ["Memory", stats.infrastructure.billing.estimated.memory],
-                    ["CPU", stats.infrastructure.billing.estimated.cpu],
-                    [
-                      "Network egress",
-                      stats.infrastructure.billing.estimated.network,
-                    ],
-                    ["Volume", stats.infrastructure.billing.estimated.volume],
-                  ] as const
-                ).map(([label, value]) => (
-                  <li
-                    key={label}
-                    className="flex items-center justify-between py-1.5"
-                  >
-                    <span className="text-fd-muted-foreground">{label}</span>
-                    <span className="tabular-nums">{usdFmt.format(value)}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
           <p className="text-xs text-fd-muted-foreground">
             Open source, community-funded. Numbers above are global (shared
-            across all regions).{" "}
-            {stats.infrastructure.billing && (
-              <>
-                Billing period{" "}
-                {dateFmt.format(stats.infrastructure.billing.billingPeriod.start)}{" "}
-                →{" "}
-                {dateFmt.format(stats.infrastructure.billing.billingPeriod.end)}
-                , live from Railway API.
-              </>
-            )}
+            across all regions).
           </p>
         </PanelContent>
       </Panel>
