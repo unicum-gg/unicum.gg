@@ -1,7 +1,7 @@
 import { env } from "env";
 import { traced } from "@/lib/perf-trace";
 import { Region } from "./index";
-import { acquireWgToken } from "./rate-limit";
+import { acquireWgSlot, acquireWgToken, releaseWgSlot } from "./rate-limit";
 
 const REGION_API_HOST: Record<Region, string> = {
   [Region.EU]: "api.worldoftanks.eu",
@@ -106,16 +106,21 @@ export async function wgFetch<T>(
     withRetries(async () => {
       // Guarantee we never exceed WG's per-application_id rate limit
       await acquireWgToken(region);
-      const res = await fetch(url, { next: { revalidate } });
-      if (!res.ok) {
-        throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
-      }
+      await acquireWgSlot(region);
+      try {
+        const res = await fetch(url, { next: { revalidate } });
+        if (!res.ok) {
+          throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
+        }
 
-      const body = (await res.json()) as WgResponse<T>;
-      if (body.status === "error") {
-        throw new WargamingApiError(body.error.message, body.error.field);
+        const body = (await res.json()) as WgResponse<T>;
+        if (body.status === "error") {
+          throw new WargamingApiError(body.error.message, body.error.field);
+        }
+        return body.data;
+      } finally {
+        releaseWgSlot(region);
       }
-      return body.data;
     }),
   );
 }
