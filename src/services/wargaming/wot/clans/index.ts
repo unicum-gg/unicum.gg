@@ -50,20 +50,28 @@ async function getClanLanguages(
 
 type RawClanFullInfo = {
   clan_id: number;
-  tag: string;
-  name: string;
-  color: string;
-  motto: string;
-  description_html: string;
+  // WG returns null for these on disbanded/deleted clans
+  tag: string | null;
+  name: string | null;
+  color: string | null;
+  motto: string | null;
+  description_html: string | null;
   members_count: number;
   leader_id: number;
-  leader_name: string;
+  leader_name: string | null;
   creator_id: number;
-  creator_name: string;
+  creator_name: string | null;
   created_at: number;
   is_clan_disbanded: boolean;
   emblems: Record<string, { portal?: string; wot?: string }> | null;
 };
+
+function isGhostClan(raw: RawClanFullInfo): boolean {
+  // WG returns an object with most fields null for clans that don't really
+  // exist anymore (deleted, migrated, etc). They all collide on tag_lower=""
+  // and pollute the DB if inserted.
+  return !raw.tag;
+}
 
 const CLAN_INFO_FIELDS =
   "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,creator_id,creator_name,created_at,is_clan_disbanded,emblems";
@@ -80,18 +88,18 @@ function clanFullInfoFromRaw(
     "";
   return {
     id: raw.clan_id,
-    tag: raw.tag,
-    name: raw.name,
-    color: raw.color,
+    tag: raw.tag ?? "",
+    name: raw.name ?? "",
+    color: raw.color ?? "",
     emblem,
     motto: raw.motto ?? "",
-    descriptionHtml: sanitizeClanDescription(raw.description_html),
+    descriptionHtml: sanitizeClanDescription(raw.description_html ?? ""),
     createdAt: new Date(raw.created_at * 1000),
     membersCount: raw.members_count,
     leaderId: raw.leader_id,
-    leaderName: raw.leader_name,
+    leaderName: raw.leader_name ?? "",
     creatorId: raw.creator_id,
-    creatorName: raw.creator_name,
+    creatorName: raw.creator_name ?? "",
     isDisbanded: raw.is_clan_disbanded,
     languages,
   };
@@ -109,7 +117,7 @@ export async function getClanFullInfo(
     getClanLanguages(region, clanId),
   ]);
   const raw = data[String(clanId)];
-  if (!raw) return null;
+  if (!raw || isGhostClan(raw)) return null;
   return clanFullInfoFromRaw(raw, languages);
 }
 
@@ -155,7 +163,7 @@ export async function getClansFullInfoBatch(
       continue;
     }
     for (const [id, raw] of Object.entries(res.value)) {
-      if (!raw) continue;
+      if (!raw || isGhostClan(raw)) continue;
       const cid = Number(id);
       out.set(cid, clanFullInfoFromRaw(raw, languagesMap.get(cid) ?? []));
     }

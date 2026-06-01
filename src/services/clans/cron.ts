@@ -144,7 +144,19 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
         const info = infos.get(job.clanId);
         if (!info) {
           failed += 1;
-          if (!job.fromQueue) {
+          // Ghost clan (WG returned no/empty data). Drop from queue so we
+          // don't retry it forever; bump stale clan timestamp so it goes to
+          // the back of the line.
+          if (job.fromQueue) {
+            await db
+              .delete(clanDiscoveryQueue)
+              .where(
+                and(
+                  eq(clanDiscoveryQueue.region, region),
+                  eq(clanDiscoveryQueue.clanId, job.clanId),
+                ),
+              );
+          } else {
             await db
               .update(clans)
               .set({ lastRefreshedAt: sql`NOW()` })
