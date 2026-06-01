@@ -68,7 +68,7 @@ export function TopClans({
                   #
                 </TableHead>
                 <TableHead>Clan</TableHead>
-                <TableHead className="pr-4 text-right!">Avg WNX</TableHead>
+                <TableHead className="w-24 pr-4 text-right!">Avg WNX</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>

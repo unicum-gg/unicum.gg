@@ -64,7 +64,7 @@ export function TopPlayers({
                   #
                 </TableHead>
                 <TableHead>Player</TableHead>
-                <TableHead className="pr-4 text-right!">WNX</TableHead>
+                <TableHead className="w-24 pr-4 text-right!">WNX</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
