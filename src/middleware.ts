@@ -2,19 +2,28 @@ import { NextResponse, type NextRequest } from "next/server";
 import STORAGE from "@/constants/storage";
 import { isRegion, Region } from "@/services/wargaming/wot";
 
-export function middleware(req: NextRequest) {
-  if (req.nextUrl.pathname !== "/") return NextResponse.next();
+const PATHNAME_HEADER = "x-pathname";
 
-  const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
-  if (!stored || !isRegion(stored) || stored === Region.EU) {
-    return NextResponse.next();
+export function middleware(req: NextRequest) {
+  const pathname = req.nextUrl.pathname;
+
+  if (pathname === "/") {
+    const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
+    if (stored && isRegion(stored) && stored !== Region.EU) {
+      const url = req.nextUrl.clone();
+      url.pathname = `/${stored}`;
+      return NextResponse.redirect(url);
+    }
   }
 
-  const url = req.nextUrl.clone();
-  url.pathname = `/${stored}`;
-  return NextResponse.redirect(url);
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set(PATHNAME_HEADER, pathname);
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
-  matcher: "/",
+  matcher: [
+    // Match all paths except Next internals + static assets
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+  ],
 };
