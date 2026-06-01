@@ -13,11 +13,36 @@ import { type Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wo
 import { CoverageAreaChart } from "./coverage-charts";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const decFmt = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+const usdFmt = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  maximumFractionDigits: 2,
+});
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  month: "short",
+  day: "numeric",
+});
 
 function formatYear(d: Date | null): string {
   return d
     ? d.toLocaleDateString("en-US", { year: "numeric", month: "long" })
     : "n/a";
+}
+
+function formatBytes(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  const units = ["KB", "MB", "GB", "TB"];
+  let value = bytes / 1024;
+  let unitIndex = 0;
+  while (value >= 1024 && unitIndex < units.length - 1) {
+    value /= 1024;
+    unitIndex += 1;
+  }
+  return `${decFmt.format(value)} ${units[unitIndex]}`;
 }
 
 export async function CoverageView({ region }: { region: Region }) {
@@ -162,6 +187,127 @@ export async function CoverageView({ region }: { region: Region }) {
               lists and clan history of tracked players all feed this pool
               automatically.
             </span>
+          </p>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Infrastructure</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="space-y-6 p-4">
+          {stats.infrastructure.billing && (
+            <div className="space-y-1">
+              <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
+                Estimated annual cost
+              </div>
+              <div className="font-heading text-4xl font-bold tabular-nums text-[#f25322]">
+                {usdFmt.format(
+                  stats.infrastructure.billing.estimated.total * 12,
+                )}
+              </div>
+              <div className="text-sm text-fd-muted-foreground">
+                Based on{" "}
+                {usdFmt.format(stats.infrastructure.billing.estimated.total)}
+                /month at current usage, billed by Railway. Will grow as the
+                player and clan corpus expands.
+              </div>
+            </div>
+          )}
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+            <StatCell
+              label="Database size"
+              value={formatBytes(stats.infrastructure.databaseBytes)}
+            />
+            {stats.infrastructure.billing && (
+              <>
+                <StatCell
+                  label="This period so far"
+                  value={usdFmt.format(
+                    stats.infrastructure.billing.current.total,
+                  )}
+                />
+                <StatCell
+                  label="This period estimate"
+                  value={
+                    <span>
+                      {usdFmt.format(
+                        stats.infrastructure.billing.estimated.total,
+                      )}{" "}
+                      <span className="text-xs text-fd-muted-foreground">
+                        by{" "}
+                        {dateFmt.format(
+                          stats.infrastructure.billing.billingPeriod.end,
+                        )}
+                      </span>
+                    </span>
+                  }
+                />
+              </>
+            )}
+          </div>
+          {stats.infrastructure.tables.length > 0 && (
+            <div className="space-y-1.5">
+              <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
+                Top tables
+              </div>
+              <ul className="divide-y divide-fd-border text-sm">
+                {stats.infrastructure.tables.map((t) => (
+                  <li
+                    key={t.name}
+                    className="flex items-center justify-between py-1.5"
+                  >
+                    <span className="font-mono text-fd-muted-foreground">
+                      {t.name}
+                    </span>
+                    <span className="tabular-nums">{formatBytes(t.bytes)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {stats.infrastructure.billing && (
+            <div className="space-y-1.5">
+              <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
+                Cost breakdown · estimated end of period
+              </div>
+              <ul className="divide-y divide-fd-border text-sm">
+                {(
+                  [
+                    ["Memory", stats.infrastructure.billing.estimated.memory],
+                    ["CPU", stats.infrastructure.billing.estimated.cpu],
+                    [
+                      "Network egress",
+                      stats.infrastructure.billing.estimated.network,
+                    ],
+                    ["Volume", stats.infrastructure.billing.estimated.volume],
+                  ] as const
+                ).map(([label, value]) => (
+                  <li
+                    key={label}
+                    className="flex items-center justify-between py-1.5"
+                  >
+                    <span className="text-fd-muted-foreground">{label}</span>
+                    <span className="tabular-nums">{usdFmt.format(value)}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <p className="text-xs text-fd-muted-foreground">
+            Open source, community-funded. Numbers above are global (shared
+            across all regions).{" "}
+            {stats.infrastructure.billing && (
+              <>
+                Billing period{" "}
+                {dateFmt.format(stats.infrastructure.billing.billingPeriod.start)}{" "}
+                →{" "}
+                {dateFmt.format(stats.infrastructure.billing.billingPeriod.end)}
+                , live from Railway API.
+              </>
+            )}
           </p>
         </PanelContent>
       </Panel>

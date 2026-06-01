@@ -8,6 +8,8 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: z.string(),
     DATABASE_URL: z.url(),
     CRON_SECRET: z.string(),
+    RAILWAY_API_TOKEN: z.string().optional(),
+    RAILWAY_PROJECT_ID: z.string().optional(),
   },
   client: {},
   runtimeEnv: {
@@ -16,6 +18,8 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: process.env.WARGAMING_APPLICATION_ID_ASIA,
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
+    RAILWAY_API_TOKEN: process.env.RAILWAY_API_TOKEN,
+    RAILWAY_PROJECT_ID: process.env.RAILWAY_PROJECT_ID,
   },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

@@ -1,8 +1,11 @@
 import { sql } from "drizzle-orm";
 import { db } from "@/services/db";
+import { getRailwayBilling, type RailwayBilling } from "@/services/railway";
 import type { Region } from "@/services/wargaming/wot";
 
 export type DailyPoint = { day: string; count: number };
+
+export type TableSize = { name: string; bytes: number };
 
 export type CoverageStats = {
   region: Region;
@@ -32,6 +35,11 @@ export type CoverageStats = {
     playersDiscoveredDaily: DailyPoint[];
     playerSnapshotsDaily: DailyPoint[];
   };
+  infrastructure: {
+    databaseBytes: number;
+    tables: TableSize[];
+    billing: RailwayBilling | null;
+  };
 };
 
 const DAYS_WINDOW = 30;
@@ -58,6 +66,10 @@ function buildDaySeries(
 }
 
 export async function getCoverageStats(region: Region): Promise<CoverageStats> {
+  const billingPromise = getRailwayBilling().catch((err) => {
+    console.warn("[coverage] railway billing fetch failed:", err);
+    return null;
+  });
   const [
     players,
     clans,
@@ -75,6 +87,8 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
     totalBattles,
     playersDiscoveredRows,
     snapshotsDailyRows,
+    databaseBytes,
+    tableSizeRows,
   ] = await Promise.all([
     db
       .execute<{ count: string }>(
@@ -199,6 +213,19 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
           GROUP BY day
           ORDER BY day`,
     ),
+    db
+      .execute<{ bytes: string }>(
+        sql`SELECT pg_database_size(current_database())::text AS bytes`,
+      )
+      .then((r) => Number(r[0]?.bytes ?? 0)),
+    db.execute<{ name: string; bytes: string }>(
+      sql`SELECT c.relname AS name, pg_total_relation_size(c.oid)::text AS bytes
+          FROM pg_class c
+          JOIN pg_namespace n ON n.oid = c.relnamespace
+          WHERE n.nspname = 'public' AND c.relkind = 'r'
+          ORDER BY pg_total_relation_size(c.oid) DESC
+          LIMIT 10`,
+    ),
   ]);
 
   return {
@@ -224,6 +251,14 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
     trends: {
       playersDiscoveredDaily: buildDaySeries(playersDiscoveredRows, DAYS_WINDOW),
       playerSnapshotsDaily: buildDaySeries(snapshotsDailyRows, DAYS_WINDOW),
+    },
+    infrastructure: {
+      databaseBytes,
+      tables: tableSizeRows.map((r) => ({
+        name: r.name,
+        bytes: Number(r.bytes),
+      })),
+      billing: await billingPromise,
     },
   };
 }
