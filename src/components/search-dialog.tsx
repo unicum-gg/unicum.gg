@@ -10,7 +10,7 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
 import ROUTES from "@/constants/routes";
@@ -146,12 +146,32 @@ function selectableRows(rows: Row[]): SelectableRow[] {
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const [storedRegion, setStoredRegion] = useCookie(
     STORAGE.COOKIES.REGION,
     Region.EU,
   );
-  const region: Region = isRegion(storedRegion) ? storedRegion : Region.EU;
-  const setRegion = (r: Region) => setStoredRegion(r);
+  // Source of truth = URL (e.g. /asia/...) over cookie. The user is
+  // browsing that region right now; default the search to it.
+  const urlRegion = pathname?.split("/")[1] ?? "";
+  const defaultRegion: Region = isRegion(urlRegion)
+    ? urlRegion
+    : isRegion(storedRegion)
+      ? storedRegion
+      : Region.EU;
+  const [region, setRegionState] = useState<Region>(defaultRegion);
+  // Sync region with URL changes without an effect (cheaper, plays nice
+  // with React 19 purity rules). React re-renders before commit when
+  // setState is called during render with a different value.
+  const [trackedUrlRegion, setTrackedUrlRegion] = useState(urlRegion);
+  if (urlRegion !== trackedUrlRegion) {
+    setTrackedUrlRegion(urlRegion);
+    if (isRegion(urlRegion)) setRegionState(urlRegion);
+  }
+  const setRegion = (r: Region) => {
+    setRegionState(r);
+    setStoredRegion(r);
+  };
   const [searchType, setSearchType] = useState<SearchType>(SearchType.All);
   const [query, setQuery] = useState("");
   const [playersOutcome, setPlayersOutcome] =
