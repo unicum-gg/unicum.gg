@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { CoverageView } from "@/components/coverage/coverage-view";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: `Coverage (${REGION_LABEL[Region.EU]}), what we track, unicum.gg`,

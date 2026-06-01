@@ -3,7 +3,7 @@ import { notFound, redirect } from "next/navigation";
 import { CoverageView } from "@/components/coverage/coverage-view";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
