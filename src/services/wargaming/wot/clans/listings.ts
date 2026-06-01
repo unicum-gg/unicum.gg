@@ -67,7 +67,7 @@ type RawClanBriefInfo = {
   tag: string;
   name: string;
   color: string;
-  emblems: Record<string, { portal?: string; wot?: string }>;
+  emblems: Record<string, { portal?: string; wot?: string }> | null;
   members: ClanMember[];
 };
 
@@ -94,7 +94,7 @@ export async function getClansBriefInfo(
         tag: raw.tag,
         name: raw.name,
         color: raw.color,
-        emblem: raw.emblems.x64?.portal ?? raw.emblems.x64?.wot ?? null,
+        emblem: raw.emblems?.x64?.portal ?? raw.emblems?.x64?.wot ?? null,
         members: raw.members ?? [],
       });
     }

@@ -34,7 +34,7 @@ type RawClanSearchResult = {
   name: string;
   color: string;
   members_count: number;
-  emblems: Record<string, { portal?: string; wot?: string }>;
+  emblems: Record<string, { portal?: string; wot?: string }> | null;
 };
 
 export async function findClansByPrefix(
@@ -57,6 +57,6 @@ export async function findClansByPrefix(
     name: c.name,
     color: c.color,
     members_count: c.members_count,
-    emblem: c.emblems.x32?.portal ?? c.emblems.x32?.wot ?? null,
+    emblem: c.emblems?.x32?.portal ?? c.emblems?.x32?.wot ?? null,
   }));
 }

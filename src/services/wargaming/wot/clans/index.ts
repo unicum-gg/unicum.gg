@@ -62,7 +62,7 @@ type RawClanFullInfo = {
   creator_name: string;
   created_at: number;
   is_clan_disbanded: boolean;
-  emblems: Record<string, { portal?: string; wot?: string }>;
+  emblems: Record<string, { portal?: string; wot?: string }> | null;
 };
 
 const CLAN_INFO_FIELDS =
@@ -73,10 +73,10 @@ function clanFullInfoFromRaw(
   languages: string[],
 ): ClanFullInfo {
   const emblem =
-    raw.emblems.x195?.portal ??
-    raw.emblems.x64?.portal ??
-    raw.emblems.x64?.wot ??
-    raw.emblems.x32?.portal ??
+    raw.emblems?.x195?.portal ??
+    raw.emblems?.x64?.portal ??
+    raw.emblems?.x64?.wot ??
+    raw.emblems?.x32?.portal ??
     "";
   return {
     id: raw.clan_id,
