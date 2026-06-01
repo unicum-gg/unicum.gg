@@ -1,5 +1,6 @@
 import { and, desc, eq, inArray, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
+import { playerChannel, publish } from "@/services/live/pubsub";
 import {
   type NewPlayerSnapshot,
   type Player,
@@ -13,7 +14,7 @@ import type {
 } from "@/services/wargaming/wot/accounts";
 import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
-import { bulkInsertTankSnapshots } from "./tank";
+import { bulkInsertTankSnapshots } from "../tank";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -135,22 +136,63 @@ function snapshotFromInfo(
   };
 }
 
-export async function recordCurrentSnapshot(
+export async function markPlayerSeen(
   region: Region,
   info: PlayerInfo,
-  wtr: number | null = null,
-  tanks: TankStats[] = [],
-): Promise<SnapshotContext> {
+): Promise<Player> {
+  const createdAt = new Date(info.created_at * 1000);
+  const lastBattleAt = new Date(info.last_battle_time * 1000);
   const [player] = await db
     .insert(players)
     .values({
       region,
       accountId: info.account_id,
       nickname: info.nickname,
+      createdAt,
+      lastBattleAt,
+      clanId: info.clan_id,
     })
     .onConflictDoUpdate({
       target: [players.region, players.accountId],
-      set: { nickname: info.nickname, lastSeenAt: new Date() },
+      set: {
+        nickname: info.nickname,
+        createdAt,
+        lastBattleAt,
+        clanId: info.clan_id,
+        lastSeenAt: new Date(),
+      },
+    })
+    .returning();
+  return player;
+}
+
+export async function recordCurrentSnapshot(
+  region: Region,
+  info: PlayerInfo,
+  wtr: number | null = null,
+  tanks: TankStats[] = [],
+): Promise<SnapshotContext> {
+  const createdAt = new Date(info.created_at * 1000);
+  const lastBattleAt = new Date(info.last_battle_time * 1000);
+  const [player] = await db
+    .insert(players)
+    .values({
+      region,
+      accountId: info.account_id,
+      nickname: info.nickname,
+      createdAt,
+      lastBattleAt,
+      clanId: info.clan_id,
+    })
+    .onConflictDoUpdate({
+      target: [players.region, players.accountId],
+      set: {
+        nickname: info.nickname,
+        createdAt,
+        lastBattleAt,
+        clanId: info.clan_id,
+        lastSeenAt: new Date(),
+      },
     })
     .returning();
 
@@ -180,6 +222,7 @@ export async function recordCurrentSnapshot(
     .returning();
 
   if (tanks.length > 0) await bulkInsertTankSnapshots(player.id, tanks);
+  publish(playerChannel(region, info.account_id), { kind: "snapshot" });
 
   if (inserted) return { player, latest: inserted };
 
@@ -257,6 +300,25 @@ export async function getPlayerIdsByAccounts(
   return map;
 }
 
+export async function getPlayersByAccounts(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, Player>> {
+  if (accountIds.length === 0) return new Map();
+  const rows = await db
+    .select()
+    .from(players)
+    .where(
+      and(
+        eq(players.region, region),
+        inArray(players.accountId, accountIds),
+      ),
+    );
+  const map = new Map<number, Player>();
+  for (const r of rows) map.set(r.accountId, r);
+  return map;
+}
+
 export async function getLatestPlayerSnapshotsByAccounts(
   region: Region,
   accountIds: number[],
@@ -308,7 +370,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     out.set(accountId, {
       id: Number(row.id),
       playerId: Number(row.player_id),
-      takenAt: row.taken_at,
+      takenAt: row.taken_at instanceof Date ? row.taken_at : new Date(row.taken_at),
       battles: Number(row.battles),
       wins: Number(row.wins),
       losses: Number(row.losses),
