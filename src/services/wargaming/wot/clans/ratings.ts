@@ -23,35 +23,13 @@ import {
   type WN8Expected,
   type WNXExpected,
 } from "@/services/wargaming/wot/ratings";
-import { getTanksStats, type TankStats } from "@/services/wargaming/wot/tanks";
+import { getTanksStatsBatch, type TankStats } from "@/services/wargaming/wot/tanks";
 
 export type MemberRatings = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
 };
-
-const TANKS_STATS_CONCURRENCY = 8;
-
-async function mapWithConcurrency<T, R>(
-  items: T[],
-  limit: number,
-  fn: (item: T, index: number) => Promise<R>,
-): Promise<R[]> {
-  const results: R[] = new Array(items.length);
-  let cursor = 0;
-  async function worker() {
-    while (true) {
-      const idx = cursor++;
-      if (idx >= items.length) return;
-      results[idx] = await fn(items[idx], idx);
-    }
-  }
-  await Promise.all(
-    Array.from({ length: Math.min(limit, items.length) }, () => worker()),
-  );
-  return results;
-}
 
 type StatsForWn7 = Pick<
   PlayerStatistics,
@@ -130,23 +108,23 @@ export async function getClanMembersRatings(
   }
 
   if (missing.length > 0) {
-    const [playersInfo, missingTanksList] = await Promise.all([
+    const [playersInfo, missingTanksMap] = await Promise.all([
       getPlayersInfoBatch(region, missing),
-      mapWithConcurrency(missing, TANKS_STATS_CONCURRENCY, (id) =>
-        getTanksStats(region, id).catch<TankStats[]>((err) => {
-          console.error(`[clan-ratings] tanks/stats ${id} failed:`, err);
-          return [];
-        }),
+      getTanksStatsBatch(region, missing).catch<Map<number, TankStats[]>>(
+        (err) => {
+          console.error("[clan-ratings] tanks/stats batch failed:", err);
+          return new Map();
+        },
       ),
     ]);
 
     const toBackfill: Array<{ info: NonNullable<ReturnType<typeof playersInfo.get>>; tanks: TankStats[] }> = [];
-    missing.forEach((id, i) => {
+    for (const id of missing) {
       const info = playersInfo.get(id);
-      const tanks = missingTanksList[i];
+      const tanks = missingTanksMap.get(id) ?? [];
       if (!info || tanks.length === 0) {
         out.set(id, { wn7: null, wn8: null, wnx: null });
-        return;
+        continue;
       }
       out.set(
         id,
@@ -159,7 +137,7 @@ export async function getClanMembersRatings(
         ),
       );
       toBackfill.push({ info, tanks });
-    });
+    }
 
     if (toBackfill.length > 0) {
       after(async () => {
