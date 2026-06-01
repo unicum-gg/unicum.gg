@@ -65,20 +65,13 @@ type RawClanFullInfo = {
   emblems: Record<string, { portal?: string; wot?: string }>;
 };
 
-export async function getClanFullInfo(
-  region: Region,
-  clanId: number,
-): Promise<ClanFullInfo | null> {
-  const [data, languages] = await Promise.all([
-    wgFetch<Record<string, RawClanFullInfo | null>>(region, "/wot/clans/info/", {
-      clan_id: String(clanId),
-      fields:
-        "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,creator_id,creator_name,created_at,is_clan_disbanded,emblems",
-    }),
-    getClanLanguages(region, clanId),
-  ]);
-  const raw = data[String(clanId)];
-  if (!raw) return null;
+const CLAN_INFO_FIELDS =
+  "clan_id,tag,name,color,motto,description_html,members_count,leader_id,leader_name,creator_id,creator_name,created_at,is_clan_disbanded,emblems";
+
+function clanFullInfoFromRaw(
+  raw: RawClanFullInfo,
+  languages: string[],
+): ClanFullInfo {
   const emblem =
     raw.emblems.x195?.portal ??
     raw.emblems.x64?.portal ??
@@ -102,4 +95,70 @@ export async function getClanFullInfo(
     isDisbanded: raw.is_clan_disbanded,
     languages,
   };
+}
+
+export async function getClanFullInfo(
+  region: Region,
+  clanId: number,
+): Promise<ClanFullInfo | null> {
+  const [data, languages] = await Promise.all([
+    wgFetch<Record<string, RawClanFullInfo | null>>(region, "/wot/clans/info/", {
+      clan_id: String(clanId),
+      fields: CLAN_INFO_FIELDS,
+    }),
+    getClanLanguages(region, clanId),
+  ]);
+  const raw = data[String(clanId)];
+  if (!raw) return null;
+  return clanFullInfoFromRaw(raw, languages);
+}
+
+const CLAN_FULL_INFO_BATCH_SIZE = 100;
+const LANGUAGES_CONCURRENCY = 5;
+
+export async function getClansFullInfoBatch(
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, ClanFullInfo>> {
+  const out = new Map<number, ClanFullInfo>();
+  const unique = Array.from(new Set(clanIds));
+  if (unique.length === 0) return out;
+
+  // 1. Batched WG calls in parallel
+  const chunks: number[][] = [];
+  for (let i = 0; i < unique.length; i += CLAN_FULL_INFO_BATCH_SIZE) {
+    chunks.push(unique.slice(i, i + CLAN_FULL_INFO_BATCH_SIZE));
+  }
+  const wgResults = await Promise.allSettled(
+    chunks.map((batch) =>
+      wgFetch<Record<string, RawClanFullInfo | null>>(
+        region,
+        "/wot/clans/info/",
+        { clan_id: batch.join(","), fields: CLAN_INFO_FIELDS },
+      ),
+    ),
+  );
+
+  // 2. Portal languages, concurrency-limited
+  const languagesMap = new Map<number, string[]>();
+  for (let i = 0; i < unique.length; i += LANGUAGES_CONCURRENCY) {
+    const batch = unique.slice(i, i + LANGUAGES_CONCURRENCY);
+    const results = await Promise.all(
+      batch.map(async (id) => [id, await getClanLanguages(region, id)] as const),
+    );
+    for (const [id, langs] of results) languagesMap.set(id, langs);
+  }
+
+  for (const res of wgResults) {
+    if (res.status === "rejected") {
+      console.error("[clans-info-batch] chunk failed:", res.reason);
+      continue;
+    }
+    for (const [id, raw] of Object.entries(res.value)) {
+      if (!raw) continue;
+      const cid = Number(id);
+      out.set(cid, clanFullInfoFromRaw(raw, languagesMap.get(cid) ?? []));
+    }
+  }
+  return out;
 }

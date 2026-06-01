@@ -1,4 +1,4 @@
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import { type Clan, clans } from "@/services/db/schema";
 import { clanChannel, publish } from "@/services/live/pubsub";
@@ -6,6 +6,7 @@ import type { Region } from "@/services/wargaming/wot";
 import {
   type ClanFullInfo,
   getClanFullInfo,
+  getClansFullInfoBatch,
 } from "@/services/wargaming/wot/clans";
 import { findClanIdByTag } from "@/services/wargaming/wot/clans/search";
 import { dedup, isStale } from "./internal";
@@ -117,6 +118,70 @@ export async function refreshClanById(
     });
   publish(clanChannel(region, info.id), { kind: "info" });
   return info;
+}
+
+/**
+ * Batched variant: fetches & upserts many clans at once. Used by the cron
+ * to avoid 1 WG round-trip per clan.
+ */
+export async function refreshClansByIdsBatch(
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, ClanFullInfo>> {
+  const infos = await getClansFullInfoBatch(region, clanIds);
+  if (infos.size === 0) return infos;
+
+  const now = new Date();
+  const rows = Array.from(infos.values()).map((info) => ({
+    region,
+    id: info.id,
+    tag: info.tag,
+    tagLower: info.tag.toLowerCase(),
+    name: info.name,
+    color: info.color,
+    emblem: info.emblem,
+    motto: info.motto,
+    descriptionHtml: info.descriptionHtml,
+    membersCount: info.membersCount,
+    leaderId: info.leaderId,
+    leaderName: info.leaderName,
+    creatorId: info.creatorId,
+    creatorName: info.creatorName,
+    createdAtWg: info.createdAt,
+    isDisbanded: info.isDisbanded,
+    languages: info.languages,
+    lastRefreshedAt: now,
+  }));
+
+  await db
+    .insert(clans)
+    .values(rows)
+    .onConflictDoUpdate({
+      target: [clans.region, clans.id],
+      set: {
+        tag: sql`excluded.tag`,
+        tagLower: sql`excluded.tag_lower`,
+        name: sql`excluded.name`,
+        color: sql`excluded.color`,
+        emblem: sql`excluded.emblem`,
+        motto: sql`excluded.motto`,
+        descriptionHtml: sql`excluded.description_html`,
+        membersCount: sql`excluded.members_count`,
+        leaderId: sql`excluded.leader_id`,
+        leaderName: sql`excluded.leader_name`,
+        creatorId: sql`excluded.creator_id`,
+        creatorName: sql`excluded.creator_name`,
+        createdAtWg: sql`excluded.created_at_wg`,
+        isDisbanded: sql`excluded.is_disbanded`,
+        languages: sql`excluded.languages`,
+        lastRefreshedAt: sql`excluded.last_refreshed_at`,
+      },
+    });
+
+  for (const info of infos.values()) {
+    publish(clanChannel(region, info.id), { kind: "info" });
+  }
+  return infos;
 }
 
 function refreshClanByIdInBackground(region: Region, clanId: number): void {
