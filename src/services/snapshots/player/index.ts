@@ -1,5 +1,7 @@
 import { and, desc, eq, inArray, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
+import { discoverClansBackground } from "@/services/discovery/clans";
+import { discoverFromClanHistoryBackground } from "@/services/discovery/player-history";
 import { playerChannel, publish } from "@/services/live/pubsub";
 import {
   type NewPlayerSnapshot,
@@ -163,6 +165,9 @@ export async function markPlayerSeen(
       },
     })
     .returning();
+  if (info.clan_id !== null) {
+    discoverClansBackground(region, [info.clan_id]);
+  }
   return player;
 }
 
@@ -196,12 +201,20 @@ export async function recordCurrentSnapshot(
     })
     .returning();
 
+  if (info.clan_id !== null) {
+    discoverClansBackground(region, [info.clan_id]);
+  }
+
   const [latest] = await db
     .select()
     .from(playerSnapshots)
     .where(eq(playerSnapshots.playerId, player.id))
     .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
+
+  if (!latest) {
+    discoverFromClanHistoryBackground(region, info.account_id);
+  }
 
   const stale =
     !latest ||
