@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import { HomePage } from "@/components/home/home-page";
 import { isRegion, Region } from "@/services/wargaming/wot";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 export default async function Page({
   params,
