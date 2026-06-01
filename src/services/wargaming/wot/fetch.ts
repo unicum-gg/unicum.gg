@@ -1,6 +1,7 @@
 import { env } from "env";
 import { traced } from "@/lib/perf-trace";
 import { Region } from "./index";
+import { acquireWgToken } from "./rate-limit";
 
 const REGION_API_HOST: Record<Region, string> = {
   [Region.EU]: "api.worldoftanks.eu",
@@ -103,6 +104,8 @@ export async function wgFetch<T>(
 
   return traced(`wgFetch ${region} ${path}`, () =>
     withRetries(async () => {
+      // Guarantee we never exceed WG's per-application_id rate limit
+      await acquireWgToken(region);
       const res = await fetch(url, { next: { revalidate } });
       if (!res.ok) {
         throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
