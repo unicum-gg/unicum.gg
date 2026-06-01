@@ -39,8 +39,10 @@ function computeMetrics(
   members: ClanMemberStats[],
   ratings: Map<number, MemberRatings> | null,
 ): { avg30dWnx: MetricCell; avgWnx: MetricCell; avgWinrate: MetricCell } {
-  const active = members.filter((m) => m.overall.battles > 0);
-  const avgWinRate = average(active.map((m) => m.overall.winsPercentage));
+  const active = members.filter((m) => m.overall && m.overall.battles > 0);
+  const avgWinRate = average(
+    active.map((m) => m.overall?.winsPercentage ?? 0),
+  );
   const wnxValues = ratings
     ? members
         .map((m) => ratings.get(m.accountId)?.wnx)

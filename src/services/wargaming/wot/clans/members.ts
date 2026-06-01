@@ -15,13 +15,13 @@ type PortalMemberRaw = {
   };
   days_in_clan: number;
   last_battle_time: number | null;
-  personal_rating: number;
-  battles_count: number;
-  wins_percentage: number;
-  damage_per_battle: number;
-  exp_per_battle: number;
-  frags_per_battle: number;
-  battles_per_day: number;
+  personal_rating: number | null;
+  battles_count: number | null;
+  wins_percentage: number | null;
+  damage_per_battle: number | null;
+  exp_per_battle: number | null;
+  frags_per_battle: number | null;
+  battles_per_day: number | null;
   abnormal_results: boolean;
   is_press: boolean;
 };
@@ -48,12 +48,27 @@ export type ClanMemberStats = {
   roleRank: number;
   daysInClan: number;
   lastBattleTime: Date | null;
-  personalRating: number;
-  overall: ClanMemberPeriodStats;
+  personalRating: number | null;
+  overall: ClanMemberPeriodStats | null;
   d28: ClanMemberPeriodStats | null;
 };
 
-function periodStatsFromRaw(raw: PortalMemberRaw): ClanMemberPeriodStats {
+function periodStatsFromRaw(
+  raw: PortalMemberRaw,
+): ClanMemberPeriodStats | null {
+  // WG flags long-inactive accounts with `abnormal_results: true` and returns
+  // null stats for them in this endpoint, even when the same account has stats
+  // exposed via the public API. Treat partial nulls as "no stats".
+  if (
+    raw.battles_count === null ||
+    raw.wins_percentage === null ||
+    raw.damage_per_battle === null ||
+    raw.exp_per_battle === null ||
+    raw.frags_per_battle === null ||
+    raw.battles_per_day === null
+  ) {
+    return null;
+  }
   return {
     battles: raw.battles_count,
     winsPercentage: raw.wins_percentage,

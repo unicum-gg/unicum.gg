@@ -79,9 +79,9 @@ function getSortValue(
     case SortColumn.WNX:
       return ratings?.wnx ?? -1;
     case SortColumn.WR:
-      return m.overall.winsPercentage;
+      return m.overall?.winsPercentage ?? -1;
     case SortColumn.Battles:
-      return m.overall.battles;
+      return m.overall?.battles ?? -1;
     case SortColumn.LastBattle:
       return m.lastBattleTime?.getTime() ?? 0;
   }
@@ -95,7 +95,7 @@ function compareMembers(
 ): number {
   if (!state) {
     if (a.roleRank !== b.roleRank) return b.roleRank - a.roleRank;
-    return b.personalRating - a.personalRating;
+    return (b.personalRating ?? -1) - (a.personalRating ?? -1);
   }
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
   const av = getSortValue(a, ratingsByAccount.get(a.accountId), state.column);
@@ -251,35 +251,36 @@ export function ClanMembersTable({
               </TableCell>
               <RatingCell
                 value={
-                  r?.wn7 ?? (m.overall.battles === 0 ? 0 : null)
+                  r?.wn7 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={r?.wn7 != null ? wn7Color(r.wn7) : null}
               />
               <RatingCell
                 value={
-                  r?.wn8 ?? (m.overall.battles === 0 ? 0 : null)
+                  r?.wn8 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={r?.wn8 != null ? wn8Color(r.wn8) : null}
               />
               <RatingCell
                 value={
-                  r?.wnx ?? (m.overall.battles === 0 ? 0 : null)
+                  r?.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={r?.wnx != null ? wn8Color(r.wnx) : null}
               />
               <TableCell
                 className={cn(
                   "text-right tabular-nums",
-                  m.overall.battles > 0 &&
+                  m.overall &&
+                    m.overall.battles > 0 &&
                     RATING_COLOR_CLASS[
                       winrateColor(m.overall.winsPercentage / 100)
                     ],
                 )}
               >
-                {pctFmt.format(m.overall.winsPercentage)}%
+                {m.overall ? `${pctFmt.format(m.overall.winsPercentage)}%` : "—"}
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {intFmt.format(m.overall.battles)}
+                {m.overall ? intFmt.format(m.overall.battles) : "—"}
               </TableCell>
               <TableCell className="text-right text-xs text-muted-foreground tabular-nums">
                 {m.lastBattleTime
