@@ -4,7 +4,7 @@ import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
 import { topClans } from "@/services/db/schema";
 import { REGIONS } from "@/services/wargaming/wot";
-import { computeTopClansByWnx } from "@/services/wargaming/wot/clans/top";
+import { computeTopClansByWnx } from ".";
 
 const SCHEDULE = "0 * * * *";
 const TOP_N = 30;

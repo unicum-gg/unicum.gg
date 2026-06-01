@@ -1,7 +1,7 @@
 import { and, asc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import { topPlayers } from "@/services/db/schema";
-import { getPlayerClansBatch } from "@/services/wargaming/wot/clans";
+import { getPlayerClansBatch } from "@/services/wargaming/wot/clans/listings";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import {
   computeWNX,

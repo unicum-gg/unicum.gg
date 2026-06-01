@@ -5,7 +5,7 @@ import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
 } from "@/services/snapshots/tank";
-import { getClansBriefInfo } from "@/services/wargaming/wot/clans";
+import { getClansBriefInfo } from "@/services/wargaming/wot/clans/listings";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import {
   computeWNX,
