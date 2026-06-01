@@ -9,6 +9,12 @@ const ROUTES = {
   HOME: (region: Region) =>
     region === Region.EU ? "/" : pathcat("/:region", { region }),
 
+  // - Coverage (per region)
+  COVERAGE: (region: Region) =>
+    region === Region.EU
+      ? "/coverage"
+      : pathcat("/:region/coverage", { region }),
+
   // - Players
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),

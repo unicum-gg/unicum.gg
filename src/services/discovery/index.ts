@@ -6,6 +6,7 @@ import {
   getClansMembers,
   listTopClansByMembers,
 } from "@/services/wargaming/wot/clans/listings";
+import { discoverClans } from "./clans";
 
 const DB_CHUNK_SIZE = 500;
 const EPOCH = new Date(0);
@@ -26,6 +27,8 @@ export async function discoverTopClanPlayers(
   console.log(
     `[discovery] ${region}: ${clanIds.length} clans found, fetching members`,
   );
+
+  await discoverClans(region, clanIds);
 
   const clanMembers = await getClansMembers(region, clanIds);
   const playersMap = new Map<number, string>();

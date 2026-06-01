@@ -25,6 +25,13 @@ function regionFromPath(pathname: string): Region | undefined {
   return isRegion(segment) ? segment : undefined;
 }
 
+const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
+
+function targetForRegion(pathname: string, region: Region): string {
+  if (COVERAGE_PATHS.has(pathname)) return ROUTES.COVERAGE(region);
+  return ROUTES.HOME(region);
+}
+
 export function RegionSelector() {
   const [stored, setStored] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const pathname = usePathname();
@@ -39,7 +46,7 @@ export function RegionSelector() {
       onValueChange={(v) => {
         if (!isRegion(v)) return;
         setStored(v);
-        router.push(ROUTES.HOME(v));
+        router.push(targetForRegion(pathname, v));
       }}
     >
       <SelectTrigger

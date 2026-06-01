@@ -2,6 +2,7 @@ import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
 import { Region } from "@/services/wargaming/wot";
+import { FooterCoverageLink } from "./footer-coverage-link";
 
 export function Footer() {
   return (
@@ -22,11 +23,12 @@ export function Footer() {
               Player example
             </Link>
             <Link
-              href={ROUTES.CLAN(Region.EU, "KAISN")}
+              href={ROUTES.CLAN(Region.EU, "KAIZN")}
               className={styles.linkHover}
             >
               Clan example
             </Link>
+            <FooterCoverageLink />
             <Link
               href={ROUTES.EXTERNAL.GITHUB}
               className={styles.linkHover}
