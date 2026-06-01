@@ -165,7 +165,20 @@ async function render(
       clanHistoryFresh
         ? Promise.resolve(cachedClanHistory.data)
         : span("getFullPlayerClanHistory", () =>
-            getFullPlayerClanHistory(region, found.account_id),
+            getFullPlayerClanHistory(region, found.account_id).catch((err) => {
+              console.error(
+                "[player page] getFullPlayerClanHistory failed, falling back:",
+                err,
+              );
+              return (
+                cachedClanHistory?.data ?? {
+                  currentStint: null,
+                  pastStints: [],
+                  totalClans: 0,
+                  timeInClansSeconds: 0,
+                }
+              );
+            }),
           ),
     ]);
 
