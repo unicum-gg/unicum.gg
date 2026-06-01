@@ -6,15 +6,18 @@ import { players } from "@/services/db/schema";
 import { REGIONS } from "@/services/wargaming/wot";
 import {
   getAccountsWTRBatch,
-  getPlayerInfo,
+  getPlayersInfoBatch,
+  type PlayerInfo,
 } from "@/services/wargaming/wot/accounts";
-import { getTanksStats } from "@/services/wargaming/wot/tanks";
+import {
+  getTanksStatsBatch,
+  type TankStats,
+} from "@/services/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from "./player";
 
 const SCHEDULE = "* * * * *";
 const BATCH_SIZE_PER_REGION = 200;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
-const REQUEST_DELAY_MS = 200;
 
 export function startSnapshotCron() {
   cron.schedule(SCHEDULE, async () => {
@@ -72,29 +75,45 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
 
   await Promise.all(
     dueByRegion.map(async ({ region, rows }) => {
-      const wtrByAccount = await getAccountsWTRBatch(
-        region,
-        rows.map((r) => r.accountId),
-      ).catch((err) => {
-        console.error(`[cron] wtr batch failed (${region}):`, err);
-        return new Map<number, number>();
-      });
+      if (rows.length === 0) return;
+      const accountIds = rows.map((r) => r.accountId);
+
+      // 3 WG endpoints, all batched, all in parallel
+      const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
+        getPlayersInfoBatch(region, accountIds).catch((err) => {
+          console.error(`[cron] account/info batch failed (${region}):`, err);
+          return new Map<number, PlayerInfo>();
+        }),
+        getTanksStatsBatch(region, accountIds).catch((err) => {
+          console.error(`[cron] tanks/stats batch failed (${region}):`, err);
+          return new Map<number, TankStats[]>();
+        }),
+        getAccountsWTRBatch(region, accountIds).catch((err) => {
+          console.error(`[cron] wtr batch failed (${region}):`, err);
+          return new Map<number, number>();
+        }),
+      ]);
 
       for (const player of rows) {
+        const info = infosByAccount.get(player.accountId);
+        if (!info) {
+          failed += 1;
+          // Touch lastSeenAt so we don't keep retrying immediately
+          await db
+            .update(players)
+            .set({ lastSeenAt: sql`NOW()` })
+            .where(eq(players.id, player.id));
+          continue;
+        }
         try {
-          const [info, tanks] = await Promise.all([
-            getPlayerInfo(region, player.accountId),
-            getTanksStats(region, player.accountId),
-          ]);
-          if (info) {
-            const wtr = wtrByAccount.get(player.accountId) ?? null;
-            await recordCurrentSnapshot(region, info, wtr, tanks);
-            succeeded += 1;
-          }
+          const wtr = wtrByAccount.get(player.accountId) ?? null;
+          const tanks = tanksByAccount.get(player.accountId) ?? [];
+          await recordCurrentSnapshot(region, info, wtr, tanks);
+          succeeded += 1;
         } catch (err) {
           failed += 1;
           console.error(
-            `[cron] failed for ${player.nickname} (${region}):`,
+            `[cron] snapshot insert failed for ${player.nickname} (${region}):`,
             err,
           );
           await db
@@ -102,7 +121,6 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
             .set({ lastSeenAt: sql`NOW()` })
             .where(eq(players.id, player.id));
         }
-        await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
       }
     }),
   );

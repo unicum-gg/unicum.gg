@@ -4,7 +4,7 @@ import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
 import { clanDiscoveryQueue, clans } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
-import { refreshClanById } from "./repository";
+import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
 
@@ -123,20 +123,48 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
 
   await Promise.all(
     perRegion.map(async ({ jobs }) => {
+      if (jobs.length === 0) return;
+
+      // 1. Batch-refresh all clan infos in one WG roundtrip
+      const ids = jobs.map((j) => j.clanId);
+      const infos = await refreshClansByIdsBatch(jobs[0].region, ids).catch(
+        (err) => {
+          console.error(
+            `[clan-cron] clans batch refresh failed (${jobs[0].region}):`,
+            err,
+          );
+          return new Map<number, unknown>();
+        },
+      );
+
+      // 2. For each clan that returned info, refresh members + events.
+      //    Portal endpoints are per-clan, so we run them concurrency-limited.
+      const region = jobs[0].region;
       for (const job of jobs) {
+        const info = infos.get(job.clanId);
+        if (!info) {
+          failed += 1;
+          if (!job.fromQueue) {
+            await db
+              .update(clans)
+              .set({ lastRefreshedAt: sql`NOW()` })
+              .where(
+                and(eq(clans.region, region), eq(clans.id, job.clanId)),
+              );
+          }
+          continue;
+        }
         try {
-          await refreshClanById(job.region, job.clanId);
-          // members + events in parallel after the clan info is up
           await Promise.all([
-            refreshClanMembers(job.region, job.clanId).catch((err) =>
+            refreshClanMembers(region, job.clanId).catch((err) =>
               console.error(
-                `[clan-cron] members ${job.region}/${job.clanId} failed:`,
+                `[clan-cron] members ${region}/${job.clanId} failed:`,
                 err,
               ),
             ),
-            refreshClanEvents(job.region, job.clanId, 30).catch((err) =>
+            refreshClanEvents(region, job.clanId, 30).catch((err) =>
               console.error(
-                `[clan-cron] events ${job.region}/${job.clanId} failed:`,
+                `[clan-cron] events ${region}/${job.clanId} failed:`,
                 err,
               ),
             ),
@@ -146,7 +174,7 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
               .delete(clanDiscoveryQueue)
               .where(
                 and(
-                  eq(clanDiscoveryQueue.region, job.region),
+                  eq(clanDiscoveryQueue.region, region),
                   eq(clanDiscoveryQueue.clanId, job.clanId),
                 ),
               );
@@ -155,21 +183,9 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
         } catch (err) {
           failed += 1;
           console.error(
-            `[clan-cron] ${job.region}/${job.clanId} failed:`,
+            `[clan-cron] ${region}/${job.clanId} failed:`,
             err,
           );
-          // If it was a stale clan, bump lastRefreshedAt to push it down the queue
-          if (!job.fromQueue) {
-            await db
-              .update(clans)
-              .set({ lastRefreshedAt: sql`NOW()` })
-              .where(
-                and(
-                  eq(clans.region, job.region),
-                  eq(clans.id, job.clanId),
-                ),
-              );
-          }
         }
         await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
       }
