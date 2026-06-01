@@ -3,6 +3,7 @@ import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { Footer } from "@/components/footer";
+import { Toaster } from "@/components/ui/sonner";
 import { baseOptions } from "@/lib/layout.shared";
 import { Provider } from "./provider";
 import "./globals.css";
@@ -35,6 +36,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </HomeLayout>
+          <Toaster />
         </Provider>
       </body>
     </html>
