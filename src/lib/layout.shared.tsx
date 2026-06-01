@@ -1,10 +1,18 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
+import { cookies } from "next/headers";
 import { RegionSelector } from "@/components/region-selector";
 import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { isRegion, Region } from "@/services/wargaming/wot";
 
-export function baseOptions(): BaseLayoutProps {
+export async function baseOptions(): Promise<BaseLayoutProps> {
+  const cookieStore = await cookies();
+  const stored = cookieStore.get(STORAGE.COOKIES.REGION)?.value;
+  const region: Region = stored && isRegion(stored) ? stored : Region.EU;
+
   return {
     nav: {
+      url: ROUTES.HOME(region),
       title: (
         <>
           <svg

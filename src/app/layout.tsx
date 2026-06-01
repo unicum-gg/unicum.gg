@@ -19,11 +19,12 @@ export const metadata: Metadata = {
   description: "Player and clan stats for World of Tanks.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const layoutProps = await baseOptions();
   return (
     <html
       lang="en"
@@ -32,7 +33,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-screen flex-col overflow-x-hidden antialiased">
         <Provider>
-          <HomeLayout {...baseOptions()}>
+          <HomeLayout {...layoutProps}>
             {children}
             <Footer />
           </HomeLayout>
