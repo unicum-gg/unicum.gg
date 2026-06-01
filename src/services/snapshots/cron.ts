@@ -26,10 +26,10 @@ export function startSnapshotCron() {
       if (!isLeader) return;
       await refreshDuePlayers();
     } catch (err) {
-      console.error("[cron] tick failed:", err);
+      console.error("[snapshot-cron] tick failed:", err);
     }
   });
-  console.log(`[cron] snapshot refresh scheduled (${SCHEDULE})`);
+  console.log(`[snapshot-cron] snapshot refresh scheduled (${SCHEDULE})`);
 }
 
 export type RefreshResult = {
@@ -65,7 +65,7 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
   if (total === 0) return { processed: 0, succeeded: 0, failed: 0 };
 
   console.log(
-    `[cron] refreshing ${total}/${totalQueued} due (${dueByRegion
+    `[snapshot-cron] refreshing ${total}/${totalQueued} due (${dueByRegion
       .map((r) => `${r.region}:${r.rows.length}/${r.queued}`)
       .join(", ")})`,
   );
@@ -81,15 +81,15 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
       // 3 WG endpoints, all batched, all in parallel
       const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
         getPlayersInfoBatch(region, accountIds).catch((err) => {
-          console.error(`[cron] account/info batch failed (${region}):`, err);
+          console.error(`[snapshot-cron] account/info batch failed (${region}):`, err);
           return new Map<number, PlayerInfo>();
         }),
         getTanksStatsBatch(region, accountIds).catch((err) => {
-          console.error(`[cron] tanks/stats batch failed (${region}):`, err);
+          console.error(`[snapshot-cron] tanks/stats batch failed (${region}):`, err);
           return new Map<number, TankStats[]>();
         }),
         getAccountsWTRBatch(region, accountIds).catch((err) => {
-          console.error(`[cron] wtr batch failed (${region}):`, err);
+          console.error(`[snapshot-cron] wtr batch failed (${region}):`, err);
           return new Map<number, number>();
         }),
       ]);
@@ -113,7 +113,7 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
         } catch (err) {
           failed += 1;
           console.error(
-            `[cron] snapshot insert failed for ${player.nickname} (${region}):`,
+            `[snapshot-cron] snapshot insert failed for ${player.nickname} (${region}):`,
             err,
           );
           await db
@@ -125,6 +125,6 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
     }),
   );
 
-  console.log(`[cron] done: ${succeeded} ok, ${failed} failed`);
+  console.log(`[snapshot-cron] done: ${succeeded} ok, ${failed} failed`);
   return { processed: total, succeeded, failed };
 }
