@@ -14,6 +14,9 @@ export const players = pgTable(
     region: text("region").notNull(),
     accountId: bigint("account_id", { mode: "number" }).notNull(),
     nickname: text("nickname").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }),
+    lastBattleAt: timestamp("last_battle_at", { withTimezone: true }),
+    clanId: bigint("clan_id", { mode: "number" }),
     firstSeenAt: timestamp("first_seen_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
