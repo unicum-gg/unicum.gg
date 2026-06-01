@@ -152,16 +152,40 @@ async function render(
     await Promise.all([
       snapshotFresh
         ? Promise.resolve(null)
-        : span("getPlayerInfo", () => getPlayerInfo(region, found.account_id)),
+        : span("getPlayerInfo", () =>
+            getPlayerInfo(region, found.account_id).catch((err) => {
+              console.warn(
+                "[player page] getPlayerInfo failed, falling back to cache:",
+                err,
+              );
+              return null;
+            }),
+          ),
       span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
       span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
       span("getWNXExpectedValues", () => getWNXExpectedValues()),
       snapshotFresh
         ? Promise.resolve(tankSnapshotsToTankStats(cachedTankSnapshots))
-        : span("getTanksStats", () => getTanksStats(region, found.account_id)),
+        : span("getTanksStats", () =>
+            getTanksStats(region, found.account_id).catch((err) => {
+              console.warn(
+                "[player page] getTanksStats failed, falling back to cache:",
+                err,
+              );
+              return tankSnapshotsToTankStats(cachedTankSnapshots);
+            }),
+          ),
       snapshotFresh
         ? Promise.resolve(cachedSnapshot.wtr)
-        : span("getAccountWTR", () => getAccountWTR(region, found.account_id)),
+        : span("getAccountWTR", () =>
+            getAccountWTR(region, found.account_id).catch((err) => {
+              console.warn(
+                "[player page] getAccountWTR failed, falling back to cache:",
+                err,
+              );
+              return cachedSnapshot?.wtr ?? null;
+            }),
+          ),
       clanHistoryFresh
         ? Promise.resolve(cachedClanHistory.data)
         : span("getFullPlayerClanHistory", () =>
@@ -187,8 +211,7 @@ async function render(
 
   let player = cachedPlayer;
   let latest = cachedSnapshot;
-  if (!snapshotFresh) {
-    if (!info) notFound();
+  if (!snapshotFresh && info) {
     const battlesChanged =
       !cachedSnapshot || info.statistics.all.battles !== cachedSnapshot.battles;
     trace?.log(`battlesChanged=${battlesChanged}`);
@@ -214,6 +237,10 @@ async function render(
         console.error("[bg] markPlayerSeen failed:", err),
       );
     }
+  } else if (!snapshotFresh && !info) {
+    trace?.log(
+      "wg refresh unavailable, rendering from cached DB snapshot if any",
+    );
   }
   if (!player || !latest) notFound();
 
