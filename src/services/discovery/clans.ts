@@ -14,7 +14,9 @@ export async function discoverClans(
   clanIds: number[],
 ): Promise<void> {
   if (clanIds.length === 0) return;
-  const unique = Array.from(new Set(clanIds));
+  // Sort so concurrent inserts acquire row-level locks in the same order
+  // (prevents Postgres 40P01 deadlocks).
+  const unique = Array.from(new Set(clanIds)).sort((a, b) => a - b);
 
   for (let i = 0; i < unique.length; i += CHUNK_SIZE) {
     const chunk = unique.slice(i, i + CHUNK_SIZE);
