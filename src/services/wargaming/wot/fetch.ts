@@ -40,10 +40,37 @@ const RETRIABLE_WG_CODES = new Set([
 const MAX_RETRIES = 4;
 const RETRY_DELAYS_MS = [250, 500, 1000, 2000];
 
+const RETRIABLE_NODE_ERROR_CODES = new Set([
+  "UND_ERR_CONNECT_TIMEOUT",
+  "UND_ERR_SOCKET",
+  "UND_ERR_HEADERS_TIMEOUT",
+  "UND_ERR_BODY_TIMEOUT",
+  "ECONNRESET",
+  "ETIMEDOUT",
+  "ENOTFOUND",
+  "ECONNREFUSED",
+  "EAI_AGAIN",
+]);
+
 function isRetriable(err: unknown): boolean {
   if (err instanceof WargamingApiError) return RETRIABLE_WG_CODES.has(err.code);
-  if (err instanceof Error && /HTTP (5\d\d|408|429)/.test(err.message)) {
-    return true;
+  if (err instanceof Error) {
+    if (/HTTP (5\d\d|408|429)/.test(err.message)) return true;
+    // AbortSignal.timeout fires with a TimeoutError DOMException
+    if (err.name === "TimeoutError" || err.name === "AbortError") return true;
+    // undici / Node fetch wraps low-level network errors as `fetch failed`
+    // with a `cause` field holding the actual error code
+    if (err.message.includes("fetch failed")) return true;
+    const cause = (err as Error & { cause?: unknown }).cause;
+    if (
+      cause &&
+      typeof cause === "object" &&
+      "code" in cause &&
+      typeof cause.code === "string" &&
+      RETRIABLE_NODE_ERROR_CODES.has(cause.code)
+    ) {
+      return true;
+    }
   }
   return false;
 }
@@ -90,6 +117,8 @@ export async function wgFetch<T>(
   );
 }
 
+const PORTAL_TIMEOUT_MS = 30_000;
+
 export async function portalFetch<T>(url: URL): Promise<T> {
   const headers: Record<string, string> = {
     "x-requested-with": "XMLHttpRequest",
@@ -99,7 +128,11 @@ export async function portalFetch<T>(url: URL): Promise<T> {
 
   return traced(`portalFetch ${url.pathname}`, () =>
     withRetries(async () => {
-      const res = await fetch(url, { headers });
+      // 10s default is aggressive — the WG portal is sometimes slow but reachable
+      const res = await fetch(url, {
+        headers,
+        signal: AbortSignal.timeout(PORTAL_TIMEOUT_MS),
+      });
       if (!res.ok) {
         throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
       }
