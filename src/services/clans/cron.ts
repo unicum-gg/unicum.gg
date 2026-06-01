@@ -1,0 +1,181 @@
+import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
+import cron from "node-cron";
+import { tryAcquireLease } from "@/services/cron/lease";
+import { db } from "@/services/db";
+import { clanDiscoveryQueue, clans } from "@/services/db/schema";
+import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { refreshClanById } from "./repository";
+import { refreshClanEvents } from "./repository/events";
+import { refreshClanMembers } from "./repository/members";
+
+const SCHEDULE = "* * * * *"; // every minute
+const BATCH_SIZE_PER_REGION = 20;
+const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
+const REQUEST_DELAY_MS = 250;
+
+export function startClanRefreshCron() {
+  cron.schedule(SCHEDULE, async () => {
+    try {
+      const isLeader = await tryAcquireLease();
+      if (!isLeader) return;
+      await refreshDueClans();
+    } catch (err) {
+      console.error("[clan-cron] tick failed:", err);
+    }
+  });
+  console.log(`[clan-cron] scheduled (${SCHEDULE})`);
+}
+
+export type ClanRefreshResult = {
+  processed: number;
+  succeeded: number;
+  failed: number;
+};
+
+type Job = { region: Region; clanId: number; fromQueue: boolean };
+
+async function collectJobsForRegion(
+  region: Region,
+  cutoff: Date,
+  limit: number,
+): Promise<{ jobs: Job[]; staleCount: number; queueCount: number }> {
+  const [queueRows, staleRows, [{ staleCount }], [{ queueCount }]] =
+    await Promise.all([
+      db
+        .select({ clanId: clanDiscoveryQueue.clanId })
+        .from(clanDiscoveryQueue)
+        .where(eq(clanDiscoveryQueue.region, region))
+        .orderBy(asc(clanDiscoveryQueue.queuedAt))
+        .limit(limit),
+      db
+        .select({ id: clans.id })
+        .from(clans)
+        .where(
+          and(
+            eq(clans.region, region),
+            or(
+              isNull(clans.lastRefreshedAt),
+              lt(clans.lastRefreshedAt, cutoff),
+            ),
+          ),
+        )
+        .orderBy(asc(clans.lastRefreshedAt))
+        .limit(limit),
+      db
+        .select({ staleCount: count() })
+        .from(clans)
+        .where(
+          and(
+            eq(clans.region, region),
+            or(
+              isNull(clans.lastRefreshedAt),
+              lt(clans.lastRefreshedAt, cutoff),
+            ),
+          ),
+        ),
+      db
+        .select({ queueCount: count() })
+        .from(clanDiscoveryQueue)
+        .where(eq(clanDiscoveryQueue.region, region)),
+    ]);
+
+  const jobs: Job[] = [];
+  const seen = new Set<number>();
+  for (const r of queueRows) {
+    const id = Number(r.clanId);
+    if (!seen.has(id)) {
+      jobs.push({ region, clanId: id, fromQueue: true });
+      seen.add(id);
+    }
+  }
+  for (const r of staleRows) {
+    const id = Number(r.id);
+    if (!seen.has(id)) {
+      jobs.push({ region, clanId: id, fromQueue: false });
+      seen.add(id);
+    }
+    if (jobs.length >= limit) break;
+  }
+  return { jobs: jobs.slice(0, limit), staleCount, queueCount };
+}
+
+export async function refreshDueClans(): Promise<ClanRefreshResult> {
+  const cutoff = new Date(Date.now() - MIN_REFRESH_AGE_MS);
+
+  const perRegion = await Promise.all(
+    REGIONS.map((region) =>
+      collectJobsForRegion(region, cutoff, BATCH_SIZE_PER_REGION),
+    ),
+  );
+
+  const total = perRegion.reduce((acc, r) => acc + r.jobs.length, 0);
+  if (total === 0) return { processed: 0, succeeded: 0, failed: 0 };
+
+  console.log(
+    `[clan-cron] refreshing ${total} clans (${REGIONS.map(
+      (r, i) =>
+        `${r}:${perRegion[i].jobs.length}/${perRegion[i].queueCount}q+${perRegion[i].staleCount}s`,
+    ).join(", ")})`,
+  );
+
+  let succeeded = 0;
+  let failed = 0;
+
+  await Promise.all(
+    perRegion.map(async ({ jobs }) => {
+      for (const job of jobs) {
+        try {
+          await refreshClanById(job.region, job.clanId);
+          // members + events in parallel after the clan info is up
+          await Promise.all([
+            refreshClanMembers(job.region, job.clanId).catch((err) =>
+              console.error(
+                `[clan-cron] members ${job.region}/${job.clanId} failed:`,
+                err,
+              ),
+            ),
+            refreshClanEvents(job.region, job.clanId, 30).catch((err) =>
+              console.error(
+                `[clan-cron] events ${job.region}/${job.clanId} failed:`,
+                err,
+              ),
+            ),
+          ]);
+          if (job.fromQueue) {
+            await db
+              .delete(clanDiscoveryQueue)
+              .where(
+                and(
+                  eq(clanDiscoveryQueue.region, job.region),
+                  eq(clanDiscoveryQueue.clanId, job.clanId),
+                ),
+              );
+          }
+          succeeded += 1;
+        } catch (err) {
+          failed += 1;
+          console.error(
+            `[clan-cron] ${job.region}/${job.clanId} failed:`,
+            err,
+          );
+          // If it was a stale clan, bump lastRefreshedAt to push it down the queue
+          if (!job.fromQueue) {
+            await db
+              .update(clans)
+              .set({ lastRefreshedAt: sql`NOW()` })
+              .where(
+                and(
+                  eq(clans.region, job.region),
+                  eq(clans.id, job.clanId),
+                ),
+              );
+          }
+        }
+        await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
+      }
+    }),
+  );
+
+  console.log(`[clan-cron] done: ${succeeded} ok, ${failed} failed`);
+  return { processed: total, succeeded, failed };
+}
