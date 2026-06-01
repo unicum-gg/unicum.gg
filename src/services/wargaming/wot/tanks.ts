@@ -1,5 +1,5 @@
 import type { Region } from ".";
-import { wgFetch } from "./fetch";
+import { WargamingApiError, wgFetch } from "./fetch";
 
 export type TankStats = {
   tank_id: number;
@@ -42,7 +42,51 @@ export async function getTanksStats(
   return data[String(accountId)] ?? [];
 }
 
-const TANKS_STATS_BATCH_SIZE = 100;
+const TANKS_STATS_BATCH_SIZE = 25;
+
+async function fetchTanksStatsChunk(
+  region: Region,
+  ids: number[],
+  out: Map<number, TankStats[]>,
+): Promise<void> {
+  if (ids.length === 0) return;
+  try {
+    const data = await wgFetch<Record<string, TankStats[] | null>>(
+      region,
+      "/wot/tanks/stats/",
+      {
+        account_id: ids.join(","),
+        fields: TANK_STATS_FIELDS,
+      },
+    );
+    for (const [id, tanks] of Object.entries(data)) {
+      out.set(Number(id), tanks ?? []);
+    }
+  } catch (err) {
+    // WG rejects the WHOLE chunk if any account_id is invalid (deleted/banned).
+    // Bisect to isolate the bad one. Single bad id → just skip it.
+    if (
+      err instanceof WargamingApiError &&
+      err.code === "INVALID_ACCOUNT_ID" &&
+      ids.length > 1
+    ) {
+      const mid = Math.floor(ids.length / 2);
+      await Promise.all([
+        fetchTanksStatsChunk(region, ids.slice(0, mid), out),
+        fetchTanksStatsChunk(region, ids.slice(mid), out),
+      ]);
+      return;
+    }
+    if (
+      err instanceof WargamingApiError &&
+      err.code === "INVALID_ACCOUNT_ID"
+    ) {
+      // single bad id → silently drop it
+      return;
+    }
+    throw err;
+  }
+}
 
 export async function getTanksStatsBatch(
   region: Region,
@@ -50,18 +94,16 @@ export async function getTanksStatsBatch(
 ): Promise<Map<number, TankStats[]>> {
   const out = new Map<number, TankStats[]>();
   const unique = Array.from(new Set(accountIds));
+  const chunks: number[][] = [];
   for (let i = 0; i < unique.length; i += TANKS_STATS_BATCH_SIZE) {
-    const batch = unique.slice(i, i + TANKS_STATS_BATCH_SIZE);
-    const data = await wgFetch<Record<string, TankStats[] | null>>(
-      region,
-      "/wot/tanks/stats/",
-      {
-        account_id: batch.join(","),
-        fields: TANK_STATS_FIELDS,
-      },
-    );
-    for (const [id, tanks] of Object.entries(data)) {
-      out.set(Number(id), tanks ?? []);
+    chunks.push(unique.slice(i, i + TANKS_STATS_BATCH_SIZE));
+  }
+  const results = await Promise.allSettled(
+    chunks.map((batch) => fetchTanksStatsChunk(region, batch, out)),
+  );
+  for (const res of results) {
+    if (res.status === "rejected") {
+      console.error("[tanks-stats-batch] chunk failed:", res.reason);
     }
   }
   return out;

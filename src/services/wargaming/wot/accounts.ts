@@ -93,23 +93,50 @@ export async function getPlayerInfo(
 
 const ACCOUNT_INFO_BATCH_SIZE = 100;
 
+async function fetchAccountInfoChunk(
+  region: Region,
+  ids: number[],
+  out: Map<number, PlayerInfo>,
+): Promise<void> {
+  if (ids.length === 0) return;
+  try {
+    const data = await wgFetch<Record<string, PlayerInfo | null>>(
+      region,
+      "/wot/account/info/",
+      { account_id: ids.join(",") },
+    );
+    for (const [id, info] of Object.entries(data)) {
+      if (info) out.set(Number(id), info);
+    }
+  } catch (err) {
+    if (
+      err instanceof WargamingApiError &&
+      err.code === "INVALID_ACCOUNT_ID" &&
+      ids.length > 1
+    ) {
+      const mid = Math.floor(ids.length / 2);
+      await Promise.all([
+        fetchAccountInfoChunk(region, ids.slice(0, mid), out),
+        fetchAccountInfoChunk(region, ids.slice(mid), out),
+      ]);
+      return;
+    }
+    if (err instanceof WargamingApiError && err.code === "INVALID_ACCOUNT_ID") return;
+    throw err;
+  }
+}
+
 export async function getPlayersInfoBatch(
   region: Region,
   accountIds: number[],
 ): Promise<Map<number, PlayerInfo>> {
   const out = new Map<number, PlayerInfo>();
   const unique = Array.from(new Set(accountIds));
+  const chunks: number[][] = [];
   for (let i = 0; i < unique.length; i += ACCOUNT_INFO_BATCH_SIZE) {
-    const batch = unique.slice(i, i + ACCOUNT_INFO_BATCH_SIZE);
-    const data = await wgFetch<Record<string, PlayerInfo | null>>(
-      region,
-      "/wot/account/info/",
-      { account_id: batch.join(",") },
-    );
-    for (const [id, info] of Object.entries(data)) {
-      if (info) out.set(Number(id), info);
-    }
+    chunks.push(unique.slice(i, i + ACCOUNT_INFO_BATCH_SIZE));
   }
+  await Promise.all(chunks.map((batch) => fetchAccountInfoChunk(region, batch, out)));
   return out;
 }
 
@@ -127,22 +154,49 @@ export async function getAccountWTR(
 
 const ACCOUNT_WTR_BATCH_SIZE = 100;
 
+async function fetchWtrChunk(
+  region: Region,
+  ids: number[],
+  out: Map<number, number>,
+): Promise<void> {
+  if (ids.length === 0) return;
+  try {
+    const data = await wgFetch<Record<string, { rating: number } | null>>(
+      region,
+      "/wot/account/wtr/",
+      { account_id: ids.join(",") },
+    );
+    for (const [id, entry] of Object.entries(data)) {
+      if (entry?.rating != null) out.set(Number(id), entry.rating);
+    }
+  } catch (err) {
+    if (
+      err instanceof WargamingApiError &&
+      err.code === "INVALID_ACCOUNT_ID" &&
+      ids.length > 1
+    ) {
+      const mid = Math.floor(ids.length / 2);
+      await Promise.all([
+        fetchWtrChunk(region, ids.slice(0, mid), out),
+        fetchWtrChunk(region, ids.slice(mid), out),
+      ]);
+      return;
+    }
+    if (err instanceof WargamingApiError && err.code === "INVALID_ACCOUNT_ID") return;
+    throw err;
+  }
+}
+
 export async function getAccountsWTRBatch(
   region: Region,
   accountIds: number[],
 ): Promise<Map<number, number>> {
   const out = new Map<number, number>();
   const unique = Array.from(new Set(accountIds));
+  const chunks: number[][] = [];
   for (let i = 0; i < unique.length; i += ACCOUNT_WTR_BATCH_SIZE) {
-    const batch = unique.slice(i, i + ACCOUNT_WTR_BATCH_SIZE);
-    const data = await wgFetch<Record<string, { rating: number } | null>>(
-      region,
-      "/wot/account/wtr/",
-      { account_id: batch.join(",") },
-    );
-    for (const [id, entry] of Object.entries(data)) {
-      if (entry?.rating != null) out.set(Number(id), entry.rating);
-    }
+    chunks.push(unique.slice(i, i + ACCOUNT_WTR_BATCH_SIZE));
   }
+  await Promise.all(chunks.map((batch) => fetchWtrChunk(region, batch, out)));
   return out;
 }
