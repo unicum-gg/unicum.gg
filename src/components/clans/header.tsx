@@ -4,10 +4,8 @@ import { AutoFitText } from "@/components/auto-fit-text";
 import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type {
-  ClanFullInfo,
-  ClanMemberStats,
-} from "@/services/wargaming/wot/clans";
+import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
+import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import type { MemberRatings } from "@/services/wargaming/wot/clans/ratings";
 import {
   RATING_COLOR_CLASS,

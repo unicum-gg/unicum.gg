@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { MemberRatings } from "@/services/wargaming/wot/clans/ratings";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans";
+import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import type { Region } from "@/services/wargaming/wot";
 import {
   RATING_COLOR_CLASS,

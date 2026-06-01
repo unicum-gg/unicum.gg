@@ -1,4 +1,5 @@
-import { type Region, wgFetch } from ".";
+import type { Region } from ".";
+import { wgFetch } from "./fetch";
 import type { TankStats } from "./tanks";
 
 export type VehicleMeta = { tier: number };

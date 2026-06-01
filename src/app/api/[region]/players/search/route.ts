@@ -1,8 +1,9 @@
+import { discoverPlayersBackground } from "@/services/discovery/players";
 import { findPlayersByPrefix } from "@/services/wargaming/wot/accounts";
 import {
   getPlayerClansBatch,
   type PlayerClanInfo,
-} from "@/services/wargaming/wot/clans";
+} from "@/services/wargaming/wot/clans/listings";
 import { isRegion } from "@/services/wargaming/wot";
 
 export const dynamic = "force-dynamic";
@@ -48,6 +49,11 @@ export async function GET(
       nickname: p.nickname,
       clan: clansByAccount.get(p.account_id) ?? null,
     }));
+
+    discoverPlayersBackground(
+      region,
+      results.map((r) => ({ accountId: r.account_id, nickname: r.nickname })),
+    );
 
     return Response.json({ results });
   } catch (err) {

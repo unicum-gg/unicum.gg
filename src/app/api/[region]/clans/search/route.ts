@@ -1,7 +1,8 @@
+import { discoverClansBackground } from "@/services/discovery/clans";
 import {
   findClansByPrefix,
   type ClanSearchResult,
-} from "@/services/wargaming/wot/clans";
+} from "@/services/wargaming/wot/clans/search";
 import { isRegion } from "@/services/wargaming/wot";
 
 export const dynamic = "force-dynamic";
@@ -28,6 +29,10 @@ export async function GET(
 
   try {
     const results = await findClansByPrefix(region, q, 5);
+    discoverClansBackground(
+      region,
+      results.map((r) => r.clan_id),
+    );
     return Response.json({ results });
   } catch (err) {
     console.error(`[api/${region}/clans/search] failed:`, err);

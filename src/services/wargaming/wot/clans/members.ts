@@ -1,0 +1,112 @@
+import {
+  type Region,
+  REGION_PORTAL_HOST,
+} from "@/services/wargaming/wot";
+import { portalFetch } from "@/services/wargaming/wot/fetch";
+
+type PortalMemberRaw = {
+  id: number;
+  name: string;
+  role: {
+    name: string;
+    localized_name: string;
+    rank: number;
+    order: number;
+  };
+  days_in_clan: number;
+  last_battle_time: number | null;
+  personal_rating: number;
+  battles_count: number;
+  wins_percentage: number;
+  damage_per_battle: number;
+  exp_per_battle: number;
+  frags_per_battle: number;
+  battles_per_day: number;
+  abnormal_results: boolean;
+  is_press: boolean;
+};
+
+type PortalMembersResponse = {
+  status: string;
+  items: PortalMemberRaw[];
+};
+
+export type ClanMemberPeriodStats = {
+  battles: number;
+  winsPercentage: number;
+  damagePerBattle: number;
+  expPerBattle: number;
+  fragsPerBattle: number;
+  battlesPerDay: number;
+};
+
+export type ClanMemberStats = {
+  accountId: number;
+  name: string;
+  role: string;
+  roleLocalized: string;
+  roleRank: number;
+  daysInClan: number;
+  lastBattleTime: Date | null;
+  personalRating: number;
+  overall: ClanMemberPeriodStats;
+  d28: ClanMemberPeriodStats | null;
+};
+
+function periodStatsFromRaw(raw: PortalMemberRaw): ClanMemberPeriodStats {
+  return {
+    battles: raw.battles_count,
+    winsPercentage: raw.wins_percentage,
+    damagePerBattle: raw.damage_per_battle,
+    expPerBattle: raw.exp_per_battle,
+    fragsPerBattle: raw.frags_per_battle,
+    battlesPerDay: raw.battles_per_day,
+  };
+}
+
+async function fetchClanMembersTimeframe(
+  region: Region,
+  clanId: number,
+  timeframe: "all" | "28",
+): Promise<PortalMemberRaw[]> {
+  const url = new URL(
+    `https://${REGION_PORTAL_HOST[region]}/clans/wot/${clanId}/api/players/`,
+  );
+  url.searchParams.set("offset", "0");
+  url.searchParams.set("limit", "500");
+  url.searchParams.set("order", "-personal_rating");
+  url.searchParams.set("timeframe", timeframe);
+  url.searchParams.set("battle_type", "default");
+  const body = await portalFetch<PortalMembersResponse>(url);
+  return body.items ?? [];
+}
+
+export async function getClanMembersStats(
+  region: Region,
+  clanId: number,
+): Promise<ClanMemberStats[]> {
+  const [allRaws, d28Raws] = await Promise.all([
+    fetchClanMembersTimeframe(region, clanId, "all"),
+    fetchClanMembersTimeframe(region, clanId, "28"),
+  ]);
+  const d28ByAccount = new Map<number, PortalMemberRaw>();
+  for (const m of d28Raws) d28ByAccount.set(m.id, m);
+
+  return allRaws.map((m) => {
+    const d28 = d28ByAccount.get(m.id);
+    return {
+      accountId: m.id,
+      name: m.name,
+      role: m.role.name,
+      roleLocalized: m.role.localized_name,
+      roleRank: m.role.rank,
+      daysInClan: m.days_in_clan,
+      lastBattleTime: m.last_battle_time
+        ? new Date(m.last_battle_time * 1000)
+        : null,
+      personalRating: m.personal_rating,
+      overall: periodStatsFromRaw(m),
+      d28: d28 ? periodStatsFromRaw(d28) : null,
+    };
+  });
+}

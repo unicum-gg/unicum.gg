@@ -5,7 +5,7 @@ import type { Region } from "@/services/wargaming/wot";
 import {
   getClansMembers,
   listTopClansByMembers,
-} from "@/services/wargaming/wot/clans";
+} from "@/services/wargaming/wot/clans/listings";
 
 const DB_CHUNK_SIZE = 500;
 const EPOCH = new Date(0);

@@ -28,7 +28,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import type { ClanSearchResult } from "@/services/wargaming/wot/clans";
+import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
 import { isRegion, Region, REGIONS } from "@/services/wargaming/wot";
 
 type Outcome<T> =

@@ -1,8 +1,8 @@
 import {
-  portalFetch,
   type Region,
   REGION_PORTAL_HOST,
 } from "@/services/wargaming/wot";
+import { portalFetch } from "@/services/wargaming/wot/fetch";
 
 export enum ClanEventType {
   JoinClan = "join_clan",

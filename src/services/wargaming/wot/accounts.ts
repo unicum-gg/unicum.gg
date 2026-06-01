@@ -1,4 +1,5 @@
-import { type Region, WargamingApiError, wgFetch } from ".";
+import type { Region } from ".";
+import { WargamingApiError, wgFetch } from "./fetch";
 
 export type PlayerSearchResult = {
   account_id: number;
