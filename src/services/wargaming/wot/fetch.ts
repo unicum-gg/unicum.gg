@@ -1,7 +1,13 @@
 import { env } from "env";
 import { traced } from "@/lib/perf-trace";
-import { Region } from "./index";
-import { acquireWgSlot, acquireWgToken, releaseWgSlot } from "./rate-limit";
+import { Region, REGION_PORTAL_HOST } from "./index";
+import {
+  acquirePortalSlot,
+  acquireWgSlot,
+  acquireWgToken,
+  releasePortalSlot,
+  releaseWgSlot,
+} from "./rate-limit";
 
 const REGION_API_HOST: Record<Region, string> = {
   [Region.EU]: "api.worldoftanks.eu",
@@ -127,24 +133,36 @@ export async function wgFetch<T>(
 
 const PORTAL_TIMEOUT_MS = 30_000;
 
+function portalRegionFromUrl(url: URL): Region | null {
+  for (const region of [Region.EU, Region.NA, Region.ASIA]) {
+    if (url.host === REGION_PORTAL_HOST[region]) return region;
+  }
+  return null;
+}
+
 export async function portalFetch<T>(url: URL): Promise<T> {
   const headers: Record<string, string> = {
     "x-requested-with": "XMLHttpRequest",
     accept: "application/json",
     "accept-language": "en",
   };
+  const region = portalRegionFromUrl(url);
 
   return traced(`portalFetch ${url.pathname}`, () =>
     withRetries(async () => {
-      // 10s default is aggressive — the WG portal is sometimes slow but reachable
-      const res = await fetch(url, {
-        headers,
-        signal: AbortSignal.timeout(PORTAL_TIMEOUT_MS),
-      });
-      if (!res.ok) {
-        throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
+      if (region) await acquirePortalSlot(region);
+      try {
+        const res = await fetch(url, {
+          headers,
+          signal: AbortSignal.timeout(PORTAL_TIMEOUT_MS),
+        });
+        if (!res.ok) {
+          throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
+        }
+        return (await res.json()) as T;
+      } finally {
+        if (region) releasePortalSlot(region);
       }
-      return (await res.json()) as T;
     }),
   );
 }

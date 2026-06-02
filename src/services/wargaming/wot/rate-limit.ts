@@ -122,3 +122,21 @@ export function acquireWgSlot(region: Region): Promise<void> {
 export function releaseWgSlot(region: Region): void {
   wgConcurrency[region].release();
 }
+
+// *.wargaming.net (used by portalFetch for clan history, members, events)
+// refuses concurrent connections under load: parallel calls all time out
+// while a steady serial stream succeeds. Same symptom as Asia api but on a
+// different host. Cap parallelism per region for portal calls too.
+const portalConcurrency: Record<Region, Semaphore> = {
+  [Region.EU]: new Semaphore(3),
+  [Region.NA]: new Semaphore(3),
+  [Region.ASIA]: new Semaphore(3),
+};
+
+export function acquirePortalSlot(region: Region): Promise<void> {
+  return portalConcurrency[region].acquire();
+}
+
+export function releasePortalSlot(region: Region): void {
+  portalConcurrency[region].release();
+}
