@@ -1,9 +1,10 @@
-import { and, asc, count, eq, lt, sql } from "drizzle-orm";
+import { and, asc, count, desc, eq, inArray, lt, notInArray, sql } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { players } from "@/services/db/schema";
-import { REGIONS } from "@/services/wargaming/wot";
+import { players, playerRefreshQueue } from "@/services/db/schema";
+import { dequeuePlayerRefresh } from "@/services/refresh-queue";
+import { REGIONS, type Region } from "@/services/wargaming/wot";
 import {
   getAccountsWTRBatch,
   getPlayersInfoBatch,
@@ -38,24 +39,82 @@ export type RefreshResult = {
   failed: number;
 };
 
+type DuePlayer = typeof players.$inferSelect & { fromQueue: boolean };
+
+async function collectDuePlayers(
+  region: Region,
+  cutoff: Date,
+  limit: number,
+): Promise<{ rows: DuePlayer[]; queued: number }> {
+  // 1. Drain priority queue first (user-initiated bumps, then cron backfills).
+  const queueRows = await db
+    .select({ accountId: playerRefreshQueue.accountId })
+    .from(playerRefreshQueue)
+    .where(eq(playerRefreshQueue.region, region))
+    .orderBy(
+      desc(playerRefreshQueue.priority),
+      asc(playerRefreshQueue.queuedAt),
+    )
+    .limit(limit);
+  const queuedIds = queueRows.map((r) => Number(r.accountId));
+
+  const queuedPlayerRows =
+    queuedIds.length > 0
+      ? await db
+          .select()
+          .from(players)
+          .where(
+            and(
+              eq(players.region, region),
+              inArray(players.accountId, queuedIds),
+            ),
+          )
+      : [];
+  const queueResults: DuePlayer[] = queuedPlayerRows.map((p) => ({
+    ...p,
+    fromQueue: true,
+  }));
+
+  // 2. Fill the remaining budget with the oldest-snapshot scan, excluding
+  //    players we already pulled from the queue above.
+  const remaining = limit - queueResults.length;
+  const staleWhere = and(
+    eq(players.region, region),
+    lt(players.lastSeenAt, cutoff),
+    queuedIds.length > 0 ? notInArray(players.accountId, queuedIds) : undefined,
+  );
+  const [staleRows, [{ queued: staleCount }]] = await Promise.all([
+    remaining > 0
+      ? db
+          .select()
+          .from(players)
+          .where(staleWhere)
+          .orderBy(asc(players.lastSeenAt))
+          .limit(remaining)
+      : Promise.resolve([] as (typeof players.$inferSelect)[]),
+    db.select({ queued: count() }).from(players).where(staleWhere),
+  ]);
+  const staleResults: DuePlayer[] = staleRows.map((p) => ({
+    ...p,
+    fromQueue: false,
+  }));
+
+  return {
+    rows: [...queueResults, ...staleResults],
+    queued: queueResults.length + staleCount,
+  };
+}
+
 export async function refreshDuePlayers(): Promise<RefreshResult> {
   const cutoff = new Date(Date.now() - MIN_REFRESH_AGE_MS);
 
   const dueByRegion = await Promise.all(
     REGIONS.map(async (region) => {
-      const where = and(
-        eq(players.region, region),
-        lt(players.lastSeenAt, cutoff),
+      const { rows, queued } = await collectDuePlayers(
+        region,
+        cutoff,
+        BATCH_SIZE_PER_REGION,
       );
-      const [rows, [{ queued }]] = await Promise.all([
-        db
-          .select()
-          .from(players)
-          .where(where)
-          .orderBy(asc(players.lastSeenAt))
-          .limit(BATCH_SIZE_PER_REGION),
-        db.select({ queued: count() }).from(players).where(where),
-      ]);
       return { region, rows, queued };
     }),
   );
@@ -103,6 +162,9 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
             .update(players)
             .set({ lastSeenAt: sql`NOW()` })
             .where(eq(players.id, player.id));
+          if (player.fromQueue) {
+            await dequeuePlayerRefresh(region, player.accountId);
+          }
           continue;
         }
         try {
@@ -110,6 +172,9 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
           const tanks = tanksByAccount.get(player.accountId) ?? [];
           await recordCurrentSnapshot(region, info, wtr, tanks);
           succeeded += 1;
+          if (player.fromQueue) {
+            await dequeuePlayerRefresh(region, player.accountId);
+          }
         } catch (err) {
           failed += 1;
           console.error(
@@ -120,6 +185,9 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
             .update(players)
             .set({ lastSeenAt: sql`NOW()` })
             .where(eq(players.id, player.id));
+          if (player.fromQueue) {
+            await dequeuePlayerRefresh(region, player.accountId);
+          }
         }
       }
     }),

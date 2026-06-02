@@ -1,6 +1,6 @@
 import { and, eq, inArray } from "drizzle-orm";
 import { db } from "@/services/db";
-import { clanDiscoveryQueue, clans } from "@/services/db/schema";
+import { clanRefreshQueue, clans } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 const CHUNK_SIZE = 500;
@@ -29,8 +29,8 @@ export async function discoverClans(
     if (toQueue.length === 0) continue;
 
     await db
-      .insert(clanDiscoveryQueue)
-      .values(toQueue.map((clanId) => ({ region, clanId })))
+      .insert(clanRefreshQueue)
+      .values(toQueue.map((clanId) => ({ region, clanId, firstSeen: true })))
       .onConflictDoNothing();
   }
 }

@@ -130,7 +130,7 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM clan_discovery_queue WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM clan_refresh_queue WHERE region = ${region}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db

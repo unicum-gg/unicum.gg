@@ -2,7 +2,7 @@ import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { clanDiscoveryQueue, clans } from "@/services/db/schema";
+import { clanRefreshQueue, clans } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
@@ -42,10 +42,10 @@ async function collectJobsForRegion(
   const [queueRows, staleRows, [{ staleCount }], [{ queueCount }]] =
     await Promise.all([
       db
-        .select({ clanId: clanDiscoveryQueue.clanId })
-        .from(clanDiscoveryQueue)
-        .where(eq(clanDiscoveryQueue.region, region))
-        .orderBy(asc(clanDiscoveryQueue.queuedAt))
+        .select({ clanId: clanRefreshQueue.clanId })
+        .from(clanRefreshQueue)
+        .where(eq(clanRefreshQueue.region, region))
+        .orderBy(asc(clanRefreshQueue.queuedAt))
         .limit(limit),
       db
         .select({ id: clans.id })
@@ -75,8 +75,8 @@ async function collectJobsForRegion(
         ),
       db
         .select({ queueCount: count() })
-        .from(clanDiscoveryQueue)
-        .where(eq(clanDiscoveryQueue.region, region)),
+        .from(clanRefreshQueue)
+        .where(eq(clanRefreshQueue.region, region)),
     ]);
 
   const jobs: Job[] = [];
@@ -149,11 +149,11 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
           // the back of the line.
           if (job.fromQueue) {
             await db
-              .delete(clanDiscoveryQueue)
+              .delete(clanRefreshQueue)
               .where(
                 and(
-                  eq(clanDiscoveryQueue.region, region),
-                  eq(clanDiscoveryQueue.clanId, job.clanId),
+                  eq(clanRefreshQueue.region, region),
+                  eq(clanRefreshQueue.clanId, job.clanId),
                 ),
               );
           } else {
@@ -183,11 +183,11 @@ export async function refreshDueClans(): Promise<ClanRefreshResult> {
           ]);
           if (job.fromQueue) {
             await db
-              .delete(clanDiscoveryQueue)
+              .delete(clanRefreshQueue)
               .where(
                 and(
-                  eq(clanDiscoveryQueue.region, region),
-                  eq(clanDiscoveryQueue.clanId, job.clanId),
+                  eq(clanRefreshQueue.region, region),
+                  eq(clanRefreshQueue.clanId, job.clanId),
                 ),
               );
           }
