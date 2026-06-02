@@ -8,7 +8,7 @@ import type {
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
-import type { TankSnapshotMap } from "../tank";
+import type { TankSnapshotMap } from "./tanks";
 
 type RawPlayer = {
   id: number;

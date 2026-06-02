@@ -1,8 +1,5 @@
-import {
-  type Region,
-  REGION_PORTAL_HOST,
-} from "@/services/wargaming/wot";
-import { portalFetch } from "@/services/wargaming/wot/fetch";
+import type { Region } from "@/services/wargaming/wot";
+import { wgFetch } from "@/services/wargaming/wot/fetch";
 
 export type ClanRef = {
   id: number;
@@ -27,123 +24,100 @@ export type PlayerClanHistoryFull = {
   timeInClansSeconds: number;
 };
 
-type PortalClan = {
-  id: number;
-  tag: string;
-  name: string;
-  color: string;
-  emblem: string;
-  link?: string;
-  is_active?: boolean;
-};
+type Emblems = Record<string, { portal?: string; wot?: string }> | null;
 
-type PortalRole = { name: string; localized: string };
+function pickEmblem(emblems: Emblems): string {
+  return (
+    emblems?.x195?.portal ??
+    emblems?.x64?.portal ??
+    emblems?.x64?.wot ??
+    emblems?.x32?.portal ??
+    ""
+  );
+}
 
-type PortalCurrentClan = {
-  clan: PortalClan;
-  joined_at: string;
-  role: PortalRole | null;
-};
-
-type PortalHistoryStint = {
-  clan: PortalClan;
-  since: string;
-  until: string;
-  role: PortalRole | null;
-};
-
-type PortalAccountCard = {
-  accountcard: {
-    clans_count: number;
-    current_clan: PortalCurrentClan | null;
-    time_in_clans: number;
-    clan_history: { total: number; collection: PortalHistoryStint[] };
+type AccountInfoEntry = {
+  joined_at: number;
+  role: string;
+  role_i18n: string;
+  clan: {
+    clan_id: number;
+    tag: string;
+    name: string;
+    color: string;
+    emblems: Emblems;
   };
-};
+} | null;
 
-type PortalClanHistoryPage = {
-  _meta_: { total: number; collection: string };
-  clan_history: PortalHistoryStint[];
-};
-
-function absolutePortalUrl(region: Region, path: string): string {
-  if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  return `https://${REGION_PORTAL_HOST[region]}${path}`;
-}
-
-function upgradeEmblemSize(url: string): string {
-  return url.replace(/_(32x32|64x64)/, "_195x195");
-}
-
-function clanRefFromPortal(region: Region, c: PortalClan): ClanRef {
-  return {
-    id: c.id,
-    tag: c.tag,
-    name: c.name,
-    color: c.color,
-    emblem: upgradeEmblemSize(absolutePortalUrl(region, c.emblem)),
-  };
-}
-
-function stintFromCurrent(
-  region: Region,
-  cur: PortalCurrentClan,
-): ClanStint {
-  return {
-    clan: clanRefFromPortal(region, cur.clan),
-    joinedAt: new Date(cur.joined_at),
-    leftAt: null,
-    role: cur.role?.name ?? "",
-    roleLocalized: cur.role?.localized ?? "",
-  };
-}
-
-function stintFromHistory(
-  region: Region,
-  h: PortalHistoryStint,
-): ClanStint {
-  return {
-    clan: clanRefFromPortal(region, h.clan),
-    joinedAt: new Date(h.since),
-    leftAt: new Date(h.until),
-    role: h.role?.name ?? "",
-    roleLocalized: h.role?.localized ?? "",
-  };
-}
-
-export async function getFullPlayerClanHistory(
+/**
+ * Returns the player's current clan as a stint, or null if they are not in
+ * a clan. Single public API call to `/wot/clans/accountinfo/` — replaces a
+ * direct portal hit that was Cloudflare-blocked from many networks.
+ */
+export async function getPlayerCurrentClan(
   region: Region,
   accountId: number,
-): Promise<PlayerClanHistoryFull> {
-  const accountcardUrl = new URL(
-    `https://${REGION_PORTAL_HOST[region]}/clans/wot/playerslist/api/accounts/${accountId}/`,
+): Promise<ClanStint | null> {
+  const data = await wgFetch<Record<string, AccountInfoEntry>>(
+    region,
+    "/wot/clans/accountinfo/",
+    {
+      account_id: String(accountId),
+      fields:
+        "joined_at,role,role_i18n,clan.clan_id,clan.tag,clan.name,clan.color,clan.emblems",
+    },
   );
-  const card = (await portalFetch<PortalAccountCard>(accountcardUrl)).accountcard;
-
-  const currentStint = card.current_clan
-    ? stintFromCurrent(region, card.current_clan)
-    : null;
-
-  const total = card.clan_history.total;
-  let history: PortalHistoryStint[] = card.clan_history.collection;
-
-  if (total > history.length) {
-    const fullUrl = new URL(
-      `https://${REGION_PORTAL_HOST[region]}/clans/wot/playerslist/api/account_clans_history/`,
-    );
-    fullUrl.searchParams.set("account_id", String(accountId));
-    fullUrl.searchParams.set("offset", "0");
-    fullUrl.searchParams.set("limit", String(total));
-    const page = await portalFetch<PortalClanHistoryPage>(fullUrl);
-    history = page.clan_history;
-  }
-
-  const pastStints = history.map((h) => stintFromHistory(region, h));
-
+  const entry = data[String(accountId)];
+  if (!entry?.clan) return null;
   return {
-    currentStint,
-    pastStints,
-    totalClans: card.clans_count + (currentStint ? 1 : 0),
-    timeInClansSeconds: card.time_in_clans,
+    clan: {
+      id: entry.clan.clan_id,
+      tag: entry.clan.tag,
+      name: entry.clan.name,
+      color: entry.clan.color,
+      emblem: pickEmblem(entry.clan.emblems),
+    },
+    joinedAt: new Date(entry.joined_at * 1000),
+    leftAt: null,
+    role: entry.role,
+    roleLocalized: entry.role_i18n,
   };
+}
+
+export type RawClanMemberStint = {
+  clanId: number;
+  role: string;
+  joinedAt: Date;
+  leftAt: Date;
+};
+
+type RawMemberHistoryEntry = {
+  role: string;
+  left_at: number;
+  clan_id: number;
+  joined_at: number;
+};
+
+/**
+ * Past clan stints only — current membership is intentionally absent from
+ * this endpoint. Returned in WG order (most-recent first). Clan refs are not
+ * embedded; resolve via the `clans` table or `getClansShortRefBatch`.
+ */
+export async function getPlayerClanMemberHistory(
+  region: Region,
+  accountId: number,
+): Promise<RawClanMemberStint[]> {
+  const data = await wgFetch<Record<string, RawMemberHistoryEntry[] | null>>(
+    region,
+    "/wot/clans/memberhistory/",
+    { account_id: String(accountId) },
+  );
+  const entries = data[String(accountId)];
+  if (!entries) return [];
+  return entries.map((e) => ({
+    clanId: e.clan_id,
+    role: e.role,
+    joinedAt: new Date(e.joined_at * 1000),
+    leftAt: new Date(e.left_at * 1000),
+  }));
 }

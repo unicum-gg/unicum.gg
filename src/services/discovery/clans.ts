@@ -1,6 +1,7 @@
 import { and, eq, inArray } from "drizzle-orm";
+import { enqueueClanRefresh } from "@/services/clans/refresh-queue";
 import { db } from "@/services/db";
-import { clanRefreshQueue, clans } from "@/services/db/schema";
+import { clans } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 const CHUNK_SIZE = 500;
@@ -8,15 +9,14 @@ const CHUNK_SIZE = 500;
 /**
  * Mark unknown clans for discovery so the refresh cron picks them up.
  * Already-known clans (present in the `clans` table) are skipped.
+ * Enqueued at priority 0 — user-initiated page hits sit above at priority 10.
  */
 export async function discoverClans(
   region: Region,
   clanIds: number[],
 ): Promise<void> {
   if (clanIds.length === 0) return;
-  // Sort so concurrent inserts acquire row-level locks in the same order
-  // (prevents Postgres 40P01 deadlocks).
-  const unique = Array.from(new Set(clanIds)).sort((a, b) => a - b);
+  const unique = Array.from(new Set(clanIds));
 
   for (let i = 0; i < unique.length; i += CHUNK_SIZE) {
     const chunk = unique.slice(i, i + CHUNK_SIZE);
@@ -28,10 +28,7 @@ export async function discoverClans(
     const toQueue = chunk.filter((id) => !knownIds.has(id));
     if (toQueue.length === 0) continue;
 
-    await db
-      .insert(clanRefreshQueue)
-      .values(toQueue.map((clanId) => ({ region, clanId, firstSeen: true })))
-      .onConflictDoNothing();
+    await enqueueClanRefresh(region, toQueue, { priority: 0 });
   }
 }
 

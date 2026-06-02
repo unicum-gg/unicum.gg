@@ -2,7 +2,7 @@ import { and, eq, isNotNull, notInArray, sql } from "drizzle-orm";
 import { env } from "env";
 import { db } from "@/services/db";
 import { players, playerSnapshots, tankSnapshots } from "@/services/db/schema";
-import { bulkInsertTankSnapshots } from "@/services/snapshots/tank";
+import { bulkInsertTankSnapshots } from "@/services/players/tanks";
 import { getTanksStats } from "@/services/wargaming/wot/tanks";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 

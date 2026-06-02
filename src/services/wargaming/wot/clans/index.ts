@@ -4,6 +4,7 @@ import {
 } from "@/services/wargaming/wot";
 import { portalFetch, wgFetch } from "@/services/wargaming/wot/fetch";
 import { sanitizeClanDescription } from "./description";
+import type { ClanRef } from "./player";
 
 export type ClanFullInfo = {
   id: number;
@@ -166,6 +167,72 @@ export async function getClansFullInfoBatch(
       if (!raw || isGhostClan(raw)) continue;
       const cid = Number(id);
       out.set(cid, clanFullInfoFromRaw(raw, languagesMap.get(cid) ?? []));
+    }
+  }
+  return out;
+}
+
+type RawClanShortRef = {
+  clan_id: number;
+  tag: string | null;
+  name: string | null;
+  color: string | null;
+  emblems: Record<string, { portal?: string; wot?: string }> | null;
+};
+
+const CLAN_SHORT_REF_FIELDS = "clan_id,tag,name,color,emblems";
+const CLAN_SHORT_REF_BATCH_SIZE = 100;
+
+function clanRefFromShortRaw(raw: RawClanShortRef): ClanRef {
+  const emblems = raw.emblems;
+  return {
+    id: raw.clan_id,
+    tag: raw.tag ?? "",
+    name: raw.name ?? "",
+    color: raw.color ?? "",
+    emblem:
+      emblems?.x195?.portal ??
+      emblems?.x64?.portal ??
+      emblems?.x64?.wot ??
+      emblems?.x32?.portal ??
+      "",
+  };
+}
+
+/**
+ * Lightweight batch lookup that returns just enough to render a clan badge
+ * (tag, name, color, emblem) — no portal hop, no description/motto/leader.
+ * Use when resolving historical clan IDs into refs for display.
+ */
+export async function getClansShortRefBatch(
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, ClanRef>> {
+  const out = new Map<number, ClanRef>();
+  const unique = Array.from(new Set(clanIds));
+  if (unique.length === 0) return out;
+
+  const chunks: number[][] = [];
+  for (let i = 0; i < unique.length; i += CLAN_SHORT_REF_BATCH_SIZE) {
+    chunks.push(unique.slice(i, i + CLAN_SHORT_REF_BATCH_SIZE));
+  }
+  const results = await Promise.allSettled(
+    chunks.map((batch) =>
+      wgFetch<Record<string, RawClanShortRef | null>>(
+        region,
+        "/wot/clans/info/",
+        { clan_id: batch.join(","), fields: CLAN_SHORT_REF_FIELDS },
+      ),
+    ),
+  );
+  for (const res of results) {
+    if (res.status === "rejected") {
+      console.error("[clans-short-ref-batch] chunk failed:", res.reason);
+      continue;
+    }
+    for (const [id, raw] of Object.entries(res.value)) {
+      if (!raw || !raw.tag) continue;
+      out.set(Number(id), clanRefFromShortRaw(raw));
     }
   }
   return out;

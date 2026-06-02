@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { LiveSync } from "@/components/live-sync";
 import {
   Panel,
   PanelContent,
@@ -8,41 +9,52 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { LiveSync } from "@/components/live-sync";
 import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
+import type { Player, PlayerSnapshot } from "@/services/db/schema";
 import { discoverClansBackground } from "@/services/discovery/clans";
-import { loadPlayerInitialData } from "@/services/snapshots/player/initial-data";
-import {
-  storePlayerClanHistory,
-} from "@/services/snapshots/player/clan-history";
 import {
   diffStats,
-  markPlayerSeen,
   recordCurrentSnapshot,
   statsFromSnapshot,
-} from "@/services/snapshots/player";
+} from "@/services/players";
+import {
+  loadPlayerClanHistoryFromWG,
+  storePlayerClanHistory,
+} from "@/services/players/clan-history";
+import {
+  type PlayerInitialData,
+  loadPlayerInitialData,
+} from "@/services/players/initial-data";
+import { enqueuePlayerRefreshBackground } from "@/services/players/refresh-queue";
 import {
   diffTanks,
   tankSnapshotsToTankStats,
-} from "@/services/snapshots/tank";
+} from "@/services/players/tanks";
+import { type Region, isRegion } from "@/services/wargaming/wot";
 import {
   findPlayerByNickname,
   getAccountWTR,
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
-import { type Region, isRegion } from "@/services/wargaming/wot";
-import { getFullPlayerClanHistory } from "@/services/wargaming/wot/clans/player";
+import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@/services/wargaming/wot/ratings";
-import { getTanksStats } from "@/services/wargaming/wot/tanks";
+import { type TankStats, getTanksStats } from "@/services/wargaming/wot/tanks";
 
-const FRESH_MS = 30 * 60 * 1000;
+const REFRESH_COALESCE_MS = 5 * 60 * 1000;
+
+const EMPTY_CLAN_HISTORY: PlayerClanHistoryFull = {
+  currentStint: null,
+  pastStints: [],
+  totalClans: 0,
+  timeInClansSeconds: 0,
+};
 
 const loadInitialByNickname = cache((region: Region, nickname: string) =>
   loadPlayerInitialData(region, { nickname }),
@@ -101,17 +113,21 @@ export default async function PlayerPage({
   }
 }
 
+type Span = <T>(name: string, fn: () => Promise<T>) => Promise<T>;
+
 async function render(
   region: Region,
   decoded: string,
 ): Promise<React.ReactElement> {
   const trace = currentTrace();
-  const span = <T,>(name: string, fn: () => Promise<T>): Promise<T> =>
-    trace ? trace.span(name, fn) : fn();
+  const span: Span = (name, fn) => (trace ? trace.span(name, fn) : fn());
 
+  // 1. Load whatever the DB has.
   let initial = await span("loadPlayerInitialData (by nickname)", () =>
     loadInitialByNickname(region, decoded),
   );
+
+  // 2. Resolve accountId for true first-ever visits.
   let accountId = initial.player?.accountId ?? null;
   if (accountId === null) {
     const found = await span("findPlayerByNickname (WG)", () =>
@@ -123,135 +139,150 @@ async function render(
       loadPlayerInitialData(region, { accountId: found.account_id }),
     );
   }
-  const found = { account_id: accountId };
-  const cachedPlayer = initial.player;
-  const cachedSnapshot = initial.latestSnapshot;
-  const cachedTankSnapshots = initial.latestTankSnapshots;
-  const cachedClanHistory = initial.clanHistory;
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once at request time
-  const nowMs = Date.now();
 
-  const snapshotAgeMs = cachedSnapshot
-    ? nowMs - cachedSnapshot.takenAt.getTime()
-    : null;
-  const snapshotFresh =
-    !!cachedSnapshot &&
-    cachedTankSnapshots.length > 0 &&
-    !!cachedPlayer?.createdAt &&
-    !!cachedPlayer?.lastBattleAt &&
-    snapshotAgeMs !== null &&
-    snapshotAgeMs < FRESH_MS;
-  const clanHistoryFresh =
-    !!cachedClanHistory &&
-    nowMs - cachedClanHistory.fetchedAt.getTime() < FRESH_MS;
+  // 3. Static data — cached at the service layer, cheap to await in series here.
+  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
+    span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
+    span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
+    span("getWNXExpectedValues", () => getWNXExpectedValues()),
+  ]);
+
+  const fullCache =
+    initial.player &&
+    initial.latestSnapshot &&
+    initial.latestTankSnapshots.length > 0 &&
+    initial.clanHistory;
   trace?.log(
-    `freshness snapshotFresh=${snapshotFresh} clanHistoryFresh=${clanHistoryFresh} cachedSnapshot=${!!cachedSnapshot} tanks=${cachedTankSnapshots.length} createdAt=${cachedPlayer?.createdAt?.toISOString() ?? "null"} lastBattleAt=${cachedPlayer?.lastBattleAt?.toISOString() ?? "null"} snapshotAgeMs=${snapshotAgeMs}`,
+    `cacheHit=${!!fullCache} hasPlayer=${!!initial.player} hasSnapshot=${!!initial.latestSnapshot} tanks=${initial.latestTankSnapshots.length} hasClanHistory=${!!initial.clanHistory}`,
   );
 
-  const [info, encyclopedia, wn8Expected, wnxExpected, fetchedTanks, fetchedWtr, fetchedClanHistory] =
-    await Promise.all([
-      snapshotFresh
-        ? Promise.resolve(null)
-        : span("getPlayerInfo", () =>
-            getPlayerInfo(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getPlayerInfo failed, falling back to cache:",
-                err,
-              );
-              return null;
-            }),
-          ),
-      span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
-      span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
-      span("getWNXExpectedValues", () => getWNXExpectedValues()),
-      snapshotFresh
-        ? Promise.resolve(tankSnapshotsToTankStats(cachedTankSnapshots))
-        : span("getTanksStats", () =>
-            getTanksStats(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getTanksStats failed, falling back to cache:",
-                err,
-              );
-              return tankSnapshotsToTankStats(cachedTankSnapshots);
-            }),
-          ),
-      snapshotFresh
-        ? Promise.resolve(cachedSnapshot.wtr)
-        : span("getAccountWTR", () =>
-            getAccountWTR(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getAccountWTR failed, falling back to cache:",
-                err,
-              );
-              return cachedSnapshot?.wtr ?? null;
-            }),
-          ),
-      clanHistoryFresh
-        ? Promise.resolve(cachedClanHistory.data)
-        : span("getFullPlayerClanHistory", () =>
-            getFullPlayerClanHistory(region, found.account_id).catch((err) => {
-              console.error(
-                "[player page] getFullPlayerClanHistory failed, falling back:",
-                err,
-              );
-              return (
-                cachedClanHistory?.data ?? {
-                  currentStint: null,
-                  pastStints: [],
-                  totalClans: 0,
-                  timeInClansSeconds: 0,
-                }
-              );
-            }),
-          ),
-    ]);
-
-  const tanks = fetchedTanks;
-  const wtr = fetchedWtr;
-
-  let player = cachedPlayer;
-  let latest = cachedSnapshot;
-  if (!snapshotFresh && info) {
-    const battlesChanged =
-      !cachedSnapshot || info.statistics.all.battles !== cachedSnapshot.battles;
-    trace?.log(`battlesChanged=${battlesChanged}`);
-    if (battlesChanged) {
-      const cachedTankMap = new Map(
-        cachedTankSnapshots.map((t) => [t.tankId, t.battles]),
-      );
-      const changedTanks = tanks.filter((t) => {
-        const prev = cachedTankMap.get(t.tank_id);
-        return prev === undefined || prev !== t.all.battles;
-      });
-      trace?.log(
-        `tank diff: ${changedTanks.length}/${tanks.length} changed`,
-      );
-      const result = await span("recordCurrentSnapshot", () =>
-        recordCurrentSnapshot(region, info, wtr, changedTanks),
-      );
-      player = result.player;
-      latest = result.latest;
-    } else if (cachedPlayer) {
-      // Battles unchanged: detach the lastSeenAt update so it doesn't block render
-      void markPlayerSeen(region, info).catch((err) =>
-        console.error("[bg] markPlayerSeen failed:", err),
-      );
-    }
-  } else if (!snapshotFresh && !info) {
-    trace?.log(
-      "wg refresh unavailable, rendering from cached DB snapshot if any",
+  if (fullCache) {
+    return renderFromCache(
+      region,
+      accountId,
+      initial,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
     );
   }
-  if (!player || !latest) notFound();
+  return await renderFromWG(
+    region,
+    accountId,
+    initial,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    span,
+  );
+}
 
-  const clanHistory = fetchedClanHistory;
-  if (!clanHistoryFresh) {
-    void storePlayerClanHistory(region, found.account_id, clanHistory).catch(
-      (err) => console.error("[bg] storePlayerClanHistory failed:", err),
-    );
+function renderFromCache(
+  region: Region,
+  accountId: number,
+  initial: PlayerInitialData,
+  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
+  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>,
+  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>,
+): React.ReactElement {
+  const player = initial.player as Player;
+  const latest = initial.latestSnapshot as PlayerSnapshot;
+  const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
+  const clanHistory = initial.clanHistory!.data;
+
+  // Coalesce: only re-enqueue if the last refresh was at least 5min ago.
+  const ageMs = Date.now() - player.lastSeenAt.getTime();
+  if (ageMs > REFRESH_COALESCE_MS) {
+    enqueuePlayerRefreshBackground(region, [accountId], { priority: 10 });
   }
 
-  // Discovery: every clan seen in the history is a candidate for our DB
+  return buildView({
+    region,
+    player,
+    latest,
+    tanks,
+    clanHistory,
+    initial,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+  });
+}
+
+async function renderFromWG(
+  region: Region,
+  accountId: number,
+  initial: PlayerInitialData,
+  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
+  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>,
+  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>,
+  span: Span,
+): Promise<React.ReactElement> {
+  const [info, fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
+    span("getPlayerInfo", () => getPlayerInfo(region, accountId)),
+    span("getTanksStats", () =>
+      getTanksStats(region, accountId).catch((err) => {
+        console.warn("[player page] getTanksStats failed:", err);
+        return [] as TankStats[];
+      }),
+    ),
+    span("getAccountWTR", () =>
+      getAccountWTR(region, accountId).catch(() => null),
+    ),
+    span("loadPlayerClanHistoryFromWG", () =>
+      loadPlayerClanHistoryFromWG(region, accountId).catch((err) => {
+        console.error("[player page] loadPlayerClanHistoryFromWG failed:", err);
+        return EMPTY_CLAN_HISTORY;
+      }),
+    ),
+  ]);
+
+  if (!info) notFound();
+
+  const { player, latest } = await span("recordCurrentSnapshot", () =>
+    recordCurrentSnapshot(region, info, fetchedWtr, fetchedTanks),
+  );
+  void storePlayerClanHistory(region, accountId, fetchedClanHistory).catch(
+    (err) => console.error("[bg] storePlayerClanHistory failed:", err),
+  );
+
+  return buildView({
+    region,
+    player,
+    latest,
+    tanks: fetchedTanks,
+    clanHistory: fetchedClanHistory,
+    initial,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+  });
+}
+
+function buildView(args: {
+  region: Region;
+  player: Player;
+  latest: PlayerSnapshot;
+  tanks: TankStats[];
+  clanHistory: PlayerClanHistoryFull;
+  initial: PlayerInitialData;
+  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>;
+  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>;
+  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>;
+}): React.ReactElement {
+  const {
+    region,
+    player,
+    latest,
+    tanks,
+    clanHistory,
+    initial,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+  } = args;
+
+  // Discovery: every clan seen in the history is a candidate for our DB.
   const clanIdsSeen: number[] = [];
   if (clanHistory.currentStint) clanIdsSeen.push(clanHistory.currentStint.clan.id);
   for (const s of clanHistory.pastStints) clanIdsSeen.push(s.clan.id);
@@ -270,20 +301,23 @@ async function render(
       : null,
   };
   const periodTanks = {
-    h24: initial.periodTankSnapshots.h24.size > 0
-      ? diffTanks(tanks, initial.periodTankSnapshots.h24)
-      : null,
-    d7: initial.periodTankSnapshots.d7.size > 0
-      ? diffTanks(tanks, initial.periodTankSnapshots.d7)
-      : null,
-    d30: initial.periodTankSnapshots.d30.size > 0
-      ? diffTanks(tanks, initial.periodTankSnapshots.d30)
-      : null,
+    h24:
+      initial.periodTankSnapshots.h24.size > 0
+        ? diffTanks(tanks, initial.periodTankSnapshots.h24)
+        : null,
+    d7:
+      initial.periodTankSnapshots.d7.size > 0
+        ? diffTanks(tanks, initial.periodTankSnapshots.d7)
+        : null,
+    d30:
+      initial.periodTankSnapshots.d30.size > 0
+        ? diffTanks(tanks, initial.periodTankSnapshots.d30)
+        : null,
   };
 
-  const createdAt = player.createdAt ?? new Date((info?.created_at ?? 0) * 1000);
-  const lastBattleAt =
-    player.lastBattleAt ?? new Date((info?.last_battle_time ?? 0) * 1000);
+  const createdAt = player.createdAt ?? new Date(0);
+  const lastBattleAt = player.lastBattleAt ?? new Date(0);
+  const nowMs = Date.now();
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -333,4 +367,3 @@ async function render(
     </div>
   );
 }
-

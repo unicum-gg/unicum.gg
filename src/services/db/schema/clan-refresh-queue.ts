@@ -1,16 +1,16 @@
 import {
   bigint,
-  boolean,
   index,
+  integer,
   pgTable,
   primaryKey,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
 
-// Unified queue for clans the cron should fetch from WG. `firstSeen` is true
-// for clans we've heard about but never fetched (discovery), false for known
-// clans queued for periodic refresh. Cron drains by queued_at asc.
+// Refresh queue for clans. Mirrors player_refresh_queue: the refresh-cron
+// drains by priority desc then queued_at asc. Higher priority = newer user
+// page visit (priority 10); discovery-fed entries sit at priority 0.
 export const clanRefreshQueue = pgTable(
   "clan_refresh_queue",
   {
@@ -19,11 +19,14 @@ export const clanRefreshQueue = pgTable(
     queuedAt: timestamp("queued_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
-    firstSeen: boolean("first_seen").notNull().default(false),
+    priority: integer("priority").notNull().default(0),
   },
   (t) => [
     primaryKey({ columns: [t.region, t.clanId] }),
-    index("clan_refresh_queue_queued_at_idx").on(t.queuedAt),
+    index("clan_refresh_queue_priority_queued_at_idx").on(
+      t.priority,
+      t.queuedAt,
+    ),
   ],
 );
 

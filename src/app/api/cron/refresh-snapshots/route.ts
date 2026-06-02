@@ -1,5 +1,5 @@
 import { env } from "env";
-import { refreshDuePlayers } from "@/services/snapshots/cron";
+import { refreshDuePlayers } from "@/services/players/backfill-cron";
 
 export async function POST(req: Request) {
   if (req.headers.get("authorization") !== `Bearer ${env.CRON_SECRET}`) {

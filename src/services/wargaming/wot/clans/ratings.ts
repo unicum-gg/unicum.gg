@@ -2,11 +2,11 @@ import { after } from "next/server";
 import {
   getLatestPlayerSnapshotsByAccounts,
   recordCurrentSnapshot,
-} from "@/services/snapshots/player";
+} from "@/services/players";
 import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
-} from "@/services/snapshots/tank";
+} from "@/services/players/tanks";
 import {
   getPlayersInfoBatch,
   type PlayerStatistics,

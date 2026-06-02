@@ -7,7 +7,7 @@ import {
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
-import { getPlayerIdsByAccounts } from "./player";
+import { getPlayerIdsByAccounts } from ".";
 
 const TANK_INSERT_CHUNK = 500;
 

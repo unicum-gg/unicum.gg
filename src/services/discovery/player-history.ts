@@ -1,12 +1,10 @@
 import {
   getStoredPlayerClanHistory,
+  loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
-} from "@/services/snapshots/player/clan-history";
+} from "@/services/players/clan-history";
 import type { Region } from "@/services/wargaming/wot";
-import {
-  getFullPlayerClanHistory,
-  type PlayerClanHistoryFull,
-} from "@/services/wargaming/wot/clans/player";
+import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
 import { discoverClans } from "./clans";
 
 function collectClanIds(data: PlayerClanHistoryFull): number[] {
@@ -29,7 +27,7 @@ export function discoverFromClanHistoryBackground(
     try {
       const cached = await getStoredPlayerClanHistory(region, accountId);
       if (cached) return;
-      const history = await getFullPlayerClanHistory(region, accountId);
+      const history = await loadPlayerClanHistoryFromWG(region, accountId);
       await storePlayerClanHistory(region, accountId, history);
       const ids = collectClanIds(history);
       if (ids.length > 0) await discoverClans(region, ids);

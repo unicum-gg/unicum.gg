@@ -10,11 +10,25 @@ export async function register() {
   const { getInstanceId } = await import("@/services/cron/lease");
   console.log(`[cron] instance ${getInstanceId()}`);
 
-  const { startSnapshotCron } = await import("@/services/snapshots/cron");
-  startSnapshotCron();
+  const { startPlayerBackfillCron } = await import(
+    "@/services/players/backfill-cron"
+  );
+  startPlayerBackfillCron();
 
-  const { startClanRefreshCron } = await import("@/services/clans/cron");
+  const { startPlayerRefreshCron } = await import(
+    "@/services/players/refresh-cron"
+  );
+  startPlayerRefreshCron();
+
+  const { startClanRefreshCron } = await import(
+    "@/services/clans/refresh-cron"
+  );
   startClanRefreshCron();
+
+  const { startClanBackfillCron } = await import(
+    "@/services/clans/backfill-cron"
+  );
+  startClanBackfillCron();
 
   const { startDiscoveryCron } = await import("@/services/discovery/cron");
   startDiscoveryCron();

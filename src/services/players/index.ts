@@ -16,7 +16,7 @@ import type {
 } from "@/services/wargaming/wot/accounts";
 import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
-import { bulkInsertTankSnapshots } from "../tank";
+import { bulkInsertTankSnapshots } from "./tanks";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 

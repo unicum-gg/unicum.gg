@@ -4,7 +4,7 @@ import { players, playerSnapshots, topClans } from "@/services/db/schema";
 import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
-} from "@/services/snapshots/tank";
+} from "@/services/players/tanks";
 import { getClansBriefInfo } from "@/services/wargaming/wot/clans/listings";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import {
