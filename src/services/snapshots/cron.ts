@@ -10,10 +10,12 @@ import {
   getPlayersInfoBatch,
   type PlayerInfo,
 } from "@/services/wargaming/wot/accounts";
+import { getFullPlayerClanHistory } from "@/services/wargaming/wot/clans/player";
 import {
   getTanksStatsBatch,
   type TankStats,
 } from "@/services/wargaming/wot/tanks";
+import { storePlayerClanHistory } from "./player/clan-history";
 import { recordCurrentSnapshot } from "./player";
 
 const SCHEDULE = "* * * * *";
@@ -171,10 +173,25 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
           const wtr = wtrByAccount.get(player.accountId) ?? null;
           const tanks = tanksByAccount.get(player.accountId) ?? [];
           await recordCurrentSnapshot(region, info, wtr, tanks);
-          succeeded += 1;
+          // Clan history is portal-only (no batch endpoint) and goes through
+          // a Semaphore(3) per region, so we only refresh it for queued
+          // entries — a user is actively viewing that player and wants
+          // current clan data. Bulk cron backfills skip it; the next user
+          // visit will enqueue and refresh.
           if (player.fromQueue) {
+            void getFullPlayerClanHistory(region, player.accountId)
+              .then((history) =>
+                storePlayerClanHistory(region, player.accountId, history),
+              )
+              .catch((err) =>
+                console.error(
+                  `[snapshot-cron] clan-history refresh failed for ${player.nickname} (${region}):`,
+                  err,
+                ),
+              );
             await dequeuePlayerRefresh(region, player.accountId);
           }
+          succeeded += 1;
         } catch (err) {
           failed += 1;
           console.error(
