@@ -37,8 +37,16 @@ export type CoverageStats = {
   infrastructure: {
     databaseBytes: number;
     tables: TableSize[];
+    costs: {
+      breakdown: { label: string; usdAnnual: number; note?: string }[];
+      totalAnnualUsd: number;
+    };
   };
 };
+
+// Contabo Cloud VPS 10, monthly no-commit billing. €8.49/mo ≈ $9.50/mo at 1.12 USD/EUR.
+const HOSTING_USD_MONTHLY = 9.5;
+const DOMAIN_USD_ANNUAL = 51.6;
 
 const DAYS_WINDOW = 30;
 
@@ -252,6 +260,26 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
         name: r.name,
         bytes: Number(r.bytes),
       })),
+      costs: {
+        breakdown: [
+          {
+            label: "VPS hosting",
+            usdAnnual: HOSTING_USD_MONTHLY * 12,
+            note: "Contabo Cloud VPS 10, 6 vCPU / 12 GB RAM",
+          },
+          {
+            label: "Domain",
+            usdAnnual: DOMAIN_USD_ANNUAL,
+            note: "unicum.gg, billed yearly",
+          },
+          {
+            label: "CDN, SSL, deploys",
+            usdAnnual: 0,
+            note: "Cloudflare free tier + Let's Encrypt + self-hosted Coolify",
+          },
+        ],
+        totalAnnualUsd: HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL,
+      },
     },
   };
 }
