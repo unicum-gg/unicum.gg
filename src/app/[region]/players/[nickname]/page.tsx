@@ -14,13 +14,10 @@ import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { discoverClansBackground } from "@/services/discovery/clans";
+import { enqueuePlayerRefreshBackground } from "@/services/refresh-queue";
 import { loadPlayerInitialData } from "@/services/snapshots/player/initial-data";
 import {
-  storePlayerClanHistory,
-} from "@/services/snapshots/player/clan-history";
-import {
   diffStats,
-  markPlayerSeen,
   recordCurrentSnapshot,
   statsFromSnapshot,
 } from "@/services/snapshots/player";
@@ -34,7 +31,6 @@ import {
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
 import { type Region, isRegion } from "@/services/wargaming/wot";
-import { getFullPlayerClanHistory } from "@/services/wargaming/wot/clans/player";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
@@ -112,144 +108,74 @@ async function render(
   let initial = await span("loadPlayerInitialData (by nickname)", () =>
     loadInitialByNickname(region, decoded),
   );
-  let accountId = initial.player?.accountId ?? null;
-  if (accountId === null) {
+
+  // First-ever visit (nothing in our DB for this nickname): synchronously
+  // resolve via WG, persist a snapshot, then proceed as a normal render.
+  // Every subsequent visit serves from the DB and refreshes in background.
+  if (!initial.player || !initial.latestSnapshot) {
     const found = await span("findPlayerByNickname (WG)", () =>
       findPlayerByNickname(region, decoded),
     );
     if (!found) notFound();
-    accountId = found.account_id;
-    initial = await span("loadPlayerInitialData (by accountId)", () =>
+    const [info, tanks, wtr] = await Promise.all([
+      span("getPlayerInfo", () => getPlayerInfo(region, found.account_id)),
+      span("getTanksStats", () => getTanksStats(region, found.account_id)),
+      span("getAccountWTR", () =>
+        getAccountWTR(region, found.account_id).catch(() => null),
+      ),
+    ]);
+    if (!info) notFound();
+    await span("recordCurrentSnapshot", () =>
+      recordCurrentSnapshot(region, info, wtr, tanks),
+    );
+    initial = await span("loadPlayerInitialData (by accountId, post-bootstrap)", () =>
       loadPlayerInitialData(region, { accountId: found.account_id }),
     );
   }
-  const found = { account_id: accountId };
-  const cachedPlayer = initial.player;
-  const cachedSnapshot = initial.latestSnapshot;
-  const cachedTankSnapshots = initial.latestTankSnapshots;
-  const cachedClanHistory = initial.clanHistory;
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once at request time
-  const nowMs = Date.now();
 
-  const snapshotAgeMs = cachedSnapshot
-    ? nowMs - cachedSnapshot.takenAt.getTime()
-    : null;
-  const snapshotFresh =
-    !!cachedSnapshot &&
-    cachedTankSnapshots.length > 0 &&
-    !!cachedPlayer?.createdAt &&
-    !!cachedPlayer?.lastBattleAt &&
-    snapshotAgeMs !== null &&
-    snapshotAgeMs < FRESH_MS;
-  const clanHistoryFresh =
-    !!cachedClanHistory &&
-    nowMs - cachedClanHistory.fetchedAt.getTime() < FRESH_MS;
-  trace?.log(
-    `freshness snapshotFresh=${snapshotFresh} clanHistoryFresh=${clanHistoryFresh} cachedSnapshot=${!!cachedSnapshot} tanks=${cachedTankSnapshots.length} createdAt=${cachedPlayer?.createdAt?.toISOString() ?? "null"} lastBattleAt=${cachedPlayer?.lastBattleAt?.toISOString() ?? "null"} snapshotAgeMs=${snapshotAgeMs}`,
-  );
-
-  const [info, encyclopedia, wn8Expected, wnxExpected, fetchedTanks, fetchedWtr, fetchedClanHistory] =
-    await Promise.all([
-      snapshotFresh
-        ? Promise.resolve(null)
-        : span("getPlayerInfo", () =>
-            getPlayerInfo(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getPlayerInfo failed, falling back to cache:",
-                err,
-              );
-              return null;
-            }),
-          ),
-      span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
-      span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
-      span("getWNXExpectedValues", () => getWNXExpectedValues()),
-      snapshotFresh
-        ? Promise.resolve(tankSnapshotsToTankStats(cachedTankSnapshots))
-        : span("getTanksStats", () =>
-            getTanksStats(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getTanksStats failed, falling back to cache:",
-                err,
-              );
-              return tankSnapshotsToTankStats(cachedTankSnapshots);
-            }),
-          ),
-      snapshotFresh
-        ? Promise.resolve(cachedSnapshot.wtr)
-        : span("getAccountWTR", () =>
-            getAccountWTR(region, found.account_id).catch((err) => {
-              console.warn(
-                "[player page] getAccountWTR failed, falling back to cache:",
-                err,
-              );
-              return cachedSnapshot?.wtr ?? null;
-            }),
-          ),
-      clanHistoryFresh
-        ? Promise.resolve(cachedClanHistory.data)
-        : span("getFullPlayerClanHistory", () =>
-            getFullPlayerClanHistory(region, found.account_id).catch((err) => {
-              console.error(
-                "[player page] getFullPlayerClanHistory failed, falling back:",
-                err,
-              );
-              return (
-                cachedClanHistory?.data ?? {
-                  currentStint: null,
-                  pastStints: [],
-                  totalClans: 0,
-                  timeInClansSeconds: 0,
-                }
-              );
-            }),
-          ),
-    ]);
-
-  const tanks = fetchedTanks;
-  const wtr = fetchedWtr;
-
-  let player = cachedPlayer;
-  let latest = cachedSnapshot;
-  if (!snapshotFresh && info) {
-    const battlesChanged =
-      !cachedSnapshot || info.statistics.all.battles !== cachedSnapshot.battles;
-    trace?.log(`battlesChanged=${battlesChanged}`);
-    if (battlesChanged) {
-      const cachedTankMap = new Map(
-        cachedTankSnapshots.map((t) => [t.tankId, t.battles]),
-      );
-      const changedTanks = tanks.filter((t) => {
-        const prev = cachedTankMap.get(t.tank_id);
-        return prev === undefined || prev !== t.all.battles;
-      });
-      trace?.log(
-        `tank diff: ${changedTanks.length}/${tanks.length} changed`,
-      );
-      const result = await span("recordCurrentSnapshot", () =>
-        recordCurrentSnapshot(region, info, wtr, changedTanks),
-      );
-      player = result.player;
-      latest = result.latest;
-    } else if (cachedPlayer) {
-      // Battles unchanged: detach the lastSeenAt update so it doesn't block render
-      void markPlayerSeen(region, info).catch((err) =>
-        console.error("[bg] markPlayerSeen failed:", err),
-      );
-    }
-  } else if (!snapshotFresh && !info) {
-    trace?.log(
-      "wg refresh unavailable, rendering from cached DB snapshot if any",
-    );
-  }
+  const player = initial.player;
+  const latest = initial.latestSnapshot;
   if (!player || !latest) notFound();
 
-  const clanHistory = fetchedClanHistory;
-  if (!clanHistoryFresh) {
-    void storePlayerClanHistory(region, found.account_id, clanHistory).catch(
-      (err) => console.error("[bg] storePlayerClanHistory failed:", err),
-    );
+  const cachedTankSnapshots = initial.latestTankSnapshots;
+  const cachedClanHistory = initial.clanHistory;
+  const nowMs = Date.now();
+
+  const snapshotAgeMs = nowMs - latest.takenAt.getTime();
+  const snapshotStale =
+    snapshotAgeMs > FRESH_MS ||
+    cachedTankSnapshots.length === 0 ||
+    !player.createdAt ||
+    !player.lastBattleAt;
+  const clanHistoryStale =
+    !cachedClanHistory ||
+    nowMs - cachedClanHistory.fetchedAt.getTime() > FRESH_MS;
+  trace?.log(
+    `freshness snapshotStale=${snapshotStale} clanHistoryStale=${clanHistoryStale} snapshotAgeMs=${snapshotAgeMs} tanks=${cachedTankSnapshots.length}`,
+  );
+
+  // Stale data: kick off a background refresh via the queue (user priority).
+  // Cron drains it within ~1 minute; the next page hit serves the fresh data.
+  if (snapshotStale || clanHistoryStale) {
+    enqueuePlayerRefreshBackground(region, [player.accountId], {
+      priority: 10,
+    });
   }
+
+  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
+    span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
+    span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
+    span("getWNXExpectedValues", () => getWNXExpectedValues()),
+  ]);
+
+  const tanks = tankSnapshotsToTankStats(cachedTankSnapshots);
+  const clanHistory =
+    cachedClanHistory?.data ?? {
+      currentStint: null,
+      pastStints: [],
+      totalClans: 0,
+      timeInClansSeconds: 0,
+    };
 
   // Discovery: every clan seen in the history is a candidate for our DB
   const clanIdsSeen: number[] = [];
@@ -281,9 +207,12 @@ async function render(
       : null,
   };
 
-  const createdAt = player.createdAt ?? new Date((info?.created_at ?? 0) * 1000);
-  const lastBattleAt =
-    player.lastBattleAt ?? new Date((info?.last_battle_time ?? 0) * 1000);
+  // First-visit bootstrap above always persists createdAt and lastBattleAt,
+  // so subsequent renders read them from the DB. Old records pre-dating that
+  // field may still be missing them — fall back to epoch and let the
+  // background refresh fill them in shortly.
+  const createdAt = player.createdAt ?? new Date(0);
+  const lastBattleAt = player.lastBattleAt ?? new Date(0);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
