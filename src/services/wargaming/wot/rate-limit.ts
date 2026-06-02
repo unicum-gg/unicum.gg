@@ -106,13 +106,14 @@ class Semaphore {
   }
 }
 
-// Asia transit drops concurrent flows from non-Asian hosts at TCP-connect:
-// sequential requests succeed in <1s, ≥2 parallel time out. Serialize Asia
-// to avoid that. EU/NA stay unbounded — they tolerate the 18 RPS bucket fine.
+// Per-region wgFetch concurrency cap. All regions currently unbounded —
+// the 18 RPS token bucket already protects us against WG's 20 RPS per-app
+// limit, and api.worldoftanks.* tolerates parallel connections fine. Keep
+// the Semaphore wiring so we can dial a region down quickly if needed.
 const wgConcurrency: Record<Region, Semaphore> = {
   [Region.EU]: new Semaphore(Number.POSITIVE_INFINITY),
   [Region.NA]: new Semaphore(Number.POSITIVE_INFINITY),
-  [Region.ASIA]: new Semaphore(1),
+  [Region.ASIA]: new Semaphore(Number.POSITIVE_INFINITY),
 };
 
 export function acquireWgSlot(region: Region): Promise<void> {
