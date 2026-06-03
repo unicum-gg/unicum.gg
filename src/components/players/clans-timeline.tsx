@@ -1,6 +1,7 @@
 "use client";
 
 import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 import ROUTES from "@/constants/routes";
@@ -99,7 +100,7 @@ export function PlayerClansTimeline({
                     }}
                   >
                     {showEmblem && (
-                      <img
+                      <Image
                         src={s.clan.emblem}
                         alt=""
                         width={20}
@@ -112,7 +113,7 @@ export function PlayerClansTimeline({
                 </TooltipTrigger>
                 <TooltipContent>
                   <div className="flex items-center gap-2 text-xs">
-                    <img
+                    <Image
                       src={s.clan.emblem}
                       alt={`${tag} emblem`}
                       width={32}

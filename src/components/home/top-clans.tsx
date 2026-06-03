@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
@@ -109,7 +110,7 @@ function ClanRow({
           className="flex items-center gap-3 hover:underline"
         >
           {clan.emblem ? (
-            <img
+            <Image
               src={clan.emblem}
               alt=""
               width={24}

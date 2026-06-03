@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { LanguageFlags } from "@/components/language-flags";
@@ -81,9 +82,11 @@ export function ClanHeader({
     <header className="flex items-stretch">
       {clan.emblem && (
         <div className="flex size-24 shrink-0 items-center justify-center border-r border-fd-border p-3">
-          <img
+          <Image
             src={clan.emblem}
             alt={`${clan.tag} emblem`}
+            width={195}
+            height={195}
             className="size-full object-contain"
           />
         </div>

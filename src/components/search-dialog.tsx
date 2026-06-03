@@ -10,6 +10,7 @@ import {
   SearchDialogOverlay,
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
@@ -544,7 +545,7 @@ function ClanRow({ clan }: { clan: ClanSearchResult }) {
     <>
       <span className="flex min-w-0 items-center gap-2">
         {clan.emblem ? (
-          <img
+          <Image
             src={clan.emblem}
             alt=""
             width={20}

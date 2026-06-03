@@ -1,4 +1,5 @@
 import { format, formatDistanceToNow } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
@@ -67,9 +68,11 @@ export function PlayerHeader({
             </div>
           </div>
           <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">
-            <img
+            <Image
               src={currentStint.clan.emblem}
               alt={`${currentStint.clan.tag} emblem`}
+              width={195}
+              height={195}
               className="size-full object-contain"
             />
           </div>

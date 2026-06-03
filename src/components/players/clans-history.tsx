@@ -6,6 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format, formatDistanceStrict } from "date-fns";
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
@@ -254,7 +255,7 @@ export function PlayerClansHistory({
                         href={clanHref}
                         className="flex items-center gap-2 hover:underline"
                       >
-                        <img
+                        <Image
                           src={s.clan.emblem}
                           alt={`${s.clan.tag} emblem`}
                           width={20}
