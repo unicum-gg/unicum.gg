@@ -180,18 +180,28 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Discovery pool</PanelTitle>
+          <PanelTitle>Refresh queues</PanelTitle>
         </PanelHeader>
-        <PanelContent className="p-4 text-sm">
+        <PanelContent className="space-y-3 p-4 text-sm">
           <p>
             <span className="font-semibold tabular-nums">
-              {intFmt.format(stats.discoveryQueue)}
+              {intFmt.format(stats.clanRefreshQueue)}
             </span>{" "}
             <span className="text-fd-muted-foreground">
-              clans seen but not yet fetched in {REGION_LABEL[region]}. The
-              refresh cron drains this every minute. Search results, members
-              lists and clan history of tracked players all feed this pool
-              automatically.
+              clans queued for refresh in {REGION_LABEL[region]}. Drained
+              every 10s. Page hits enqueue at priority 10; discovery
+              (search results, members lists, clan history of tracked
+              players) feeds priority 0.
+            </span>
+          </p>
+          <p>
+            <span className="font-semibold tabular-nums">
+              {intFmt.format(stats.playerRefreshQueue)}
+            </span>{" "}
+            <span className="text-fd-muted-foreground">
+              players queued for refresh in {REGION_LABEL[region]}. Drained
+              every 10s. Page hits enqueue at priority 10 when the cached
+              snapshot is older than 5min.
             </span>
           </p>
         </PanelContent>

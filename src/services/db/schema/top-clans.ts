@@ -3,16 +3,14 @@ import {
   integer,
   numeric,
   pgTable,
-  primaryKey,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
+import { Region } from "@/services/wargaming/wot";
 
-export const topClans = pgTable(
-  "top_clans",
-  {
-    region: text("region").notNull(),
-    rank: integer("rank").notNull(),
+export function makeTopClansTable(region: string) {
+  return pgTable(`${region}_top_clans`, {
+    rank: integer("rank").primaryKey(),
     clanId: bigint("clan_id", { mode: "number" }).notNull(),
     tag: text("tag").notNull(),
     name: text("name").notNull(),
@@ -24,6 +22,13 @@ export const topClans = pgTable(
     computedAt: timestamp("computed_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
-  },
-  (t) => [primaryKey({ columns: [t.region, t.rank] })],
-);
+  });
+}
+
+export type TopClansTable = ReturnType<typeof makeTopClansTable>;
+
+export const topClansByRegion: Record<Region, TopClansTable> = {
+  [Region.EU]: makeTopClansTable(Region.EU),
+  [Region.NA]: makeTopClansTable(Region.NA),
+  [Region.ASIA]: makeTopClansTable(Region.ASIA),
+};

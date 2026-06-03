@@ -1,6 +1,6 @@
-import { and, eq, inArray } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { db } from "@/services/db";
-import { clans, playerClanHistory } from "@/services/db/schema";
+import { clansByRegion, playerClanHistoryByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import { getClansShortRefBatch } from "@/services/wargaming/wot/clans";
 import {
@@ -67,15 +67,11 @@ export async function getStoredPlayerClanHistory(
   region: Region,
   accountId: number,
 ): Promise<StoredPlayerClanHistory | null> {
+  const playerClanHistory = playerClanHistoryByRegion[region];
   const [row] = await db
     .select()
     .from(playerClanHistory)
-    .where(
-      and(
-        eq(playerClanHistory.region, region),
-        eq(playerClanHistory.accountId, accountId),
-      ),
-    )
+    .where(eq(playerClanHistory.accountId, accountId))
     .limit(1);
   if (!row) return null;
   return {
@@ -90,10 +86,11 @@ async function resolveClanRefs(
 ): Promise<Map<number, ClanRef>> {
   const out = new Map<number, ClanRef>();
   if (clanIds.length === 0) return out;
+  const clans = clansByRegion[region];
   const unique = Array.from(new Set(clanIds));
 
-  // 1. Try the local clans table first — covers the vast majority once
-  //    discovery has run at least once.
+  // 1. Try the local regional clans table first — covers the vast majority
+  //    once discovery has run at least once.
   const rows = await db
     .select({
       id: clans.id,
@@ -103,7 +100,7 @@ async function resolveClanRefs(
       emblem: clans.emblem,
     })
     .from(clans)
-    .where(and(eq(clans.region, region), inArray(clans.id, unique)));
+    .where(inArray(clans.id, unique));
   for (const r of rows) {
     out.set(Number(r.id), {
       id: Number(r.id),
@@ -191,17 +188,17 @@ export async function storePlayerClanHistory(
   accountId: number,
   data: PlayerClanHistoryFull,
 ): Promise<void> {
+  const playerClanHistory = playerClanHistoryByRegion[region];
   const serialized = serialize(data);
   await db
     .insert(playerClanHistory)
     .values({
-      region,
       accountId,
       data: serialized,
       fetchedAt: new Date(),
     })
     .onConflictDoUpdate({
-      target: [playerClanHistory.region, playerClanHistory.accountId],
+      target: playerClanHistory.accountId,
       set: {
         data: serialized,
         fetchedAt: new Date(),

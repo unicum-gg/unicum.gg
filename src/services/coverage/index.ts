@@ -1,5 +1,15 @@
 import { sql } from "drizzle-orm";
 import { db } from "@/services/db";
+import {
+  clanMembersByRegion,
+  clanRecentEventsByRegion,
+  clanRefreshQueueByRegion,
+  clansByRegion,
+  playerRefreshQueueByRegion,
+  playerSnapshotsByRegion,
+  playersByRegion,
+  tankSnapshotsByRegion,
+} from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 export type DailyPoint = { day: string; count: number };
@@ -14,7 +24,8 @@ export type CoverageStats = {
   tankSnapshots: number;
   clanMembers: number;
   clanRecentEvents: number;
-  discoveryQueue: number;
+  clanRefreshQueue: number;
+  playerRefreshQueue: number;
   activity: {
     lastPlayerSnapshotAt: Date | null;
     lastClanRefreshAt: Date | null;
@@ -72,6 +83,15 @@ function buildDaySeries(
 }
 
 export async function getCoverageStats(region: Region): Promise<CoverageStats> {
+  const playersTable = playersByRegion[region];
+  const playerSnapshotsTable = playerSnapshotsByRegion[region];
+  const tankSnapshotsTable = tankSnapshotsByRegion[region];
+  const clansTable = clansByRegion[region];
+  const clanMembersTable = clanMembersByRegion[region];
+  const clanRecentEventsTable = clanRecentEventsByRegion[region];
+  const clanRefreshQueueTable = clanRefreshQueueByRegion[region];
+  const playerRefreshQueueTable = playerRefreshQueueByRegion[region];
+
   const [
     players,
     clans,
@@ -79,7 +99,8 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
     tankSnapshots,
     clanMembers,
     clanRecentEvents,
-    discoveryQueue,
+    clanRefreshQueue,
+    playerRefreshQueue,
     lastPlayerSnapshot,
     lastClanRefresh,
     snapshotsLast24h,
@@ -94,86 +115,77 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
   ] = await Promise.all([
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM players WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${playersTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM clans WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${clansTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count
-            FROM player_snapshots ps
-            JOIN players p ON p.id = ps.player_id
-            WHERE p.region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${playerSnapshotsTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count
-            FROM tank_snapshots ts
-            JOIN players p ON p.id = ts.player_id
-            WHERE p.region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${tankSnapshotsTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM clan_members WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${clanMembersTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM clan_recent_events WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${clanRecentEventsTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM clan_refresh_queue WHERE region = ${region}`,
+        sql`SELECT COUNT(*)::text AS count FROM ${clanRefreshQueueTable}`,
+      )
+      .then((r) => Number(r[0]?.count ?? 0)),
+    db
+      .execute<{ count: string }>(
+        sql`SELECT COUNT(*)::text AS count FROM ${playerRefreshQueueTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ at: string | null }>(
-        sql`SELECT MAX(ps.taken_at)::text AS at
-            FROM player_snapshots ps
-            JOIN players p ON p.id = ps.player_id
-            WHERE p.region = ${region}`,
+        sql`SELECT MAX(taken_at)::text AS at FROM ${playerSnapshotsTable}`,
       )
       .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
     db
       .execute<{ at: string | null }>(
-        sql`SELECT MAX(last_refreshed_at)::text AS at FROM clans WHERE region = ${region}`,
+        sql`SELECT MAX(last_refreshed_at)::text AS at FROM ${clansTable}`,
       )
       .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
     db
       .execute<{ count: string }>(
         sql`SELECT COUNT(*)::text AS count
-            FROM player_snapshots ps
-            JOIN players p ON p.id = ps.player_id
-            WHERE p.region = ${region} AND ps.taken_at > NOW() - INTERVAL '24 hours'`,
+            FROM ${playerSnapshotsTable}
+            WHERE taken_at > NOW() - INTERVAL '24 hours'`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
         sql`SELECT COUNT(*)::text AS count
-            FROM clans
-            WHERE region = ${region} AND last_refreshed_at > NOW() - INTERVAL '24 hours'`,
+            FROM ${clansTable}
+            WHERE last_refreshed_at > NOW() - INTERVAL '24 hours'`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ at: string | null }>(
-        sql`SELECT MIN(ps.taken_at)::text AS at
-            FROM player_snapshots ps
-            JOIN players p ON p.id = ps.player_id
-            WHERE p.region = ${region}`,
+        sql`SELECT MIN(taken_at)::text AS at FROM ${playerSnapshotsTable}`,
       )
       .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
     db
       .execute<{ tag: string; name: string; members_count: number }>(
         sql`SELECT tag, name, members_count
-            FROM clans
-            WHERE region = ${region}
+            FROM ${clansTable}
             ORDER BY members_count DESC
             LIMIT 1`,
       )
@@ -190,28 +202,23 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
       .execute<{ total: string | null }>(
         sql`SELECT SUM(latest.battles)::text AS total
             FROM (
-              SELECT DISTINCT ON (ps.player_id) ps.battles
-              FROM player_snapshots ps
-              JOIN players p ON p.id = ps.player_id
-              WHERE p.region = ${region}
-              ORDER BY ps.player_id, ps.taken_at DESC
+              SELECT DISTINCT ON (player_id) battles
+              FROM ${playerSnapshotsTable}
+              ORDER BY player_id, taken_at DESC
             ) latest`,
       )
       .then((r) => Number(r[0]?.total ?? 0)),
     db.execute<{ day: string; count: string }>(
       sql`SELECT date_trunc('day', first_seen_at)::text AS day, COUNT(*)::text AS count
-          FROM players
-          WHERE region = ${region}
-            AND first_seen_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          FROM ${playersTable}
+          WHERE first_seen_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
           GROUP BY day
           ORDER BY day`,
     ),
     db.execute<{ day: string; count: string }>(
-      sql`SELECT date_trunc('day', ps.taken_at)::text AS day, COUNT(*)::text AS count
-          FROM player_snapshots ps
-          JOIN players p ON p.id = ps.player_id
-          WHERE p.region = ${region}
-            AND ps.taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+      sql`SELECT date_trunc('day', taken_at)::text AS day, COUNT(*)::text AS count
+          FROM ${playerSnapshotsTable}
+          WHERE taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
           GROUP BY day
           ORDER BY day`,
     ),
@@ -238,7 +245,8 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
     tankSnapshots,
     clanMembers,
     clanRecentEvents,
-    discoveryQueue,
+    clanRefreshQueue,
+    playerRefreshQueue,
     activity: {
       lastPlayerSnapshotAt: lastPlayerSnapshot,
       lastClanRefreshAt: lastClanRefresh,

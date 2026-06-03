@@ -1,20 +1,20 @@
 import { and, desc, eq, inArray, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { discoverClansBackground } from "@/services/discovery/clans";
-import { discoverFromClanHistoryBackground } from "@/services/discovery/player-history";
-import { playerChannel, publish } from "@/services/live/pubsub";
 import {
   type NewPlayerSnapshot,
   type Player,
   type PlayerSnapshot,
-  playerSnapshots,
-  players,
+  playerSnapshotsByRegion,
+  playersByRegion,
 } from "@/services/db/schema";
+import { discoverClansBackground } from "@/services/discovery/clans";
+import { discoverFromClanHistoryBackground } from "@/services/discovery/player-history";
+import { playerChannel, publish } from "@/services/live/pubsub";
+import type { Region } from "@/services/wargaming/wot";
 import type {
   PlayerInfo,
   PlayerSearchResult,
 } from "@/services/wargaming/wot/accounts";
-import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 import { bulkInsertTankSnapshots } from "./tanks";
 
@@ -53,15 +53,11 @@ export async function findPlayerByNicknameInDB(
   region: Region,
   nickname: string,
 ): Promise<PlayerSearchResult | null> {
+  const players = playersByRegion[region];
   const [row] = await db
     .select({ accountId: players.accountId, nickname: players.nickname })
     .from(players)
-    .where(
-      and(
-        eq(players.region, region),
-        sql`LOWER(${players.nickname}) = LOWER(${nickname})`,
-      ),
-    )
+    .where(sql`LOWER(${players.nickname}) = LOWER(${nickname})`)
     .limit(1);
   if (!row) return null;
   return { account_id: row.accountId, nickname: row.nickname };
@@ -142,12 +138,12 @@ export async function markPlayerSeen(
   region: Region,
   info: PlayerInfo,
 ): Promise<Player> {
+  const players = playersByRegion[region];
   const createdAt = new Date(info.created_at * 1000);
   const lastBattleAt = new Date(info.last_battle_time * 1000);
   const [player] = await db
     .insert(players)
     .values({
-      region,
       accountId: info.account_id,
       nickname: info.nickname,
       createdAt,
@@ -155,7 +151,7 @@ export async function markPlayerSeen(
       clanId: info.clan_id,
     })
     .onConflictDoUpdate({
-      target: [players.region, players.accountId],
+      target: players.accountId,
       set: {
         nickname: info.nickname,
         createdAt,
@@ -177,12 +173,13 @@ export async function recordCurrentSnapshot(
   wtr: number | null = null,
   tanks: TankStats[] = [],
 ): Promise<SnapshotContext> {
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const createdAt = new Date(info.created_at * 1000);
   const lastBattleAt = new Date(info.last_battle_time * 1000);
   const [player] = await db
     .insert(players)
     .values({
-      region,
       accountId: info.account_id,
       nickname: info.nickname,
       createdAt,
@@ -190,7 +187,7 @@ export async function recordCurrentSnapshot(
       clanId: info.clan_id,
     })
     .onConflictDoUpdate({
-      target: [players.region, players.accountId],
+      target: players.accountId,
       set: {
         nickname: info.nickname,
         createdAt,
@@ -222,8 +219,9 @@ export async function recordCurrentSnapshot(
     latest.battles !== info.statistics.all.battles;
 
   if (!stale) {
-    if (tanks.length > 0) await bulkInsertTankSnapshots(player.id, tanks);
-    return { player, latest: await backfillWtr(latest, wtr) };
+    if (tanks.length > 0)
+      await bulkInsertTankSnapshots(region, player.id, tanks);
+    return { player, latest: await backfillWtr(region, latest, wtr) };
   }
 
   const [inserted] = await db
@@ -234,7 +232,7 @@ export async function recordCurrentSnapshot(
     })
     .returning();
 
-  if (tanks.length > 0) await bulkInsertTankSnapshots(player.id, tanks);
+  if (tanks.length > 0) await bulkInsertTankSnapshots(region, player.id, tanks);
   publish(playerChannel(region, info.account_id), { kind: "snapshot" });
 
   if (inserted) return { player, latest: inserted };
@@ -245,14 +243,16 @@ export async function recordCurrentSnapshot(
     .where(eq(playerSnapshots.playerId, player.id))
     .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
-  return { player, latest: await backfillWtr(winner, wtr) };
+  return { player, latest: await backfillWtr(region, winner, wtr) };
 }
 
 async function backfillWtr(
+  region: Region,
   snapshot: PlayerSnapshot,
   wtr: number | null,
 ): Promise<PlayerSnapshot> {
   if (snapshot.wtr !== null || wtr === null) return snapshot;
+  const playerSnapshots = playerSnapshotsByRegion[region];
   await db
     .update(playerSnapshots)
     .set({ wtr })
@@ -261,8 +261,10 @@ async function backfillWtr(
 }
 
 export async function getPeriodComparators(
+  region: Region,
   playerId: number,
 ): Promise<PeriodComparators> {
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const now = Date.now();
   const cutoffs = {
     h24: new Date(now - 24 * 60 * 60 * 1000),
@@ -299,15 +301,11 @@ export async function getPlayerIdsByAccounts(
   accountIds: number[],
 ): Promise<Map<number, number>> {
   if (accountIds.length === 0) return new Map();
+  const players = playersByRegion[region];
   const rows = await db
     .select({ id: players.id, accountId: players.accountId })
     .from(players)
-    .where(
-      and(
-        eq(players.region, region),
-        inArray(players.accountId, accountIds),
-      ),
-    );
+    .where(inArray(players.accountId, accountIds));
   const map = new Map<number, number>();
   for (const r of rows) map.set(r.accountId, r.id);
   return map;
@@ -318,15 +316,11 @@ export async function getPlayersByAccounts(
   accountIds: number[],
 ): Promise<Map<number, Player>> {
   if (accountIds.length === 0) return new Map();
+  const players = playersByRegion[region];
   const rows = await db
     .select()
     .from(players)
-    .where(
-      and(
-        eq(players.region, region),
-        inArray(players.accountId, accountIds),
-      ),
-    );
+    .where(inArray(players.accountId, accountIds));
   const map = new Map<number, Player>();
   for (const r of rows) map.set(r.accountId, r);
   return map;
@@ -337,6 +331,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
   accountIds: number[],
 ): Promise<Map<number, PlayerSnapshot>> {
   if (accountIds.length === 0) return new Map();
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const idMap = await getPlayerIdsByAccounts(region, accountIds);
   const playerIds = Array.from(idMap.values());
   if (playerIds.length === 0) return new Map();

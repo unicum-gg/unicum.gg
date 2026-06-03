@@ -1,6 +1,6 @@
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { playerRefreshQueue } from "@/services/db/schema";
+import { playerRefreshQueueByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 const CHUNK_SIZE = 500;
@@ -22,6 +22,7 @@ export async function enqueuePlayerRefresh(
 ): Promise<void> {
   if (accountIds.length === 0) return;
   const priority = options.priority ?? 0;
+  const table = playerRefreshQueueByRegion[region];
   // Sort by id so concurrent bulk inserts grab row locks in the same order
   // (prevents Postgres 40P01 deadlocks under contention).
   const unique = Array.from(new Set(accountIds)).sort((a, b) => a - b);
@@ -29,13 +30,13 @@ export async function enqueuePlayerRefresh(
   for (let i = 0; i < unique.length; i += CHUNK_SIZE) {
     const chunk = unique.slice(i, i + CHUNK_SIZE);
     await db
-      .insert(playerRefreshQueue)
-      .values(chunk.map((accountId) => ({ region, accountId, priority })))
+      .insert(table)
+      .values(chunk.map((accountId) => ({ accountId, priority })))
       .onConflictDoUpdate({
-        target: [playerRefreshQueue.region, playerRefreshQueue.accountId],
+        target: table.accountId,
         set: {
-          priority: sql`GREATEST(${playerRefreshQueue.priority}, EXCLUDED.priority)`,
-          queuedAt: sql`LEAST(${playerRefreshQueue.queuedAt}, EXCLUDED.queued_at)`,
+          priority: sql`GREATEST(${table.priority}, EXCLUDED.priority)`,
+          queuedAt: sql`LEAST(${table.queuedAt}, EXCLUDED.queued_at)`,
         },
       });
   }
@@ -62,12 +63,6 @@ export async function dequeuePlayerRefresh(
   region: Region,
   accountId: number,
 ): Promise<void> {
-  await db
-    .delete(playerRefreshQueue)
-    .where(
-      and(
-        eq(playerRefreshQueue.region, region),
-        eq(playerRefreshQueue.accountId, accountId),
-      ),
-    );
+  const table = playerRefreshQueueByRegion[region];
+  await db.delete(table).where(eq(table.accountId, accountId));
 }

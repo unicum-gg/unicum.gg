@@ -1,6 +1,6 @@
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import { db } from "@/services/db";
-import { clans } from "@/services/db/schema";
+import { clansByRegion } from "@/services/db/schema";
 import { clanChannel, subscribe } from "@/services/live/pubsub";
 import { isRegion } from "@/services/wargaming/wot";
 
@@ -18,10 +18,11 @@ export async function GET(
   }
   const tagLower = decodeURIComponent(tag).toLowerCase();
 
+  const clans = clansByRegion[region];
   const [row] = await db
     .select({ id: clans.id })
     .from(clans)
-    .where(and(eq(clans.region, region), eq(clans.tagLower, tagLower)))
+    .where(eq(clans.tagLower, tagLower))
     .limit(1);
   if (!row) {
     return new Response("not_found", { status: 404 });

@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { players } from "@/services/db/schema";
+import { playersByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import {
   getClansMembers,
@@ -43,8 +43,8 @@ export async function discoverTopClanPlayers(
 
   let upserted = 0;
   if (playersMap.size > 0) {
+    const players = playersByRegion[region];
     const rows = Array.from(playersMap).map(([accountId, nickname]) => ({
-      region,
       accountId,
       nickname,
       lastSeenAt: EPOCH,
@@ -56,7 +56,7 @@ export async function discoverTopClanPlayers(
         .insert(players)
         .values(chunk)
         .onConflictDoUpdate({
-          target: [players.region, players.accountId],
+          target: players.accountId,
           set: { nickname: sql`excluded.nickname` },
         })
         .returning({ id: players.id });

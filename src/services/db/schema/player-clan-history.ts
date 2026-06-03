@@ -3,29 +3,41 @@ import {
   jsonb,
   pgTable,
   serial,
-  text,
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+import { Region } from "@/services/wargaming/wot";
 
-export const playerClanHistory = pgTable(
-  "player_clan_history",
-  {
-    id: serial("id").primaryKey(),
-    region: text("region").notNull(),
-    accountId: bigint("account_id", { mode: "number" }).notNull(),
-    fetchedAt: timestamp("fetched_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    data: jsonb("data").notNull(),
-  },
-  (t) => [
-    uniqueIndex("player_clan_history_region_account_id_idx").on(
-      t.region,
-      t.accountId,
-    ),
-  ],
-);
+export function makePlayerClanHistoryTable(region: string) {
+  return pgTable(
+    `${region}_player_clan_history`,
+    {
+      id: serial("id").primaryKey(),
+      accountId: bigint("account_id", { mode: "number" }).notNull(),
+      fetchedAt: timestamp("fetched_at", { withTimezone: true })
+        .notNull()
+        .defaultNow(),
+      data: jsonb("data").notNull(),
+    },
+    (t) => [
+      uniqueIndex(`${region}_player_clan_history_account_id_idx`).on(
+        t.accountId,
+      ),
+    ],
+  );
+}
 
-export type PlayerClanHistoryRow = typeof playerClanHistory.$inferSelect;
-export type NewPlayerClanHistoryRow = typeof playerClanHistory.$inferInsert;
+export type PlayerClanHistoryTable = ReturnType<
+  typeof makePlayerClanHistoryTable
+>;
+export type PlayerClanHistoryRow = PlayerClanHistoryTable["$inferSelect"];
+export type NewPlayerClanHistoryRow = PlayerClanHistoryTable["$inferInsert"];
+
+export const playerClanHistoryByRegion: Record<
+  Region,
+  PlayerClanHistoryTable
+> = {
+  [Region.EU]: makePlayerClanHistoryTable(Region.EU),
+  [Region.NA]: makePlayerClanHistoryTable(Region.NA),
+  [Region.ASIA]: makePlayerClanHistoryTable(Region.ASIA),
+};

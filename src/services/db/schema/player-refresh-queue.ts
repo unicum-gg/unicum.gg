@@ -3,32 +3,41 @@ import {
   index,
   integer,
   pgTable,
-  primaryKey,
-  text,
   timestamp,
 } from "drizzle-orm/pg-core";
+import { Region } from "@/services/wargaming/wot";
 
-// User-initiated and cron-initiated player refreshes queue. Snapshot cron
-// drains this first, ordered by priority desc then queued_at asc, before
-// falling back to its own oldest-snapshot scan. Higher priority = newer
-// user visit; cron-discovered backfills sit at priority 0.
-export const playerRefreshQueue = pgTable(
-  "player_refresh_queue",
-  {
-    region: text("region").notNull(),
-    accountId: bigint("account_id", { mode: "number" }).notNull(),
-    queuedAt: timestamp("queued_at", { withTimezone: true })
-      .notNull()
-      .defaultNow(),
-    priority: integer("priority").notNull().default(0),
-  },
-  (t) => [
-    primaryKey({ columns: [t.region, t.accountId] }),
-    index("player_refresh_queue_priority_queued_at_idx").on(
-      t.priority,
-      t.queuedAt,
-    ),
-  ],
-);
+// User-initiated and cron-initiated player refreshes queue. The refresh-cron
+// drains by priority desc then queued_at asc.
+export function makePlayerRefreshQueueTable(region: string) {
+  return pgTable(
+    `${region}_player_refresh_queue`,
+    {
+      accountId: bigint("account_id", { mode: "number" }).primaryKey(),
+      queuedAt: timestamp("queued_at", { withTimezone: true })
+        .notNull()
+        .defaultNow(),
+      priority: integer("priority").notNull().default(0),
+    },
+    (t) => [
+      index(`${region}_player_refresh_queue_priority_queued_at_idx`).on(
+        t.priority,
+        t.queuedAt,
+      ),
+    ],
+  );
+}
 
-export type PlayerRefreshQueueRow = typeof playerRefreshQueue.$inferSelect;
+export type PlayerRefreshQueueTable = ReturnType<
+  typeof makePlayerRefreshQueueTable
+>;
+export type PlayerRefreshQueueRow = PlayerRefreshQueueTable["$inferSelect"];
+
+export const playerRefreshQueueByRegion: Record<
+  Region,
+  PlayerRefreshQueueTable
+> = {
+  [Region.EU]: makePlayerRefreshQueueTable(Region.EU),
+  [Region.NA]: makePlayerRefreshQueueTable(Region.NA),
+  [Region.ASIA]: makePlayerRefreshQueueTable(Region.ASIA),
+};

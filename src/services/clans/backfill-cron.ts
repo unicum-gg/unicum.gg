@@ -1,8 +1,8 @@
-import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
+import { asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { clans } from "@/services/db/schema";
+import { clansByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
@@ -37,9 +37,10 @@ async function pickStaleForRegion(
   cutoff: Date,
   limit: number,
 ): Promise<{ clanIds: number[]; staleCount: number }> {
-  const where = and(
-    eq(clans.region, region),
-    or(isNull(clans.lastRefreshedAt), lt(clans.lastRefreshedAt, cutoff)),
+  const clans = clansByRegion[region];
+  const where = or(
+    isNull(clans.lastRefreshedAt),
+    lt(clans.lastRefreshedAt, cutoff),
   );
   const [rows, [{ staleCount }]] = await Promise.all([
     db
@@ -85,6 +86,7 @@ export async function refreshDueClans(): Promise<ClanBackfillResult> {
   await Promise.all(
     perRegion.map(async ({ region, clanIds }) => {
       if (clanIds.length === 0) return;
+      const clans = clansByRegion[region];
 
       const infos = await refreshClansByIdsBatch(region, clanIds).catch(
         (err) => {
@@ -105,7 +107,7 @@ export async function refreshDueClans(): Promise<ClanBackfillResult> {
           await db
             .update(clans)
             .set({ lastRefreshedAt: sql`NOW()` })
-            .where(and(eq(clans.region, region), eq(clans.id, clanId)));
+            .where(eq(clans.id, clanId));
           continue;
         }
         try {

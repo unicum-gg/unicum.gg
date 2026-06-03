@@ -2,7 +2,10 @@ import { asc, desc, eq } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { playerRefreshQueue, players } from "@/services/db/schema";
+import {
+  playerRefreshQueueByRegion,
+  playersByRegion,
+} from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
 import {
   getAccountWTR,
@@ -45,31 +48,26 @@ async function pickEntriesForRegion(
   region: Region,
   limit: number,
 ): Promise<QueueEntry[]> {
-  // Pull queue entries by priority, then join `players` to get id/nickname
-  // for logging + the recordCurrentSnapshot path. Players in the queue but
-  // missing from `players` are skipped here — they're cold-path territory
-  // (the page itself does the sync fetch for first-ever visits).
+  // Pull queue entries by priority, then join the regional players table to
+  // get id/nickname for logging + the recordCurrentSnapshot path. Players in
+  // the queue but missing from `<region>_players` are skipped here — they're
+  // cold-path territory (the page itself does the sync fetch for first-ever
+  // visits).
+  const queue = playerRefreshQueueByRegion[region];
+  const players = playersByRegion[region];
   const rows = await db
     .select({
-      region: playerRefreshQueue.region,
-      accountId: playerRefreshQueue.accountId,
+      accountId: queue.accountId,
       playerId: players.id,
       nickname: players.nickname,
     })
-    .from(playerRefreshQueue)
-    .innerJoin(
-      players,
-      eq(players.accountId, playerRefreshQueue.accountId),
-    )
-    .where(eq(playerRefreshQueue.region, region))
-    .orderBy(
-      desc(playerRefreshQueue.priority),
-      asc(playerRefreshQueue.queuedAt),
-    )
+    .from(queue)
+    .innerJoin(players, eq(players.accountId, queue.accountId))
+    .orderBy(desc(queue.priority), asc(queue.queuedAt))
     .limit(limit);
 
   return rows.map((r) => ({
-    region: r.region as Region,
+    region,
     accountId: Number(r.accountId),
     playerId: Number(r.playerId),
     nickname: r.nickname,

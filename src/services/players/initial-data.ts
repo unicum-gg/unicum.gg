@@ -1,10 +1,14 @@
 import { sql } from "drizzle-orm";
 import { traced } from "@/lib/perf-trace";
 import { db } from "@/services/db";
-import type {
-  Player,
-  PlayerSnapshot,
-  TankSnapshot,
+import {
+  type Player,
+  type PlayerSnapshot,
+  type TankSnapshot,
+  playerClanHistoryByRegion,
+  playerSnapshotsByRegion,
+  playersByRegion,
+  tankSnapshotsByRegion,
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
@@ -12,7 +16,6 @@ import type { TankSnapshotMap } from "./tanks";
 
 type RawPlayer = {
   id: number;
-  region: string;
   account_id: number;
   nickname: string;
   created_at: string | null;
@@ -102,7 +105,6 @@ export type PlayerInitialData = {
 function playerFromRaw(r: RawPlayer): Player {
   return {
     id: r.id,
-    region: r.region,
     accountId: Number(r.account_id),
     nickname: r.nickname,
     createdAt: r.created_at ? new Date(r.created_at) : null,
@@ -186,6 +188,11 @@ export async function loadPlayerInitialData(
   region: Region,
   lookup: PlayerLookup,
 ): Promise<PlayerInitialData> {
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
+  const tankSnapshots = tankSnapshotsByRegion[region];
+  const playerClanHistory = playerClanHistoryByRegion[region];
+
   const matchClause =
     "accountId" in lookup
       ? sql`account_id = ${lookup.accountId}`
@@ -197,57 +204,57 @@ export async function loadPlayerInitialData(
   const rows = (await traced("db loadPlayerInitialData", () => db.execute(sql`
     WITH p AS (
       SELECT *
-      FROM players
-      WHERE region = ${region} AND ${matchClause}
+      FROM ${players}
+      WHERE ${matchClause}
       LIMIT 1
     ),
     latest_snap AS (
-      SELECT * FROM player_snapshots
+      SELECT * FROM ${playerSnapshots}
       WHERE player_id = (SELECT id FROM p)
       ORDER BY taken_at DESC, id DESC
       LIMIT 1
     ),
     latest_tanks AS (
       SELECT DISTINCT ON (tank_id) *
-      FROM tank_snapshots
+      FROM ${tankSnapshots}
       WHERE player_id = (SELECT id FROM p)
       ORDER BY tank_id, taken_at DESC, id DESC
     ),
     snap_24h AS (
-      SELECT * FROM player_snapshots
+      SELECT * FROM ${playerSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '24 hours'
       ORDER BY taken_at DESC, id DESC LIMIT 1
     ),
     snap_7d AS (
-      SELECT * FROM player_snapshots
+      SELECT * FROM ${playerSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '7 days'
       ORDER BY taken_at DESC, id DESC LIMIT 1
     ),
     snap_30d AS (
-      SELECT * FROM player_snapshots
+      SELECT * FROM ${playerSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '30 days'
       ORDER BY taken_at DESC, id DESC LIMIT 1
     ),
     tanks_24h AS (
       SELECT DISTINCT ON (tank_id) *
-      FROM tank_snapshots
+      FROM ${tankSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '24 hours'
       ORDER BY tank_id, taken_at DESC, id DESC
     ),
     tanks_7d AS (
       SELECT DISTINCT ON (tank_id) *
-      FROM tank_snapshots
+      FROM ${tankSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '7 days'
       ORDER BY tank_id, taken_at DESC, id DESC
     ),
     tanks_30d AS (
       SELECT DISTINCT ON (tank_id) *
-      FROM tank_snapshots
+      FROM ${tankSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND taken_at < NOW() - INTERVAL '30 days'
       ORDER BY tank_id, taken_at DESC, id DESC
@@ -257,8 +264,8 @@ export async function loadPlayerInitialData(
       (SELECT row_to_json(latest_snap.*) FROM latest_snap) AS latest_snapshot,
       (SELECT json_agg(latest_tanks.*) FROM latest_tanks) AS latest_tank_snapshots,
       (SELECT row_to_json(ch.*)
-       FROM player_clan_history ch
-       WHERE ch.region = ${region} AND ch.account_id = ${accountIdClause}
+       FROM ${playerClanHistory} ch
+       WHERE ch.account_id = ${accountIdClause}
        LIMIT 1) AS clan_history,
       (SELECT row_to_json(snap_24h.*) FROM snap_24h) AS snap_24h,
       (SELECT row_to_json(snap_7d.*) FROM snap_7d) AS snap_7d,

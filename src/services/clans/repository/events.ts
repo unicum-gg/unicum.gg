@@ -1,9 +1,9 @@
-import { and, desc, eq, sql } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   type ClanRecentEventRow,
-  clanRecentEvents,
-  clans,
+  clanRecentEventsByRegion,
+  clansByRegion,
 } from "@/services/db/schema";
 import { discoverPlayersBackground } from "@/services/discovery/players";
 import { clanChannel, publish } from "@/services/live/pubsub";
@@ -39,21 +39,19 @@ export async function getClanEventsCached(
   clanId: number,
   limit = 30,
 ): Promise<ClanEventsCached> {
+  const clans = clansByRegion[region];
+  const clanRecentEvents = clanRecentEventsByRegion[region];
+
   const [clanRow] = await db
     .select({ lastRefreshedAt: clans.lastRefreshedAt })
     .from(clans)
-    .where(and(eq(clans.region, region), eq(clans.id, clanId)))
+    .where(eq(clans.id, clanId))
     .limit(1);
 
   const rows = await db
     .select()
     .from(clanRecentEvents)
-    .where(
-      and(
-        eq(clanRecentEvents.region, region),
-        eq(clanRecentEvents.clanId, clanId),
-      ),
-    )
+    .where(eq(clanRecentEvents.clanId, clanId))
     .orderBy(desc(clanRecentEvents.createdAt))
     .limit(limit);
 
@@ -76,13 +74,14 @@ export async function refreshClanEvents(
   clanId: number,
   limit = 30,
 ): Promise<ClanRecentEvent[]> {
+  const clans = clansByRegion[region];
+  const clanRecentEvents = clanRecentEventsByRegion[region];
   const events = await getClanRecentEvents(region, clanId, limit);
   if (events.length > 0) {
     await db
       .insert(clanRecentEvents)
       .values(
         events.map((e) => ({
-          region,
           clanId,
           createdAt: e.createdAt,
           type: e.type,
@@ -99,7 +98,7 @@ export async function refreshClanEvents(
   await db
     .update(clans)
     .set({ lastRefreshedAt: sql`GREATEST(${clans.lastRefreshedAt}, NOW())` })
-    .where(and(eq(clans.region, region), eq(clans.id, clanId)));
+    .where(eq(clans.id, clanId));
   discoverPlayersBackground(
     region,
     events.map((e) => ({ accountId: e.accountId, nickname: e.accountName })),

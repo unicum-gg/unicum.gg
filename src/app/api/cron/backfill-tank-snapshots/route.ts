@@ -1,7 +1,11 @@
-import { and, eq, isNotNull, notInArray, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { env } from "env";
 import { db } from "@/services/db";
-import { players, playerSnapshots, tankSnapshots } from "@/services/db/schema";
+import {
+  playerSnapshotsByRegion,
+  playersByRegion,
+  tankSnapshotsByRegion,
+} from "@/services/db/schema";
 import { bulkInsertTankSnapshots } from "@/services/players/tanks";
 import { getTanksStats } from "@/services/wargaming/wot/tanks";
 import { isRegion, type Region } from "@/services/wargaming/wot";
@@ -49,7 +53,7 @@ async function backfillTankSnapshots(region: Region): Promise<{
         const tanks = await getTanksStats(region, target.accountId);
         fetched += 1;
         if (tanks.length > 0) {
-          await bulkInsertTankSnapshots(target.playerId, tanks);
+          await bulkInsertTankSnapshots(region, target.playerId, tanks);
           inserted += tanks.length;
         }
       } catch (err) {
@@ -69,12 +73,16 @@ async function backfillTankSnapshots(region: Region): Promise<{
 type Target = { playerId: number; accountId: number };
 
 async function selectTargets(region: Region): Promise<Target[]> {
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
+  const tankSnapshots = tankSnapshotsByRegion[region];
+
   const eligibleClans = (await db.execute(sql`
     WITH latest AS (
       SELECT DISTINCT ON (ps.player_id) ps.player_id, ps.clan_id
       FROM ${playerSnapshots} ps
       INNER JOIN ${players} p ON p.id = ps.player_id
-      WHERE p.region = ${region} AND ps.clan_id IS NOT NULL
+      WHERE ps.clan_id IS NOT NULL
       ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
     )
     SELECT clan_id, COUNT(*) AS members
@@ -92,7 +100,7 @@ async function selectTargets(region: Region): Promise<Target[]> {
       SELECT DISTINCT ON (ps.player_id) ps.player_id, ps.clan_id
       FROM ${playerSnapshots} ps
       INNER JOIN ${players} p ON p.id = ps.player_id
-      WHERE p.region = ${region} AND ps.clan_id IS NOT NULL
+      WHERE ps.clan_id IS NOT NULL
       ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
     )
     SELECT DISTINCT p.id AS player_id, p.account_id

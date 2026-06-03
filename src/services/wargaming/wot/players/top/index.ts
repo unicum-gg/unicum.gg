@@ -1,8 +1,12 @@
-import { and, asc, eq, inArray, sql } from "drizzle-orm";
+import { asc, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { topPlayers } from "@/services/db/schema";
+import {
+  playersByRegion,
+  tankSnapshotsByRegion,
+  topPlayersByRegion,
+} from "@/services/db/schema";
 import { getPlayerClansBatch } from "@/services/wargaming/wot/clans/listings";
-import { isRegion, type Region } from "@/services/wargaming/wot";
+import { type Region } from "@/services/wargaming/wot";
 import {
   computeWNX,
   getWNXExpectedValues,
@@ -54,6 +58,8 @@ export async function computeTopPlayersByWnx(
   period: TopPlayersPeriod,
   limit: number,
 ): Promise<TopPlayerResult[]> {
+  const players = playersByRegion[region];
+  const tankSnapshots = tankSnapshotsByRegion[region];
   const interval = PERIOD_INTERVAL[period];
   const minBattles = MIN_BATTLES[period];
 
@@ -71,25 +77,24 @@ export async function computeTopPlayersByWnx(
           SELECT DISTINCT ON (player_id, tank_id)
             player_id, tank_id, battles, damage_dealt, spotted, frags,
             radio_assisted_damage, track_assisted_damage
-          FROM tank_snapshots
+          FROM ${tankSnapshots}
           ORDER BY player_id, tank_id, taken_at DESC
         ) ts
-        INNER JOIN players p ON p.id = ts.player_id
-        WHERE p.region = ${region}
+        INNER JOIN ${players} p ON p.id = ts.player_id
       `
       : sql`
         WITH latest AS (
           SELECT DISTINCT ON (player_id, tank_id)
             player_id, tank_id, battles, damage_dealt, spotted, frags,
             radio_assisted_damage, track_assisted_damage
-          FROM tank_snapshots
+          FROM ${tankSnapshots}
           ORDER BY player_id, tank_id, taken_at DESC
         ),
         earlier AS (
           SELECT DISTINCT ON (player_id, tank_id)
             player_id, tank_id, battles, damage_dealt, spotted, frags,
             radio_assisted_damage, track_assisted_damage
-          FROM tank_snapshots
+          FROM ${tankSnapshots}
           WHERE taken_at <= NOW() - ${sql.raw(`INTERVAL '${interval}'`)}
           ORDER BY player_id, tank_id, taken_at DESC
         )
@@ -102,8 +107,8 @@ export async function computeTopPlayersByWnx(
           ((l.radio_assisted_damage - e.radio_assisted_damage) + (l.track_assisted_damage - e.track_assisted_damage)) AS diff_assist
         FROM latest l
         INNER JOIN earlier e USING (player_id, tank_id)
-        INNER JOIN players p ON p.id = l.player_id
-        WHERE p.region = ${region} AND l.battles > e.battles
+        INNER JOIN ${players} p ON p.id = l.player_id
+        WHERE l.battles > e.battles
       `,
   )) as unknown as DiffRow[];
 
@@ -189,10 +194,11 @@ export async function getTopPlayersByWnx(
   period: TopPlayersPeriod,
   limit: number,
 ): Promise<TopPlayersSnapshot> {
+  const topPlayers = topPlayersByRegion[region];
   const rows = await db
     .select()
     .from(topPlayers)
-    .where(and(eq(topPlayers.region, region), eq(topPlayers.period, period)))
+    .where(eq(topPlayers.period, period))
     .orderBy(asc(topPlayers.rank))
     .limit(limit);
 
@@ -214,34 +220,13 @@ export async function getTopPlayersByWnxByRegions(
   period: TopPlayersPeriod,
   limit: number,
 ): Promise<Record<Region, TopPlayersSnapshot>> {
-  const rows = await db
-    .select()
-    .from(topPlayers)
-    .where(
-      and(
-        inArray(topPlayers.region, regions),
-        eq(topPlayers.period, period),
-        sql`rank <= ${limit}`,
-      ),
-    )
-    .orderBy(asc(topPlayers.region), asc(topPlayers.rank));
-
+  const perRegion = await Promise.all(
+    regions.map(
+      async (region) =>
+        [region, await getTopPlayersByWnx(region, period, limit)] as const,
+    ),
+  );
   const out = {} as Record<Region, TopPlayersSnapshot>;
-  for (const region of regions) {
-    out[region] = { results: [], computedAt: null };
-  }
-  for (const r of rows) {
-    if (!isRegion(r.region)) continue;
-    const bucket = out[r.region];
-    bucket.results.push({
-      account_id: r.accountId,
-      nickname: r.nickname,
-      clan_tag: r.clanTag,
-      clan_color: r.clanColor,
-      battles: r.battles,
-      wnx: Number(r.wnx),
-    });
-    if (bucket.computedAt === null) bucket.computedAt = r.computedAt;
-  }
+  for (const [region, snap] of perRegion) out[region] = snap;
   return out;
 }

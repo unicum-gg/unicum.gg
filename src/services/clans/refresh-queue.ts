@@ -1,6 +1,6 @@
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { clanRefreshQueue } from "@/services/db/schema";
+import { clanRefreshQueueByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 const CHUNK_SIZE = 500;
@@ -23,6 +23,7 @@ export async function enqueueClanRefresh(
 ): Promise<void> {
   if (clanIds.length === 0) return;
   const priority = options.priority ?? 0;
+  const table = clanRefreshQueueByRegion[region];
   // Sort by id so concurrent bulk inserts grab row locks in the same order
   // (prevents Postgres 40P01 deadlocks under contention).
   const unique = Array.from(new Set(clanIds)).sort((a, b) => a - b);
@@ -30,13 +31,13 @@ export async function enqueueClanRefresh(
   for (let i = 0; i < unique.length; i += CHUNK_SIZE) {
     const chunk = unique.slice(i, i + CHUNK_SIZE);
     await db
-      .insert(clanRefreshQueue)
-      .values(chunk.map((clanId) => ({ region, clanId, priority })))
+      .insert(table)
+      .values(chunk.map((clanId) => ({ clanId, priority })))
       .onConflictDoUpdate({
-        target: [clanRefreshQueue.region, clanRefreshQueue.clanId],
+        target: table.clanId,
         set: {
-          priority: sql`GREATEST(${clanRefreshQueue.priority}, EXCLUDED.priority)`,
-          queuedAt: sql`LEAST(${clanRefreshQueue.queuedAt}, EXCLUDED.queued_at)`,
+          priority: sql`GREATEST(${table.priority}, EXCLUDED.priority)`,
+          queuedAt: sql`LEAST(${table.queuedAt}, EXCLUDED.queued_at)`,
         },
       });
   }
@@ -63,12 +64,6 @@ export async function dequeueClanRefresh(
   region: Region,
   clanId: number,
 ): Promise<void> {
-  await db
-    .delete(clanRefreshQueue)
-    .where(
-      and(
-        eq(clanRefreshQueue.region, region),
-        eq(clanRefreshQueue.clanId, clanId),
-      ),
-    );
+  const table = clanRefreshQueueByRegion[region];
+  await db.delete(table).where(eq(table.clanId, clanId));
 }

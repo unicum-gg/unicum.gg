@@ -1,7 +1,7 @@
-import { eq, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { env } from "env";
 import { db } from "@/services/db";
-import { players, playerSnapshots } from "@/services/db/schema";
+import { playerSnapshotsByRegion, playersByRegion } from "@/services/db/schema";
 import { getPlayersInfoBatch } from "@/services/wargaming/wot/accounts";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 
@@ -28,10 +28,11 @@ async function backfillClanIds(region: Region): Promise<{
   withoutClan: number;
   updated: number;
 }> {
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const rows = await db
     .select({ id: players.id, accountId: players.accountId })
-    .from(players)
-    .where(eq(players.region, region));
+    .from(players);
 
   let withClan = 0;
   let withoutClan = 0;

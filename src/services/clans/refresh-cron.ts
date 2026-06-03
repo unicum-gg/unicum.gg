@@ -1,8 +1,8 @@
-import { asc, desc, eq } from "drizzle-orm";
+import { asc, desc } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { clanRefreshQueue } from "@/services/db/schema";
+import { clanRefreshQueueByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
 import { dequeueClanRefresh } from "./refresh-queue";
 import { refreshClansByIdsBatch } from "./repository";
@@ -34,14 +34,11 @@ async function pickEntriesForRegion(
   region: Region,
   limit: number,
 ): Promise<number[]> {
+  const queue = clanRefreshQueueByRegion[region];
   const rows = await db
-    .select({ clanId: clanRefreshQueue.clanId })
-    .from(clanRefreshQueue)
-    .where(eq(clanRefreshQueue.region, region))
-    .orderBy(
-      desc(clanRefreshQueue.priority),
-      asc(clanRefreshQueue.queuedAt),
-    )
+    .select({ clanId: queue.clanId })
+    .from(queue)
+    .orderBy(desc(queue.priority), asc(queue.queuedAt))
     .limit(limit);
   return rows.map((r) => Number(r.clanId));
 }

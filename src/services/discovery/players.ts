@@ -1,5 +1,5 @@
 import { db } from "@/services/db";
-import { players } from "@/services/db/schema";
+import { playersByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 
 const EPOCH = new Date(0);
@@ -11,14 +11,15 @@ export type PlayerDiscoveryEntry = {
 };
 
 /**
- * Insert unknown players into the `players` table so the snapshot cron picks them up.
- * Already-known players are not touched.
+ * Insert unknown players into the regional players table so the snapshot
+ * cron picks them up. Already-known players are not touched.
  */
 export async function discoverPlayers(
   region: Region,
   entries: PlayerDiscoveryEntry[],
 ): Promise<void> {
   if (entries.length === 0) return;
+  const players = playersByRegion[region];
 
   const unique = new Map<number, string>();
   for (const e of entries) {
@@ -32,7 +33,6 @@ export async function discoverPlayers(
   const rows = Array.from(unique)
     .sort((a, b) => a[0] - b[0])
     .map(([accountId, nickname]) => ({
-      region,
       accountId,
       nickname,
       lastSeenAt: EPOCH,

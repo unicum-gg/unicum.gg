@@ -1,6 +1,6 @@
-import { and, eq, sql } from "drizzle-orm";
+import { sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { players } from "@/services/db/schema";
+import { playersByRegion } from "@/services/db/schema";
 import { playerChannel, subscribe } from "@/services/live/pubsub";
 import { isRegion } from "@/services/wargaming/wot";
 
@@ -18,15 +18,11 @@ export async function GET(
   }
   const decoded = decodeURIComponent(nickname);
 
+  const players = playersByRegion[region];
   const [row] = await db
     .select({ accountId: players.accountId })
     .from(players)
-    .where(
-      and(
-        eq(players.region, region),
-        sql`LOWER(${players.nickname}) = LOWER(${decoded})`,
-      ),
-    )
+    .where(sql`LOWER(${players.nickname}) = LOWER(${decoded})`)
     .limit(1);
   if (!row) {
     return new Response("not_found", { status: 404 });

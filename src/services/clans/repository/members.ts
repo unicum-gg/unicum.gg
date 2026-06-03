@@ -1,10 +1,10 @@
-import { and, desc, eq, inArray } from "drizzle-orm";
+import { desc, eq, inArray } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   type ClanMember,
-  clanMembers,
-  playerSnapshots,
-  players,
+  clanMembersByRegion,
+  playerSnapshotsByRegion,
+  playersByRegion,
 } from "@/services/db/schema";
 import { discoverPlayersBackground } from "@/services/discovery/players";
 import { clanChannel, publish } from "@/services/live/pubsub";
@@ -72,6 +72,8 @@ async function periodStatsFromSnapshotsForAccounts(
   accountIds: number[],
 ): Promise<Map<number, ClanMemberPeriodStats>> {
   if (accountIds.length === 0) return new Map();
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
 
   const playerRows = await db
     .select({
@@ -80,9 +82,7 @@ async function periodStatsFromSnapshotsForAccounts(
       createdAt: players.createdAt,
     })
     .from(players)
-    .where(
-      and(eq(players.region, region), inArray(players.accountId, accountIds)),
-    );
+    .where(inArray(players.accountId, accountIds));
   if (playerRows.length === 0) return new Map();
 
   const playerIds = playerRows.map((r) => r.id);
@@ -110,7 +110,8 @@ async function periodStatsFromSnapshotsForAccounts(
   for (const p of playerRows) {
     const s = latestByPlayer.get(p.id);
     if (!s || s.battles <= 0) continue;
-    const created = p.createdAt ? p.createdAt.getTime() : null;
+    const created =
+      p.createdAt instanceof Date ? p.createdAt.getTime() : null;
     const days = created
       ? Math.max(1, Math.floor((now - created) / 86_400_000))
       : null;
@@ -148,10 +149,11 @@ export async function getClanMembersCached(
   region: Region,
   clanId: number,
 ): Promise<ClanMembersCached> {
+  const clanMembers = clanMembersByRegion[region];
   const rows = await db
     .select()
     .from(clanMembers)
-    .where(and(eq(clanMembers.region, region), eq(clanMembers.clanId, clanId)));
+    .where(eq(clanMembers.clanId, clanId));
 
   if (rows.length > 0) {
     const oldest = rows.reduce(
@@ -180,17 +182,13 @@ export async function refreshClanMembers(
   region: Region,
   clanId: number,
 ): Promise<ClanMemberStats[]> {
+  const clanMembers = clanMembersByRegion[region];
   const members = await getClanMembersStats(region, clanId);
   await db.transaction(async (tx) => {
-    await tx
-      .delete(clanMembers)
-      .where(
-        and(eq(clanMembers.region, region), eq(clanMembers.clanId, clanId)),
-      );
+    await tx.delete(clanMembers).where(eq(clanMembers.clanId, clanId));
     if (members.length > 0) {
       await tx.insert(clanMembers).values(
         members.map((m) => ({
-          region,
           clanId,
           accountId: m.accountId,
           name: m.name,

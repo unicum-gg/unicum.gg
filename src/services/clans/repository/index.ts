@@ -1,7 +1,7 @@
-import { and, eq, sql } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { enqueueClanRefreshBackground } from "@/services/clans/refresh-queue";
 import { db } from "@/services/db";
-import { type Clan, clans } from "@/services/db/schema";
+import { type Clan, clansByRegion } from "@/services/db/schema";
 import { clanChannel, publish } from "@/services/live/pubsub";
 import type { Region } from "@/services/wargaming/wot";
 import {
@@ -42,11 +42,12 @@ export async function getClanByTagCached(
   region: Region,
   tag: string,
 ): Promise<ClanCached | null> {
+  const clans = clansByRegion[region];
   const tagLower = tag.toLowerCase();
   const [row] = await db
     .select()
     .from(clans)
-    .where(and(eq(clans.region, region), eq(clans.tagLower, tagLower)))
+    .where(eq(clans.tagLower, tagLower))
     .limit(1);
 
   if (row) {
@@ -83,12 +84,12 @@ export async function refreshClanById(
   region: Region,
   clanId: number,
 ): Promise<ClanFullInfo | null> {
+  const clans = clansByRegion[region];
   const info = await getClanFullInfo(region, clanId);
   if (!info) return null;
   await db
     .insert(clans)
     .values({
-      region,
       id: info.id,
       tag: info.tag,
       tagLower: info.tag.toLowerCase(),
@@ -108,7 +109,7 @@ export async function refreshClanById(
       lastRefreshedAt: new Date(),
     })
     .onConflictDoUpdate({
-      target: [clans.region, clans.id],
+      target: clans.id,
       set: {
         tag: info.tag,
         tagLower: info.tag.toLowerCase(),
@@ -140,12 +141,12 @@ export async function refreshClansByIdsBatch(
   region: Region,
   clanIds: number[],
 ): Promise<Map<number, ClanFullInfo>> {
+  const clans = clansByRegion[region];
   const infos = await getClansFullInfoBatch(region, clanIds);
   if (infos.size === 0) return infos;
 
   const now = new Date();
   const rows = Array.from(infos.values()).map((info) => ({
-    region,
     id: info.id,
     tag: info.tag,
     tagLower: info.tag.toLowerCase(),
@@ -169,7 +170,7 @@ export async function refreshClansByIdsBatch(
     .insert(clans)
     .values(rows)
     .onConflictDoUpdate({
-      target: [clans.region, clans.id],
+      target: clans.id,
       set: {
         tag: sql`excluded.tag`,
         tagLower: sql`excluded.tag_lower`,
@@ -195,4 +196,3 @@ export async function refreshClansByIdsBatch(
   }
   return infos;
 }
-

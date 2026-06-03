@@ -1,8 +1,8 @@
-import { and, asc, count, eq, lt, sql } from "drizzle-orm";
+import { asc, count, eq, lt, sql } from "drizzle-orm";
 import cron from "node-cron";
 import { tryAcquireLease } from "@/services/cron/lease";
 import { db } from "@/services/db";
-import { players } from "@/services/db/schema";
+import { type Player, playersByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
 import {
   getAccountsWTRBatch,
@@ -42,11 +42,12 @@ async function collectDuePlayers(
   region: Region,
   cutoff: Date,
   limit: number,
-): Promise<{ rows: (typeof players.$inferSelect)[]; queued: number }> {
+): Promise<{ rows: Player[]; queued: number }> {
   // Pure 24h backfill: pick the oldest snapshots in the region.
   // User-initiated refreshes live in the dedicated player-cron via
-  // player_refresh_queue — this cron stays out of that hot path.
-  const where = and(eq(players.region, region), lt(players.lastSeenAt, cutoff));
+  // <region>_player_refresh_queue — this cron stays out of that hot path.
+  const players = playersByRegion[region];
+  const where = lt(players.lastSeenAt, cutoff);
   const [rows, [{ queued }]] = await Promise.all([
     db
       .select()
@@ -89,6 +90,7 @@ export async function refreshDuePlayers(): Promise<RefreshResult> {
   await Promise.all(
     dueByRegion.map(async ({ region, rows }) => {
       if (rows.length === 0) return;
+      const players = playersByRegion[region];
       const accountIds = rows.map((r) => r.accountId);
 
       const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([

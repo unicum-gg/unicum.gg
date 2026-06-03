@@ -3,7 +3,7 @@ import { db } from "@/services/db";
 import {
   type NewTankSnapshot,
   type TankSnapshot,
-  tankSnapshots,
+  tankSnapshotsByRegion,
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
@@ -35,30 +35,30 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
 }
 
 export async function bulkInsertTankSnapshots(
+  region: Region,
   playerId: number,
   tanks: TankStats[],
 ): Promise<void> {
+  const table = tankSnapshotsByRegion[region];
   const rows = tanks
     .filter((t) => t.all.battles > 0)
     .map((t) => tankSnapshotFromStats(playerId, t));
   for (let i = 0; i < rows.length; i += TANK_INSERT_CHUNK) {
     const chunk = rows.slice(i, i + TANK_INSERT_CHUNK);
     await db
-      .insert(tankSnapshots)
+      .insert(table)
       .values(chunk)
       .onConflictDoNothing({
-        target: [
-          tankSnapshots.playerId,
-          tankSnapshots.tankId,
-          tankSnapshots.battles,
-        ],
+        target: [table.playerId, table.tankId, table.battles],
       });
   }
 }
 
 export async function getPeriodTankComparators(
+  region: Region,
   playerId: number,
 ): Promise<PeriodTankComparators> {
+  const tankSnapshots = tankSnapshotsByRegion[region];
   const now = Date.now();
   const cutoffs = {
     h24: new Date(now - 24 * 60 * 60 * 1000).toISOString(),
@@ -120,6 +120,7 @@ export async function getLatestTankSnapshotsByAccounts(
   accountIds: number[],
 ): Promise<Map<number, TankSnapshot[]>> {
   if (accountIds.length === 0) return new Map();
+  const tankSnapshots = tankSnapshotsByRegion[region];
   const idMap = await getPlayerIdsByAccounts(region, accountIds);
   const playerIds = Array.from(idMap.values());
   if (playerIds.length === 0) return new Map();

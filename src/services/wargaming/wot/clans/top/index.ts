@@ -1,12 +1,16 @@
-import { and, asc, eq, inArray, isNotNull, sql } from "drizzle-orm";
+import { asc, eq, isNotNull, sql } from "drizzle-orm";
 import { db } from "@/services/db";
-import { players, playerSnapshots, topClans } from "@/services/db/schema";
+import {
+  playerSnapshotsByRegion,
+  playersByRegion,
+  topClansByRegion,
+} from "@/services/db/schema";
 import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
 } from "@/services/players/tanks";
 import { getClansBriefInfo } from "@/services/wargaming/wot/clans/listings";
-import { isRegion, type Region } from "@/services/wargaming/wot";
+import { type Region } from "@/services/wargaming/wot";
 import {
   computeWNX,
   getWNXExpectedValues,
@@ -123,6 +127,8 @@ type LatestMembership = {
 async function getLatestClanMembershipsByRegion(
   region: Region,
 ): Promise<LatestMembership[]> {
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const ranked = db
     .select({
       accountId: players.accountId,
@@ -133,9 +139,7 @@ async function getLatestClanMembershipsByRegion(
     })
     .from(playerSnapshots)
     .innerJoin(players, eq(players.id, playerSnapshots.playerId))
-    .where(
-      and(eq(players.region, region), isNotNull(playerSnapshots.clanId)),
-    )
+    .where(isNotNull(playerSnapshots.clanId))
     .as("ranked");
 
   return db
@@ -153,10 +157,10 @@ export async function getTopClansByWnx(
   region: Region,
   limit: number,
 ): Promise<TopClansSnapshot> {
+  const topClans = topClansByRegion[region];
   const rows = await db
     .select()
     .from(topClans)
-    .where(eq(topClans.region, region))
     .orderBy(asc(topClans.rank))
     .limit(limit);
 
@@ -179,30 +183,10 @@ export async function getTopClansByWnxByRegions(
   regions: Region[],
   limit: number,
 ): Promise<Record<Region, TopClansSnapshot>> {
-  const rows = await db
-    .select()
-    .from(topClans)
-    .where(and(inArray(topClans.region, regions), sql`rank <= ${limit}`))
-    .orderBy(asc(topClans.region), asc(topClans.rank));
-
+  const perRegion = await Promise.all(
+    regions.map(async (region) => [region, await getTopClansByWnx(region, limit)] as const),
+  );
   const out = {} as Record<Region, TopClansSnapshot>;
-  for (const region of regions) {
-    out[region] = { results: [], computedAt: null };
-  }
-  for (const r of rows) {
-    if (!isRegion(r.region)) continue;
-    const bucket = out[r.region];
-    bucket.results.push({
-      clan_id: r.clanId,
-      tag: r.tag,
-      name: r.name,
-      color: r.color,
-      emblem: r.emblem,
-      members_count: r.membersCount,
-      rated_members_count: r.ratedMembersCount,
-      avg_wnx: Number(r.avgWnx),
-    });
-    if (bucket.computedAt === null) bucket.computedAt = r.computedAt;
-  }
+  for (const [region, snap] of perRegion) out[region] = snap;
   return out;
 }
