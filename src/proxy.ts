@@ -4,7 +4,7 @@ import { isRegion, Region } from "@/services/wargaming/wot";
 
 const PATHNAME_HEADER = "x-pathname";
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
 
   if (pathname === "/") {
