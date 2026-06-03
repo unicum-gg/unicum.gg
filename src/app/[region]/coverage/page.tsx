@@ -3,7 +3,8 @@ import { notFound, redirect } from "next/navigation";
 import { CoverageView } from "@/components/coverage/coverage-view";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
-export const revalidate = 60;
+// Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
+// page-level revalidate would be redundant and conflict with the cache scope.
 
 export async function generateMetadata({
   params,

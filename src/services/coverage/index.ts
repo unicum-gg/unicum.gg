@@ -1,4 +1,5 @@
 import { sql } from "drizzle-orm";
+import { unstable_cache } from "next/cache";
 import { db } from "@/services/db";
 import {
   clanMembersByRegion,
@@ -82,7 +83,9 @@ function buildDaySeries(
   return out;
 }
 
-export async function getCoverageStats(region: Region): Promise<CoverageStats> {
+async function getCoverageStatsUncached(
+  region: Region,
+): Promise<CoverageStats> {
   const playersTable = playersByRegion[region];
   const playerSnapshotsTable = playerSnapshotsByRegion[region];
   const tankSnapshotsTable = tankSnapshotsByRegion[region];
@@ -288,6 +291,47 @@ export async function getCoverageStats(region: Region): Promise<CoverageStats> {
         ],
         totalAnnualUsd: HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL,
       },
+    },
+  };
+}
+
+// `unstable_cache` round-trips values through JSON, so Date fields come back
+// as ISO strings on a cache hit. The thin wrapper below re-hydrates them so
+// callers keep the documented `Date | null` shape.
+const getCoverageStatsCached = unstable_cache(
+  getCoverageStatsUncached,
+  ["coverage-stats"],
+  { revalidate: 60, tags: ["coverage"] },
+);
+
+function toDate(v: Date | string | null): Date | null {
+  if (v === null) return null;
+  return v instanceof Date ? v : new Date(v);
+}
+
+/**
+ * Cached coverage stats: 60s fresh, then revalidate in background. Without
+ * this cache the page would hit ~18 DB queries (incl. a multi-second
+ * aggregate) on every request.
+ */
+export async function getCoverageStats(region: Region): Promise<CoverageStats> {
+  const c = (await getCoverageStatsCached(region)) as CoverageStats & {
+    activity: {
+      lastPlayerSnapshotAt: Date | string | null;
+      lastClanRefreshAt: Date | string | null;
+    };
+    funFacts: { oldestPlayerSnapshotAt: Date | string | null };
+  };
+  return {
+    ...c,
+    activity: {
+      ...c.activity,
+      lastPlayerSnapshotAt: toDate(c.activity.lastPlayerSnapshotAt),
+      lastClanRefreshAt: toDate(c.activity.lastClanRefreshAt),
+    },
+    funFacts: {
+      ...c.funFacts,
+      oldestPlayerSnapshotAt: toDate(c.funFacts.oldestPlayerSnapshotAt),
     },
   };
 }

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { CoverageView } from "@/components/coverage/coverage-view";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
-export const revalidate = 60;
+// Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
+// page-level revalidate would be redundant and conflict with the cache scope.
 
 export const metadata: Metadata = {
   title: `Coverage (${REGION_LABEL[Region.EU]}), what we track, unicum.gg`,

@@ -23,10 +23,7 @@ export function proxy(req: NextRequest) {
 
 export const config = {
   matcher: [
-    // Match all paths except Next internals + static assets + coverage
-    // (coverage is excluded so it can be statically prerendered + ISR-cached
-    // via `revalidate = 60`; running the proxy on it would force dynamic
-    // rendering on every request).
-    "/((?!_next/static|_next/image|favicon.ico|coverage|(?:eu|na|asia)/coverage|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
+    // Match all paths except Next internals + static assets
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico)$).*)",
   ],
 };
