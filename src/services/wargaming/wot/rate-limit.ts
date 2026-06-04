@@ -63,81 +63,74 @@ class RateLimiter {
   }
 }
 
-// WG server-side limit is 20 RPS per application_id. We keep a 2 RPS margin.
-const WG_RPS_PER_REGION = 18;
-const WG_BURST_PER_REGION = 20;
+// WG public API server-side limit = 20 RPS per application_id, BUT that's
+// never our actual ceiling: DNS for `api.worldoftanks.*` is geo-routed, and
+// from any VPS (Contabo, OVH, Hetzner) we resolve to G-Core IPs (92.223.x.x),
+// NOT Wargaming's `*.fe.core.pw` origin. So all 3 API hosts sit behind the
+// same G-Core WAF as the portals.
+//
+// Empirical confirmation: 18 RPS sustained on api.worldoftanks.eu from OVH
+// gave 71.3% success / p50 3.5s latency (10-min test, 2026-06-03), exactly
+// the same throttle signature as the portals.
+//
+// Same +1/day ramp discipline as PORTAL_RPS — start at 1 RPS per region,
+// bump each day until that host starts timing out.
+const WG_RPS: Record<Region, number> = {
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
+};
+const WG_BURST: Record<Region, number> = {
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
+};
 
 const wgLimiters: Record<Region, RateLimiter> = {
-  [Region.EU]: new RateLimiter(WG_BURST_PER_REGION, WG_RPS_PER_REGION),
-  [Region.NA]: new RateLimiter(WG_BURST_PER_REGION, WG_RPS_PER_REGION),
-  [Region.ASIA]: new RateLimiter(WG_BURST_PER_REGION, WG_RPS_PER_REGION),
+  [Region.EU]: new RateLimiter(WG_BURST[Region.EU], WG_RPS[Region.EU]),
+  [Region.NA]: new RateLimiter(WG_BURST[Region.NA], WG_RPS[Region.NA]),
+  [Region.ASIA]: new RateLimiter(WG_BURST[Region.ASIA], WG_RPS[Region.ASIA]),
 };
 
 export function acquireWgToken(region: Region): Promise<void> {
   return wgLimiters[region].acquire();
 }
 
-/**
- * Bounded counter — caps in-flight calls at `max`. Extra callers queue FIFO.
- */
-class Semaphore {
-  private inFlight = 0;
-  private queue: Array<() => void> = [];
-
-  constructor(private readonly max: number) {}
-
-  acquire(): Promise<void> {
-    if (this.inFlight < this.max) {
-      this.inFlight += 1;
-      return Promise.resolve();
-    }
-    return new Promise<void>((resolve) => {
-      this.queue.push(() => {
-        this.inFlight += 1;
-        resolve();
-      });
-    });
-  }
-
-  release(): void {
-    this.inFlight -= 1;
-    const next = this.queue.shift();
-    if (next) next();
-  }
-}
-
-// Per-region wgFetch concurrency cap. All regions currently unbounded —
-// the 18 RPS token bucket already protects us against WG's 20 RPS per-app
-// limit, and api.worldoftanks.* tolerates parallel connections fine. Keep
-// the Semaphore wiring so we can dial a region down quickly if needed.
-const wgConcurrency: Record<Region, Semaphore> = {
-  [Region.EU]: new Semaphore(Number.POSITIVE_INFINITY),
-  [Region.NA]: new Semaphore(Number.POSITIVE_INFINITY),
-  [Region.ASIA]: new Semaphore(Number.POSITIVE_INFINITY),
+// ─── PORTAL RATE LIMIT (the one that actually gets us banned) ───────────────
+//
+// `*.wargaming.net/clans/*` is fronted by G-Core CDN which has an aggressive
+// anti-scraping WAF: once an IP crosses some unpublished volume threshold
+// (likely ~minutes of sustained > a few RPS), TCP packets to 92.223.x.x get
+// silently dropped for ~2h. We've been bitten on Contabo (persistent) and
+// reproduced on OVH (cleared after ~2h post-stress-test).
+//
+// Empirical safe ceiling from `negri/wotclans` (a C# scraper that's been
+// running in prod for years without bans):
+//   `WebFetchInterval = TimeSpan.FromSeconds(1)` → ~1 RPS sustained MAX.
+//
+// PER-REGION token bucket because empirically the 3 hosts behave very
+// differently: EU portal was getting silently dropped from Contabo while
+// NA/ASIA portals were still reachable. The threshold (and ban state) is
+// tracked separately per `<region>.wargaming.net` endpoint. We start
+// uniformly at 1 RPS each and bump per region until one of them starts
+// timing out — that tells us the ceiling on THAT host for our IP/AS.
+const PORTAL_RPS: Record<Region, number> = {
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
+};
+const PORTAL_BURST: Record<Region, number> = {
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
 };
 
-export function acquireWgSlot(region: Region): Promise<void> {
-  return wgConcurrency[region].acquire();
-}
-
-export function releaseWgSlot(region: Region): void {
-  wgConcurrency[region].release();
-}
-
-// *.wargaming.net (used by portalFetch for clan history, members, events)
-// refuses concurrent connections under load: parallel calls all time out
-// while a steady serial stream succeeds. Same symptom as Asia api but on a
-// different host. Cap parallelism per region for portal calls too.
-const portalConcurrency: Record<Region, Semaphore> = {
-  [Region.EU]: new Semaphore(3),
-  [Region.NA]: new Semaphore(3),
-  [Region.ASIA]: new Semaphore(3),
+const portalLimiters: Record<Region, RateLimiter> = {
+  [Region.EU]: new RateLimiter(PORTAL_BURST[Region.EU], PORTAL_RPS[Region.EU]),
+  [Region.NA]: new RateLimiter(PORTAL_BURST[Region.NA], PORTAL_RPS[Region.NA]),
+  [Region.ASIA]: new RateLimiter(PORTAL_BURST[Region.ASIA], PORTAL_RPS[Region.ASIA]),
 };
 
-export function acquirePortalSlot(region: Region): Promise<void> {
-  return portalConcurrency[region].acquire();
-}
-
-export function releasePortalSlot(region: Region): void {
-  portalConcurrency[region].release();
+export function acquirePortalToken(region: Region): Promise<void> {
+  return portalLimiters[region].acquire();
 }
