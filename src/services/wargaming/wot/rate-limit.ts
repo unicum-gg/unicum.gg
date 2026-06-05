@@ -81,13 +81,16 @@ class RateLimiter {
 // wgFetch calls, which at 1 RPS = 8-25 min per tick (the cron runs every
 // minute → infinite pileup). At 5 RPS we drain in <60s. Asia API tested
 // clean from OVH (1s latency direct).
+// EU dropped from 5 to 3 after sustained G-Core block (60+ /wot/tanks/stats/
+// timeouts at 30s exact) — see the cluster pattern documented in PORTAL_RPS
+// below. EU's threshold sits lower than NA/ASIA in our experience.
 const WG_RPS: Record<Region, number> = {
-  [Region.EU]: 5,
+  [Region.EU]: 3,
   [Region.NA]: 5,
   [Region.ASIA]: 5,
 };
 const WG_BURST: Record<Region, number> = {
-  [Region.EU]: 5,
+  [Region.EU]: 3,
   [Region.NA]: 5,
   [Region.ASIA]: 5,
 };
