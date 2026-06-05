@@ -16,7 +16,7 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopPlayerResult } from "@/services/wargaming/wot/players/top";
-import { RATING_COLOR_CLASS, wn8Color } from "@/services/wargaming/wot/ratings";
+import { RATING_COLOR_CLASS, wnxColor } from "@/services/wargaming/wot/ratings";
 import { isRegion, Region } from "@/services/wargaming/wot";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -93,7 +93,7 @@ function PlayerRow({
   rank: number;
   region: Region;
 }) {
-  const colorClass = RATING_COLOR_CLASS[wn8Color(player.wnx)];
+  const colorClass = RATING_COLOR_CLASS[wnxColor(player.wnx)];
   return (
     <TableRow>
       <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">

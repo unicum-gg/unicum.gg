@@ -17,7 +17,7 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopClanResult } from "@/services/wargaming/wot/clans/top";
-import { RATING_COLOR_CLASS, wn8Color } from "@/services/wargaming/wot/ratings";
+import { RATING_COLOR_CLASS, wnxColor } from "@/services/wargaming/wot/ratings";
 import {
   isRegion,
   Region,
@@ -98,7 +98,7 @@ function ClanRow({
   rank: number;
   region: Region;
 }) {
-  const colorClass = RATING_COLOR_CLASS[wn8Color(clan.avg_wnx)];
+  const colorClass = RATING_COLOR_CLASS[wnxColor(clan.avg_wnx)];
   return (
     <TableRow>
       <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">

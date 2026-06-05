@@ -60,6 +60,20 @@ export function wn8Color(value: number): RatingColor {
   return RatingColor.Top;
 }
 
+// Thresholds calibrated against tomato.gg/wnx's 24-step gradient,
+// mapped onto our 9 RatingColor buckets (matching their color zones).
+export function wnxColor(value: number): RatingColor {
+  if (value < 200) return RatingColor.VeryBad;
+  if (value < 400) return RatingColor.Bad;
+  if (value < 800) return RatingColor.BelowAvg;
+  if (value < 1200) return RatingColor.Average;
+  if (value < 1600) return RatingColor.Good;
+  if (value < 1800) return RatingColor.VeryGood;
+  if (value < 2200) return RatingColor.Super;
+  if (value < 2800) return RatingColor.Excellent;
+  return RatingColor.Top;
+}
+
 export type WN7Inputs = {
   battles: number;
   wins: number;

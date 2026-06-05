@@ -27,6 +27,7 @@ import {
   winrateColor,
   wn7Color,
   wn8Color,
+  wnxColor,
 } from "@/services/wargaming/wot/ratings";
 
 function prettyRole(role: string): string {
@@ -265,7 +266,7 @@ export function ClanMembersTable({
                 value={
                   r?.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
-                color={r?.wnx != null ? wn8Color(r.wnx) : null}
+                color={r?.wnx != null ? wnxColor(r.wnx) : null}
               />
               <TableCell
                 className={cn(

@@ -23,6 +23,7 @@ import {
   wn7Color,
   wn8Color,
   type WNXExpected,
+  wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 
@@ -280,7 +281,7 @@ export function PlayerStatsTable({
     if (!t) return EMPTY_CELL;
     const value = computeWNX(t, wnxExpected);
     if (value === null) return EMPTY_CELL;
-    return { primary: decimalFmt.format(value), color: wn8Color(value) };
+    return { primary: decimalFmt.format(value), color: wnxColor(value) };
   }
   const wnxCells = {
     total: wnxCellFor(tanks),

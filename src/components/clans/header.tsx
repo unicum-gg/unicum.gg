@@ -12,7 +12,7 @@ import {
   RATING_COLOR_CLASS,
   type RatingColor,
   winrateColor,
-  wn8Color,
+  wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import type { Region } from "@/services/wargaming/wot";
 
@@ -56,7 +56,7 @@ function computeMetrics(
     avgWnx: {
       label: "Avg WNX",
       value: avgWnx === null ? "—" : intFmt.format(avgWnx),
-      color: avgWnx === null ? null : wn8Color(avgWnx),
+      color: avgWnx === null ? null : wnxColor(avgWnx),
     },
     avgWinrate: {
       label: "Avg winrate",
