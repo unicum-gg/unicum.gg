@@ -75,18 +75,21 @@ class RateLimiter {
 // cleanly at 5. Still well under G-Core's WAF threshold (we stress-tested
 // 18-60 RPS before getting throttled).
 //
-// ASIA stays at 1 because (a) the host is on a different G-Core /24
-// (92.223.17.x) we haven't re-tested without DNS pinning, and (b) low traffic
-// region — no queue pressure to justify bumping.
+// ASIA also at 5: the region has lots of deleted/banned accounts, and
+// fetchTanksStatsChunk recursively bisects on INVALID_ACCOUNT_ID to isolate
+// the bad one. A single tick with high deleted-density can spawn 500-1500
+// wgFetch calls, which at 1 RPS = 8-25 min per tick (the cron runs every
+// minute → infinite pileup). At 5 RPS we drain in <60s. Asia API tested
+// clean from OVH (1s latency direct).
 const WG_RPS: Record<Region, number> = {
   [Region.EU]: 5,
   [Region.NA]: 5,
-  [Region.ASIA]: 1,
+  [Region.ASIA]: 5,
 };
 const WG_BURST: Record<Region, number> = {
   [Region.EU]: 5,
   [Region.NA]: 5,
-  [Region.ASIA]: 1,
+  [Region.ASIA]: 5,
 };
 
 const wgLimiters: Record<Region, RateLimiter> = {
