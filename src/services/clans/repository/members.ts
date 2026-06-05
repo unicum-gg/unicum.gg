@@ -16,7 +16,17 @@ import {
 } from "@/services/wargaming/wot/clans/members";
 import { dedup, STALE_AFTER_MS } from "./internal";
 
-function memberStatsFromRow(row: ClanMember): ClanMemberStats {
+type PlayerRatings = {
+  wn7: number | null;
+  wn8: number | null;
+  wnx: number | null;
+  wnxRecent: number | null;
+};
+
+function memberStatsFromRow(
+  row: ClanMember,
+  ratings: PlayerRatings | null,
+): ClanMemberStats {
   return {
     accountId: Number(row.accountId),
     name: row.name,
@@ -58,6 +68,10 @@ function memberStatsFromRow(row: ClanMember): ClanMemberStats {
             battlesPerDay: row.d28BattlesPerDay,
           }
         : null,
+    wn7: ratings?.wn7 ?? null,
+    wn8: ratings?.wn8 ?? null,
+    wnx: ratings?.wnx ?? null,
+    wnxRecent: ratings?.wnxRecent ?? null,
   };
 }
 
@@ -150,21 +164,39 @@ export async function getClanMembersCached(
   clanId: number,
 ): Promise<ClanMembersCached> {
   const clanMembers = clanMembersByRegion[region];
+  const players = playersByRegion[region];
+  // LEFT JOIN players: ratings live on the players row (updated by
+  // snapshot-cron whenever a fresh tank snapshot lands), so a member whose
+  // player hasn't been snapshotted yet gets null ratings — render as "—".
   const rows = await db
-    .select()
+    .select({
+      member: clanMembers,
+      wn7: players.wn7,
+      wn8: players.wn8,
+      wnx: players.wnx,
+      wnxRecent: players.wnxRecent,
+    })
     .from(clanMembers)
+    .leftJoin(players, eq(clanMembers.accountId, players.accountId))
     .where(eq(clanMembers.clanId, clanId));
 
   if (rows.length > 0) {
     const oldest = rows.reduce(
-      (min, r) => Math.min(min, r.refreshedAt.getTime()),
+      (min, r) => Math.min(min, r.member.refreshedAt.getTime()),
       Number.POSITIVE_INFINITY,
     );
     const stale = Date.now() - oldest > STALE_AFTER_MS;
     if (stale) refreshClanMembersInBackground(region, clanId);
     const enriched = await enrichMissingOverall(
       region,
-      rows.map(memberStatsFromRow),
+      rows.map((r) =>
+        memberStatsFromRow(r.member, {
+          wn7: r.wn7,
+          wn8: r.wn8,
+          wnx: r.wnx,
+          wnxRecent: r.wnxRecent,
+        }),
+      ),
     );
     return {
       members: enriched,

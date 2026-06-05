@@ -7,7 +7,6 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
 import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
-import type { MemberRatings } from "@/services/wargaming/wot/clans/ratings";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -38,21 +37,31 @@ type MetricCell = {
 
 function computeMetrics(
   members: ClanMemberStats[],
-  ratings: Map<number, MemberRatings> | null,
-): { avg30dWnx: MetricCell; avgWnx: MetricCell; avgWinrate: MetricCell } {
+): {
+  avgWnxRecent: MetricCell;
+  avgWnx: MetricCell;
+  avgWinrate: MetricCell;
+} {
   const active = members.filter((m) => m.overall && m.overall.battles > 0);
   const avgWinRate = average(
     active.map((m) => m.overall?.winsPercentage ?? 0),
   );
-  const wnxValues = ratings
-    ? members
-        .map((m) => ratings.get(m.accountId)?.wnx)
-        .filter((v): v is number => v !== null && v !== undefined)
-    : [];
+  const wnxValues = members
+    .map((m) => m.wnx)
+    .filter((v): v is number => v !== null);
+  const wnxRecentValues = members
+    .map((m) => m.wnxRecent)
+    .filter((v): v is number => v !== null);
   const avgWnx = wnxValues.length > 0 ? average(wnxValues) : null;
+  const avgWnxRecent =
+    wnxRecentValues.length > 0 ? average(wnxRecentValues) : null;
 
   return {
-    avg30dWnx: { label: "Avg 30d WNX", value: "—", color: null },
+    avgWnxRecent: {
+      label: "Avg Recent WNX",
+      value: avgWnxRecent === null ? "—" : intFmt.format(avgWnxRecent),
+      color: avgWnxRecent === null ? null : wnxColor(avgWnxRecent),
+    },
     avgWnx: {
       label: "Avg WNX",
       value: avgWnx === null ? "—" : intFmt.format(avgWnx),
@@ -70,14 +79,12 @@ export function ClanHeader({
   region,
   clan,
   members,
-  ratings,
 }: {
   region: Region;
   clan: ClanFullInfo;
   members: ClanMemberStats[];
-  ratings: Map<number, MemberRatings> | null;
 }) {
-  const metrics = computeMetrics(members, ratings);
+  const metrics = computeMetrics(members);
   return (
     <header className="flex items-stretch">
       {clan.emblem && (
@@ -140,7 +147,7 @@ export function ClanHeader({
           )}
         </div>
       </div>
-      <MetricColumn metric={metrics.avg30dWnx} />
+      <MetricColumn metric={metrics.avgWnxRecent} />
       <MetricColumn metric={metrics.avgWnx} />
       <MetricColumn metric={metrics.avgWinrate} />
     </header>

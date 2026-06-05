@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, lte, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, lt, lte, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   type NewPlayerSnapshot,
@@ -6,6 +6,7 @@ import {
   type PlayerSnapshot,
   playerSnapshotsByRegion,
   playersByRegion,
+  tankSnapshotsByRegion,
 } from "@/services/db/schema";
 import { discoverClansBackground } from "@/services/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@/services/discovery/player-history";
@@ -15,8 +16,19 @@ import type {
   PlayerInfo,
   PlayerSearchResult,
 } from "@/services/wargaming/wot/accounts";
+import {
+  computeAvgTier,
+  getVehicleEncyclopedia,
+} from "@/services/wargaming/wot/encyclopedia";
+import {
+  computeWN7,
+  computeWN8,
+  computeWNX,
+  getWN8ExpectedValues,
+  getWNXExpectedValues,
+} from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
-import { bulkInsertTankSnapshots } from "./tanks";
+import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -219,8 +231,10 @@ export async function recordCurrentSnapshot(
     latest.battles !== info.statistics.all.battles;
 
   if (!stale) {
-    if (tanks.length > 0)
+    if (tanks.length > 0) {
       await bulkInsertTankSnapshots(region, player.id, tanks);
+      await updatePlayerRatings(region, player.id, info, tanks);
+    }
     return { player, latest: await backfillWtr(region, latest, wtr) };
   }
 
@@ -232,7 +246,10 @@ export async function recordCurrentSnapshot(
     })
     .returning();
 
-  if (tanks.length > 0) await bulkInsertTankSnapshots(region, player.id, tanks);
+  if (tanks.length > 0) {
+    await bulkInsertTankSnapshots(region, player.id, tanks);
+    await updatePlayerRatings(region, player.id, info, tanks);
+  }
   publish(playerChannel(region, info.account_id), { kind: "snapshot" });
 
   if (inserted) return { player, latest: inserted };
@@ -244,6 +261,106 @@ export async function recordCurrentSnapshot(
     .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
   return { player, latest: await backfillWtr(region, winner, wtr) };
+}
+
+/**
+ * Refresh the cached wn7/wn8/wnx/wnxRecent on the players row from the just
+ * inserted tank snapshot set. Called inside `recordCurrentSnapshot` so every
+ * fresh snapshot keeps the ratings in lockstep with the underlying data —
+ * the clan members table and the player page both read these cached values
+ * instead of computing at request time.
+ */
+async function updatePlayerRatings(
+  region: Region,
+  playerId: number,
+  info: PlayerInfo,
+  tanks: TankStats[],
+): Promise<void> {
+  const players = playersByRegion[region];
+  const tankSnapshots = tankSnapshotsByRegion[region];
+  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
+    getVehicleEncyclopedia(region),
+    getWN8ExpectedValues(),
+    getWNXExpectedValues(),
+  ]);
+
+  const overall = info.statistics.all;
+  const avgTier = computeAvgTier(tanks, encyclopedia);
+  const wn7 =
+    overall.battles > 0
+      ? computeWN7(
+          {
+            battles: overall.battles,
+            wins: overall.wins,
+            frags: overall.frags,
+            damageDealt: overall.damage_dealt,
+            spotted: overall.spotted,
+            droppedCapturePoints: overall.dropped_capture_points,
+          },
+          avgTier,
+        )
+      : null;
+  const wn8 = computeWN8(tanks, wn8Expected);
+  const wnx = computeWNX(tanks, wnxExpected);
+
+  // Recent WNX = current vs. latest snapshot strictly older than 7 days.
+  // Single query per player: cheap inside the snapshot path.
+  const d7Cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+  const d7Rows = await db
+    .selectDistinctOn([tankSnapshots.tankId], {
+      tankId: tankSnapshots.tankId,
+      battles: tankSnapshots.battles,
+      wins: tankSnapshots.wins,
+      damageDealt: tankSnapshots.damageDealt,
+      spotted: tankSnapshots.spotted,
+      frags: tankSnapshots.frags,
+      droppedCapturePoints: tankSnapshots.droppedCapturePoints,
+      radioAssistedDamage: tankSnapshots.radioAssistedDamage,
+      trackAssistedDamage: tankSnapshots.trackAssistedDamage,
+      takenAt: tankSnapshots.takenAt,
+    })
+    .from(tankSnapshots)
+    .where(
+      and(
+        eq(tankSnapshots.playerId, playerId),
+        lt(tankSnapshots.takenAt, d7Cutoff),
+      ),
+    )
+    .orderBy(
+      tankSnapshots.tankId,
+      desc(tankSnapshots.takenAt),
+      desc(tankSnapshots.id),
+    );
+
+  let wnxRecent: number | null = null;
+  if (d7Rows.length > 0) {
+    const d7Map = new Map(
+      d7Rows.map((r) => [
+        r.tankId,
+        {
+          id: 0,
+          playerId,
+          tankId: r.tankId,
+          takenAt: r.takenAt,
+          battles: r.battles,
+          wins: r.wins,
+          damageDealt: r.damageDealt,
+          spotted: r.spotted,
+          frags: r.frags,
+          droppedCapturePoints: r.droppedCapturePoints,
+          radioAssistedDamage: r.radioAssistedDamage,
+          trackAssistedDamage: r.trackAssistedDamage,
+        },
+      ]),
+    );
+    const recent = diffTanks(tanks, d7Map);
+    if (recent) wnxRecent = computeWNX(recent, wnxExpected);
+  }
+
+  await db
+    .update(players)
+    .set({ wn7, wn8, wnx, wnxRecent })
+    .where(eq(players.id, playerId));
 }
 
 async function backfillWtr(

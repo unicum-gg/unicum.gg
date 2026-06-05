@@ -1,6 +1,7 @@
 import {
   bigint,
   pgTable,
+  real,
   serial,
   text,
   timestamp,
@@ -31,6 +32,13 @@ export function makePlayersTable(region: string) {
       lastSeenAt: timestamp("last_seen_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
+      // Cached ratings — updated by the snapshot-cron whenever a new tank
+      // snapshot is recorded. Lets the player page render synchronously and
+      // the clan page JOIN for member ratings without per-request compute.
+      wn7: real("wn7"),
+      wn8: real("wn8"),
+      wnx: real("wnx"),
+      wnxRecent: real("wnx_recent"),
     },
     (t) => [uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId)],
   );

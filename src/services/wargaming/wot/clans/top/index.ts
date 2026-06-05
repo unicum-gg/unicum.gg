@@ -1,20 +1,12 @@
-import { asc, eq, isNotNull, sql } from "drizzle-orm";
+import { asc, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   playerSnapshotsByRegion,
   playersByRegion,
   topClansByRegion,
 } from "@/services/db/schema";
-import {
-  getLatestTankSnapshotsByAccounts,
-  tankSnapshotsToTankStats,
-} from "@/services/players/tanks";
 import { getClansBriefInfo } from "@/services/wargaming/wot/clans/listings";
 import { type Region } from "@/services/wargaming/wot";
-import {
-  computeWNX,
-  getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
 
 export type TopClanResult = {
   clan_id: number;
@@ -30,67 +22,57 @@ export type TopClanResult = {
 const MIN_MEMBERS = 50;
 const ENRICH_CANDIDATES = 30;
 
+type RankedClan = {
+  clan_id: number;
+  members_in_db: number;
+  rated_members_count: number;
+  avg_wnx: number;
+};
+
 export async function computeTopClansByWnx(
   region: Region,
   limit: number,
 ): Promise<TopClanResult[]> {
-  const latest = await getLatestClanMembershipsByRegion(region);
-  if (latest.length === 0) return [];
-
-  const byClan = new Map<number, number[]>();
-  for (const row of latest) {
-    if (row.clanId === null) continue;
-    const list = byClan.get(row.clanId);
-    if (list) list.push(row.accountId);
-    else byClan.set(row.clanId, [row.accountId]);
-  }
-
-  const eligibleClanIds: number[] = [];
-  const accountsByClan = new Map<number, number[]>();
-  for (const [clanId, accountIds] of byClan) {
-    if (accountIds.length > MIN_MEMBERS) {
-      eligibleClanIds.push(clanId);
-      accountsByClan.set(clanId, accountIds);
-    }
-  }
-  if (eligibleClanIds.length === 0) return [];
-
-  const allAccountIds = eligibleClanIds.flatMap(
-    (id) => accountsByClan.get(id) ?? [],
-  );
-  const [tankSnaps, wnxExpected] = await Promise.all([
-    getLatestTankSnapshotsByAccounts(region, allAccountIds),
-    getWNXExpectedValues(),
-  ]);
-
-  type Ranked = {
-    clan_id: number;
+  // Single SQL aggregation: for each player take the latest snapshot's clan_id
+  // (DISTINCT ON), join `players.wnx` (cached by snapshot-cron), then GROUP BY
+  // clan to count members and average the WNX. Replaces an in-process compute
+  // that fetched tank snapshots for every member of every eligible clan and
+  // blew through PG's 65k-param limit on regions with thousands of clans.
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
+  const rows = (await db.execute(sql`
+    WITH latest_memberships AS (
+      SELECT DISTINCT ON (ps.player_id)
+        ps.player_id,
+        ps.clan_id
+      FROM ${playerSnapshots} ps
+      WHERE ps.clan_id IS NOT NULL
+      ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
+    )
+    SELECT
+      lm.clan_id,
+      COUNT(*)::int AS members_in_db,
+      COUNT(p.wnx)::int AS rated_members_count,
+      AVG(p.wnx)::float8 AS avg_wnx
+    FROM latest_memberships lm
+    INNER JOIN ${players} p ON p.id = lm.player_id
+    GROUP BY lm.clan_id
+    HAVING COUNT(*) > ${MIN_MEMBERS} AND COUNT(p.wnx) > 0
+    ORDER BY avg_wnx DESC
+    LIMIT ${ENRICH_CANDIDATES}
+  `)) as unknown as Array<{
+    clan_id: string | number;
     members_in_db: number;
     rated_members_count: number;
     avg_wnx: number;
-  };
-  const ranked: Ranked[] = [];
-  for (const clanId of eligibleClanIds) {
-    const accountIds = accountsByClan.get(clanId) ?? [];
-    const wnxs: number[] = [];
-    for (const accountId of accountIds) {
-      const tanks = tankSnaps.get(accountId);
-      if (!tanks || tanks.length === 0) continue;
-      const wnx = computeWNX(tankSnapshotsToTankStats(tanks), wnxExpected);
-      if (wnx !== null && Number.isFinite(wnx)) wnxs.push(wnx);
-    }
-    if (wnxs.length === 0) continue;
-    const avg = wnxs.reduce((a, b) => a + b, 0) / wnxs.length;
-    ranked.push({
-      clan_id: clanId,
-      members_in_db: accountIds.length,
-      rated_members_count: wnxs.length,
-      avg_wnx: avg,
-    });
-  }
+  }>;
 
-  ranked.sort((a, b) => b.avg_wnx - a.avg_wnx);
-  const candidates = ranked.slice(0, ENRICH_CANDIDATES);
+  const candidates: RankedClan[] = rows.map((r) => ({
+    clan_id: Number(r.clan_id),
+    members_in_db: r.members_in_db,
+    rated_members_count: r.rated_members_count,
+    avg_wnx: Number(r.avg_wnx),
+  }));
   if (candidates.length === 0) return [];
 
   const clansBrief = await getClansBriefInfo(
@@ -117,35 +99,6 @@ export async function computeTopClansByWnx(
     if (enriched.length >= limit) break;
   }
   return enriched;
-}
-
-type LatestMembership = {
-  accountId: number;
-  clanId: number | null;
-};
-
-async function getLatestClanMembershipsByRegion(
-  region: Region,
-): Promise<LatestMembership[]> {
-  const players = playersByRegion[region];
-  const playerSnapshots = playerSnapshotsByRegion[region];
-  const ranked = db
-    .select({
-      accountId: players.accountId,
-      clanId: playerSnapshots.clanId,
-      rn: sql<number>`row_number() over (partition by ${playerSnapshots.playerId} order by ${playerSnapshots.takenAt} desc, ${playerSnapshots.id} desc)`.as(
-        "rn",
-      ),
-    })
-    .from(playerSnapshots)
-    .innerJoin(players, eq(players.id, playerSnapshots.playerId))
-    .where(isNotNull(playerSnapshots.clanId))
-    .as("ranked");
-
-  return db
-    .select({ accountId: ranked.accountId, clanId: ranked.clanId })
-    .from(ranked)
-    .where(eq(ranked.rn, 1));
 }
 
 export type TopClansSnapshot = {

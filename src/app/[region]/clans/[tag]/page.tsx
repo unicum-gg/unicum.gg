@@ -13,23 +13,16 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { JsonLd } from "@/components/json-ld";
+import ROUTES from "@/constants/routes";
+import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
+import { clanSchema } from "@/lib/schema-org";
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanEventsCached } from "@/services/clans/repository/events";
 import { getClanMembersCached } from "@/services/clans/repository/members";
-import {
-  getClanMembersRatings,
-  type MemberRatings,
-} from "@/services/wargaming/wot/clans/ratings";
 import { isRegion, type Region } from "@/services/wargaming/wot";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/events";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -47,16 +40,19 @@ export async function generateMetadata({
 
   const cached = await loadClanByTag(region, decoded);
   if (!cached) {
-    return {
-      title: `[${decoded}] (${regionLabel}) — World of Tanks clan — unicum.gg`,
-    };
+    return constructMetadata({
+      title: `[${decoded}] World of Tanks clan (${regionLabel})`,
+      description: `[${decoded}] World of Tanks clan on ${regionLabel}: members table with WN8/WNX ratings, join/leave activity, recent battles and full clan history.`,
+      ogImage: false,
+    });
   }
   const clan = cached.info;
   const members = intFmt.format(clan.membersCount);
-  return {
-    title: `[${clan.tag}] ${clan.name} (${regionLabel}) — ${members} members — World of Tanks clan — unicum.gg`,
+  return constructMetadata({
+    title: `[${clan.tag}] ${clan.name} World of Tanks clan (${regionLabel}), ${members} members`,
     description: `${clan.name} [${clan.tag}] on ${regionLabel}: ${members} members, full members table with WN8 and WNX ratings, recent join/leave activity and clan history.`,
-  };
+    ogImage: false,
+  });
 }
 
 export default async function ClanPage({
@@ -93,29 +89,18 @@ async function render(
     `clan fromDb=${clanCached.fromDb} refreshing=${clanCached.refreshing}`,
   );
 
-  const [membersCached, encyclopedia, wn8Expected, wnxExpected] =
-    await Promise.all([
-      span("getClanMembersCached", () =>
-        getClanMembersCached(region, clan.id),
-      ),
-      span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
-      span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
-      span("getWNXExpectedValues", () => getWNXExpectedValues()),
-    ]);
+  const membersCached = await span("getClanMembersCached", () =>
+    getClanMembersCached(region, clan.id),
+  );
   const members = membersCached.members;
   trace?.log(
     `members fromDb=${membersCached.fromDb} refreshing=${membersCached.refreshing} count=${members.length}`,
   );
 
-  const ratingsPromise = span("getClanMembersRatings (background)", () =>
-    getClanMembersRatings(
-      region,
-      members.map((m) => m.accountId),
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
-    ),
-  );
+  // Ratings (wn7/wn8/wnx/wnxRecent) are pre-computed by refreshClanMembers
+  // and cached on each row, so the table renders fully populated on first
+  // paint — no Suspense boundary needed.
+
   const eventsPromise = span("getClanEventsCached (background)", async () => {
     const cached = await getClanEventsCached(region, clan.id, 30);
     return cached.events;
@@ -123,26 +108,25 @@ async function render(
 
   return (
     <div className="mx-auto w-full max-w-7xl">
+      <JsonLd
+        data={clanSchema({
+          tag: clan.tag,
+          name: clan.name,
+          region: region.toUpperCase(),
+          membersCount: clan.membersCount,
+          url: `https://unicum.gg${ROUTES.CLAN(region, clan.tag)}`,
+          description: `${clan.name} [${clan.tag}] World of Tanks clan on ${region.toUpperCase()}: ${clan.membersCount} members, WN8/WNX ratings, member rankings, recent join/leave activity.`,
+          logo: clan.emblem,
+        })}
+      />
       <LiveSync
         url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/live`}
       />
-      <Suspense
-        fallback={
-          <ClanHeaderPanel
-            region={region}
-            clan={clan}
-            members={members}
-            ratings={null}
-          />
-        }
-      >
-        <ClanHeaderWithRatings
-          region={region}
-          clan={clan}
-          members={members}
-          ratingsPromise={ratingsPromise}
-        />
-      </Suspense>
+      <Panel>
+        <PanelContent className="p-0">
+          <ClanHeader region={region} clan={clan} members={members} />
+        </PanelContent>
+      </Panel>
 
       {clan.descriptionHtml && (
         <>
@@ -157,21 +141,14 @@ async function render(
 
       <PanelSeparator />
 
-      <Suspense
-        fallback={
-          <MembersPanel
-            region={region}
-            members={members}
-            ratings={new Map()}
-          />
-        }
-      >
-        <MembersWithRatings
-          region={region}
-          members={members}
-          ratingsPromise={ratingsPromise}
-        />
-      </Suspense>
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Members</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <ClanMembersTable region={region} members={members} />
+        </PanelContent>
+      </Panel>
 
       <PanelSeparator />
 
@@ -180,91 +157,6 @@ async function render(
       </Suspense>
     </div>
   );
-}
-
-function ClanHeaderPanel({
-  region,
-  clan,
-  members,
-  ratings,
-}: {
-  region: Region;
-  clan: ClanFullInfo;
-  members: ClanMemberStats[];
-  ratings: Map<number, MemberRatings> | null;
-}) {
-  return (
-    <Panel>
-      <PanelContent className="p-0">
-        <ClanHeader
-          region={region}
-          clan={clan}
-          members={members}
-          ratings={ratings}
-        />
-      </PanelContent>
-    </Panel>
-  );
-}
-
-async function ClanHeaderWithRatings({
-  region,
-  clan,
-  members,
-  ratingsPromise,
-}: {
-  region: Region;
-  clan: ClanFullInfo;
-  members: ClanMemberStats[];
-  ratingsPromise: Promise<Map<number, MemberRatings>>;
-}) {
-  const ratings = await ratingsPromise;
-  return (
-    <ClanHeaderPanel
-      region={region}
-      clan={clan}
-      members={members}
-      ratings={ratings}
-    />
-  );
-}
-
-function MembersPanel({
-  region,
-  members,
-  ratings,
-}: {
-  region: Region;
-  members: ClanMemberStats[];
-  ratings: Map<number, MemberRatings>;
-}) {
-  return (
-    <Panel>
-      <PanelHeader>
-        <PanelTitle>Members</PanelTitle>
-      </PanelHeader>
-      <PanelContent className="p-0">
-        <ClanMembersTable
-          region={region}
-          members={members}
-          ratingsByAccount={ratings}
-        />
-      </PanelContent>
-    </Panel>
-  );
-}
-
-async function MembersWithRatings({
-  region,
-  members,
-  ratingsPromise,
-}: {
-  region: Region;
-  members: ClanMemberStats[];
-  ratingsPromise: Promise<Map<number, MemberRatings>>;
-}) {
-  const ratings = await ratingsPromise;
-  return <MembersPanel region={region} members={members} ratings={ratings} />;
 }
 
 async function RecentActivityStreamed({

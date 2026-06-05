@@ -174,6 +174,74 @@ export async function getLatestTankSnapshotsByAccounts(
   return out;
 }
 
+/**
+ * Batch variant of `getLatestTankSnapshotsByAccounts` that returns, per
+ * account, the latest tank snapshot taken strictly before `cutoff`. Used to
+ * build per-member period diffs (e.g. clan-wide d7 WNX) in one SQL round-trip
+ * instead of N queries.
+ */
+export async function getTankSnapshotsByAccountsBefore(
+  region: Region,
+  accountIds: number[],
+  cutoff: Date,
+): Promise<Map<number, TankSnapshot[]>> {
+  if (accountIds.length === 0) return new Map();
+  const tankSnapshots = tankSnapshotsByRegion[region];
+  const idMap = await getPlayerIdsByAccounts(region, accountIds);
+  const playerIds = Array.from(idMap.values());
+  if (playerIds.length === 0) return new Map();
+
+  const rows = (await db.execute(sql`
+    SELECT DISTINCT ON (player_id, tank_id) *
+    FROM ${tankSnapshots}
+    WHERE player_id IN ${sql.raw(`(${playerIds.join(",")})`)}
+      AND taken_at < ${cutoff.toISOString()}
+    ORDER BY player_id, tank_id, taken_at DESC, id DESC
+  `)) as unknown as Array<{
+    id: number;
+    player_id: number;
+    tank_id: number;
+    taken_at: Date;
+    battles: number;
+    wins: number;
+    damage_dealt: number;
+    spotted: number;
+    frags: number;
+    dropped_capture_points: number;
+    radio_assisted_damage: number;
+    track_assisted_damage: number;
+  }>;
+
+  const playerIdToAccount = new Map<number, number>();
+  for (const [accountId, playerId] of idMap) {
+    playerIdToAccount.set(playerId, accountId);
+  }
+
+  const out = new Map<number, TankSnapshot[]>();
+  for (const row of rows) {
+    const accountId = playerIdToAccount.get(row.player_id);
+    if (accountId === undefined) continue;
+    const arr = out.get(accountId) ?? [];
+    arr.push({
+      id: Number(row.id),
+      playerId: Number(row.player_id),
+      tankId: Number(row.tank_id),
+      takenAt:
+        row.taken_at instanceof Date ? row.taken_at : new Date(row.taken_at),
+      battles: Number(row.battles),
+      wins: Number(row.wins),
+      damageDealt: Number(row.damage_dealt),
+      spotted: Number(row.spotted),
+      frags: Number(row.frags),
+      droppedCapturePoints: Number(row.dropped_capture_points),
+      radioAssistedDamage: Number(row.radio_assisted_damage),
+      trackAssistedDamage: Number(row.track_assisted_damage),
+    });
+    out.set(accountId, arr);
+  }
+  return out;
+}
+
 export function tankSnapshotsToTankStats(
   snapshots: TankSnapshot[],
 ): TankStats[] {

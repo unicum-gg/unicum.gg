@@ -51,6 +51,13 @@ export type ClanMemberStats = {
   personalRating: number | null;
   overall: ClanMemberPeriodStats | null;
   d28: ClanMemberPeriodStats | null;
+  // Pre-computed ratings cached on the clan_members row by refreshClanMembers,
+  // so the clan page can render the table fully populated on first paint
+  // instead of streaming a 100-member compute via Suspense.
+  wn7: number | null;
+  wn8: number | null;
+  wnx: number | null;
+  wnxRecent: number | null;
 };
 
 function periodStatsFromRaw(
@@ -122,6 +129,13 @@ export async function getClanMembersStats(
       personalRating: m.personal_rating,
       overall: periodStatsFromRaw(m),
       d28: d28 ? periodStatsFromRaw(d28) : null,
+      // Ratings are computed in `refreshClanMembers` from tank snapshots,
+      // not from the portal payload — leave null here so the cron path is
+      // the single source of truth.
+      wn7: null,
+      wn8: null,
+      wnx: null,
+      wnxRecent: null,
     };
   });
 }

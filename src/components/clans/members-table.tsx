@@ -18,7 +18,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { MemberRatings } from "@/services/wargaming/wot/clans/ratings";
 import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import type { Region } from "@/services/wargaming/wot";
 import {
@@ -65,7 +64,6 @@ type SortState = { column: SortColumn; direction: SortDirection } | null;
 
 function getSortValue(
   m: ClanMemberStats,
-  ratings: MemberRatings | undefined,
   column: SortColumn,
 ): number | string {
   switch (column) {
@@ -74,11 +72,11 @@ function getSortValue(
     case SortColumn.Role:
       return m.roleRank;
     case SortColumn.WN7:
-      return ratings?.wn7 ?? -1;
+      return m.wn7 ?? -1;
     case SortColumn.WN8:
-      return ratings?.wn8 ?? -1;
+      return m.wn8 ?? -1;
     case SortColumn.WNX:
-      return ratings?.wnx ?? -1;
+      return m.wnx ?? -1;
     case SortColumn.WR:
       return m.overall?.winsPercentage ?? -1;
     case SortColumn.Battles:
@@ -91,7 +89,6 @@ function getSortValue(
 function compareMembers(
   a: ClanMemberStats,
   b: ClanMemberStats,
-  ratingsByAccount: Map<number, MemberRatings>,
   state: SortState,
 ): number {
   if (!state) {
@@ -99,8 +96,8 @@ function compareMembers(
     return (b.personalRating ?? -1) - (a.personalRating ?? -1);
   }
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
-  const av = getSortValue(a, ratingsByAccount.get(a.accountId), state.column);
-  const bv = getSortValue(b, ratingsByAccount.get(b.accountId), state.column);
+  const av = getSortValue(a, state.column);
+  const bv = getSortValue(b, state.column);
   if (typeof av === "string" && typeof bv === "string") {
     return mul * av.localeCompare(bv);
   }
@@ -176,17 +173,13 @@ function RatingCell({
 export function ClanMembersTable({
   region,
   members,
-  ratingsByAccount,
 }: {
   region: Region;
   members: ClanMemberStats[];
-  ratingsByAccount: Map<number, MemberRatings>;
 }) {
   const [sort, setSort] = useState<SortState>(null);
 
-  const sorted = [...members].sort((a, b) =>
-    compareMembers(a, b, ratingsByAccount, sort),
-  );
+  const sorted = [...members].sort((a, b) => compareMembers(a, b, sort));
 
   function toggleSort(column: SortColumn) {
     setSort((prev) => {
@@ -233,7 +226,6 @@ export function ClanMembersTable({
       </TableHeader>
       <TableBody>
         {sorted.map((m, idx) => {
-          const r = ratingsByAccount.get(m.accountId);
           return (
             <TableRow key={m.accountId}>
               <TableCell className="text-right tabular-nums text-muted-foreground">
@@ -252,21 +244,21 @@ export function ClanMembersTable({
               </TableCell>
               <RatingCell
                 value={
-                  r?.wn7 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
+                  m.wn7 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
-                color={r?.wn7 != null ? wn7Color(r.wn7) : null}
+                color={m.wn7 != null ? wn7Color(m.wn7) : null}
               />
               <RatingCell
                 value={
-                  r?.wn8 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
+                  m.wn8 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
-                color={r?.wn8 != null ? wn8Color(r.wn8) : null}
+                color={m.wn8 != null ? wn8Color(m.wn8) : null}
               />
               <RatingCell
                 value={
-                  r?.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
+                  m.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
-                color={r?.wnx != null ? wnxColor(r.wnx) : null}
+                color={m.wnx != null ? wnxColor(m.wnx) : null}
               />
               <TableCell
                 className={cn(
