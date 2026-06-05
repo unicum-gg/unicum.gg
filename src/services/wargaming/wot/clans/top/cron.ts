@@ -1,5 +1,4 @@
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { topClansByRegion } from "@/services/db/schema";
 import { REGIONS } from "@/services/wargaming/wot";
@@ -8,15 +7,9 @@ import { computeTopClansByWnx } from ".";
 const SCHEDULE = "0 * * * *";
 const TOP_N = 30;
 
-export function startTopClansCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await refreshAllRegions();
-    } catch (err) {
-      console.error("[top-clans cron] tick failed:", err);
-    }
+export function startTopClansCron(): void {
+  scheduleCron("top-clans cron", SCHEDULE, async () => {
+    await refreshAllRegions();
   });
   console.log(`[top-clans cron] scheduled (${SCHEDULE})`);
 

@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm";
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { topPlayersByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
@@ -14,15 +13,9 @@ const PERIODS: TopPlayersPeriod[] = [
   TopPlayersPeriod.Overall,
 ];
 
-export function startTopPlayersCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await refreshAll();
-    } catch (err) {
-      console.error("[top-players cron] tick failed:", err);
-    }
+export function startTopPlayersCron(): void {
+  scheduleCron("top-players cron", SCHEDULE, async () => {
+    await refreshAll();
   });
   console.log(`[top-players cron] scheduled (${SCHEDULE})`);
 

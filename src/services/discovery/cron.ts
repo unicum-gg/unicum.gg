@@ -1,20 +1,13 @@
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { REGIONS } from "@/services/wargaming/wot";
 import { discoverTopClanPlayers } from ".";
 
 const SCHEDULE = "0 4 * * 0"; // Sundays at 04:00 server time
 const TOP_N = 500;
 
-export function startDiscoveryCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await runDiscoveryAllRegions();
-    } catch (err) {
-      console.error("[discovery cron] tick failed:", err);
-    }
+export function startDiscoveryCron(): void {
+  scheduleCron("discovery cron", SCHEDULE, async () => {
+    await runDiscoveryAllRegions();
   });
   console.log(`[discovery cron] scheduled (${SCHEDULE})`);
 }

@@ -1,6 +1,5 @@
 import { asc, desc, eq } from "drizzle-orm";
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import {
   playerRefreshQueueByRegion,
@@ -24,15 +23,9 @@ import { dequeuePlayerRefresh } from "./refresh-queue";
 const SCHEDULE = "*/10 * * * * *";
 const BATCH_SIZE_PER_REGION = 25;
 
-export function startPlayerRefreshCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await drainPlayerRefreshQueue();
-    } catch (err) {
-      console.error("[player-cron] tick failed:", err);
-    }
+export function startPlayerRefreshCron(): void {
+  scheduleCron("player-cron", SCHEDULE, async () => {
+    await drainPlayerRefreshQueue();
   });
   console.log(`[player-cron] queue drain scheduled (${SCHEDULE})`);
 }

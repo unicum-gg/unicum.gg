@@ -1,6 +1,5 @@
 import { asc, desc } from "drizzle-orm";
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { clanRefreshQueueByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
@@ -17,15 +16,9 @@ const BATCH_SIZE_PER_REGION = 5;
 // don't trip Wargaming's portal rate limit on a busy queue.
 const REQUEST_DELAY_MS = 250;
 
-export function startClanRefreshCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await drainClanRefreshQueue();
-    } catch (err) {
-      console.error("[clan-refresh-cron] tick failed:", err);
-    }
+export function startClanRefreshCron(): void {
+  scheduleCron("clan-refresh-cron", SCHEDULE, async () => {
+    await drainClanRefreshQueue();
   });
   console.log(`[clan-refresh-cron] queue drain scheduled (${SCHEDULE})`);
 }

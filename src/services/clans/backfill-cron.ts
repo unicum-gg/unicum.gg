@@ -1,6 +1,5 @@
 import { asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { clansByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
@@ -13,15 +12,9 @@ const BATCH_SIZE_PER_REGION = 20;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 const REQUEST_DELAY_MS = 250;
 
-export function startClanBackfillCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await refreshDueClans();
-    } catch (err) {
-      console.error("[clan-backfill-cron] tick failed:", err);
-    }
+export function startClanBackfillCron(): void {
+  scheduleCron("clan-backfill-cron", SCHEDULE, async () => {
+    await refreshDueClans();
   });
   console.log(`[clan-backfill-cron] stale scan scheduled (${SCHEDULE})`);
 }

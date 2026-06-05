@@ -1,6 +1,5 @@
 import { asc, count, eq, lt, sql } from "drizzle-orm";
-import cron from "node-cron";
-import { tryAcquireLease } from "@/services/cron/lease";
+import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { type Player, playersByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
@@ -19,15 +18,9 @@ const SCHEDULE = "* * * * *";
 const BATCH_SIZE_PER_REGION = 200;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 
-export function startPlayerBackfillCron() {
-  cron.schedule(SCHEDULE, async () => {
-    try {
-      const isLeader = await tryAcquireLease();
-      if (!isLeader) return;
-      await refreshDuePlayers();
-    } catch (err) {
-      console.error("[snapshot-cron] tick failed:", err);
-    }
+export function startPlayerBackfillCron(): void {
+  scheduleCron("snapshot-cron", SCHEDULE, async () => {
+    await refreshDuePlayers();
   });
   console.log(`[snapshot-cron] snapshot refresh scheduled (${SCHEDULE})`);
 }
