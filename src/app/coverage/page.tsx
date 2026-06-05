@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
 import { CoverageView } from "@/components/coverage/coverage-view";
+import { constructMetadata } from "@/lib/metadata";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 // Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
 // page-level revalidate would be redundant and conflict with the cache scope.
 
-export const metadata: Metadata = {
-  title: `Coverage (${REGION_LABEL[Region.EU]}), what we track, unicum.gg`,
-  description: `Live coverage stats for ${REGION_LABEL[Region.EU]} on unicum.gg: players and clans tracked, snapshot counts, cron activity and refresh health.`,
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const label = REGION_LABEL[Region.EU];
+  return constructMetadata({
+    title: `World of Tanks data coverage (${label})`,
+    description: `How many World of Tanks players and clans unicum.gg tracks on ${label}, snapshot refresh rate, data depth, infrastructure cost and uptime.`,
+    ogTitle: "Data coverage",
+    ogSubtitle: `${label} players & clans`,
+  });
+}
 
 export default async function Page() {
   return <CoverageView region={Region.EU} />;

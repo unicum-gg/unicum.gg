@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { CoverageView } from "@/components/coverage/coverage-view";
+import { constructMetadata } from "@/lib/metadata";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 // Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
@@ -14,10 +15,12 @@ export async function generateMetadata({
   const { region } = await params;
   if (!isRegion(region)) return {};
   const label = REGION_LABEL[region];
-  return {
-    title: `Coverage (${label}), what we track, unicum.gg`,
-    description: `Live coverage stats for ${label} on unicum.gg: players and clans tracked, snapshot counts, cron activity and refresh health.`,
-  };
+  return constructMetadata({
+    title: `World of Tanks data coverage (${label})`,
+    description: `How many World of Tanks players and clans unicum.gg tracks on ${label}, snapshot refresh rate, data depth, infrastructure cost and uptime.`,
+    ogTitle: "Data coverage",
+    ogSubtitle: `${label} players & clans`,
+  });
 }
 
 export default async function CoveragePage({

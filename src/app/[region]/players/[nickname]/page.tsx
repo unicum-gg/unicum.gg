@@ -12,7 +12,11 @@ import {
 import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
+import { JsonLd } from "@/components/json-ld";
+import ROUTES from "@/constants/routes";
+import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
+import { personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
 import { discoverClansBackground } from "@/services/discovery/clans";
 import {
@@ -81,19 +85,21 @@ export async function generateMetadata({
   const regionLabel = region.toUpperCase();
 
   if (!snap || snap.battles === 0) {
-    return {
-      title: `${displayName} (${regionLabel}) — World of Tanks player stats — unicum.gg`,
-      description: `World of Tanks player stats for ${displayName} on ${regionLabel}: WN8, WNX, winrate, tank progression and clans history.`,
-    };
+    return constructMetadata({
+      title: `${displayName} World of Tanks player stats (${regionLabel})`,
+      description: `${displayName} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`,
+      ogImage: false,
+    });
   }
 
   const winrate = pctFmt.format((snap.wins / snap.battles) * 100);
   const battles = intFmt.format(snap.battles);
   const rating = snap.wtr ?? snap.globalRating;
-  return {
-    title: `${displayName} (${regionLabel}) — ${battles} battles, ${winrate}% WR — World of Tanks stats — unicum.gg`,
+  return constructMetadata({
+    title: `${displayName} World of Tanks stats (${regionLabel}), ${battles} battles, ${winrate}% WR`,
     description: `${displayName} on ${regionLabel}: ${battles} battles, ${winrate}% winrate, ${intFmt.format(rating)} rating. Tank-by-tank breakdown, WN8, WNX and full clans history.`,
-  };
+    ogImage: false,
+  });
 }
 
 export default async function PlayerPage({
