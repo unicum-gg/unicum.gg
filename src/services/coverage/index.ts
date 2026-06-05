@@ -56,8 +56,9 @@ export type CoverageStats = {
   };
 };
 
-// Contabo Cloud VPS 10, monthly no-commit billing. €8.49/mo ≈ $9.50/mo at 1.12 USD/EUR.
-const HOSTING_USD_MONTHLY = 9.5;
+// OVH VPS-2, monthly no-commit billing. €9.99 HT + 20% VAT = €11.99 TTC/mo
+// ≈ $12.99/mo at ~1.08 USD/EUR.
+const HOSTING_USD_MONTHLY = 12.99;
 const DOMAIN_USD_ANNUAL = 51.6;
 
 const DAYS_WINDOW = 30;
@@ -276,7 +277,7 @@ async function getCoverageStatsUncached(
           {
             label: "VPS hosting",
             usdAnnual: HOSTING_USD_MONTHLY * 12,
-            note: "Contabo Cloud VPS 10, 6 vCPU / 12 GB RAM",
+            note: "OVH VPS-2, 6 vCPU / 12 GB RAM / 100 GB NVMe",
           },
           {
             label: "Domain",
