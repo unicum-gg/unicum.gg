@@ -12,7 +12,7 @@ import {
 import { REGIONS } from "@/services/wargaming/wot";
 
 export const SITE_URL = "https://unicum.gg";
-export const URLS_PER_SITEMAP = 5000;
+export const URLS_PER_SITEMAP = 25000;
 
 export function getSitemapCount(
   total: number,
