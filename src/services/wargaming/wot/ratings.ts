@@ -1,4 +1,5 @@
 import { botHeaders } from "@/lib/bot-headers";
+import type { VehicleMeta } from "./encyclopedia";
 import type { TankStats } from "./tanks";
 
 export enum RatingColor {
@@ -148,8 +149,12 @@ const wn8Cache = expectedCache<Map<number, WN8Expected>>();
 
 export async function getWN8ExpectedValues(): Promise<Map<number, WN8Expected>> {
   return wn8Cache(async () => {
+    // The `/wg/wn8exp.json` URL is the auto-updating "latest" pointer that
+    // XVM regenerates daily and that includes the post-2024 tanks (Tier 11,
+    // recent premiums). The plain `/wn8exp.json` URL is a stale 2024-09
+    // snapshot — it was missing ~100 tanks. See `/en/wn8-expected-values-by-date/`.
     const res = await fetch(
-      "https://static.modxvm.com/wn8-data-exp/json/wn8exp.json",
+      "https://static.modxvm.com/wn8-data-exp/json/wg/wn8exp.json",
       { headers: botHeaders() },
     );
     if (!res.ok) {
@@ -170,9 +175,70 @@ export async function getWN8ExpectedValues(): Promise<Map<number, WN8Expected>> 
   });
 }
 
+/**
+ * Build a (tier, type) → mean expected-values fallback table from the modxvm
+ * dataset, used in `computeWN8` when a tank is missing from the dataset.
+ *
+ * modxvm's `wn8exp.json` lags behind WG releases: new premiums, Tier 11
+ * additions and event tanks routinely have no expected values for months
+ * after they ship. The original WN8 paper [1] explicitly prescribes the
+ * remedy: "tanks where there is insufficient data ... are given the same
+ * values as a similar tank of the same tier and type". This helper materializes
+ * that prescription as a Map keyed by `${tier}-${type}` (e.g. `"10-heavyTank"`).
+ *
+ * [1] https://koreanrandom.com/forum/topic/81531-wn8-a-detailed-article-about-the-rating-and-its-formula-from-its-developers/
+ */
+export function buildWN8Fallback(
+  expected: Map<number, WN8Expected>,
+  encyclopedia: Record<string, VehicleMeta>,
+): Map<string, WN8Expected> {
+  type Sum = {
+    expDamage: number;
+    expSpot: number;
+    expFrag: number;
+    expDef: number;
+    expWinRate: number;
+    count: number;
+  };
+  const groups = new Map<string, Sum>();
+  for (const [tankId, exp] of expected) {
+    const meta = encyclopedia[String(tankId)];
+    if (!meta) continue;
+    const key = `${meta.tier}-${meta.type}`;
+    const g = groups.get(key) ?? {
+      expDamage: 0,
+      expSpot: 0,
+      expFrag: 0,
+      expDef: 0,
+      expWinRate: 0,
+      count: 0,
+    };
+    g.expDamage += exp.expDamage;
+    g.expSpot += exp.expSpot;
+    g.expFrag += exp.expFrag;
+    g.expDef += exp.expDef;
+    g.expWinRate += exp.expWinRate;
+    g.count += 1;
+    groups.set(key, g);
+  }
+  const fallback = new Map<string, WN8Expected>();
+  for (const [key, g] of groups) {
+    fallback.set(key, {
+      expDamage: g.expDamage / g.count,
+      expSpot: g.expSpot / g.count,
+      expFrag: g.expFrag / g.count,
+      expDef: g.expDef / g.count,
+      expWinRate: g.expWinRate / g.count,
+    });
+  }
+  return fallback;
+}
+
 export function computeWN8(
   tanks: TankStats[],
   expected: Map<number, WN8Expected>,
+  encyclopedia: Record<string, VehicleMeta>,
+  fallback: Map<string, WN8Expected>,
 ): number | null {
   let expDmg = 0;
   let expSpot = 0;
@@ -187,9 +253,17 @@ export function computeWN8(
   let battles = 0;
 
   for (const tank of tanks) {
-    const exp = expected.get(tank.tank_id);
     const tb = tank.all?.battles ?? 0;
-    if (!exp || tb <= 0) continue;
+    if (tb <= 0) continue;
+    let exp = expected.get(tank.tank_id);
+    if (!exp) {
+      // Tank missing from modxvm dataset (typically a recent premium, event
+      // tank or a Tier 11) — fall back to the mean of same (tier, type) per
+      // the WN8 paper's prescription.
+      const meta = encyclopedia[String(tank.tank_id)];
+      if (meta) exp = fallback.get(`${meta.tier}-${meta.type}`);
+    }
+    if (!exp) continue;
 
     expDmg += exp.expDamage * tb;
     expSpot += exp.expSpot * tb;

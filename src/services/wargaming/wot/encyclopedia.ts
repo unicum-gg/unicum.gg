@@ -3,16 +3,17 @@ import type { Region } from ".";
 import { wgFetch } from "./fetch";
 import type { TankStats } from "./tanks";
 
-export type VehicleMeta = { tier: number };
+export type VehicleMeta = { tier: number; type: string };
 
-// Vehicle tiers change at most once per game patch (months), so we cache
-// for a week. `unstable_cache` keys by region argument automatically.
+// Vehicle tiers/types change at most once per game patch (months), so we
+// cache for a week. `unstable_cache` keys by region argument automatically.
+// `type` is required for WN8 tier+type fallback (computeWN8 / buildWN8Fallback).
 export const getVehicleEncyclopedia = unstable_cache(
   async (region: Region): Promise<Record<string, VehicleMeta>> => {
     return wgFetch<Record<string, VehicleMeta>>(
       region,
       "/wot/encyclopedia/vehicles/",
-      { fields: "tier" },
+      { fields: "tier,type" },
     );
   },
   ["vehicle-encyclopedia"],

@@ -13,6 +13,7 @@ import {
   type VehicleMeta,
 } from "@/services/wargaming/wot/encyclopedia";
 import {
+  buildWN8Fallback,
   computeWN7,
   computeWN8,
   computeWNX,
@@ -264,9 +265,10 @@ export function PlayerStatsTable({
     ),
   };
 
+  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
   function wn8CellFor(t: TankStats[] | null): Cell {
     if (!t) return EMPTY_CELL;
-    const value = computeWN8(t, wn8Expected);
+    const value = computeWN8(t, wn8Expected, encyclopedia, wn8Fallback);
     if (value === null) return EMPTY_CELL;
     return { primary: decimalFmt.format(value), color: wn8Color(value) };
   }

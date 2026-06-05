@@ -21,6 +21,7 @@ import {
   getVehicleEncyclopedia,
 } from "@/services/wargaming/wot/encyclopedia";
 import {
+  buildWN8Fallback,
   computeWN7,
   computeWN8,
   computeWNX,
@@ -300,7 +301,8 @@ async function updatePlayerRatings(
           avgTier,
         )
       : null;
-  const wn8 = computeWN8(tanks, wn8Expected);
+  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
+  const wn8 = computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   const wnx = computeWNX(tanks, wnxExpected);
 
   // Recent WNX = current vs. latest snapshot strictly older than 7 days.

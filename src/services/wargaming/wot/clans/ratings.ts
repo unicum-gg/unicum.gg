@@ -17,6 +17,7 @@ import {
   type VehicleMeta,
 } from "@/services/wargaming/wot/encyclopedia";
 import {
+  buildWN8Fallback,
   computeWN7,
   computeWN8,
   computeWNX,
@@ -46,6 +47,7 @@ function computeRatings(
   tanks: TankStats[],
   encyclopedia: Record<string, VehicleMeta>,
   wn8Expected: Map<number, WN8Expected>,
+  wn8Fallback: Map<string, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
 ): MemberRatings {
   const avgTier = computeAvgTier(tanks, encyclopedia);
@@ -61,7 +63,7 @@ function computeRatings(
       },
       avgTier,
     ),
-    wn8: computeWN8(tanks, wn8Expected),
+    wn8: computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback),
     wnx: computeWNX(tanks, wnxExpected),
   };
 }
@@ -77,6 +79,7 @@ export async function getClanMembersRatings(
     getLatestPlayerSnapshotsByAccounts(region, accountIds),
     getLatestTankSnapshotsByAccounts(region, accountIds),
   ]);
+  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
 
   const out = new Map<number, MemberRatings>();
   const missing: number[] = [];
@@ -99,6 +102,7 @@ export async function getClanMembersRatings(
           tankSnapshotsToTankStats(tanks),
           encyclopedia,
           wn8Expected,
+          wn8Fallback,
           wnxExpected,
         ),
       );
@@ -133,6 +137,7 @@ export async function getClanMembersRatings(
           tanks,
           encyclopedia,
           wn8Expected,
+          wn8Fallback,
           wnxExpected,
         ),
       );
