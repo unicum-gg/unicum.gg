@@ -65,7 +65,7 @@ class RateLimiter {
 
 // WG public API server-side limit = 20 RPS per application_id, BUT that's
 // never our actual ceiling: DNS for `api.worldoftanks.*` is geo-routed, and
-// from any VPS (Contabo, OVH, Hetzner) we resolve to G-Core IPs (92.223.x.x),
+// from any VPS (OVH, Hetzner, etc.) we resolve to G-Core IPs (92.223.x.x),
 // NOT Wargaming's `*.fe.core.pw` origin. So all 3 API hosts sit behind the
 // same G-Core WAF as the portals.
 //
@@ -107,16 +107,16 @@ export function acquireWgToken(region: Region): Promise<void> {
 // `*.wargaming.net/clans/*` is fronted by G-Core CDN which has an aggressive
 // anti-scraping WAF: once an IP crosses some unpublished volume threshold
 // (likely ~minutes of sustained > a few RPS), TCP packets to 92.223.x.x get
-// silently dropped for ~2h. We've been bitten on Contabo (persistent) and
-// reproduced on OVH (cleared after ~2h post-stress-test).
+// silently dropped for ~2h. Reproduced empirically: the ban clears on its
+// own after roughly two hours post-stress-test.
 //
 // Empirical safe ceiling from `negri/wotclans` (a C# scraper that's been
 // running in prod for years without bans):
 //   `WebFetchInterval = TimeSpan.FromSeconds(1)` → ~1 RPS sustained MAX.
 //
 // PER-REGION token bucket because empirically the 3 hosts behave very
-// differently: EU portal was getting silently dropped from Contabo while
-// NA/ASIA portals were still reachable. The threshold (and ban state) is
+// differently: we've observed EU portal getting silently dropped while
+// NA/ASIA portals stayed reachable. The threshold (and ban state) is
 // tracked separately per `<region>.wargaming.net` endpoint. We start
 // uniformly at 1 RPS each and bump per region until one of them starts
 // timing out — that tells us the ceiling on THAT host for our IP/AS.
