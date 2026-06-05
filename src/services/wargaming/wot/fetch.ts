@@ -1,4 +1,5 @@
 import { env } from "env";
+import { userAgent } from "@/constants/app";
 import { traced } from "@/lib/perf-trace";
 import { Region, REGION_PORTAL_HOST } from "./index";
 import { acquirePortalToken, acquireWgToken } from "./rate-limit";
@@ -137,6 +138,7 @@ export async function wgFetch<T>(
       try {
         const res = await fetch(url, {
           cache: "no-store",
+          headers: { "user-agent": userAgent(region) },
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
         });
         if (!res.ok) {
@@ -170,15 +172,16 @@ function portalRegionFromUrl(url: URL): Region | null {
 }
 
 export async function portalFetch<T>(url: URL): Promise<T> {
-  const headers: Record<string, string> = {
-    "x-requested-with": "XMLHttpRequest",
-    accept: "application/json",
-    "accept-language": "en",
-  };
   const region = portalRegionFromUrl(url);
   if (!region) {
     throw new Error(`portalFetch: unknown region for host ${url.host}`);
   }
+  const headers: Record<string, string> = {
+    "x-requested-with": "XMLHttpRequest",
+    accept: "application/json",
+    "accept-language": "en",
+    "user-agent": userAgent(region),
+  };
 
   return traced(`portalFetch ${region} ${url.pathname}`, () =>
     withRetries(async () => {

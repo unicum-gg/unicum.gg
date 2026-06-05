@@ -1,3 +1,4 @@
+import { userAgent } from "@/constants/app";
 import type { TankStats } from "./tanks";
 
 export enum RatingColor {
@@ -149,6 +150,7 @@ export async function getWN8ExpectedValues(): Promise<Map<number, WN8Expected>> 
   return wn8Cache(async () => {
     const res = await fetch(
       "https://static.modxvm.com/wn8-data-exp/json/wn8exp.json",
+      { headers: { "user-agent": userAgent() } },
     );
     if (!res.ok) {
       throw new Error(`WN8 expected values HTTP ${res.status}`);
@@ -256,6 +258,7 @@ export async function getWNXExpectedValues(): Promise<Map<number, WNXExpected>> 
   return wnxCache(async () => {
     const res = await fetch(
       "https://api.tomato.gg/api/wnx/wnx-expected-values.json",
+      { headers: { "user-agent": userAgent() } },
     );
     if (!res.ok) {
       throw new Error(`WNX expected values HTTP ${res.status}`);
