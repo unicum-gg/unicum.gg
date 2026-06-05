@@ -325,8 +325,24 @@ function buildView(args: {
   const lastBattleAt = player.lastBattleAt ?? new Date(0);
   const nowMs = Date.now();
 
+  const regionLabel = region.toUpperCase();
+  const winrate = current.battles > 0 ? (current.wins / current.battles) * 100 : 0;
+  const playerDescription =
+    current.battles > 0
+      ? `${player.nickname} (${regionLabel}) World of Tanks player stats: ${intFmt.format(current.battles)} battles, ${pctFmt.format(winrate)}% winrate, WN8 and WNX ratings, tank-by-tank breakdown and clan history.`
+      : `${player.nickname} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`;
+
   return (
     <div className="mx-auto w-full max-w-7xl">
+      <JsonLd
+        data={personSchema({
+          nickname: player.nickname,
+          region: regionLabel,
+          url: `https://unicum.gg${ROUTES.PLAYER(region, player.nickname)}`,
+          description: playerDescription,
+          clanName: clanHistory.currentStint?.clan.name ?? null,
+        })}
+      />
       <LiveSync
         url={`/api/${region}/players/${encodeURIComponent(player.nickname)}/live`}
       />
