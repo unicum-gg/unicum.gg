@@ -41,6 +41,21 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "asia.wargaming.net", pathname: "/clans/**" },
     ],
   },
+  // Map the `sitemap-N.xml` / `clans-sitemap-N.xml` / `players-sitemap-N.xml`
+  // URLs declared in the sitemap index to their backing `[id]` route handlers.
+  async rewrites() {
+    return [
+      { source: "/sitemap-:id.xml", destination: "/sitemap.xml/:id" },
+      {
+        source: "/:region(eu|na|asia)/clans-sitemap-:id.xml",
+        destination: "/:region/clans-sitemap.xml/:id",
+      },
+      {
+        source: "/:region(eu|na|asia)/players-sitemap-:id.xml",
+        destination: "/:region/players-sitemap.xml/:id",
+      },
+    ];
+  },
 };
 
 export default nextConfig;
