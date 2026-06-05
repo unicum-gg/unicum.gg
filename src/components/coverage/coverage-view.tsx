@@ -179,28 +179,22 @@ export async function CoverageView({ region }: { region: Region }) {
         <PanelHeader>
           <PanelTitle>Refresh queues</PanelTitle>
         </PanelHeader>
-        <PanelContent className="space-y-3 p-4 text-sm">
-          <p>
-            <span className="font-semibold tabular-nums">
-              {intFmt.format(stats.clanRefreshQueue)}
-            </span>{" "}
-            <span className="text-fd-muted-foreground">
-              clans queued for refresh in {REGION_LABEL[region]}. Drained
-              every 10s. Page hits enqueue at priority 10; discovery
-              (search results, members lists, clan history of tracked
-              players) feeds priority 0.
-            </span>
-          </p>
-          <p>
-            <span className="font-semibold tabular-nums">
-              {intFmt.format(stats.playerRefreshQueue)}
-            </span>{" "}
-            <span className="text-fd-muted-foreground">
-              players queued for refresh in {REGION_LABEL[region]}. Drained
-              every 10s. Page hits enqueue at priority 10 when the cached
-              snapshot is older than 5min.
-            </span>
-          </p>
+        <PanelContent className="flex flex-col divide-y divide-fd-border p-0 md:flex-row md:divide-x md:divide-y-0">
+          <QueueCell
+            label="Snapshot backlog"
+            value={intFmt.format(stats.snapshotBacklog)}
+            description="Players whose last snapshot is older than 24h. Snapshot-cron drains at 200 per region per minute."
+          />
+          <QueueCell
+            label="Clan refresh queue"
+            value={intFmt.format(stats.clanRefreshQueue)}
+            description="On-demand: page hits enqueue at priority 10, discovery feeds priority 0. Drained every 10s."
+          />
+          <QueueCell
+            label="Player refresh queue"
+            value={intFmt.format(stats.playerRefreshQueue)}
+            description="On-demand: page hits enqueue at priority 10 when the cached snapshot is older than 5 min. Drained every 10s."
+          />
         </PanelContent>
       </Panel>
 
@@ -219,7 +213,7 @@ export async function CoverageView({ region }: { region: Region }) {
               {usdFmt.format(stats.infrastructure.costs.totalAnnualUsd)}
             </div>
             <div className="text-sm text-fd-muted-foreground">
-              Fixed monthly bill, no surprises. Hosted on a Contabo VPS, no
+              Fixed monthly bill, no surprises. Hosted on an OVH VPS, no
               third-party SaaS in the data path. Will only grow if we outgrow
               the current server.
             </div>
@@ -336,6 +330,26 @@ function StatCell({
         {label}
       </div>
       <div className="text-xl font-semibold tabular-nums">{value}</div>
+    </div>
+  );
+}
+
+function QueueCell({
+  label,
+  value,
+  description,
+}: {
+  label: string;
+  value: React.ReactNode;
+  description: string;
+}) {
+  return (
+    <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
+        {label}
+      </div>
+      <div className="text-2xl font-semibold tabular-nums">{value}</div>
+      <p className="text-xs text-fd-muted-foreground">{description}</p>
     </div>
   );
 }

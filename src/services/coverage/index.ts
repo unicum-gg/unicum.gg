@@ -27,6 +27,7 @@ export type CoverageStats = {
   clanRecentEvents: number;
   clanRefreshQueue: number;
   playerRefreshQueue: number;
+  snapshotBacklog: number;
   activity: {
     lastPlayerSnapshotAt: Date | null;
     lastClanRefreshAt: Date | null;
@@ -105,6 +106,7 @@ async function getCoverageStatsUncached(
     clanRecentEvents,
     clanRefreshQueue,
     playerRefreshQueue,
+    snapshotBacklog,
     lastPlayerSnapshot,
     lastClanRefresh,
     snapshotsLast24h,
@@ -155,6 +157,13 @@ async function getCoverageStatsUncached(
     db
       .execute<{ count: string }>(
         sql`SELECT COUNT(*)::text AS count FROM ${playerRefreshQueueTable}`,
+      )
+      .then((r) => Number(r[0]?.count ?? 0)),
+    db
+      .execute<{ count: string }>(
+        sql`SELECT COUNT(*)::text AS count
+            FROM ${playersTable}
+            WHERE last_seen_at < NOW() - INTERVAL '24 hours'`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
@@ -251,6 +260,7 @@ async function getCoverageStatsUncached(
     clanRecentEvents,
     clanRefreshQueue,
     playerRefreshQueue,
+    snapshotBacklog,
     activity: {
       lastPlayerSnapshotAt: lastPlayerSnapshot,
       lastClanRefreshAt: lastClanRefresh,
