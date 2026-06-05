@@ -24,10 +24,13 @@ const SCHEDULE = "*/10 * * * * *";
 const BATCH_SIZE_PER_REGION = 25;
 
 export function startPlayerRefreshCron(): void {
-  scheduleCron("player-cron", SCHEDULE, async () => {
-    await drainPlayerRefreshQueue();
-  });
-  console.log(`[player-cron] queue drain scheduled (${SCHEDULE})`);
+  if (
+    scheduleCron("player-cron", SCHEDULE, async () => {
+      await drainPlayerRefreshQueue();
+    })
+  ) {
+    console.log(`[player-cron] queue drain scheduled (${SCHEDULE})`);
+  }
 }
 
 type QueueEntry = {

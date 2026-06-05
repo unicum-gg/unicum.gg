@@ -13,10 +13,13 @@ const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 const REQUEST_DELAY_MS = 250;
 
 export function startClanBackfillCron(): void {
-  scheduleCron("clan-backfill-cron", SCHEDULE, async () => {
-    await refreshDueClans();
-  });
-  console.log(`[clan-backfill-cron] stale scan scheduled (${SCHEDULE})`);
+  if (
+    scheduleCron("clan-backfill-cron", SCHEDULE, async () => {
+      await refreshDueClans();
+    })
+  ) {
+    console.log(`[clan-backfill-cron] stale scan scheduled (${SCHEDULE})`);
+  }
 }
 
 export type ClanBackfillResult = {

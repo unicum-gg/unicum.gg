@@ -14,12 +14,14 @@ const PERIODS: TopPlayersPeriod[] = [
 ];
 
 export function startTopPlayersCron(): void {
-  scheduleCron("top-players cron", SCHEDULE, async () => {
-    await refreshAll();
-  });
-  console.log(`[top-players cron] scheduled (${SCHEDULE})`);
-
-  void runInitialIfEmpty();
+  if (
+    scheduleCron("top-players cron", SCHEDULE, async () => {
+      await refreshAll();
+    })
+  ) {
+    console.log(`[top-players cron] scheduled (${SCHEDULE})`);
+    void runInitialIfEmpty();
+  }
 }
 
 async function runInitialIfEmpty(): Promise<void> {

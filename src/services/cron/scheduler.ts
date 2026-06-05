@@ -6,6 +6,11 @@ import { tryAcquireLease } from "./lease";
 // nothing happen). Prod stays HA-safe via the lease.
 const SKIP_LEASE = process.env.NODE_ENV === "development";
 
+// Hard kill-switch: set `SKIP_CRONS=true` in .env.local to disable all crons
+// entirely (no schedule registration). Useful when iterating on rating logic
+// or anything else that doesn't need background ticks polluting the DB.
+const SKIP_CRONS = process.env.SKIP_CRONS === "true";
+
 /**
  * Schedule a cron tick that (a) skips if the previous tick is still in flight
  * (prevents pileup of concurrent ticks that hold thousands of in-flight
@@ -16,7 +21,11 @@ export function scheduleCron(
   name: string,
   schedule: string,
   fn: () => Promise<void>,
-): void {
+): boolean {
+  if (SKIP_CRONS) {
+    console.log(`[${name}] SKIP_CRONS=true, not scheduling`);
+    return false;
+  }
   let inFlight = false;
   cron.schedule(schedule, async () => {
     if (inFlight) {
@@ -33,4 +42,5 @@ export function scheduleCron(
       inFlight = false;
     }
   });
+  return true;
 }

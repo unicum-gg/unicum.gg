@@ -19,10 +19,13 @@ const BATCH_SIZE_PER_REGION = 200;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 
 export function startPlayerBackfillCron(): void {
-  scheduleCron("snapshot-cron", SCHEDULE, async () => {
-    await refreshDuePlayers();
-  });
-  console.log(`[snapshot-cron] snapshot refresh scheduled (${SCHEDULE})`);
+  if (
+    scheduleCron("snapshot-cron", SCHEDULE, async () => {
+      await refreshDuePlayers();
+    })
+  ) {
+    console.log(`[snapshot-cron] snapshot refresh scheduled (${SCHEDULE})`);
+  }
 }
 
 export type RefreshResult = {

@@ -8,12 +8,14 @@ const SCHEDULE = "0 * * * *";
 const TOP_N = 30;
 
 export function startTopClansCron(): void {
-  scheduleCron("top-clans cron", SCHEDULE, async () => {
-    await refreshAllRegions();
-  });
-  console.log(`[top-clans cron] scheduled (${SCHEDULE})`);
-
-  void runInitialIfEmpty();
+  if (
+    scheduleCron("top-clans cron", SCHEDULE, async () => {
+      await refreshAllRegions();
+    })
+  ) {
+    console.log(`[top-clans cron] scheduled (${SCHEDULE})`);
+    void runInitialIfEmpty();
+  }
 }
 
 async function runInitialIfEmpty(): Promise<void> {

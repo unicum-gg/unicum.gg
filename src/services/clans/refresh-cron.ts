@@ -17,10 +17,13 @@ const BATCH_SIZE_PER_REGION = 5;
 const REQUEST_DELAY_MS = 250;
 
 export function startClanRefreshCron(): void {
-  scheduleCron("clan-refresh-cron", SCHEDULE, async () => {
-    await drainClanRefreshQueue();
-  });
-  console.log(`[clan-refresh-cron] queue drain scheduled (${SCHEDULE})`);
+  if (
+    scheduleCron("clan-refresh-cron", SCHEDULE, async () => {
+      await drainClanRefreshQueue();
+    })
+  ) {
+    console.log(`[clan-refresh-cron] queue drain scheduled (${SCHEDULE})`);
+  }
 }
 
 async function pickEntriesForRegion(

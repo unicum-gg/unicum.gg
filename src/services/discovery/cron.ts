@@ -6,10 +6,13 @@ const SCHEDULE = "0 4 * * 0"; // Sundays at 04:00 server time
 const TOP_N = 500;
 
 export function startDiscoveryCron(): void {
-  scheduleCron("discovery cron", SCHEDULE, async () => {
-    await runDiscoveryAllRegions();
-  });
-  console.log(`[discovery cron] scheduled (${SCHEDULE})`);
+  if (
+    scheduleCron("discovery cron", SCHEDULE, async () => {
+      await runDiscoveryAllRegions();
+    })
+  ) {
+    console.log(`[discovery cron] scheduled (${SCHEDULE})`);
+  }
 }
 
 async function runDiscoveryAllRegions(): Promise<void> {
