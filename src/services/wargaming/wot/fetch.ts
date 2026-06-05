@@ -1,5 +1,5 @@
 import { env } from "env";
-import { userAgent } from "@/constants/app";
+import { botHeaders } from "@/lib/bot-headers";
 import { traced } from "@/lib/perf-trace";
 import { Region, REGION_PORTAL_HOST } from "./index";
 import { acquirePortalToken, acquireWgToken } from "./rate-limit";
@@ -138,7 +138,7 @@ export async function wgFetch<T>(
       try {
         const res = await fetch(url, {
           cache: "no-store",
-          headers: { "user-agent": userAgent(region) },
+          headers: botHeaders(region),
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
         });
         if (!res.ok) {
@@ -179,8 +179,7 @@ export async function portalFetch<T>(url: URL): Promise<T> {
   const headers: Record<string, string> = {
     "x-requested-with": "XMLHttpRequest",
     accept: "application/json",
-    "accept-language": "en",
-    "user-agent": userAgent(region),
+    ...botHeaders(region),
   };
 
   return traced(`portalFetch ${region} ${url.pathname}`, () =>

@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
-import APP, { userAgent } from "@/constants/app";
+import APP from "@/constants/app";
+import { botHeaders } from "@/lib/bot-headers";
 import {
   intFmt,
   loadOgAssets,
@@ -54,7 +55,7 @@ export default async function Image({
       if (cached.info.emblem) {
         try {
           const res = await fetch(cached.info.emblem, {
-            headers: { "user-agent": userAgent(region) },
+            headers: botHeaders(region),
             signal: AbortSignal.timeout(5000),
           });
           if (res.ok) {
