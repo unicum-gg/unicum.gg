@@ -69,20 +69,23 @@ class RateLimiter {
 // NOT Wargaming's `*.fe.core.pw` origin. So all 3 API hosts sit behind the
 // same G-Core WAF as the portals.
 //
-// Empirical confirmation: 18 RPS sustained on api.worldoftanks.eu from OVH
-// gave 71.3% success / p50 3.5s latency (10-min test, 2026-06-03), exactly
-// the same throttle signature as the portals.
+// On OVH (clean IP, no DNS pinning) 5 RPS sustained is fine empirically —
+// snapshot-cron (200 calls/min) + clan-backfill (20/min) + user-driven
+// ClanPage loads (~200 calls per page) saturate the queue at 1 RPS but drain
+// cleanly at 5. Still well under G-Core's WAF threshold (we stress-tested
+// 18-60 RPS before getting throttled).
 //
-// Same +1/day ramp discipline as PORTAL_RPS — start at 1 RPS per region,
-// bump each day until that host starts timing out.
+// ASIA stays at 1 because (a) the host is on a different G-Core /24
+// (92.223.17.x) we haven't re-tested without DNS pinning, and (b) low traffic
+// region — no queue pressure to justify bumping.
 const WG_RPS: Record<Region, number> = {
-  [Region.EU]: 1,
-  [Region.NA]: 1,
+  [Region.EU]: 5,
+  [Region.NA]: 5,
   [Region.ASIA]: 1,
 };
 const WG_BURST: Record<Region, number> = {
-  [Region.EU]: 1,
-  [Region.NA]: 1,
+  [Region.EU]: 5,
+  [Region.NA]: 5,
   [Region.ASIA]: 1,
 };
 
