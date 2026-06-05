@@ -21,6 +21,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
 import { getTopClansByWnxByRegions } from "@/services/wargaming/wot/clans/top";
@@ -64,7 +65,7 @@ export async function HomePage({
         <div className="absolute inset-0 dot-pattern opacity-20" />
         <div className="relative z-10 space-y-4 px-4 text-center sm:space-y-6 sm:px-6">
           <h1 className="text-2xl font-bold text-white sm:text-4xl md:text-6xl">
-            unicum.gg
+            {APP.NAME}
           </h1>
           <p className="mx-auto max-w-2xl text-base text-white/90 sm:text-lg md:text-xl">
             World of Tanks player and clan stats. Track your progress, compare
@@ -163,7 +164,7 @@ export async function HomePage({
               </p>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Link
-                  href={ROUTES.EXTERNAL.DISCORD}
+                  href={APP.EXTERNAL.DISCORD}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({ variant: "primary" })}
@@ -172,7 +173,7 @@ export async function HomePage({
                   Join Discord
                 </Link>
                 <Link
-                  href={ROUTES.EXTERNAL.GITHUB}
+                  href={APP.EXTERNAL.GITHUB}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={buttonVariants({ variant: "outline" })}

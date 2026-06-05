@@ -13,6 +13,7 @@ import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import { JsonLd } from "@/components/json-ld";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
@@ -338,7 +339,7 @@ function buildView(args: {
         data={personSchema({
           nickname: player.nickname,
           region: regionLabel,
-          url: `https://unicum.gg${ROUTES.PLAYER(region, player.nickname)}`,
+          url: `${APP.URL}${ROUTES.PLAYER(region, player.nickname)}`,
           description: playerDescription,
           clanName: clanHistory.currentStint?.clan.name ?? null,
         })}

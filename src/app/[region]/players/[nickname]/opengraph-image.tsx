@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import APP from "@/constants/app";
 import {
   intFmt,
   loadOgAssets,
@@ -20,7 +21,7 @@ import { isRegion } from "@/services/wargaming/wot";
 import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
 
 export const runtime = "nodejs";
-export const alt = "World of Tanks player stats on unicum.gg";
+export const alt = `World of Tanks player stats on ${APP.NAME}`;
 export const size = OG_SIZE;
 export const contentType = OG_CONTENT_TYPE;
 
@@ -170,7 +171,7 @@ export default async function Image({
             }}
           >
             <span>
-              unicum.gg/{region}/players/{displayName}
+              {APP.NAME}/{region}/players/{displayName}
             </span>
           </div>
         </div>

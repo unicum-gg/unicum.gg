@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { CoverageView } from "@/components/coverage/coverage-view";
+import APP from "@/constants/app";
 import { constructMetadata } from "@/lib/metadata";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
@@ -17,7 +18,7 @@ export async function generateMetadata({
   const label = REGION_LABEL[region];
   return constructMetadata({
     title: `World of Tanks data coverage (${label})`,
-    description: `How many World of Tanks players and clans unicum.gg tracks on ${label}, snapshot refresh rate, data depth, infrastructure cost and uptime.`,
+    description: `How many World of Tanks players and clans ${APP.NAME} tracks on ${label}, snapshot refresh rate, data depth, infrastructure cost and uptime.`,
     ogTitle: "Data coverage",
     ogSubtitle: `${label} players & clans`,
   });

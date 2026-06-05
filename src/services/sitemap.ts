@@ -4,6 +4,7 @@ import {
   type SitemapEntry,
 } from "@onruntime/next-sitemap";
 import { sql } from "drizzle-orm";
+import APP from "@/constants/app";
 import { db } from "@/services/db";
 import {
   clansByRegion,
@@ -11,7 +12,6 @@ import {
 } from "@/services/db/schema";
 import { REGIONS } from "@/services/wargaming/wot";
 
-export const SITE_URL = "https://unicum.gg";
 export const URLS_PER_SITEMAP = 25000;
 
 export function getSitemapCount(
@@ -26,7 +26,7 @@ export function createSitemapEntry(
   options?: { lastModified?: Date },
 ): SitemapEntry {
   return {
-    url: `${SITE_URL}${path}`,
+    url: `${APP.URL}${path}`,
     lastModified: options?.lastModified ?? new Date(),
     priority: getPriority(path, "auto"),
   };
@@ -64,7 +64,7 @@ export const sitemapConfig: Pick<
   SitemapConfig,
   "baseUrl" | "exclude"
 > = {
-  baseUrl: SITE_URL,
+  baseUrl: APP.URL,
   exclude: [
     // Internal/API routes
     "/api/*",

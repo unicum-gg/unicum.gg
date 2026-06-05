@@ -1,4 +1,5 @@
 import Link from "next/link";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { styles } from "@/lib/styles";
 import { Region } from "@/services/wargaming/wot";
@@ -30,7 +31,7 @@ export function Footer() {
             </Link>
             <FooterCoverageLink />
             <Link
-              href={ROUTES.EXTERNAL.GITHUB}
+              href={APP.EXTERNAL.GITHUB}
               className={styles.linkHover}
               target="_blank"
               rel="noopener noreferrer"
@@ -39,7 +40,7 @@ export function Footer() {
             </Link>
           </div>
           <div className="space-y-1 text-xs text-fd-muted-foreground">
-            <div>© 2026 unicum.gg</div>
+            <div>© 2026 {APP.NAME}</div>
             <div>Not affiliated with Wargaming</div>
           </div>
         </div>

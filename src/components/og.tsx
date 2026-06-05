@@ -1,3 +1,5 @@
+import APP from "@/constants/app";
+
 export function RegionHeaderCell({ region }: { region: string }) {
   return (
     <div
@@ -34,7 +36,7 @@ export function BrandHeaderCell({ logoSrc }: { logoSrc: string }) {
     >
       <img src={logoSrc} width={35} height={48} alt="" />
       <span style={{ fontSize: 36, fontWeight: 700, color: "#F5F5F5" }}>
-        unicum.gg
+        {APP.NAME}
       </span>
     </div>
   );

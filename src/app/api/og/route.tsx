@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { BrandHeaderCell } from "@/components/og";
+import APP from "@/constants/app";
 import { loadOgAssets, OG_SIZE, ogFonts } from "@/lib/og";
 
 export const runtime = "nodejs";
@@ -75,7 +76,7 @@ export async function GET(req: NextRequest) {
               color: "#71717A",
             }}
           >
-            <span>unicum.gg</span>
+            <span>{APP.NAME}</span>
           </div>
         </div>
       </div>

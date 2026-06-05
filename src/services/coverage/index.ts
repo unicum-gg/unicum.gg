@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
+import APP from "@/constants/app";
 import { db } from "@/services/db";
 import {
   clanMembersByRegion,
@@ -292,7 +293,7 @@ async function getCoverageStatsUncached(
           {
             label: "Domain",
             usdAnnual: DOMAIN_USD_ANNUAL,
-            note: "unicum.gg, billed yearly",
+            note: `${APP.NAME}, billed yearly`,
           },
           {
             label: "CDN, SSL, deploys",

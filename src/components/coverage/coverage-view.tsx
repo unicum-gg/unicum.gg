@@ -6,7 +6,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { RelativeTime } from "@/components/relative-time";
-import ROUTES from "@/constants/routes";
+import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
 import { getCoverageStats } from "@/services/coverage";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
@@ -64,7 +64,7 @@ export async function CoverageView({ region }: { region: Region }) {
             Refreshed every 24h by our snapshot system. Open source, no login,
             no ads.{" "}
             <a
-              href={ROUTES.EXTERNAL.GITHUB}
+              href={APP.EXTERNAL.GITHUB}
               className="underline-offset-2 hover:underline"
             >
               Code on GitHub

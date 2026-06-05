@@ -14,6 +14,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { JsonLd } from "@/components/json-ld";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
@@ -114,7 +115,7 @@ async function render(
           name: clan.name,
           region: region.toUpperCase(),
           membersCount: clan.membersCount,
-          url: `https://unicum.gg${ROUTES.CLAN(region, clan.tag)}`,
+          url: `${APP.URL}${ROUTES.CLAN(region, clan.tag)}`,
           description: `${clan.name} [${clan.tag}] World of Tanks clan on ${region.toUpperCase()}: ${clan.membersCount} members, WN8/WNX ratings, member rankings, recent join/leave activity.`,
           logo: clan.emblem,
         })}

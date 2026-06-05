@@ -1,11 +1,11 @@
 import "server-only";
 import type { Metadata } from "next";
 import { headers } from "next/headers";
+import APP from "@/constants/app";
 
-const SITE_URL = "https://unicum.gg";
-const SITE_NAME = "unicum.gg";
-const SITE_DESCRIPTION =
-  "Free World of Tanks stats for every player and clan across EU, NA and Asia. WN8, WNX, winrate, tank progression, clan member rankings and history.";
+const SITE_URL = APP.URL;
+const SITE_NAME = APP.NAME;
+const SITE_DESCRIPTION = APP.DESCRIPTION;
 
 export async function constructMetadata({
   title,

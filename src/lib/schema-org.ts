@@ -5,10 +5,11 @@ import type {
   WebSite,
   WithContext,
 } from "schema-dts";
+import APP from "@/constants/app";
 
-const SITE_URL = "https://unicum.gg";
-const SITE_NAME = "unicum.gg";
-const LOGO_URL = `${SITE_URL}/icon.svg`;
+const SITE_URL = APP.URL;
+const SITE_NAME = APP.NAME;
+const LOGO_URL = APP.LOGO;
 
 export function websiteSchema(): WithContext<WebSite> {
   return {
@@ -29,10 +30,7 @@ export function organizationSchema(): WithContext<Organization> {
     name: SITE_NAME,
     url: SITE_URL,
     logo: LOGO_URL,
-    sameAs: [
-      "https://github.com/unicum-gg/unicum.gg",
-      "https://discord.gg/pxSQgmzPTG",
-    ],
+    sameAs: Object.values(APP.EXTERNAL),
   };
 }
 
