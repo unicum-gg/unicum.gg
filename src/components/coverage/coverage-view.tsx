@@ -111,14 +111,11 @@ export async function CoverageView({ region }: { region: Region }) {
               value={intFmt.format(stats.activity.clansRefreshedLast24h)}
             />
           </div>
-          {region === Region.ASIA && (
-            <p className="text-xs text-fd-muted-foreground">
-              Asia throughput is intentionally serialized (one in-flight request
-              at a time): the network path between Europe and Wargaming Asia
-              drops concurrent flows. Snapshots progress slower than EU/NA but
-              every player gets refreshed eventually.
-            </p>
-          )}
+          <p className="text-xs text-fd-muted-foreground">
+            The snapshot cron refreshes up to 200 players per region per minute
+            to stay under Wargaming's API rate limits. Backlogs drain
+            continuously and every player is eventually refreshed.
+          </p>
         </PanelContent>
       </Panel>
 
