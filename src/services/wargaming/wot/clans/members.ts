@@ -1,3 +1,4 @@
+import type { WeightedDataPoint } from "@/lib/stats";
 import {
   type Region,
   REGION_PORTAL_HOST,
@@ -138,4 +139,41 @@ export async function getClanMembersStats(
       wnxRecent: null,
     };
   });
+}
+
+/**
+ * Build battle-weighted points for clan-aggregate ratings derived from a
+ * member's lifetime stats (overall WNX, lifetime winrate). Weight is the
+ * member's lifetime battle count, so veterans outweigh freshmen.
+ */
+export function overallPoints(
+  members: ClanMemberStats[],
+  getValue: (m: ClanMemberStats) => number | null,
+): WeightedDataPoint[] {
+  const points: WeightedDataPoint[] = [];
+  for (const m of members) {
+    const value = getValue(m);
+    if (value === null || !m.overall || m.overall.battles <= 0) continue;
+    points.push({ value, weight: m.overall.battles });
+  }
+  return points;
+}
+
+/**
+ * Build battle-weighted points for clan-aggregate "recent" ratings (28-day
+ * WNX, 28-day winrate). Weight is 28-day battles only, so a member who
+ * stopped playing weeks ago (huge lifetime totals, zero recent) doesn't
+ * poison the recent view.
+ */
+export function recentPoints(
+  members: ClanMemberStats[],
+  getValue: (m: ClanMemberStats) => number | null,
+): WeightedDataPoint[] {
+  const points: WeightedDataPoint[] = [];
+  for (const m of members) {
+    const value = getValue(m);
+    if (value === null || !m.d28 || m.d28.battles <= 0) continue;
+    points.push({ value, weight: m.d28.battles });
+  }
+  return points;
 }

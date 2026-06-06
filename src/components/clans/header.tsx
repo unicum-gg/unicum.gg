@@ -4,9 +4,14 @@ import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
+import { weightedAverage } from "@/lib/stats";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
+import {
+  type ClanMemberStats,
+  overallPoints,
+  recentPoints,
+} from "@/services/wargaming/wot/clans/members";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -22,13 +27,6 @@ const pctFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1,
 });
 
-function average(values: number[]): number | null {
-  if (values.length === 0) return null;
-  let sum = 0;
-  for (const v of values) sum += v;
-  return sum / values.length;
-}
-
 type MetricCell = {
   label: string;
   value: string;
@@ -42,19 +40,13 @@ function computeMetrics(
   avgWnx: MetricCell;
   avgWinrate: MetricCell;
 } {
-  const active = members.filter((m) => m.overall && m.overall.battles > 0);
-  const avgWinRate = average(
-    active.map((m) => m.overall?.winsPercentage ?? 0),
+  const avgWnx = weightedAverage(overallPoints(members, (m) => m.wnx));
+  const avgWnxRecent = weightedAverage(
+    recentPoints(members, (m) => m.wnxRecent),
   );
-  const wnxValues = members
-    .map((m) => m.wnx)
-    .filter((v): v is number => v !== null);
-  const wnxRecentValues = members
-    .map((m) => m.wnxRecent)
-    .filter((v): v is number => v !== null);
-  const avgWnx = wnxValues.length > 0 ? average(wnxValues) : null;
-  const avgWnxRecent =
-    wnxRecentValues.length > 0 ? average(wnxRecentValues) : null;
+  const avgWinRate = weightedAverage(
+    overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
+  );
 
   return {
     avgWnxRecent: {

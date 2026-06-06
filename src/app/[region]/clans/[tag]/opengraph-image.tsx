@@ -11,6 +11,7 @@ import {
   pctFmt,
   RATING_BG,
 } from "@/lib/og";
+import { weightedAverage } from "@/lib/stats";
 import {
   BrandHeaderCell,
   RegionHeaderCell,
@@ -19,6 +20,10 @@ import {
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanMembersCached } from "@/services/clans/repository/members";
 import { isRegion } from "@/services/wargaming/wot";
+import {
+  overallPoints,
+  recentPoints,
+} from "@/services/wargaming/wot/clans/members";
 import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
 
 export const runtime = "nodejs";
@@ -68,27 +73,19 @@ export default async function Image({
       }
 
       // Ratings (wnx + wnxRecent) are pre-computed on each member row by
-      // refreshClanMembers, so the OG just averages cached values — no tank
-      // snapshot loading, no compute. Sub-second regardless of clan size.
+      // refreshClanMembers, so the OG just averages cached values. Battle-
+      // weighted so a freshman with 1 battle doesn't drag the clan number.
       const memberStats = (
         await getClanMembersCached(region, cached.info.id)
       ).members;
-      const activeOverall = memberStats.filter(
-        (m) => m.overall && m.overall.battles > 0,
+      avgWnx = weightedAverage(overallPoints(memberStats, (m) => m.wnx));
+      avgWnxRecent = weightedAverage(
+        recentPoints(memberStats, (m) => m.wnxRecent),
       );
-      if (activeOverall.length > 0) {
-        avgWinrate =
-          average(activeOverall.map((m) => m.overall?.winsPercentage ?? 0)) /
-          100;
-      }
-      const wnxValues = memberStats
-        .map((m) => m.wnx)
-        .filter((v): v is number => v !== null);
-      const wnxRecentValues = memberStats
-        .map((m) => m.wnxRecent)
-        .filter((v): v is number => v !== null);
-      if (wnxValues.length > 0) avgWnx = average(wnxValues);
-      if (wnxRecentValues.length > 0) avgWnxRecent = average(wnxRecentValues);
+      const wr = weightedAverage(
+        overallPoints(memberStats, (m) => m.overall?.winsPercentage ?? null),
+      );
+      avgWinrate = wr === null ? null : wr / 100;
     }
   }
 
@@ -229,7 +226,3 @@ export default async function Image({
   );
 }
 
-function average(values: number[]): number {
-  if (values.length === 0) return 0;
-  return values.reduce((sum, v) => sum + v, 0) / values.length;
-}
