@@ -33,18 +33,22 @@ export async function computeTopClansByWnx(
   region: Region,
   limit: number,
 ): Promise<TopClanResult[]> {
-  // Single SQL aggregation: for each player take the latest snapshot's clan_id
-  // (DISTINCT ON), join `players.wnx` (cached by snapshot-cron), then GROUP BY
-  // clan to count members and average the WNX. Replaces an in-process compute
-  // that fetched tank snapshots for every member of every eligible clan and
-  // blew through PG's 65k-param limit on regions with thousands of clans.
+  // Single SQL aggregation: for each player take the latest snapshot's
+  // clan_id + battles (DISTINCT ON), join `players.wnx` (cached by
+  // snapshot-cron), then GROUP BY clan. Average is battle-weighted so a
+  // freshly-recruited noob with 1 battle and freak WNX doesn't drag the
+  // clan rank; matches the in-app `computeMetrics` in components/clans/header.
+  // Replaces an in-process compute that fetched tank snapshots for every
+  // member of every eligible clan and blew through PG's 65k-param limit on
+  // regions with thousands of clans.
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
   const rows = (await db.execute(sql`
     WITH latest_memberships AS (
       SELECT DISTINCT ON (ps.player_id)
         ps.player_id,
-        ps.clan_id
+        ps.clan_id,
+        ps.battles
       FROM ${playerSnapshots} ps
       WHERE ps.clan_id IS NOT NULL
       ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
@@ -53,12 +57,20 @@ export async function computeTopClansByWnx(
       lm.clan_id,
       COUNT(*)::int AS members_in_db,
       COUNT(p.wnx)::int AS rated_members_count,
-      AVG(p.wnx)::float8 AS avg_wnx
+      (
+        SUM(p.wnx * lm.battles)
+          FILTER (WHERE p.wnx IS NOT NULL AND lm.battles > 0)
+        / NULLIF(
+            SUM(lm.battles)
+              FILTER (WHERE p.wnx IS NOT NULL AND lm.battles > 0),
+            0
+          )
+      )::float8 AS avg_wnx
     FROM latest_memberships lm
     INNER JOIN ${players} p ON p.id = lm.player_id
     GROUP BY lm.clan_id
     HAVING COUNT(*) > ${MIN_MEMBERS} AND COUNT(p.wnx) > 0
-    ORDER BY avg_wnx DESC
+    ORDER BY avg_wnx DESC NULLS LAST
     LIMIT ${ENRICH_CANDIDATES}
   `)) as unknown as Array<{
     clan_id: string | number;
