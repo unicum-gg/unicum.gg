@@ -10,7 +10,7 @@ import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
 import {
   type ClanMemberStats,
   overallPoints,
-  recentPoints,
+  d30Points,
 } from "@/services/wargaming/wot/clans/members";
 import {
   RATING_COLOR_CLASS,
@@ -36,23 +36,23 @@ type MetricCell = {
 function computeMetrics(
   members: ClanMemberStats[],
 ): {
-  avgWnxRecent: MetricCell;
+  avgWnx30d: MetricCell;
   avgWnx: MetricCell;
   avgWinrate: MetricCell;
 } {
   const avgWnx = weightedAverage(overallPoints(members, (m) => m.wnx));
-  const avgWnxRecent = weightedAverage(
-    recentPoints(members, (m) => m.wnxRecent),
+  const avgWnx30d = weightedAverage(
+    d30Points(members, (m) => m.wnx30d),
   );
   const avgWinRate = weightedAverage(
     overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
   );
 
   return {
-    avgWnxRecent: {
-      label: "Avg Recent WNX",
-      value: avgWnxRecent === null ? "—" : intFmt.format(avgWnxRecent),
-      color: avgWnxRecent === null ? null : wnxColor(avgWnxRecent),
+    avgWnx30d: {
+      label: "Avg WNX · 30d",
+      value: avgWnx30d === null ? "—" : intFmt.format(avgWnx30d),
+      color: avgWnx30d === null ? null : wnxColor(avgWnx30d),
     },
     avgWnx: {
       label: "Avg WNX",
@@ -137,7 +137,7 @@ export function ClanHeader({
           )}
         </div>
       </div>
-      <MetricColumn metric={metrics.avgWnxRecent} />
+      <MetricColumn metric={metrics.avgWnx30d} />
       <MetricColumn metric={metrics.avgWnx} />
       <MetricColumn metric={metrics.avgWinrate} />
     </header>

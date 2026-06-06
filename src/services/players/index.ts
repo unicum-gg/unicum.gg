@@ -265,7 +265,7 @@ export async function recordCurrentSnapshot(
 }
 
 /**
- * Refresh the cached wn7/wn8/wnx/wnxRecent on the players row from the just
+ * Refresh the cached wn7/wn8/wnx/wnx30d on the players row from the just
  * inserted tank snapshot set. Called inside `recordCurrentSnapshot` so every
  * fresh snapshot keeps the ratings in lockstep with the underlying data —
  * the clan members table and the player page both read these cached values
@@ -305,10 +305,11 @@ async function updatePlayerRatings(
   const wn8 = computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   const wnx = computeWNX(tanks, wnxExpected);
 
-  // Recent WNX = current vs. latest snapshot strictly older than 7 days.
+  // Recent ratings use a 30-day window so they match the "Last 30d" column
+  // on the player page and the clan aggregate (`weighted by battles30d`).
   // Single query per player: cheap inside the snapshot path.
-  const d7Cutoff = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
-  const d7Rows = await db
+  const d30Cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const d30Rows = await db
     .selectDistinctOn([tankSnapshots.tankId], {
       tankId: tankSnapshots.tankId,
       battles: tankSnapshots.battles,
@@ -325,7 +326,7 @@ async function updatePlayerRatings(
     .where(
       and(
         eq(tankSnapshots.playerId, playerId),
-        lt(tankSnapshots.takenAt, d7Cutoff),
+        lt(tankSnapshots.takenAt, d30Cutoff),
       ),
     )
     .orderBy(
@@ -334,10 +335,11 @@ async function updatePlayerRatings(
       desc(tankSnapshots.id),
     );
 
-  let wnxRecent: number | null = null;
-  if (d7Rows.length > 0) {
-    const d7Map = new Map(
-      d7Rows.map((r) => [
+  let wnx30d: number | null = null;
+  let battles30d: number | null = null;
+  if (d30Rows.length > 0) {
+    const d30Map = new Map(
+      d30Rows.map((r) => [
         r.tankId,
         {
           id: 0,
@@ -355,13 +357,16 @@ async function updatePlayerRatings(
         },
       ]),
     );
-    const recent = diffTanks(tanks, d7Map);
-    if (recent) wnxRecent = computeWNX(recent, wnxExpected);
+    const recent = diffTanks(tanks, d30Map);
+    if (recent.length > 0) {
+      wnx30d = computeWNX(recent, wnxExpected);
+      battles30d = recent.reduce((sum, t) => sum + t.all.battles, 0);
+    }
   }
 
   await db
     .update(players)
-    .set({ wn7, wn8, wnx, wnxRecent })
+    .set({ wn7, wn8, wnx, wnx30d, battles30d })
     .where(eq(players.id, playerId));
 }
 

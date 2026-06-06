@@ -55,10 +55,13 @@ export type ClanMemberStats = {
   // Pre-computed ratings cached on the clan_members row by refreshClanMembers,
   // so the clan page can render the table fully populated on first paint
   // instead of streaming a 100-member compute via Suspense.
+  // `wnx30d` + `battles30d` cover a 30-day window (matches the player
+  // page "Last 30d" column); the clan aggregate weights by `battles30d`.
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
-  wnxRecent: number | null;
+  wnx30d: number | null;
+  battles30d: number | null;
 };
 
 function periodStatsFromRaw(
@@ -136,7 +139,8 @@ export async function getClanMembersStats(
       wn7: null,
       wn8: null,
       wnx: null,
-      wnxRecent: null,
+      wnx30d: null,
+      battles30d: null,
     };
   });
 }
@@ -160,20 +164,21 @@ export function overallPoints(
 }
 
 /**
- * Build battle-weighted points for clan-aggregate "recent" ratings (28-day
- * WNX, 28-day winrate). Weight is 28-day battles only, so a member who
- * stopped playing weeks ago (huge lifetime totals, zero recent) doesn't
- * poison the recent view.
+ * Build battle-weighted points for clan-aggregate "recent" ratings using
+ * the 30-day window cached on the players row. Weight is `battles30d`,
+ * so a member who stopped playing weeks ago (huge lifetime totals, zero
+ * recent) doesn't poison the recent view.
  */
-export function recentPoints(
+export function d30Points(
   members: ClanMemberStats[],
   getValue: (m: ClanMemberStats) => number | null,
 ): WeightedDataPoint[] {
   const points: WeightedDataPoint[] = [];
   for (const m of members) {
     const value = getValue(m);
-    if (value === null || !m.d28 || m.d28.battles <= 0) continue;
-    points.push({ value, weight: m.d28.battles });
+    if (value === null || m.battles30d === null || m.battles30d <= 0)
+      continue;
+    points.push({ value, weight: m.battles30d });
   }
   return points;
 }

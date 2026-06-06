@@ -30,7 +30,8 @@ type RawPlayer = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
-  wnx_recent: number | null;
+  wnx_30d: number | null;
+  battles_30d: number | null;
 };
 
 type RawPlayerSnapshot = {
@@ -108,7 +109,8 @@ function playerFromRaw(r: RawPlayer): Player {
     wn7: r.wn7,
     wn8: r.wn8,
     wnx: r.wnx,
-    wnxRecent: r.wnx_recent,
+    wnx30d: r.wnx_30d,
+    battles30d: r.battles_30d,
   };
 }
 

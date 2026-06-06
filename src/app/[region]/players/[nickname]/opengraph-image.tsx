@@ -42,7 +42,7 @@ export default async function Image({
   let clanTagColor = "#F5F5F5";
   let clanEmblemDataUrl: string | null = null;
   let wnx: number | null = null;
-  let wnxRecent: number | null = null;
+  let wnx30d: number | null = null;
 
   if (isRegion(region)) {
     const initial = await loadPlayerInitialData(region, { nickname: decoded });
@@ -75,7 +75,7 @@ export default async function Image({
     // Ratings come pre-computed on the player row (updated by snapshot-cron
     // whenever a fresh tank snapshot is recorded), so no compute here.
     wnx = initial.player?.wnx ?? null;
-    wnxRecent = initial.player?.wnxRecent ?? null;
+    wnx30d = initial.player?.wnx30d ?? null;
   }
 
   return new ImageResponse(
@@ -188,9 +188,9 @@ export default async function Image({
             first
           />
           <StatCard
-            label="Recent WNX"
-            value={wnxRecent !== null ? ratingFmt.format(wnxRecent) : "—"}
-            bg={wnxRecent !== null ? RATING_BG[wnxColor(wnxRecent)] : null}
+            label="WNX · 30d"
+            value={wnx30d !== null ? ratingFmt.format(wnx30d) : "—"}
+            bg={wnx30d !== null ? RATING_BG[wnxColor(wnx30d)] : null}
           />
           <StatCard
             label="WNX"

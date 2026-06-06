@@ -22,7 +22,7 @@ import { getClanMembersCached } from "@/services/clans/repository/members";
 import { isRegion } from "@/services/wargaming/wot";
 import {
   overallPoints,
-  recentPoints,
+  d30Points,
 } from "@/services/wargaming/wot/clans/members";
 import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
 
@@ -47,7 +47,7 @@ export default async function Image({
   let clanEmblemDataUrl: string | null = null;
   let avgWinrate: number | null = null;
   let avgWnx: number | null = null;
-  let avgWnxRecent: number | null = null;
+  let avgWnx30d: number | null = null;
 
   if (isRegion(region)) {
     const cached = await getClanByTagCached(region, decoded);
@@ -72,15 +72,15 @@ export default async function Image({
         }
       }
 
-      // Ratings (wnx + wnxRecent) are pre-computed on each member row by
+      // Ratings (wnx + wnx30d) are pre-computed on each member row by
       // refreshClanMembers, so the OG just averages cached values. Battle-
       // weighted so a freshman with 1 battle doesn't drag the clan number.
       const memberStats = (
         await getClanMembersCached(region, cached.info.id)
       ).members;
       avgWnx = weightedAverage(overallPoints(memberStats, (m) => m.wnx));
-      avgWnxRecent = weightedAverage(
-        recentPoints(memberStats, (m) => m.wnxRecent),
+      avgWnx30d = weightedAverage(
+        d30Points(memberStats, (m) => m.wnx30d),
       );
       const wr = weightedAverage(
         overallPoints(memberStats, (m) => m.overall?.winsPercentage ?? null),
@@ -203,9 +203,9 @@ export default async function Image({
             first
           />
           <StatCard
-            label="Recent WNX"
-            value={avgWnxRecent !== null ? intFmt.format(avgWnxRecent) : "—"}
-            bg={avgWnxRecent !== null ? RATING_BG[wnxColor(avgWnxRecent)] : null}
+            label="WNX · 30d"
+            value={avgWnx30d !== null ? intFmt.format(avgWnx30d) : "—"}
+            bg={avgWnx30d !== null ? RATING_BG[wnxColor(avgWnx30d)] : null}
           />
           <StatCard
             label="WNX"

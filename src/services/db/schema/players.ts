@@ -1,5 +1,6 @@
 import {
   bigint,
+  integer,
   pgTable,
   real,
   serial,
@@ -35,10 +36,14 @@ export function makePlayersTable(region: string) {
       // Cached ratings — updated by the snapshot-cron whenever a new tank
       // snapshot is recorded. Lets the player page render synchronously and
       // the clan page JOIN for member ratings without per-request compute.
+      // `wnx30d` + `battles30d` cover a 30-day window so they line up with
+      // the player page "Last 30d" column; the clan aggregate weights
+      // members by `battles30d` for a consistent recent view.
       wn7: real("wn7"),
       wn8: real("wn8"),
       wnx: real("wnx"),
-      wnxRecent: real("wnx_recent"),
+      wnx30d: real("wnx_30d"),
+      battles30d: integer("battles_30d"),
     },
     (t) => [uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId)],
   );

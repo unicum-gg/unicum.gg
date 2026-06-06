@@ -98,7 +98,7 @@ async function render(
     `members fromDb=${membersCached.fromDb} refreshing=${membersCached.refreshing} count=${members.length}`,
   );
 
-  // Ratings (wn7/wn8/wnx/wnxRecent) are pre-computed by refreshClanMembers
+  // Ratings (wn7/wn8/wnx/wnx30d) are pre-computed by refreshClanMembers
   // and cached on each row, so the table renders fully populated on first
   // paint — no Suspense boundary needed.
 
