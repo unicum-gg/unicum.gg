@@ -18,13 +18,24 @@ const SCHEDULE = "* * * * *";
 const BATCH_SIZE_PER_REGION = 200;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 
+/**
+ * Schedules one independent cron per region instead of a single cron that
+ * processes all three in parallel. The single-cron design was bottlenecked
+ * by EU's G-Core throttling: a slow EU tick held the global overlap guard
+ * and caused NA/Asia to skip their own ticks ("previous tick still in
+ * flight"). Per-region crons keep each region's overlap guard isolated, so
+ * EU's timeouts can't starve NA/Asia of compute.
+ */
 export function startPlayerBackfillCron(): void {
-  if (
-    scheduleCron("snapshot-cron", SCHEDULE, async () => {
-      await refreshDuePlayers();
-    })
-  ) {
-    console.log(`[snapshot-cron] snapshot refresh scheduled (${SCHEDULE})`);
+  for (const region of REGIONS) {
+    const name = `snapshot-cron-${region}`;
+    if (
+      scheduleCron(name, SCHEDULE, async () => {
+        await refreshDuePlayersForRegion(region);
+      })
+    ) {
+      console.log(`[${name}] snapshot refresh scheduled (${SCHEDULE})`);
+    }
   }
 }
 
@@ -56,84 +67,100 @@ async function collectDuePlayers(
   return { rows, queued };
 }
 
-export async function refreshDuePlayers(): Promise<RefreshResult> {
-  const cutoff = new Date(Date.now() - MIN_REFRESH_AGE_MS);
+async function processRegionBatch(
+  region: Region,
+  rows: Player[],
+): Promise<{ succeeded: number; failed: number }> {
+  const players = playersByRegion[region];
+  const accountIds = rows.map((r) => r.accountId);
 
-  const dueByRegion = await Promise.all(
-    REGIONS.map(async (region) => {
-      const { rows, queued } = await collectDuePlayers(
-        region,
-        cutoff,
-        BATCH_SIZE_PER_REGION,
-      );
-      return { region, rows, queued };
+  const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
+    getPlayersInfoBatch(region, accountIds).catch((err) => {
+      console.error(`[snapshot-cron-${region}] account/info batch failed:`, err);
+      return new Map<number, PlayerInfo>();
     }),
-  );
-
-  const total = dueByRegion.reduce((acc, r) => acc + r.rows.length, 0);
-  const totalQueued = dueByRegion.reduce((acc, r) => acc + r.queued, 0);
-  if (total === 0) return { processed: 0, succeeded: 0, failed: 0 };
-
-  console.log(
-    `[snapshot-cron] refreshing ${total}/${totalQueued} due (${dueByRegion
-      .map((r) => `${r.region}:${r.rows.length}/${r.queued}`)
-      .join(", ")})`,
-  );
+    getTanksStatsBatch(region, accountIds).catch((err) => {
+      console.error(`[snapshot-cron-${region}] tanks/stats batch failed:`, err);
+      return new Map<number, TankStats[]>();
+    }),
+    getAccountsWTRBatch(region, accountIds).catch((err) => {
+      console.error(`[snapshot-cron-${region}] wtr batch failed:`, err);
+      return new Map<number, number>();
+    }),
+  ]);
 
   let succeeded = 0;
   let failed = 0;
 
-  await Promise.all(
-    dueByRegion.map(async ({ region, rows }) => {
-      if (rows.length === 0) return;
-      const players = playersByRegion[region];
-      const accountIds = rows.map((r) => r.accountId);
+  for (const player of rows) {
+    const info = infosByAccount.get(player.accountId);
+    if (!info) {
+      failed += 1;
+      await db
+        .update(players)
+        .set({ lastSeenAt: sql`NOW()` })
+        .where(eq(players.id, player.id));
+      continue;
+    }
+    try {
+      const wtr = wtrByAccount.get(player.accountId) ?? null;
+      const tanks = tanksByAccount.get(player.accountId) ?? [];
+      await recordCurrentSnapshot(region, info, wtr, tanks);
+      succeeded += 1;
+    } catch (err) {
+      failed += 1;
+      console.error(
+        `[snapshot-cron-${region}] snapshot insert failed for ${player.nickname}:`,
+        err,
+      );
+      await db
+        .update(players)
+        .set({ lastSeenAt: sql`NOW()` })
+        .where(eq(players.id, player.id));
+    }
+  }
 
-      const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
-        getPlayersInfoBatch(region, accountIds).catch((err) => {
-          console.error(`[snapshot-cron] account/info batch failed (${region}):`, err);
-          return new Map<number, PlayerInfo>();
-        }),
-        getTanksStatsBatch(region, accountIds).catch((err) => {
-          console.error(`[snapshot-cron] tanks/stats batch failed (${region}):`, err);
-          return new Map<number, TankStats[]>();
-        }),
-        getAccountsWTRBatch(region, accountIds).catch((err) => {
-          console.error(`[snapshot-cron] wtr batch failed (${region}):`, err);
-          return new Map<number, number>();
-        }),
-      ]);
+  return { succeeded, failed };
+}
 
-      for (const player of rows) {
-        const info = infosByAccount.get(player.accountId);
-        if (!info) {
-          failed += 1;
-          await db
-            .update(players)
-            .set({ lastSeenAt: sql`NOW()` })
-            .where(eq(players.id, player.id));
-          continue;
-        }
-        try {
-          const wtr = wtrByAccount.get(player.accountId) ?? null;
-          const tanks = tanksByAccount.get(player.accountId) ?? [];
-          await recordCurrentSnapshot(region, info, wtr, tanks);
-          succeeded += 1;
-        } catch (err) {
-          failed += 1;
-          console.error(
-            `[snapshot-cron] snapshot insert failed for ${player.nickname} (${region}):`,
-            err,
-          );
-          await db
-            .update(players)
-            .set({ lastSeenAt: sql`NOW()` })
-            .where(eq(players.id, player.id));
-        }
-      }
-    }),
+export async function refreshDuePlayersForRegion(
+  region: Region,
+): Promise<RefreshResult> {
+  const cutoff = new Date(Date.now() - MIN_REFRESH_AGE_MS);
+  const { rows, queued } = await collectDuePlayers(
+    region,
+    cutoff,
+    BATCH_SIZE_PER_REGION,
+  );
+  if (rows.length === 0) return { processed: 0, succeeded: 0, failed: 0 };
+
+  console.log(
+    `[snapshot-cron-${region}] refreshing ${rows.length}/${queued} due`,
   );
 
-  console.log(`[snapshot-cron] done: ${succeeded} ok, ${failed} failed`);
-  return { processed: total, succeeded, failed };
+  const { succeeded, failed } = await processRegionBatch(region, rows);
+
+  console.log(
+    `[snapshot-cron-${region}] done: ${succeeded} ok, ${failed} failed`,
+  );
+  return { processed: rows.length, succeeded, failed };
+}
+
+/**
+ * Run a single round across all three regions in parallel. Kept for the
+ * manual `/api/cron/refresh-snapshots` HTTP trigger; production background
+ * work goes through the per-region scheduled crons.
+ */
+export async function refreshDuePlayers(): Promise<RefreshResult> {
+  const results = await Promise.all(
+    REGIONS.map((region) => refreshDuePlayersForRegion(region)),
+  );
+  return results.reduce(
+    (acc, r) => ({
+      processed: acc.processed + r.processed,
+      succeeded: acc.succeeded + r.succeeded,
+      failed: acc.failed + r.failed,
+    }),
+    { processed: 0, succeeded: 0, failed: 0 },
+  );
 }

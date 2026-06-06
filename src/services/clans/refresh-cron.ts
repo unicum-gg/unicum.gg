@@ -16,13 +16,20 @@ const BATCH_SIZE_PER_REGION = 5;
 // don't trip Wargaming's portal rate limit on a busy queue.
 const REQUEST_DELAY_MS = 250;
 
+/**
+ * Schedules one independent cron per region so a backed-up region (G-Core
+ * throttling on EU portal calls) can't starve the others.
+ */
 export function startClanRefreshCron(): void {
-  if (
-    scheduleCron("clan-refresh-cron", SCHEDULE, async () => {
-      await drainClanRefreshQueue();
-    })
-  ) {
-    console.log(`[clan-refresh-cron] queue drain scheduled (${SCHEDULE})`);
+  for (const region of REGIONS) {
+    const name = `clan-refresh-cron-${region}`;
+    if (
+      scheduleCron(name, SCHEDULE, async () => {
+        await drainClanRefreshQueueForRegion(region);
+      })
+    ) {
+      console.log(`[${name}] queue drain scheduled (${SCHEDULE})`);
+    }
   }
 }
 
@@ -39,73 +46,55 @@ async function pickEntriesForRegion(
   return rows.map((r) => Number(r.clanId));
 }
 
-export async function drainClanRefreshQueue(): Promise<void> {
-  const perRegion = await Promise.all(
-    REGIONS.map(async (region) => ({
-      region,
-      clanIds: await pickEntriesForRegion(region, BATCH_SIZE_PER_REGION),
-    })),
-  );
-  const total = perRegion.reduce((a, r) => a + r.clanIds.length, 0);
-  if (total === 0) return;
+export async function drainClanRefreshQueueForRegion(
+  region: Region,
+): Promise<void> {
+  const clanIds = await pickEntriesForRegion(region, BATCH_SIZE_PER_REGION);
+  if (clanIds.length === 0) return;
 
   let ok = 0;
   let failed = 0;
 
-  await Promise.all(
-    perRegion.map(async ({ region, clanIds }) => {
-      if (clanIds.length === 0) return;
+  // 1. Batched info upsert — single WG roundtrip + publish per clan.
+  const infos = await refreshClansByIdsBatch(region, clanIds).catch((err) => {
+    console.error(`[clan-refresh-cron-${region}] batch info failed:`, err);
+    return new Map<number, unknown>();
+  });
 
-      // 1. Batched info upsert — single WG roundtrip + publish per clan.
-      const infos = await refreshClansByIdsBatch(region, clanIds).catch(
-        (err) => {
+  // 2. Members + events per-clan (portal, rate-limited).
+  for (const clanId of clanIds) {
+    const info = infos.get(clanId);
+    if (!info) {
+      // Ghost clan or batch failure — drop from queue so we don't loop.
+      failed += 1;
+      await dequeueClanRefresh(region, clanId);
+      continue;
+    }
+    try {
+      await Promise.all([
+        refreshClanMembers(region, clanId).catch((err) =>
           console.error(
-            `[clan-refresh-cron] batch info failed (${region}):`,
+            `[clan-refresh-cron-${region}] members ${clanId} failed:`,
             err,
-          );
-          return new Map<number, unknown>();
-        },
-      );
-
-      // 2. Members + events per-clan (portal, rate-limited).
-      for (const clanId of clanIds) {
-        const info = infos.get(clanId);
-        if (!info) {
-          // Ghost clan or batch failure — drop from queue so we don't loop.
-          failed += 1;
-          await dequeueClanRefresh(region, clanId);
-          continue;
-        }
-        try {
-          await Promise.all([
-            refreshClanMembers(region, clanId).catch((err) =>
-              console.error(
-                `[clan-refresh-cron] members ${region}/${clanId} failed:`,
-                err,
-              ),
-            ),
-            refreshClanEvents(region, clanId, 30).catch((err) =>
-              console.error(
-                `[clan-refresh-cron] events ${region}/${clanId} failed:`,
-                err,
-              ),
-            ),
-          ]);
-          ok += 1;
-        } catch (err) {
-          failed += 1;
+          ),
+        ),
+        refreshClanEvents(region, clanId, 30).catch((err) =>
           console.error(
-            `[clan-refresh-cron] ${region}/${clanId} failed:`,
+            `[clan-refresh-cron-${region}] events ${clanId} failed:`,
             err,
-          );
-        }
-        await dequeueClanRefresh(region, clanId);
-        await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
-      }
-    }),
-  );
+          ),
+        ),
+      ]);
+      ok += 1;
+    } catch (err) {
+      failed += 1;
+      console.error(`[clan-refresh-cron-${region}] ${clanId} failed:`, err);
+    }
+    await dequeueClanRefresh(region, clanId);
+    await new Promise((r) => setTimeout(r, REQUEST_DELAY_MS));
+  }
 
   console.log(
-    `[clan-refresh-cron] drained ${total} (${ok} ok, ${failed} failed)`,
+    `[clan-refresh-cron-${region}] drained ${clanIds.length} (${ok} ok, ${failed} failed)`,
   );
 }

@@ -23,13 +23,21 @@ import { dequeuePlayerRefresh } from "./refresh-queue";
 const SCHEDULE = "*/10 * * * * *";
 const BATCH_SIZE_PER_REGION = 25;
 
+/**
+ * Schedules one independent cron per region so a slow region can't starve
+ * the others. EU's G-Core throttling no longer cascades into NA/Asia
+ * skipping their own ticks ("previous still in flight").
+ */
 export function startPlayerRefreshCron(): void {
-  if (
-    scheduleCron("player-cron", SCHEDULE, async () => {
-      await drainPlayerRefreshQueue();
-    })
-  ) {
-    console.log(`[player-cron] queue drain scheduled (${SCHEDULE})`);
+  for (const region of REGIONS) {
+    const name = `player-cron-${region}`;
+    if (
+      scheduleCron(name, SCHEDULE, async () => {
+        await drainPlayerRefreshQueueForRegion(region);
+      })
+    ) {
+      console.log(`[${name}] queue drain scheduled (${SCHEDULE})`);
+    }
   }
 }
 
@@ -80,7 +88,7 @@ async function refreshOne(entry: QueueEntry): Promise<boolean> {
       loadPlayerClanHistoryFromWG(region, accountId).catch((err) => {
         // Portal is flaky — don't fail the whole refresh on history alone.
         console.warn(
-          `[player-cron] clan-history failed for ${entry.nickname} (${region}):`,
+          `[player-cron-${region}] clan-history failed for ${entry.nickname}:`,
           err instanceof Error ? err.message : err,
         );
         return null;
@@ -98,27 +106,24 @@ async function refreshOne(entry: QueueEntry): Promise<boolean> {
     return true;
   } catch (err) {
     console.error(
-      `[player-cron] refresh ${entry.nickname} (${region}) failed:`,
+      `[player-cron-${region}] refresh ${entry.nickname} failed:`,
       err,
     );
     return false;
   }
 }
 
-export async function drainPlayerRefreshQueue(): Promise<void> {
-  const perRegion = await Promise.all(
-    REGIONS.map((region) =>
-      pickEntriesForRegion(region, BATCH_SIZE_PER_REGION),
-    ),
-  );
-  const total = perRegion.reduce((a, e) => a + e.length, 0);
-  if (total === 0) return;
+export async function drainPlayerRefreshQueueForRegion(
+  region: Region,
+): Promise<void> {
+  const entries = await pickEntriesForRegion(region, BATCH_SIZE_PER_REGION);
+  if (entries.length === 0) return;
 
   let ok = 0;
   let failed = 0;
 
   await Promise.all(
-    perRegion.flat().map(async (entry) => {
+    entries.map(async (entry) => {
       const success = await refreshOne(entry);
       if (success) ok += 1;
       else failed += 1;
@@ -130,6 +135,6 @@ export async function drainPlayerRefreshQueue(): Promise<void> {
   );
 
   console.log(
-    `[player-cron] drained ${total} (${ok} ok, ${failed} failed)`,
+    `[player-cron-${region}] drained ${entries.length} (${ok} ok, ${failed} failed)`,
   );
 }
