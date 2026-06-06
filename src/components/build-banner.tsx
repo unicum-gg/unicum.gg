@@ -17,21 +17,23 @@ export function BuildBanner() {
 
   return (
     <div className="border-b border-[#f25322]/30 bg-linear-to-r from-[#f25322]/15 via-[#f25322]/5 to-[#f25322]/15">
-      <div className="mx-auto flex h-9 items-center gap-3 px-4 text-xs">
-        <Construction className="size-3.5 shrink-0 text-[#f25322]" />
-        <p className="flex-1 truncate text-center text-fd-foreground">
-          <span className="font-medium">{APP.NAME}</span> is building &middot;{" "}
-          <span className="text-fd-muted-foreground">
-            full 30-day data on June 28
+      <div className="mx-auto w-full max-w-7xl">
+        <div className="flex h-9 items-center gap-3 border-x border-fd-border px-4 text-xs">
+          <Construction className="size-3.5 shrink-0 text-[#f25322]" />
+          <p className="flex-1 truncate text-center text-fd-foreground">
+            <span className="font-medium">{APP.NAME}</span> is building &middot;{" "}
+            <span className="text-fd-muted-foreground">
+              full 30-day data on June 28
+            </span>
+          </p>
+          <span className="inline-flex shrink-0 items-center gap-1.5 font-mono tabular-nums text-fd-muted-foreground">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
+              <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
+            </span>
+            {daysLeft}d
           </span>
-        </p>
-        <span className="inline-flex shrink-0 items-center gap-1.5 font-mono tabular-nums text-fd-muted-foreground">
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500 opacity-75" />
-            <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-          </span>
-          {daysLeft}d
-        </span>
+        </div>
       </div>
     </div>
   );
