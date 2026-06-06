@@ -35,6 +35,10 @@ function serializeStint(s: ClanStint): SerializedClanStint {
 function deserializeStint(s: SerializedClanStint): ClanStint {
   return {
     ...s,
+    // Legacy rows stored before ClanRef gained `languages` (added 2026-06-06)
+    // serialize without that field; fill it in so downstream code can
+    // safely read `.length` without crashing on `undefined`.
+    clan: { ...s.clan, languages: s.clan.languages ?? [] },
     joinedAt: new Date(s.joinedAt),
     leftAt: s.leftAt ? new Date(s.leftAt) : null,
   };
