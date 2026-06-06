@@ -176,7 +176,11 @@ function tankSnapshotMapFromRaws(rows: RawTankSnapshot[] | null): TankSnapshotMa
 
 function clanHistoryFromSerialized(data: SerializedClanHistory): PlayerClanHistoryFull {
   const stint = (s: SerializedClanStint) => ({
-    clan: s.clan,
+    // Legacy rows stored before ClanRef gained `languages` (added 2026-06-06)
+    // serialize without that field; fill it in so downstream code can safely
+    // read `.length` without crashing on `undefined`. Same backfill as
+    // clan-history.ts's deserializeStint — both paths feed the same UI.
+    clan: { ...s.clan, languages: s.clan.languages ?? [] },
     joinedAt: new Date(s.joinedAt),
     leftAt: s.leftAt ? new Date(s.leftAt) : null,
     role: s.role,
