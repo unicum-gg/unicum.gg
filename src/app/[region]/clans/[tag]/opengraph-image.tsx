@@ -157,14 +157,16 @@ export default async function Image({
                   fontSize: 120,
                   fontWeight: 700,
                   lineHeight: 1.1,
-                  color: tagColor,
+                  color: "#F5F5F5",
                   maxWidth: clanEmblemDataUrl ? 880 : 1072,
                   overflow: "hidden",
                   textOverflow: "ellipsis",
                   whiteSpace: "nowrap",
                 }}
               >
-                [{displayTag}]
+                <span style={{ color: tagColor }}>[</span>
+                {displayTag}
+                <span style={{ color: tagColor }}>]</span>
               </span>
               {name && (
                 <span

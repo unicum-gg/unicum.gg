@@ -123,11 +123,13 @@ export default async function Image({
                 style={{
                   fontSize: 44,
                   fontWeight: 700,
-                  color: clanTagColor,
+                  color: "#F5F5F5",
                   lineHeight: 1,
                 }}
               >
-                [{clanTag}]
+                <span style={{ color: clanTagColor }}>[</span>
+                {clanTag}
+                <span style={{ color: clanTagColor }}>]</span>
               </span>
             ) : (
               <span style={{ fontSize: 28, color: "#71717A" }}>No clan</span>
