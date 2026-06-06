@@ -30,7 +30,12 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
-import { isRegion, Region, REGIONS } from "@/services/wargaming/wot";
+import {
+  isRegion,
+  Region,
+  REGIONS,
+  regionFromPathname,
+} from "@/services/wargaming/wot";
 
 type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }
@@ -154,12 +159,9 @@ export default function SearchDialog(props: SharedProps) {
   );
   // Source of truth = URL (e.g. /asia/...) over cookie. The user is
   // browsing that region right now; default the search to it.
-  const urlRegion = pathname?.split("/")[1] ?? "";
-  const defaultRegion: Region = isRegion(urlRegion)
-    ? urlRegion
-    : isRegion(storedRegion)
-      ? storedRegion
-      : Region.EU;
+  const urlRegion = regionFromPathname(pathname);
+  const defaultRegion: Region =
+    urlRegion ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
   const [region, setRegionState] = useState<Region>(defaultRegion);
   // Sync region with URL changes without an effect (cheaper, plays nice
   // with React 19 purity rules). React re-renders before commit when
@@ -167,11 +169,17 @@ export default function SearchDialog(props: SharedProps) {
   const [trackedUrlRegion, setTrackedUrlRegion] = useState(urlRegion);
   if (urlRegion !== trackedUrlRegion) {
     setTrackedUrlRegion(urlRegion);
-    if (isRegion(urlRegion)) setRegionState(urlRegion);
+    if (urlRegion) setRegionState(urlRegion);
   }
   const setRegion = (r: Region) => {
     setRegionState(r);
     setStoredRegion(r);
+    // Also navigate so the navbar selector and any region-aware UI stay
+    // aligned. Without this, the dialog flips to EU while the navbar
+    // still says ASIA until the user actually picks a search result.
+    if (urlRegion && urlRegion !== r) {
+      router.push(ROUTES.HOME(r));
+    }
   };
   const [searchType, setSearchType] = useState<SearchType>(SearchType.All);
   const [query, setQuery] = useState("");

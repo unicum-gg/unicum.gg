@@ -1,59 +1,15 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import { cookies, headers } from "next/headers";
+import { NavLogo } from "@/components/nav-logo";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
-import STORAGE from "@/constants/storage";
-import { isRegion, Region } from "@/services/wargaming/wot";
-
-function regionFromPathname(pathname: string | null): Region | null {
-  if (!pathname) return null;
-  if (pathname === "/") return Region.EU;
-  const segment = pathname.split("/")[1];
-  return isRegion(segment) ? segment : null;
-}
 
 export async function baseOptions(): Promise<BaseLayoutProps> {
-  const [cookieStore, headerStore] = await Promise.all([cookies(), headers()]);
-  const fromPath = regionFromPathname(headerStore.get("x-pathname"));
-  const stored = cookieStore.get(STORAGE.COOKIES.REGION)?.value;
-  const region: Region =
-    fromPath ?? (stored && isRegion(stored) ? stored : Region.EU);
-
   return {
     nav: {
-      url: ROUTES.HOME(region),
-      title: (
-        <>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 1104.586 1511.305"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-label={`${APP.NAME} Logo`}
-          >
-            <path
-              d="M316.11 55.984L56.036 315.941V946.07l496.271 487.021 496.251-487.021V315.96L788.496 55.984H316.11zM8.304 284.584L284.914 8.24 293.096 0h518.379l8.18 8.24 276.629 276.344 8.303 8.316v676.439l-8.406 8.229-524.299 514.538-19.574 19.197-19.6-19.197L8.429 977.571 0 969.341V292.905l8.304-8.321z"
-              fill="#f25322"
-            />
-            <path
-              d="M316 56 L788 56 L1048 316 L1048 946 L552 1433 L56 946 L56 316 Z"
-              fill="currentColor"
-            />
-            <g fill="#f25322">
-              <path d="M 380 56 L 724 56 L 552 540 Z" />
-              <path d="M 200 280 L 320 56 L 280 360 Z" />
-              <path d="M 904 280 L 784 56 L 824 360 Z" />
-              <path d="M 250 660 L 420 700 L 400 750 L 250 710 Z" />
-              <path d="M 854 660 L 684 700 L 704 750 L 854 710 Z" />
-              <path d="M 545 950 L 559 950 L 552 1300 Z" />
-              <path d="M 470 1140 L 500 1185 L 470 1230 L 440 1185 Z" />
-              <path d="M 634 1140 L 604 1185 L 634 1230 L 664 1185 Z" />
-            </g>
-          </svg>
-          {APP.NAME}
-        </>
-      ),
+      // NavLogo is a Client Component that picks its href from usePathname,
+      // so the navbar logo stays aligned with the current region even after
+      // soft client-side navigations (the root layout doesn't re-execute).
+      title: NavLogo,
     },
     links: [
       {

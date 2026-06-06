@@ -17,13 +17,8 @@ import {
   REGION_LABEL,
   REGIONS,
   Region,
+  regionFromPathname,
 } from "@/services/wargaming/wot";
-
-function regionFromPath(pathname: string): Region | undefined {
-  if (pathname === "/") return Region.EU;
-  const segment = pathname.split("/")[1];
-  return isRegion(segment) ? segment : undefined;
-}
 
 const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
 
@@ -37,8 +32,12 @@ export function RegionSelector() {
   const pathname = usePathname();
   const router = useRouter();
 
+  // URL wins when regional ("/eu/..."); fall back to the cookie when the
+  // path has no region prefix (e.g. "/" or "/coverage"), so a change made
+  // in the search dialog is reflected here once useCookie broadcasts it.
   const region: Region =
-    regionFromPath(pathname) ?? (isRegion(stored) ? stored : Region.EU);
+    regionFromPathname(pathname) ??
+    (isRegion(stored) ? stored : Region.EU);
 
   return (
     <Select

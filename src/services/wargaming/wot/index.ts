@@ -10,6 +10,20 @@ export function isRegion(value: string): value is Region {
   return (REGIONS as readonly string[]).includes(value);
 }
 
+/**
+ * Pulls the region from the first URL segment, or null if the path has no
+ * regional prefix (`/`, `/coverage`, etc). Callers pick their own fallback
+ * (cookie, default, ...) so the behavior is uniform across the navbar
+ * selector, the search dialog, and the SSR layout.
+ */
+export function regionFromPathname(
+  pathname: string | null | undefined,
+): Region | null {
+  if (!pathname) return null;
+  const segment = pathname.split("/")[1];
+  return isRegion(segment) ? segment : null;
+}
+
 export const REGION_PORTAL_HOST: Record<Region, string> = {
   [Region.EU]: "eu.wargaming.net",
   [Region.NA]: "na.wargaming.net",
