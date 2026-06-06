@@ -12,6 +12,10 @@ import {
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
 import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
+import {
+  type SerializedClanHistory,
+  deserializeClanHistory,
+} from "./clan-history";
 import type { TankSnapshotMap } from "./tanks";
 
 type RawPlayer = {
@@ -72,21 +76,6 @@ type RawTankSnapshot = {
 type RawClanHistory = {
   fetched_at: string;
   data: unknown;
-};
-
-type SerializedClanStint = {
-  clan: PlayerClanHistoryFull["pastStints"][number]["clan"];
-  joinedAt: string;
-  leftAt: string | null;
-  role: string;
-  roleLocalized: string;
-};
-
-type SerializedClanHistory = {
-  currentStint: SerializedClanStint | null;
-  pastStints: SerializedClanStint[];
-  totalClans: number;
-  timeInClansSeconds: number;
 };
 
 export type PlayerInitialData = {
@@ -174,25 +163,6 @@ function tankSnapshotMapFromRaws(rows: RawTankSnapshot[] | null): TankSnapshotMa
   return map;
 }
 
-function clanHistoryFromSerialized(data: SerializedClanHistory): PlayerClanHistoryFull {
-  const stint = (s: SerializedClanStint) => ({
-    // Legacy rows stored before ClanRef gained `languages` (added 2026-06-06)
-    // serialize without that field; fill it in so downstream code can safely
-    // read `.length` without crashing on `undefined`. Same backfill as
-    // clan-history.ts's deserializeStint — both paths feed the same UI.
-    clan: { ...s.clan, languages: s.clan.languages ?? [] },
-    joinedAt: new Date(s.joinedAt),
-    leftAt: s.leftAt ? new Date(s.leftAt) : null,
-    role: s.role,
-    roleLocalized: s.roleLocalized,
-  });
-  return {
-    currentStint: data.currentStint ? stint(data.currentStint) : null,
-    pastStints: data.pastStints.map(stint),
-    totalClans: data.totalClans,
-    timeInClansSeconds: data.timeInClansSeconds,
-  };
-}
 
 export type PlayerLookup = { accountId: number } | { nickname: string };
 
@@ -307,7 +277,7 @@ export async function loadPlayerInitialData(
     clanHistory: row.clan_history
       ? {
           fetchedAt: new Date(row.clan_history.fetched_at),
-          data: clanHistoryFromSerialized(row.clan_history.data as SerializedClanHistory),
+          data: deserializeClanHistory(row.clan_history.data as SerializedClanHistory),
         }
       : null,
     periodSnapshots: {

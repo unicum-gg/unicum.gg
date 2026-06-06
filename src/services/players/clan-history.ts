@@ -12,12 +12,12 @@ import {
   getPlayerCurrentClan,
 } from "@/services/wargaming/wot/clans/player";
 
-type SerializedClanStint = Omit<ClanStint, "joinedAt" | "leftAt"> & {
+export type SerializedClanStint = Omit<ClanStint, "joinedAt" | "leftAt"> & {
   joinedAt: string;
   leftAt: string | null;
 };
 
-type SerializedClanHistory = {
+export type SerializedClanHistory = {
   currentStint: SerializedClanStint | null;
   pastStints: SerializedClanStint[];
   totalClans: number;
@@ -53,7 +53,15 @@ function serialize(data: PlayerClanHistoryFull): SerializedClanHistory {
   };
 }
 
-function deserialize(data: SerializedClanHistory): PlayerClanHistoryFull {
+/**
+ * Single source of truth for turning a stored `playerClanHistory.data` JSONB
+ * blob back into a `PlayerClanHistoryFull`. Used by both `getStoredPlayerClanHistory`
+ * here and `loadPlayerInitialData`, so any future schema-evolution backfill
+ * (like the `languages` default) lives in one place.
+ */
+export function deserializeClanHistory(
+  data: SerializedClanHistory,
+): PlayerClanHistoryFull {
   return {
     currentStint: data.currentStint ? deserializeStint(data.currentStint) : null,
     pastStints: data.pastStints.map(deserializeStint),
@@ -80,7 +88,7 @@ export async function getStoredPlayerClanHistory(
   if (!row) return null;
   return {
     fetchedAt: row.fetchedAt,
-    data: deserialize(row.data as SerializedClanHistory),
+    data: deserializeClanHistory(row.data as SerializedClanHistory),
   };
 }
 
