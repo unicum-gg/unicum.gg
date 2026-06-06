@@ -53,7 +53,11 @@ export function PlayerHeader({
             </span>
           </div>
           {inferredLanguages.length > 0 && (
-            <LanguageFlags languages={inferredLanguages} size="l" />
+            <LanguageFlags
+              languages={inferredLanguages}
+              size="l"
+              source="inferred"
+            />
           )}
         </div>
       </div>

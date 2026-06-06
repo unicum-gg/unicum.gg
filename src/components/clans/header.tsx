@@ -133,7 +133,11 @@ export function ClanHeader({
             )}
           </div>
           {clan.languages.length > 0 && (
-            <LanguageFlags languages={clan.languages} size="l" />
+            <LanguageFlags
+              languages={clan.languages}
+              size="l"
+              source="declared"
+            />
           )}
         </div>
       </div>
