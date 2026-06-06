@@ -1,4 +1,3 @@
-import { unstable_cache } from "next/cache";
 import { db } from "@/services/db";
 import { type NewVehicle, vehiclesByRegion } from "@/services/db/schema";
 import { Region } from ".";
@@ -39,15 +38,22 @@ const VEHICLE_FIELDS = [
   "images",
 ].join(",");
 
-/**
- * Reads the per-region catalogue from the DB and shapes it into the
- * `Record<tank_id, VehicleMeta>` consumers expect. On a cold table the read
- * auto-bootstraps via `refreshVehiclesFromWG` (one wgFetch, ~5s once) and
- * subsequent calls are <50ms. The weekly discovery cron keeps the table
- * fresh; the Next-level cache below keeps the per-request cost zero after
- * the first hit.
- */
-async function loadVehiclesUncached(
+// Module-level in-memory cache. Lives for the lifetime of the Node process
+// (cleared on deploy/restart) and is shared across all callers — both inside
+// a request lifecycle and inside cron ticks. We deliberately avoid
+// `unstable_cache` here because it requires an IncrementalCache context that
+// cron-driven calls (snapshot-cron → updatePlayerRatings) don't have, and
+// Next throws `Invariant: incrementalCache missing in unstable_cache`. The
+// underlying DB read is <50ms anyway, so a plain Map gives us all the
+// per-process dedup we need.
+const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const cache = new Map<
+  Region,
+  { data: Record<string, VehicleMeta>; expiresAt: number }
+>();
+const inFlight = new Map<Region, Promise<Record<string, VehicleMeta>>>();
+
+async function loadVehicles(
   region: Region,
 ): Promise<Record<string, VehicleMeta>> {
   const table = vehiclesByRegion[region];
@@ -56,23 +62,38 @@ async function loadVehiclesUncached(
     .from(table);
   if (rows.length === 0) {
     await refreshVehiclesFromWG(region);
-    return loadVehiclesUncached(region);
+    return loadVehicles(region);
   }
   const out: Record<string, VehicleMeta> = {};
   for (const r of rows) out[String(r.tankId)] = { tier: r.tier, type: r.type };
   return out;
 }
 
-const loadVehiclesCached = unstable_cache(
-  async (region: Region) => loadVehiclesUncached(region),
-  ["vehicle-encyclopedia-db"],
-  { revalidate: 7 * 24 * 60 * 60, tags: ["encyclopedia"] },
-);
-
+/**
+ * Reads the per-region catalogue from the DB and shapes it into the
+ * `Record<tank_id, VehicleMeta>` consumers expect. On a cold table the read
+ * auto-bootstraps via `refreshVehiclesFromWG` (one wgFetch, ~5s once) and
+ * subsequent calls are <50ms. The weekly discovery cron keeps the table
+ * fresh; concurrent callers share the in-flight promise to dedup the DB
+ * round-trip.
+ */
 export async function getVehicleEncyclopedia(
   region: Region,
 ): Promise<Record<string, VehicleMeta>> {
-  return loadVehiclesCached(region);
+  const cached = cache.get(region);
+  if (cached && cached.expiresAt > Date.now()) return cached.data;
+  const pending = inFlight.get(region);
+  if (pending) return pending;
+  const promise = loadVehicles(region)
+    .then((data) => {
+      cache.set(region, { data, expiresAt: Date.now() + CACHE_TTL_MS });
+      return data;
+    })
+    .finally(() => {
+      inFlight.delete(region);
+    });
+  inFlight.set(region, promise);
+  return promise;
 }
 
 /**
