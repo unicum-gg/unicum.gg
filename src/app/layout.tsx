@@ -2,6 +2,7 @@ import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
+import { BuildBanner } from "@/components/build-banner";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { Toaster } from "@/components/ui/sonner";
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <JsonLd data={websiteSchema()} />
         <JsonLd data={organizationSchema()} />
         <Provider>
+          <BuildBanner />
           <HomeLayout {...layoutProps}>
             {children}
             <Footer />
