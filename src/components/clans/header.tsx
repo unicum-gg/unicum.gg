@@ -107,43 +107,41 @@ export function ClanHeader({
             <span className="ml-2">{clan.name}</span>
           </AutoFitText>
         </h1>
-        <div className="flex h-8 flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-fd-border px-4 text-xs text-muted-foreground">
-          <span>
-            <span className="font-medium">Members:</span> {clan.membersCount}
-          </span>
-          <span>·</span>
-          <span>
-            <span className="font-medium">Created:</span>{" "}
-            {format(clan.createdAt, DAY_FORMAT)} by{" "}
-            <Link
-              href={ROUTES.PLAYER(region, clan.creatorName)}
-              className="underline-offset-2 hover:underline"
-            >
-              {clan.creatorName}
-            </Link>
-          </span>
-          <span>·</span>
-          <span>
-            <span className="font-medium">Commander:</span>{" "}
-            <Link
-              href={ROUTES.PLAYER(region, clan.leaderName)}
-              className="underline-offset-2 hover:underline"
-            >
-              {clan.leaderName}
-            </Link>
-          </span>
-          {clan.isDisbanded && (
-            <>
-              <span>·</span>
-              <span className="font-medium text-destructive">Disbanded</span>
-            </>
-          )}
+        <div className="flex h-8 border-t border-fd-border">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-0.5 px-4 text-xs text-muted-foreground">
+            <span>
+              <span className="font-medium">Members:</span> {clan.membersCount}
+            </span>
+            <span>·</span>
+            <span>
+              <span className="font-medium">Created:</span>{" "}
+              {format(clan.createdAt, DAY_FORMAT)} by{" "}
+              <Link
+                href={ROUTES.PLAYER(region, clan.creatorName)}
+                className="underline-offset-2 hover:underline"
+              >
+                {clan.creatorName}
+              </Link>
+            </span>
+            <span>·</span>
+            <span>
+              <span className="font-medium">Commander:</span>{" "}
+              <Link
+                href={ROUTES.PLAYER(region, clan.leaderName)}
+                className="underline-offset-2 hover:underline"
+              >
+                {clan.leaderName}
+              </Link>
+            </span>
+            {clan.isDisbanded && (
+              <>
+                <span>·</span>
+                <span className="font-medium text-destructive">Disbanded</span>
+              </>
+            )}
+          </div>
           {clan.languages.length > 0 && (
-            <LanguageFlags
-              languages={clan.languages}
-              size="l"
-              className="-mr-4 mb-px ml-auto h-[calc(100%-1px)]"
-            />
+            <LanguageFlags languages={clan.languages} size="l" />
           )}
         </div>
       </div>
