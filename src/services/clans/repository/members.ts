@@ -20,6 +20,8 @@ type PlayerRatings = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  wn730d: number | null;
+  wn830d: number | null;
   wnx30d: number | null;
   battles30d: number | null;
 };
@@ -72,6 +74,8 @@ function memberStatsFromRow(
     wn7: ratings?.wn7 ?? null,
     wn8: ratings?.wn8 ?? null,
     wnx: ratings?.wnx ?? null,
+    wn730d: ratings?.wn730d ?? null,
+    wn830d: ratings?.wn830d ?? null,
     wnx30d: ratings?.wnx30d ?? null,
     battles30d: ratings?.battles30d ?? null,
   };
@@ -176,6 +180,8 @@ export async function getClanMembersCached(
       wn7: players.wn7,
       wn8: players.wn8,
       wnx: players.wnx,
+      wn730d: players.wn730d,
+      wn830d: players.wn830d,
       wnx30d: players.wnx30d,
       battles30d: players.battles30d,
     })
@@ -197,6 +203,8 @@ export async function getClanMembersCached(
           wn7: r.wn7,
           wn8: r.wn8,
           wnx: r.wnx,
+          wn730d: r.wn730d,
+          wn830d: r.wn830d,
           wnx30d: r.wnx30d,
           battles30d: r.battles30d,
         }),

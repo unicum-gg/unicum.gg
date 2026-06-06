@@ -335,6 +335,8 @@ async function updatePlayerRatings(
       desc(tankSnapshots.id),
     );
 
+  let wn730d: number | null = null;
+  let wn830d: number | null = null;
   let wnx30d: number | null = null;
   let battles30d: number | null = null;
   if (d30Rows.length > 0) {
@@ -360,13 +362,38 @@ async function updatePlayerRatings(
     const recent = diffTanks(tanks, d30Map);
     if (recent.length > 0) {
       wnx30d = computeWNX(recent, wnxExpected);
+      wn830d = computeWN8(recent, wn8Expected, encyclopedia, wn8Fallback);
       battles30d = recent.reduce((sum, t) => sum + t.all.battles, 0);
+      // WN7 needs aggregate stats and the average tier over the same window.
+      const recentAggregates = recent.reduce(
+        (acc, t) => {
+          acc.battles += t.all.battles;
+          acc.wins += t.all.wins;
+          acc.frags += t.all.frags;
+          acc.damageDealt += t.all.damage_dealt;
+          acc.spotted += t.all.spotted;
+          acc.droppedCapturePoints += t.all.dropped_capture_points;
+          return acc;
+        },
+        {
+          battles: 0,
+          wins: 0,
+          frags: 0,
+          damageDealt: 0,
+          spotted: 0,
+          droppedCapturePoints: 0,
+        },
+      );
+      if (recentAggregates.battles > 0) {
+        const recentAvgTier = computeAvgTier(recent, encyclopedia);
+        wn730d = computeWN7(recentAggregates, recentAvgTier);
+      }
     }
   }
 
   await db
     .update(players)
-    .set({ wn7, wn8, wnx, wnx30d, battles30d })
+    .set({ wn7, wn8, wnx, wn730d, wn830d, wnx30d, battles30d })
     .where(eq(players.id, playerId));
 }
 

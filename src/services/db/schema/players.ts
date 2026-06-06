@@ -42,6 +42,8 @@ export function makePlayersTable(region: string) {
       wn7: real("wn7"),
       wn8: real("wn8"),
       wnx: real("wnx"),
+      wn730d: real("wn7_30d"),
+      wn830d: real("wn8_30d"),
       wnx30d: real("wnx_30d"),
       battles30d: integer("battles_30d"),
     },

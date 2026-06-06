@@ -1,5 +1,6 @@
+import { ratingMetricFromCookie } from "@/constants/rating";
 import {
-  getTopPlayersByWnx,
+  getTopPlayersByMetric,
   TopPlayersPeriod,
   type TopPlayerResult,
 } from "@/services/wargaming/wot/players/top";
@@ -34,10 +35,12 @@ export async function GET(
     1,
     Math.min(MAX_LIMIT, Number(url.searchParams.get("limit")) || DEFAULT_LIMIT),
   );
+  const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
   try {
-    const { results, computedAt } = await getTopPlayersByWnx(
+    const { results, computedAt } = await getTopPlayersByMetric(
       region,
+      metric,
       period,
       limit,
     );

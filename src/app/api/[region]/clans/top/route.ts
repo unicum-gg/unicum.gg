@@ -1,5 +1,6 @@
+import { ratingMetricFromCookie } from "@/constants/rating";
 import {
-  getTopClansByWnx,
+  getTopClansByMetric,
   type TopClanResult,
 } from "@/services/wargaming/wot/clans/top";
 import { isRegion } from "@/services/wargaming/wot";
@@ -21,14 +22,21 @@ export async function GET(
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
 
-  const limitParam = new URL(req.url).searchParams.get("limit");
+  const url = new URL(req.url);
+  const limitParam = url.searchParams.get("limit");
   const limit = Math.max(
     1,
     Math.min(MAX_LIMIT, Number(limitParam) || DEFAULT_LIMIT),
   );
+  // Caller may pin a metric via ?metric=wn7|wn8|wnx; otherwise default.
+  const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
   try {
-    const { results, computedAt } = await getTopClansByWnx(region, limit);
+    const { results, computedAt } = await getTopClansByMetric(
+      region,
+      metric,
+      limit,
+    );
     return Response.json({
       results,
       computed_at: computedAt?.toISOString() ?? null,

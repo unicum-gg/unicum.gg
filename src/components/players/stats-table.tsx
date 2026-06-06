@@ -350,21 +350,21 @@ export function PlayerStatsTable({
               </TableRow>,
             ];
           })}
-          <TableRow key="WN7">
+          <TableRow key="WN7" data-rating-row="wn7">
             <TableCell className="py-1.5! font-medium">WN7</TableCell>
             <PeriodCells cell={wn7Cells.total} />
             <PeriodCells cell={wn7Cells.h24} />
             <PeriodCells cell={wn7Cells.d7} />
             <PeriodCells cell={wn7Cells.d30} />
           </TableRow>
-          <TableRow key="WN8">
+          <TableRow key="WN8" data-rating-row="wn8">
             <TableCell className="py-1.5! font-medium">WN8</TableCell>
             <PeriodCells cell={wn8Cells.total} />
             <PeriodCells cell={wn8Cells.h24} />
             <PeriodCells cell={wn8Cells.d7} />
             <PeriodCells cell={wn8Cells.d30} />
           </TableRow>
-          <TableRow key="WNX">
+          <TableRow key="WNX" data-rating-row="wnx">
             <TableCell className="py-1.5! font-medium">WNX</TableCell>
             <PeriodCells cell={wnxCells.total} />
             <PeriodCells cell={wnxCells.h24} />

@@ -16,6 +16,8 @@ import {
   RATING_COLOR_CLASS,
   type RatingColor,
   winrateColor,
+  wn7Color,
+  wn8Color,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import type { Region } from "@/services/wargaming/wot";
@@ -33,32 +35,69 @@ type MetricCell = {
   color: RatingColor | null;
 };
 
-function computeMetrics(
-  members: ClanMemberStats[],
-): {
-  avgWnx30d: MetricCell;
-  avgWnx: MetricCell;
+type MetricSet = {
+  wn7: MetricCell;
+  wn8: MetricCell;
+  wnx: MetricCell;
+};
+
+function metricCell(
+  label: string,
+  value: number | null,
+  color: (v: number) => RatingColor,
+): MetricCell {
+  return {
+    label,
+    value: value === null ? "—" : intFmt.format(value),
+    color: value === null ? null : color(value),
+  };
+}
+
+function computeMetrics(members: ClanMemberStats[]): {
+  recent: MetricSet;
+  lifetime: MetricSet;
   avgWinrate: MetricCell;
 } {
-  const avgWnx = weightedAverage(overallPoints(members, (m) => m.wnx));
-  const avgWnx30d = weightedAverage(
-    d30Points(members, (m) => m.wnx30d),
-  );
+  const recent: MetricSet = {
+    wn7: metricCell(
+      "Avg WN7 · 30d",
+      weightedAverage(d30Points(members, (m) => m.wn730d)),
+      wn7Color,
+    ),
+    wn8: metricCell(
+      "Avg WN8 · 30d",
+      weightedAverage(d30Points(members, (m) => m.wn830d)),
+      wn8Color,
+    ),
+    wnx: metricCell(
+      "Avg WNX · 30d",
+      weightedAverage(d30Points(members, (m) => m.wnx30d)),
+      wnxColor,
+    ),
+  };
+  const lifetime: MetricSet = {
+    wn7: metricCell(
+      "Avg WN7",
+      weightedAverage(overallPoints(members, (m) => m.wn7)),
+      wn7Color,
+    ),
+    wn8: metricCell(
+      "Avg WN8",
+      weightedAverage(overallPoints(members, (m) => m.wn8)),
+      wn8Color,
+    ),
+    wnx: metricCell(
+      "Avg WNX",
+      weightedAverage(overallPoints(members, (m) => m.wnx)),
+      wnxColor,
+    ),
+  };
   const avgWinRate = weightedAverage(
     overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
   );
-
   return {
-    avgWnx30d: {
-      label: "Avg WNX · 30d",
-      value: avgWnx30d === null ? "—" : intFmt.format(avgWnx30d),
-      color: avgWnx30d === null ? null : wnxColor(avgWnx30d),
-    },
-    avgWnx: {
-      label: "Avg WNX",
-      value: avgWnx === null ? "—" : intFmt.format(avgWnx),
-      color: avgWnx === null ? null : wnxColor(avgWnx),
-    },
+    recent,
+    lifetime,
     avgWinrate: {
       label: "Avg winrate",
       value: avgWinRate === null ? "—" : `${pctFmt.format(avgWinRate)}%`,
@@ -141,16 +180,29 @@ export function ClanHeader({
           )}
         </div>
       </div>
-      <MetricColumn metric={metrics.avgWnx30d} />
-      <MetricColumn metric={metrics.avgWnx} />
+      <MetricColumn metric={metrics.recent.wn7} ratingCol="wn7" />
+      <MetricColumn metric={metrics.recent.wn8} ratingCol="wn8" />
+      <MetricColumn metric={metrics.recent.wnx} ratingCol="wnx" />
+      <MetricColumn metric={metrics.lifetime.wn7} ratingCol="wn7" />
+      <MetricColumn metric={metrics.lifetime.wn8} ratingCol="wn8" />
+      <MetricColumn metric={metrics.lifetime.wnx} ratingCol="wnx" />
       <MetricColumn metric={metrics.avgWinrate} />
     </header>
   );
 }
 
-function MetricColumn({ metric }: { metric: MetricCell }) {
+function MetricColumn({
+  metric,
+  ratingCol,
+}: {
+  metric: MetricCell;
+  ratingCol?: string;
+}) {
   return (
-    <div className="flex w-32 shrink-0 flex-col border-l border-fd-border">
+    <div
+      data-rating-col={ratingCol}
+      className="flex w-32 shrink-0 flex-col border-l border-fd-border"
+    >
       <div className="px-4 py-2 text-center text-xs text-muted-foreground">
         {metric.label}
       </div>

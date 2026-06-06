@@ -60,6 +60,8 @@ export type ClanMemberStats = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  wn730d: number | null;
+  wn830d: number | null;
   wnx30d: number | null;
   battles30d: number | null;
 };
@@ -139,6 +141,8 @@ export async function getClanMembersStats(
       wn7: null,
       wn8: null,
       wnx: null,
+      wn730d: null,
+      wn830d: null,
       wnx30d: null,
       battles30d: null,
     };

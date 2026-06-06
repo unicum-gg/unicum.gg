@@ -1,9 +1,10 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
+import { RATING_METRICS } from "@/constants/rating";
 import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { topPlayersByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
-import { computeTopPlayersByWnx, TopPlayersPeriod } from ".";
+import { computeTopPlayersAllMetrics, TopPlayersPeriod } from ".";
 
 const SCHEDULE = "0 * * * *";
 const TOP_N = 30;
@@ -53,12 +54,21 @@ async function refreshRegion(region: Region): Promise<void> {
   for (const period of PERIODS) {
     try {
       const start = Date.now();
-      const results = await computeTopPlayersByWnx(region, period, TOP_N);
+      const allMetrics = await computeTopPlayersAllMetrics(
+        region,
+        period,
+        TOP_N,
+      );
       await db.transaction(async (tx) => {
-        await tx.delete(table).where(eq(table.period, period));
-        if (results.length > 0) {
+        for (const metric of RATING_METRICS) {
+          const results = allMetrics[metric];
+          await tx
+            .delete(table)
+            .where(and(eq(table.metric, metric), eq(table.period, period)));
+          if (results.length === 0) continue;
           await tx.insert(table).values(
             results.map((r, i) => ({
+              metric,
               period,
               rank: i + 1,
               accountId: r.account_id,
@@ -66,21 +76,18 @@ async function refreshRegion(region: Region): Promise<void> {
               clanTag: r.clan_tag,
               clanColor: r.clan_color,
               battles: r.battles,
-              wnx: r.wnx.toString(),
+              value: r.wnx.toString(),
             })),
           );
         }
       });
       console.log(
-        `[top-players cron] ${region}/${period}: ${results.length} players in ${
-          Date.now() - start
-        }ms`,
+        `[top-players cron] ${region}/${period}: ${Object.values(allMetrics)
+          .map((m) => m.length)
+          .join("+")} in ${Date.now() - start}ms`,
       );
     } catch (err) {
-      console.error(
-        `[top-players cron] ${region}/${period} failed:`,
-        err,
-      );
+      console.error(`[top-players cron] ${region}/${period} failed:`, err);
     }
   }
 }

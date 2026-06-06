@@ -1,4 +1,4 @@
-import { asc, sql } from "drizzle-orm";
+import { asc, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
   playerSnapshotsByRegion,
@@ -29,20 +29,28 @@ type RankedClan = {
   avg_wnx: number;
 };
 
-export async function computeTopClansByWnx(
+const VALID_METRIC_COLUMNS: Record<string, string> = {
+  wn7: "wn7",
+  wn8: "wn8",
+  wnx: "wnx",
+};
+
+export async function computeTopClansByMetric(
   region: Region,
+  metric: string,
   limit: number,
 ): Promise<TopClanResult[]> {
   // Single SQL aggregation: for each player take the latest snapshot's
-  // clan_id + battles (DISTINCT ON), join `players.wnx` (cached by
-  // snapshot-cron), then GROUP BY clan. Average is battle-weighted so a
-  // freshly-recruited noob with 1 battle and freak WNX doesn't drag the
-  // clan rank; matches the in-app `computeMetrics` in components/clans/header.
-  // Replaces an in-process compute that fetched tank snapshots for every
-  // member of every eligible clan and blew through PG's 65k-param limit on
-  // regions with thousands of clans.
+  // clan_id + battles (DISTINCT ON), join the chosen metric column on
+  // the players row (cached by snapshot-cron), then GROUP BY clan.
+  // Average is battle-weighted so a freshly-recruited noob with 1 battle
+  // and freak rating doesn't drag the clan rank; matches the in-app
+  // computeMetrics in components/clans/header.
+  const col = VALID_METRIC_COLUMNS[metric];
+  if (!col) throw new Error(`computeTopClansByMetric: unknown metric ${metric}`);
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
+  const metricCol = sql.raw(`p."${col}"`);
   const rows = (await db.execute(sql`
     WITH latest_memberships AS (
       SELECT DISTINCT ON (ps.player_id)
@@ -56,34 +64,34 @@ export async function computeTopClansByWnx(
     SELECT
       lm.clan_id,
       COUNT(*)::int AS members_in_db,
-      COUNT(p.wnx)::int AS rated_members_count,
+      COUNT(${metricCol})::int AS rated_members_count,
       (
-        SUM(p.wnx * lm.battles)
-          FILTER (WHERE p.wnx IS NOT NULL AND lm.battles > 0)
+        SUM(${metricCol} * lm.battles)
+          FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0)
         / NULLIF(
             SUM(lm.battles)
-              FILTER (WHERE p.wnx IS NOT NULL AND lm.battles > 0),
+              FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0),
             0
           )
-      )::float8 AS avg_wnx
+      )::float8 AS avg_value
     FROM latest_memberships lm
     INNER JOIN ${players} p ON p.id = lm.player_id
     GROUP BY lm.clan_id
-    HAVING COUNT(*) > ${MIN_MEMBERS} AND COUNT(p.wnx) > 0
-    ORDER BY avg_wnx DESC NULLS LAST
+    HAVING COUNT(*) > ${MIN_MEMBERS} AND COUNT(${metricCol}) > 0
+    ORDER BY avg_value DESC NULLS LAST
     LIMIT ${ENRICH_CANDIDATES}
   `)) as unknown as Array<{
     clan_id: string | number;
     members_in_db: number;
     rated_members_count: number;
-    avg_wnx: number;
+    avg_value: number;
   }>;
 
   const candidates: RankedClan[] = rows.map((r) => ({
     clan_id: Number(r.clan_id),
     members_in_db: r.members_in_db,
     rated_members_count: r.rated_members_count,
-    avg_wnx: Number(r.avg_wnx),
+    avg_wnx: Number(r.avg_value),
   }));
   if (candidates.length === 0) return [];
 
@@ -118,14 +126,16 @@ export type TopClansSnapshot = {
   computedAt: Date | null;
 };
 
-export async function getTopClansByWnx(
+export async function getTopClansByMetric(
   region: Region,
+  metric: string,
   limit: number,
 ): Promise<TopClansSnapshot> {
   const topClans = topClansByRegion[region];
   const rows = await db
     .select()
     .from(topClans)
+    .where(eq(topClans.metric, metric))
     .orderBy(asc(topClans.rank))
     .limit(limit);
 
@@ -138,18 +148,22 @@ export async function getTopClansByWnx(
       emblem: r.emblem,
       members_count: r.membersCount,
       rated_members_count: r.ratedMembersCount,
-      avg_wnx: Number(r.avgWnx),
+      avg_wnx: Number(r.avgValue),
     })),
     computedAt: rows[0]?.computedAt ?? null,
   };
 }
 
-export async function getTopClansByWnxByRegions(
+export async function getTopClansByMetricByRegions(
   regions: Region[],
+  metric: string,
   limit: number,
 ): Promise<Record<Region, TopClansSnapshot>> {
   const perRegion = await Promise.all(
-    regions.map(async (region) => [region, await getTopClansByWnx(region, limit)] as const),
+    regions.map(
+      async (region) =>
+        [region, await getTopClansByMetric(region, metric, limit)] as const,
+    ),
   );
   const out = {} as Record<Region, TopClansSnapshot>;
   for (const [region, snap] of perRegion) out[region] = snap;

@@ -1,6 +1,7 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { cookies } from "next/headers";
 import { NavLogo } from "@/components/nav-logo";
+import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
 
@@ -19,6 +20,11 @@ export async function baseOptions(): Promise<BaseLayoutProps> {
       title: NavLogo,
     },
     links: [
+      {
+        type: "custom",
+        secondary: true,
+        children: <RatingSelector />,
+      },
       {
         type: "custom",
         secondary: true,

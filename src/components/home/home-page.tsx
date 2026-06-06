@@ -22,11 +22,13 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
+import { cookies } from "next/headers";
+import { ratingMetricFromCookie } from "@/constants/rating";
+import STORAGE from "@/constants/storage";
 import { styles } from "@/lib/styles";
-import { getTopClansByWnxByRegions } from "@/services/wargaming/wot/clans/top";
+import { getTopClansByMetricByRegions } from "@/services/wargaming/wot/clans/top";
 import {
-  getTopPlayersByWnxByRegions,
+  getTopPlayersByMetricByRegions,
   TopPlayersPeriod,
 } from "@/services/wargaming/wot/players/top";
 import { type Region, REGIONS } from "@/services/wargaming/wot";
@@ -38,19 +40,30 @@ export async function HomePage({
 }: {
   regionOverride?: Region;
 }) {
-  const topClans = await getTopClansByWnxByRegions(REGIONS, TOP_LIMIT);
-  const topPlayersDay = await getTopPlayersByWnxByRegions(
+  const cookieStore = await cookies();
+  const metric = ratingMetricFromCookie(
+    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
+  );
+  const topClans = await getTopClansByMetricByRegions(
     REGIONS,
+    metric,
+    TOP_LIMIT,
+  );
+  const topPlayersDay = await getTopPlayersByMetricByRegions(
+    REGIONS,
+    metric,
     TopPlayersPeriod.Day,
     TOP_LIMIT,
   );
-  const topPlayersWeek = await getTopPlayersByWnxByRegions(
+  const topPlayersWeek = await getTopPlayersByMetricByRegions(
     REGIONS,
+    metric,
     TopPlayersPeriod.Week,
     TOP_LIMIT,
   );
-  const topPlayersOverall = await getTopPlayersByWnxByRegions(
+  const topPlayersOverall = await getTopPlayersByMetricByRegions(
     REGIONS,
+    metric,
     TopPlayersPeriod.Overall,
     TOP_LIMIT,
   );

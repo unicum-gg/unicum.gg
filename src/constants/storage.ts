@@ -4,6 +4,7 @@ const STORAGE = {
   },
   COOKIES: {
     REGION: "unicum.region",
+    RATING: "unicum.rating",
   },
 };
 

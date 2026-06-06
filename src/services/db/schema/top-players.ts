@@ -13,6 +13,10 @@ export function makeTopPlayersTable(region: string) {
   return pgTable(
     `${region}_top_players`,
     {
+      // 'wn7' | 'wn8' | 'wnx' — the rating used to rank this row. Each
+      // period has its own ranking per metric, so (metric, period, rank)
+      // is the natural primary key.
+      metric: text("metric").notNull(),
       period: text("period").notNull(),
       rank: integer("rank").notNull(),
       accountId: bigint("account_id", { mode: "number" }).notNull(),
@@ -20,12 +24,15 @@ export function makeTopPlayersTable(region: string) {
       clanTag: text("clan_tag"),
       clanColor: text("clan_color"),
       battles: integer("battles").notNull(),
-      wnx: numeric("wnx").notNull(),
+      // Value of the ranking metric for this row (wn7 score for a
+      // metric='wn7' row, etc). DB column name stays `wnx` from before
+      // the multi-metric refactor.
+      value: numeric("wnx").notNull(),
       computedAt: timestamp("computed_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
     },
-    (t) => [primaryKey({ columns: [t.period, t.rank] })],
+    (t) => [primaryKey({ columns: [t.metric, t.period, t.rank] })],
   );
 }
 

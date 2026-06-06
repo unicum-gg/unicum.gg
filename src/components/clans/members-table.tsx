@@ -109,12 +109,14 @@ function SortableHead({
   state,
   onToggle,
   align = "start",
+  ratingCol,
   children,
 }: {
   column: SortColumn;
   state: SortState;
   onToggle: (col: SortColumn) => void;
   align?: "start" | "end";
+  ratingCol?: string;
   children: React.ReactNode;
 }) {
   const active = state?.column === column;
@@ -124,7 +126,7 @@ function SortableHead({
       : CaretDownIcon
     : CaretUpDownIcon;
   return (
-    <TableHead className="p-0">
+    <TableHead data-rating-col={ratingCol} className="p-0">
       <button
         type="button"
         onClick={() => onToggle(column)}
@@ -147,19 +149,25 @@ function SortableHead({
 function RatingCell({
   value,
   color,
+  ratingCol,
 }: {
   value: number | null;
   color: RatingColor | null;
+  ratingCol?: string;
 }) {
   if (value === null) {
     return (
-      <TableCell className="text-right text-muted-foreground tabular-nums">
+      <TableCell
+        data-rating-col={ratingCol}
+        className="text-right text-muted-foreground tabular-nums"
+      >
         —
       </TableCell>
     );
   }
   return (
     <TableCell
+      data-rating-col={ratingCol}
       className={cn(
         "text-right tabular-nums",
         color && RATING_COLOR_CLASS[color],
@@ -204,13 +212,31 @@ export function ClanMembersTable({
           <SortableHead column={SortColumn.Role} state={sort} onToggle={toggleSort}>
             Role
           </SortableHead>
-          <SortableHead column={SortColumn.WN7} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.WN7}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wn7"
+          >
             WN7
           </SortableHead>
-          <SortableHead column={SortColumn.WN8} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.WN8}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wn8"
+          >
             WN8
           </SortableHead>
-          <SortableHead column={SortColumn.WNX} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.WNX}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wnx"
+          >
             WNX
           </SortableHead>
           <SortableHead column={SortColumn.WR} state={sort} onToggle={toggleSort} align="end">
@@ -247,18 +273,21 @@ export function ClanMembersTable({
                   m.wn7 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={m.wn7 != null ? wn7Color(m.wn7) : null}
+                ratingCol="wn7"
               />
               <RatingCell
                 value={
                   m.wn8 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={m.wn8 != null ? wn8Color(m.wn8) : null}
+                ratingCol="wn8"
               />
               <RatingCell
                 value={
                   m.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={m.wnx != null ? wnxColor(m.wnx) : null}
+                ratingCol="wnx"
               />
               <TableCell
                 className={cn(

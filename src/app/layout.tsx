@@ -1,11 +1,15 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { Figtree } from "next/font/google";
 import { BuildBanner } from "@/components/build-banner";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
+import { RatingMetricRoot } from "@/components/rating-metric-root";
 import { Toaster } from "@/components/ui/sonner";
+import { ratingMetricFromCookie } from "@/constants/rating";
+import STORAGE from "@/constants/storage";
 import { baseOptions } from "@/lib/layout.shared";
 import { constructMetadata } from "@/lib/metadata";
 import { organizationSchema, websiteSchema } from "@/lib/schema-org";
@@ -29,10 +33,20 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const layoutProps = await baseOptions();
+  const [layoutProps, cookieStore] = await Promise.all([
+    baseOptions(),
+    cookies(),
+  ]);
+  // Paint the initial rating metric on <html> from the cookie so CSS rules
+  // ([data-rating-metric="..."] [data-rating-row="..."]) match on the very
+  // first server render, no flash before hydration.
+  const initialRatingMetric = ratingMetricFromCookie(
+    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
+  );
   return (
     <html
       lang="en"
+      data-rating-metric={initialRatingMetric}
       className={`${figtree.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >
@@ -40,6 +54,7 @@ export default async function RootLayout({
         <JsonLd data={websiteSchema()} />
         <JsonLd data={organizationSchema()} />
         <Provider>
+          <RatingMetricRoot />
           <BuildBanner />
           <HomeLayout {...layoutProps}>
             {children}
