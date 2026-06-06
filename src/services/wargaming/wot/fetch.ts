@@ -1,6 +1,7 @@
 import { env } from "env";
 import { botHeaders } from "@/lib/bot-headers";
 import { traced } from "@/lib/perf-trace";
+import { getPortalDispatcher } from "./dispatchers";
 import { Region, REGION_PORTAL_HOST } from "./index";
 import { acquirePortalToken, acquireWgToken } from "./rate-limit";
 
@@ -192,7 +193,11 @@ export async function portalFetch<T>(url: URL): Promise<T> {
         const res = await fetch(url, {
           headers,
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
-        });
+          // Custom undici Agent: short keepAliveTimeout + capped pool +
+          // no pipelining so G-Core's silent socket drops don't poison
+          // the whole portal queue. See `./dispatchers.ts` for rationale.
+          dispatcher: getPortalDispatcher(),
+        } as RequestInit & { dispatcher: unknown });
         if (!res.ok) {
           throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
         }
