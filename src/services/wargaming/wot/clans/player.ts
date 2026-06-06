@@ -7,6 +7,10 @@ export type ClanRef = {
   name: string;
   color: string;
   emblem: string;
+  // Empty `[]` when this ref was produced by the public WG API (which doesn't
+  // expose languages). The clan-history resolver enriches it from our local
+  // `clans` table when the clan is known there.
+  languages: string[];
 };
 
 export type ClanStint = {
@@ -76,6 +80,9 @@ export async function getPlayerCurrentClan(
       name: entry.clan.name,
       color: entry.clan.color,
       emblem: pickEmblem(entry.clan.emblems),
+      // Public API doesn't expose languages; clan-history will enrich
+      // from the local clans table when the clan is known.
+      languages: [],
     },
     joinedAt: new Date(entry.joined_at * 1000),
     leftAt: null,

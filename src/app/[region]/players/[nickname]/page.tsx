@@ -29,6 +29,7 @@ import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
 } from "@/services/players/clan-history";
+import { inferPlayerLanguages } from "@/services/players/language-inference";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
@@ -356,6 +357,7 @@ function buildView(args: {
             lastBattleAt={lastBattleAt}
             updatedAt={player.lastSeenAt}
             currentStint={clanHistory.currentStint}
+            inferredLanguages={inferPlayerLanguages(clanHistory, nowMs)}
           />
         </PanelContent>
       </Panel>

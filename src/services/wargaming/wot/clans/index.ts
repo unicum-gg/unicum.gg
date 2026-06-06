@@ -196,6 +196,9 @@ function clanRefFromShortRaw(raw: RawClanShortRef): ClanRef {
       emblems?.x64?.wot ??
       emblems?.x32?.portal ??
       "",
+    // /wot/clans/info/ doesn't return languages — those live behind the portal.
+    // Consumers that need languages enrich from the local clans table.
+    languages: [],
   };
 }
 

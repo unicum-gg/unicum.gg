@@ -1,6 +1,7 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { LanguageFlags } from "@/components/language-flags";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@/services/wargaming/wot";
@@ -16,6 +17,7 @@ export function PlayerHeader({
   lastBattleAt,
   updatedAt,
   currentStint,
+  inferredLanguages,
 }: {
   region: Region;
   nickname: string;
@@ -23,6 +25,7 @@ export function PlayerHeader({
   lastBattleAt: Date;
   updatedAt: Date;
   currentStint: ClanStint | null;
+  inferredLanguages: string[];
 }) {
   return (
     <header className="flex items-stretch">
@@ -30,22 +33,28 @@ export function PlayerHeader({
         <h1 className="flex flex-1 items-center px-4 py-3 font-heading text-4xl font-bold tracking-tight">
           {nickname}
         </h1>
-        <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-fd-border px-4 py-2 text-xs text-muted-foreground">
-          <span title={format(createdAt, DAY_FORMAT)}>
-            Joined {format(createdAt, MONTH_FORMAT)}
-          </span>
-          <span>·</span>
-          <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
-            Last battle {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
-          </span>
-          <span>·</span>
-          <span>
-            Updated{" "}
-            <RelativeTime
-              date={updatedAt}
-              title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
-            />
-          </span>
+        <div className="flex border-t border-fd-border">
+          <div className="flex min-w-0 flex-1 flex-wrap items-center gap-x-2 gap-y-0.5 px-4 py-2 text-xs text-muted-foreground">
+            <span title={format(createdAt, DAY_FORMAT)}>
+              Joined {format(createdAt, MONTH_FORMAT)}
+            </span>
+            <span>·</span>
+            <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
+              Last battle{" "}
+              {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
+            </span>
+            <span>·</span>
+            <span>
+              Updated{" "}
+              <RelativeTime
+                date={updatedAt}
+                title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
+              />
+            </span>
+          </div>
+          {inferredLanguages.length > 0 && (
+            <LanguageFlags languages={inferredLanguages} size="l" />
+          )}
         </div>
       </div>
       {currentStint && (

@@ -90,7 +90,9 @@ async function resolveClanRefs(
   const unique = Array.from(new Set(clanIds));
 
   // 1. Try the local regional clans table first — covers the vast majority
-  //    once discovery has run at least once.
+  //    once discovery has run at least once. `languages` are only present
+  //    here (the public API doesn't expose them), so this read is also what
+  //    powers the player-language inference downstream.
   const rows = await db
     .select({
       id: clans.id,
@@ -98,6 +100,7 @@ async function resolveClanRefs(
       name: clans.name,
       color: clans.color,
       emblem: clans.emblem,
+      languages: clans.languages,
     })
     .from(clans)
     .where(inArray(clans.id, unique));
@@ -108,6 +111,7 @@ async function resolveClanRefs(
       name: r.name,
       color: r.color,
       emblem: r.emblem,
+      languages: r.languages ?? [],
     });
   }
 
@@ -152,10 +156,12 @@ export async function loadPlayerClanHistoryFromWG(
     getPlayerClanMemberHistory(region, accountId),
   ]);
 
-  const refs = await resolveClanRefs(
-    region,
-    rawHistory.map((s) => s.clanId),
-  );
+  // Resolve refs for ALL clans seen — past stints AND the current one — so we
+  // can backfill `languages` on the current stint (the public-API path that
+  // built it can't supply them).
+  const clanIds = rawHistory.map((s) => s.clanId);
+  if (currentStint) clanIds.push(currentStint.clan.id);
+  const refs = await resolveClanRefs(region, clanIds);
 
   const pastStints: ClanStint[] = [];
   for (const raw of rawHistory) {
@@ -164,9 +170,21 @@ export async function loadPlayerClanHistoryFromWG(
     pastStints.push(stintFromMemberHistory(raw, clan));
   }
 
+  const enrichedCurrent: ClanStint | null = currentStint
+    ? {
+        ...currentStint,
+        clan: {
+          ...currentStint.clan,
+          languages:
+            refs.get(currentStint.clan.id)?.languages ??
+            currentStint.clan.languages,
+        },
+      }
+    : null;
+
   const nowMs = Date.now();
-  const currentDurationS = currentStint
-    ? Math.max(0, Math.floor((nowMs - currentStint.joinedAt.getTime()) / 1000))
+  const currentDurationS = enrichedCurrent
+    ? Math.max(0, Math.floor((nowMs - enrichedCurrent.joinedAt.getTime()) / 1000))
     : 0;
   const pastDurationS = pastStints.reduce(
     (sum, s) =>
@@ -176,9 +194,9 @@ export async function loadPlayerClanHistoryFromWG(
   );
 
   return {
-    currentStint,
+    currentStint: enrichedCurrent,
     pastStints,
-    totalClans: pastStints.length + (currentStint ? 1 : 0),
+    totalClans: pastStints.length + (enrichedCurrent ? 1 : 0),
     timeInClansSeconds: currentDurationS + pastDurationS,
   };
 }
