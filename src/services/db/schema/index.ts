@@ -10,3 +10,4 @@ export * from "./player-snapshots";
 export * from "./tank-snapshots";
 export * from "./top-clans";
 export * from "./top-players";
+export * from "./vehicles";
