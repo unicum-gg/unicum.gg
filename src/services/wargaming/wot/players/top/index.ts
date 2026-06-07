@@ -1,8 +1,7 @@
-import { and, asc, eq, sql } from "drizzle-orm";
+import { and, asc, desc, eq, gte, isNotNull, sql } from "drizzle-orm";
 import { RatingMetric } from "@/constants/rating";
 import { db } from "@/services/db";
 import {
-  playerSnapshotsByRegion,
   playersByRegion,
   tankSnapshotsByRegion,
   topPlayersByRegion,
@@ -282,12 +281,10 @@ export async function computeTopPlayersAllMetrics(
 }
 
 /**
- * Overall ranking fast path: the players row already holds wn7/wn8/wnx
- * (recomputed on every snapshot-cron tick), so we just need each player's
- * lifetime battle count (from the latest player_snapshot) to apply the
- * 20k minimum and ORDER BY the cached column. No tank-snapshot scan, no
- * per-player WN compute. Done in one round-trip per metric, plus one
- * clan-enrichment batch over the union.
+ * Overall ranking fast path: the players row holds the cached lifetime
+ * wn7/wn8/wnx (refreshed by snapshot-cron) plus `battles`. So the lifetime
+ * top 30 is a single typed Drizzle query per metric, no raw SQL, no
+ * DISTINCT-ON scan of any snapshot table.
  */
 async function computeOverallFromCache(
   region: Region,
@@ -295,46 +292,35 @@ async function computeOverallFromCache(
 ): Promise<TopPlayersAllMetrics> {
   const minBattles = MIN_BATTLES[TopPlayersPeriod.Overall];
   const players = playersByRegion[region];
-  const playerSnapshots = playerSnapshotsByRegion[region];
 
-  type Row = {
-    account_id: string | number;
-    nickname: string;
-    battles: number;
-    value: string | number;
-  };
   const fetchTop = async (
-    column: "wn7" | "wn8" | "wnx",
+    column: typeof players.wn7 | typeof players.wn8 | typeof players.wnx,
   ): Promise<TopPlayerResult[]> => {
-    const metricCol = sql.raw(`p."${column}"`);
-    const rows = (await db.execute(sql`
-      WITH latest_snap AS (
-        SELECT DISTINCT ON (player_id) player_id, battles
-        FROM ${playerSnapshots}
-        ORDER BY player_id, taken_at DESC, id DESC
-      )
-      SELECT p.account_id, p.nickname, s.battles, ${metricCol} AS value
-      FROM latest_snap s
-      INNER JOIN ${players} p ON p.id = s.player_id
-      WHERE s.battles >= ${minBattles}
-        AND ${metricCol} IS NOT NULL
-      ORDER BY ${metricCol} DESC
-      LIMIT ${ENRICH_CANDIDATES}
-    `)) as unknown as Row[];
+    const rows = await db
+      .select({
+        accountId: players.accountId,
+        nickname: players.nickname,
+        battles: players.battles,
+        value: column,
+      })
+      .from(players)
+      .where(and(gte(players.battles, minBattles), isNotNull(column)))
+      .orderBy(desc(column))
+      .limit(ENRICH_CANDIDATES);
     return rows.map((r) => ({
-      account_id: Number(r.account_id),
+      account_id: Number(r.accountId),
       nickname: r.nickname,
       clan_tag: null,
       clan_color: null,
-      battles: r.battles,
+      battles: r.battles ?? 0,
       wnx: Number(r.value),
     }));
   };
 
   const [wn7, wn8, wnx] = await Promise.all([
-    fetchTop("wn7"),
-    fetchTop("wn8"),
-    fetchTop("wnx"),
+    fetchTop(players.wn7),
+    fetchTop(players.wn8),
+    fetchTop(players.wnx),
   ]);
 
   const out: TopPlayersAllMetrics = {

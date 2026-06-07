@@ -33,6 +33,7 @@ type RawPlayer = {
   wn7_30d: number | null;
   wn8_30d: number | null;
   wnx_30d: number | null;
+  battles: number | null;
   battles_30d: number | null;
 };
 
@@ -114,6 +115,7 @@ function playerFromRaw(r: RawPlayer): Player {
     wn730d: r.wn7_30d,
     wn830d: r.wn8_30d,
     wnx30d: r.wnx_30d,
+    battles: r.battles,
     battles30d: r.battles_30d,
   };
 }

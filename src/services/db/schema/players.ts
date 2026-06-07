@@ -45,6 +45,11 @@ export function makePlayersTable(region: string) {
       wn730d: real("wn7_30d"),
       wn830d: real("wn8_30d"),
       wnx30d: real("wnx_30d"),
+      // Lifetime battle count, copied from the latest snapshot's `battles`
+      // field at every snapshot-cron tick. Lets the Overall top-players
+      // ranking apply the 20k-battle minimum without DISTINCT-ON-scanning
+      // the whole player_snapshots table.
+      battles: integer("battles"),
       battles30d: integer("battles_30d"),
     },
     (t) => [uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId)],

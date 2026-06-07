@@ -393,7 +393,16 @@ async function updatePlayerRatings(
 
   await db
     .update(players)
-    .set({ wn7, wn8, wnx, wn730d, wn830d, wnx30d, battles30d })
+    .set({
+      wn7,
+      wn8,
+      wnx,
+      wn730d,
+      wn830d,
+      wnx30d,
+      battles30d,
+      battles: overall.battles,
+    })
     .where(eq(players.id, playerId));
 }
 
