@@ -36,7 +36,7 @@ export function NavLogo(props: ComponentProps<"a">) {
         />
         <path
           d="M316 56 L788 56 L1048 316 L1048 946 L552 1433 L56 946 L56 316 Z"
-          fill="currentColor"
+          fill="#F5F5F5"
         />
         <g fill="#f25322">
           <path d="M 380 56 L 724 56 L 552 540 Z" />
