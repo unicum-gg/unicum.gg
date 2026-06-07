@@ -1,6 +1,8 @@
 const STORAGE = {
   LOCAL_STORAGE: {
-    HERO_VIDEO_PLAYING: "hero-video-playing",
+    HERO_VIDEO_PLAYING: "unicum.hero-video-playing",
+    COOKIE_CONSENT: "unicum.cookie-consent",
+    COOKIE_PREFERENCES: "unicum.cookie-preferences",
   },
   COOKIES: {
     REGION: "unicum.region",
