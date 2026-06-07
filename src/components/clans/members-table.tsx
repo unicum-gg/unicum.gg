@@ -5,7 +5,7 @@ import {
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
-import { formatDistanceToNow } from "date-fns";
+import { format } from "date-fns";
 import Link from "next/link";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
@@ -52,7 +52,7 @@ enum SortColumn {
   WNX = "wnx",
   WR = "wr",
   Battles = "battles",
-  LastBattle = "last_battle",
+  Joined = "joined",
 }
 
 enum SortDirection {
@@ -81,8 +81,10 @@ function getSortValue(
       return m.overall?.winsPercentage ?? -1;
     case SortColumn.Battles:
       return m.overall?.battles ?? -1;
-    case SortColumn.LastBattle:
-      return m.lastBattleTime?.getTime() ?? 0;
+    case SortColumn.Joined:
+      // Bigger daysInClan = joined longer ago. Sorting descending shows the
+      // oldest members first, which matches what `Joined` usually means.
+      return m.daysInClan;
   }
 }
 
@@ -245,8 +247,8 @@ export function ClanMembersTable({
           <SortableHead column={SortColumn.Battles} state={sort} onToggle={toggleSort} align="end">
             Battles
           </SortableHead>
-          <SortableHead column={SortColumn.LastBattle} state={sort} onToggle={toggleSort} align="end">
-            Last battle
+          <SortableHead column={SortColumn.Joined} state={sort} onToggle={toggleSort} align="end">
+            Joined
           </SortableHead>
         </TableRow>
       </TableHeader>
@@ -305,9 +307,11 @@ export function ClanMembersTable({
                 {m.overall ? intFmt.format(m.overall.battles) : "—"}
               </TableCell>
               <TableCell className="text-right text-xs text-muted-foreground tabular-nums">
-                {m.lastBattleTime
-                  ? formatDistanceToNow(m.lastBattleTime, { addSuffix: true })
-                  : "—"}
+                {format(
+                  // eslint-disable-next-line react-hooks/purity -- portal API only gives us days_in_clan, not the join timestamp, so we derive it from "now" at render time
+                  new Date(Date.now() - m.daysInClan * 86_400_000),
+                  "MMM d, yyyy",
+                )}
               </TableCell>
             </TableRow>
           );
