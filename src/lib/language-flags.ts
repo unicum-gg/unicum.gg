@@ -14,6 +14,7 @@ const LANGUAGE_TO_COUNTRY: Record<string, string> = {
   ro: "RO",
   bg: "BG",
   hr: "HR",
+  bs: "BA",
   sr: "RS",
   sl: "SI",
   uk: "UA",
