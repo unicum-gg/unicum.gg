@@ -4,8 +4,6 @@ import NextScript from "next/script";
 import { useEffect, useState } from "react";
 import STORAGE from "@/constants/storage";
 
-const ADS_ENABLED = process.env.NEXT_PUBLIC_ADS_ENABLED === "true";
-
 export default function Script() {
   const [hasConsent, setHasConsent] = useState(false);
 
@@ -53,21 +51,6 @@ export default function Script() {
         `,
         }}
       />
-
-      {ADS_ENABLED && (
-        <>
-          {/* AdSense placeholder. Drop the network's script tag here once
-              your account is approved. Example for AdSense:
-
-              <NextScript
-                async
-                crossOrigin="anonymous"
-                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
-              />
-
-              Then inside <AdSlot> render the matching <ins class="adsbygoogle"> tag. */}
-        </>
-      )}
     </>
   );
 }

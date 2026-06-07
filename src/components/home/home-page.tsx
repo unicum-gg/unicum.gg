@@ -14,7 +14,6 @@ import { RatingScale } from "@/components/home/rating-scale";
 import { TopClans } from "@/components/home/top-clans";
 import { TopPlayers } from "@/components/home/top-players";
 import { HeroVideo } from "@/components/home/hero-video";
-import { AdSlot } from "@/components/ad-slot";
 import {
   Panel,
   PanelContent,
@@ -138,8 +137,6 @@ export async function HomePage({
         </Panel>
       </div>
 
-      <AdSlot slot="home-mid" className="min-h-22.5 w-full" />
-
       <PanelSeparator />
 
       <div className="grid lg:grid-cols-2">
@@ -206,8 +203,6 @@ export async function HomePage({
           </div>
         </PanelContent>
       </Panel>
-
-      <AdSlot slot="home-bottom" className="min-h-22.5 w-full" />
 
       <PanelSeparator />
 

@@ -63,7 +63,6 @@ export async function constructMetadata({
       ...(resolvedOgImage && { images: [resolvedOgImage] }),
     },
     icons: { icon: "/icon.svg" },
-    other: { "google-adsense-account": "ca-pub-3691404603790195" },
     ...(noIndex && { robots: { index: false, follow: false } }),
   };
 }
