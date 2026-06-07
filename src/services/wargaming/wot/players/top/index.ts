@@ -2,6 +2,7 @@ import { and, asc, eq, sql } from "drizzle-orm";
 import { RatingMetric } from "@/constants/rating";
 import { db } from "@/services/db";
 import {
+  playerSnapshotsByRegion,
   playersByRegion,
   tankSnapshotsByRegion,
   topPlayersByRegion,
@@ -75,6 +76,13 @@ export async function computeTopPlayersAllMetrics(
   period: TopPlayersPeriod,
   limit: number,
 ): Promise<TopPlayersAllMetrics> {
+  // Overall ratings are already cached on the players row by snapshot-cron,
+  // so the lifetime ranking is just a SELECT + ORDER BY on each column. No
+  // need to scan tens of millions of tank_snapshots and recompute.
+  if (period === TopPlayersPeriod.Overall) {
+    return computeOverallFromCache(region, limit);
+  }
+
   const players = playersByRegion[region];
   const tankSnapshots = tankSnapshotsByRegion[region];
   const interval = PERIOD_INTERVAL[period];
@@ -266,6 +274,92 @@ export async function computeTopPlayersAllMetrics(
   }
 
   // Trim each list to the requested limit (was working off ENRICH_CANDIDATES).
+  return {
+    [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
+    [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
+    [RatingMetric.Wnx]: out[RatingMetric.Wnx].slice(0, limit),
+  };
+}
+
+/**
+ * Overall ranking fast path: the players row already holds wn7/wn8/wnx
+ * (recomputed on every snapshot-cron tick), so we just need each player's
+ * lifetime battle count (from the latest player_snapshot) to apply the
+ * 20k minimum and ORDER BY the cached column. No tank-snapshot scan, no
+ * per-player WN compute. Done in one round-trip per metric, plus one
+ * clan-enrichment batch over the union.
+ */
+async function computeOverallFromCache(
+  region: Region,
+  limit: number,
+): Promise<TopPlayersAllMetrics> {
+  const minBattles = MIN_BATTLES[TopPlayersPeriod.Overall];
+  const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
+
+  type Row = {
+    account_id: string | number;
+    nickname: string;
+    battles: number;
+    value: string | number;
+  };
+  const fetchTop = async (
+    column: "wn7" | "wn8" | "wnx",
+  ): Promise<TopPlayerResult[]> => {
+    const metricCol = sql.raw(`p."${column}"`);
+    const rows = (await db.execute(sql`
+      WITH latest_snap AS (
+        SELECT DISTINCT ON (player_id) player_id, battles
+        FROM ${playerSnapshots}
+        ORDER BY player_id, taken_at DESC, id DESC
+      )
+      SELECT p.account_id, p.nickname, s.battles, ${metricCol} AS value
+      FROM latest_snap s
+      INNER JOIN ${players} p ON p.id = s.player_id
+      WHERE s.battles >= ${minBattles}
+        AND ${metricCol} IS NOT NULL
+      ORDER BY ${metricCol} DESC
+      LIMIT ${ENRICH_CANDIDATES}
+    `)) as unknown as Row[];
+    return rows.map((r) => ({
+      account_id: Number(r.account_id),
+      nickname: r.nickname,
+      clan_tag: null,
+      clan_color: null,
+      battles: r.battles,
+      wnx: Number(r.value),
+    }));
+  };
+
+  const [wn7, wn8, wnx] = await Promise.all([
+    fetchTop("wn7"),
+    fetchTop("wn8"),
+    fetchTop("wnx"),
+  ]);
+
+  const out: TopPlayersAllMetrics = {
+    [RatingMetric.Wn7]: wn7,
+    [RatingMetric.Wn8]: wn8,
+    [RatingMetric.Wnx]: wnx,
+  };
+
+  const uniqueIds = new Set<number>();
+  for (const list of Object.values(out)) {
+    for (const r of list) uniqueIds.add(r.account_id);
+  }
+  if (uniqueIds.size > 0) {
+    const clansByAccount = await getPlayerClansBatch(region, [...uniqueIds]);
+    for (const list of Object.values(out)) {
+      for (const r of list) {
+        const clan = clansByAccount.get(r.account_id);
+        if (clan) {
+          r.clan_tag = clan.tag;
+          r.clan_color = clan.color;
+        }
+      }
+    }
+  }
+
   return {
     [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
     [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
