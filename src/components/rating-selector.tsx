@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -18,6 +19,7 @@ import {
 } from "@/components/ui/select";
 
 export function RatingSelector() {
+  const router = useRouter();
   const [stored, setStored] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -32,6 +34,10 @@ export function RatingSelector() {
       onValueChange={(v) => {
         if (!isRatingMetric(v)) return;
         setStored(v);
+        // Re-fetch any RSC that reads the cookie (homepage leaderboards
+        // pick the metric from cookies() at render time). Pages that only
+        // rely on CSS data-attributes ignore this no-op.
+        router.refresh();
       }}
     >
       <SelectTrigger

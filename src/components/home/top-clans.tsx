@@ -3,6 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
+import {
+  DEFAULT_RATING_METRIC,
+  isRatingMetric,
+  RATING_METRIC_LABEL,
+  RatingMetric,
+} from "@/constants/rating";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -17,7 +23,18 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopClanResult } from "@/services/wargaming/wot/clans/top";
-import { RATING_COLOR_CLASS, wnxColor } from "@/services/wargaming/wot/ratings";
+import {
+  RATING_COLOR_CLASS,
+  wn7Color,
+  wn8Color,
+  wnxColor,
+} from "@/services/wargaming/wot/ratings";
+
+const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
+  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
+  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
+  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
+};
 import {
   isRegion,
   Region,
@@ -40,15 +57,23 @@ export function TopClans({
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
+  const [storedRating] = useCookie(
+    STORAGE.COOKIES.RATING,
+    DEFAULT_RATING_METRIC,
+  );
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
+  const metric: RatingMetric = isRatingMetric(storedRating)
+    ? storedRating
+    : DEFAULT_RATING_METRIC;
+  const metricLabel = RATING_METRIC_LABEL[metric];
   const { results, computedAt } = initial[region];
 
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
         Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-        more than 50 members, ranked by average WNX.
+        more than 50 members, ranked by average {metricLabel}.
         {computedAt ? (
           <>
             {" "}
@@ -69,7 +94,9 @@ export function TopClans({
                   #
                 </TableHead>
                 <TableHead>Clan</TableHead>
-                <TableHead className="w-24 pr-4 text-right!">Avg WNX</TableHead>
+                <TableHead className="w-24 pr-4 text-right!">
+                  Avg {metricLabel}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -79,6 +106,7 @@ export function TopClans({
                   clan={c}
                   rank={i + 1}
                   region={region}
+                  metric={metric}
                 />
               ))}
             </TableBody>
@@ -93,12 +121,14 @@ function ClanRow({
   clan,
   rank,
   region,
+  metric,
 }: {
   clan: TopClanResult;
   rank: number;
   region: Region;
+  metric: RatingMetric;
 }) {
-  const colorClass = RATING_COLOR_CLASS[wnxColor(clan.avg_wnx)];
+  const colorClass = COLOR_FOR_METRIC[metric](clan.avg_wnx);
   return (
     <TableRow>
       <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">

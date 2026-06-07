@@ -23,7 +23,10 @@ import {
 } from "@/components/panel";
 import APP from "@/constants/app";
 import { cookies } from "next/headers";
-import { ratingMetricFromCookie } from "@/constants/rating";
+import {
+  ratingMetricFromCookie,
+  RATING_METRIC_LABEL,
+} from "@/constants/rating";
 import STORAGE from "@/constants/storage";
 import { styles } from "@/lib/styles";
 import { getTopClansByMetricByRegions } from "@/services/wargaming/wot/clans/top";
@@ -44,6 +47,7 @@ export async function HomePage({
   const metric = ratingMetricFromCookie(
     cookieStore.get(STORAGE.COOKIES.RATING)?.value,
   );
+  const metricLabel = RATING_METRIC_LABEL[metric];
   const topClans = await getTopClansByMetricByRegions(
     REGIONS,
     metric,
@@ -96,7 +100,7 @@ export async function HomePage({
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              description="Ranked by WNX over the past 24 hours (min. 20 battles)."
+              description={`Ranked by ${metricLabel} over the past 24 hours (min. 20 battles).`}
               initial={topPlayersDay}
               regionOverride={regionOverride}
             />
@@ -112,7 +116,7 @@ export async function HomePage({
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              description="Ranked by WNX over the past 7 days (min. 140 battles)."
+              description={`Ranked by ${metricLabel} over the past 7 days (min. 140 battles).`}
               initial={topPlayersWeek}
               regionOverride={regionOverride}
             />
@@ -125,7 +129,7 @@ export async function HomePage({
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers
-              description="Ranked by all-time WNX (min. 20,000 battles)."
+              description={`Ranked by all-time ${metricLabel} (min. 20,000 battles).`}
               initial={topPlayersOverall}
               regionOverride={regionOverride}
             />

@@ -2,6 +2,12 @@
 
 import Link from "next/link";
 import { RelativeTime } from "@/components/relative-time";
+import {
+  DEFAULT_RATING_METRIC,
+  isRatingMetric,
+  RATING_METRIC_LABEL,
+  RatingMetric,
+} from "@/constants/rating";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -16,8 +22,19 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopPlayerResult } from "@/services/wargaming/wot/players/top";
-import { RATING_COLOR_CLASS, wnxColor } from "@/services/wargaming/wot/ratings";
+import {
+  RATING_COLOR_CLASS,
+  wn7Color,
+  wn8Color,
+  wnxColor,
+} from "@/services/wargaming/wot/ratings";
 import { isRegion, Region } from "@/services/wargaming/wot";
+
+const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
+  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
+  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
+  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
+};
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -36,8 +53,16 @@ export function TopPlayers({
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
+  const [storedRating] = useCookie(
+    STORAGE.COOKIES.RATING,
+    DEFAULT_RATING_METRIC,
+  );
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
+  const metric: RatingMetric = isRatingMetric(storedRating)
+    ? storedRating
+    : DEFAULT_RATING_METRIC;
+  const metricLabel = RATING_METRIC_LABEL[metric];
   const { results, computedAt } = initial[region];
 
   return (
@@ -64,7 +89,9 @@ export function TopPlayers({
                   #
                 </TableHead>
                 <TableHead>Player</TableHead>
-                <TableHead className="w-24 pr-4 text-right!">WNX</TableHead>
+                <TableHead className="w-24 pr-4 text-right!">
+                  {metricLabel}
+                </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -74,6 +101,7 @@ export function TopPlayers({
                   player={p}
                   rank={i + 1}
                   region={region}
+                  metric={metric}
                 />
               ))}
             </TableBody>
@@ -88,12 +116,14 @@ function PlayerRow({
   player,
   rank,
   region,
+  metric,
 }: {
   player: TopPlayerResult;
   rank: number;
   region: Region;
+  metric: RatingMetric;
 }) {
-  const colorClass = RATING_COLOR_CLASS[wnxColor(player.wnx)];
+  const colorClass = COLOR_FOR_METRIC[metric](player.wnx);
   return (
     <TableRow>
       <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">
