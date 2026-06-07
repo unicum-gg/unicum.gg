@@ -261,21 +261,24 @@
     @apply border-x border-fd-border;
   }
 
-  /* Rating metric: bold the selected row in 3-row metric tables (player
-     stats), hide the non-selected columns in 3-column metric tables (clan
-     members), hide the non-selected variants in single-metric cells (clan
-     header). Driven by html[data-rating-metric] painted from the cookie. */
-  html[data-rating-metric="wn7"] [data-rating-row="wn7"] td,
-  html[data-rating-metric="wn8"] [data-rating-row="wn8"] td,
-  html[data-rating-metric="wnx"] [data-rating-row="wnx"] td {
-    @apply font-bold;
-  }
-  html[data-rating-metric="wn7"] [data-rating-col="wn8"],
-  html[data-rating-metric="wn7"] [data-rating-col="wnx"],
-  html[data-rating-metric="wn8"] [data-rating-col="wn7"],
-  html[data-rating-metric="wn8"] [data-rating-col="wnx"],
-  html[data-rating-metric="wnx"] [data-rating-col="wn7"],
-  html[data-rating-metric="wnx"] [data-rating-col="wn8"] {
-    display: none !important;
-  }
+}
+
+/* Rating metric: bold the selected row in 3-row metric tables (player stats),
+   hide the non-selected columns in 3-column metric tables (clan members),
+   hide the non-selected variants in single-metric cells (clan header).
+   Driven by html[data-rating-metric] painted from the cookie. Kept outside
+   @layer base on purpose so it wins over Tailwind utilities like font-medium
+   on the label cell. */
+html[data-rating-metric="wn7"] [data-rating-row="wn7"] td,
+html[data-rating-metric="wn8"] [data-rating-row="wn8"] td,
+html[data-rating-metric="wnx"] [data-rating-row="wnx"] td {
+  font-weight: 700;
+}
+html[data-rating-metric="wn7"] [data-rating-col="wn8"],
+html[data-rating-metric="wn7"] [data-rating-col="wnx"],
+html[data-rating-metric="wn8"] [data-rating-col="wn7"],
+html[data-rating-metric="wn8"] [data-rating-col="wnx"],
+html[data-rating-metric="wnx"] [data-rating-col="wn7"],
+html[data-rating-metric="wnx"] [data-rating-col="wn8"] {
+  display: none !important;
 }
