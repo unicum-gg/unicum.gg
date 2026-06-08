@@ -50,13 +50,13 @@ async function collectDuePlayers(
   cutoff: Date,
   limit: number,
 ): Promise<{ rows: Player[]; queued: number }> {
-  // Pure 24h backfill, but biased toward recently-active players. Plain
-  // FIFO on lastSeenAt wasted most slots on long-inactive accounts (NA in
-  // particular tracks ~140k players for ~6k active ones), so the cron
-  // refreshed each active player only every few days. Ordering by
-  // lastBattleAt DESC NULLS LAST pulls today's active players to the front
-  // of the queue every cycle; lastSeenAt ASC breaks ties so we still
-  // eventually rotate through long-inactives.
+  // Pure 24h backfill, biased toward filling holes in the DB first, then
+  // toward recently-active players. NULL lastBattleAt = player discovered
+  // via a clan members list with no stats yet. Until those are fetched,
+  // they're missing from leaderboards / top players / search, so they
+  // always take priority (NULLS FIRST). Among non-NULLs, most recent
+  // battle wins so active players stay refreshed. lastSeenAt ASC breaks
+  // ties so we rotate through.
   const players = playersByRegion[region];
   const where = lt(players.lastSeenAt, cutoff);
   const [rows, [{ queued }]] = await Promise.all([
@@ -65,7 +65,7 @@ async function collectDuePlayers(
       .from(players)
       .where(where)
       .orderBy(
-        sql`${players.lastBattleAt} DESC NULLS LAST`,
+        sql`${players.lastBattleAt} DESC NULLS FIRST`,
         asc(players.lastSeenAt),
       )
       .limit(limit),
