@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { LiveSync } from "@/components/live-sync";
@@ -11,11 +12,18 @@ import {
 } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
+import { PlayerRatingChart } from "@/components/players/rating-chart";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
+import {
+  RATING_METRIC_LABEL,
+  ratingMetricFromCookie,
+} from "@/constants/rating";
 import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
 import { constructMetadata } from "@/lib/metadata";
+import { styles } from "@/lib/styles";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
@@ -34,6 +42,7 @@ import {
   type PlayerInitialData,
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
+import { getRatingHistory } from "@/services/players/rating-history";
 import { enqueuePlayerRefreshBackground } from "@/services/players/refresh-queue";
 import {
   diffTanks,
@@ -165,7 +174,7 @@ async function render(
   );
 
   if (fullCache) {
-    return renderFromCache(
+    return await renderFromCache(
       region,
       accountId,
       initial,
@@ -185,14 +194,14 @@ async function render(
   );
 }
 
-function renderFromCache(
+async function renderFromCache(
   region: Region,
   accountId: number,
   initial: PlayerInitialData,
   encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
   wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>,
   wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>,
-): React.ReactElement {
+): Promise<React.ReactElement> {
   const player = initial.player as Player;
   const latest = initial.latestSnapshot as PlayerSnapshot;
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
@@ -204,7 +213,7 @@ function renderFromCache(
     enqueuePlayerRefreshBackground(region, [accountId], { priority: 10 });
   }
 
-  return buildView({
+  return await buildView({
     region,
     player,
     latest,
@@ -254,7 +263,7 @@ async function renderFromWG(
     (err) => console.error("[bg] storePlayerClanHistory failed:", err),
   );
 
-  return buildView({
+  return await buildView({
     region,
     player,
     latest,
@@ -267,7 +276,7 @@ async function renderFromWG(
   });
 }
 
-function buildView(args: {
+async function buildView(args: {
   region: Region;
   player: Player;
   latest: PlayerSnapshot;
@@ -277,7 +286,7 @@ function buildView(args: {
   encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>;
   wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>;
   wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>;
-}): React.ReactElement {
+}): Promise<React.ReactElement> {
   const {
     region,
     player,
@@ -326,6 +335,13 @@ function buildView(args: {
   const createdAt = player.createdAt ?? new Date(0);
   const lastBattleAt = player.lastBattleAt ?? new Date(0);
   const nowMs = Date.now();
+
+  const cookieStore = await cookies();
+  const metric = ratingMetricFromCookie(
+    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
+  );
+  const metricLabel = RATING_METRIC_LABEL[metric];
+  const ratingHistory = await getRatingHistory(region, player.id, metric);
 
   const regionLabel = region.toUpperCase();
   const winrate = current.battles > 0 ? (current.wins / current.battles) * 100 : 0;
@@ -378,6 +394,39 @@ function buildView(args: {
             wn8Expected={wn8Expected}
             wnxExpected={wnxExpected}
           />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{metricLabel} progression</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          {ratingHistory.points.length > 0 ? (
+            <>
+              <div className={`p-4 ${styles.mutedDescription}`}>
+                Rolling {metricLabel} over the last 90 days, with a window of
+                up to {ratingHistory.windowDays} days
+                {ratingHistory.windowDays < 30
+                  ? " for now (the window grows up to 30 as we collect more snapshots)"
+                  : ""}
+                .
+              </div>
+              <div className="px-4 pb-4">
+                <PlayerRatingChart
+                  data={ratingHistory.points}
+                  metricLabel={metricLabel}
+                />
+              </div>
+            </>
+          ) : (
+            <div className={`p-4 ${styles.mutedDescription}`}>
+              Not enough history yet. We need at least 2 days of snapshots to
+              draw the curve. Check back soon.
+            </div>
+          )}
         </PanelContent>
       </Panel>
 
