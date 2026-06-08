@@ -164,16 +164,21 @@ async function render(
     span("getWNXExpectedValues", () => getWNXExpectedValues()),
   ]);
 
-  const fullCache =
+  // Stale-while-revalidate: if we have a player + snapshot + tanks we can
+  // render the stats page right away, even if clanHistory is missing or
+  // stale. The clan history section just shows empty until the background
+  // fetch lands; LiveSync then triggers `router.refresh()` and the page
+  // hydrates with the full data. Avoids the 5-30s wait on WG when G-Core
+  // throttles EU.
+  const renderableFromCache =
     initial.player &&
     initial.latestSnapshot &&
-    initial.latestTankSnapshots.length > 0 &&
-    initial.clanHistory;
+    initial.latestTankSnapshots.length > 0;
   trace?.log(
-    `cacheHit=${!!fullCache} hasPlayer=${!!initial.player} hasSnapshot=${!!initial.latestSnapshot} tanks=${initial.latestTankSnapshots.length} hasClanHistory=${!!initial.clanHistory}`,
+    `cacheHit=${!!renderableFromCache} hasPlayer=${!!initial.player} hasSnapshot=${!!initial.latestSnapshot} tanks=${initial.latestTankSnapshots.length} hasClanHistory=${!!initial.clanHistory}`,
   );
 
-  if (fullCache) {
+  if (renderableFromCache) {
     return await renderFromCache(
       region,
       accountId,
@@ -205,12 +210,23 @@ async function renderFromCache(
   const player = initial.player as Player;
   const latest = initial.latestSnapshot as PlayerSnapshot;
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
-  const clanHistory = initial.clanHistory!.data;
+  const clanHistory = initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY;
 
   // Coalesce: only re-enqueue if the last refresh was at least 5min ago.
   const ageMs = Date.now() - player.lastSeenAt.getTime();
   if (ageMs > REFRESH_COALESCE_MS) {
     enqueuePlayerRefreshBackground(region, [accountId], { priority: 10 });
+  }
+
+  // If we rendered with a stub clan history, fire the real fetch in the
+  // background. LiveSync's SSE will trigger router.refresh() once it's
+  // stored and the next render will pick up the full data.
+  if (!initial.clanHistory) {
+    void loadPlayerClanHistoryFromWG(region, accountId)
+      .then((history) => storePlayerClanHistory(region, accountId, history))
+      .catch((err) =>
+        console.error("[bg] backfill clan history failed:", err),
+      );
   }
 
   return await buildView({
