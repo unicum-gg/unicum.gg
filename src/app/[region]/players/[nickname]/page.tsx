@@ -422,12 +422,9 @@ async function buildView(args: {
           {ratingHistory.points.length > 0 ? (
             <>
               <div className={`p-4 ${styles.mutedDescription}`}>
-                Rolling {metricLabel} over the last 90 days, with a window of
-                up to {ratingHistory.windowDays} days
-                {ratingHistory.windowDays < 30
-                  ? " for now (the window grows up to 30 as we collect more snapshots)"
-                  : ""}
-                .
+                Overall {metricLabel} computed from the player&apos;s
+                lifetime stats at each day. Same number as the {metricLabel}{" "}
+                cell in the Total column above, plotted over time.
               </div>
               <div className="px-4 pb-4">
                 <PlayerRatingChart
@@ -438,8 +435,8 @@ async function buildView(args: {
             </>
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
-              Not enough history yet. We need at least 2 days of snapshots to
-              draw the curve. Check back soon.
+              Not enough history yet. We need at least one snapshot to draw
+              the curve. Check back soon.
             </div>
           )}
         </PanelContent>

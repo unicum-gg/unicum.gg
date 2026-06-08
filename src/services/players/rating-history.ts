@@ -25,12 +25,10 @@ export type RatingHistoryPoint = {
 };
 
 export type RatingHistory = {
-  windowDays: number;
   points: RatingHistoryPoint[];
 };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
-const MAX_WINDOW_DAYS = 30;
 const DEFAULT_LOOKBACK_DAYS = 90;
 
 type TankSnapshotRow = {
@@ -47,11 +45,14 @@ type TankSnapshotRow = {
 };
 
 /**
- * Daily rolling rating series. The window adapts to the data we have: it
- * stays at 30 days once the player has 30+ days of snapshots, and shrinks
- * down to whatever's available before that (so a player tracked 11 days
- * still gets a line, computed over an 11-day window). Returns an empty
- * point list when there's less than one day of data spread.
+ * Daily lifetime rating series. For each anchor day we pick the latest
+ * tank snapshot per tank at-or-before that day, then run the WN8/WN7/WNX
+ * formula on those cumulative stats. The point at day T equals the
+ * player's overall rating as of T — same metric the stats table shows
+ * in its `Total` column, so the chart and table match exactly.
+ *
+ * Returns an empty point list when the player has no tank snapshots at
+ * all.
  */
 export async function getRatingHistory(
   region: Region,
@@ -78,7 +79,7 @@ export async function getRatingHistory(
     .where(eq(tankSnapshots.playerId, playerId))
     .orderBy(asc(tankSnapshots.takenAt), asc(tankSnapshots.id));
 
-  if (rows.length === 0) return { windowDays: 0, points: [] };
+  if (rows.length === 0) return { points: [] };
 
   const byTank = new Map<number, TankSnapshotRow[]>();
   for (const r of rows) {
@@ -91,19 +92,9 @@ export async function getRatingHistory(
   const newestMs = rows[rows.length - 1].takenAt.getTime();
   const endDay = startOfDay(newestMs);
   const oldestDay = startOfDay(oldestMs);
-  const daysOfData = Math.floor((endDay - oldestDay) / DAY_MS);
-  if (daysOfData < 1) return { windowDays: 0, points: [] };
-
-  // The "advertised" window: the largest window we'll ever use, capped at 30
-  // days. Each anchor day uses its own actual window = min(30d, days back to
-  // the oldest snapshot), so early anchors get a shorter window while late
-  // anchors (once we've accumulated 30+ days) get the full 30. This keeps
-  // every anchor producing a point instead of waiting 30 days for the first.
-  const windowDays = Math.min(MAX_WINDOW_DAYS, daysOfData);
-
   const lookbackStart = endDay - lookbackDays * DAY_MS;
-  const startDay = Math.max(oldestDay + DAY_MS, lookbackStart);
-  if (startDay > endDay) return { windowDays, points: [] };
+  const startDay = Math.max(oldestDay, lookbackStart);
+  if (startDay > endDay) return { points: [] };
 
   const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
     getVehicleEncyclopedia(region),
@@ -115,25 +106,14 @@ export async function getRatingHistory(
   const points: RatingHistoryPoint[] = [];
   for (let dayMs = startDay; dayMs <= endDay; dayMs += DAY_MS) {
     const currentMs = dayMs + DAY_MS - 1;
-    const priorMs = Math.max(
-      currentMs - MAX_WINDOW_DAYS * DAY_MS,
-      oldestMs,
-    );
-
-    const currentTanks: TankStats[] = [];
-    const priorByTank = new Map<number, TankStats>();
-    for (const [tankId, snaps] of byTank) {
+    const tanks: TankStats[] = [];
+    for (const snaps of byTank.values()) {
       const cur = findLatestAtOrBefore(snaps, currentMs);
-      const prior = findLatestAtOrBefore(snaps, priorMs);
-      if (!cur) continue;
-      currentTanks.push(rowToTankStats(cur));
-      if (prior) priorByTank.set(tankId, rowToTankStats(prior));
+      if (cur) tanks.push(rowToTankStats(cur));
     }
-
-    const delta = diffTankStats(currentTanks, priorByTank);
     const value = computeMetric(
       metric,
-      delta,
+      tanks,
       encyclopedia,
       wn8Expected,
       wn8Fallback,
@@ -141,55 +121,25 @@ export async function getRatingHistory(
     );
     points.push({ day: dayToISO(dayMs), value });
   }
-  return { windowDays, points };
-}
-
-function diffTankStats(
-  current: TankStats[],
-  prior: Map<number, TankStats>,
-): TankStats[] {
-  const out: TankStats[] = [];
-  for (const t of current) {
-    const p = prior.get(t.tank_id);
-    if (!p) continue;
-    const battlesDiff = t.all.battles - p.all.battles;
-    if (battlesDiff <= 0) continue;
-    out.push({
-      tank_id: t.tank_id,
-      all: {
-        battles: battlesDiff,
-        wins: t.all.wins - p.all.wins,
-        damage_dealt: t.all.damage_dealt - p.all.damage_dealt,
-        spotted: t.all.spotted - p.all.spotted,
-        frags: t.all.frags - p.all.frags,
-        dropped_capture_points:
-          t.all.dropped_capture_points - p.all.dropped_capture_points,
-        radio_assisted_damage:
-          t.all.radio_assisted_damage - p.all.radio_assisted_damage,
-        track_assisted_damage:
-          t.all.track_assisted_damage - p.all.track_assisted_damage,
-      },
-    });
-  }
-  return out;
+  return { points };
 }
 
 function computeMetric(
   metric: RatingMetric,
-  delta: TankStats[],
+  tanks: TankStats[],
   encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
   wn8Expected: Map<number, WN8Expected>,
   wn8Fallback: ReturnType<typeof buildWN8Fallback>,
   wnxExpected: Map<number, WNXExpected>,
 ): number | null {
-  if (delta.length === 0) return null;
+  if (tanks.length === 0) return null;
   if (metric === RatingMetric.Wn8) {
-    return computeWN8(delta, wn8Expected, encyclopedia, wn8Fallback);
+    return computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   }
   if (metric === RatingMetric.Wnx) {
-    return computeWNX(delta, wnxExpected);
+    return computeWNX(tanks, wnxExpected);
   }
-  const agg = delta.reduce(
+  const agg = tanks.reduce(
     (acc, t) => {
       acc.battles += t.all.battles;
       acc.wins += t.all.wins;
@@ -209,7 +159,7 @@ function computeMetric(
     },
   );
   if (agg.battles === 0) return null;
-  const avgTier = computeAvgTier(delta, encyclopedia);
+  const avgTier = computeAvgTier(tanks, encyclopedia);
   return computeWN7(agg, avgTier);
 }
 
