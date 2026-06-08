@@ -422,14 +422,17 @@ async function buildView(args: {
           {ratingHistory.points.length > 0 ? (
             <>
               <div className={`p-4 ${styles.mutedDescription}`}>
-                Overall {metricLabel} computed from the player&apos;s
-                lifetime stats at each day. Same number as the {metricLabel}{" "}
-                cell in the Total column above, plotted over time.
+                Solid line is overall {metricLabel} (matches the Total
+                column above), drifting slowly as new battles accumulate.
+                Dashed line is per-session {metricLabel}, computed from the
+                battles played since the previous snapshot. It shows hot
+                and cold streaks. Line color follows the rating tier.
               </div>
               <div className="px-4 pb-4">
                 <PlayerRatingChart
                   data={ratingHistory.points}
                   metricLabel={metricLabel}
+                  metric={metric}
                 />
               </div>
             </>

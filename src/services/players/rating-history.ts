@@ -21,7 +21,8 @@ import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 export type RatingHistoryPoint = {
   day: string;
-  value: number | null;
+  lifetime: number | null;
+  session: number | null;
 };
 
 export type RatingHistory = {
@@ -45,14 +46,15 @@ type TankSnapshotRow = {
 };
 
 /**
- * Daily lifetime rating series. For each anchor day we pick the latest
- * tank snapshot per tank at-or-before that day, then run the WN8/WN7/WNX
- * formula on those cumulative stats. The point at day T equals the
- * player's overall rating as of T — same metric the stats table shows
- * in its `Total` column, so the chart and table match exactly.
+ * Two parallel daily series:
  *
- * Returns an empty point list when the player has no tank snapshots at
- * all.
+ *   - `lifetime`: WN8/WN7/WNX computed on the player's cumulative tank
+ *     stats at-or-before that day. Matches the value in the stats table's
+ *     `Total` column. Smooth, slow drift.
+ *   - `session`: WN8/WN7/WNX computed on the delta between this anchor's
+ *     tank state and the previous anchor's tank state. Spiky, reflects
+ *     each day's actual session performance. null on the very first day
+ *     (no prior) and on days with no battle change.
  */
 export async function getRatingHistory(
   region: Region,
@@ -104,22 +106,69 @@ export async function getRatingHistory(
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
 
   const points: RatingHistoryPoint[] = [];
+  let prevCumulative: Map<number, TankStats> | null = null;
+
   for (let dayMs = startDay; dayMs <= endDay; dayMs += DAY_MS) {
     const currentMs = dayMs + DAY_MS - 1;
-    const tanks: TankStats[] = [];
-    for (const snaps of byTank.values()) {
+    const currentCumulative = new Map<number, TankStats>();
+    for (const [tankId, snaps] of byTank) {
       const cur = findLatestAtOrBefore(snaps, currentMs);
-      if (cur) tanks.push(rowToTankStats(cur));
+      if (cur) currentCumulative.set(tankId, rowToTankStats(cur));
     }
-    const value = computeMetric(
+    const currentTanks = Array.from(currentCumulative.values());
+
+    const lifetime = computeMetric(
       metric,
-      tanks,
+      currentTanks,
       encyclopedia,
       wn8Expected,
       wn8Fallback,
       wnxExpected,
     );
-    points.push({ day: dayToISO(dayMs), value });
+
+    let session: number | null = null;
+    if (prevCumulative !== null) {
+      const sessionDelta: TankStats[] = [];
+      for (const t of currentTanks) {
+        const p = prevCumulative.get(t.tank_id);
+        if (!p) {
+          // Tank that didn't exist in the previous snapshot — count its
+          // full current stats as "earned this session" (the player
+          // acquired and played it inside the window).
+          if (t.all.battles > 0) sessionDelta.push(t);
+          continue;
+        }
+        const battlesDiff = t.all.battles - p.all.battles;
+        if (battlesDiff <= 0) continue;
+        sessionDelta.push({
+          tank_id: t.tank_id,
+          all: {
+            battles: battlesDiff,
+            wins: t.all.wins - p.all.wins,
+            damage_dealt: t.all.damage_dealt - p.all.damage_dealt,
+            spotted: t.all.spotted - p.all.spotted,
+            frags: t.all.frags - p.all.frags,
+            dropped_capture_points:
+              t.all.dropped_capture_points - p.all.dropped_capture_points,
+            radio_assisted_damage:
+              t.all.radio_assisted_damage - p.all.radio_assisted_damage,
+            track_assisted_damage:
+              t.all.track_assisted_damage - p.all.track_assisted_damage,
+          },
+        });
+      }
+      session = computeMetric(
+        metric,
+        sessionDelta,
+        encyclopedia,
+        wn8Expected,
+        wn8Fallback,
+        wnxExpected,
+      );
+    }
+
+    points.push({ day: dayToISO(dayMs), lifetime, session });
+    prevCumulative = currentCumulative;
   }
   return { points };
 }

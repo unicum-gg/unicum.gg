@@ -14,6 +14,21 @@ export enum RatingColor {
   Top = "top",
 }
 
+export const RATING_COLOR_HEX: Record<RatingColor, string> = {
+  [RatingColor.VeryBad]: "#000000",
+  [RatingColor.Bad]: "#CD3333",
+  [RatingColor.BelowAvg]: "#D77900",
+  [RatingColor.Average]: "#D7B600",
+  [RatingColor.Good]: "#6D9521",
+  [RatingColor.VeryGood]: "#4C762E",
+  [RatingColor.Super]: "#4A92B7",
+  [RatingColor.Excellent]: "#83579D",
+  [RatingColor.Top]: "#5A3175",
+};
+
+// Hardcoded as literal strings so Tailwind's JIT scanner sees the
+// arbitrary `bg-[#...]` classes at build time. Keep in sync with
+// RATING_COLOR_HEX above.
 export const RATING_COLOR_CLASS: Record<RatingColor, string> = {
   [RatingColor.VeryBad]: "bg-[#000000]! text-white",
   [RatingColor.Bad]: "bg-[#CD3333]! text-white",

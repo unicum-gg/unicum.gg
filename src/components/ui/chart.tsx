@@ -202,7 +202,17 @@ function ChartTooltipContent({
           .map((item, index) => {
             const key = `${nameKey ?? item.name ?? item.dataKey ?? "value"}`
             const itemConfig = getPayloadConfigFromPayload(config, item, key)
-            const indicatorColor = color ?? item.payload?.fill ?? item.color
+            // When the series uses an SVG gradient stroke (e.g. `url(#foo)`),
+            // item.color is the gradient ref, not a usable CSS color for the
+            // indicator chip. Fall back to the config color in that case.
+            const rawItemColor = item.color
+            const itemColorIsGradient =
+              typeof rawItemColor === "string" && rawItemColor.startsWith("url(")
+            const indicatorColor =
+              color ??
+              item.payload?.fill ??
+              (itemColorIsGradient ? itemConfig?.color : rawItemColor) ??
+              itemConfig?.color
 
             return (
               <div
@@ -242,7 +252,7 @@ function ChartTooltipContent({
                     )}
                     <div
                       className={cn(
-                        "flex flex-1 justify-between leading-none",
+                        "flex flex-1 justify-between gap-3 leading-none",
                         nestLabel ? "items-end" : "items-center"
                       )}
                     >
