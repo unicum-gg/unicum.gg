@@ -11,6 +11,12 @@ import { cn } from "@/lib/utils";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
 
+const FLAG_DIMENSIONS = {
+  s: { width: 16, height: 12 },
+  m: { width: 20, height: 15 },
+  l: { width: 32, height: 24 },
+} as const;
+
 function displayName(code: string): string {
   return LANGUAGE_NAMES.of(code) ?? code.toUpperCase();
 }
@@ -72,6 +78,8 @@ export function LanguageFlags({
                 <img
                   src={`/flags/${size}/${code}.svg`}
                   alt={lang}
+                  width={FLAG_DIMENSIONS[size].width}
+                  height={FLAG_DIMENSIONS[size].height}
                   className="h-full w-auto"
                 />
               </TooltipTrigger>
