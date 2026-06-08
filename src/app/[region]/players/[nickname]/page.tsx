@@ -164,16 +164,15 @@ async function render(
     span("getWNXExpectedValues", () => getWNXExpectedValues()),
   ]);
 
-  // Stale-while-revalidate: if we have a player + snapshot + tanks we can
-  // render the stats page right away, even if clanHistory is missing or
-  // stale. The clan history section just shows empty until the background
-  // fetch lands; LiveSync then triggers `router.refresh()` and the page
-  // hydrates with the full data. Avoids the 5-30s wait on WG when G-Core
-  // throttles EU.
+  // Stale-while-revalidate: if we have a player + at least one snapshot
+  // we render the page right away. Missing tanks → stats table falls back
+  // to "—". Missing clanHistory → empty section. Both get backfilled via
+  // background WG fetches; LiveSync triggers `router.refresh()` when fresh
+  // data lands. Avoids the 5-30s wait on WG when G-Core throttles EU,
+  // even on long-tail accounts with 0 battles (e.g. fresh accounts whose
+  // tank stats are empty by construction).
   const renderableFromCache =
-    initial.player &&
-    initial.latestSnapshot &&
-    initial.latestTankSnapshots.length > 0;
+    initial.player && initial.latestSnapshot;
   trace?.log(
     `cacheHit=${!!renderableFromCache} hasPlayer=${!!initial.player} hasSnapshot=${!!initial.latestSnapshot} tanks=${initial.latestTankSnapshots.length} hasClanHistory=${!!initial.clanHistory}`,
   );
