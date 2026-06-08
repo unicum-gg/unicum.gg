@@ -217,9 +217,13 @@ export async function getClanMembersCached(
     };
   }
 
-  const members = await refreshClanMembers(region, clanId);
-  const enriched = await enrichMissingOverall(region, members);
-  return { members: enriched, fromDb: false, refreshing: false };
+  // Stale-while-revalidate: render the clan page with an empty members
+  // table right away and fire the WG fetch in the background. LiveSync's
+  // SSE triggers router.refresh() once the members land. Avoids the
+  // 5-30s wait when G-Core throttles EU and the WG members endpoint
+  // hangs on first-visit clans.
+  refreshClanMembersInBackground(region, clanId);
+  return { members: [], fromDb: false, refreshing: true };
 }
 
 export async function refreshClanMembers(
