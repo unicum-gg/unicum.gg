@@ -87,10 +87,10 @@ export function TopClans({
         </div>
       ) : (
         <div className="mt-auto">
-          <Table className="mb-px! [&_td]:min-w-0 [&_tr]:h-11">
+          <Table className="mb-px! table-fixed [&_tr]:h-11">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[1%] whitespace-nowrap px-4! text-center!">
+                <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
                   #
                 </TableHead>
                 <TableHead>Clan</TableHead>

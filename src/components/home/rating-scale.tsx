@@ -42,7 +42,7 @@ export function RatingScale() {
         metric selected in the navbar.
       </div>
       <div className="mt-auto">
-        <Table className="mb-px! [&_td]:min-w-0 [&_tr]:h-11">
+        <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
           <TableHeader>
             <TableRow>
               <TableHead className="pl-4!">Tier</TableHead>

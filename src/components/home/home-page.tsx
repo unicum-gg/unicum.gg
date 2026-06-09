@@ -93,7 +93,7 @@ export async function HomePage({
 
       <PanelSeparator />
 
-      <div className="grid lg:grid-cols-3">
+      <div className="grid lg:grid-cols-3 *:min-w-0">
         <Panel className="flex flex-col lg:border-r-0">
           <PanelHeader>
             <PanelTitle>Top players · Past 24 hours</PanelTitle>
@@ -139,7 +139,7 @@ export async function HomePage({
 
       <PanelSeparator />
 
-      <div className="grid lg:grid-cols-2">
+      <div className="grid lg:grid-cols-2 *:min-w-0">
         <Panel className="flex flex-col">
           <PanelHeader>
             <PanelTitle>Top clans</PanelTitle>
