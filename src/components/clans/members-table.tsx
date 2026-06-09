@@ -112,6 +112,8 @@ function SortableHead({
   onToggle,
   align = "start",
   ratingCol,
+  hideOnMobile,
+  headClassName,
   children,
 }: {
   column: SortColumn;
@@ -119,6 +121,8 @@ function SortableHead({
   onToggle: (col: SortColumn) => void;
   align?: "start" | "end";
   ratingCol?: string;
+  hideOnMobile?: boolean;
+  headClassName?: string;
   children: React.ReactNode;
 }) {
   const active = state?.column === column;
@@ -128,7 +132,14 @@ function SortableHead({
       : CaretDownIcon
     : CaretUpDownIcon;
   return (
-    <TableHead data-rating-col={ratingCol} className="p-0">
+    <TableHead
+      data-rating-col={ratingCol}
+      className={cn(
+        "p-0",
+        hideOnMobile && "hidden sm:table-cell",
+        headClassName,
+      )}
+    >
       <button
         type="button"
         onClick={() => onToggle(column)}
@@ -211,7 +222,12 @@ export function ClanMembersTable({
           <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
             Player
           </SortableHead>
-          <SortableHead column={SortColumn.Role} state={sort} onToggle={toggleSort}>
+          <SortableHead
+            column={SortColumn.Role}
+            state={sort}
+            onToggle={toggleSort}
+            hideOnMobile
+          >
             Role
           </SortableHead>
           <SortableHead
@@ -241,13 +257,31 @@ export function ClanMembersTable({
           >
             WNX
           </SortableHead>
-          <SortableHead column={SortColumn.WR} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.WR}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            headClassName="max-[480px]:hidden"
+          >
             WR
           </SortableHead>
-          <SortableHead column={SortColumn.Battles} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.Battles}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            hideOnMobile
+          >
             Battles
           </SortableHead>
-          <SortableHead column={SortColumn.Joined} state={sort} onToggle={toggleSort} align="end">
+          <SortableHead
+            column={SortColumn.Joined}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            hideOnMobile
+          >
             Joined
           </SortableHead>
         </TableRow>
@@ -267,7 +301,7 @@ export function ClanMembersTable({
                   {m.name}
                 </Link>
               </TableCell>
-              <TableCell className="text-muted-foreground">
+              <TableCell className="hidden text-muted-foreground sm:table-cell">
                 {prettyRole(m.role)}
               </TableCell>
               <RatingCell
@@ -293,7 +327,7 @@ export function ClanMembersTable({
               />
               <TableCell
                 className={cn(
-                  "text-right tabular-nums",
+                  "text-right tabular-nums max-[480px]:hidden",
                   m.overall &&
                     m.overall.battles > 0 &&
                     RATING_COLOR_CLASS[
@@ -303,10 +337,10 @@ export function ClanMembersTable({
               >
                 {m.overall ? `${pctFmt.format(m.overall.winsPercentage)}%` : "—"}
               </TableCell>
-              <TableCell className="text-right tabular-nums">
+              <TableCell className="hidden text-right tabular-nums sm:table-cell">
                 {m.overall ? intFmt.format(m.overall.battles) : "—"}
               </TableCell>
-              <TableCell className="text-right text-xs text-muted-foreground tabular-nums">
+              <TableCell className="hidden text-right text-xs text-muted-foreground tabular-nums sm:table-cell">
                 {format(
                   // eslint-disable-next-line react-hooks/purity -- portal API only gives us days_in_clan, not the join timestamp, so we derive it from "now" at render time
                   new Date(Date.now() - m.daysInClan * 86_400_000),

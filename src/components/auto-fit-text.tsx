@@ -8,11 +8,13 @@ export function AutoFitText({
   maxPx,
   minPx,
   className,
+  allowWrap = false,
 }: {
   children: React.ReactNode;
   maxPx: number;
   minPx: number;
   className?: string;
+  allowWrap?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLSpanElement>(null);
@@ -25,7 +27,9 @@ export function AutoFitText({
     function fit() {
       if (!container || !text) return;
       text.style.fontSize = `${maxPx}px`;
+      text.style.whiteSpace = "nowrap";
       const naturalW = text.scrollWidth;
+      text.style.whiteSpace = allowWrap ? "normal" : "nowrap";
       const containerW = container.clientWidth;
       if (naturalW > containerW && naturalW > 0) {
         const scaled = Math.max(minPx, (containerW / naturalW) * maxPx);
@@ -43,7 +47,7 @@ export function AutoFitText({
     <div ref={containerRef} className={cn("overflow-hidden", className)}>
       <span
         ref={textRef}
-        className="inline-block whitespace-nowrap"
+        className={cn("inline-block", !allowWrap && "whitespace-nowrap")}
         style={{ fontSize: `${maxPx}px` }}
       >
         {children}
