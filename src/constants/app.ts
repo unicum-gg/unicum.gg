@@ -11,7 +11,7 @@ const APP = {
     EMAIL: "contact@unicum.gg",
   },
   EXTERNAL: {
-    DISCORD: "https://discord.gg/pxSQgmzPTG",
+    DISCORD: "https://discord.gg/Hqbfb8YPbU",
     GITHUB: "https://github.com/unicum-gg/unicum.gg",
   },
 };
