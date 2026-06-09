@@ -8,7 +8,7 @@ import { ScriptWrapper } from "@/components/script-wrapper";
 import { CookieConsentProvider } from "@/contexts/cookie-consent";
 
 const SearchDialog = dynamic(
-  () => import("@/components/search-dialog"),
+  () => import("@/components/search/dialog"),
 );
 
 export function Provider({ children }: { children: ReactNode }) {
