@@ -47,6 +47,12 @@ function parseNewsfeedDate(s: string): Date {
   return new Date(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(s) ? s : `${s}Z`);
 }
 
+const EVENT_TYPE_ORDER: Record<ClanEventType, number> = {
+  [ClanEventType.JoinClan]: 1,
+  [ClanEventType.ChangeRole]: 2,
+  [ClanEventType.LeaveClan]: 3,
+};
+
 export async function getClanRecentEvents(
   region: Region,
   clanId: number,
@@ -94,5 +100,10 @@ export async function getClanRecentEvents(
     }
     if (out.length >= maxItems) break;
   }
+  out.sort((a, b) => {
+    const dt = b.createdAt.getTime() - a.createdAt.getTime();
+    if (dt !== 0) return dt;
+    return EVENT_TYPE_ORDER[b.type] - EVENT_TYPE_ORDER[a.type];
+  });
   return out.slice(0, maxItems);
 }
