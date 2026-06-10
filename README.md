@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# unicum.gg
 
-## Getting Started
+Free, open-source World of Tanks stats tracker. Player profiles, clan pages, leaderboards. WN7, WN8, WNX. No login, no ads.
 
-First, run the development server:
+Live at [unicum.gg](https://unicum.gg).
+
+## Stack
+
+Next.js 16, React 19, TypeScript, PostgreSQL via Drizzle, Tailwind v4, shadcn/ui, Recharts.
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+pnpm env:init   # generates .env.local from env.ts; fill in the values
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`pnpm env:init` reads `env.ts` and writes a `.env.local` with every required key. If a `.env.local` already exists it is backed up to `.env.local.<timestamp>.bak` first, so nothing is lost.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Get the three WG application IDs at [developers.wargaming.net](https://developers.wargaming.net) (one ID can be reused across regions).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Database
 
-## Learn More
+```bash
+for f in drizzle/0*.sql; do psql "$DATABASE_URL" -f "$f"; done
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Contributing
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Issues and PRs welcome. **Read [AGENTS.md](./AGENTS.md) first.** It is the project's contributing guide and covers the non-obvious foot-guns (schema factory pattern, migration workflow, cron loop, WG fetch and rate limits).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
+[AGPL v3](./LICENSE). Copyright (C) 2026 Antoine Kingue.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Not affiliated with Wargaming.net.
