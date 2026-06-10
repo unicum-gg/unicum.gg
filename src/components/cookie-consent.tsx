@@ -61,7 +61,7 @@ export function CookieConsent() {
 
   return (
     <div className="animate-in slide-in-from-bottom-5 fixed right-0 bottom-0 left-0 z-80 p-4 sm:left-auto sm:max-w-md">
-      <div className="border border-border bg-popover p-4 text-popover-foreground shadow-lg">
+      <div className="rounded-lg border border-border bg-popover p-4 text-popover-foreground shadow-lg">
         <div className="flex gap-3">
           <div className="shrink-0">
             <CookieIcon className="h-5 w-5 text-muted-foreground" />
