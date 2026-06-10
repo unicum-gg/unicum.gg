@@ -165,12 +165,20 @@ const ROW_DEFS: RowDef[] = [
   },
 ];
 
-function PeriodCells({ cell }: { cell: Cell }) {
+function PeriodCells({
+  cell,
+  hideOnMobile,
+}: {
+  cell: Cell;
+  hideOnMobile?: boolean;
+}) {
+  const hide = hideOnMobile ? "max-sm:hidden" : "";
   if (!cell.secondary) {
     return (
       <TableCell
         className={cn(
           "py-1.5! text-right tabular-nums",
+          hide,
           cell.color && RATING_COLOR_CLASS[cell.color],
         )}
         colSpan={2}
@@ -183,7 +191,7 @@ function PeriodCells({ cell }: { cell: Cell }) {
   }
   return (
     <>
-      <TableCell className="py-1.5! pe-1! text-right tabular-nums">
+      <TableCell className={cn("py-1.5! pe-1! text-right tabular-nums", hide)}>
         <span className={cell.primary === "—" ? "text-muted-foreground" : ""}>
           {cell.primary}
         </span>
@@ -191,6 +199,7 @@ function PeriodCells({ cell }: { cell: Cell }) {
       <TableCell
         className={cn(
           "py-1.5! ps-1! text-right tabular-nums",
+          hide,
           cell.color && RATING_COLOR_CLASS[cell.color],
         )}
       >
@@ -296,14 +305,14 @@ export function PlayerStatsTable({
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
         <colgroup>
           <col />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
-          <col className="w-[9%]" />
+          <col className="w-[20%] sm:w-[9%]" />
+          <col className="w-[20%] sm:w-[9%]" />
+          <col className="max-sm:w-0! sm:w-[9%]" />
+          <col className="max-sm:w-0! sm:w-[9%]" />
+          <col className="max-sm:w-0! sm:w-[9%]" />
+          <col className="max-sm:w-0! sm:w-[9%]" />
+          <col className="w-[20%] sm:w-[9%]" />
+          <col className="w-[20%] sm:w-[9%]" />
         </colgroup>
         <TableHeader>
           <TableRow>
@@ -311,10 +320,10 @@ export function PlayerStatsTable({
             <TableHead className="text-right" colSpan={2}>
               Total
             </TableHead>
-            <TableHead className="text-right" colSpan={2}>
+            <TableHead className="text-right max-sm:hidden" colSpan={2}>
               Last 24h
             </TableHead>
-            <TableHead className="text-right" colSpan={2}>
+            <TableHead className="text-right max-sm:hidden" colSpan={2}>
               Last 7d
             </TableHead>
             <TableHead className="text-right" colSpan={2}>
@@ -333,8 +342,8 @@ export function PlayerStatsTable({
               <TableRow key={row.label}>
                 <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
                 <PeriodCells cell={total} />
-                <PeriodCells cell={h24} />
-                <PeriodCells cell={d7} />
+                <PeriodCells cell={h24} hideOnMobile />
+                <PeriodCells cell={d7} hideOnMobile />
                 <PeriodCells cell={d30} />
               </TableRow>
             );
@@ -344,8 +353,8 @@ export function PlayerStatsTable({
               <TableRow key="Tier">
                 <TableCell className="py-1.5! font-medium">Tier</TableCell>
                 <PeriodCells cell={tierCells.total} />
-                <PeriodCells cell={tierCells.h24} />
-                <PeriodCells cell={tierCells.d7} />
+                <PeriodCells cell={tierCells.h24} hideOnMobile />
+                <PeriodCells cell={tierCells.d7} hideOnMobile />
                 <PeriodCells cell={tierCells.d30} />
               </TableRow>,
             ];
@@ -353,22 +362,22 @@ export function PlayerStatsTable({
           <TableRow key="WN7" data-rating-row="wn7">
             <TableCell className="py-1.5! font-medium">WN7</TableCell>
             <PeriodCells cell={wn7Cells.total} />
-            <PeriodCells cell={wn7Cells.h24} />
-            <PeriodCells cell={wn7Cells.d7} />
+            <PeriodCells cell={wn7Cells.h24} hideOnMobile />
+            <PeriodCells cell={wn7Cells.d7} hideOnMobile />
             <PeriodCells cell={wn7Cells.d30} />
           </TableRow>
           <TableRow key="WN8" data-rating-row="wn8">
             <TableCell className="py-1.5! font-medium">WN8</TableCell>
             <PeriodCells cell={wn8Cells.total} />
-            <PeriodCells cell={wn8Cells.h24} />
-            <PeriodCells cell={wn8Cells.d7} />
+            <PeriodCells cell={wn8Cells.h24} hideOnMobile />
+            <PeriodCells cell={wn8Cells.d7} hideOnMobile />
             <PeriodCells cell={wn8Cells.d30} />
           </TableRow>
           <TableRow key="WNX" data-rating-row="wnx">
             <TableCell className="py-1.5! font-medium">WNX</TableCell>
             <PeriodCells cell={wnxCells.total} />
-            <PeriodCells cell={wnxCells.h24} />
-            <PeriodCells cell={wnxCells.d7} />
+            <PeriodCells cell={wnxCells.h24} hideOnMobile />
+            <PeriodCells cell={wnxCells.d7} hideOnMobile />
             <PeriodCells cell={wnxCells.d30} />
           </TableRow>
         </TableBody>

@@ -118,12 +118,14 @@ function SortableHead({
   state,
   onToggle,
   align = "start",
+  hideOnMobile,
   children,
 }: {
   column: SortColumn;
   state: SortState;
   onToggle: (col: SortColumn) => void;
   align?: "start" | "end";
+  hideOnMobile?: boolean;
   children: React.ReactNode;
 }) {
   const active = state?.column === column;
@@ -133,7 +135,7 @@ function SortableHead({
       : CaretDownIcon
     : CaretUpDownIcon;
   return (
-    <TableHead className="p-0">
+    <TableHead className={cn("p-0", hideOnMobile && "hidden sm:table-cell")}>
       <button
         type="button"
         onClick={() => onToggle(column)}
@@ -219,10 +221,20 @@ export function PlayerClansHistory({
                 <SortableHead column={SortColumn.Name} state={sort} onToggle={toggleSort}>
                   Name
                 </SortableHead>
-                <SortableHead column={SortColumn.Role} state={sort} onToggle={toggleSort}>
+                <SortableHead
+                  column={SortColumn.Role}
+                  state={sort}
+                  onToggle={toggleSort}
+                  hideOnMobile
+                >
                   Role
                 </SortableHead>
-                <SortableHead column={SortColumn.From} state={sort} onToggle={toggleSort}>
+                <SortableHead
+                  column={SortColumn.From}
+                  state={sort}
+                  onToggle={toggleSort}
+                  hideOnMobile
+                >
                   From
                 </SortableHead>
                 <SortableHead column={SortColumn.To} state={sort} onToggle={toggleSort}>
@@ -265,8 +277,10 @@ export function PlayerClansHistory({
                         {s.clan.name}
                       </Link>
                     </TableCell>
-                    <TableCell>{prettyRole(s.role)}</TableCell>
-                    <TableCell className="tabular-nums">
+                    <TableCell className="hidden sm:table-cell">
+                      {prettyRole(s.role)}
+                    </TableCell>
+                    <TableCell className="hidden tabular-nums sm:table-cell">
                       {format(s.joinedAt, DAY_FORMAT)}
                     </TableCell>
                     <TableCell className="tabular-nums">
