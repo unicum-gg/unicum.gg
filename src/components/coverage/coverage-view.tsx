@@ -10,7 +10,7 @@ import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
 import { getCoverageStats } from "@/services/coverage";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
-import { CoverageAreaChart } from "./coverage-charts";
+import { ChartMode, CoverageAreaChart } from "./coverage-charts";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {
@@ -126,24 +126,18 @@ export async function CoverageView({ region }: { region: Region }) {
           <PanelTitle>Trends, last 30 days</PanelTitle>
         </PanelHeader>
         <PanelContent className="grid grid-cols-1 gap-6 p-4 lg:grid-cols-2">
-          <div className="space-y-2">
-            <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-              New players discovered per day
-            </div>
-            <CoverageAreaChart
-              data={stats.trends.playersDiscoveredDaily}
-              ariaLabel="New players discovered per day, last 30 days"
-            />
-          </div>
-          <div className="space-y-2">
-            <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-              Player snapshots per day
-            </div>
-            <CoverageAreaChart
-              data={stats.trends.playerSnapshotsDaily}
-              ariaLabel="Player snapshots per day, last 30 days"
-            />
-          </div>
+          <CoverageAreaChart
+            title="New players discovered"
+            data={stats.trends.playersDiscoveredDaily}
+            ariaLabel="New players discovered, last 30 days"
+            defaultMode={ChartMode.Cumulative}
+          />
+          <CoverageAreaChart
+            title="Player snapshots"
+            data={stats.trends.playerSnapshotsDaily}
+            ariaLabel="Player snapshots, last 30 days"
+            defaultMode={ChartMode.Daily}
+          />
         </PanelContent>
       </Panel>
 
