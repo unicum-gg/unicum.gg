@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import {
   DEFAULT_RATING_METRIC,
@@ -127,7 +128,11 @@ function PlayerRow({
   return (
     <TableRow>
       <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">
-        {rank}
+        {rank === 1 || rank === 2 || rank === 3 ? (
+          <RankMedal rank={rank} />
+        ) : (
+          rank
+        )}
       </TableCell>
       <TableCell>
         <Link
