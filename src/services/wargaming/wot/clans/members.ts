@@ -14,7 +14,7 @@ type PortalMemberRaw = {
     rank: number;
     order: number;
   };
-  days_in_clan: number;
+  days_in_clan: number | null;
   last_battle_time: number | null;
   personal_rating: number | null;
   battles_count: number | null;
@@ -128,7 +128,7 @@ export async function getClanMembersStats(
       role: m.role.name,
       roleLocalized: m.role.localized_name,
       roleRank: m.role.rank,
-      daysInClan: m.days_in_clan,
+      daysInClan: m.days_in_clan ?? 0,
       lastBattleTime: m.last_battle_time
         ? new Date(m.last_battle_time * 1000)
         : null,
