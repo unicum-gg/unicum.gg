@@ -48,7 +48,7 @@ export function TopPlayers({
   initial,
   regionOverride,
 }: {
-  description: string;
+  description: React.ReactNode;
   initial: TopPlayersInitial;
   regionOverride?: Region;
 }) {

@@ -9,6 +9,7 @@ import {
   RATING_METRIC_LABEL,
   RatingMetric,
 } from "@/constants/rating";
+import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -73,7 +74,7 @@ export function TopClans({
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
         Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-        more than 50 members, ranked by average {metricLabel}.
+        more than 50 members, ranked by average <RatingMetricInlineSelect />.
         {computedAt ? (
           <>
             {" "}
