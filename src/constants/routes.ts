@@ -18,6 +18,11 @@ const ROUTES = {
   // - Players
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
+  COMPARE_PLAYERS: (region: Region, nicknames: string[]) => {
+    const [first, ...rest] = nicknames;
+    const encoded = rest.map(encodeURIComponent).join("/");
+    return `/${region}/players/${encodeURIComponent(first)}/vs/${encoded}`;
+  },
 
   // - Clans
   CLAN: (region: Region, tag: string) =>

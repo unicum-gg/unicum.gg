@@ -1,6 +1,7 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
+import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
@@ -30,9 +31,12 @@ export function PlayerHeader({
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex min-w-0 flex-1 flex-col">
-        <h1 className="flex min-w-0 flex-1 items-center px-4 py-3 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
-          {nickname}
-        </h1>
+        <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
+          <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
+            {nickname}
+          </h1>
+          <CompareWithButton region={region} current={nickname} />
+        </div>
         <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
             <span title={format(createdAt, DAY_FORMAT)}>
