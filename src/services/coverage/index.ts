@@ -46,7 +46,9 @@ export type CoverageStats = {
   };
   trends: {
     playersDiscoveredDaily: DailyPoint[];
+    clansDiscoveredDaily: DailyPoint[];
     playerSnapshotsDaily: DailyPoint[];
+    snapshotFreshnessHoursDaily: DailyPoint[];
   };
   infrastructure: {
     databaseBytes: number;
@@ -116,7 +118,9 @@ async function getCoverageStatsUncached(
     biggestClan,
     totalBattles,
     playersDiscoveredRows,
+    clansDiscoveredRows,
     snapshotsDailyRows,
+    snapshotFreshnessRows,
     databaseBytes,
     tableSizeRows,
   ] = await Promise.all([
@@ -230,9 +234,31 @@ async function getCoverageStatsUncached(
           ORDER BY day`,
     ),
     db.execute<{ day: string; count: string }>(
+      sql`SELECT date_trunc('day', first_seen_at)::text AS day, COUNT(*)::text AS count
+          FROM ${clansTable}
+          WHERE first_seen_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          GROUP BY day
+          ORDER BY day`,
+    ),
+    db.execute<{ day: string; count: string }>(
       sql`SELECT date_trunc('day', taken_at)::text AS day, COUNT(*)::text AS count
           FROM ${playerSnapshotsTable}
           WHERE taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          GROUP BY day
+          ORDER BY day`,
+    ),
+    db.execute<{ day: string; count: string }>(
+      sql`WITH gaps AS (
+            SELECT date_trunc('day', taken_at) AS day,
+                   EXTRACT(epoch FROM (taken_at - LAG(taken_at) OVER (PARTITION BY player_id ORDER BY taken_at))) / 3600 AS gap_hours
+            FROM ${playerSnapshotsTable}
+            WHERE taken_at > NOW() - (${DAYS_WINDOW + 1} || ' days')::interval
+          )
+          SELECT day::text AS day,
+                 percentile_cont(0.5) WITHIN GROUP (ORDER BY gap_hours)::numeric(10,2)::text AS count
+          FROM gaps
+          WHERE gap_hours IS NOT NULL
+            AND day > NOW() - (${DAYS_WINDOW} || ' days')::interval
           GROUP BY day
           ORDER BY day`,
     ),
@@ -275,7 +301,12 @@ async function getCoverageStatsUncached(
     },
     trends: {
       playersDiscoveredDaily: buildDaySeries(playersDiscoveredRows, DAYS_WINDOW),
+      clansDiscoveredDaily: buildDaySeries(clansDiscoveredRows, DAYS_WINDOW),
       playerSnapshotsDaily: buildDaySeries(snapshotsDailyRows, DAYS_WINDOW),
+      snapshotFreshnessHoursDaily: buildDaySeries(
+        snapshotFreshnessRows,
+        DAYS_WINDOW,
+      ),
     },
     infrastructure: {
       databaseBytes,

@@ -16,13 +16,6 @@ enum ChartMode {
   Cumulative = "cumulative",
 }
 
-const config = {
-  count: {
-    label: "Count",
-    color: "#f25322",
-  },
-} satisfies ChartConfig;
-
 const dayFmt = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -46,18 +39,37 @@ export function CoverageAreaChart({
   data,
   ariaLabel,
   defaultMode = ChartMode.Daily,
+  valueLabel = "Count",
+  allowCumulative = true,
+  suffixDaily = "per day",
 }: {
   title: string;
   data: DailyPoint[];
   ariaLabel: string;
   defaultMode?: ChartMode;
+  valueLabel?: string;
+  allowCumulative?: boolean;
+  suffixDaily?: string;
 }) {
   const [mode, setMode] = useState<ChartMode>(defaultMode);
+  const effectiveMode = allowCumulative ? mode : ChartMode.Daily;
   const displayData = useMemo(
-    () => (mode === ChartMode.Cumulative ? toCumulative(data) : data),
-    [data, mode],
+    () =>
+      effectiveMode === ChartMode.Cumulative ? toCumulative(data) : data,
+    [data, effectiveMode],
   );
-  const suffix = mode === ChartMode.Cumulative ? "(cumulative)" : "per day";
+  const config = useMemo(
+    () =>
+      ({
+        count: {
+          label: valueLabel,
+          color: "#f25322",
+        },
+      }) satisfies ChartConfig,
+    [valueLabel],
+  );
+  const suffix =
+    effectiveMode === ChartMode.Cumulative ? "(cumulative)" : suffixDaily;
 
   return (
     <div className="space-y-2">
@@ -65,25 +77,27 @@ export function CoverageAreaChart({
         <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
           {title} {suffix}
         </div>
-        <div className="flex items-center gap-0.5 text-[10px] font-medium uppercase tracking-wider">
-          <ModeButton
-            active={mode === ChartMode.Daily}
-            onClick={() => setMode(ChartMode.Daily)}
-          >
-            Daily
-          </ModeButton>
-          <ModeButton
-            active={mode === ChartMode.Cumulative}
-            onClick={() => setMode(ChartMode.Cumulative)}
-          >
-            Cumulative
-          </ModeButton>
-        </div>
+        {allowCumulative && (
+          <div className="flex items-center gap-0.5 text-[10px] font-medium uppercase tracking-wider">
+            <ModeButton
+              active={mode === ChartMode.Daily}
+              onClick={() => setMode(ChartMode.Daily)}
+            >
+              Daily
+            </ModeButton>
+            <ModeButton
+              active={mode === ChartMode.Cumulative}
+              onClick={() => setMode(ChartMode.Cumulative)}
+            >
+              Cumulative
+            </ModeButton>
+          </div>
+        )}
       </div>
       <ChartContainer
         config={config}
         className="aspect-auto h-48 w-full"
-        aria-label={`${ariaLabel} (${mode})`}
+        aria-label={`${ariaLabel} (${effectiveMode})`}
       >
         <AreaChart
           data={displayData}

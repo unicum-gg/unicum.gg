@@ -133,10 +133,24 @@ export async function CoverageView({ region }: { region: Region }) {
             defaultMode={ChartMode.Cumulative}
           />
           <CoverageAreaChart
+            title="New clans discovered"
+            data={stats.trends.clansDiscoveredDaily}
+            ariaLabel="New clans discovered, last 30 days"
+            defaultMode={ChartMode.Cumulative}
+          />
+          <CoverageAreaChart
             title="Player snapshots"
             data={stats.trends.playerSnapshotsDaily}
             ariaLabel="Player snapshots, last 30 days"
             defaultMode={ChartMode.Daily}
+          />
+          <CoverageAreaChart
+            title="Snapshot freshness"
+            data={stats.trends.snapshotFreshnessHoursDaily}
+            ariaLabel="Median hours between consecutive snapshots, last 30 days"
+            valueLabel="Median hours"
+            suffixDaily="(median hours between snapshots)"
+            allowCumulative={false}
           />
         </PanelContent>
       </Panel>
