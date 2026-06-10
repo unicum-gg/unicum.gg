@@ -4,7 +4,16 @@ import { Region } from ".";
 import { wgFetch } from "./fetch";
 import type { TankStats } from "./tanks";
 
-export type VehicleMeta = { tier: number; type: string };
+export type VehicleMeta = {
+  tier: number;
+  type: string;
+  nation: string;
+  name: string;
+  shortName: string;
+  tag: string;
+  isPremium: boolean;
+  contourIcon: string | null;
+};
 
 type WGVehicleRaw = {
   tank_id: number;
@@ -58,14 +67,35 @@ async function loadVehicles(
 ): Promise<Record<string, VehicleMeta>> {
   const table = vehiclesByRegion[region];
   const rows = await db
-    .select({ tankId: table.tankId, tier: table.tier, type: table.type })
+    .select({
+      tankId: table.tankId,
+      tier: table.tier,
+      type: table.type,
+      nation: table.nation,
+      name: table.name,
+      shortName: table.shortName,
+      tag: table.tag,
+      isPremium: table.isPremium,
+      contourIcon: table.contourIcon,
+    })
     .from(table);
   if (rows.length === 0) {
     await refreshVehiclesFromWG(region);
     return loadVehicles(region);
   }
   const out: Record<string, VehicleMeta> = {};
-  for (const r of rows) out[String(r.tankId)] = { tier: r.tier, type: r.type };
+  for (const r of rows) {
+    out[String(r.tankId)] = {
+      tier: r.tier,
+      type: r.type,
+      nation: r.nation,
+      name: r.name,
+      shortName: r.shortName,
+      tag: r.tag,
+      isPremium: r.isPremium,
+      contourIcon: r.contourIcon,
+    };
+  }
   return out;
 }
 

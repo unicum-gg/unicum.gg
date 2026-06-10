@@ -38,6 +38,11 @@ export function makeTankSnapshotsTable(
       trackAssistedDamage: bigint("track_assisted_damage", {
         mode: "number",
       }).notNull(),
+      // Nullable because old snapshots predate these columns; backfill happens
+      // organically as the snapshot cron writes new rows with the values from
+      // WG's tanks/stats API.
+      xp: bigint("xp", { mode: "number" }),
+      markOfMastery: integer("mark_of_mastery"),
     },
     (t) => [
       index(`${region}_tank_snapshots_player_taken_idx`).on(

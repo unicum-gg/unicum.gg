@@ -142,6 +142,7 @@ export async function getRatingHistory(
         if (battlesDiff <= 0) continue;
         sessionDelta.push({
           tank_id: t.tank_id,
+          mark_of_mastery: null,
           all: {
             battles: battlesDiff,
             wins: t.all.wins - p.all.wins,
@@ -154,6 +155,7 @@ export async function getRatingHistory(
               t.all.radio_assisted_damage - p.all.radio_assisted_damage,
             track_assisted_damage:
               t.all.track_assisted_damage - p.all.track_assisted_damage,
+            xp: t.all.xp - p.all.xp,
           },
         });
       }
@@ -215,6 +217,7 @@ function computeMetric(
 function rowToTankStats(s: TankSnapshotRow): TankStats {
   return {
     tank_id: s.tankId,
+    mark_of_mastery: null,
     all: {
       battles: s.battles,
       wins: s.wins,
@@ -224,6 +227,7 @@ function rowToTankStats(s: TankSnapshotRow): TankStats {
       dropped_capture_points: s.droppedCapturePoints,
       radio_assisted_damage: s.radioAssistedDamage,
       track_assisted_damage: s.trackAssistedDamage,
+      xp: 0,
     },
   };
 }

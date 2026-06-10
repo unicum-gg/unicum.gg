@@ -14,6 +14,7 @@ import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerRatingChart } from "@/components/players/rating-chart";
 import { PlayerStatsTable } from "@/components/players/stats-table";
+import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import {
@@ -442,6 +443,22 @@ async function buildView(args: {
               the curve. Check back soon.
             </div>
           )}
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Vehicles</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <PlayerVehiclesTable
+            tanks={tanks}
+            encyclopedia={encyclopedia}
+            wn8Expected={wn8Expected}
+            wnxExpected={wnxExpected}
+          />
         </PanelContent>
       </Panel>
 

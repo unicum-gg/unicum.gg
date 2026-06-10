@@ -75,6 +75,8 @@ type RawTankSnapshot = {
   dropped_capture_points: number;
   radio_assisted_damage: number;
   track_assisted_damage: number;
+  xp: number | null;
+  mark_of_mastery: number | null;
 };
 
 type RawClanHistory = {
@@ -161,6 +163,8 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
     droppedCapturePoints: Number(r.dropped_capture_points),
     radioAssistedDamage: Number(r.radio_assisted_damage),
     trackAssistedDamage: Number(r.track_assisted_damage),
+    xp: r.xp == null ? null : Number(r.xp),
+    markOfMastery: r.mark_of_mastery == null ? null : Number(r.mark_of_mastery),
   };
 }
 

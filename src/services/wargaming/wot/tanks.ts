@@ -3,6 +3,7 @@ import { WargamingApiError, wgFetch } from "./fetch";
 
 export type TankStats = {
   tank_id: number;
+  mark_of_mastery: number | null;
   all: {
     battles: number;
     damage_dealt: number;
@@ -12,11 +13,13 @@ export type TankStats = {
     wins: number;
     radio_assisted_damage: number;
     track_assisted_damage: number;
+    xp: number;
   };
 };
 
 const TANK_STATS_FIELDS = [
   "tank_id",
+  "mark_of_mastery",
   "all.battles",
   "all.damage_dealt",
   "all.spotted",
@@ -25,6 +28,7 @@ const TANK_STATS_FIELDS = [
   "all.wins",
   "all.radio_assisted_damage",
   "all.track_assisted_damage",
+  "all.xp",
 ].join(",");
 
 export async function getTanksStats(

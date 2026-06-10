@@ -178,6 +178,7 @@ export async function computeTopPlayersAllMetrics(
     }
     agg.tanks.push({
       tank_id: Number(row.tank_id),
+      mark_of_mastery: null,
       all: {
         battles,
         wins,
@@ -187,6 +188,7 @@ export async function computeTopPlayersAllMetrics(
         dropped_capture_points: droppedCap,
         radio_assisted_damage: Number(row.diff_assist),
         track_assisted_damage: 0,
+        xp: 0,
       },
     });
     agg.totalBattles += battles;

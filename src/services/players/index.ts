@@ -320,6 +320,8 @@ async function updatePlayerRatings(
       droppedCapturePoints: tankSnapshots.droppedCapturePoints,
       radioAssistedDamage: tankSnapshots.radioAssistedDamage,
       trackAssistedDamage: tankSnapshots.trackAssistedDamage,
+      xp: tankSnapshots.xp,
+      markOfMastery: tankSnapshots.markOfMastery,
       takenAt: tankSnapshots.takenAt,
     })
     .from(tankSnapshots)
@@ -356,6 +358,8 @@ async function updatePlayerRatings(
           droppedCapturePoints: r.droppedCapturePoints,
           radioAssistedDamage: r.radioAssistedDamage,
           trackAssistedDamage: r.trackAssistedDamage,
+          xp: r.xp,
+          markOfMastery: r.markOfMastery,
         },
       ]),
     );

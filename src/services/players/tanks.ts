@@ -31,6 +31,8 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
     droppedCapturePoints: t.all.dropped_capture_points,
     radioAssistedDamage: t.all.radio_assisted_damage,
     trackAssistedDamage: t.all.track_assisted_damage,
+    xp: t.all.xp,
+    markOfMastery: t.mark_of_mastery,
   };
 }
 
@@ -87,6 +89,8 @@ export async function getPeriodTankComparators(
       dropped_capture_points: number;
       radio_assisted_damage: number;
       track_assisted_damage: number;
+      xp: number | null;
+      mark_of_mastery: number | null;
     }>) {
       map.set(row.tank_id, {
         id: row.id,
@@ -101,6 +105,8 @@ export async function getPeriodTankComparators(
         droppedCapturePoints: row.dropped_capture_points,
         radioAssistedDamage: row.radio_assisted_damage,
         trackAssistedDamage: row.track_assisted_damage,
+        xp: row.xp,
+        markOfMastery: row.mark_of_mastery,
       });
     }
     return map;
@@ -143,6 +149,8 @@ export async function getLatestTankSnapshotsByAccounts(
     dropped_capture_points: number;
     radio_assisted_damage: number;
     track_assisted_damage: number;
+    xp: number | null;
+    mark_of_mastery: number | null;
   }>;
 
   const playerIdToAccount = new Map<number, number>();
@@ -168,6 +176,8 @@ export async function getLatestTankSnapshotsByAccounts(
       droppedCapturePoints: Number(row.dropped_capture_points),
       radioAssistedDamage: Number(row.radio_assisted_damage),
       trackAssistedDamage: Number(row.track_assisted_damage),
+      xp: row.xp == null ? null : Number(row.xp),
+      markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
     });
     out.set(accountId, arr);
   }
@@ -210,6 +220,8 @@ export async function getTankSnapshotsByAccountsBefore(
     dropped_capture_points: number;
     radio_assisted_damage: number;
     track_assisted_damage: number;
+    xp: number | null;
+    mark_of_mastery: number | null;
   }>;
 
   const playerIdToAccount = new Map<number, number>();
@@ -236,6 +248,8 @@ export async function getTankSnapshotsByAccountsBefore(
       droppedCapturePoints: Number(row.dropped_capture_points),
       radioAssistedDamage: Number(row.radio_assisted_damage),
       trackAssistedDamage: Number(row.track_assisted_damage),
+      xp: row.xp == null ? null : Number(row.xp),
+      markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
     });
     out.set(accountId, arr);
   }
@@ -247,6 +261,7 @@ export function tankSnapshotsToTankStats(
 ): TankStats[] {
   return snapshots.map((s) => ({
     tank_id: s.tankId,
+    mark_of_mastery: s.markOfMastery,
     all: {
       battles: s.battles,
       wins: s.wins,
@@ -256,6 +271,7 @@ export function tankSnapshotsToTankStats(
       dropped_capture_points: s.droppedCapturePoints,
       radio_assisted_damage: s.radioAssistedDamage,
       track_assisted_damage: s.trackAssistedDamage,
+      xp: Number.isFinite(s.xp) ? (s.xp as number) : 0,
     },
   }));
 }
@@ -272,6 +288,7 @@ export function diffTanks(
     if (battlesDiff <= 0) continue;
     out.push({
       tank_id: t.tank_id,
+      mark_of_mastery: t.mark_of_mastery,
       all: {
         battles: battlesDiff,
         wins: t.all.wins - p.wins,
@@ -284,6 +301,7 @@ export function diffTanks(
           t.all.radio_assisted_damage - p.radioAssistedDamage,
         track_assisted_damage:
           t.all.track_assisted_damage - p.trackAssistedDamage,
+        xp: t.all.xp - (p.xp ?? 0),
       },
     });
   }

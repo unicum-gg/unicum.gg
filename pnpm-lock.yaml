@@ -77,6 +77,9 @@ importers:
       recharts:
         specifier: ^3.8.1
         version: 3.8.1(@types/react@19.2.15)(react-dom@19.2.4(react@19.2.4))(react-is@16.13.1)(react@19.2.4)(redux@5.0.1)
+      roman-numerals:
+        specifier: ^0.3.2
+        version: 0.3.2
       sanitize-html:
         specifier: ^2.17.4
         version: 2.17.4
@@ -111,6 +114,9 @@ importers:
       '@types/react-dom':
         specifier: ^19
         version: 19.2.3(@types/react@19.2.15)
+      '@types/roman-numerals':
+        specifier: ^0.3.2
+        version: 0.3.2
       '@types/sanitize-html':
         specifier: ^2.16.1
         version: 2.16.1
@@ -1953,6 +1959,9 @@ packages:
 
   '@types/react@19.2.15':
     resolution: {integrity: sha512-eRwcGNHve+E8qtEQSSRl6urh+rFop4v8gm6O8rGv25CodbvFdLjA1vVQ1KkiFE0w0UPOnb8tDiFKL5lp0rtY5Q==}
+
+  '@types/roman-numerals@0.3.2':
+    resolution: {integrity: sha512-5hnxBbrSFgquSF6cBU+m/H1fUdheoBz1k3c0Fe1yzP1L29vSLPOLzlyWzU8FWfY/TSMuZfm6FoK/D4n6jc05gA==}
 
   '@types/sanitize-html@2.16.1':
     resolution: {integrity: sha512-n9wjs8bCOTyN/ynwD8s/nTcTreIHB1vf31vhLMGqUPNHaweKC4/fAl4Dj+hUlCTKYgm4P3k83fmiFfzkZ6sgMA==}
@@ -3916,6 +3925,9 @@ packages:
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  roman-numerals@0.3.2:
+    resolution: {integrity: sha512-aTmaKtxczT3K4ZhtJDauOZ6LY3e1xNDf2SBn7aRY/ErAtCCuVYuwNQbPuh+SWTjGmbg9p5Nlt8sJbQNkto8uyg==}
 
   run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
@@ -5890,6 +5902,8 @@ snapshots:
   '@types/react@19.2.15':
     dependencies:
       csstype: 3.2.3
+
+  '@types/roman-numerals@0.3.2': {}
 
   '@types/sanitize-html@2.16.1':
     dependencies:
@@ -8306,6 +8320,8 @@ snapshots:
       supports-preserve-symlinks-flag: 1.0.0
 
   reusify@1.1.0: {}
+
+  roman-numerals@0.3.2: {}
 
   run-parallel@1.2.0:
     dependencies:
