@@ -28,16 +28,18 @@ export function scheduleCron(
   }
   let inFlight = false;
   cron.schedule(schedule, async () => {
-    if (inFlight) {
-      console.warn(`[${name}] previous tick still in flight, skipping`);
-      return;
-    }
+    if (inFlight) return;
     inFlight = true;
+    const start = Date.now();
     try {
       if (!SKIP_LEASE && !(await tryAcquireLease())) return;
       await fn();
+      console.log(`[${name}] tick completed in ${Date.now() - start}ms`);
     } catch (err) {
-      console.error(`[${name}] tick failed:`, err);
+      console.error(
+        `[${name}] tick failed after ${Date.now() - start}ms:`,
+        err,
+      );
     } finally {
       inFlight = false;
     }
