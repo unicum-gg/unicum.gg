@@ -14,8 +14,8 @@ import {
 } from "@/services/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from ".";
 
-const SCHEDULE = "* * * * *";
-const BATCH_SIZE_PER_REGION = 200;
+const SCHEDULE = "* * * * * *";
+const BATCH_SIZE_PER_REGION = 400;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 
 /**
