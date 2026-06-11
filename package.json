@@ -22,6 +22,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.3.0",
     "drizzle-orm": "^0.45.2",
+    "fast-xml-parser": "^5.8.0",
     "fumadocs-core": "16.9.3",
     "fumadocs-ui": "16.9.3",
     "geist": "^1.7.1",

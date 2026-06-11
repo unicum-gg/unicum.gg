@@ -45,7 +45,8 @@ Crons start from `src/instrumentation.ts` on Node runtime boot, with a `globalTh
 | `player-cron-<region>` | `services/players/refresh-cron.ts` | Every 10s. Drains the on-demand player refresh queue (page hits enqueue at priority 10). |
 | `clan-refresh-cron-<region>` | `services/clans/refresh-cron.ts` | Every 10s. Drains on-demand clan refresh queue. |
 | `clan-backfill-cron-<region>` | `services/clans/backfill-cron.ts` | Every minute. Re-fetches the oldest tracked clans. |
-| `discovery-cron` | `services/discovery/cron.ts` | Periodic walk of clan member lists to find new account IDs. |
+| `discovery-cron` | `services/discovery/cron.ts` | Weekly (Sundays 04:00) walk of clan member lists to find new account IDs. |
+| `vehicles-cron` | `services/discovery/cron.ts` | Daily (07:00) refresh of the vehicle catalogue from the IzeBerg/wot-src mirror. Runs after IzeBerg's typical push window (Tue/Thu 02:30-07:00 UTC, mostly ~04:30) so we never miss a release-day update. |
 | `top-*-cron` | `services/wargaming/wot/{players,clans}/top/cron.ts` | Nightly leaderboard precompute. |
 
 ## Wargaming fetch layer

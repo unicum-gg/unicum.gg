@@ -1,8 +1,8 @@
 import { db } from "@/services/db";
 import { type NewVehicle, vehiclesByRegion } from "@/services/db/schema";
 import { Region } from ".";
-import { wgFetch } from "./fetch";
 import type { TankStats } from "./tanks";
+import { fetchVehicleCatalog } from "./wotsrc";
 
 export type VehicleMeta = {
   tier: number;
@@ -14,38 +14,6 @@ export type VehicleMeta = {
   isPremium: boolean;
   contourIcon: string | null;
 };
-
-type WGVehicleRaw = {
-  tank_id: number;
-  tier: number;
-  type: string;
-  nation: string;
-  name: string;
-  short_name: string;
-  tag: string;
-  is_premium: boolean;
-  is_wheeled: boolean;
-  is_gift: boolean;
-  images: {
-    small_icon?: string | null;
-    contour_icon?: string | null;
-    big_icon?: string | null;
-  } | null;
-};
-
-const VEHICLE_FIELDS = [
-  "tank_id",
-  "tier",
-  "type",
-  "nation",
-  "name",
-  "short_name",
-  "tag",
-  "is_premium",
-  "is_wheeled",
-  "is_gift",
-  "images",
-].join(",");
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
 // (cleared on deploy/restart) and is shared across all callers — both inside
@@ -80,7 +48,7 @@ async function loadVehicles(
     })
     .from(table);
   if (rows.length === 0) {
-    await refreshVehiclesFromWG(region);
+    await refreshVehicles(region);
     return loadVehicles(region);
   }
   const out: Record<string, VehicleMeta> = {};
@@ -102,10 +70,10 @@ async function loadVehicles(
 /**
  * Reads the per-region catalogue from the DB and shapes it into the
  * `Record<tank_id, VehicleMeta>` consumers expect. On a cold table the read
- * auto-bootstraps via `refreshVehiclesFromWG` (one wgFetch, ~5s once) and
- * subsequent calls are <50ms. The weekly discovery cron keeps the table
- * fresh; concurrent callers share the in-flight promise to dedup the DB
- * round-trip.
+ * auto-bootstraps via `refreshVehicles` (one fetch from the wot-src GitHub
+ * mirror, ~3-5s once) and subsequent calls are <50ms. The weekly discovery
+ * cron keeps the table fresh; concurrent callers share the in-flight promise
+ * to dedup the DB round-trip.
  */
 export async function getVehicleEncyclopedia(
   region: Region,
@@ -127,31 +95,30 @@ export async function getVehicleEncyclopedia(
 }
 
 /**
- * Fetch the full vehicle catalogue from WG for a given region and upsert
- * into `<region>_vehicles`. Called by the weekly cron (for all regions) and
- * as the cold-start bootstrap inside `loadVehiclesUncached`.
+ * Fetch the full vehicle catalogue from the IzeBerg/wot-src GitHub mirror
+ * and upsert into `<region>_vehicles`. Called by the weekly cron (for all
+ * regions) and as the cold-start bootstrap inside `loadVehicles`. The
+ * mirror tracks the live WoT game client, so this returns ~1224 tanks
+ * including the ~224 that WG's public API has stripped (removed/event-only
+ * tanks that still show up in player stats).
  */
-export async function refreshVehiclesFromWG(region: Region): Promise<number> {
+export async function refreshVehicles(region: Region): Promise<number> {
   const table = vehiclesByRegion[region];
-  const data = await wgFetch<Record<string, WGVehicleRaw>>(
-    region,
-    "/wot/encyclopedia/vehicles/",
-    { fields: VEHICLE_FIELDS },
-  );
-  const rows: NewVehicle[] = Object.values(data).map((v) => ({
-    tankId: v.tank_id,
+  const catalog = await fetchVehicleCatalog(region);
+  const rows: NewVehicle[] = catalog.map((v) => ({
+    tankId: v.tankId,
     tier: v.tier,
     type: v.type,
     nation: v.nation,
     name: v.name,
-    shortName: v.short_name,
+    shortName: v.shortName,
     tag: v.tag,
-    isPremium: v.is_premium,
-    isWheeled: v.is_wheeled,
-    isGift: v.is_gift,
-    smallIcon: v.images?.small_icon ?? null,
-    contourIcon: v.images?.contour_icon ?? null,
-    bigIcon: v.images?.big_icon ?? null,
+    isPremium: v.isPremium,
+    isWheeled: v.isWheeled,
+    isGift: v.isGift,
+    smallIcon: null,
+    contourIcon: null,
+    bigIcon: null,
     updatedAt: new Date(),
   }));
   if (rows.length === 0) return 0;
@@ -170,9 +137,6 @@ export async function refreshVehiclesFromWG(region: Region): Promise<number> {
         isPremium: table.isPremium,
         isWheeled: table.isWheeled,
         isGift: table.isGift,
-        smallIcon: table.smallIcon,
-        contourIcon: table.contourIcon,
-        bigIcon: table.bigIcon,
         updatedAt: new Date(),
       },
     });
