@@ -5,6 +5,8 @@ import { ExpandableDescription } from "@/components/clans/description";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
+import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
+import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
 import { LiveSync } from "@/components/live-sync";
 import {
   Panel,
@@ -22,8 +24,14 @@ import { clanSchema } from "@/lib/schema-org";
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanEventsCached } from "@/services/clans/repository/events";
 import { getClanMembersCached } from "@/services/clans/repository/members";
+import { getClanTankAggregates } from "@/services/clans/repository/tanks";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/events";
+import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import {
+  getWN8ExpectedValues,
+  getWNXExpectedValues,
+} from "@/services/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -58,16 +66,20 @@ export async function generateMetadata({
 
 export default async function ClanPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ region: string; tag: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
   const { region, tag } = await params;
   if (!isRegion(region)) notFound();
   const decoded = decodeURIComponent(tag);
+  const { tab: tabParam } = await searchParams;
+  const activeTab = tabFromQuery(tabParam);
 
   const trace = new PerfTrace(`ClanPage ${region}/${decoded}`);
   try {
-    return await runWithTrace(trace, () => render(region, decoded));
+    return await runWithTrace(trace, () => render(region, decoded, activeTab));
   } finally {
     trace.endRender();
   }
@@ -76,6 +88,7 @@ export default async function ClanPage({
 async function render(
   region: Region,
   decoded: string,
+  activeTab: ClanTab,
 ): Promise<React.ReactElement> {
   const trace = currentTrace();
   const span = <T,>(name: string, fn: () => Promise<T>): Promise<T> =>
@@ -107,6 +120,8 @@ async function render(
     return cached.events;
   });
 
+  const basePath = ROUTES.CLAN(region, clan.tag);
+
   return (
     <div className="mx-auto w-full max-w-7xl">
       <JsonLd
@@ -129,34 +144,95 @@ async function render(
         </PanelContent>
       </Panel>
 
-      {clan.descriptionHtml && (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelContent>
-              <ExpandableDescription html={clan.descriptionHtml} />
-            </PanelContent>
-          </Panel>
-        </>
-      )}
-
       <PanelSeparator />
 
       <Panel>
-        <PanelHeader>
-          <PanelTitle>Members</PanelTitle>
+        <PanelHeader className="px-0! py-0!" screenLines={false}>
+          <ClanTabsNav basePath={basePath} activeTab={activeTab} />
         </PanelHeader>
-        <PanelContent className="p-0">
-          <ClanMembersTable region={region} members={members} />
-        </PanelContent>
       </Panel>
 
-      <PanelSeparator />
+      {activeTab === ClanTab.Overview ? (
+        <>
+          {clan.descriptionHtml && (
+            <>
+              <PanelSeparator />
+              <Panel>
+                <PanelContent>
+                  <ExpandableDescription html={clan.descriptionHtml} />
+                </PanelContent>
+              </Panel>
+            </>
+          )}
 
-      <Suspense fallback={null}>
-        <RecentActivityStreamed region={region} promise={eventsPromise} />
-      </Suspense>
+          <PanelSeparator />
+
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>Members</PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              <ClanMembersTable region={region} members={members} />
+            </PanelContent>
+          </Panel>
+
+          <PanelSeparator />
+
+          <Suspense fallback={null}>
+            <RecentActivityStreamed region={region} promise={eventsPromise} />
+          </Suspense>
+        </>
+      ) : (
+        <>
+          <PanelSeparator />
+          <Suspense
+            fallback={
+              <Panel>
+                <PanelContent>
+                  <p className="text-sm text-muted-foreground">
+                    Loading vehicles...
+                  </p>
+                </PanelContent>
+              </Panel>
+            }
+          >
+            <VehiclesStreamed region={region} clanId={clan.id} />
+          </Suspense>
+        </>
+      )}
     </div>
+  );
+}
+
+async function VehiclesStreamed({
+  region,
+  clanId,
+}: {
+  region: Region;
+  clanId: number;
+}) {
+  const [aggregates, encyclopedia, wn8Expected, wnxExpected] = await Promise.all(
+    [
+      getClanTankAggregates(region, clanId),
+      getVehicleEncyclopedia(region),
+      getWN8ExpectedValues(),
+      getWNXExpectedValues(),
+    ],
+  );
+  return (
+    <Panel>
+      <PanelHeader>
+        <PanelTitle>Vehicles ({intFmt.format(aggregates.length)})</PanelTitle>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        <ClanVehiclesTable
+          aggregates={aggregates}
+          encyclopedia={encyclopedia}
+          wn8Expected={wn8Expected}
+          wnxExpected={wnxExpected}
+        />
+      </PanelContent>
+    </Panel>
   );
 }
 
