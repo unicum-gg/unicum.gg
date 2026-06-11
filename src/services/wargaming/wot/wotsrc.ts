@@ -3,7 +3,12 @@ import { Region } from ".";
 
 const REPO = "IzeBerg/wot-src";
 
-const NATION_DIRS = [
+// Source-of-truth order. The array index doubles as the nation's encoded
+// value in `tank_id`: bits 0-3 = item type (1 for vehicles), bits 4-7 =
+// position in this array, bits 8+ = local id within the nation's list.xml.
+// Verified empirically against the eu_vehicles dump:
+// ((tank_id >> 4) & 0x0F) matches this array's index for every row.
+const NATIONS = [
   "ussr",
   "germany",
   "usa",
@@ -16,41 +21,13 @@ const NATION_DIRS = [
   "poland",
   "italy",
 ] as const;
-type NationDir = (typeof NATION_DIRS)[number];
+type Nation = (typeof NATIONS)[number];
 
-// tank_id encoding: bits 0-3 = item type (1 for vehicles), bits 4-7 = nation
-// index, bits 8+ = local vehicle id within the nation's list.xml.
-// Verified empirically against the existing eu_vehicles dump:
-// ((tank_id >> 4) & 0x0F) returns these per-nation constants.
-const NATION_INDEX: Record<NationDir, number> = {
-  ussr: 0,
-  germany: 1,
-  usa: 2,
-  china: 3,
-  france: 4,
-  uk: 5,
-  japan: 6,
-  czech: 7,
-  sweden: 8,
-  poland: 9,
-  italy: 10,
-};
-
-// .po filename matches the nation dir name except for UK, which lives in
-// gb_vehicles.po (historical artifact in the WoT client tree).
-const PO_FILENAME: Record<NationDir, string> = {
-  ussr: "ussr_vehicles.po",
-  germany: "germany_vehicles.po",
-  usa: "usa_vehicles.po",
-  china: "china_vehicles.po",
-  france: "france_vehicles.po",
-  uk: "gb_vehicles.po",
-  japan: "japan_vehicles.po",
-  czech: "czech_vehicles.po",
-  sweden: "sweden_vehicles.po",
-  poland: "poland_vehicles.po",
-  italy: "italy_vehicles.po",
-};
+// UK is the only nation whose .po file doesn't match its dir name (historical
+// artifact in the WoT client tree).
+function poFilename(nation: Nation): string {
+  return nation === "uk" ? "gb_vehicles.po" : `${nation}_vehicles.po`;
+}
 
 const VEHICLE_TYPES = new Set([
   "heavyTank",
@@ -143,7 +120,8 @@ async function fetchText(url: string): Promise<string> {
 
 async function fetchNation(
   branch: string,
-  nation: NationDir,
+  nation: Nation,
+  nationIdx: number,
   parser: XMLParser,
 ): Promise<WotSrcVehicle[]> {
   const [xmlText, poText] = await Promise.all([
@@ -154,13 +132,12 @@ async function fetchNation(
       ),
     ),
     fetchText(
-      rawUrl(branch, `sources/res/text/lc_messages/${PO_FILENAME[nation]}`),
+      rawUrl(branch, `sources/res/text/lc_messages/${poFilename(nation)}`),
     ),
   ]);
 
   const translations = parsePo(poText);
   const parsed = parser.parse(xmlText) as RawListXml;
-  const nationIdx = NATION_INDEX[nation];
 
   const out: WotSrcVehicle[] = [];
   for (const [tag, fields] of Object.entries(parsed.root ?? {})) {
@@ -227,8 +204,8 @@ export async function fetchVehicleCatalog(
   });
 
   const results = await Promise.all(
-    NATION_DIRS.map((nation) =>
-      fetchNation(branch, nation, parser).catch((err) => {
+    NATIONS.map((nation, idx) =>
+      fetchNation(branch, nation, idx, parser).catch((err) => {
         console.error(`[wotsrc-${region}] ${nation} failed:`, err);
         return [] as WotSrcVehicle[];
       }),
