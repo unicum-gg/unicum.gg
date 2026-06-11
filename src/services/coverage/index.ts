@@ -34,6 +34,10 @@ export type CoverageStats = {
     lastClanRefreshAt: Date | null;
     playerSnapshotsLast24h: number;
     clansRefreshedLast24h: number;
+    snapshotFreshness: {
+      medianHours: number | null;
+      neverSnapped: number;
+    };
   };
   funFacts: {
     oldestPlayerSnapshotAt: Date | null;
@@ -120,7 +124,8 @@ async function getCoverageStatsUncached(
     playersDiscoveredRows,
     clansDiscoveredRows,
     snapshotsDailyRows,
-    snapshotFreshnessRows,
+    snapshotFreshness,
+    snapshotFreshnessDailyRows,
     databaseBytes,
     tableSizeRows,
   ] = await Promise.all([
@@ -247,20 +252,64 @@ async function getCoverageStatsUncached(
           GROUP BY day
           ORDER BY day`,
     ),
+    db
+      .execute<{
+        never_snapped: string;
+        p50_hours: string | null;
+      }>(
+        // True freshness: for every tracked player, hours since their last
+        // snapshot (NULL if never snapped). Returns median + never-snapped
+        // count. Replaces the older gap-between-consecutive-snapshots query
+        // that silently excluded the never-snapped majority, making freshness
+        // look 4x rosier than reality.
+        sql`WITH last_snap AS (
+              SELECT player_id, MAX(taken_at) AS taken_at
+              FROM ${playerSnapshotsTable}
+              GROUP BY player_id
+            ),
+            hrs AS (
+              SELECT EXTRACT(epoch FROM (NOW() - ls.taken_at)) / 3600 AS hours_since
+              FROM ${playersTable} p
+              LEFT JOIN last_snap ls ON ls.player_id = p.id
+            )
+            SELECT
+              COUNT(*) FILTER (WHERE hours_since IS NULL)::text AS never_snapped,
+              percentile_cont(0.5) WITHIN GROUP (ORDER BY hours_since)::numeric(10,2)::text AS p50_hours
+            FROM hrs`,
+      )
+      .then((r) => ({
+        neverSnapped: Number(r[0]?.never_snapped ?? 0),
+        medianHours:
+          r[0]?.p50_hours != null ? Number(r[0].p50_hours) : null,
+      })),
     db.execute<{ day: string; count: string }>(
-      sql`WITH gaps AS (
-            SELECT date_trunc('day', taken_at) AS day,
-                   EXTRACT(epoch FROM (taken_at - LAG(taken_at) OVER (PARTITION BY player_id ORDER BY taken_at))) / 3600 AS gap_hours
+      // Daily freshness time-series: for each day X in the window, median
+      // hours since last snapshot evaluated at end of day X, across players
+      // who had at least one snapshot at-or-before end-of-day X. Computed by
+      // pairing each snapshot with its LEAD (next snapshot) so each row covers
+      // the time-span during which it was that player's latest, then joining
+      // the day grid onto whichever snapshot covers the day's end-time.
+      sql`WITH days AS (
+            SELECT generate_series(
+              (NOW() - (${DAYS_WINDOW - 1} || ' days')::interval)::date,
+              NOW()::date,
+              INTERVAL '1 day'
+            )::date AS day
+          ),
+          snaps AS (
+            SELECT player_id, taken_at,
+                   LEAD(taken_at) OVER (PARTITION BY player_id ORDER BY taken_at) AS next_at
             FROM ${playerSnapshotsTable}
-            WHERE taken_at > NOW() - (${DAYS_WINDOW + 1} || ' days')::interval
           )
-          SELECT day::text AS day,
-                 percentile_cont(0.5) WITHIN GROUP (ORDER BY gap_hours)::numeric(10,2)::text AS count
-          FROM gaps
-          WHERE gap_hours IS NOT NULL
-            AND day > NOW() - (${DAYS_WINDOW} || ' days')::interval
-          GROUP BY day
-          ORDER BY day`,
+          SELECT d.day::text AS day,
+                 percentile_cont(0.5) WITHIN GROUP (
+                   ORDER BY EXTRACT(epoch FROM (d.day + INTERVAL '1 day' - s.taken_at)) / 3600
+                 )::numeric(10,2)::text AS count
+          FROM days d
+          JOIN snaps s ON s.taken_at < d.day + INTERVAL '1 day'
+            AND (s.next_at IS NULL OR s.next_at >= d.day + INTERVAL '1 day')
+          GROUP BY d.day
+          ORDER BY d.day`,
     ),
     db
       .execute<{ bytes: string }>(
@@ -293,6 +342,7 @@ async function getCoverageStatsUncached(
       lastClanRefreshAt: lastClanRefresh,
       playerSnapshotsLast24h: snapshotsLast24h,
       clansRefreshedLast24h: clansRefreshedLast24h,
+      snapshotFreshness,
     },
     funFacts: {
       oldestPlayerSnapshotAt: oldestSnapshot,
@@ -304,7 +354,7 @@ async function getCoverageStatsUncached(
       clansDiscoveredDaily: buildDaySeries(clansDiscoveredRows, DAYS_WINDOW),
       playerSnapshotsDaily: buildDaySeries(snapshotsDailyRows, DAYS_WINDOW),
       snapshotFreshnessHoursDaily: buildDaySeries(
-        snapshotFreshnessRows,
+        snapshotFreshnessDailyRows,
         DAYS_WINDOW,
       ),
     },

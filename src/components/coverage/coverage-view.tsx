@@ -1,3 +1,4 @@
+import { format, formatDistanceStrict } from "date-fns";
 import {
   Panel,
   PanelContent,
@@ -23,10 +24,17 @@ const usdFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
+function formatHours(hours: number | null): string {
+  if (hours === null) return "n/a";
+  const ms = hours * 60 * 60 * 1000;
+  return formatDistanceStrict(0, ms, {
+    unit: hours < 48 ? "hour" : "day",
+    roundingMethod: "round",
+  });
+}
+
 function formatYear(d: Date | null): string {
-  return d
-    ? d.toLocaleDateString("en-US", { year: "numeric", month: "long" })
-    : "n/a";
+  return d ? format(d, "MMMM yyyy") : "n/a";
 }
 
 function formatBytes(bytes: number): string {
@@ -78,7 +86,7 @@ export async function CoverageView({ region }: { region: Region }) {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Activity, last 24 hours</PanelTitle>
+          <PanelTitle>Activity</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-4 p-4">
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
@@ -109,6 +117,16 @@ export async function CoverageView({ region }: { region: Region }) {
             <StatCell
               label="Clans refreshed in 24h"
               value={intFmt.format(stats.activity.clansRefreshedLast24h)}
+            />
+            <StatCell
+              label="Typical snapshot age"
+              value={formatHours(stats.activity.snapshotFreshness.medianHours)}
+            />
+            <StatCell
+              label="Players never snapped"
+              value={intFmt.format(
+                stats.activity.snapshotFreshness.neverSnapped,
+              )}
             />
           </div>
           <p className="text-xs text-fd-muted-foreground">
@@ -147,9 +165,9 @@ export async function CoverageView({ region }: { region: Region }) {
           <CoverageAreaChart
             title="Snapshot freshness"
             data={stats.trends.snapshotFreshnessHoursDaily}
-            ariaLabel="Median hours between consecutive snapshots, last 30 days"
+            ariaLabel="Median hours since last snapshot, evaluated at end of each day, last 30 days"
             valueLabel="Median hours"
-            suffixDaily="(median hours between snapshots)"
+            suffixDaily="(median hours since last snapshot)"
             allowCumulative={false}
           />
         </PanelContent>
