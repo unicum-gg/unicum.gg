@@ -11,7 +11,7 @@ import {
   RedditLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -20,6 +20,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 type ShareTarget = {
@@ -48,6 +49,11 @@ export function ShareModal({
   ogImage?: string;
 }) {
   const [copied, setCopied] = useState(false);
+  const [ogLoaded, setOgLoaded] = useState(false);
+
+  useEffect(() => {
+    setOgLoaded(false);
+  }, [ogImage]);
 
   const encodedText = encodeURIComponent(shareText);
   const encodedUrl = encodeURIComponent(url);
@@ -146,14 +152,23 @@ export function ShareModal({
 
         <div className="space-y-5">
           {ogImage && (
-            // eslint-disable-next-line @next/next/no-img-element -- dynamic OG route, Next/Image optimizer adds overhead
-            <img
-              src={ogImage}
-              alt="Share preview"
-              width={1200}
-              height={630}
-              className="block aspect-1200/630 w-full object-cover"
-            />
+            <div className="relative aspect-1200/630 w-full">
+              {!ogLoaded && (
+                <Skeleton className="absolute inset-0 rounded-none" />
+              )}
+              {/* eslint-disable-next-line @next/next/no-img-element -- dynamic OG route, Next/Image optimizer adds overhead */}
+              <img
+                src={ogImage}
+                alt="Share preview"
+                width={1200}
+                height={630}
+                onLoad={() => setOgLoaded(true)}
+                className={cn(
+                  "block size-full object-cover transition-opacity duration-200",
+                  ogLoaded ? "opacity-100" : "opacity-0",
+                )}
+              />
+            </div>
           )}
           <div className="space-y-2">
             <label
