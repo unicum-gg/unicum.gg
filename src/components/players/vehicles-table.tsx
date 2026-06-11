@@ -5,6 +5,7 @@ import {
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
+import Image from "next/image";
 import { useState } from "react";
 import { toRoman } from "roman-numerals";
 import {
@@ -83,17 +84,19 @@ const TYPE_ABBR: Record<string, string> = {
 };
 
 const MASTERY_LABEL: Record<number, string> = {
-  4: "Master",
-  3: "1st",
-  2: "2nd",
-  1: "3rd",
+  4: "Ace Tanker",
+  3: "1st Class",
+  2: "2nd Class",
+  1: "3rd Class",
 };
 
-const MASTERY_COLOR: Record<number, string> = {
-  4: "text-amber-400",
-  3: "text-fd-foreground",
-  2: "text-fd-muted-foreground",
-  1: "text-fd-muted-foreground",
+// Official WG badge images. The CDN serves the same asset across realms,
+// EU host works as a global default. Index = `mark_of_mastery` value.
+const MASTERY_ICON: Record<number, string> = {
+  4: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery4.png",
+  3: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery3.png",
+  2: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery2.png",
+  1: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery1.png",
 };
 
 type TankRow = {
@@ -362,7 +365,7 @@ export function PlayerVehiclesTable({
             column={SortColumn.Mastery}
             state={sort}
             onToggle={toggleSort}
-            align="end"
+            align="center"
             hideOnMobile
           >
             Mastery
@@ -459,11 +462,16 @@ export function PlayerVehiclesTable({
                   <span>{name}</span>
                 </span>
               </TableCell>
-              <TableCell className="hidden text-right text-xs sm:table-cell">
+              <TableCell className="hidden text-center text-xs sm:table-cell">
                 {mastery && mastery > 0 ? (
-                  <span className={cn("font-semibold", MASTERY_COLOR[mastery])}>
-                    {MASTERY_LABEL[mastery]}
-                  </span>
+                  <Image
+                    src={MASTERY_ICON[mastery]}
+                    alt={MASTERY_LABEL[mastery]}
+                    title={MASTERY_LABEL[mastery]}
+                    width={28}
+                    height={28}
+                    className="mx-auto h-7 w-auto object-contain"
+                  />
                 ) : (
                   <span className="text-muted-foreground">—</span>
                 )}
