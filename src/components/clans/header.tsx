@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
+import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
 import { weightedAverage } from "@/lib/stats";
@@ -131,14 +132,17 @@ export function ClanHeader({
           </div>
         )}
         <div className="flex min-w-0 flex-1 flex-col">
-          <h1 className="flex min-h-16 min-w-0 flex-1 items-center px-4 py-2 font-heading font-bold tracking-tight sm:h-16 sm:flex-none sm:py-0">
-            <AutoFitText maxPx={36} minPx={18} allowWrap className="w-full">
-              <span style={{ color: clan.color }}>[</span>
-              {clan.tag}
-              <span style={{ color: clan.color }}>]</span>
-              <span className="ml-2">{clan.name}</span>
-            </AutoFitText>
-          </h1>
+          <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
+            <h1 className="min-w-0 flex-1 font-heading font-bold tracking-tight">
+              <AutoFitText maxPx={36} minPx={18} allowWrap className="w-full">
+                <span style={{ color: clan.color }}>[</span>
+                {clan.tag}
+                <span style={{ color: clan.color }}>]</span>
+                <span className="ml-2">{clan.name}</span>
+              </AutoFitText>
+            </h1>
+            <CompareWithButton region={region} current={clan.tag} />
+          </div>
           <InfoRow
             region={region}
             clan={clan}
