@@ -24,6 +24,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { NationFlag } from "@/components/players/nation-flag";
+import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import {
@@ -34,10 +35,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { Region } from "@/services/wargaming/wot";
-import {
-  masteryBadgeUrl,
-  tankIconUrl,
-} from "@/services/wargaming/wot/cdn";
+import { masteryBadgeUrl } from "@/services/wargaming/wot/cdn";
 import {
   type VehicleMeta,
 } from "@/services/wargaming/wot/encyclopedia";
@@ -406,7 +404,7 @@ export function PlayerVehiclesTable({
       <TableBody>
         {sorted.map((r) => {
           const tankId = r.tank.tank_id;
-          const icon = r.meta?.tag ? tankIconUrl(region, r.meta.tag) : null;
+          const hasIcon = !!(r.meta?.tag && r.meta?.type);
           const name = r.meta?.shortName || r.meta?.name || `#${tankId}`;
           const mastery = r.tank.mark_of_mastery ?? null;
           const isPremium = r.meta?.isPremium ?? false;
@@ -444,13 +442,11 @@ export function PlayerVehiclesTable({
                 )}
               >
                 <span className="flex items-center gap-2">
-                  {icon ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- WG CDN, no Next loader configured for it
-                    <img
-                      src={icon}
-                      alt=""
-                      width={28}
-                      height={14}
+                  {hasIcon ? (
+                    <TankIcon
+                      region={region}
+                      tag={r.meta!.tag}
+                      type={r.meta!.type}
                       className="h-3.5 w-auto shrink-0 object-contain"
                     />
                   ) : null}

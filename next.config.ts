@@ -39,10 +39,18 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "eu.wargaming.net", pathname: "/clans/**" },
       { protocol: "https", hostname: "na.wargaming.net", pathname: "/clans/**" },
       { protocol: "https", hostname: "asia.wargaming.net", pathname: "/clans/**" },
-      { protocol: "https", hostname: "eu-wotp.wgcdn.co", pathname: "/dcont/**" },
-      { protocol: "https", hostname: "na-wotp.wgcdn.co", pathname: "/dcont/**" },
-      { protocol: "https", hostname: "sg-wotp.wgcdn.co", pathname: "/dcont/**" },
+      { protocol: "https", hostname: "eu-wotp.wgcdn.co", pathname: "/**" },
+      { protocol: "https", hostname: "na-wotp.wgcdn.co", pathname: "/**" },
+      { protocol: "https", hostname: "sg-wotp.wgcdn.co", pathname: "/**" },
     ],
+    // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
+    // SVG sources by default; enabling this allows them through the optimizer
+    // (so they get proxied via our origin like everything else). The strict
+    // CSP + sandbox below prevents any inline script in the SVG from running.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy:
+      "default-src 'self'; script-src 'none'; sandbox;",
   },
   // Map the `sitemap-N.xml` / `clans-sitemap-N.xml` / `players-sitemap-N.xml`
   // URLs declared in the sitemap index to their backing `[id]` route handlers.
