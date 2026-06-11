@@ -50,8 +50,18 @@ export async function bulkInsertTankSnapshots(
     await db
       .insert(table)
       .values(chunk)
-      .onConflictDoNothing({
+      .onConflictDoUpdate({
+        // Same (player, tank, battles) means we've already seen this exact
+        // state, so all the count columns must be identical. We only refresh
+        // the columns that were added by later migrations and might still be
+        // NULL on older rows (xp from 0008, mark_of_mastery from 0008). We
+        // overwrite unconditionally rather than guarding on NULL so a buggy
+        // earlier write that put 0 instead of NULL also gets corrected.
         target: [table.playerId, table.tankId, table.battles],
+        set: {
+          xp: sql`EXCLUDED.xp`,
+          markOfMastery: sql`EXCLUDED.mark_of_mastery`,
+        },
       });
   }
 }
