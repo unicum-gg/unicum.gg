@@ -450,7 +450,9 @@ async function buildView(args: {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Vehicles</PanelTitle>
+          <PanelTitle>
+            Vehicles ({intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
+          </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <PlayerVehiclesTable
