@@ -16,13 +16,8 @@ import {
 } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 import {
-  aggregateClanTanks,
   avgCell,
   bestIndex,
-  clanAggregatesToTankStats,
-  type ClanCompareSlot,
-  ComparisonTable,
-  computeAvgTier,
   dec2Fmt,
   intFmt,
   type MetricCell,
@@ -30,6 +25,13 @@ import {
   numCell,
   ratingCell,
   winratePctCell,
+} from "@/components/compare/cells";
+import {
+  aggregateClanTanks,
+  clanAggregatesToTankStats,
+  type ClanCompareSlot,
+  ComparisonTable,
+  computeAvgTier,
 } from "./comparison-table";
 
 export type BucketKey = "class" | "tier";

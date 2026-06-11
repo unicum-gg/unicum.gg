@@ -1,17 +1,26 @@
 "use client";
 
-import {
-  CaretDownIcon,
-  CaretUpDownIcon,
-  CaretUpIcon,
-} from "@phosphor-icons/react";
 import { Fragment, useMemo, useState } from "react";
-import { toRoman } from "roman-numerals";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import {
+  IntegerCell,
+  RatingValueCell,
+  ratingCell,
+  SortDirection,
+  type SortColumn,
+  type SortState,
+  SortToggle,
+  SubHeadSort,
+  TABLE_CLASSNAME,
+  VehicleLabelCell,
+  sameColumn,
+} from "@/components/compare/per-tank-table";
+import {
+  computeSlotAggRating,
+  computeTankRating,
+} from "@/components/compare/per-tank-ratings";
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -24,15 +33,10 @@ import {
 } from "@/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import { cn } from "@/lib/utils";
 import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
 import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
 import {
   buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-  RATING_COLOR_CLASS,
   type RatingColor,
   type WN8Expected,
   wn7Color,
@@ -41,13 +45,13 @@ import {
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
+import { bestIndex } from "@/components/compare/cells";
 import {
-  bestIndex,
   type ClanCompareSlot,
-  intFmt,
-  type MetricCell,
-  ratingCell,
+  clanAggregatesToTankStats,
 } from "./comparison-table";
+
+type SortMetric = "battles" | "members" | "rating" | "avgDmg";
 
 type SlotCell = {
   battles: number;
@@ -66,28 +70,16 @@ type TankRow = {
   cells: SlotCell[];
 };
 
-type SortMetric = "battles" | "members" | "rating" | "avgDmg";
-type SortColumn = { kind: "tier" } | { kind: "slot"; slot: number; metric: SortMetric };
-enum SortDirection {
-  Asc = "asc",
-  Desc = "desc",
-}
-type SortState = { column: SortColumn; direction: SortDirection } | null;
-
-function sameColumn(a: SortColumn, b: SortColumn): boolean {
-  if (a.kind === "tier" && b.kind === "tier") return true;
-  if (a.kind === "slot" && b.kind === "slot") {
-    return a.slot === b.slot && a.metric === b.metric;
-  }
-  return false;
-}
-
-function rowSortValue(row: TankRow, column: SortColumn): number | null {
+function rowSortValue(
+  row: TankRow,
+  column: SortColumn<SortMetric>,
+): number | null {
   if (column.kind === "tier") return row.tier;
   const c = row.cells[column.slot];
   if (!c) return null;
   if (column.metric === "battles") return c.battles > 0 ? c.battles : null;
-  if (column.metric === "members") return c.memberCount > 0 ? c.memberCount : null;
+  if (column.metric === "members")
+    return c.memberCount > 0 ? c.memberCount : null;
   if (column.metric === "rating") return c.rating;
   return c.avgDmg;
 }
@@ -121,7 +113,7 @@ export function PerTankTab({
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
 }) {
-  const [sort, setSort] = useState<SortState>(null);
+  const [sort, setSort] = useState<SortState<SortMetric>>(null);
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -134,6 +126,11 @@ export function PerTankTab({
   const wn8Fallback = useMemo(
     () => buildWN8Fallback(wn8Expected, encyclopedia),
     [wn8Expected, encyclopedia],
+  );
+
+  const ctx = useMemo(
+    () => ({ encyclopedia, wn8Expected, wn8Fallback, wnxExpected }),
+    [encyclopedia, wn8Expected, wn8Fallback, wnxExpected],
   );
 
   const ratingColor: (v: number) => RatingColor =
@@ -167,39 +164,17 @@ export function PerTankTab({
           };
           seen.set(agg.tankId, row);
         }
-        const tank = aggToTankStats(agg);
-        let rating: number | null = null;
-        if (metric === RatingMetric.Wn7) {
-          const meta = encyclopedia[String(agg.tankId)];
-          rating = computeWN7(
-            {
-              battles: agg.battles,
-              wins: agg.wins,
-              frags: agg.frags,
-              damageDealt: agg.damageDealt,
-              spotted: agg.spotted,
-              droppedCapturePoints: agg.droppedCapturePoints,
-            },
-            meta?.tier ?? null,
-          );
-        } else if (metric === RatingMetric.Wn8) {
-          rating = computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback);
-        } else {
-          rating = computeWNX([tank], wnxExpected);
-        }
-        const avgDmg =
-          agg.battles > 0 ? agg.damageDealt / agg.battles : null;
         row.cells[i] = {
           battles: agg.battles,
           memberCount: agg.memberCount,
-          rating,
-          avgDmg,
+          rating: computeTankRating(metric, aggToTankStats(agg), ctx),
+          avgDmg: agg.battles > 0 ? agg.damageDealt / agg.battles : null,
         };
         row.totalBattles += agg.battles;
       }
     }
     return Array.from(seen.values());
-  }, [slots, encyclopedia, wn8Expected, wn8Fallback, wnxExpected, metric]);
+  }, [slots, encyclopedia, ctx, metric]);
 
   const sortedRows = useMemo(() => {
     if (!sort) {
@@ -216,7 +191,7 @@ export function PerTankTab({
     });
   }, [rows, sort]);
 
-  function toggleSort(column: SortColumn) {
+  function toggleSort(column: SortColumn<SortMetric>) {
     setSort((prev) => {
       if (!prev || !sameColumn(prev.column, column)) {
         return { column, direction: SortDirection.Desc };
@@ -228,52 +203,26 @@ export function PerTankTab({
     });
   }
 
-  const slotAggRatings = useMemo(() => {
-    return slots.map((s) => {
-      const tanks = s.tankAggregates;
-      if (tanks.length === 0) return null;
-      if (metric === RatingMetric.Wn7) {
-        let battles = 0,
-          wins = 0,
-          frags = 0,
-          damageDealt = 0,
-          spotted = 0,
-          droppedCapturePoints = 0;
-        for (const t of tanks) {
-          battles += t.battles;
-          wins += t.wins;
-          frags += t.frags;
-          damageDealt += t.damageDealt;
-          spotted += t.spotted;
-          droppedCapturePoints += t.droppedCapturePoints;
-        }
-        if (battles === 0) return null;
-        let weighted = 0;
-        let totalBattles = 0;
-        for (const t of tanks) {
-          const meta = encyclopedia[String(t.tankId)];
-          if (!meta) continue;
-          weighted += meta.tier * t.battles;
-          totalBattles += t.battles;
-        }
-        const avgTier = totalBattles > 0 ? weighted / totalBattles : null;
-        return computeWN7(
-          { battles, wins, frags, damageDealt, spotted, droppedCapturePoints },
-          avgTier,
-        );
-      }
-      const asStats = tanks.map(aggToTankStats);
-      if (metric === RatingMetric.Wn8) {
-        return computeWN8(asStats, wn8Expected, encyclopedia, wn8Fallback);
-      }
-      return computeWNX(asStats, wnxExpected);
-    });
-  }, [slots, encyclopedia, wn8Expected, wn8Fallback, wnxExpected, metric]);
+  const slotAggRatings = useMemo(
+    () =>
+      slots.map((s) =>
+        computeSlotAggRating(
+          metric,
+          clanAggregatesToTankStats(s.tankAggregates),
+          ctx,
+        ),
+      ),
+    [slots, ctx, metric],
+  );
 
-  const headerWinners = useMemo(() => {
-    const cells = slotAggRatings.map((v) => ratingCell(v, ratingColor));
-    return bestIndex(cells, "higher");
-  }, [slotAggRatings, ratingColor]);
+  const headerWinners = useMemo(
+    () =>
+      bestIndex(
+        slotAggRatings.map((v) => ratingCell(v, ratingColor)),
+        "higher",
+      ),
+    [slotAggRatings, ratingColor],
+  );
 
   if (rows.length === 0) {
     return (
@@ -285,7 +234,7 @@ export function PerTankTab({
 
   return (
     <div className="overflow-x-auto">
-      <Table className="my-0! table-fixed [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_thead_th:first-child]:pl-4! [&_tbody_tr]:border-b [&_tbody_tr]:border-fd-border [&_thead_tr]:border-b [&_thead_tr]:border-fd-border [&_td]:border-r [&_th]:border-r [&_td]:border-fd-border [&_th]:border-fd-border [&_td:last-child]:border-r-0 [&_th:last-child]:border-r-0">
+      <Table className={TABLE_CLASSNAME}>
         <TableHeader>
           <TableRow>
             <TableHead className="w-64 p-0">
@@ -354,75 +303,28 @@ export function PerTankTab({
         </TableHeader>
         <TableBody>
           {sortedRows.map((r) => {
-            const ratingCells: MetricCell[] = r.cells.map((c) =>
+            const ratingCells = r.cells.map((c) =>
               ratingCell(c.rating, ratingColor),
             );
             const bestRating = bestIndex(ratingCells, "higher");
             return (
               <TableRow key={r.tankId}>
-                <TableCell>
-                  <span className="flex items-center gap-2">
-                    {r.type && (
-                      <VehicleTypeIcon
-                        type={r.type}
-                        premium={r.isPremium}
-                      />
-                    )}
-                    <span className="text-xs text-muted-foreground">
-                      {r.tier > 0 ? toRoman(r.tier) : "—"}
-                    </span>
-                    <span
-                      className={cn(
-                        "font-medium truncate",
-                        r.isPremium && "text-[#FAB81B]",
-                      )}
-                    >
-                      {r.name}
-                    </span>
-                  </span>
-                </TableCell>
+                <VehicleLabelCell
+                  tier={r.tier}
+                  name={r.name}
+                  type={r.type}
+                  isPremium={r.isPremium}
+                />
                 {r.cells.map((c, i) => (
                   <Fragment key={i}>
-                    <TableCell
-                      className={cn(
-                        "text-right tabular-nums",
-                        c.memberCount === 0 && "text-muted-foreground",
-                      )}
-                    >
-                      {c.memberCount > 0 ? intFmt.format(c.memberCount) : "—"}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-right tabular-nums",
-                        c.battles === 0 && "text-muted-foreground",
-                      )}
-                    >
-                      {c.battles > 0 ? intFmt.format(c.battles) : "—"}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-right tabular-nums",
-                        ratingCells[i].color
-                          ? RATING_COLOR_CLASS[ratingCells[i].color]
-                          : "text-muted-foreground",
-                      )}
-                    >
-                      {ratingCells[i].display}
-                      {bestRating.has(i) && r.cells.length > 1 && (
-                        <span
-                          aria-hidden
-                          className="ms-1.5 inline-block size-1.5 rounded-full bg-fd-primary align-middle"
-                        />
-                      )}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-right tabular-nums",
-                        c.avgDmg === null && "text-muted-foreground",
-                      )}
-                    >
-                      {c.avgDmg !== null ? intFmt.format(c.avgDmg) : "—"}
-                    </TableCell>
+                    <IntegerCell value={c.memberCount} />
+                    <IntegerCell value={c.battles} />
+                    <RatingValueCell
+                      cell={ratingCells[i]}
+                      isBest={bestRating.has(i)}
+                      showDot={r.cells.length > 1}
+                    />
+                    <IntegerCell value={c.avgDmg} />
                   </Fragment>
                 ))}
               </TableRow>
@@ -431,69 +333,5 @@ export function PerTankTab({
         </TableBody>
       </Table>
     </div>
-  );
-}
-
-function SortToggle({
-  active,
-  direction,
-  onClick,
-  align,
-  children,
-}: {
-  active: boolean;
-  direction: SortDirection | null;
-  onClick: () => void;
-  align: "start" | "end";
-  children: React.ReactNode;
-}) {
-  const Icon =
-    active && direction === SortDirection.Asc
-      ? CaretUpIcon
-      : active && direction === SortDirection.Desc
-        ? CaretDownIcon
-        : CaretUpDownIcon;
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={cn(
-        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-        align === "end" && "justify-end text-right",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {children}
-      <Icon
-        weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-}
-
-function SubHeadSort({
-  sort,
-  column,
-  onClick,
-  label,
-}: {
-  sort: SortState;
-  column: SortColumn;
-  onClick: (col: SortColumn) => void;
-  label: string;
-}) {
-  const active = !!sort && sameColumn(sort.column, column);
-  return (
-    <TableHead className="p-0">
-      <SortToggle
-        active={active}
-        direction={active ? sort!.direction : null}
-        onClick={() => onClick(column)}
-        align="end"
-      >
-        <span className="text-xs text-muted-foreground">{label}</span>
-      </SortToggle>
-    </TableHead>
   );
 }

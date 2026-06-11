@@ -14,12 +14,8 @@ import {
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import {
-  aggregateTanks,
   avgCell,
   bestIndex,
-  type CompareSlot,
-  ComparisonTable,
-  computeAvgTier,
   dashCell,
   dec2Fmt,
   intFmt,
@@ -31,6 +27,12 @@ import {
   pctFmt,
   ratingCell,
   winratePctCell,
+} from "@/components/compare/cells";
+import {
+  aggregateTanks,
+  type CompareSlot,
+  ComparisonTable,
+  computeAvgTier,
 } from "./comparison-table";
 
 export function OverallTab({

@@ -29,7 +29,8 @@ import {
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import type { Region } from "@/services/wargaming/wot";
-import { type ClanCompareSlot, dec2Fmt } from "./comparison-table";
+import { dec2Fmt } from "@/components/compare/cells";
+import { type ClanCompareSlot } from "./comparison-table";
 
 const TOP_N = 10;
 

@@ -9,8 +9,7 @@ import {
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
 import {
-  type ClanCompareSlot,
-  ComparisonTable,
+  bestIndex,
   dashCell,
   intFmt,
   type MetricCell,
@@ -18,8 +17,8 @@ import {
   numCell,
   ratingCell,
   winratePctCell,
-  bestIndex,
-} from "./comparison-table";
+} from "@/components/compare/cells";
+import { type ClanCompareSlot, ComparisonTable } from "./comparison-table";
 
 const DAY_FORMAT = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
