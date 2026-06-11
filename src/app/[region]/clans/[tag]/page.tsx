@@ -185,26 +185,14 @@ async function render(
       ) : (
         <>
           <PanelSeparator />
-          <Suspense
-            fallback={
-              <Panel>
-                <PanelContent>
-                  <p className="text-sm text-muted-foreground">
-                    Loading vehicles...
-                  </p>
-                </PanelContent>
-              </Panel>
-            }
-          >
-            <VehiclesStreamed region={region} clanId={clan.id} />
-          </Suspense>
+          <VehiclesPanel region={region} clanId={clan.id} />
         </>
       )}
     </div>
   );
 }
 
-async function VehiclesStreamed({
+async function VehiclesPanel({
   region,
   clanId,
 }: {
