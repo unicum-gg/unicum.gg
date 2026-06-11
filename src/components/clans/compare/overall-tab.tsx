@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import { LanguageFlags } from "@/components/language-flags";
 import { weightedAverage, type WeightedDataPoint } from "@/lib/stats";
 import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import {
@@ -172,15 +173,26 @@ export function OverallTab({ slots }: { slots: ClanCompareSlot[] }) {
       buildRow("Age (days)", "higher", (s) =>
         numCell(ageInDays(s.clan!.createdAt), intFmt),
       ),
-      buildRow("Created", "higher", (s) => ({
+      buildRow("Created", "lower", (s) => ({
         display: DAY_FORMAT.format(s.clan!.createdAt),
         numeric: s.clan!.createdAt.getTime(),
       })),
       buildRow("Languages", "higher", (s) => {
         const langs = s.clan!.languages;
+        if (langs.length === 0) {
+          return { display: "—", numeric: 0 };
+        }
         return {
-          display:
-            langs.length > 0 ? langs.map((l) => l.toUpperCase()).join(", ") : "—",
+          display: langs.map((l) => l.toUpperCase()).join(", "),
+          displayNode: (
+            <span className="inline-flex justify-end">
+              <LanguageFlags
+                languages={langs}
+                size="s"
+                source="declared"
+              />
+            </span>
+          ),
           numeric: langs.length,
         };
       }),

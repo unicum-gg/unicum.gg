@@ -1,9 +1,11 @@
+import type { ReactNode } from "react";
 import { type RatingColor, winrateColor } from "@/services/wargaming/wot/ratings";
 
 export type MetricKind = "higher" | "lower";
 
 export type MetricCell = {
   display: string;
+  displayNode?: ReactNode;
   numeric: number | null;
   color?: RatingColor | null;
 };

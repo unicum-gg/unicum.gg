@@ -149,7 +149,7 @@ export function ComparisonTable({
                       : cell.display === "—" && "text-muted-foreground",
                   )}
                 >
-                  {cell.display}
+                  {cell.displayNode ?? cell.display}
                   {best.has(i) && row.cells.length > 1 && (
                     <span
                       aria-hidden
