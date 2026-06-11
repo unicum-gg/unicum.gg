@@ -456,6 +456,7 @@ async function buildView(args: {
         </PanelHeader>
         <PanelContent className="p-0">
           <PlayerVehiclesTable
+            region={region}
             tanks={tanks}
             encyclopedia={encyclopedia}
             wn8Expected={wn8Expected}

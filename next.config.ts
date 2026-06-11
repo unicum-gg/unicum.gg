@@ -39,11 +39,9 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "eu.wargaming.net", pathname: "/clans/**" },
       { protocol: "https", hostname: "na.wargaming.net", pathname: "/clans/**" },
       { protocol: "https", hostname: "asia.wargaming.net", pathname: "/clans/**" },
-      {
-        protocol: "https",
-        hostname: "eu-wotp.wgcdn.co",
-        pathname: "/dcont/**",
-      },
+      { protocol: "https", hostname: "eu-wotp.wgcdn.co", pathname: "/dcont/**" },
+      { protocol: "https", hostname: "na-wotp.wgcdn.co", pathname: "/dcont/**" },
+      { protocol: "https", hostname: "sg-wotp.wgcdn.co", pathname: "/dcont/**" },
     ],
   },
   // Map the `sitemap-N.xml` / `clans-sitemap-N.xml` / `players-sitemap-N.xml`

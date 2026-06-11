@@ -33,6 +33,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import type { Region } from "@/services/wargaming/wot";
+import {
+  masteryBadgeUrl,
+  tankIconUrl,
+} from "@/services/wargaming/wot/cdn";
 import {
   type VehicleMeta,
 } from "@/services/wargaming/wot/encyclopedia";
@@ -88,15 +93,6 @@ const MASTERY_LABEL: Record<number, string> = {
   3: "1st Class",
   2: "2nd Class",
   1: "3rd Class",
-};
-
-// Official WG badge images. The CDN serves the same asset across realms,
-// EU host works as a global default. Index = `mark_of_mastery` value.
-const MASTERY_ICON: Record<number, string> = {
-  4: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery4.png",
-  3: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery3.png",
-  2: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery2.png",
-  1: "https://eu-wotp.wgcdn.co/dcont/wot/current/achievement/big/markOfMastery1.png",
 };
 
 type TankRow = {
@@ -252,11 +248,13 @@ function SortableHead({
 }
 
 export function PlayerVehiclesTable({
+  region,
   tanks,
   encyclopedia,
   wn8Expected,
   wnxExpected,
 }: {
+  region: Region;
   tanks: TankStats[];
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
@@ -408,10 +406,7 @@ export function PlayerVehiclesTable({
       <TableBody>
         {sorted.map((r) => {
           const tankId = r.tank.tank_id;
-          const tagLower = r.meta?.tag?.toLowerCase();
-          const icon = tagLower
-            ? `https://eu-wotp.wgcdn.co/dcont/tankopedia_images/${tagLower}/${tagLower}_icon.svg`
-            : null;
+          const icon = r.meta?.tag ? tankIconUrl(region, r.meta.tag) : null;
           const name = r.meta?.shortName || r.meta?.name || `#${tankId}`;
           const mastery = r.tank.mark_of_mastery ?? null;
           const isPremium = r.meta?.isPremium ?? false;
@@ -465,7 +460,7 @@ export function PlayerVehiclesTable({
               <TableCell className="hidden text-center text-xs sm:table-cell">
                 {mastery && mastery > 0 ? (
                   <Image
-                    src={MASTERY_ICON[mastery]}
+                    src={masteryBadgeUrl(region, mastery)}
                     alt={MASTERY_LABEL[mastery]}
                     title={MASTERY_LABEL[mastery]}
                     width={28}
