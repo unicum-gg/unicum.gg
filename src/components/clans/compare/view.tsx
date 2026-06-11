@@ -8,6 +8,8 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { ShareButton } from "@/components/share-button";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
@@ -96,8 +98,21 @@ export function ClanCompareView({
   return (
     <>
       <Panel>
-        <PanelHeader>
+        <PanelHeader className="flex items-center justify-between gap-2">
           <PanelTitle>Compare</PanelTitle>
+          <ShareButton
+            title="Share comparison"
+            url={`${APP.URL}${ROUTES.COMPARE_CLANS(
+              region,
+              slots.map((s) => s.requested),
+            )}`}
+            shareText={`${slots
+              .map((s) => `[${s.clan?.tag ?? s.requested}]`)
+              .join(" vs ")} compared on ${APP.NAME}`}
+            ogImage={`${APP.URL}/api/og/${region}/clans/compare?tags=${slots
+              .map((s) => encodeURIComponent(s.requested))
+              .join(",")}`}
+          />
         </PanelHeader>
         <PanelContent className="p-4">
           <SlotHeader

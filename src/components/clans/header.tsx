@@ -4,6 +4,8 @@ import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
+import { ShareButton } from "@/components/share-button";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { weightedAverage } from "@/lib/stats";
 import { cn } from "@/lib/utils";
@@ -141,6 +143,12 @@ export function ClanHeader({
                 <span className="ml-2">{clan.name}</span>
               </AutoFitText>
             </h1>
+            <ShareButton
+              title={`Share [${clan.tag}]`}
+              url={`${APP.URL}${ROUTES.CLAN(region, clan.tag)}`}
+              shareText={`Check [${clan.tag}] ${clan.name} on ${APP.NAME}`}
+              ogImage={`${APP.URL}${ROUTES.CLAN(region, clan.tag)}/opengraph-image`}
+            />
             <CompareWithButton region={region} current={clan.tag} />
           </div>
           <InfoRow

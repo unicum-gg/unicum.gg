@@ -4,6 +4,8 @@ import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RelativeTime } from "@/components/relative-time";
+import { ShareButton } from "@/components/share-button";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@/services/wargaming/wot";
 import type { ClanStint } from "@/services/wargaming/wot/clans/player";
@@ -35,6 +37,12 @@ export function PlayerHeader({
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
           </h1>
+          <ShareButton
+            title={`Share ${nickname}`}
+            url={`${APP.URL}${ROUTES.PLAYER(region, nickname)}`}
+            shareText={`Check ${nickname}'s WoT stats on ${APP.NAME}`}
+            ogImage={`${APP.URL}${ROUTES.PLAYER(region, nickname)}/opengraph-image`}
+          />
           <CompareWithButton region={region} current={nickname} />
         </div>
         <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
