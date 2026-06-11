@@ -10,7 +10,7 @@ import { refreshClanMembers } from "./repository/members";
 
 // 10s tick — fast enough for user-initiated page visits to feel live, loose
 // enough to coalesce bursts on the same clan into a single drain.
-const SCHEDULE = "*/10 * * * * *";
+const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 5;
 // Members + events are per-clan portal calls; throttle between them so we
 // don't trip Wargaming's portal rate limit on a busy queue.

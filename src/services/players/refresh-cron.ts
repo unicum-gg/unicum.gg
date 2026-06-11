@@ -20,7 +20,7 @@ import { dequeuePlayerRefresh } from "./refresh-queue";
 
 // 10s tick — fast enough for user-initiated refreshes to feel live,
 // loose enough to coalesce bursts on the same player into a single drain.
-const SCHEDULE = "*/10 * * * * *";
+const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 25;
 
 /**

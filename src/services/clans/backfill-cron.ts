@@ -7,7 +7,7 @@ import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
 
-const SCHEDULE = "* * * * *";
+const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 20;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 const REQUEST_DELAY_MS = 250;
