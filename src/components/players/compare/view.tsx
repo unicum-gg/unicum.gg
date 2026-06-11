@@ -110,7 +110,7 @@ export function PlayerCompareView({
       <PanelSeparator />
 
       <Panel>
-        <PanelHeader className="px-0! py-0!" screenLines={false}>
+        <PanelHeader className="px-0! py-0!">
           <nav className="flex items-center overflow-x-auto text-sm">
             {TABS.map((t) => (
               <button
