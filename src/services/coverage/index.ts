@@ -12,11 +12,26 @@ import {
   playersByRegion,
   tankSnapshotsByRegion,
 } from "@/services/db/schema";
+import {
+  ACTIVITY_BUCKET_ORDER,
+  ActivityBucket,
+  activityBucketSql,
+  REFRESH_CADENCE_MS,
+  refreshCutoffSql,
+} from "@/services/players/refresh-policy";
 import type { Region } from "@/services/wargaming/wot";
 
 export type DailyPoint = { day: string; count: number };
 
 export type TableSize = { name: string; bytes: number };
+
+export type RefreshPolicyBucket = {
+  bucket: ActivityBucket;
+  cadenceMs: number;
+  total: number;
+  onTime: number;
+  neverSnapped: number;
+};
 
 export type CoverageStats = {
   region: Region;
@@ -34,11 +49,17 @@ export type CoverageStats = {
     lastClanRefreshAt: Date | null;
     playerSnapshotsLast24h: number;
     clansRefreshedLast24h: number;
+    // Refresh-policy health on the fetched portion of the player base.
+    // Excludes Unfetched players (they have nothing to snapshot yet) so
+    // the % stays a clean signal about the adaptive cadence rather than
+    // being dragged down by the discovery backlog.
     snapshotFreshness: {
-      medianHours: number | null;
-      neverSnapped: number;
+      onTime: number;
+      fetched: number;
     };
+    awaitingFirstSnapshot: number;
   };
+  refreshPolicy: RefreshPolicyBucket[];
   funFacts: {
     oldestPlayerSnapshotAt: Date | null;
     biggestClan: {
@@ -52,7 +73,7 @@ export type CoverageStats = {
     playersDiscoveredDaily: DailyPoint[];
     clansDiscoveredDaily: DailyPoint[];
     playerSnapshotsDaily: DailyPoint[];
-    snapshotFreshnessHoursDaily: DailyPoint[];
+    firstSnapshotsDaily: DailyPoint[];
   };
   infrastructure: {
     databaseBytes: number;
@@ -124,8 +145,8 @@ async function getCoverageStatsUncached(
     playersDiscoveredRows,
     clansDiscoveredRows,
     snapshotsDailyRows,
-    snapshotFreshness,
-    snapshotFreshnessDailyRows,
+    firstSnapshotsDailyRows,
+    refreshPolicyReport,
     databaseBytes,
     tableSizeRows,
   ] = await Promise.all([
@@ -171,9 +192,15 @@ async function getCoverageStatsUncached(
       .then((r) => Number(r[0]?.count ?? 0)),
     db
       .execute<{ count: string }>(
+        // Overdue per the adaptive refresh policy (see refresh-policy.ts):
+        // a player is "overdue" when last_seen_at is older than the cadence
+        // for their `last_battle_at` bucket. Unfetched accounts are always
+        // overdue (cutoff returns a future date) so this number includes
+        // both the discovery backlog and the fetched-but-stale backlog.
+        // Mirrors the snapshot cron's eligibility filter exactly.
         sql`SELECT COUNT(*)::text AS count
             FROM ${playersTable}
-            WHERE last_seen_at < NOW() - INTERVAL '24 hours'`,
+            WHERE ${playersTable.lastSeenAt} < ${refreshCutoffSql(playersTable.lastBattleAt)}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
@@ -252,65 +279,81 @@ async function getCoverageStatsUncached(
           GROUP BY day
           ORDER BY day`,
     ),
+    db.execute<{ day: string; count: string }>(
+      // First-time snapshots per day: bucket each player by their oldest
+      // taken_at, then count per day. Reads pair with playersDiscoveredDaily
+      // to show the discovery -> first-snapshot pipeline (are we keeping up
+      // with new account onboarding or piling up?).
+      sql`WITH firsts AS (
+            SELECT player_id, MIN(taken_at) AS first_at
+            FROM ${playerSnapshotsTable}
+            GROUP BY player_id
+          )
+          SELECT date_trunc('day', first_at)::text AS day, COUNT(*)::text AS count
+          FROM firsts
+          WHERE first_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          GROUP BY day
+          ORDER BY day`,
+    ),
     db
       .execute<{
+        bucket: ActivityBucket;
+        total: string;
+        on_time: string;
         never_snapped: string;
-        p50_hours: string | null;
       }>(
-        // True freshness: for every tracked player, hours since their last
-        // snapshot (NULL if never snapped). Returns median + never-snapped
-        // count. Replaces the older gap-between-consecutive-snapshots query
-        // that silently excluded the never-snapped majority, making freshness
-        // look 4x rosier than reality.
+        // Per-bucket breakdown: total players in each activity bucket and
+        // how many have a recent enough snapshot to count as "on-time"
+        // against their bucket's target cadence. Aggregated client-side
+        // into both the headline freshness stat (Unfetched excluded from
+        // denominator so the % reflects refresh-policy health, not the
+        // discovery backlog) and the per-bucket breakdown panel.
         sql`WITH last_snap AS (
               SELECT player_id, MAX(taken_at) AS taken_at
               FROM ${playerSnapshotsTable}
               GROUP BY player_id
-            ),
-            hrs AS (
-              SELECT EXTRACT(epoch FROM (NOW() - ls.taken_at)) / 3600 AS hours_since
-              FROM ${playersTable} p
-              LEFT JOIN last_snap ls ON ls.player_id = p.id
             )
             SELECT
-              COUNT(*) FILTER (WHERE hours_since IS NULL)::text AS never_snapped,
-              percentile_cont(0.5) WITHIN GROUP (ORDER BY hours_since)::numeric(10,2)::text AS p50_hours
-            FROM hrs`,
+              ${activityBucketSql(playersTable.lastBattleAt)} AS bucket,
+              COUNT(*)::text AS total,
+              COUNT(*) FILTER (
+                WHERE ls.taken_at IS NOT NULL
+                  AND ls.taken_at >= ${refreshCutoffSql(playersTable.lastBattleAt)}
+              )::text AS on_time,
+              COUNT(*) FILTER (WHERE ls.taken_at IS NULL)::text AS never_snapped
+            FROM ${playersTable}
+            LEFT JOIN last_snap ls ON ls.player_id = ${playersTable.id}
+            GROUP BY bucket`,
       )
-      .then((r) => ({
-        neverSnapped: Number(r[0]?.never_snapped ?? 0),
-        medianHours:
-          r[0]?.p50_hours != null ? Number(r[0].p50_hours) : null,
-      })),
-    db.execute<{ day: string; count: string }>(
-      // Daily freshness time-series: for each day X in the window, median
-      // hours since last snapshot evaluated at end of day X, across players
-      // who had at least one snapshot at-or-before end-of-day X. Computed by
-      // pairing each snapshot with its LEAD (next snapshot) so each row covers
-      // the time-span during which it was that player's latest, then joining
-      // the day grid onto whichever snapshot covers the day's end-time.
-      sql`WITH days AS (
-            SELECT generate_series(
-              (NOW() - (${DAYS_WINDOW - 1} || ' days')::interval)::date,
-              NOW()::date,
-              INTERVAL '1 day'
-            )::date AS day
-          ),
-          snaps AS (
-            SELECT player_id, taken_at,
-                   LEAD(taken_at) OVER (PARTITION BY player_id ORDER BY taken_at) AS next_at
-            FROM ${playerSnapshotsTable}
-          )
-          SELECT d.day::text AS day,
-                 percentile_cont(0.5) WITHIN GROUP (
-                   ORDER BY EXTRACT(epoch FROM (d.day + INTERVAL '1 day' - s.taken_at)) / 3600
-                 )::numeric(10,2)::text AS count
-          FROM days d
-          JOIN snaps s ON s.taken_at < d.day + INTERVAL '1 day'
-            AND (s.next_at IS NULL OR s.next_at >= d.day + INTERVAL '1 day')
-          GROUP BY d.day
-          ORDER BY d.day`,
-    ),
+      .then((rows) => {
+        const byBucket = new Map(rows.map((r) => [r.bucket, r]));
+        const breakdown: RefreshPolicyBucket[] = ACTIVITY_BUCKET_ORDER.map(
+          (bucket) => {
+            const r = byBucket.get(bucket);
+            return {
+              bucket,
+              cadenceMs: REFRESH_CADENCE_MS[bucket],
+              total: r ? Number(r.total) : 0,
+              onTime: r ? Number(r.on_time) : 0,
+              neverSnapped: r ? Number(r.never_snapped) : 0,
+            };
+          },
+        );
+        const fetched = breakdown
+          .filter((b) => b.bucket !== ActivityBucket.Unfetched)
+          .reduce((sum, b) => sum + b.total, 0);
+        const onTime = breakdown
+          .filter((b) => b.bucket !== ActivityBucket.Unfetched)
+          .reduce((sum, b) => sum + b.onTime, 0);
+        const awaitingFirstSnapshot =
+          breakdown.find((b) => b.bucket === ActivityBucket.Unfetched)?.total ??
+          0;
+        return {
+          breakdown,
+          freshness: { onTime, fetched },
+          awaitingFirstSnapshot,
+        };
+      }),
     db
       .execute<{ bytes: string }>(
         sql`SELECT pg_database_size(current_database())::text AS bytes`,
@@ -342,8 +385,10 @@ async function getCoverageStatsUncached(
       lastClanRefreshAt: lastClanRefresh,
       playerSnapshotsLast24h: snapshotsLast24h,
       clansRefreshedLast24h: clansRefreshedLast24h,
-      snapshotFreshness,
+      snapshotFreshness: refreshPolicyReport.freshness,
+      awaitingFirstSnapshot: refreshPolicyReport.awaitingFirstSnapshot,
     },
+    refreshPolicy: refreshPolicyReport.breakdown,
     funFacts: {
       oldestPlayerSnapshotAt: oldestSnapshot,
       biggestClan,
@@ -353,10 +398,7 @@ async function getCoverageStatsUncached(
       playersDiscoveredDaily: buildDaySeries(playersDiscoveredRows, DAYS_WINDOW),
       clansDiscoveredDaily: buildDaySeries(clansDiscoveredRows, DAYS_WINDOW),
       playerSnapshotsDaily: buildDaySeries(snapshotsDailyRows, DAYS_WINDOW),
-      snapshotFreshnessHoursDaily: buildDaySeries(
-        snapshotFreshnessDailyRows,
-        DAYS_WINDOW,
-      ),
+      firstSnapshotsDaily: buildDaySeries(firstSnapshotsDailyRows, DAYS_WINDOW),
     },
     infrastructure: {
       databaseBytes,

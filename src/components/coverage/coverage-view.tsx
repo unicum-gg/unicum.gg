@@ -1,4 +1,4 @@
-import { format, formatDistanceStrict } from "date-fns";
+import { format } from "date-fns";
 import {
   Panel,
   PanelContent,
@@ -10,6 +10,10 @@ import { RelativeTime } from "@/components/relative-time";
 import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
 import { getCoverageStats } from "@/services/coverage";
+import {
+  ACTIVITY_BUCKET_LABEL,
+  formatCadence,
+} from "@/services/players/refresh-policy";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
 import { ChartMode, CoverageAreaChart } from "./coverage-charts";
 
@@ -18,19 +22,19 @@ const decFmt = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
+const pctFmt = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 0,
+});
 const usdFmt = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
   maximumFractionDigits: 2,
 });
 
-function formatHours(hours: number | null): string {
-  if (hours === null) return "n/a";
-  const ms = hours * 60 * 60 * 1000;
-  return formatDistanceStrict(0, ms, {
-    unit: hours < 48 ? "hour" : "day",
-    roundingMethod: "round",
-  });
+function formatOnTime(onTime: number, total: number): string {
+  if (total === 0) return "n/a";
+  return pctFmt.format(onTime / total);
 }
 
 function formatYear(d: Date | null): string {
@@ -69,8 +73,8 @@ export async function CoverageView({ region }: { region: Region }) {
             clans
           </h1>
           <p className="mt-4 text-fd-muted-foreground">
-            Refreshed every 24h by our snapshot system. Open source, no login,
-            no ads.{" "}
+            Refreshed on an adaptive cadence: active players every few hours,
+            dormants every weeks. Open source, no login, no ads.{" "}
             <a
               href={APP.EXTERNAL.GITHUB}
               className="underline-offset-2 hover:underline"
@@ -119,21 +123,67 @@ export async function CoverageView({ region }: { region: Region }) {
               value={intFmt.format(stats.activity.clansRefreshedLast24h)}
             />
             <StatCell
-              label="Typical snapshot age"
-              value={formatHours(stats.activity.snapshotFreshness.medianHours)}
+              label="Players on-time"
+              value={formatOnTime(
+                stats.activity.snapshotFreshness.onTime,
+                stats.activity.snapshotFreshness.fetched,
+              )}
             />
             <StatCell
-              label="Players never snapped"
-              value={intFmt.format(
-                stats.activity.snapshotFreshness.neverSnapped,
-              )}
+              label="Awaiting first snapshot"
+              value={intFmt.format(stats.activity.awaitingFirstSnapshot)}
             />
           </div>
           <p className="text-xs text-fd-muted-foreground">
-            The snapshot cron refreshes up to 200 players per region per minute
-            to stay under Wargaming's API rate limits. Backlogs drain
-            continuously and every player is eventually refreshed.
+            Snapshot cadence adapts to each player based on their last-battle
+            recency. Active players (last 24h) refresh every 6h, dormants on
+            longer windows up to 90 days. On-time counts players whose latest
+            snapshot is within their bucket target. The breakdown below shows
+            the policy in detail.
           </p>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Refresh policy</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-fd-border text-xs uppercase tracking-wide text-fd-muted-foreground">
+                <th className="px-4 py-2 text-left font-medium">Bucket</th>
+                <th className="px-4 py-2 text-right font-medium">Players</th>
+                <th className="px-4 py-2 text-right font-medium">
+                  Target cadence
+                </th>
+                <th className="px-4 py-2 text-right font-medium">On-time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stats.refreshPolicy.map((row) => (
+                <tr
+                  key={row.bucket}
+                  className="border-b border-fd-border last:border-b-0"
+                >
+                  <td className="px-4 py-2">
+                    {ACTIVITY_BUCKET_LABEL[row.bucket]}
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums">
+                    {intFmt.format(row.total)}
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
+                    {formatCadence(row.cadenceMs)}
+                  </td>
+                  <td className="px-4 py-2 text-right tabular-nums">
+                    {formatOnTime(row.onTime, row.total)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </PanelContent>
       </Panel>
 
@@ -163,12 +213,10 @@ export async function CoverageView({ region }: { region: Region }) {
             defaultMode={ChartMode.Daily}
           />
           <CoverageAreaChart
-            title="Snapshot freshness"
-            data={stats.trends.snapshotFreshnessHoursDaily}
-            ariaLabel="Median hours since last snapshot, evaluated at end of each day, last 30 days"
-            valueLabel="Median hours"
-            suffixDaily="(median hours since last snapshot)"
-            allowCumulative={false}
+            title="First-time snapshots"
+            data={stats.trends.firstSnapshotsDaily}
+            ariaLabel="First-ever snapshots per day, last 30 days"
+            defaultMode={ChartMode.Daily}
           />
         </PanelContent>
       </Panel>
@@ -209,7 +257,7 @@ export async function CoverageView({ region }: { region: Region }) {
           <QueueCell
             label="Snapshot backlog"
             value={intFmt.format(stats.snapshotBacklog)}
-            description="Players whose last snapshot is older than 24h. Snapshot-cron drains at 200 per region per minute."
+            description="Players past their adaptive refresh target plus those awaiting first snapshot. The cron drains continuously, unfetched players first."
           />
           <QueueCell
             label="Clan refresh queue"

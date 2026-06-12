@@ -13,10 +13,10 @@ import {
   type TankStats,
 } from "@/services/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from ".";
+import { refreshCutoffSql } from "./refresh-policy";
 
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 400;
-const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
 // Soft-delete tunables — see schema/players.ts for the rationale.
 const NULL_THRESHOLD = 3;
 const SOFT_DELETE_RECHECK_MS = 30 * 24 * 60 * 60 * 1000;
@@ -50,16 +50,18 @@ export type RefreshResult = {
 
 async function collectDuePlayers(
   region: Region,
-  cutoff: Date,
   limit: number,
 ): Promise<{ rows: Player[]; queued: number }> {
-  // Pure 24h backfill, biased toward filling holes in the DB first, then
-  // toward recently-active players. NULL lastBattleAt = player discovered
-  // via a clan members list with no stats yet. Until those are fetched,
-  // they're missing from leaderboards / top players / search, so they
-  // always take priority (NULLS FIRST). Among non-NULLs, most recent
-  // battle wins so active players stay refreshed. lastSeenAt ASC breaks
-  // ties so we rotate through.
+  // Adaptive cadence — see refresh-policy.ts for the per-bucket targets.
+  // The cutoff is computed per-row from `last_battle_at`: actives get
+  // refreshed every few hours, dormants every weeks-to-months, and
+  // `last_battle_at IS NULL` (= we know the account from clan discovery
+  // but never called /wot/account/info/) is perpetually due so it dominates
+  // the queue until cleared.
+  //
+  // ORDER BY puts unfetched first (NULLS FIRST), then most-recently-active,
+  // then oldest `last_seen_at` for fairness within ties. This keeps the
+  // discovery backlog clearing fast while still rotating fetched players.
   const players = playersByRegion[region];
   // Skip players that WG has been returning null for if we already marked
   // them soft-deleted within the past 30 days. After the recheck window the
@@ -69,7 +71,7 @@ async function collectDuePlayers(
     Date.now() - SOFT_DELETE_RECHECK_MS,
   );
   const where = and(
-    lt(players.lastSeenAt, cutoff),
+    sql`${players.lastSeenAt} < ${refreshCutoffSql(players.lastBattleAt)}`,
     or(
       isNull(players.softDeletedAt),
       lt(players.softDeletedAt, softDeleteCutoff),
@@ -168,10 +170,8 @@ async function processRegionBatch(
 export async function refreshDuePlayersForRegion(
   region: Region,
 ): Promise<RefreshResult> {
-  const cutoff = new Date(Date.now() - MIN_REFRESH_AGE_MS);
   const { rows, queued } = await collectDuePlayers(
     region,
-    cutoff,
     BATCH_SIZE_PER_REGION,
   );
   if (rows.length === 0) return { processed: 0, succeeded: 0, failed: 0 };
