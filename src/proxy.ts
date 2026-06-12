@@ -13,10 +13,10 @@ export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
 
-  if (pathname === "/") {
+  if (pathname === "/" || pathname === "/coverage") {
     if (stored && isRegion(stored) && stored !== Region.EU) {
       const url = req.nextUrl.clone();
-      url.pathname = `/${stored}`;
+      url.pathname = pathname === "/" ? `/${stored}` : `/${stored}/coverage`;
       return NextResponse.redirect(url);
     }
   }
