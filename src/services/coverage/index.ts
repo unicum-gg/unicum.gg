@@ -314,7 +314,7 @@ async function getCoverageStatsUncached(
               GROUP BY player_id
             )
             SELECT
-              ${activityBucketSql(playersTable.lastBattleAt)} AS bucket,
+              ${activityBucketSql(playersTable.lastBattleAt, playersTable.softDeletedAt)} AS bucket,
               COUNT(*)::text AS total,
               COUNT(*) FILTER (
                 WHERE ls.taken_at IS NOT NULL
@@ -339,11 +339,14 @@ async function getCoverageStatsUncached(
             };
           },
         );
+        const refreshable = (b: RefreshPolicyBucket) =>
+          b.bucket !== ActivityBucket.Unfetched &&
+          b.bucket !== ActivityBucket.Hidden;
         const fetched = breakdown
-          .filter((b) => b.bucket !== ActivityBucket.Unfetched)
+          .filter(refreshable)
           .reduce((sum, b) => sum + b.total, 0);
         const onTime = breakdown
-          .filter((b) => b.bucket !== ActivityBucket.Unfetched)
+          .filter(refreshable)
           .reduce((sum, b) => sum + b.onTime, 0);
         const awaitingFirstSnapshot =
           breakdown.find((b) => b.bucket === ActivityBucket.Unfetched)?.total ??

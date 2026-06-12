@@ -1,17 +1,23 @@
 import { type AnyColumn, type SQL, sql } from "drizzle-orm";
 
 /**
- * Activity buckets keyed on `players.last_battle_at`. Used by the snapshot
- * cron (to decide who is due) and by /coverage (to report on-time rates).
+ * Activity buckets keyed on `players.last_battle_at` (and `soft_deleted_at`
+ * for the Hidden case). Used by the snapshot cron (to decide who is due)
+ * and by /coverage (to report on-time rates).
  *
  * `Unfetched` is special: `last_battle_at IS NULL` means we know the
- * account exists (discovered via clan walk) but never called
- * `/wot/account/info/` to populate its stats. These are real players with
- * real history (sampled 100 random EU, 99 had battles, 80 had 1000+).
- * They get top priority — see `refreshCutoffSql` and the cron ORDER BY.
+ * account exists (discovered via clan walk) but never successfully fetched.
+ * These are real players with real history (sampled 100 random EU, 99 had
+ * battles, 80 had 1000+) and get top priority.
+ *
+ * `Hidden` is the dead-end: `last_battle_at IS NULL AND soft_deleted_at IS
+ * NOT NULL`. WG returned null on 3 consecutive fetches so we flagged it
+ * (anonymized accounts, GDPR-purged, restricted, etc.). Excluded from the
+ * cron for 30 days, then re-tried once in case the account came back.
  */
 export enum ActivityBucket {
   Unfetched = "unfetched",
+  Hidden = "hidden",
   Active24h = "active_24h",
   Active7d = "active_7d",
   Recent30d = "recent_30d",
@@ -22,6 +28,7 @@ export enum ActivityBucket {
 
 export const ACTIVITY_BUCKET_ORDER: readonly ActivityBucket[] = [
   ActivityBucket.Unfetched,
+  ActivityBucket.Hidden,
   ActivityBucket.Active24h,
   ActivityBucket.Active7d,
   ActivityBucket.Recent30d,
@@ -32,6 +39,7 @@ export const ACTIVITY_BUCKET_ORDER: readonly ActivityBucket[] = [
 
 export const ACTIVITY_BUCKET_LABEL: Record<ActivityBucket, string> = {
   [ActivityBucket.Unfetched]: "Awaiting first snapshot",
+  [ActivityBucket.Hidden]: "Hidden by Wargaming",
   [ActivityBucket.Active24h]: "Active < 24h",
   [ActivityBucket.Active7d]: "Active < 7d",
   [ActivityBucket.Recent30d]: "Recent < 30d",
@@ -52,6 +60,7 @@ const DAY_MS = 24 * HOUR_MS;
  */
 export const REFRESH_CADENCE_MS: Record<ActivityBucket, number> = {
   [ActivityBucket.Unfetched]: 0,
+  [ActivityBucket.Hidden]: 30 * DAY_MS,
   [ActivityBucket.Active24h]: 6 * HOUR_MS,
   [ActivityBucket.Active7d]: 24 * HOUR_MS,
   [ActivityBucket.Recent30d]: 3 * DAY_MS,
@@ -90,11 +99,17 @@ export function refreshCutoffSql(lastBattle: AnyColumn): SQL {
 }
 
 /**
- * SQL CASE that resolves to the `ActivityBucket` string for the given
- * last-battle column. Use to GROUP BY bucket in reporting queries.
+ * SQL CASE that resolves to the `ActivityBucket` string for a player row.
+ * Use to GROUP BY bucket in reporting queries. Hidden test runs before
+ * Unfetched so soft-deleted ghosts get pulled out cleanly instead of
+ * piling up in the "Awaiting first snapshot" stat forever.
  */
-export function activityBucketSql(lastBattle: AnyColumn): SQL {
+export function activityBucketSql(
+  lastBattle: AnyColumn,
+  softDeleted: AnyColumn,
+): SQL {
   return sql`CASE
+    WHEN ${lastBattle} IS NULL AND ${softDeleted} IS NOT NULL THEN ${ActivityBucket.Hidden}
     WHEN ${lastBattle} IS NULL THEN ${ActivityBucket.Unfetched}
     WHEN ${lastBattle} > NOW() - INTERVAL '24 hours' THEN ${ActivityBucket.Active24h}
     WHEN ${lastBattle} > NOW() - INTERVAL '7 days' THEN ${ActivityBucket.Active7d}
