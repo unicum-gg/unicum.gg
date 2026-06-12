@@ -7,7 +7,10 @@ import {
 } from "@/services/sitemap";
 import { REGIONS } from "@/services/wargaming/wot";
 
-export const dynamic = "force-dynamic";
+// Static-first, stale-while-revalidate on a 1h window. The pre-built XML
+// serves every hit instantly; the first hit after 1h triggers a background
+// rebuild so the next hit gets fresher counts. The rebuild is cheap (three
+// COUNT(*) queries) but daily-ish freshness is plenty for a sitemap.
 export const revalidate = 3600;
 
 export async function GET() {
