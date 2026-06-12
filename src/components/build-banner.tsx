@@ -2,11 +2,14 @@ import { Construction } from "lucide-react";
 import APP from "@/constants/app";
 
 /**
- * Date when 30-day delta data becomes complete across all regions. Snapshot
- * collection started 2026-05-29, plus 30 days. Once we cross this, the banner
- * hides itself and the file can be deleted at leisure.
+ * Date when 30-day delta data becomes complete across all regions. Pushed
+ * from late June to late July: EU has a ~669k unfetched backlog (real
+ * players discovered via clan walks, still awaiting first snapshot), and
+ * draining it at the current ~60k/day first-snap rate plus 30 days of
+ * history land us around end of July. Once we cross this, the banner hides
+ * itself and the file can be deleted at leisure.
  */
-const DATA_COMPLETE_AT = new Date("2026-06-28T00:00:00Z");
+const DATA_COMPLETE_AT = new Date("2026-07-31T00:00:00Z");
 const MS_PER_DAY = 24 * 60 * 60 * 1000;
 
 export function BuildBanner() {
@@ -23,7 +26,7 @@ export function BuildBanner() {
           <p className="flex-1 truncate text-center text-fd-foreground">
             <span className="font-medium">{APP.NAME}</span> is building &middot;{" "}
             <span className="text-fd-muted-foreground">
-              full 30-day data on June 28
+              full 30-day data by end of July
             </span>
           </p>
           <span className="inline-flex shrink-0 items-center gap-1.5 font-mono tabular-nums text-fd-muted-foreground">
