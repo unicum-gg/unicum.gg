@@ -194,13 +194,15 @@ async function getCoverageStatsUncached(
       .execute<{ count: string }>(
         // Overdue per the adaptive refresh policy (see refresh-policy.ts):
         // a player is "overdue" when last_seen_at is older than the cadence
-        // for their `last_battle_at` bucket. Unfetched accounts are always
-        // overdue (cutoff returns a future date) so this number includes
-        // both the discovery backlog and the fetched-but-stale backlog.
-        // Mirrors the snapshot cron's eligibility filter exactly.
+        // for their `last_battle_at` bucket AND they aren't currently inside
+        // the 30-day soft-delete recheck window. Mirrors the snapshot cron's
+        // WHERE filter exactly so the number on /coverage matches the queue
+        // the cron actually drains.
         sql`SELECT COUNT(*)::text AS count
             FROM ${playersTable}
-            WHERE ${playersTable.lastSeenAt} < ${refreshCutoffSql(playersTable.lastBattleAt)}`,
+            WHERE ${playersTable.lastSeenAt} < ${refreshCutoffSql(playersTable.lastBattleAt)}
+              AND (${playersTable.softDeletedAt} IS NULL
+                   OR ${playersTable.softDeletedAt} < NOW() - INTERVAL '30 days')`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
     db
