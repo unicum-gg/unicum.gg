@@ -1,4 +1,4 @@
-import { asc, count, eq, lt, sql } from "drizzle-orm";
+import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
 import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { type Player, playersByRegion } from "@/services/db/schema";
@@ -17,6 +17,9 @@ import { recordCurrentSnapshot } from ".";
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 400;
 const MIN_REFRESH_AGE_MS = 24 * 60 * 60 * 1000;
+// Soft-delete tunables — see schema/players.ts for the rationale.
+const NULL_THRESHOLD = 3;
+const SOFT_DELETE_RECHECK_MS = 30 * 24 * 60 * 60 * 1000;
 
 /**
  * Schedules one independent cron per region instead of a single cron that
@@ -58,7 +61,20 @@ async function collectDuePlayers(
   // battle wins so active players stay refreshed. lastSeenAt ASC breaks
   // ties so we rotate through.
   const players = playersByRegion[region];
-  const where = lt(players.lastSeenAt, cutoff);
+  // Skip players that WG has been returning null for if we already marked
+  // them soft-deleted within the past 30 days. After the recheck window the
+  // OR branch lets them back in; if WG keeps returning null we re-stamp
+  // softDeletedAt and they go back to sleep.
+  const softDeleteCutoff = new Date(
+    Date.now() - SOFT_DELETE_RECHECK_MS,
+  );
+  const where = and(
+    lt(players.lastSeenAt, cutoff),
+    or(
+      isNull(players.softDeletedAt),
+      lt(players.softDeletedAt, softDeleteCutoff),
+    ),
+  );
   const [rows, [{ queued }]] = await Promise.all([
     db
       .select()
@@ -102,10 +118,20 @@ async function processRegionBatch(
   for (const player of rows) {
     const info = infosByAccount.get(player.accountId);
     if (!info) {
+      // WG returned null. Bump the null counter; if we cross the threshold,
+      // stamp `softDeletedAt` so we stop hammering this account for 30 days.
+      // The threshold guards against transient null responses on otherwise
+      // active accounts (observed empirically).
       failed += 1;
+      const nextCount = (player.nullCount ?? 0) + 1;
       await db
         .update(players)
-        .set({ lastSeenAt: sql`NOW()` })
+        .set({
+          lastSeenAt: sql`NOW()`,
+          nullCount: nextCount,
+          softDeletedAt:
+            nextCount >= NULL_THRESHOLD ? sql`NOW()` : players.softDeletedAt,
+        })
         .where(eq(players.id, player.id));
       continue;
     }
@@ -114,6 +140,15 @@ async function processRegionBatch(
       const tanks = tanksByAccount.get(player.accountId) ?? [];
       await recordCurrentSnapshot(region, info, wtr, tanks);
       succeeded += 1;
+      // Successful fetch wipes the soft-delete state. Necessary so a
+      // previously-flagged account that came back can rejoin the rotation
+      // without waiting another full recheck window.
+      if ((player.nullCount ?? 0) > 0 || player.softDeletedAt) {
+        await db
+          .update(players)
+          .set({ nullCount: 0, softDeletedAt: null })
+          .where(eq(players.id, player.id));
+      }
     } catch (err) {
       failed += 1;
       console.error(

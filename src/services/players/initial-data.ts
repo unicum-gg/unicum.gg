@@ -35,6 +35,8 @@ type RawPlayer = {
   wnx_30d: number | null;
   battles: number | null;
   battles_30d: number | null;
+  null_count: number;
+  soft_deleted_at: string | null;
 };
 
 type RawPlayerSnapshot = {
@@ -119,6 +121,8 @@ function playerFromRaw(r: RawPlayer): Player {
     wnx30d: r.wnx_30d,
     battles: r.battles,
     battles30d: r.battles_30d,
+    nullCount: r.null_count,
+    softDeletedAt: r.soft_deleted_at ? new Date(r.soft_deleted_at) : null,
   };
 }
 

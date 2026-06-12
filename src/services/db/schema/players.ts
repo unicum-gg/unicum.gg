@@ -51,6 +51,16 @@ export function makePlayersTable(region: string) {
       // the whole player_snapshots table.
       battles: integer("battles"),
       battles30d: integer("battles_30d"),
+      // Hidden/purged-account guard. WG sometimes returns null for an
+      // account from /wot/account/info/. Causes: (a) GDPR purge for accounts
+      // dormant 10+ years, (b) admin restriction, (c) transient cache miss
+      // for active accounts. We increment `nullCount` on each null and only
+      // mark `softDeletedAt` after 3 consecutive nulls so transient blips
+      // don't take an active player out. Soft-deleted players are excluded
+      // from the snapshot cron for 30 days, then re-tried — a successful
+      // fetch resets both fields to zero/null.
+      nullCount: integer("null_count").notNull().default(0),
+      softDeletedAt: timestamp("soft_deleted_at", { withTimezone: true }),
     },
     (t) => [uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId)],
   );
