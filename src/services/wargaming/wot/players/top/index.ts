@@ -2,6 +2,7 @@ import { and, asc, desc, eq, gte, isNotNull, sql } from "drizzle-orm";
 import { RatingMetric } from "@/constants/rating";
 import { db } from "@/services/db";
 import {
+  playerSnapshotsByRegion,
   playersByRegion,
   tankSnapshotsByRegion,
   topPlayersByRegion,
@@ -31,6 +32,17 @@ export enum TopPlayersPeriod {
 const PERIOD_INTERVAL: Record<TopPlayersPeriod, string | null> = {
   [TopPlayersPeriod.Day]: "24 hours",
   [TopPlayersPeriod.Week]: "7 days",
+  [TopPlayersPeriod.Overall]: null,
+};
+
+// Upper bound for the "earlier" snapshot lookback: 2x the period. Bounds
+// the scan tightly while still leaving room for a snapshot that landed
+// slightly outside the exact window edge. A player without any snapshot
+// in (period, 2*period] before NOW is by definition not active enough to
+// rank, so excluding them is correct.
+const PERIOD_LOOKBACK: Record<TopPlayersPeriod, string | null> = {
+  [TopPlayersPeriod.Day]: "48 hours",
+  [TopPlayersPeriod.Week]: "14 days",
   [TopPlayersPeriod.Overall]: null,
 };
 
@@ -83,62 +95,87 @@ export async function computeTopPlayersAllMetrics(
   }
 
   const players = playersByRegion[region];
+  const playerSnapshots = playerSnapshotsByRegion[region];
   const tankSnapshots = tankSnapshotsByRegion[region];
   const interval = PERIOD_INTERVAL[period];
+  const lookback = PERIOD_LOOKBACK[period];
   const minBattles = MIN_BATTLES[period];
+  if (interval === null || lookback === null) {
+    throw new Error(`top-players: unexpected null interval for ${period}`);
+  }
+  const intervalSql = sql.raw(`INTERVAL '${interval}'`);
+  const lookbackSql = sql.raw(`INTERVAL '${lookback}'`);
 
-  const rows = (await db.execute(
-    interval === null
-      ? sql`
-        SELECT
-          p.account_id, p.nickname, ts.tank_id,
-          ts.battles AS diff_battles,
-          ts.wins AS diff_wins,
-          ts.damage_dealt AS diff_damage,
-          ts.spotted AS diff_spotted,
-          ts.frags AS diff_frags,
-          ts.dropped_capture_points AS diff_dropped_cap,
-          (ts.radio_assisted_damage + ts.track_assisted_damage) AS diff_assist
-        FROM (
-          SELECT DISTINCT ON (player_id, tank_id)
-            player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
-            dropped_capture_points, radio_assisted_damage, track_assisted_damage
-          FROM ${tankSnapshots}
-          ORDER BY player_id, tank_id, taken_at DESC
-        ) ts
-        INNER JOIN ${players} p ON p.id = ts.player_id
-      `
-      : sql`
-        WITH latest AS (
-          SELECT DISTINCT ON (player_id, tank_id)
-            player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
-            dropped_capture_points, radio_assisted_damage, track_assisted_damage
-          FROM ${tankSnapshots}
-          ORDER BY player_id, tank_id, taken_at DESC
-        ),
-        earlier AS (
-          SELECT DISTINCT ON (player_id, tank_id)
-            player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
-            dropped_capture_points, radio_assisted_damage, track_assisted_damage
-          FROM ${tankSnapshots}
-          WHERE taken_at <= NOW() - ${sql.raw(`INTERVAL '${interval}'`)}
-          ORDER BY player_id, tank_id, taken_at DESC
-        )
-        SELECT
-          p.account_id, p.nickname, l.tank_id,
-          (l.battles - e.battles) AS diff_battles,
-          (l.wins - e.wins) AS diff_wins,
-          (l.damage_dealt - e.damage_dealt) AS diff_damage,
-          (l.spotted - e.spotted) AS diff_spotted,
-          (l.frags - e.frags) AS diff_frags,
-          (l.dropped_capture_points - e.dropped_capture_points) AS diff_dropped_cap,
-          ((l.radio_assisted_damage - e.radio_assisted_damage) + (l.track_assisted_damage - e.track_assisted_damage)) AS diff_assist
-        FROM latest l
-        INNER JOIN earlier e USING (player_id, tank_id)
-        INNER JOIN ${players} p ON p.id = l.player_id
-        WHERE l.battles > e.battles
-      `,
-  )) as unknown as DiffRow[];
+  // Two-stage strategy: filter to active player IDs via the small
+  // player_snapshots table (171 MB on EU vs 22 GB on tank_snapshots —
+  // ~150x smaller), then run the per-tank diff query restricted to
+  // those IDs so the planner uses the (player_id, taken_at) index for
+  // narrow lookups. The previous single-stage query did a DISTINCT ON
+  // over the full tank_snapshots and ran out of temp space (SQLSTATE
+  // 53100) on EU. Inlining both stages into one CTE chain also fails
+  // here: the planner doesn't push the active-player filter past the
+  // DISTINCT ON sort, so it still scans the whole window.
+  const activeRows = (await db.execute(sql`
+    SELECT lp.player_id
+    FROM (
+      SELECT DISTINCT ON (player_id) player_id, battles
+      FROM ${playerSnapshots}
+      WHERE taken_at > NOW() - ${intervalSql}
+      ORDER BY player_id, taken_at DESC
+    ) lp
+    INNER JOIN (
+      SELECT DISTINCT ON (player_id) player_id, battles
+      FROM ${playerSnapshots}
+      WHERE taken_at <= NOW() - ${intervalSql}
+        AND taken_at > NOW() - ${lookbackSql}
+      ORDER BY player_id, taken_at DESC
+    ) ep USING (player_id)
+    WHERE lp.battles - ep.battles >= ${minBattles}
+  `)) as unknown as Array<{ player_id: number | string }>;
+  const activeIds = activeRows.map((r) => Number(r.player_id));
+  if (activeIds.length === 0) {
+    return {
+      [RatingMetric.Wn7]: [],
+      [RatingMetric.Wn8]: [],
+      [RatingMetric.Wnx]: [],
+    };
+  }
+  const activeIdsSql = sql.raw(`ARRAY[${activeIds.join(",")}]::int[]`);
+
+  const rows = (await db.execute(sql`
+    WITH latest AS (
+      SELECT DISTINCT ON (player_id, tank_id)
+        player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
+        dropped_capture_points, radio_assisted_damage, track_assisted_damage
+      FROM ${tankSnapshots}
+      WHERE player_id = ANY(${activeIdsSql})
+        AND taken_at > NOW() - ${intervalSql}
+      ORDER BY player_id, tank_id, taken_at DESC
+    ),
+    earlier AS (
+      SELECT DISTINCT ON (player_id, tank_id)
+        player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
+        dropped_capture_points, radio_assisted_damage, track_assisted_damage
+      FROM ${tankSnapshots}
+      WHERE player_id = ANY(${activeIdsSql})
+        AND taken_at <= NOW() - ${intervalSql}
+        AND taken_at > NOW() - ${lookbackSql}
+      ORDER BY player_id, tank_id, taken_at DESC
+    )
+    SELECT
+      p.account_id, p.nickname, l.tank_id,
+      (l.battles - e.battles) AS diff_battles,
+      (l.wins - e.wins) AS diff_wins,
+      (l.damage_dealt - e.damage_dealt) AS diff_damage,
+      (l.spotted - e.spotted) AS diff_spotted,
+      (l.frags - e.frags) AS diff_frags,
+      (l.dropped_capture_points - e.dropped_capture_points) AS diff_dropped_cap,
+      ((l.radio_assisted_damage - e.radio_assisted_damage) + (l.track_assisted_damage - e.track_assisted_damage)) AS diff_assist
+    FROM latest l
+    INNER JOIN earlier e USING (player_id, tank_id)
+    INNER JOIN ${players} p ON p.id = l.player_id
+    WHERE l.battles > e.battles
+  `)) as unknown as DiffRow[];
 
   type Agg = {
     account_id: number;
