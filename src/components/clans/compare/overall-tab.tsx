@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import { LanguageFlags } from "@/components/language-flags";
+import type { Region } from "@/services/wargaming/wot";
 import { weightedAverage, type WeightedDataPoint } from "@/lib/stats";
 import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import {
@@ -59,7 +60,13 @@ function ageInDays(date: Date | null | undefined): number | null {
   return Math.max(0, Math.floor(ms / (24 * 60 * 60 * 1000)));
 }
 
-export function OverallTab({ slots }: { slots: ClanCompareSlot[] }) {
+export function OverallTab({
+  region,
+  slots,
+}: {
+  region: Region;
+  slots: ClanCompareSlot[];
+}) {
   const { rows, headerWinners } = useMemo(() => {
     function buildRow<T>(
       label: string,
@@ -190,6 +197,7 @@ export function OverallTab({ slots }: { slots: ClanCompareSlot[] }) {
                 languages={langs}
                 size="s"
                 source="declared"
+                region={region}
               />
             </span>
           ),

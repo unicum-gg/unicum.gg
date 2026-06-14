@@ -256,6 +256,7 @@ function InfoRow({
             languages={clan.languages}
             size="l"
             source="declared"
+            region={region}
           />
         </div>
       )}

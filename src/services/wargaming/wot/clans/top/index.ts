@@ -29,7 +29,10 @@ type RankedClan = {
   avg_wnx: number;
 };
 
-const VALID_METRIC_COLUMNS: Record<string, string> = {
+// Allowlist for the metric->column mapping used by the leaderboard SQL.
+// Exported so the by-language variant can validate against the same set
+// without drifting.
+export const VALID_METRIC_COLUMNS: Record<string, string> = {
   wn7: "wn7",
   wn8: "wn8",
   wnx: "wnx",

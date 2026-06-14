@@ -13,10 +13,16 @@ export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
 
-  if (pathname === "/" || pathname === "/coverage") {
+  if (
+    pathname === "/" ||
+    pathname === "/coverage" ||
+    pathname === "/clans" ||
+    pathname.startsWith("/clans/")
+  ) {
     if (stored && isRegion(stored) && stored !== Region.EU) {
       const url = req.nextUrl.clone();
-      url.pathname = pathname === "/" ? `/${stored}` : `/${stored}/coverage`;
+      if (pathname === "/") url.pathname = `/${stored}`;
+      else url.pathname = `/${stored}${pathname}`;
       return NextResponse.redirect(url);
     }
   }

@@ -34,6 +34,12 @@ const ROUTES = {
       first,
       rest: rest.map(encodeURIComponent).join("/"),
     }),
+  CLANS: (region: Region) =>
+    region === Region.EU ? "/clans" : pathcat("/:region/clans", { region }),
+  CLANS_BY_LANGUAGE: (region: Region, language: string) =>
+    region === Region.EU
+      ? pathcat("/clans/lang/:language", { language })
+      : pathcat("/:region/clans/lang/:language", { region, language }),
 };
 
 export default ROUTES;

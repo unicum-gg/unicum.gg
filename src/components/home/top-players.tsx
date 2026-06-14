@@ -83,10 +83,10 @@ export function TopPlayers({
         </div>
       ) : (
         <div className="mt-auto">
-          <Table className="mb-px! [&_td]:min-w-0 [&_tr]:h-11">
+          <Table className="mb-px! table-fixed [&_td]:min-w-0 [&_tr]:h-11">
             <TableHeader>
               <TableRow>
-                <TableHead className="w-[1%] whitespace-nowrap px-4! text-center!">
+                <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
                   #
                 </TableHead>
                 <TableHead>Player</TableHead>
@@ -127,9 +127,9 @@ function PlayerRow({
   const colorClass = COLOR_FOR_METRIC[metric](player.wnx);
   return (
     <TableRow>
-      <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">
+      <TableCell className="px-2! text-center font-mono tabular-nums text-muted-foreground">
         {rank === 1 || rank === 2 || rank === 3 ? (
-          <RankMedal rank={rank} />
+          <RankMedal rank={rank} className="mx-auto" />
         ) : (
           rank
         )}

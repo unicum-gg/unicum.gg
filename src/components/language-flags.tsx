@@ -1,13 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ROUTES from "@/constants/routes";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { cn } from "@/lib/utils";
+import type { Region } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
 
@@ -29,26 +32,43 @@ function displayName(code: string): string {
  */
 type LanguageSource = "declared" | "inferred";
 
-function tooltipFor(code: string, source: LanguageSource): string {
+function tooltipFor(
+  code: string,
+  source: LanguageSource,
+  clickable: boolean,
+): string {
   const name = displayName(code);
-  if (source === "declared") {
-    return `${name}. Picked by the clan.`;
-  }
-  return `${name}. Our guess from this player's clan history. The longer they stay in a clan, the more its languages count.`;
+  const origin =
+    source === "declared"
+      ? `${name}. Picked by the clan.`
+      : `${name}. Our guess from this player's clan history. The longer they stay in a clan, the more its languages count.`;
+  return clickable ? `${origin} Click to see top ${name} clans.` : origin;
 }
 
+/**
+ * `region` drives both the flag picking (`en` on NA → US instead of UK)
+ * and the destination of each flag's link (region-scoped clans leaderboard).
+ * Set `link={false}` when this is rendered inside an outer `<a>` (the
+ * top-clans list, for instance) to keep the region-aware flags but skip
+ * the nested anchor.
+ */
 export function LanguageFlags({
   languages,
   className,
   size = "s",
   source,
+  region,
+  link = true,
 }: {
   languages: string[];
   className?: string;
   size?: "s" | "m" | "l";
   source: LanguageSource;
+  region?: Region;
+  link?: boolean;
 }) {
   if (languages.length === 0) return null;
+  const clickable = link && region != null;
   return (
     <TooltipProvider delayDuration={100}>
       <span
@@ -58,31 +78,34 @@ export function LanguageFlags({
         )}
       >
         {languages.map((lang) => {
-          const code = languageToCountryCode(lang);
-          const tip = tooltipFor(lang, source);
-          if (!code) {
-            return (
-              <Tooltip key={lang}>
-                <TooltipTrigger asChild>
-                  <span className="text-xs font-medium uppercase">{lang}</span>
-                </TooltipTrigger>
-                <TooltipContent>
-                  <p className="max-w-xs">{tip}</p>
-                </TooltipContent>
-              </Tooltip>
+          const code = languageToCountryCode(lang, region);
+          const tip = tooltipFor(lang, source, clickable);
+          const visual = code ? (
+            <img
+              src={`/flags/${size}/${code}.svg`}
+              alt={lang}
+              width={FLAG_DIMENSIONS[size].width}
+              height={FLAG_DIMENSIONS[size].height}
+              className="h-full w-auto"
+            />
+          ) : (
+            <span className="text-xs font-medium uppercase">{lang}</span>
+          );
+          const trigger =
+            clickable && region ? (
+              <Link
+                href={ROUTES.CLANS_BY_LANGUAGE(region, lang)}
+                className="inline-flex h-full items-center transition-opacity hover:opacity-80"
+                aria-label={`Top ${displayName(lang)} clans`}
+              >
+                {visual}
+              </Link>
+            ) : (
+              visual
             );
-          }
           return (
             <Tooltip key={lang}>
-              <TooltipTrigger asChild>
-                <img
-                  src={`/flags/${size}/${code}.svg`}
-                  alt={lang}
-                  width={FLAG_DIMENSIONS[size].width}
-                  height={FLAG_DIMENSIONS[size].height}
-                  className="h-full w-auto"
-                />
-              </TooltipTrigger>
+              <TooltipTrigger asChild>{trigger}</TooltipTrigger>
               <TooltipContent>
                 <p className="max-w-xs">{tip}</p>
               </TooltipContent>

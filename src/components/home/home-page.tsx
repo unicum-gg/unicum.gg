@@ -12,6 +12,7 @@ import {
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
 import { TopClans } from "@/components/home/top-clans";
+import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
 import { TopPlayers } from "@/components/home/top-players";
 import { HeroVideo } from "@/components/home/hero-video";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
@@ -153,8 +154,9 @@ export async function HomePage({
 
       <div className="grid lg:grid-cols-2 *:min-w-0">
         <Panel className="flex flex-col">
-          <PanelHeader>
+          <PanelHeader className="flex items-center justify-between gap-3">
             <PanelTitle>Top clans</PanelTitle>
+            <TopClansLeaderboardLink regionOverride={regionOverride} />
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopClans initial={topClans} regionOverride={regionOverride} />

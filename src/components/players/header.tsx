@@ -70,6 +70,7 @@ export function PlayerHeader({
                 languages={inferredLanguages}
                 size="l"
                 source="inferred"
+                region={region}
               />
             </div>
           )}

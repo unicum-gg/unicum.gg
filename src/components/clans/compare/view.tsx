@@ -148,7 +148,9 @@ export function ClanCompareView({
           </nav>
         </PanelHeader>
         <PanelContent className="p-0">
-          {tab === CompareTab.Overall && <OverallTab slots={slots} />}
+          {tab === CompareTab.Overall && (
+            <OverallTab region={region} slots={slots} />
+          )}
           {tab === CompareTab.TopMembers && (
             <TopMembersTab region={region} slots={slots} />
           )}

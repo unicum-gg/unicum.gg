@@ -133,9 +133,9 @@ function ClanRow({
   const colorClass = COLOR_FOR_METRIC[metric](clan.avg_wnx);
   return (
     <TableRow>
-      <TableCell className="px-4! text-center font-mono tabular-nums text-muted-foreground">
+      <TableCell className="px-2! text-center font-mono tabular-nums text-muted-foreground">
         {rank === 1 || rank === 2 || rank === 3 ? (
-          <RankMedal rank={rank} />
+          <RankMedal rank={rank} className="mx-auto" />
         ) : (
           rank
         )}
