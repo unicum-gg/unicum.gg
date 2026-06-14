@@ -51,3 +51,46 @@ export function getAvailableLanguages(
 ): Promise<AvailableLanguage[]> {
   return getAvailableLanguagesCached(region);
 }
+
+export type LanguageFilterCounts = {
+  total: number;
+  strict: number;
+};
+
+async function getLanguageFilterCountsUncached(
+  region: Region,
+  language: string,
+): Promise<LanguageFilterCounts> {
+  const clans = clansByRegion[region];
+  const rows = (await db.execute(sql`
+    SELECT
+      COUNT(*) FILTER (WHERE ${language} = ANY(languages))::int AS total,
+      COUNT(*) FILTER (WHERE languages = ARRAY[${language}]::text[])::int
+        AS strict
+    FROM ${clans}
+    WHERE members_count >= ${MIN_MEMBERS} AND is_disbanded = false
+  `)) as unknown as Array<{ total: number; strict: number }>;
+  return {
+    total: rows[0]?.total ?? 0,
+    strict: rows[0]?.strict ?? 0,
+  };
+}
+
+const getLanguageFilterCountsCached = unstable_cache(
+  getLanguageFilterCountsUncached,
+  ["language-filter-counts"],
+  { revalidate: 3600, tags: ["top-clans"] },
+);
+
+/**
+ * Pair of counts for the "Any / Strict" toggle at a given language: how
+ * many large clans declare this language (alongside others), and how many
+ * declare ONLY this language. Same 25-member floor as the chips so the
+ * numbers line up.
+ */
+export function getLanguageFilterCounts(
+  region: Region,
+  language: string,
+): Promise<LanguageFilterCounts> {
+  return getLanguageFilterCountsCached(region, language);
+}

@@ -34,6 +34,7 @@ async function getTopClansByLanguageUncached(
   metric: string,
   language: string | null,
   limit: number,
+  strict: boolean,
 ): Promise<TopClanByLanguageResult[]> {
   const col = VALID_METRIC_COLUMNS[metric];
   if (!col) throw new Error(`top-clans by-language: unknown metric ${metric}`);
@@ -44,8 +45,12 @@ async function getTopClansByLanguageUncached(
   // Battle-weighted average to match the in-app computeMetrics in
   // components/clans/header. Language filter applied at the clan-join stage
   // so we don't waste compute averaging across clans we'll discard.
+  // Strict mode: clan declared ONLY this language (`languages = ['de']`),
+  // not `['de', 'en']`. Falls back to ANY when no language filter is set.
   const langClause = language
-    ? sql`AND ${language} = ANY(c.languages)`
+    ? strict
+      ? sql`AND c.languages = ARRAY[${language}]::text[]`
+      : sql`AND ${language} = ANY(c.languages)`
     : sql``;
   const minMembers = language ? MIN_MEMBERS_BY_LANGUAGE : MIN_MEMBERS_GLOBAL;
   const rows = (await db.execute(sql`
@@ -127,13 +132,15 @@ const getTopClansByLanguageCached = unstable_cache(
 /**
  * Region-scoped top clans, optionally filtered by language code. 10-minute
  * cache: the underlying DISTINCT ON over the snapshots table is heavy and
- * a leaderboard tolerates that staleness.
+ * a leaderboard tolerates that staleness. `strict` requires the clan to
+ * declare ONLY that single language; ignored when `language` is null.
  */
 export function getTopClansByLanguage(
   region: Region,
   metric: string,
   language: string | null,
   limit: number,
+  strict: boolean = false,
 ): Promise<TopClanByLanguageResult[]> {
-  return getTopClansByLanguageCached(region, metric, language, limit);
+  return getTopClansByLanguageCached(region, metric, language, limit, strict);
 }

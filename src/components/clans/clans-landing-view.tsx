@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { LanguageChips } from "@/components/clans/language-chips";
+import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
 import { TopClansList } from "@/components/clans/top-clans-list";
 import {
   Panel,
@@ -14,7 +15,10 @@ import {
 } from "@/constants/rating";
 import STORAGE from "@/constants/storage";
 import { languageToCountryCode } from "@/lib/language-flags";
-import { getAvailableLanguages } from "@/services/clans/available-languages";
+import {
+  getAvailableLanguages,
+  getLanguageFilterCounts,
+} from "@/services/clans/available-languages";
 import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";
 import {
   Region,
@@ -32,22 +36,27 @@ function languageDisplayName(code: string): string {
 /**
  * Shared body for both /clans (EU default) and /<region>/clans pages. Pass
  * `language: null` for the unfiltered landing and the language code for
- * /clans/lang/<language>.
+ * /clans/lang/<language>. `strict` is only meaningful when a language is
+ * set: it restricts the leaderboard to clans that declared ONLY that
+ * language (no `de + en` mixed declarations).
  */
 export async function ClansLandingView({
   region,
   language,
+  strict = false,
 }: {
   region: Region;
   language: string | null;
+  strict?: boolean;
 }) {
   const cookieStore = await cookies();
   const metric = ratingMetricFromCookie(
     cookieStore.get(STORAGE.COOKIES.RATING)?.value,
   );
-  const [results, available] = await Promise.all([
-    getTopClansByLanguage(region, metric, language, LIMIT),
+  const [results, available, filterCounts] = await Promise.all([
+    getTopClansByLanguage(region, metric, language, LIMIT, strict),
     getAvailableLanguages(region),
+    language ? getLanguageFilterCounts(region, language) : null,
   ]);
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
@@ -87,12 +96,21 @@ export async function ClansLandingView({
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {language ? (
-              <>
-                {REGION_LABEL[region]} clans that declared {langName} as one
-                of their languages, ranked by{" "}
-                {RATING_METRIC_LABEL[metric]} averaged across their tracked
-                members (minimum 25 members).
-              </>
+              strict ? (
+                <>
+                  {REGION_LABEL[region]} clans that declared {langName} as
+                  their only language, ranked by{" "}
+                  {RATING_METRIC_LABEL[metric]} averaged across their tracked
+                  members (minimum 25 members).
+                </>
+              ) : (
+                <>
+                  {REGION_LABEL[region]} clans that declared {langName} as one
+                  of their languages, ranked by{" "}
+                  {RATING_METRIC_LABEL[metric]} averaged across their tracked
+                  members (minimum 25 members).
+                </>
+              )
             ) : (
               <>
                 {REGION_LABEL[region]} leaderboard, ranked by{" "}
@@ -122,20 +140,26 @@ export async function ClansLandingView({
       <PanelSeparator />
 
       <Panel>
-        <PanelHeader>
+        <PanelHeader className="flex items-center justify-between gap-3">
           <PanelTitle>
             {language
-              ? `Top ${results.length} ${langName} clans`
+              ? strict
+                ? `Top ${results.length} strictly ${langName} clans`
+                : `Top ${results.length} ${langName} clans`
               : `Top ${results.length} clans`}
           </PanelTitle>
+          {language && filterCounts && (
+            <StrictModeToggle
+              region={region}
+              language={language}
+              strict={strict}
+              total={filterCounts.total}
+              strictCount={filterCounts.strict}
+            />
+          )}
         </PanelHeader>
         <PanelContent className="p-0">
-          <TopClansList
-            region={region}
-            results={results}
-            metric={metric}
-            activeLanguage={language}
-          />
+          <TopClansList region={region} results={results} metric={metric} />
         </PanelContent>
       </Panel>
     </div>

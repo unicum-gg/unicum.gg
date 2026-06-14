@@ -14,30 +14,43 @@ function languageDisplayName(code: string): string {
 
 export async function generateMetadata({
   params,
+  searchParams,
 }: {
   params: Promise<{ language: string }>;
+  searchParams: Promise<{ strict?: string }>;
 }): Promise<Metadata> {
-  const { language } = await params;
+  const [{ language }, { strict }] = await Promise.all([params, searchParams]);
   const name = languageDisplayName(language);
   const label = REGION_LABEL[Region.EU];
+  const isStrict = strict === "1";
   return constructMetadata({
-    title: `Top ${name} World of Tanks clans (${label})`,
-    description: `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as one of their languages, ranked by WNX.`,
-    ogTitle: `Top ${name} clans`,
+    title: isStrict
+      ? `Strictly ${name} World of Tanks clans (${label})`
+      : `Top ${name} World of Tanks clans (${label})`,
+    description: isStrict
+      ? `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as their only language, ranked by WNX.`
+      : `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as one of their languages, ranked by WNX.`,
+    ogTitle: isStrict ? `Strictly ${name} clans` : `Top ${name} clans`,
     ogSubtitle: `${label} leaderboard`,
   });
 }
 
 export default async function Page({
   params,
+  searchParams,
 }: {
   params: Promise<{ language: string }>;
+  searchParams: Promise<{ strict?: string }>;
 }) {
-  const { language } = await params;
+  const [{ language }, { strict }] = await Promise.all([params, searchParams]);
   const available = await getAvailableLanguages(Region.EU);
   if (!available.some((l) => l.code === language)) notFound();
   return (
-    <ClansLandingView region={Region.EU} language={language} />
+    <ClansLandingView
+      region={Region.EU}
+      language={language}
+      strict={strict === "1"}
+    />
   );
 }
 

@@ -34,12 +34,10 @@ export function TopClansList({
   region,
   results,
   metric,
-  activeLanguage,
 }: {
   region: Region;
   results: TopClanByLanguageResult[];
   metric: RatingMetric;
-  activeLanguage: string | null;
 }) {
   if (results.length === 0) {
     return (
@@ -74,13 +72,6 @@ export function TopClansList({
       <TableBody>
         {results.map((r, i) => {
           const rank = i + 1;
-          // Hide the active language flag on each row because every row
-          // shares it (every result matches the filter). Only show the
-          // "other" languages the clan declared, which is the actually
-          // informative slice.
-          const extraLanguages = activeLanguage
-            ? r.languages.filter((l) => l !== activeLanguage)
-            : r.languages;
           return (
             <TableRow key={r.clan_id}>
               <TableCell className="text-center text-muted-foreground tabular-nums">
@@ -115,10 +106,10 @@ export function TopClansList({
                       </span>{" "}
                       <span className="text-muted-foreground">{r.name}</span>
                     </span>
-                    {extraLanguages.length > 0 && (
+                    {r.languages.length > 0 && (
                       <span className="hidden h-4 shrink-0 sm:inline-flex">
                         <LanguageFlags
-                          languages={extraLanguages}
+                          languages={r.languages}
                           source="declared"
                           size="s"
                           region={region}
