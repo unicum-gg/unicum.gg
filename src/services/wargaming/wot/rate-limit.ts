@@ -84,15 +84,17 @@ class RateLimiter {
 // EU dropped from 5 to 3 after sustained G-Core block (60+ /wot/tanks/stats/
 // timeouts at 30s exact), see the cluster pattern documented in PORTAL_RPS
 // below. EU's threshold sits lower than NA/ASIA in our experience.
-// Stepping all three +1 RPS to probe the new ceiling. Watch logs for the
-// 30s-exact timeout cluster (G-Core WAF signature) and revert if it shows.
+// Daily +1 RPS exploration to find the new ceiling empirically. Watch logs
+// for the 30s-exact timeout cluster (G-Core WAF signature) and revert if it
+// shows. EU 4→5 after 32h at 4 with zero snapshot-cron timeouts. NA stays
+// at 6 (already shows mild WAF signal on player-cron); ASIA stays at 6.
 const WG_RPS: Record<Region, number> = {
-  [Region.EU]: 4,
+  [Region.EU]: 5,
   [Region.NA]: 6,
   [Region.ASIA]: 6,
 };
 const WG_BURST: Record<Region, number> = {
-  [Region.EU]: 4,
+  [Region.EU]: 5,
   [Region.NA]: 6,
   [Region.ASIA]: 6,
 };

@@ -53,7 +53,7 @@ Crons start from `src/instrumentation.ts` on Node runtime boot, with a `globalTh
 
 `src/services/wargaming/wot/fetch.ts` wraps every WG call with a per-region token-bucket rate limiter defined in `src/services/wargaming/wot/rate-limit.ts`. The empirical caps sit well below WG's official 20 RPS because traffic actually hits G-Core CDN IPs (geo-routed DNS), which throttle more aggressively:
 
-- WG API: EU = 4 RPS, NA = 6 RPS, Asia = 6 RPS
+- WG API: EU = 5 RPS, NA = 6 RPS, Asia = 6 RPS
 - Clan portal (newsfeeds): 1 RPS per region
 
 Three application IDs (one per region) live in `env.ts` and are required at boot. They can all be the same string in practice, but the env names are kept separate to make rotation possible.
