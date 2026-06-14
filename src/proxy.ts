@@ -14,10 +14,11 @@ export function proxy(req: NextRequest) {
   const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
 
   if (
-    pathname === "/" ||
-    pathname === "/coverage" ||
-    pathname === "/clans" ||
-    pathname.startsWith("/clans/")
+    (pathname === "/" ||
+      pathname === "/coverage" ||
+      pathname === "/clans" ||
+      pathname.startsWith("/clans/")) &&
+    !pathname.endsWith("/sitemap.xml")
   ) {
     if (stored && isRegion(stored) && stored !== Region.EU) {
       const url = req.nextUrl.clone();

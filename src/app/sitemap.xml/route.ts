@@ -14,19 +14,27 @@ import { REGIONS } from "@/services/wargaming/wot";
 export const revalidate = 3600;
 
 export async function GET() {
-  let additionalSitemaps: { pattern: string; count: number }[] = [];
+  const additionalSitemaps: (string | { pattern: string; count: number })[] = [
+    // Languages live in a single non-paginated sub-sitemap: total entry
+    // count is small (one URL per declared language per region) and
+    // depends on `getAvailableLanguages` at request time so the list
+    // tracks reality instead of a hardcoded constant.
+    "/clans/lang/sitemap.xml",
+  ];
   try {
     const counts = await getSitemapCounts();
-    additionalSitemaps = REGIONS.flatMap((region) => [
-      {
-        pattern: `/${region}/clans/sitemap-{id}.xml`,
-        count: getSitemapCount(counts[region].clans, URLS_PER_SITEMAP),
-      },
-      {
-        pattern: `/${region}/players/sitemap-{id}.xml`,
-        count: getSitemapCount(counts[region].players, URLS_PER_SITEMAP),
-      },
-    ]);
+    additionalSitemaps.push(
+      ...REGIONS.flatMap((region) => [
+        {
+          pattern: `/${region}/clans/sitemap-{id}.xml`,
+          count: getSitemapCount(counts[region].clans, URLS_PER_SITEMAP),
+        },
+        {
+          pattern: `/${region}/players/sitemap-{id}.xml`,
+          count: getSitemapCount(counts[region].players, URLS_PER_SITEMAP),
+        },
+      ]),
+    );
   } catch (err) {
     console.warn("[sitemap] counts failed, falling back to empty:", err);
   }
