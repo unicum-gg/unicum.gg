@@ -70,6 +70,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // Browsers and crawlers default-request `/favicon.ico`, but we serve the
+  // App Router `app/icon.svg` convention so that path is a 404. Permanent
+  // redirect so caches stop asking.
+  async redirects() {
+    return [
+      { source: "/favicon.ico", destination: "/icon.svg", permanent: true },
+    ];
+  },
 };
 
 export default nextConfig;
