@@ -62,7 +62,7 @@ export async function getSitemapCounts(): Promise<RegionCounts> {
 
 export const sitemapConfig: Pick<
   SitemapConfig,
-  "baseUrl" | "exclude"
+  "baseUrl" | "exclude" | "debug"
 > = {
   baseUrl: APP.URL,
   exclude: [
@@ -72,4 +72,5 @@ export const sitemapConfig: Pick<
     "/[region]/clans/[tag]",
     "/[region]/players/[nickname]",
   ],
+  debug: process.env.NODE_ENV !== "production",
 };

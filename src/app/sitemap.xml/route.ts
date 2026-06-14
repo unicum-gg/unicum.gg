@@ -19,11 +19,11 @@ export async function GET() {
     const counts = await getSitemapCounts();
     additionalSitemaps = REGIONS.flatMap((region) => [
       {
-        pattern: `/${region}/clans-sitemap-{id}.xml`,
+        pattern: `/${region}/clans/sitemap-{id}.xml`,
         count: getSitemapCount(counts[region].clans, URLS_PER_SITEMAP),
       },
       {
-        pattern: `/${region}/players-sitemap-{id}.xml`,
+        pattern: `/${region}/players/sitemap-{id}.xml`,
         count: getSitemapCount(counts[region].players, URLS_PER_SITEMAP),
       },
     ]);
