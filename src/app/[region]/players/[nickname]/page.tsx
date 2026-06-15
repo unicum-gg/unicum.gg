@@ -14,11 +14,13 @@ import { PlayerClansHistory } from "@/components/players/clans-history";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerRatingChart } from "@/components/players/rating-chart";
 import { PlayerStatsTable } from "@/components/players/stats-table";
+import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import {
   RATING_METRIC_LABEL,
+  RatingMetric,
   ratingMetricFromCookie,
 } from "@/constants/rating";
 import ROUTES from "@/constants/routes";
@@ -398,7 +400,7 @@ async function buildView(args: {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>Overall stats</PanelTitle>
+          <PanelTitle>{player.nickname}&apos;s overall stats</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           <PlayerStatsTable
@@ -417,7 +419,9 @@ async function buildView(args: {
 
       <Panel>
         <PanelHeader>
-          <PanelTitle>{metricLabel} progression</PanelTitle>
+          <PanelTitle>
+            {player.nickname}&apos;s {metricLabel} progression
+          </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
           {ratingHistory.points.length > 0 ? (
@@ -451,7 +455,36 @@ async function buildView(args: {
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            Vehicles ({intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
+            Tanks shaping {player.nickname}&apos;s rating
+          </PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <TanksLiftDrag
+            region={region}
+            tanks={tanks}
+            encyclopedia={encyclopedia}
+            wn8Expected={wn8Expected}
+            wnxExpected={wnxExpected}
+            metric={metric}
+            metricLabel={metricLabel}
+            overallRating={
+              metric === RatingMetric.Wn7
+                ? player.wn7
+                : metric === RatingMetric.Wn8
+                  ? player.wn8
+                  : player.wnx
+            }
+          />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>
+            {player.nickname}&apos;s vehicles (
+            {intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
@@ -469,6 +502,7 @@ async function buildView(args: {
 
       <PlayerClansHistory
         region={region}
+        nickname={player.nickname}
         accountCreatedAt={createdAt}
         clanHistory={clanHistory}
         nowMs={nowMs}

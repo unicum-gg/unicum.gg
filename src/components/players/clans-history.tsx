@@ -157,11 +157,13 @@ function SortableHead({
 
 export function PlayerClansHistory({
   region,
+  nickname,
   accountCreatedAt,
   clanHistory,
   nowMs,
 }: {
   region: Region;
+  nickname: string;
   accountCreatedAt: Date;
   clanHistory: PlayerClanHistoryFull;
   nowMs: number;
@@ -190,7 +192,7 @@ export function PlayerClansHistory({
     <Panel>
       <PanelHeader>
         <div className="flex items-baseline justify-between gap-4">
-          <PanelTitle>Clans history</PanelTitle>
+          <PanelTitle>{nickname}&apos;s clans history</PanelTitle>
           {stints.length > 0 && (
             <p className="text-xs text-muted-foreground tabular-nums">
               {clanHistory.totalClans} clans ·{" "}
