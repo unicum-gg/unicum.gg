@@ -35,17 +35,6 @@ const PERIOD_INTERVAL: Record<TopPlayersPeriod, string | null> = {
   [TopPlayersPeriod.Overall]: null,
 };
 
-// Upper bound for the "earlier" snapshot lookback: 2x the period. Bounds
-// the scan tightly while still leaving room for a snapshot that landed
-// slightly outside the exact window edge. A player without any snapshot
-// in (period, 2*period] before NOW is by definition not active enough to
-// rank, so excluding them is correct.
-const PERIOD_LOOKBACK: Record<TopPlayersPeriod, string | null> = {
-  [TopPlayersPeriod.Day]: "48 hours",
-  [TopPlayersPeriod.Week]: "14 days",
-  [TopPlayersPeriod.Overall]: null,
-};
-
 const MIN_BATTLES: Record<TopPlayersPeriod, number> = {
   [TopPlayersPeriod.Day]: 20,
   [TopPlayersPeriod.Week]: 140,
@@ -98,13 +87,11 @@ export async function computeTopPlayersAllMetrics(
   const playerSnapshots = playerSnapshotsByRegion[region];
   const tankSnapshots = tankSnapshotsByRegion[region];
   const interval = PERIOD_INTERVAL[period];
-  const lookback = PERIOD_LOOKBACK[period];
   const minBattles = MIN_BATTLES[period];
-  if (interval === null || lookback === null) {
+  if (interval === null) {
     throw new Error(`top-players: unexpected null interval for ${period}`);
   }
   const intervalSql = sql.raw(`INTERVAL '${interval}'`);
-  const lookbackSql = sql.raw(`INTERVAL '${lookback}'`);
 
   // Two-stage strategy: filter to active player IDs via the small
   // player_snapshots table (171 MB on EU vs 22 GB on tank_snapshots —
@@ -115,6 +102,13 @@ export async function computeTopPlayersAllMetrics(
   // 53100) on EU. Inlining both stages into one CTE chain also fails
   // here: the planner doesn't push the active-player filter past the
   // DISTINCT ON sort, so it still scans the whole window.
+  //
+  // `earlier` is unbounded on the past side: we pick the latest snapshot
+  // strictly older than the period. Same logic the player page uses for
+  // its "Last 24h / 7d" deltas — keeps the two views consistent. The
+  // diff may stretch beyond the labelled period for players whose last
+  // baseline snapshot is older than that window, but that's already
+  // baked into the player-page semantics.
   const activeRows = (await db.execute(sql`
     SELECT lp.player_id
     FROM (
@@ -127,7 +121,6 @@ export async function computeTopPlayersAllMetrics(
       SELECT DISTINCT ON (player_id) player_id, battles
       FROM ${playerSnapshots}
       WHERE taken_at <= NOW() - ${intervalSql}
-        AND taken_at > NOW() - ${lookbackSql}
       ORDER BY player_id, taken_at DESC
     ) ep USING (player_id)
     WHERE lp.battles - ep.battles >= ${minBattles}
@@ -159,7 +152,6 @@ export async function computeTopPlayersAllMetrics(
       FROM ${tankSnapshots}
       WHERE player_id = ANY(${activeIdsSql})
         AND taken_at <= NOW() - ${intervalSql}
-        AND taken_at > NOW() - ${lookbackSql}
       ORDER BY player_id, tank_id, taken_at DESC
     )
     SELECT
