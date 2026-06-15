@@ -101,21 +101,21 @@ export async function ClansLandingView({
                   {REGION_LABEL[region]} clans that declared {langName} as
                   their only language, ranked by{" "}
                   {RATING_METRIC_LABEL[metric]} averaged across their tracked
-                  members (minimum 25 members).
+                  members (minimum 25 members with battles).
                 </>
               ) : (
                 <>
                   {REGION_LABEL[region]} clans that declared {langName} as one
                   of their languages, ranked by{" "}
                   {RATING_METRIC_LABEL[metric]} averaged across their tracked
-                  members (minimum 25 members).
+                  members (minimum 25 members with battles).
                 </>
               )
             ) : (
               <>
                 {REGION_LABEL[region]} leaderboard, ranked by{" "}
                 {RATING_METRIC_LABEL[metric]} averaged across the tracked
-                members of each clan (minimum 50 members).
+                members of each clan (minimum 50 members with battles).
               </>
             )}
           </p>

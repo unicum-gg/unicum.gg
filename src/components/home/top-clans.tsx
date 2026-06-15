@@ -75,7 +75,8 @@ export function TopClans({
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
         Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-        more than 50 members, ranked by average <RatingMetricInlineSelect />.
+        more than 50 members with battles, ranked by average{" "}
+        <RatingMetricInlineSelect />.
         {computedAt ? (
           <>
             {" "}
