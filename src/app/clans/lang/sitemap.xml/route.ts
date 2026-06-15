@@ -1,6 +1,6 @@
 import { generateSitemapXml } from "@onruntime/next-sitemap";
 import ROUTES from "@/constants/routes";
-import { getAvailableLanguages } from "@/services/clans/available-languages";
+import { getLanguageStats } from "@/services/clans/available-languages";
 import { createSitemapEntry } from "@/services/sitemap";
 import { REGIONS } from "@/services/wargaming/wot";
 
@@ -9,16 +9,16 @@ export const revalidate = 3600;
 
 /**
  * One-shot sitemap for `/<region>/clans/lang/<code>` URLs. Hits
- * `getAvailableLanguages` per region at request time so the sitemap
- * reflects the actual languages declared in the DB rather than a static
- * constant that would drift. Output is well under the 25k URLs/sitemap
- * limit (max a few hundred entries), no pagination needed.
+ * `getLanguageStats` per region at request time so the sitemap reflects
+ * the actual languages declared in the DB rather than a static constant
+ * that would drift. Output is well under the 25k URLs/sitemap limit
+ * (max a few hundred entries), no pagination needed.
  */
 export async function GET() {
   const perRegion = await Promise.all(
     REGIONS.map(async (region) => ({
       region,
-      languages: await getAvailableLanguages(region),
+      languages: await getLanguageStats(region),
     })),
   );
 

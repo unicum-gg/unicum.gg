@@ -15,10 +15,7 @@ import {
 } from "@/constants/rating";
 import STORAGE from "@/constants/storage";
 import { languageToCountryCode } from "@/lib/language-flags";
-import {
-  getAvailableLanguages,
-  getLanguageFilterCounts,
-} from "@/services/clans/available-languages";
+import { getLanguageStats } from "@/services/clans/available-languages";
 import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";
 import {
   Region,
@@ -53,11 +50,11 @@ export async function ClansLandingView({
   const metric = ratingMetricFromCookie(
     cookieStore.get(STORAGE.COOKIES.RATING)?.value,
   );
-  const [results, available, filterCounts] = await Promise.all([
+  const [results, stats] = await Promise.all([
     getTopClansByLanguage(region, metric, language, LIMIT, strict),
-    getAvailableLanguages(region),
-    language ? getLanguageFilterCounts(region, language) : null,
+    getLanguageStats(region),
   ]);
+  const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
 
@@ -130,7 +127,10 @@ export async function ClansLandingView({
         </PanelHeader>
         <PanelContent className="p-0">
           <LanguageChips
-            available={available}
+            available={stats.map((s) => ({
+              code: s.code,
+              clansCount: s.total,
+            }))}
             active={language}
             region={region}
           />

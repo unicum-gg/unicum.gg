@@ -4,7 +4,7 @@ import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getAvailableLanguages } from "@/services/clans/available-languages";
+import { getLanguageStats } from "@/services/clans/available-languages";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -58,7 +58,7 @@ export default async function Page({
         (strict === "1" ? "?strict=1" : ""),
     );
   }
-  const available = await getAvailableLanguages(region);
+  const available = await getLanguageStats(region);
   if (!available.some((l) => l.code === language)) notFound();
   return (
     <ClansLandingView
