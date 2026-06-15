@@ -96,6 +96,12 @@ async function getTopClansByLanguageUncached(
     INNER JOIN ${clans} c ON c.id = cs.clan_id
     WHERE c.is_disbanded = false
       AND c.members_count >= ${minMembers}
+      -- Also require a real rated population (matches global query).
+      -- Stops troll/dormant clans (e.g. DRAKS, the Dragon Ball-themed
+      -- meme clan with 94 declared members but ~14 active alts) from
+      -- ranking with absurd battle-weighted averages from a handful
+      -- of 1-3 battle accounts.
+      AND cs.rated_members_count >= ${minMembers}
     ${langClause}
     ORDER BY cs.avg_value DESC NULLS LAST
     LIMIT ${limit}

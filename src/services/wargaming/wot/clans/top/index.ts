@@ -80,7 +80,13 @@ export async function computeTopClansByMetric(
     FROM latest_memberships lm
     INNER JOIN ${players} p ON p.id = lm.player_id
     GROUP BY lm.clan_id
-    HAVING COUNT(*) > ${MIN_MEMBERS} AND COUNT(${metricCol}) > 0
+    -- Filter on RATED members, not the raw DB count. A clan can declare
+    -- 90+ members but only a handful of those accounts actually play —
+    -- those few alts with 1-3 battles at 100% WR can produce absurd
+    -- battle-weighted averages (e.g. DRAKS, the Dragon Ball-themed
+    -- troll clan with 4,719 avg WNX from 14 actives). Requiring 50+
+    -- rated members forces a real player base before the clan ranks.
+    HAVING COUNT(${metricCol}) >= ${MIN_MEMBERS}
     ORDER BY avg_value DESC NULLS LAST
     LIMIT ${ENRICH_CANDIDATES}
   `)) as unknown as Array<{
