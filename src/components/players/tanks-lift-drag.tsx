@@ -4,7 +4,10 @@ import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import { RatingMetric } from "@/constants/rating";
 import { cn } from "@/lib/utils";
 import type { Region } from "@/services/wargaming/wot";
-import { type VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import {
+  computeAvgTier,
+  type VehicleMeta,
+} from "@/services/wargaming/wot/encyclopedia";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -36,13 +39,15 @@ type Scored = {
   meta: VehicleMeta;
   rating: number;
   battles: number;
-  delta: number; // rating - overall (positive = lift, negative = drag)
-  leverage: number; // |delta| * battles, used to rank within each side
+  // overall_without_this_tank - overall_with_this_tank.
+  // Positive => removing the tank lifts the overall (drag candidate).
+  // Negative => removing the tank drops the overall (lift candidate).
+  removalDelta: number;
 };
 
-function computeRating(
+function computePerTankRating(
   tank: TankStats,
-  meta: VehicleMeta | null,
+  meta: VehicleMeta,
   metric: RatingMetric,
   wn8Expected: Map<number, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
@@ -61,13 +66,59 @@ function computeRating(
         spotted: tank.all.spotted,
         droppedCapturePoints: tank.all.dropped_capture_points,
       },
-      meta?.tier ?? null,
+      meta.tier ?? null,
     );
   }
   if (metric === RatingMetric.Wn8) {
     return computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback);
   }
   return computeWNX([tank], wnxExpected);
+}
+
+function computeAggregateRating(
+  tanks: TankStats[],
+  metric: RatingMetric,
+  wn8Expected: Map<number, WN8Expected>,
+  wnxExpected: Map<number, WNXExpected>,
+  wn8Fallback: Map<string, WN8Expected>,
+  encyclopedia: Record<string, VehicleMeta>,
+): number | null {
+  if (tanks.length === 0) return null;
+  if (metric === RatingMetric.Wn8) {
+    return computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
+  }
+  if (metric === RatingMetric.Wnx) {
+    return computeWNX(tanks, wnxExpected);
+  }
+  let battles = 0;
+  let wins = 0;
+  let frags = 0;
+  let damage = 0;
+  let spotted = 0;
+  let droppedCap = 0;
+  for (const tank of tanks) {
+    const b = tank.all.battles;
+    if (b <= 0) continue;
+    battles += b;
+    wins += tank.all.wins;
+    frags += tank.all.frags;
+    damage += tank.all.damage_dealt;
+    spotted += tank.all.spotted;
+    droppedCap += tank.all.dropped_capture_points;
+  }
+  if (battles === 0) return null;
+  const avgTier = computeAvgTier(tanks, encyclopedia);
+  return computeWN7(
+    {
+      battles,
+      wins,
+      frags,
+      damageDealt: damage,
+      spotted,
+      droppedCapturePoints: droppedCap,
+    },
+    avgTier,
+  );
 }
 
 function ratingColorClass(metric: RatingMetric, value: number): string {
@@ -84,7 +135,6 @@ export function TanksLiftDrag({
   wnxExpected,
   metric,
   metricLabel,
-  overallRating,
 }: {
   region: Region;
   tanks: TankStats[];
@@ -93,17 +143,26 @@ export function TanksLiftDrag({
   wnxExpected: Map<number, WNXExpected>;
   metric: RatingMetric;
   metricLabel: string;
-  overallRating: number | null;
 }): React.ReactElement | null {
-  if (overallRating === null) return null;
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-  const scored: Scored[] = [];
+  const overall = computeAggregateRating(
+    tanks,
+    metric,
+    wn8Expected,
+    wnxExpected,
+    wn8Fallback,
+    encyclopedia,
+  );
+  if (overall === null) return null;
+
+  // Pre-index by tank_id so we can build "tanks without X" without
+  // rescanning the array each time.
+  const candidates: Array<{ tank: TankStats; meta: VehicleMeta; rating: number }> = [];
   for (const tank of tanks) {
-    const battles = tank.all.battles;
-    if (battles < MIN_BATTLES) continue;
+    if (tank.all.battles < MIN_BATTLES) continue;
     const meta = encyclopedia[String(tank.tank_id)] ?? null;
     if (!meta) continue;
-    const rating = computeRating(
+    const rating = computePerTankRating(
       tank,
       meta,
       metric,
@@ -113,25 +172,42 @@ export function TanksLiftDrag({
       encyclopedia,
     );
     if (rating === null || !Number.isFinite(rating)) continue;
-    const delta = rating - overallRating;
+    candidates.push({ tank, meta, rating });
+  }
+
+  const scored: Scored[] = [];
+  for (const c of candidates) {
+    const tanksWithout = tanks.filter((t) => t.tank_id !== c.tank.tank_id);
+    const overallWithout = computeAggregateRating(
+      tanksWithout,
+      metric,
+      wn8Expected,
+      wnxExpected,
+      wn8Fallback,
+      encyclopedia,
+    );
+    if (overallWithout === null) continue;
+    const removalDelta = overallWithout - overall;
+    if (!Number.isFinite(removalDelta) || removalDelta === 0) continue;
     scored.push({
-      tank,
-      meta,
-      rating,
-      battles,
-      delta,
-      leverage: Math.abs(delta) * battles,
+      tank: c.tank,
+      meta: c.meta,
+      rating: c.rating,
+      battles: c.tank.all.battles,
+      removalDelta,
     });
   }
   if (scored.length === 0) return null;
 
+  // Negative removalDelta = removing it lowers your overall → it's lifting you.
+  // Positive removalDelta = removing it raises your overall → it's dragging you.
   const lift = scored
-    .filter((s) => s.delta > 0)
-    .sort((a, b) => b.leverage - a.leverage)
+    .filter((s) => s.removalDelta < 0)
+    .sort((a, b) => a.removalDelta - b.removalDelta) // most negative first
     .slice(0, TOP_N);
   const drag = scored
-    .filter((s) => s.delta < 0)
-    .sort((a, b) => b.leverage - a.leverage)
+    .filter((s) => s.removalDelta > 0)
+    .sort((a, b) => b.removalDelta - a.removalDelta) // most positive first
     .slice(0, TOP_N);
 
   if (lift.length === 0 && drag.length === 0) return null;
@@ -183,15 +259,13 @@ function Column({
         </div>
         <p className="mt-0.5 text-xs text-fd-muted-foreground">
           {isLift
-            ? "Tanks scoring above the overall rating. More battles on these pulls the average up."
-            : "Tanks scoring below the overall rating. Fewer battles (or better play) on these pulls the average up."}
+            ? "Tanks that prop the overall up — dropping them would lower the rating."
+            : "Tanks that weigh the overall down — dropping them would raise the rating."}
         </p>
       </div>
       {rows.length === 0 ? (
         <div className="px-4 py-6 text-center text-sm text-fd-muted-foreground">
-          {isLift
-            ? "No tank above the overall rating yet."
-            : "No tank below the overall rating — clean run."}
+          {isLift ? "No tank propping up the overall." : "No tank dragging the overall down."}
         </div>
       ) : (
         <ul>
@@ -200,7 +274,6 @@ function Column({
               key={row.tank.tank_id}
               region={region}
               row={row}
-              kind={kind}
               metric={metric}
             />
           ))}
@@ -213,18 +286,19 @@ function Column({
 function Row({
   region,
   row,
-  kind,
   metric,
 }: {
   region: Region;
   row: Scored;
-  kind: "lift" | "drag";
   metric: RatingMetric;
 }) {
-  const isLift = kind === "lift";
-  const deltaSign = isLift ? "+" : "−";
+  // Display the signed change to the overall rating that would happen if
+  // this tank were excluded. Positive (green) = removing helps you;
+  // negative (red) = removing costs you.
+  const isPositive = row.removalDelta > 0;
+  const sign = isPositive ? "+" : "−";
   return (
-    <li className="flex items-center gap-3 border-b border-fd-border/40 px-4 py-2">
+    <li className="flex items-center gap-3 border-b border-fd-border/40 px-4 py-2 last:border-fd-border">
       <span className="flex w-10 shrink-0 items-center justify-center">
         <TankIcon
           region={region}
@@ -254,14 +328,9 @@ function Row({
         >
           {decFmt.format(row.rating)}
         </span>
-        <span
-          className={cn(
-            "text-xs font-medium",
-            isLift ? "text-green-500" : "text-red-500",
-          )}
-        >
-          {deltaSign}
-          {decFmt.format(Math.abs(row.delta))}
+        <span className="text-xs font-medium text-fd-muted-foreground">
+          {sign}
+          {decFmt.format(Math.abs(row.removalDelta))} if removed
         </span>
       </div>
     </li>

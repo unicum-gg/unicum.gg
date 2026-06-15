@@ -20,7 +20,6 @@ import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import {
   RATING_METRIC_LABEL,
-  RatingMetric,
   ratingMetricFromCookie,
 } from "@/constants/rating";
 import ROUTES from "@/constants/routes";
@@ -467,13 +466,6 @@ async function buildView(args: {
             wnxExpected={wnxExpected}
             metric={metric}
             metricLabel={metricLabel}
-            overallRating={
-              metric === RatingMetric.Wn7
-                ? player.wn7
-                : metric === RatingMetric.Wn8
-                  ? player.wn8
-                  : player.wnx
-            }
           />
         </PanelContent>
       </Panel>
