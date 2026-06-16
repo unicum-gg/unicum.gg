@@ -18,19 +18,25 @@ export type LanguageChip = {
 /**
  * Horizontal row of clickable language pills shown above the top-clans
  * list. The "All" pill clears the filter. Hrefs are built from ROUTES so
- * the region scope stays consistent across the site.
+ * the region scope stays consistent across the site. When the user is
+ * in strict mode (single-language clans only), language switches keep
+ * the `?strict=1` flag so the filter persists across chip clicks. The
+ * "All" chip drops it — strict has no meaning without a language.
  */
 export function LanguageChips({
   available,
   active,
   region,
+  strict = false,
   className,
 }: {
   available: LanguageChip[];
   active: string | null;
   region: Region;
+  strict?: boolean;
   className?: string;
 }) {
+  const strictSuffix = strict ? "?strict=1" : "";
   return (
     <div
       className={cn(
@@ -48,7 +54,7 @@ export function LanguageChips({
         return (
           <ChipLink
             key={lang.code}
-            href={ROUTES.CLANS_BY_LANGUAGE(region, lang.code)}
+            href={ROUTES.CLANS_BY_LANGUAGE(region, lang.code) + strictSuffix}
             active={active === lang.code}
             label={displayName(lang.code)}
             count={lang.clansCount}

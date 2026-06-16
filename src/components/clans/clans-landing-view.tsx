@@ -133,6 +133,7 @@ export async function ClansLandingView({
             }))}
             active={language}
             region={region}
+            strict={strict}
           />
         </PanelContent>
       </Panel>
