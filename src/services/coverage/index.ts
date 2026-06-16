@@ -10,7 +10,6 @@ import {
   playerRefreshQueueByRegion,
   playerSnapshotsByRegion,
   playersByRegion,
-  tankSnapshotsByRegion,
 } from "@/services/db/schema";
 import {
   ACTIVITY_BUCKET_ORDER,
@@ -113,12 +112,18 @@ function buildDaySeries(
   return out;
 }
 
+async function approxRowCount(tableName: string): Promise<number> {
+  const rows = (await db.execute(
+    sql`SELECT reltuples::bigint AS n FROM pg_class WHERE oid = ${tableName}::regclass`,
+  )) as unknown as Array<{ n: number | string | null }>;
+  return Math.max(0, Number(rows[0]?.n ?? 0));
+}
+
 async function getCoverageStatsUncached(
   region: Region,
 ): Promise<CoverageStats> {
   const playersTable = playersByRegion[region];
   const playerSnapshotsTable = playerSnapshotsByRegion[region];
-  const tankSnapshotsTable = tankSnapshotsByRegion[region];
   const clansTable = clansByRegion[region];
   const clanMembersTable = clanMembersByRegion[region];
   const clanRecentEventsTable = clanRecentEventsByRegion[region];
@@ -160,16 +165,12 @@ async function getCoverageStatsUncached(
         sql`SELECT COUNT(*)::text AS count FROM ${clansTable}`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
-    db
-      .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM ${playerSnapshotsTable}`,
-      )
-      .then((r) => Number(r[0]?.count ?? 0)),
-    db
-      .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM ${tankSnapshotsTable}`,
-      )
-      .then((r) => Number(r[0]?.count ?? 0)),
+    // Exact COUNT(*) on player_snapshots + tank_snapshots is too costly
+    // (EU tank_snapshots is ~150M rows, saturates IO for >10s and starves
+    // request-path queries). `pg_class.reltuples` is the planner's estimate,
+    // refreshed by autovacuum/analyze, accurate within a few %.
+    approxRowCount(`${region}_player_snapshots`),
+    approxRowCount(`${region}_tank_snapshots`),
     db
       .execute<{ count: string }>(
         sql`SELECT COUNT(*)::text AS count FROM ${clanMembersTable}`,
