@@ -5,9 +5,6 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
-// Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
-// page-level revalidate would be redundant and conflict with the cache scope.
-
 export async function generateMetadata(): Promise<Metadata> {
   const label = REGION_LABEL[Region.EU];
   return constructMetadata({
@@ -22,3 +19,6 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   return <CoverageView region={Region.EU} />;
 }
+
+export const dynamic = "force-static";
+export const revalidate = 60;

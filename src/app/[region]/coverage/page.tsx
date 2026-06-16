@@ -2,11 +2,9 @@ import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
 import { CoverageView } from "@/components/coverage/coverage-view";
 import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
-
-// Caching is owned by `getCoverageStats` via `'use cache' + cacheLife()` —
-// page-level revalidate would be redundant and conflict with the cache scope.
 
 export async function generateMetadata({
   params,
@@ -21,7 +19,12 @@ export async function generateMetadata({
     description: `How many World of Tanks players and clans ${APP.NAME} tracks on ${label}, snapshot refresh rate, data depth, infrastructure cost and uptime.`,
     ogTitle: "Data coverage",
     ogSubtitle: `${label} players & clans`,
+    canonical: ROUTES.COVERAGE(region),
   });
+}
+
+export async function generateStaticParams() {
+  return [Region.NA, Region.ASIA].map((region) => ({ region }));
 }
 
 export default async function CoveragePage({
@@ -31,6 +34,9 @@ export default async function CoveragePage({
 }) {
   const { region } = await params;
   if (!isRegion(region)) notFound();
-  if (region === Region.EU) redirect("/coverage");
+  if (region === Region.EU) redirect(ROUTES.COVERAGE(Region.EU));
   return <CoverageView region={region} />;
 }
+
+export const dynamic = "force-static";
+export const revalidate = 60;
