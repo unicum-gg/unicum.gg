@@ -27,10 +27,17 @@ const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
 const CLANS_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?clans(?:/|$)`,
 );
+// Mirror for /players. Same reasoning: a per-language top-players page
+// makes no sense after a region switch, so we drop the user on the new
+// region's players index.
+const PLAYERS_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?players(?:/|$)`,
+);
 
 function targetForRegion(pathname: string, region: Region): string {
   if (COVERAGE_PATHS.has(pathname)) return ROUTES.COVERAGE(region);
   if (CLANS_PATTERN.test(pathname)) return ROUTES.CLANS(region);
+  if (PLAYERS_PATTERN.test(pathname)) return ROUTES.PLAYERS(region);
   return ROUTES.HOME(region);
 }
 

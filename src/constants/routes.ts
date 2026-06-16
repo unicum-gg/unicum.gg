@@ -16,6 +16,12 @@ const ROUTES = {
       : pathcat("/:region/coverage", { region }),
 
   // - Players
+  PLAYERS: (region: Region) =>
+    region === Region.EU ? "/players" : pathcat("/:region/players", { region }),
+  PLAYERS_BY_LANGUAGE: (region: Region, language: string) =>
+    region === Region.EU
+      ? pathcat("/players/lang/:language", { language })
+      : pathcat("/:region/players/lang/:language", { region, language }),
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
   COMPARE_PLAYERS: (region: Region, [first, ...rest]: string[]) =>

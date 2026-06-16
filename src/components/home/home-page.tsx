@@ -14,6 +14,7 @@ import { RatingScale } from "@/components/home/rating-scale";
 import { TopClans } from "@/components/home/top-clans";
 import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
 import { TopPlayers } from "@/components/home/top-players";
+import { TopPlayersLeaderboardLink } from "@/components/home/top-players-leaderboard-link";
 import { HeroVideo } from "@/components/home/hero-video";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import {
@@ -132,8 +133,12 @@ export async function HomePage({
         </Panel>
 
         <Panel className="flex flex-col" screenLines={false}>
-          <PanelHeader screenLines={false}>
+          <PanelHeader
+            screenLines={false}
+            className="flex items-center justify-between gap-3"
+          >
             <PanelTitle>Top players · Overall</PanelTitle>
+            <TopPlayersLeaderboardLink regionOverride={regionOverride} />
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
             <TopPlayers

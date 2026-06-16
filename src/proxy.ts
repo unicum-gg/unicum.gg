@@ -17,7 +17,9 @@ export function proxy(req: NextRequest) {
     (pathname === "/" ||
       pathname === "/coverage" ||
       pathname === "/clans" ||
-      pathname.startsWith("/clans/")) &&
+      pathname.startsWith("/clans/") ||
+      pathname === "/players" ||
+      pathname.startsWith("/players/")) &&
     !pathname.endsWith("/sitemap.xml")
   ) {
     if (stored && isRegion(stored) && stored !== Region.EU) {

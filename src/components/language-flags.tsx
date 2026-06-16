@@ -42,15 +42,21 @@ function tooltipFor(
     source === "declared"
       ? `${name}. Picked by the clan.`
       : `${name}. Our guess from this player's clan history. The longer they stay in a clan, the more its languages count.`;
-  return clickable ? `${origin} Click to see top ${name} clans.` : origin;
+  if (!clickable) return origin;
+  const cta =
+    source === "declared"
+      ? `Click to see top ${name} clans.`
+      : `Click to see top ${name} players.`;
+  return `${origin} ${cta}`;
 }
 
 /**
  * `region` drives both the flag picking (`en` on NA → US instead of UK)
- * and the destination of each flag's link (region-scoped clans leaderboard).
- * Set `link={false}` when this is rendered inside an outer `<a>` (the
- * top-clans list, for instance) to keep the region-aware flags but skip
- * the nested anchor.
+ * and the destination of each flag's link: declared (clan) flags point
+ * to the clans leaderboard for that language, inferred (player) flags
+ * point to the players leaderboard. Set `link={false}` when this is
+ * rendered inside an outer `<a>` (the top-clans list, for instance) to
+ * keep the region-aware flags but skip the nested anchor.
  */
 export function LanguageFlags({
   languages,
@@ -91,18 +97,27 @@ export function LanguageFlags({
           ) : (
             <span className="text-xs font-medium uppercase">{lang}</span>
           );
-          const trigger =
-            clickable && region ? (
-              <Link
-                href={ROUTES.CLANS_BY_LANGUAGE(region, lang)}
-                className="inline-flex h-full items-center transition-opacity hover:opacity-80"
-                aria-label={`Top ${displayName(lang)} clans`}
-              >
-                {visual}
-              </Link>
-            ) : (
-              visual
-            );
+          const href =
+            clickable && region
+              ? source === "declared"
+                ? ROUTES.CLANS_BY_LANGUAGE(region, lang)
+                : ROUTES.PLAYERS_BY_LANGUAGE(region, lang)
+              : null;
+          const trigger = href ? (
+            <Link
+              href={href}
+              className="inline-flex h-full items-center transition-opacity hover:opacity-80"
+              aria-label={
+                source === "declared"
+                  ? `Top ${displayName(lang)} clans`
+                  : `Top ${displayName(lang)} players`
+              }
+            >
+              {visual}
+            </Link>
+          ) : (
+            visual
+          );
           return (
             <Tooltip key={lang}>
               <TooltipTrigger asChild>{trigger}</TooltipTrigger>

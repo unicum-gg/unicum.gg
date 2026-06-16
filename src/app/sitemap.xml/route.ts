@@ -20,6 +20,9 @@ export async function GET() {
     // depends on `getAvailableLanguages` at request time so the list
     // tracks reality instead of a hardcoded constant.
     "/clans/lang/sitemap.xml",
+    // Mirror for the players language landings. See
+    // `src/app/players/lang/sitemap.xml/route.ts`.
+    "/players/lang/sitemap.xml",
   ];
   try {
     const counts = await getSitemapCounts();
