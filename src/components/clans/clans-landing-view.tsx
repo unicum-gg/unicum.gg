@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import { LanguageChips } from "@/components/clans/language-chips";
 import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
 import { TopClansList } from "@/components/clans/top-clans-list";
@@ -10,11 +9,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import {
-  RATING_METRIC_LABEL,
-  ratingMetricFromCookie,
-} from "@/constants/rating";
-import STORAGE from "@/constants/storage";
+import { RatingMetric } from "@/constants/rating";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { getLanguageStats } from "@/services/clans/available-languages";
 import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";
@@ -32,11 +27,30 @@ function languageDisplayName(code: string): string {
 }
 
 /**
+ * Inline metric label gated by `html[data-rating-metric]` CSS. All three
+ * variants ship in the HTML, only the matching one shows. Keeps the page
+ * output identical regardless of the user's rating cookie so the
+ * response can be cached without varying.
+ */
+function MetricInline() {
+  return (
+    <>
+      <span data-rating-col="wn7">WN7</span>
+      <span data-rating-col="wn8">WN8</span>
+      <span data-rating-col="wnx">WNX</span>
+    </>
+  );
+}
+
+/**
  * Shared body for both /clans (EU default) and /<region>/clans pages. Pass
  * `language: null` for the unfiltered landing and the language code for
- * /clans/lang/<language>. `strict` is only meaningful when a language is
- * set: it restricts the leaderboard to clans that declared ONLY that
- * language (no `de + en` mixed declarations).
+ * /clans/lang/<language>. `strict` narrows to clans that declared ONLY
+ * the requested language.
+ *
+ * The view renders all three metric variants in parallel and gates them
+ * via `data-rating-col` so the same HTML serves every visitor. The
+ * cookie picks which is visible via CSS (rule lives in `globals.css`).
  */
 export async function ClansLandingView({
   region,
@@ -47,17 +61,19 @@ export async function ClansLandingView({
   language: string | null;
   strict?: boolean;
 }) {
-  const cookieStore = await cookies();
-  const metric = ratingMetricFromCookie(
-    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
-  );
-  const [results, stats] = await Promise.all([
-    getTopClansByLanguage(region, metric, language, LIMIT, strict),
+  const [wn7Results, wn8Results, wnxResults, stats] = await Promise.all([
+    getTopClansByLanguage(region, RatingMetric.Wn7, language, LIMIT, strict),
+    getTopClansByLanguage(region, RatingMetric.Wn8, language, LIMIT, strict),
+    getTopClansByLanguage(region, RatingMetric.Wnx, language, LIMIT, strict),
     getLanguageStats(region),
   ]);
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
+  // All three metrics use the same eligibility filter, so the row count
+  // is identical across them in practice. Pick one as the canonical
+  // count for the panel title.
+  const totalCount = wnxResults.length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -97,23 +113,23 @@ export async function ClansLandingView({
               strict ? (
                 <>
                   {REGION_LABEL[region]} clans that declared {langName} as
-                  their only language, ranked by{" "}
-                  {RATING_METRIC_LABEL[metric]} averaged across their tracked
-                  members (minimum 25 members with battles).
+                  their only language, ranked by <MetricInline /> averaged
+                  across their tracked members (minimum 25 members with
+                  battles).
                 </>
               ) : (
                 <>
                   {REGION_LABEL[region]} clans that declared {langName} as one
-                  of their languages, ranked by{" "}
-                  {RATING_METRIC_LABEL[metric]} averaged across their tracked
-                  members (minimum 25 members with battles).
+                  of their languages, ranked by <MetricInline /> averaged
+                  across their tracked members (minimum 25 members with
+                  battles).
                 </>
               )
             ) : (
               <>
-                {REGION_LABEL[region]} leaderboard, ranked by{" "}
-                {RATING_METRIC_LABEL[metric]} averaged across the tracked
-                members of each clan (minimum 50 members with battles).
+                {REGION_LABEL[region]} leaderboard, ranked by <MetricInline />
+                {" "}averaged across the tracked members of each clan
+                (minimum 50 members with battles).
               </>
             )}
           </p>
@@ -154,9 +170,9 @@ export async function ClansLandingView({
           <PanelTitle>
             {language
               ? strict
-                ? `Top ${results.length} strictly ${langName} clans`
-                : `Top ${results.length} ${langName} clans`
-              : `Top ${results.length} clans`}
+                ? `Top ${totalCount} strictly ${langName} clans`
+                : `Top ${totalCount} ${langName} clans`
+              : `Top ${totalCount} clans`}
           </PanelTitle>
           {language && filterCounts && (
             <StrictModeToggle
@@ -169,7 +185,27 @@ export async function ClansLandingView({
           )}
         </PanelHeader>
         <PanelContent className="p-0">
-          <TopClansList region={region} results={results} metric={metric} />
+          <div data-rating-col="wn7">
+            <TopClansList
+              region={region}
+              results={wn7Results}
+              metric={RatingMetric.Wn7}
+            />
+          </div>
+          <div data-rating-col="wn8">
+            <TopClansList
+              region={region}
+              results={wn8Results}
+              metric={RatingMetric.Wn8}
+            />
+          </div>
+          <div data-rating-col="wnx">
+            <TopClansList
+              region={region}
+              results={wnxResults}
+              metric={RatingMetric.Wnx}
+            />
+          </div>
         </PanelContent>
       </Panel>
     </div>

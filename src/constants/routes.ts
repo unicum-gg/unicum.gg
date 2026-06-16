@@ -18,10 +18,17 @@ const ROUTES = {
   // - Players
   PLAYERS: (region: Region) =>
     region === Region.EU ? "/players" : pathcat("/:region/players", { region }),
-  PLAYERS_BY_LANGUAGE: (region: Region, language: string) =>
-    region === Region.EU
-      ? pathcat("/players/lang/:language", { language })
-      : pathcat("/:region/players/lang/:language", { region, language }),
+  PLAYERS_BY_LANGUAGE: (
+    region: Region,
+    language: string,
+    strict: boolean = false,
+  ) => {
+    const base =
+      region === Region.EU
+        ? pathcat("/players/lang/:language", { language })
+        : pathcat("/:region/players/lang/:language", { region, language });
+    return strict ? `${base}/strict` : base;
+  },
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
   COMPARE_PLAYERS: (region: Region, [first, ...rest]: string[]) =>
@@ -42,10 +49,17 @@ const ROUTES = {
     }),
   CLANS: (region: Region) =>
     region === Region.EU ? "/clans" : pathcat("/:region/clans", { region }),
-  CLANS_BY_LANGUAGE: (region: Region, language: string) =>
-    region === Region.EU
-      ? pathcat("/clans/lang/:language", { language })
-      : pathcat("/:region/clans/lang/:language", { region, language }),
+  CLANS_BY_LANGUAGE: (
+    region: Region,
+    language: string,
+    strict: boolean = false,
+  ) => {
+    const base =
+      region === Region.EU
+        ? pathcat("/clans/lang/:language", { language })
+        : pathcat("/:region/clans/lang/:language", { region, language });
+    return strict ? `${base}/strict` : base;
+  },
 };
 
 export default ROUTES;

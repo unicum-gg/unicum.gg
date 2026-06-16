@@ -33,7 +33,6 @@ export function PlayerLanguageChips({
   strict?: boolean;
   className?: string;
 }) {
-  const strictSuffix = strict ? "?strict=1" : "";
   return (
     <div
       className={cn(
@@ -51,7 +50,7 @@ export function PlayerLanguageChips({
         return (
           <ChipLink
             key={lang.code}
-            href={ROUTES.PLAYERS_BY_LANGUAGE(region, lang.code) + strictSuffix}
+            href={ROUTES.PLAYERS_BY_LANGUAGE(region, lang.code, strict)}
             active={active === lang.code}
             label={displayName(lang.code)}
             count={lang.playersCount}

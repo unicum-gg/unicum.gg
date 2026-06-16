@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
@@ -11,6 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     description: `${APP.NAME} ${label} clan leaderboard, ranked by WNX, filterable by declared clan language.`,
     ogTitle: "Top clans",
     ogSubtitle: `${label} leaderboard`,
+    canonical: ROUTES.CLANS(Region.EU),
   });
 }
 
@@ -20,4 +22,5 @@ export default async function Page() {
   );
 }
 
+export const dynamic = "force-static";
 export const revalidate = 600;

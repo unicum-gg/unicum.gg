@@ -15,6 +15,7 @@ export async function constructMetadata({
   ogImage,
   ogType = "website",
   noIndex = false,
+  canonical: explicitCanonical,
 }: {
   title?: string;
   description?: string;
@@ -26,8 +27,15 @@ export async function constructMetadata({
   ogImage?: string | false;
   ogType?: "website" | "article";
   noIndex?: boolean;
+  // Static pages should pass their absolute path (e.g. "/players") so the
+  // canonical can be built without touching `headers()`, which would
+  // opt the page out of static generation. Falls back to the request's
+  // pathname only when not provided.
+  canonical?: string;
 } = {}): Promise<Metadata> {
-  const canonical = await generateCanonical();
+  const canonical = explicitCanonical
+    ? buildCanonical(explicitCanonical)
+    : await generateCanonical();
   const formattedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const resolvedOgImage =
     ogImage === false
@@ -84,5 +92,10 @@ async function getPathname(): Promise<string> {
 
 async function generateCanonical(): Promise<string> {
   const pathname = await getPathname();
-  return pathname === "/" ? SITE_URL : `${SITE_URL}${pathname}`;
+  return buildCanonical(pathname);
+}
+
+function buildCanonical(pathname: string): string {
+  const cleaned = (pathname.split("?")[0] || "/").replace(/\/+$/, "") || "/";
+  return cleaned === "/" ? SITE_URL : `${SITE_URL}${cleaned}`;
 }

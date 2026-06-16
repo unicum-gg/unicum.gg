@@ -21,19 +21,20 @@ export async function generateMetadata({
   const name = languageDisplayName(language);
   const label = REGION_LABEL[Region.EU];
   return constructMetadata({
-    title: `Top ${name} World of Tanks players (${label})`,
-    description: `${APP.NAME} ${label} player leaderboard for players whose inferred clan-history language set includes ${name}, ranked by WNX.`,
-    ogTitle: `Top ${name} players`,
+    title: `Strictly ${name} World of Tanks players (${label})`,
+    description: `${APP.NAME} ${label} player leaderboard for players whose inferred clan-history language is exclusively ${name}, ranked by WNX.`,
+    ogTitle: `Strictly ${name} players`,
     ogSubtitle: `${label} leaderboard`,
-    canonical: ROUTES.PLAYERS_BY_LANGUAGE(Region.EU, language),
+    canonical: ROUTES.PLAYERS_BY_LANGUAGE(Region.EU, language, true),
   });
 }
 
 export async function generateStaticParams() {
-  // Prerender common languages only (≥100 eligible players). Niche
-  // languages fall through to on-demand rendering and ISR.
+  // Strict variant: prerender only languages with a real strict cohort
+  // (≥25 strict-only players). Niche languages fall through to on-demand
+  // rendering and ISR.
   const stats = await getPlayerLanguageStats(Region.EU);
-  return stats.filter((s) => s.total >= 100).map((s) => ({ language: s.code }));
+  return stats.filter((s) => s.strict >= 25).map((s) => ({ language: s.code }));
 }
 
 export default async function Page({
@@ -43,7 +44,7 @@ export default async function Page({
 }) {
   const { language } = await params;
   return (
-    <PlayersLandingView region={Region.EU} language={language} strict={false} />
+    <PlayersLandingView region={Region.EU} language={language} strict={true} />
   );
 }
 

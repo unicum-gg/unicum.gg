@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { ClansLandingView } from "@/components/clans/clans-landing-view";
+import { PlayersLandingView } from "@/components/players/players-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getLanguageStats } from "@/services/clans/available-languages";
+import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -23,23 +23,23 @@ export async function generateMetadata({
   const name = languageDisplayName(language);
   const label = REGION_LABEL[region];
   return constructMetadata({
-    title: `Top ${name} World of Tanks clans (${label})`,
-    description: `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as one of their languages, ranked by WNX.`,
-    ogTitle: `Top ${name} clans`,
+    title: `Strictly ${name} World of Tanks players (${label})`,
+    description: `${APP.NAME} ${label} player leaderboard for players whose inferred clan-history language is exclusively ${name}, ranked by WNX.`,
+    ogTitle: `Strictly ${name} players`,
     ogSubtitle: `${label} leaderboard`,
-    canonical: ROUTES.CLANS_BY_LANGUAGE(region, language),
+    canonical: ROUTES.PLAYERS_BY_LANGUAGE(region, language, true),
   });
 }
 
 export async function generateStaticParams() {
-  // Prerender common languages only (≥100 eligible clans). Niche
-  // languages fall through to on-demand rendering and ISR.
-  // EU lives at /clans/lang/<lang>, so only NA and ASIA are enumerated.
+  // Strict variant: prerender only languages with a real strict cohort
+  // (≥25 strict-only players). Niche languages fall through to on-demand
+  // rendering and ISR.
   const params: Array<{ region: string; language: string }> = [];
   for (const region of [Region.NA, Region.ASIA]) {
-    const stats = await getLanguageStats(region);
+    const stats = await getPlayerLanguageStats(region);
     for (const stat of stats) {
-      if (stat.total < 100) continue;
+      if (stat.strict < 25) continue;
       params.push({ region, language: stat.code });
     }
   }
@@ -54,10 +54,10 @@ export default async function Page({
   const { region, language } = await params;
   if (!isRegion(region)) notFound();
   if (region === Region.EU) {
-    redirect(ROUTES.CLANS_BY_LANGUAGE(Region.EU, language));
+    redirect(ROUTES.PLAYERS_BY_LANGUAGE(Region.EU, language, true));
   }
   return (
-    <ClansLandingView region={region} language={language} strict={false} />
+    <PlayersLandingView region={region} language={language} strict={true} />
   );
 }
 

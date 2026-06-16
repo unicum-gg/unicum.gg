@@ -87,11 +87,6 @@ async function getTopPlayersByLanguageUncached(
     }));
   }
 
-  // JIT off: tested on prod EU, JIT adds ~4s of compile overhead for
-  // this single execution (~6s with, ~2s without). Cache amortises but
-  // first hit per period stings.
-  await db.execute(sql`SET LOCAL jit = off`);
-
   // Two-phase strategy: pull the top-N candidates by metric (cheap, hits
   // an index), then run the per-player language inference over only
   // those rows. Trying to infer across the entire history table first
@@ -103,7 +98,14 @@ async function getTopPlayersByLanguageUncached(
     ? sql`HAVING bool_and(lang = ${language})`
     : sql`HAVING bool_or(lang = ${language})`;
 
-  const rows = (await db.execute(sql`
+  // JIT off via a one-shot transaction: tested on prod EU, JIT adds ~4s
+  // of compile overhead for this single execution (~6s with, ~2s
+  // without). `SET LOCAL` requires a transaction block; plain `SET`
+  // would leak to the pooled connection. Cache amortises but the first
+  // hit per period stings without this.
+  const rows = (await db.transaction(async (tx) => {
+    await tx.execute(sql`SET LOCAL jit = off`);
+    return tx.execute(sql`
     WITH top_cands AS (
       SELECT p.account_id, p.nickname, p.clan_id, p.battles,
         ${metricCol} AS value
@@ -171,7 +173,8 @@ async function getTopPlayersByLanguageUncached(
     LEFT JOIN ${clans} cl ON cl.id = tc.clan_id
     ORDER BY tc.value DESC
     LIMIT ${limit}
-  `)) as unknown as Array<{
+  `);
+  })) as unknown as Array<{
     account_id: number | string;
     nickname: string;
     battles: number;

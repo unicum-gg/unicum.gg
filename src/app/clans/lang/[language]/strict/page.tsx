@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { PlayersLandingView } from "@/components/players/players-landing-view";
+import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getPlayerLanguageStats } from "@/services/players/available-languages";
+import { getLanguageStats } from "@/services/clans/available-languages";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -21,19 +21,20 @@ export async function generateMetadata({
   const name = languageDisplayName(language);
   const label = REGION_LABEL[Region.EU];
   return constructMetadata({
-    title: `Top ${name} World of Tanks players (${label})`,
-    description: `${APP.NAME} ${label} player leaderboard for players whose inferred clan-history language set includes ${name}, ranked by WNX.`,
-    ogTitle: `Top ${name} players`,
+    title: `Strictly ${name} World of Tanks clans (${label})`,
+    description: `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as their only language, ranked by WNX.`,
+    ogTitle: `Strictly ${name} clans`,
     ogSubtitle: `${label} leaderboard`,
-    canonical: ROUTES.PLAYERS_BY_LANGUAGE(Region.EU, language),
+    canonical: ROUTES.CLANS_BY_LANGUAGE(Region.EU, language, true),
   });
 }
 
 export async function generateStaticParams() {
-  // Prerender common languages only (≥100 eligible players). Niche
-  // languages fall through to on-demand rendering and ISR.
-  const stats = await getPlayerLanguageStats(Region.EU);
-  return stats.filter((s) => s.total >= 100).map((s) => ({ language: s.code }));
+  // Strict variant: prerender only languages with a real strict cohort
+  // (≥25 strict-only clans). Niche languages fall through to on-demand
+  // rendering and ISR.
+  const stats = await getLanguageStats(Region.EU);
+  return stats.filter((s) => s.strict >= 25).map((s) => ({ language: s.code }));
 }
 
 export default async function Page({
@@ -43,7 +44,7 @@ export default async function Page({
 }) {
   const { language } = await params;
   return (
-    <PlayersLandingView region={Region.EU} language={language} strict={false} />
+    <ClansLandingView region={Region.EU} language={language} strict={true} />
   );
 }
 

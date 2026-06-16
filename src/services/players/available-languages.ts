@@ -25,12 +25,17 @@ async function getPlayerLanguageStatsUncached(
 ): Promise<PlayerLanguageStats[]> {
   const players = playersByRegion[region];
   const history = playerClanHistoryByRegion[region];
-  await db.execute(sql`SET LOCAL jit = off`);
+  // JIT off inside a one-shot transaction: `SET LOCAL` requires a
+  // transaction block. Same trick as `getTopPlayersByLanguage`. Without
+  // this the per-call JIT compile adds ~4s for the rest of the CTE chain.
+  //
   // Same CTE chain as the leaderboard, but instead of joining back to
   // `top_cands` for ranked output we aggregate per language: total =
   // players with this language among their survivors, strict = players
   // whose single survivor is this language.
-  const rows = (await db.execute(sql`
+  const rows = (await db.transaction(async (tx) => {
+    await tx.execute(sql`SET LOCAL jit = off`);
+    return tx.execute(sql`
     WITH top_cands AS (
       SELECT p.account_id FROM ${players} p
       WHERE p.wnx IS NOT NULL
@@ -92,7 +97,8 @@ async function getPlayerLanguageStatsUncached(
     INNER JOIN per_player pp USING (account_id)
     GROUP BY s.lang
     ORDER BY total DESC
-  `)) as unknown as Array<{ code: string; total: number; strict: number }>;
+  `);
+  })) as unknown as Array<{ code: string; total: number; strict: number }>;
   return rows.map((r) => ({
     code: r.code,
     total: r.total,

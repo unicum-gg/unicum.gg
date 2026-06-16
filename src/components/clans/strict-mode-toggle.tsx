@@ -22,12 +22,16 @@ export function StrictModeToggle({
   total: number;
   strictCount: number;
 }) {
-  const base = ROUTES.CLANS_BY_LANGUAGE(region, language);
   return (
     <div className="inline-flex items-center rounded-md border border-fd-border bg-fd-card p-0.5 text-xs font-medium">
-      <Segment href={base} active={!strict} label="Any" count={total} />
       <Segment
-        href={`${base}?strict=1`}
+        href={ROUTES.CLANS_BY_LANGUAGE(region, language)}
+        active={!strict}
+        label="Any"
+        count={total}
+      />
+      <Segment
+        href={ROUTES.CLANS_BY_LANGUAGE(region, language, true)}
         active={strict}
         label="Strict"
         count={strictCount}

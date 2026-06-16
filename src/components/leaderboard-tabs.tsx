@@ -21,12 +21,11 @@ export function LeaderboardTabs({
   language: string | null;
   strict: boolean;
 }) {
-  const suffix = strict ? "?strict=1" : "";
   const clansHref = language
-    ? ROUTES.CLANS_BY_LANGUAGE(region, language) + suffix
+    ? ROUTES.CLANS_BY_LANGUAGE(region, language, strict)
     : ROUTES.CLANS(region);
   const playersHref = language
-    ? ROUTES.PLAYERS_BY_LANGUAGE(region, language) + suffix
+    ? ROUTES.PLAYERS_BY_LANGUAGE(region, language, strict)
     : ROUTES.PLAYERS(region);
   return (
     <div className="inline-flex items-center rounded-md border border-fd-border bg-fd-card p-0.5 text-xs font-medium">

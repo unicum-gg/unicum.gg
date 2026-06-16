@@ -31,6 +31,11 @@ const nextConfig: NextConfig = {
         deploymentId: BUILD_ID,
       }
     : {}),
+  // The leaderboard pages prerender 3 metric variants per language at
+  // build, each kicking off a ~2-5s heavy CTE chain on the EU dataset.
+  // The 60s default trips on the largest languages (`ru`, `de`, `pl`)
+  // when other workers are competing on the same Postgres pool.
+  staticPageGenerationTimeout: 300,
   images: {
     // Wargaming emblems live on regional portal hosts that some user ISPs
     // route badly to. Proxy them through next/image so users always fetch

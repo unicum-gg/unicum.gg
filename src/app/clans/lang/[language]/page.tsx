@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
+import { getLanguageStats } from "@/services/clans/available-languages";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -12,45 +14,38 @@ function languageDisplayName(code: string): string {
 
 export async function generateMetadata({
   params,
-  searchParams,
 }: {
   params: Promise<{ language: string }>;
-  searchParams: Promise<{ strict?: string }>;
 }): Promise<Metadata> {
-  const [{ language }, { strict }] = await Promise.all([params, searchParams]);
+  const { language } = await params;
   const name = languageDisplayName(language);
   const label = REGION_LABEL[Region.EU];
-  const isStrict = strict === "1";
   return constructMetadata({
-    title: isStrict
-      ? `Strictly ${name} World of Tanks clans (${label})`
-      : `Top ${name} World of Tanks clans (${label})`,
-    description: isStrict
-      ? `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as their only language, ranked by WNX.`
-      : `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as one of their languages, ranked by WNX.`,
-    ogTitle: isStrict ? `Strictly ${name} clans` : `Top ${name} clans`,
+    title: `Top ${name} World of Tanks clans (${label})`,
+    description: `${APP.NAME} ${label} clan leaderboard for clans that declared ${name} as one of their languages, ranked by WNX.`,
+    ogTitle: `Top ${name} clans`,
     ogSubtitle: `${label} leaderboard`,
+    canonical: ROUTES.CLANS_BY_LANGUAGE(Region.EU, language),
   });
+}
+
+export async function generateStaticParams() {
+  // Prerender common languages only (≥100 eligible clans). Niche
+  // languages fall through to on-demand rendering and ISR.
+  const stats = await getLanguageStats(Region.EU);
+  return stats.filter((s) => s.total >= 100).map((s) => ({ language: s.code }));
 }
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: Promise<{ language: string }>;
-  searchParams: Promise<{ strict?: string }>;
 }) {
-  const [{ language }, { strict }] = await Promise.all([params, searchParams]);
-  // No notFound() when the language isn't in the eligible pool. The page
-  // renders an empty state, so a players-to-clans tab swap on a language
-  // that exists player-side but not clan-side stays navigable.
+  const { language } = await params;
   return (
-    <ClansLandingView
-      region={Region.EU}
-      language={language}
-      strict={strict === "1"}
-    />
+    <ClansLandingView region={Region.EU} language={language} strict={false} />
   );
 }
 
+export const dynamic = "force-static";
 export const revalidate = 600;
