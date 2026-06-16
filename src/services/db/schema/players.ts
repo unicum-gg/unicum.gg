@@ -1,5 +1,7 @@
+import { sql } from "drizzle-orm";
 import {
   bigint,
+  index,
   integer,
   pgTable,
   real,
@@ -62,7 +64,12 @@ export function makePlayersTable(region: string) {
       nullCount: integer("null_count").notNull().default(0),
       softDeletedAt: timestamp("soft_deleted_at", { withTimezone: true }),
     },
-    (t) => [uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId)],
+    (t) => [
+      uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId),
+      // Case-insensitive nickname lookup powers the /<region>/players/<nickname>
+      // page. Without it, every page load full-scans the ~1.5M EU rows.
+      index(`${region}_players_lower_nickname_idx`).on(sql`LOWER(${t.nickname})`),
+    ],
   );
 }
 
