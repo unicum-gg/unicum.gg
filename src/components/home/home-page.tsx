@@ -25,9 +25,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import { cookies } from "next/headers";
-import { ratingMetricFromCookie } from "@/constants/rating";
-import STORAGE from "@/constants/storage";
+import { RATING_METRICS, RatingMetric } from "@/constants/rating";
 import { styles } from "@/lib/styles";
 import { getTopClansByMetricByRegions } from "@/services/wargaming/wot/clans/top";
 import {
@@ -37,39 +35,59 @@ import {
 import { type Region, REGIONS } from "@/services/wargaming/wot";
 
 const TOP_LIMIT = 9;
+const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
+  [RatingMetric.Wn7]: "wn7",
+  [RatingMetric.Wn8]: "wn8",
+  [RatingMetric.Wnx]: "wnx",
+};
 
 export async function HomePage({
   regionOverride,
 }: {
   regionOverride?: Region;
 }) {
-  const cookieStore = await cookies();
-  const metric = ratingMetricFromCookie(
-    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
-  );
-  const topClans = await getTopClansByMetricByRegions(
-    REGIONS,
-    metric,
-    TOP_LIMIT,
-  );
-  const topPlayersDay = await getTopPlayersByMetricByRegions(
-    REGIONS,
-    metric,
-    TopPlayersPeriod.Day,
-    TOP_LIMIT,
-  );
-  const topPlayersWeek = await getTopPlayersByMetricByRegions(
-    REGIONS,
-    metric,
-    TopPlayersPeriod.Week,
-    TOP_LIMIT,
-  );
-  const topPlayersOverall = await getTopPlayersByMetricByRegions(
-    REGIONS,
-    metric,
-    TopPlayersPeriod.Overall,
-    TOP_LIMIT,
-  );
+  const [
+    topClansByMetric,
+    topPlayersDayByMetric,
+    topPlayersWeekByMetric,
+    topPlayersOverallByMetric,
+  ] = await Promise.all([
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopClansByMetricByRegions(REGIONS, m, TOP_LIMIT),
+      ),
+    ),
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopPlayersByMetricByRegions(
+          REGIONS,
+          m,
+          TopPlayersPeriod.Day,
+          TOP_LIMIT,
+        ),
+      ),
+    ),
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopPlayersByMetricByRegions(
+          REGIONS,
+          m,
+          TopPlayersPeriod.Week,
+          TOP_LIMIT,
+        ),
+      ),
+    ),
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopPlayersByMetricByRegions(
+          REGIONS,
+          m,
+          TopPlayersPeriod.Overall,
+          TOP_LIMIT,
+        ),
+      ),
+    ),
+  ]);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -98,16 +116,21 @@ export async function HomePage({
             <PanelTitle>Top players · Past 24 hours</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              description={
-                <>
-                  Ranked by <RatingMetricInlineSelect /> over the past 24 hours
-                  (min. 20 battles).
-                </>
-              }
-              initial={topPlayersDay}
-              regionOverride={regionOverride}
-            />
+            {RATING_METRICS.map((m, i) => (
+              <div key={m} data-rating-col={RATING_COL[m]}>
+                <TopPlayers
+                  description={
+                    <>
+                      Ranked by <RatingMetricInlineSelect /> over the past 24
+                      hours (min. 20 battles).
+                    </>
+                  }
+                  initial={topPlayersDayByMetric[i]}
+                  metric={m}
+                  regionOverride={regionOverride}
+                />
+              </div>
+            ))}
           </PanelContent>
         </Panel>
 
@@ -119,16 +142,21 @@ export async function HomePage({
             <PanelTitle>Top players · Past 7 days</PanelTitle>
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              description={
-                <>
-                  Ranked by <RatingMetricInlineSelect /> over the past 7 days
-                  (min. 140 battles).
-                </>
-              }
-              initial={topPlayersWeek}
-              regionOverride={regionOverride}
-            />
+            {RATING_METRICS.map((m, i) => (
+              <div key={m} data-rating-col={RATING_COL[m]}>
+                <TopPlayers
+                  description={
+                    <>
+                      Ranked by <RatingMetricInlineSelect /> over the past 7
+                      days (min. 140 battles).
+                    </>
+                  }
+                  initial={topPlayersWeekByMetric[i]}
+                  metric={m}
+                  regionOverride={regionOverride}
+                />
+              </div>
+            ))}
           </PanelContent>
         </Panel>
 
@@ -141,16 +169,21 @@ export async function HomePage({
             <TopPlayersLeaderboardLink regionOverride={regionOverride} />
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            <TopPlayers
-              description={
-                <>
-                  Ranked by all-time <RatingMetricInlineSelect /> (min. 20,000
-                  battles).
-                </>
-              }
-              initial={topPlayersOverall}
-              regionOverride={regionOverride}
-            />
+            {RATING_METRICS.map((m, i) => (
+              <div key={m} data-rating-col={RATING_COL[m]}>
+                <TopPlayers
+                  description={
+                    <>
+                      Ranked by all-time <RatingMetricInlineSelect /> (min.
+                      20,000 battles).
+                    </>
+                  }
+                  initial={topPlayersOverallByMetric[i]}
+                  metric={m}
+                  regionOverride={regionOverride}
+                />
+              </div>
+            ))}
           </PanelContent>
         </Panel>
       </div>
@@ -164,7 +197,15 @@ export async function HomePage({
             <TopClansLeaderboardLink regionOverride={regionOverride} />
           </PanelHeader>
           <PanelContent className="flex-1 p-0">
-            <TopClans initial={topClans} regionOverride={regionOverride} />
+            {RATING_METRICS.map((m, i) => (
+              <div key={m} data-rating-col={RATING_COL[m]}>
+                <TopClans
+                  initial={topClansByMetric[i]}
+                  metric={m}
+                  regionOverride={regionOverride}
+                />
+              </div>
+            ))}
           </PanelContent>
         </Panel>
 

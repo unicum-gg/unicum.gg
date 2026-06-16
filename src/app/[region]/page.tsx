@@ -1,8 +1,11 @@
 import { notFound, redirect } from "next/navigation";
 import { HomePage } from "@/components/home/home-page";
+import ROUTES from "@/constants/routes";
 import { isRegion, Region } from "@/services/wargaming/wot";
 
-export const revalidate = 60;
+export async function generateStaticParams() {
+  return [Region.NA, Region.ASIA].map((region) => ({ region }));
+}
 
 export default async function Page({
   params,
@@ -11,7 +14,10 @@ export default async function Page({
 }) {
   const { region } = await params;
   if (!isRegion(region)) notFound();
-  if (region === Region.EU) redirect("/");
+  if (region === Region.EU) redirect(ROUTES.HOME(Region.EU));
 
   return <HomePage regionOverride={region} />;
 }
+
+export const dynamic = "force-static";
+export const revalidate = 60;

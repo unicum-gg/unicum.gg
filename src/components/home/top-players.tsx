@@ -4,8 +4,6 @@ import Link from "next/link";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
   RATING_METRIC_LABEL,
   RatingMetric,
 } from "@/constants/rating";
@@ -47,22 +45,17 @@ export type TopPlayersInitial = Record<
 export function TopPlayers({
   description,
   initial,
+  metric,
   regionOverride,
 }: {
   description: React.ReactNode;
   initial: TopPlayersInitial;
+  metric: RatingMetric;
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
-  const [storedRating] = useCookie(
-    STORAGE.COOKIES.RATING,
-    DEFAULT_RATING_METRIC,
-  );
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
-  const metric: RatingMetric = isRatingMetric(storedRating)
-    ? storedRating
-    : DEFAULT_RATING_METRIC;
   const metricLabel = RATING_METRIC_LABEL[metric];
   const { results, computedAt } = initial[region];
 
