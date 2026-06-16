@@ -21,9 +21,16 @@ import {
 } from "@/services/wargaming/wot";
 
 const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
+// Any `/clans`, `/eu/clans/...`, `/na/clans/lang/pt`, etc. Clans, languages,
+// and strict mode are all region-scoped, so the only sensible landing when
+// the user switches region is the new region's clans index.
+const CLANS_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?clans(?:/|$)`,
+);
 
 function targetForRegion(pathname: string, region: Region): string {
   if (COVERAGE_PATHS.has(pathname)) return ROUTES.COVERAGE(region);
+  if (CLANS_PATTERN.test(pathname)) return ROUTES.CLANS(region);
   return ROUTES.HOME(region);
 }
 
