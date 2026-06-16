@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
 import { constructMetadata } from "@/lib/metadata";
-import { getLanguageStats } from "@/services/clans/available-languages";
 import { Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -43,8 +41,9 @@ export default async function Page({
   searchParams: Promise<{ strict?: string }>;
 }) {
   const [{ language }, { strict }] = await Promise.all([params, searchParams]);
-  const available = await getLanguageStats(Region.EU);
-  if (!available.some((l) => l.code === language)) notFound();
+  // No notFound() when the language isn't in the eligible pool. The page
+  // renders an empty state, so a players-to-clans tab swap on a language
+  // that exists player-side but not clan-side stays navigable.
   return (
     <ClansLandingView
       region={Region.EU}

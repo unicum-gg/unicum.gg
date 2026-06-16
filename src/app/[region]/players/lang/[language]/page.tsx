@@ -4,7 +4,6 @@ import { PlayersLandingView } from "@/components/players/players-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -58,8 +57,10 @@ export default async function Page({
         (strict === "1" ? "?strict=1" : ""),
     );
   }
-  const available = await getPlayerLanguageStats(region);
-  if (!available.some((l) => l.code === language)) notFound();
+  // No notFound() when the language isn't in our player pool. The page
+  // renders an empty state instead so a clans-to-players tab swap on a
+  // language that's present clan-side but missing player-side stays
+  // navigable rather than 404ing under the user.
   return (
     <PlayersLandingView
       region={region}

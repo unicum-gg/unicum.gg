@@ -2,6 +2,7 @@ import { cookies } from "next/headers";
 import { LanguageChips } from "@/components/clans/language-chips";
 import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
 import { TopClansList } from "@/components/clans/top-clans-list";
+import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import {
   Panel,
   PanelContent,
@@ -116,6 +117,14 @@ export async function ClansLandingView({
               </>
             )}
           </p>
+          <div className="mt-6 flex justify-center">
+            <LeaderboardTabs
+              current="clans"
+              region={region}
+              language={language}
+              strict={strict}
+            />
+          </div>
         </PanelContent>
       </Panel>
 

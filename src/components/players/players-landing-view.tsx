@@ -1,4 +1,5 @@
 import { cookies } from "next/headers";
+import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { PlayerLanguageChips } from "@/components/players/language-chips";
 import { PlayerStrictModeToggle } from "@/components/players/strict-mode-toggle";
 import { TopPlayersList } from "@/components/players/top-players-list";
@@ -114,6 +115,14 @@ export async function PlayersLandingView({
               </>
             )}
           </p>
+          <div className="mt-6 flex justify-center">
+            <LeaderboardTabs
+              current="players"
+              region={region}
+              language={language}
+              strict={strict}
+            />
+          </div>
         </PanelContent>
       </Panel>
 
