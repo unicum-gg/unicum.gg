@@ -210,7 +210,7 @@ async function VehiclesPanel({
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>Vehicles ({intFmt.format(aggregates.length)})</PanelTitle>
+        <PanelTitle>Tanks ({intFmt.format(aggregates.length)})</PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">
         <ClanVehiclesTable

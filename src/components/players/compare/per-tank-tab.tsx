@@ -210,7 +210,7 @@ export function PerTankTab({
                 onClick={() => toggleSort({ kind: "tier" })}
                 align="start"
               >
-                Vehicle
+                Tank
               </SortToggle>
             </TableHead>
             {slots.map((s, idx) => (

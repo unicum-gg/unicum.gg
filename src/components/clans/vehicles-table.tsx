@@ -272,7 +272,7 @@ export function ClanVehiclesTable({
   if (rows.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        No vehicle data for this clan yet.
+        No tank data for this clan yet.
       </p>
     );
   }

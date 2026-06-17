@@ -58,7 +58,7 @@ export async function generateMetadata({
     .join(",")}`;
   return constructMetadata({
     title: `${list} compared on World of Tanks (${region.toUpperCase()})`,
-    description: `Side-by-side World of Tanks clan stats for ${list}: members, WN8/WNX averages, vehicles, role distribution. ${APP.NAME}.`,
+    description: `Side-by-side World of Tanks clan stats for ${list}: members, WN8/WNX averages, tanks, role distribution. ${APP.NAME}.`,
     ogImage,
   });
 }

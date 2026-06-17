@@ -475,7 +475,7 @@ async function buildView(args: {
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {player.nickname}&apos;s vehicles (
+            {player.nickname}&apos;s tanks (
             {intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
           </PanelTitle>
         </PanelHeader>

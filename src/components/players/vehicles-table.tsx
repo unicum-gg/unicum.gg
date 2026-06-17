@@ -291,7 +291,7 @@ export function PlayerVehiclesTable({
   if (rows.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">
-        No vehicles played yet.
+        No tanks played yet.
       </p>
     );
   }

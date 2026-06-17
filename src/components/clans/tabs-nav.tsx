@@ -3,12 +3,12 @@ import { cn } from "@/lib/utils";
 
 export enum ClanTab {
   Overview = "overview",
-  Vehicles = "vehicles",
+  Tanks = "tanks",
 }
 
 const TABS: { id: ClanTab; label: string; query: string | null }[] = [
   { id: ClanTab.Overview, label: "Overview", query: null },
-  { id: ClanTab.Vehicles, label: "Vehicles", query: "vehicles" },
+  { id: ClanTab.Tanks, label: "Tanks", query: "tanks" },
 ];
 
 export function tabFromQuery(query: string | null | undefined): ClanTab {
