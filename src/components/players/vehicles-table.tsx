@@ -45,6 +45,7 @@ import {
   computeWN8,
   computeWNX,
   RATING_COLOR_CLASS,
+  winrateColor,
   wn7Color,
   wn8Color,
   type WN8Expected,
@@ -60,6 +61,7 @@ enum SortColumn {
   Nation = "nation",
   Tier = "tier",
   Battles = "battles",
+  WinRate = "winrate",
   AvgDamage = "avg_damage",
   AvgXp = "avg_xp",
   Rating = "rating",
@@ -74,6 +76,10 @@ type SortState = { column: SortColumn; direction: SortDirection } | null;
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+const pctFmt = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
@@ -98,6 +104,7 @@ type TankRow = {
   meta: VehicleMeta | null;
   avgDamage: number | null;
   avgXp: number | null;
+  winrate: number | null;
   rating: number | null;
 };
 
@@ -121,6 +128,7 @@ function buildRows(
       battles > 0 && Number.isFinite(tank.all.xp) && tank.all.xp > 0
         ? tank.all.xp / battles
         : null;
+    const winrate = battles > 0 ? tank.all.wins / battles : null;
     let rating: number | null = null;
     if (battles > 0) {
       if (metric === RatingMetric.Wn7) {
@@ -141,7 +149,7 @@ function buildRows(
         rating = computeWNX([tank], wnxExpected);
       }
     }
-    return { tank, meta, avgDamage, avgXp, rating };
+    return { tank, meta, avgDamage, avgXp, winrate, rating };
   });
 }
 
@@ -159,6 +167,8 @@ function getSortValue(row: TankRow, column: SortColumn): number | string {
       return row.meta?.tier ?? 0;
     case SortColumn.Battles:
       return row.tank.all.battles;
+    case SortColumn.WinRate:
+      return row.winrate ?? -1;
     case SortColumn.AvgDamage:
       return row.avgDamage ?? -1;
     case SortColumn.AvgXp:
@@ -392,6 +402,15 @@ export function PlayerVehiclesTable({
             Avg XP
           </SortableHead>
           <SortableHead
+            column={SortColumn.WinRate}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            tooltip="Overall (lifetime) winrate"
+          >
+            WR
+          </SortableHead>
+          <SortableHead
             column={SortColumn.Rating}
             state={sort}
             onToggle={toggleSort}
@@ -475,6 +494,17 @@ export function PlayerVehiclesTable({
               </TableCell>
               <TableCell className="hidden text-right tabular-nums sm:table-cell">
                 {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
+              </TableCell>
+              <TableCell
+                className={cn(
+                  "text-right tabular-nums",
+                  r.winrate !== null &&
+                    RATING_COLOR_CLASS[winrateColor(r.winrate)],
+                )}
+              >
+                {r.winrate !== null
+                  ? `${pctFmt.format(r.winrate * 100)}%`
+                  : "—"}
               </TableCell>
               <TableCell
                 className={cn("text-right tabular-nums", ratingColor(r.rating))}
