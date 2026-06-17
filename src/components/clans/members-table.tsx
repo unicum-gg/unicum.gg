@@ -249,15 +249,6 @@ export function ClanMembersTable({
             WN8
           </SortableHead>
           <SortableHead
-            column={SortColumn.WNX}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-            ratingCol="wnx"
-          >
-            WNX
-          </SortableHead>
-          <SortableHead
             column={SortColumn.WR}
             state={sort}
             onToggle={toggleSort}
@@ -265,6 +256,15 @@ export function ClanMembersTable({
             headClassName="max-[480px]:hidden"
           >
             WR
+          </SortableHead>
+          <SortableHead
+            column={SortColumn.WNX}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wnx"
+          >
+            WNX
           </SortableHead>
           <SortableHead
             column={SortColumn.Battles}
@@ -318,13 +318,6 @@ export function ClanMembersTable({
                 color={m.wn8 != null ? wn8Color(m.wn8) : null}
                 ratingCol="wn8"
               />
-              <RatingCell
-                value={
-                  m.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
-                }
-                color={m.wnx != null ? wnxColor(m.wnx) : null}
-                ratingCol="wnx"
-              />
               <TableCell
                 className={cn(
                   "text-right tabular-nums max-[480px]:hidden",
@@ -337,6 +330,13 @@ export function ClanMembersTable({
               >
                 {m.overall ? `${pctFmt.format(m.overall.winsPercentage)}%` : "—"}
               </TableCell>
+              <RatingCell
+                value={
+                  m.wnx ?? (m.overall && m.overall.battles === 0 ? 0 : null)
+                }
+                color={m.wnx != null ? wnxColor(m.wnx) : null}
+                ratingCol="wnx"
+              />
               <TableCell className="hidden text-right tabular-nums sm:table-cell">
                 {m.overall ? intFmt.format(m.overall.battles) : "—"}
               </TableCell>
