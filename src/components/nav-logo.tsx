@@ -1,26 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import type { ComponentProps } from "react";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { Region, regionFromPathname } from "@/services/wargaming/wot";
+import { useRegion } from "@/hooks/use-region";
 
 /**
  * Client-side navbar logo. The previous server-rendered `nav.url` was
  * frozen at the initial SSR (root layout doesn't re-execute on soft-nav),
  * so navigating from /asia/... to /eu/... left the logo pointing at /asia
  * and a click on it bounced the user back to the old region. Computing
- * the href from `usePathname()` keeps it always aligned with the URL.
+ * the region client-side keeps it always aligned with the URL and cookie.
  *
  * Passed to fumadocs as `nav.title` (which accepts an FC of anchor
  * props), so fumadocs gives us its outer anchor props that we forward to
  * Next's Link. We override `href` with our region-aware value.
  */
 export function NavLogo(props: ComponentProps<"a">) {
-  const pathname = usePathname();
-  const region = regionFromPathname(pathname) ?? Region.EU;
+  const { region } = useRegion();
   return (
     <Link {...props} href={ROUTES.HOME(region)}>
       <svg

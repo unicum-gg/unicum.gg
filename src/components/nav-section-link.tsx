@@ -25,7 +25,7 @@ export function NavSectionLink({
   text: string;
   section: Section;
 }) {
-  const region = useRegion();
+  const { region } = useRegion();
   const pathname = usePathname();
   // Active when the section segment of the current path matches, regardless
   // of region prefix: `/players/...`, `/eu/players/...`, `/asia/players/...`

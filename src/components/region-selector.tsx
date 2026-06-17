@@ -2,8 +2,7 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
-import STORAGE from "@/constants/storage";
-import { useCookie } from "@/hooks/use-cookie";
+import { useRegion } from "@/hooks/use-region";
 import {
   Select,
   SelectContent,
@@ -17,7 +16,6 @@ import {
   REGION_LABEL,
   REGIONS,
   Region,
-  regionFromPathname,
 } from "@/services/wargaming/wot";
 
 const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
@@ -42,23 +40,16 @@ function targetForRegion(pathname: string, region: Region): string {
 }
 
 export function RegionSelector() {
-  const [stored, setStored] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const pathname = usePathname();
   const router = useRouter();
-
-  // URL wins when regional ("/eu/..."); fall back to the cookie when the
-  // path has no region prefix (e.g. "/" or "/coverage"), so a change made
-  // in the search dialog is reflected here once useCookie broadcasts it.
-  const region: Region =
-    regionFromPathname(pathname) ??
-    (isRegion(stored) ? stored : Region.EU);
+  const { region, setRegion } = useRegion();
 
   return (
     <Select
       value={region}
       onValueChange={(v) => {
         if (!isRegion(v)) return;
-        setStored(v);
+        setRegion(v);
         router.push(targetForRegion(pathname, v));
       }}
     >
