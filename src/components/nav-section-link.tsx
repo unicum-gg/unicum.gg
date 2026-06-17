@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ROUTES from "@/constants/routes";
+import { useRegion } from "@/hooks/use-region";
 import { Region, regionFromPathname } from "@/services/wargaming/wot";
 
 type Section = "players" | "clans";
@@ -13,9 +14,8 @@ const ROUTE_FOR: Record<Section, (region: Region) => string> = {
 };
 
 /**
- * Region-aware navbar item. Mirrors `NavLogo` so soft-navs across regions
- * keep the link in sync with the URL (the root layout doesn't re-execute).
- * Styling matches fumadocs' built-in `main` link type, sourced from
+ * Region-aware navbar item. Styling matches fumadocs' built-in `main` link
+ * type, sourced from
  * `node_modules/fumadocs-ui/dist/layouts/home/slots/header.js`.
  */
 export function NavSectionLink({
@@ -25,10 +25,13 @@ export function NavSectionLink({
   text: string;
   section: Section;
 }) {
+  const region = useRegion();
   const pathname = usePathname();
-  const region = regionFromPathname(pathname) ?? Region.EU;
+  // Active when the section segment of the current path matches, regardless
+  // of region prefix: `/players/...`, `/eu/players/...`, `/asia/players/...`
+  // all light up the Players item.
   const segments = pathname.split("/").filter(Boolean);
-  const segIdx = region === Region.EU ? 0 : 1;
+  const segIdx = regionFromPathname(pathname) === null ? 0 : 1;
   const active = segments[segIdx] === section;
   return (
     <Link
