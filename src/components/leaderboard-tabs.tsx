@@ -29,12 +29,12 @@ export function LeaderboardTabs({
     : ROUTES.PLAYERS(region);
   return (
     <div className="inline-flex items-center rounded-md border border-fd-border bg-fd-card p-0.5 text-xs font-medium">
-      <Segment href={clansHref} active={current === "clans"} label="Clans" />
       <Segment
         href={playersHref}
         active={current === "players"}
         label="Players"
       />
+      <Segment href={clansHref} active={current === "clans"} label="Clans" />
     </div>
   );
 }
