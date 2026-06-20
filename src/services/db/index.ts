@@ -10,7 +10,11 @@ const globalForDb = globalThis as unknown as {
 const client =
   globalForDb.pgClient ??
   postgres(env.DATABASE_URL, {
-    max: 5,
+    // The 9 cron jobs + concurrent page requests easily saturate a pool
+    // of 5; once exhausted, the 6th+ waits and page renders stretch from
+    // ~50ms to multiple seconds. Bumped to 20; postgres `max_connections`
+    // is 100, so 4 app instances + admin sessions still fit.
+    max: 20,
     prepare: false,
   });
 
