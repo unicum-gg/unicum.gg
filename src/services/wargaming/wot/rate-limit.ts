@@ -86,17 +86,17 @@ class RateLimiter {
 // below. EU's threshold sits lower than NA/ASIA in our experience.
 // Daily +1 RPS exploration to find the new ceiling empirically. Watch logs
 // for the 30s-exact timeout cluster (G-Core WAF signature) and revert if it
-// shows. EU 4→5 after 32h at 4 with zero snapshot-cron timeouts. NA stays
-// at 6 (already shows mild WAF signal on player-cron); ASIA stays at 6.
+// shows. EU 4→5 after 32h at 4 with zero snapshot-cron timeouts. NA/ASIA
+// bumped 6→8 — both have shown more headroom than EU in prior tests.
 const WG_RPS: Record<Region, number> = {
-  [Region.EU]: 5,
-  [Region.NA]: 6,
-  [Region.ASIA]: 6,
+  [Region.EU]: 6,
+  [Region.NA]: 8,
+  [Region.ASIA]: 8,
 };
 const WG_BURST: Record<Region, number> = {
-  [Region.EU]: 5,
-  [Region.NA]: 6,
-  [Region.ASIA]: 6,
+  [Region.EU]: 6,
+  [Region.NA]: 8,
+  [Region.ASIA]: 8,
 };
 
 const wgLimiters: Record<Region, RateLimiter> = {
