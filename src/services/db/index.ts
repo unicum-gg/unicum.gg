@@ -12,9 +12,15 @@ const client =
   postgres(env.DATABASE_URL, {
     // The 9 cron jobs + concurrent page requests easily saturate a pool
     // of 5; once exhausted, the 6th+ waits and page renders stretch from
-    // ~50ms to multiple seconds. Bumped to 20; postgres `max_connections`
-    // is 100, so 4 app instances + admin sessions still fit.
-    max: 20,
+    // ~50ms to multiple seconds. Bumped to 12.
+    //
+    // Ceiling is the build, NOT runtime: Next.js spawns 5 SSG workers and
+    // each opens its own pool. 5 × 12 = 60 connections during prerender,
+    // leaving headroom under postgres `max_connections=100` for the
+    // running runtime container (12) + coolify-db sessions (~5) + admin.
+    // A pool of 20 here pushed us to 5×20=100 exactly, blowing the build
+    // with "sorry, too many clients already".
+    max: 12,
     prepare: false,
   });
 
