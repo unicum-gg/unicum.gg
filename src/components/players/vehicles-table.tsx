@@ -6,8 +6,10 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { toRoman } from "roman-numerals";
+import ROUTES from "@/constants/routes";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -469,7 +471,16 @@ export function PlayerVehiclesTable({
                       className="h-3.5 w-auto shrink-0 object-contain"
                     />
                   ) : null}
-                  <span>{name}</span>
+                  {r.meta ? (
+                    <Link
+                      href={ROUTES.TANK(region, tankId)}
+                      className="hover:underline"
+                    >
+                      {name}
+                    </Link>
+                  ) : (
+                    <span>{name}</span>
+                  )}
                 </span>
               </TableCell>
               <TableCell className="hidden text-center text-xs sm:table-cell">
