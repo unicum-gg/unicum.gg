@@ -301,7 +301,7 @@ export async function HomePage({
             <FeatureBlock
               icon="🛠️"
               title="Open source · AGPL"
-              description="Code's on GitHub. Inspect, fork, contribute. No login required, no ads, opt-in analytics only."
+              description="Code's on GitHub. Inspect, fork, contribute. No login to view stats, opt-in analytics only."
             />
           </div>
         </PanelContent>
@@ -353,4 +353,3 @@ export async function HomePage({
     </div>
   );
 }
-
