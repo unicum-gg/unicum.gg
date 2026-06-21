@@ -13,7 +13,7 @@ This version has breaking changes. APIs, conventions, and file structure may all
 | `pnpm lint` | ESLint. There is no test runner in the project. |
 | `pnpm env:init` | Generate `.env.local` from `env.ts`. Backs up any existing file to `.env.local.<timestamp>.bak`. |
 | `pnpm db:generate` | Drizzle-kit generate. Always review the SQL it emits (see [Database migrations](#database-migrations)). |
-| `pnpm db:migrate` | Often a no-op: the journal is out of sync with disk, so apply migrations manually via `psql "$DATABASE_URL" -f drizzle/000N_*.sql` instead. |
+| `pnpm db:migrate` | Runs the journal migrations. The journal was rebaselined in UNI-16 to a single entry (`0012_baseline`, the full current schema). For schema *changes* you still hand-write and apply SQL via `psql "$DATABASE_URL" -f drizzle/00NN_*.sql` (see [Database migrations](#database-migrations)). |
 | `npx tsc --noEmit --skipLibCheck` | Type-check the project. Use this rather than `pnpm build` when iterating on types. |
 
 There is no test suite. Validation is type checking plus ESLint plus manual smoke in the browser.
@@ -28,6 +28,24 @@ The correct workflow for any schema change:
 2. `pnpm db:generate` so drizzle-kit emits a new SQL file in `drizzle/000N_*.sql`
 3. **Review the generated SQL.** If you see unexpected `DROP TABLE` on per-region tables, the factory pattern bit you again. Stop, do not apply, and write the migration by hand instead.
 4. Apply via `psql "$DATABASE_URL" -f drizzle/000N_*.sql`. Drizzle-kit tracks applied migrations in the `__drizzle_migrations` table on the DB; the `_journal.json` on disk is out of sync and is not authoritative.
+
+## Reproducible baseline (UNI-16)
+
+`drizzle/0012_baseline.sql` is the authoritative, reproducible schema baseline: applied
+to an empty database it recreates the entire current per-region structure (37 tables,
+all indexes/FKs/checks). `meta/_journal.json` holds a single entry (`0012_baseline`).
+Migrations `0000`-`0011` are kept on disk as history but are **not** in the journal and
+must not be replayed; `0000_material_ego.sql` predates the factory refactor and does not
+match production. Full rationale and the production-reconciliation runbook live in
+[`drizzle/README-MIGRATIONS.md`](drizzle/README-MIGRATIONS.md).
+
+`meta/0012_snapshot.json` deliberately lists only `cron_leader` - the one table
+drizzle-kit can see. This keeps `db:generate` a safe no-op (it can never propose
+`DROP TABLE` for the 36 factory tables it cannot see). Never "fix" the snapshot to list
+all tables; that recreates the `db:push` DROP disaster through `db:generate`.
+
+New migrations are hand-written and numbered from `0013` onward, with a matching
+`_journal.json` entry. Reproduce a fresh DB with `psql "$DATABASE_URL" -f drizzle/0012_baseline.sql`.
 
 # Big picture
 
