@@ -11,6 +11,13 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
+    // Master switch for manual AdSense placements (UNI-18). Defaults off so the
+    // ad infra can merge and deploy dark before live slot ids exist. Set to
+    // "true" to render real <ins> units (still consent-gated at runtime).
+    NEXT_PUBLIC_ADS_ENABLED: z
+      .enum(["true", "false"])
+      .optional()
+      .transform((value) => value === "true"),
   },
   runtimeEnv: {
     WARGAMING_APPLICATION_ID_EU: process.env.WARGAMING_APPLICATION_ID_EU,
@@ -19,6 +26,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_ADS_ENABLED: process.env.NEXT_PUBLIC_ADS_ENABLED,
   },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
