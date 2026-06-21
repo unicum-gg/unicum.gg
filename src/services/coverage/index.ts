@@ -84,9 +84,9 @@ export type CoverageStats = {
   };
 };
 
-// OVH VPS-2, monthly no-commit billing. €9.99 HT + 20% VAT = €11.99 TTC/mo
-// ≈ $12.99/mo at ~1.08 USD/EUR.
-const HOSTING_USD_MONTHLY = 12.99;
+// OVH VPS-4, monthly no-commit billing. €23.49 HT + 20% VAT = €28.19 TTC/mo
+// ≈ $30.45/mo at ~1.08 USD/EUR.
+const HOSTING_USD_MONTHLY = 30.45;
 const DOMAIN_USD_ANNUAL = 51.6;
 
 const DAYS_WINDOW = 30;
@@ -417,7 +417,7 @@ async function getCoverageStatsUncached(
           {
             label: "VPS hosting",
             usdAnnual: HOSTING_USD_MONTHLY * 12,
-            note: "OVH VPS-2, 6 vCPU / 12 GB RAM / 100 GB NVMe",
+            note: "OVH VPS-4, 8 vCPU / 24 GB RAM / 200 GB NVMe",
           },
           {
             label: "Domain",
