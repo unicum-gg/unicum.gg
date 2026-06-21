@@ -60,14 +60,6 @@ const ROUTES = {
         : pathcat("/:region/clans/lang/:language", { region, language });
     return strict ? `${base}/strict` : base;
   },
-
-  // - Leaderboards (period-based precomputed top players + clans)
-  TOP: (region: Region) =>
-    region === Region.EU ? "/top" : pathcat("/:region/top", { region }),
-
-  // - Metric glossary (region-less definitional pages)
-  GLOSSARY: "/glossary",
-  GLOSSARY_METRIC: (slug: string) => pathcat("/glossary/:slug", { slug }),
 };
 
 export default ROUTES;

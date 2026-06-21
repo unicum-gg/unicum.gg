@@ -46,12 +46,6 @@ export function Footer() {
           </div>
           <div className="flex justify-center gap-4 text-sm">
             <Link
-              href={ROUTES.TOP(Region.EU)}
-              className={styles.linkHover}
-            >
-              Leaderboards
-            </Link>
-            <Link
               href={ROUTES.PLAYERS(Region.EU)}
               className={styles.linkHover}
             >
@@ -62,9 +56,6 @@ export function Footer() {
               className={styles.linkHover}
             >
               Top clans
-            </Link>
-            <Link href={ROUTES.GLOSSARY} className={styles.linkHover}>
-              Glossary
             </Link>
             <FooterCoverageLink />
             <Link
