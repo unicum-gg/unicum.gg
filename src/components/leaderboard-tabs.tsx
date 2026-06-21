@@ -35,6 +35,7 @@ export function LeaderboardTabs({
         label="Players"
       />
       <Segment href={clansHref} active={current === "clans"} label="Clans" />
+      <Segment href={ROUTES.TOP(region)} active={false} label="Top" />
     </div>
   );
 }

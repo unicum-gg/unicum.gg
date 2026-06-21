@@ -4,6 +4,7 @@ import { NavSectionLink } from "@/components/nav-section-link";
 import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 
 export async function baseOptions(): Promise<BaseLayoutProps> {
   return {
@@ -16,11 +17,20 @@ export async function baseOptions(): Promise<BaseLayoutProps> {
     links: [
       {
         type: "custom",
+        children: <NavSectionLink text="Leaderboards" section="top" />,
+      },
+      {
+        type: "custom",
         children: <NavSectionLink text="Players" section="players" />,
       },
       {
         type: "custom",
         children: <NavSectionLink text="Clans" section="clans" />,
+      },
+      {
+        type: "main",
+        text: "Glossary",
+        url: ROUTES.GLOSSARY,
       },
       {
         type: "custom",
