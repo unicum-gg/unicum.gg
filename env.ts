@@ -11,6 +11,11 @@ export const env = createEnv({
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
+    // Master ad switch. Board sets it to "true" in the prod environment once real
+    // data-ad-slot ids exist (UNI-43); until then AdSlot renders nothing everywhere,
+    // so placements ship "dark" with zero visual impact and light up via one flip.
+    // Kept OFF in dev/preview so a unit never fires there.
+    NEXT_PUBLIC_ADS_ENABLED: z.enum(["true", "false"]).optional(),
   },
   runtimeEnv: {
     WARGAMING_APPLICATION_ID_EU: process.env.WARGAMING_APPLICATION_ID_EU,
@@ -19,6 +24,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    NEXT_PUBLIC_ADS_ENABLED: process.env.NEXT_PUBLIC_ADS_ENABLED,
   },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
