@@ -124,18 +124,24 @@ export function acquireWgToken(region: Region): Promise<void> {
 // PER-REGION token bucket because empirically the 3 hosts behave very
 // differently: we've observed EU portal getting silently dropped while
 // NA/ASIA portals stayed reachable. The threshold (and ban state) is
-// tracked separately per `<region>.wargaming.net` endpoint. We start
-// uniformly at 1 RPS each and bump per region until one of them starts
-// timing out — that tells us the ceiling on THAT host for our IP/AS.
+// tracked separately per `<region>.wargaming.net` endpoint.
+//
+// Bumped 1 → 10 across all regions on 2026-06-21. Justification: a local
+// stress test from a macbook IP sustained 12 RPS against ASIA for ~6 min
+// with zero WAF signal (no 30s timeouts, no 5xx). Real demand is well
+// under 1 RPS — the bucket is there to drain bursts when 5-10 users hit
+// cold clan pages simultaneously (was queueing them to 15-18 min total).
+// Watch logs for the 30s-exact timeout cluster (G-Core WAF signature)
+// and revert this region's ceiling if it appears.
 const PORTAL_RPS: Record<Region, number> = {
-  [Region.EU]: 1,
-  [Region.NA]: 1,
-  [Region.ASIA]: 1,
+  [Region.EU]: 10,
+  [Region.NA]: 10,
+  [Region.ASIA]: 10,
 };
 const PORTAL_BURST: Record<Region, number> = {
-  [Region.EU]: 1,
-  [Region.NA]: 1,
-  [Region.ASIA]: 1,
+  [Region.EU]: 10,
+  [Region.NA]: 10,
+  [Region.ASIA]: 10,
 };
 
 const portalLimiters: Record<Region, RateLimiter> = {
