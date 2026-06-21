@@ -6,6 +6,7 @@ import {
 import { isRegion, Region, REGIONS } from "@/services/wargaming/wot";
 import { editInteractionResponse } from "./rest";
 import { buildPlayerStatCard, notFoundEmbed } from "./embeds";
+import { loadStatCardEnrichment } from "./enrichment";
 import {
   ApplicationCommandOptionType,
   MessageFlags,
@@ -73,8 +74,20 @@ async function executeStats(
     return;
   }
 
+  // Best-effort enrichment from our cache. Never let a DB hiccup or a cold
+  // account block the live card: fall back to live-only stats on any failure.
+  let enrichment = null;
+  try {
+    enrichment = await loadStatCardEnrichment(
+      resolved.region,
+      resolved.result.account_id,
+    );
+  } catch (err) {
+    console.error("discord: stat-card enrichment failed", err);
+  }
+
   await editInteractionResponse(interaction.token, {
-    embeds: [buildPlayerStatCard(resolved.region, info)],
+    embeds: [buildPlayerStatCard(resolved.region, info, enrichment)],
   });
 }
 
