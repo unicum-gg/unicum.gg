@@ -126,22 +126,22 @@ export function acquireWgToken(region: Region): Promise<void> {
 // NA/ASIA portals stayed reachable. The threshold (and ban state) is
 // tracked separately per `<region>.wargaming.net` endpoint.
 //
-// Bumped 1 → 10 across all regions on 2026-06-21. Justification: a local
-// stress test from a macbook IP sustained 12 RPS against ASIA for ~6 min
-// with zero WAF signal (no 30s timeouts, no 5xx). Real demand is well
-// under 1 RPS — the bucket is there to drain bursts when 5-10 users hit
-// cold clan pages simultaneously (was queueing them to 15-18 min total).
-// Watch logs for the 30s-exact timeout cluster (G-Core WAF signature)
-// and revert this region's ceiling if it appears.
+// Bumped 1 → 10 on 2026-06-21 based on a local-IP stress test. That test
+// was misleading: from the OVH VPS IP the EU G-Core silently banned within
+// the hour (10k+ portal connect timeouts against 92.223.23.118/23 — the
+// documented WAF signature). Reverting all three back to 1 RPS sustained.
+// The negri/wotclans empirical ceiling stands: 1 RPS is what runs long-term
+// without bans. Do not re-bump without validating from the actual prod IP
+// for at least 30 min sustained.
 const PORTAL_RPS: Record<Region, number> = {
-  [Region.EU]: 10,
-  [Region.NA]: 10,
-  [Region.ASIA]: 10,
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
 };
 const PORTAL_BURST: Record<Region, number> = {
-  [Region.EU]: 10,
-  [Region.NA]: 10,
-  [Region.ASIA]: 10,
+  [Region.EU]: 1,
+  [Region.NA]: 1,
+  [Region.ASIA]: 1,
 };
 
 const portalLimiters: Record<Region, RateLimiter> = {
