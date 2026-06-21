@@ -23,6 +23,10 @@ export async function GET() {
     // Mirror for the players language landings. See
     // `src/app/players/lang/sitemap.xml/route.ts`.
     "/players/lang/sitemap.xml",
+    // Per-region tank index + per-tank stat pages (~2.1k URLs across the
+    // three regions). Single non-paginated sub-sitemap, see
+    // `src/app/tanks/sitemap.xml/route.ts`.
+    "/tanks/sitemap.xml",
   ];
   try {
     const counts = await getSitemapCounts();

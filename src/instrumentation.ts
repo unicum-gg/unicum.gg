@@ -47,4 +47,9 @@ export async function register() {
     "@/services/wargaming/wot/players/top/cron"
   );
   startTopPlayersCron();
+
+  const { startTankAggregatesCron } = await import(
+    "@/services/tanks/aggregates-cron"
+  );
+  startTankAggregatesCron();
 }

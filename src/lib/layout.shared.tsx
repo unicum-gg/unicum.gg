@@ -24,6 +24,10 @@ export async function baseOptions(): Promise<BaseLayoutProps> {
       },
       {
         type: "custom",
+        children: <NavSectionLink text="Tanks" section="tanks" />,
+      },
+      {
+        type: "custom",
         secondary: true,
         children: <RatingSelector />,
       },

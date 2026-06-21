@@ -60,6 +60,13 @@ const ROUTES = {
         : pathcat("/:region/clans/lang/:language", { region, language });
     return strict ? `${base}/strict` : base;
   },
+
+  // - Tanks (per-region vehicle index + per-tank community stats). Always
+  // region-prefixed, like player/clan profiles, so the ~90 tank links on a
+  // profile point at the same region the profile lives in.
+  TANKS: (region: Region) => pathcat("/:region/tanks", { region }),
+  TANK: (region: Region, tankId: number | string) =>
+    pathcat("/:region/tanks/:tankId", { region, tankId }),
 };
 
 export default ROUTES;
