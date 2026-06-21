@@ -7,6 +7,7 @@ export * from "./players";
 export * from "./player-clan-history";
 export * from "./player-refresh-queue";
 export * from "./player-snapshots";
+export * from "./tank-aggregates";
 export * from "./tank-snapshots";
 export * from "./top-clans";
 export * from "./top-players";
