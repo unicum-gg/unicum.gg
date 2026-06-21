@@ -6,11 +6,12 @@ import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
 import { Region, regionFromPathname } from "@/services/wargaming/wot";
 
-type Section = "players" | "clans";
+type Section = "players" | "clans" | "top";
 
 const ROUTE_FOR: Record<Section, (region: Region) => string> = {
   players: ROUTES.PLAYERS,
   clans: ROUTES.CLANS,
+  top: ROUTES.TOP,
 };
 
 /**
