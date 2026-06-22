@@ -16,6 +16,10 @@ export const env = createEnv({
     // so placements ship "dark" with zero visual impact and light up via one flip.
     // Kept OFF in dev/preview so a unit never fires there.
     NEXT_PUBLIC_ADS_ENABLED: z.enum(["true", "false"]).optional(),
+    // Active ad network. The CMO revenue model (UNI-47) flags the network as the
+    // dominant revenue lever (gaming-vertical Ezoic/Playwire = 3-5x AdSense RPM), so
+    // AdSlot is network-agnostic and this selects the adapter. Defaults to adsense.
+    NEXT_PUBLIC_AD_NETWORK: z.enum(["adsense", "ezoic", "playwire"]).optional(),
   },
   runtimeEnv: {
     WARGAMING_APPLICATION_ID_EU: process.env.WARGAMING_APPLICATION_ID_EU,
@@ -25,6 +29,7 @@ export const env = createEnv({
     CRON_SECRET: process.env.CRON_SECRET,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_ADS_ENABLED: process.env.NEXT_PUBLIC_ADS_ENABLED,
+    NEXT_PUBLIC_AD_NETWORK: process.env.NEXT_PUBLIC_AD_NETWORK,
   },
   emptyStringAsUndefined: true,
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,

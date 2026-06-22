@@ -2,14 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
-import {
-  AD_CLIENT,
-  AD_FORMAT_CONFIG,
-  AdFormat,
-  adsEnabled,
-  reservedHeightFor,
-} from "./ad-config";
+import { AD_FORMAT_CONFIG, AdFormat, adsEnabled, reservedHeightFor } from "./ad-config";
 import { useAdSlotAllowed } from "./ad-density";
+import { AD_NETWORK_SLOTS, activeAdNetwork } from "./ad-network";
 
 /**
  * Start loading the unit once it is within this distance of the viewport. Keeps
@@ -18,20 +13,14 @@ import { useAdSlotAllowed } from "./ad-density";
  */
 const LAZY_LOAD_MARGIN = "300px";
 
-declare global {
-  interface Window {
-    adsbygoogle?: Array<Record<string, unknown>>;
-  }
-}
-
 interface AdSlotProps {
   /**
-   * data-ad-slot id from the AdSense dashboard. Placements pass a placeholder id now
-   * and swap the real id once UNI-43 delivers it (no other code change needed).
+   * data-ad-slot id from the ad network dashboard. Placements pass a placeholder id
+   * now and swap the real id once UNI-43 delivers it (no other code change needed).
    */
   slot: string;
   format: AdFormat;
-  /** Required for in-feed fluid units (data-ad-layout-key from the AdSense unit). */
+  /** Required for in-feed fluid units (data-ad-layout-key from the network unit). */
   layoutKey?: string;
   /** Overrides data-full-width-responsive; defaults per format. */
   responsive?: boolean;
@@ -39,22 +28,25 @@ interface AdSlotProps {
 }
 
 /**
- * A deliberately placed, CLS-safe, consent-gated AdSense display unit.
+ * A deliberately placed, CLS-safe, consent-gated, network-agnostic ad display unit.
+ *
+ * AdSlot owns everything that does not depend on the ad network: reserved space
+ * (CLS ~0), IntersectionObserver lazy-load (LCP protection), the NEXT_PUBLIC_ADS_ENABLED
+ * flag + Consent Mode v2 gating, the density cap, and the "Advertisement" label. The
+ * actual unit markup and activation come from the active network's adapter (see
+ * ad-network.ts), so moving AdSense -> Ezoic -> Playwire is a config swap, not a rewrite
+ * (the dominant revenue lever per the CMO model, UNI-47).
  *
  * Guarantees:
  *   - CLS ~0: the container reserves its final height before anything loads, so the
  *     ad never pushes content (Core Web Vitals / SEO deliverable, must stay CLS 0.00).
- *   - Lazy: the unit only pushes once it is within ~300px of the viewport, so it never
- *     blocks LCP.
- *   - Consent-gated: it reuses the existing Consent Mode v2 + Google Funding Choices
- *     plumbing in src/components/script/index.tsx. adsbygoogle queues the push; Consent
- *     Mode v2 gates the actual ad-server call until the CMP resolves consent (denied
- *     users still get non-personalized ads, which is the documented Google pattern).
- *     We never bypass Consent Mode.
- *   - Density-capped: respects AdDensityProvider (3 desktop / 2 mobile).
+ *   - Lazy: the adapter only mounts (and pushes) once the slot is within ~300px of the
+ *     viewport, so it never blocks LCP.
+ *   - Consent-gated + density-capped (3 desktop / 2 mobile via AdDensityProvider).
  *
  * Renders nothing unless NEXT_PUBLIC_ADS_ENABLED === "true" (board sets it in prod once
- * real slot ids exist, UNI-43), so it ships safely "dark" everywhere until then.
+ * real slot ids exist, UNI-43) and an adapter exists for the active network, so it ships
+ * safely "dark" everywhere until then.
  */
 export function AdSlot({
   slot,
@@ -66,10 +58,10 @@ export function AdSlot({
   const allowed = useAdSlotAllowed();
   const containerRef = useRef<HTMLDivElement>(null);
   const [inView, setInView] = useState(false);
-  const pushedRef = useRef(false);
 
   const config = AD_FORMAT_CONFIG[format];
-  const willLoad = allowed !== false && adsEnabled();
+  const NetworkSlot = AD_NETWORK_SLOTS[activeAdNetwork()];
+  const willLoad = allowed !== false && adsEnabled() && Boolean(NetworkSlot);
 
   useEffect(() => {
     if (!willLoad) return;
@@ -88,18 +80,7 @@ export function AdSlot({
     return () => observer.disconnect();
   }, [willLoad]);
 
-  useEffect(() => {
-    if (!inView || pushedRef.current) return;
-    pushedRef.current = true;
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-    } catch {
-      // adsbygoogle.js not ready yet, blocked, or consent path inactive. The reserved
-      // box stays in place, so this is a safe no-op rather than an exception.
-    }
-  }, [inView]);
-
-  if (!willLoad) return null;
+  if (!willLoad || !NetworkSlot) return null;
 
   const isResponsive = responsive ?? config.responsiveDefault;
 
@@ -119,21 +100,11 @@ export function AdSlot({
           <span className="block w-full text-center text-[10px] leading-4 tracking-wide text-muted-foreground uppercase">
             Advertisement
           </span>
-          <ins
-            className="adsbygoogle block"
-            style={{
-              display: "block",
-              width: "100%",
-              minHeight: config.reservedHeight,
-            }}
-            data-ad-client={AD_CLIENT}
-            data-ad-slot={slot}
-            data-ad-format={config.adFormat}
-            {...(config.adLayout ? { "data-ad-layout": config.adLayout } : {})}
-            {...(format === AdFormat.InFeed && layoutKey
-              ? { "data-ad-layout-key": layoutKey }
-              : {})}
-            data-full-width-responsive={isResponsive ? "true" : "false"}
+          <NetworkSlot
+            slot={slot}
+            format={format}
+            layoutKey={layoutKey}
+            responsive={isResponsive}
           />
         </>
       ) : null}

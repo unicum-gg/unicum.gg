@@ -1,65 +1,102 @@
 # Ad revenue model vs flat hosting cost (UNI-39 Deliverable B)
 
-Margin proof for the `<AdSlot>` rollout. The question is not "can ads pay for a CDN bill"
-(the ad JS is served from Google's CDN, not our VPS) but "at what monthly traffic does
-display revenue clear the flat OVH cost." Both company metrics must hold: grow MAU AND
-keep monthly contribution margin above zero.
+Margin proof for the `<AdSlot>` rollout, reconciled with the CMO economic model (UNI-47)
+and live GSC reach data. Both company metrics must hold: grow MAU AND keep monthly
+contribution margin above zero.
+
+## The decision that matters: network, not geometry
+
+The placement plan is 100% AdSense and the CEO confirmed AdSense fill/RPM is near-zero.
+**AdSense-only is a near-zero revenue ceiling.** The dominant revenue lever is the ad
+*network*: a gaming-vertical network (Ezoic now, Playwire/Snigel at scale) delivers 3-5x
+raw AdSense RPM. At tomato.gg-scale traffic that is a ~$3.75k vs ~$25k/mo swing.
+
+This is why `<AdSlot>` is **network-agnostic** (see `src/components/ad/ad-network.ts`): the
+unit markup + activation live behind a per-network adapter and the active network is an env
+flag (`NEXT_PUBLIC_AD_NETWORK`, default `adsense`). Moving AdSense -> Ezoic -> Playwire is
+adding an adapter and flipping the flag, never an AdSlot rewrite. We do not pour engineering
+into AdSense-specific plumbing that cannot be repointed.
+
+Network roadmap (CMO, sequenced): (1) now, low volume - apply to Ezoic (no traffic minimum,
+~2-3x AdSense), AdSense stays fallback; (2) at 50k+ sessions/mo - Playwire/Snigel (gaming
+header bidding, $6-12 on tool/tank pages).
 
 ## Cost side: flat
 
-- Hosting is a single OVH VPS, FIXED at roughly EUR 20-40/mo (~$22-44/mo, CEO to confirm
-  invoice). It does not scale with pageviews.
-- AdSense client JS (`adsbygoogle.js`) loads from Google's CDN and renders client-side.
-  Each ad-served pageview adds about $0 of marginal infra cost on our box and does not move
-  the single-box saturation point (which is driven by per-second crons x3 regions + WG
-  fetch + SSR, not by serving ad markup).
-- Therefore margin = ad revenue - ~flat cost, and margin scales close to linearly with
-  traffic once break-even is crossed. The real risk is not infra cost: it is a CWV/CLS
-  regression eroding the SEO that produces the pageviews. That is exactly why `<AdSlot>`
-  centralizes reserved space (CLS ~0) and IntersectionObserver lazy-load (LCP protection).
+- Hosting is a single OVH VPS, FIXED at ~EUR 20-40/mo (~$22-44/mo). It does not scale with
+  pageviews.
+- Ad JS (AdSense or a mediation network) serves from the network's CDN, not our VPS. Each
+  ad-served pageview adds ~$0 marginal infra cost and does not move the single-box saturation
+  point (driven by per-second crons x3 regions + WG fetch + SSR, not ad markup).
+- So margin = ad revenue - ~flat cost, scaling near-linearly with traffic above break-even.
+  The real risk is not infra cost: it is a CWV/CLS regression eroding the SEO that produces
+  the pageviews. That is why `<AdSlot>` enforces reserved space (CLS ~0) + lazy-load (LCP).
 
-## Revenue side: page RPM x pageviews
+## RPM bands (CMO, validated gaming display 2026)
 
-Formula: `monthly revenue = (pageviews / 1000) x blended page RPM`.
+| Page type | Gaming-network RPM | Raw AdSense RPM | Live today? |
+|---|---|---|---|
+| Thin player profile | $1-4 | ~$0.30-1.00 | yes (2.34M pages) |
+| Leaderboard / clan listing | $2-5 | ~$0.50-1.50 | yes |
+| Tank / comparison / tool / guide | $6-12 | ~$1.50-3 | NO (UNI-19, PR #5 unmerged) |
+| Blended near-term (profiles dominate volume) | ~$2-4 | ~$0.50-1.00 | - |
 
-Blended page RPM uses the indexable-URL geo split as a proxy (~75% EU / 15% NA / 10%
-Asia, from the EU 71 / NA 14 / Asia 10 sitemap player-chunk split):
+Profiles are the volume engine but the lowest RPM band. Tank pages are the highest band and
+unlock the upside; sequence ad value to follow high-RPM content as it ships.
 
-- NA display RPM ~$6-12
-- EU display RPM ~$2-5 (depressed by Consent Mode v2 denied-by-default)
-- Asia/CIS display RPM ~$0.5-2
+## Break-even vs hosting
 
-That blend lands a conservative-to-optimistic page RPM band of roughly $2.00-$6.00.
-Ezoic / Playwire mediation (UNI-18 scope) is modeled as a 1.5-2x upside, NOT baseline.
-Baseline assumes current AdSense fill/RPM ~0 today; this models EXPECTED yield once real
-`data-ad-slot` ids are placed (UNI-43).
+Break-even pageviews/mo = cost / RPM x 1000:
 
-| Scenario     | Blended page RPM | Monthly cost | Break-even pageviews/mo |
-|--------------|------------------|--------------|-------------------------|
-| Conservative | $2.00            | $44          | ~22,000                 |
-| Mid          | $3.50            | $33          | ~9,400                  |
-| Optimistic   | $6.00            | $22          | ~3,700                  |
+| RPM scenario | pv/mo to cover $22 | pv/mo to cover $44 |
+|---|---|---|
+| AdSense $0.75 | ~29,000 | ~59,000 |
+| Network $3 | ~7,300 | ~14,700 |
+| Network+tank $6 | ~3,700 | ~7,300 |
 
-Every pageview above the break-even row is pure contribution margin.
+The network choice decides whether ads merely cover the VPS or fund real margin.
 
-## Day-one verdict
+## Scenario monthly ad revenue (blended RPM x pageviews)
 
-Ship all placements regardless of current traffic. Rationale:
+| Pageviews/mo | AdSense $0.75 | Network $3 | Network+tank $5 |
+|---|---|---|---|
+| 50k | $38 | $150 | $250 |
+| 200k | $150 | $600 | $1,000 |
+| 500k | $375 | $1,500 | $2,500 |
+| 1M | $750 | $3,000 | $5,000 |
+| 5M (~tomato.gg scale) | $3,750 | $15,000 | $25,000 |
 
-1. Cost is flat and marginal infra cost per ad-served pageview is ~0, so ads can only add
-   contribution margin, never subtract it (the downside is bounded by the CWV guard, which
-   `<AdSlot>` enforces).
-2. The reach engine is ~2.4M indexable player/clan URLs still ramping in the index. Even if
-   current pageviews sit below the conservative ~22k/mo break-even, the crossover arrives as
-   organic traffic ramps; placing units now means we capture margin the moment it does.
-3. Decision rule (per UNI-39): if live 30-day pageviews already exceed ~22k/mo, we are
-   margin-positive day one even at the conservative $2.00 RPM. If below, still ship (flat
-   cost) and track the ramp toward the mid ~9.4k and conservative ~22k thresholds.
+## Live reach reconciliation (GSC, 28d, sc-domain:unicum.gg)
 
-## Open input (does NOT block the build)
+The "pending Umami pageviews" open input is now resolved enough to finalize the verdict using
+real organic data the CMO pulled from GSC:
 
-The one number this model still needs plugged in is the live trailing-30-day pageview count
-per region from Umami (`cloud.umami.is`). It is not accessible from the CTO agent environment
-(no Umami credentials injected; SEO Gets has no unicum.gg property), so it is routed to the
-board / CMO. Once provided, drop it into the decision rule above to state which break-even row
-we are already past. The placement build (UNI-40/41/42) does not wait on it.
+| Metric (28d) | Value |
+|---|---|
+| Impressions | 941 |
+| Clicks | 7 |
+| Avg CTR | 0.74% |
+| Avg position | 9.9 |
+
+Reach is pure long-tail (individual player/clan profiles, 1-5 impressions each, homepage 21).
+Tank pages contribute 0 (highest-RPM band not live in reach terms either). Even at a generous
+10-20x clicks-to-total-pageviews multiple, we are **2-3 orders of magnitude below the lowest
+break-even floor (~3,700 pv/mo)**.
+
+## Day-one verdict (finalized)
+
+1. **Ship the units dark now.** Flat VPS cost, ~$0 marginal per ad-served pageview, and they
+   light up via one env flip (`NEXT_PUBLIC_ADS_ENABLED=true` after UNI-43 delivers slot ids).
+   No downside while reach is small; the CWV guard bounds the only real risk.
+2. **Ad revenue is ~$0 until reach grows. Ad infrastructure is not the binding constraint on
+   margin right now - reach is.** The monetization layer is being built ahead of the traffic
+   that makes it pay; that is correct only if reach ships in parallel.
+3. **Highest-leverage merge for the twin metrics is PR #5 (tank pages, UNI-19):** the #1 reach
+   surface AND the highest-RPM ad band. The ad PR (#12) and Discord are margin-safe dark and
+   lower urgency than the reach lever.
+4. **When network is chosen:** apply to Ezoic immediately (it lifts RPM 2-3x at any volume);
+   AdSlot already supports the swap with no code change beyond the adapter.
+
+Precise total-channel pv (Umami 30-day) remains a refinement, not a blocker: the GSC organic
+floor above is decisive, and Umami would only refine the exact denominator, not the conclusion.
+UNI-46 owns the post-deploy fill/RPM + pv reconcile against these tables once ads are live.
