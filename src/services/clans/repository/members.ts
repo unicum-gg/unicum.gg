@@ -12,6 +12,7 @@ import type { Region } from "@/services/wargaming/wot";
 import {
   type ClanMemberPeriodStats,
   type ClanMemberStats,
+  type ClanRole,
   getClanMembersStats,
 } from "@/services/wargaming/wot/clans/members";
 import { dedup, STALE_AFTER_MS } from "./internal";
@@ -33,7 +34,7 @@ function memberStatsFromRow(
   return {
     accountId: Number(row.accountId),
     name: row.name,
-    role: row.role,
+    role: row.role as ClanRole,
     roleLocalized: row.roleLocalized,
     roleRank: row.roleRank,
     daysInClan: row.daysInClan,

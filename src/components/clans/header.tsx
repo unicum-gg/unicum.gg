@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
 import {
   type ClanMemberStats,
+  ClanRole,
   overallPoints,
   d30Points,
 } from "@/services/wargaming/wot/clans/members";
@@ -154,6 +155,7 @@ export function ClanHeader({
           <InfoRow
             region={region}
             clan={clan}
+            members={members}
             className="hidden h-8 sm:flex"
             flagWrapperClassName="h-full"
           />
@@ -162,6 +164,7 @@ export function ClanHeader({
       <InfoRow
         region={region}
         clan={clan}
+        members={members}
         className="flex min-h-8 sm:hidden"
         flagWrapperClassName="h-6 self-end"
       />
@@ -208,14 +211,18 @@ function MetricColumn({
 function InfoRow({
   region,
   clan,
+  members,
   className,
   flagWrapperClassName,
 }: {
   region: Region;
   clan: ClanFullInfo;
+  members: ClanMemberStats[];
   className?: string;
   flagWrapperClassName?: string;
 }) {
+  const commanderName =
+    members.find((m) => m.role === ClanRole.Commander)?.name ?? clan.leaderName;
   return (
     <div className={cn("border-t border-fd-border", className)}>
       <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-1 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:py-0">
@@ -237,10 +244,10 @@ function InfoRow({
         <span>
           <span className="font-medium">Commander:</span>{" "}
           <Link
-            href={ROUTES.PLAYER(region, clan.leaderName)}
+            href={ROUTES.PLAYER(region, commanderName)}
             className="underline-offset-2 hover:underline"
           >
-            {clan.leaderName}
+            {commanderName}
           </Link>
         </span>
         {clan.isDisbanded && (

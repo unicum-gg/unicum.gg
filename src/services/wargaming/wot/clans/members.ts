@@ -32,6 +32,22 @@ type PortalMembersResponse = {
   items: PortalMemberRaw[];
 };
 
+export enum ClanRole {
+  Commander = "commander",
+  ExecutiveOfficer = "executive_officer",
+  PersonnelOfficer = "personnel_officer",
+  CombatOfficer = "combat_officer",
+  IntelligenceOfficer = "intelligence_officer",
+  Quartermaster = "quartermaster",
+  Diplomat = "diplomat",
+  Recruiter = "recruiter",
+  Treasurer = "treasurer",
+  JuniorOfficer = "junior_officer",
+  Private = "private",
+  Recruit = "recruit",
+  Reservist = "reservist",
+}
+
 export type ClanMemberPeriodStats = {
   battles: number;
   winsPercentage: number;
@@ -44,7 +60,7 @@ export type ClanMemberPeriodStats = {
 export type ClanMemberStats = {
   accountId: number;
   name: string;
-  role: string;
+  role: ClanRole;
   roleLocalized: string;
   roleRank: number;
   daysInClan: number;
@@ -125,7 +141,7 @@ export async function getClanMembersStats(
     return {
       accountId: m.id,
       name: m.name,
-      role: m.role.name,
+      role: m.role.name as ClanRole,
       roleLocalized: m.role.localized_name,
       roleRank: m.role.rank,
       daysInClan: m.days_in_clan ?? 0,
