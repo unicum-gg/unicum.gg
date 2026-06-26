@@ -11,7 +11,7 @@ import { type Region } from "@/services/wargaming/wot";
 // counts then describe the same population that the leaderboard ranks
 // from, so chip "fr 257" matches the actual hits behind `/players/lang/fr`.
 const CANDIDATE_POOL = 10000;
-const MIN_BATTLES = 20000;
+const MIN_BATTLES = 10000;
 const KEEP_RATIO = 0.5;
 
 export type PlayerLanguageStats = {

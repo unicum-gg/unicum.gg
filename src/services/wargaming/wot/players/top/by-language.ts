@@ -24,9 +24,11 @@ export type TopPlayerByLanguageResult = {
 // pl, de, ru, cs, sk, hu, sr, fr, hr, ro, be, tr, bs, fi, nl on EU);
 // niche languages may return fewer than `limit` rows, which is fine.
 const CANDIDATE_OVERSHOOT = 10000;
-// Mirror the homepage Overall leaderboard floor. At fewer than 20k
-// battles a player's cached WNX is statistical noise.
-const MIN_BATTLES = 20000;
+// Lower than the global Overall leaderboard floor (20k) because the
+// language-filtered pool is smaller — a 10k floor surfaces enough
+// candidates per language for niche communities to produce a useful
+// leaderboard. Below 10k WNX is statistical noise.
+const MIN_BATTLES = 10000;
 // Keep-ratio for the inference, matches `inferPlayerLanguages` in
 // `@/services/players/language-inference`. Any language scoring at least
 // half the player's top language survives.

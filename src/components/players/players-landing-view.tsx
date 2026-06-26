@@ -110,13 +110,13 @@ export async function PlayersLandingView({
                 <>
                   {REGION_LABEL[region]} players whose inferred clan-history
                   language is exclusively {langName}, ranked by <MetricInline />
-                  {" "}(minimum 20,000 battles).
+                  {" "}(minimum 10,000 battles).
                 </>
               ) : (
                 <>
                   {REGION_LABEL[region]} players whose inferred clan-history
                   language set includes {langName}, ranked by <MetricInline />
-                  {" "}(minimum 20,000 battles).
+                  {" "}(minimum 10,000 battles).
                 </>
               )
             ) : (
