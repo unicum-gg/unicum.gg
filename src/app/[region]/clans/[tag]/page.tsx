@@ -4,6 +4,7 @@ import { cache, Suspense } from "react";
 import { ExpandableDescription } from "@/components/clans/description";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
+import { PreviousClansTable } from "@/components/clans/previous-clans-table";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
 import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
@@ -21,6 +22,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { clanSchema } from "@/lib/schema-org";
+import { getPreviousClans } from "@/services/clans/previous-clans";
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanEventsCached } from "@/services/clans/repository/events";
 import { getClanMembersCached } from "@/services/clans/repository/members";
@@ -179,6 +181,12 @@ async function render(
           <PanelSeparator />
 
           <Suspense fallback={null}>
+            <PreviousClansStreamed region={region} clanId={clan.id} />
+          </Suspense>
+
+          <PanelSeparator />
+
+          <Suspense fallback={null}>
             <RecentActivityStreamed region={region} promise={eventsPromise} />
           </Suspense>
         </>
@@ -240,6 +248,27 @@ async function RecentActivityStreamed({
       </PanelHeader>
       <PanelContent className="p-0">
         <ClanRecentActivity region={region} events={events} />
+      </PanelContent>
+    </Panel>
+  );
+}
+
+async function PreviousClansStreamed({
+  region,
+  clanId,
+}: {
+  region: Region;
+  clanId: number;
+}) {
+  const rows = await getPreviousClans(region, clanId);
+  if (rows.length === 0) return null;
+  return (
+    <Panel>
+      <PanelHeader>
+        <PanelTitle>Previous clans</PanelTitle>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        <PreviousClansTable region={region} rows={rows} />
       </PanelContent>
     </Panel>
   );
