@@ -2,8 +2,8 @@ import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import { db } from "@/services/db";
 import {
+  clanMembersByRegion,
   clansByRegion,
-  playerSnapshotsByRegion,
   playersByRegion,
 } from "@/services/db/schema";
 import { type Region } from "@/services/wargaming/wot";
@@ -39,12 +39,13 @@ async function getTopClansByLanguageUncached(
   const col = VALID_METRIC_COLUMNS[metric];
   if (!col) throw new Error(`top-clans by-language: unknown metric ${metric}`);
   const players = playersByRegion[region];
-  const playerSnapshots = playerSnapshotsByRegion[region];
+  const clanMembers = clanMembersByRegion[region];
   const clans = clansByRegion[region];
   const metricCol = sql.raw(`p."${col}"`);
-  // Battle-weighted average to match the in-app computeMetrics in
-  // components/clans/header. Language filter applied at the clan-join stage
-  // so we don't waste compute averaging across clans we'll discard.
+  // Battle-weighted average over portal-derived membership (clan_members),
+  // matching exactly the per-member set + weight that the clan page header
+  // uses in components/clans/header. Language filter applied at the
+  // clan-join stage so we don't waste compute on clans we'll discard.
   // Strict mode: clan declared ONLY this language (`languages = ['de']`),
   // not `['de', 'en']`. Falls back to ANY when no language filter is set.
   const langClause = language
@@ -54,32 +55,22 @@ async function getTopClansByLanguageUncached(
     : sql``;
   const minMembers = language ? MIN_MEMBERS_BY_LANGUAGE : MIN_MEMBERS_GLOBAL;
   const rows = (await db.execute(sql`
-    WITH latest_memberships AS (
-      SELECT DISTINCT ON (ps.player_id)
-        ps.player_id,
-        ps.clan_id,
-        ps.battles
-      FROM ${playerSnapshots} ps
-      WHERE ps.clan_id IS NOT NULL
-      ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
-    ),
-    clan_stats AS (
+    WITH clan_stats AS (
       SELECT
-        lm.clan_id,
-        COUNT(*)::int AS members_in_db,
+        cm.clan_id,
         COUNT(${metricCol})::int AS rated_members_count,
         (
-          SUM(${metricCol} * lm.battles)
-            FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0)
+          SUM(${metricCol} * cm.overall_battles)
+            FILTER (WHERE ${metricCol} IS NOT NULL AND cm.overall_battles > 0)
           / NULLIF(
-              SUM(lm.battles)
-                FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0),
+              SUM(cm.overall_battles)
+                FILTER (WHERE ${metricCol} IS NOT NULL AND cm.overall_battles > 0),
               0
             )
         )::float8 AS avg_value
-      FROM latest_memberships lm
-      INNER JOIN ${players} p ON p.id = lm.player_id
-      GROUP BY lm.clan_id
+      FROM ${clanMembers} cm
+      INNER JOIN ${players} p ON p.account_id = cm.account_id
+      GROUP BY cm.clan_id
       HAVING COUNT(${metricCol}) > 0
     )
     SELECT
@@ -137,9 +128,12 @@ const getTopClansByLanguageCached = unstable_cache(
 
 /**
  * Region-scoped top clans, optionally filtered by language code. 10-minute
- * cache: the underlying DISTINCT ON over the snapshots table is heavy and
- * a leaderboard tolerates that staleness. `strict` requires the clan to
- * declare ONLY that single language; ignored when `language` is null.
+ * cache: even though the new clan_members-based aggregation is much cheaper
+ * than the old player_snapshots DISTINCT ON, the underlying member set only
+ * moves on portal refresh (per-clan, on-demand + by clan-backfill-cron), so
+ * 10 minutes of staleness is well below the data's actual mutation rate.
+ * `strict` requires the clan to declare ONLY that single language; ignored
+ * when `language` is null.
  */
 export function getTopClansByLanguage(
   region: Region,

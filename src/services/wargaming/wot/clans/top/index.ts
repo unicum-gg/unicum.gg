@@ -1,7 +1,7 @@
 import { asc, eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import {
-  playerSnapshotsByRegion,
+  clanMembersByRegion,
   playersByRegion,
   topClansByRegion,
 } from "@/services/db/schema";
@@ -24,7 +24,6 @@ const ENRICH_CANDIDATES = 30;
 
 type RankedClan = {
   clan_id: number;
-  members_in_db: number;
   rated_members_count: number;
   avg_wnx: number;
 };
@@ -43,62 +42,53 @@ export async function computeTopClansByMetric(
   metric: string,
   limit: number,
 ): Promise<TopClanResult[]> {
-  // Single SQL aggregation: for each player take the latest snapshot's
-  // clan_id + battles (DISTINCT ON), join the chosen metric column on
-  // the players row (cached by snapshot-cron), then GROUP BY clan.
-  // Average is battle-weighted so a freshly-recruited noob with 1 battle
-  // and freak rating doesn't drag the clan rank; matches the in-app
-  // computeMetrics in components/clans/header.
+  // Aggregate over clan_members (portal-derived membership, refreshed
+  // per-clan on demand + by clan-backfill-cron) JOINed with players for
+  // the cached metric column. Battle weight comes from clan_members
+  // overall_battles (= portal `battles_count` at refresh time), matching
+  // exactly what `computeMetrics` in components/clans/header uses — so the
+  // leaderboard value lines up with the clan page header.
+  //
+  // Previously this scanned player_snapshots with DISTINCT ON to derive
+  // memberships, which was heavier and let stale snapshots (24h) drift
+  // the rank vs the portal-truth shown on the clan page.
   const col = VALID_METRIC_COLUMNS[metric];
   if (!col) throw new Error(`computeTopClansByMetric: unknown metric ${metric}`);
   const players = playersByRegion[region];
-  const playerSnapshots = playerSnapshotsByRegion[region];
+  const clanMembers = clanMembersByRegion[region];
   const metricCol = sql.raw(`p."${col}"`);
   const rows = (await db.execute(sql`
-    WITH latest_memberships AS (
-      SELECT DISTINCT ON (ps.player_id)
-        ps.player_id,
-        ps.clan_id,
-        ps.battles
-      FROM ${playerSnapshots} ps
-      WHERE ps.clan_id IS NOT NULL
-      ORDER BY ps.player_id, ps.taken_at DESC, ps.id DESC
-    )
     SELECT
-      lm.clan_id,
-      COUNT(*)::int AS members_in_db,
+      cm.clan_id,
       COUNT(${metricCol})::int AS rated_members_count,
       (
-        SUM(${metricCol} * lm.battles)
-          FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0)
+        SUM(${metricCol} * cm.overall_battles)
+          FILTER (WHERE ${metricCol} IS NOT NULL AND cm.overall_battles > 0)
         / NULLIF(
-            SUM(lm.battles)
-              FILTER (WHERE ${metricCol} IS NOT NULL AND lm.battles > 0),
+            SUM(cm.overall_battles)
+              FILTER (WHERE ${metricCol} IS NOT NULL AND cm.overall_battles > 0),
             0
           )
       )::float8 AS avg_value
-    FROM latest_memberships lm
-    INNER JOIN ${players} p ON p.id = lm.player_id
-    GROUP BY lm.clan_id
-    -- Filter on RATED members, not the raw DB count. A clan can declare
-    -- 90+ members but only a handful of those accounts actually play —
-    -- those few alts with 1-3 battles at 100% WR can produce absurd
-    -- battle-weighted averages (e.g. DRAKS, the Dragon Ball-themed
-    -- troll clan with 4,719 avg WNX from 14 actives). Requiring 50+
-    -- rated members forces a real player base before the clan ranks.
+    FROM ${clanMembers} cm
+    INNER JOIN ${players} p ON p.account_id = cm.account_id
+    GROUP BY cm.clan_id
+    -- Filter on RATED members. A clan can declare 90+ members but only
+    -- a handful actually play — those few alts with 1-3 battles at 100%
+    -- WR can produce absurd battle-weighted averages (e.g. DRAKS, the
+    -- Dragon Ball-themed troll clan with 4,719 avg WNX from 14 actives).
+    -- Requiring 50+ rated members forces a real player base before rank.
     HAVING COUNT(${metricCol}) >= ${MIN_MEMBERS}
     ORDER BY avg_value DESC NULLS LAST
     LIMIT ${ENRICH_CANDIDATES}
   `)) as unknown as Array<{
     clan_id: string | number;
-    members_in_db: number;
     rated_members_count: number;
     avg_value: number;
   }>;
 
   const candidates: RankedClan[] = rows.map((r) => ({
     clan_id: Number(r.clan_id),
-    members_in_db: r.members_in_db,
     rated_members_count: r.rated_members_count,
     avg_wnx: Number(r.avg_value),
   }));
