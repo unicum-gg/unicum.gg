@@ -30,6 +30,24 @@ export function proxy(req: NextRequest) {
     }
   }
 
+  // Serve a Markdown rendering of any page through two triggers: a `.md`
+  // suffix on the URL (shareable, indexable) or an `Accept: text/markdown`
+  // header (for agents and LLMs). Both rewrite to the `/api/md/[...slug]`
+  // route, which re-fetches the page HTML and converts `#page-content`.
+  // Runs after the region redirect so `.md` requests are region-normalized
+  // first. The fetch the route makes carries `Accept: text/html`, so it
+  // never re-enters this branch.
+  const accept = req.headers.get("accept") || "";
+  const isMdSuffix = pathname.endsWith(".md");
+  if (isMdSuffix || accept.includes("text/markdown")) {
+    const clean = isMdSuffix ? pathname.slice(0, -".md".length) : pathname;
+    const slug =
+      clean === "/" || clean === "" ? "index" : clean.replace(/^\//, "");
+    const url = req.nextUrl.clone();
+    url.pathname = `/api/md/${slug}`;
+    return NextResponse.rewrite(url);
+  }
+
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(PATHNAME_HEADER, pathname);
   const response = NextResponse.next({ request: { headers: requestHeaders } });

@@ -60,7 +60,7 @@ export default async function RootLayout({
           <RatingMetricRoot />
           <BuildBanner />
           <HomeLayout {...layoutProps}>
-            {children}
+            <div id="page-content">{children}</div>
             <Footer />
           </HomeLayout>
           <Toaster />

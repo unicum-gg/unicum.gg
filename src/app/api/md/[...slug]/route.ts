@@ -1,0 +1,105 @@
+import { encodingForModel } from "js-tiktoken";
+import { parse } from "node-html-parser";
+import TurndownService from "turndown";
+import { gfm } from "turndown-plugin-gfm";
+import APP from "@/constants/app";
+
+const turndown = new TurndownService({
+  headingStyle: "atx",
+  codeBlockStyle: "fenced",
+  bulletListMarker: "-",
+});
+
+// The site is table-heavy (leaderboards, per-tank stats). The GFM plugin
+// teaches Turndown to emit Markdown tables, strikethrough and task lists
+// instead of dropping the `<table>` markup.
+turndown.use(gfm);
+
+// Pages embed JSON-LD and inline styles inside the content container; drop
+// them so their raw payloads don't leak into the Markdown.
+turndown.remove(["script", "style", "noscript"]);
+
+/**
+ * Point an internal page link at its Markdown rendering so the document stays
+ * navigable in Markdown. Leaves external links, protocol-relative URLs,
+ * anchors, other schemes (`mailto:`, …) and paths that already carry a file
+ * extension (`/sitemap.xml`, an existing `.md`) untouched. Query strings and
+ * hashes are preserved.
+ */
+function toMarkdownHref(href: string): string {
+  if (!href.startsWith("/") || href.startsWith("//")) return href;
+
+  const splitAt = href.search(/[?#]/);
+  const pathPart = splitAt === -1 ? href : href.slice(0, splitAt);
+  const suffix = splitAt === -1 ? "" : href.slice(splitAt);
+
+  if (pathPart === "/") return `/index.md${suffix}`;
+
+  const clean = pathPart.endsWith("/") ? pathPart.slice(0, -1) : pathPart;
+  const lastSegment = clean.slice(clean.lastIndexOf("/") + 1);
+  if (lastSegment.includes(".")) return href;
+
+  return `${clean}.md${suffix}`;
+}
+
+/**
+ * Markdown rendering of any page. Reached via `proxy.ts`, which rewrites a
+ * `.md` suffix or an `Accept: text/markdown` request to `/api/md/<path>`.
+ *
+ * We re-fetch the page over HTTP and convert its `#page-content` container
+ * (the layout wraps `{children}` in it) so nav and footer never leak in.
+ */
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ slug: string[] }> },
+) {
+  const { slug } = await params;
+  const path = slug[0] === "index" ? "" : slug.join("/");
+
+  // Fetch from the incoming request's own origin so this works identically
+  // in local dev, preview and production. Fall back to the configured URL if
+  // the origin can't be derived.
+  let origin = APP.URL;
+  try {
+    origin = new URL(request.url).origin;
+  } catch {}
+
+  const response = await fetch(`${origin}/${path}`, {
+    headers: { Accept: "text/html" },
+  });
+
+  if (!response.ok) {
+    return new Response("Page not found", { status: 404 });
+  }
+
+  const html = await response.text();
+  const content = parse(html).querySelector("#page-content");
+
+  if (!content) {
+    return new Response("Page content not found", { status: 404 });
+  }
+
+  // Turndown's HTML parser drops `<svg>` elements entirely, so icon-only SVGs
+  // that carry their meaning in `aria-label` (e.g. the rank medals for the top
+  // 1/2/3) would vanish. Surface the label as text before conversion.
+  for (const svg of content.querySelectorAll("svg[aria-label]")) {
+    svg.replaceWith(`<span>${svg.getAttribute("aria-label")}</span>`);
+  }
+
+  // Keep internal navigation in Markdown: rewrite `<a href>` to the `.md` URL.
+  for (const anchor of content.querySelectorAll("a[href]")) {
+    const href = anchor.getAttribute("href");
+    if (href) anchor.setAttribute("href", toMarkdownHref(href));
+  }
+
+  const markdown = turndown.turndown(content.innerHTML);
+  const tokenCount = encodingForModel("gpt-4o").encode(markdown).length;
+
+  return new Response(markdown, {
+    headers: {
+      "Content-Type": "text/markdown; charset=utf-8",
+      "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
+      "x-markdown-tokens": String(tokenCount),
+    },
+  });
+}
