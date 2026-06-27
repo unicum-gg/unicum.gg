@@ -19,6 +19,19 @@ turndown.use(gfm);
 // them so their raw payloads don't leak into the Markdown.
 turndown.remove(["script", "style", "noscript"]);
 
+// Build the tiktoken encoder once (it loads a large BPE rank table) and reuse
+// it. Token counting is best-effort: the `x-markdown-tokens` header is
+// optional, so a failure here must never break the Markdown response.
+let encoder: ReturnType<typeof encodingForModel> | null = null;
+function countTokens(text: string): number | null {
+  try {
+    encoder ??= encodingForModel("gpt-4o");
+    return encoder.encode(text).length;
+  } catch {
+    return null;
+  }
+}
+
 /**
  * Point an internal page link at its Markdown rendering so the document stays
  * navigable in Markdown. Leaves external links, protocol-relative URLs,
@@ -64,9 +77,14 @@ export async function GET(
     origin = new URL(request.url).origin;
   } catch {}
 
-  const response = await fetch(`${origin}/${path}`, {
-    headers: { Accept: "text/html" },
-  });
+  let response: Response;
+  try {
+    response = await fetch(`${origin}/${path}`, {
+      headers: { Accept: "text/html" },
+    });
+  } catch {
+    return new Response("Upstream fetch failed", { status: 502 });
+  }
 
   if (!response.ok) {
     return new Response("Page not found", { status: 404 });
@@ -93,13 +111,13 @@ export async function GET(
   }
 
   const markdown = turndown.turndown(content.innerHTML);
-  const tokenCount = encodingForModel("gpt-4o").encode(markdown).length;
 
-  return new Response(markdown, {
-    headers: {
-      "Content-Type": "text/markdown; charset=utf-8",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
-      "x-markdown-tokens": String(tokenCount),
-    },
-  });
+  const headers: Record<string, string> = {
+    "Content-Type": "text/markdown; charset=utf-8",
+    "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
+  };
+  const tokenCount = countTokens(markdown);
+  if (tokenCount !== null) headers["x-markdown-tokens"] = String(tokenCount);
+
+  return new Response(markdown, { headers });
 }
