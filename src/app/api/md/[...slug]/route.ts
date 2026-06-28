@@ -2,7 +2,6 @@ import { encodingForModel } from "js-tiktoken";
 import { parse } from "node-html-parser";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
-import APP from "@/constants/app";
 
 const turndown = new TurndownService({
   headingStyle: "atx",
@@ -69,18 +68,18 @@ export async function GET(
   const { slug } = await params;
   const path = slug[0] === "index" ? "" : slug.join("/");
 
-  // Fetch from the incoming request's own origin so this works identically
-  // in local dev, preview and production. Fall back to the configured URL if
-  // the origin can't be derived.
-  let origin = APP.URL;
-  try {
-    origin = new URL(request.url).origin;
-  } catch {}
+  // Use localhost so the self-fetch never routes through Cloudflare or any
+  // external network. The public URL hairpins through the CDN and fails in
+  // production (Railway containers cannot reliably reach themselves via the
+  // public hostname). PORT is set by Railway; 3000 is the Next.js default.
+  const port = process.env.PORT ?? 3000;
+  const origin = `http://localhost:${port}`;
 
   let response: Response;
   try {
     response = await fetch(`${origin}/${path}`, {
       headers: { Accept: "text/html" },
+      cache: "no-store",
     });
   } catch {
     return new Response("Upstream fetch failed", { status: 502 });
