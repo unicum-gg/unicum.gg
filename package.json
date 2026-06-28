@@ -19,6 +19,7 @@
     "env:init": "tsx scripts/init-env.ts"
   },
   "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
     "@onruntime/next-sitemap": "^0.9.5",
     "@phosphor-icons/react": "^2.1.10",
     "@scalar/api-reference-react": "^0.9.49",
