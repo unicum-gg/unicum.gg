@@ -24,6 +24,14 @@ function gitRevision(): string | undefined {
 
 const BUILD_ID = gitRevision();
 
+// Advertise agent-discovery resources on the homepages via a Link header
+// (RFC 8288 / RFC 9727 section 3). Relative URIs resolve against the request,
+// so no domain is hard-coded.
+const AGENT_DISCOVERY_LINK =
+  '</.well-known/api-catalog>; rel="api-catalog", ' +
+  '</api/openapi.json>; rel="service-desc", ' +
+  '</docs>; rel="service-doc"';
+
 const nextConfig: NextConfig = {
   ...(BUILD_ID
     ? {
@@ -81,6 +89,19 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/favicon.ico", destination: "/icon.svg", permanent: true },
+    ];
+  },
+  async headers() {
+    return [
+      // Homepage (EU) and the per-region homepages an agent may land on.
+      {
+        source: "/",
+        headers: [{ key: "Link", value: AGENT_DISCOVERY_LINK }],
+      },
+      {
+        source: "/:region(eu|na|asia)",
+        headers: [{ key: "Link", value: AGENT_DISCOVERY_LINK }],
+      },
     ];
   },
 };
