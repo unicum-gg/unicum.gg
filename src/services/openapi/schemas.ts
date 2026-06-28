@@ -114,12 +114,12 @@ export function limitField(max: number) {
 
 export const playersTopQuery = z.object({
   period: periodField.optional(),
-  limit: limitField(PLAYERS_TOP_MAX_LIMIT),
+  limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
 });
 
 export const clansTopQuery = z.object({
-  limit: limitField(CLANS_TOP_MAX_LIMIT),
+  limit: limitField(CLANS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
 });
 
