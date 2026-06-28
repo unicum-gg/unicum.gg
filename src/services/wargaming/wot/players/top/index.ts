@@ -22,12 +22,9 @@ import {
   getWNXExpectedValues,
 } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
+import { TopPlayersPeriod } from "./period";
 
-export enum TopPlayersPeriod {
-  Day = "24h",
-  Week = "7d",
-  Overall = "overall",
-}
+export { TopPlayersPeriod } from "./period";
 
 const PERIOD_INTERVAL: Record<TopPlayersPeriod, string | null> = {
   [TopPlayersPeriod.Day]: "24 hours",
