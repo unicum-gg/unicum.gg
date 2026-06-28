@@ -52,6 +52,9 @@ export function proxy(req: NextRequest) {
   const requestHeaders = new Headers(req.headers);
   requestHeaders.set(PATHNAME_HEADER, pathname);
   const response = NextResponse.next({ request: { headers: requestHeaders } });
+  // Tell CDNs to cache HTML and markdown separately so an agent hitting
+  // `Accept: text/markdown` never receives a cached HTML response.
+  response.headers.set("Vary", "Accept");
 
   // Sync the cookie to the URL whenever the URL carries a region. Without
   // this, manually visiting /asia/clans/X with `cookie=eu` leaves them
