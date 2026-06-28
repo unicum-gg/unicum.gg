@@ -1,44 +1,54 @@
-"use client";
+import { TOOL_DEFS } from "@/services/mcp/tools";
 
-import { useEffect } from "react";
-import { TOOL_DEFS, buildApiPath } from "@/services/mcp/tools";
-
-type ModelCtx = {
-  registerTool?: (tool: unknown, options?: { signal?: AbortSignal }) => Promise<void>;
-  provideContext?: (tools: unknown[]) => Promise<void>;
+type SerializedDef = {
+  name: string;
+  description: string;
+  inputSchema: (typeof TOOL_DEFS)[number]["inputSchema"];
+  path: string;
 };
 
 export function WebMcp() {
-  useEffect(() => {
-    const controller = new AbortController();
-    const { signal } = controller;
-
-    const tools = TOOL_DEFS.map(({ name, description, inputSchema, path }) => ({
+  const defs: SerializedDef[] = TOOL_DEFS.map(
+    ({ name, description, inputSchema, path }) => ({
       name,
       description,
       inputSchema,
-      annotations: { readOnlyHint: true },
-      execute: async (input: Record<string, unknown>) => {
-        const res = await fetch(`/api${buildApiPath(path, input)}`);
-        return res.json();
-      },
-    }));
+      path,
+    }),
+  );
 
-    const docCtx = (document as unknown as { modelContext?: ModelCtx }).modelContext;
-    const navCtx = (navigator as unknown as { modelContext?: ModelCtx }).modelContext;
+  // Inlined so the script runs at parse time, before React hydrates.
+  // Using two patterns: W3C (document.modelContext.registerTool) and the
+  // older Chrome EPP draft (navigator.modelContext.provideContext).
+  const script = `(function(){
+var defs=${JSON.stringify(defs)};
+function buildPath(tpl,args){
+  var p=tpl,q={};
+  Object.keys(args).forEach(function(k){
+    var v=args[k];if(v==null)return;
+    if(p.indexOf('{'+k+'}')!==-1)p=p.replace('{'+k+'}',encodeURIComponent(String(v)));
+    else q[k]=String(v);
+  });
+  var s=new URLSearchParams(q).toString();
+  return'/api'+p+(s?'?'+s:'');
+}
+function register(){
+  var tools=defs.map(function(d){
+    return{
+      name:d.name,description:d.description,inputSchema:d.inputSchema,
+      annotations:{readOnlyHint:true},
+      execute:function(i){return fetch(buildPath(d.path,i)).then(function(r){return r.json();});}
+    };
+  });
+  var nav=typeof navigator!=='undefined'&&navigator.modelContext;
+  var doc=typeof document!=='undefined'&&document.modelContext;
+  if(nav&&nav.provideContext)try{nav.provideContext(tools);}catch(e){}
+  if(doc&&doc.registerTool)tools.forEach(function(t){try{doc.registerTool(t);}catch(e){}});
+}
+if(typeof document!=='undefined'&&document.readyState==='loading')
+  document.addEventListener('DOMContentLoaded',register);
+else register();
+})();`;
 
-    // W3C spec: document.modelContext.registerTool()
-    if (docCtx?.registerTool) {
-      Promise.all(tools.map((t) => docCtx.registerTool!(t, { signal }))).catch(() => {});
-    }
-
-    // Older Chrome EPP draft: navigator.modelContext.provideContext()
-    if (navCtx?.provideContext) {
-      navCtx.provideContext(tools).catch(() => {});
-    }
-
-    return () => controller.abort();
-  }, []);
-
-  return null;
+  return <script dangerouslySetInnerHTML={{ __html: script }} />;
 }
