@@ -1,12 +1,13 @@
 import APP from "@/constants/app";
+import { MCP_NAME } from "@/services/mcp/skill";
 
 export function GET(): Response {
   const card = {
     $schema:
       "https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json",
-    name: "unicum.gg/stats",
+    name: `${APP.NAME}/${MCP_NAME}`,
     version: APP.VERSION,
-    title: "unicum.gg",
+    title: APP.NAME,
     description:
       "World of Tanks stats for players and clans across EU, NA, and Asia.",
     websiteUrl: APP.URL,

@@ -2,6 +2,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp";
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp";
 import * as z from "zod";
 import APP from "@/constants/app";
+import { MCP_NAME } from "@/services/mcp/skill";
 import { TOOL_DEFS, buildApiPath, type ToolInputSchema } from "@/services/mcp/tools";
 
 function toZodShape(schema: ToolInputSchema): Record<string, z.ZodTypeAny> {
@@ -21,7 +22,7 @@ function toZodShape(schema: ToolInputSchema): Record<string, z.ZodTypeAny> {
 
 function createServer(): McpServer {
   const server = new McpServer(
-    { name: "unicum.gg/stats", version: APP.VERSION },
+    { name: `${APP.NAME}/${MCP_NAME}`, version: APP.VERSION },
     { capabilities: { tools: {} } },
   );
 
