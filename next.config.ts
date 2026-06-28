@@ -93,13 +93,10 @@ const nextConfig: NextConfig = {
   },
   async headers() {
     return [
-      // Homepage (EU) and the per-region homepages an agent may land on.
+      // Advertise discovery on every page (and route), not just the homepage.
+      // Excludes Next internals/assets under `_next/`.
       {
-        source: "/",
-        headers: [{ key: "Link", value: AGENT_DISCOVERY_LINK }],
-      },
-      {
-        source: "/:region(eu|na|asia)",
+        source: "/((?!_next/).*)",
         headers: [{ key: "Link", value: AGENT_DISCOVERY_LINK }],
       },
     ];
