@@ -39,7 +39,8 @@ export function proxy(req: NextRequest) {
   // never re-enters this branch.
   const accept = req.headers.get("accept") || "";
   const isMdSuffix = pathname.endsWith(".md");
-  if (isMdSuffix || accept.includes("text/markdown")) {
+  const isApiRoute = pathname.startsWith("/api/");
+  if (!isApiRoute && (isMdSuffix || accept.includes("text/markdown"))) {
     const clean = isMdSuffix ? pathname.slice(0, -".md".length) : pathname;
     const slug =
       clean === "/" || clean === "" ? "index" : clean.replace(/^\//, "");
