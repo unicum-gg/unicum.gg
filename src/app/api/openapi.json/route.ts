@@ -88,6 +88,8 @@ export function GET(): Response {
       description: APP.DESCRIPTION,
     },
     servers: [{ url: `${APP.URL}/api` }],
+    // Empty security array = all endpoints are public; no OAuth server needed.
+    security: [],
   };
 
   return new Response(JSON.stringify(out), {
