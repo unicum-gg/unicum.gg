@@ -12,6 +12,7 @@ import STORAGE from "@/constants/storage";
 import { baseOptions } from "@/lib/layout.shared";
 import { constructMetadata } from "@/lib/metadata";
 import { organizationSchema, websiteSchema } from "@/lib/schema-org";
+import { WebMcp } from "@/components/script/webmcp";
 import { Provider } from "./provider";
 import "./globals.css";
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
         <JsonLd data={websiteSchema()} />
         <JsonLd data={organizationSchema()} />
         <Provider>
+          <WebMcp />
           <RatingMetricRoot />
           <BuildBanner />
           <HomeLayout {...layoutProps}>
