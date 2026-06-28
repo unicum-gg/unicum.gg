@@ -5,6 +5,9 @@ const ROUTES = {
   NONE: "#",
   INDEX: "/",
 
+  // - API reference (region-less)
+  DOCS: "/docs",
+
   // - Home
   HOME: (region: Region) =>
     region === Region.EU ? "/" : pathcat("/:region", { region }),

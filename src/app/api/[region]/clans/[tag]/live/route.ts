@@ -8,6 +8,14 @@ export const dynamic = "force-dynamic";
 
 const HEARTBEAT_MS = 25_000;
 
+/**
+ * Clan live stream
+ * @description Server-sent events (SSE) for live clan profile updates.
+ * @pathParams clanLiveParams
+ * @responseDescription Server-sent event stream of live updates.
+ * @tag Clans
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string; tag: string }> },

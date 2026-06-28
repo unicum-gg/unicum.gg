@@ -43,3 +43,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .perf-trace.log
+
+# generated openapi spec + generator cache (regenerated on postinstall / predev / prebuild)
+/src/services/openapi/openapi.generated.json
+/.openapi-gen/

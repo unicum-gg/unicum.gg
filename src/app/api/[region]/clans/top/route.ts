@@ -1,4 +1,5 @@
 import { ratingMetricFromCookie } from "@/constants/rating";
+import * as S from "@/services/openapi/schemas";
 import {
   getTopClansByMetric,
   type TopClanResult,
@@ -10,9 +11,15 @@ export type TopClansResponse = {
   computed_at: string | null;
 };
 
-const DEFAULT_LIMIT = 10;
-const MAX_LIMIT = 200;
-
+/**
+ * Top clans
+ * @description Clan leaderboard for a region.
+ * @pathParams regionParams
+ * @queryParams clansTopQuery
+ * @response TopClansResponse
+ * @tag Clans
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
@@ -26,7 +33,10 @@ export async function GET(
   const limitParam = url.searchParams.get("limit");
   const limit = Math.max(
     1,
-    Math.min(MAX_LIMIT, Number(limitParam) || DEFAULT_LIMIT),
+    Math.min(
+      S.CLANS_TOP_MAX_LIMIT,
+      Number(limitParam) || S.TOP_DEFAULT_LIMIT,
+    ),
   );
   // Caller may pin a metric via ?metric=wn7|wn8|wnx; otherwise default.
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));

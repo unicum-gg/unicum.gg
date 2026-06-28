@@ -4,6 +4,7 @@ import {
   getPlayerClansBatch,
   type PlayerClanInfo,
 } from "@/services/wargaming/wot/clans/listings";
+import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@/services/wargaming/wot";
 
 export const dynamic = "force-dynamic";
@@ -18,24 +19,32 @@ export type PlayerSearchResponse = {
   results: SearchPlayerResult[];
 };
 
-const MIN_QUERY_LENGTH = 3;
-
+/**
+ * Search players
+ * @description Search players by nickname prefix (minimum 3 characters).
+ * @pathParams regionParams
+ * @queryParams searchQuery
+ * @response PlayerSearchResponse
+ * @tag Players
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {
   const { region } = await params;
-  const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
-
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  if (q.length < MIN_QUERY_LENGTH) {
+
+  const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
+  const parsed = S.searchQuery.safeParse({ q });
+  if (!parsed.success) {
     return Response.json({ results: [] });
   }
 
   try {
-    const rawPlayers = await findPlayersByPrefix(region, q, 5);
+    const rawPlayers = await findPlayersByPrefix(region, parsed.data.q, 5);
     const clansByAccount =
       rawPlayers.length > 0
         ? await getPlayerClansBatch(

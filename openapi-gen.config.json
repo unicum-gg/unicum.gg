@@ -1,0 +1,20 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "unicum.gg API",
+    "version": "0.1.0",
+    "description": "Public read API for World of Tanks player and clan stats across EU, NA and Asia."
+  },
+  "apiDir": "src/app/api",
+  "routerType": "app",
+  "schemaDir": "src/services/openapi",
+  "schemaType": "zod",
+  "schemaFiles": [],
+  "outputFile": "openapi.generated.json",
+  "outputDir": "./src/services/openapi",
+  "docsUrl": "docs",
+  "includeOpenApiRoutes": true,
+  "ignoreRoutes": [],
+  "excludeSchemas": ["*Params", "*Query", "regionPath", "periodField", "metricField"],
+  "debug": false
+}

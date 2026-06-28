@@ -58,6 +58,9 @@ export function Footer() {
               Top clans
             </Link>
             <FooterCoverageLink />
+            <Link href={ROUTES.DOCS} className={styles.linkHover}>
+              API Docs
+            </Link>
             <Link
               href={APP.EXTERNAL.GITHUB}
               className={styles.linkHover}

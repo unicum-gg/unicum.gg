@@ -8,6 +8,14 @@ export const dynamic = "force-dynamic";
 
 const HEARTBEAT_MS = 25_000;
 
+/**
+ * Player live stream
+ * @description Server-sent events (SSE) for live player profile updates.
+ * @pathParams playerLiveParams
+ * @responseDescription Server-sent event stream of live updates.
+ * @tag Players
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },

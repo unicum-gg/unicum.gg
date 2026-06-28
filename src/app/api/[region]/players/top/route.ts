@@ -1,7 +1,8 @@
 import { ratingMetricFromCookie } from "@/constants/rating";
+import * as S from "@/services/openapi/schemas";
 import {
   getTopPlayersByMetric,
-  TopPlayersPeriod,
+  type TopPlayersPeriod,
   type TopPlayerResult,
 } from "@/services/wargaming/wot/players/top";
 import { isRegion } from "@/services/wargaming/wot";
@@ -11,15 +12,15 @@ export type TopPlayersResponse = {
   computed_at: string | null;
 };
 
-const DEFAULT_LIMIT = 10;
-const MAX_LIMIT = 30;
-
-function parsePeriod(value: string | null): TopPlayersPeriod {
-  if (value === TopPlayersPeriod.Day) return TopPlayersPeriod.Day;
-  if (value === TopPlayersPeriod.Week) return TopPlayersPeriod.Week;
-  return TopPlayersPeriod.Overall;
-}
-
+/**
+ * Top players
+ * @description Player leaderboard for a region.
+ * @pathParams regionParams
+ * @queryParams playersTopQuery
+ * @response TopPlayersResponse
+ * @tag Players
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
@@ -30,10 +31,17 @@ export async function GET(
   }
 
   const url = new URL(req.url);
-  const period = parsePeriod(url.searchParams.get("period"));
+  // `periodField` enum values match `TopPlayersPeriod`; `.catch` mirrors the
+  // old `parsePeriod` (unknown/missing -> overall).
+  const period = S.periodField
+    .catch("overall")
+    .parse(url.searchParams.get("period")) as TopPlayersPeriod;
   const limit = Math.max(
     1,
-    Math.min(MAX_LIMIT, Number(url.searchParams.get("limit")) || DEFAULT_LIMIT),
+    Math.min(
+      S.PLAYERS_TOP_MAX_LIMIT,
+      Number(url.searchParams.get("limit")) || S.TOP_DEFAULT_LIMIT,
+    ),
   );
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 

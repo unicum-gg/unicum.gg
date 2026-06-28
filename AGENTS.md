@@ -83,6 +83,25 @@ The `CookieConsent` context in `src/contexts/cookie-consent.tsx` writes the cons
 
 Public routes live under `src/app/[region]/...`. The region is part of the path, never a query param. The home page `src/app/page.tsx` and a couple of region-less routes (e.g. `/coverage`) read the region from a cookie (`STORAGE.COOKIES.REGION`) and either redirect or render region-aware content client-side.
 
+## API documentation (OpenAPI)
+
+The public API is documented with `next-openapi-gen` (config in `openapi-gen.config.json`). Flow:
+
+- `src/services/openapi/schemas.ts` holds the Zod schemas (the single source of truth), used both for handler validation and the spec.
+- Public route handlers opt in with a JSDoc block: `@tag`, `@pathParams`, `@queryParams`, `@response`, `@openapi` (referencing the exported schema names). `includeOpenApiRoutes: true` means only `@openapi`-tagged handlers are included, so internal routes (cron, discovery, og, md) are skipped automatically.
+- `openapi-gen generate` writes `src/services/openapi/openapi.generated.json` (gitignored, regenerated on `postinstall`/`predev`/`prebuild`).
+- `src/app/api/openapi.json/route.ts` serves that file, patching `servers`/`info` and running `normalizeParameters` (see gotchas). `Cache-Control: no-cache` so the docs never show a stale spec.
+- `src/app/docs/page.tsx` renders the Scalar reference from `/api/openapi.json`, themed via `scalar-theme.css` (maps `--scalar-*` to the site's design tokens, so it follows light/dark). It is a full-screen overlay so the site nav/footer do not show.
+
+Adding a public endpoint: write the handler, its Zod schemas, and the JSDoc block, then regenerate. Beware these `next-openapi-gen` quirks (all worked around in `schemas.ts` + `normalizeParameters`):
+
+- **Enum values must be literal arrays** in `z.enum([...])`. It cannot read an imported array (`REGIONS`) or a native enum, so the literals are inlined and locked to their source enum by the `Exact<>` compile-time guard and the runtime `assertEnumInSync` (drift throws).
+- **No template literals or non-literal expressions in `.meta()`**: the whole `.meta` is silently dropped. Use static description strings.
+- **`.default()` on enum params is not serialized**: doc defaults live in `QUERY_PARAM_DEFAULTS` (sourced from app constants like `DEFAULT_RATING_METRIC`) and are applied per param name in `normalizeParameters`.
+- **Enum params get wrapped in a single-element `allOf`**, which stops Scalar rendering a `<select>`; `normalizeParameters` flattens it.
+- **A literal `example: "example"` placeholder** is injected on every param; `normalizeParameters` replaces it with the first enum value (so `region` prefills `eu`) or drops it.
+- **Without `@tag`** the sidebar groups everything under the first path segment (`{region}`); tag handlers `Clans`/`Players`/`System`.
+
 # Conventions
 
 - Enums over union types or `as const` arrays. The codebase uses real TypeScript `enum` declarations consistently (`enum SortColumn`, `enum RatingMetric`, etc.).
