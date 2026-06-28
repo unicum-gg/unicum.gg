@@ -40,7 +40,8 @@ export function proxy(req: NextRequest) {
   const accept = req.headers.get("accept") || "";
   const isMdSuffix = pathname.endsWith(".md");
   const isApiRoute = pathname.startsWith("/api/");
-  if (!isApiRoute && (isMdSuffix || accept.includes("text/markdown"))) {
+  const isWellKnown = pathname.startsWith("/.well-known/");
+  if (!isApiRoute && !isWellKnown && (isMdSuffix || accept.includes("text/markdown"))) {
     const clean = isMdSuffix ? pathname.slice(0, -".md".length) : pathname;
     const slug =
       clean === "/" || clean === "" ? "index" : clean.replace(/^\//, "");
