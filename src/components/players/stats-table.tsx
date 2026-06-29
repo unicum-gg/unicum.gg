@@ -116,7 +116,7 @@ const ROW_DEFS: RowDef[] = [
     }),
   },
   {
-    label: "Damage dealt",
+    label: "Damages",
     render: (s) => ({
       primary: avgOrDash(s.damageDealt, s.battles),
     }),
@@ -238,6 +238,37 @@ export function PlayerStatsTable({
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
 }) {
+  function tankAvgCell(t: TankStats[] | null, fn: (t: TankStats) => number): Cell {
+    if (!t) return EMPTY_CELL;
+    const total = t.reduce((s, x) => s + fn(x), 0);
+    const battles = t.reduce((s, x) => s + x.all.battles, 0);
+    return { primary: avgOrDash(total, battles) };
+  }
+  const trackDmgCells = {
+    total: tankAvgCell(tanks, (t) => t.all.track_assisted_damage),
+    h24: tankAvgCell(periodTanks.h24, (t) => t.all.track_assisted_damage),
+    d7: tankAvgCell(periodTanks.d7, (t) => t.all.track_assisted_damage),
+    d30: tankAvgCell(periodTanks.d30, (t) => t.all.track_assisted_damage),
+  };
+  const spottingDmgCells = {
+    total: tankAvgCell(tanks, (t) => t.all.radio_assisted_damage),
+    h24: tankAvgCell(periodTanks.h24, (t) => t.all.radio_assisted_damage),
+    d7: tankAvgCell(periodTanks.d7, (t) => t.all.radio_assisted_damage),
+    d30: tankAvgCell(periodTanks.d30, (t) => t.all.radio_assisted_damage),
+  };
+  const assistingDmgCells = {
+    total: tankAvgCell(tanks, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    h24: tankAvgCell(periodTanks.h24, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    d7: tankAvgCell(periodTanks.d7, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    d30: tankAvgCell(periodTanks.d30, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
+  };
+  const combinedDmgCells = {
+    total: tankAvgCell(tanks, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    h24: tankAvgCell(periodTanks.h24, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    d7: tankAvgCell(periodTanks.d7, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
+    d30: tankAvgCell(periodTanks.d30, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
+  };
+
   function tierCellFor(t: TankStats[] | null): Cell {
     if (!t) return EMPTY_CELL;
     const value = computeAvgTier(t, encyclopedia);
@@ -347,17 +378,52 @@ export function PlayerStatsTable({
                 <PeriodCells cell={d30} />
               </TableRow>
             );
-            if (row.label !== "Battles") return [rowEl];
-            return [
-              rowEl,
-              <TableRow key="Tier">
-                <TableCell className="py-1.5! font-medium">Tier</TableCell>
-                <PeriodCells cell={tierCells.total} />
-                <PeriodCells cell={tierCells.h24} hideOnMobile />
-                <PeriodCells cell={tierCells.d7} hideOnMobile />
-                <PeriodCells cell={tierCells.d30} />
-              </TableRow>,
-            ];
+            if (row.label === "Battles") {
+              return [
+                rowEl,
+                <TableRow key="Tier">
+                  <TableCell className="py-1.5! font-medium">Tier</TableCell>
+                  <PeriodCells cell={tierCells.total} />
+                  <PeriodCells cell={tierCells.h24} hideOnMobile />
+                  <PeriodCells cell={tierCells.d7} hideOnMobile />
+                  <PeriodCells cell={tierCells.d30} />
+                </TableRow>,
+              ];
+            }
+            if (row.label === "Damages") {
+              return [
+                rowEl,
+                <TableRow key="Track damages">
+                  <TableCell className="py-1.5! font-medium">Track damages</TableCell>
+                  <PeriodCells cell={trackDmgCells.total} />
+                  <PeriodCells cell={trackDmgCells.h24} hideOnMobile />
+                  <PeriodCells cell={trackDmgCells.d7} hideOnMobile />
+                  <PeriodCells cell={trackDmgCells.d30} />
+                </TableRow>,
+                <TableRow key="Spotting damages">
+                  <TableCell className="py-1.5! font-medium">Spotting damages</TableCell>
+                  <PeriodCells cell={spottingDmgCells.total} />
+                  <PeriodCells cell={spottingDmgCells.h24} hideOnMobile />
+                  <PeriodCells cell={spottingDmgCells.d7} hideOnMobile />
+                  <PeriodCells cell={spottingDmgCells.d30} />
+                </TableRow>,
+                <TableRow key="Assisting damages">
+                  <TableCell className="py-1.5! font-medium">Assisting damages</TableCell>
+                  <PeriodCells cell={assistingDmgCells.total} />
+                  <PeriodCells cell={assistingDmgCells.h24} hideOnMobile />
+                  <PeriodCells cell={assistingDmgCells.d7} hideOnMobile />
+                  <PeriodCells cell={assistingDmgCells.d30} />
+                </TableRow>,
+                <TableRow key="Combined damages">
+                  <TableCell className="py-1.5! font-medium">Combined damages</TableCell>
+                  <PeriodCells cell={combinedDmgCells.total} />
+                  <PeriodCells cell={combinedDmgCells.h24} hideOnMobile />
+                  <PeriodCells cell={combinedDmgCells.d7} hideOnMobile />
+                  <PeriodCells cell={combinedDmgCells.d30} />
+                </TableRow>,
+              ];
+            }
+            return [rowEl];
           })}
           <TableRow key="WN7" data-rating-row="wn7">
             <TableCell className="py-1.5! font-medium">WN7</TableCell>
