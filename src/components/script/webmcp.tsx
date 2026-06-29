@@ -18,8 +18,8 @@ export function WebMcp() {
   );
 
   // Inlined so the script runs at parse time, before React hydrates.
-  // Using two patterns: W3C (document.modelContext.registerTool) and the
-  // older Chrome EPP draft (navigator.modelContext.provideContext).
+  // Calls registerTool on both navigator.modelContext (Chrome EPP) and
+  // document.modelContext (W3C spec) to cover both implementations.
   const script = `(function(){
 var defs=${JSON.stringify(defs)};
 function buildPath(tpl,args){
@@ -42,8 +42,10 @@ function register(){
   });
   var nav=typeof navigator!=='undefined'&&navigator.modelContext;
   var doc=typeof document!=='undefined'&&document.modelContext;
-  if(nav&&nav.provideContext)try{nav.provideContext(tools);}catch(e){}
-  if(doc&&doc.registerTool)tools.forEach(function(t){try{doc.registerTool(t);}catch(e){}});
+  tools.forEach(function(t){
+    if(nav&&nav.registerTool)try{nav.registerTool(t);}catch(e){}
+    if(doc&&doc.registerTool)try{doc.registerTool(t);}catch(e){}
+  });
 }
 if(typeof document!=='undefined'&&document.readyState==='loading')
   document.addEventListener('DOMContentLoaded',register);
