@@ -29,7 +29,6 @@ import { styles } from "@/lib/styles";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
-import { discoverClansBackground } from "@/services/discovery/clans";
 import {
   diffStats,
   recordCurrentSnapshot,
@@ -45,7 +44,6 @@ import {
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
 import { getRatingHistory } from "@/services/players/rating-history";
-import { enqueuePlayerRefreshBackground } from "@/services/players/refresh-queue";
 import {
   diffTanks,
   tankSnapshotsToTankStats,
@@ -63,8 +61,6 @@ import {
   getWNXExpectedValues,
 } from "@/services/wargaming/wot/ratings";
 import { type TankStats, getTanksStats } from "@/services/wargaming/wot/tanks";
-
-const REFRESH_COALESCE_MS = 5 * 60 * 1000;
 
 const EMPTY_CLAN_HISTORY: PlayerClanHistoryFull = {
   currentStint: null,
@@ -213,11 +209,6 @@ async function renderFromCache(
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
   const clanHistory = initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY;
 
-  // Coalesce: only re-enqueue if the last refresh was at least 5min ago.
-  const ageMs = Date.now() - player.lastSeenAt.getTime();
-  if (ageMs > REFRESH_COALESCE_MS) {
-    enqueuePlayerRefreshBackground(region, [accountId], { priority: 10 });
-  }
 
   // If we rendered with a stub clan history, fire the real fetch in the
   // background. LiveSync's SSE will trigger router.refresh() once it's
@@ -315,12 +306,6 @@ async function buildView(args: {
     wn8Expected,
     wnxExpected,
   } = args;
-
-  // Discovery: every clan seen in the history is a candidate for our DB.
-  const clanIdsSeen: number[] = [];
-  if (clanHistory.currentStint) clanIdsSeen.push(clanHistory.currentStint.clan.id);
-  for (const s of clanHistory.pastStints) clanIdsSeen.push(s.clan.id);
-  discoverClansBackground(region, clanIdsSeen);
 
   const current = statsFromSnapshot(latest);
   const periods = {

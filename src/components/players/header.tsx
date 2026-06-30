@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
+import { RefreshBeacon } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
@@ -61,6 +62,10 @@ export function PlayerHeader({
               <RelativeTime
                 date={updatedAt}
                 title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
+              />
+              <RefreshBeacon
+                url={`/api/${region}/players/${encodeURIComponent(nickname)}/enqueue`}
+                updatedAt={updatedAt}
               />
             </span>
           </div>

@@ -9,6 +9,7 @@ import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
 import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
 import { LiveSync } from "@/components/live-sync";
+import { ViewBeacon } from "@/components/view-beacon";
 import {
   Panel,
   PanelContent,
@@ -139,6 +140,9 @@ async function render(
       />
       <LiveSync
         url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/live`}
+      />
+      <ViewBeacon
+        url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/enqueue`}
       />
       <Panel>
         <PanelContent className="p-0">

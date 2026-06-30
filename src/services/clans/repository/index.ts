@@ -1,5 +1,4 @@
 import { eq, sql } from "drizzle-orm";
-import { enqueueClanRefreshBackground } from "@/services/clans/refresh-queue";
 import { db } from "@/services/db";
 import { type Clan, clansByRegion } from "@/services/db/schema";
 import { clanChannel, publish } from "@/services/live/pubsub";
@@ -10,7 +9,6 @@ import {
   getClansFullInfoBatch,
 } from "@/services/wargaming/wot/clans";
 import { findClanIdByTag } from "@/services/wargaming/wot/clans/search";
-import { COALESCE_AFTER_MS } from "./internal";
 
 function clanFullInfoFromRow(row: Clan): ClanFullInfo {
   return {
@@ -51,19 +49,10 @@ export async function getClanByTagCached(
     .limit(1);
 
   if (row) {
-    // Coalesce: only re-enqueue if the last refresh was at least 5min ago.
-    // The refresh-cron drains the queue every 10s and publishes SSE updates.
-    const ageMs = row.lastRefreshedAt
-      ? Date.now() - row.lastRefreshedAt.getTime()
-      : Number.POSITIVE_INFINITY;
-    const shouldRefresh = ageMs > COALESCE_AFTER_MS;
-    if (shouldRefresh) {
-      enqueueClanRefreshBackground(region, [Number(row.id)], { priority: 10 });
-    }
     return {
       info: clanFullInfoFromRow(row),
       fromDb: true,
-      refreshing: shouldRefresh,
+      refreshing: false,
     };
   }
 
