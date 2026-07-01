@@ -8,11 +8,11 @@ import {
 import { discoverPlayersBackground } from "@/services/discovery/players";
 import { clanChannel, publish } from "@/services/live/pubsub";
 import type { Region } from "@/services/wargaming/wot";
-import {
-  type ClanEventType,
-  type ClanRecentEvent,
-  getClanRecentEvents,
-} from "@/services/wargaming/wot/clans/events";
+import { getClanRecentEvents } from "@/services/wargaming/wot/clans/events";
+import type {
+  ClanEventType,
+  ClanRecentEvent,
+} from "@/services/wargaming/wot/clans/event-types";
 import { dedup, isStale } from "./internal";
 
 function eventFromRow(row: ClanRecentEventRow): ClanRecentEvent {

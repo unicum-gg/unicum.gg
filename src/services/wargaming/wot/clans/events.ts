@@ -3,23 +3,7 @@ import {
   REGION_PORTAL_HOST,
 } from "@/services/wargaming/wot";
 import { portalFetch } from "@/services/wargaming/wot/fetch";
-
-export enum ClanEventType {
-  JoinClan = "join_clan",
-  LeaveClan = "leave_clan",
-  ChangeRole = "change_role",
-}
-
-export type ClanRecentEvent = {
-  type: ClanEventType;
-  createdAt: Date;
-  accountId: number;
-  accountName: string;
-  oldRole: string | null;
-  newRole: string | null;
-  oldRank: number | null;
-  newRank: number | null;
-};
+import { ClanEventType, type ClanRecentEvent } from "./event-types";
 
 type NewsfeedAccountInfo = { name?: string; role?: string };
 

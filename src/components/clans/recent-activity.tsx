@@ -11,7 +11,7 @@ import ROUTES from "@/constants/routes";
 import {
   ClanEventType,
   type ClanRecentEvent,
-} from "@/services/wargaming/wot/clans/events";
+} from "@/services/wargaming/wot/clans/event-types";
 import type { Region } from "@/services/wargaming/wot";
 
 function prettyRole(role: string): string {
