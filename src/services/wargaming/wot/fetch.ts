@@ -4,13 +4,13 @@ import { traced } from "@/lib/perf-trace";
 import { Region, REGION_PORTAL_HOST } from "./index";
 import { acquirePortalToken, acquireWgToken } from "./rate-limit";
 
-const REGION_API_HOST: Record<Region, string> = {
+export const REGION_API_HOST: Record<Region, string> = {
   [Region.EU]: "api.worldoftanks.eu",
   [Region.NA]: "api.worldoftanks.com",
   [Region.ASIA]: "api.worldoftanks.asia",
 };
 
-function applicationIdFor(region: Region): string {
+export function applicationIdFor(region: Region): string {
   switch (region) {
     case Region.EU:
       return env.WARGAMING_APPLICATION_ID_EU;

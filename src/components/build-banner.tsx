@@ -1,5 +1,5 @@
-import { Construction } from "lucide-react";
 import APP from "@/constants/app";
+import { PlayersOnline } from "./players-online";
 
 /**
  * Date when 30-day delta data becomes complete across all regions. Pushed
@@ -22,7 +22,7 @@ export function BuildBanner() {
     <div className="border-b border-[#f25322]/30 bg-linear-to-r from-[#f25322]/15 via-[#f25322]/5 to-[#f25322]/15">
       <div className="mx-auto w-full max-w-7xl">
         <div className="flex h-9 items-center gap-3 border-x border-fd-border px-4 text-xs">
-          <Construction className="size-3.5 shrink-0 text-[#f25322]" />
+          <PlayersOnline />
           <p className="flex-1 truncate text-center text-fd-foreground">
             <span className="font-medium">{APP.NAME}</span> is building &middot;{" "}
             <span className="text-fd-muted-foreground">
