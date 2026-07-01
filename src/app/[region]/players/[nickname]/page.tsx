@@ -3,21 +3,10 @@ import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { LiveSync } from "@/components/live-sync";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-  PanelTitle,
-} from "@/components/panel";
-import { PlayerClansHistory } from "@/components/players/clans-history";
+import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/header";
-import { PlayerRatingChart } from "@/components/players/rating-chart";
-import { PlayerStatsTable } from "@/components/players/stats-table";
-import { StrongholdStatsTable } from "@/components/players/stronghold-stats-table";
-import { PlayerTab, PlayerTabsNav, tabFromQuery } from "@/components/players/tabs-nav";
-import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
-import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
+import { PlayerTab, tabFromQuery } from "@/components/players/tabs";
+import { PlayerTabsView } from "@/components/players/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import {
@@ -27,7 +16,6 @@ import {
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { constructMetadata } from "@/lib/metadata";
-import { styles } from "@/lib/styles";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
@@ -484,267 +472,37 @@ async function buildView(args: {
 
       <PanelSeparator />
 
-      <Panel>
-        <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <PlayerTabsNav
-            basePath={ROUTES.PLAYER(region, player.nickname)}
-            activeTab={activeTab}
-          />
-        </PanelHeader>
-      </Panel>
-
-      {activeTab === PlayerTab.Overall ? (
-        <>
-          <PanelSeparator />
-
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s random battles stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              <PlayerStatsTable
-                current={current}
-                periods={periods}
-                tanks={tanks}
-                periodTanks={periodTanks}
-                encyclopedia={encyclopedia}
-                wn8Expected={wn8Expected}
-                wnxExpected={wnxExpected}
-              />
-            </PanelContent>
-          </Panel>
-
-          <PanelSeparator />
-
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                {player.nickname}&apos;s {metricLabel} progression
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {ratingHistory.points.length > 0 ? (
-                <>
-                  <div className={`p-4 ${styles.mutedDescription}`}>
-                    Solid line is overall {metricLabel} (matches the Total
-                    column above), drifting slowly as new battles accumulate.
-                    Dashed line is per-session {metricLabel}, computed from the
-                    battles played since the previous snapshot. It shows hot
-                    and cold streaks. Line color follows the rating tier.
-                  </div>
-                  <div className="px-4 pb-4">
-                    <PlayerRatingChart
-                      data={ratingHistory.points}
-                      metricLabel={metricLabel}
-                      metric={metric}
-                    />
-                  </div>
-                </>
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  Not enough history yet. We need at least one snapshot to draw
-                  the curve. Check back soon.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-
-          <PanelSeparator />
-
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                Tanks shaping {player.nickname}&apos;s rating
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              <TanksLiftDrag
-                region={region}
-                tanks={tanks}
-                encyclopedia={encyclopedia}
-                wn8Expected={wn8Expected}
-                wnxExpected={wnxExpected}
-                metric={metric}
-                metricLabel={metricLabel}
-              />
-            </PanelContent>
-          </Panel>
-
-          <PanelSeparator />
-
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                {player.nickname}&apos;s tanks (
-                {intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              <PlayerVehiclesTable
-                region={region}
-                tanks={tanks}
-                encyclopedia={encyclopedia}
-                wn8Expected={wn8Expected}
-                wnxExpected={wnxExpected}
-              />
-            </PanelContent>
-          </Panel>
-
-          <PanelSeparator />
-
-          <PlayerClansHistory
-            region={region}
-            nickname={player.nickname}
-            accountCreatedAt={createdAt}
-            clanHistory={clanHistory}
-            nowMs={nowMs}
-          />
-        </>
-      ) : activeTab === PlayerTab.Skirmish ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s skirmish stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {skirmishCurrent !== null ? (
-                <StrongholdStatsTable current={skirmishCurrent} periods={skirmishPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No skirmish data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.Advances ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s advances stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {fortifiedCurrent !== null ? (
-                <StrongholdStatsTable current={fortifiedCurrent} periods={fortifiedPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No advances data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.GrandBattles ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s grand battles stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {epicCurrent !== null ? (
-                <StrongholdStatsTable current={epicCurrent} periods={epicPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No grand battles data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.RankedBattles ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s ranked battles stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {rankedCurrent !== null ? (
-                <StrongholdStatsTable current={rankedCurrent} periods={rankedPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No ranked battles data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.ClanWarsX ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s Clan Wars Tier X stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {cwAbsoluteCurrent !== null ? (
-                <StrongholdStatsTable current={cwAbsoluteCurrent} periods={cwAbsolutePeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Clan Wars Tier X data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.ClanWarsVIII ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s Clan Wars Tier VIII stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {cwChampionCurrent !== null ? (
-                <StrongholdStatsTable current={cwChampionCurrent} periods={cwChampionPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Clan Wars Tier VIII data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : activeTab === PlayerTab.ClanWarsVI ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s Clan Wars Tier VI stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {cwMiddleCurrent !== null ? (
-                <StrongholdStatsTable current={cwMiddleCurrent} periods={cwMiddlePeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Clan Wars Tier VI data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s Steel Hunter stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {falloutCurrent !== null ? (
-                <StrongholdStatsTable current={falloutCurrent} periods={falloutPeriods} />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Steel Hunter data yet. Check back after the next snapshot.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      )}
+      <PlayerTabsView
+        region={region}
+        basePath={ROUTES.PLAYER(region, player.nickname)}
+        nickname={player.nickname}
+        activeTab={activeTab}
+        overall={{
+          current,
+          periods,
+          tanks,
+          periodTanks,
+          encyclopedia,
+          wn8Expected,
+          wnxExpected,
+          ratingData: ratingHistory.points,
+          metric,
+          metricLabel,
+          clanHistory,
+          createdAt,
+          nowMs,
+        }}
+        strongholds={{
+          [PlayerTab.Skirmish]: { current: skirmishCurrent, periods: skirmishPeriods },
+          [PlayerTab.Advances]: { current: fortifiedCurrent, periods: fortifiedPeriods },
+          [PlayerTab.GrandBattles]: { current: epicCurrent, periods: epicPeriods },
+          [PlayerTab.RankedBattles]: { current: rankedCurrent, periods: rankedPeriods },
+          [PlayerTab.ClanWarsX]: { current: cwAbsoluteCurrent, periods: cwAbsolutePeriods },
+          [PlayerTab.ClanWarsVIII]: { current: cwChampionCurrent, periods: cwChampionPeriods },
+          [PlayerTab.ClanWarsVI]: { current: cwMiddleCurrent, periods: cwMiddlePeriods },
+          [PlayerTab.SteelHunter]: { current: falloutCurrent, periods: falloutPeriods },
+        }}
+      />
     </div>
   );
 }
