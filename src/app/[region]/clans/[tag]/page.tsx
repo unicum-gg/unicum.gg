@@ -1,24 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache, Suspense } from "react";
-import { ExpandableDescription } from "@/components/clans/description";
+import { cache } from "react";
 import { ClanHeader } from "@/components/clans/header";
-import { ClanMembersTable } from "@/components/clans/members-table";
-import { PreviousClansTable } from "@/components/clans/previous-clans-table";
-import { ClanRecentActivity } from "@/components/clans/recent-activity";
-import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
-import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
-import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
-import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
+import { ClanTab, tabFromQuery } from "@/components/clans/tabs";
+import { ClanTabsView, type VehiclesData } from "@/components/clans/tabs-view";
 import { LiveSync } from "@/components/live-sync";
 import { ViewBeacon } from "@/components/view-beacon";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-  PanelTitle,
-} from "@/components/panel";
+import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -34,9 +22,7 @@ import {
   getLatestClanSnapshot,
   getClanSnapshotPeriods,
 } from "@/services/clans/snapshots";
-import { styles } from "@/lib/styles";
 import { isRegion, type Region } from "@/services/wargaming/wot";
-import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/events";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
@@ -113,30 +99,48 @@ async function render(
     `clan fromDb=${clanCached.fromDb} refreshing=${clanCached.refreshing}`,
   );
 
-  const membersCached = await span("getClanMembersCached", () =>
-    getClanMembersCached(region, clan.id),
-  );
+  // The three light tabs (Overview, Stronghold, Clan Wars) are always loaded so
+  // switching to them is an instant client toggle with no server round-trip.
+  // These are all cheap indexed/cached reads. Ratings (wn7/wn8/wnx/wnx30d) are
+  // pre-computed and cached on each member row, so the members table renders
+  // fully populated on first paint.
+  const [
+    membersCached,
+    snapshotLatest,
+    snapshotPeriods,
+    previousClans,
+    eventsCached,
+  ] = await Promise.all([
+    span("getClanMembersCached", () => getClanMembersCached(region, clan.id)),
+    span("getLatestClanSnapshot", () => getLatestClanSnapshot(region, clan.id)),
+    span("getClanSnapshotPeriods", () =>
+      getClanSnapshotPeriods(region, clan.id),
+    ),
+    span("getPreviousClans", () => getPreviousClans(region, clan.id)),
+    span("getClanEventsCached", () => getClanEventsCached(region, clan.id, 30)),
+  ]);
   const members = membersCached.members;
   trace?.log(
     `members fromDb=${membersCached.fromDb} refreshing=${membersCached.refreshing} count=${members.length}`,
   );
 
-  // Ratings (wn7/wn8/wnx/wnx30d) are pre-computed by refreshClanMembers
-  // and cached on each row, so the table renders fully populated on first
-  // paint — no Suspense boundary needed.
-
-  const eventsPromise = span("getClanEventsCached (background)", async () => {
-    const cached = await getClanEventsCached(region, clan.id, 30);
-    return cached.events;
-  });
-
-  const [latestSnapshot, snapshotPeriods] =
-    activeTab === ClanTab.Stronghold || activeTab === ClanTab.ClanWars
-      ? await Promise.all([
-          getLatestClanSnapshot(region, clan.id),
-          getClanSnapshotPeriods(region, clan.id),
-        ])
-      : [null, null];
+  // Tanks tab: the per-member aggregation is the heavy query on this page, so
+  // load it server-side only when Tanks is the tab being rendered (its content
+  // then ships in the initial HTML for SEO/deep-links). On any other tab it's
+  // left null and fetched on demand — then cached — client-side via SWR.
+  let initialVehicles: VehiclesData | null = null;
+  if (activeTab === ClanTab.Tanks) {
+    const [aggregates, encyclopedia, wn8Expected, wnxExpected] =
+      await Promise.all([
+        span("getClanTankAggregates", () =>
+          getClanTankAggregates(region, clan.id),
+        ),
+        span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
+        span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
+        span("getWNXExpectedValues", () => getWNXExpectedValues()),
+      ]);
+    initialVehicles = { aggregates, encyclopedia, wn8Expected, wnxExpected };
+  }
 
   const basePath = ROUTES.CLAN(region, clan.tag);
 
@@ -167,170 +171,19 @@ async function render(
 
       <PanelSeparator />
 
-      <Panel>
-        <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <ClanTabsNav basePath={basePath} activeTab={activeTab} />
-        </PanelHeader>
-      </Panel>
-
-      {activeTab === ClanTab.Overview ? (
-        <>
-          {clan.descriptionHtml && (
-            <>
-              <PanelSeparator />
-              <Panel>
-                <PanelContent>
-                  <ExpandableDescription html={clan.descriptionHtml} />
-                </PanelContent>
-              </Panel>
-            </>
-          )}
-
-          <PanelSeparator />
-
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>Members</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              <ClanMembersTable region={region} members={members} />
-            </PanelContent>
-          </Panel>
-
-          <PanelSeparator />
-
-          <Suspense fallback={null}>
-            <PreviousClansStreamed region={region} clanId={clan.id} />
-          </Suspense>
-
-          <PanelSeparator />
-
-          <Suspense fallback={null}>
-            <RecentActivityStreamed region={region} promise={eventsPromise} />
-          </Suspense>
-        </>
-      ) : activeTab === ClanTab.Tanks ? (
-        <>
-          <PanelSeparator />
-          <VehiclesPanel region={region} clanId={clan.id} />
-        </>
-      ) : activeTab === ClanTab.Stronghold ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>Stronghold stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {latestSnapshot && snapshotPeriods ? (
-                <ClanStrongholdStatsTable
-                  latest={latestSnapshot}
-                  periods={snapshotPeriods}
-                />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No stronghold data yet. Check back after the next clan refresh.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>Clan Wars stats</PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {latestSnapshot && snapshotPeriods ? (
-                <ClanWarsStatsTable
-                  latest={latestSnapshot}
-                  periods={snapshotPeriods}
-                />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Clan Wars data yet. Check back after the next clan refresh.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      )}
+      <ClanTabsView
+        region={region}
+        tag={clan.tag}
+        basePath={basePath}
+        activeTab={activeTab}
+        descriptionHtml={clan.descriptionHtml ?? null}
+        members={members}
+        previousClans={previousClans}
+        events={eventsCached.events}
+        snapshotLatest={snapshotLatest}
+        snapshotPeriods={snapshotPeriods}
+        initialVehicles={initialVehicles}
+      />
     </div>
-  );
-}
-
-async function VehiclesPanel({
-  region,
-  clanId,
-}: {
-  region: Region;
-  clanId: number;
-}) {
-  const [aggregates, encyclopedia, wn8Expected, wnxExpected] = await Promise.all(
-    [
-      getClanTankAggregates(region, clanId),
-      getVehicleEncyclopedia(region),
-      getWN8ExpectedValues(),
-      getWNXExpectedValues(),
-    ],
-  );
-  return (
-    <Panel>
-      <PanelHeader>
-        <PanelTitle>Tanks ({intFmt.format(aggregates.length)})</PanelTitle>
-      </PanelHeader>
-      <PanelContent className="p-0">
-        <ClanVehiclesTable
-          aggregates={aggregates}
-          encyclopedia={encyclopedia}
-          wn8Expected={wn8Expected}
-          wnxExpected={wnxExpected}
-        />
-      </PanelContent>
-    </Panel>
-  );
-}
-
-async function RecentActivityStreamed({
-  region,
-  promise,
-}: {
-  region: Region;
-  promise: Promise<ClanRecentEvent[]>;
-}) {
-  const events = await promise;
-  if (events.length === 0) return null;
-  return (
-    <Panel>
-      <PanelHeader>
-        <PanelTitle>Recent activity</PanelTitle>
-      </PanelHeader>
-      <PanelContent className="p-0">
-        <ClanRecentActivity region={region} events={events} />
-      </PanelContent>
-    </Panel>
-  );
-}
-
-async function PreviousClansStreamed({
-  region,
-  clanId,
-}: {
-  region: Region;
-  clanId: number;
-}) {
-  const rows = await getPreviousClans(region, clanId);
-  if (rows.length === 0) return null;
-  return (
-    <Panel>
-      <PanelHeader>
-        <PanelTitle>Previous clans</PanelTitle>
-      </PanelHeader>
-      <PanelContent className="p-0">
-        <PreviousClansTable region={region} rows={rows} />
-      </PanelContent>
-    </Panel>
   );
 }
