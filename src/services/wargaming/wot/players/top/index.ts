@@ -8,10 +8,8 @@ import {
   topPlayersByRegion,
 } from "@/services/db/schema";
 import { getPlayerClansBatch } from "@/services/wargaming/wot/clans/listings";
-import {
-  computeAvgTier,
-  getVehicleEncyclopedia,
-} from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { computeAvgTier } from "@/services/wargaming/wot/vehicle-meta";
 import { type Region } from "@/services/wargaming/wot";
 import {
   buildWN8Fallback,

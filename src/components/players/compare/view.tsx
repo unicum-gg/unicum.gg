@@ -12,7 +12,7 @@ import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import {
   type WN8Expected,
   type WNXExpected,

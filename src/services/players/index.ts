@@ -16,10 +16,8 @@ import type {
   PlayerInfo,
   PlayerSearchResult,
 } from "@/services/wargaming/wot/accounts";
-import {
-  computeAvgTier,
-  getVehicleEncyclopedia,
-} from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { computeAvgTier } from "@/services/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,

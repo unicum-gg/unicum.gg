@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
 import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
 import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import { RATING_COLOR_CLASS } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 

@@ -3,10 +3,8 @@ import { RatingMetric } from "@/constants/rating";
 import { db } from "@/services/db";
 import { tankSnapshotsByRegion } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
-import {
-  computeAvgTier,
-  getVehicleEncyclopedia,
-} from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { computeAvgTier } from "@/services/wargaming/wot/vehicle-meta";
 import {
   type WN8Expected,
   type WNXExpected,

@@ -34,7 +34,7 @@ import {
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   type RatingColor,

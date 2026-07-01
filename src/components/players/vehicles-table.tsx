@@ -38,7 +38,7 @@ import type { Region } from "@/services/wargaming/wot";
 import { masteryBadgeUrl } from "@/services/wargaming/wot/cdn";
 import {
   type VehicleMeta,
-} from "@/services/wargaming/wot/encyclopedia";
+} from "@/services/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,

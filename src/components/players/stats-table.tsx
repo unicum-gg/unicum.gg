@@ -11,7 +11,7 @@ import { type Stats } from "@/services/players";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@/services/wargaming/wot/encyclopedia";
+} from "@/services/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,

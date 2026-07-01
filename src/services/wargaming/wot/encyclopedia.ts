@@ -1,19 +1,8 @@
 import { db } from "@/services/db";
 import { type NewVehicle, vehiclesByRegion } from "@/services/db/schema";
 import { Region } from ".";
-import type { TankStats } from "./tanks";
 import { fetchVehicleCatalog } from "./wotsrc";
-
-export type VehicleMeta = {
-  tier: number;
-  type: string;
-  nation: string;
-  name: string;
-  shortName: string;
-  tag: string;
-  isPremium: boolean;
-  contourIcon: string | null;
-};
+import type { VehicleMeta } from "./vehicle-meta";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
 // (cleared on deploy/restart) and is shared across all callers — both inside
@@ -141,20 +130,4 @@ export async function refreshVehicles(region: Region): Promise<number> {
       },
     });
   return rows.length;
-}
-
-export function computeAvgTier(
-  tanks: TankStats[],
-  encyclopedia: Record<string, VehicleMeta>,
-): number | null {
-  let weighted = 0;
-  let total = 0;
-  for (const tank of tanks) {
-    const meta = encyclopedia[String(tank.tank_id)];
-    const battles = tank.all?.battles ?? 0;
-    if (!meta || battles <= 0) continue;
-    weighted += meta.tier * battles;
-    total += battles;
-  }
-  return total > 0 ? weighted / total : null;
 }

@@ -1,5 +1,5 @@
 import { botHeaders } from "@/lib/bot-headers";
-import type { VehicleMeta } from "./encyclopedia";
+import type { VehicleMeta } from "./vehicle-meta";
 import type { TankStats } from "./tanks";
 
 export enum RatingColor {

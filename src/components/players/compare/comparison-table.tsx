@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import { RATING_COLOR_CLASS } from "@/services/wargaming/wot/ratings";
 import type { TankStats } from "@/services/wargaming/wot/tanks";
 

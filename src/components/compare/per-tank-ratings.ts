@@ -1,5 +1,5 @@
 import { RatingMetric } from "@/constants/rating";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import {
   computeWN7,
   computeWN8,

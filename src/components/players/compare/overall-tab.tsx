@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { VehicleMeta } from "@/services/wargaming/wot/encyclopedia";
+import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,
