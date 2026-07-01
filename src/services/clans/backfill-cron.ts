@@ -8,6 +8,7 @@ import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
 import { fetchClanStronghold } from "@/services/wargaming/wot/clans/stronghold";
+import { fetchClanGlobalMap } from "@/services/wargaming/wot/clans/globalmap";
 
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 20;
@@ -114,8 +115,10 @@ export async function refreshDueClansForRegion(
             err,
           ),
         ),
-        fetchClanStronghold(region, clanId)
-          .then((data) => data && recordClanSnapshot(region, clanId, data))
+        Promise.all([
+          fetchClanStronghold(region, clanId),
+          fetchClanGlobalMap(region, clanId),
+        ]).then(([sh, gm]) => sh && recordClanSnapshot(region, clanId, sh, gm))
           .catch((err) =>
             console.error(
               `[clan-backfill-cron-${region}] stronghold ${clanId} failed:`,

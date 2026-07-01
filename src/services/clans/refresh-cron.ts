@@ -9,6 +9,7 @@ import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
 import { fetchClanStronghold } from "@/services/wargaming/wot/clans/stronghold";
+import { fetchClanGlobalMap } from "@/services/wargaming/wot/clans/globalmap";
 
 // 10s tick — fast enough for user-initiated page visits to feel live, loose
 // enough to coalesce bursts on the same clan into a single drain.
@@ -86,8 +87,10 @@ export async function drainClanRefreshQueueForRegion(
             err,
           ),
         ),
-        fetchClanStronghold(region, clanId)
-          .then((data) => data && recordClanSnapshot(region, clanId, data))
+        Promise.all([
+          fetchClanStronghold(region, clanId),
+          fetchClanGlobalMap(region, clanId),
+        ]).then(([sh, gm]) => sh && recordClanSnapshot(region, clanId, sh, gm))
           .catch((err) =>
             console.error(
               `[clan-refresh-cron-${region}] stronghold ${clanId} failed:`,

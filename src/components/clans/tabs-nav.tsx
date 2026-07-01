@@ -5,12 +5,14 @@ export enum ClanTab {
   Overview = "overview",
   Tanks = "tanks",
   Stronghold = "stronghold",
+  ClanWars = "clan-wars",
 }
 
 const TABS: { id: ClanTab; label: string; query: string | null }[] = [
   { id: ClanTab.Overview, label: "Overview", query: null },
   { id: ClanTab.Tanks, label: "Tanks", query: "tanks" },
   { id: ClanTab.Stronghold, label: "Stronghold", query: "stronghold" },
+  { id: ClanTab.ClanWars, label: "Clan Wars", query: "clan-wars" },
 ];
 
 export function tabFromQuery(query: string | null | undefined): ClanTab {

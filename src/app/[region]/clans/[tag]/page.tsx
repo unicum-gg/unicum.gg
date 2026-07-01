@@ -7,6 +7,7 @@ import { ClanMembersTable } from "@/components/clans/members-table";
 import { PreviousClansTable } from "@/components/clans/previous-clans-table";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
+import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
 import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
 import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
 import { LiveSync } from "@/components/live-sync";
@@ -129,12 +130,13 @@ async function render(
     return cached.events;
   });
 
-  const [latestSnapshot, snapshotPeriods] = activeTab === ClanTab.Stronghold
-    ? await Promise.all([
-        getLatestClanSnapshot(region, clan.id),
-        getClanSnapshotPeriods(region, clan.id),
-      ])
-    : [null, null];
+  const [latestSnapshot, snapshotPeriods] =
+    activeTab === ClanTab.Stronghold || activeTab === ClanTab.ClanWars
+      ? await Promise.all([
+          getLatestClanSnapshot(region, clan.id),
+          getClanSnapshotPeriods(region, clan.id),
+        ])
+      : [null, null];
 
   const basePath = ROUTES.CLAN(region, clan.tag);
 
@@ -212,7 +214,7 @@ async function render(
           <PanelSeparator />
           <VehiclesPanel region={region} clanId={clan.id} />
         </>
-      ) : (
+      ) : activeTab === ClanTab.Stronghold ? (
         <>
           <PanelSeparator />
           <Panel>
@@ -228,6 +230,27 @@ async function render(
               ) : (
                 <div className={`p-4 ${styles.mutedDescription}`}>
                   No stronghold data yet. Check back after the next clan refresh.
+                </div>
+              )}
+            </PanelContent>
+          </Panel>
+        </>
+      ) : (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>Clan Wars stats</PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              {latestSnapshot && snapshotPeriods ? (
+                <ClanWarsStatsTable
+                  latest={latestSnapshot}
+                  periods={snapshotPeriods}
+                />
+              ) : (
+                <div className={`p-4 ${styles.mutedDescription}`}>
+                  No Clan Wars data yet. Check back after the next clan refresh.
                 </div>
               )}
             </PanelContent>

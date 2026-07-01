@@ -5,6 +5,7 @@ import {
   clanSnapshotsByRegion,
 } from "@/services/db/schema";
 import type { Region } from "@/services/wargaming/wot";
+import type { ClanGlobalMapData } from "@/services/wargaming/wot/clans/globalmap";
 import type { ClanStrongholdData } from "@/services/wargaming/wot/clans/stronghold";
 
 const SNAPSHOT_THROTTLE_MS = 24 * 60 * 60 * 1000;
@@ -21,6 +22,19 @@ export type ClanStrongholdStats = {
   skirmishWinsT10: number | null;
   advancesBattlesT10: number | null;
   advancesWinsT10: number | null;
+};
+
+export type ClanGlobalMapStats = {
+  gmEloT10: number | null;
+  gmBattlesT10: number | null;
+  gmWinsT10: number | null;
+  gmEloT8: number | null;
+  gmBattlesT8: number | null;
+  gmWinsT8: number | null;
+  gmEloT6: number | null;
+  gmBattlesT6: number | null;
+  gmWinsT6: number | null;
+  gmProvinces: number | null;
 };
 
 export type ClanSnapshotPeriods = {
@@ -44,6 +58,42 @@ export function strongholdStatsFromClanSnapshot(
     skirmishWinsT10: s.skirmishWinsT10,
     advancesBattlesT10: s.advancesBattlesT10,
     advancesWinsT10: s.advancesWinsT10,
+  };
+}
+
+export function globalMapStatsFromClanSnapshot(s: ClanSnapshot): ClanGlobalMapStats {
+  return {
+    gmEloT10: s.gmEloT10,
+    gmBattlesT10: s.gmBattlesT10,
+    gmWinsT10: s.gmWinsT10,
+    gmEloT8: s.gmEloT8,
+    gmBattlesT8: s.gmBattlesT8,
+    gmWinsT8: s.gmWinsT8,
+    gmEloT6: s.gmEloT6,
+    gmBattlesT6: s.gmBattlesT6,
+    gmWinsT6: s.gmWinsT6,
+    gmProvinces: s.gmProvinces,
+  };
+}
+
+export function diffClanGlobalMapStats(
+  curr: ClanGlobalMapStats,
+  prev: ClanGlobalMapStats,
+): ClanGlobalMapStats {
+  function diff(a: number | null, b: number | null): number | null {
+    return a !== null && b !== null ? a - b : null;
+  }
+  return {
+    gmEloT10: diff(curr.gmEloT10, prev.gmEloT10),
+    gmBattlesT10: diff(curr.gmBattlesT10, prev.gmBattlesT10),
+    gmWinsT10: diff(curr.gmWinsT10, prev.gmWinsT10),
+    gmEloT8: diff(curr.gmEloT8, prev.gmEloT8),
+    gmBattlesT8: diff(curr.gmBattlesT8, prev.gmBattlesT8),
+    gmWinsT8: diff(curr.gmWinsT8, prev.gmWinsT8),
+    gmEloT6: diff(curr.gmEloT6, prev.gmEloT6),
+    gmBattlesT6: diff(curr.gmBattlesT6, prev.gmBattlesT6),
+    gmWinsT6: diff(curr.gmWinsT6, prev.gmWinsT6),
+    gmProvinces: diff(curr.gmProvinces, prev.gmProvinces),
   };
 }
 
@@ -73,6 +123,7 @@ export async function recordClanSnapshot(
   region: Region,
   clanId: number,
   data: ClanStrongholdData,
+  gm: ClanGlobalMapData | null = null,
 ): Promise<void> {
   const snapshots = clanSnapshotsByRegion[region];
 
@@ -100,6 +151,16 @@ export async function recordClanSnapshot(
     skirmishWinsT10: data.t10?.skirmishWins ?? null,
     advancesBattlesT10: data.t10?.advancesBattles ?? null,
     advancesWinsT10: data.t10?.advancesWins ?? null,
+    gmEloT10: gm?.eloT10 ?? null,
+    gmBattlesT10: gm?.battlesT10 ?? null,
+    gmWinsT10: gm?.winsT10 ?? null,
+    gmEloT8: gm?.eloT8 ?? null,
+    gmBattlesT8: gm?.battlesT8 ?? null,
+    gmWinsT8: gm?.winsT8 ?? null,
+    gmEloT6: gm?.eloT6 ?? null,
+    gmBattlesT6: gm?.battlesT6 ?? null,
+    gmWinsT6: gm?.winsT6 ?? null,
+    gmProvinces: gm?.provinces ?? null,
   });
 }
 

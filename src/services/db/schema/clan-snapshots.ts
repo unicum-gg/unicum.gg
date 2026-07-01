@@ -35,6 +35,17 @@ export function makeClanSnapshotsTable(region: string, clans: ClansTable) {
 
       advancesBattlesT10: integer("advances_battles_t10"),
       advancesWinsT10: integer("advances_wins_t10"),
+
+      gmEloT10: integer("gm_elo_t10"),
+      gmBattlesT10: integer("gm_battles_t10"),
+      gmWinsT10: integer("gm_wins_t10"),
+      gmEloT8: integer("gm_elo_t8"),
+      gmBattlesT8: integer("gm_battles_t8"),
+      gmWinsT8: integer("gm_wins_t8"),
+      gmEloT6: integer("gm_elo_t6"),
+      gmBattlesT6: integer("gm_battles_t6"),
+      gmWinsT6: integer("gm_wins_t6"),
+      gmProvinces: integer("gm_provinces"),
     },
     (t) => [
       index(`${region}_clan_snapshots_clan_id_taken_at_idx`).on(
