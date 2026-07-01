@@ -2,6 +2,7 @@ import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
+import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
@@ -16,6 +17,7 @@ const DAY_FORMAT = "MMM d, yyyy";
 
 export function PlayerHeader({
   region,
+  accountId,
   nickname,
   createdAt,
   lastBattleAt,
@@ -24,6 +26,7 @@ export function PlayerHeader({
   inferredLanguages,
 }: {
   region: Region;
+  accountId: number;
   nickname: string;
   createdAt: Date;
   lastBattleAt: Date;
@@ -38,6 +41,9 @@ export function PlayerHeader({
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
           </h1>
+          <FavoriteButton
+            item={{ kind: "player", region, player: { account_id: accountId, nickname, clan: null } }}
+          />
           <ShareButton
             title={`Share ${nickname}`}
             url={`${APP.URL}${ROUTES.PLAYER(region, nickname)}`}

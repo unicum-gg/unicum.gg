@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
+import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
@@ -144,6 +145,20 @@ export function ClanHeader({
                 <span className="ml-2">{clan.name}</span>
               </AutoFitText>
             </h1>
+            <FavoriteButton
+              item={{
+                kind: "clan",
+                region,
+                clan: {
+                  clan_id: clan.id,
+                  tag: clan.tag,
+                  name: clan.name,
+                  color: clan.color,
+                  members_count: clan.membersCount,
+                  emblem: clan.emblem,
+                },
+              }}
+            />
             <ShareButton
               title={`Share [${clan.tag}]`}
               url={`${APP.URL}${ROUTES.CLAN(region, clan.tag)}`}

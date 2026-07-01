@@ -223,6 +223,7 @@ async function renderFromCache(
 
   return await buildView({
     region,
+    accountId,
     player,
     latest,
     tanks,
@@ -273,6 +274,7 @@ async function renderFromWG(
 
   return await buildView({
     region,
+    accountId,
     player,
     latest,
     tanks: fetchedTanks,
@@ -286,6 +288,7 @@ async function renderFromWG(
 
 async function buildView(args: {
   region: Region;
+  accountId: number;
   player: Player;
   latest: PlayerSnapshot;
   tanks: TankStats[];
@@ -297,6 +300,7 @@ async function buildView(args: {
 }): Promise<React.ReactElement> {
   const {
     region,
+    accountId,
     player,
     latest,
     tanks,
@@ -370,6 +374,7 @@ async function buildView(args: {
         <PanelContent className="p-0">
           <PlayerHeader
             region={region}
+            accountId={accountId}
             nickname={player.nickname}
             createdAt={createdAt}
             lastBattleAt={lastBattleAt}
