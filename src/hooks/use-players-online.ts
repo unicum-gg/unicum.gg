@@ -10,9 +10,13 @@ export function usePlayersOnline(region: Region): OnlinePayload {
   useEffect(() => {
     const es = new EventSource(`/api/${region}/server/online`);
     es.onmessage = (e: MessageEvent<string>) => {
-      setPayload(JSON.parse(e.data) as OnlinePayload);
+      const next = JSON.parse(e.data) as OnlinePayload;
+      // A transient WG failure arrives as `null`. Keep the last known count
+      // so the banner never blinks out, rather than clearing it.
+      if (next) setPayload(next);
     };
-    es.onerror = () => es.close();
+    // Let EventSource auto-reconnect on transient errors instead of closing
+    // the stream for good (which would drop the count permanently).
     return () => es.close();
   }, [region]);
 

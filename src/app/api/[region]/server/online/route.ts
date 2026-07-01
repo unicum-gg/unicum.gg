@@ -24,6 +24,10 @@ function ensurePolling(region: Region): void {
   if (globalThis.__wotOnlineIntervals[region]) return;
   const poll = async () => {
     const payload = await fetchPlayersOnline(region);
+    // A failed WG tick returns null. Keep the last good value instead of
+    // propagating the hole, so connected clients (and any that connect during
+    // the outage) never see the count blink out.
+    if (!payload) return;
     globalThis.__wotOnlineCache[region] = payload;
     globalThis.__wotOnlineListeners[region]?.forEach((cb) => cb(payload));
   };
