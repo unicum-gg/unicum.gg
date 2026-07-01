@@ -11,11 +11,11 @@ import { RATING_COLOR_CLASS, RatingColor } from "@/services/wargaming/wot/rating
 import type {
   ClanGlobalMapStats,
   ClanSnapshotPeriods,
-} from "@/services/clans/snapshots";
+} from "@/services/clans/snapshot-stats";
 import {
   diffClanGlobalMapStats,
   globalMapStatsFromClanSnapshot,
-} from "@/services/clans/snapshots";
+} from "@/services/clans/snapshot-stats";
 import type { ClanSnapshot } from "@/services/db/schema";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

@@ -14,11 +14,11 @@ import {
 import type {
   ClanStrongholdStats,
   ClanSnapshotPeriods,
-} from "@/services/clans/snapshots";
+} from "@/services/clans/snapshot-stats";
 import {
   diffClanStrongholdStats,
   strongholdStatsFromClanSnapshot,
-} from "@/services/clans/snapshots";
+} from "@/services/clans/snapshot-stats";
 import type { ClanSnapshot } from "@/services/db/schema";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
