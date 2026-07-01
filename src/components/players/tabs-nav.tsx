@@ -14,7 +14,7 @@ export enum PlayerTab {
 }
 
 const TABS: { id: PlayerTab; label: string; query: string | null }[] = [
-  { id: PlayerTab.Overall, label: "Overall", query: null },
+  { id: PlayerTab.Overall, label: "Random Battles", query: null },
   { id: PlayerTab.Skirmish, label: "Skirmish", query: "skirmish" },
   { id: PlayerTab.Advances, label: "Advances", query: "advances" },
   { id: PlayerTab.GrandBattles, label: "Grand Battles", query: "grand" },
