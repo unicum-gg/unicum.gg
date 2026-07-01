@@ -1,5 +1,6 @@
 import type { Region } from "@/services/wargaming/wot";
 import { wgFetch } from "@/services/wargaming/wot/fetch";
+import { type Emblems, pickEmblem } from ".";
 
 export type ClanRef = {
   id: number;
@@ -28,17 +29,6 @@ export type PlayerClanHistoryFull = {
   timeInClansSeconds: number;
 };
 
-type Emblems = Record<string, { portal?: string; wot?: string }> | null;
-
-function pickEmblem(emblems: Emblems): string {
-  return (
-    emblems?.x195?.portal ??
-    emblems?.x64?.portal ??
-    emblems?.x64?.wot ??
-    emblems?.x32?.portal ??
-    ""
-  );
-}
 
 type AccountInfoEntry = {
   joined_at: number;

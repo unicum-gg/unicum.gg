@@ -2,9 +2,22 @@ import {
   type Region,
   REGION_PORTAL_HOST,
 } from "@/services/wargaming/wot";
+import { chunkArray } from "@/lib/utils";
 import { portalFetch, wgFetch } from "@/services/wargaming/wot/fetch";
 import { sanitizeClanDescription } from "./description";
 import type { ClanRef } from "./player";
+
+export type Emblems = Record<string, { portal?: string; wot?: string }> | null;
+
+export function pickEmblem(emblems: Emblems): string {
+  return (
+    emblems?.x195?.portal ??
+    emblems?.x64?.portal ??
+    emblems?.x64?.wot ??
+    emblems?.x32?.portal ??
+    ""
+  );
+}
 
 export type ClanFullInfo = {
   id: number;
@@ -64,7 +77,7 @@ type RawClanFullInfo = {
   creator_name: string | null;
   created_at: number;
   is_clan_disbanded: boolean;
-  emblems: Record<string, { portal?: string; wot?: string }> | null;
+  emblems: Emblems;
 };
 
 function isGhostClan(raw: RawClanFullInfo): boolean {
@@ -81,12 +94,7 @@ function clanFullInfoFromRaw(
   raw: RawClanFullInfo,
   languages: string[],
 ): ClanFullInfo {
-  const emblem =
-    raw.emblems?.x195?.portal ??
-    raw.emblems?.x64?.portal ??
-    raw.emblems?.x64?.wot ??
-    raw.emblems?.x32?.portal ??
-    "";
+  const emblem = pickEmblem(raw.emblems);
   return {
     id: raw.clan_id,
     tag: raw.tag ?? "",
@@ -134,10 +142,7 @@ export async function getClansFullInfoBatch(
   if (unique.length === 0) return out;
 
   // 1. Batched WG calls in parallel
-  const chunks: number[][] = [];
-  for (let i = 0; i < unique.length; i += CLAN_FULL_INFO_BATCH_SIZE) {
-    chunks.push(unique.slice(i, i + CLAN_FULL_INFO_BATCH_SIZE));
-  }
+  const chunks = chunkArray(unique, CLAN_FULL_INFO_BATCH_SIZE);
   const wgResults = await Promise.allSettled(
     chunks.map((batch) =>
       wgFetch<Record<string, RawClanFullInfo | null>>(
@@ -177,25 +182,19 @@ type RawClanShortRef = {
   tag: string | null;
   name: string | null;
   color: string | null;
-  emblems: Record<string, { portal?: string; wot?: string }> | null;
+  emblems: Emblems;
 };
 
 const CLAN_SHORT_REF_FIELDS = "clan_id,tag,name,color,emblems";
 const CLAN_SHORT_REF_BATCH_SIZE = 100;
 
 function clanRefFromShortRaw(raw: RawClanShortRef): ClanRef {
-  const emblems = raw.emblems;
   return {
     id: raw.clan_id,
     tag: raw.tag ?? "",
     name: raw.name ?? "",
     color: raw.color ?? "",
-    emblem:
-      emblems?.x195?.portal ??
-      emblems?.x64?.portal ??
-      emblems?.x64?.wot ??
-      emblems?.x32?.portal ??
-      "",
+    emblem: pickEmblem(raw.emblems),
     // /wot/clans/info/ doesn't return languages — those live behind the portal.
     // Consumers that need languages enrich from the local clans table.
     languages: [],
@@ -215,10 +214,7 @@ export async function getClansShortRefBatch(
   const unique = Array.from(new Set(clanIds));
   if (unique.length === 0) return out;
 
-  const chunks: number[][] = [];
-  for (let i = 0; i < unique.length; i += CLAN_SHORT_REF_BATCH_SIZE) {
-    chunks.push(unique.slice(i, i + CLAN_SHORT_REF_BATCH_SIZE));
-  }
+  const chunks = chunkArray(unique, CLAN_SHORT_REF_BATCH_SIZE);
   const results = await Promise.allSettled(
     chunks.map((batch) =>
       wgFetch<Record<string, RawClanShortRef | null>>(

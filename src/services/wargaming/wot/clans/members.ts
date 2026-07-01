@@ -4,6 +4,7 @@ import {
   REGION_PORTAL_HOST,
 } from "@/services/wargaming/wot";
 import { portalFetch } from "@/services/wargaming/wot/fetch";
+import type { MemberRatings } from "./ratings";
 
 type PortalMemberRaw = {
   id: number;
@@ -57,6 +58,11 @@ export type ClanMemberPeriodStats = {
   battlesPerDay: number;
 };
 
+// Pre-computed ratings cached on the clan_members row by refreshClanMembers,
+// so the clan page can render the table fully populated on first paint
+// instead of streaming a 100-member compute via Suspense.
+// `wnx30d` + `battles30d` cover a 30-day window (matches the player
+// page "Last 30d" column); the clan aggregate weights by `battles30d`.
 export type ClanMemberStats = {
   accountId: number;
   name: string;
@@ -68,19 +74,11 @@ export type ClanMemberStats = {
   personalRating: number | null;
   overall: ClanMemberPeriodStats | null;
   d28: ClanMemberPeriodStats | null;
-  // Pre-computed ratings cached on the clan_members row by refreshClanMembers,
-  // so the clan page can render the table fully populated on first paint
-  // instead of streaming a 100-member compute via Suspense.
-  // `wnx30d` + `battles30d` cover a 30-day window (matches the player
-  // page "Last 30d" column); the clan aggregate weights by `battles30d`.
-  wn7: number | null;
-  wn8: number | null;
-  wnx: number | null;
   wn730d: number | null;
   wn830d: number | null;
   wnx30d: number | null;
   battles30d: number | null;
-};
+} & MemberRatings;
 
 function periodStatsFromRaw(
   raw: PortalMemberRaw,

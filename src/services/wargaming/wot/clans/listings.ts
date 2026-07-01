@@ -1,5 +1,6 @@
 import type { Region } from "@/services/wargaming/wot";
 import { wgFetch } from "@/services/wargaming/wot/fetch";
+import { type Emblems, pickEmblem } from ".";
 
 export type ClanMember = { account_id: number; account_name: string };
 
@@ -67,7 +68,7 @@ type RawClanBriefInfo = {
   tag: string;
   name: string;
   color: string;
-  emblems: Record<string, { portal?: string; wot?: string }> | null;
+  emblems: Emblems;
   members: ClanMember[];
 };
 
@@ -94,7 +95,7 @@ export async function getClansBriefInfo(
         tag: raw.tag,
         name: raw.name,
         color: raw.color,
-        emblem: raw.emblems?.x64?.portal ?? raw.emblems?.x64?.wot ?? null,
+        emblem: pickEmblem(raw.emblems) || null,
         members: raw.members ?? [],
       });
     }
