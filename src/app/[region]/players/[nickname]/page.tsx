@@ -499,7 +499,7 @@ async function buildView(args: {
 
           <Panel>
             <PanelHeader>
-              <PanelTitle>{player.nickname}&apos;s overall stats</PanelTitle>
+              <PanelTitle>{player.nickname}&apos;s random battles stats</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <PlayerStatsTable
