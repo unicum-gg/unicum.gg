@@ -3,6 +3,12 @@
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { useOnClickOutside } from "usehooks-ts";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import type {
   PlayerSearchResponse,
   SearchPlayerResult,
@@ -19,6 +25,7 @@ export function PlayerSearchPopover({
   triggerClassName,
   triggerContent,
   triggerAriaLabel,
+  tooltip,
 }: {
   region: Region;
   excludeKeys?: Set<string>;
@@ -26,6 +33,7 @@ export function PlayerSearchPopover({
   triggerClassName: string;
   triggerContent: ReactNode;
   triggerAriaLabel: string;
+  tooltip?: string;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -78,16 +86,27 @@ export function PlayerSearchPopover({
     ? results.filter((r) => !excludeKeys.has(r.nickname.toLowerCase()))
     : results;
 
+  const trigger = (
+    <button
+      type="button"
+      onClick={() => setOpen((v) => !v)}
+      aria-label={triggerAriaLabel}
+      className={triggerClassName}
+    >
+      {triggerContent}
+    </button>
+  );
+
   return (
     <div ref={ref} className="relative inline-block">
-      <button
-        type="button"
-        onClick={() => setOpen((v) => !v)}
-        aria-label={triggerAriaLabel}
-        className={triggerClassName}
-      >
-        {triggerContent}
-      </button>
+      {tooltip ? (
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>{trigger}</TooltipTrigger>
+            <TooltipContent>{tooltip}</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      ) : trigger}
       {open && (
         <div className="absolute left-0 top-full z-50 mt-1 w-72 overflow-hidden rounded-md border border-fd-border bg-fd-popover shadow-lg">
           <div className="flex items-center gap-2 border-b border-fd-border px-3 py-2">

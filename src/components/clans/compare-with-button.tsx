@@ -24,13 +24,9 @@ export function CompareWithButton({
         router.push(ROUTES.COMPARE_CLANS(region, [current, tag]));
       }}
       triggerAriaLabel="Compare with another clan"
-      triggerClassName="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-fd-border bg-fd-secondary/30 px-3 py-1.5 text-xs font-medium text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
-      triggerContent={
-        <>
-          <ArrowsLeftRightIcon className="size-3.5" weight="bold" />
-          Compare with...
-        </>
-      }
+      tooltip="Compare with..."
+      triggerClassName="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
+      triggerContent={<ArrowsLeftRightIcon className="size-3.5" weight="bold" />}
     />
   );
 }

@@ -2,6 +2,12 @@
 
 import { ShareNetworkIcon } from "@phosphor-icons/react";
 import { useState } from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { ShareModal } from "./share-modal";
 
 export function ShareButton({
@@ -23,15 +29,21 @@ export function ShareButton({
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        aria-label="Share"
-        className="inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-fd-border bg-fd-secondary/30 px-3 py-1.5 text-xs font-medium text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
-      >
-        <ShareNetworkIcon className="size-3.5" weight="bold" />
-        Share
-      </button>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Share"
+              className="inline-flex cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 p-1.5 text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
+            >
+              <ShareNetworkIcon className="size-3.5" weight="bold" />
+            </button>
+          </TooltipTrigger>
+          <TooltipContent>Share</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
       <ShareModal
         open={open}
         onOpenChange={setOpen}
