@@ -1,5 +1,6 @@
 import { LanguageChips } from "@/components/clans/language-chips";
 import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
+import { StrongholdTierTabs } from "@/components/clans/stronghold-tier-tabs";
 import { TopClansList } from "@/components/clans/top-clans-list";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import {
@@ -133,7 +134,7 @@ export async function ClansLandingView({
               </>
             )}
           </p>
-          <div className="mt-6 flex justify-center">
+          <div className="mt-6 flex flex-col items-center gap-3">
             <LeaderboardTabs
               current="clans"
               region={region}
@@ -143,6 +144,13 @@ export async function ClansLandingView({
           </div>
         </PanelContent>
       </Panel>
+
+      {!language && (
+        <>
+          <PanelSeparator />
+          <StrongholdTierTabs region={region} />
+        </>
+      )}
 
       <PanelSeparator />
 

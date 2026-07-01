@@ -7,7 +7,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { RATING_COLOR_CLASS, RatingColor } from "@/services/wargaming/wot/ratings";
+import {
+  RATING_COLOR_CLASS,
+  strongholdWinrateColor,
+} from "@/services/wargaming/wot/ratings";
 import type {
   ClanStrongholdStats,
   ClanSnapshotPeriods,
@@ -33,22 +36,13 @@ const pctFmt = new Intl.NumberFormat("en-US", {
 type Cell = { primary: string; className?: string };
 const DASH: Cell = { primary: "—", className: "text-muted-foreground" };
 
-function strongholdWrColor(ratio: number): RatingColor {
-  if (ratio >= 0.60) return RatingColor.Excellent;
-  if (ratio >= 0.55) return RatingColor.Super;
-  if (ratio >= 0.50) return RatingColor.Good;
-  if (ratio >= 0.45) return RatingColor.Average;
-  if (ratio >= 0.40) return RatingColor.BelowAvg;
-  return RatingColor.Bad;
-}
-
 function wrCell(wins: number | null, battles: number | null): Cell {
   if (wins === null || battles === null || battles === 0)
     return { primary: "—", className: "text-muted-foreground" };
   const ratio = wins / battles;
   return {
     primary: pctFmt.format(ratio),
-    className: RATING_COLOR_CLASS[strongholdWrColor(ratio)],
+    className: RATING_COLOR_CLASS[strongholdWinrateColor(ratio)],
   };
 }
 

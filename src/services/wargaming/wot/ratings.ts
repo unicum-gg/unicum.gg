@@ -53,6 +53,22 @@ export function winrateColor(wr: number): RatingColor {
   return RatingColor.Top;
 }
 
+// Stronghold (skirmish + advances) win rate anchors 50% at Good, which
+// matches the reality of organised 7v7/15v15 play far better than the
+// random-battle `winrateColor` scale. Same 9 tiers, with 45/40 below Good
+// and 55/60 above it, plus VeryBad/VeryGood/Top filling out the extremes.
+export function strongholdWinrateColor(wr: number): RatingColor {
+  if (wr < 0.35) return RatingColor.VeryBad;
+  if (wr < 0.4) return RatingColor.Bad;
+  if (wr < 0.45) return RatingColor.BelowAvg;
+  if (wr < 0.5) return RatingColor.Average;
+  if (wr < 0.53) return RatingColor.Good;
+  if (wr < 0.55) return RatingColor.VeryGood;
+  if (wr < 0.6) return RatingColor.Super;
+  if (wr < 0.65) return RatingColor.Excellent;
+  return RatingColor.Top;
+}
+
 export function wn7Color(value: number): RatingColor {
   if (value < 500) return RatingColor.VeryBad;
   if (value < 700) return RatingColor.Bad;

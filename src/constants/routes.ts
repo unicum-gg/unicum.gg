@@ -1,4 +1,5 @@
 import { pathcat } from "pathcat";
+import { StrongholdTier } from "@/constants/stronghold";
 import { Region } from "@/services/wargaming/wot";
 
 const ROUTES = {
@@ -52,6 +53,13 @@ const ROUTES = {
     }),
   CLANS: (region: Region) =>
     region === Region.EU ? "/clans" : pathcat("/:region/clans", { region }),
+  STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
+    const base =
+      region === Region.EU
+        ? "/clans/stronghold"
+        : pathcat("/:region/clans/stronghold", { region });
+    return tier ? `${base}/${tier}` : base;
+  },
   CLANS_BY_LANGUAGE: (
     region: Region,
     language: string,
