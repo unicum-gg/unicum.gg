@@ -100,10 +100,16 @@ function compareMembers(
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
   const av = getSortValue(a, state.column);
   const bv = getSortValue(b, state.column);
-  if (typeof av === "string" && typeof bv === "string") {
-    return mul * av.localeCompare(bv);
+  const cmp =
+    typeof av === "string" && typeof bv === "string"
+      ? av.localeCompare(bv)
+      : (av as number) - (bv as number);
+  // Within the same role, keep the best-rated members first so the default
+  // Role sort matches the commander-first, then personal-rating order.
+  if (cmp === 0 && state.column === SortColumn.Role) {
+    return (b.personalRating ?? -1) - (a.personalRating ?? -1);
   }
-  return mul * ((av as number) - (bv as number));
+  return mul * cmp;
 }
 
 function SortableHead({
@@ -198,7 +204,10 @@ export function ClanMembersTable({
   region: Region;
   members: ClanMemberStats[];
 }) {
-  const [sort, setSort] = useState<SortState>(null);
+  const [sort, setSort] = useState<SortState>({
+    column: SortColumn.Role,
+    direction: SortDirection.Desc,
+  });
 
   const sorted = [...members].sort((a, b) => compareMembers(a, b, sort));
 

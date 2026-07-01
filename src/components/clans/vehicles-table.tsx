@@ -256,7 +256,10 @@ export function ClanVehiclesTable({
   const metric: RatingMetric = isRatingMetric(storedRating)
     ? storedRating
     : DEFAULT_RATING_METRIC;
-  const [sort, setSort] = useState<SortState>(null);
+  const [sort, setSort] = useState<SortState>({
+    column: SortColumn.Battles,
+    direction: SortDirection.Desc,
+  });
 
   const rows = useMemo(
     () => buildRows(aggregates, encyclopedia, metric, wn8Expected, wnxExpected),
