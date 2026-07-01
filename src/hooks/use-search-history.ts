@@ -16,7 +16,7 @@ type SearchHistory = {
 };
 
 const STORAGE_KEY = STORAGE.LOCAL_STORAGE.SEARCH_HISTORY;
-const MAX_RECENT = 3;
+const MAX_RECENT = 5;
 
 const EMPTY: SearchHistory = { recent: [], favorites: [] };
 
@@ -41,68 +41,71 @@ function loadFromStorage(): SearchHistory {
   }
 }
 
+// Module-level shared state so all useSearchHistory instances on the same
+// page stay in sync without a React context provider.
+let sharedState: SearchHistory = EMPTY;
+const listeners = new Set<(s: SearchHistory) => void>();
+
+function broadcast(next: SearchHistory) {
+  sharedState = next;
+  for (const fn of listeners) fn(next);
+}
+
+function persist(next: SearchHistory) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+}
+
+// Cross-tab sync — storage event only fires for OTHER tabs, which is exactly
+// what we want here (same-tab sync is handled by broadcast()).
+if (typeof window !== "undefined") {
+  window.addEventListener("storage", (e) => {
+    if (e.key !== STORAGE_KEY) return;
+    broadcast(loadFromStorage());
+  });
+}
+
 export function useSearchHistory() {
-  const [state, setState] = useState<SearchHistory>(EMPTY);
-  const [hydrated, setHydrated] = useState(false);
+  const [state, setState] = useState<SearchHistory>(sharedState);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-shot hydration from localStorage on mount
-    setState(loadFromStorage());
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- flips the "we've checked localStorage" flag once on mount
-    setHydrated(true);
-    // The native `storage` event fires only for changes from OTHER tabs
-    // or windows. Reload our state when that happens so multiple open
-    // tabs stay in sync.
-    const onStorage = (e: StorageEvent) => {
-      if (e.key !== STORAGE_KEY) return;
-      setState(loadFromStorage());
-    };
-    window.addEventListener("storage", onStorage);
-    return () => window.removeEventListener("storage", onStorage);
+    listeners.add(setState);
+    // Hydrate from localStorage on mount and broadcast to all instances.
+    broadcast(loadFromStorage());
+    return () => { listeners.delete(setState); };
   }, []);
 
-  // Persist on every change (state-driven). Pure setState updaters above
-  // avoid running this side effect inside the updater itself, which
-  // misbehaves under React 19 strict mode (updaters are double-invoked).
-  useEffect(() => {
-    if (!hydrated) return;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  }, [state, hydrated]);
-
   const addRecent = useCallback((item: SearchHistoryItem) => {
-    setState((prev) => {
-      const key = itemKey(item);
-      return {
-        favorites: prev.favorites,
-        recent: [item, ...prev.recent.filter((i) => itemKey(i) !== key)].slice(
-          0,
-          MAX_RECENT,
-        ),
-      };
-    });
+    const key = itemKey(item);
+    const next = {
+      favorites: sharedState.favorites,
+      recent: [item, ...sharedState.recent.filter((i) => itemKey(i) !== key)].slice(0, MAX_RECENT),
+    };
+    broadcast(next);
+    persist(next);
   }, []);
 
   const removeRecent = useCallback((item: SearchHistoryItem) => {
-    setState((prev) => {
-      const key = itemKey(item);
-      return {
-        favorites: prev.favorites,
-        recent: prev.recent.filter((i) => itemKey(i) !== key),
-      };
-    });
+    const key = itemKey(item);
+    const next = {
+      favorites: sharedState.favorites,
+      recent: sharedState.recent.filter((i) => itemKey(i) !== key),
+    };
+    broadcast(next);
+    persist(next);
   }, []);
 
   const toggleFavorite = useCallback((item: SearchHistoryItem) => {
-    setState((prev) => {
-      const key = itemKey(item);
-      const isFav = prev.favorites.some((i) => itemKey(i) === key);
-      return {
-        recent: prev.recent,
-        favorites: isFav
-          ? prev.favorites.filter((i) => itemKey(i) !== key)
-          : [...prev.favorites, item],
-      };
-    });
+    const key = itemKey(item);
+    const isFav = sharedState.favorites.some((i) => itemKey(i) === key);
+    const next = {
+      recent: sharedState.recent,
+      favorites: isFav
+        ? sharedState.favorites.filter((i) => itemKey(i) !== key)
+        : [...sharedState.favorites, item],
+    };
+    broadcast(next);
+    persist(next);
   }, []);
 
   const isFavorite = useCallback(
