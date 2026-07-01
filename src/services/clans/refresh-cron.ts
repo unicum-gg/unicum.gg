@@ -3,10 +3,12 @@ import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { clanRefreshQueueByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { recordClanSnapshot } from "./snapshots";
 import { dequeueClanRefresh } from "./refresh-queue";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
+import { fetchClanStronghold } from "@/services/wargaming/wot/clans/stronghold";
 
 // 10s tick — fast enough for user-initiated page visits to feel live, loose
 // enough to coalesce bursts on the same clan into a single drain.
@@ -84,6 +86,14 @@ export async function drainClanRefreshQueueForRegion(
             err,
           ),
         ),
+        fetchClanStronghold(region, clanId)
+          .then((data) => data && recordClanSnapshot(region, clanId, data))
+          .catch((err) =>
+            console.error(
+              `[clan-refresh-cron-${region}] stronghold ${clanId} failed:`,
+              err,
+            ),
+          ),
       ]);
       ok += 1;
     } catch (err) {

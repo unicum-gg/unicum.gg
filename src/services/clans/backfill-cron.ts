@@ -3,9 +3,11 @@ import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { clansByRegion } from "@/services/db/schema";
 import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { recordClanSnapshot } from "./snapshots";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
+import { fetchClanStronghold } from "@/services/wargaming/wot/clans/stronghold";
 
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 20;
@@ -112,6 +114,14 @@ export async function refreshDueClansForRegion(
             err,
           ),
         ),
+        fetchClanStronghold(region, clanId)
+          .then((data) => data && recordClanSnapshot(region, clanId, data))
+          .catch((err) =>
+            console.error(
+              `[clan-backfill-cron-${region}] stronghold ${clanId} failed:`,
+              err,
+            ),
+          ),
       ]);
       succeeded += 1;
     } catch (err) {

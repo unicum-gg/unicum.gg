@@ -1,4 +1,5 @@
 export * from "./clan-members";
+export * from "./clan-snapshots";
 export * from "./clan-recent-events";
 export * from "./clan-refresh-queue";
 export * from "./clans";

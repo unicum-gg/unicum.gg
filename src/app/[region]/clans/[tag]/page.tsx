@@ -6,6 +6,7 @@ import { ClanHeader } from "@/components/clans/header";
 import { ClanMembersTable } from "@/components/clans/members-table";
 import { PreviousClansTable } from "@/components/clans/previous-clans-table";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
+import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
 import { ClanTabsNav, ClanTab, tabFromQuery } from "@/components/clans/tabs-nav";
 import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
 import { LiveSync } from "@/components/live-sync";
@@ -28,6 +29,11 @@ import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanEventsCached } from "@/services/clans/repository/events";
 import { getClanMembersCached } from "@/services/clans/repository/members";
 import { getClanTankAggregates } from "@/services/clans/repository/tanks";
+import {
+  getLatestClanSnapshot,
+  getClanSnapshotPeriods,
+} from "@/services/clans/snapshots";
+import { styles } from "@/lib/styles";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/events";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
@@ -123,6 +129,13 @@ async function render(
     return cached.events;
   });
 
+  const [latestSnapshot, snapshotPeriods] = activeTab === ClanTab.Stronghold
+    ? await Promise.all([
+        getLatestClanSnapshot(region, clan.id),
+        getClanSnapshotPeriods(region, clan.id),
+      ])
+    : [null, null];
+
   const basePath = ROUTES.CLAN(region, clan.tag);
 
   return (
@@ -194,10 +207,31 @@ async function render(
             <RecentActivityStreamed region={region} promise={eventsPromise} />
           </Suspense>
         </>
-      ) : (
+      ) : activeTab === ClanTab.Tanks ? (
         <>
           <PanelSeparator />
           <VehiclesPanel region={region} clanId={clan.id} />
+        </>
+      ) : (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>Stronghold stats</PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              {latestSnapshot && snapshotPeriods ? (
+                <ClanStrongholdStatsTable
+                  latest={latestSnapshot}
+                  periods={snapshotPeriods}
+                />
+              ) : (
+                <div className={`p-4 ${styles.mutedDescription}`}>
+                  No stronghold data yet. Check back after the next clan refresh.
+                </div>
+              )}
+            </PanelContent>
+          </Panel>
         </>
       )}
     </div>
