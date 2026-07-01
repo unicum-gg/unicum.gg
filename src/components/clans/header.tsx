@@ -5,6 +5,7 @@ import { AutoFitText } from "@/components/auto-fit-text";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
+import { PortalLinkButton } from "@/components/portal-link-button";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -25,7 +26,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
-import type { Region } from "@/services/wargaming/wot";
+import { REGION_PORTAL_HOST, type Region } from "@/services/wargaming/wot";
 
 const DAY_FORMAT = "MMM d, yyyy";
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -158,6 +159,9 @@ export function ClanHeader({
                   emblem: clan.emblem,
                 },
               }}
+            />
+            <PortalLinkButton
+              href={`https://${REGION_PORTAL_HOST[region]}/clans/wot/${clan.id}/`}
             />
             <ShareButton
               title={`Share [${clan.tag}]`}

@@ -4,12 +4,13 @@ import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
 import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
+import { PortalLinkButton } from "@/components/portal-link-button";
 import { RefreshBeacon } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import type { Region } from "@/services/wargaming/wot";
+import { REGION_WOT_HOST, type Region } from "@/services/wargaming/wot";
 import type { ClanStint } from "@/services/wargaming/wot/clans/player";
 
 const MONTH_FORMAT = "MMM yyyy";
@@ -43,6 +44,9 @@ export function PlayerHeader({
           </h1>
           <FavoriteButton
             item={{ kind: "player", region, player: { account_id: accountId, nickname, clan: null } }}
+          />
+          <PortalLinkButton
+            href={`https://${REGION_WOT_HOST[region]}/en/community/accounts/${accountId}-${nickname}/`}
           />
           <ShareButton
             title={`Share ${nickname}`}

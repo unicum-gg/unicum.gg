@@ -30,6 +30,12 @@ export const REGION_PORTAL_HOST: Record<Region, string> = {
   [Region.ASIA]: "asia.wargaming.net",
 };
 
+export const REGION_WOT_HOST: Record<Region, string> = {
+  [Region.EU]: "worldoftanks.eu",
+  [Region.NA]: "worldoftanks.com",
+  [Region.ASIA]: "worldoftanks.asia",
+};
+
 export const REGION_LABEL: Record<Region, string> = {
   [Region.EU]: "EU",
   [Region.NA]: "NA",
