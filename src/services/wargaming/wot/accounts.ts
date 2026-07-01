@@ -66,6 +66,15 @@ export type PlayerStatistics = {
   max_frags: number;
 };
 
+const EXTRA_STATS = [
+  "statistics.epic",
+  "statistics.fallout",
+  "statistics.globalmap_absolute",
+  "statistics.globalmap_champion",
+  "statistics.globalmap_middle",
+  "statistics.ranked_battles",
+].join(",");
+
 export type PlayerInfo = {
   account_id: number;
   nickname: string;
@@ -76,6 +85,14 @@ export type PlayerInfo = {
   clan_id: number | null;
   statistics: {
     all: PlayerStatistics;
+    stronghold_skirmish?: PlayerStatistics;
+    stronghold_defense?: PlayerStatistics;
+    epic?: PlayerStatistics;
+    fallout?: PlayerStatistics;
+    globalmap_absolute?: PlayerStatistics;
+    globalmap_champion?: PlayerStatistics;
+    globalmap_middle?: PlayerStatistics;
+    ranked_battles?: PlayerStatistics;
   };
 };
 
@@ -86,7 +103,7 @@ export async function getPlayerInfo(
   const data = await wgFetch<Record<string, PlayerInfo | null>>(
     region,
     "/wot/account/info/",
-    { account_id: String(accountId) },
+    { account_id: String(accountId), extra: EXTRA_STATS },
   );
   return data[String(accountId)] ?? null;
 }
@@ -103,7 +120,7 @@ async function fetchAccountInfoChunk(
     const data = await wgFetch<Record<string, PlayerInfo | null>>(
       region,
       "/wot/account/info/",
-      { account_id: ids.join(",") },
+      { account_id: ids.join(","), extra: EXTRA_STATS },
     );
     for (const [id, info] of Object.entries(data)) {
       if (info) out.set(Number(id), info);

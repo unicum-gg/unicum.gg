@@ -62,6 +62,94 @@ type RawPlayerSnapshot = {
   global_rating: number;
   wtr: number | null;
   clan_id: number | null;
+  skirmish_battles: number | null;
+  skirmish_wins: number | null;
+  skirmish_losses: number | null;
+  skirmish_draws: number | null;
+  skirmish_survived_battles: number | null;
+  skirmish_frags: number | null;
+  skirmish_damage_dealt: number | null;
+  skirmish_spotted: number | null;
+  skirmish_capture_points: number | null;
+  skirmish_dropped_capture_points: number | null;
+  skirmish_battle_avg_xp: number | null;
+  fortified_battles: number | null;
+  fortified_wins: number | null;
+  fortified_losses: number | null;
+  fortified_draws: number | null;
+  fortified_survived_battles: number | null;
+  fortified_frags: number | null;
+  fortified_damage_dealt: number | null;
+  fortified_spotted: number | null;
+  fortified_capture_points: number | null;
+  fortified_dropped_capture_points: number | null;
+  fortified_battle_avg_xp: number | null;
+  epic_battles: number | null;
+  epic_wins: number | null;
+  epic_losses: number | null;
+  epic_draws: number | null;
+  epic_survived_battles: number | null;
+  epic_frags: number | null;
+  epic_damage_dealt: number | null;
+  epic_spotted: number | null;
+  epic_capture_points: number | null;
+  epic_dropped_capture_points: number | null;
+  epic_battle_avg_xp: number | null;
+  fallout_battles: number | null;
+  fallout_wins: number | null;
+  fallout_losses: number | null;
+  fallout_draws: number | null;
+  fallout_survived_battles: number | null;
+  fallout_frags: number | null;
+  fallout_damage_dealt: number | null;
+  fallout_spotted: number | null;
+  fallout_capture_points: number | null;
+  fallout_dropped_capture_points: number | null;
+  fallout_battle_avg_xp: number | null;
+  ranked_battles: number | null;
+  ranked_wins: number | null;
+  ranked_losses: number | null;
+  ranked_draws: number | null;
+  ranked_survived_battles: number | null;
+  ranked_frags: number | null;
+  ranked_damage_dealt: number | null;
+  ranked_spotted: number | null;
+  ranked_capture_points: number | null;
+  ranked_dropped_capture_points: number | null;
+  ranked_battle_avg_xp: number | null;
+  cw_absolute_battles: number | null;
+  cw_absolute_wins: number | null;
+  cw_absolute_losses: number | null;
+  cw_absolute_draws: number | null;
+  cw_absolute_survived_battles: number | null;
+  cw_absolute_frags: number | null;
+  cw_absolute_damage_dealt: number | null;
+  cw_absolute_spotted: number | null;
+  cw_absolute_capture_points: number | null;
+  cw_absolute_dropped_capture_points: number | null;
+  cw_absolute_battle_avg_xp: number | null;
+  cw_champion_battles: number | null;
+  cw_champion_wins: number | null;
+  cw_champion_losses: number | null;
+  cw_champion_draws: number | null;
+  cw_champion_survived_battles: number | null;
+  cw_champion_frags: number | null;
+  cw_champion_damage_dealt: number | null;
+  cw_champion_spotted: number | null;
+  cw_champion_capture_points: number | null;
+  cw_champion_dropped_capture_points: number | null;
+  cw_champion_battle_avg_xp: number | null;
+  cw_middle_battles: number | null;
+  cw_middle_wins: number | null;
+  cw_middle_losses: number | null;
+  cw_middle_draws: number | null;
+  cw_middle_survived_battles: number | null;
+  cw_middle_frags: number | null;
+  cw_middle_damage_dealt: number | null;
+  cw_middle_spotted: number | null;
+  cw_middle_capture_points: number | null;
+  cw_middle_dropped_capture_points: number | null;
+  cw_middle_battle_avg_xp: number | null;
 };
 
 type RawTankSnapshot = {
@@ -150,6 +238,94 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     globalRating: Number(r.global_rating),
     wtr: r.wtr === null ? null : Number(r.wtr),
     clanId: r.clan_id === null ? null : Number(r.clan_id),
+    skirmishBattles: r.skirmish_battles == null ? null : Number(r.skirmish_battles),
+    skirmishWins: r.skirmish_wins == null ? null : Number(r.skirmish_wins),
+    skirmishLosses: r.skirmish_losses == null ? null : Number(r.skirmish_losses),
+    skirmishDraws: r.skirmish_draws == null ? null : Number(r.skirmish_draws),
+    skirmishSurvivedBattles: r.skirmish_survived_battles == null ? null : Number(r.skirmish_survived_battles),
+    skirmishFrags: r.skirmish_frags == null ? null : Number(r.skirmish_frags),
+    skirmishDamageDealt: r.skirmish_damage_dealt == null ? null : Number(r.skirmish_damage_dealt),
+    skirmishSpotted: r.skirmish_spotted == null ? null : Number(r.skirmish_spotted),
+    skirmishCapturePoints: r.skirmish_capture_points == null ? null : Number(r.skirmish_capture_points),
+    skirmishDroppedCapturePoints: r.skirmish_dropped_capture_points == null ? null : Number(r.skirmish_dropped_capture_points),
+    skirmishBattleAvgXp: r.skirmish_battle_avg_xp == null ? null : Number(r.skirmish_battle_avg_xp),
+    fortifiedBattles: r.fortified_battles == null ? null : Number(r.fortified_battles),
+    fortifiedWins: r.fortified_wins == null ? null : Number(r.fortified_wins),
+    fortifiedLosses: r.fortified_losses == null ? null : Number(r.fortified_losses),
+    fortifiedDraws: r.fortified_draws == null ? null : Number(r.fortified_draws),
+    fortifiedSurvivedBattles: r.fortified_survived_battles == null ? null : Number(r.fortified_survived_battles),
+    fortifiedFrags: r.fortified_frags == null ? null : Number(r.fortified_frags),
+    fortifiedDamageDealt: r.fortified_damage_dealt == null ? null : Number(r.fortified_damage_dealt),
+    fortifiedSpotted: r.fortified_spotted == null ? null : Number(r.fortified_spotted),
+    fortifiedCapturePoints: r.fortified_capture_points == null ? null : Number(r.fortified_capture_points),
+    fortifiedDroppedCapturePoints: r.fortified_dropped_capture_points == null ? null : Number(r.fortified_dropped_capture_points),
+    fortifiedBattleAvgXp: r.fortified_battle_avg_xp == null ? null : Number(r.fortified_battle_avg_xp),
+    epicBattles: r.epic_battles == null ? null : Number(r.epic_battles),
+    epicWins: r.epic_wins == null ? null : Number(r.epic_wins),
+    epicLosses: r.epic_losses == null ? null : Number(r.epic_losses),
+    epicDraws: r.epic_draws == null ? null : Number(r.epic_draws),
+    epicSurvivedBattles: r.epic_survived_battles == null ? null : Number(r.epic_survived_battles),
+    epicFrags: r.epic_frags == null ? null : Number(r.epic_frags),
+    epicDamageDealt: r.epic_damage_dealt == null ? null : Number(r.epic_damage_dealt),
+    epicSpotted: r.epic_spotted == null ? null : Number(r.epic_spotted),
+    epicCapturePoints: r.epic_capture_points == null ? null : Number(r.epic_capture_points),
+    epicDroppedCapturePoints: r.epic_dropped_capture_points == null ? null : Number(r.epic_dropped_capture_points),
+    epicBattleAvgXp: r.epic_battle_avg_xp == null ? null : Number(r.epic_battle_avg_xp),
+    falloutBattles: r.fallout_battles == null ? null : Number(r.fallout_battles),
+    falloutWins: r.fallout_wins == null ? null : Number(r.fallout_wins),
+    falloutLosses: r.fallout_losses == null ? null : Number(r.fallout_losses),
+    falloutDraws: r.fallout_draws == null ? null : Number(r.fallout_draws),
+    falloutSurvivedBattles: r.fallout_survived_battles == null ? null : Number(r.fallout_survived_battles),
+    falloutFrags: r.fallout_frags == null ? null : Number(r.fallout_frags),
+    falloutDamageDealt: r.fallout_damage_dealt == null ? null : Number(r.fallout_damage_dealt),
+    falloutSpotted: r.fallout_spotted == null ? null : Number(r.fallout_spotted),
+    falloutCapturePoints: r.fallout_capture_points == null ? null : Number(r.fallout_capture_points),
+    falloutDroppedCapturePoints: r.fallout_dropped_capture_points == null ? null : Number(r.fallout_dropped_capture_points),
+    falloutBattleAvgXp: r.fallout_battle_avg_xp == null ? null : Number(r.fallout_battle_avg_xp),
+    rankedBattles: r.ranked_battles == null ? null : Number(r.ranked_battles),
+    rankedWins: r.ranked_wins == null ? null : Number(r.ranked_wins),
+    rankedLosses: r.ranked_losses == null ? null : Number(r.ranked_losses),
+    rankedDraws: r.ranked_draws == null ? null : Number(r.ranked_draws),
+    rankedSurvivedBattles: r.ranked_survived_battles == null ? null : Number(r.ranked_survived_battles),
+    rankedFrags: r.ranked_frags == null ? null : Number(r.ranked_frags),
+    rankedDamageDealt: r.ranked_damage_dealt == null ? null : Number(r.ranked_damage_dealt),
+    rankedSpotted: r.ranked_spotted == null ? null : Number(r.ranked_spotted),
+    rankedCapturePoints: r.ranked_capture_points == null ? null : Number(r.ranked_capture_points),
+    rankedDroppedCapturePoints: r.ranked_dropped_capture_points == null ? null : Number(r.ranked_dropped_capture_points),
+    rankedBattleAvgXp: r.ranked_battle_avg_xp == null ? null : Number(r.ranked_battle_avg_xp),
+    cwAbsoluteBattles: r.cw_absolute_battles == null ? null : Number(r.cw_absolute_battles),
+    cwAbsoluteWins: r.cw_absolute_wins == null ? null : Number(r.cw_absolute_wins),
+    cwAbsoluteLosses: r.cw_absolute_losses == null ? null : Number(r.cw_absolute_losses),
+    cwAbsoluteDraws: r.cw_absolute_draws == null ? null : Number(r.cw_absolute_draws),
+    cwAbsoluteSurvivedBattles: r.cw_absolute_survived_battles == null ? null : Number(r.cw_absolute_survived_battles),
+    cwAbsoluteFrags: r.cw_absolute_frags == null ? null : Number(r.cw_absolute_frags),
+    cwAbsoluteDamageDealt: r.cw_absolute_damage_dealt == null ? null : Number(r.cw_absolute_damage_dealt),
+    cwAbsoluteSpotted: r.cw_absolute_spotted == null ? null : Number(r.cw_absolute_spotted),
+    cwAbsoluteCapturePoints: r.cw_absolute_capture_points == null ? null : Number(r.cw_absolute_capture_points),
+    cwAbsoluteDroppedCapturePoints: r.cw_absolute_dropped_capture_points == null ? null : Number(r.cw_absolute_dropped_capture_points),
+    cwAbsoluteBattleAvgXp: r.cw_absolute_battle_avg_xp == null ? null : Number(r.cw_absolute_battle_avg_xp),
+    cwChampionBattles: r.cw_champion_battles == null ? null : Number(r.cw_champion_battles),
+    cwChampionWins: r.cw_champion_wins == null ? null : Number(r.cw_champion_wins),
+    cwChampionLosses: r.cw_champion_losses == null ? null : Number(r.cw_champion_losses),
+    cwChampionDraws: r.cw_champion_draws == null ? null : Number(r.cw_champion_draws),
+    cwChampionSurvivedBattles: r.cw_champion_survived_battles == null ? null : Number(r.cw_champion_survived_battles),
+    cwChampionFrags: r.cw_champion_frags == null ? null : Number(r.cw_champion_frags),
+    cwChampionDamageDealt: r.cw_champion_damage_dealt == null ? null : Number(r.cw_champion_damage_dealt),
+    cwChampionSpotted: r.cw_champion_spotted == null ? null : Number(r.cw_champion_spotted),
+    cwChampionCapturePoints: r.cw_champion_capture_points == null ? null : Number(r.cw_champion_capture_points),
+    cwChampionDroppedCapturePoints: r.cw_champion_dropped_capture_points == null ? null : Number(r.cw_champion_dropped_capture_points),
+    cwChampionBattleAvgXp: r.cw_champion_battle_avg_xp == null ? null : Number(r.cw_champion_battle_avg_xp),
+    cwMiddleBattles: r.cw_middle_battles == null ? null : Number(r.cw_middle_battles),
+    cwMiddleWins: r.cw_middle_wins == null ? null : Number(r.cw_middle_wins),
+    cwMiddleLosses: r.cw_middle_losses == null ? null : Number(r.cw_middle_losses),
+    cwMiddleDraws: r.cw_middle_draws == null ? null : Number(r.cw_middle_draws),
+    cwMiddleSurvivedBattles: r.cw_middle_survived_battles == null ? null : Number(r.cw_middle_survived_battles),
+    cwMiddleFrags: r.cw_middle_frags == null ? null : Number(r.cw_middle_frags),
+    cwMiddleDamageDealt: r.cw_middle_damage_dealt == null ? null : Number(r.cw_middle_damage_dealt),
+    cwMiddleSpotted: r.cw_middle_spotted == null ? null : Number(r.cw_middle_spotted),
+    cwMiddleCapturePoints: r.cw_middle_capture_points == null ? null : Number(r.cw_middle_capture_points),
+    cwMiddleDroppedCapturePoints: r.cw_middle_dropped_capture_points == null ? null : Number(r.cw_middle_dropped_capture_points),
+    cwMiddleBattleAvgXp: r.cw_middle_battle_avg_xp == null ? null : Number(r.cw_middle_battle_avg_xp),
   };
 }
 
