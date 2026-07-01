@@ -3,9 +3,11 @@
 import { RootProvider } from "fumadocs-ui/provider/next";
 import dynamic from "next/dynamic";
 import type { ReactNode } from "react";
+import { SWRConfig } from "swr";
 import { CookieConsent } from "@/components/cookie-consent";
 import Script from "@/components/script";
 import { CookieConsentProvider } from "@/contexts/cookie-consent";
+import { swrConfig } from "@/services/swr";
 
 // Single switch: pick which CMP drives consent.
 //   true  → Google CMP (Funding Choices, configured in AdSense).
@@ -18,19 +20,21 @@ const SearchDialog = dynamic(
 
 export function Provider({ children }: { children: ReactNode }) {
   return (
-    <RootProvider search={{ SearchDialog }}>
-      {USE_GOOGLE_CMP ? (
-        <>
-          {children}
-          <Script useGoogleCMP />
-        </>
-      ) : (
-        <CookieConsentProvider>
-          {children}
-          <CookieConsent />
-          <Script useGoogleCMP={false} />
-        </CookieConsentProvider>
-      )}
-    </RootProvider>
+    <SWRConfig value={swrConfig}>
+      <RootProvider search={{ SearchDialog }}>
+        {USE_GOOGLE_CMP ? (
+          <>
+            {children}
+            <Script useGoogleCMP />
+          </>
+        ) : (
+          <CookieConsentProvider>
+            {children}
+            <CookieConsent />
+            <Script useGoogleCMP={false} />
+          </CookieConsentProvider>
+        )}
+      </RootProvider>
+    </SWRConfig>
   );
 }
