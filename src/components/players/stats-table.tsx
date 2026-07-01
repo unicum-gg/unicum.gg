@@ -43,7 +43,7 @@ const percentFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 
-type Cell = { primary: string; secondary?: string; color?: RatingColor };
+type Cell = { primary: string; secondary?: string; color?: RatingColor; className?: string };
 
 const EMPTY_CELL: Cell = { primary: "—" };
 
@@ -152,6 +152,7 @@ const ROW_DEFS: RowDef[] = [
     render: (s) => ({ primary: integerFmt.format(s.globalRating) }),
     renderDelta: (s) => ({
       primary: signedIntegerFmt.format(s.globalRating),
+      className: s.globalRating > 0 ? "text-emerald-500" : s.globalRating < 0 ? "text-red-500" : undefined,
     }),
   },
   {
@@ -161,6 +162,7 @@ const ROW_DEFS: RowDef[] = [
     }),
     renderDelta: (s) => ({
       primary: s.wtr === null ? "—" : signedIntegerFmt.format(s.wtr),
+      className: s.wtr === null ? undefined : s.wtr > 0 ? "text-emerald-500" : s.wtr < 0 ? "text-red-500" : undefined,
     }),
   },
 ];
@@ -180,6 +182,7 @@ function PeriodCells({
           "py-1.5! text-right tabular-nums",
           hide,
           cell.color && RATING_COLOR_CLASS[cell.color],
+          cell.className,
         )}
         colSpan={2}
       >
