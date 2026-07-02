@@ -189,11 +189,8 @@ export function PlayerTabsView({
           void mutateData();
         }}
       />
-      {/* Both nav rows share one Panel so there's a single line between them
-          (two stacked Panels would draw a double border). The section row
-          only carries the divider when the mode row follows it. */}
       <Panel>
-        <PanelHeader className="px-0! py-0!" screenLines={!onTanks}>
+        <PanelHeader className="px-0! py-0!" screenLines={false}>
           <PlayerSectionNav
             basePath={basePath}
             section={section}
@@ -201,16 +198,24 @@ export function PlayerTabsView({
             onSelect={selectSection}
           />
         </PanelHeader>
-        {!onTanks && (
-          <PanelHeader className="px-0! py-0!" screenLines={false}>
-            <PlayerModeNav
-              basePath={basePath}
-              mode={mode}
-              onSelect={selectMode}
-            />
-          </PanelHeader>
-        )}
       </Panel>
+
+      {/* The mode row is a sibling section under Overview, so it gets the same
+          diagonal separator as the content sections below it. */}
+      {!onTanks && (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader className="px-0! py-0!" screenLines={false}>
+              <PlayerModeNav
+                basePath={basePath}
+                mode={mode}
+                onSelect={selectMode}
+              />
+            </PanelHeader>
+          </Panel>
+        </>
+      )}
 
       {onTanks ? (
         <TanksTab
