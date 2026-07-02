@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { ClanHeader } from "@/components/clans/header";
-import { ClanTab, tabFromQuery } from "@/components/clans/tabs";
+import {
+  type ClanMode,
+  ClanSection,
+  modeFromQuery,
+  sectionFromQuery,
+} from "@/components/clans/tabs";
 import { ClanTabsView } from "@/components/clans/tabs-view";
 import { ViewBeacon } from "@/components/view-beacon";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
@@ -62,26 +67,32 @@ export default async function ClanPage({
   searchParams,
 }: {
   params: Promise<{ region: string; tag: string }>;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; section?: string }>;
 }) {
   const { region, tag } = await params;
   if (!isRegion(region)) notFound();
   const decoded = decodeURIComponent(tag);
-  const { tab: tabParam } = await searchParams;
-  const activeTab = tabFromQuery(tabParam);
+  const { tab: tabParam, section: sectionParam } = await searchParams;
+  // Two independent nav axes, each its own query param (see components/clans/tabs).
+  const active: ActiveTab = {
+    section: sectionFromQuery(sectionParam),
+    mode: modeFromQuery(tabParam),
+  };
 
   const trace = new PerfTrace(`ClanPage ${region}/${decoded}`);
   try {
-    return await runWithTrace(trace, () => render(region, decoded, activeTab));
+    return await runWithTrace(trace, () => render(region, decoded, active));
   } finally {
     trace.endRender();
   }
 }
 
+type ActiveTab = { section: ClanSection; mode: ClanMode };
+
 async function render(
   region: Region,
   decoded: string,
-  activeTab: ClanTab,
+  active: ActiveTab,
 ): Promise<React.ReactElement> {
   const trace = currentTrace();
   const span = <T,>(name: string, fn: () => Promise<T>): Promise<T> =>
@@ -96,22 +107,23 @@ async function render(
     `clan fromDb=${clanCached.fromDb} refreshing=${clanCached.refreshing}`,
   );
 
-  // The three light tabs (Overview, Stronghold, Clan Wars) are always loaded so
-  // switching to them is an instant client toggle with no server round-trip.
-  // These are all cheap indexed/cached reads. Ratings (wn7/wn8/wnx/wnx30d) are
-  // pre-computed and cached on each member row, so the members table renders
-  // fully populated on first paint. Same payload the clan detail endpoint
-  // serves, so a LiveSync tick can refetch it client-side.
+  // The Overview modes (Random Battles, Stronghold, Clan Wars) are always
+  // loaded so switching between them is an instant client toggle with no server
+  // round-trip. These are all cheap indexed/cached reads. Ratings
+  // (wn7/wn8/wnx/wnx30d) are pre-computed and cached on each member row, so the
+  // members table renders fully populated on first paint. Same payload the clan
+  // detail endpoint serves, so a LiveSync tick can refetch it client-side.
   const detail = await loadClanDetail(region, clan, span);
   const members = detail.members;
   trace?.log(`members count=${members.length}`);
 
-  // Tanks tab: the per-member aggregation is the heavy query on this page, so
-  // load it server-side only when Tanks is the tab being rendered (its content
-  // then ships in the initial HTML for SEO/deep-links). On any other tab it's
-  // left null and fetched on demand — then cached — client-side via SWR.
+  // Tanks section: the per-member aggregation is the heavy query on this page,
+  // so load it server-side only when Tanks is the section being rendered (its
+  // content then ships in the initial HTML for SEO/deep-links). On any other
+  // section it's left null and fetched on demand — then cached — client-side
+  // via SWR.
   let initialVehicles: ClanVehicleRow[] | null = null;
-  if (activeTab === ClanTab.Tanks) {
+  if (active.section === ClanSection.Tanks) {
     const [aggregates, encyclopedia, wn8Expected, wnxExpected] =
       await Promise.all([
         span("getClanTankAggregates", () =>
@@ -158,8 +170,10 @@ async function render(
       <ClanTabsView
         region={region}
         tag={clan.tag}
+        color={clan.color}
         basePath={basePath}
-        activeTab={activeTab}
+        activeSection={active.section}
+        activeMode={active.mode}
         descriptionHtml={clan.descriptionHtml ?? null}
         initialData={detail}
         initialVehicles={initialVehicles}

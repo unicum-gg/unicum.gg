@@ -10,8 +10,15 @@ import { ClanMembersTable } from "@/components/clans/members-table";
 import { PreviousClansTable } from "@/components/clans/previous-clans-table";
 import { ClanRecentActivity } from "@/components/clans/recent-activity";
 import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
-import { ClanTabsNav } from "@/components/clans/tabs-nav";
-import { ClanTab, clanTabHref, tabFromQuery } from "@/components/clans/tabs";
+import { ClanModeNav, ClanSectionNav } from "@/components/clans/tabs-nav";
+import {
+  ClanMode,
+  ClanSection,
+  clanModeHref,
+  clanSectionHref,
+  modeFromQuery,
+  sectionFromQuery,
+} from "@/components/clans/tabs";
 import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
 import {
   Panel,
@@ -72,67 +79,102 @@ async function clanDetailFetcher(url: string): Promise<ClanDetailData> {
   return ClanDetailResponse.parse(await res.json()) as unknown as ClanDetailData;
 }
 
+// Renders a panel title prefixed with the clan tag, its brackets tinted with
+// the clan's own color (matching the header's `[TAG]` treatment).
+function TaggedTitle({
+  tag,
+  color,
+  children,
+}: {
+  tag: string;
+  color: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <>
+      <span style={{ color }}>[</span>
+      {tag}
+      <span style={{ color }}>]</span> {children}
+    </>
+  );
+}
+
 export type ClanTabsViewProps = {
   region: Region;
   tag: string;
+  // The clan's custom color, used to tint the `[TAG]` brackets in panel titles.
+  color: string;
   basePath: string;
-  activeTab: ClanTab;
+  activeSection: ClanSection;
+  activeMode: ClanMode;
   descriptionHtml: string | null;
   // Freshness-sensitive clan detail, seeded from the SSR render and kept live
   // by SWR (see the LiveSync wiring below).
   initialData: ClanDetailData;
-  // Present only when Tanks is the tab the server rendered, so its content is
-  // in the initial HTML (SEO for `?tab=tanks`); null otherwise, so the tab
-  // fetches on demand when first opened.
+  // Present only when Tanks is the section the server rendered, so its content
+  // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
+  // section fetches on demand when first opened.
   initialVehicles: ClanVehicleRow[] | null;
 };
 
 export function ClanTabsView({
   region,
   tag,
+  color,
   basePath,
-  activeTab,
+  activeSection,
+  activeMode,
   descriptionHtml,
   initialData,
   initialVehicles,
 }: ClanTabsViewProps) {
-  // `activeTab` seeds the first client render so it matches the server HTML.
-  // A tab click updates local state immediately (instant switch) and pushes
-  // the URL. Back/forward instead moves through history, which Next reflects
-  // in `useSearchParams`; we reconcile that during render (no effect) so the
-  // shown tab follows the URL without a server round-trip.
+  // `activeSection`/`activeMode` seed the first client render so it matches the
+  // server HTML. A nav click updates local state immediately (instant switch)
+  // and pushes the URL. Back/forward instead moves through history, which Next
+  // reflects in `useSearchParams`; we reconcile both axes during render (no
+  // effect) so the view follows the URL without a server round-trip.
   const searchParams = useSearchParams();
-  const urlTab = tabFromQuery(searchParams.get("tab"));
-  const [tab, setTab] = useState(activeTab);
-  const [syncedUrlTab, setSyncedUrlTab] = useState(urlTab);
-  if (urlTab !== syncedUrlTab) {
-    setSyncedUrlTab(urlTab);
-    setTab(urlTab);
+  const urlSection = sectionFromQuery(searchParams.get("section"));
+  const urlMode = modeFromQuery(searchParams.get("tab"));
+  const [section, setSection] = useState(activeSection);
+  const [mode, setMode] = useState(activeMode);
+  const [syncedSection, setSyncedSection] = useState(urlSection);
+  const [syncedMode, setSyncedMode] = useState(urlMode);
+  if (urlSection !== syncedSection || urlMode !== syncedMode) {
+    setSyncedSection(urlSection);
+    setSyncedMode(urlMode);
+    setSection(urlSection);
+    setMode(urlMode);
   }
 
-  function select(next: ClanTab) {
-    setTab(next);
-    window.history.pushState(null, "", clanTabHref(basePath, next));
+  function selectSection(next: ClanSection) {
+    setSection(next);
+    window.history.pushState(null, "", clanSectionHref(basePath, next, mode));
+  }
+  function selectMode(next: ClanMode) {
+    setMode(next);
+    setSection(ClanSection.Overview);
+    window.history.pushState(null, "", clanModeHref(basePath, next));
   }
 
-  // Only the Tanks tab needs an on-demand fetch. SWR keys on the URL and only
-  // runs when Tanks is active (null key = no request).
+  // Only the Tanks section needs an on-demand fetch. SWR keys on the URL and
+  // only runs when Tanks is active (null key = no request).
   const vehiclesUrl = `/api/${region}/clans/${encodeURIComponent(tag)}/vehicles`;
   const seededVehicles = initialVehicles != null;
   const { data: vehicles } = useSWR(
-    tab === ClanTab.Tanks ? vehiclesUrl : null,
+    section === ClanSection.Tanks ? vehiclesUrl : null,
     vehiclesFetcher,
     {
       fallbackData: initialVehicles ?? undefined,
       // When the server already rendered Tanks (`initialVehicles` seeds the
       // cache), skip the on-mount revalidation so the heavy aggregation isn't
       // re-run for nothing. When it wasn't seeded, keep the default so opening
-      // the tab from another tab actually fetches.
+      // the section from another one actually fetches.
       revalidateOnMount: !seededVehicles,
     },
   );
 
-  // The tab content (members, activity, snapshots) lives behind SWR so a
+  // The section content (members, activity, snapshots) lives behind SWR so a
   // LiveSync tick refetches just this JSON and re-renders client-side, instead
   // of `router.refresh()` re-rendering the whole route on the server.
   // `initialData` seeds it from the SSR render, so there's no fetch on load;
@@ -146,6 +188,8 @@ export function ClanTabsView({
   const { members, previousClans, events, snapshotLatest, snapshotPeriods } =
     liveData ?? initialData;
 
+  const onTanks = section === ClanSection.Tanks;
+
   return (
     <>
       <LiveSync
@@ -156,28 +200,76 @@ export function ClanTabsView({
       />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <ClanTabsNav basePath={basePath} activeTab={tab} onSelect={select} />
+          <ClanSectionNav
+            basePath={basePath}
+            section={section}
+            mode={mode}
+            onSelect={selectSection}
+          />
         </PanelHeader>
       </Panel>
 
-      {tab === ClanTab.Overview ? (
+      {/* The description is clan-level metadata, so it stays visible on every
+          section, sitting between the section row and the mode row. */}
+      {descriptionHtml && (
         <>
-          {descriptionHtml && (
-            <>
-              <PanelSeparator />
-              <Panel>
-                <PanelContent>
-                  <ExpandableDescription html={descriptionHtml} />
-                </PanelContent>
-              </Panel>
-            </>
-          )}
-
           <PanelSeparator />
+          <Panel>
+            <PanelContent>
+              <ExpandableDescription html={descriptionHtml} />
+            </PanelContent>
+          </Panel>
+        </>
+      )}
 
+      {/* The mode row is a sibling section under Overview, so it gets the same
+          diagonal separator as the content sections below it. */}
+      {!onTanks && (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader className="px-0! py-0!" screenLines={false}>
+              <ClanModeNav
+                basePath={basePath}
+                mode={mode}
+                onSelect={selectMode}
+              />
+            </PanelHeader>
+          </Panel>
+        </>
+      )}
+
+      {onTanks ? (
+        <>
+          <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>Members</PanelTitle>
+              <PanelTitle>
+                <TaggedTitle tag={tag} color={color}>
+                  tanks
+                  {vehicles ? ` (${intFmt.format(vehicles.length)})` : ""}
+                </TaggedTitle>
+              </PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              {vehicles ? (
+                <ClanVehiclesTable vehicles={vehicles} />
+              ) : (
+                <TableSkeleton columns={VEHICLES_SKELETON_COLUMNS} rows={12} />
+              )}
+            </PanelContent>
+          </Panel>
+        </>
+      ) : mode === ClanMode.RandomBattles ? (
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>
+                <TaggedTitle tag={tag} color={color}>
+                  random battles stats
+                </TaggedTitle>
+              </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               <ClanMembersTable region={region} members={members} />
@@ -189,7 +281,11 @@ export function ClanTabsView({
               <PanelSeparator />
               <Panel>
                 <PanelHeader>
-                  <PanelTitle>Previous clans</PanelTitle>
+                  <PanelTitle>
+                    <TaggedTitle tag={tag} color={color}>
+                      previous clans
+                    </TaggedTitle>
+                  </PanelTitle>
                 </PanelHeader>
                 <PanelContent className="p-0">
                   <PreviousClansTable region={region} rows={previousClans} />
@@ -203,7 +299,11 @@ export function ClanTabsView({
               <PanelSeparator />
               <Panel>
                 <PanelHeader>
-                  <PanelTitle>Recent activity</PanelTitle>
+                  <PanelTitle>
+                    <TaggedTitle tag={tag} color={color}>
+                      recent activity
+                    </TaggedTitle>
+                  </PanelTitle>
                 </PanelHeader>
                 <PanelContent className="p-0">
                   <ClanRecentActivity region={region} events={events} />
@@ -212,34 +312,16 @@ export function ClanTabsView({
             </>
           )}
         </>
-      ) : tab === ClanTab.Tanks ? (
+      ) : mode === ClanMode.Stronghold ? (
         <>
           <PanelSeparator />
           <Panel>
             <PanelHeader>
               <PanelTitle>
-                Tanks
-                {vehicles ? ` (${intFmt.format(vehicles.length)})` : ""}
+                <TaggedTitle tag={tag} color={color}>
+                  stronghold stats
+                </TaggedTitle>
               </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {vehicles ? (
-                <ClanVehiclesTable vehicles={vehicles} />
-              ) : (
-                <TableSkeleton
-                  columns={VEHICLES_SKELETON_COLUMNS}
-                  rows={12}
-                />
-              )}
-            </PanelContent>
-          </Panel>
-        </>
-      ) : tab === ClanTab.Stronghold ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>Stronghold stats</PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               {snapshotLatest && snapshotPeriods ? (
@@ -260,7 +342,11 @@ export function ClanTabsView({
           <PanelSeparator />
           <Panel>
             <PanelHeader>
-              <PanelTitle>Clan Wars stats</PanelTitle>
+              <PanelTitle>
+                <TaggedTitle tag={tag} color={color}>
+                  clan wars stats
+                </TaggedTitle>
+              </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               {snapshotLatest && snapshotPeriods ? (
