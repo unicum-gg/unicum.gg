@@ -4,6 +4,7 @@
 // Components.
 export enum PlayerTab {
   Overall = "overall",
+  Tanks = "tanks",
   Skirmish = "skirmish",
   Advances = "advances",
   GrandBattles = "grand",
@@ -17,6 +18,7 @@ export enum PlayerTab {
 export const PLAYER_TABS: { id: PlayerTab; label: string; query: string | null }[] =
   [
     { id: PlayerTab.Overall, label: "Random Battles", query: null },
+    { id: PlayerTab.Tanks, label: "Tanks", query: "tanks" },
     { id: PlayerTab.Skirmish, label: "Skirmish", query: "skirmish" },
     { id: PlayerTab.Advances, label: "Advances", query: "advances" },
     { id: PlayerTab.GrandBattles, label: "Grand Battles", query: "grand" },

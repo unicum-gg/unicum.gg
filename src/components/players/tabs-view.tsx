@@ -25,8 +25,7 @@ import {
   tabFromQuery,
 } from "@/components/players/tabs";
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
-// TEMP perf experiment: see the commented usage below.
-// import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
+import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
 import type { StrongholdStats } from "@/services/players";
 import type { PlayerDerivedStats } from "@/services/players/derived-stats";
@@ -42,7 +41,6 @@ type OverallData = {
   current: React.ComponentProps<typeof PlayerStatsTable>["current"];
   periods: React.ComponentProps<typeof PlayerStatsTable>["periods"];
   derived: PlayerDerivedStats;
-  vehicles: PlayerVehicleRow[];
   liftDrag: LiftDrag | null;
   ratingData: React.ComponentProps<typeof PlayerRatingChart>["data"];
   metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
@@ -54,11 +52,13 @@ type OverallData = {
 
 type StrongholdData = { current: StrongholdStats | null; periods: StrongholdPeriods };
 
-// The eight non-Overall tabs share one shape: a single stronghold-style table
-// with a "no data yet" fallback. `label` fills both the panel title
-// (`{nickname}'s {label} stats`) and the empty message (`No {label} data yet`).
+// The eight stronghold tabs (every tab but Overall and Tanks) share one shape:
+// a single stronghold-style table with a "no data yet" fallback. `label` fills
+// both the panel title (`{nickname}'s {label} stats`) and the empty message
+// (`No {label} data yet`).
+type StrongholdTabId = Exclude<PlayerTab, PlayerTab.Overall | PlayerTab.Tanks>;
 const STRONGHOLD_TABS: {
-  id: Exclude<PlayerTab, PlayerTab.Overall>;
+  id: StrongholdTabId;
   label: string;
 }[] = [
   { id: PlayerTab.Skirmish, label: "skirmish" },
@@ -143,7 +143,6 @@ export function PlayerTabsView({
     current: detail.current,
     periods: detail.periods,
     derived: detail.derived,
-    vehicles: detail.vehicles,
     liftDrag: detail.liftDrag,
     ratingData: detail.ratingHistory,
     metric: detail.metric,
@@ -152,10 +151,7 @@ export function PlayerTabsView({
     createdAt: detail.player.createdAt,
     nowMs,
   };
-  const strongholds: Record<
-    Exclude<PlayerTab, PlayerTab.Overall>,
-    StrongholdData
-  > = {
+  const strongholds: Record<StrongholdTabId, StrongholdData> = {
     [PlayerTab.Skirmish]: detail.strongholds.skirmish,
     [PlayerTab.Advances]: detail.strongholds.fortified,
     [PlayerTab.GrandBattles]: detail.strongholds.epic,
@@ -186,6 +182,12 @@ export function PlayerTabsView({
 
       {tab === PlayerTab.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
+      ) : tab === PlayerTab.Tanks ? (
+        <TanksTab
+          region={region}
+          nickname={nickname}
+          vehicles={detail.vehicles}
+        />
       ) : (
         <StrongholdTab
           nickname={nickname}
@@ -199,13 +201,42 @@ export function PlayerTabsView({
   );
 }
 
+// Its own tab (not part of Overall) so the ~700-row table isn't server-rendered
+// on the default page load, which was the dominant SSR cost. The rows are
+// already in the detail payload, so opening the tab renders client-side with no
+// fetch; a `?tab=tanks` deep-link still server-renders them for SEO.
+function TanksTab({
+  region,
+  nickname,
+  vehicles,
+}: {
+  region: Region;
+  nickname: string;
+  vehicles: PlayerVehicleRow[];
+}) {
+  return (
+    <>
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>
+            {nickname}&apos;s tanks ({intFmt.format(vehicles.length)})
+          </PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <PlayerVehiclesTable region={region} vehicles={vehicles} />
+        </PanelContent>
+      </Panel>
+    </>
+  );
+}
+
 function OverallTab({
   region,
   nickname,
   current,
   periods,
   derived,
-  vehicles,
   liftDrag,
   ratingData,
   metric,
@@ -279,21 +310,6 @@ function OverallTab({
             metric={metric}
             metricLabel={metricLabel}
           />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>
-            {nickname}&apos;s tanks ({intFmt.format(vehicles.length)})
-          </PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          {/* TEMP perf experiment: table render disabled to measure its SSR
-              cost in isolation (data above still computed and serialized). */}
-          {/* <PlayerVehiclesTable region={region} vehicles={vehicles} /> */}
         </PanelContent>
       </Panel>
 
