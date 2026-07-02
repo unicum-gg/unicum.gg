@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
 import { ClanCompareView } from "@/components/clans/compare/view";
+import { CompareSkeleton } from "@/components/compare/compare-skeleton";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -74,6 +76,25 @@ export default async function CompareClansPage({ params }: RouteParams) {
   const requested = `/${region}/clans/${tag}/vs/${(rest ?? []).join("/")}`;
   if (canonical !== requested) redirect(canonical);
 
+  return (
+    <div className="mx-auto w-full max-w-7xl">
+      <Suspense fallback={<CompareSkeleton count={tags.length} />}>
+        <ClanCompareContent region={region} tags={tags} />
+      </Suspense>
+    </div>
+  );
+}
+
+// Async server child: loads the encyclopedia + each clan's members and the
+// heavy per-clan tank aggregation, then renders the compare grid. React flushes
+// the (empty) shell and shows the CompareSkeleton until these resolve.
+async function ClanCompareContent({
+  region,
+  tags,
+}: {
+  region: Region;
+  tags: string[];
+}): Promise<React.ReactElement> {
   // Static encyclopedia + expected values shared by all clans.
   const [encyclopedia, wn8Expected, wnxExpected, ...clanData] =
     await Promise.all([
@@ -89,16 +110,14 @@ export default async function CompareClansPage({ params }: RouteParams) {
   }));
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
-      <ClanCompareView
-        region={region}
-        slots={slots}
-        encyclopedia={encyclopedia}
-        wn8Expected={wn8Expected}
-        wnxExpected={wnxExpected}
-        maxClans={MAX_CLANS}
-      />
-    </div>
+    <ClanCompareView
+      region={region}
+      slots={slots}
+      encyclopedia={encyclopedia}
+      wn8Expected={wn8Expected}
+      wnxExpected={wnxExpected}
+      maxClans={MAX_CLANS}
+    />
   );
 }
 

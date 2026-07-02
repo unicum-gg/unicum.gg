@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
+import { Suspense } from "react";
+import { CompareSkeleton } from "@/components/compare/compare-skeleton";
 import { PlayerCompareView } from "@/components/players/compare/view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -9,7 +11,7 @@ import {
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
 import { tankSnapshotsToTankStats } from "@/services/players/tanks";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion, type Region } from "@/services/wargaming/wot";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
@@ -77,6 +79,25 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
   const requested = `/${region}/players/${nickname}/vs/${(rest ?? []).join("/")}`;
   if (canonical !== requested) redirect(canonical);
 
+  return (
+    <div className="mx-auto w-full max-w-7xl">
+      <Suspense fallback={<CompareSkeleton count={nicks.length} />}>
+        <PlayerCompareContent region={region} nicks={nicks} />
+      </Suspense>
+    </div>
+  );
+}
+
+// Async server child: loads the encyclopedia + every player's initial data and
+// renders the compare grid. React flushes the (empty) shell and shows the
+// CompareSkeleton until these resolve.
+async function PlayerCompareContent({
+  region,
+  nicks,
+}: {
+  region: Region;
+  nicks: string[];
+}): Promise<React.ReactElement> {
   const [encyclopedia, wn8Expected, wnxExpected, ...initials] =
     await Promise.all([
       getVehicleEncyclopedia(region),
@@ -110,15 +131,13 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
   });
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
-      <PlayerCompareView
-        region={region}
-        slots={visibleSlots}
-        encyclopedia={encyclopedia}
-        wn8Expected={wn8Expected}
-        wnxExpected={wnxExpected}
-        maxPlayers={MAX_PLAYERS}
-      />
-    </div>
+    <PlayerCompareView
+      region={region}
+      slots={visibleSlots}
+      encyclopedia={encyclopedia}
+      wn8Expected={wn8Expected}
+      wnxExpected={wnxExpected}
+      maxPlayers={MAX_PLAYERS}
+    />
   );
 }
