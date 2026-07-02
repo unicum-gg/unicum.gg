@@ -25,7 +25,8 @@ import {
   tabFromQuery,
 } from "@/components/players/tabs";
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
-import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
+// TEMP perf experiment: see the commented usage below.
+// import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
 import type { StrongholdStats } from "@/services/players";
 import type { PlayerDerivedStats } from "@/services/players/derived-stats";
@@ -290,7 +291,9 @@ function OverallTab({
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          <PlayerVehiclesTable region={region} vehicles={vehicles} />
+          {/* TEMP perf experiment: table render disabled to measure its SSR
+              cost in isolation (data above still computed and serialized). */}
+          {/* <PlayerVehiclesTable region={region} vehicles={vehicles} /> */}
         </PanelContent>
       </Panel>
 
