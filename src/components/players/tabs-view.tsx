@@ -18,11 +18,17 @@ import {
   StrongholdStatsTable,
   type StrongholdPeriods,
 } from "@/components/players/stronghold-stats-table";
-import { PlayerTabsNav } from "@/components/players/tabs-nav";
 import {
-  PlayerTab,
-  playerTabHref,
-  tabFromQuery,
+  PlayerModeNav,
+  PlayerSectionNav,
+} from "@/components/players/tabs-nav";
+import {
+  PlayerMode,
+  PlayerSection,
+  modeFromQuery,
+  playerModeHref,
+  playerSectionHref,
+  sectionFromQuery,
 } from "@/components/players/tabs";
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
@@ -52,23 +58,23 @@ type OverallData = {
 
 type StrongholdData = { current: StrongholdStats | null; periods: StrongholdPeriods };
 
-// The eight stronghold tabs (every tab but Overall and Tanks) share one shape:
+// The eight stronghold modes (every mode but Random Battles) share one shape:
 // a single stronghold-style table with a "no data yet" fallback. `label` fills
 // both the panel title (`{nickname}'s {label} stats`) and the empty message
 // (`No {label} data yet`).
-type StrongholdTabId = Exclude<PlayerTab, PlayerTab.Overall | PlayerTab.Tanks>;
-const STRONGHOLD_TABS: {
-  id: StrongholdTabId;
+type StrongholdModeId = Exclude<PlayerMode, PlayerMode.Overall>;
+const STRONGHOLD_MODES: {
+  id: StrongholdModeId;
   label: string;
 }[] = [
-  { id: PlayerTab.Skirmish, label: "skirmish" },
-  { id: PlayerTab.Advances, label: "advances" },
-  { id: PlayerTab.GrandBattles, label: "grand battles" },
-  { id: PlayerTab.RankedBattles, label: "ranked battles" },
-  { id: PlayerTab.ClanWarsX, label: "Clan Wars Tier X" },
-  { id: PlayerTab.ClanWarsVIII, label: "Clan Wars Tier VIII" },
-  { id: PlayerTab.ClanWarsVI, label: "Clan Wars Tier VI" },
-  { id: PlayerTab.SteelHunter, label: "Steel Hunter" },
+  { id: PlayerMode.Skirmish, label: "skirmish" },
+  { id: PlayerMode.Advances, label: "advances" },
+  { id: PlayerMode.GrandBattles, label: "grand battles" },
+  { id: PlayerMode.RankedBattles, label: "ranked battles" },
+  { id: PlayerMode.ClanWarsX, label: "Clan Wars Tier X" },
+  { id: PlayerMode.ClanWarsVIII, label: "Clan Wars Tier VIII" },
+  { id: PlayerMode.ClanWarsVI, label: "Clan Wars Tier VI" },
+  { id: PlayerMode.SteelHunter, label: "Steel Hunter" },
 ];
 
 // Parse the player detail response with the shared OpenAPI schema: it
@@ -89,7 +95,8 @@ export type PlayerTabsViewProps = {
   region: Region;
   basePath: string;
   nickname: string;
-  activeTab: PlayerTab;
+  activeSection: PlayerSection;
+  activeMode: PlayerMode;
   metricLabel: string;
   nowMs: number;
   // Full player detail, seeded from the SSR render and kept live by SWR (see
@@ -101,28 +108,39 @@ export function PlayerTabsView({
   region,
   basePath,
   nickname,
-  activeTab,
+  activeSection,
+  activeMode,
   metricLabel,
   nowMs,
   initialData,
 }: PlayerTabsViewProps) {
-  // `activeTab` seeds the first client render so it matches the server HTML.
-  // A tab click updates local state immediately (instant switch) and pushes
-  // the URL. Back/forward instead moves through history, which Next reflects
-  // in `useSearchParams`; we reconcile that during render (no effect) so the
-  // shown tab follows the URL without a server round-trip.
+  // `activeSection`/`activeMode` seed the first client render so it matches the
+  // server HTML. A nav click updates local state immediately (instant switch)
+  // and pushes the URL. Back/forward instead moves through history, which Next
+  // reflects in `useSearchParams`; we reconcile both axes during render (no
+  // effect) so the view follows the URL without a server round-trip.
   const searchParams = useSearchParams();
-  const urlTab = tabFromQuery(searchParams.get("tab"));
-  const [tab, setTab] = useState(activeTab);
-  const [syncedUrlTab, setSyncedUrlTab] = useState(urlTab);
-  if (urlTab !== syncedUrlTab) {
-    setSyncedUrlTab(urlTab);
-    setTab(urlTab);
+  const urlSection = sectionFromQuery(searchParams.get("section"));
+  const urlMode = modeFromQuery(searchParams.get("tab"));
+  const [section, setSection] = useState(activeSection);
+  const [mode, setMode] = useState(activeMode);
+  const [syncedSection, setSyncedSection] = useState(urlSection);
+  const [syncedMode, setSyncedMode] = useState(urlMode);
+  if (urlSection !== syncedSection || urlMode !== syncedMode) {
+    setSyncedSection(urlSection);
+    setSyncedMode(urlMode);
+    setSection(urlSection);
+    setMode(urlMode);
   }
 
-  function select(next: PlayerTab) {
-    setTab(next);
-    window.history.pushState(null, "", playerTabHref(basePath, next));
+  function selectSection(next: PlayerSection) {
+    setSection(next);
+    window.history.pushState(null, "", playerSectionHref(basePath, next, mode));
+  }
+  function selectMode(next: PlayerMode) {
+    setMode(next);
+    setSection(PlayerSection.Overview);
+    window.history.pushState(null, "", playerModeHref(basePath, next));
   }
 
   // The page data lives behind SWR so a LiveSync tick refetches just this
@@ -151,16 +169,17 @@ export function PlayerTabsView({
     createdAt: detail.player.createdAt,
     nowMs,
   };
-  const strongholds: Record<StrongholdTabId, StrongholdData> = {
-    [PlayerTab.Skirmish]: detail.strongholds.skirmish,
-    [PlayerTab.Advances]: detail.strongholds.fortified,
-    [PlayerTab.GrandBattles]: detail.strongholds.epic,
-    [PlayerTab.RankedBattles]: detail.strongholds.ranked,
-    [PlayerTab.ClanWarsX]: detail.strongholds.cwAbsolute,
-    [PlayerTab.ClanWarsVIII]: detail.strongholds.cwChampion,
-    [PlayerTab.ClanWarsVI]: detail.strongholds.cwMiddle,
-    [PlayerTab.SteelHunter]: detail.strongholds.fallout,
+  const strongholds: Record<StrongholdModeId, StrongholdData> = {
+    [PlayerMode.Skirmish]: detail.strongholds.skirmish,
+    [PlayerMode.Advances]: detail.strongholds.fortified,
+    [PlayerMode.GrandBattles]: detail.strongholds.epic,
+    [PlayerMode.RankedBattles]: detail.strongholds.ranked,
+    [PlayerMode.ClanWarsX]: detail.strongholds.cwAbsolute,
+    [PlayerMode.ClanWarsVIII]: detail.strongholds.cwChampion,
+    [PlayerMode.ClanWarsVI]: detail.strongholds.cwMiddle,
+    [PlayerMode.SteelHunter]: detail.strongholds.fallout,
   };
+  const onTanks = section === PlayerSection.Tanks;
 
   return (
     <>
@@ -170,31 +189,42 @@ export function PlayerTabsView({
           void mutateData();
         }}
       />
+      {/* Both nav rows share one Panel so there's a single line between them
+          (two stacked Panels would draw a double border). The section row
+          only carries the divider when the mode row follows it. */}
       <Panel>
-        <PanelHeader className="px-0! py-0!" screenLines={false}>
-          <PlayerTabsNav
+        <PanelHeader className="px-0! py-0!" screenLines={!onTanks}>
+          <PlayerSectionNav
             basePath={basePath}
-            activeTab={tab}
-            onSelect={select}
+            section={section}
+            mode={mode}
+            onSelect={selectSection}
           />
         </PanelHeader>
+        {!onTanks && (
+          <PanelHeader className="px-0! py-0!" screenLines={false}>
+            <PlayerModeNav
+              basePath={basePath}
+              mode={mode}
+              onSelect={selectMode}
+            />
+          </PanelHeader>
+        )}
       </Panel>
 
-      {tab === PlayerTab.Overall ? (
-        <OverallTab region={region} nickname={nickname} {...overall} />
-      ) : tab === PlayerTab.Tanks ? (
+      {onTanks ? (
         <TanksTab
           region={region}
           nickname={nickname}
           vehicles={detail.vehicles}
         />
+      ) : mode === PlayerMode.Overall ? (
+        <OverallTab region={region} nickname={nickname} {...overall} />
       ) : (
         <StrongholdTab
           nickname={nickname}
-          label={
-            STRONGHOLD_TABS.find((s) => s.id === tab)?.label ?? ""
-          }
-          data={strongholds[tab]}
+          label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
+          data={strongholds[mode]}
         />
       )}
     </>

@@ -3,7 +3,12 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/header";
-import { PlayerTab, tabFromQuery } from "@/components/players/tabs";
+import {
+  type PlayerMode,
+  type PlayerSection,
+  modeFromQuery,
+  sectionFromQuery,
+} from "@/components/players/tabs";
 import { PlayerTabsView } from "@/components/players/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
@@ -85,27 +90,33 @@ export default async function PlayerPage({
   searchParams,
 }: {
   params: Promise<{ region: string; nickname: string }>;
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; section?: string }>;
 }) {
-  const [{ region, nickname }, { tab: tabParam }] = await Promise.all([params, searchParams]);
+  const [{ region, nickname }, { tab: tabParam, section: sectionParam }] =
+    await Promise.all([params, searchParams]);
   if (!isRegion(region)) notFound();
   const decoded = decodeURIComponent(nickname);
-  const activeTab = tabFromQuery(tabParam);
+  // Two independent nav axes, each its own query param (see components/players/tabs).
+  const active: ActiveTab = {
+    section: sectionFromQuery(sectionParam),
+    mode: modeFromQuery(tabParam),
+  };
 
   const trace = new PerfTrace(`PlayerPage ${region}/${decoded}`);
   try {
-    return await runWithTrace(trace, () => render(region, decoded, activeTab));
+    return await runWithTrace(trace, () => render(region, decoded, active));
   } finally {
     trace.endRender();
   }
 }
 
+type ActiveTab = { section: PlayerSection; mode: PlayerMode };
 type Span = <T>(name: string, fn: () => Promise<T>) => Promise<T>;
 
 async function render(
   region: Region,
   decoded: string,
-  activeTab: PlayerTab,
+  active: ActiveTab,
 ): Promise<React.ReactElement> {
   const trace = currentTrace();
   const span: Span = (name, fn) => (trace ? trace.span(name, fn) : fn());
@@ -142,16 +153,16 @@ async function render(
   );
 
   if (renderableFromCache) {
-    return await renderFromCache(region, accountId, initial, activeTab);
+    return await renderFromCache(region, accountId, initial, active);
   }
-  return await renderFromWG(region, accountId, initial, span, activeTab);
+  return await renderFromWG(region, accountId, initial, span, active);
 }
 
 async function renderFromCache(
   region: Region,
   accountId: number,
   initial: PlayerInitialData,
-  activeTab: PlayerTab,
+  active: ActiveTab,
 ): Promise<React.ReactElement> {
   const player = initial.player as Player;
   const latest = initial.latestSnapshot as PlayerSnapshot;
@@ -177,7 +188,7 @@ async function renderFromCache(
     tanks,
     clanHistory,
     initial,
-    activeTab,
+    active,
   });
 }
 
@@ -186,7 +197,7 @@ async function renderFromWG(
   accountId: number,
   initial: PlayerInitialData,
   span: Span,
-  activeTab: PlayerTab,
+  active: ActiveTab,
 ): Promise<React.ReactElement> {
   const [info, fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
     span("getPlayerInfo", () => getPlayerInfo(region, accountId)),
@@ -224,7 +235,7 @@ async function renderFromWG(
     tanks: fetchedTanks,
     clanHistory: fetchedClanHistory,
     initial,
-    activeTab,
+    active,
   });
 }
 
@@ -236,9 +247,9 @@ async function buildView(args: {
   tanks: TankStats[];
   clanHistory: PlayerClanHistoryFull;
   initial: PlayerInitialData;
-  activeTab: PlayerTab;
+  active: ActiveTab;
 }): Promise<React.ReactElement> {
-  const { region, accountId, player, activeTab } = args;
+  const { region, accountId, player, active } = args;
 
   const metric = await getRatingMetricFromCookies();
   const metricLabel = RATING_METRIC_LABEL[metric];
@@ -290,7 +301,8 @@ async function buildView(args: {
         region={region}
         basePath={ROUTES.PLAYER(region, player.nickname)}
         nickname={player.nickname}
-        activeTab={activeTab}
+        activeSection={active.section}
+        activeMode={active.mode}
         metricLabel={metricLabel}
         nowMs={nowMs}
         initialData={detail}
