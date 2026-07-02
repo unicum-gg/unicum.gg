@@ -22,9 +22,14 @@ export function Footer() {
   useEffect(() => {
     const el = spacerRef.current;
     if (!el) return;
-    const update = () => setShowTopLine(el.offsetHeight > 0);
-    update();
-    const observer = new ResizeObserver(update);
+    // Read the height from the observer entry (`contentRect`) instead of
+    // `el.offsetHeight`: the latter forces a full-page synchronous reflow, and
+    // on this tall/large DOM that showed up as the dominant layout-thrash cost
+    // on load. The observer reports the measured size for free and its initial
+    // callback fires after layout, so no forced reflow is triggered.
+    const observer = new ResizeObserver((entries) => {
+      setShowTopLine((entries[0]?.contentRect.height ?? 0) > 0);
+    });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
