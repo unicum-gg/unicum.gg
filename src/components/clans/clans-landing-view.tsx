@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { LanguageChips } from "@/components/clans/language-chips";
 import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
 import { StrongholdTierTabs } from "@/components/clans/stronghold-tier-tabs";
@@ -83,7 +84,7 @@ export async function ClansLandingView({
           {language ? (
             <div className="mb-2 inline-flex items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               {langCountry && (
-                <img
+                <Image
                   src={`/flags/m/${langCountry}.svg`}
                   alt=""
                   width={20}

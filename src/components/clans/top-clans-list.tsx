@@ -84,6 +84,7 @@ export function TopClansList({
               <TableCell>
                 <Link
                   href={ROUTES.CLAN(region, r.tag)}
+                  prefetch={false}
                   className="flex items-center gap-3 hover:underline"
                 >
                   {r.emblem ? (

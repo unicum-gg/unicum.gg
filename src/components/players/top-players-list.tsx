@@ -84,6 +84,7 @@ export function TopPlayersList({
               <TableCell>
                 <Link
                   href={ROUTES.PLAYER(region, r.nickname)}
+                  prefetch={false}
                   className="flex items-center gap-3 hover:underline"
                 >
                   <span className="flex min-w-0 flex-1 items-center gap-2">

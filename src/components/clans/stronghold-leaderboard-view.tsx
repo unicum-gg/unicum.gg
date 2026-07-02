@@ -232,6 +232,7 @@ export function StrongholdLeaderboardView({
                         <TableCell>
                           <Link
                             href={ROUTES.CLAN(region, entry.tag)}
+                            prefetch={false}
                             className="flex items-center gap-3 hover:underline"
                           >
                             {entry.emblem ? (

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 // WG CDN path; the version chunk drifts when WG ships a new client. If our
@@ -37,8 +38,7 @@ export function NationFlag({
 }) {
   if (!nation || !KNOWN_NATIONS.has(nation)) return null;
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- WG CDN, no Next loader
-    <img
+    <Image
       src={`${FLAG_BASE}/filter-${nation}.png`}
       alt={prettyNation(nation)}
       title={prettyNation(nation)}

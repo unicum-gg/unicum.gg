@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { PlayerLanguageChips } from "@/components/players/language-chips";
 import { PlayerStrictModeToggle } from "@/components/players/strict-mode-toggle";
@@ -78,7 +79,7 @@ export async function PlayersLandingView({
           {language ? (
             <div className="mb-2 inline-flex items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               {langCountry && (
-                <img
+                <Image
                   src={`/flags/m/${langCountry}.svg`}
                   alt=""
                   width={20}

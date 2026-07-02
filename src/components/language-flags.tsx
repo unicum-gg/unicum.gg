@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   Tooltip,
@@ -87,7 +88,7 @@ export function LanguageFlags({
           const code = languageToCountryCode(lang, region);
           const tip = tooltipFor(lang, source, clickable);
           const visual = code ? (
-            <img
+            <Image
               src={`/flags/${size}/${code}.svg`}
               alt={lang}
               width={FLAG_DIMENSIONS[size].width}
