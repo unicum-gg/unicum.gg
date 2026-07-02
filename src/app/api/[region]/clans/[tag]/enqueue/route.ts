@@ -6,7 +6,7 @@ import { isRegion } from "@/services/wargaming/wot";
 
 /**
  * Enqueue clan refresh
- * @description Signals that a real browser is viewing this clan's page. Schedules a background refresh of the clan's data from the Wargaming API. Idempotent — calling it multiple times only raises the existing queue entry's priority, never duplicates work.
+ * @description Signals that a real browser is viewing this clan's page. Schedules a background refresh of the clan's data from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
  * @pathParams clanLiveParams
  * @responseDescription Refresh enqueued. No body.
  * @tag Clans

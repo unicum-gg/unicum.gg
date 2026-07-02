@@ -12,7 +12,7 @@ const WG_RPS: Record<string, number> = { eu: 6, na: 8, asia: 8 };
 
 /**
  * Enqueue player refresh
- * @description Signals that a real browser is viewing this player's page. Schedules a background refresh of the player's stats from the Wargaming API. Idempotent — calling it multiple times only raises the existing queue entry's priority, never duplicates work.
+ * @description Signals that a real browser is viewing this player's page. Schedules a background refresh of the player's stats from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
  * @pathParams playerLiveParams
  * @responseDescription Estimated seconds until the refresh completes.
  * @tag Players
