@@ -8,7 +8,7 @@ export function usePlayersOnline(region: Region): OnlinePayload {
   const [payload, setPayload] = useState<OnlinePayload>(null);
 
   useEffect(() => {
-    const es = new EventSource(`/api/${region}/server/online`);
+    const es = new EventSource(`/api/${region}/server/online/sse`);
     es.onmessage = (e: MessageEvent<string>) => {
       const next = JSON.parse(e.data) as OnlinePayload;
       // A transient WG failure arrives as `null`. Keep the last known count

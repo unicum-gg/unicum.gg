@@ -149,7 +149,7 @@ export function ClanTabsView({
   return (
     <>
       <LiveSync
-        url={`/api/${region}/clans/${encodeURIComponent(tag)}/live`}
+        url={`/api/${region}/clans/${encodeURIComponent(tag)}/sse`}
         onUpdate={() => {
           void mutateData();
         }}

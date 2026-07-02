@@ -168,7 +168,7 @@ export function PlayerTabsView({
   return (
     <>
       <LiveSync
-        url={`/api/${region}/players/${encodeURIComponent(nickname)}/live`}
+        url={`/api/${region}/players/${encodeURIComponent(nickname)}/sse`}
         onUpdate={() => {
           void mutateData();
         }}

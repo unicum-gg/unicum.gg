@@ -61,11 +61,11 @@ export type ToolDef = {
 };
 
 // Derived once at module load from the generated OpenAPI spec.
-// SSE endpoints (/live) are excluded — they stream, not respond.
+// SSE endpoints (/sse) are excluded: they stream, not respond.
 export const TOOL_DEFS: ToolDef[] = Object.entries(
   (spec as OpenApiSpec).paths ?? {},
 )
-  .filter(([path, item]) => !path.endsWith("/live") && !!item.get?.operationId)
+  .filter(([path, item]) => !path.endsWith("/sse") && !!item.get?.operationId)
   .map(([path, item]) => {
     const op = item.get!;
     return {

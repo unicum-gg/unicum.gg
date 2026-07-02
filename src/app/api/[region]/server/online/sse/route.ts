@@ -35,6 +35,14 @@ function ensurePolling(region: Region): void {
   globalThis.__wotOnlineIntervals[region] = setInterval(poll, POLL_MS);
 }
 
+/**
+ * Players online stream
+ * @description Server-sent events (SSE) of the region's live player count. Each event's data is a JSON object with the region total and the per-server breakdown, pushed whenever the count refreshes (about every 3 seconds).
+ * @pathParams regionParams
+ * @responseDescription Server-sent event stream of players-online payloads.
+ * @tag Server
+ * @openapi
+ */
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
