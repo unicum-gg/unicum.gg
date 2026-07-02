@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { cache } from "react";
+import { Suspense, cache } from "react";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
+import { PlayerContentSkeleton } from "@/components/players/content-skeleton";
 import { PlayerHeader } from "@/components/players/header";
 import {
   type PlayerMode,
@@ -249,24 +250,26 @@ async function buildView(args: {
   initial: PlayerInitialData;
   active: ActiveTab;
 }): Promise<React.ReactElement> {
-  const { region, accountId, player, active } = args;
+  const { region, accountId, player, latest, clanHistory } = args;
 
   const metric = await getRatingMetricFromCookies();
   const metricLabel = RATING_METRIC_LABEL[metric];
-
-  // All page data (stats grid, vehicles, lift/drag, strongholds, rating
-  // history) is assembled by the shared detail builder, the same payload the
-  // player detail endpoint serves.
-  const detail = await buildPlayerDetail({ ...args, metric });
-  const { current, clanHistory } = detail;
-  const { createdAt, lastBattleAt } = detail.player;
   const nowMs = Date.now();
+  const basePath = ROUTES.PLAYER(region, player.nickname);
+
+  // Header + JSON-LD are built from the cheap initial data (player row, latest
+  // snapshot, clan history) so the shell paints immediately. The heavy detail
+  // (buildPlayerDetail: encyclopedia, lift/drag, rating history, ~700 vehicle
+  // rows) streams into the Suspense boundary below.
+  const createdAt = player.createdAt ?? new Date(0);
+  const lastBattleAt = player.lastBattleAt ?? new Date(0);
+  const currentStint = clanHistory.currentStint;
 
   const regionLabel = region.toUpperCase();
-  const winrate = current.battles > 0 ? (current.wins / current.battles) * 100 : 0;
+  const winrate = latest.battles > 0 ? (latest.wins / latest.battles) * 100 : 0;
   const playerDescription =
-    current.battles > 0
-      ? `${player.nickname} (${regionLabel}) World of Tanks player stats: ${intFmt.format(current.battles)} battles, ${pctFmt.format(winrate)}% winrate, WN8 and WNX ratings, tank-by-tank breakdown and clan history.`
+    latest.battles > 0
+      ? `${player.nickname} (${regionLabel}) World of Tanks player stats: ${intFmt.format(latest.battles)} battles, ${pctFmt.format(winrate)}% winrate, WN8 and WNX ratings, tank-by-tank breakdown and clan history.`
       : `${player.nickname} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`;
 
   return (
@@ -275,9 +278,9 @@ async function buildView(args: {
         data={personSchema({
           nickname: player.nickname,
           region: regionLabel,
-          url: `${APP.URL}${ROUTES.PLAYER(region, player.nickname)}`,
+          url: `${APP.URL}${basePath}`,
           description: playerDescription,
-          clanName: clanHistory.currentStint?.clan.name ?? null,
+          clanName: currentStint?.clan.name ?? null,
         })}
       />
       <Panel>
@@ -289,7 +292,7 @@ async function buildView(args: {
             createdAt={createdAt}
             lastBattleAt={lastBattleAt}
             updatedAt={player.lastSeenAt}
-            currentStint={clanHistory.currentStint}
+            currentStint={currentStint}
             inferredLanguages={inferPlayerLanguages(clanHistory, nowMs)}
           />
         </PanelContent>
@@ -297,16 +300,56 @@ async function buildView(args: {
 
       <PanelSeparator />
 
-      <PlayerTabsView
-        region={region}
-        basePath={ROUTES.PLAYER(region, player.nickname)}
-        nickname={player.nickname}
-        activeSection={active.section}
-        activeMode={active.mode}
-        metricLabel={metricLabel}
-        nowMs={nowMs}
-        initialData={detail}
-      />
+      <Suspense fallback={<PlayerContentSkeleton />}>
+        <PlayerDetailContent
+          args={args}
+          metric={metric}
+          metricLabel={metricLabel}
+          nowMs={nowMs}
+          basePath={basePath}
+        />
+      </Suspense>
     </div>
+  );
+}
+
+// Async server child holding the heavy work: it awaits buildPlayerDetail and
+// renders the client tab view. React suspends here and flushes the shell
+// (header) first, then streams this in once the detail resolves.
+async function PlayerDetailContent({
+  args,
+  metric,
+  metricLabel,
+  nowMs,
+  basePath,
+}: {
+  args: {
+    region: Region;
+    accountId: number;
+    player: Player;
+    latest: PlayerSnapshot;
+    tanks: TankStats[];
+    clanHistory: PlayerClanHistoryFull;
+    initial: PlayerInitialData;
+    active: ActiveTab;
+  };
+  metric: Awaited<ReturnType<typeof getRatingMetricFromCookies>>;
+  metricLabel: string;
+  nowMs: number;
+  basePath: string;
+}): Promise<React.ReactElement> {
+  const { region, player, active } = args;
+  const detail = await buildPlayerDetail({ ...args, metric });
+  return (
+    <PlayerTabsView
+      region={region}
+      basePath={basePath}
+      nickname={player.nickname}
+      activeSection={active.section}
+      activeMode={active.mode}
+      metricLabel={metricLabel}
+      nowMs={nowMs}
+      initialData={detail}
+    />
   );
 }
