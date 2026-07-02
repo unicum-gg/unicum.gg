@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import useSWR from "swr";
 import { LiveSync } from "@/components/live-sync";
+import { MountOnVisible } from "@/components/mount-on-visible";
 import {
   Panel,
   PanelContent,
@@ -315,13 +316,16 @@ function OverallTab({
                 since the previous snapshot. It shows hot and cold streaks. Line
                 color follows the rating tier.
               </div>
-              <div className="px-4 pb-4">
+              <MountOnVisible
+                className="px-4 pb-4"
+                placeholder={<div className="h-56 w-full" />}
+              >
                 <PlayerRatingChart
                   data={ratingData}
                   metricLabel={metricLabel}
                   metric={metric}
                 />
-              </div>
+              </MountOnVisible>
             </>
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>
