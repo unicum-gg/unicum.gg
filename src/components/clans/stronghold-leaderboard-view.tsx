@@ -7,10 +7,12 @@ import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
+import { StrongholdTierTabs } from "@/components/clans/stronghold-tier-tabs";
 import {
   Panel,
   PanelContent,
   PanelHeader,
+  PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
 import {
@@ -31,11 +33,14 @@ import { cn } from "@/lib/utils";
 import {
   StrongholdSort,
   StrongholdTier,
+  STRONGHOLD_MIN_BATTLES,
+  STRONGHOLD_SORT_LABEL,
   STRONGHOLD_TIER_LABEL,
 } from "@/constants/stronghold";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@/services/wargaming/wot";
+import { REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
 import {
   RATING_COLOR_CLASS,
   strongholdWinrateColor,
@@ -117,13 +122,43 @@ export function StrongholdLeaderboardView({
   }
 
   return (
-    <Panel>
-      <PanelHeader>
-        <PanelTitle>
-          Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans
-        </PanelTitle>
-      </PanelHeader>
-      <PanelContent className="p-0">
+    <div className="mx-auto w-full max-w-7xl">
+      <Panel>
+        <PanelContent className="px-4 py-12 text-center">
+          <p className="mb-2 text-sm text-muted-foreground">
+            {REGION_EMOJI[region]} {REGION_LABEL[region]}
+          </p>
+          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
+            Top{" "}
+            <span className="text-[#f25322]">
+              {STRONGHOLD_TIER_LABEL[tier]}
+            </span>{" "}
+            clans
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+            {REGION_LABEL[region]} leaderboard, ranked by{" "}
+            {STRONGHOLD_SORT_LABEL[sort]} across all tracked clans
+            {tier === StrongholdTier.Advances
+              ? " in Advances (15v15)"
+              : ` in ${STRONGHOLD_TIER_LABEL[tier]} (7v7)`}{" "}
+            (minimum {STRONGHOLD_MIN_BATTLES[tier]} battles).
+          </p>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <StrongholdTierTabs region={region} activeTier={tier} />
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>
+            Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans
+          </PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
           {results.length === 0 ? (
             <p className="p-4 text-sm text-muted-foreground">
               No data yet — check back once clans have been refreshed.
@@ -268,7 +303,8 @@ export function StrongholdLeaderboardView({
               </Table>
             </TooltipProvider>
           )}
-      </PanelContent>
-    </Panel>
+        </PanelContent>
+      </Panel>
+    </div>
   );
 }

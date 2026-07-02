@@ -14,10 +14,6 @@ export type SkeletonColumn = {
   // "w-28" for a name column.
   width: string;
   align?: "left" | "right" | "center";
-  // Renders a round avatar/emblem placeholder before the bar, matching tables
-  // whose name cell leads with a `size-6` emblem (taller rows) so the skeleton
-  // row height lines up with the real one.
-  avatar?: boolean;
 };
 
 // A block-level bar with a fixed width honours these auto margins, so the
@@ -38,19 +34,14 @@ export function TableSkeleton({
   columns,
   rows = 10,
   header = true,
-  cellPaddingClass = "[&_td]:py-1.5!",
 }: {
   columns: SkeletonColumn[];
   rows?: number;
   header?: boolean;
-  // Full arbitrary-variant class for cell vertical padding (kept as a literal
-  // so Tailwind can detect it), to match tables of a different density — e.g.
-  // the emblem-row leaderboards pass "[&_td]:py-2!".
-  cellPaddingClass?: string;
 }) {
   const rowIndexes = Array.from({ length: rows }, (_, i) => i);
   return (
-    <Table className={cn("my-0!", cellPaddingClass, "[&_th]:py-2!")}>
+    <Table className="my-0! [&_td]:py-1.5! [&_th]:py-2!">
       {header && (
         <TableHeader>
           <TableRow>
@@ -73,20 +64,13 @@ export function TableSkeleton({
           <TableRow key={r}>
             {columns.map((col, c) => (
               <TableCell key={c}>
-                {col.avatar ? (
-                  <div className="flex items-center gap-3">
-                    <Skeleton className="size-6 shrink-0 rounded" />
-                    <Skeleton className={cn("h-4", col.width)} />
-                  </div>
-                ) : (
-                  <Skeleton
-                    className={cn(
-                      "h-4",
-                      col.width,
-                      ALIGN_CLASS[col.align ?? "left"],
-                    )}
-                  />
-                )}
+                <Skeleton
+                  className={cn(
+                    "h-4",
+                    col.width,
+                    ALIGN_CLASS[col.align ?? "left"],
+                  )}
+                />
               </TableCell>
             ))}
           </TableRow>

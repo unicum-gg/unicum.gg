@@ -107,12 +107,12 @@ async function render(
     `clan fromDb=${clanCached.fromDb} refreshing=${clanCached.refreshing}`,
   );
 
-  // The clan detail is entirely cheap cached reads (members with pre-computed
-  // ratings, previous clans, events, snapshots), so it loads fast and renders in
-  // one pass. No Suspense here on purpose: the description sits above the fold
-  // between the two nav rows and its height varies per clan, so a placeholder
-  // can't match it — streaming would reflow the page when the real description
-  // lands. Rendering atomically keeps the layout stable.
+  // The Overview modes (Random Battles, Stronghold, Clan Wars) are always
+  // loaded so switching between them is an instant client toggle with no server
+  // round-trip. These are all cheap indexed/cached reads. Ratings
+  // (wn7/wn8/wnx/wnx30d) are pre-computed and cached on each member row, so the
+  // members table renders fully populated on first paint. Same payload the clan
+  // detail endpoint serves, so a LiveSync tick can refetch it client-side.
   const detail = await loadClanDetail(region, clan, span);
   const members = detail.members;
   trace?.log(`members count=${members.length}`);
