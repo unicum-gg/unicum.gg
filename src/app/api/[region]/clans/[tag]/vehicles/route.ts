@@ -2,6 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/services/db";
 import { clansByRegion } from "@/services/db/schema";
 import { getClanTankAggregates } from "@/services/clans/repository/tanks";
+import { buildClanVehicleRows } from "@/services/clans/vehicles";
 import { isRegion } from "@/services/wargaming/wot";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
@@ -10,14 +11,12 @@ import {
 } from "@/services/wargaming/wot/ratings";
 
 /**
- * Internal data endpoint backing the clan page's "Tanks" tab. Kept out of the
- * initial page payload because the per-member tank aggregation is the heavy
- * query on this page; the tab is fetched on demand (and cached client-side by
- * SWR) so a visitor who only reads the Overview never pays for it. Not part of
- * the public API (no `@openapi` block), so `next-openapi-gen` skips it.
- *
- * WN8/WNX expected values are `Map`s, which JSON can't carry, so they're
- * emitted as `[tankId, value]` entry arrays and rebuilt into `Map`s client-side.
+ * Clan vehicles
+ * @description Per-tank stats for a clan, aggregated across all members from their most recent tank snapshots: member count, total battles, battle-weighted average damage and XP, win rate, and WN7/WN8/WNX ratings. This is the heavy aggregation on the clan page, so it lives on its own endpoint and is loaded on demand.
+ * @pathParams clanLiveParams
+ * @response ClanVehiclesResponse
+ * @tag Clans
+ * @openapi
  */
 export async function GET(
   _req: Request,
@@ -46,12 +45,13 @@ export async function GET(
         getWN8ExpectedValues(),
         getWNXExpectedValues(),
       ]);
-    return Response.json({
+    const vehicles = buildClanVehicleRows(
       aggregates,
       encyclopedia,
-      wn8Expected: [...wn8Expected.entries()],
-      wnxExpected: [...wnxExpected.entries()],
-    });
+      wn8Expected,
+      wnxExpected,
+    );
+    return Response.json({ vehicles });
   } catch (err) {
     console.error(`[api/${region}/clans/${decoded}/vehicles] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

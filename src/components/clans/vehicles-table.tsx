@@ -26,23 +26,15 @@ import {
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
+import type { ClanVehicleRow } from "@/services/clans/vehicles";
 import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
   RATING_COLOR_CLASS,
   type RatingColor,
   winrateColor,
-  type WN8Expected,
   wn7Color,
   wn8Color,
-  type WNXExpected,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {
@@ -74,97 +66,30 @@ enum SortDirection {
 
 type SortState = { column: SortColumn; direction: SortDirection } | null;
 
-type Row = {
-  agg: ClanTankAggregate;
-  meta: VehicleMeta | null;
-  avgDamage: number | null;
-  avgXp: number | null;
-  winrate: number | null;
-  rating: number | null;
-};
+// The row plus the rating for the currently-selected metric, so sorting and the
+// rating column read a single resolved value.
+type Row = ClanVehicleRow & { rating: number | null };
 
-function buildRows(
-  aggregates: ClanTankAggregate[],
-  encyclopedia: Record<string, VehicleMeta>,
-  metric: RatingMetric,
-  wn8Expected: Map<number, WN8Expected>,
-  wnxExpected: Map<number, WNXExpected>,
-): Row[] {
-  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-  return aggregates.map((agg) => {
-    const meta = encyclopedia[String(agg.tankId)] ?? null;
-    const avgDamage = agg.battles > 0 ? agg.damageDealt / agg.battles : null;
-    const avgXp =
-      agg.battles > 0 && agg.xp > 0 ? agg.xp / agg.battles : null;
-    const winrate = agg.battles > 0 ? agg.wins / agg.battles : null;
-    let rating: number | null = null;
-    if (agg.battles > 0) {
-      if (metric === RatingMetric.Wn7) {
-        rating = computeWN7(
-          {
-            battles: agg.battles,
-            wins: agg.wins,
-            frags: agg.frags,
-            damageDealt: agg.damageDealt,
-            spotted: agg.spotted,
-            droppedCapturePoints: agg.droppedCapturePoints,
-          },
-          meta?.tier ?? null,
-        );
-      } else if (metric === RatingMetric.Wn8) {
-        const synthetic: TankStats = {
-          tank_id: agg.tankId,
-          mark_of_mastery: null,
-          all: {
-            battles: agg.battles,
-            wins: agg.wins,
-            damage_dealt: agg.damageDealt,
-            spotted: agg.spotted,
-            frags: agg.frags,
-            dropped_capture_points: agg.droppedCapturePoints,
-            radio_assisted_damage: agg.radioAssistedDamage,
-            track_assisted_damage: agg.trackAssistedDamage,
-            xp: agg.xp,
-          },
-        };
-        rating = computeWN8([synthetic], wn8Expected, encyclopedia, wn8Fallback);
-      } else {
-        const synthetic: TankStats = {
-          tank_id: agg.tankId,
-          mark_of_mastery: null,
-          all: {
-            battles: agg.battles,
-            wins: agg.wins,
-            damage_dealt: agg.damageDealt,
-            spotted: agg.spotted,
-            frags: agg.frags,
-            dropped_capture_points: agg.droppedCapturePoints,
-            radio_assisted_damage: agg.radioAssistedDamage,
-            track_assisted_damage: agg.trackAssistedDamage,
-            xp: agg.xp,
-          },
-        };
-        rating = computeWNX([synthetic], wnxExpected);
-      }
-    }
-    return { agg, meta, avgDamage, avgXp, winrate, rating };
-  });
+function ratingForMetric(row: ClanVehicleRow, metric: RatingMetric): number | null {
+  if (metric === RatingMetric.Wn7) return row.wn7;
+  if (metric === RatingMetric.Wn8) return row.wn8;
+  return row.wnx;
 }
 
 function getSortValue(row: Row, column: SortColumn): number | string {
   switch (column) {
     case SortColumn.Name:
-      return row.meta?.name?.toLowerCase() ?? "";
+      return row.name.toLowerCase();
     case SortColumn.Type:
-      return row.meta?.type ?? "";
+      return row.type ?? "";
     case SortColumn.Nation:
-      return row.meta?.nation ?? "";
+      return row.nation ?? "";
     case SortColumn.Tier:
-      return row.meta?.tier ?? 0;
+      return row.tier ?? 0;
     case SortColumn.Members:
-      return row.agg.memberCount;
+      return row.memberCount;
     case SortColumn.Battles:
-      return row.agg.battles;
+      return row.battles;
     case SortColumn.AvgDamage:
       return row.avgDamage ?? -1;
     case SortColumn.AvgXp:
@@ -177,7 +102,7 @@ function getSortValue(row: Row, column: SortColumn): number | string {
 }
 
 function compareRows(a: Row, b: Row, state: SortState): number {
-  if (!state) return b.agg.battles - a.agg.battles;
+  if (!state) return b.battles - a.battles;
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
   const av = getSortValue(a, state.column);
   const bv = getSortValue(b, state.column);
@@ -239,15 +164,9 @@ function SortableHead({
 }
 
 export function ClanVehiclesTable({
-  aggregates,
-  encyclopedia,
-  wn8Expected,
-  wnxExpected,
+  vehicles,
 }: {
-  aggregates: ClanTankAggregate[];
-  encyclopedia: Record<string, VehicleMeta>;
-  wn8Expected: Map<number, WN8Expected>;
-  wnxExpected: Map<number, WNXExpected>;
+  vehicles: ClanVehicleRow[];
 }) {
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -261,9 +180,11 @@ export function ClanVehiclesTable({
     direction: SortDirection.Desc,
   });
 
+  // Rows arrive pre-computed from the server; here we only resolve the rating
+  // for the selected metric so the column and sort share one value.
   const rows = useMemo(
-    () => buildRows(aggregates, encyclopedia, metric, wn8Expected, wnxExpected),
-    [aggregates, encyclopedia, metric, wn8Expected, wnxExpected],
+    () => vehicles.map((v) => ({ ...v, rating: ratingForMetric(v, metric) })),
+    [vehicles, metric],
   );
   const sorted = useMemo(
     () => [...rows].sort((a, b) => compareRows(a, b, sort)),
@@ -392,22 +313,19 @@ export function ClanVehiclesTable({
       </TableHeader>
       <TableBody>
         {sorted.map((r) => {
-          const isPremium = r.meta?.isPremium ?? false;
+          const isPremium = r.isPremium;
           return (
-            <TableRow key={r.agg.tankId}>
+            <TableRow key={r.tankId}>
               <TableCell className="hidden text-center sm:table-cell">
-                {r.meta?.nation ? (
-                  <NationFlag nation={r.meta.nation} />
+                {r.nation ? (
+                  <NationFlag nation={r.nation} />
                 ) : (
                   <span className="text-muted-foreground">—</span>
                 )}
               </TableCell>
               <TableCell className="hidden text-center sm:table-cell">
-                {r.meta?.type ? (
-                  <VehicleTypeIcon
-                    type={r.meta.type}
-                    premium={isPremium}
-                  />
+                {r.type ? (
+                  <VehicleTypeIcon type={r.type} premium={isPremium} />
                 ) : (
                   <span className="text-muted-foreground">—</span>
                 )}
@@ -418,7 +336,7 @@ export function ClanVehiclesTable({
                   isPremium && "text-[#FAB81B]",
                 )}
               >
-                {r.meta?.tier ? toRoman(r.meta.tier) : "—"}
+                {r.tier ? toRoman(r.tier) : "—"}
               </TableCell>
               <TableCell
                 className={cn(
@@ -426,13 +344,13 @@ export function ClanVehiclesTable({
                   isPremium && "text-[#FAB81B]",
                 )}
               >
-                {r.meta?.shortName || r.meta?.name || `#${r.agg.tankId}`}
+                {r.shortName || r.name || `#${r.tankId}`}
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.agg.memberCount)}
+                {intFmt.format(r.memberCount)}
               </TableCell>
               <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.agg.battles)}
+                {intFmt.format(r.battles)}
               </TableCell>
               <TableCell className="text-right tabular-nums">
                 {r.avgDamage !== null ? intFmt.format(r.avgDamage) : "—"}

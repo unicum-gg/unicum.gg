@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import useSWR from "swr";
+import { LiveSync } from "@/components/live-sync";
 import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
 import { ExpandableDescription } from "@/components/clans/description";
 import { ClanMembersTable } from "@/components/clans/members-table";
@@ -24,18 +25,13 @@ import {
   type SkeletonColumn,
 } from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
-import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
-import type { ClanSnapshotPeriods } from "@/services/clans/snapshot-stats";
-import type { PreviousClanRow } from "@/services/clans/previous-clans";
-import type { ClanSnapshot } from "@/services/db/schema";
+import type { ClanDetailData } from "@/services/clans/detail";
+import type { ClanVehicleRow } from "@/services/clans/vehicles";
+import {
+  ClanDetailResponse,
+  ClanVehiclesResponse,
+} from "@/services/openapi/schemas";
 import type { Region } from "@/services/wargaming/wot";
-import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/event-types";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
-import type {
-  WN8Expected,
-  WNXExpected,
-} from "@/services/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -55,35 +51,25 @@ const VEHICLES_SKELETON_COLUMNS: SkeletonColumn[] = [
   { width: "w-14", align: "right" }, // Rating
 ];
 
-// Wire shape of the /vehicles endpoint: Maps can't cross JSON, so the expected
-// values travel as entry arrays.
-type VehiclesPayload = {
-  aggregates: ClanTankAggregate[];
-  encyclopedia: Record<string, VehicleMeta>;
-  wn8Expected: [number, WN8Expected][];
-  wnxExpected: [number, WNXExpected][];
-};
-
-// Resolved shape the ClanVehiclesTable consumes, with the Maps rebuilt.
-export type VehiclesData = {
-  aggregates: ClanTankAggregate[];
-  encyclopedia: Record<string, VehicleMeta>;
-  wn8Expected: Map<number, WN8Expected>;
-  wnxExpected: Map<number, WNXExpected>;
-};
-
-async function vehiclesFetcher(url: string): Promise<VehiclesData> {
+async function vehiclesFetcher(url: string): Promise<ClanVehicleRow[]> {
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Request failed (${res.status}) for ${url}`);
   }
-  const json = (await res.json()) as VehiclesPayload;
-  return {
-    aggregates: json.aggregates,
-    encyclopedia: json.encyclopedia,
-    wn8Expected: new Map(json.wn8Expected),
-    wnxExpected: new Map(json.wnxExpected),
-  };
+  return ClanVehiclesResponse.parse(await res.json())
+    .vehicles as unknown as ClanVehicleRow[];
+}
+
+// Parse the clan detail response with the shared OpenAPI schema: it validates
+// the shape and `z.coerce.date()` revives ISO date strings into `Date`s, so no
+// hand-written revival is needed. The cast restores the rich domain types the
+// components expect (the schema is intentionally `.loose()`).
+async function clanDetailFetcher(url: string): Promise<ClanDetailData> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Request failed (${res.status}) for ${url}`);
+  }
+  return ClanDetailResponse.parse(await res.json()) as unknown as ClanDetailData;
 }
 
 export type ClanTabsViewProps = {
@@ -92,15 +78,13 @@ export type ClanTabsViewProps = {
   basePath: string;
   activeTab: ClanTab;
   descriptionHtml: string | null;
-  members: ClanMemberStats[];
-  previousClans: PreviousClanRow[];
-  events: ClanRecentEvent[];
-  snapshotLatest: ClanSnapshot | null;
-  snapshotPeriods: ClanSnapshotPeriods | null;
+  // Freshness-sensitive clan detail, seeded from the SSR render and kept live
+  // by SWR (see the LiveSync wiring below).
+  initialData: ClanDetailData;
   // Present only when Tanks is the tab the server rendered, so its content is
   // in the initial HTML (SEO for `?tab=tanks`); null otherwise, so the tab
   // fetches on demand when first opened.
-  initialVehicles: VehiclesData | null;
+  initialVehicles: ClanVehicleRow[] | null;
 };
 
 export function ClanTabsView({
@@ -109,11 +93,7 @@ export function ClanTabsView({
   basePath,
   activeTab,
   descriptionHtml,
-  members,
-  previousClans,
-  events,
-  snapshotLatest,
-  snapshotPeriods,
+  initialData,
   initialVehicles,
 }: ClanTabsViewProps) {
   // `activeTab` seeds the first client render so it matches the server HTML.
@@ -152,8 +132,28 @@ export function ClanTabsView({
     },
   );
 
+  // The tab content (members, activity, snapshots) lives behind SWR so a
+  // LiveSync tick refetches just this JSON and re-renders client-side, instead
+  // of `router.refresh()` re-rendering the whole route on the server.
+  // `initialData` seeds it from the SSR render, so there's no fetch on load;
+  // only `mutateData()` (below) triggers a refetch.
+  const dataUrl = `/api/${region}/clans/${encodeURIComponent(tag)}`;
+  const { data: liveData, mutate: mutateData } = useSWR(
+    dataUrl,
+    clanDetailFetcher,
+    { fallbackData: initialData, revalidateOnMount: false },
+  );
+  const { members, previousClans, events, snapshotLatest, snapshotPeriods } =
+    liveData ?? initialData;
+
   return (
     <>
+      <LiveSync
+        url={`/api/${region}/clans/${encodeURIComponent(tag)}/live`}
+        onUpdate={() => {
+          void mutateData();
+        }}
+      />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
           <ClanTabsNav basePath={basePath} activeTab={tab} onSelect={select} />
@@ -219,19 +219,12 @@ export function ClanTabsView({
             <PanelHeader>
               <PanelTitle>
                 Tanks
-                {vehicles
-                  ? ` (${intFmt.format(vehicles.aggregates.length)})`
-                  : ""}
+                {vehicles ? ` (${intFmt.format(vehicles.length)})` : ""}
               </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
               {vehicles ? (
-                <ClanVehiclesTable
-                  aggregates={vehicles.aggregates}
-                  encyclopedia={vehicles.encyclopedia}
-                  wn8Expected={vehicles.wn8Expected}
-                  wnxExpected={vehicles.wnxExpected}
-                />
+                <ClanVehiclesTable vehicles={vehicles} />
               ) : (
                 <TableSkeleton
                   columns={VEHICLES_SKELETON_COLUMNS}

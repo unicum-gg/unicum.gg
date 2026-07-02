@@ -1,6 +1,9 @@
 import APP from "@/constants/app";
 import generated from "@/services/openapi/openapi.generated.json";
-import { QUERY_PARAM_DEFAULTS } from "@/services/openapi/schemas";
+import {
+  PARAM_EXAMPLES,
+  QUERY_PARAM_DEFAULTS,
+} from "@/services/openapi/schemas";
 
 type Schema = {
   allOf?: Schema[];
@@ -38,8 +41,8 @@ function flattenSingleAllOf(schema?: Schema): void {
  * - applies the query defaults from `QUERY_PARAM_DEFAULTS` (next-openapi-gen
  *   doesn't serialize `.default()` on enum params), e.g. `metric` -> `wnx`;
  * - replaces next-openapi-gen's literal `example: "example"` placeholder with
- *   the first enum value (so e.g. `region` prefills `eu`) or drops it.
- * Schema-driven, so no per-param config.
+ *   the first enum value (so e.g. `region` prefills `eu`), an entry from
+ *   `PARAM_EXAMPLES` (so e.g. `tag` prefills `FAME`), or drops it.
  */
 function normalizeParameters(doc: OpenApiDoc): void {
   for (const pathItem of Object.values(doc.paths ?? {})) {
@@ -58,12 +61,24 @@ function normalizeParameters(doc: OpenApiDoc): void {
           parameter.schema.default = fallback;
         }
 
-        if (parameter.example !== "example") continue;
-        const enumValues = parameter.schema?.enum;
-        if (Array.isArray(enumValues) && enumValues.length > 0) {
-          parameter.example = enumValues[0];
-        } else {
-          delete parameter.example;
+        const named = parameter.name
+          ? PARAM_EXAMPLES[parameter.name]
+          : undefined;
+        const isPlaceholder = parameter.example === "example";
+        if (named !== undefined) {
+          // Our curated example wins whenever next-openapi-gen left a
+          // placeholder or no example at all (it drops `.meta` examples on
+          // params). It never overrides a real, already-set example.
+          if (isPlaceholder || parameter.example === undefined) {
+            parameter.example = named;
+          }
+        } else if (isPlaceholder) {
+          const enumValues = parameter.schema?.enum;
+          if (Array.isArray(enumValues) && enumValues.length > 0) {
+            parameter.example = enumValues[0];
+          } else {
+            delete parameter.example;
+          }
         }
       }
     }

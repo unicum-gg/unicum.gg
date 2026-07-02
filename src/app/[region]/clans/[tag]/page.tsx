@@ -3,8 +3,7 @@ import { notFound } from "next/navigation";
 import { cache } from "react";
 import { ClanHeader } from "@/components/clans/header";
 import { ClanTab, tabFromQuery } from "@/components/clans/tabs";
-import { ClanTabsView, type VehiclesData } from "@/components/clans/tabs-view";
-import { LiveSync } from "@/components/live-sync";
+import { ClanTabsView } from "@/components/clans/tabs-view";
 import { ViewBeacon } from "@/components/view-beacon";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { JsonLd } from "@/components/json-ld";
@@ -13,15 +12,13 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { clanSchema } from "@/lib/schema-org";
-import { getPreviousClans } from "@/services/clans/previous-clans";
+import { loadClanDetail } from "@/services/clans/detail";
 import { getClanByTagCached } from "@/services/clans/repository";
-import { getClanEventsCached } from "@/services/clans/repository/events";
-import { getClanMembersCached } from "@/services/clans/repository/members";
 import { getClanTankAggregates } from "@/services/clans/repository/tanks";
 import {
-  getLatestClanSnapshot,
-  getClanSnapshotPeriods,
-} from "@/services/clans/snapshots";
+  buildClanVehicleRows,
+  type ClanVehicleRow,
+} from "@/services/clans/vehicles";
 import { isRegion, type Region } from "@/services/wargaming/wot";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
@@ -103,32 +100,17 @@ async function render(
   // switching to them is an instant client toggle with no server round-trip.
   // These are all cheap indexed/cached reads. Ratings (wn7/wn8/wnx/wnx30d) are
   // pre-computed and cached on each member row, so the members table renders
-  // fully populated on first paint.
-  const [
-    membersCached,
-    snapshotLatest,
-    snapshotPeriods,
-    previousClans,
-    eventsCached,
-  ] = await Promise.all([
-    span("getClanMembersCached", () => getClanMembersCached(region, clan.id)),
-    span("getLatestClanSnapshot", () => getLatestClanSnapshot(region, clan.id)),
-    span("getClanSnapshotPeriods", () =>
-      getClanSnapshotPeriods(region, clan.id),
-    ),
-    span("getPreviousClans", () => getPreviousClans(region, clan.id)),
-    span("getClanEventsCached", () => getClanEventsCached(region, clan.id, 30)),
-  ]);
-  const members = membersCached.members;
-  trace?.log(
-    `members fromDb=${membersCached.fromDb} refreshing=${membersCached.refreshing} count=${members.length}`,
-  );
+  // fully populated on first paint. Same payload the clan detail endpoint
+  // serves, so a LiveSync tick can refetch it client-side.
+  const detail = await loadClanDetail(region, clan, span);
+  const members = detail.members;
+  trace?.log(`members count=${members.length}`);
 
   // Tanks tab: the per-member aggregation is the heavy query on this page, so
   // load it server-side only when Tanks is the tab being rendered (its content
   // then ships in the initial HTML for SEO/deep-links). On any other tab it's
   // left null and fetched on demand — then cached — client-side via SWR.
-  let initialVehicles: VehiclesData | null = null;
+  let initialVehicles: ClanVehicleRow[] | null = null;
   if (activeTab === ClanTab.Tanks) {
     const [aggregates, encyclopedia, wn8Expected, wnxExpected] =
       await Promise.all([
@@ -139,7 +121,12 @@ async function render(
         span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
         span("getWNXExpectedValues", () => getWNXExpectedValues()),
       ]);
-    initialVehicles = { aggregates, encyclopedia, wn8Expected, wnxExpected };
+    initialVehicles = buildClanVehicleRows(
+      aggregates,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
+    );
   }
 
   const basePath = ROUTES.CLAN(region, clan.tag);
@@ -156,9 +143,6 @@ async function render(
           description: `${clan.name} [${clan.tag}] World of Tanks clan on ${region.toUpperCase()}: ${clan.membersCount} members, WN8/WNX ratings, member rankings, recent join/leave activity.`,
           logo: clan.emblem,
         })}
-      />
-      <LiveSync
-        url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/live`}
       />
       <ViewBeacon
         url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/enqueue`}
@@ -177,11 +161,7 @@ async function render(
         basePath={basePath}
         activeTab={activeTab}
         descriptionHtml={clan.descriptionHtml ?? null}
-        members={members}
-        previousClans={previousClans}
-        events={eventsCached.events}
-        snapshotLatest={snapshotLatest}
-        snapshotPeriods={snapshotPeriods}
+        initialData={detail}
         initialVehicles={initialVehicles}
       />
     </div>
