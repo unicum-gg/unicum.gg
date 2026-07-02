@@ -2,6 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import useSWR from "swr";
+import { LiveSync } from "@/components/live-sync";
 import {
   Panel,
   PanelContent,
@@ -26,6 +28,11 @@ import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
 import type { StrongholdStats } from "@/services/players";
+import type { PlayerDerivedStats } from "@/services/players/derived-stats";
+import type { PlayerDetailData } from "@/services/players/detail";
+import type { LiftDrag } from "@/services/players/lift-drag";
+import type { PlayerVehicleRow } from "@/services/players/vehicles";
+import { PlayerDetailResponse } from "@/services/openapi/schemas";
 import type { Region } from "@/services/wargaming/wot";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -33,11 +40,9 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 type OverallData = {
   current: React.ComponentProps<typeof PlayerStatsTable>["current"];
   periods: React.ComponentProps<typeof PlayerStatsTable>["periods"];
-  tanks: React.ComponentProps<typeof PlayerStatsTable>["tanks"];
-  periodTanks: React.ComponentProps<typeof PlayerStatsTable>["periodTanks"];
-  encyclopedia: React.ComponentProps<typeof PlayerStatsTable>["encyclopedia"];
-  wn8Expected: React.ComponentProps<typeof PlayerStatsTable>["wn8Expected"];
-  wnxExpected: React.ComponentProps<typeof PlayerStatsTable>["wnxExpected"];
+  derived: PlayerDerivedStats;
+  vehicles: PlayerVehicleRow[];
+  liftDrag: LiftDrag | null;
   ratingData: React.ComponentProps<typeof PlayerRatingChart>["data"];
   metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
   metricLabel: string;
@@ -65,13 +70,30 @@ const STRONGHOLD_TABS: {
   { id: PlayerTab.SteelHunter, label: "Steel Hunter" },
 ];
 
+// Parse the player detail response with the shared OpenAPI schema: it
+// validates the shape and `z.coerce.date()` revives ISO date strings into
+// `Date`s. The cast restores the rich domain types the components expect (the
+// schema is intentionally `.loose()`).
+async function playerDetailFetcher(url: string): Promise<PlayerDetailData> {
+  const res = await fetch(url);
+  if (!res.ok) {
+    throw new Error(`Request failed (${res.status}) for ${url}`);
+  }
+  return PlayerDetailResponse.parse(
+    await res.json(),
+  ) as unknown as PlayerDetailData;
+}
+
 export type PlayerTabsViewProps = {
   region: Region;
   basePath: string;
   nickname: string;
   activeTab: PlayerTab;
-  overall: OverallData;
-  strongholds: Record<Exclude<PlayerTab, PlayerTab.Overall>, StrongholdData>;
+  metricLabel: string;
+  nowMs: number;
+  // Full player detail, seeded from the SSR render and kept live by SWR (see
+  // the LiveSync wiring below).
+  initialData: PlayerDetailData;
 };
 
 export function PlayerTabsView({
@@ -79,8 +101,9 @@ export function PlayerTabsView({
   basePath,
   nickname,
   activeTab,
-  overall,
-  strongholds,
+  metricLabel,
+  nowMs,
+  initialData,
 }: PlayerTabsViewProps) {
   // `activeTab` seeds the first client render so it matches the server HTML.
   // A tab click updates local state immediately (instant switch) and pushes
@@ -101,8 +124,55 @@ export function PlayerTabsView({
     window.history.pushState(null, "", playerTabHref(basePath, next));
   }
 
+  // The page data lives behind SWR so a LiveSync tick refetches just this
+  // JSON and re-renders client-side, instead of `router.refresh()`
+  // re-rendering the whole route on the server. `initialData` seeds it from
+  // the SSR render, so there's no fetch on load; only `mutateData()` (below)
+  // triggers a refetch. Keyed by the SSR-resolved metric so lift/drag and the
+  // rating history stay consistent with what the server rendered.
+  const dataUrl = `/api/${region}/players/${encodeURIComponent(nickname)}?metric=${initialData.metric}`;
+  const { data: liveData, mutate: mutateData } = useSWR(
+    dataUrl,
+    playerDetailFetcher,
+    { fallbackData: initialData, revalidateOnMount: false },
+  );
+  const detail = liveData ?? initialData;
+
+  const overall: OverallData = {
+    current: detail.current,
+    periods: detail.periods,
+    derived: detail.derived,
+    vehicles: detail.vehicles,
+    liftDrag: detail.liftDrag,
+    ratingData: detail.ratingHistory,
+    metric: detail.metric,
+    metricLabel,
+    clanHistory: detail.clanHistory,
+    createdAt: detail.player.createdAt,
+    nowMs,
+  };
+  const strongholds: Record<
+    Exclude<PlayerTab, PlayerTab.Overall>,
+    StrongholdData
+  > = {
+    [PlayerTab.Skirmish]: detail.strongholds.skirmish,
+    [PlayerTab.Advances]: detail.strongholds.fortified,
+    [PlayerTab.GrandBattles]: detail.strongholds.epic,
+    [PlayerTab.RankedBattles]: detail.strongholds.ranked,
+    [PlayerTab.ClanWarsX]: detail.strongholds.cwAbsolute,
+    [PlayerTab.ClanWarsVIII]: detail.strongholds.cwChampion,
+    [PlayerTab.ClanWarsVI]: detail.strongholds.cwMiddle,
+    [PlayerTab.SteelHunter]: detail.strongholds.fallout,
+  };
+
   return (
     <>
+      <LiveSync
+        url={`/api/${region}/players/${encodeURIComponent(nickname)}/live`}
+        onUpdate={() => {
+          void mutateData();
+        }}
+      />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
           <PlayerTabsNav
@@ -133,11 +203,9 @@ function OverallTab({
   nickname,
   current,
   periods,
-  tanks,
-  periodTanks,
-  encyclopedia,
-  wn8Expected,
-  wnxExpected,
+  derived,
+  vehicles,
+  liftDrag,
   ratingData,
   metric,
   metricLabel,
@@ -157,11 +225,7 @@ function OverallTab({
           <PlayerStatsTable
             current={current}
             periods={periods}
-            tanks={tanks}
-            periodTanks={periodTanks}
-            encyclopedia={encyclopedia}
-            wn8Expected={wn8Expected}
-            wnxExpected={wnxExpected}
+            derived={derived}
           />
         </PanelContent>
       </Panel>
@@ -210,10 +274,7 @@ function OverallTab({
         <PanelContent className="p-0">
           <TanksLiftDrag
             region={region}
-            tanks={tanks}
-            encyclopedia={encyclopedia}
-            wn8Expected={wn8Expected}
-            wnxExpected={wnxExpected}
+            liftDrag={liftDrag}
             metric={metric}
             metricLabel={metricLabel}
           />
@@ -225,18 +286,11 @@ function OverallTab({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s tanks (
-            {intFmt.format(tanks.filter((t) => t.all.battles > 0).length)})
+            {nickname}&apos;s tanks ({intFmt.format(vehicles.length)})
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          <PlayerVehiclesTable
-            region={region}
-            tanks={tanks}
-            encyclopedia={encyclopedia}
-            wn8Expected={wn8Expected}
-            wnxExpected={wnxExpected}
-          />
+          <PlayerVehiclesTable region={region} vehicles={vehicles} />
         </PanelContent>
       </Panel>
 

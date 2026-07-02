@@ -6,7 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import {
   DEFAULT_RATING_METRIC,
@@ -34,25 +34,16 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import type { PlayerVehicleRow } from "@/services/players/vehicles";
 import type { Region } from "@/services/wargaming/wot";
 import { masteryBadgeUrl } from "@/services/wargaming/wot/cdn";
 import {
-  type VehicleMeta,
-} from "@/services/wargaming/wot/vehicle-meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
   RATING_COLOR_CLASS,
   winrateColor,
   wn7Color,
   wn8Color,
-  type WN8Expected,
   wnxColor,
-  type WNXExpected,
 } from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 enum SortColumn {
   Name = "name",
@@ -99,74 +90,33 @@ const MASTERY_LABEL: Record<number, string> = {
   1: "3rd Class",
 };
 
-type TankRow = {
-  tank: TankStats;
-  meta: VehicleMeta | null;
-  avgDamage: number | null;
-  avgXp: number | null;
-  winrate: number | null;
-  rating: number | null;
-};
+// The row plus the rating for the currently-selected metric, so sorting and the
+// rating column read a single resolved value.
+type Row = PlayerVehicleRow & { rating: number | null };
 
-function buildRows(
-  tanks: TankStats[],
-  encyclopedia: Record<string, VehicleMeta>,
+function ratingForMetric(
+  row: PlayerVehicleRow,
   metric: RatingMetric,
-  wn8Expected: Map<number, WN8Expected>,
-  wnxExpected: Map<number, WNXExpected>,
-): TankRow[] {
-  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-  return tanks.map((tank) => {
-    const meta = encyclopedia[String(tank.tank_id)] ?? null;
-    const battles = tank.all.battles;
-    const avgDamage =
-      battles > 0 ? tank.all.damage_dealt / battles : null;
-    // A tank with battles > 0 always has xp > 0 from those battles, so
-    // xp === 0 here means the column wasn't populated yet (pre-migration
-    // snapshots) — show "—" instead of "0".
-    const avgXp =
-      battles > 0 && Number.isFinite(tank.all.xp) && tank.all.xp > 0
-        ? tank.all.xp / battles
-        : null;
-    const winrate = battles > 0 ? tank.all.wins / battles : null;
-    let rating: number | null = null;
-    if (battles > 0) {
-      if (metric === RatingMetric.Wn7) {
-        rating = computeWN7(
-          {
-            battles,
-            wins: tank.all.wins,
-            frags: tank.all.frags,
-            damageDealt: tank.all.damage_dealt,
-            spotted: tank.all.spotted,
-            droppedCapturePoints: tank.all.dropped_capture_points,
-          },
-          meta?.tier ?? null,
-        );
-      } else if (metric === RatingMetric.Wn8) {
-        rating = computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback);
-      } else {
-        rating = computeWNX([tank], wnxExpected);
-      }
-    }
-    return { tank, meta, avgDamage, avgXp, winrate, rating };
-  });
+): number | null {
+  if (metric === RatingMetric.Wn7) return row.wn7;
+  if (metric === RatingMetric.Wn8) return row.wn8;
+  return row.wnx;
 }
 
-function getSortValue(row: TankRow, column: SortColumn): number | string {
+function getSortValue(row: Row, column: SortColumn): number | string {
   switch (column) {
     case SortColumn.Name:
-      return row.meta?.name?.toLowerCase() ?? "";
+      return row.name.toLowerCase();
     case SortColumn.Mastery:
-      return row.tank.mark_of_mastery ?? -1;
+      return row.mastery ?? -1;
     case SortColumn.Type:
-      return TYPE_ABBR[row.meta?.type ?? ""] ?? row.meta?.type ?? "";
+      return TYPE_ABBR[row.type ?? ""] ?? row.type ?? "";
     case SortColumn.Nation:
-      return row.meta?.nation ?? "";
+      return row.nation ?? "";
     case SortColumn.Tier:
-      return row.meta?.tier ?? 0;
+      return row.tier ?? 0;
     case SortColumn.Battles:
-      return row.tank.all.battles;
+      return row.battles;
     case SortColumn.WinRate:
       return row.winrate ?? -1;
     case SortColumn.AvgDamage:
@@ -178,10 +128,10 @@ function getSortValue(row: TankRow, column: SortColumn): number | string {
   }
 }
 
-function compareRows(a: TankRow, b: TankRow, state: SortState): number {
+function compareRows(a: Row, b: Row, state: SortState): number {
   if (!state) {
     // Default: most battles first.
-    return b.tank.all.battles - a.tank.all.battles;
+    return b.battles - a.battles;
   }
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
   const av = getSortValue(a, state.column);
@@ -257,16 +207,10 @@ function SortableHead({
 
 export function PlayerVehiclesTable({
   region,
-  tanks,
-  encyclopedia,
-  wn8Expected,
-  wnxExpected,
+  vehicles,
 }: {
   region: Region;
-  tanks: TankStats[];
-  encyclopedia: Record<string, VehicleMeta>;
-  wn8Expected: Map<number, WN8Expected>;
-  wnxExpected: Map<number, WNXExpected>;
+  vehicles: PlayerVehicleRow[];
 }) {
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -280,14 +224,16 @@ export function PlayerVehiclesTable({
     direction: SortDirection.Desc,
   });
 
-  const rows = buildRows(
-    tanks.filter((t) => t.all.battles > 0),
-    encyclopedia,
-    metric,
-    wn8Expected,
-    wnxExpected,
+  // Rows arrive pre-computed from the server; here we only resolve the rating
+  // for the selected metric so the column and sort share one value.
+  const rows = useMemo(
+    () => vehicles.map((v) => ({ ...v, rating: ratingForMetric(v, metric) })),
+    [vehicles, metric],
   );
-  const sorted = [...rows].sort((a, b) => compareRows(a, b, sort));
+  const sorted = useMemo(
+    () => [...rows].sort((a, b) => compareRows(a, b, sort)),
+    [rows, sort],
+  );
 
   function toggleSort(column: SortColumn) {
     setSort((prev) => {
@@ -303,9 +249,7 @@ export function PlayerVehiclesTable({
 
   if (rows.length === 0) {
     return (
-      <p className="p-4 text-sm text-muted-foreground">
-        No tanks played yet.
-      </p>
+      <p className="p-4 text-sm text-muted-foreground">No tanks played yet.</p>
     );
   }
 
@@ -325,200 +269,198 @@ export function PlayerVehiclesTable({
 
   return (
     <TooltipProvider delayDuration={150}>
-    <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
-      <TableHeader>
-        <TableRow>
-          <SortableHead
-            column={SortColumn.Nation}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-            tooltip="Nation"
-          >
-            <TankopediaHeaderIcon name="nation" />
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Type}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-            tooltip="Type"
-          >
-            <TankopediaHeaderIcon name="type" />
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Tier}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-            tooltip="Tier"
-          >
-            <span className="whitespace-nowrap text-xs font-medium tracking-tight text-fd-muted-foreground">
-              I-XI
-            </span>
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Name}
-            state={sort}
-            onToggle={toggleSort}
-          >
-            Name
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Mastery}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-          >
-            Mastery
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Battles}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            Battles
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.AvgDamage}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            Avg damage
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.AvgXp}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-            hideOnMobile
-          >
-            Avg XP
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.WinRate}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-            tooltip="Overall (lifetime) winrate"
-          >
-            WR
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Rating}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            {metricLabel}
-          </SortableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sorted.map((r) => {
-          const tankId = r.tank.tank_id;
-          const hasIcon = !!(r.meta?.tag && r.meta?.type);
-          const name = r.meta?.shortName || r.meta?.name || `#${tankId}`;
-          const mastery = r.tank.mark_of_mastery ?? null;
-          const isPremium = r.meta?.isPremium ?? false;
-          return (
-            <TableRow key={tankId}>
-              <TableCell className="hidden text-center sm:table-cell">
-                {r.meta?.nation ? (
-                  <NationFlag nation={r.meta.nation} />
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </TableCell>
-              <TableCell className="hidden text-center sm:table-cell">
-                {r.meta?.type ? (
-                  <VehicleTypeIcon
-                    type={r.meta.type}
-                    premium={r.meta.isPremium}
-                  />
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "hidden text-center font-medium sm:table-cell",
-                  isPremium && "text-[#FAB81B]",
-                )}
-              >
-                {r.meta?.tier ? toRoman(r.meta.tier) : "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "font-medium max-sm:pl-4!",
-                  isPremium && "text-[#FAB81B]",
-                )}
-              >
-                <span className="flex items-center gap-2">
-                  {hasIcon ? (
-                    <TankIcon
-                      region={region}
-                      tag={r.meta!.tag}
-                      type={r.meta!.type}
-                      className="h-3.5 w-auto shrink-0 object-contain"
+      <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
+        <TableHeader>
+          <TableRow>
+            <SortableHead
+              column={SortColumn.Nation}
+              state={sort}
+              onToggle={toggleSort}
+              align="center"
+              hideOnMobile
+              headClassName="w-px"
+              tooltip="Nation"
+            >
+              <TankopediaHeaderIcon name="nation" />
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Type}
+              state={sort}
+              onToggle={toggleSort}
+              align="center"
+              hideOnMobile
+              headClassName="w-px"
+              tooltip="Type"
+            >
+              <TankopediaHeaderIcon name="type" />
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Tier}
+              state={sort}
+              onToggle={toggleSort}
+              align="center"
+              hideOnMobile
+              headClassName="w-px"
+              tooltip="Tier"
+            >
+              <span className="whitespace-nowrap text-xs font-medium tracking-tight text-fd-muted-foreground">
+                I-XI
+              </span>
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Name}
+              state={sort}
+              onToggle={toggleSort}
+            >
+              Name
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Mastery}
+              state={sort}
+              onToggle={toggleSort}
+              align="center"
+              hideOnMobile
+            >
+              Mastery
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Battles}
+              state={sort}
+              onToggle={toggleSort}
+              align="end"
+            >
+              Battles
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.AvgDamage}
+              state={sort}
+              onToggle={toggleSort}
+              align="end"
+            >
+              Avg damage
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.AvgXp}
+              state={sort}
+              onToggle={toggleSort}
+              align="end"
+              hideOnMobile
+            >
+              Avg XP
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.WinRate}
+              state={sort}
+              onToggle={toggleSort}
+              align="end"
+              tooltip="Overall (lifetime) winrate"
+            >
+              WR
+            </SortableHead>
+            <SortableHead
+              column={SortColumn.Rating}
+              state={sort}
+              onToggle={toggleSort}
+              align="end"
+            >
+              {metricLabel}
+            </SortableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {sorted.map((r) => {
+            const hasIcon = !!(r.tag && r.type);
+            const name = r.shortName || r.name || `#${r.tankId}`;
+            const isPremium = r.isPremium;
+            return (
+              <TableRow key={r.tankId}>
+                <TableCell className="hidden text-center sm:table-cell">
+                  {r.nation ? (
+                    <NationFlag nation={r.nation} />
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </TableCell>
+                <TableCell className="hidden text-center sm:table-cell">
+                  {r.type ? (
+                    <VehicleTypeIcon type={r.type} premium={isPremium} />
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </TableCell>
+                <TableCell
+                  className={cn(
+                    "hidden text-center font-medium sm:table-cell",
+                    isPremium && "text-[#FAB81B]",
+                  )}
+                >
+                  {r.tier ? toRoman(r.tier) : "—"}
+                </TableCell>
+                <TableCell
+                  className={cn(
+                    "font-medium max-sm:pl-4!",
+                    isPremium && "text-[#FAB81B]",
+                  )}
+                >
+                  <span className="flex items-center gap-2">
+                    {hasIcon ? (
+                      <TankIcon
+                        region={region}
+                        tag={r.tag!}
+                        type={r.type!}
+                        className="h-3.5 w-auto shrink-0 object-contain"
+                      />
+                    ) : null}
+                    <span>{name}</span>
+                  </span>
+                </TableCell>
+                <TableCell className="hidden text-center text-xs sm:table-cell">
+                  {r.mastery && r.mastery > 0 ? (
+                    <Image
+                      src={masteryBadgeUrl(region, r.mastery)}
+                      alt={MASTERY_LABEL[r.mastery]}
+                      title={MASTERY_LABEL[r.mastery]}
+                      width={28}
+                      height={28}
+                      className="mx-auto h-7 w-auto object-contain"
                     />
-                  ) : null}
-                  <span>{name}</span>
-                </span>
-              </TableCell>
-              <TableCell className="hidden text-center text-xs sm:table-cell">
-                {mastery && mastery > 0 ? (
-                  <Image
-                    src={masteryBadgeUrl(region, mastery)}
-                    alt={MASTERY_LABEL[mastery]}
-                    title={MASTERY_LABEL[mastery]}
-                    width={28}
-                    height={28}
-                    className="mx-auto h-7 w-auto object-contain"
-                  />
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.tank.all.battles)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {r.avgDamage !== null ? intFmt.format(r.avgDamage) : "—"}
-              </TableCell>
-              <TableCell className="hidden text-right tabular-nums sm:table-cell">
-                {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "text-right tabular-nums",
-                  r.winrate !== null &&
-                    RATING_COLOR_CLASS[winrateColor(r.winrate)],
-                )}
-              >
-                {r.winrate !== null
-                  ? `${pctFmt.format(r.winrate * 100)}%`
-                  : "—"}
-              </TableCell>
-              <TableCell
-                className={cn("text-right tabular-nums", ratingColor(r.rating))}
-              >
-                {r.rating !== null ? decFmt.format(r.rating) : "—"}
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+                  ) : (
+                    <span className="text-muted-foreground">—</span>
+                  )}
+                </TableCell>
+                <TableCell className="text-right tabular-nums">
+                  {intFmt.format(r.battles)}
+                </TableCell>
+                <TableCell className="text-right tabular-nums">
+                  {r.avgDamage !== null ? intFmt.format(r.avgDamage) : "—"}
+                </TableCell>
+                <TableCell className="hidden text-right tabular-nums sm:table-cell">
+                  {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
+                </TableCell>
+                <TableCell
+                  className={cn(
+                    "text-right tabular-nums",
+                    r.winrate !== null &&
+                      RATING_COLOR_CLASS[winrateColor(r.winrate)],
+                  )}
+                >
+                  {r.winrate !== null
+                    ? `${pctFmt.format(r.winrate * 100)}%`
+                    : "—"}
+                </TableCell>
+                <TableCell
+                  className={cn(
+                    "text-right tabular-nums",
+                    ratingColor(r.rating),
+                  )}
+                >
+                  {r.rating !== null ? decFmt.format(r.rating) : "—"}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
     </TooltipProvider>
   );
 }

@@ -1,52 +1,34 @@
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { LiveSync } from "@/components/live-sync";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/header";
 import { PlayerTab, tabFromQuery } from "@/components/players/tabs";
 import { PlayerTabsView } from "@/components/players/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
-import {
-  RATING_METRIC_LABEL,
-  ratingMetricFromCookie,
-} from "@/constants/rating";
+import { RATING_METRIC_LABEL } from "@/constants/rating";
 import ROUTES from "@/constants/routes";
-import STORAGE from "@/constants/storage";
 import { constructMetadata } from "@/lib/metadata";
+import { getRatingMetricFromCookies } from "@/lib/rating-metric";
 import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
 import { personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@/services/db/schema";
-import {
-  cwAbsoluteStatsFromSnapshot,
-  cwChampionStatsFromSnapshot,
-  cwMiddleStatsFromSnapshot,
-  diffStats,
-  diffStrongholdStats,
-  epicStatsFromSnapshot,
-  falloutStatsFromSnapshot,
-  fortifiedStatsFromSnapshot,
-  rankedStatsFromSnapshot,
-  recordCurrentSnapshot,
-  skirmishStatsFromSnapshot,
-  statsFromSnapshot,
-} from "@/services/players";
+import { recordCurrentSnapshot } from "@/services/players";
 import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
 } from "@/services/players/clan-history";
+import {
+  buildPlayerDetail,
+  EMPTY_CLAN_HISTORY,
+} from "@/services/players/detail";
 import { inferPlayerLanguages } from "@/services/players/language-inference";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
-import { getRatingHistory } from "@/services/players/rating-history";
-import {
-  diffTanks,
-  tankSnapshotsToTankStats,
-} from "@/services/players/tanks";
+import { tankSnapshotsToTankStats } from "@/services/players/tanks";
 import { type Region, isRegion } from "@/services/wargaming/wot";
 import {
   findPlayerByNickname,
@@ -54,19 +36,7 @@ import {
   getPlayerInfo,
 } from "@/services/wargaming/wot/accounts";
 import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
 import { type TankStats, getTanksStats } from "@/services/wargaming/wot/tanks";
-
-const EMPTY_CLAN_HISTORY: PlayerClanHistoryFull = {
-  currentStint: null,
-  pastStints: [],
-  totalClans: 0,
-  timeInClansSeconds: 0,
-};
 
 const loadInitialByNickname = cache((region: Region, nickname: string) =>
   loadPlayerInitialData(region, { nickname }),
@@ -158,13 +128,6 @@ async function render(
     );
   }
 
-  // 3. Static data — cached at the service layer, cheap to await in series here.
-  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
-    span("getVehicleEncyclopedia", () => getVehicleEncyclopedia(region)),
-    span("getWN8ExpectedValues", () => getWN8ExpectedValues()),
-    span("getWNXExpectedValues", () => getWNXExpectedValues()),
-  ]);
-
   // Stale-while-revalidate: if we have a player + at least one snapshot
   // we render the page right away. Missing tanks → stats table falls back
   // to "—". Missing clanHistory → empty section. Both get backfilled via
@@ -179,35 +142,15 @@ async function render(
   );
 
   if (renderableFromCache) {
-    return await renderFromCache(
-      region,
-      accountId,
-      initial,
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
-      activeTab,
-    );
+    return await renderFromCache(region, accountId, initial, activeTab);
   }
-  return await renderFromWG(
-    region,
-    accountId,
-    initial,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
-    span,
-    activeTab,
-  );
+  return await renderFromWG(region, accountId, initial, span, activeTab);
 }
 
 async function renderFromCache(
   region: Region,
   accountId: number,
   initial: PlayerInitialData,
-  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
-  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>,
-  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>,
   activeTab: PlayerTab,
 ): Promise<React.ReactElement> {
   const player = initial.player as Player;
@@ -215,10 +158,9 @@ async function renderFromCache(
   const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
   const clanHistory = initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY;
 
-
   // If we rendered with a stub clan history, fire the real fetch in the
-  // background. LiveSync's SSE will trigger router.refresh() once it's
-  // stored and the next render will pick up the full data.
+  // background. LiveSync's SSE will trigger a refetch once it's stored and
+  // the next render will pick up the full data.
   if (!initial.clanHistory) {
     void loadPlayerClanHistoryFromWG(region, accountId)
       .then((history) => storePlayerClanHistory(region, accountId, history))
@@ -235,9 +177,6 @@ async function renderFromCache(
     tanks,
     clanHistory,
     initial,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
     activeTab,
   });
 }
@@ -246,9 +185,6 @@ async function renderFromWG(
   region: Region,
   accountId: number,
   initial: PlayerInitialData,
-  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
-  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>,
-  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>,
   span: Span,
   activeTab: PlayerTab,
 ): Promise<React.ReactElement> {
@@ -288,9 +224,6 @@ async function renderFromWG(
     tanks: fetchedTanks,
     clanHistory: fetchedClanHistory,
     initial,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
     activeTab,
   });
 }
@@ -303,136 +236,20 @@ async function buildView(args: {
   tanks: TankStats[];
   clanHistory: PlayerClanHistoryFull;
   initial: PlayerInitialData;
-  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>;
-  wn8Expected: Awaited<ReturnType<typeof getWN8ExpectedValues>>;
-  wnxExpected: Awaited<ReturnType<typeof getWNXExpectedValues>>;
   activeTab: PlayerTab;
 }): Promise<React.ReactElement> {
-  const {
-    region,
-    accountId,
-    player,
-    latest,
-    tanks,
-    clanHistory,
-    initial,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
-    activeTab,
-  } = args;
+  const { region, accountId, player, activeTab } = args;
 
-  const current = statsFromSnapshot(latest);
-  const periods = {
-    h24: initial.periodSnapshots.h24
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.h24))
-      : null,
-    d7: initial.periodSnapshots.d7
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.d7))
-      : null,
-    d30: initial.periodSnapshots.d30
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.d30))
-      : null,
-  };
-  const periodTanks = {
-    h24:
-      initial.periodTankSnapshots.h24.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.h24)
-        : null,
-    d7:
-      initial.periodTankSnapshots.d7.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.d7)
-        : null,
-    d30:
-      initial.periodTankSnapshots.d30.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.d30)
-        : null,
-  };
-
-  const skirmishCurrent = skirmishStatsFromSnapshot(latest);
-  const skirmishPeriods = {
-    h24: skirmishCurrent && initial.periodSnapshots.h24
-      ? (skirmishStatsFromSnapshot(initial.periodSnapshots.h24) !== null
-          ? diffStrongholdStats(skirmishCurrent, skirmishStatsFromSnapshot(initial.periodSnapshots.h24)!)
-          : null)
-      : null,
-    d7: skirmishCurrent && initial.periodSnapshots.d7
-      ? (skirmishStatsFromSnapshot(initial.periodSnapshots.d7) !== null
-          ? diffStrongholdStats(skirmishCurrent, skirmishStatsFromSnapshot(initial.periodSnapshots.d7)!)
-          : null)
-      : null,
-    d30: skirmishCurrent && initial.periodSnapshots.d30
-      ? (skirmishStatsFromSnapshot(initial.periodSnapshots.d30) !== null
-          ? diffStrongholdStats(skirmishCurrent, skirmishStatsFromSnapshot(initial.periodSnapshots.d30)!)
-          : null)
-      : null,
-  };
-
-  const fortifiedCurrent = fortifiedStatsFromSnapshot(latest);
-  const fortifiedPeriods = {
-    h24: fortifiedCurrent && initial.periodSnapshots.h24
-      ? (fortifiedStatsFromSnapshot(initial.periodSnapshots.h24) !== null
-          ? diffStrongholdStats(fortifiedCurrent, fortifiedStatsFromSnapshot(initial.periodSnapshots.h24)!)
-          : null)
-      : null,
-    d7: fortifiedCurrent && initial.periodSnapshots.d7
-      ? (fortifiedStatsFromSnapshot(initial.periodSnapshots.d7) !== null
-          ? diffStrongholdStats(fortifiedCurrent, fortifiedStatsFromSnapshot(initial.periodSnapshots.d7)!)
-          : null)
-      : null,
-    d30: fortifiedCurrent && initial.periodSnapshots.d30
-      ? (fortifiedStatsFromSnapshot(initial.periodSnapshots.d30) !== null
-          ? diffStrongholdStats(fortifiedCurrent, fortifiedStatsFromSnapshot(initial.periodSnapshots.d30)!)
-          : null)
-      : null,
-  };
-
-  function makeStrongholdPeriods(
-    current: ReturnType<typeof skirmishStatsFromSnapshot>,
-    fromSnap: (s: typeof latest) => ReturnType<typeof skirmishStatsFromSnapshot>,
-  ) {
-    return {
-      h24: current && initial.periodSnapshots.h24
-        ? (fromSnap(initial.periodSnapshots.h24) !== null
-            ? diffStrongholdStats(current, fromSnap(initial.periodSnapshots.h24)!)
-            : null)
-        : null,
-      d7: current && initial.periodSnapshots.d7
-        ? (fromSnap(initial.periodSnapshots.d7) !== null
-            ? diffStrongholdStats(current, fromSnap(initial.periodSnapshots.d7)!)
-            : null)
-        : null,
-      d30: current && initial.periodSnapshots.d30
-        ? (fromSnap(initial.periodSnapshots.d30) !== null
-            ? diffStrongholdStats(current, fromSnap(initial.periodSnapshots.d30)!)
-            : null)
-        : null,
-    };
-  }
-
-  const epicCurrent = epicStatsFromSnapshot(latest);
-  const epicPeriods = makeStrongholdPeriods(epicCurrent, epicStatsFromSnapshot);
-  const falloutCurrent = falloutStatsFromSnapshot(latest);
-  const falloutPeriods = makeStrongholdPeriods(falloutCurrent, falloutStatsFromSnapshot);
-  const rankedCurrent = rankedStatsFromSnapshot(latest);
-  const rankedPeriods = makeStrongholdPeriods(rankedCurrent, rankedStatsFromSnapshot);
-  const cwAbsoluteCurrent = cwAbsoluteStatsFromSnapshot(latest);
-  const cwAbsolutePeriods = makeStrongholdPeriods(cwAbsoluteCurrent, cwAbsoluteStatsFromSnapshot);
-  const cwChampionCurrent = cwChampionStatsFromSnapshot(latest);
-  const cwChampionPeriods = makeStrongholdPeriods(cwChampionCurrent, cwChampionStatsFromSnapshot);
-  const cwMiddleCurrent = cwMiddleStatsFromSnapshot(latest);
-  const cwMiddlePeriods = makeStrongholdPeriods(cwMiddleCurrent, cwMiddleStatsFromSnapshot);
-
-  const createdAt = player.createdAt ?? new Date(0);
-  const lastBattleAt = player.lastBattleAt ?? new Date(0);
-  const nowMs = Date.now();
-
-  const cookieStore = await cookies();
-  const metric = ratingMetricFromCookie(
-    cookieStore.get(STORAGE.COOKIES.RATING)?.value,
-  );
+  const metric = await getRatingMetricFromCookies();
   const metricLabel = RATING_METRIC_LABEL[metric];
-  const ratingHistory = await getRatingHistory(region, player.id, metric);
+
+  // All page data (stats grid, vehicles, lift/drag, strongholds, rating
+  // history) is assembled by the shared detail builder, the same payload the
+  // player detail endpoint serves.
+  const detail = await buildPlayerDetail({ ...args, metric });
+  const { current, clanHistory } = detail;
+  const { createdAt, lastBattleAt } = detail.player;
+  const nowMs = Date.now();
 
   const regionLabel = region.toUpperCase();
   const winrate = current.battles > 0 ? (current.wins / current.battles) * 100 : 0;
@@ -451,9 +268,6 @@ async function buildView(args: {
           description: playerDescription,
           clanName: clanHistory.currentStint?.clan.name ?? null,
         })}
-      />
-      <LiveSync
-        url={`/api/${region}/players/${encodeURIComponent(player.nickname)}/live`}
       />
       <Panel>
         <PanelContent className="p-0">
@@ -477,31 +291,9 @@ async function buildView(args: {
         basePath={ROUTES.PLAYER(region, player.nickname)}
         nickname={player.nickname}
         activeTab={activeTab}
-        overall={{
-          current,
-          periods,
-          tanks,
-          periodTanks,
-          encyclopedia,
-          wn8Expected,
-          wnxExpected,
-          ratingData: ratingHistory.points,
-          metric,
-          metricLabel,
-          clanHistory,
-          createdAt,
-          nowMs,
-        }}
-        strongholds={{
-          [PlayerTab.Skirmish]: { current: skirmishCurrent, periods: skirmishPeriods },
-          [PlayerTab.Advances]: { current: fortifiedCurrent, periods: fortifiedPeriods },
-          [PlayerTab.GrandBattles]: { current: epicCurrent, periods: epicPeriods },
-          [PlayerTab.RankedBattles]: { current: rankedCurrent, periods: rankedPeriods },
-          [PlayerTab.ClanWarsX]: { current: cwAbsoluteCurrent, periods: cwAbsolutePeriods },
-          [PlayerTab.ClanWarsVIII]: { current: cwChampionCurrent, periods: cwChampionPeriods },
-          [PlayerTab.ClanWarsVI]: { current: cwMiddleCurrent, periods: cwMiddlePeriods },
-          [PlayerTab.SteelHunter]: { current: falloutCurrent, periods: falloutPeriods },
-        }}
+        metricLabel={metricLabel}
+        nowMs={nowMs}
+        initialData={detail}
       />
     </div>
   );

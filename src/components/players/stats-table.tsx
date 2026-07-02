@@ -8,25 +8,19 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { type Stats } from "@/services/players";
+import type {
+  PeriodStats,
+  PeriodValues,
+  PlayerDerivedStats,
+} from "@/services/players/derived-stats";
 import {
-  computeAvgTier,
-  type VehicleMeta,
-} from "@/services/wargaming/wot/vehicle-meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
   RATING_COLOR_CLASS,
   type RatingColor,
   winrateColor,
-  type WN8Expected,
   wn7Color,
   wn8Color,
-  type WNXExpected,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntegerFmt = new Intl.NumberFormat("en-US", {
@@ -212,128 +206,48 @@ function PeriodCells({
   );
 }
 
-export type PeriodStats = {
-  h24: Stats | null;
-  d7: Stats | null;
-  d30: Stats | null;
-};
+type PeriodCellSet = { total: Cell; h24: Cell; d7: Cell; d30: Cell };
 
-export type PeriodTanks = {
-  h24: TankStats[] | null;
-  d7: TankStats[] | null;
-  d30: TankStats[] | null;
-};
+// Turns the server-computed numeric values into display cells, optionally
+// color-coding them with the matching rating scale.
+function cellsFrom(
+  values: PeriodValues,
+  color?: (v: number) => RatingColor,
+): PeriodCellSet {
+  const cell = (value: number | null): Cell => {
+    if (value === null) return EMPTY_CELL;
+    return {
+      primary: decimalFmt.format(value),
+      color: color ? color(value) : undefined,
+    };
+  };
+  return {
+    total: cell(values.total),
+    h24: cell(values.h24),
+    d7: cell(values.d7),
+    d30: cell(values.d30),
+  };
+}
 
 export function PlayerStatsTable({
   current,
   periods,
-  tanks,
-  periodTanks,
-  encyclopedia,
-  wn8Expected,
-  wnxExpected,
+  derived,
 }: {
   current: Stats;
   periods: PeriodStats;
-  tanks: TankStats[];
-  periodTanks: PeriodTanks;
-  encyclopedia: Record<string, VehicleMeta>;
-  wn8Expected: Map<number, WN8Expected>;
-  wnxExpected: Map<number, WNXExpected>;
+  derived: PlayerDerivedStats;
 }) {
-  function tankAvgCell(t: TankStats[] | null, fn: (t: TankStats) => number): Cell {
-    if (!t) return EMPTY_CELL;
-    const total = t.reduce((s, x) => s + fn(x), 0);
-    const battles = t.reduce((s, x) => s + x.all.battles, 0);
-    return { primary: avgOrDash(total, battles) };
-  }
-  const trackDmgCells = {
-    total: tankAvgCell(tanks, (t) => t.all.track_assisted_damage),
-    h24: tankAvgCell(periodTanks.h24, (t) => t.all.track_assisted_damage),
-    d7: tankAvgCell(periodTanks.d7, (t) => t.all.track_assisted_damage),
-    d30: tankAvgCell(periodTanks.d30, (t) => t.all.track_assisted_damage),
-  };
-  const spottingDmgCells = {
-    total: tankAvgCell(tanks, (t) => t.all.radio_assisted_damage),
-    h24: tankAvgCell(periodTanks.h24, (t) => t.all.radio_assisted_damage),
-    d7: tankAvgCell(periodTanks.d7, (t) => t.all.radio_assisted_damage),
-    d30: tankAvgCell(periodTanks.d30, (t) => t.all.radio_assisted_damage),
-  };
-  const assistingDmgCells = {
-    total: tankAvgCell(tanks, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    h24: tankAvgCell(periodTanks.h24, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    d7: tankAvgCell(periodTanks.d7, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    d30: tankAvgCell(periodTanks.d30, (t) => t.all.radio_assisted_damage + t.all.track_assisted_damage),
-  };
-  const combinedDmgCells = {
-    total: tankAvgCell(tanks, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    h24: tankAvgCell(periodTanks.h24, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    d7: tankAvgCell(periodTanks.d7, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
-    d30: tankAvgCell(periodTanks.d30, (t) => t.all.damage_dealt + t.all.radio_assisted_damage + t.all.track_assisted_damage),
-  };
-
-  function tierCellFor(t: TankStats[] | null): Cell {
-    if (!t) return EMPTY_CELL;
-    const value = computeAvgTier(t, encyclopedia);
-    if (value === null) return EMPTY_CELL;
-    return { primary: decimalFmt.format(value) };
-  }
-  const tierCells = {
-    total: tierCellFor(tanks),
-    h24: tierCellFor(periodTanks.h24),
-    d7: tierCellFor(periodTanks.d7),
-    d30: tierCellFor(periodTanks.d30),
-  };
-
-  function wn7CellFor(stats: Stats | null, periodTier: number | null): Cell {
-    if (!stats) return EMPTY_CELL;
-    const value = computeWN7(stats, periodTier);
-    if (value === null) return EMPTY_CELL;
-    return { primary: decimalFmt.format(value), color: wn7Color(value) };
-  }
-  const totalAvgTier = computeAvgTier(tanks, encyclopedia);
-  const wn7Cells = {
-    total: wn7CellFor(current, totalAvgTier),
-    h24: wn7CellFor(
-      periods.h24,
-      periodTanks.h24 ? computeAvgTier(periodTanks.h24, encyclopedia) : null,
-    ),
-    d7: wn7CellFor(
-      periods.d7,
-      periodTanks.d7 ? computeAvgTier(periodTanks.d7, encyclopedia) : null,
-    ),
-    d30: wn7CellFor(
-      periods.d30,
-      periodTanks.d30 ? computeAvgTier(periodTanks.d30, encyclopedia) : null,
-    ),
-  };
-
-  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-  function wn8CellFor(t: TankStats[] | null): Cell {
-    if (!t) return EMPTY_CELL;
-    const value = computeWN8(t, wn8Expected, encyclopedia, wn8Fallback);
-    if (value === null) return EMPTY_CELL;
-    return { primary: decimalFmt.format(value), color: wn8Color(value) };
-  }
-  const wn8Cells = {
-    total: wn8CellFor(tanks),
-    h24: wn8CellFor(periodTanks.h24),
-    d7: wn8CellFor(periodTanks.d7),
-    d30: wn8CellFor(periodTanks.d30),
-  };
-
-  function wnxCellFor(t: TankStats[] | null): Cell {
-    if (!t) return EMPTY_CELL;
-    const value = computeWNX(t, wnxExpected);
-    if (value === null) return EMPTY_CELL;
-    return { primary: decimalFmt.format(value), color: wnxColor(value) };
-  }
-  const wnxCells = {
-    total: wnxCellFor(tanks),
-    h24: wnxCellFor(periodTanks.h24),
-    d7: wnxCellFor(periodTanks.d7),
-    d30: wnxCellFor(periodTanks.d30),
-  };
+  // All tank-breakdown rows arrive pre-computed from the server (see
+  // services/players/derived-stats); this component only formats them.
+  const tierCells = cellsFrom(derived.tier);
+  const trackDmgCells = cellsFrom(derived.trackDamage);
+  const spottingDmgCells = cellsFrom(derived.spottingDamage);
+  const assistingDmgCells = cellsFrom(derived.assistingDamage);
+  const combinedDmgCells = cellsFrom(derived.combinedDamage);
+  const wn7Cells = cellsFrom(derived.wn7, wn7Color);
+  const wn8Cells = cellsFrom(derived.wn8, wn8Color);
+  const wnxCells = cellsFrom(derived.wnx, wnxColor);
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
