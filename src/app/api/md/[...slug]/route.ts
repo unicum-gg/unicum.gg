@@ -67,6 +67,10 @@ export async function GET(
 ) {
   const { slug } = await params;
   const path = slug[0] === "index" ? "" : slug.join("/");
+  // Forward the query string (e.g. `?tab=tanks`) so the rendered page matches
+  // what a `.md` link with query params asked for. The proxy rewrite preserves
+  // it on the request URL; the self-fetch would otherwise always get defaults.
+  const search = new URL(request.url).search;
 
   // Use localhost so the self-fetch never routes through Cloudflare or any
   // external network. The public URL hairpins through the CDN and fails in
@@ -77,7 +81,7 @@ export async function GET(
 
   let response: Response;
   try {
-    response = await fetch(`${origin}/${path}`, {
+    response = await fetch(`${origin}/${path}${search}`, {
       headers: { Accept: "text/html" },
       cache: "no-store",
     });
