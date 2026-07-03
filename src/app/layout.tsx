@@ -5,6 +5,7 @@ import { Figtree } from "next/font/google";
 import { BuildBanner } from "@/components/build-banner";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
+import { NavDebug } from "@/components/nav-debug";
 import { RatingMetricRoot } from "@/components/rating-metric-root";
 import { Toaster } from "@/components/ui/sonner";
 import { DEFAULT_RATING_METRIC } from "@/constants/rating";
@@ -59,6 +60,7 @@ export default async function RootLayout({
         <JsonLd data={organizationSchema()} />
         <Provider>
           <WebMcp />
+          <NavDebug />
           <RatingMetricRoot />
           <BuildBanner />
           <HomeLayout {...layoutProps}>
