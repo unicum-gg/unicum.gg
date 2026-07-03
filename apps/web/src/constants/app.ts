@@ -2,7 +2,7 @@ import { env } from "../../env";
 import pkg from "../../package.json";
 
 const APP = {
-  NAME: pkg.name,
+  NAME: "unicum.gg",
   VERSION: pkg.version,
   DESCRIPTION:
     "Free World of Tanks stats for every player and clan across EU, NA and Asia. WN8, WNX, winrate, tank progression, clan member rankings and history.",
