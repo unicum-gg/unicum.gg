@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+node_modules
 /.pnp
 .pnp.*
 .yarn/*
@@ -11,17 +11,17 @@
 !.yarn/versions
 
 # testing
-/coverage
+coverage
 
 # next.js
-/.next/
-/out/
+apps/web/.next/
+apps/web/out/
 
 # production
-/build
+apps/web/build
 
 # react-flagpack assets (copied via postinstall)
-/public/flags
+apps/web/public/flags
 
 # misc
 .DS_Store
@@ -45,5 +45,5 @@ next-env.d.ts
 .perf-trace.log
 
 # generated openapi spec + generator cache (regenerated on postinstall / predev / prebuild)
-/src/services/openapi/openapi.generated.json
-/.openapi-gen/
+apps/web/src/services/openapi/openapi.generated.json
+apps/web/.openapi-gen/

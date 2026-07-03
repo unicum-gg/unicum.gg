@@ -4,16 +4,20 @@
 This version has breaking changes. APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 <!-- END:nextjs-agent-rules -->
 
+# Monorepo layout
+
+This is a pnpm workspace (`pnpm-workspace.yaml`, `packages: ["apps/*"]`). The Next.js app lives in **`apps/web/`** (its own `package.json`, `env.ts`, `tsconfig.json`, `next.config.ts`, `drizzle/`, `src/`). The root `package.json` only holds workspace config and thin scripts that delegate to it (`pnpm --filter web ...`), so the `pnpm <cmd>` commands below still work from the repo root. **Every `src/...` path in this document is relative to `apps/web/`** unless prefixed otherwise. Future services (a standalone cron worker, shared `packages/*`) will sit beside `apps/web`.
+
 # Commands
 
 | Command | Purpose |
 |---|---|
-| `pnpm dev` | Next.js dev server. Also starts the cron loop via `src/instrumentation.ts` (snapshot, refresh, discovery). |
+| `pnpm dev` | Next.js dev server (delegates to `apps/web`). Also starts the cron loop via `src/instrumentation.ts` (snapshot, refresh, discovery). |
 | `pnpm build` / `pnpm start` | Production build / start. |
 | `pnpm lint` | ESLint. There is no test runner in the project. |
 | `pnpm env:init` | Generate `.env.local` from `env.ts`. Backs up any existing file to `.env.local.<timestamp>.bak`. |
 | `pnpm db:generate` | Drizzle-kit generate. Always review the SQL it emits (see [Database migrations](#database-migrations)). |
-| `pnpm db:migrate` | Often a no-op: the journal is out of sync with disk, so apply migrations manually via `psql "$DATABASE_URL" -f drizzle/000N_*.sql` instead. |
+| `pnpm db:migrate` | Often a no-op: the journal is out of sync with disk, so apply migrations manually via `psql "$DATABASE_URL" -f apps/web/drizzle/000N_*.sql` instead. |
 | `npx tsc --noEmit --skipLibCheck` | Type-check the project. Use this rather than `pnpm build` when iterating on types. |
 
 There is no test suite. Validation is type checking plus ESLint plus manual smoke in the browser.
@@ -27,7 +31,7 @@ The correct workflow for any schema change:
 1. Edit `src/services/db/schema/<file>.ts`
 2. `pnpm db:generate` so drizzle-kit emits a new SQL file in `drizzle/000N_*.sql`
 3. **Review the generated SQL.** If you see unexpected `DROP TABLE` on per-region tables, the factory pattern bit you again. Stop, do not apply, and write the migration by hand instead.
-4. Apply via `psql "$DATABASE_URL" -f drizzle/000N_*.sql`. Drizzle-kit tracks applied migrations in the `__drizzle_migrations` table on the DB; the `_journal.json` on disk is out of sync and is not authoritative.
+4. Apply via `psql "$DATABASE_URL" -f apps/web/drizzle/000N_*.sql`. Drizzle-kit tracks applied migrations in the `__drizzle_migrations` table on the DB; the `_journal.json` on disk is out of sync and is not authoritative.
 
 # Big picture
 
