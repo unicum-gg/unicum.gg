@@ -5,6 +5,11 @@ declare global {
 
 export async function register() {
   if (process.env.NEXT_RUNTIME !== "nodejs") return;
+  // A dedicated cron worker runs the loops; web instances set RUN_CRONS=0 so
+  // they never do cron work on the request-serving thread (the crons still hold
+  // a DB lease, so at most one instance ever executes them). Leaving it unset
+  // keeps the legacy single-process behaviour where crons run here.
+  if (process.env.RUN_CRONS === "0" || process.env.RUN_CRONS === "false") return;
   if (globalThis.__cronStarted) return;
   globalThis.__cronStarted = true;
 
