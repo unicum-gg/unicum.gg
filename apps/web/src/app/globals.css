@@ -4,6 +4,11 @@
 @import "fumadocs-ui/css/preset.css";
 @import "../styles/custom.css";
 
+/* Register the core package as a Tailwind content source. Its ratings module
+   holds the literal `bg-[#...]!` rating-color classes, and it lives outside
+   apps/web (symlinked under node_modules), which auto-detection skips. */
+@source "../../../../packages/core/src";
+
 @custom-variant dark (&:is(.dark *));
 @custom-variant data-open (&[data-state="open"]);
 @custom-variant data-closed (&[data-state="closed"]);
