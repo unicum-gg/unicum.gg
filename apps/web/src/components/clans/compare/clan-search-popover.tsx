@@ -9,7 +9,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
+import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/route";
+import { readNdjson } from "@/lib/ndjson";
 import type { Region } from "@unicum.gg/wargaming/region";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 
@@ -60,8 +61,11 @@ export function ClanSearchPopover({
           { signal: controller.signal },
         );
         if (!res.ok) return;
-        const data = (await res.json()) as ClanSearchResponse;
-        setResults(data.results);
+        let acc: ClanSearchResult[] = [];
+        await readNdjson<ClanSearchChunk>(res, (chunk) => {
+          acc = [...acc, ...chunk.results];
+          setResults(acc);
+        });
       } catch {
         // aborted or network failure, ignore
       } finally {
@@ -106,7 +110,7 @@ export function ClanSearchPopover({
         </TooltipProvider>
       ) : trigger}
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1 w-72 overflow-hidden rounded-md border border-fd-border bg-fd-popover shadow-lg">
+        <div className="absolute right-0 top-full z-50 mt-1 w-72 max-w-[calc(100vw-1rem)] overflow-hidden rounded-md border border-fd-border bg-fd-popover shadow-lg">
           <div className="flex items-center gap-2 border-b border-fd-border px-3 py-2">
             <MagnifyingGlassIcon
               className="size-4 shrink-0 text-fd-muted-foreground"
@@ -128,14 +132,16 @@ export function ClanSearchPopover({
               <div className="px-3 py-3 text-xs text-fd-muted-foreground">
                 Type at least {MIN_QUERY_LENGTH} characters.
               </div>
-            ) : loading ? (
-              <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-                Searching...
-              </div>
             ) : filtered.length === 0 ? (
-              <div className="px-3 py-3 text-xs text-fd-muted-foreground">
-                No matching clans.
-              </div>
+              loading ? (
+                <div className="px-3 py-3 text-xs text-fd-muted-foreground">
+                  Searching...
+                </div>
+              ) : (
+                <div className="px-3 py-3 text-xs text-fd-muted-foreground">
+                  No matching clans.
+                </div>
+              )
             ) : (
               filtered.map((r) => (
                 <button

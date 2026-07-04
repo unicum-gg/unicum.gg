@@ -1,4 +1,6 @@
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
+import { searchPlayersLocal } from "@unicum.gg/core/players/search-local";
+import { SearchSource } from "@unicum.gg/core/search";
 import { findPlayersByPrefix } from "@unicum.gg/core/wargaming/wot/accounts";
 import {
   getPlayerClansBatch,
@@ -15,16 +17,20 @@ export type SearchPlayerResult = {
   clan: PlayerClanInfo | null;
 };
 
-export type PlayerSearchResponse = {
+/** One NDJSON line of the streamed search response. The `local` chunk (from our
+ * database) is emitted first and near-instantly; the `remote` chunk (from the
+ * Wargaming API, deduped against local) streams in after. */
+export type PlayerSearchChunk = {
+  source: SearchSource;
   results: SearchPlayerResult[];
 };
 
 /**
  * Search players
- * @description Search players by nickname prefix (minimum 3 characters).
+ * @description Search players by nickname prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives.
  * @pathParams regionParams
  * @queryParams searchQuery
- * @response PlayerSearchResponse
+ * @response PlayerSearchChunk
  * @tag Players
  * @openapi
  */
@@ -40,33 +46,64 @@ export async function GET(
   const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
   const parsed = S.searchQuery.safeParse({ q });
   if (!parsed.success) {
-    return Response.json({ results: [] });
-  }
-
-  try {
-    const rawPlayers = await findPlayersByPrefix(region, parsed.data.q, 5);
-    const clansByAccount =
-      rawPlayers.length > 0
-        ? await getPlayerClansBatch(
-            region,
-            rawPlayers.map((p) => p.account_id),
-          )
-        : new Map<number, PlayerClanInfo>();
-
-    const results: SearchPlayerResult[] = rawPlayers.map((p) => ({
-      account_id: p.account_id,
-      nickname: p.nickname,
-      clan: clansByAccount.get(p.account_id) ?? null,
-    }));
-
-    discoverPlayersBackground(
-      region,
-      results.map((r) => ({ accountId: r.account_id, nickname: r.nickname })),
+    return new Response(
+      `${JSON.stringify({ source: SearchSource.Local, results: [] })}\n`,
+      { headers: { "content-type": "application/x-ndjson; charset=utf-8" } },
     );
-
-    return Response.json({ results });
-  } catch (err) {
-    console.error(`[api/${region}/players/search] failed:`, err);
-    return Response.json({ error: "upstream_failure" }, { status: 502 });
   }
+  const query = parsed.data.q;
+
+  const stream = new ReadableStream<Uint8Array>({
+    async start(controller) {
+      const enc = new TextEncoder();
+      const send = (chunk: PlayerSearchChunk) =>
+        controller.enqueue(enc.encode(`${JSON.stringify(chunk)}\n`));
+
+      // Fire the local DB query and the live WG lookup together; the DB nearly
+      // always wins the race, so results paint before the rate-limited WG call
+      // (which may sit behind a busy token bucket) ever returns.
+      const localP = searchPlayersLocal(region, query, 5).catch(() => []);
+      const remoteP = (async (): Promise<SearchPlayerResult[]> => {
+        const raw = await findPlayersByPrefix(region, query, 5);
+        const clans =
+          raw.length > 0
+            ? await getPlayerClansBatch(
+                region,
+                raw.map((p) => p.account_id),
+              )
+            : new Map<number, PlayerClanInfo>();
+        return raw.map((p) => ({
+          account_id: p.account_id,
+          nickname: p.nickname,
+          clan: clans.get(p.account_id) ?? null,
+        }));
+      })().catch((err) => {
+        console.error(`[api/${region}/players/search] remote failed:`, err);
+        return [] as SearchPlayerResult[];
+      });
+
+      const local = await localP;
+      send({ source: SearchSource.Local, results: local });
+
+      const seen = new Set(local.map((r) => r.account_id));
+      const remote = (await remoteP).filter((r) => !seen.has(r.account_id));
+      send({ source: SearchSource.Remote, results: remote });
+
+      discoverPlayersBackground(
+        region,
+        [...local, ...remote].map((r) => ({
+          accountId: r.account_id,
+          nickname: r.nickname,
+        })),
+      );
+      controller.close();
+    },
+  });
+
+  return new Response(stream, {
+    headers: {
+      "content-type": "application/x-ndjson; charset=utf-8",
+      "cache-control": "no-store",
+    },
+  });
 }

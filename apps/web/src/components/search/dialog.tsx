@@ -12,9 +12,9 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/sse/route";
+import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/route";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/sse/route";
+import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/route";
 import { SearchSource } from "@unicum.gg/core/search";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
@@ -34,6 +34,7 @@ import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
+import { readNdjson } from "@/lib/ndjson";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import {
@@ -44,33 +45,6 @@ import {
 
 const DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;
-
-/**
- * Read an NDJSON stream, invoking `onChunk` for each complete line as it lands.
- * The search endpoints emit a `local` (DB) chunk first, then a `remote` (WG)
- * chunk, so results paint progressively instead of blocking on the WG call.
- */
-async function readNdjson<T>(
-  res: Response,
-  onChunk: (chunk: T) => void,
-): Promise<void> {
-  const reader = res.body?.getReader();
-  if (!reader) return;
-  const decoder = new TextDecoder();
-  let buffer = "";
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    let newline = buffer.indexOf("\n");
-    while (newline >= 0) {
-      const line = buffer.slice(0, newline).trim();
-      buffer = buffer.slice(newline + 1);
-      if (line) onChunk(JSON.parse(line) as T);
-      newline = buffer.indexOf("\n");
-    }
-  }
-}
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
@@ -149,7 +123,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/players/search/sse?${qParam}`, {
+        fetch(`/api/${region}/players/search?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
@@ -180,7 +154,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/clans/search/sse?${qParam}`, {
+        fetch(`/api/${region}/clans/search?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
