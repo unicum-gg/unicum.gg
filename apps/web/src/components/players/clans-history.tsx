@@ -30,7 +30,7 @@ import type { Region } from "@unicum.gg/wargaming/region";
 import type {
   ClanStint,
   PlayerClanHistoryFull,
-} from "@/services/wargaming/wot/clans/player";
+} from "@unicum.gg/core/wargaming/wot/clans/player";
 
 function prettyRole(role: string): string {
   if (!role) return "—";

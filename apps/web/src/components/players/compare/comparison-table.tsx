@@ -10,10 +10,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { Player, PlayerSnapshot } from "@/services/db/schema";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
-import { RATING_COLOR_CLASS } from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
+import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import { RATING_COLOR_CLASS } from "@unicum.gg/core/wargaming/wot/ratings";
+import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type CompareSlot = {
   requested: string;

@@ -15,21 +15,21 @@ import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
+import { PerfTrace, currentTrace, runWithTrace } from "@unicum.gg/core/lib/perf-trace";
 import { clanSchema } from "@/lib/schema-org";
 import { loadClanDetail } from "@/services/clans/detail";
-import { getClanByTagCached } from "@/services/clans/repository";
-import { getClanTankAggregates } from "@/services/clans/repository/tanks";
+import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
+import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
 import {
   buildClanVehicleRows,
   type ClanVehicleRow,
-} from "@/services/clans/vehicles";
+} from "@unicum.gg/core/clans/vehicles";
 import { isRegion, type Region } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

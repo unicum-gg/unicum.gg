@@ -1,5 +1,5 @@
-import { ratingMetricFromCookie } from "@/constants/rating";
-import { loadPlayerDetail } from "@/services/players/detail";
+import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
+import { loadPlayerDetail } from "@unicum.gg/core/players/detail";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
 /**

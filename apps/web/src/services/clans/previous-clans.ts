@@ -1,11 +1,11 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   clanMembersByRegion,
   clansByRegion,
   playerClanHistoryByRegion,
-} from "@/services/db/schema";
+} from "@unicum.gg/core/db/schema";
 import { type Region } from "@unicum.gg/wargaming/region";
 
 export type PreviousClanRow = {

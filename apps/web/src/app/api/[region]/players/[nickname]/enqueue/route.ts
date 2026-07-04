@@ -1,7 +1,7 @@
 import { eq, sql } from "drizzle-orm";
-import { db } from "@/services/db";
-import { playerRefreshQueueByRegion, playersByRegion } from "@/services/db/schema";
-import { enqueuePlayerRefresh } from "@/services/players/refresh-queue";
+import { db } from "@unicum.gg/core/db";
+import { playerRefreshQueueByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
+import { enqueuePlayerRefresh } from "@unicum.gg/core/players/refresh-queue";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
 const LIVE_PRIORITY = 20;

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { RATING_METRIC_LABEL, RatingMetric } from "@/constants/rating";
+import { RATING_METRIC_LABEL, RatingMetric } from "@unicum.gg/core/constants/rating";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -19,7 +19,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

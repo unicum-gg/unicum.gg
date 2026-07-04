@@ -34,11 +34,11 @@ import {
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
-import type { StrongholdStats } from "@/services/players";
-import type { PlayerDerivedStats } from "@/services/players/derived-stats";
-import type { PlayerDetailData } from "@/services/players/detail";
-import type { LiftDrag } from "@/services/players/lift-drag";
-import type { PlayerVehicleRow } from "@/services/players/vehicles";
+import type { StrongholdStats } from "@unicum.gg/core/players";
+import type { PlayerDerivedStats } from "@unicum.gg/core/players/derived-stats";
+import type { PlayerDetailData } from "@unicum.gg/core/players/detail";
+import type { LiftDrag } from "@unicum.gg/core/players/lift-drag";
+import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
 import { PlayerDetailResponse } from "@/services/openapi/schemas";
 import type { Region } from "@unicum.gg/wargaming/region";
 

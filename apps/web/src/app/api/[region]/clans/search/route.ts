@@ -1,8 +1,8 @@
-import { discoverClansBackground } from "@/services/discovery/clans";
+import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import {
   findClansByPrefix,
   type ClanSearchResult,
-} from "@/services/wargaming/wot/clans/search";
+} from "@unicum.gg/core/wargaming/wot/clans/search";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming/region";
 

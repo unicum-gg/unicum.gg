@@ -11,7 +11,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RatingMetric } from "@/constants/rating";
+import { RatingMetric } from "@unicum.gg/core/constants/rating";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { getLanguageStats } from "@/services/clans/available-languages";
 import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";

@@ -10,12 +10,12 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
-import type { ClanMemberStats } from "@/services/clans/members";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans/info";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
-import { RATING_COLOR_CLASS } from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
+import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
+import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
+import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import { RATING_COLOR_CLASS } from "@unicum.gg/core/wargaming/wot/ratings";
+import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type ClanCompareSlot = {
   requested: string;

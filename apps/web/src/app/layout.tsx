@@ -8,7 +8,7 @@ import { JsonLd } from "@/components/json-ld";
 import { NavDebug } from "@/components/nav-debug";
 import { RatingMetricRoot } from "@/components/rating-metric-root";
 import { Toaster } from "@/components/ui/sonner";
-import { DEFAULT_RATING_METRIC } from "@/constants/rating";
+import { DEFAULT_RATING_METRIC } from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { baseOptions } from "@/lib/layout.shared";
 import { constructMetadata } from "@/lib/metadata";

@@ -25,6 +25,9 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
+      '@unicum.gg/core':
+        specifier: workspace:*
+        version: link:../../packages/core
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../../packages/wargaming
@@ -189,18 +192,58 @@ importers:
         specifier: ^5
         version: 5.9.3
 
+  apps/worker:
+    dependencies:
+      '@unicum.gg/core':
+        specifier: workspace:*
+        version: link:../../packages/core
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.20.0
+      tsx:
+        specifier: ^4.19.2
+        version: 4.22.4
+
+  packages/core:
+    dependencies:
+      '@t3-oss/env-core':
+        specifier: ^0.13.11
+        version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
+      '@unicum.gg/wargaming':
+        specifier: workspace:*
+        version: link:../wargaming
+      drizzle-orm:
+        specifier: ^0.45.2
+        version: 0.45.2(@opentelemetry/api@1.9.0)(postgres@3.4.9)
+      ioredis:
+        specifier: ^5.11.1
+        version: 5.11.1
+      node-cron:
+        specifier: ^4.2.1
+        version: 4.2.1
+      postgres:
+        specifier: ^3.4.9
+        version: 3.4.9
+      sanitize-html:
+        specifier: ^2.17.4
+        version: 2.17.4
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
+    devDependencies:
+      '@types/node':
+        specifier: ^22.10.5
+        version: 22.20.0
+      '@types/sanitize-html':
+        specifier: ^2.16.1
+        version: 2.16.1
+
   packages/wargaming:
     dependencies:
       fast-xml-parser:
         specifier: ^5.8.0
         version: 5.8.0
-      sanitize-html:
-        specifier: ^2.17.4
-        version: 2.17.4
-    devDependencies:
-      '@types/sanitize-html':
-        specifier: ^2.16.1
-        version: 2.16.1
 
 packages:
 
@@ -2267,6 +2310,9 @@ packages:
 
   '@types/node@20.19.41':
     resolution: {integrity: sha512-ECymXOukMnOoVkC2bb1Vc/w/836DXncOg5m8Xj1RH7xSHZJWNYY6Zh7EH477vcnD5egKNNfy2RpNOmuChhFPgQ==}
+
+  '@types/node@22.20.0':
+    resolution: {integrity: sha512-QWlFW2wf3nTjC13/DqRnBpR4ZO36VJH/JVBkA/vcnmbTBNQIlnObqyqZE1tUR7+Ni23Lda8R1BxMfbXRpCUx5g==}
 
   '@types/node@24.13.2':
     resolution: {integrity: sha512-fRa09kZTgu8o71KFcDjUFuc7F+dEbZYZmkI0mg5YBTRs0yMKjYHsq/c0urDKeDb+D5qVgXOdFcuu+DZPKOITwA==}
@@ -7586,6 +7632,10 @@ snapshots:
   '@types/node-cron@3.0.11': {}
 
   '@types/node@20.19.41':
+    dependencies:
+      undici-types: 6.21.0
+
+  '@types/node@22.20.0':
     dependencies:
       undici-types: 6.21.0
 

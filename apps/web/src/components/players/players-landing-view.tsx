@@ -10,7 +10,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RatingMetric } from "@/constants/rating";
+import { RatingMetric } from "@unicum.gg/core/constants/rating";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";

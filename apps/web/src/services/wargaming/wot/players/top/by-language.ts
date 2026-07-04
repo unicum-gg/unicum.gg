@@ -1,11 +1,11 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
   playerClanHistoryByRegion,
   playersByRegion,
-} from "@/services/db/schema";
+} from "@unicum.gg/core/db/schema";
 import { type Region } from "@unicum.gg/wargaming/region";
 
 export type TopPlayerByLanguageResult = {
@@ -30,7 +30,7 @@ const CANDIDATE_OVERSHOOT = 10000;
 // leaderboard. Below 10k WNX is statistical noise.
 const MIN_BATTLES = 10000;
 // Keep-ratio for the inference, matches `inferPlayerLanguages` in
-// `@/services/players/language-inference`. Any language scoring at least
+// `@unicum.gg/core/players/language-inference`. Any language scoring at least
 // half the player's top language survives.
 const KEEP_RATIO = 0.5;
 

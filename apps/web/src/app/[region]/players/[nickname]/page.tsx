@@ -12,36 +12,36 @@ import {
 import { PlayerTabsView } from "@/components/players/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
-import { RATING_METRIC_LABEL } from "@/constants/rating";
+import { RATING_METRIC_LABEL } from "@unicum.gg/core/constants/rating";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getRatingMetricFromCookies } from "@/lib/rating-metric";
-import { PerfTrace, currentTrace, runWithTrace } from "@/lib/perf-trace";
+import { PerfTrace, currentTrace, runWithTrace } from "@unicum.gg/core/lib/perf-trace";
 import { personSchema } from "@/lib/schema-org";
-import type { Player, PlayerSnapshot } from "@/services/db/schema";
-import { recordCurrentSnapshot } from "@/services/players";
+import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
+import { recordCurrentSnapshot } from "@unicum.gg/core/players";
 import {
   loadPlayerClanHistoryFromWG,
   storePlayerClanHistory,
-} from "@/services/players/clan-history";
+} from "@unicum.gg/core/players/clan-history";
 import {
   buildPlayerDetail,
   EMPTY_CLAN_HISTORY,
-} from "@/services/players/detail";
-import { inferPlayerLanguages } from "@/services/players/language-inference";
+} from "@unicum.gg/core/players/detail";
+import { inferPlayerLanguages } from "@unicum.gg/core/players/language-inference";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
-} from "@/services/players/initial-data";
-import { tankSnapshotsToTankStats } from "@/services/players/tanks";
+} from "@unicum.gg/core/players/initial-data";
+import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
 import { type Region, isRegion } from "@unicum.gg/wargaming/region";
 import {
   findPlayerByNickname,
   getAccountWTR,
   getPlayerInfo,
-} from "@/services/wargaming/wot/accounts";
-import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
-import { type TankStats, getTanksStats } from "@/services/wargaming/wot/tanks";
+} from "@unicum.gg/core/wargaming/wot/accounts";
+import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
+import { type TankStats, getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 const loadInitialByNickname = cache((region: Region, nickname: string) =>
   loadPlayerInitialData(region, { nickname }),

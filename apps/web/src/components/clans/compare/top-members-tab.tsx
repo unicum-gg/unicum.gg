@@ -15,19 +15,19 @@ import {
   isRatingMetric,
   RATING_METRIC_LABEL,
   RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { ClanMemberStats } from "@/services/clans/members";
+import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 import type { Region } from "@unicum.gg/wargaming/region";
 import { dec2Fmt } from "@/components/compare/cells";
 import { type ClanCompareSlot } from "./comparison-table";

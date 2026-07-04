@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import APP from "@/constants/app";
-import { botHeaders } from "@/lib/bot-headers";
+import { botHeaders } from "@unicum.gg/core/lib/bot-headers";
 import {
   intFmt,
   loadOgAssets,
@@ -11,20 +11,20 @@ import {
   pctFmt,
   RATING_BG,
 } from "@/lib/og";
-import { weightedAverage } from "@/lib/stats";
+import { weightedAverage } from "@unicum.gg/core/lib/stats";
 import {
   BrandHeaderCell,
   RegionHeaderCell,
   StatCard,
 } from "@/components/og";
-import { getClanByTagCached } from "@/services/clans/repository";
-import { getClanMembersCached } from "@/services/clans/repository/members";
+import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
+import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { isRegion } from "@unicum.gg/wargaming/region";
 import {
   overallPoints,
   d30Points,
-} from "@/services/clans/members";
-import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/clans/members";
+import { winrateColor, wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const runtime = "nodejs";
 export const alt = `World of Tanks clan on ${APP.NAME}`;

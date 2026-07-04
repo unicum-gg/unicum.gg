@@ -1,9 +1,9 @@
-import { discoverPlayersBackground } from "@/services/discovery/players";
-import { findPlayersByPrefix } from "@/services/wargaming/wot/accounts";
+import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
+import { findPlayersByPrefix } from "@unicum.gg/core/wargaming/wot/accounts";
 import {
   getPlayerClansBatch,
   type PlayerClanInfo,
-} from "@/services/wargaming/wot/clans/listings";
+} from "@unicum.gg/core/wargaming/wot/clans/listings";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming/region";
 

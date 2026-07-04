@@ -4,15 +4,15 @@ import { ClanCompareView } from "@/components/clans/compare/view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getClanByTagCached } from "@/services/clans/repository";
-import { getClanMembersCached } from "@/services/clans/repository/members";
-import { getClanTankAggregates } from "@/services/clans/repository/tanks";
+import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
+import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
+import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
 import { isRegion, type Region } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const MAX_CLANS = 4;
 const MIN_CLANS = 2;

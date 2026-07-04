@@ -3,11 +3,11 @@ import {
   DEFAULT_RATING_METRIC,
   RATING_METRICS,
   type RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 // Imported from the dependency-free `period` module (not the DB-heavy index) so
 // loading these schemas never pulls in the leaderboard logic.
-import { TopPlayersPeriod } from "@/services/wargaming/wot/players/top/period";
+import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 
 // Single source of truth for the public API surface. These Zod schemas are
 // consumed by the route handlers (runtime validation) and by the OpenAPI

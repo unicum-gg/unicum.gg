@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { type RatingMetric, ratingMetricFromCookie } from "@/constants/rating";
+import { type RatingMetric, ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 
 /**

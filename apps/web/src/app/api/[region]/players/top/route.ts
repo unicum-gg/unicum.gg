@@ -1,10 +1,10 @@
-import { ratingMetricFromCookie } from "@/constants/rating";
+import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
 import * as S from "@/services/openapi/schemas";
 import {
   getTopPlayersByMetric,
   type TopPlayersPeriod,
   type TopPlayerResult,
-} from "@/services/wargaming/wot/players/top";
+} from "@unicum.gg/core/wargaming/wot/players/top";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
 export type TopPlayersResponse = {

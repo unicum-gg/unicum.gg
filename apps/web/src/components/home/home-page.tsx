@@ -25,13 +25,13 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import { RATING_METRICS, RatingMetric } from "@/constants/rating";
+import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
 import { styles } from "@/lib/styles";
-import { getTopClansByMetricByRegions } from "@/services/wargaming/wot/clans/top";
+import { getTopClansByMetricByRegions } from "@unicum.gg/core/wargaming/wot/clans/top";
 import {
   getTopPlayersByMetricByRegions,
   TopPlayersPeriod,
-} from "@/services/wargaming/wot/players/top";
+} from "@unicum.gg/core/wargaming/wot/players/top";
 import { type Region, REGIONS } from "@unicum.gg/wargaming/region";
 
 const TOP_LIMIT = 9;

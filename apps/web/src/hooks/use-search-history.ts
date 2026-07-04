@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import STORAGE from "@/constants/storage";
 import type { Region } from "@unicum.gg/wargaming/region";
-import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 
 export type SearchHistoryItem =
   | { kind: "player"; region: Region; player: SearchPlayerResult }

@@ -30,10 +30,10 @@ import {
   isRatingMetric,
   RATING_METRIC_LABEL,
   RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   type RatingColor,
@@ -42,7 +42,7 @@ import {
   wn8Color,
   type WNXExpected,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 import { bestIndex } from "@/components/compare/cells";
 import { type CompareSlot } from "./comparison-table";
 

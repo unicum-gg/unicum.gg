@@ -1,13 +1,13 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   clanMembersByRegion,
   clansByRegion,
   playersByRegion,
-} from "@/services/db/schema";
+} from "@unicum.gg/core/db/schema";
 import { type Region } from "@unicum.gg/wargaming/region";
-import { VALID_METRIC_COLUMNS } from ".";
+import { VALID_METRIC_COLUMNS } from "@unicum.gg/core/wargaming/wot/clans/top";
 
 export type TopClanByLanguageResult = {
   clan_id: number;

@@ -36,7 +36,7 @@ import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
-import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import {
   isRegion,
   Region,

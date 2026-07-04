@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { type RatingColor, winrateColor } from "@/services/wargaming/wot/ratings";
+import { type RatingColor, winrateColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export type MetricKind = "higher" | "lower";
 

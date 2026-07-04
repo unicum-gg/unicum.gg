@@ -1,13 +1,13 @@
 import { sql } from "drizzle-orm";
 import { env } from "env";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   playerSnapshotsByRegion,
   playersByRegion,
   tankSnapshotsByRegion,
-} from "@/services/db/schema";
-import { bulkInsertTankSnapshots } from "@/services/players/tanks";
-import { getTanksStats } from "@/services/wargaming/wot/tanks";
+} from "@unicum.gg/core/db/schema";
+import { bulkInsertTankSnapshots } from "@unicum.gg/core/players/tanks";
+import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { isRegion, type Region } from "@unicum.gg/wargaming/region";
 
 const MIN_MEMBERS = 50;

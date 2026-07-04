@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {
   return (

@@ -2,20 +2,20 @@ import { after } from "next/server";
 import {
   getLatestPlayerSnapshotsByAccounts,
   recordCurrentSnapshot,
-} from "@/services/players";
+} from "@unicum.gg/core/players";
 import {
   getLatestTankSnapshotsByAccounts,
   tankSnapshotsToTankStats,
-} from "@/services/players/tanks";
+} from "@unicum.gg/core/players/tanks";
 import {
   getPlayersInfoBatch,
   type PlayerStatistics,
-} from "@/services/wargaming/wot/accounts";
+} from "@unicum.gg/core/wargaming/wot/accounts";
 import type { Region } from "@unicum.gg/wargaming/region";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@/services/wargaming/wot/vehicle-meta";
+} from "@unicum.gg/core/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -23,14 +23,11 @@ import {
   computeWNX,
   type WN8Expected,
   type WNXExpected,
-} from "@/services/wargaming/wot/ratings";
-import { getTanksStatsBatch, type TankStats } from "@/services/wargaming/wot/tanks";
+} from "@unicum.gg/core/wargaming/wot/ratings";
+import { getTanksStatsBatch, type TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import type { MemberRatings } from "@unicum.gg/core/clans/members";
 
-export type MemberRatings = {
-  wn7: number | null;
-  wn8: number | null;
-  wnx: number | null;
-};
+export type { MemberRatings };
 
 type StatsForWn7 = Pick<
   PlayerStatistics,

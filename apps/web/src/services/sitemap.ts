@@ -5,11 +5,11 @@ import {
 } from "@onruntime/next-sitemap";
 import { sql } from "drizzle-orm";
 import APP from "@/constants/app";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
   playersByRegion,
-} from "@/services/db/schema";
+} from "@unicum.gg/core/db/schema";
 import { REGIONS } from "@unicum.gg/wargaming/region";
 
 export const URLS_PER_SITEMAP = 25000;

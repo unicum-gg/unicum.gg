@@ -1,14 +1,14 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/services/db";
-import { clansByRegion } from "@/services/db/schema";
-import { getClanTankAggregates } from "@/services/clans/repository/tanks";
-import { buildClanVehicleRows } from "@/services/clans/vehicles";
+import { db } from "@unicum.gg/core/db";
+import { clansByRegion } from "@unicum.gg/core/db/schema";
+import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
+import { buildClanVehicleRows } from "@unicum.gg/core/clans/vehicles";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 /**
  * Clan vehicles

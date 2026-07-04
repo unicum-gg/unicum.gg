@@ -1,13 +1,13 @@
-import { RatingMetric } from "@/constants/rating";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
+import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
 import {
   computeWN7,
   computeWN8,
   computeWNX,
   type WN8Expected,
   type WNXExpected,
-} from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
+} from "@unicum.gg/core/wargaming/wot/ratings";
+import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type RatingContext = {
   encyclopedia: Record<string, VehicleMeta>;

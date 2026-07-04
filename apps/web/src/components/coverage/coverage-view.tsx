@@ -13,7 +13,7 @@ import { getCoverageStats } from "@/services/coverage";
 import {
   ACTIVITY_BUCKET_LABEL,
   formatCadence,
-} from "@/services/players/refresh-policy";
+} from "@unicum.gg/core/players/refresh-policy";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming/region";
 import { ChartMode, CoverageAreaChart } from "./coverage-charts";
 

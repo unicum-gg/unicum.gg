@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
 import APP from "@/constants/app";
-import { db } from "@/services/db";
+import { db } from "@unicum.gg/core/db";
 import {
   clanMembersByRegion,
   clanRecentEventsByRegion,
@@ -10,14 +10,14 @@ import {
   playerRefreshQueueByRegion,
   playerSnapshotsByRegion,
   playersByRegion,
-} from "@/services/db/schema";
+} from "@unicum.gg/core/db/schema";
 import {
   ACTIVITY_BUCKET_ORDER,
   ActivityBucket,
   activityBucketSql,
   REFRESH_CADENCE_MS,
   refreshCutoffSql,
-} from "@/services/players/refresh-policy";
+} from "@unicum.gg/core/players/refresh-policy";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 export type DailyPoint = { day: string; count: number };

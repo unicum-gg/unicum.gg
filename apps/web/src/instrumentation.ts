@@ -19,44 +19,44 @@ export async function register() {
   // hit (always after `register` resolves), pick the request pool instead.
   globalThis.__dbContext = "background";
   try {
-    const { getInstanceId } = await import("@/services/cron/lease");
+    const { getInstanceId } = await import("@unicum.gg/core/cron/lease");
     console.log(`[cron] instance ${getInstanceId()}`);
 
     const { installShutdownHandler } = await import(
-      "@/services/cron/shutdown"
+      "@unicum.gg/core/cron/shutdown"
     );
     installShutdownHandler();
 
     const { startPlayerBackfillCron } = await import(
-      "@/services/players/backfill-cron"
+      "@unicum.gg/core/players/backfill-cron"
     );
     startPlayerBackfillCron();
 
     const { startPlayerRefreshCron } = await import(
-      "@/services/players/refresh-cron"
+      "@unicum.gg/core/players/refresh-cron"
     );
     startPlayerRefreshCron();
 
     const { startClanRefreshCron } = await import(
-      "@/services/clans/refresh-cron"
+      "@unicum.gg/core/clans/refresh-cron"
     );
     startClanRefreshCron();
 
     const { startClanBackfillCron } = await import(
-      "@/services/clans/backfill-cron"
+      "@unicum.gg/core/clans/backfill-cron"
     );
     startClanBackfillCron();
 
-    const { startDiscoveryCron } = await import("@/services/discovery/cron");
+    const { startDiscoveryCron } = await import("@unicum.gg/core/discovery/cron");
     startDiscoveryCron();
 
     const { startTopClansCron } = await import(
-      "@/services/wargaming/wot/clans/top/cron"
+      "@unicum.gg/core/wargaming/wot/clans/top/cron"
     );
     startTopClansCron();
 
     const { startTopPlayersCron } = await import(
-      "@/services/wargaming/wot/players/top/cron"
+      "@unicum.gg/core/wargaming/wot/players/top/cron"
     );
     startTopPlayersCron();
   } finally {

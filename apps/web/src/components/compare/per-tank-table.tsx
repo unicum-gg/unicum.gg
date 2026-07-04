@@ -13,7 +13,7 @@ import { intFmt, type MetricCell, ratingCell } from "./cells";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 export enum SortDirection {
   Asc = "asc",

@@ -7,7 +7,7 @@ import {
   STRONGHOLD_MIN_BATTLES,
   STRONGHOLD_TIER_LABEL,
   StrongholdTier,
-} from "@/constants/stronghold";
+} from "@unicum.gg/core/constants/stronghold";
 
 function parseTier(tier: string): StrongholdTier {
   return (Object.values(StrongholdTier) as string[]).includes(tier)

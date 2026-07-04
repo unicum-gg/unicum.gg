@@ -6,7 +6,7 @@ import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route
 import { ClanRow, PlayerRow } from "@/components/search/rows";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
-import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 export type Outcome<T> =

@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 import APP from "@/constants/app";
-import { botHeaders } from "@/lib/bot-headers";
+import { botHeaders } from "@unicum.gg/core/lib/bot-headers";
 import {
   intFmt,
   loadOgAssets,
@@ -17,9 +17,9 @@ import {
   RegionHeaderCell,
   StatCard,
 } from "@/components/og";
-import { loadPlayerInitialData } from "@/services/players/initial-data";
+import { loadPlayerInitialData } from "@unicum.gg/core/players/initial-data";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
+import { winrateColor, wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const runtime = "nodejs";
 export const alt = `World of Tanks player stats on ${APP.NAME}`;

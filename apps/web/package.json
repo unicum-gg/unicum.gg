@@ -19,6 +19,7 @@
     "env:init": "tsx scripts/init-env.ts"
   },
   "dependencies": {
+    "@unicum.gg/core": "workspace:*",
     "@unicum.gg/wargaming": "workspace:*",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@onruntime/next-sitemap": "^0.9.5",

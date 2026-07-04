@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
-import { db } from "@/services/db";
-import { clansByRegion } from "@/services/db/schema";
-import { clanChannel, subscribe } from "@/services/live/pubsub";
+import { db } from "@unicum.gg/core/db";
+import { clansByRegion } from "@unicum.gg/core/db/schema";
+import { clanChannel, subscribe } from "@unicum.gg/core/live/pubsub";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
 export const dynamic = "force-dynamic";

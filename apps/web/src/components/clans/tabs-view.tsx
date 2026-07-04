@@ -33,7 +33,7 @@ import {
 } from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
 import type { ClanDetailData } from "@/services/clans/detail";
-import type { ClanVehicleRow } from "@/services/clans/vehicles";
+import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
 import {
   ClanDetailResponse,
   ClanVehiclesResponse,

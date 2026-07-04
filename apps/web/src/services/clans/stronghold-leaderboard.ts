@@ -4,9 +4,9 @@ import {
   STRONGHOLD_MIN_BATTLES,
   StrongholdSort,
   StrongholdTier,
-} from "@/constants/stronghold";
-import { db } from "@/services/db";
-import { clanSnapshotsByRegion, clansByRegion } from "@/services/db/schema";
+} from "@unicum.gg/core/constants/stronghold";
+import { db } from "@unicum.gg/core/db";
+import { clanSnapshotsByRegion, clansByRegion } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 export type StrongholdLeaderboardEntry = {

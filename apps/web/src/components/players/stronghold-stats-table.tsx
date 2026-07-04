@@ -7,8 +7,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { winrateColor, RATING_COLOR_CLASS, type RatingColor } from "@/services/wargaming/wot/ratings";
-import type { StrongholdStats } from "@/services/players";
+import { winrateColor, RATING_COLOR_CLASS, type RatingColor } from "@unicum.gg/core/wargaming/wot/ratings";
+import type { StrongholdStats } from "@unicum.gg/core/players";
 
 const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decimalFmt = new Intl.NumberFormat("en-US", {

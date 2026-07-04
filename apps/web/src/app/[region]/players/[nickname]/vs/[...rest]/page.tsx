@@ -7,14 +7,14 @@ import { constructMetadata } from "@/lib/metadata";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
-} from "@/services/players/initial-data";
-import { tankSnapshotsToTankStats } from "@/services/players/tanks";
+} from "@unicum.gg/core/players/initial-data";
+import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const MAX_PLAYERS = 4;
 const MIN_PLAYERS = 2;

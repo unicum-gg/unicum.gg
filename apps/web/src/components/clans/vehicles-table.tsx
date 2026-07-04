@@ -22,11 +22,11 @@ import {
   isRatingMetric,
   RATING_METRIC_LABEL,
   RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { ClanVehicleRow } from "@/services/clans/vehicles";
+import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -34,7 +34,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {

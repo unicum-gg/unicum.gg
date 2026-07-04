@@ -1,5 +1,5 @@
 import { env } from "env";
-import { discoverTopClanPlayers } from "@/services/discovery";
+import { discoverTopClanPlayers } from "@unicum.gg/core/discovery";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
 export async function POST(req: Request) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -12,7 +12,7 @@ import {
   wn8Color,
   type WNXExpected,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   avgCell,
   bestIndex,

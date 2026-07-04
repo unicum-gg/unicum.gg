@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { OnlinePayload } from "@/services/wargaming/wot/server/online";
+import type { OnlinePayload } from "@unicum.gg/core/wargaming/wot/server/online";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 export function usePlayersOnline(region: Region): OnlinePayload {

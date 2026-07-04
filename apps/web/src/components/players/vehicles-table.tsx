@@ -12,7 +12,7 @@ import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
   RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -34,7 +34,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import type { PlayerVehicleRow } from "@/services/players/vehicles";
+import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
 import type { Region } from "@unicum.gg/wargaming/region";
 import { masteryBadgeUrl } from "@unicum.gg/wargaming/cdn";
 import {
@@ -43,7 +43,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 enum SortColumn {
   Name = "name",

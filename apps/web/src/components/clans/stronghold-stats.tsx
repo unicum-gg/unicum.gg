@@ -10,16 +10,16 @@ import { cn } from "@/lib/utils";
 import {
   RATING_COLOR_CLASS,
   strongholdWinrateColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 import type {
   ClanStrongholdStats,
   ClanSnapshotPeriods,
-} from "@/services/clans/snapshot-stats";
+} from "@unicum.gg/core/clans/snapshot-stats";
 import {
   diffClanStrongholdStats,
   strongholdStatsFromClanSnapshot,
-} from "@/services/clans/snapshot-stats";
-import type { ClanSnapshot } from "@/services/db/schema";
+} from "@unicum.gg/core/clans/snapshot-stats";
+import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntFmt = new Intl.NumberFormat("en-US", {

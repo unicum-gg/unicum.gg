@@ -36,7 +36,7 @@ import {
   STRONGHOLD_MIN_BATTLES,
   STRONGHOLD_SORT_LABEL,
   STRONGHOLD_TIER_LABEL,
-} from "@/constants/stronghold";
+} from "@unicum.gg/core/constants/stronghold";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import ROUTES from "@/constants/routes";
 import type { Region } from "@unicum.gg/wargaming/region";
@@ -44,7 +44,7 @@ import { REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming/region";
 import {
   RATING_COLOR_CLASS,
   strongholdWinrateColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const pctFmt = new Intl.NumberFormat("en-US", {

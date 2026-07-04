@@ -1,17 +1,17 @@
 import { getPreviousClans } from "@/services/clans/previous-clans";
-import { getClanEventsCached } from "@/services/clans/repository/events";
-import { getClanMembersCached } from "@/services/clans/repository/members";
+import { getClanEventsCached } from "@unicum.gg/core/clans/repository/events";
+import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import {
   getClanSnapshotPeriods,
   getLatestClanSnapshot,
-} from "@/services/clans/snapshots";
-import type { ClanSnapshot } from "@/services/db/schema";
+} from "@unicum.gg/core/clans/snapshots";
+import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming/region";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans/info";
-import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/event-types";
-import type { ClanMemberStats } from "@/services/clans/members";
+import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
+import type { ClanRecentEvent } from "@unicum.gg/core/wargaming/wot/clans/event-types";
+import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
 import type { PreviousClanRow } from "./previous-clans";
-import type { ClanSnapshotPeriods } from "./snapshot-stats";
+import type { ClanSnapshotPeriods } from "@unicum.gg/core/clans/snapshot-stats";
 
 // The clan detail resource: everything the clan page and the
 // `GET /api/[region]/clans/[tag]` endpoint expose. Consumed client-side (via

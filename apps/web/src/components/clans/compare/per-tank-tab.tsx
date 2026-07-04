@@ -30,11 +30,11 @@ import {
   isRatingMetric,
   RATING_METRIC_LABEL,
   RatingMetric,
-} from "@/constants/rating";
+} from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import type { ClanTankAggregate } from "@/services/clans/repository/tanks";
-import type { VehicleMeta } from "@/services/wargaming/wot/vehicle-meta";
+import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
 import {
   buildWN8Fallback,
   type RatingColor,
@@ -43,8 +43,8 @@ import {
   wn8Color,
   type WNXExpected,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
-import type { TankStats } from "@/services/wargaming/wot/tanks";
+} from "@unicum.gg/core/wargaming/wot/ratings";
+import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { bestIndex } from "@/components/compare/cells";
 import {
   type ClanCompareSlot,

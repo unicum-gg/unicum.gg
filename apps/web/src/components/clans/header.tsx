@@ -9,15 +9,15 @@ import { PortalLinkButton } from "@/components/portal-link-button";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { weightedAverage } from "@/lib/stats";
+import { weightedAverage } from "@unicum.gg/core/lib/stats";
 import { cn } from "@/lib/utils";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans/info";
+import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import {
   type ClanMemberStats,
   ClanRole,
   overallPoints,
   d30Points,
-} from "@/services/clans/members";
+} from "@unicum.gg/core/clans/members";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -25,7 +25,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@/services/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/ratings";
 import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming/region";
 
 const DAY_FORMAT = "MMM d, yyyy";
