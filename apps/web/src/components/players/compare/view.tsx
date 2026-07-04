@@ -17,7 +17,7 @@ import {
   type WN8Expected,
   type WNXExpected,
 } from "@/services/wargaming/wot/ratings";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import { BucketTab } from "./bucket-tab";
 import { OverallTab } from "./overall-tab";
 import { PerTankTab } from "./per-tank-tab";

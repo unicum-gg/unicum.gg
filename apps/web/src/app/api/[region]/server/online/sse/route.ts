@@ -1,4 +1,4 @@
-import { isRegion, Region } from "@/services/wargaming/wot";
+import { isRegion, Region } from "@unicum.gg/wargaming/region";
 import { fetchPlayersOnline, type OnlinePayload } from "@/services/wargaming/wot/server/online";
 
 export const dynamic = "force-dynamic";

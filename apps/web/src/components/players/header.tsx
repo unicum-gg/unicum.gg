@@ -10,7 +10,7 @@ import { RelativeTime } from "@/components/relative-time";
 import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { REGION_WOT_HOST, type Region } from "@/services/wargaming/wot";
+import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming/region";
 import type { ClanStint } from "@/services/wargaming/wot/clans/player";
 
 const MONTH_FORMAT = "MMM yyyy";

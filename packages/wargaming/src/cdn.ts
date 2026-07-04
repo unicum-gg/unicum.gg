@@ -1,4 +1,4 @@
-import { Region } from ".";
+import { Region } from "./region";
 
 // Per-region wgcdn portal hosts. EU and NA follow `<region>-wotp`; ASIA is
 // served from Singapore via `sg-wotp`. All three host the same assets.

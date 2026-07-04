@@ -1,8 +1,8 @@
 import { eq, inArray } from "drizzle-orm";
 import { db } from "@/services/db";
 import { clansByRegion, playerClanHistoryByRegion } from "@/services/db/schema";
-import type { Region } from "@/services/wargaming/wot";
-import { getClansShortRefBatch } from "@/services/wargaming/wot/clans";
+import type { Region } from "@unicum.gg/wargaming/region";
+import { getClansShortRefBatch } from "@/services/wargaming/wot/clans/info";
 import {
   type ClanRef,
   type ClanStint,

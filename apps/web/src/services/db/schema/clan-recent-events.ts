@@ -7,7 +7,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@/services/wargaming/wot";
+import { Region } from "@unicum.gg/wargaming/region";
 
 export function makeClanRecentEventsTable(region: string) {
   return pgTable(

@@ -1,6 +1,6 @@
 import { db } from "@/services/db";
 import { playersByRegion } from "@/services/db/schema";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const EPOCH = new Date(0);
 const CHUNK_SIZE = 500;

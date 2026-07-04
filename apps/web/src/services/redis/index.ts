@@ -18,6 +18,31 @@ export type RedisPubSub = { publisher: Redis; subscriber: Redis };
 declare global {
   // undefined = not resolved yet; null = resolved to "no Redis configured".
   var __redisPubSub: RedisPubSub | null | undefined;
+  var __redisClient: Redis | null | undefined;
+}
+
+/**
+ * A shared general-purpose command connection (distinct from the pub/sub pair,
+ * whose subscriber can't issue ordinary commands). Backs the WG SDK's cross-
+ * instance cache + rate-limit stores. Null when `REDIS_URL` is unset → callers
+ * fall back to in-process behaviour.
+ */
+export function getRedisClient(): Redis | null {
+  if (globalThis.__redisClient !== undefined) return globalThis.__redisClient;
+
+  const url = env.REDIS_URL;
+  if (!url) {
+    globalThis.__redisClient = null;
+    return null;
+  }
+
+  // This connection sits in the WG hot path (cache + rate-limit on every call),
+  // so commands fail fast (2s) rather than queueing forever — the stores treat
+  // an error as a miss / no-limit so a Redis blip never stalls WG traffic.
+  const client = new Redis(url, { maxRetriesPerRequest: 2, commandTimeout: 2_000 });
+  client.on("error", (err) => console.error("[redis] client error:", err.message));
+  globalThis.__redisClient = client;
+  return globalThis.__redisClient;
 }
 
 export function getRedisPubSub(): RedisPubSub | null {

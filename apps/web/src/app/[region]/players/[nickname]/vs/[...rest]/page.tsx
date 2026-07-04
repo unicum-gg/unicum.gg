@@ -9,7 +9,7 @@ import {
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
 import { tankSnapshotsToTankStats } from "@/services/players/tanks";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,

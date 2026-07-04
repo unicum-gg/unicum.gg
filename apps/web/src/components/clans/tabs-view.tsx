@@ -38,7 +38,7 @@ import {
   ClanDetailResponse,
   ClanVehiclesResponse,
 } from "@/services/openapi/schemas";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

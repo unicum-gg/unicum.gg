@@ -10,7 +10,7 @@ import {
   clansByRegion,
   playersByRegion,
 } from "@/services/db/schema";
-import { REGIONS } from "@/services/wargaming/wot";
+import { REGIONS } from "@unicum.gg/wargaming/region";
 
 export const URLS_PER_SITEMAP = 25000;
 
@@ -32,7 +32,7 @@ export function createSitemapEntry(
   };
 }
 
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 export type RegionCounts = Record<Region, { clans: number; players: number }>;
 

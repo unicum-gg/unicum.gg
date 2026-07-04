@@ -3,7 +3,7 @@ import { db } from "@/services/db";
 import { clansByRegion } from "@/services/db/schema";
 import { getClanTankAggregates } from "@/services/clans/repository/tanks";
 import { buildClanVehicleRows } from "@/services/clans/vehicles";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 import { getVehicleEncyclopedia } from "@/services/wargaming/wot/encyclopedia";
 import {
   getWN8ExpectedValues,

@@ -6,7 +6,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { styles } from "@/lib/styles";
-import { Region } from "@/services/wargaming/wot";
+import { Region } from "@unicum.gg/wargaming/region";
 import { FooterCoverageLink } from "./footer-coverage-link";
 
 export function Footer() {

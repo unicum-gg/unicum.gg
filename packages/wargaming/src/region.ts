@@ -24,6 +24,12 @@ export function regionFromPathname(
   return isRegion(segment) ? segment : null;
 }
 
+export const REGION_API_HOST: Record<Region, string> = {
+  [Region.EU]: "api.worldoftanks.eu",
+  [Region.NA]: "api.worldoftanks.com",
+  [Region.ASIA]: "api.worldoftanks.asia",
+};
+
 export const REGION_PORTAL_HOST: Record<Region, string> = {
   [Region.EU]: "eu.wargaming.net",
   [Region.NA]: "na.wargaming.net",

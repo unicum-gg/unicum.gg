@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { db } from "@/services/db";
 import { clansByRegion } from "@/services/db/schema";
 import { enqueueClanRefresh } from "@/services/clans/refresh-queue";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 /**
  * Enqueue clan refresh

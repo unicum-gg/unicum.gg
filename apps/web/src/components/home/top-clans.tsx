@@ -40,7 +40,7 @@ import {
   Region,
   REGION_EMOJI,
   REGION_LABEL,
-} from "@/services/wargaming/wot";
+} from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

@@ -4,7 +4,7 @@ import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import { RatingMetric } from "@/constants/rating";
 import { cn } from "@/lib/utils";
 import type { LiftDrag, LiftDragRow } from "@/services/players/lift-drag";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   RATING_COLOR_CLASS,
   wn7Color,

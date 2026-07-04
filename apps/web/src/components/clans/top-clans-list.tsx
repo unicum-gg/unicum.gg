@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   RATING_COLOR_CLASS,
   wn7Color,

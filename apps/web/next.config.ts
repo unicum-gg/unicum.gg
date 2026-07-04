@@ -33,6 +33,8 @@ const AGENT_DISCOVERY_LINK =
   '</docs>; rel="service-doc"';
 
 const nextConfig: NextConfig = {
+  // Workspace packages ship TypeScript source; Next transpiles them.
+  transpilePackages: ["@unicum.gg/wargaming"],
   ...(BUILD_ID
     ? {
         generateBuildId: async () => BUILD_ID,

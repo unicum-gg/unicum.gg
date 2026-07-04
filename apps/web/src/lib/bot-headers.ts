@@ -1,5 +1,5 @@
 import APP from "@/constants/app";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 /**
  * Identification headers attached to every outbound HTTP request so

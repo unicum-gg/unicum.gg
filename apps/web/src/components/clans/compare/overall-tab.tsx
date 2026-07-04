@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import { LanguageFlags } from "@/components/language-flags";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import { weightedAverage, type WeightedDataPoint } from "@/lib/stats";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
+import type { ClanMemberStats } from "@/services/clans/members";
 import {
   wn7Color,
   wn8Color,

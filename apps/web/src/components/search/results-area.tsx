@@ -7,7 +7,7 @@ import { ClanRow, PlayerRow } from "@/components/search/rows";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 export type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }

@@ -1,24 +1,6 @@
-import type { Region } from "@/services/wargaming/wot";
-import { wgFetch } from "@/services/wargaming/wot/fetch";
-import { type Emblems, pickEmblem } from ".";
-
-export async function findClanIdByTag(
-  region: Region,
-  tag: string,
-): Promise<number | null> {
-  const result = await wgFetch<Array<{ clan_id: number; tag: string }>>(
-    region,
-    "/wot/clans/list/",
-    {
-      search: tag,
-      limit: "20",
-      fields: "clan_id,tag",
-    },
-  );
-  const upper = tag.toUpperCase();
-  const match = result.find((c) => c.tag.toUpperCase() === upper);
-  return match?.clan_id ?? null;
-}
+import type { Region } from "@unicum.gg/wargaming/region";
+import { wg } from "../../client";
+import { pickEmblem } from "./info";
 
 export type ClanSearchResult = {
   clan_id: number;
@@ -29,29 +11,37 @@ export type ClanSearchResult = {
   emblem: string | null;
 };
 
-type RawClanSearchResult = {
-  clan_id: number;
-  tag: string;
-  name: string;
-  color: string;
-  members_count: number;
-  emblems: Emblems;
+const SEARCH_FIELDS = [
+  "clan_id",
+  "tag",
+  "name",
+  "color",
+  "members_count",
+  "emblems",
+] as const;
+
+/** Resolve a clan tag to its id via exact-tag search. */
+export const findClanIdByTag = async (region: Region, tag: string): Promise<number | null> => {
+  const results = await wg.region(region).api.wot.clans.list({
+    search: tag,
+    limit: 20,
+    fields: ["clan_id", "tag"],
+  });
+  const upper = tag.toUpperCase();
+  return results.find((c) => c.tag.toUpperCase() === upper)?.clan_id ?? null;
 };
 
-export async function findClansByPrefix(
+/** Prefix search by tag/name. */
+export const findClansByPrefix = async (
   region: Region,
   prefix: string,
   limit = 10,
-): Promise<ClanSearchResult[]> {
-  const raw = await wgFetch<RawClanSearchResult[]>(
-    region,
-    "/wot/clans/list/",
-    {
-      search: prefix,
-      limit: String(limit),
-      fields: "clan_id,tag,name,color,members_count,emblems",
-    },
-  );
+): Promise<ClanSearchResult[]> => {
+  const raw = await wg.region(region).api.wot.clans.list({
+    search: prefix,
+    limit,
+    fields: SEARCH_FIELDS,
+  });
   return raw.map((c) => ({
     clan_id: c.clan_id,
     tag: c.tag,
@@ -60,4 +50,4 @@ export async function findClansByPrefix(
     members_count: c.members_count,
     emblem: pickEmblem(c.emblems) || null,
   }));
-}
+};

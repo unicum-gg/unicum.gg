@@ -19,11 +19,11 @@ import {
 } from "@/components/og";
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanMembersCached } from "@/services/clans/repository/members";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 import {
   overallPoints,
   d30Points,
-} from "@/services/wargaming/wot/clans/members";
+} from "@/services/clans/members";
 import { winrateColor, wnxColor } from "@/services/wargaming/wot/ratings";
 
 export const runtime = "nodejs";

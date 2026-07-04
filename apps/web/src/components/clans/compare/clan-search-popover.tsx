@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import type { ClanSearchResult } from "@/services/wargaming/wot/clans/search";
 
 const SEARCH_DEBOUNCE_MS = 250;

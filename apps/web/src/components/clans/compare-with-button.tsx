@@ -3,7 +3,7 @@
 import { ArrowsLeftRightIcon } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import { ClanSearchPopover } from "./compare/clan-search-popover";
 
 export function CompareWithButton({

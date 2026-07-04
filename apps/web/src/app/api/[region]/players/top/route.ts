@@ -5,7 +5,7 @@ import {
   type TopPlayersPeriod,
   type TopPlayerResult,
 } from "@/services/wargaming/wot/players/top";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 export type TopPlayersResponse = {
   results: TopPlayerResult[];

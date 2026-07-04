@@ -20,7 +20,7 @@ import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
+import type { ClanMemberStats } from "@/services/clans/members";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -28,7 +28,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import { dec2Fmt } from "@/components/compare/cells";
 import { type ClanCompareSlot } from "./comparison-table";
 

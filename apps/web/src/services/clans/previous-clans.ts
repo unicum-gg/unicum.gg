@@ -6,7 +6,7 @@ import {
   clansByRegion,
   playerClanHistoryByRegion,
 } from "@/services/db/schema";
-import { type Region } from "@/services/wargaming/wot";
+import { type Region } from "@unicum.gg/wargaming/region";
 
 export type PreviousClanRow = {
   clanId: number;

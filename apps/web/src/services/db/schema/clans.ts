@@ -8,7 +8,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { Region } from "@/services/wargaming/wot";
+import { Region } from "@unicum.gg/wargaming/region";
 
 export function makeClansTable(region: string) {
   return pgTable(

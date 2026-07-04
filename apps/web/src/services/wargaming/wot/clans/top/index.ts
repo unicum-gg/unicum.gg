@@ -6,7 +6,7 @@ import {
   topClansByRegion,
 } from "@/services/db/schema";
 import { getClansBriefInfo } from "@/services/wargaming/wot/clans/listings";
-import { type Region } from "@/services/wargaming/wot";
+import { type Region } from "@unicum.gg/wargaming/region";
 
 export type TopClanResult = {
   clan_id: number;

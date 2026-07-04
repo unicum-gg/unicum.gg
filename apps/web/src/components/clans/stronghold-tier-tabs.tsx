@@ -3,7 +3,7 @@ import { Panel, PanelHeader } from "@/components/panel";
 import ROUTES from "@/constants/routes";
 import { STRONGHOLD_TIER_LABEL, StrongholdTier } from "@/constants/stronghold";
 import { cn } from "@/lib/utils";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 function tabClass(active: boolean): string {
   return cn(

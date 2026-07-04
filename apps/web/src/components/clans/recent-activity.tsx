@@ -12,7 +12,7 @@ import {
   ClanEventType,
   type ClanRecentEvent,
 } from "@/services/wargaming/wot/clans/event-types";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 function prettyRole(role: string): string {
   if (!role) return "—";

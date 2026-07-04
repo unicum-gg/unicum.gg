@@ -1,4 +1,4 @@
-import type { TankStats } from "./tanks";
+import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 // Pure, db-free vehicle metadata shape and helpers. Kept apart from
 // `encyclopedia.ts` (which imports `db`) so client components can pull

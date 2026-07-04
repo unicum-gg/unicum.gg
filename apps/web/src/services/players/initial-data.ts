@@ -10,7 +10,7 @@ import {
   playersByRegion,
   tankSnapshotsByRegion,
 } from "@/services/db/schema";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import type { PlayerClanHistoryFull } from "@/services/wargaming/wot/clans/player";
 import {
   type SerializedClanHistory,

@@ -1,7 +1,7 @@
 import { db } from "@/services/db";
 import { type NewVehicle, vehiclesByRegion } from "@/services/db/schema";
-import { Region } from ".";
-import { fetchVehicleCatalog } from "./wotsrc";
+import { Region } from "@unicum.gg/wargaming/region";
+import { fetchVehicleCatalog } from "@/services/wargaming/wot/wotsrc";
 import type { VehicleMeta } from "./vehicle-meta";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process

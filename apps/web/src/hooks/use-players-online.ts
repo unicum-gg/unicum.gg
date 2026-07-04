@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { OnlinePayload } from "@/services/wargaming/wot/server/online";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 export function usePlayersOnline(region: Region): OnlinePayload {
   const [payload, setPayload] = useState<OnlinePayload>(null);

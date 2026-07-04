@@ -1,18 +1,8 @@
-import type { Region } from "@/services/wargaming/wot";
-import { wgFetch } from "@/services/wargaming/wot/fetch";
-import { type Emblems, pickEmblem } from ".";
+import type { Region } from "@unicum.gg/wargaming/region";
+import { wg } from "../../client";
+import { type ClanRef, pickEmblem } from "./info";
 
-export type ClanRef = {
-  id: number;
-  tag: string;
-  name: string;
-  color: string;
-  emblem: string;
-  // Empty `[]` when this ref was produced by the public WG API (which doesn't
-  // expose languages). The clan-history resolver enriches it from our local
-  // `clans` table when the clan is known there.
-  languages: string[];
-};
+export type { ClanRef } from "./info";
 
 export type ClanStint = {
   clan: ClanRef;
@@ -22,6 +12,14 @@ export type ClanStint = {
   roleLocalized: string;
 };
 
+/** A past clan membership as returned by `clans/memberhistory` (app-shaped). */
+export type RawClanMemberStint = {
+  clanId: number;
+  role: string;
+  joinedAt: Date;
+  leftAt: Date;
+};
+
 export type PlayerClanHistoryFull = {
   currentStint: ClanStint | null;
   pastStints: ClanStint[];
@@ -29,39 +27,25 @@ export type PlayerClanHistoryFull = {
   timeInClansSeconds: number;
 };
 
+const ACCOUNT_CLAN_FIELDS = [
+  "joined_at",
+  "role",
+  "role_i18n",
+  "clan.clan_id",
+  "clan.tag",
+  "clan.name",
+  "clan.color",
+  "clan.emblems",
+] as const;
 
-type AccountInfoEntry = {
-  joined_at: number;
-  role: string;
-  role_i18n: string;
-  clan: {
-    clan_id: number;
-    tag: string;
-    name: string;
-    color: string;
-    emblems: Emblems;
-  };
-} | null;
-
-/**
- * Returns the player's current clan as a stint, or null if they are not in
- * a clan. Single public API call to `/wot/clans/accountinfo/` — replaces a
- * direct portal hit that was Cloudflare-blocked from many networks.
- */
-export async function getPlayerCurrentClan(
+/** Player's current clan as a stint (`/wot/clans/accountinfo/`), or null. */
+export const getPlayerCurrentClan = async (
   region: Region,
   accountId: number,
-): Promise<ClanStint | null> {
-  const data = await wgFetch<Record<string, AccountInfoEntry>>(
-    region,
-    "/wot/clans/accountinfo/",
-    {
-      account_id: String(accountId),
-      fields:
-        "joined_at,role,role_i18n,clan.clan_id,clan.tag,clan.name,clan.color,clan.emblems",
-    },
-  );
-  const entry = data[String(accountId)];
+): Promise<ClanStint | null> => {
+  const entry = await wg
+    .region(region)
+    .api.wot.clans.accountinfo({ accountId, fields: ACCOUNT_CLAN_FIELDS });
   if (!entry?.clan) return null;
   return {
     clan: {
@@ -70,8 +54,6 @@ export async function getPlayerCurrentClan(
       name: entry.clan.name,
       color: entry.clan.color,
       emblem: pickEmblem(entry.clan.emblems),
-      // Public API doesn't expose languages; clan-history will enrich
-      // from the local clans table when the clan is known.
       languages: [],
     },
     joinedAt: new Date(entry.joined_at * 1000),
@@ -79,42 +61,18 @@ export async function getPlayerCurrentClan(
     role: entry.role,
     roleLocalized: entry.role_i18n,
   };
-}
-
-export type RawClanMemberStint = {
-  clanId: number;
-  role: string;
-  joinedAt: Date;
-  leftAt: Date;
 };
 
-type RawMemberHistoryEntry = {
-  role: string;
-  left_at: number;
-  clan_id: number;
-  joined_at: number;
-};
-
-/**
- * Past clan stints only — current membership is intentionally absent from
- * this endpoint. Returned in WG order (most-recent first). Clan refs are not
- * embedded; resolve via the `clans` table or `getClansShortRefBatch`.
- */
-export async function getPlayerClanMemberHistory(
+/** Past clan stints (`/wot/clans/memberhistory/`), most-recent first. */
+export const getPlayerClanMemberHistory = async (
   region: Region,
   accountId: number,
-): Promise<RawClanMemberStint[]> {
-  const data = await wgFetch<Record<string, RawMemberHistoryEntry[] | null>>(
-    region,
-    "/wot/clans/memberhistory/",
-    { account_id: String(accountId) },
-  );
-  const entries = data[String(accountId)];
-  if (!entries) return [];
+): Promise<RawClanMemberStint[]> => {
+  const entries = await wg.region(region).api.wot.clans.memberhistory({ accountId });
   return entries.map((e) => ({
     clanId: e.clan_id,
     role: e.role,
     joinedAt: new Date(e.joined_at * 1000),
     leftAt: new Date(e.left_at * 1000),
   }));
-}
+};

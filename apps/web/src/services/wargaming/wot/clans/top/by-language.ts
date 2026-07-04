@@ -6,7 +6,7 @@ import {
   clansByRegion,
   playersByRegion,
 } from "@/services/db/schema";
-import { type Region } from "@/services/wargaming/wot";
+import { type Region } from "@unicum.gg/wargaming/region";
 import { VALID_METRIC_COLUMNS } from ".";
 
 export type TopClanByLanguageResult = {

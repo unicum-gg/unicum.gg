@@ -1,6 +1,6 @@
 import { ratingMetricFromCookie } from "@/constants/rating";
 import { loadPlayerDetail } from "@/services/players/detail";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 /**
  * Player detail

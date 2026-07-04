@@ -1,6 +1,6 @@
 import { botHeaders } from "@/lib/bot-headers";
 import type { VehicleMeta } from "./vehicle-meta";
-import type { TankStats } from "./tanks";
+import type { TankStats } from "@/services/wargaming/wot/tanks";
 
 export enum RatingColor {
   VeryBad = "veryBad",

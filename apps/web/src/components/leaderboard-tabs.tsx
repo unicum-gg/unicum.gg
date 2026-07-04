@@ -1,7 +1,7 @@
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 /**
  * Cross-link between `/clans` and `/players`. Same language and strict

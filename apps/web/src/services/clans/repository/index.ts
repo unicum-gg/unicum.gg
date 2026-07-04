@@ -2,12 +2,12 @@ import { eq, sql } from "drizzle-orm";
 import { db } from "@/services/db";
 import { type Clan, clansByRegion } from "@/services/db/schema";
 import { clanChannel, publish } from "@/services/live/pubsub";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   type ClanFullInfo,
   getClanFullInfo,
   getClansFullInfoBatch,
-} from "@/services/wargaming/wot/clans";
+} from "@/services/wargaming/wot/clans/info";
 import { findClanIdByTag } from "@/services/wargaming/wot/clans/search";
 
 function clanFullInfoFromRow(row: Clan): ClanFullInfo {

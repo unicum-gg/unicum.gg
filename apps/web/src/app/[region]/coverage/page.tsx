@@ -4,7 +4,7 @@ import { CoverageView } from "@/components/coverage/coverage-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { isRegion, Region, REGION_LABEL } from "@/services/wargaming/wot";
+import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
 
 export async function generateMetadata({
   params,

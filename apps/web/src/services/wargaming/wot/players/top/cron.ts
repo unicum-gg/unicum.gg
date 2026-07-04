@@ -3,7 +3,7 @@ import { RATING_METRICS } from "@/constants/rating";
 import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { topPlayersByRegion } from "@/services/db/schema";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 import { computeTopPlayersAllMetrics, TopPlayersPeriod } from ".";
 
 const SCHEDULE = "0 * * * *";

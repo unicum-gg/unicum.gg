@@ -5,7 +5,7 @@ import {
   pgTable,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@/services/wargaming/wot";
+import { Region } from "@unicum.gg/wargaming/region";
 
 // Refresh queue for clans. Mirrors player_refresh_queue: the refresh-cron
 // drains by priority desc then queued_at asc. Higher priority = newer user

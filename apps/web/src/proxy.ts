@@ -4,7 +4,7 @@ import {
   isRegion,
   Region,
   regionFromPathname,
-} from "@/services/wargaming/wot";
+} from "@unicum.gg/wargaming/region";
 
 const PATHNAME_HEADER = "x-pathname";
 const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;

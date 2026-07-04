@@ -40,7 +40,7 @@ import type { PlayerDetailData } from "@/services/players/detail";
 import type { LiftDrag } from "@/services/players/lift-drag";
 import type { PlayerVehicleRow } from "@/services/players/vehicles";
 import { PlayerDetailResponse } from "@/services/openapi/schemas";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

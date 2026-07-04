@@ -5,7 +5,7 @@ import {
   StrongholdTier,
   TIER_SORT_OPTIONS,
 } from "@/constants/stronghold";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const LIMIT = 100;
 

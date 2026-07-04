@@ -25,6 +25,9 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: ^0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
+      '@unicum.gg/wargaming':
+        specifier: workspace:*
+        version: link:../../packages/wargaming
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -185,6 +188,19 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+
+  packages/wargaming:
+    dependencies:
+      fast-xml-parser:
+        specifier: ^5.8.0
+        version: 5.8.0
+      sanitize-html:
+        specifier: ^2.17.4
+        version: 2.17.4
+    devDependencies:
+      '@types/sanitize-html':
+        specifier: ^2.16.1
+        version: 2.16.1
 
 packages:
 

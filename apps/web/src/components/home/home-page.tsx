@@ -32,7 +32,7 @@ import {
   getTopPlayersByMetricByRegions,
   TopPlayersPeriod,
 } from "@/services/wargaming/wot/players/top";
-import { type Region, REGIONS } from "@/services/wargaming/wot";
+import { type Region, REGIONS } from "@unicum.gg/wargaming/region";
 
 const TOP_LIMIT = 9;
 const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {

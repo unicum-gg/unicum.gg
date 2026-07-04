@@ -11,7 +11,7 @@ import {
   getPlayersInfoBatch,
   type PlayerStatistics,
 } from "@/services/wargaming/wot/accounts";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   computeAvgTier,
   type VehicleMeta,

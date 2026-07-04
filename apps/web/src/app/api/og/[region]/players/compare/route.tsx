@@ -14,7 +14,7 @@ import {
   ratingFmt,
 } from "@/lib/og";
 import { loadPlayerInitialData } from "@/services/players/initial-data";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 import { wnxColor } from "@/services/wargaming/wot/ratings";
 
 export const runtime = "nodejs";

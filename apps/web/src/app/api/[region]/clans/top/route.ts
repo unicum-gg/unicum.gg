@@ -4,7 +4,7 @@ import {
   getTopClansByMetric,
   type TopClanResult,
 } from "@/services/wargaming/wot/clans/top";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 export type TopClansResponse = {
   results: TopClanResult[];

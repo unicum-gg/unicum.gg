@@ -13,7 +13,7 @@ import {
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

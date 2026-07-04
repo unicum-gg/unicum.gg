@@ -35,8 +35,8 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { PlayerVehicleRow } from "@/services/players/vehicles";
-import type { Region } from "@/services/wargaming/wot";
-import { masteryBadgeUrl } from "@/services/wargaming/wot/cdn";
+import type { Region } from "@unicum.gg/wargaming/region";
+import { masteryBadgeUrl } from "@unicum.gg/wargaming/cdn";
 import {
   RATING_COLOR_CLASS,
   winrateColor,

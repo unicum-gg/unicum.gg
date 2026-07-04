@@ -5,7 +5,7 @@ import {
   sitemapConfig,
   URLS_PER_SITEMAP,
 } from "@/services/sitemap";
-import { REGIONS } from "@/services/wargaming/wot";
+import { REGIONS } from "@unicum.gg/wargaming/region";
 
 // Static-first, stale-while-revalidate on a 1h window. The pre-built XML
 // serves every hit instantly; the first hit after 1h triggers a background

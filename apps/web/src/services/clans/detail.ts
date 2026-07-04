@@ -6,10 +6,10 @@ import {
   getLatestClanSnapshot,
 } from "@/services/clans/snapshots";
 import type { ClanSnapshot } from "@/services/db/schema";
-import type { Region } from "@/services/wargaming/wot";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
+import type { Region } from "@unicum.gg/wargaming/region";
+import type { ClanFullInfo } from "@/services/wargaming/wot/clans/info";
 import type { ClanRecentEvent } from "@/services/wargaming/wot/clans/event-types";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
+import type { ClanMemberStats } from "@/services/clans/members";
 import type { PreviousClanRow } from "./previous-clans";
 import type { ClanSnapshotPeriods } from "./snapshot-stats";
 

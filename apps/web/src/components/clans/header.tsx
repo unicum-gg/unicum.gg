@@ -11,13 +11,13 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { weightedAverage } from "@/lib/stats";
 import { cn } from "@/lib/utils";
-import type { ClanFullInfo } from "@/services/wargaming/wot/clans";
+import type { ClanFullInfo } from "@/services/wargaming/wot/clans/info";
 import {
   type ClanMemberStats,
   ClanRole,
   overallPoints,
   d30Points,
-} from "@/services/wargaming/wot/clans/members";
+} from "@/services/clans/members";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -26,7 +26,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@/services/wargaming/wot/ratings";
-import { REGION_PORTAL_HOST, type Region } from "@/services/wargaming/wot";
+import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming/region";
 
 const DAY_FORMAT = "MMM d, yyyy";
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

@@ -16,8 +16,8 @@ import {
 } from "@/lib/og";
 import { getClanByTagCached } from "@/services/clans/repository";
 import { getClanMembersCached } from "@/services/clans/repository/members";
-import { isRegion } from "@/services/wargaming/wot";
-import { overallPoints } from "@/services/wargaming/wot/clans/members";
+import { isRegion } from "@unicum.gg/wargaming/region";
+import { overallPoints } from "@/services/clans/members";
 import { wnxColor } from "@/services/wargaming/wot/ratings";
 
 export const runtime = "nodejs";

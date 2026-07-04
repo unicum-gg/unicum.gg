@@ -2,11 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   defaultTankIconUrl,
   tankIconUrl,
-} from "@/services/wargaming/wot/cdn";
+} from "@unicum.gg/wargaming/cdn";
 
 export function TankIcon({
   region,

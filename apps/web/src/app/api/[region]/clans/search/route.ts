@@ -4,7 +4,7 @@ import {
   type ClanSearchResult,
 } from "@/services/wargaming/wot/clans/search";
 import * as S from "@/services/openapi/schemas";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 export const dynamic = "force-dynamic";
 

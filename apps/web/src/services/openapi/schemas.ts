@@ -4,7 +4,7 @@ import {
   RATING_METRICS,
   type RatingMetric,
 } from "@/constants/rating";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 // Imported from the dependency-free `period` module (not the DB-heavy index) so
 // loading these schemas never pulls in the leaderboard logic.
 import { TopPlayersPeriod } from "@/services/wargaming/wot/players/top/period";

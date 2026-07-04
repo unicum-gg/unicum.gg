@@ -8,13 +8,13 @@ import {
 } from "@/services/db/schema";
 import { discoverPlayersBackground } from "@/services/discovery/players";
 import { clanChannel, publish } from "@/services/live/pubsub";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   type ClanMemberPeriodStats,
   type ClanMemberStats,
   type ClanRole,
   getClanMembersStats,
-} from "@/services/wargaming/wot/clans/members";
+} from "@/services/clans/members";
 import { dedup, STALE_AFTER_MS } from "./internal";
 
 type PlayerRatings = {
@@ -269,7 +269,19 @@ export async function refreshClanMembers(
     members.map((m) => ({ accountId: m.accountId, nickname: m.name })),
   );
   publish(clanChannel(region, clanId), { kind: "members" });
-  return members;
+  // Ratings are computed from tank snapshots elsewhere (the cron path is the
+  // single source of truth); the freshly-fetched portal members carry none, so
+  // surface them as null to match the enriched ClanMemberStats shape.
+  return members.map((m) => ({
+    ...m,
+    wn7: null,
+    wn8: null,
+    wnx: null,
+    wn730d: null,
+    wn830d: null,
+    wnx30d: null,
+    battles30d: null,
+  }));
 }
 
 function refreshClanMembersInBackground(region: Region, clanId: number): void {

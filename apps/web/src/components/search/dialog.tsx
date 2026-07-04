@@ -41,7 +41,7 @@ import {
   isRegion,
   Region,
   regionFromPathname,
-} from "@/services/wargaming/wot";
+} from "@unicum.gg/wargaming/region";
 
 const DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;

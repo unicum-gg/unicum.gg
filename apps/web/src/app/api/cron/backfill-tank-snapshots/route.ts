@@ -8,7 +8,7 @@ import {
 } from "@/services/db/schema";
 import { bulkInsertTankSnapshots } from "@/services/players/tanks";
 import { getTanksStats } from "@/services/wargaming/wot/tanks";
-import { isRegion, type Region } from "@/services/wargaming/wot";
+import { isRegion, type Region } from "@unicum.gg/wargaming/region";
 
 const MIN_MEMBERS = 50;
 const CONCURRENCY = 5;

@@ -5,7 +5,7 @@ import {
   playerRefreshQueueByRegion,
   playersByRegion,
 } from "@/services/db/schema";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 import {
   getAccountWTR,
   getPlayerInfo,

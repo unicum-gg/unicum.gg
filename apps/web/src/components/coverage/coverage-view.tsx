@@ -14,7 +14,7 @@ import {
   ACTIVITY_BUCKET_LABEL,
   formatCadence,
 } from "@/services/players/refresh-policy";
-import { Region, REGION_EMOJI, REGION_LABEL } from "@/services/wargaming/wot";
+import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming/region";
 import { ChartMode, CoverageAreaChart } from "./coverage-charts";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

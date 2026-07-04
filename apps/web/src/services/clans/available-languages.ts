@@ -6,7 +6,7 @@ import {
   playerSnapshotsByRegion,
   playersByRegion,
 } from "@/services/db/schema";
-import { type Region } from "@/services/wargaming/wot";
+import { type Region } from "@unicum.gg/wargaming/region";
 
 // Matches `MIN_MEMBERS_BY_LANGUAGE` in
 // `wargaming/wot/clans/top/by-language.ts` and the equivalent guard in

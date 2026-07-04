@@ -2,7 +2,7 @@ import { asc, desc } from "drizzle-orm";
 import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { clanRefreshQueueByRegion } from "@/services/db/schema";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 import { recordClanSnapshot } from "./snapshots";
 import { dequeueClanRefresh } from "./refresh-queue";
 import { refreshClansByIdsBatch } from "./repository";

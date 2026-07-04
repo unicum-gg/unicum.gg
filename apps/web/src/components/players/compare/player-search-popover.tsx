@@ -13,7 +13,7 @@ import type {
   PlayerSearchResponse,
   SearchPlayerResult,
 } from "@/app/api/[region]/players/search/route";
-import type { Region } from "@/services/wargaming/wot";
+import type { Region } from "@unicum.gg/wargaming/region";
 
 const SEARCH_DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;

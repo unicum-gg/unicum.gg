@@ -1,6 +1,22 @@
-import type { Region } from ".";
-import { WargamingApiError, wgFetch } from "./fetch";
+import type { Region } from "@unicum.gg/wargaming/region";
+import { wg } from "../client";
 
+/** The per-tank fields this app surfaces (WN8/WNX inputs + mastery). */
+const TANK_STATS_FIELDS = [
+  "tank_id",
+  "mark_of_mastery",
+  "all.battles",
+  "all.damage_dealt",
+  "all.spotted",
+  "all.frags",
+  "all.dropped_capture_points",
+  "all.wins",
+  "all.radio_assisted_damage",
+  "all.track_assisted_damage",
+  "all.xp",
+] as const;
+
+/** The curated per-tank shape the app consumes (a narrow slice of the WG response). */
 export type TankStats = {
   tank_id: number;
   mark_of_mastery: number | null;
@@ -17,98 +33,11 @@ export type TankStats = {
   };
 };
 
-const TANK_STATS_FIELDS = [
-  "tank_id",
-  "mark_of_mastery",
-  "all.battles",
-  "all.damage_dealt",
-  "all.spotted",
-  "all.frags",
-  "all.dropped_capture_points",
-  "all.wins",
-  "all.radio_assisted_damage",
-  "all.track_assisted_damage",
-  "all.xp",
-].join(",");
+export const getTanksStats = (region: Region, accountId: number): Promise<TankStats[]> =>
+  wg.region(region).api.wot.tanks.stats({ accountId, fields: TANK_STATS_FIELDS });
 
-export async function getTanksStats(
-  region: Region,
-  accountId: number,
-): Promise<TankStats[]> {
-  const data = await wgFetch<Record<string, TankStats[] | null>>(
-    region,
-    "/wot/tanks/stats/",
-    {
-      account_id: String(accountId),
-      fields: TANK_STATS_FIELDS,
-    },
-  );
-  return data[String(accountId)] ?? [];
-}
-
-const TANKS_STATS_BATCH_SIZE = 25;
-
-async function fetchTanksStatsChunk(
-  region: Region,
-  ids: number[],
-  out: Map<number, TankStats[]>,
-): Promise<void> {
-  if (ids.length === 0) return;
-  try {
-    const data = await wgFetch<Record<string, TankStats[] | null>>(
-      region,
-      "/wot/tanks/stats/",
-      {
-        account_id: ids.join(","),
-        fields: TANK_STATS_FIELDS,
-      },
-    );
-    for (const [id, tanks] of Object.entries(data)) {
-      out.set(Number(id), tanks ?? []);
-    }
-  } catch (err) {
-    // WG rejects the WHOLE chunk if any account_id is invalid (deleted/banned).
-    // Bisect to isolate the bad one. Single bad id → just skip it.
-    if (
-      err instanceof WargamingApiError &&
-      err.code === "INVALID_ACCOUNT_ID" &&
-      ids.length > 1
-    ) {
-      const mid = Math.floor(ids.length / 2);
-      await Promise.all([
-        fetchTanksStatsChunk(region, ids.slice(0, mid), out),
-        fetchTanksStatsChunk(region, ids.slice(mid), out),
-      ]);
-      return;
-    }
-    if (
-      err instanceof WargamingApiError &&
-      err.code === "INVALID_ACCOUNT_ID"
-    ) {
-      // single bad id → silently drop it
-      return;
-    }
-    throw err;
-  }
-}
-
-export async function getTanksStatsBatch(
+export const getTanksStatsBatch = (
   region: Region,
   accountIds: number[],
-): Promise<Map<number, TankStats[]>> {
-  const out = new Map<number, TankStats[]>();
-  const unique = Array.from(new Set(accountIds));
-  const chunks: number[][] = [];
-  for (let i = 0; i < unique.length; i += TANKS_STATS_BATCH_SIZE) {
-    chunks.push(unique.slice(i, i + TANKS_STATS_BATCH_SIZE));
-  }
-  const results = await Promise.allSettled(
-    chunks.map((batch) => fetchTanksStatsChunk(region, batch, out)),
-  );
-  for (const res of results) {
-    if (res.status === "rejected") {
-      console.error("[tanks-stats-batch] chunk failed:", res.reason);
-    }
-  }
-  return out;
-}
+): Promise<Map<number, TankStats[]>> =>
+  wg.region(region).api.wot.tanks.statsBatch({ accountIds, fields: TANK_STATS_FIELDS });

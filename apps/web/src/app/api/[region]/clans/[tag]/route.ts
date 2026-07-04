@@ -1,6 +1,6 @@
 import { loadClanDetail } from "@/services/clans/detail";
 import { getClanByTagCached } from "@/services/clans/repository";
-import { isRegion } from "@/services/wargaming/wot";
+import { isRegion } from "@unicum.gg/wargaming/region";
 
 /**
  * Clan detail

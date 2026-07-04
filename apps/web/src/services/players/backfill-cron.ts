@@ -2,7 +2,7 @@ import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
 import { scheduleCron } from "@/services/cron/scheduler";
 import { db } from "@/services/db";
 import { type Player, playersByRegion } from "@/services/db/schema";
-import { REGIONS, type Region } from "@/services/wargaming/wot";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 import {
   getAccountsWTRBatch,
   getPlayersInfoBatch,

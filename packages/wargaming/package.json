@@ -1,0 +1,12 @@
+{
+  "name": "@unicum.gg/wargaming",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.8.0"
+  }
+}

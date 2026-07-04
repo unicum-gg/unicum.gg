@@ -18,8 +18,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { ClanMemberStats } from "@/services/wargaming/wot/clans/members";
-import type { Region } from "@/services/wargaming/wot";
+import type { ClanMemberStats } from "@/services/clans/members";
+import type { Region } from "@unicum.gg/wargaming/region";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,

@@ -6,7 +6,7 @@ import {
   playerClanHistoryByRegion,
   playersByRegion,
 } from "@/services/db/schema";
-import { type Region } from "@/services/wargaming/wot";
+import { type Region } from "@unicum.gg/wargaming/region";
 
 export type TopPlayerByLanguageResult = {
   account_id: number;

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { StrongholdLeaderboardPage } from "@/components/clans/stronghold-leaderboard-page";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { Region, REGION_LABEL } from "@/services/wargaming/wot";
+import { Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
 import {
   STRONGHOLD_MIN_BATTLES,
   STRONGHOLD_TIER_LABEL,

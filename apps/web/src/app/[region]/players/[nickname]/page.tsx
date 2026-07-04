@@ -34,7 +34,7 @@ import {
   loadPlayerInitialData,
 } from "@/services/players/initial-data";
 import { tankSnapshotsToTankStats } from "@/services/players/tanks";
-import { type Region, isRegion } from "@/services/wargaming/wot";
+import { type Region, isRegion } from "@unicum.gg/wargaming/region";
 import {
   findPlayerByNickname,
   getAccountWTR,
