@@ -88,10 +88,19 @@ export type ClanMembersCached = {
   refreshing: boolean;
 };
 
+/** Per-member figures the WG API roster does not carry, sourced from our own
+ * player data: lifetime `overall` (latest snapshot), `personalRating` (that
+ * snapshot's global rating) and `lastBattleTime` (players row). */
+type MemberSnapshotData = {
+  overall: ClanMemberPeriodStats;
+  personalRating: number | null;
+  lastBattleTime: Date | null;
+};
+
 async function periodStatsFromSnapshotsForAccounts(
   region: Region,
   accountIds: number[],
-): Promise<Map<number, ClanMemberPeriodStats>> {
+): Promise<Map<number, MemberSnapshotData>> {
   if (accountIds.length === 0) return new Map();
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
@@ -101,6 +110,7 @@ async function periodStatsFromSnapshotsForAccounts(
       id: players.id,
       accountId: players.accountId,
       createdAt: players.createdAt,
+      lastBattleAt: players.lastBattleAt,
     })
     .from(players)
     .where(inArray(players.accountId, accountIds));
@@ -116,6 +126,7 @@ async function periodStatsFromSnapshotsForAccounts(
       damageDealt: playerSnapshots.damageDealt,
       frags: playerSnapshots.frags,
       xp: playerSnapshots.xp,
+      globalRating: playerSnapshots.globalRating,
     })
     .from(playerSnapshots)
     .where(inArray(playerSnapshots.playerId, playerIds))
@@ -126,7 +137,7 @@ async function periodStatsFromSnapshotsForAccounts(
     if (!latestByPlayer.has(s.playerId)) latestByPlayer.set(s.playerId, s);
   }
 
-  const out = new Map<number, ClanMemberPeriodStats>();
+  const out = new Map<number, MemberSnapshotData>();
   const now = Date.now();
   for (const p of playerRows) {
     const s = latestByPlayer.get(p.id);
@@ -137,12 +148,16 @@ async function periodStatsFromSnapshotsForAccounts(
       ? Math.max(1, Math.floor((now - created) / 86_400_000))
       : null;
     out.set(Number(p.accountId), {
-      battles: s.battles,
-      winsPercentage: (s.wins / s.battles) * 100,
-      damagePerBattle: Number(s.damageDealt) / s.battles,
-      expPerBattle: Number(s.xp) / s.battles,
-      fragsPerBattle: s.frags / s.battles,
-      battlesPerDay: days ? s.battles / days : 0,
+      overall: {
+        battles: s.battles,
+        winsPercentage: (s.wins / s.battles) * 100,
+        damagePerBattle: Number(s.damageDealt) / s.battles,
+        expPerBattle: Number(s.xp) / s.battles,
+        fragsPerBattle: s.frags / s.battles,
+        battlesPerDay: days ? s.battles / days : 0,
+      },
+      personalRating: s.globalRating ?? null,
+      lastBattleTime: p.lastBattleAt ?? null,
     });
   }
   return out;
@@ -161,7 +176,7 @@ async function enrichMissingOverall(
   if (byAccount.size === 0) return members;
   return members.map((m) =>
     m.overall === null && byAccount.has(m.accountId)
-      ? { ...m, overall: byAccount.get(m.accountId) ?? null }
+      ? { ...m, overall: byAccount.get(m.accountId)?.overall ?? null }
       : m,
   );
 }
@@ -232,7 +247,25 @@ export async function refreshClanMembers(
   clanId: number,
 ): Promise<ClanMemberStats[]> {
   const clanMembers = clanMembersByRegion[region];
-  const members = await getClanMembersStats(region, clanId);
+  // Roster (names, roles, join dates) comes from the batchable WG API; the
+  // per-member lifetime figures the API omits are backfilled from our own
+  // player snapshots so we never touch the 1 RPS clan portal for members.
+  const roster = await getClanMembersStats(region, clanId);
+  const snapshotData = await periodStatsFromSnapshotsForAccounts(
+    region,
+    roster.map((m) => m.accountId),
+  );
+  const members = roster.map((m) => {
+    const d = snapshotData.get(m.accountId);
+    return d
+      ? {
+          ...m,
+          overall: d.overall,
+          personalRating: d.personalRating,
+          lastBattleTime: d.lastBattleTime,
+        }
+      : m;
+  });
   await db.transaction(async (tx) => {
     await tx.delete(clanMembers).where(eq(clanMembers.clanId, clanId));
     if (members.length > 0) {
