@@ -27,9 +27,11 @@ import {
 import { isRegion, type Region } from "@unicum.gg/wargaming/region";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
 import {
+} from "@unicum.gg/core/wargaming/wot/ratings";
+import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+} from "@unicum.gg/core/wargaming/wot/wn-expected";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
