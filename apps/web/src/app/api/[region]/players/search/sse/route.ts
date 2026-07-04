@@ -1,5 +1,6 @@
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { searchPlayersLocal } from "@unicum.gg/core/players/search-local";
+import { SearchSource } from "@unicum.gg/core/search";
 import { findPlayersByPrefix } from "@unicum.gg/core/wargaming/wot/accounts";
 import {
   getPlayerClansBatch,
@@ -15,7 +16,7 @@ export const dynamic = "force-dynamic";
  * emitted first and near-instantly; `remote` (from the WG API, deduped against
  * local) streams in after. */
 export type PlayerSearchChunk = {
-  source: "local" | "remote";
+  source: SearchSource;
   results: SearchPlayerResult[];
 };
 
@@ -37,9 +38,12 @@ export async function GET(
   const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
   const parsed = S.searchQuery.safeParse({ q });
   if (!parsed.success) {
-    return new Response(`${JSON.stringify({ source: "local", results: [] })}\n`, {
-      headers: { "content-type": "application/x-ndjson; charset=utf-8" },
-    });
+    return new Response(
+      `${JSON.stringify({ source: SearchSource.Local, results: [] })}\n`,
+      {
+        headers: { "content-type": "application/x-ndjson; charset=utf-8" },
+      },
+    );
   }
   const query = parsed.data.q;
 
@@ -73,11 +77,11 @@ export async function GET(
       });
 
       const local = await localP;
-      send({ source: "local", results: local });
+      send({ source: SearchSource.Local, results: local });
 
       const seen = new Set(local.map((r) => r.account_id));
       const remote = (await remoteP).filter((r) => !seen.has(r.account_id));
-      send({ source: "remote", results: remote });
+      send({ source: SearchSource.Remote, results: remote });
 
       discoverPlayersBackground(
         region,

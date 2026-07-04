@@ -15,6 +15,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/sse/route";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/sse/route";
+import { SearchSource } from "@unicum.gg/core/search";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
   type Outcome,
@@ -164,7 +165,7 @@ export default function SearchDialog(props: SharedProps) {
                 results: acc,
                 forQuery: trimmedQuery,
               });
-              if (chunk.source === "local") setActiveIndex(0);
+              if (chunk.source === SearchSource.Local) setActiveIndex(0);
             });
           })
           .catch((err) => {
@@ -195,7 +196,7 @@ export default function SearchDialog(props: SharedProps) {
                 results: acc,
                 forQuery: trimmedQuery,
               });
-              if (chunk.source === "local") setActiveIndex(0);
+              if (chunk.source === SearchSource.Local) setActiveIndex(0);
             });
           })
           .catch((err) => {
