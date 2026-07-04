@@ -12,11 +12,9 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ClanSearchResponse } from "@/app/api/[region]/clans/search/route";
-import type {
-  PlayerSearchResponse,
-  SearchPlayerResult,
-} from "@/app/api/[region]/players/search/route";
+import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/sse/route";
+import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
+import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/sse/route";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
   type Outcome,
@@ -45,6 +43,33 @@ import {
 
 const DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;
+
+/**
+ * Read an NDJSON stream, invoking `onChunk` for each complete line as it lands.
+ * The search endpoints emit a `local` (DB) chunk first, then a `remote` (WG)
+ * chunk, so results paint progressively instead of blocking on the WG call.
+ */
+async function readNdjson<T>(
+  res: Response,
+  onChunk: (chunk: T) => void,
+): Promise<void> {
+  const reader = res.body?.getReader();
+  if (!reader) return;
+  const decoder = new TextDecoder();
+  let buffer = "";
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let newline = buffer.indexOf("\n");
+    while (newline >= 0) {
+      const line = buffer.slice(0, newline).trim();
+      buffer = buffer.slice(newline + 1);
+      if (line) onChunk(JSON.parse(line) as T);
+      newline = buffer.indexOf("\n");
+    }
+  }
+}
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
@@ -123,7 +148,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/players/search?${qParam}`, {
+        fetch(`/api/${region}/players/search/sse?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
@@ -131,13 +156,16 @@ export default function SearchDialog(props: SharedProps) {
               setPlayersOutcome({ status: "error", forQuery: trimmedQuery });
               return;
             }
-            const body = (await res.json()) as PlayerSearchResponse;
-            setPlayersOutcome({
-              status: "ok",
-              results: body.results,
-              forQuery: trimmedQuery,
+            let acc: SearchPlayerResult[] = [];
+            await readNdjson<PlayerSearchChunk>(res, (chunk) => {
+              acc = [...acc, ...chunk.results];
+              setPlayersOutcome({
+                status: "ok",
+                results: acc,
+                forQuery: trimmedQuery,
+              });
+              if (chunk.source === "local") setActiveIndex(0);
             });
-            setActiveIndex(0);
           })
           .catch((err) => {
             if (err?.name === "AbortError") return;
@@ -151,7 +179,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/clans/search?${qParam}`, {
+        fetch(`/api/${region}/clans/search/sse?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
@@ -159,13 +187,16 @@ export default function SearchDialog(props: SharedProps) {
               setClansOutcome({ status: "error", forQuery: trimmedQuery });
               return;
             }
-            const body = (await res.json()) as ClanSearchResponse;
-            setClansOutcome({
-              status: "ok",
-              results: body.results,
-              forQuery: trimmedQuery,
+            let acc: ClanSearchResult[] = [];
+            await readNdjson<ClanSearchChunk>(res, (chunk) => {
+              acc = [...acc, ...chunk.results];
+              setClansOutcome({
+                status: "ok",
+                results: acc,
+                forQuery: trimmedQuery,
+              });
+              if (chunk.source === "local") setActiveIndex(0);
             });
-            setActiveIndex(0);
           })
           .catch((err) => {
             if (err?.name === "AbortError") return;
