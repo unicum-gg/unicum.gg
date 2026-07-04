@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   bigint,
   boolean,
@@ -38,6 +39,11 @@ export function makeClansTable(region: string) {
     (t) => [
       uniqueIndex(`${region}_clans_tag_lower_idx`).on(t.tagLower),
       index(`${region}_clans_last_refreshed_at_idx`).on(t.lastRefreshedAt),
+      // Tag prefix search (search dialog). `text_pattern_ops` makes
+      // `tag_lower LIKE 'x%'` a range scan regardless of DB collation.
+      index(`${region}_clans_tag_prefix_idx`).on(
+        sql`${t.tagLower} text_pattern_ops`,
+      ),
     ],
   );
 }

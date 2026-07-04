@@ -69,6 +69,12 @@ export function makePlayersTable(region: string) {
       // Case-insensitive nickname lookup powers the /<region>/players/<nickname>
       // page. Without it, every page load full-scans the ~1.5M EU rows.
       index(`${region}_players_lower_nickname_idx`).on(sql`LOWER(${t.nickname})`),
+      // Nickname prefix search (search dialog). `text_pattern_ops` makes
+      // `LOWER(nickname) LIKE 'x%'` a range scan regardless of DB collation, so
+      // the local-first search never scans the ~2M rows.
+      index(`${region}_players_nickname_prefix_idx`).on(
+        sql`LOWER(${t.nickname}) text_pattern_ops`,
+      ),
     ],
   );
 }
