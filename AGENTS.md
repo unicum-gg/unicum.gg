@@ -6,13 +6,20 @@ This version has breaking changes. APIs, conventions, and file structure may all
 
 # Monorepo layout
 
-This is a pnpm workspace (`pnpm-workspace.yaml`, `packages: ["apps/*"]`). The Next.js app lives in **`apps/web/`** (its own `package.json`, `env.ts`, `tsconfig.json`, `next.config.ts`, `drizzle/`, `src/`). The root `package.json` only holds workspace config and thin scripts that delegate to it (`pnpm --filter web ...`), so the `pnpm <cmd>` commands below still work from the repo root. **Every `src/...` path in this document is relative to `apps/web/`** unless prefixed otherwise. Future services (a standalone cron worker, shared `packages/*`) will sit beside `apps/web`.
+This is a pnpm workspace (`pnpm-workspace.yaml`, `packages: ["apps/*", "packages/*"]`) with four members:
+
+- **`apps/web/`** — the Next.js frontend (its own `package.json`, `env.ts`, `tsconfig.json`, `next.config.ts`, `drizzle/`, `src/`). Keeps only web-specific code: `app/`, `components/`, `hooks/`, `contexts/`, plus the render-only services that use `next` APIs (`unstable_cache`/`after`): `services/{clans,players}/available-languages`, `clans/{detail,previous-clans,stronghold-leaderboard}`, `wargaming/wot/{clans/ratings, clans/top/by-language, players/top/by-language}`, `coverage`, `openapi`, `swr`, `mcp`, `sitemap`.
+- **`apps/worker/`** — a standalone Node (`tsx`, no build) cron runner. `src/index.ts` sets `__dbContext = "background"`, installs the shutdown handler, and starts the seven cron groups (the same sequence the web's `instrumentation.ts` used to run). Deployed as its own Coolify service; the web sets `RUN_CRONS=0` so only the worker executes crons.
+- **`packages/core/`** (`@unicum.gg/core`) — all the backend + shared code, consumed via subpath exports (`@unicum.gg/core/db`, `/players`, `/clans`, `/discovery`, `/redis`, `/live`, `/cron`, `/wargaming/…`, `/lib/…`, `/constants/…`, `/env`). This is where nearly every former `src/services/*` lives now, plus `env` (via `@t3-oss/env-core`), the pure `lib/*`, and `constants/{rating,stronghold}`. Its `package.json` `exports` lists each folder-with-index explicitly (Turbopack's resolver ignores the array-fallback wildcard, so `@unicum.gg/core/db` etc. need explicit `"./db": "./src/db/index.ts"` entries).
+- **`packages/wargaming/`** (`@unicum.gg/wargaming`) — the neutral, publishable WG SDK (see [Wargaming SDK](#wargaming-sdk)).
+
+The root `package.json` holds workspace config + thin scripts that delegate to `apps/web` (`pnpm --filter @unicum.gg/web ...`), so the `pnpm <cmd>` commands below run from the repo root. **Paths in this document that begin `src/...` are relative to `apps/web/`; backend code they refer to has usually moved to `packages/core/src/...` under the matching subpath** (e.g. `services/players/backfill-cron.ts` → `packages/core/src/players/backfill-cron.ts`, imported as `@unicum.gg/core/players/backfill-cron`).
 
 # Commands
 
 | Command | Purpose |
 |---|---|
-| `pnpm dev` | Next.js dev server (delegates to `apps/web`). Also starts the cron loop via `src/instrumentation.ts` (snapshot, refresh, discovery). |
+| `pnpm dev` | Next.js dev server (delegates to `apps/web`). Runs the cron loop in-process via `src/instrumentation.ts` unless `RUN_CRONS=0`/`SKIP_CRONS=true`. In prod the crons run in `apps/worker` instead — `pnpm --filter @unicum.gg/worker dev` runs that standalone. |
 | `pnpm build` / `pnpm start` | Production build / start. |
 | `pnpm lint` | ESLint. There is no test runner in the project. |
 | `pnpm env:init` | Generate `.env.local` from `env.ts`. Backs up any existing file to `.env.local.<timestamp>.bak`. |
@@ -24,11 +31,11 @@ There is no test suite. Validation is type checking plus ESLint plus manual smok
 
 # Database migrations
 
-**NEVER suggest or run `pnpm db:push` (= `drizzle-kit push`).** The script is intentionally poisoned in `package.json` and will fail loudly. Reason: our `src/services/db/schema/*.ts` files use a `makeXxxTable(region)` factory pattern (e.g. `playersByRegion = { eu: makePlayersTable("eu"), ... }`). Drizzle-Kit's AST analyzer only detects top-level `pgTable(...)` exports and cannot see tables hidden inside factory call bodies. `db:push` therefore concludes that every `eu_*`/`na_*`/`asia_*` table is orphan and emits `DROP TABLE ... CASCADE` for all of them. **This has already wiped the production DB once. Don't do it twice.**
+**NEVER suggest or run `pnpm db:push` (= `drizzle-kit push`).** The script is intentionally poisoned in `package.json` and will fail loudly. Reason: our `packages/core/src/db/schema/*.ts` files use a `makeXxxTable(region)` factory pattern (e.g. `playersByRegion = { eu: makePlayersTable("eu"), ... }`). Drizzle-Kit's AST analyzer only detects top-level `pgTable(...)` exports and cannot see tables hidden inside factory call bodies. `db:push` therefore concludes that every `eu_*`/`na_*`/`asia_*` table is orphan and emits `DROP TABLE ... CASCADE` for all of them. **This has already wiped the production DB once. Don't do it twice.**
 
 The correct workflow for any schema change:
 
-1. Edit `src/services/db/schema/<file>.ts`
+1. Edit `packages/core/src/db/schema/<file>.ts`
 2. `pnpm db:generate` so drizzle-kit emits a new SQL file in `drizzle/000N_*.sql`
 3. **Review the generated SQL.** If you see unexpected `DROP TABLE` on per-region tables, the factory pattern bit you again. Stop, do not apply, and write the migration by hand instead.
 4. Apply via `psql "$DATABASE_URL" -f apps/web/drizzle/000N_*.sql`. Drizzle-kit tracks applied migrations in the `__drizzle_migrations` table on the DB; the `_journal.json` on disk is out of sync and is not authoritative.
@@ -37,32 +44,29 @@ The correct workflow for any schema change:
 
 ## Per-region table factory
 
-`src/services/db/schema/*.ts` exports `makeXxxTable(region)` factories rather than top-level `pgTable(...)` calls. Every domain table physically exists three times (`eu_*`, `na_*`, `asia_*`). Consumers index into a `Record<Region, Table>` map (e.g. `playersByRegion[region]`). See the migration section above for the consequences.
+`packages/core/src/db/schema/*.ts` exports `makeXxxTable(region)` factories rather than top-level `pgTable(...)` calls. Every domain table physically exists three times (`eu_*`, `na_*`, `asia_*`). Consumers index into a `Record<Region, Table>` map (e.g. `playersByRegion[region]`). See the migration section above for the consequences.
 
 ## Cron loop
 
-Crons start from `src/instrumentation.ts` on Node runtime boot, with a `globalThis.__cronStarted` guard to avoid double-start under HMR. Every job is scheduled per region rather than globally, so a slow region cannot starve the others (EU's G-Core throttling used to cascade into NA/Asia skipping their ticks).
+Crons run in the standalone **`apps/worker`** process (`src/index.ts`), which starts the seven groups below on boot. The web's `src/instrumentation.ts` keeps the same start sequence behind a `RUN_CRONS` gate (`RUN_CRONS=0` on the web service in prod → it skips them) plus a `globalThis.__cronStarted` HMR guard, so local `pnpm dev` can still run them in-process. A single `cron_leader` DB lease means **at most one instance ever executes a job** regardless of how many have it scheduled — so the worker and an un-gated web coexist safely (whoever holds the lease runs it). Every job is scheduled per region rather than globally, so a slow region cannot starve the others (EU's G-Core throttling used to cascade into NA/Asia skipping their ticks). The cron modules live in `packages/core/src/*` (paths below are the `@unicum.gg/core/...` subpaths).
 
-| Cron | Source | Cadence |
+| Cron | Source (`@unicum.gg/core/…`) | Cadence |
 |---|---|---|
-| `snapshot-cron-<region>` | `services/players/backfill-cron.ts` | Every minute. Refreshes up to 200 players whose last snapshot is older than 24h. |
-| `player-cron-<region>` | `services/players/refresh-cron.ts` | Every 10s. Drains the on-demand player refresh queue (page hits enqueue at priority 10). |
-| `clan-refresh-cron-<region>` | `services/clans/refresh-cron.ts` | Every 10s. Drains on-demand clan refresh queue. |
-| `clan-backfill-cron-<region>` | `services/clans/backfill-cron.ts` | Every minute. Re-fetches the oldest tracked clans. |
-| `discovery-cron` | `services/discovery/cron.ts` | Weekly (Sundays 04:00) walk of clan member lists to find new account IDs. |
-| `vehicles-cron` | `services/discovery/cron.ts` | Daily (07:00) refresh of the vehicle catalogue from the IzeBerg/wot-src mirror. Runs after IzeBerg's typical push window (Tue/Thu 02:30-07:00 UTC, mostly ~04:30) so we never miss a release-day update. |
-| `top-*-cron` | `services/wargaming/wot/{players,clans}/top/cron.ts` | Nightly leaderboard precompute. |
+| `snapshot-cron-<region>` | `players/backfill-cron` | Every minute. Refreshes up to 200 players whose last snapshot is older than 24h. |
+| `player-cron-<region>` | `players/refresh-cron` | Every 10s. Drains the on-demand player refresh queue (page hits enqueue at priority 10). |
+| `clan-refresh-cron-<region>` | `clans/refresh-cron` | Every 10s. Drains on-demand clan refresh queue. |
+| `clan-backfill-cron-<region>` | `clans/backfill-cron` | Every minute. Re-fetches the oldest tracked clans. |
+| `discovery-cron` | `discovery/cron` | Weekly (Sundays 04:00) walk of clan member lists to find new account IDs. |
+| `vehicles-cron` | `discovery/cron` | Daily (07:00) refresh of the vehicle catalogue from the IzeBerg/wot-src mirror. Runs after IzeBerg's typical push window (Tue/Thu 02:30-07:00 UTC, mostly ~04:30) so we never miss a release-day update. |
+| `top-*-cron` | `wargaming/wot/{players,clans}/top/cron` | Nightly leaderboard precompute. |
 
-## Wargaming fetch layer
+## Wargaming SDK
 
-`src/services/wargaming/wot/fetch.ts` wraps every WG call with a per-region token-bucket rate limiter defined in `src/services/wargaming/wot/rate-limit.ts`. The empirical caps sit well below WG's official 20 RPS because traffic actually hits G-Core CDN IPs (geo-routed DNS), which throttle more aggressively:
+The `@unicum.gg/wargaming` package (`packages/wargaming/`) is a neutral, publishable, discord.js-style client. Construct once, navigate `wg.<region>.<surface>.<resource>.<method>({ ...objectParams })` — surfaces `api.wot.*` / `api.wgn.*` (folders `src/api/{wot,wgn}/`), `portal`, `stronghold`, `source`; regions via `wg.eu`/`wg.na`/`wg.asia` (literal sugar) or `wg.region(r)` (dynamic). Every response type is modelled in full from the WG docs; `fields` is typed to the response's dotted paths (`FieldPath`/`Selected` in `src/fields.ts`) and narrows the return. Value-sets are real TS `enum`s. Deprecated-but-still-live endpoints are kept (WG's deprecation banners are unreliable). App-specific opinion (which `extra`/`fields` to request, camelCase mapping, `Date`, sanitize-html, portal hops) lives in the `apps/web`/`packages/core` facades, never the SDK.
 
-- WG API: EU = 5 RPS, NA = 6 RPS, Asia = 6 RPS
-- Clan portal (newsfeeds): 1 RPS per region
+The transport (`src/client/transport.ts`) wraps every call: injects `application_id` (three region ids from `env.ts`, required at boot) + default `language`, a per-region **token-bucket rate limiter** (`src/client/rate-limiter.ts`; defaults sit below WG's 20 RPS because traffic hits geo-routed G-Core CDN IPs that throttle harder — WG API EU=6 / NA=8 / Asia=8 RPS, clan portal 1 RPS/region), retries with i·i·2 backoff, and an embedded **response cache** (`src/client/cache/`, static-endpoint allowlist only — encyclopedia/glossary/types). Batched endpoints chunk to WG's per-request `account_id` limit and bisect on `INVALID_ACCOUNT_ID`.
 
-Three application IDs (one per region) live in `env.ts` and are required at boot. They can all be the same string in practice, but the env names are kept separate to make rotation possible.
-
-Batched endpoints (`getPlayersInfoBatch`, `getTanksStatsBatch`, `getAccountsWTRBatch`) chunk inputs to fit WG's per-request `account_id` limit and bisect on `INVALID_ACCOUNT_ID` so a single deleted account does not poison a full chunk.
+**Both the cache store and the rate limiter are pluggable** so a multi-instance deploy shares one WG budget + cache. The SDK ships in-memory defaults; `apps/web/src/services/wargaming/` provides Redis implementations (`RedisCacheStore`, `RedisRateLimiter` — an atomic Lua token bucket) wired into the `wg` singleton via `getRedisClient()`, gated on `REDIS_URL` (absent → in-process fallback for local dev). Both fail open: a Redis blip degrades to "no cache" / "no shared limit", never a stalled WG call.
 
 ## Player page render path
 
@@ -72,7 +76,7 @@ Batched endpoints (`getPlayersInfoBatch`, `getTanksStatsBatch`, `getAccountsWTRB
 2. If we have at least the player row and the latest snapshot, render immediately from cache and enqueue an on-demand refresh in the background.
 3. If the DB is cold for that account, fetch live from WG and write back before rendering.
 
-`LiveSync` (SSE channel in `src/services/live/`) lets the browser hot-swap fresh data without a manual reload once the background refresh lands.
+`LiveSync` (SSE channel in `packages/core/src/live/`, bridged across processes via Redis pub/sub when `REDIS_URL` is set) lets the browser hot-swap fresh data without a manual reload once the background refresh lands.
 
 ## Analytics consent
 
