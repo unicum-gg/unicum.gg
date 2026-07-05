@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { LeaderboardPeriod } from "@/components/home/leaderboard-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import {
@@ -52,10 +53,12 @@ export type TopClansInitial = Record<
 export function TopClans({
   initial,
   metric,
+  period = LeaderboardPeriod.Overall,
   regionOverride,
 }: {
   initial: TopClansInitial;
   metric: RatingMetric;
+  period?: LeaderboardPeriod;
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
@@ -67,9 +70,19 @@ export function TopClans({
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
-        Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
-        more than 50 members with battles, ranked by average{" "}
-        <RatingMetricInlineSelect />.
+        {period === LeaderboardPeriod.Month ? (
+          <>
+            Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
+            more than 50 members with battles, ranked by{" "}
+            <RatingMetricInlineSelect /> over the past 30 days (min. 15 active).
+          </>
+        ) : (
+          <>
+            Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
+            more than 50 members with battles, ranked by average{" "}
+            <RatingMetricInlineSelect />.
+          </>
+        )}
         {computedAt ? (
           <>
             {" "}

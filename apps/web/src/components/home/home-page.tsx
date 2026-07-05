@@ -11,8 +11,7 @@ import {
 } from "@/components/home/card";
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
-import { TopClans } from "@/components/home/top-clans";
-import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
+import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import { HeroVideo } from "@/components/home/hero-video";
@@ -27,7 +26,10 @@ import {
 import APP from "@/constants/app";
 import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
 import { styles } from "@/lib/styles";
-import { getTopClansByMetricByRegions } from "@unicum.gg/core/wargaming/wot/clans/top";
+import {
+  getTopClansByMetricByRegions,
+  TopClansPeriod,
+} from "@unicum.gg/core/wargaming/wot/clans/top";
 import {
   getTopPlayersByMetricByRegions,
   TopPlayersPeriod,
@@ -47,7 +49,8 @@ export async function HomePage({
   regionOverride?: Region;
 }) {
   const [
-    topClansByMetric,
+    topClansOverallByMetric,
+    topClansMonthByMetric,
     topPlayersDayByMetric,
     topPlayersWeekByMetric,
     topPlayersOverallByMetric,
@@ -55,7 +58,22 @@ export async function HomePage({
   ] = await Promise.all([
     Promise.all(
       RATING_METRICS.map((m) =>
-        getTopClansByMetricByRegions(REGIONS, m, TOP_LIMIT),
+        getTopClansByMetricByRegions(
+          REGIONS,
+          m,
+          TopClansPeriod.Overall,
+          TOP_LIMIT,
+        ),
+      ),
+    ),
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopClansByMetricByRegions(
+          REGIONS,
+          m,
+          TopClansPeriod.Month,
+          TOP_LIMIT,
+        ),
       ),
     ),
     Promise.all(
@@ -181,23 +199,11 @@ export async function HomePage({
       <PanelSeparator />
 
       <div className="grid lg:grid-cols-2 *:min-w-0">
-        <Panel className="flex flex-col">
-          <PanelHeader className="flex items-center justify-between gap-3">
-            <PanelTitle>Top clans</PanelTitle>
-            <TopClansLeaderboardLink regionOverride={regionOverride} />
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={RATING_COL[m]}>
-                <TopClans
-                  initial={topClansByMetric[i]}
-                  metric={m}
-                  regionOverride={regionOverride}
-                />
-              </div>
-            ))}
-          </PanelContent>
-        </Panel>
+        <TopClansOverallPanel
+          overallByMetric={topClansOverallByMetric}
+          monthByMetric={topClansMonthByMetric}
+          regionOverride={regionOverride}
+        />
 
         <Panel className="flex flex-col lg:border-l-0" screenLines={false}>
           <PanelHeader screenLines={false}>
