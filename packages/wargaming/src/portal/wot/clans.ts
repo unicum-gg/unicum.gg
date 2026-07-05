@@ -103,6 +103,21 @@ function parseNewsfeedDate(s: string): Date {
   return new Date(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(s) ? s : `${s}Z`);
 }
 
+/** One past clan stint from the portal `account_clans_history` endpoint. */
+export type PortalAccountClanStint = {
+  clan: {
+    id: number;
+    tag: string;
+    name: string;
+    color: string;
+    emblem: string;
+    is_active: boolean;
+  };
+  since: string;
+  until: string;
+  role: { name: string; localized: string } | null;
+};
+
 /** Clan portal (`<region>.wargaming.net/clans/*`) — members roster, newsfeed. */
 export class PortalClansResource {
   constructor(
@@ -211,5 +226,29 @@ export class PortalClansResource {
       return dt !== 0 ? dt : EVENT_TYPE_ORDER[b.type] - EVENT_TYPE_ORDER[a.type];
     });
     return out.slice(0, maxItems);
+  }
+
+  /**
+   * A player's full past-clan history (`/clans/wot/playerslist/api/account_clans_history/`).
+   * The public API's `clans/memberhistory` caps at the 10 most recent stints;
+   * this portal endpoint paginates (`offset`/`limit`) and returns them all.
+   */
+  async accountClanHistory({
+    accountId,
+    limit = 100,
+  }: {
+    accountId: number;
+    limit?: number;
+  }): Promise<PortalAccountClanStint[]> {
+    const url = new URL(
+      `https://${REGION_PORTAL_HOST[this.region]}/clans/wot/playerslist/api/account_clans_history/`,
+    );
+    url.searchParams.set("account_id", String(accountId));
+    url.searchParams.set("offset", "0");
+    url.searchParams.set("limit", String(limit));
+    const body = await this.t.portalFetch<{
+      clan_history: PortalAccountClanStint[];
+    }>(this.region, url);
+    return body.clan_history ?? [];
   }
 }

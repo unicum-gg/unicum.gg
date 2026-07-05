@@ -63,7 +63,8 @@ export const getPlayerCurrentClan = async (
   };
 };
 
-/** Past clan stints (`/wot/clans/memberhistory/`), most-recent first. */
+/** Past clan stints (`/wot/clans/memberhistory/`), most-recent first. Capped by
+ * WG at the 10 most recent — used only as a fallback when the portal is down. */
 export const getPlayerClanMemberHistory = async (
   region: Region,
   accountId: number,
@@ -74,5 +75,29 @@ export const getPlayerClanMemberHistory = async (
     role: e.role,
     joinedAt: new Date(e.joined_at * 1000),
     leftAt: new Date(e.left_at * 1000),
+  }));
+};
+
+// Portal timestamps are naive UTC ("2019-08-13T11:56:36.695"); mark them so.
+const portalDate = (s: string): Date =>
+  new Date(/[zZ]$|[+-]\d{2}:?\d{2}$/.test(s) ? s : `${s}Z`);
+
+/**
+ * Full past-clan history via the portal `account_clans_history` endpoint — ALL
+ * stints, not just WG's public last-10. This is the primary source; the caller
+ * falls back to {@link getPlayerClanMemberHistory} when the portal is blocked.
+ */
+export const getPlayerClanHistoryFromPortal = async (
+  region: Region,
+  accountId: number,
+): Promise<RawClanMemberStint[]> => {
+  const stints = await wg
+    .region(region)
+    .portal.clans.accountClanHistory({ accountId });
+  return stints.map((h) => ({
+    clanId: h.clan.id,
+    role: h.role?.name ?? "",
+    joinedAt: portalDate(h.since),
+    leftAt: portalDate(h.until),
   }));
 };

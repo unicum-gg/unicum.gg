@@ -8,6 +8,7 @@ import {
   type ClanStint,
   type PlayerClanHistoryFull,
   type RawClanMemberStint,
+  getPlayerClanHistoryFromPortal,
   getPlayerClanMemberHistory,
   getPlayerCurrentClan,
 } from "@unicum.gg/core/wargaming/wot/clans/player";
@@ -165,7 +166,16 @@ export async function loadPlayerClanHistoryFromWG(
 ): Promise<PlayerClanHistoryFull> {
   const [currentStint, rawHistory] = await Promise.all([
     getPlayerCurrentClan(region, accountId),
-    getPlayerClanMemberHistory(region, accountId),
+    // Portal `account_clans_history` returns the FULL past history; the public
+    // API's memberhistory (last 10) is only a fallback for when the portal is
+    // blocked (Cloudflare) or errors.
+    getPlayerClanHistoryFromPortal(region, accountId).catch((err) => {
+      console.warn(
+        `[clan-history] portal history failed for ${region}/${accountId}, falling back to WG API (last 10):`,
+        err,
+      );
+      return getPlayerClanMemberHistory(region, accountId);
+    }),
   ]);
 
   // Resolve refs for ALL clans seen — past stints AND the current one — so we
@@ -213,13 +223,66 @@ export async function loadPlayerClanHistoryFromWG(
   };
 }
 
+/**
+ * Union of past stints so we NEVER drop a clan we've already recorded: if the
+ * portal is blocked and we fall back to the WG API's last-10, the stored fuller
+ * history must survive. Keyed by clan + join time, so re-joins of the same clan
+ * (distinct `joinedAt`) are kept as separate stints. Totals are recomputed from
+ * the merged set. The freshest current stint wins.
+ */
+function mergeClanHistory(
+  stored: PlayerClanHistoryFull | null,
+  fresh: PlayerClanHistoryFull,
+): PlayerClanHistoryFull {
+  if (!stored) return fresh;
+  // Key by clan + join DAY, not exact timestamp: the portal reports millisecond
+  // precision while the WG API rounds `joined_at` to the second, so the same
+  // stint from the two sources must still collapse. A player never joins the
+  // same clan twice in one day, so genuine re-joins stay distinct.
+  const key = (s: ClanStint) =>
+    `${s.clan.id}:${s.joinedAt.toISOString().slice(0, 10)}`;
+  const byKey = new Map<string, ClanStint>();
+  for (const s of stored.pastStints) byKey.set(key(s), s);
+  for (const s of fresh.pastStints) byKey.set(key(s), s);
+  const pastStints = [...byKey.values()].sort(
+    (a, b) => b.joinedAt.getTime() - a.joinedAt.getTime(),
+  );
+  const nowMs = Date.now();
+  const currentDurationS = fresh.currentStint
+    ? Math.max(
+        0,
+        Math.floor((nowMs - fresh.currentStint.joinedAt.getTime()) / 1000),
+      )
+    : 0;
+  const pastDurationS = pastStints.reduce(
+    (sum, s) =>
+      sum +
+      Math.max(
+        0,
+        Math.floor(
+          ((s.leftAt?.getTime() ?? s.joinedAt.getTime()) -
+            s.joinedAt.getTime()) /
+            1000,
+        ),
+      ),
+    0,
+  );
+  return {
+    currentStint: fresh.currentStint,
+    pastStints,
+    totalClans: pastStints.length + (fresh.currentStint ? 1 : 0),
+    timeInClansSeconds: currentDurationS + pastDurationS,
+  };
+}
+
 export async function storePlayerClanHistory(
   region: Region,
   accountId: number,
   data: PlayerClanHistoryFull,
 ): Promise<void> {
   const playerClanHistory = playerClanHistoryByRegion[region];
-  const serialized = serialize(data);
+  const existing = await getStoredPlayerClanHistory(region, accountId);
+  const serialized = serialize(mergeClanHistory(existing?.data ?? null, data));
   await db
     .insert(playerClanHistory)
     .values({
