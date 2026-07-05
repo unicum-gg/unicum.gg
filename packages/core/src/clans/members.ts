@@ -11,6 +11,7 @@ export type MemberRatings = {
 
 export {
   ClanRole,
+  getClanMembersBatch,
   getClanMembersStats,
 } from "@unicum.gg/core/wargaming/wot/clans/members";
 export type {

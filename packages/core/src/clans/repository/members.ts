@@ -13,6 +13,7 @@ import {
   type ClanMemberPeriodStats,
   type ClanMemberStats,
   type ClanRole,
+  type PortalClanMember,
   getClanMembersStats,
 } from "@unicum.gg/core/clans/members";
 import { dedup, STALE_AFTER_MS } from "./internal";
@@ -245,12 +246,15 @@ export async function getClanMembersCached(
 export async function refreshClanMembers(
   region: Region,
   clanId: number,
+  prefetchedRoster?: PortalClanMember[],
 ): Promise<ClanMemberStats[]> {
   const clanMembers = clanMembersByRegion[region];
   // Roster (names, roles, join dates) comes from the batchable WG API; the
   // per-member lifetime figures the API omits are backfilled from our own
-  // player snapshots so we never touch the 1 RPS clan portal for members.
-  const roster = await getClanMembersStats(region, clanId);
+  // player snapshots so we never touch the 1 RPS clan portal for members. The
+  // cron passes `prefetchedRoster` from a single batched `clans/info` call; the
+  // on-demand path fetches this one clan's roster on its own.
+  const roster = prefetchedRoster ?? (await getClanMembersStats(region, clanId));
   const snapshotData = await periodStatsFromSnapshotsForAccounts(
     region,
     roster.map((m) => m.accountId),

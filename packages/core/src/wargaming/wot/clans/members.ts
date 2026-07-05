@@ -20,13 +20,36 @@ const UNKNOWN_ROLE_RANK = Object.keys(ROLE_RANK).length;
 
 const DAY_MS = 86_400_000;
 
+/** A member as returned by the WG API `clans/info` `members` field. */
+type ApiClanMember = {
+  account_id: number;
+  account_name: string;
+  joined_at: number;
+  role: string;
+  role_i18n: string;
+};
+
+/** Map an API roster member to our `PortalClanMember` shape. Per-member figures
+ * the API does not carry (`overall`, `personalRating`, `lastBattleTime`) are
+ * left null and backfilled from our own player snapshots in `refreshClanMembers`. */
+const mapMember = (m: ApiClanMember, now: number): PortalClanMember => ({
+  accountId: m.account_id,
+  name: m.account_name,
+  role: m.role as ClanRole,
+  roleLocalized: m.role_i18n,
+  roleRank: ROLE_RANK[m.role] ?? UNKNOWN_ROLE_RANK,
+  daysInClan: Math.max(0, Math.floor((now - m.joined_at * 1000) / DAY_MS)),
+  lastBattleTime: null,
+  personalRating: null,
+  overall: null,
+  d28: null,
+});
+
 /**
  * Clan roster from the batchable WG API (`clans/info` members field) rather
  * than the per-clan clan portal, so refreshing a clan no longer spends the
- * scarce 1 RPS portal budget on the roster. Per-member figures the API does
- * not carry (`overall`, `personalRating`, `lastBattleTime`) are left null and
- * backfilled from our own player snapshots in `refreshClanMembers`; the newsfeed
- * (`portal.clans.events`) remains the one genuinely per-clan portal call.
+ * scarce 1 RPS portal budget on the roster. Single-clan variant, used for the
+ * on-demand refresh path; the cron uses {@link getClanMembersBatch}.
  */
 export const getClanMembersStats = async (
   region: Region,
@@ -35,18 +58,29 @@ export const getClanMembersStats = async (
   const info = await wg
     .region(region)
     .api.wot.clans.info({ clanId, fields: ["members"] });
-  const members = info?.members ?? [];
   const now = Date.now();
-  return members.map((m) => ({
-    accountId: m.account_id,
-    name: m.account_name,
-    role: m.role as ClanRole,
-    roleLocalized: m.role_i18n,
-    roleRank: ROLE_RANK[m.role] ?? UNKNOWN_ROLE_RANK,
-    daysInClan: Math.max(0, Math.floor((now - m.joined_at * 1000) / DAY_MS)),
-    lastBattleTime: null,
-    personalRating: null,
-    overall: null,
-    d28: null,
-  }));
+  return (info?.members ?? []).map((m) => mapMember(m, now));
+};
+
+/**
+ * Rosters for many clans in a SINGLE `clans/info` call (up to 100 clan ids).
+ * The cron uses this so a drain no longer fires one `clans/info` per clan on
+ * top of the batched clan-info fetch — that per-clan fan-out is what pushed the
+ * EU API bucket into overload.
+ */
+export const getClanMembersBatch = async (
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, PortalClanMember[]>> => {
+  const out = new Map<number, PortalClanMember[]>();
+  const unique = Array.from(new Set(clanIds));
+  if (unique.length === 0) return out;
+  const byClan = await wg
+    .region(region)
+    .api.wot.clans.infoBatch({ clanIds: unique, fields: ["members"] });
+  const now = Date.now();
+  for (const [id, info] of byClan) {
+    out.set(id, (info?.members ?? []).map((m) => mapMember(m, now)));
+  }
+  return out;
 };

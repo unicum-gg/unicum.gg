@@ -5,6 +5,7 @@ import { clanRefreshQueueByRegion } from "@unicum.gg/core/db/schema";
 import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
 import { recordClanSnapshot } from "./snapshots";
 import { dequeueClanRefresh } from "./refresh-queue";
+import { getClanMembersBatch } from "@unicum.gg/core/clans/members";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
@@ -64,6 +65,14 @@ export async function drainClanRefreshQueueForRegion(
     return new Map<number, unknown>();
   });
 
+  // 1b. Rosters for the whole batch in ONE `clans/info` call, so a drain does
+  // not fire one member fetch per clan on top of the info batch. On failure we
+  // leave it null and each clan falls back to its own single fetch.
+  const rosters = await getClanMembersBatch(region, clanIds).catch((err) => {
+    console.error(`[clan-refresh-cron-${region}] batch members failed:`, err);
+    return null;
+  });
+
   // 2. Members + events per-clan (portal, rate-limited).
   for (const clanId of clanIds) {
     const info = infos.get(clanId);
@@ -75,7 +84,7 @@ export async function drainClanRefreshQueueForRegion(
     }
     try {
       await Promise.all([
-        refreshClanMembers(region, clanId).catch((err) =>
+        refreshClanMembers(region, clanId, rosters?.get(clanId)).catch((err) =>
           console.error(
             `[clan-refresh-cron-${region}] members ${clanId} failed:`,
             err,
