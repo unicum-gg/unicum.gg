@@ -3,6 +3,7 @@ import * as S from "@/services/openapi/schemas";
 import {
   getTopClansByMetric,
   type TopClanResult,
+  TopClansPeriod,
 } from "@unicum.gg/core/wargaming/wot/clans/top";
 import { isRegion } from "@unicum.gg/wargaming/region";
 
@@ -30,6 +31,11 @@ export async function GET(
   }
 
   const url = new URL(req.url);
+  // `clanPeriodField` enum values match `TopClansPeriod`; unknown/missing falls
+  // back to the lifetime ranking.
+  const period = S.clanPeriodField
+    .catch("overall")
+    .parse(url.searchParams.get("period")) as TopClansPeriod;
   const limitParam = url.searchParams.get("limit");
   const limit = Math.max(
     1,
@@ -45,6 +51,7 @@ export async function GET(
     const { results, computedAt } = await getTopClansByMetric(
       region,
       metric,
+      period,
       limit,
     );
     return Response.json({

@@ -82,13 +82,99 @@ export async function computeTopPlayersAllMetrics(
     return computeOverallFromCache(region, limit);
   }
 
+  const ratings = await computePlayerPeriodRatings(
+    region,
+    period,
+    MIN_BATTLES[period],
+  );
+  if (ratings.length === 0) {
+    return {
+      [RatingMetric.Wn7]: [],
+      [RatingMetric.Wn8]: [],
+      [RatingMetric.Wnx]: [],
+    };
+  }
+
+  function topByScore(field: "wn7" | "wn8" | "wnx"): TopPlayerResult[] {
+    return ratings
+      .filter(
+        (s): s is PlayerPeriodRating & { [K in typeof field]: number } =>
+          s[field] !== null,
+      )
+      .sort((a, b) => b[field] - a[field])
+      .slice(0, ENRICH_CANDIDATES)
+      .map((s) => ({
+        account_id: s.account_id,
+        nickname: s.nickname,
+        clan_tag: null,
+        clan_color: null,
+        battles: s.battles,
+        wnx: s[field],
+      }));
+  }
+
+  const out: TopPlayersAllMetrics = {
+    [RatingMetric.Wn7]: topByScore("wn7"),
+    [RatingMetric.Wn8]: topByScore("wn8"),
+    [RatingMetric.Wnx]: topByScore("wnx"),
+  };
+
+  // Enrich the UNION of all 3 top lists with clan info in one batch.
+  const uniqueIds = new Set<number>();
+  for (const m of Object.values(out)) {
+    for (const r of m) uniqueIds.add(r.account_id);
+  }
+  if (uniqueIds.size === 0) return out;
+  const clansByAccount = await getPlayerClansBatch(region, [...uniqueIds]);
+  for (const list of Object.values(out)) {
+    for (const r of list) {
+      const clan = clansByAccount.get(r.account_id);
+      if (clan) {
+        r.clan_tag = clan.tag;
+        r.clan_color = clan.color;
+      }
+    }
+  }
+
+  // Trim each list to the requested limit (was working off ENRICH_CANDIDATES).
+  return {
+    [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
+    [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
+    [RatingMetric.Wnx]: out[RatingMetric.Wnx].slice(0, limit),
+  };
+}
+
+/**
+ * Per-player period ratings for every active player in a region, WITHOUT the
+ * top-N slicing or clan enrichment. Shared by the player leaderboard (which
+ * then ranks + enriches per metric) and the clan leaderboard (which aggregates
+ * these per-member scores into a clan-level battle-weighted average). The
+ * `minBattles` floor gates who counts as "active" over the period: the player
+ * leaderboard passes its per-period minimum, the clan aggregation a lower floor
+ * so more members contribute (their weight is their period battle count).
+ */
+export type PlayerPeriodRating = {
+  account_id: number;
+  nickname: string;
+  battles: number;
+  wn7: number | null;
+  wn8: number | null;
+  wnx: number | null;
+};
+
+export async function computePlayerPeriodRatings(
+  region: Region,
+  period: TopPlayersPeriod,
+  minBattles: number,
+): Promise<PlayerPeriodRating[]> {
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
   const tankSnapshots = tankSnapshotsByRegion[region];
   const interval = PERIOD_INTERVAL[period];
-  const minBattles = MIN_BATTLES[period];
   if (interval === null) {
-    throw new Error(`top-players: unexpected null interval for ${period}`);
+    throw new Error(
+      `computePlayerPeriodRatings: unexpected null interval for ${period}`,
+    );
   }
   const intervalSql = sql.raw(`INTERVAL '${interval}'`);
 
@@ -125,13 +211,7 @@ export async function computeTopPlayersAllMetrics(
     WHERE lp.battles - ep.battles >= ${minBattles}
   `)) as unknown as Array<{ player_id: number | string }>;
   const activeIds = activeRows.map((r) => Number(r.player_id));
-  if (activeIds.length === 0) {
-    return {
-      [RatingMetric.Wn7]: [],
-      [RatingMetric.Wn8]: [],
-      [RatingMetric.Wnx]: [],
-    };
-  }
+  if (activeIds.length === 0) return [];
   const activeIdsSql = sql.raw(`ARRAY[${activeIds.join(",")}]::int[]`);
 
   const rows = (await db.execute(sql`
@@ -234,13 +314,7 @@ export async function computeTopPlayersAllMetrics(
   ]);
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
 
-  type Scored = {
-    base: Omit<TopPlayerResult, "wnx">;
-    wn7: number | null;
-    wn8: number | null;
-    wnx: number | null;
-  };
-  const scored: Scored[] = [];
+  const ratings: PlayerPeriodRating[] = [];
   for (const agg of byPlayer.values()) {
     if (agg.totalBattles < minBattles) continue;
     const wnx = computeWNX(agg.tanks, wnxExpected);
@@ -257,57 +331,16 @@ export async function computeTopPlayersAllMetrics(
       },
       avgTier,
     );
-    scored.push({
-      base: {
-        account_id: agg.account_id,
-        nickname: agg.nickname,
-        clan_tag: null,
-        clan_color: null,
-        battles: agg.totalBattles,
-      },
+    ratings.push({
+      account_id: agg.account_id,
+      nickname: agg.nickname,
+      battles: agg.totalBattles,
       wn7: wn7 != null && Number.isFinite(wn7) ? wn7 : null,
       wn8: Number.isFinite(wn8) ? wn8 : null,
       wnx: wnx != null && Number.isFinite(wnx) ? wnx : null,
     });
   }
-
-  function topByScore(field: "wn7" | "wn8" | "wnx"): TopPlayerResult[] {
-    return scored
-      .filter((s): s is Scored & { [K in typeof field]: number } => s[field] !== null)
-      .sort((a, b) => b[field] - a[field])
-      .slice(0, ENRICH_CANDIDATES)
-      .map((s) => ({ ...s.base, wnx: s[field] }));
-  }
-
-  const out: TopPlayersAllMetrics = {
-    [RatingMetric.Wn7]: topByScore("wn7"),
-    [RatingMetric.Wn8]: topByScore("wn8"),
-    [RatingMetric.Wnx]: topByScore("wnx"),
-  };
-
-  // Enrich the UNION of all 3 top lists with clan info in one batch.
-  const uniqueIds = new Set<number>();
-  for (const m of Object.values(out)) {
-    for (const r of m) uniqueIds.add(r.account_id);
-  }
-  if (uniqueIds.size === 0) return out;
-  const clansByAccount = await getPlayerClansBatch(region, [...uniqueIds]);
-  for (const list of Object.values(out)) {
-    for (const r of list) {
-      const clan = clansByAccount.get(r.account_id);
-      if (clan) {
-        r.clan_tag = clan.tag;
-        r.clan_color = clan.color;
-      }
-    }
-  }
-
-  // Trim each list to the requested limit (was working off ENRICH_CANDIDATES).
-  return {
-    [RatingMetric.Wn7]: out[RatingMetric.Wn7].slice(0, limit),
-    [RatingMetric.Wn8]: out[RatingMetric.Wn8].slice(0, limit),
-    [RatingMetric.Wnx]: out[RatingMetric.Wnx].slice(0, limit),
-  };
+  return ratings;
 }
 
 /**

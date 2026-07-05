@@ -5,9 +5,10 @@ import {
   type RatingMetric,
 } from "@unicum.gg/core/constants/rating";
 import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
-// Imported from the dependency-free `period` module (not the DB-heavy index) so
-// loading these schemas never pulls in the leaderboard logic.
+// Imported from the dependency-free `period` modules (not the DB-heavy index)
+// so loading these schemas never pulls in the leaderboard logic.
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
+import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
 
 // Single source of truth for the public API surface. These Zod schemas are
 // consumed by the route handlers (runtime validation) and by the OpenAPI
@@ -54,6 +55,13 @@ export const periodField = z.enum(["24h", "7d", "30d", "overall"]).meta({
   example: "overall",
 });
 
+// Clans expose only the lifetime and 30-day rankings (no 24h/7d), so their
+// period param is a narrower enum than the player one.
+export const clanPeriodField = z.enum(["overall", "30d"]).meta({
+  description: "Clan leaderboard time window.",
+  example: "overall",
+});
+
 export const metricField = z.enum(["wn7", "wn8", "wnx"]).meta({
   description: "Rating metric the leaderboard is ranked by.",
 });
@@ -66,8 +74,9 @@ export const metricField = z.enum(["wn7", "wn8", "wnx"]).meta({
 const _enumGuards: [
   Exact<(typeof regionPath.options)[number], `${Region}`>,
   Exact<(typeof periodField.options)[number], `${TopPlayersPeriod}`>,
+  Exact<(typeof clanPeriodField.options)[number], `${TopClansPeriod}`>,
   Exact<(typeof metricField.options)[number], `${RatingMetric}`>,
-] = [true, true, true];
+] = [true, true, true, true];
 void _enumGuards;
 
 // 2. Runtime: throws when this module loads (dev, `openapi-gen generate`, prod)
@@ -92,6 +101,11 @@ function assertEnumInSync(
 
 assertEnumInSync(regionPath.options, REGIONS, "region");
 assertEnumInSync(periodField.options, Object.values(TopPlayersPeriod), "period");
+assertEnumInSync(
+  clanPeriodField.options,
+  Object.values(TopClansPeriod),
+  "clan period",
+);
 assertEnumInSync(metricField.options, RATING_METRICS, "metric");
 
 // Leaderboard limits live here (the API contract) and are imported by the route
@@ -118,6 +132,7 @@ export const playersTopQuery = z.object({
 });
 
 export const clansTopQuery = z.object({
+  period: clanPeriodField.optional(),
   limit: limitField(CLANS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
 });

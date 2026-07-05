@@ -1,13 +1,17 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { RATING_METRICS } from "@unicum.gg/core/constants/rating";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { topClansByRegion } from "@unicum.gg/core/db/schema";
-import { REGIONS } from "@unicum.gg/wargaming/region";
-import { computeTopClansByMetric } from ".";
+import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
+import { computeTopClansAllMetrics, TopClansPeriod } from ".";
 
 const SCHEDULE = "0 * * * *";
 const TOP_N = 30;
+const PERIODS: TopClansPeriod[] = [
+  TopClansPeriod.Overall,
+  TopClansPeriod.Month,
+];
 
 export function startTopClansCron(): void {
   if (
@@ -45,38 +49,57 @@ async function refreshAllRegions(): Promise<void> {
   }
 }
 
-async function refreshRegion(region: (typeof REGIONS)[number]): Promise<void> {
+/**
+ * Recompute + store one leaderboard period for a region (all metrics). Exported
+ * so a one-off (e.g. seeding a newly-added period before the next cron tick) can
+ * trigger it directly. Returns the per-metric row counts. */
+export async function recomputeTopClansPeriod(
+  region: Region,
+  period: TopClansPeriod,
+): Promise<number[]> {
   const table = topClansByRegion[region];
-  for (const metric of RATING_METRICS) {
-    const start = Date.now();
+  const allMetrics = await computeTopClansAllMetrics(region, period, TOP_N);
+  const counts: number[] = [];
+  await db.transaction(async (tx) => {
+    for (const metric of RATING_METRICS) {
+      const results = allMetrics[metric];
+      counts.push(results.length);
+      await tx
+        .delete(table)
+        .where(and(eq(table.metric, metric), eq(table.period, period)));
+      if (results.length === 0) continue;
+      await tx.insert(table).values(
+        results.map((r, i) => ({
+          metric,
+          period,
+          rank: i + 1,
+          clanId: r.clan_id,
+          tag: r.tag,
+          name: r.name,
+          color: r.color,
+          emblem: r.emblem,
+          membersCount: r.members_count,
+          ratedMembersCount: r.rated_members_count,
+          avgValue: r.avg_wnx.toString(),
+        })),
+      );
+    }
+  });
+  return counts;
+}
+
+async function refreshRegion(region: Region): Promise<void> {
+  for (const period of PERIODS) {
     try {
-      const results = await computeTopClansByMetric(region, metric, TOP_N);
-      await db.transaction(async (tx) => {
-        await tx.delete(table).where(eq(table.metric, metric));
-        if (results.length > 0) {
-          await tx.insert(table).values(
-            results.map((r, i) => ({
-              metric,
-              rank: i + 1,
-              clanId: r.clan_id,
-              tag: r.tag,
-              name: r.name,
-              color: r.color,
-              emblem: r.emblem,
-              membersCount: r.members_count,
-              ratedMembersCount: r.rated_members_count,
-              avgValue: r.avg_wnx.toString(),
-            })),
-          );
-        }
-      });
+      const start = Date.now();
+      const counts = await recomputeTopClansPeriod(region, period);
       console.log(
-        `[top-clans cron] ${region}/${metric}: ${results.length} clans in ${
+        `[top-clans cron] ${region}/${period}: ${counts.join("+")} in ${
           Date.now() - start
         }ms`,
       );
     } catch (err) {
-      console.error(`[top-clans cron] ${region}/${metric} failed:`, err);
+      console.error(`[top-clans cron] ${region}/${period} failed:`, err);
     }
   }
 }
