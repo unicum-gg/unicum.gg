@@ -29,12 +29,14 @@ export { TopPlayersPeriod } from "./period";
 const PERIOD_INTERVAL: Record<TopPlayersPeriod, string | null> = {
   [TopPlayersPeriod.Day]: "24 hours",
   [TopPlayersPeriod.Week]: "7 days",
+  [TopPlayersPeriod.Month]: "30 days",
   [TopPlayersPeriod.Overall]: null,
 };
 
 const MIN_BATTLES: Record<TopPlayersPeriod, number> = {
   [TopPlayersPeriod.Day]: 20,
   [TopPlayersPeriod.Week]: 140,
+  [TopPlayersPeriod.Month]: 600,
   [TopPlayersPeriod.Overall]: 20000,
 };
 

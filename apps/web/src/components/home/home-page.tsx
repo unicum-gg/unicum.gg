@@ -14,7 +14,7 @@ import { RatingScale } from "@/components/home/rating-scale";
 import { TopClans } from "@/components/home/top-clans";
 import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
 import { TopPlayers } from "@/components/home/top-players";
-import { TopPlayersLeaderboardLink } from "@/components/home/top-players-leaderboard-link";
+import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import { HeroVideo } from "@/components/home/hero-video";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import {
@@ -51,6 +51,7 @@ export async function HomePage({
     topPlayersDayByMetric,
     topPlayersWeekByMetric,
     topPlayersOverallByMetric,
+    topPlayersMonthByMetric,
   ] = await Promise.all([
     Promise.all(
       RATING_METRICS.map((m) =>
@@ -83,6 +84,16 @@ export async function HomePage({
           REGIONS,
           m,
           TopPlayersPeriod.Overall,
+          TOP_LIMIT,
+        ),
+      ),
+    ),
+    Promise.all(
+      RATING_METRICS.map((m) =>
+        getTopPlayersByMetricByRegions(
+          REGIONS,
+          m,
+          TopPlayersPeriod.Month,
           TOP_LIMIT,
         ),
       ),
@@ -160,32 +171,11 @@ export async function HomePage({
           </PanelContent>
         </Panel>
 
-        <Panel className="flex flex-col" screenLines={false}>
-          <PanelHeader
-            screenLines={false}
-            className="flex items-center justify-between gap-3"
-          >
-            <PanelTitle>Top players · Overall</PanelTitle>
-            <TopPlayersLeaderboardLink regionOverride={regionOverride} />
-          </PanelHeader>
-          <PanelContent className="flex-1 p-0">
-            {RATING_METRICS.map((m, i) => (
-              <div key={m} data-rating-col={RATING_COL[m]}>
-                <TopPlayers
-                  description={
-                    <>
-                      Ranked by all-time <RatingMetricInlineSelect /> (min.
-                      20,000 battles).
-                    </>
-                  }
-                  initial={topPlayersOverallByMetric[i]}
-                  metric={m}
-                  regionOverride={regionOverride}
-                />
-              </div>
-            ))}
-          </PanelContent>
-        </Panel>
+        <TopPlayersOverallPanel
+          overallByMetric={topPlayersOverallByMetric}
+          monthByMetric={topPlayersMonthByMetric}
+          regionOverride={regionOverride}
+        />
       </div>
 
       <PanelSeparator />

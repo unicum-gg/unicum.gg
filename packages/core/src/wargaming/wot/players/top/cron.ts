@@ -11,6 +11,7 @@ const TOP_N = 30;
 const PERIODS: TopPlayersPeriod[] = [
   TopPlayersPeriod.Day,
   TopPlayersPeriod.Week,
+  TopPlayersPeriod.Month,
   TopPlayersPeriod.Overall,
 ];
 
@@ -49,42 +50,52 @@ async function refreshAll(): Promise<void> {
   }
 }
 
-async function refreshRegion(region: Region): Promise<void> {
+/**
+ * Recompute + store one leaderboard period for a region (all metrics). Exported
+ * so a one-off (e.g. seeding a newly-added period before the next cron tick) can
+ * trigger it directly. Returns the per-metric row counts. */
+export async function recomputeTopPlayersPeriod(
+  region: Region,
+  period: TopPlayersPeriod,
+): Promise<number[]> {
   const table = topPlayersByRegion[region];
+  const allMetrics = await computeTopPlayersAllMetrics(region, period, TOP_N);
+  const counts: number[] = [];
+  await db.transaction(async (tx) => {
+    for (const metric of RATING_METRICS) {
+      const results = allMetrics[metric];
+      counts.push(results.length);
+      await tx
+        .delete(table)
+        .where(and(eq(table.metric, metric), eq(table.period, period)));
+      if (results.length === 0) continue;
+      await tx.insert(table).values(
+        results.map((r, i) => ({
+          metric,
+          period,
+          rank: i + 1,
+          accountId: r.account_id,
+          nickname: r.nickname,
+          clanTag: r.clan_tag,
+          clanColor: r.clan_color,
+          battles: r.battles,
+          value: r.wnx.toString(),
+        })),
+      );
+    }
+  });
+  return counts;
+}
+
+async function refreshRegion(region: Region): Promise<void> {
   for (const period of PERIODS) {
     try {
       const start = Date.now();
-      const allMetrics = await computeTopPlayersAllMetrics(
-        region,
-        period,
-        TOP_N,
-      );
-      await db.transaction(async (tx) => {
-        for (const metric of RATING_METRICS) {
-          const results = allMetrics[metric];
-          await tx
-            .delete(table)
-            .where(and(eq(table.metric, metric), eq(table.period, period)));
-          if (results.length === 0) continue;
-          await tx.insert(table).values(
-            results.map((r, i) => ({
-              metric,
-              period,
-              rank: i + 1,
-              accountId: r.account_id,
-              nickname: r.nickname,
-              clanTag: r.clan_tag,
-              clanColor: r.clan_color,
-              battles: r.battles,
-              value: r.wnx.toString(),
-            })),
-          );
-        }
-      });
+      const counts = await recomputeTopPlayersPeriod(region, period);
       console.log(
-        `[top-players cron] ${region}/${period}: ${Object.values(allMetrics)
-          .map((m) => m.length)
-          .join("+")} in ${Date.now() - start}ms`,
+        `[top-players cron] ${region}/${period}: ${counts.join("+")} in ${
+          Date.now() - start
+        }ms`,
       );
     } catch (err) {
       console.error(`[top-players cron] ${region}/${period} failed:`, err);

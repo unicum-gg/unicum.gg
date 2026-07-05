@@ -6,5 +6,6 @@
 export enum TopPlayersPeriod {
   Day = "24h",
   Week = "7d",
+  Month = "30d",
   Overall = "overall",
 }

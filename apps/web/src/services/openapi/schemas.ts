@@ -49,7 +49,7 @@ export const searchQuery = z.object({
   }),
 });
 
-export const periodField = z.enum(["24h", "7d", "overall"]).meta({
+export const periodField = z.enum(["24h", "7d", "30d", "overall"]).meta({
   description: "Leaderboard time window.",
   example: "overall",
 });
