@@ -10,8 +10,9 @@ node_modules
 !.yarn/releases
 !.yarn/versions
 
-# testing
-coverage
+# testing (anchored to repo root so it does not shadow the
+# src/components/coverage source dir, which Tailwind must scan)
+/coverage
 
 # next.js
 apps/web/.next/
