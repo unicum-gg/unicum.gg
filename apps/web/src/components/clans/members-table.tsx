@@ -48,8 +48,11 @@ enum SortColumn {
   Name = "name",
   Role = "role",
   WN7 = "wn7",
+  WN730d = "wn7_30d",
   WN8 = "wn8",
+  WN830d = "wn8_30d",
   WNX = "wnx",
+  WNX30d = "wnx_30d",
   WR = "wr",
   Battles = "battles",
   Joined = "joined",
@@ -73,10 +76,16 @@ function getSortValue(
       return m.roleRank;
     case SortColumn.WN7:
       return m.wn7 ?? -1;
+    case SortColumn.WN730d:
+      return m.wn730d ?? -1;
     case SortColumn.WN8:
       return m.wn8 ?? -1;
+    case SortColumn.WN830d:
+      return m.wn830d ?? -1;
     case SortColumn.WNX:
       return m.wnx ?? -1;
+    case SortColumn.WNX30d:
+      return m.wnx30d ?? -1;
     case SortColumn.WR:
       return m.overall?.winsPercentage ?? -1;
     case SortColumn.Battles:
@@ -249,6 +258,15 @@ export function ClanMembersTable({
             WN7
           </SortableHead>
           <SortableHead
+            column={SortColumn.WN730d}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wn7-30d"
+          >
+            30d WN7
+          </SortableHead>
+          <SortableHead
             column={SortColumn.WN8}
             state={sort}
             onToggle={toggleSort}
@@ -256,6 +274,15 @@ export function ClanMembersTable({
             ratingCol="wn8"
           >
             WN8
+          </SortableHead>
+          <SortableHead
+            column={SortColumn.WN830d}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wn8-30d"
+          >
+            30d WN8
           </SortableHead>
           <SortableHead
             column={SortColumn.WR}
@@ -274,6 +301,15 @@ export function ClanMembersTable({
             ratingCol="wnx"
           >
             WNX
+          </SortableHead>
+          <SortableHead
+            column={SortColumn.WNX30d}
+            state={sort}
+            onToggle={toggleSort}
+            align="end"
+            ratingCol="wnx-30d"
+          >
+            30d WNX
           </SortableHead>
           <SortableHead
             column={SortColumn.Battles}
@@ -321,11 +357,21 @@ export function ClanMembersTable({
                 ratingCol="wn7"
               />
               <RatingCell
+                value={m.wn730d ?? (m.battles30d === 0 ? 0 : null)}
+                color={m.wn730d != null ? wn7Color(m.wn730d) : null}
+                ratingCol="wn7-30d"
+              />
+              <RatingCell
                 value={
                   m.wn8 ?? (m.overall && m.overall.battles === 0 ? 0 : null)
                 }
                 color={m.wn8 != null ? wn8Color(m.wn8) : null}
                 ratingCol="wn8"
+              />
+              <RatingCell
+                value={m.wn830d ?? (m.battles30d === 0 ? 0 : null)}
+                color={m.wn830d != null ? wn8Color(m.wn830d) : null}
+                ratingCol="wn8-30d"
               />
               <TableCell
                 className={cn(
@@ -345,6 +391,11 @@ export function ClanMembersTable({
                 }
                 color={m.wnx != null ? wnxColor(m.wnx) : null}
                 ratingCol="wnx"
+              />
+              <RatingCell
+                value={m.wnx30d ?? (m.battles30d === 0 ? 0 : null)}
+                color={m.wnx30d != null ? wnxColor(m.wnx30d) : null}
+                ratingCol="wnx-30d"
               />
               <TableCell className="hidden text-right tabular-nums sm:table-cell">
                 {m.overall ? intFmt.format(m.overall.battles) : "—"}

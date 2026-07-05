@@ -287,6 +287,12 @@ html[data-rating-metric="wn7"] [data-rating-col="wnx"],
 html[data-rating-metric="wn8"] [data-rating-col="wn7"],
 html[data-rating-metric="wn8"] [data-rating-col="wnx"],
 html[data-rating-metric="wnx"] [data-rating-col="wn7"],
-html[data-rating-metric="wnx"] [data-rating-col="wn8"] {
+html[data-rating-metric="wnx"] [data-rating-col="wn8"],
+html[data-rating-metric="wn7"] [data-rating-col="wn8-30d"],
+html[data-rating-metric="wn7"] [data-rating-col="wnx-30d"],
+html[data-rating-metric="wn8"] [data-rating-col="wn7-30d"],
+html[data-rating-metric="wn8"] [data-rating-col="wnx-30d"],
+html[data-rating-metric="wnx"] [data-rating-col="wn7-30d"],
+html[data-rating-metric="wnx"] [data-rating-col="wn8-30d"] {
   display: none !important;
 }
