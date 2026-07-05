@@ -267,7 +267,7 @@ export function ClanTabsView({
             <PanelHeader>
               <PanelTitle>
                 <TaggedTitle tag={tag} color={color}>
-                  random battles stats
+                  members random battles stats
                 </TaggedTitle>
               </PanelTitle>
             </PanelHeader>
@@ -283,7 +283,7 @@ export function ClanTabsView({
                 <PanelHeader>
                   <PanelTitle>
                     <TaggedTitle tag={tag} color={color}>
-                      previous clans
+                      members previous clans
                     </TaggedTitle>
                   </PanelTitle>
                 </PanelHeader>
