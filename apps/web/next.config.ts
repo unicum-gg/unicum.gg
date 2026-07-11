@@ -35,6 +35,12 @@ const AGENT_DISCOVERY_LINK =
 const nextConfig: NextConfig = {
   // Workspace packages ship TypeScript source; Next transpiles them.
   transpilePackages: ["@unicum.gg/core", "@unicum.gg/wargaming"],
+  // Local auth testing runs on `http://127.0.0.1:3000` because WG OpenID
+  // rejects a `localhost` redirect_uri but accepts the loopback IP. The dev
+  // server is initialised on `localhost`, so without this Next blocks the
+  // cross-origin dev requests from 127.0.0.1 (HMR + client fetches never fire
+  // and interactive widgets stay frozen on their SSR placeholder). Dev-only.
+  allowedDevOrigins: ["127.0.0.1"],
   ...(BUILD_ID
     ? {
         generateBuildId: async () => BUILD_ID,

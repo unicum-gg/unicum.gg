@@ -20,6 +20,10 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: z.string(),
     DATABASE_URL: z.url(),
     CRON_SECRET: z.string(),
+    // Better Auth session/cookie signing + encryption key. Optional at the env
+    // layer so the worker (which never loads the auth instance) boots without
+    // it; the web asserts its presence where the auth instance is created.
+    BETTER_AUTH_SECRET: z.string().optional(),
     // When set, live pub/sub + the WG cache/rate-limit fan out through Redis so
     // they are shared across processes/instances. Unset = in-process (dev).
     REDIS_URL: z.string().optional(),
@@ -33,6 +37,7 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_ASIA: process.env.WARGAMING_APPLICATION_ID_ASIA,
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
+    BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     REDIS_URL: process.env.REDIS_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },

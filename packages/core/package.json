@@ -4,6 +4,7 @@
   "private": true,
   "exports": {
     ".": "./src/index.ts",
+    "./auth": "./src/auth/index.ts",
     "./db": "./src/db/index.ts",
     "./db/schema": "./src/db/schema/index.ts",
     "./redis": "./src/redis/index.ts",
@@ -21,8 +22,9 @@
     "./*": "./src/*.ts"
   },
   "dependencies": {
-    "@unicum.gg/wargaming": "workspace:*",
     "@t3-oss/env-core": "^0.13.11",
+    "@unicum.gg/wargaming": "workspace:*",
+    "better-auth": "^1.6.23",
     "drizzle-orm": "^0.45.2",
     "ioredis": "^5.11.1",
     "node-cron": "^4.2.1",
