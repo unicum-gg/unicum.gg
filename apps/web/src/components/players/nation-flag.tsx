@@ -1,10 +1,10 @@
 import Image from "next/image";
+import { Region } from "@unicum.gg/wargaming/region";
+import {
+  nationFilterFlagUrl,
+  nationWavingFlagUrl,
+} from "@unicum.gg/wargaming/cdn";
 import { cn } from "@/lib/utils";
-
-// WG CDN path; the version chunk drifts when WG ships a new client. If our
-// flag <img> 404s after a WG release, bump `WG_STATIC_VERSION`.
-const WG_STATIC_VERSION = "6.15.1_aca52e";
-const FLAG_BASE = `https://eu-wotp.wgcdn.co/static/${WG_STATIC_VERSION}/wotp_static/img/core/frontend/scss/common/components/icons/img`;
 
 // Natural size of every filter-<nation>.png on WG CDN.
 const NATURAL_W = 29;
@@ -28,18 +28,14 @@ export function nationLabel(nation: string): string {
   );
 }
 
-// The waving-flag emblems WG's own tankopedia detail page shows next to the
-// vehicle name. Sizes differ per nation, so we let CSS drive the height and
-// keep the aspect ratio (next/image's `width={0} height={0}` responsive mode).
-// `latest` survives client version bumps.
-const WAVING_FLAG_BASE = `https://eu-wotp.wgcdn.co/static/latest/wotp_static/img/core/frontend/scss/common/components/icons/img/flags`;
-
 export function NationFlag({
   nation,
+  region,
   className,
   variant = "filter",
 }: {
   nation: string;
+  region: Region;
   className?: string;
   // `filter` = the flat 29x18 strip used in dense tables; `flag` = the larger
   // waving emblem used on the tank detail hero.
@@ -47,9 +43,12 @@ export function NationFlag({
 }) {
   if (!nation) return null;
   if (variant === "flag") {
+    // The waving-flag emblem WG's tankopedia detail page shows next to the
+    // vehicle name. Sizes differ per nation, so we let CSS drive the height and
+    // keep the aspect ratio (next/image's `width={0} height={0}` responsive mode).
     return (
       <Image
-        src={`${WAVING_FLAG_BASE}/${nation}_small.png`}
+        src={nationWavingFlagUrl(region, nation)}
         alt={nationLabel(nation)}
         title={nationLabel(nation)}
         width={0}
@@ -61,7 +60,7 @@ export function NationFlag({
   }
   return (
     <Image
-      src={`${FLAG_BASE}/filter-${nation}.png`}
+      src={nationFilterFlagUrl(region, nation)}
       alt={nationLabel(nation)}
       title={nationLabel(nation)}
       width={NATURAL_W}

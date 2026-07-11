@@ -1,5 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
+import { hangarBgUrl } from "@unicum.gg/wargaming/cdn";
+import type { Region } from "@unicum.gg/wargaming/region";
 import type { RatingColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;
@@ -23,18 +25,24 @@ const unicumLogoDataUrl = readFile(
 );
 
 // The hangar-floor scene WG's tankopedia detail page uses (the JPEG variant,
-// since Satori can't decode WebP). Constant across tanks, so fetch once per
-// cold start. Resolves to `null` on failure so the OG still renders.
-const HANGAR_BG_URL =
-  "https://eu-wotp.wgcdn.co/static/latest/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/hangar-bg.jpg";
+// since Satori can't decode WebP). Constant across tanks, so we memoize per
+// region host and fetch once per cold start. Resolves to `null` on failure so
+// the OG still renders.
+const hangarBgCache = new Map<Region, Promise<string | null>>();
 
-export const hangarBgDataUrl: Promise<string | null> = fetch(HANGAR_BG_URL)
-  .then(async (res) =>
-    res.ok
-      ? `data:image/jpeg;base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`
-      : null,
-  )
-  .catch(() => null);
+export function hangarBgDataUrl(region: Region): Promise<string | null> {
+  const cached = hangarBgCache.get(region);
+  if (cached) return cached;
+  const promise = fetch(hangarBgUrl(region, "jpg"))
+    .then(async (res) =>
+      res.ok
+        ? `data:image/jpeg;base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`
+        : null,
+    )
+    .catch(() => null);
+  hangarBgCache.set(region, promise);
+  return promise;
+}
 
 // Fetch a remote raster into a data URL Satori can embed. Returns `null` on any
 // failure (timeout, 404, G-Core throttle) so callers degrade gracefully.

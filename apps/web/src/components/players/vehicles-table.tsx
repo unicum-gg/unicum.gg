@@ -314,7 +314,7 @@ export function PlayerVehiclesTable({
                   <TableRow key={r.tankId}>
                     <TableCell className="hidden text-center sm:table-cell">
                       {r.nation ? (
-                        <NationFlag nation={r.nation} />
+                        <NationFlag nation={r.nation} region={region} />
                       ) : (
                         <span className="text-muted-foreground">—</span>
                       )}

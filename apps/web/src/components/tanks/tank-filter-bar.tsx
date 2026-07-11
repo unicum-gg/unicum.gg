@@ -13,6 +13,7 @@ import {
 } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag, nationLabel } from "@/components/players/nation-flag";
+import { useRegion } from "@/hooks/use-region";
 import { VehicleRoleIcon } from "@/components/players/vehicle-role-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import {
@@ -328,6 +329,7 @@ export function TankFilterBar<T>({
   searchNoun: string;
   extra?: ReactNode;
 }) {
+  const { region } = useRegion();
   return (
     <div className="flex flex-wrap items-center gap-x-2 gap-y-2 text-xs">
       <input
@@ -357,7 +359,7 @@ export function TankFilterBar<T>({
                   active={filters.nationsSel.has(n)}
                   onClick={() => filters.toggleNation(n)}
                 >
-                  <NationFlag nation={n} className="h-3.5" />
+                  <NationFlag nation={n} region={region} className="h-3.5" />
                 </Chip>
               </TooltipTrigger>
               <TooltipContent>{nationLabel(n)}</TooltipContent>

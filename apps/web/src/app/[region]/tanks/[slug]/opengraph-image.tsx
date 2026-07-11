@@ -19,7 +19,8 @@ import {
 import { VEHICLE_CLASS_LABEL_FULL } from "@unicum.gg/core/constants/tanks";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { tankopediaImageUrl } from "@unicum.gg/wargaming/cdn";
 import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 import { toRoman } from "roman-numerals";
 
@@ -36,7 +37,7 @@ export default async function Image({
   const { region, slug } = await params;
   const [assets, hangarBg] = await Promise.all([
     loadOgAssets(),
-    hangarBgDataUrl,
+    hangarBgDataUrl(isRegion(region) ? region : Region.EU),
   ]);
 
   let name = slug;
@@ -60,9 +61,7 @@ export default async function Image({
       const tagSlug = meta.tag.toLowerCase();
       const [top, render] = await Promise.all([
         getTopPlayersByTank(region, tankId, "wnx", 1),
-        fetchImageDataUrl(
-          `https://eu-wotp.wgcdn.co/dcont/tankopedia_images/${tagSlug}/${tagSlug}_image.png`,
-        ),
+        fetchImageDataUrl(tankopediaImageUrl(region, tagSlug)),
       ]);
       renderDataUrl = render;
       const best = top.results[0];

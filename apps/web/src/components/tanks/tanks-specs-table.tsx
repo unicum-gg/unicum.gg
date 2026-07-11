@@ -210,7 +210,7 @@ export function TanksSpecsTable({
             {paged.map((t) => (
               <TableRow key={t.tankId}>
                 <TableCell className="text-center">
-                  <NationFlag nation={t.nation} />
+                  <NationFlag nation={t.nation} region={region} />
                 </TableCell>
                 <TableCell className="text-center">
                   <VehicleTypeIcon type={t.type} premium={t.isPremium} />

@@ -11,6 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
+import { portalIconUrl } from "@unicum.gg/wargaming/cdn";
 import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
@@ -55,16 +56,15 @@ const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 type MasteryColumn = {
   key: string;
   label: string;
-  icon: string;
+  iconFile: string;
   tip: string;
   value: (t: TankListItem) => number | null;
 };
 
-// Badge icons served straight from WG's portal CDN under the version-less
-// `latest` alias (the same art the account profile pages use). The mastery
-// badge art is server-agnostic, so the EU host serves every region.
-const ICON_BASE =
-  "https://eu-wotp.wgcdn.co/static/latest/wotp_static/img/core/frontend/scss/common/components/icons/img";
+// Badge icons served from WG's portal CDN under the version-less `latest`
+// alias (the same art the account profile pages use). The mastery badge art is
+// server-agnostic, so the URL is region-hosted only for consistency; the file
+// is built at render via `portalIconUrl(region, ...)`.
 
 // From least to most demanding badge. Values are the single-battle XP each
 // badge requires on that vehicle, mirrored per region (see the mastery cron).
@@ -72,28 +72,28 @@ const MASTERY_COLUMNS: MasteryColumn[] = [
   {
     key: "class3",
     label: "3rd Class",
-    icon: `${ICON_BASE}/rank_03.png`,
+    iconFile: "rank_03.png",
     tip: "3rd Class: XP needed to beat 50% of players",
     value: (t) => t.mastery?.class3 ?? null,
   },
   {
     key: "class2",
     label: "2nd Class",
-    icon: `${ICON_BASE}/rank_02.png`,
+    iconFile: "rank_02.png",
     tip: "2nd Class: XP needed to beat 80% of players",
     value: (t) => t.mastery?.class2 ?? null,
   },
   {
     key: "class1",
     label: "1st Class",
-    icon: `${ICON_BASE}/rank_01.png`,
+    iconFile: "rank_01.png",
     tip: "1st Class: XP needed to beat 95% of players",
     value: (t) => t.mastery?.class1 ?? null,
   },
   {
     key: "ace",
     label: "Ace Tanker",
-    icon: `${ICON_BASE}/rank_m.png`,
+    iconFile: "rank_m.png",
     tip: "Ace Tanker: XP needed to beat 99% of players",
     value: (t) => t.mastery?.ace ?? null,
   },
@@ -208,7 +208,7 @@ export function TanksMasteryTable({
               {MASTERY_COLUMNS.map((c) => (
                 <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
                   <Image
-                    src={c.icon}
+                    src={portalIconUrl(region, c.iconFile)}
                     alt={c.label}
                     width={20}
                     height={20}
@@ -223,7 +223,7 @@ export function TanksMasteryTable({
             {paged.map((t) => (
               <TableRow key={t.tankId}>
                 <TableCell className="text-center">
-                  <NationFlag nation={t.nation} />
+                  <NationFlag nation={t.nation} region={region} />
                 </TableCell>
                 <TableCell className="text-center">
                   <VehicleTypeIcon type={t.type} premium={t.isPremium} />

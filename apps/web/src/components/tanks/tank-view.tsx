@@ -61,6 +61,7 @@ import {
   REGION_LABEL,
   REGION_WOT_HOST,
 } from "@unicum.gg/wargaming/region";
+import { hangarBgUrl } from "@unicum.gg/wargaming/cdn";
 
 
 
@@ -364,8 +365,7 @@ export function TankView({
             aria-hidden
             className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{
-              backgroundImage:
-                "url('https://eu-wotp.wgcdn.co/static/latest/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/hangar-bg.webp')",
+              backgroundImage: `url('${hangarBgUrl(region, "webp")}')`,
             }}
           />
           {/* Soft spotlight behind the vehicle. */}
@@ -375,7 +375,12 @@ export function TankView({
           />
           {/* High-res vehicle render, full-bleed (gunmarks / skill4ltu style). */}
           <div className="pointer-events-none absolute inset-0">
-            <TankRender tag={meta.tag} fallback={meta.bigIcon} name={meta.name} />
+            <TankRender
+              tag={meta.tag}
+              region={region}
+              fallback={meta.bigIcon}
+              name={meta.name}
+            />
           </div>
           {/* Left fade keeps the title legible over the render. */}
           <div
@@ -412,7 +417,7 @@ export function TankView({
           <div className="relative z-10 space-y-2 px-6 py-8 sm:px-10 sm:py-10">
             <div className="flex flex-wrap items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
               <span className="font-semibold text-[#f25322]">{tierLabel}</span>
-              <NationFlag nation={meta.nation} variant="flag" />
+              <NationFlag nation={meta.nation} region={region} variant="flag" />
               <VehicleTypeIcon type={meta.type} premium={meta.isPremium} />
               <span>{classLabel}</span>
               {roleSfx && (

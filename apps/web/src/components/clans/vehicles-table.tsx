@@ -25,6 +25,7 @@ import {
 } from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { useRegion } from "@/hooks/use-region";
 import { cn } from "@/lib/utils";
 import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
 import {
@@ -168,6 +169,7 @@ export function ClanVehiclesTable({
 }: {
   vehicles: ClanVehicleRow[];
 }) {
+  const { region } = useRegion();
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -318,7 +320,7 @@ export function ClanVehiclesTable({
             <TableRow key={r.tankId}>
               <TableCell className="hidden text-center sm:table-cell">
                 {r.nation ? (
-                  <NationFlag nation={r.nation} />
+                  <NationFlag nation={r.nation} region={region} />
                 ) : (
                   <span className="text-muted-foreground">—</span>
                 )}
