@@ -20,7 +20,10 @@ import { VEHICLE_CLASS_LABEL_FULL } from "@unicum.gg/core/constants/tanks";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import { isRegion, Region } from "@unicum.gg/wargaming/region";
-import { tankopediaImageUrl } from "@unicum.gg/wargaming/cdn";
+import {
+  defaultVehicleRenderUrl,
+  tankopediaImageUrl,
+} from "@unicum.gg/wargaming/cdn";
 import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 import { toRoman } from "roman-numerals";
 
@@ -63,7 +66,18 @@ export default async function Image({
         getTopPlayersByTank(region, tankId, "wnx", 1),
         fetchImageDataUrl(tankopediaImageUrl(region, tagSlug)),
       ]);
+      // Same fallback chain as the live hero: portal render, then the
+      // encyclopedia render, then WG's covered-vehicle placeholder so the OG
+      // always shows a tank.
       renderDataUrl = render;
+      if (!renderDataUrl && meta.bigIcon) {
+        renderDataUrl = await fetchImageDataUrl(
+          meta.bigIcon.replace(/^http:/, "https:"),
+        );
+      }
+      if (!renderDataUrl) {
+        renderDataUrl = await fetchImageDataUrl(defaultVehicleRenderUrl(region));
+      }
       const best = top.results[0];
       if (best) {
         topNick = best.nickname;

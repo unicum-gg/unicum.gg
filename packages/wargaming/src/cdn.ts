@@ -74,6 +74,13 @@ export function tankopediaImageUrl(region: Region, tag: string): string {
   return `https://${HOST[region]}/dcont/tankopedia_images/${slug}/${slug}_image.png`;
 }
 
+// WG's "vehicle under a tarp" placeholder render (1920x900), shown for tanks
+// with no published tankopedia image. This is WG's own default, the
+// `TANKOPEDIA_DEFAULT_IMAGES_URLS.images.original` its tankopedia falls back to.
+export function defaultVehicleRenderUrl(region: Region): string {
+  return `https://${HOST[region]}/static/${STATIC_VERSION}/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/tanks/default_image.png`;
+}
+
 // The home hero's promo video/poster bundle, pinned to the build these assets
 // shipped in (they are not published under `latest`).
 const PROMO_VERSION = "6.10.0_4edfb4";
