@@ -145,7 +145,9 @@ export async function getClanMembersRatings(
       after(async () => {
         for (const { info, tanks } of toBackfill) {
           try {
-            await recordCurrentSnapshot(region, info, null, tanks);
+            // Bulk clan-member backfill: skip the 1 RPS portal marks call
+            // (carried forward instead) so it doesn't serialise on the portal.
+            await recordCurrentSnapshot(region, info, null, tanks, false);
           } catch (err) {
             console.error(
               `[clan-ratings] backfill snapshot ${info.account_id} failed:`,

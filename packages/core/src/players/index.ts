@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, lt, or, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   type NewPlayerSnapshot,
@@ -445,6 +445,11 @@ export async function recordCurrentSnapshot(
   info: PlayerInfo,
   wtr: number | null = null,
   tanks: TankStats[] = [],
+  // Fetch fresh Marks of Excellence from the clan portal. The portal is capped
+  // at ~1 RPS/region, so the bulk backfill passes `false` (it would otherwise
+  // serialise snapshot writes to one player per second and wreck on-time
+  // freshness); the on-demand/page-view paths keep it `true`.
+  fetchMarks: boolean = true,
 ): Promise<SnapshotContext> {
   const players = playersByRegion[region];
   const playerSnapshots = playerSnapshotsByRegion[region];
@@ -599,16 +604,23 @@ export async function recordCurrentSnapshot(
     .returning();
 
   if (tanks.length > 0) {
-    // A fresh snapshot means the player has played, so Marks of Excellence may
-    // have moved — enrich from the portal (the public API doesn't expose them)
-    // before writing. Only here (not the no-new-battles fast path) since marks
-    // can't change without battles. Fail-open: no marks this cycle on a blip.
-    const marks = await fetchPlayerMarksOnGun(region, info.account_id);
-    if (marks.size > 0) {
-      for (const t of tanks) {
-        const m = marks.get(t.tank_id);
-        if (m != null) t.marks_on_gun = m;
+    if (fetchMarks) {
+      // A fresh snapshot means the player has played, so Marks of Excellence may
+      // have moved — enrich from the portal (the public API doesn't expose them)
+      // before writing. Only here (not the no-new-battles fast path) since marks
+      // can't change without battles. Fail-open: no marks this cycle on a blip.
+      const marks = await fetchPlayerMarksOnGun(region, info.account_id);
+      if (marks.size > 0) {
+        for (const t of tanks) {
+          const m = marks.get(t.tank_id);
+          if (m != null) t.marks_on_gun = m;
+        }
       }
+    } else {
+      // Bulk path: skip the 1 RPS portal call and carry the last known marks
+      // forward so a new-battles snapshot doesn't reset the Marks column to
+      // null. Fresh marks land on the next on-demand (page-view) refresh.
+      await carryForwardMarks(region, player.id, tanks);
     }
     await bulkInsertTankSnapshots(region, player.id, tanks);
     await updatePlayerRatings(region, player.id, info, tanks);
@@ -624,6 +636,43 @@ export async function recordCurrentSnapshot(
     .orderBy(desc(playerSnapshots.takenAt), desc(playerSnapshots.id))
     .limit(1);
   return { player, latest: await backfillWtr(region, winner, wtr) };
+}
+
+/**
+ * Copy each tank's last known Marks of Excellence onto the incoming stats, so a
+ * marks-less bulk snapshot (backfill) never resets the Marks column to null on
+ * a new-battles row. Reads the newest non-null value per tank; genuinely fresh
+ * marks come from the portal on the on-demand (page-view) path.
+ */
+async function carryForwardMarks(
+  region: Region,
+  playerId: number,
+  tanks: TankStats[],
+): Promise<void> {
+  const tankSnapshots = tankSnapshotsByRegion[region];
+  const rows = await db
+    .selectDistinctOn([tankSnapshots.tankId], {
+      tankId: tankSnapshots.tankId,
+      marksOnGun: tankSnapshots.marksOnGun,
+    })
+    .from(tankSnapshots)
+    .where(
+      and(
+        eq(tankSnapshots.playerId, playerId),
+        isNotNull(tankSnapshots.marksOnGun),
+      ),
+    )
+    .orderBy(
+      tankSnapshots.tankId,
+      desc(tankSnapshots.takenAt),
+      desc(tankSnapshots.id),
+    );
+  if (rows.length === 0) return;
+  const byTank = new Map(rows.map((r) => [r.tankId, r.marksOnGun]));
+  for (const t of tanks) {
+    const m = byTank.get(t.tank_id);
+    if (m != null) t.marks_on_gun = m;
+  }
 }
 
 /**

@@ -140,7 +140,10 @@ async function processRegionBatch(
     try {
       const wtr = wtrByAccount.get(player.accountId) ?? null;
       const tanks = tanksByAccount.get(player.accountId) ?? [];
-      await recordCurrentSnapshot(region, info, wtr, tanks);
+      // fetchMarks=false: the bulk backfill must not spend the 1 RPS/region
+      // portal budget per player — that serialises snapshot writes and starves
+      // on-time freshness. Marks are carried forward and refreshed on-demand.
+      await recordCurrentSnapshot(region, info, wtr, tanks, false);
       succeeded += 1;
       // Successful fetch wipes the soft-delete state. Necessary so a
       // previously-flagged account that came back can rejoin the rotation
