@@ -385,6 +385,42 @@ export async function loadPlayerInitialData(
     "accountId" in lookup
       ? sql`${lookup.accountId}::bigint`
       : sql`(SELECT account_id FROM p)`;
+
+  // Baseline snapshot for a period diff. Normally the newest snapshot older than
+  // `interval` (so "last 7d" = now minus ~7 days ago). When the player has been
+  // tracked for less than that window, no such snapshot exists, so we fall back
+  // to the oldest snapshot other than the current one — otherwise a player with
+  // only a few days of history would show a blank column instead of the games
+  // they actually played. Excluding the current snapshot (via latest_snap) keeps
+  // a single-snapshot player empty rather than showing a false zero.
+  const playerPeriodCte = (interval: string) => sql`
+      SELECT * FROM ${playerSnapshots}
+      WHERE player_id = (SELECT id FROM p)
+        AND (
+          taken_at < NOW() - ${interval}::interval
+          OR taken_at < (SELECT taken_at FROM latest_snap)
+        )
+      ORDER BY
+        (taken_at < NOW() - ${interval}::interval) DESC,
+        CASE WHEN taken_at < NOW() - ${interval}::interval THEN taken_at END DESC,
+        taken_at ASC
+      LIMIT 1
+    `;
+  // Same baseline rule, per tank: the current snapshot per tank is latest_tanks.
+  const tankPeriodCte = (interval: string) => sql`
+      SELECT DISTINCT ON (tank_id) *
+      FROM ${tankSnapshots} ts
+      WHERE player_id = (SELECT id FROM p)
+        AND (
+          taken_at < NOW() - ${interval}::interval
+          OR taken_at < (SELECT lt.taken_at FROM latest_tanks lt WHERE lt.tank_id = ts.tank_id)
+        )
+      ORDER BY tank_id,
+        (taken_at < NOW() - ${interval}::interval) DESC,
+        CASE WHEN taken_at < NOW() - ${interval}::interval THEN taken_at END DESC,
+        taken_at ASC
+    `;
+
   const rows = (await traced("db loadPlayerInitialData", () => db.execute(sql`
     WITH p AS (
       SELECT *
@@ -404,45 +440,12 @@ export async function loadPlayerInitialData(
       WHERE player_id = (SELECT id FROM p)
       ORDER BY tank_id, taken_at DESC, id DESC
     ),
-    snap_24h AS (
-      SELECT * FROM ${playerSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '24 hours'
-      ORDER BY taken_at DESC, id DESC LIMIT 1
-    ),
-    snap_7d AS (
-      SELECT * FROM ${playerSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '7 days'
-      ORDER BY taken_at DESC, id DESC LIMIT 1
-    ),
-    snap_30d AS (
-      SELECT * FROM ${playerSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '30 days'
-      ORDER BY taken_at DESC, id DESC LIMIT 1
-    ),
-    tanks_24h AS (
-      SELECT DISTINCT ON (tank_id) *
-      FROM ${tankSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '24 hours'
-      ORDER BY tank_id, taken_at DESC, id DESC
-    ),
-    tanks_7d AS (
-      SELECT DISTINCT ON (tank_id) *
-      FROM ${tankSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '7 days'
-      ORDER BY tank_id, taken_at DESC, id DESC
-    ),
-    tanks_30d AS (
-      SELECT DISTINCT ON (tank_id) *
-      FROM ${tankSnapshots}
-      WHERE player_id = (SELECT id FROM p)
-        AND taken_at < NOW() - INTERVAL '30 days'
-      ORDER BY tank_id, taken_at DESC, id DESC
-    )
+    snap_24h AS (${playerPeriodCte("24 hours")}),
+    snap_7d AS (${playerPeriodCte("7 days")}),
+    snap_30d AS (${playerPeriodCte("30 days")}),
+    tanks_24h AS (${tankPeriodCte("24 hours")}),
+    tanks_7d AS (${tankPeriodCte("7 days")}),
+    tanks_30d AS (${tankPeriodCte("30 days")})
     SELECT
       (SELECT row_to_json(p.*) FROM p) AS player,
       (SELECT row_to_json(latest_snap.*) FROM latest_snap) AS latest_snapshot,
