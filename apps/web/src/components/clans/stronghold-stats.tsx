@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import {
   Table,
   TableBody,
@@ -193,20 +194,20 @@ export function ClanStrongholdStatsTable({
       </TableHeader>
       <TableBody>
         {ROWS.map((row) => (
-          <>
+          <Fragment key={row.label}>
             {row.separator && (
-              <TableRow key={`${row.label}-sep`}>
+              <TableRow>
                 <td colSpan={5} className="h-px bg-border p-0!" />
               </TableRow>
             )}
-            <TableRow key={row.label}>
+            <TableRow>
               <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
               <PeriodCell cell={row.current(current)} />
               <PeriodCell cell={p24 ? row.delta(p24) : DASH} hideOnMobile />
               <PeriodCell cell={p7 ? row.delta(p7) : DASH} hideOnMobile />
               <PeriodCell cell={p30 ? row.delta(p30) : DASH} />
             </TableRow>
-          </>
+          </Fragment>
         ))}
       </TableBody>
     </Table>
