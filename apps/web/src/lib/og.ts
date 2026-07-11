@@ -22,6 +22,36 @@ const unicumLogoDataUrl = readFile(
   (svg) => `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`,
 );
 
+// The hangar-floor scene WG's tankopedia detail page uses (the JPEG variant,
+// since Satori can't decode WebP). Constant across tanks, so fetch once per
+// cold start. Resolves to `null` on failure so the OG still renders.
+const HANGAR_BG_URL =
+  "https://eu-wotp.wgcdn.co/static/latest/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/hangar-bg.jpg";
+
+export const hangarBgDataUrl: Promise<string | null> = fetch(HANGAR_BG_URL)
+  .then(async (res) =>
+    res.ok
+      ? `data:image/jpeg;base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`
+      : null,
+  )
+  .catch(() => null);
+
+// Fetch a remote raster into a data URL Satori can embed. Returns `null` on any
+// failure (timeout, 404, G-Core throttle) so callers degrade gracefully.
+export async function fetchImageDataUrl(
+  url: string,
+  mime = "image/png",
+): Promise<string | null> {
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+    if (!res.ok) return null;
+    const buf = await res.arrayBuffer();
+    return `data:${mime};base64,${Buffer.from(buf).toString("base64")}`;
+  } catch {
+    return null;
+  }
+}
+
 export type OgAssets = {
   regular: ArrayBuffer;
   bold: ArrayBuffer;

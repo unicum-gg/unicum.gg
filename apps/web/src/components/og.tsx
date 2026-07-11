@@ -1,4 +1,35 @@
+import type React from "react";
 import APP from "@/constants/app";
+import { VEHICLE_TYPE_PATHS } from "@/components/players/vehicle-type-icon";
+
+// Satori renders inline SVG, so we reuse the site's vehicle-type glyph paths
+// with an explicit fill (Satori ignores Tailwind/currentColor).
+export function VehicleTypeGlyph({
+  type,
+  size = 44,
+  color = "#F5F5F5",
+}: {
+  type: string;
+  size?: number;
+  color?: string;
+}) {
+  const spec = VEHICLE_TYPE_PATHS[type];
+  if (!spec) return null;
+  const paths = Array.isArray(spec.d) ? spec.d : [spec.d];
+  const scale = size / Math.max(spec.width, spec.height);
+  return (
+    <svg
+      width={spec.width * scale}
+      height={spec.height * scale}
+      viewBox={`0 0 ${spec.width} ${spec.height}`}
+      fill={color}
+    >
+      {paths.map((d) => (
+        <path key={d} d={d} fillRule="evenodd" />
+      ))}
+    </svg>
+  );
+}
 
 export function RegionHeaderCell({ region }: { region: string }) {
   return (
@@ -52,7 +83,7 @@ export function StatCard({
   first,
 }: {
   label: string;
-  value: string;
+  value: React.ReactNode;
   bg: string | null;
   first?: boolean;
 }) {
@@ -69,7 +100,16 @@ export function StatCard({
       }}
     >
       <span style={{ fontSize: 22, opacity: 0.8 }}>{label}</span>
-      <span style={{ fontSize: 56, fontWeight: 700, marginTop: 4 }}>
+      <span
+        style={{
+          display: "flex",
+          alignItems: "center",
+          height: 60,
+          fontSize: 56,
+          fontWeight: 700,
+          marginTop: 4,
+        }}
+      >
         {value}
       </span>
     </div>
