@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import { FavoriteButton } from "@/components/favorite-button";
 import { NationFlag } from "@/components/players/nation-flag";
@@ -360,13 +361,17 @@ export function TankView({
         <div className="relative min-h-[320px] overflow-hidden sm:min-h-[400px] lg:min-h-[470px]">
           {/* The exact hangar-floor backdrop WG's own tankopedia detail page
               uses (1920x900, matching the render), served from its portal CDN.
-              `latest` keeps the URL stable across client version bumps. */}
-          <div
+              `latest` keeps the URL stable across client version bumps. Rendered
+              through next/image so it is resized/format-negotiated instead of
+              shipping the full-size webp as a CSS background. */}
+          <Image
+            src={hangarBgUrl(region, "webp")}
+            alt=""
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{
-              backgroundImage: `url('${hangarBgUrl(region, "webp")}')`,
-            }}
+            fill
+            priority
+            sizes="100vw"
+            className="pointer-events-none object-cover object-center"
           />
           {/* Soft spotlight behind the vehicle. */}
           <div
@@ -382,10 +387,19 @@ export function TankView({
               name={meta.name}
             />
           </div>
-          {/* Left fade keeps the title legible over the render. */}
+          {/* Left fade keeps the title legible over the render. Kept tight to
+              the left (clears by ~58%) so it darkens the title area, not the
+              vehicle render sitting in the centre. */}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-r from-fd-background via-fd-background/45 to-transparent"
+            className="pointer-events-none absolute inset-0 bg-linear-to-r from-fd-background from-0% via-fd-background/30 via-26% to-transparent to-58%"
+          />
+          {/* Wrap the fade around the top-left corner (diagonal from that
+              corner) so the header labels sit on the same darkening, not just
+              the left edge. Clears before the centre so the render stays lit. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-linear-to-br from-fd-background from-0% via-fd-background/20 via-28% to-transparent to-55%"
           />
           <div className="absolute right-4 top-4 z-20 flex items-center gap-1.5">
             <FavoriteButton item={favoriteItem} />
