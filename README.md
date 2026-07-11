@@ -1,6 +1,6 @@
 # unicum.gg
 
-Free, open-source World of Tanks stats tracker. Player profiles, clan pages, leaderboards. WN7, WN8, WNX. No login, no ads.
+Free, open-source World of Tanks stats tracker. Player profiles, clan pages, leaderboards. WN7, WN8, WNX. No ads.
 
 Live at [unicum.gg](https://unicum.gg).
 

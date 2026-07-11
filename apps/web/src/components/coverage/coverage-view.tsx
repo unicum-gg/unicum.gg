@@ -74,7 +74,7 @@ export async function CoverageView({ region }: { region: Region }) {
           </h1>
           <p className="mt-4 text-fd-muted-foreground">
             Refreshed on an adaptive cadence: active players every few hours,
-            dormants every weeks. Open source, no login, no ads.{" "}
+            dormants every weeks. Open source, no ads.{" "}
             <a
               href={APP.EXTERNAL.GITHUB}
               className="underline-offset-2 hover:underline"
