@@ -50,6 +50,14 @@ export async function register() {
     const { startDiscoveryCron } = await import("@unicum.gg/core/discovery/cron");
     startDiscoveryCron();
 
+    const { startMomCron } = await import(
+      "@unicum.gg/core/mom/refresh-cron"
+    );
+    startMomCron();
+
+    const { startMoeCron } = await import("@unicum.gg/core/moe/refresh-cron");
+    startMoeCron();
+
     const { startTopClansCron } = await import(
       "@unicum.gg/core/wargaming/wot/clans/top/cron"
     );
@@ -59,6 +67,11 @@ export async function register() {
       "@unicum.gg/core/wargaming/wot/players/top/cron"
     );
     startTopPlayersCron();
+
+    const { startTopPlayersByTankCron } = await import(
+      "@unicum.gg/core/wargaming/wot/players/top/by-tank/cron"
+    );
+    startTopPlayersByTankCron();
   } finally {
     globalThis.__dbContext = "request";
   }

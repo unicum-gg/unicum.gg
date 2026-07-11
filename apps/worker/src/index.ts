@@ -42,6 +42,14 @@ async function main(): Promise<void> {
   const { startDiscoveryCron } = await import("@unicum.gg/core/discovery/cron");
   startDiscoveryCron();
 
+  const { startMomCron } = await import(
+    "@unicum.gg/core/mom/refresh-cron"
+  );
+  startMomCron();
+
+  const { startMoeCron } = await import("@unicum.gg/core/moe/refresh-cron");
+  startMoeCron();
+
   const { startTopClansCron } = await import(
     "@unicum.gg/core/wargaming/wot/clans/top/cron"
   );
@@ -51,6 +59,11 @@ async function main(): Promise<void> {
     "@unicum.gg/core/wargaming/wot/players/top/cron"
   );
   startTopPlayersCron();
+
+  const { startTopPlayersByTankCron } = await import(
+    "@unicum.gg/core/wargaming/wot/players/top/by-tank/cron"
+  );
+  startTopPlayersByTankCron();
 
   console.log("[worker] all crons scheduled");
 }
