@@ -7,11 +7,17 @@
     "./db": "./src/db/index.ts",
     "./db/schema": "./src/db/schema/index.ts",
     "./redis": "./src/redis/index.ts",
+    "./mom": "./src/mom/index.ts",
+    "./mom/refresh-cron": "./src/mom/refresh-cron.ts",
+    "./moe": "./src/moe/index.ts",
+    "./moe/refresh-cron": "./src/moe/refresh-cron.ts",
     "./players": "./src/players/index.ts",
     "./discovery": "./src/discovery/index.ts",
     "./clans/repository": "./src/clans/repository/index.ts",
     "./wargaming/wot/clans/top": "./src/wargaming/wot/clans/top/index.ts",
     "./wargaming/wot/players/top": "./src/wargaming/wot/players/top/index.ts",
+    "./wargaming/wot/players/top/by-tank": "./src/wargaming/wot/players/top/by-tank/index.ts",
+    "./wargaming/wot/tanks": "./src/wargaming/wot/tanks/index.ts",
     "./*": "./src/*.ts"
   },
   "dependencies": {
