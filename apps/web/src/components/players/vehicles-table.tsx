@@ -5,9 +5,10 @@ import {
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
-import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
+import ROUTES from "@/constants/routes";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -24,9 +25,23 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { NationFlag } from "@/components/players/nation-flag";
+import {
+  PLAYER_COLUMNS,
+  PLAYER_COLUMN_BY_KEY,
+  PlayerColumnSelector,
+  ratingForMetric,
+  usePlayerColumns,
+} from "@/components/players/player-vehicle-columns";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { TablePager, usePagination } from "@/components/table-pager";
+import { metricLabel } from "@/components/tanks/perf-columns";
+import {
+  type RangeColumn,
+  TankFilterBar,
+  useTankFilters,
+} from "@/components/tanks/tank-filter-bar";
 import {
   Tooltip,
   TooltipContent,
@@ -36,44 +51,13 @@ import {
 import { cn } from "@/lib/utils";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
 import type { Region } from "@unicum.gg/wargaming/region";
-import { masteryBadgeUrl } from "@unicum.gg/wargaming/cdn";
-import {
-  RATING_COLOR_CLASS,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-
-enum SortColumn {
-  Name = "name",
-  Mastery = "mastery",
-  Type = "type",
-  Nation = "nation",
-  Tier = "tier",
-  Battles = "battles",
-  WinRate = "winrate",
-  AvgDamage = "avg_damage",
-  AvgXp = "avg_xp",
-  Rating = "rating",
-}
 
 enum SortDirection {
   Asc = "asc",
   Desc = "desc",
 }
 
-type SortState = { column: SortColumn; direction: SortDirection } | null;
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const decFmt = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-const pctFmt = new Intl.NumberFormat("en-US", {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
+type SortState = { key: string; direction: SortDirection } | null;
 
 const TYPE_ABBR: Record<string, string> = {
   heavyTank: "HT",
@@ -83,59 +67,36 @@ const TYPE_ABBR: Record<string, string> = {
   SPG: "SPG",
 };
 
-const MASTERY_LABEL: Record<number, string> = {
-  4: "Ace Tanker",
-  3: "1st Class",
-  2: "2nd Class",
-  1: "3rd Class",
-};
-
-// The row plus the rating for the currently-selected metric, so sorting and the
-// rating column read a single resolved value.
-type Row = PlayerVehicleRow & { rating: number | null };
-
-function ratingForMetric(
+function sortValue(
   row: PlayerVehicleRow,
+  key: string,
   metric: RatingMetric,
-): number | null {
-  if (metric === RatingMetric.Wn7) return row.wn7;
-  if (metric === RatingMetric.Wn8) return row.wn8;
-  return row.wnx;
-}
-
-function getSortValue(row: Row, column: SortColumn): number | string {
-  switch (column) {
-    case SortColumn.Name:
-      return row.name.toLowerCase();
-    case SortColumn.Mastery:
-      return row.mastery ?? -1;
-    case SortColumn.Type:
-      return TYPE_ABBR[row.type ?? ""] ?? row.type ?? "";
-    case SortColumn.Nation:
+): number | string {
+  switch (key) {
+    case "nation":
       return row.nation ?? "";
-    case SortColumn.Tier:
+    case "type":
+      return TYPE_ABBR[row.type ?? ""] ?? row.type ?? "";
+    case "tier":
       return row.tier ?? 0;
-    case SortColumn.Battles:
-      return row.battles;
-    case SortColumn.WinRate:
-      return row.winrate ?? -1;
-    case SortColumn.AvgDamage:
-      return row.avgDamage ?? -1;
-    case SortColumn.AvgXp:
-      return row.avgXp ?? -1;
-    case SortColumn.Rating:
-      return row.rating ?? -1;
+    case "name":
+      return row.name.toLowerCase();
+    default:
+      return PLAYER_COLUMN_BY_KEY[key]?.sortValue(row, metric) ?? -1;
   }
 }
 
-function compareRows(a: Row, b: Row, state: SortState): number {
-  if (!state) {
-    // Default: most battles first.
-    return b.battles - a.battles;
-  }
+function compareRows(
+  a: PlayerVehicleRow,
+  b: PlayerVehicleRow,
+  state: SortState,
+  metric: RatingMetric,
+): number {
+  // Default: most battles first.
+  if (!state) return b.battles - a.battles;
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
-  const av = getSortValue(a, state.column);
-  const bv = getSortValue(b, state.column);
+  const av = sortValue(a, state.key, metric);
+  const bv = sortValue(b, state.key, metric);
   if (typeof av === "string" && typeof bv === "string") {
     return mul * av.localeCompare(bv);
   }
@@ -143,7 +104,7 @@ function compareRows(a: Row, b: Row, state: SortState): number {
 }
 
 function SortableHead({
-  column,
+  col,
   state,
   onToggle,
   align = "start",
@@ -152,16 +113,16 @@ function SortableHead({
   tooltip,
   children,
 }: {
-  column: SortColumn;
+  col: string;
   state: SortState;
-  onToggle: (col: SortColumn) => void;
+  onToggle: (key: string) => void;
   align?: "start" | "center" | "end";
   hideOnMobile?: boolean;
   headClassName?: string;
   tooltip?: string;
   children: React.ReactNode;
 }) {
-  const active = state?.column === column;
+  const active = state?.key === col;
   const Icon = active
     ? state.direction === SortDirection.Asc
       ? CaretUpIcon
@@ -170,7 +131,7 @@ function SortableHead({
   const button = (
     <button
       type="button"
-      onClick={() => onToggle(column)}
+      onClick={() => onToggle(col)}
       className={cn(
         "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
         align === "center" && "justify-center",
@@ -220,247 +181,212 @@ export function PlayerVehiclesTable({
     ? storedRating
     : DEFAULT_RATING_METRIC;
   const [sort, setSort] = useState<SortState>({
-    column: SortColumn.Battles,
+    key: "battles",
     direction: SortDirection.Desc,
   });
+  const [visibleKeys] = usePlayerColumns();
 
-  // Rows arrive pre-computed from the server; here we only resolve the rating
-  // for the selected metric so the column and sort share one value.
-  const rows = useMemo(
-    () => vehicles.map((v) => ({ ...v, rating: ratingForMetric(v, metric) })),
-    [vehicles, metric],
+  // Numeric columns the min/max range filter can target (the rating column
+  // follows the selected metric, like the table's own rating column).
+  const rangeCols: RangeColumn<PlayerVehicleRow>[] = useMemo(
+    () => [
+      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "avgDamage", label: "Avg damage", value: (r) => r.avgDamage },
+      { key: "avgXp", label: "Avg XP", value: (r) => r.avgXp },
+      {
+        key: "winrate",
+        label: "WR %",
+        value: (r) => (r.winrate != null ? r.winrate * 100 : null),
+      },
+      {
+        key: "rating",
+        label: metricLabel(metric),
+        value: (r) => ratingForMetric(r, metric),
+      },
+    ],
+    [metric],
   );
+
+  const { filtered, filters } = useTankFilters(vehicles, rangeCols, "battles");
   const sorted = useMemo(
-    () => [...rows].sort((a, b) => compareRows(a, b, sort)),
-    [rows, sort],
+    () => [...filtered].sort((a, b) => compareRows(a, b, sort, metric)),
+    [filtered, sort, metric],
+  );
+  const { paged, pager } = usePagination(sorted);
+  const visibleColumns = useMemo(
+    () => PLAYER_COLUMNS.filter((c) => visibleKeys.has(c.key)),
+    [visibleKeys],
   );
 
-  function toggleSort(column: SortColumn) {
+  function toggleSort(key: string) {
     setSort((prev) => {
-      if (prev?.column !== column) {
-        return { column, direction: SortDirection.Desc };
-      }
-      if (prev.direction === SortDirection.Desc) {
-        return { column, direction: SortDirection.Asc };
-      }
+      if (prev?.key !== key) return { key, direction: SortDirection.Desc };
+      if (prev.direction === SortDirection.Desc)
+        return { key, direction: SortDirection.Asc };
       return null;
     });
   }
 
-  if (rows.length === 0) {
+  if (vehicles.length === 0) {
     return (
       <p className="p-4 text-sm text-muted-foreground">No tanks played yet.</p>
     );
   }
 
-  function ratingColor(value: number | null): string {
-    if (value === null) return "";
-    if (metric === RatingMetric.Wn7) return RATING_COLOR_CLASS[wn7Color(value)];
-    if (metric === RatingMetric.Wn8) return RATING_COLOR_CLASS[wn8Color(value)];
-    return RATING_COLOR_CLASS[wnxColor(value)];
-  }
-
-  const metricLabel =
-    metric === RatingMetric.Wn7
-      ? "WN7"
-      : metric === RatingMetric.Wn8
-        ? "WN8"
-        : "WNX";
-
   return (
     <TooltipProvider delayDuration={150}>
-      <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
-        <TableHeader>
-          <TableRow>
-            <SortableHead
-              column={SortColumn.Nation}
-              state={sort}
-              onToggle={toggleSort}
-              align="center"
-              hideOnMobile
-              headClassName="w-px"
-              tooltip="Nation"
-            >
-              <TankopediaHeaderIcon name="nation" />
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Type}
-              state={sort}
-              onToggle={toggleSort}
-              align="center"
-              hideOnMobile
-              headClassName="w-px"
-              tooltip="Type"
-            >
-              <TankopediaHeaderIcon name="type" />
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Tier}
-              state={sort}
-              onToggle={toggleSort}
-              align="center"
-              hideOnMobile
-              headClassName="w-px"
-              tooltip="Tier"
-            >
-              <span className="whitespace-nowrap text-xs font-medium tracking-tight text-fd-muted-foreground">
-                I-XI
-              </span>
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Name}
-              state={sort}
-              onToggle={toggleSort}
-            >
-              Name
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Mastery}
-              state={sort}
-              onToggle={toggleSort}
-              align="center"
-              hideOnMobile
-            >
-              Mastery
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Battles}
-              state={sort}
-              onToggle={toggleSort}
-              align="end"
-            >
-              Battles
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.AvgDamage}
-              state={sort}
-              onToggle={toggleSort}
-              align="end"
-            >
-              Avg damage
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.AvgXp}
-              state={sort}
-              onToggle={toggleSort}
-              align="end"
-              hideOnMobile
-            >
-              Avg XP
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.WinRate}
-              state={sort}
-              onToggle={toggleSort}
-              align="end"
-              tooltip="Overall (lifetime) winrate"
-            >
-              WR
-            </SortableHead>
-            <SortableHead
-              column={SortColumn.Rating}
-              state={sort}
-              onToggle={toggleSort}
-              align="end"
-            >
-              {metricLabel}
-            </SortableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {sorted.map((r) => {
-            const hasIcon = !!(r.tag && r.type);
-            const name = r.shortName || r.name || `#${r.tankId}`;
-            const isPremium = r.isPremium;
-            return (
-              <TableRow key={r.tankId}>
-                <TableCell className="hidden text-center sm:table-cell">
-                  {r.nation ? (
-                    <NationFlag nation={r.nation} />
-                  ) : (
-                    <span className="text-muted-foreground">—</span>
-                  )}
-                </TableCell>
-                <TableCell className="hidden text-center sm:table-cell">
-                  {r.type ? (
-                    <VehicleTypeIcon type={r.type} premium={isPremium} />
-                  ) : (
-                    <span className="text-muted-foreground">—</span>
-                  )}
-                </TableCell>
-                <TableCell
-                  className={cn(
-                    "hidden text-center font-medium sm:table-cell",
-                    isPremium && "text-[#FAB81B]",
-                  )}
+      <div className="p-4">
+        <TankFilterBar
+          filters={filters}
+          searchNoun="tanks"
+          extra={<PlayerColumnSelector />}
+        />
+      </div>
+      <div className="border-t border-fd-border">
+        {sorted.length === 0 ? (
+          <p className="p-4 text-sm text-muted-foreground">
+            No tanks match these filters.
+          </p>
+        ) : (
+          <>
+          <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
+            <TableHeader>
+              <TableRow>
+                <SortableHead
+                  col="nation"
+                  state={sort}
+                  onToggle={toggleSort}
+                  align="center"
+                  hideOnMobile
+                  headClassName="w-px"
+                  tooltip="Nation"
                 >
-                  {r.tier ? toRoman(r.tier) : "—"}
-                </TableCell>
-                <TableCell
-                  className={cn(
-                    "font-medium max-sm:pl-4!",
-                    isPremium && "text-[#FAB81B]",
-                  )}
+                  <TankopediaHeaderIcon name="nation" />
+                </SortableHead>
+                <SortableHead
+                  col="type"
+                  state={sort}
+                  onToggle={toggleSort}
+                  align="center"
+                  hideOnMobile
+                  headClassName="w-px"
+                  tooltip="Type"
                 >
-                  <span className="flex items-center gap-2">
-                    {hasIcon ? (
-                      <TankIcon
-                        region={region}
-                        tag={r.tag!}
-                        type={r.type!}
-                        className="h-3.5 w-auto shrink-0 object-contain"
-                      />
-                    ) : null}
-                    <span>{name}</span>
+                  <TankopediaHeaderIcon name="type" />
+                </SortableHead>
+                <SortableHead
+                  col="tier"
+                  state={sort}
+                  onToggle={toggleSort}
+                  align="center"
+                  hideOnMobile
+                  headClassName="w-px"
+                  tooltip="Tier"
+                >
+                  <span className="whitespace-nowrap text-xs font-medium tracking-tight text-fd-muted-foreground">
+                    I-XI
                   </span>
-                </TableCell>
-                <TableCell className="hidden text-center text-xs sm:table-cell">
-                  {r.mastery && r.mastery > 0 ? (
-                    <Image
-                      src={masteryBadgeUrl(region, r.mastery)}
-                      alt={MASTERY_LABEL[r.mastery]}
-                      title={MASTERY_LABEL[r.mastery]}
-                      width={28}
-                      height={28}
-                      className="mx-auto h-7 w-auto object-contain"
-                    />
-                  ) : (
-                    <span className="text-muted-foreground">—</span>
-                  )}
-                </TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {intFmt.format(r.battles)}
-                </TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {r.avgDamage !== null ? intFmt.format(r.avgDamage) : "—"}
-                </TableCell>
-                <TableCell className="hidden text-right tabular-nums sm:table-cell">
-                  {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
-                </TableCell>
-                <TableCell
-                  className={cn(
-                    "text-right tabular-nums",
-                    r.winrate !== null &&
-                      RATING_COLOR_CLASS[winrateColor(r.winrate)],
-                  )}
-                >
-                  {r.winrate !== null
-                    ? `${pctFmt.format(r.winrate * 100)}%`
-                    : "—"}
-                </TableCell>
-                <TableCell
-                  className={cn(
-                    "text-right tabular-nums",
-                    ratingColor(r.rating),
-                  )}
-                >
-                  {r.rating !== null ? decFmt.format(r.rating) : "—"}
-                </TableCell>
+                </SortableHead>
+                <SortableHead col="name" state={sort} onToggle={toggleSort}>
+                  Name
+                </SortableHead>
+                {visibleColumns.map((c) => (
+                  <SortableHead
+                    key={c.key}
+                    col={c.key}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align={c.align}
+                    hideOnMobile={c.hideOnMobile}
+                    tooltip={c.tip}
+                  >
+                    {c.header ? c.header(metric) : c.label}
+                  </SortableHead>
+                ))}
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            </TableHeader>
+            <TableBody>
+              {paged.map((r) => {
+                const hasIcon = !!(r.tag && r.type);
+                const name = r.shortName || r.name || `#${r.tankId}`;
+                const isPremium = r.isPremium;
+                return (
+                  <TableRow key={r.tankId}>
+                    <TableCell className="hidden text-center sm:table-cell">
+                      {r.nation ? (
+                        <NationFlag nation={r.nation} />
+                      ) : (
+                        <span className="text-muted-foreground">—</span>
+                      )}
+                    </TableCell>
+                    <TableCell className="hidden text-center sm:table-cell">
+                      {r.type ? (
+                        <VehicleTypeIcon type={r.type} premium={isPremium} />
+                      ) : (
+                        <span className="text-muted-foreground">—</span>
+                      )}
+                    </TableCell>
+                    <TableCell
+                      className={cn(
+                        "hidden text-center font-medium sm:table-cell",
+                        isPremium && "text-[#FAB81B]",
+                      )}
+                    >
+                      {r.tier ? toRoman(r.tier) : "—"}
+                    </TableCell>
+                    <TableCell
+                      className={cn(
+                        "font-medium max-sm:pl-4!",
+                        isPremium && "text-[#FAB81B]",
+                      )}
+                    >
+                      <span className="flex items-center gap-2">
+                        {hasIcon ? (
+                          <TankIcon
+                            region={region}
+                            tag={r.tag!}
+                            type={r.type!}
+                            className="h-3.5 w-auto shrink-0 object-contain"
+                          />
+                        ) : null}
+                        {r.slug ? (
+                          <Link
+                            href={ROUTES.TANK(region, r.slug)}
+                            className="hover:underline"
+                          >
+                            {name}
+                          </Link>
+                        ) : (
+                          <span>{name}</span>
+                        )}
+                      </span>
+                    </TableCell>
+                    {visibleColumns.map((c) => {
+                      const { node, className } = c.cell(r, { region, metric });
+                      return (
+                        <TableCell
+                          key={c.key}
+                          className={cn(
+                            "tabular-nums",
+                            c.align === "center" && "text-center",
+                            c.align === "end" && "text-right",
+                            c.hideOnMobile && "hidden sm:table-cell",
+                            className,
+                          )}
+                        >
+                          {node}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          <TablePager pager={pager} />
+          </>
+        )}
+      </div>
     </TooltipProvider>
   );
 }
