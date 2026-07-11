@@ -3,7 +3,8 @@
 import { StarIcon, XIcon } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import { ClanRow, PlayerRow } from "@/components/search/rows";
+import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
+import { ClanRow, PlayerRow, TankRow } from "@/components/search/rows";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
@@ -36,9 +37,19 @@ export type Row =
       region: Region;
       key: string;
       isRecent?: boolean;
+    }
+  | {
+      type: "tank";
+      tank: TankSearchResult;
+      region: Region;
+      key: string;
+      isRecent?: boolean;
     };
 
-export type SelectableRow = Extract<Row, { type: "player" | "clan" }>;
+export type SelectableRow = Extract<Row, { type: "player" | "clan" | "tank" }>;
+// Rows that can be pinned as a favorite / stored in recent history — players,
+// clans, and tanks alike.
+export type HistoryRow = SelectableRow;
 
 export type ResultsStatus = {
   anyLoading: boolean;
@@ -103,6 +114,7 @@ export function flattenSections(
   region: Region,
   players: SearchPlayerResult[] | null,
   clans: ClanSearchResult[] | null,
+  tanks: TankSearchResult[] | null,
 ): Row[] {
   const rows: Row[] = [];
   if (players && players.length > 0) {
@@ -127,16 +139,29 @@ export function flattenSections(
       });
     }
   }
+  if (tanks && tanks.length > 0) {
+    rows.push({ type: "header", label: "Tanks", key: "h-tanks" });
+    for (const tank of tanks) {
+      rows.push({
+        type: "tank",
+        tank,
+        region,
+        key: `t-${tank.tank_id}`,
+      });
+    }
+  }
   return rows;
 }
 
 function sameItem(a: SearchHistoryItem, b: SearchHistoryItem): boolean {
   if (a.region !== b.region || a.kind !== b.kind) return false;
-  return a.kind === "player" && b.kind === "player"
-    ? a.player.account_id === b.player.account_id
-    : a.kind === "clan" && b.kind === "clan"
-      ? a.clan.clan_id === b.clan.clan_id
-      : false;
+  if (a.kind === "player" && b.kind === "player")
+    return a.player.account_id === b.player.account_id;
+  if (a.kind === "clan" && b.kind === "clan")
+    return a.clan.clan_id === b.clan.clan_id;
+  if (a.kind === "tank" && b.kind === "tank")
+    return a.tank.tank_id === b.tank.tank_id;
+  return false;
 }
 
 export function flattenHistory(
@@ -178,19 +203,30 @@ export function itemToRow(
       isRecent,
     };
   }
+  if (item.kind === "clan") {
+    return {
+      type: "clan",
+      clan: item.clan,
+      region: item.region,
+      key: `${keyPrefix}-c-${item.region}-${item.clan.clan_id}`,
+      isRecent,
+    };
+  }
   return {
-    type: "clan",
-    clan: item.clan,
+    type: "tank",
+    tank: item.tank,
     region: item.region,
-    key: `${keyPrefix}-c-${item.region}-${item.clan.clan_id}`,
+    key: `${keyPrefix}-t-${item.region}-${item.tank.tank_id}`,
     isRecent,
   };
 }
 
-export function rowToItem(row: SelectableRow): SearchHistoryItem {
-  return row.type === "player"
-    ? { kind: "player", region: row.region, player: row.player }
-    : { kind: "clan", region: row.region, clan: row.clan };
+export function rowToItem(row: HistoryRow): SearchHistoryItem {
+  if (row.type === "player")
+    return { kind: "player", region: row.region, player: row.player };
+  if (row.type === "clan")
+    return { kind: "clan", region: row.region, clan: row.clan };
+  return { kind: "tank", region: row.region, tank: row.tank };
 }
 
 export function ResultsArea({
@@ -208,9 +244,9 @@ export function ResultsArea({
   activeIndex: number;
   onPick: (row: SelectableRow) => void;
   onHover: (index: number) => void;
-  isFavorite: (row: SelectableRow) => boolean;
-  onToggleFavorite: (row: SelectableRow) => void;
-  onRemoveRecent: (row: SelectableRow) => void;
+  isFavorite: (row: HistoryRow) => boolean;
+  onToggleFavorite: (row: HistoryRow) => void;
+  onRemoveRecent: (row: HistoryRow) => void;
 }) {
   const listRef = useRef<HTMLUListElement>(null);
 
@@ -241,7 +277,9 @@ export function ResultsArea({
           selectableIndex += 1;
           const idx = selectableIndex;
           const isActive = idx === activeIndex;
-          const fav = isFavorite(row);
+          // Players, clans, and tanks can all be favorited / kept in recent.
+          const historyRow: HistoryRow = row;
+          const fav = isFavorite(historyRow);
           return (
             <li
               key={row.key}
@@ -261,29 +299,33 @@ export function ResultsArea({
               >
                 {row.type === "player" ? (
                   <PlayerRow player={row.player} />
-                ) : (
+                ) : row.type === "clan" ? (
                   <ClanRow clan={row.clan} />
+                ) : (
+                  <TankRow tank={row.tank} region={row.region} />
                 )}
               </button>
-              <div className="flex shrink-0 items-center gap-1 pr-2">
-                {row.isRecent ? (
+              {historyRow ? (
+                <div className="flex shrink-0 items-center gap-1 pr-2">
+                  {historyRow.isRecent ? (
+                    <RowActionButton
+                      onClick={() => onRemoveRecent(historyRow)}
+                      label="Remove from recent"
+                    >
+                      <XIcon className="size-3.5" weight="bold" />
+                    </RowActionButton>
+                  ) : null}
                   <RowActionButton
-                    onClick={() => onRemoveRecent(row)}
-                    label="Remove from recent"
+                    onClick={() => onToggleFavorite(historyRow)}
+                    label={fav ? "Remove from favorites" : "Add to favorites"}
                   >
-                    <XIcon className="size-3.5" weight="bold" />
+                    <StarIcon
+                      className={cn("size-3.5", fav ? "text-fd-primary" : "")}
+                      weight={fav ? "fill" : "regular"}
+                    />
                   </RowActionButton>
-                ) : null}
-                <RowActionButton
-                  onClick={() => onToggleFavorite(row)}
-                  label={fav ? "Remove from favorites" : "Add to favorites"}
-                >
-                  <StarIcon
-                    className={cn("size-3.5", fav ? "text-fd-primary" : "")}
-                    weight={fav ? "fill" : "regular"}
-                  />
-                </RowActionButton>
-              </div>
+                </div>
+              ) : null}
             </li>
           );
         })}

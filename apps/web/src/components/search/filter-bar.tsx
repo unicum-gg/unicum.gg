@@ -14,18 +14,21 @@ export enum SearchType {
   All = "all",
   Players = "players",
   Clans = "clans",
+  Tanks = "tanks",
 }
 
 const SEARCH_TYPES: SearchType[] = [
   SearchType.All,
   SearchType.Players,
   SearchType.Clans,
+  SearchType.Tanks,
 ];
 
 const SEARCH_TYPE_LABEL: Record<SearchType, string> = {
   [SearchType.All]: "All",
   [SearchType.Players]: "Players",
   [SearchType.Clans]: "Clans",
+  [SearchType.Tanks]: "Tanks",
 };
 
 export function FilterBar({

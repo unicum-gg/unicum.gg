@@ -5,10 +5,12 @@ import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route
 import STORAGE from "@/constants/storage";
 import type { Region } from "@unicum.gg/wargaming/region";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
+import type { TankSearchResult } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 
 export type SearchHistoryItem =
   | { kind: "player"; region: Region; player: SearchPlayerResult }
-  | { kind: "clan"; region: Region; clan: ClanSearchResult };
+  | { kind: "clan"; region: Region; clan: ClanSearchResult }
+  | { kind: "tank"; region: Region; tank: TankSearchResult };
 
 type SearchHistory = {
   recent: SearchHistoryItem[];
@@ -21,9 +23,14 @@ const MAX_RECENT = 5;
 const EMPTY: SearchHistory = { recent: [], favorites: [] };
 
 function itemKey(item: SearchHistoryItem): string {
-  return item.kind === "player"
-    ? `p:${item.region}:${item.player.account_id}`
-    : `c:${item.region}:${item.clan.clan_id}`;
+  switch (item.kind) {
+    case "player":
+      return `p:${item.region}:${item.player.account_id}`;
+    case "clan":
+      return `c:${item.region}:${item.clan.clan_id}`;
+    case "tank":
+      return `t:${item.region}:${item.tank.tank_id}`;
+  }
 }
 
 function loadFromStorage(): SearchHistory {
