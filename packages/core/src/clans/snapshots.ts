@@ -1,4 +1,4 @@
-import { and, desc, eq, lte } from "drizzle-orm";
+import { and, asc, desc, eq, lt, lte, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   type ClanSnapshot,
@@ -68,25 +68,52 @@ export async function getClanSnapshotPeriods(
     d30: new Date(now - 30 * 24 * 60 * 60 * 1000),
   };
 
-  async function latestBefore(cutoff: Date): Promise<ClanSnapshot | null> {
+  // The current snapshot's timestamp. We exclude it from the short-history
+  // fallback below so a clan with a single snapshot stays empty rather than
+  // diffing against itself.
+  const [latest] = await db
+    .select({ takenAt: snapshots.takenAt })
+    .from(snapshots)
+    .where(eq(snapshots.clanId, clanId))
+    .orderBy(desc(snapshots.takenAt))
+    .limit(1);
+  const latestTakenAt = latest?.takenAt ?? null;
+
+  // Baseline snapshot for a period diff: normally the newest snapshot at or
+  // before `cutoff`. When the clan has been tracked for less than that window,
+  // no such snapshot exists, so fall back to the oldest snapshot other than the
+  // current one, otherwise a recently-tracked clan shows a blank period column
+  // instead of the games it actually played.
+  async function periodBaseline(cutoff: Date): Promise<ClanSnapshot | null> {
+    if (!latestTakenAt) return null;
+    // A raw `sql` template can't bind a Date directly (the driver only accepts
+    // strings/buffers there), so hand it the ISO string cast to timestamptz.
+    const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
     const [row] = await db
       .select()
       .from(snapshots)
       .where(
         and(
           eq(snapshots.clanId, clanId),
-          lte(snapshots.takenAt, cutoff),
+          or(
+            lte(snapshots.takenAt, cutoff),
+            lt(snapshots.takenAt, latestTakenAt),
+          ),
         ),
       )
-      .orderBy(desc(snapshots.takenAt))
+      .orderBy(
+        sql`(${snapshots.takenAt} <= ${cutoffTs}) DESC`,
+        sql`CASE WHEN ${snapshots.takenAt} <= ${cutoffTs} THEN ${snapshots.takenAt} END DESC`,
+        asc(snapshots.takenAt),
+      )
       .limit(1);
     return row ?? null;
   }
 
   const [h24, d7, d30] = await Promise.all([
-    latestBefore(cutoffs.h24),
-    latestBefore(cutoffs.d7),
-    latestBefore(cutoffs.d30),
+    periodBaseline(cutoffs.h24),
+    periodBaseline(cutoffs.d7),
+    periodBaseline(cutoffs.d30),
   ]);
 
   return { h24, d7, d30 };
