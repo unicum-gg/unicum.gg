@@ -16,8 +16,8 @@ import type {
   PlayerInfo,
   PlayerSearchResult,
 } from "@unicum.gg/core/wargaming/wot/accounts";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
-import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
+import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -29,6 +29,7 @@ import {
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import { fetchPlayerMarksOnGun } from "./marks";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
@@ -604,6 +605,17 @@ export async function recordCurrentSnapshot(
     .returning();
 
   if (tanks.length > 0) {
+    // A fresh snapshot means the player has played, so Marks of Excellence may
+    // have moved — enrich from the portal (the public API doesn't expose them)
+    // before writing. Only here (not the no-new-battles fast path) since marks
+    // can't change without battles. Fail-open: no marks this cycle on a blip.
+    const marks = await fetchPlayerMarksOnGun(region, info.account_id);
+    if (marks.size > 0) {
+      for (const t of tanks) {
+        const m = marks.get(t.tank_id);
+        if (m != null) t.marks_on_gun = m;
+      }
+    }
     await bulkInsertTankSnapshots(region, player.id, tanks);
     await updatePlayerRatings(region, player.id, info, tanks);
   }
@@ -716,6 +728,13 @@ async function updatePlayerRatings(
           trackAssistedDamage: r.trackAssistedDamage,
           xp: r.xp,
           markOfMastery: r.markOfMastery,
+          // Not needed for the 30-day rating diff.
+          marksOnGun: null,
+          survivedBattles: null,
+          hits: null,
+          shots: null,
+          piercings: null,
+          damageBlocked: null,
         },
       ]),
     );
@@ -762,6 +781,7 @@ async function updatePlayerRatings(
       wnx30d,
       battles30d,
       battles: overall.battles,
+      winrate: overall.battles > 0 ? overall.wins / overall.battles : null,
     })
     .where(eq(players.id, playerId));
 }

@@ -34,7 +34,7 @@ import {
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   buildWN8Fallback,
   type RatingColor,

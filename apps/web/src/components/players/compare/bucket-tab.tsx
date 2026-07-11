@@ -1,8 +1,12 @@
 "use client";
 
 import { useMemo } from "react";
+import {
+  VEHICLE_CLASS_LABEL,
+  VEHICLE_CLASSES,
+} from "@unicum.gg/core/constants/tanks";
 import { cn } from "@/lib/utils";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -35,14 +39,6 @@ import {
 
 export type BucketKey = "class" | "tier";
 
-const CLASS_LABEL: Record<string, string> = {
-  heavyTank: "Heavy",
-  mediumTank: "Medium",
-  lightTank: "Light",
-  "AT-SPG": "TD",
-  SPG: "SPG",
-};
-const CLASS_ORDER = ["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"];
 
 function bucket(
   tanks: TankStats[],
@@ -63,8 +59,8 @@ function bucket(
 
 function orderKeys(keys: string[], by: BucketKey): string[] {
   if (by === "class") {
-    return CLASS_ORDER.filter((c) => keys.includes(c)).concat(
-      keys.filter((k) => !CLASS_ORDER.includes(k)),
+    return VEHICLE_CLASSES.filter((c) => keys.includes(c)).concat(
+      keys.filter((k) => !VEHICLE_CLASSES.includes(k)),
     );
   }
   return [...keys].sort((a, b) => Number(b) - Number(a));
@@ -190,7 +186,7 @@ export function BucketTab({
         ];
 
         const title =
-          bucketKey === "class" ? CLASS_LABEL[key] || key : `Tier ${key}`;
+          bucketKey === "class" ? VEHICLE_CLASS_LABEL[key] || key : `Tier ${key}`;
 
         return (
           <div key={key}>

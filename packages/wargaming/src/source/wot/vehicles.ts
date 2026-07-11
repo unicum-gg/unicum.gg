@@ -1,28 +1,20 @@
 import { XMLParser } from "fast-xml-parser";
 import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
-
-const REPO = "IzeBerg/wot-src";
-
-// Source-of-truth order; array index doubles as the nation's encoded value in
-// `tank_id` (bits 4-7). Verified against the eu_vehicles dump.
-const NATIONS = [
-  "ussr", "germany", "usa", "china", "france", "uk",
-  "japan", "czech", "sweden", "poland", "italy",
-] as const;
-type Nation = (typeof NATIONS)[number];
+import { RateLimit } from "../../client/rate-limiter";
+import { fetchNations } from "./nations";
+import {
+  BRANCH_BY_REGION,
+  computeTankId,
+  rawUrl,
+  VEHICLE_TYPES,
+  WotSrcBranch,
+} from "./index";
 
 // UK's .po file doesn't match its dir name (historical artifact).
-function poFilename(nation: Nation): string {
+function poFilename(nation: string): string {
   return nation === "uk" ? "gb_vehicles.po" : `${nation}_vehicles.po`;
 }
-
-const VEHICLE_TYPES = new Set(["heavyTank", "mediumTank", "lightTank", "AT-SPG", "SPG"]);
-const BRANCH_BY_REGION: Record<Region, string> = {
-  [Region.EU]: "EU",
-  [Region.NA]: "NA",
-  [Region.ASIA]: "ASIA",
-};
 
 export type WotSrcVehicle = {
   tankId: number;
@@ -35,6 +27,12 @@ export type WotSrcVehicle = {
   isPremium: boolean;
   isWheeled: boolean;
   isGift: boolean;
+  /** Reward / special vehicle (earned, not sold), marked by the `special` tag.
+   * These carry a gold price too, so they read as premium unless checked first. */
+  isReward: boolean;
+  /** Raw WoT role token from the vehicle tags, e.g. `role_HT_assault`. Null for
+   * SPGs and any vehicle with no role tag. */
+  role: string | null;
 };
 
 type RawTankEntry = {
@@ -47,12 +45,6 @@ type RawTankEntry = {
 };
 type RawListXml = { root?: Record<string, RawTankEntry> };
 
-function rawUrl(branch: string, path: string): string {
-  return `https://raw.githubusercontent.com/${REPO}/${branch}/${path}`;
-}
-function computeTankId(nationIdx: number, localId: number): number {
-  return (localId << 8) | (nationIdx << 4) | 1;
-}
 function unescapePo(s: string): string {
   return s.replace(/\\n/g, "\n").replace(/\\"/g, '"').replace(/\\\\/g, "\\");
 }
@@ -73,6 +65,11 @@ function extractType(tags: string | undefined): string | null {
   for (const t of tags.split(/\s+/)) if (VEHICLE_TYPES.has(t)) return t;
   return null;
 }
+function extractRole(tags: string | undefined): string | null {
+  if (!tags) return null;
+  for (const t of tags.split(/\s+/)) if (t.startsWith("role_")) return t;
+  return null;
+}
 
 /**
  * Vehicle catalogue from the IzeBerg/wot-src GitHub mirror (the actual game
@@ -87,6 +84,7 @@ export class SourceVehiclesResource {
 
   async catalog(): Promise<WotSrcVehicle[]> {
     const branch = BRANCH_BY_REGION[this.region];
+    const nations = await fetchNations(this.t, branch);
     const parser = new XMLParser({
       ignoreAttributes: true,
       parseTagValue: false,
@@ -94,7 +92,7 @@ export class SourceVehiclesResource {
       commentPropName: false,
     });
     const results = await Promise.all(
-      NATIONS.map((nation, idx) =>
+      nations.map((nation, idx) =>
         this.#nation(branch, nation, idx, parser).catch((err) => {
           console.error(`[wotsrc-${this.region}] ${nation} failed:`, err);
           return [] as WotSrcVehicle[];
@@ -105,13 +103,13 @@ export class SourceVehiclesResource {
   }
 
   async #text(url: string): Promise<string> {
-    const res = await this.t.get(new URL(url), { limit: "none" });
+    const res = await this.t.get(new URL(url), { limit: RateLimit.None });
     return res.text();
   }
 
   async #nation(
-    branch: string,
-    nation: Nation,
+    branch: WotSrcBranch,
+    nation: string,
     nationIdx: number,
     parser: XMLParser,
   ): Promise<WotSrcVehicle[]> {
@@ -147,6 +145,8 @@ export class SourceVehiclesResource {
         isPremium,
         isWheeled: tagTokens.includes("wheeled"),
         isGift: tagTokens.includes("gift"),
+        isReward: tagTokens.includes("special"),
+        role: extractRole(fields.tags),
       });
     }
     return out;

@@ -5,6 +5,7 @@ export { MemoryCacheStore } from "./client/cache/memory";
 export type { CacheStore, CacheEntry } from "./client/cache/store";
 export {
   RateLimiter,
+  RateLimit,
   type WgRateLimiter,
   type RateLimiterFactory,
   type RateLimiterKind,

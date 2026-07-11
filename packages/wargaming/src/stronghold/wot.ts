@@ -1,5 +1,6 @@
 import { Region } from "../region";
 import type { Transport } from "../client/transport";
+import { RateLimit } from "../client/rate-limiter";
 
 // Stronghold data lives on a dedicated game_api host, distinct from the public
 // API and the clan portal.
@@ -71,7 +72,10 @@ export class StrongholdResource {
       const url = new URL(
         `https://${WGSH_HOST[this.region]}/game_api/stronghold_info/clan/${clanId}`,
       );
-      const json = await this.t.getJson<WgshResponse>(url, { region: this.region, limit: "none" });
+      const json = await this.t.getJson<WgshResponse>(url, {
+        region: this.region,
+        limit: RateLimit.None,
+      });
       return {
         t6: parseTier(json.stats["6"], false),
         t8: parseTier(json.stats["8"], false),

@@ -1,12 +1,12 @@
 import { cn } from "@/lib/utils";
 
-type IconSpec = {
+export type IconSpec = {
   width: number;
   height: number;
   d: string | string[];
 };
 
-const VEHICLE_TYPE_PATHS: Record<string, IconSpec> = {
+export const VEHICLE_TYPE_PATHS: Record<string, IconSpec> = {
   lightTank: {
     width: 11,
     height: 13,
@@ -38,23 +38,27 @@ const VEHICLE_TYPE_PATHS: Record<string, IconSpec> = {
   },
 };
 
-// The tallest icon (heavyTank) is 18px tall. We host every icon inside an
-// 18px-tall, 18px-wide flex box so they share an alignment baseline regardless
-// of the natural SVG dimensions — visually consistent rows, just like WG does.
+// The tallest icon (heavyTank) is 18px tall. We host every icon inside a square
+// flex box (default 18px) so they share an alignment baseline regardless of the
+// natural SVG dimensions — visually consistent rows, just like WG does. Callers
+// in tighter rows can pass a smaller `size`; the glyphs scale proportionally.
 const BOX_PX = 18;
 
 export function VehicleTypeIcon({
   type,
   premium,
   className,
+  size = BOX_PX,
 }: {
   type: string;
   premium?: boolean;
   className?: string;
+  size?: number;
 }) {
   const spec = VEHICLE_TYPE_PATHS[type];
   if (!spec) return null;
   const paths = Array.isArray(spec.d) ? spec.d : [spec.d];
+  const scale = size / BOX_PX;
   return (
     <span
       aria-label={type}
@@ -64,11 +68,11 @@ export function VehicleTypeIcon({
         premium ? "text-[#FAB81B]" : "text-fd-foreground/70",
         className,
       )}
-      style={{ width: BOX_PX, height: BOX_PX }}
+      style={{ width: size, height: size }}
     >
       <svg
-        width={spec.width}
-        height={spec.height}
+        width={spec.width * scale}
+        height={spec.height * scale}
         viewBox={`0 0 ${spec.width} ${spec.height}`}
         xmlns="http://www.w3.org/2000/svg"
         fill="currentColor"

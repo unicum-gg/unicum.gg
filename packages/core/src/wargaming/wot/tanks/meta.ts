@@ -12,7 +12,10 @@ export type VehicleMeta = {
   shortName: string;
   tag: string;
   isPremium: boolean;
+  isReward: boolean;
+  role: string | null;
   contourIcon: string | null;
+  bigIcon: string | null;
 };
 
 // Battle-weighted average tier across a set of tanks. Tanks with no

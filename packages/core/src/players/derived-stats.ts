@@ -11,7 +11,7 @@ import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+} from "@unicum.gg/core/wargaming/wot/tanks/meta";
 
 // The period diffs feeding the stats table: lifetime stats minus the snapshot
 // taken at each cutoff, null when no snapshot that old exists yet.

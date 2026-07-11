@@ -15,7 +15,7 @@ import type { Region } from "@unicum.gg/wargaming/region";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+} from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   buildWN8Fallback,
   computeWN7,

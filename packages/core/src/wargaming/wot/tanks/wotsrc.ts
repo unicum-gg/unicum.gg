@@ -1,5 +1,5 @@
 import type { Region } from "@unicum.gg/wargaming/region";
-import { wg } from "../client";
+import { wg } from "../../client";
 
 export type { WotSrcVehicle } from "@unicum.gg/wargaming/source/wot/vehicles";
 

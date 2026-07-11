@@ -11,7 +11,7 @@ import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+} from "@unicum.gg/core/wargaming/wot/tanks/meta";
 
 // Below this you can't tell if a player is actually that good on the
 // tank or just got lucky on a few games. Same threshold as the period

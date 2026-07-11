@@ -8,7 +8,7 @@ import {
   type WNXExpected,
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 
 // One computed row per tank the clan has played: vehicle metadata joined from
 // the encyclopedia plus derived per-battle stats and all three ratings. Kept

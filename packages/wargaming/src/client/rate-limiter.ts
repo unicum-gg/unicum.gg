@@ -5,8 +5,15 @@ export type WgRateLimiter = {
   acquire(): Promise<void>;
 };
 
-/** Which limiter pool a request belongs to. */
-export type RateLimiterKind = "wg" | "portal";
+/** Which limiter pool a request uses, or `None` to skip rate limiting. */
+export enum RateLimit {
+  Wg = "wg",
+  Portal = "portal",
+  None = "none",
+}
+
+/** The pools a limiter can be built for: every `RateLimit` except `None`. */
+export type RateLimiterKind = Exclude<RateLimit, RateLimit.None>;
 
 /**
  * Builds a limiter for a given region/pool. Supply one via

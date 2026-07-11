@@ -35,6 +35,7 @@ type RawPlayer = {
   wnx_30d: number | null;
   battles: number | null;
   battles_30d: number | null;
+  winrate: number | null;
   null_count: number;
   soft_deleted_at: string | null;
 };
@@ -167,6 +168,7 @@ type RawTankSnapshot = {
   track_assisted_damage: number;
   xp: number | null;
   mark_of_mastery: number | null;
+  marks_on_gun: number | null;
 };
 
 type RawClanHistory = {
@@ -209,6 +211,7 @@ function playerFromRaw(r: RawPlayer): Player {
     wnx30d: r.wnx_30d,
     battles: r.battles,
     battles30d: r.battles_30d,
+    winrate: r.winrate,
     nullCount: r.null_count,
     softDeletedAt: r.soft_deleted_at ? new Date(r.soft_deleted_at) : null,
   };
@@ -345,6 +348,13 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
     trackAssistedDamage: Number(r.track_assisted_damage),
     xp: r.xp == null ? null : Number(r.xp),
     markOfMastery: r.mark_of_mastery == null ? null : Number(r.mark_of_mastery),
+    marksOnGun: r.marks_on_gun == null ? null : Number(r.marks_on_gun),
+    // Unused by the player page's period rating diff.
+    survivedBattles: null,
+    hits: null,
+    shots: null,
+    piercings: null,
+    damageBlocked: null,
   };
 }
 

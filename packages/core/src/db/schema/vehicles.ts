@@ -24,6 +24,11 @@ export function makeVehiclesTable(region: string) {
     isPremium: boolean("is_premium").notNull(),
     isWheeled: boolean("is_wheeled").notNull(),
     isGift: boolean("is_gift").notNull(),
+    // Reward / special vehicle (earned, not sold). Marked by the `special` tag;
+    // these also carry a gold price, so check this before treating as premium.
+    isReward: boolean("is_reward").notNull().default(false),
+    // Raw WoT role token, e.g. `role_HT_assault`. Null for SPGs / roleless tanks.
+    role: text("role"),
     smallIcon: text("small_icon"),
     contourIcon: text("contour_icon"),
     bigIcon: text("big_icon"),

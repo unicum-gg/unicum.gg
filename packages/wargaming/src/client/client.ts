@@ -12,8 +12,10 @@ import { ServersResource } from "../api/wgn/servers";
 import { ApiStrongholdResource } from "../api/wot/stronghold";
 import { WgnClansResource } from "../api/wgn/clans";
 import { PortalClansResource } from "../portal/wot/clans";
+import { PortalProfileResource } from "../portal/wot/profile";
 import { StrongholdResource } from "../stronghold/wot";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
+import { SourceSpecsResource } from "../source/wot/specs";
 
 /** World of Tanks endpoints (`/wot/*`). */
 class WotApiSurface {
@@ -62,21 +64,26 @@ class ApiSurface {
   }
 }
 
-/** The clan portal surface (`<region>.wargaming.net/clans/*`). */
+/** The portal surface (clan portal on `<region>.wargaming.net`, plus the player
+ * profile SPA on `worldoftanks.<tld>`). */
 class PortalSurface {
   readonly clans: PortalClansResource;
+  readonly profile: PortalProfileResource;
 
   constructor(transport: Transport, region: Region) {
     this.clans = new PortalClansResource(transport, region);
+    this.profile = new PortalProfileResource(transport, region);
   }
 }
 
 /** Third-party game-data sources (e.g. the wot-src vehicle catalogue). */
 class SourceSurface {
   readonly vehicles: SourceVehiclesResource;
+  readonly specs: SourceSpecsResource;
 
   constructor(transport: Transport, region: Region) {
     this.vehicles = new SourceVehiclesResource(transport, region);
+    this.specs = new SourceSpecsResource(transport, region);
   }
 }
 

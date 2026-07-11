@@ -4,6 +4,7 @@ import {
   type WgRateLimiter,
   type RateLimiterFactory,
   type RegionRps,
+  RateLimit,
   DEFAULT_WG_RPS,
   DEFAULT_PORTAL_RPS,
   regionLimiters,
@@ -154,12 +155,12 @@ export class Transport {
     const limiterFactory = opts.rateLimit?.factory;
     this.#wgLimiters = regionLimiters(
       { ...DEFAULT_WG_RPS, ...opts.rateLimit?.wg },
-      "wg",
+      RateLimit.Wg,
       limiterFactory,
     );
     this.#portalLimiters = regionLimiters(
       { ...DEFAULT_PORTAL_RPS, ...opts.rateLimit?.portal },
-      "portal",
+      RateLimit.Portal,
       limiterFactory,
     );
     if (opts.cache?.enabled ?? true) {
@@ -296,17 +297,18 @@ export class Transport {
    */
   get(
     url: URL,
-    opts?: { region?: Region; limit?: "wg" | "portal" | "none"; headers?: Record<string, string> },
+    opts?: { region?: Region; limit?: RateLimit; headers?: Record<string, string> },
   ): Promise<Response> {
     const region = opts?.region;
-    const limit = opts?.limit ?? (region ? "wg" : "none");
+    const limit = opts?.limit ?? (region ? RateLimit.Wg : RateLimit.None);
     const headers = region
       ? this.#withHeaders(region, opts?.headers)
       : { ...(opts?.headers ?? {}) };
     return this.#trace_(`get ${url.host}${url.pathname}`, () =>
       this.#withRetries(async () => {
-        if (limit === "wg" && region) await this.#wgLimiters[region].acquire();
-        else if (limit === "portal" && region) await this.#portalLimiters[region].acquire();
+        if (limit === RateLimit.Wg && region) await this.#wgLimiters[region].acquire();
+        else if (limit === RateLimit.Portal && region)
+          await this.#portalLimiters[region].acquire();
         const res = await fetch(url, {
           headers,
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
@@ -319,9 +321,43 @@ export class Transport {
 
   async getJson<T>(
     url: URL,
-    opts?: { region?: Region; limit?: "wg" | "portal" | "none"; headers?: Record<string, string> },
+    opts?: { region?: Region; limit?: RateLimit; headers?: Record<string, string> },
   ): Promise<T> {
     const res = await this.get(url, opts);
     return (await res.json()) as T;
+  }
+
+  /**
+   * Low-level JSON POST with the same retries + optional per-region rate limit
+   * as `get`, for the handful of portal SPA endpoints that only accept POST
+   * (e.g. the profile vehicles list).
+   */
+  async postJson<T>(
+    url: URL,
+    body: unknown,
+    opts?: { region?: Region; limit?: RateLimit; headers?: Record<string, string> },
+  ): Promise<T> {
+    const region = opts?.region;
+    const limit = opts?.limit ?? (region ? RateLimit.Wg : RateLimit.None);
+    const headers = {
+      "content-type": "application/json; charset=UTF-8",
+      "x-requested-with": "XMLHttpRequest",
+      ...(region ? this.#withHeaders(region, opts?.headers) : opts?.headers ?? {}),
+    };
+    return this.#trace_(`postJson ${url.host}${url.pathname}`, () =>
+      this.#withRetries(async () => {
+        if (limit === RateLimit.Wg && region) await this.#wgLimiters[region].acquire();
+        else if (limit === RateLimit.Portal && region)
+          await this.#portalLimiters[region].acquire();
+        const res = await fetch(url, {
+          method: "POST",
+          headers,
+          body: JSON.stringify(body),
+          signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+        });
+        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText} on ${url.pathname}`);
+        return (await res.json()) as T;
+      }),
+    );
   }
 }

@@ -10,7 +10,7 @@ import {
 } from "@unicum.gg/core/players/initial-data";
 import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import {

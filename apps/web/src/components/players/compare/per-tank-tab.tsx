@@ -33,7 +33,7 @@ import {
 } from "@unicum.gg/core/constants/rating";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   buildWN8Fallback,
   type RatingColor,

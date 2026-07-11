@@ -20,19 +20,31 @@ export type PeriodTankComparators = {
 };
 
 function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot {
+  const a = t.all;
   return {
     playerId,
     tankId: t.tank_id,
-    battles: t.all.battles,
-    wins: t.all.wins,
-    damageDealt: t.all.damage_dealt,
-    spotted: t.all.spotted,
-    frags: t.all.frags,
-    droppedCapturePoints: t.all.dropped_capture_points,
-    radioAssistedDamage: t.all.radio_assisted_damage,
-    trackAssistedDamage: t.all.track_assisted_damage,
-    xp: t.all.xp,
+    battles: a.battles,
+    wins: a.wins,
+    damageDealt: a.damage_dealt,
+    spotted: a.spotted,
+    frags: a.frags,
+    droppedCapturePoints: a.dropped_capture_points,
+    radioAssistedDamage: a.radio_assisted_damage,
+    trackAssistedDamage: a.track_assisted_damage,
+    xp: a.xp,
     markOfMastery: t.mark_of_mastery,
+    marksOnGun: t.marks_on_gun ?? null,
+    survivedBattles: a.survived_battles ?? null,
+    hits: a.hits ?? null,
+    shots: a.shots ?? null,
+    piercings: a.piercings ?? null,
+    // WG only exposes the per-battle average; store the cumulative total so it
+    // aggregates like the other counters.
+    damageBlocked:
+      a.avg_damage_blocked != null
+        ? Math.round(a.avg_damage_blocked * a.battles)
+        : null,
   };
 }
 
@@ -61,6 +73,15 @@ export async function bulkInsertTankSnapshots(
         set: {
           xp: sql`EXCLUDED.xp`,
           markOfMastery: sql`EXCLUDED.mark_of_mastery`,
+          // Marks come from the portal, which we only reach on some refreshes.
+          // COALESCE so a marks-less insert never wipes a previously-stored
+          // value (unlike the columns above, which are always in the API row).
+          marksOnGun: sql`COALESCE(EXCLUDED.marks_on_gun, ${table.marksOnGun})`,
+          survivedBattles: sql`EXCLUDED.survived_battles`,
+          hits: sql`EXCLUDED.hits`,
+          shots: sql`EXCLUDED.shots`,
+          piercings: sql`EXCLUDED.piercings`,
+          damageBlocked: sql`EXCLUDED.damage_blocked`,
         },
       });
   }
@@ -117,6 +138,13 @@ export async function getPeriodTankComparators(
         trackAssistedDamage: row.track_assisted_damage,
         xp: row.xp,
         markOfMastery: row.mark_of_mastery,
+        // Not selected by this period-diff query; unused by rating math.
+        marksOnGun: null,
+        survivedBattles: null,
+        hits: null,
+        shots: null,
+        piercings: null,
+        damageBlocked: null,
       });
     }
     return map;
@@ -188,6 +216,12 @@ export async function getLatestTankSnapshotsByAccounts(
       trackAssistedDamage: Number(row.track_assisted_damage),
       xp: row.xp == null ? null : Number(row.xp),
       markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
+      marksOnGun: null,
+      survivedBattles: null,
+      hits: null,
+      shots: null,
+      piercings: null,
+      damageBlocked: null,
     });
     out.set(accountId, arr);
   }
@@ -260,6 +294,12 @@ export async function getTankSnapshotsByAccountsBefore(
       trackAssistedDamage: Number(row.track_assisted_damage),
       xp: row.xp == null ? null : Number(row.xp),
       markOfMastery: row.mark_of_mastery == null ? null : Number(row.mark_of_mastery),
+      marksOnGun: null,
+      survivedBattles: null,
+      hits: null,
+      shots: null,
+      piercings: null,
+      damageBlocked: null,
     });
     out.set(accountId, arr);
   }
@@ -272,6 +312,7 @@ export function tankSnapshotsToTankStats(
   return snapshots.map((s) => ({
     tank_id: s.tankId,
     mark_of_mastery: s.markOfMastery,
+    marks_on_gun: s.marksOnGun,
     all: {
       battles: s.battles,
       wins: s.wins,

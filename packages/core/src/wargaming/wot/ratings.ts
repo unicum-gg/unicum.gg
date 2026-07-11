@@ -1,4 +1,4 @@
-import type { VehicleMeta } from "./vehicle-meta";
+import type { VehicleMeta } from "./tanks/meta";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export enum RatingColor {

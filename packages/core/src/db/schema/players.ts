@@ -53,6 +53,10 @@ export function makePlayersTable(region: string) {
       // the whole player_snapshots table.
       battles: integer("battles"),
       battles30d: integer("battles_30d"),
+      // Lifetime account win rate (0-1), copied from the latest snapshot's
+      // wins/battles at every snapshot-cron tick. Powers the "Player WR" column
+      // of the per-tank server-average table (average driver account WR).
+      winrate: real("winrate"),
       // Hidden/purged-account guard. WG sometimes returns null for an
       // account from /wot/account/info/. Causes: (a) GDPR purge for accounts
       // dormant 10+ years, (b) admin restriction, (c) transient cache miss

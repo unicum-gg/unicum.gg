@@ -4,7 +4,7 @@ import { clansByRegion } from "@unicum.gg/core/db/schema";
 import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
 import { buildClanVehicleRows } from "@unicum.gg/core/clans/vehicles";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import {

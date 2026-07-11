@@ -36,7 +36,7 @@ import {
 import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming/region";
 import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/encyclopedia";
+import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import {

@@ -1,8 +1,9 @@
+import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewVehicle, vehiclesByRegion } from "@unicum.gg/core/db/schema";
 import { Region } from "@unicum.gg/wargaming/region";
-import { fetchVehicleCatalog } from "@unicum.gg/core/wargaming/wot/wotsrc";
-import type { VehicleMeta } from "./vehicle-meta";
+import { fetchVehicleCatalog } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
+import type { VehicleMeta } from "./meta";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
 // (cleared on deploy/restart) and is shared across all callers — both inside
@@ -33,7 +34,10 @@ async function loadVehicles(
       shortName: table.shortName,
       tag: table.tag,
       isPremium: table.isPremium,
+      isReward: table.isReward,
+      role: table.role,
       contourIcon: table.contourIcon,
+      bigIcon: table.bigIcon,
     })
     .from(table);
   if (rows.length === 0) {
@@ -47,10 +51,17 @@ async function loadVehicles(
       type: r.type,
       nation: r.nation,
       name: r.name,
-      shortName: r.shortName,
+      // The wot-src mirror omits `shortName` when it equals the full name (the
+      // famous tanks: IS-7, T-34, Type 59, ...), leaving ~216 rows blank. Fall
+      // back to `name` so the slug, search, and every "on the {shortName}"
+      // label stay populated instead of collapsing to the bare tank id.
+      shortName: r.shortName || r.name,
       tag: r.tag,
       isPremium: r.isPremium,
+      isReward: r.isReward,
+      role: r.role,
       contourIcon: r.contourIcon,
+      bigIcon: r.bigIcon,
     };
   }
   return out;
@@ -105,6 +116,8 @@ export async function refreshVehicles(region: Region): Promise<number> {
     isPremium: v.isPremium,
     isWheeled: v.isWheeled,
     isGift: v.isGift,
+    isReward: v.isReward,
+    role: v.role,
     smallIcon: null,
     contourIcon: null,
     bigIcon: null,
@@ -114,18 +127,23 @@ export async function refreshVehicles(region: Region): Promise<number> {
   await db
     .insert(table)
     .values(rows)
+    // Refresh existing rows with the incoming catalogue values. `excluded` is
+    // the row that would have been inserted; referencing `table.<col>` here
+    // would instead keep the stale value (a self-assignment no-op).
     .onConflictDoUpdate({
       target: table.tankId,
       set: {
-        tier: table.tier,
-        type: table.type,
-        nation: table.nation,
-        name: table.name,
-        shortName: table.shortName,
-        tag: table.tag,
-        isPremium: table.isPremium,
-        isWheeled: table.isWheeled,
-        isGift: table.isGift,
+        tier: sql`excluded.tier`,
+        type: sql`excluded.type`,
+        nation: sql`excluded.nation`,
+        name: sql`excluded.name`,
+        shortName: sql`excluded.short_name`,
+        tag: sql`excluded.tag`,
+        isPremium: sql`excluded.is_premium`,
+        isWheeled: sql`excluded.is_wheeled`,
+        isGift: sql`excluded.is_gift`,
+        isReward: sql`excluded.is_reward`,
+        role: sql`excluded.role`,
         updatedAt: new Date(),
       },
     });

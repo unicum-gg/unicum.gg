@@ -43,6 +43,19 @@ export function makeTankSnapshotsTable(
       // WG's tanks/stats API.
       xp: bigint("xp", { mode: "number" }),
       markOfMastery: integer("mark_of_mastery"),
+      // Marks of Excellence on the gun (0-3). Sourced from the WoT portal
+      // (`/wotup/profile/vehicles/list/`), not the public API, so it is only set
+      // on refreshes that reach the portal; nullable + organically backfilled.
+      marksOnGun: integer("marks_on_gun"),
+      // Added later for the per-tank server-average table (KDR, Hit%, Pen%,
+      // Blocked, Survival). Nullable + organically backfilled, same as xp above.
+      // `damageBlocked` is a cumulative total: WG only exposes the per-battle
+      // average, so we store average * battles to match the other counters.
+      survivedBattles: integer("survived_battles"),
+      hits: integer("hits"),
+      shots: integer("shots"),
+      piercings: integer("piercings"),
+      damageBlocked: bigint("damage_blocked", { mode: "number" }),
     },
     (t) => [
       index(`${region}_tank_snapshots_player_taken_idx`).on(

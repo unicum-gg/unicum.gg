@@ -1,5 +1,5 @@
 import { RatingMetric } from "@unicum.gg/core/constants/rating";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/vehicle-meta";
+import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
   computeWN7,
   computeWN8,

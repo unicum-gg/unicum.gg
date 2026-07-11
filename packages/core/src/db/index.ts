@@ -85,3 +85,11 @@ export async function closeDbPools(): Promise<void> {
 
 export const db = drizzle(client, { schema });
 export { schema };
+
+/**
+ * The raw postgres.js client behind `db`. Exposed for the rare case that needs
+ * a server-side cursor to stream a very large result set without buffering it
+ * all in memory (e.g. the per-tank leaderboard scan over tank_snapshots). Use
+ * `db` for everything else.
+ */
+export { client as pgClient };
