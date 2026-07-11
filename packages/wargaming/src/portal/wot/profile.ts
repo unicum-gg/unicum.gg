@@ -11,13 +11,18 @@ export type PortalVehicleMarks = {
 };
 
 // The profile vehicles endpoint returns each vehicle as a positional array (no
-// keys). These are the indices we rely on, decoded against known accounts. The
-// row also carries tag/nation/type/tier/battles/damage/etc. we don't need here.
-const IDX = { tankId: 0, markOfMastery: 21, marksOnGun: 25 } as const;
+// keys). The column order is NOT fixed — it is described per response by the
+// `parameters` array and varies between accounts — so we resolve the fields we
+// need by name rather than hardcoding indices. Column names of interest:
+const COL = {
+  tankId: "vehicle_cd",
+  marksOnGun: "marksOnGun",
+  markOfMastery: "markOfMastery",
+} as const;
 
 type RawVehicleList = {
   status: string;
-  data?: { data?: unknown[][] };
+  data?: { data?: unknown[][]; parameters?: string[] };
 };
 
 /** The player-profile portal surface (`worldoftanks.<tld>/wotup/profile/*`). */
@@ -59,14 +64,21 @@ export class PortalProfileResource {
       limit: RateLimit.Portal,
     });
     const rows = res.data?.data ?? [];
+    const params = res.data?.parameters ?? [];
+    const idTankId = params.indexOf(COL.tankId);
+    const idMarks = params.indexOf(COL.marksOnGun);
+    const idMastery = params.indexOf(COL.markOfMastery);
+    // Without the column map we can't trust any position — bail rather than
+    // read garbage (an unexpected schema returns no marks this cycle).
+    if (idTankId < 0 || idMarks < 0) return [];
     const out: PortalVehicleMarks[] = [];
     for (const r of rows) {
-      const tankId = Number(r[IDX.tankId]);
+      const tankId = Number(r[idTankId]);
       if (!Number.isFinite(tankId)) continue;
       out.push({
         tankId,
-        marksOnGun: Number(r[IDX.marksOnGun]) || 0,
-        markOfMastery: Number(r[IDX.markOfMastery]) || 0,
+        marksOnGun: Number(r[idMarks]) || 0,
+        markOfMastery: idMastery >= 0 ? Number(r[idMastery]) || 0 : 0,
       });
     }
     return out;
