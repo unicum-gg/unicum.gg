@@ -36,6 +36,10 @@ export async function GET() {
           pattern: `/${region}/players/sitemap-{id}.xml`,
           count: getSitemapCount(counts[region].players, URLS_PER_SITEMAP),
         },
+        {
+          pattern: `/${region}/tanks/sitemap-{id}.xml`,
+          count: getSitemapCount(counts[region].tanks, URLS_PER_SITEMAP),
+        },
       ]),
     );
   } catch (err) {

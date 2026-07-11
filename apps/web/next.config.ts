@@ -57,6 +57,10 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "eu-wotp.wgcdn.co", pathname: "/**" },
       { protocol: "https", hostname: "na-wotp.wgcdn.co", pathname: "/**" },
       { protocol: "https", hostname: "sg-wotp.wgcdn.co", pathname: "/**" },
+      // Encyclopedia vehicle renders (the big tank image for the tank page hero).
+      { protocol: "https", hostname: "api.worldoftanks.eu", pathname: "/static/**" },
+      { protocol: "https", hostname: "api.worldoftanks.com", pathname: "/static/**" },
+      { protocol: "https", hostname: "api.worldoftanks.asia", pathname: "/static/**" },
     ],
     // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
     // SVG sources by default; enabling this allows them through the optimizer
@@ -82,6 +86,10 @@ const nextConfig: NextConfig = {
       {
         source: "/:region(eu|na|asia)/players/sitemap-:id.xml",
         destination: "/:region/players/sitemap.xml/:id",
+      },
+      {
+        source: "/:region(eu|na|asia)/tanks/sitemap-:id.xml",
+        destination: "/:region/tanks/sitemap.xml/:id",
       },
     ];
   },

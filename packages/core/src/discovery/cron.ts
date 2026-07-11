@@ -1,6 +1,7 @@
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS } from "@unicum.gg/wargaming/region";
-import { refreshVehicles } from "@unicum.gg/core/wargaming/wot/encyclopedia";
+import { refreshVehicles } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
+import { refreshTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { discoverTopClanPlayers } from ".";
 
 const DISCOVERY_SCHEDULE = "0 4 * * 0"; // Sundays at 04:00 server time
@@ -50,5 +51,13 @@ async function refreshVehiclesCatalogue(): Promise<void> {
     } catch (err) {
       console.error(`[vehicles-cron] ${region} refresh failed:`, err);
     }
+  }
+  // Specs are region-agnostic (parsed from the EU branch once), so refresh the
+  // global tank_specs table a single time after the per-region catalogues.
+  try {
+    const count = await refreshTankSpecs();
+    console.log(`[vehicles-cron] tank specs refreshed (${count} tanks)`);
+  } catch (err) {
+    console.error("[vehicles-cron] tank specs refresh failed:", err);
   }
 }

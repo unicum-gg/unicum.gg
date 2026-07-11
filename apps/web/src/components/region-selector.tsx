@@ -31,11 +31,29 @@ const CLANS_PATTERN = new RegExp(
 const PLAYERS_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?players(?:/|$)`,
 );
+// Tanks are region-scoped in the URL but the catalogue is identical across
+// regions, so on a tank detail page we keep the same tank in the new region;
+// on the index we just swap to the new region's index.
+const TANKS_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?tanks(?:/|$)`);
+const TANK_SLUG_PATTERN = new RegExp(
+  `^/(?:(?:${REGIONS.join("|")})/)?tanks/([^/?#]+)`,
+);
 
-function targetForRegion(pathname: string, region: Region): string {
+function targetForRegion(
+  pathname: string,
+  search: string,
+  region: Region,
+): string {
   if (COVERAGE_PATHS.has(pathname)) return ROUTES.COVERAGE(region);
   if (CLANS_PATTERN.test(pathname)) return ROUTES.CLANS(region);
   if (PLAYERS_PATTERN.test(pathname)) return ROUTES.PLAYERS(region);
+  if (TANKS_PATTERN.test(pathname)) {
+    // The catalogue is identical across regions, so we keep the same tank (and
+    // its query, e.g. ?tab=performances or the index filters) in the new region.
+    const slug = pathname.match(TANK_SLUG_PATTERN)?.[1];
+    const base = slug ? ROUTES.TANK(region, slug) : ROUTES.TANKS(region);
+    return `${base}${search}`;
+  }
   return ROUTES.HOME(region);
 }
 
@@ -50,7 +68,11 @@ export function RegionSelector() {
       onValueChange={(v) => {
         if (!isRegion(v)) return;
         setRegion(v);
-        router.push(targetForRegion(pathname, v));
+        // `window.location.search` includes the leading "?"; empty string when
+        // there is no query.
+        const search =
+          typeof window !== "undefined" ? window.location.search : "";
+        router.push(targetForRegion(pathname, search, v));
       }}
     >
       <SelectTrigger
