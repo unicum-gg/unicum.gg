@@ -62,6 +62,12 @@ export function Footer() {
             >
               Top clans
             </Link>
+            <Link
+              href={ROUTES.TANKS(Region.EU)}
+              className={styles.linkHover}
+            >
+              Top tanks
+            </Link>
             <FooterCoverageLink />
             <Link href={ROUTES.DOCS} className={styles.linkHover}>
               API Docs
