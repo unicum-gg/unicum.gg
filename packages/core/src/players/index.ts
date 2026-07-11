@@ -1,4 +1,4 @@
-import { and, desc, eq, inArray, lt, lte, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   type NewPlayerSnapshot,
@@ -69,12 +69,6 @@ export type StrongholdStats = {
 export type SnapshotContext = {
   player: Player;
   latest: PlayerSnapshot;
-};
-
-export type PeriodComparators = {
-  h24: PlayerSnapshot | null;
-  d7: PlayerSnapshot | null;
-  d30: PlayerSnapshot | null;
 };
 
 export async function findPlayerByNicknameInDB(
@@ -677,6 +671,11 @@ async function updatePlayerRatings(
   // on the player page and the clan aggregate (`weighted by battles30d`).
   // Single query per player: cheap inside the snapshot path.
   const d30Cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+  const d30CutoffTs = sql`${d30Cutoff.toISOString()}::timestamptz`;
+  // Per tank: the newest snapshot older than 30 days, or (for players tracked
+  // less than 30 days) the oldest snapshot other than the current one, so the
+  // recent-rating window still reflects the games they played instead of coming
+  // back empty. Mirrors the player-page period baseline in initial-data.ts.
   const d30Rows = await db
     .selectDistinctOn([tankSnapshots.tankId], {
       tankId: tankSnapshots.tankId,
@@ -696,12 +695,17 @@ async function updatePlayerRatings(
     .where(
       and(
         eq(tankSnapshots.playerId, playerId),
-        lt(tankSnapshots.takenAt, d30Cutoff),
+        or(
+          lt(tankSnapshots.takenAt, d30Cutoff),
+          sql`${tankSnapshots.takenAt} < (SELECT MAX(ts2.taken_at) FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId} AND ts2.tank_id = ${tankSnapshots.tankId})`,
+        ),
       ),
     )
     .orderBy(
       tankSnapshots.tankId,
-      desc(tankSnapshots.takenAt),
+      sql`(${tankSnapshots.takenAt} < ${d30CutoffTs}) DESC`,
+      sql`CASE WHEN ${tankSnapshots.takenAt} < ${d30CutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
+      asc(tankSnapshots.takenAt),
       desc(tankSnapshots.id),
     );
 
@@ -798,42 +802,6 @@ async function backfillWtr(
     .set({ wtr })
     .where(eq(playerSnapshots.id, snapshot.id));
   return { ...snapshot, wtr };
-}
-
-export async function getPeriodComparators(
-  region: Region,
-  playerId: number,
-): Promise<PeriodComparators> {
-  const playerSnapshots = playerSnapshotsByRegion[region];
-  const now = Date.now();
-  const cutoffs = {
-    h24: new Date(now - 24 * 60 * 60 * 1000),
-    d7: new Date(now - 7 * 24 * 60 * 60 * 1000),
-    d30: new Date(now - 30 * 24 * 60 * 60 * 1000),
-  };
-
-  async function latestBefore(cutoff: Date): Promise<PlayerSnapshot | null> {
-    const [row] = await db
-      .select()
-      .from(playerSnapshots)
-      .where(
-        and(
-          eq(playerSnapshots.playerId, playerId),
-          lte(playerSnapshots.takenAt, cutoff),
-        ),
-      )
-      .orderBy(desc(playerSnapshots.takenAt))
-      .limit(1);
-    return row ?? null;
-  }
-
-  const [h24, d7, d30] = await Promise.all([
-    latestBefore(cutoffs.h24),
-    latestBefore(cutoffs.d7),
-    latestBefore(cutoffs.d30),
-  ]);
-
-  return { h24, d7, d30 };
 }
 
 export async function getPlayerIdsByAccounts(

@@ -13,12 +13,6 @@ const TANK_INSERT_CHUNK = 500;
 
 export type TankSnapshotMap = Map<number, TankSnapshot>;
 
-export type PeriodTankComparators = {
-  h24: TankSnapshotMap;
-  d7: TankSnapshotMap;
-  d30: TankSnapshotMap;
-};
-
 function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot {
   const a = t.all;
   return {
@@ -85,78 +79,6 @@ export async function bulkInsertTankSnapshots(
         },
       });
   }
-}
-
-export async function getPeriodTankComparators(
-  region: Region,
-  playerId: number,
-): Promise<PeriodTankComparators> {
-  const tankSnapshots = tankSnapshotsByRegion[region];
-  const now = Date.now();
-  const cutoffs = {
-    h24: new Date(now - 24 * 60 * 60 * 1000).toISOString(),
-    d7: new Date(now - 7 * 24 * 60 * 60 * 1000).toISOString(),
-    d30: new Date(now - 30 * 24 * 60 * 60 * 1000).toISOString(),
-  };
-
-  async function tanksBefore(cutoff: string): Promise<TankSnapshotMap> {
-    const rows = await db.execute(sql`
-      SELECT DISTINCT ON (tank_id) *
-      FROM ${tankSnapshots}
-      WHERE player_id = ${playerId} AND taken_at < ${cutoff}
-      ORDER BY tank_id, taken_at DESC, id DESC
-    `);
-    const map: TankSnapshotMap = new Map();
-    for (const row of rows as unknown as Array<{
-      id: number;
-      player_id: number;
-      tank_id: number;
-      taken_at: Date;
-      battles: number;
-      wins: number;
-      damage_dealt: number;
-      spotted: number;
-      frags: number;
-      dropped_capture_points: number;
-      radio_assisted_damage: number;
-      track_assisted_damage: number;
-      xp: number | null;
-      mark_of_mastery: number | null;
-    }>) {
-      map.set(row.tank_id, {
-        id: row.id,
-        playerId: row.player_id,
-        tankId: row.tank_id,
-        takenAt: row.taken_at instanceof Date ? row.taken_at : new Date(row.taken_at),
-        battles: row.battles,
-        wins: row.wins,
-        damageDealt: row.damage_dealt,
-        spotted: row.spotted,
-        frags: row.frags,
-        droppedCapturePoints: row.dropped_capture_points,
-        radioAssistedDamage: row.radio_assisted_damage,
-        trackAssistedDamage: row.track_assisted_damage,
-        xp: row.xp,
-        markOfMastery: row.mark_of_mastery,
-        // Not selected by this period-diff query; unused by rating math.
-        marksOnGun: null,
-        survivedBattles: null,
-        hits: null,
-        shots: null,
-        piercings: null,
-        damageBlocked: null,
-      });
-    }
-    return map;
-  }
-
-  const [h24, d7, d30] = await Promise.all([
-    tanksBefore(cutoffs.h24),
-    tanksBefore(cutoffs.d7),
-    tanksBefore(cutoffs.d30),
-  ]);
-
-  return { h24, d7, d30 };
 }
 
 export async function getLatestTankSnapshotsByAccounts(
