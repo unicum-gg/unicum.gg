@@ -426,8 +426,11 @@ export function TankView({
                   {VEHICLE_ROLE_LABEL[roleSfx]}
                 </span>
               )}
-              {meta.isPremium && <span className="text-[#FAB81B]">Premium</span>}
-              {meta.isGift && <span>Reward</span>}
+              {meta.isReward ? (
+                <span className="text-[#4FC4D9]">Reward</span>
+              ) : meta.isPremium ? (
+                <span className="text-[#FAB81B]">Premium</span>
+              ) : null}
             </div>
             <h1 className="max-w-sm font-heading text-4xl font-bold tracking-tight md:text-5xl">
               {meta.name}
