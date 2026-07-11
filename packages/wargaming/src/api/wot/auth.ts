@@ -74,7 +74,9 @@ export class AuthResource {
   }): Promise<ProlongedToken> {
     const query = buildQuery(params);
     if (params.expiresAt !== undefined) query.expires_at = String(params.expiresAt);
-    return this.t.wgFetch<ProlongedToken>(this.region, "/wot/auth/prolongate/", query);
+    return this.t.wgFetch<ProlongedToken>(this.region, "/wot/auth/prolongate/", query, {
+      method: "POST",
+    });
   }
 
   /**
@@ -82,6 +84,8 @@ export class AuthResource {
    * afterwards.
    */
   async logout(params: { accessToken: string }): Promise<void> {
-    await this.t.wgFetch<null>(this.region, "/wot/auth/logout/", buildQuery(params));
+    await this.t.wgFetch<null>(this.region, "/wot/auth/logout/", buildQuery(params), {
+      method: "POST",
+    });
   }
 }

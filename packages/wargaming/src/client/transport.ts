@@ -213,17 +213,40 @@ export class Transport {
     region: Region,
     path: string,
     params: Record<string, string>,
-    opts?: { cache?: number | false },
+    opts?: { cache?: number | false; method?: "GET" | "POST" },
   ): Promise<T> {
+    const method = opts?.method ?? "GET";
     const url = new URL(`https://${REGION_API_HOST[region]}${path}`);
-    url.searchParams.set("application_id", this.#appId(region));
-    if (this.#language && !("language" in params)) {
-      url.searchParams.set("language", this.#language);
+
+    // WG's auth-mutating endpoints (`auth/prolongate`, `auth/logout`) require
+    // POST and read their params — notably `access_token` — only from the form
+    // body: a GET with the token in the query string returns
+    // ACCESS_TOKEN_NOT_SPECIFIED, so tokens never leak into URLs or logs. Send
+    // everything in the body and never cache these.
+    let formBody: string | undefined;
+    if (method === "POST") {
+      const form = new URLSearchParams({
+        application_id: this.#appId(region),
+        ...params,
+      });
+      if (this.#language && !("language" in params)) {
+        form.set("language", this.#language);
+      }
+      formBody = form.toString();
+    } else {
+      url.searchParams.set("application_id", this.#appId(region));
+      if (this.#language && !("language" in params)) {
+        url.searchParams.set("language", this.#language);
+      }
+      for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
     }
-    for (const [k, v] of Object.entries(params)) url.searchParams.set(k, v);
 
     const ttl =
-      opts?.cache === false ? 0 : (opts?.cache ?? defaultCacheTtl(path));
+      method === "POST"
+        ? 0
+        : opts?.cache === false
+          ? 0
+          : (opts?.cache ?? defaultCacheTtl(path));
     const cacheKey = this.#cache && ttl > 0 ? `GET:${url.toString()}` : null;
     if (cacheKey) {
       const hit = await this.#cache!.get<T>(cacheKey);
@@ -236,16 +259,23 @@ export class Transport {
         const t0 = Date.now();
         try {
           const res = await fetch(url, {
+            method,
             cache: "no-store",
-            headers: this.#withHeaders(region),
+            headers:
+              method === "POST"
+                ? this.#withHeaders(region, {
+                    "content-type": "application/x-www-form-urlencoded",
+                  })
+                : this.#withHeaders(region),
+            body: formBody,
             signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
           });
           if (!res.ok) throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
-          const body = (await res.json()) as WgEnvelope<T>;
-          if (body.status === "error") {
-            throw new WargamingApiError(body.error.message, body.error.field);
+          const envelope = (await res.json()) as WgEnvelope<T>;
+          if (envelope.status === "error") {
+            throw new WargamingApiError(envelope.error.message, envelope.error.field);
           }
-          return body.data;
+          return envelope.data;
         } catch (err) {
           if (isTimeoutError(err)) {
             console.warn(
