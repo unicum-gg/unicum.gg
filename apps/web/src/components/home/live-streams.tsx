@@ -16,6 +16,7 @@ import {
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import { AddChannelCta } from "@/components/home/add-channel-cta";
 import {
   LeaderboardPeriod,
   LeaderboardPeriodSelect,
@@ -115,12 +116,13 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
         {APP.NAME} — World of Tanks player, clan and tank stats
       </h1>
       <Panel className="flex flex-col">
-        <PanelHeader>
+        <PanelHeader className="flex items-center justify-between gap-3">
           <PanelTitle>
             <span className="mr-2 text-[#eb0400]">●</span>
             Top players streaming now ·{" "}
             <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
+          <AddChannelCta />
         </PanelHeader>
         <PanelContent className="p-0">
           <div className="flex flex-col lg:flex-row">
