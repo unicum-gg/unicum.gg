@@ -66,11 +66,11 @@ export function AddChannelCta() {
     );
   }
 
-  // Logged out → WG login (proves they own the account), then land on
-  // /connect/twitch which chains straight into the Twitch link.
+  // Logged out → WG login (proves they own the account), then land on the
+  // `/api/connect/twitch` endpoint which chains straight into the Twitch link.
   return (
     <Button asChild variant="outline" size="sm" className="shrink-0">
-      <a href={ROUTES.AUTH_SIGN_IN(region, ROUTES.CONNECT_TWITCH)}>{label}</a>
+      <a href={ROUTES.AUTH_SIGN_IN(region, "/api/connect/twitch")}>{label}</a>
     </Button>
   );
 }

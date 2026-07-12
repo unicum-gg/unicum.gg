@@ -12,16 +12,12 @@ const ROUTES = {
   // - Auth: Wargaming.net ID sign-in. The region rides as a query param (WG
   //   rejects a query string on the callback path, not on this start URL).
   //   `callbackURL` is the same-origin path to land on once logged in (e.g.
-  //   `/connect/twitch` to chain straight into linking Twitch).
+  //   `/api/connect/twitch` to chain straight into linking Twitch).
   AUTH_SIGN_IN: (region: Region, callbackURL?: string) =>
     pathcat(
       "/api/auth/sign-in/wargaming",
       callbackURL ? { region, callbackURL } : { region },
     ),
-
-  // Post-login resume page that immediately starts the Twitch OAuth link, so a
-  // logged-out streamer goes login → Twitch in one flow.
-  CONNECT_TWITCH: "/connect/twitch",
 
   // - Home
   HOME: (region: Region) =>
