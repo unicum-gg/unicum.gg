@@ -12,19 +12,26 @@ declare global {
   var __liveStreamersWired: boolean | undefined;
 }
 
-globalThis.__liveStreamersSends ??= new Set<Send>();
-
-// One LiveSync subscription per process, fanned out to every open stream: the
+// Wire the LiveSync subscription lazily, on the first request, and NEVER at
+// module load. A module-level Redis `subscribe()` runs while `next build`
+// evaluates this route: it opens a connection to the internal Redis (unreachable
+// from the build container), ioredis retries forever, and the static-generation
+// worker never exits, hanging the build. Doing it from `GET` keeps it at request
+// time only. One subscription per process, fanned out to every open stream: the
 // single poller (in the cron process) publishes a snapshot every few seconds,
 // this receives it (over Redis in prod, in-process in dev), caches it so a new
-// connection gets data immediately, and pushes it to all connected browsers.
-if (!globalThis.__liveStreamersWired) {
-  subscribe(LIVE_STREAMERS_CHANNEL, (data) => {
-    const streamers = (data as LiveStreamer[] | null) ?? [];
-    globalThis.__liveStreamersLast = streamers;
-    globalThis.__liveStreamersSends?.forEach((send) => send(streamers));
-  });
-  globalThis.__liveStreamersWired = true;
+// connection is served immediately, and pushes it to all connected browsers.
+function ensureWired(): Set<Send> {
+  const sends = (globalThis.__liveStreamersSends ??= new Set<Send>());
+  if (!globalThis.__liveStreamersWired) {
+    globalThis.__liveStreamersWired = true;
+    subscribe(LIVE_STREAMERS_CHANNEL, (data) => {
+      const streamers = (data as LiveStreamer[] | null) ?? [];
+      globalThis.__liveStreamersLast = streamers;
+      globalThis.__liveStreamersSends?.forEach((send) => send(streamers));
+    });
+  }
+  return sends;
 }
 
 /**
@@ -35,6 +42,7 @@ if (!globalThis.__liveStreamersWired) {
  * @openapi
  */
 export function GET(req: Request): Response {
+  const sends = ensureWired();
   const encoder = new TextEncoder();
   const stream = new ReadableStream({
     start(controller) {
@@ -50,10 +58,10 @@ export function GET(req: Request): Response {
 
       // Seed the connection with the latest snapshot right away.
       if (globalThis.__liveStreamersLast) send(globalThis.__liveStreamersLast);
-      globalThis.__liveStreamersSends?.add(send);
+      sends.add(send);
 
       req.signal.addEventListener("abort", () => {
-        globalThis.__liveStreamersSends?.delete(send);
+        sends.delete(send);
         try {
           controller.close();
         } catch {
