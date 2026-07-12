@@ -12,10 +12,9 @@ import {
 import { FeatureBlock } from "@/components/home/feature-block";
 import { RatingScale } from "@/components/home/rating-scale";
 import { TopClansOverallPanel } from "@/components/home/top-clans-overall-panel";
-import { LiveStreams } from "@/components/home/live-streams";
+import { LiveSection } from "@/components/home/live-section";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
-import { HeroVideo } from "@/components/home/hero-video";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import {
   Panel,
@@ -124,30 +123,10 @@ export async function HomePage({
 
   return (
     <div className="mx-auto w-full max-w-7xl">
-      {liveStreamers.length > 0 ? (
-        // Live content earns the top slot: when tracked players are streaming,
-        // the player + rail replace the decorative video hero. The section owns
-        // its own panel + heading so it can self-hide once everyone goes offline
-        // (it re-polls client-side to stay fresh on this otherwise-static page).
-        <LiveStreams initial={liveStreamers} />
-      ) : (
-        <div
-          className={`relative aspect-16/10 ${styles.borderX} flex w-full select-none items-center justify-center overflow-hidden sm:aspect-5/2 md:aspect-auto md:h-64 ${styles.screenLines}`}
-        >
-          <HeroVideo />
-          <div className="absolute inset-0 bg-black/40" />
-          <div className="absolute inset-0 dot-pattern opacity-20" />
-          <div className="relative z-10 space-y-4 px-4 text-center sm:space-y-6 sm:px-6">
-            <h1 className="text-2xl font-bold text-white sm:text-4xl md:text-6xl">
-              {APP.NAME}
-            </h1>
-            <p className="mx-auto max-w-2xl text-base text-white/90 sm:text-lg md:text-xl">
-              World of Tanks player, clan and tank stats. Track your progress,
-              compare with others.
-            </p>
-          </div>
-        </div>
-      )}
+      {/* Live streamers rail when players are streaming (and the visitor hasn't
+          hidden it), otherwise the video hero. The toggle + preference live in
+          the client `LiveSection`. */}
+      <LiveSection streamers={liveStreamers} />
 
       <PanelSeparator />
 

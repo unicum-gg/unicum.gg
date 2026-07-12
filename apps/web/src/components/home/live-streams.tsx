@@ -1,5 +1,10 @@
 "use client";
 
+import {
+  ArrowsInSimpleIcon,
+  ArrowsOutSimpleIcon,
+  XIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
@@ -75,7 +80,13 @@ function thumb(url: string, w: number, h: number): string {
   return url.replace("{width}", String(w)).replace("{height}", String(h));
 }
 
-export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
+export function LiveStreams({
+  initial,
+  onHide,
+}: {
+  initial: LiveStreamer[];
+  onHide?: () => void;
+}) {
   // Deduped with every 🔴 badge on the page (same SWR key), SSR-seeded so the
   // rail paints without a flash.
   const streamers = useLiveStreamers(initial);
@@ -97,6 +108,9 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
   }, [streamers, metric, period]);
 
   const [activeLogin, setActiveLogin] = useState(initial[0]?.twitchLogin ?? "");
+  // Theater mode (desktop): drop the sidebar below the player so the stream
+  // goes full width, YouTube-style. Desktop-only; mobile is always stacked.
+  const [theater, setTheater] = useState(false);
   // Twitch's embed requires the exact host serving the page as `parent`, only
   // known client-side (covers unicum.gg and the 127.0.0.1 loopback in dev).
   // `useSyncExternalStore` reads it without a hydration mismatch: `null` on the
@@ -122,10 +136,23 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
             Top players streaming now ·{" "}
             <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
-          <AddChannelCta />
+          <div className="flex items-center gap-1.5">
+            <AddChannelCta />
+            {onHide ? (
+              <button
+                type="button"
+                onClick={onHide}
+                aria-label="Hide streamers"
+                title="Hide streamers"
+                className="inline-flex shrink-0 cursor-pointer items-center justify-center rounded-md p-1.5 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
+              >
+                <XIcon className="size-4" />
+              </button>
+            ) : null}
+          </div>
         </PanelHeader>
         <PanelContent className="p-0">
-          <div className="flex flex-col lg:flex-row">
+          <div className={cn("flex flex-col", !theater && "lg:flex-row")}>
             {/* Featured player */}
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="relative aspect-video w-full bg-black">
@@ -175,6 +202,22 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
                     {intFmt.format(active.viewerCount)} viewers
                   </p>
                 </div>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon-sm"
+                  onClick={() => setTheater((t) => !t)}
+                  aria-pressed={theater}
+                  aria-label={theater ? "Exit theater mode" : "Theater mode"}
+                  title={theater ? "Exit theater mode" : "Theater mode"}
+                  className="hidden shrink-0 lg:inline-flex"
+                >
+                  {theater ? (
+                    <ArrowsInSimpleIcon className="size-4" />
+                  ) : (
+                    <ArrowsOutSimpleIcon className="size-4" />
+                  )}
+                </Button>
                 <Button asChild variant="outline" size="sm">
                   <a
                     href={`https://www.twitch.tv/${active.twitchLogin}`}
@@ -187,8 +230,15 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
               </div>
             </div>
 
-            {/* Sidebar: the live table, ranked by the selected metric */}
-            <div className="border-t border-fd-border lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l">
+            {/* Sidebar: the live table, ranked by the selected metric. In
+                theater mode it sits full-width below the player instead of to
+                the right. */}
+            <div
+              className={cn(
+                "border-t border-fd-border",
+                !theater && "lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
+              )}
+            >
               <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr]:h-11">
                 <TableHeader>
                   <TableRow>

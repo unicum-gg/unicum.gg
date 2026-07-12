@@ -4,6 +4,7 @@ const STORAGE = {
     COOKIE_CONSENT: "unicum.cookie-consent",
     COOKIE_PREFERENCES: "unicum.cookie-preferences",
     SEARCH_HISTORY: "unicum.search-history",
+    HIDE_STREAMS: "unicum.hide-streams",
   },
   COOKIES: {
     REGION: "unicum.region",
