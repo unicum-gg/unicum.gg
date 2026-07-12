@@ -7,7 +7,14 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState, useSyncExternalStore } from "react";
+import {
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -78,6 +85,52 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 function thumb(url: string, w: number, h: number): string {
   return url.replace("{width}", String(w)).replace("{height}", String(h));
+}
+
+type TwitchPlayerInstance = {
+  setChannel: (channel: string) => void;
+  destroy?: () => void;
+};
+
+type TwitchEmbed = {
+  Player: new (
+    el: string | HTMLElement,
+    options: {
+      channel: string;
+      parent: string[];
+      width: string | number;
+      height: string | number;
+      muted: boolean;
+      autoplay: boolean;
+    },
+  ) => TwitchPlayerInstance;
+};
+
+declare global {
+  interface Window {
+    Twitch?: TwitchEmbed;
+  }
+}
+
+const TWITCH_EMBED_SRC = "https://player.twitch.tv/js/embed/v1.js";
+let twitchEmbedPromise: Promise<void> | null = null;
+
+// Load Twitch's player SDK once. Unlike a bare <iframe>, a `Twitch.Player`
+// instance lets us change channels with `setChannel` without tearing the player
+// down, so the viewer's volume and mute choice carry from one stream to the next
+// instead of resetting to muted on every switch.
+function loadTwitchEmbed(): Promise<void> {
+  if (window.Twitch?.Player) return Promise.resolve();
+  if (twitchEmbedPromise) return twitchEmbedPromise;
+  twitchEmbedPromise = new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = TWITCH_EMBED_SRC;
+    script.async = true;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error("Twitch embed failed to load"));
+    document.head.appendChild(script);
+  });
+  return twitchEmbedPromise;
 }
 
 export function LiveStreams({
@@ -157,13 +210,7 @@ export function LiveStreams({
             <div className="flex min-w-0 flex-1 flex-col">
               <div className="relative aspect-video w-full bg-black">
                 {parent ? (
-                  <iframe
-                    key={`${active.twitchLogin}-${parent}`}
-                    title={`${active.twitchUserName} on Twitch`}
-                    src={`https://player.twitch.tv/?channel=${active.twitchLogin}&parent=${parent}&muted=true&autoplay=true`}
-                    allowFullScreen
-                    className="absolute inset-0 size-full border-0"
-                  />
+                  <FeaturedPlayer channel={active.twitchLogin} parent={parent} />
                 ) : (
                   <Image
                     src={thumb(active.thumbnailUrl, 960, 540)}
@@ -270,6 +317,63 @@ export function LiveStreams({
       </Panel>
     </>
   );
+}
+
+/**
+ * The featured stream, driven by Twitch's Player SDK instead of a bare iframe so
+ * that switching channels reuses a single player instance. Reusing it preserves
+ * the viewer's volume and mute across streams; a keyed iframe would remount and
+ * reset to muted on every switch.
+ */
+function FeaturedPlayer({
+  channel,
+  parent,
+}: {
+  channel: string;
+  parent: string;
+}) {
+  // Twitch's SDK mounts into a div it finds by id (`getElementById`), so give
+  // the container a stable, collision-free one.
+  const domId = useId();
+  const playerRef = useRef<TwitchPlayerInstance | null>(null);
+  // If the active channel changes while the SDK is still loading, create the
+  // player on the latest one rather than the value captured at mount. Kept in a
+  // ref (synced from an effect, never during render) so it isn't an effect dep.
+  const channelRef = useRef(channel);
+  useEffect(() => {
+    channelRef.current = channel;
+  }, [channel]);
+
+  useEffect(() => {
+    let disposed = false;
+    void loadTwitchEmbed()
+      .then(() => {
+        if (disposed || playerRef.current || !window.Twitch?.Player) return;
+        if (!document.getElementById(domId)) return;
+        playerRef.current = new window.Twitch.Player(domId, {
+          channel: channelRef.current,
+          parent: [parent],
+          width: "100%",
+          height: "100%",
+          muted: true,
+          autoplay: true,
+        });
+      })
+      .catch(() => {});
+    return () => {
+      disposed = true;
+      playerRef.current?.destroy?.();
+      playerRef.current = null;
+    };
+  }, [parent, domId]);
+
+  // Swap channels on the live instance; volume and mute persist because it is
+  // the same player.
+  useEffect(() => {
+    playerRef.current?.setChannel(channel);
+  }, [channel]);
+
+  return <div id={domId} className="absolute inset-0 size-full" />;
 }
 
 function StreamRow({
