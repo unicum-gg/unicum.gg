@@ -218,6 +218,7 @@ export function LiveStreams({
                     src={thumb(active.thumbnailUrl, 960, 540)}
                     alt={active.title}
                     fill
+                    priority
                     unoptimized
                     className="object-cover"
                   />
