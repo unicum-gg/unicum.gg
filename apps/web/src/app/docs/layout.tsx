@@ -6,7 +6,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
     title: "API Docs",
     description:
-      "Interactive reference for the unicum.gg public API: player and clan search, leaderboards and live updates across EU, NA and Asia.",
+      "Interactive reference for the unicum.gg public API: player, clan and tank search, leaderboards and live updates across EU, NA and Asia.",
   });
 }
 

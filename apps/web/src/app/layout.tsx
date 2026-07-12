@@ -25,7 +25,7 @@ const figtree = Figtree({
 
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
-    title: "World of Tanks player & clan stats",
+    title: "World of Tanks player, clan & tank stats",
   });
 }
 

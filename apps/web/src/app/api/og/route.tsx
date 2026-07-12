@@ -9,7 +9,8 @@ export const runtime = "nodejs";
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title") ?? "World of Tanks";
-  const subtitle = searchParams.get("subtitle") ?? "player & clan stats";
+  const subtitle =
+    searchParams.get("subtitle") ?? "player, clan & tank stats";
 
   const assets = await loadOgAssets();
 

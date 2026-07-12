@@ -9,7 +9,7 @@ export function GET(): Response {
     version: APP.VERSION,
     title: APP.NAME,
     description:
-      "World of Tanks stats for players and clans across EU, NA, and Asia.",
+      "World of Tanks stats for players, clans and tanks across EU, NA, and Asia.",
     websiteUrl: APP.URL,
     repository: {
       source: "github",
