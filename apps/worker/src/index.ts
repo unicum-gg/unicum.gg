@@ -65,6 +65,11 @@ async function main(): Promise<void> {
   );
   startTopPlayersByTankCron();
 
+  const { startLiveStreamersPoller } = await import(
+    "@unicum.gg/core/twitch/live-poller"
+  );
+  startLiveStreamersPoller();
+
   console.log("[worker] all crons scheduled");
 }
 

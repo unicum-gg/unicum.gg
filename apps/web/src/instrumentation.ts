@@ -72,6 +72,11 @@ export async function register() {
       "@unicum.gg/core/wargaming/wot/players/top/by-tank/cron"
     );
     startTopPlayersByTankCron();
+
+    const { startLiveStreamersPoller } = await import(
+      "@unicum.gg/core/twitch/live-poller"
+    );
+    startLiveStreamersPoller();
   } finally {
     globalThis.__dbContext = "request";
   }

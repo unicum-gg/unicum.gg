@@ -608,7 +608,7 @@ export const PlayerDetailResponse = z.object({
   }),
 });
 
-// --- Live streamers (GET /api/live-streamers) ---
+// --- Live streamers (GET /api/streamers/live) ---
 // Tracked players currently live on Twitch in the WoT category, joined to their
 // cached ratings and clan tag. Global (all regions), sorted by WNX. The payload
 // is a bare array; it's empty when the Twitch feature is off or nobody is live.
