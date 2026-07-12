@@ -28,7 +28,7 @@ export function TankRender({
   // image error and stop at the placeholder.
   const candidates = [
     tankopediaImageUrl(region, tag),
-    fallback ? fallback.replace(/^http:/, "https:") : null,
+    fallback,
     defaultVehicleRenderUrl(region),
   ].filter((u): u is string => Boolean(u));
   const [idx, setIdx] = useState(0);

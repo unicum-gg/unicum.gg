@@ -13,6 +13,13 @@ import type { VehicleMeta } from "./meta";
 // Next throws `Invariant: incrementalCache missing in unstable_cache`. The
 // underlying DB read is <50ms anyway, so a plain Map gives us all the
 // per-process dedup we need.
+// The stored icon URLs are legacy WG CDN links served over plain http. Upgrade
+// them to https on read so they aren't blocked as mixed content on our https
+// pages (and so the OG image / schema.org markup carry a secure URL).
+function httpsUrl(url: string | null): string | null {
+  return url ? url.replace(/^http:\/\//, "https://") : url;
+}
+
 const CACHE_TTL_MS = 7 * 24 * 60 * 60 * 1000;
 const cache = new Map<
   Region,
@@ -60,8 +67,8 @@ async function loadVehicles(
       isPremium: r.isPremium,
       isReward: r.isReward,
       role: r.role,
-      contourIcon: r.contourIcon,
-      bigIcon: r.bigIcon,
+      contourIcon: httpsUrl(r.contourIcon),
+      bigIcon: httpsUrl(r.bigIcon),
     };
   }
   return out;

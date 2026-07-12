@@ -71,9 +71,7 @@ export default async function Image({
       // always shows a tank.
       renderDataUrl = render;
       if (!renderDataUrl && meta.bigIcon) {
-        renderDataUrl = await fetchImageDataUrl(
-          meta.bigIcon.replace(/^http:/, "https:"),
-        );
+        renderDataUrl = await fetchImageDataUrl(meta.bigIcon);
       }
       if (!renderDataUrl) {
         renderDataUrl = await fetchImageDataUrl(defaultVehicleRenderUrl(region));
