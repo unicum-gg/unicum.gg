@@ -16,7 +16,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { PerfTrace, currentTrace, runWithTrace } from "@unicum.gg/core/lib/perf-trace";
-import { clanSchema } from "@/lib/schema-org";
+import { breadcrumbSchema, clanSchema } from "@/lib/schema-org";
 import { loadClanDetail } from "@/services/clans/detail";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
@@ -157,6 +157,16 @@ async function render(
           description: `${clan.name} [${clan.tag}] World of Tanks clan on ${region.toUpperCase()}: ${clan.membersCount} members, WN8/WNX ratings, member rankings, recent join/leave activity.`,
           logo: clan.emblem,
         })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
+          { name: "Clans", url: `${APP.URL}${ROUTES.CLANS(region)}` },
+          {
+            name: `[${clan.tag}] ${clan.name}`,
+            url: `${APP.URL}${ROUTES.CLAN(region, clan.tag)}`,
+          },
+        ])}
       />
       <ViewBeacon
         url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/enqueue`}

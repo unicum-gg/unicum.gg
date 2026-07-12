@@ -17,7 +17,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getRatingMetricFromCookies } from "@/lib/rating-metric";
 import { PerfTrace, currentTrace, runWithTrace } from "@unicum.gg/core/lib/perf-trace";
-import { personSchema } from "@/lib/schema-org";
+import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
 import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
 import { recordCurrentSnapshot } from "@unicum.gg/core/players";
 import {
@@ -279,6 +279,16 @@ async function buildView(args: {
           description: playerDescription,
           clanName: clanHistory.currentStint?.clan.name ?? null,
         })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
+          { name: "Players", url: `${APP.URL}${ROUTES.PLAYERS(region)}` },
+          {
+            name: player.nickname,
+            url: `${APP.URL}${ROUTES.PLAYER(region, player.nickname)}`,
+          },
+        ])}
       />
       <Panel>
         <PanelContent className="p-0">

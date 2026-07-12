@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { TankView } from "@/components/tanks/tank-view";
+import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
+import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
+import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
@@ -89,22 +92,47 @@ export async function renderTankPage(region: Region, slug: string) {
     getMomHistory(region, tankId),
   ]);
 
+  const regionLabel = region.toUpperCase();
+  const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
+  const tankUrl = `${APP.URL}${ROUTES.TANK(region, canonicalSlug)}`;
+
   return (
-    <TankView
-      region={region}
-      tankId={tankId}
-      slug={canonicalSlug}
-      meta={meta}
-      topByMetric={topByMetric}
-      serverStats={serverStats}
-      wn8Expected={wn8Map.get(tankId) ?? null}
-      wnxExpected={wnxMap.get(tankId) ?? null}
-      specs={specsMap.get(tankId) ?? null}
-      moe={moeMap.get(tankId) ?? null}
-      mom={momMap.get(tankId) ?? null}
-      researchPath={researchPath}
-      moeHistory={moeHistory}
-      momHistory={momHistory}
-    />
+    <>
+      <JsonLd
+        data={tankSchema({
+          name: meta.name,
+          url: tankUrl,
+          description: `${meta.name}, tier ${tierLabel} ${meta.nation.toUpperCase()} in World of Tanks. Server-average stats, best players and WN8/WNX expected values on ${regionLabel}.`,
+          image: meta.bigIcon,
+          tier: meta.tier,
+          nation: meta.nation,
+          type: meta.type,
+          isPremium: meta.isPremium,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
+          { name: "Tanks", url: `${APP.URL}${ROUTES.TANKS(region)}` },
+          { name: meta.name, url: tankUrl },
+        ])}
+      />
+      <TankView
+        region={region}
+        tankId={tankId}
+        slug={canonicalSlug}
+        meta={meta}
+        topByMetric={topByMetric}
+        serverStats={serverStats}
+        wn8Expected={wn8Map.get(tankId) ?? null}
+        wnxExpected={wnxMap.get(tankId) ?? null}
+        specs={specsMap.get(tankId) ?? null}
+        moe={moeMap.get(tankId) ?? null}
+        mom={momMap.get(tankId) ?? null}
+        researchPath={researchPath}
+        moeHistory={moeHistory}
+        momHistory={momHistory}
+      />
+    </>
   );
 }

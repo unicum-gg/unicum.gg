@@ -1,6 +1,8 @@
 import type {
+  BreadcrumbList,
   Organization,
   Person,
+  Product,
   SportsTeam,
   WebSite,
   WithContext,
@@ -18,7 +20,7 @@ export function websiteSchema(): WithContext<WebSite> {
     name: SITE_NAME,
     url: SITE_URL,
     description:
-      "Free World of Tanks stats for every player and clan across EU, NA and Asia.",
+      "Free World of Tanks stats for every player, clan and tank across EU, NA and Asia.",
     inLanguage: "en",
   };
 }
@@ -51,6 +53,54 @@ export function personSchema(args: {
     ...(args.clanName && {
       memberOf: { "@type": "SportsTeam", name: args.clanName },
     }),
+  };
+}
+
+export function tankSchema(args: {
+  name: string;
+  url: string;
+  description: string;
+  image?: string | null;
+  tier: number;
+  nation: string;
+  type: string;
+  isPremium: boolean;
+}): WithContext<Product> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: args.name,
+    url: args.url,
+    description: args.description,
+    category: "World of Tanks vehicle",
+    brand: { "@type": "Brand", name: "World of Tanks" },
+    ...(args.image && { image: args.image }),
+    additionalProperty: [
+      { "@type": "PropertyValue", name: "Tier", value: args.tier },
+      { "@type": "PropertyValue", name: "Nation", value: args.nation },
+      { "@type": "PropertyValue", name: "Type", value: args.type },
+      { "@type": "PropertyValue", name: "Premium", value: args.isPremium },
+    ],
+  };
+}
+
+/**
+ * Breadcrumb trail (e.g. unicum.gg › Tanks › T-62A). Each `url` must be
+ * absolute. Renders the SERP breadcrumb rich result across player/clan/tank
+ * pages.
+ */
+export function breadcrumbSchema(
+  items: { name: string; url: string }[],
+): WithContext<BreadcrumbList> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
   };
 }
 
