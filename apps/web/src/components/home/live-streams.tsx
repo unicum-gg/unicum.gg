@@ -179,7 +179,7 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
                   <a
                     href={`https://www.twitch.tv/${active.twitchLogin}`}
                     target="_blank"
-                    rel="noreferrer"
+                    rel="nofollow noopener noreferrer"
                   >
                     Watch on Twitch
                   </a>

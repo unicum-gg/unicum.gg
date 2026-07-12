@@ -25,7 +25,7 @@ export function LiveBadge({
     <a
       href={`https://www.twitch.tv/${streamer.twitchLogin}`}
       target="_blank"
-      rel="noreferrer"
+      rel="nofollow noopener noreferrer"
       // Stop the click from bubbling to a surrounding row handler (e.g. the
       // home rail's select-row) so the badge always goes straight to Twitch.
       onClick={(e) => e.stopPropagation()}
