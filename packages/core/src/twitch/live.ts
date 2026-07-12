@@ -8,8 +8,9 @@ import { getWotStreamsByLogin } from "./index";
 /**
  * A tracked WoT player currently live on Twitch in the WoT category, joined to
  * their cached ratings and clan tag so the home rail / badges can rank and
- * colour them like the leaderboards. All rating metrics are exposed so the UI
- * can honour the navbar metric selector.
+ * colour them like the leaderboards. Both the lifetime and the 30-day WN7/WN8/
+ * WNX ship so the rail's Overall / Past-30-days toggle (and the navbar metric
+ * selector) can re-rank entirely client-side, with no refetch.
  */
 export type LiveStreamer = {
   region: Region;
@@ -20,6 +21,9 @@ export type LiveStreamer = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  wn730d: number | null;
+  wn830d: number | null;
+  wnx30d: number | null;
   twitchLogin: string;
   twitchUserName: string;
   title: string;
@@ -85,6 +89,9 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       wn7: player.wn7,
       wn8: player.wn8,
       wnx: player.wnx,
+      wn730d: player.wn730d,
+      wn830d: player.wn830d,
+      wnx30d: player.wnx30d,
       twitchLogin: row.twitchLogin,
       twitchUserName: stream.userName,
       title: stream.title,
@@ -94,6 +101,8 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
     });
   }
 
+  // Default order matches the default toggle state (Overall); the client
+  // re-sorts by the selected period + metric on render.
   out.sort((a, b) => (b.wnx ?? 0) - (a.wnx ?? 0));
   return out;
 }

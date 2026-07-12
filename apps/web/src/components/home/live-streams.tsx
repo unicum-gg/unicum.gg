@@ -17,6 +17,11 @@ import {
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
 import {
+  LeaderboardPeriod,
+  LeaderboardPeriodSelect,
+  useLeaderboardPeriod,
+} from "@/components/home/leaderboard-period";
+import {
   Panel,
   PanelContent,
   PanelHeader,
@@ -38,10 +43,23 @@ import { useCookie } from "@/hooks/use-cookie";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { cn } from "@/lib/utils";
 
-const METRIC_VALUE: Record<RatingMetric, (s: LiveStreamer) => number | null> = {
-  [RatingMetric.Wn7]: (s) => s.wn7,
-  [RatingMetric.Wn8]: (s) => s.wn8,
-  [RatingMetric.Wnx]: (s) => s.wnx,
+// Rank on either lifetime or 30-day WN*, driven by the header's period toggle
+// (shared with the "Top players" / "Top clans" panels). 30-day reflects who is
+// playing well right now rather than career averages.
+const METRIC_VALUE: Record<
+  LeaderboardPeriod,
+  Record<RatingMetric, (s: LiveStreamer) => number | null>
+> = {
+  [LeaderboardPeriod.Overall]: {
+    [RatingMetric.Wn7]: (s) => s.wn7,
+    [RatingMetric.Wn8]: (s) => s.wn8,
+    [RatingMetric.Wnx]: (s) => s.wnx,
+  },
+  [LeaderboardPeriod.Month]: {
+    [RatingMetric.Wn7]: (s) => s.wn730d,
+    [RatingMetric.Wn8]: (s) => s.wn830d,
+    [RatingMetric.Wnx]: (s) => s.wnx30d,
+  },
 };
 
 const METRIC_COLOR: Record<RatingMetric, (v: number) => string> = {
@@ -70,10 +88,12 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
     : DEFAULT_RATING_METRIC;
   const metricLabel = RATING_METRIC_LABEL[metric];
 
+  const [period, setPeriod] = useLeaderboardPeriod();
+
   const sorted = useMemo(() => {
-    const value = METRIC_VALUE[metric];
+    const value = METRIC_VALUE[period][metric];
     return [...streamers].sort((a, b) => (value(b) ?? -1) - (value(a) ?? -1));
-  }, [streamers, metric]);
+  }, [streamers, metric, period]);
 
   const [activeLogin, setActiveLogin] = useState(initial[0]?.twitchLogin ?? "");
   // Twitch's embed requires the exact host serving the page as `parent`, only
@@ -98,7 +118,8 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
         <PanelHeader>
           <PanelTitle>
             <span className="mr-2 text-[#eb0400]">●</span>
-            Top players streaming now
+            Top players streaming now ·{" "}
+            <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
@@ -184,6 +205,7 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
                       key={s.twitchLogin}
                       streamer={s}
                       metric={metric}
+                      period={period}
                       active={s.twitchLogin === active.twitchLogin}
                       onSelect={() => setActiveLogin(s.twitchLogin)}
                     />
@@ -201,15 +223,17 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
 function StreamRow({
   streamer,
   metric,
+  period,
   active,
   onSelect,
 }: {
   streamer: LiveStreamer;
   metric: RatingMetric;
+  period: LeaderboardPeriod;
   active: boolean;
   onSelect: () => void;
 }) {
-  const value = METRIC_VALUE[metric](streamer);
+  const value = METRIC_VALUE[period][metric](streamer);
   return (
     <TableRow
       onClick={onSelect}
