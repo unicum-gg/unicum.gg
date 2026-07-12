@@ -1,17 +1,14 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import { toRoman } from "roman-numerals";
-import { FavoriteButton } from "@/components/favorite-button";
 import { NationFlag } from "@/components/players/nation-flag";
-import { PortalLinkButton } from "@/components/portal-link-button";
-import { ShareButton } from "@/components/share-button";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { TankCost } from "@/components/tanks/tank-cost";
 import { TankDetailTabs } from "@/components/tanks/tank-detail-tabs";
 import { TankDetailTab } from "@/components/tanks/detail-tabs";
 import { TankRender } from "@/components/tanks/tank-render";
+import { TankActionsMenu } from "@/components/tanks/tank-actions-menu";
 import { TankResearchPath } from "@/components/tanks/tank-research-path";
-import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { TankCharacteristics } from "@/components/tanks/tank-characteristics";
 import { TankMarksMastery } from "@/components/tanks/tank-marks-mastery";
@@ -57,11 +54,7 @@ import {
   VEHICLE_ROLE_LABEL,
   roleSuffix,
 } from "@unicum.gg/core/constants/tanks";
-import {
-  Region,
-  REGION_LABEL,
-  REGION_WOT_HOST,
-} from "@unicum.gg/wargaming/region";
+import { Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
 import { hangarBgUrl } from "@unicum.gg/wargaming/cdn";
 
 
@@ -402,25 +395,13 @@ export function TankView({
             className="pointer-events-none absolute inset-0 bg-linear-to-br from-fd-background from-0% via-fd-background/20 via-28% to-transparent to-55%"
           />
           <div className="absolute right-4 top-4 z-20 flex items-center gap-1.5">
-            <FavoriteButton item={favoriteItem} />
-            <PortalLinkButton
-              href={`https://${REGION_WOT_HOST[region]}/en/tankopedia/${tankId}-${meta.tag}/`}
-              label="Open in WoT tankopedia"
-              icon="tankopedia"
-            />
-            <PortalLinkButton
-              href={`https://${REGION_WOT_HOST[region]}/en/ratings/vehicles/${meta.tag}/`}
-              label="Open in WoT vehicle ratings"
-              icon="ranking"
-            />
-            <ShareButton
-              title={`Share ${meta.name}`}
-              url={`${APP.URL}${ROUTES.TANK(region, slug)}`}
-              shareText={`Check ${meta.name}'s WoT stats on ${APP.NAME}`}
-              // Region-explicit path: the EU pretty-URL shortcut (/tanks/:slug)
-              // has no `/opengraph-image` sub-route, so build it from the
-              // canonical /:region/tanks/:slug segment the file convention lives at.
-              ogImage={`${APP.URL}/${region}/tanks/${slug}/opengraph-image`}
+            <TankActionsMenu
+              region={region}
+              tankId={tankId}
+              tag={meta.tag}
+              name={meta.name}
+              slug={slug}
+              favoriteItem={favoriteItem}
             />
           </div>
           {specs && (

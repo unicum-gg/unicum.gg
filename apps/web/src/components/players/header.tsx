@@ -2,15 +2,13 @@ import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
-import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
-import { PortalLinkButton } from "@/components/portal-link-button";
 import { RefreshBeacon } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
-import { ShareButton } from "@/components/share-button";
-import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming/region";
+import { LiveBadge } from "@/components/live-badge";
+import { PlayerActionsMenu } from "@/components/players/player-actions-menu";
 import type { ClanStint } from "@unicum.gg/core/wargaming/wot/clans/player";
 
 const MONTH_FORMAT = "MMM yyyy";
@@ -41,20 +39,18 @@ export function PlayerHeader({
         <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
+            <LiveBadge
+              region={region}
+              accountId={accountId}
+              className="ml-2 align-middle text-xs"
+            />
           </h1>
-          <FavoriteButton
-            item={{ kind: "player", region, player: { account_id: accountId, nickname, clan: null } }}
-          />
-          <PortalLinkButton
-            href={`https://${REGION_WOT_HOST[region]}/en/community/accounts/${accountId}-${nickname}/`}
-          />
-          <ShareButton
-            title={`Share ${nickname}`}
-            url={`${APP.URL}${ROUTES.PLAYER(region, nickname)}`}
-            shareText={`Check ${nickname}'s WoT stats on ${APP.NAME}`}
-            ogImage={`${APP.URL}${ROUTES.PLAYER(region, nickname)}/opengraph-image`}
-          />
           <CompareWithButton region={region} current={nickname} />
+          <PlayerActionsMenu
+            region={region}
+            accountId={accountId}
+            nickname={nickname}
+          />
         </div>
         <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">

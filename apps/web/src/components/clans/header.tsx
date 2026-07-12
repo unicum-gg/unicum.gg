@@ -2,12 +2,9 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { AutoFitText } from "@/components/auto-fit-text";
+import { ClanActionsMenu } from "@/components/clans/clan-actions-menu";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
-import { FavoriteButton } from "@/components/favorite-button";
 import { LanguageFlags } from "@/components/language-flags";
-import { PortalLinkButton } from "@/components/portal-link-button";
-import { ShareButton } from "@/components/share-button";
-import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { weightedAverage } from "@unicum.gg/core/lib/stats";
 import { cn } from "@/lib/utils";
@@ -26,7 +23,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming/region";
 
 const DAY_FORMAT = "MMM d, yyyy";
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -146,30 +143,18 @@ export function ClanHeader({
                 <span className="ml-2">{clan.name}</span>
               </AutoFitText>
             </h1>
-            <FavoriteButton
-              item={{
-                kind: "clan",
-                region,
-                clan: {
-                  clan_id: clan.id,
-                  tag: clan.tag,
-                  name: clan.name,
-                  color: clan.color,
-                  members_count: clan.membersCount,
-                  emblem: clan.emblem,
-                },
+            <CompareWithButton region={region} current={clan.tag} />
+            <ClanActionsMenu
+              region={region}
+              clan={{
+                id: clan.id,
+                tag: clan.tag,
+                name: clan.name,
+                color: clan.color,
+                membersCount: clan.membersCount,
+                emblem: clan.emblem,
               }}
             />
-            <PortalLinkButton
-              href={`https://${REGION_PORTAL_HOST[region]}/clans/wot/${clan.id}/`}
-            />
-            <ShareButton
-              title={`Share [${clan.tag}]`}
-              url={`${APP.URL}${ROUTES.CLAN(region, clan.tag)}`}
-              shareText={`Check [${clan.tag}] ${clan.name} on ${APP.NAME}`}
-              ogImage={`${APP.URL}${ROUTES.CLAN(region, clan.tag)}/opengraph-image`}
-            />
-            <CompareWithButton region={region} current={clan.tag} />
           </div>
           <InfoRow
             region={region}
