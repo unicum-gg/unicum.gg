@@ -118,6 +118,11 @@ export async function GET(
   const headers: Record<string, string> = {
     "Content-Type": "text/markdown; charset=utf-8",
     "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
+    // The `.md` twin is a duplicate of the HTML page, meant for AI tools that
+    // fetch it directly (the "Open in ChatGPT/Claude/…" deep links). Keep it out
+    // of the search index so it never competes with the canonical HTML page;
+    // `nofollow` stops crawlers from walking the `.md`→`.md` link tree.
+    "X-Robots-Tag": "noindex, nofollow",
   };
   const tokenCount = countTokens(markdown);
   if (tokenCount !== null) headers["x-markdown-tokens"] = String(tokenCount);

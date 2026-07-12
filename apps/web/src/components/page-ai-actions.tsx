@@ -44,7 +44,7 @@ export function PageAiActions() {
     <>
       {targets.map((t) => (
         <DropdownMenuItem key={t.href} asChild>
-          <a href={t.href} target="_blank" rel="noreferrer">
+          <a href={t.href} target="_blank" rel="nofollow noopener noreferrer">
             {t.icon}
             {t.label}
             <ArrowSquareOutIcon className="ml-auto size-3 text-fd-muted-foreground" />
