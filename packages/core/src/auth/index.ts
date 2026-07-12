@@ -31,7 +31,18 @@ export const auth = betterAuth({
   // The WG access token unlocks the player's private WG data, so encrypt it at
   // rest rather than storing it verbatim in the `account` table. Better Auth
   // encrypts it with the app secret on write and decrypts on read.
-  account: { encryptOAuthTokens: true },
+  account: {
+    encryptOAuthTokens: true,
+    // WG never returns an email, so a WG user's email is a synthetic
+    // `<id>@<region>.wargaming.local` that can never match a real Twitch email.
+    // Better Auth's default account-linking guard rejects that mismatch with
+    // `email_doesn't_match`, so allow linking across different emails: the user
+    // is already authenticated as this WG account and links their own Twitch via
+    // OAuth (which proves ownership), so there is no takeover risk.
+    accountLinking: {
+      allowDifferentEmails: true,
+    },
+  },
   // Twitch is offered only for LINKING (a logged-in WG player connecting their
   // channel), never as a primary login. Absent creds → provider omitted.
   socialProviders: isTwitchEnabled()
