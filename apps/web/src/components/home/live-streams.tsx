@@ -133,7 +133,22 @@ export function LiveStreams({ initial }: { initial: LiveStreamer[] }) {
                     {active.title}
                   </p>
                   <p className="mt-0.5 truncate text-sm text-fd-muted-foreground">
-                    {active.twitchUserName} ·{" "}
+                    <Link
+                      href={ROUTES.PLAYER(active.region, active.nickname)}
+                      className="font-medium text-fd-foreground hover:underline"
+                    >
+                      {active.nickname}
+                    </Link>
+                    {active.clanTag ? (
+                      <>
+                        {" "}
+                        <ClanTag
+                          tag={active.clanTag}
+                          color={active.clanColor}
+                        />
+                      </>
+                    ) : null}
+                    {" · "}
                     {intFmt.format(active.viewerCount)} viewers
                   </p>
                 </div>
@@ -202,27 +217,15 @@ function StreamRow({
       className={cn("cursor-pointer", active && "bg-fd-border/50")}
     >
       <TableCell className="pl-4!">
-        <Link
-          href={ROUTES.PLAYER(streamer.region, streamer.nickname)}
-          onClick={(e) => e.stopPropagation()}
-          className="block truncate hover:underline"
-        >
+        <div className="truncate">
           <span className="font-medium">{streamer.nickname}</span>
           {streamer.clanTag ? (
             <>
               {" "}
-              <span className="font-mono text-xs">
-                <span style={{ color: streamer.clanColor ?? undefined }}>
-                  [
-                </span>
-                {streamer.clanTag}
-                <span style={{ color: streamer.clanColor ?? undefined }}>
-                  ]
-                </span>
-              </span>
+              <ClanTag tag={streamer.clanTag} color={streamer.clanColor} />
             </>
           ) : null}
-        </Link>
+        </div>
       </TableCell>
       <TableCell className="text-right tabular-nums text-fd-muted-foreground">
         {intFmt.format(streamer.viewerCount)}
@@ -236,5 +239,15 @@ function StreamRow({
         {value != null ? intFmt.format(value) : "—"}
       </TableCell>
     </TableRow>
+  );
+}
+
+function ClanTag({ tag, color }: { tag: string; color: string | null }) {
+  return (
+    <span className="font-mono text-xs">
+      <span style={{ color: color ?? undefined }}>[</span>
+      {tag}
+      <span style={{ color: color ?? undefined }}>]</span>
+    </span>
   );
 }
