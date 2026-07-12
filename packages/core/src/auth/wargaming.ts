@@ -84,9 +84,15 @@ export function wargaming(): BetterAuthPlugin {
             ctx.context.secret,
             stateCookie.attributes,
           );
-          const { location } = await wg
+          // Redirect the browser straight to WG's login endpoint, which issues
+          // its own 302 onward to the OpenID page. Unlike calling `login()`
+          // server-side (a WG API round-trip through the shared per-region rate
+          // limiter, which queues behind background traffic and froze the click
+          // for 1-3s), this builds the URL locally: the sign-in redirect is
+          // instant and makes no WG call.
+          const location = wg
             .region(region)
-            .api.wot.auth.login({ redirectUri });
+            .api.wot.auth.loginUrl({ redirectUri });
           throw ctx.redirect(location);
         },
       ),
@@ -147,9 +153,15 @@ export function wargaming(): BetterAuthPlugin {
           // token and echoes back the account_id it is actually bound to (plus
           // a fresh token + expiry). Identity comes from THIS response, and a
           // rejected token drops the login.
+          // Skip the shared rate limiter: this token check is interactive (the
+          // user is waiting on the callback to finish logging them in), so it
+          // must not queue behind background WG traffic like the crons do.
           const verified = await wg
             .region(region)
-            .api.wot.auth.prolongate({ accessToken: access_token })
+            .api.wot.auth.prolongate(
+              { accessToken: access_token },
+              { skipRateLimit: true },
+            )
             .catch(() => null);
           if (!verified) throw ctx.redirect(appUrl("/?auth=error"));
           const accountId = String(verified.account_id);

@@ -182,6 +182,15 @@ export class Transport {
     return this.#appId(region);
   }
 
+  /**
+   * The default `language` applied to every call, if configured. Exposed for URL
+   * builders (e.g. `auth.loginUrl`) that assemble a browser-facing request URL
+   * without going through `wgFetch`, so they can match its param handling.
+   */
+  defaultLanguage(): WgLanguage | undefined {
+    return this.#language;
+  }
+
   #withHeaders(region: Region, extra?: Record<string, string>): Record<string, string> {
     return { ...(this.#headers?.(region) ?? {}), ...extra };
   }
@@ -213,7 +222,17 @@ export class Transport {
     region: Region,
     path: string,
     params: Record<string, string>,
-    opts?: { cache?: number | false; method?: "GET" | "POST" },
+    opts?: {
+      cache?: number | false;
+      method?: "GET" | "POST";
+      /**
+       * Bypass the per-region rate limiter for this call. Reserved for rare,
+       * user-blocking interactive calls (e.g. verifying a token during login)
+       * that must not queue behind background traffic. Never use it for bulk or
+       * background work, or the shared WG budget stops meaning anything.
+       */
+      skipRateLimit?: boolean;
+    },
   ): Promise<T> {
     const method = opts?.method ?? "GET";
     const url = new URL(`https://${REGION_API_HOST[region]}${path}`);
@@ -255,7 +274,7 @@ export class Transport {
 
     const data = await this.#trace_(`wgFetch ${region} ${path}`, () =>
       this.#withRetries(async () => {
-        await this.#wgLimiters[region].acquire();
+        if (!opts?.skipRateLimit) await this.#wgLimiters[region].acquire();
         const t0 = Date.now();
         try {
           const res = await fetch(url, {

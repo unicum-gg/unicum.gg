@@ -1,4 +1,4 @@
-import { Region } from "../../region";
+import { Region, REGION_API_HOST } from "../../region";
 import type { Transport } from "../../client/transport";
 import { WgLanguage } from "../../language";
 import { buildQuery } from "../../query";
@@ -61,21 +61,61 @@ export class AuthResource {
   }
 
   /**
+   * `/wot/auth/login/` as a plain URL to send the *browser* to, with no server
+   * round-trip. Where {@link login} calls WG (with `nofollow=1`) to resolve the
+   * OpenID URL and hands it back, this just assembles the `/wot/auth/login/`
+   * URL: WG then issues its own `302` to the OpenID page when the browser lands
+   * there. So it makes no API call and never touches the rate limiter — the
+   * user's browser makes the request, not us. Prefer it for the interactive
+   * sign-in redirect; use {@link login} only when the resolved URL is needed
+   * server-side.
+   */
+  loginUrl(params: {
+    /** URL WG sends the user back to after authentication. */
+    redirectUri?: string;
+    /** Page layout — `Page` (default) or `Popup` for mobile apps. */
+    display?: AuthDisplay;
+    /** `access_token` expiration as a UNIX timestamp, or a delta in seconds. */
+    expiresAt?: number;
+    language?: WgLanguage;
+  } = {}): string {
+    const url = new URL(`https://${REGION_API_HOST[this.region]}/wot/auth/login/`);
+    url.searchParams.set("application_id", this.t.applicationId(this.region));
+    if (params.redirectUri) url.searchParams.set("redirect_uri", params.redirectUri);
+    if (params.display) url.searchParams.set("display", params.display);
+    if (params.expiresAt !== undefined) {
+      url.searchParams.set("expires_at", String(params.expiresAt));
+    }
+    const language = params.language ?? this.t.defaultLanguage();
+    if (language) url.searchParams.set("language", language);
+    return url.toString();
+  }
+
+  /**
    * `/wot/auth/prolongate/` — mint a new `access_token` from a still-valid one,
    * for when the player keeps using the app past the current token's lifetime.
    */
-  async prolongate(params: {
-    accessToken: string;
+  async prolongate(
+    params: {
+      accessToken: string;
+      /**
+       * New expiration as a UNIX timestamp, or a delta in seconds. Must not
+       * exceed two weeks from now.
+       */
+      expiresAt?: number;
+    },
     /**
-     * New expiration as a UNIX timestamp, or a delta in seconds. Must not
-     * exceed two weeks from now.
+     * `skipRateLimit` exempts this call from the per-region rate limiter, for
+     * the interactive login path where verifying the token blocks the user and
+     * must not queue behind background traffic.
      */
-    expiresAt?: number;
-  }): Promise<ProlongedToken> {
+    opts?: { skipRateLimit?: boolean },
+  ): Promise<ProlongedToken> {
     const query = buildQuery(params);
     if (params.expiresAt !== undefined) query.expires_at = String(params.expiresAt);
     return this.t.wgFetch<ProlongedToken>(this.region, "/wot/auth/prolongate/", query, {
       method: "POST",
+      skipRateLimit: opts?.skipRateLimit,
     });
   }
 
