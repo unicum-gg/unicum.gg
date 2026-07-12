@@ -1,7 +1,12 @@
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { and, eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
+import { account as accountTable } from "@unicum.gg/core/db/schema";
 import { env } from "@unicum.gg/core/env";
+import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
+import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
+import { isRegion } from "@unicum.gg/wargaming/region";
 import { wargaming } from "./wargaming";
 
 /**
@@ -27,5 +32,58 @@ export const auth = betterAuth({
   // rest rather than storing it verbatim in the `account` table. Better Auth
   // encrypts it with the app secret on write and decrypts on read.
   account: { encryptOAuthTokens: true },
+  // Twitch is offered only for LINKING (a logged-in WG player connecting their
+  // channel), never as a primary login. Absent creds → provider omitted.
+  socialProviders: isTwitchEnabled()
+    ? {
+        twitch: {
+          clientId: env.TWITCH_CLIENT_ID as string,
+          clientSecret: env.TWITCH_CLIENT_SECRET as string,
+        },
+      }
+    : undefined,
+  databaseHooks: {
+    account: {
+      create: {
+        // When a player links Twitch, record the verified WoT↔Twitch mapping so
+        // they surface in the live rail/badges. The auth user id is
+        // `${region}-${accountId}`; the Twitch `sub` resolves to the login via
+        // Helix. Non-WG users (no such id) are ignored.
+        after: async (twitchAccount) => {
+          if (twitchAccount.providerId !== "twitch") return;
+          // Better Auth mints its own opaque user id, so recover the WG identity
+          // from this user's linked wargaming account row, whose accountId is
+          // `${region}-${accountId}`.
+          const [wg] = await db
+            .select({ accountId: accountTable.accountId })
+            .from(accountTable)
+            .where(
+              and(
+                eq(accountTable.userId, twitchAccount.userId),
+                eq(accountTable.providerId, "wargaming"),
+              ),
+            )
+            .limit(1);
+          if (!wg) return;
+          const dash = wg.accountId.indexOf("-");
+          if (dash < 0) return;
+          const region = wg.accountId.slice(0, dash);
+          const accountId = Number(wg.accountId.slice(dash + 1));
+          if (!isRegion(region) || !Number.isFinite(accountId)) return;
+          const [twitchUser] = await getTwitchUsersById([
+            twitchAccount.accountId,
+          ]);
+          if (!twitchUser) return;
+          await upsertStreamer({
+            region,
+            accountId,
+            twitchLogin: twitchUser.login,
+            twitchUserId: twitchUser.id,
+            verified: true,
+          });
+        },
+      },
+    },
+  },
   plugins: [wargaming()],
 });

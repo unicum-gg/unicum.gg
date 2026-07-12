@@ -14,6 +14,7 @@
     "./moe/refresh-cron": "./src/moe/refresh-cron.ts",
     "./players": "./src/players/index.ts",
     "./discovery": "./src/discovery/index.ts",
+    "./twitch": "./src/twitch/index.ts",
     "./clans/repository": "./src/clans/repository/index.ts",
     "./wargaming/wot/clans/top": "./src/wargaming/wot/clans/top/index.ts",
     "./wargaming/wot/players/top": "./src/wargaming/wot/players/top/index.ts",

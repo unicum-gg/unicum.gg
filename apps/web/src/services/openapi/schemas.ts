@@ -608,6 +608,39 @@ export const PlayerDetailResponse = z.object({
   }),
 });
 
+// --- Live streamers (GET /api/live-streamers) ---
+// Tracked players currently live on Twitch in the WoT category, joined to their
+// cached ratings and clan tag. Global (all regions), sorted by WNX. The payload
+// is a bare array; it's empty when the Twitch feature is off or nobody is live.
+
+const liveStreamer = z
+  .object({
+    region: regionPath,
+    accountId: z.number(),
+    nickname: z.string(),
+    clanTag: z.string().nullable(),
+    clanColor: z.string().nullable(),
+    wn7: z.number().nullable(),
+    wn8: z.number().nullable(),
+    wnx: z.number().nullable(),
+    twitchLogin: z.string(),
+    twitchUserName: z.string(),
+    title: z.string(),
+    viewerCount: z.number(),
+    startedAt: z.string(),
+    thumbnailUrl: z.string(),
+  })
+  .loose()
+  .meta({
+    id: "LiveStreamer",
+    description:
+      "A tracked player live on Twitch in the World of Tanks category, with cached WN7/WN8/WNX ratings and clan tag.",
+  });
+
+export const LiveStreamersResponse = z.array(liveStreamer).meta({
+  description: "Tracked players live on Twitch right now, sorted by WNX.",
+});
+
 export const HealthResponse = z.object({
   status: z.string().meta({ example: "ok" }),
 });

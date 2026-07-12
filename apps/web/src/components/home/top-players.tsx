@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import {
@@ -128,22 +129,29 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell>
-        <Link
-          href={ROUTES.PLAYER(region, player.nickname)}
-          className="block truncate hover:underline"
-        >
-          <span className="font-medium">{player.nickname}</span>
-          {player.clan_tag ? (
-            <>
-              {" "}
-              <span className="font-mono text-xs">
-                <span style={{ color: player.clan_color ?? undefined }}>[</span>
-                {player.clan_tag}
-                <span style={{ color: player.clan_color ?? undefined }}>]</span>
-              </span>
-            </>
-          ) : null}
-        </Link>
+        <span className="flex items-center gap-1.5">
+          <Link
+            href={ROUTES.PLAYER(region, player.nickname)}
+            className="min-w-0 truncate hover:underline"
+          >
+            <span className="font-medium">{player.nickname}</span>
+            {player.clan_tag ? (
+              <>
+                {" "}
+                <span className="font-mono text-xs">
+                  <span style={{ color: player.clan_color ?? undefined }}>
+                    [
+                  </span>
+                  {player.clan_tag}
+                  <span style={{ color: player.clan_color ?? undefined }}>
+                    ]
+                  </span>
+                </span>
+              </>
+            ) : null}
+          </Link>
+          <LiveBadge region={region} accountId={player.account_id} />
+        </span>
       </TableCell>
       <TableCell
         className={cn("pr-4 text-right font-semibold tabular-nums", colorClass)}

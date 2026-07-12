@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
 import Link from "next/link";
+import { LiveBadge } from "@/components/live-badge";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
 import {
@@ -339,12 +340,15 @@ export function ClanMembersTable({
                 {idx + 1}
               </TableCell>
               <TableCell className="font-medium">
-                <Link
-                  href={ROUTES.PLAYER(region, m.name)}
-                  className="hover:underline"
-                >
-                  {m.name}
-                </Link>
+                <span className="flex items-center gap-1.5">
+                  <Link
+                    href={ROUTES.PLAYER(region, m.name)}
+                    className="truncate hover:underline"
+                  >
+                    {m.name}
+                  </Link>
+                  <LiveBadge region={region} accountId={m.accountId} />
+                </span>
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">
                 {prettyRole(m.role)}

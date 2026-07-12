@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LanguageFlags } from "@/components/language-flags";
+import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
 import { RATING_METRIC_LABEL, RatingMetric } from "@unicum.gg/core/constants/rating";
 import ROUTES from "@/constants/routes";
@@ -82,42 +83,49 @@ export function TopPlayersList({
                 )}
               </TableCell>
               <TableCell>
-                <Link
-                  href={ROUTES.PLAYER(region, r.nickname)}
-                  prefetch={false}
-                  className="flex items-center gap-3 hover:underline"
-                >
-                  <span className="flex min-w-0 flex-1 items-center gap-2">
-                    <span className="min-w-0 flex-1 truncate">
-                      <span className="font-medium">{r.nickname}</span>
-                      {r.clan_tag ? (
-                        <>
-                          {" "}
-                          <span className="font-mono text-xs">
-                            <span style={{ color: r.clan_color ?? undefined }}>
-                              [
+                <span className="flex items-center gap-1.5">
+                  <Link
+                    href={ROUTES.PLAYER(region, r.nickname)}
+                    prefetch={false}
+                    className="flex min-w-0 flex-1 items-center gap-3 hover:underline"
+                  >
+                    <span className="flex min-w-0 flex-1 items-center gap-2">
+                      <span className="min-w-0 flex-1 truncate">
+                        <span className="font-medium">{r.nickname}</span>
+                        {r.clan_tag ? (
+                          <>
+                            {" "}
+                            <span className="font-mono text-xs">
+                              <span
+                                style={{ color: r.clan_color ?? undefined }}
+                              >
+                                [
+                              </span>
+                              {r.clan_tag}
+                              <span
+                                style={{ color: r.clan_color ?? undefined }}
+                              >
+                                ]
+                              </span>
                             </span>
-                            {r.clan_tag}
-                            <span style={{ color: r.clan_color ?? undefined }}>
-                              ]
-                            </span>
-                          </span>
-                        </>
-                      ) : null}
-                    </span>
-                    {r.languages.length > 0 && (
-                      <span className="hidden h-4 shrink-0 sm:inline-flex">
-                        <LanguageFlags
-                          languages={r.languages}
-                          source="inferred"
-                          size="s"
-                          region={region}
-                          link={false}
-                        />
+                          </>
+                        ) : null}
                       </span>
-                    )}
-                  </span>
-                </Link>
+                      {r.languages.length > 0 && (
+                        <span className="hidden h-4 shrink-0 sm:inline-flex">
+                          <LanguageFlags
+                            languages={r.languages}
+                            source="inferred"
+                            size="s"
+                            region={region}
+                            link={false}
+                          />
+                        </span>
+                      )}
+                    </span>
+                  </Link>
+                  <LiveBadge region={region} accountId={r.account_id} />
+                </span>
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
                 {intFmt.format(r.battles)}
