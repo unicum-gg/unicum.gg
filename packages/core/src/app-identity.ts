@@ -8,7 +8,7 @@ import { env } from "./env";
  * `env.NEXT_PUBLIC_APP_URL` is a client var (see `./env`), so reading it here is
  * safe even when this module is pulled into a browser bundle via `bot-headers`.
  */
-const APP_IDENTITY = {
+export const APP_IDENTITY = {
   NAME: "unicum.gg",
   VERSION: pkg.version,
   URL: env.NEXT_PUBLIC_APP_URL,

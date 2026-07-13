@@ -1,0 +1,22 @@
+{
+  "name": "@unicum.gg/bot",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch --env-file-if-exists=../web/.env.local --env-file-if-exists=.env.local src/index.ts"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.11",
+    "@unicum.gg/core": "workspace:*",
+    "@unicum.gg/wargaming": "workspace:*",
+    "discord.js": "^14.9.0",
+    "dixt": "^5.0.7",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "tsx": "^4.19.2"
+  }
+}
