@@ -48,3 +48,6 @@ next-env.d.ts
 # generated openapi spec + generator cache (regenerated on postinstall / predev / prebuild)
 apps/web/src/services/openapi/openapi.generated.json
 apps/web/.openapi-gen/
+
+# temp / scratch working dir (tool outputs, not tracked)
+/temp/
