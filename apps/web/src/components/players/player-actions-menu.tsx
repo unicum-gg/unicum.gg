@@ -117,7 +117,7 @@ export function PlayerActionsMenu({
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <PageAiActions />
-          {isOwnProfile ? (
+          {needsTwitch ? (
             <>
               <DropdownMenuSeparator />
               <DropdownMenuItem
@@ -130,9 +130,7 @@ export function PlayerActionsMenu({
               >
                 <TwitchLogoIcon weight="bold" />
                 Connect Twitch
-                {needsTwitch ? (
-                  <span className="ml-auto size-2 rounded-full bg-[#f25322]" />
-                ) : null}
+                <span className="ml-auto size-2 rounded-full bg-[#f25322]" />
               </DropdownMenuItem>
             </>
           ) : null}
