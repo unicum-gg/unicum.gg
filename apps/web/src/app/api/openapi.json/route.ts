@@ -66,12 +66,10 @@ function normalizeParameters(doc: OpenApiDoc): void {
           : undefined;
         const isPlaceholder = parameter.example === "example";
         if (named !== undefined) {
-          // Our curated example wins whenever next-openapi-gen left a
-          // placeholder or no example at all (it drops `.meta` examples on
-          // params). It never overrides a real, already-set example.
-          if (isPlaceholder || parameter.example === undefined) {
-            parameter.example = named;
-          }
+          // Our curated example always wins for these params: next-openapi-gen
+          // drops `.meta` examples and emits either the `"example"` placeholder,
+          // nothing, or even the param name (e.g. `slug` becomes `"slug"`).
+          parameter.example = named;
         } else if (isPlaceholder) {
           const enumValues = parameter.schema?.enum;
           if (Array.isArray(enumValues) && enumValues.length > 0) {

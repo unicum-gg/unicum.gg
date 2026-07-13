@@ -50,3 +50,14 @@ export async function getTankDataset(
       moe: moeByTank.get(t.tankId) ?? null,
     }));
 }
+
+/** One tank's dataset row by slug, or null if the region has no such vehicle.
+ * Reuses `getTankDataset` (its per-source loaders are individually cached), so
+ * the per-tank API endpoints share the same single source as the list. */
+export async function getTankRow(
+  region: Region,
+  slug: string,
+): Promise<TankDatasetRow | null> {
+  const dataset = await getTankDataset(region);
+  return dataset.find((r) => r.identity.slug === slug) ?? null;
+}

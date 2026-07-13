@@ -1,7 +1,8 @@
 import { getTankDataset } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { TankEconomicsResponse, tankEconomics } from "./schema.api";
+import { tankEconomics } from "../categories.api";
+import { TankEconomicsResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";
 

@@ -39,6 +39,11 @@ export const clanLiveParams = z.object({
   tag: z.string().meta({ description: "Clan tag." }),
 });
 
+export const tankParams = z.object({
+  region: regionPath,
+  slug: z.string().meta({ description: "Tank slug (e.g. is-7)." }),
+});
+
 export const MIN_QUERY_LENGTH = 3;
 
 export const searchQuery = z.object({
@@ -152,6 +157,7 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
 export const PARAM_EXAMPLES: Record<string, string> = {
   tag: "FAME",
   nickname: "Animal",
+  slug: "is-7",
   q: "uni",
 };
 
