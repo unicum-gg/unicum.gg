@@ -9,11 +9,7 @@ import { TanksIndex } from "@/components/tanks/tanks-index";
 import { TankTab, tankTabFromQuery } from "@/components/tanks/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
-import { getAllTankStats } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import { getTankMomByRegion } from "@unicum.gg/core/mom";
-import { getTankMoeByRegion } from "@unicum.gg/core/moe";
+import { getTankDataset } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
 import {
   type Region,
   isRegion,
@@ -54,55 +50,45 @@ export async function renderTanksIndex(
   region: Region,
   activeTab: TankTab = TankTab.Performances,
 ) {
-  const [tanks, statsByTank, specsByTank, momByTank, moeByTank] =
-    await Promise.all([
-      listTanks(region),
-      getAllTankStats(region),
-      getAllTankSpecs(),
-      getTankMomByRegion(region),
-      getTankMoeByRegion(region),
-    ]);
-  const items = tanks
-    .map((t) => {
-      const s = statsByTank.get(t.tankId);
-      return {
-        tankId: t.tankId,
-        slug: t.slug,
-        name: t.meta.name,
-        shortName: t.meta.shortName,
-        tag: t.meta.tag,
-        tier: t.meta.tier,
-        nation: t.meta.nation,
-        type: t.meta.type,
-        role: t.meta.role,
-        isPremium: t.meta.isPremium,
-        isReward: t.meta.isReward,
-        stats: s
-          ? {
-              players: s.players,
-              battles: s.total_battles,
-              wr: s.winrate,
-              playerWr: s.player_wr,
-              dpg: s.avg_damage,
-              wn7: s.wn7,
-              wn8: s.wn8,
-              wnx: s.wnx,
-              kdr: s.kdr,
-              assists: s.avg_assist,
-              hitPct: s.hit_pct,
-              penPct: s.pen_pct,
-              spots: s.avg_spots,
-              blocked: s.avg_blocked,
-              survival: s.survival,
-            }
-          : null,
-        specs: specsByTank.get(t.tankId) ?? null,
-        mastery: momByTank.get(t.tankId) ?? null,
-        moe: moeByTank.get(t.tankId) ?? null,
-      };
-    })
-    // Only real tiers 1-10(11); drop catalogue entries with no meaningful tier.
-    .filter((t) => t.tier > 0 && t.name.length > 0);
+  // Same in-process dataset the /tanks API serves, so the page and the API can't
+  // drift. This view keeps the page's stat labels (dpg, wr, ...) and columns.
+  const items = (await getTankDataset(region)).map(
+    ({ identity: i, stats: s, specs, mastery, moe }) => ({
+      tankId: i.tankId,
+      slug: i.slug,
+      name: i.name,
+      shortName: i.shortName,
+      tag: i.tag,
+      tier: i.tier,
+      nation: i.nation,
+      type: i.type,
+      role: i.role,
+      isPremium: i.isPremium,
+      isReward: i.isReward,
+      stats: s
+        ? {
+            players: s.players,
+            battles: s.total_battles,
+            wr: s.winrate,
+            playerWr: s.player_wr,
+            dpg: s.avg_damage,
+            wn7: s.wn7,
+            wn8: s.wn8,
+            wnx: s.wnx,
+            kdr: s.kdr,
+            assists: s.avg_assist,
+            hitPct: s.hit_pct,
+            penPct: s.pen_pct,
+            spots: s.avg_spots,
+            blocked: s.avg_blocked,
+            survival: s.survival,
+          }
+        : null,
+      specs,
+      mastery,
+      moe,
+    }),
+  );
 
   return (
     <div className="mx-auto w-full max-w-7xl">
