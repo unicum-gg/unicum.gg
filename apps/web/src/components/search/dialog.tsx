@@ -145,12 +145,19 @@ export default function SearchDialog(props: SharedProps) {
             let acc: SearchPlayerResult[] = [];
             await readNdjson<PlayerSearchChunk>(res, (chunk) => {
               acc = [...acc, ...chunk.results];
+              // Partial: keep the loading indicator on until the stream ends.
               setPlayersOutcome({
-                status: "ok",
+                status: "streaming",
                 results: acc,
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
+            });
+            // Stream closed (remote chunk landed): settle to the final result.
+            setPlayersOutcome({
+              status: "ok",
+              results: acc,
+              forQuery: trimmedQuery,
             });
           })
           .catch((err) => {
@@ -176,12 +183,19 @@ export default function SearchDialog(props: SharedProps) {
             let acc: ClanSearchResult[] = [];
             await readNdjson<ClanSearchChunk>(res, (chunk) => {
               acc = [...acc, ...chunk.results];
+              // Partial: keep the loading indicator on until the stream ends.
               setClansOutcome({
-                status: "ok",
+                status: "streaming",
                 results: acc,
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
+            });
+            // Stream closed (remote chunk landed): settle to the final result.
+            setClansOutcome({
+              status: "ok",
+              results: acc,
+              forQuery: trimmedQuery,
             });
           })
           .catch((err) => {
@@ -207,12 +221,19 @@ export default function SearchDialog(props: SharedProps) {
             let acc: TankSearchResult[] = [];
             await readNdjson<TankSearchChunk>(res, (chunk) => {
               acc = [...acc, ...chunk.results];
+              // Partial: keep the loading indicator on until the stream ends.
               setTanksOutcome({
-                status: "ok",
+                status: "streaming",
                 results: acc,
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
+            });
+            // Stream closed: settle to the final result.
+            setTanksOutcome({
+              status: "ok",
+              results: acc,
+              forQuery: trimmedQuery,
             });
           })
           .catch((err) => {

@@ -12,6 +12,11 @@ import type { Region } from "@unicum.gg/wargaming/region";
 
 export type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }
+  // Partial results are in, but the NDJSON stream is still open (the remote
+  // Wargaming chunk hasn't landed): show what we have AND keep the loading
+  // indicator on, so nothing "pops in" without feedback and the empty state
+  // never flashes before the remote hits arrive.
+  | { status: "streaming"; results: T[]; forQuery: string }
   | { status: "ok"; results: T[]; forQuery: string }
   | { status: "error"; forQuery: string };
 
@@ -60,7 +65,8 @@ export type ResultsStatus = {
 
 export function previousOf<T>(outcome: Outcome<T> | null): T[] | null {
   if (!outcome) return null;
-  if (outcome.status === "ok") return outcome.results;
+  if (outcome.status === "ok" || outcome.status === "streaming")
+    return outcome.results;
   if (outcome.status === "loading") return outcome.previous;
   return null;
 }
@@ -101,6 +107,16 @@ export function deriveSection<T>(
   }
   if (outcome.status === "error") {
     return { visible: null, isLoading: false, isError: true, isEmpty: false };
+  }
+  // Still streaming: show partial results but stay in the loading state, so the
+  // empty state can't flash before the remote chunk arrives.
+  if (outcome.status === "streaming") {
+    return {
+      visible: outcome.results.length > 0 ? outcome.results : null,
+      isLoading: true,
+      isError: false,
+      isEmpty: false,
+    };
   }
   return {
     visible: outcome.results.length > 0 ? outcome.results : null,
