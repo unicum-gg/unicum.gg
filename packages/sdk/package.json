@@ -1,0 +1,20 @@
+{
+  "name": "@unicum.gg/sdk",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fluent, typed client for the unicum.gg public API (World of Tanks player, clan and tank stats).",
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "scripts": {
+    "generate": "openapi-typescript http://localhost:3000/api/openapi.json -o src/generated/schema.ts"
+  },
+  "dependencies": {
+    "@unicum.gg/core": "workspace:*",
+    "openapi-fetch": "^0.13.5"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.6.1"
+  }
+}
