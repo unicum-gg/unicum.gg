@@ -115,3 +115,66 @@ export function diffClanStrongholdStats(
     advancesWinsT10: diff(curr.advancesWinsT10, prev.advancesWinsT10),
   };
 }
+
+// A table-ready view: the latest snapshot projected to stats ("Total" column),
+// plus the diff vs each period snapshot (the 24h/7d/30d columns). Built here so
+// the `/stronghold` + `/clan-wars` endpoints and the clan page's SSR seed
+// produce the exact same shape, and the tables render it with no client-side
+// projection or diffing.
+export type ClanStrongholdView = {
+  latest: ClanStrongholdStats | null;
+  periods: {
+    h24: ClanStrongholdStats | null;
+    d7: ClanStrongholdStats | null;
+    d30: ClanStrongholdStats | null;
+  };
+};
+
+export function clanStrongholdView(
+  latest: ClanSnapshot | null,
+  periods: ClanSnapshotPeriods,
+): ClanStrongholdView {
+  if (!latest) {
+    return { latest: null, periods: { h24: null, d7: null, d30: null } };
+  }
+  const current = strongholdStatsFromClanSnapshot(latest);
+  const diff = (s: ClanSnapshot | null) =>
+    s ? diffClanStrongholdStats(current, strongholdStatsFromClanSnapshot(s)) : null;
+  return {
+    latest: current,
+    periods: {
+      h24: diff(periods.h24),
+      d7: diff(periods.d7),
+      d30: diff(periods.d30),
+    },
+  };
+}
+
+export type ClanGlobalMapView = {
+  latest: ClanGlobalMapStats | null;
+  periods: {
+    h24: ClanGlobalMapStats | null;
+    d7: ClanGlobalMapStats | null;
+    d30: ClanGlobalMapStats | null;
+  };
+};
+
+export function clanGlobalMapView(
+  latest: ClanSnapshot | null,
+  periods: ClanSnapshotPeriods,
+): ClanGlobalMapView {
+  if (!latest) {
+    return { latest: null, periods: { h24: null, d7: null, d30: null } };
+  }
+  const current = globalMapStatsFromClanSnapshot(latest);
+  const diff = (s: ClanSnapshot | null) =>
+    s ? diffClanGlobalMapStats(current, globalMapStatsFromClanSnapshot(s)) : null;
+  return {
+    latest: current,
+    periods: {
+      h24: diff(periods.h24),
+      d7: diff(periods.d7),
+      d30: diff(periods.d30),
+    },
+  };
+}

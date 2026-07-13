@@ -34,8 +34,18 @@ import {
 import { styles } from "@/lib/styles";
 import type { ClanDetailData } from "@/services/clans/detail";
 import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
-import { ClanDetailResponse } from "@/app/api/[region]/clans/[tag]/schema.api";
+import { ClanActivityResponse } from "@/app/api/[region]/clans/[tag]/activity/schema.api";
+import { ClanWarsResponse } from "@/app/api/[region]/clans/[tag]/clan-wars/schema.api";
+import { ClanMembersResponse } from "@/app/api/[region]/clans/[tag]/members/schema.api";
+import { ClanPreviousClansResponse } from "@/app/api/[region]/clans/[tag]/previous-clans/schema.api";
+import { ClanStrongholdResponse } from "@/app/api/[region]/clans/[tag]/stronghold/schema.api";
 import { ClanVehiclesResponse } from "@/app/api/[region]/clans/[tag]/vehicles/schema.api";
+import {
+  type ClanGlobalMapView,
+  type ClanStrongholdView,
+  clanGlobalMapView,
+  clanStrongholdView,
+} from "@unicum.gg/core/clans/snapshot-stats";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -65,16 +75,38 @@ async function vehiclesFetcher(url: string): Promise<ClanVehicleRow[]> {
     .vehicles as unknown as ClanVehicleRow[];
 }
 
-// Parse the clan detail response with the shared OpenAPI schema: it validates
-// the shape and `z.coerce.date()` revives ISO date strings into `Date`s, so no
-// hand-written revival is needed. The cast restores the rich domain types the
-// components expect (the schema is intentionally `.loose()`).
-async function clanDetailFetcher(url: string): Promise<ClanDetailData> {
+// Per-section fetchers over the dedicated sub-endpoints (the page consumes its
+// own API). Each parses with the shared OpenAPI schema (validates + revives
+// dates via `z.coerce.date()`); the cast restores the rich domain types the
+// components expect (the schemas are intentionally `.loose()`).
+async function fetchJson(url: string): Promise<unknown> {
   const res = await fetch(url);
   if (!res.ok) {
     throw new Error(`Request failed (${res.status}) for ${url}`);
   }
-  return ClanDetailResponse.parse(await res.json()) as unknown as ClanDetailData;
+  return res.json();
+}
+async function membersFetcher(url: string): Promise<ClanDetailData["members"]> {
+  return ClanMembersResponse.parse(await fetchJson(url))
+    .members as unknown as ClanDetailData["members"];
+}
+async function previousClansFetcher(
+  url: string,
+): Promise<ClanDetailData["previousClans"]> {
+  return ClanPreviousClansResponse.parse(await fetchJson(url))
+    .previousClans as unknown as ClanDetailData["previousClans"];
+}
+async function activityFetcher(url: string): Promise<ClanDetailData["events"]> {
+  return ClanActivityResponse.parse(await fetchJson(url))
+    .events as unknown as ClanDetailData["events"];
+}
+async function strongholdFetcher(url: string): Promise<ClanStrongholdView> {
+  return ClanStrongholdResponse.parse(
+    await fetchJson(url),
+  ) as unknown as ClanStrongholdView;
+}
+async function clanWarsFetcher(url: string): Promise<ClanGlobalMapView> {
+  return ClanWarsResponse.parse(await fetchJson(url)) as unknown as ClanGlobalMapView;
 }
 
 // Renders a panel title prefixed with the clan tag, its brackets tinted with
@@ -177,14 +209,47 @@ export function ClanTabsView({
   // of `router.refresh()` re-rendering the whole route on the server.
   // `initialData` seeds it from the SSR render, so there's no fetch on load;
   // only `mutateData()` (below) triggers a refetch.
-  const dataUrl = `/api/${region}/clans/${encodeURIComponent(tag)}`;
-  const { data: liveData, mutate: mutateData } = useSWR(
-    dataUrl,
-    clanDetailFetcher,
-    { fallbackData: initialData, revalidateOnMount: false },
+  const base = `/api/${region}/clans/${encodeURIComponent(tag)}`;
+  const { data: membersData, mutate: mutateMembers } = useSWR(
+    `${base}/members`,
+    membersFetcher,
+    { fallbackData: initialData.members, revalidateOnMount: false },
   );
-  const { members, previousClans, events, snapshotLatest, snapshotPeriods } =
-    liveData ?? initialData;
+  const { data: previousClansData, mutate: mutatePrevious } = useSWR(
+    `${base}/previous-clans`,
+    previousClansFetcher,
+    { fallbackData: initialData.previousClans, revalidateOnMount: false },
+  );
+  const { data: eventsData, mutate: mutateActivity } = useSWR(
+    `${base}/activity`,
+    activityFetcher,
+    { fallbackData: initialData.events, revalidateOnMount: false },
+  );
+  const members = membersData ?? initialData.members;
+  const previousClans = previousClansData ?? initialData.previousClans;
+  const events = eventsData ?? initialData.events;
+  // Stronghold / Clan Wars: seed the table-ready view (latest + period diffs)
+  // from the SSR snapshot, then refresh it from the sub-endpoints on LiveSync.
+  const strongholdSeed = clanStrongholdView(
+    initialData.snapshotLatest,
+    initialData.snapshotPeriods,
+  );
+  const clanWarsSeed = clanGlobalMapView(
+    initialData.snapshotLatest,
+    initialData.snapshotPeriods,
+  );
+  const { data: strongholdData, mutate: mutateStronghold } = useSWR(
+    `${base}/stronghold`,
+    strongholdFetcher,
+    { fallbackData: strongholdSeed, revalidateOnMount: false },
+  );
+  const { data: clanWarsData, mutate: mutateClanWars } = useSWR(
+    `${base}/clan-wars`,
+    clanWarsFetcher,
+    { fallbackData: clanWarsSeed, revalidateOnMount: false },
+  );
+  const stronghold = strongholdData ?? strongholdSeed;
+  const clanWars = clanWarsData ?? clanWarsSeed;
 
   const onTanks = section === ClanSection.Tanks;
 
@@ -193,7 +258,11 @@ export function ClanTabsView({
       <LiveSync
         url={`/api/${region}/clans/${encodeURIComponent(tag)}/sse`}
         onUpdate={() => {
-          void mutateData();
+          void mutateMembers();
+          void mutatePrevious();
+          void mutateActivity();
+          void mutateStronghold();
+          void mutateClanWars();
         }}
       />
       <Panel>
@@ -322,10 +391,10 @@ export function ClanTabsView({
               </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
-              {snapshotLatest && snapshotPeriods ? (
+              {stronghold.latest ? (
                 <ClanStrongholdStatsTable
-                  latest={snapshotLatest}
-                  periods={snapshotPeriods}
+                  latest={stronghold.latest}
+                  periods={stronghold.periods}
                 />
               ) : (
                 <div className={`p-4 ${styles.mutedDescription}`}>
@@ -347,10 +416,10 @@ export function ClanTabsView({
               </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
-              {snapshotLatest && snapshotPeriods ? (
+              {clanWars.latest ? (
                 <ClanWarsStatsTable
-                  latest={snapshotLatest}
-                  periods={snapshotPeriods}
+                  latest={clanWars.latest}
+                  periods={clanWars.periods}
                 />
               ) : (
                 <div className={`p-4 ${styles.mutedDescription}`}>

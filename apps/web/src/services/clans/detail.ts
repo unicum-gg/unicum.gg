@@ -1,4 +1,5 @@
 import { getPreviousClans } from "@/services/clans/previous-clans";
+import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanEventsCached } from "@unicum.gg/core/clans/repository/events";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import {
@@ -64,4 +65,18 @@ export async function loadClanDetail(
     snapshotLatest,
     snapshotPeriods,
   };
+}
+
+/**
+ * Resolve a clan by tag (DB-first, WG on a cold miss) and load its full detail,
+ * or null when the tag doesn't exist. The single entry the clan detail endpoint
+ * and its per-category sub-endpoints share, so they can't drift.
+ */
+export async function loadClanDetailByTag(
+  region: Region,
+  tag: string,
+): Promise<ClanDetailData | null> {
+  const cached = await getClanByTagCached(region, tag);
+  if (!cached) return null;
+  return loadClanDetail(region, cached.info);
 }

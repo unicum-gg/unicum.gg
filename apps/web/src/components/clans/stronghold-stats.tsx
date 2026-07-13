@@ -14,13 +14,8 @@ import {
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import type {
   ClanStrongholdStats,
-  ClanSnapshotPeriods,
+  ClanStrongholdView,
 } from "@unicum.gg/core/clans/snapshot-stats";
-import {
-  diffClanStrongholdStats,
-  strongholdStatsFromClanSnapshot,
-} from "@unicum.gg/core/clans/snapshot-stats";
-import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntFmt = new Intl.NumberFormat("en-US", {
@@ -154,25 +149,17 @@ const ROWS: RowDef[] = [
   },
 ];
 
-function computePeriod(
-  current: ClanStrongholdStats,
-  snap: ClanSnapshot | null,
-): ClanStrongholdStats | null {
-  if (!snap) return null;
-  return diffClanStrongholdStats(current, strongholdStatsFromClanSnapshot(snap));
-}
-
 export function ClanStrongholdStatsTable({
   latest,
   periods,
 }: {
-  latest: ClanSnapshot;
-  periods: ClanSnapshotPeriods;
+  latest: ClanStrongholdStats;
+  periods: ClanStrongholdView["periods"];
 }) {
-  const current = strongholdStatsFromClanSnapshot(latest);
-  const p24 = computePeriod(current, periods.h24);
-  const p7 = computePeriod(current, periods.d7);
-  const p30 = computePeriod(current, periods.d30);
+  const current = latest;
+  const p24 = periods.h24;
+  const p7 = periods.d7;
+  const p30 = periods.d30;
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">

@@ -26,7 +26,7 @@ const clanMemberPeriodStats = z
     description: "A member's aggregate stats over a period.",
   });
 
-const clanMember = z
+export const clanMember = z
   .object({
     accountId: z.number(),
     name: z.string(),
@@ -52,7 +52,7 @@ const clanMember = z
     description: "A clan member with cached WN7/WN8/WNX ratings.",
   });
 
-const previousClan = z
+export const previousClan = z
   .object({
     clanId: z.number(),
     tag: z.string(),
@@ -69,7 +69,7 @@ const previousClan = z
     description: "A clan that current members previously belonged to.",
   });
 
-const clanEvent = z
+export const clanEvent = z
   .object({
     type: z.string(),
     createdAt: z.coerce.date(),
@@ -84,37 +84,6 @@ const clanEvent = z
   .meta({
     id: "ClanEvent",
     description: "A recent join, leave or role-change event.",
-  });
-
-const clanSnapshot = z
-  .object({
-    takenAt: z.coerce.date(),
-    eloT6: z.number().nullable(),
-    skirmishBattlesT6: z.number().nullable(),
-    skirmishWinsT6: z.number().nullable(),
-    eloT8: z.number().nullable(),
-    skirmishBattlesT8: z.number().nullable(),
-    skirmishWinsT8: z.number().nullable(),
-    eloT10: z.number().nullable(),
-    skirmishBattlesT10: z.number().nullable(),
-    skirmishWinsT10: z.number().nullable(),
-    advancesBattlesT10: z.number().nullable(),
-    advancesWinsT10: z.number().nullable(),
-    gmEloT10: z.number().nullable(),
-    gmBattlesT10: z.number().nullable(),
-    gmWinsT10: z.number().nullable(),
-    gmEloT8: z.number().nullable(),
-    gmBattlesT8: z.number().nullable(),
-    gmWinsT8: z.number().nullable(),
-    gmEloT6: z.number().nullable(),
-    gmBattlesT6: z.number().nullable(),
-    gmWinsT6: z.number().nullable(),
-    gmProvinces: z.number().nullable(),
-  })
-  .loose()
-  .meta({
-    id: "ClanSnapshot",
-    description: "A point-in-time stronghold and global-map snapshot.",
   });
 
 const clanInfo = z
@@ -138,15 +107,30 @@ const clanInfo = z
   .loose()
   .meta({ id: "ClanInfo", description: "Core clan profile." });
 
-export const ClanDetailResponse = z.object({
+const ratingTriplet = z.object({
+  wn7: z.number().nullable(),
+  wn8: z.number().nullable(),
+  wnx: z.number().nullable(),
+});
+
+const clanRatings = z
+  .object({
+    lifetime: ratingTriplet,
+    recent: ratingTriplet,
+    avgWinrate: z.number().nullable(),
+  })
+  .meta({
+    id: "ClanRatings",
+    description:
+      "The clan's battle-weighted aggregate ratings: lifetime and 30-day WN7/WN8/WNX (weighted by lifetime and recent battles), plus the lifetime average win rate.",
+  });
+
+/**
+ * Response of `GET /{region}/clans/{tag}`: the clan overview (profile + aggregate
+ * ratings). The heavy per-category data (members, previous clans, activity,
+ * stronghold, clan wars, vehicles) lives on the dedicated sub-endpoints.
+ */
+export const ClanOverviewResponse = z.object({
   clan: clanInfo,
-  members: z.array(clanMember),
-  previousClans: z.array(previousClan),
-  events: z.array(clanEvent),
-  snapshotLatest: clanSnapshot.nullable(),
-  snapshotPeriods: z.object({
-    h24: clanSnapshot.nullable(),
-    d7: clanSnapshot.nullable(),
-    d30: clanSnapshot.nullable(),
-  }),
+  ratings: clanRatings,
 });

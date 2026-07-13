@@ -1,7 +1,7 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
 import { APP_IDENTITY } from "@unicum.gg/core/app-identity";
-import { overallPoints } from "@unicum.gg/core/clans/members";
+import { computeClanRatings } from "@unicum.gg/core/clans/members";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { searchClansLocal } from "@unicum.gg/core/clans/search-local";
@@ -10,7 +10,6 @@ import {
   globalMapStatsFromClanSnapshot,
   strongholdStatsFromClanSnapshot,
 } from "@unicum.gg/core/clans/snapshot-stats";
-import { weightedAverage } from "@unicum.gg/core/lib/stats";
 import {
   isRegion,
   Region,
@@ -118,12 +117,9 @@ export const clanCommand: DixtSlashCommandBuilder = {
       () => null,
     );
     const members = cachedMembers?.members ?? [];
-    const avgWnx = weightedAverage(overallPoints(members, (m) => m.wnx));
-    const avgWn8 = weightedAverage(overallPoints(members, (m) => m.wn8));
-    const avgWn7 = weightedAverage(overallPoints(members, (m) => m.wn7));
-    const avgWinrate = weightedAverage(
-      overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
-    );
+    const ratings = computeClanRatings(members);
+    const { wnx: avgWnx, wn8: avgWn8, wn7: avgWn7 } = ratings.lifetime;
+    const avgWinrate = ratings.avgWinrate;
 
     const languages =
       clan.languages.length > 0

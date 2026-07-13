@@ -6,14 +6,12 @@ import { ClanActionsMenu } from "@/components/clans/clan-actions-menu";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
-import { weightedAverage } from "@unicum.gg/core/lib/stats";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import {
   type ClanMemberStats,
   ClanRole,
-  overallPoints,
-  d30Points,
+  computeClanRatings,
 } from "@unicum.gg/core/clans/members";
 import {
   RATING_COLOR_CLASS,
@@ -61,50 +59,22 @@ function computeMetrics(members: ClanMemberStats[]): {
   lifetime: MetricSet;
   avgWinrate: MetricCell;
 } {
-  const recent: MetricSet = {
-    wn7: metricCell(
-      "Avg WN7 · 30d",
-      weightedAverage(d30Points(members, (m) => m.wn730d)),
-      wn7Color,
-    ),
-    wn8: metricCell(
-      "Avg WN8 · 30d",
-      weightedAverage(d30Points(members, (m) => m.wn830d)),
-      wn8Color,
-    ),
-    wnx: metricCell(
-      "Avg WNX · 30d",
-      weightedAverage(d30Points(members, (m) => m.wnx30d)),
-      wnxColor,
-    ),
-  };
-  const lifetime: MetricSet = {
-    wn7: metricCell(
-      "Avg WN7",
-      weightedAverage(overallPoints(members, (m) => m.wn7)),
-      wn7Color,
-    ),
-    wn8: metricCell(
-      "Avg WN8",
-      weightedAverage(overallPoints(members, (m) => m.wn8)),
-      wn8Color,
-    ),
-    wnx: metricCell(
-      "Avg WNX",
-      weightedAverage(overallPoints(members, (m) => m.wnx)),
-      wnxColor,
-    ),
-  };
-  const avgWinRate = weightedAverage(
-    overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
-  );
+  const r = computeClanRatings(members);
   return {
-    recent,
-    lifetime,
+    recent: {
+      wn7: metricCell("Avg WN7 · 30d", r.recent.wn7, wn7Color),
+      wn8: metricCell("Avg WN8 · 30d", r.recent.wn8, wn8Color),
+      wnx: metricCell("Avg WNX · 30d", r.recent.wnx, wnxColor),
+    },
+    lifetime: {
+      wn7: metricCell("Avg WN7", r.lifetime.wn7, wn7Color),
+      wn8: metricCell("Avg WN8", r.lifetime.wn8, wn8Color),
+      wnx: metricCell("Avg WNX", r.lifetime.wnx, wnxColor),
+    },
     avgWinrate: {
       label: "Avg winrate",
-      value: avgWinRate === null ? "—" : `${pctFmt.format(avgWinRate)}%`,
-      color: avgWinRate === null ? null : winrateColor(avgWinRate / 100),
+      value: r.avgWinrate === null ? "—" : `${pctFmt.format(r.avgWinrate)}%`,
+      color: r.avgWinrate === null ? null : winrateColor(r.avgWinrate / 100),
     },
   };
 }

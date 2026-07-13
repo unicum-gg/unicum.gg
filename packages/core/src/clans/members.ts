@@ -1,5 +1,5 @@
 import type { PortalClanMember } from "@unicum.gg/core/wargaming/wot/clans/members";
-import type { WeightedDataPoint } from "@unicum.gg/core/lib/stats";
+import { type WeightedDataPoint, weightedAverage } from "@unicum.gg/core/lib/stats";
 
 /** Per-member computed ratings (WN7/WN8/WNX). Owned here; the web render
  * facade (`wargaming/wot/clans/ratings`) imports it. */
@@ -68,4 +68,32 @@ export function d30Points(
     points.push({ value, weight: m.battles30d });
   }
   return points;
+}
+
+/** A clan's battle-weighted aggregate ratings over its members. Single source
+ * for the clan page header, the `/{tag}` overview endpoint and the Discord bot:
+ * lifetime WN7/WN8/WNX weighted by lifetime battles, the same over the 30-day
+ * window weighted by recent battles, and the lifetime average win rate. */
+export type ClanRatings = {
+  lifetime: { wn7: number | null; wn8: number | null; wnx: number | null };
+  recent: { wn7: number | null; wn8: number | null; wnx: number | null };
+  avgWinrate: number | null;
+};
+
+export function computeClanRatings(members: ClanMemberStats[]): ClanRatings {
+  return {
+    lifetime: {
+      wn7: weightedAverage(overallPoints(members, (m) => m.wn7)),
+      wn8: weightedAverage(overallPoints(members, (m) => m.wn8)),
+      wnx: weightedAverage(overallPoints(members, (m) => m.wnx)),
+    },
+    recent: {
+      wn7: weightedAverage(d30Points(members, (m) => m.wn730d)),
+      wn8: weightedAverage(d30Points(members, (m) => m.wn830d)),
+      wnx: weightedAverage(d30Points(members, (m) => m.wnx30d)),
+    },
+    avgWinrate: weightedAverage(
+      overallPoints(members, (m) => m.overall?.winsPercentage ?? null),
+    ),
+  };
 }

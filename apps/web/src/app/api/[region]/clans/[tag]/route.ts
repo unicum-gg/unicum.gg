@@ -1,14 +1,17 @@
-import { loadClanDetail } from "@/services/clans/detail";
+import { computeClanRatings } from "@unicum.gg/core/clans/members";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
+import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming/region";
-import { ClanDetailResponse } from "./schema.api";
+import { ClanOverviewResponse } from "./schema.api";
+
+export const dynamic = "force-dynamic";
 
 /**
- * Clan detail
- * @description Full clan detail for a region: profile, members with cached WN7/WN8/WNX ratings, the clans members previously belonged to, recent join/leave/role-change activity, and the latest stronghold/global-map snapshot plus 24h/7d/30d comparison points. Dates are ISO 8601 strings.
+ * Clan overview
+ * @description The clan's profile and its battle-weighted aggregate ratings (lifetime and 30-day WN7/WN8/WNX plus the average win rate). The heavy per-category data lives on the dedicated sub-endpoints: `/members`, `/previous-clans`, `/activity`, `/stronghold`, `/clan-wars` and `/vehicles`. 404 if the region's clan with this tag doesn't exist.
  * @pathParams clanLiveParams
- * @response ClanDetailResponse
+ * @response ClanOverviewResponse
  * @tag Clans
  * @openapi
  */
@@ -27,13 +30,12 @@ export async function GET(
     return Response.json({ error: "not_found" }, { status: 404 });
   }
 
-  try {
-    // Dates serialize to ISO strings here and are revived client-side by
-    // parsing with the shared `ClanDetailResponse` schema (z.coerce.date).
-    const data = await loadClanDetail(region, clanCached.info);
-    return jsonResponse(ClanDetailResponse, data);
-  } catch (err) {
-    console.error(`[api/${region}/clans/${decoded}] failed:`, err);
-    return Response.json({ error: "upstream_failure" }, { status: 502 });
-  }
+  const cached = await getClanMembersCached(region, clanCached.info.id).catch(
+    () => null,
+  );
+  const ratings = computeClanRatings(cached?.members ?? []);
+  return jsonResponse(ClanOverviewResponse, {
+    clan: clanCached.info,
+    ratings,
+  });
 }

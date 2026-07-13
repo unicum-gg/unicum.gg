@@ -11,13 +11,8 @@ import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor } from "@unicum.gg/core/wargaming/wot/ratings";
 import type {
   ClanGlobalMapStats,
-  ClanSnapshotPeriods,
+  ClanGlobalMapView,
 } from "@unicum.gg/core/clans/snapshot-stats";
-import {
-  diffClanGlobalMapStats,
-  globalMapStatsFromClanSnapshot,
-} from "@unicum.gg/core/clans/snapshot-stats";
-import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntFmt = new Intl.NumberFormat("en-US", {
@@ -171,25 +166,17 @@ function PeriodCell({ cell, hideOnMobile }: { cell: Cell; hideOnMobile?: boolean
   );
 }
 
-function computePeriod(
-  current: ClanGlobalMapStats,
-  snap: ClanSnapshot | null,
-): ClanGlobalMapStats | null {
-  if (!snap) return null;
-  return diffClanGlobalMapStats(current, globalMapStatsFromClanSnapshot(snap));
-}
-
 export function ClanWarsStatsTable({
   latest,
   periods,
 }: {
-  latest: ClanSnapshot;
-  periods: ClanSnapshotPeriods;
+  latest: ClanGlobalMapStats;
+  periods: ClanGlobalMapView["periods"];
 }) {
-  const current = globalMapStatsFromClanSnapshot(latest);
-  const p24 = computePeriod(current, periods.h24);
-  const p7 = computePeriod(current, periods.d7);
-  const p30 = computePeriod(current, periods.d30);
+  const current = latest;
+  const p24 = periods.h24;
+  const p7 = periods.d7;
+  const p30 = periods.d30;
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">

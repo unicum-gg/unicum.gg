@@ -43,7 +43,12 @@ function pathRank(path: string): number {
   if (path.endsWith("/economics")) return 5;
   if (path.endsWith("/marks-of-excellence")) return 6;
   if (path.endsWith("/marks-of-mastery")) return 7;
-  if (path.endsWith("/vehicles")) return 8;
+  if (path.endsWith("/members")) return 9;
+  if (path.endsWith("/previous-clans")) return 10;
+  if (path.endsWith("/activity")) return 11;
+  if (path.endsWith("/stronghold")) return 12;
+  if (path.endsWith("/clan-wars")) return 13;
+  if (path.endsWith("/vehicles")) return 14;
   if (path.endsWith("/enqueue")) return 20;
   if (path.endsWith("/sse")) return 21;
   return 3; // base resource (a collection or a single item)
