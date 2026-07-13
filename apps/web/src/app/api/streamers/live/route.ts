@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
+import { jsonResponse } from "@/services/openapi/json-response";
 import { getCachedLiveStreamers } from "@/services/twitch";
+import { LiveStreamersResponse } from "./schema.api";
 
 // Public JSON snapshot of who's live. The site's own UI streams live updates
 // over `/api/streamers/live/sse` instead; this stays a plain cached endpoint for
@@ -16,7 +17,7 @@ export const dynamic = "force-dynamic";
  */
 export async function GET() {
   const streamers = await getCachedLiveStreamers();
-  return NextResponse.json(streamers, {
+  return jsonResponse(LiveStreamersResponse, streamers, {
     headers: { "Cache-Control": "no-store" },
   });
 }

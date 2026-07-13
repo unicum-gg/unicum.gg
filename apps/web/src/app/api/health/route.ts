@@ -1,3 +1,6 @@
+import { jsonResponse } from "@/services/openapi/json-response";
+import { HealthResponse } from "./schema.api";
+
 /**
  * Health check
  * @description Liveness probe. Referenced as the `status` link relation in the
@@ -7,5 +10,5 @@
  * @openapi
  */
 export function GET(): Response {
-  return Response.json({ status: "ok" });
+  return jsonResponse(HealthResponse, { status: "ok" });
 }

@@ -1,16 +1,12 @@
 import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
+import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import {
   getTopPlayersByMetric,
   type TopPlayersPeriod,
-  type TopPlayerResult,
 } from "@unicum.gg/core/wargaming/wot/players/top";
 import { isRegion } from "@unicum.gg/wargaming/region";
-
-export type TopPlayersResponse = {
-  results: TopPlayerResult[];
-  computed_at: string | null;
-};
+import { TopPlayersResponse } from "./schema.api";
 
 /**
  * Top players
@@ -52,7 +48,7 @@ export async function GET(
       period,
       limit,
     );
-    return Response.json({
+    return jsonResponse(TopPlayersResponse, {
       results,
       computed_at: computedAt?.toISOString() ?? null,
     });

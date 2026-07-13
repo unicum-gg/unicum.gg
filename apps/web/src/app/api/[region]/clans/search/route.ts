@@ -1,29 +1,21 @@
-import { searchClansLocal } from "@unicum.gg/core/clans/search-local";
-import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
-import { SearchSource } from "@unicum.gg/core/search";
-import {
-  findClansByPrefix,
-  type ClanSearchResult,
-} from "@unicum.gg/core/wargaming/wot/clans/search";
+import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming/region";
+import { ClanSearchResponse } from "./schema.api";
+import {
+  discoverClans,
+  searchClansLocalPart,
+  searchClansRemotePart,
+} from "./shared";
 
 export const dynamic = "force-dynamic";
 
-/** One NDJSON line of the streamed search response. The `local` chunk (from our
- * database) is emitted first and near-instantly; the `remote` chunk (from the
- * Wargaming API, deduped against local) streams in after. */
-export type ClanSearchChunk = {
-  source: SearchSource;
-  results: ClanSearchResult[];
-};
-
 /**
  * Search clans
- * @description Search clans by name or tag prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives.
+ * @description Search clans by name or tag prefix (minimum 3 characters). Returns the combined result set in a single JSON response: our database hits first, then Wargaming API hits (deduped). Waits for the (rate-limited) Wargaming call, so it can be slower than the streamed variant. For progressive results, use `/search/ndjson`.
  * @pathParams regionParams
  * @queryParams searchQuery
- * @response ClanSearchChunk
+ * @response ClanSearchResponse
  * @tag Clans
  * @openapi
  */
@@ -39,44 +31,25 @@ export async function GET(
   const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
   const parsed = S.searchQuery.safeParse({ q });
   if (!parsed.success) {
-    return new Response(
-      `${JSON.stringify({ source: SearchSource.Local, results: [] })}\n`,
-      { headers: { "content-type": "application/x-ndjson; charset=utf-8" } },
+    return jsonResponse(
+      ClanSearchResponse,
+      { results: [] },
+      { headers: { "cache-control": "no-store" } },
     );
   }
   const query = parsed.data.q;
 
-  const stream = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      const enc = new TextEncoder();
-      const send = (chunk: ClanSearchChunk) =>
-        controller.enqueue(enc.encode(`${JSON.stringify(chunk)}\n`));
+  const [local, remoteRaw] = await Promise.all([
+    searchClansLocalPart(region, query),
+    searchClansRemotePart(region, query),
+  ]);
+  const seen = new Set(local.map((r) => r.clan_id));
+  const results = [...local, ...remoteRaw.filter((r) => !seen.has(r.clan_id))];
 
-      const localP = searchClansLocal(region, query, 5).catch(() => []);
-      const remoteP = findClansByPrefix(region, query, 5).catch((err) => {
-        console.error(`[api/${region}/clans/search] remote failed:`, err);
-        return [] as ClanSearchResult[];
-      });
-
-      const local = await localP;
-      send({ source: SearchSource.Local, results: local });
-
-      const seen = new Set(local.map((r) => r.clan_id));
-      const remote = (await remoteP).filter((r) => !seen.has(r.clan_id));
-      send({ source: SearchSource.Remote, results: remote });
-
-      discoverClansBackground(
-        region,
-        [...local, ...remote].map((r) => r.clan_id),
-      );
-      controller.close();
-    },
-  });
-
-  return new Response(stream, {
-    headers: {
-      "content-type": "application/x-ndjson; charset=utf-8",
-      "cache-control": "no-store",
-    },
-  });
+  discoverClans(region, results);
+  return jsonResponse(
+    ClanSearchResponse,
+    { results },
+    { headers: { "cache-control": "no-store" } },
+  );
 }

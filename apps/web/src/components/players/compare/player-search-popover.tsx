@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/route";
+import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/ndjson/route";
 import { readNdjson } from "@/lib/ndjson";
 import type { Region } from "@unicum.gg/wargaming/region";
 
@@ -57,7 +57,7 @@ export function PlayerSearchPopover({
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/${region}/players/search?q=${encodeURIComponent(trimmed)}`,
+          `/api/${region}/players/search/ndjson?q=${encodeURIComponent(trimmed)}`,
           { signal: controller.signal },
         );
         if (!res.ok) return;

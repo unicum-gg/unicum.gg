@@ -52,4 +52,18 @@ async function handleMcp(request: Request): Promise<Response> {
   return transport.handleRequest(request);
 }
 
-export { handleMcp as GET, handleMcp as POST, handleMcp as DELETE };
+// GET opens the SSE stream and DELETE ends a session (both part of the
+// Streamable HTTP transport); POST carries the JSON-RPC messages and is the one
+// documented below.
+export { handleMcp as GET, handleMcp as DELETE };
+
+/**
+ * MCP endpoint
+ * @description Model Context Protocol (MCP) server over a stateless Streamable HTTP transport. Point an MCP client at this URL to use unicum.gg's read API as MCP tools (the same player, clan and tank data as the REST endpoints). The POST body is a JSON-RPC 2.0 message (`initialize`, `tools/list`, `tools/call`, ...); the server replies with a JSON-RPC response or, when streaming, an SSE stream. `GET` opens the SSE stream and `DELETE` ends a session (transport-level, not documented separately).
+ * @response McpResponse
+ * @tag MCP
+ * @openapi
+ */
+export async function POST(request: Request): Promise<Response> {
+  return handleMcp(request);
+}

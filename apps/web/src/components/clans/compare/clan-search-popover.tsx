@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/route";
+import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/ndjson/route";
 import { readNdjson } from "@/lib/ndjson";
 import type { Region } from "@unicum.gg/wargaming/region";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
@@ -57,7 +57,7 @@ export function ClanSearchPopover({
       setLoading(true);
       try {
         const res = await fetch(
-          `/api/${region}/clans/search?q=${encodeURIComponent(trimmed)}`,
+          `/api/${region}/clans/search/ndjson?q=${encodeURIComponent(trimmed)}`,
           { signal: controller.signal },
         );
         if (!res.ok) return;

@@ -1,16 +1,12 @@
 import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
+import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import {
   getTopClansByMetric,
-  type TopClanResult,
   TopClansPeriod,
 } from "@unicum.gg/core/wargaming/wot/clans/top";
 import { isRegion } from "@unicum.gg/wargaming/region";
-
-export type TopClansResponse = {
-  results: TopClanResult[];
-  computed_at: string | null;
-};
+import { TopClansResponse } from "./schema.api";
 
 /**
  * Top clans
@@ -54,7 +50,7 @@ export async function GET(
       period,
       limit,
     );
-    return Response.json({
+    return jsonResponse(TopClansResponse, {
       results,
       computed_at: computedAt?.toISOString() ?? null,
     });

@@ -1,6 +1,8 @@
 import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
 import { loadPlayerDetail } from "@unicum.gg/core/players/detail";
+import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming/region";
+import { PlayerDetailResponse } from "./schema.api";
 
 /**
  * Player detail
@@ -33,7 +35,7 @@ export async function GET(
     if (!data) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
-    return Response.json(data);
+    return jsonResponse(PlayerDetailResponse, data);
   } catch (err) {
     console.error(`[api/${region}/players/${decoded}] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

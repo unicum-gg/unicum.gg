@@ -39,7 +39,7 @@ import type { PlayerDerivedStats } from "@unicum.gg/core/players/derived-stats";
 import type { PlayerDetailData } from "@unicum.gg/core/players/detail";
 import type { LiftDrag } from "@unicum.gg/core/players/lift-drag";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
-import { PlayerDetailResponse } from "@/services/openapi/schemas";
+import { PlayerDetailResponse } from "@/app/api/[region]/players/[nickname]/schema.api";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

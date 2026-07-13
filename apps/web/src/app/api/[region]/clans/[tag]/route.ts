@@ -1,6 +1,8 @@
 import { loadClanDetail } from "@/services/clans/detail";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
+import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming/region";
+import { ClanDetailResponse } from "./schema.api";
 
 /**
  * Clan detail
@@ -29,7 +31,7 @@ export async function GET(
     // Dates serialize to ISO strings here and are revived client-side by
     // parsing with the shared `ClanDetailResponse` schema (z.coerce.date).
     const data = await loadClanDetail(region, clanCached.info);
-    return Response.json(data);
+    return jsonResponse(ClanDetailResponse, data);
   } catch (err) {
     console.error(`[api/${region}/clans/${decoded}] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

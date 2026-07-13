@@ -12,13 +12,11 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/route";
+import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/ndjson/route";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/route";
-import type {
-  TankSearchChunk,
-  TankSearchResult,
-} from "@/app/api/[region]/tanks/search/route";
+import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/ndjson/route";
+import type { TankSearchChunk } from "@/app/api/[region]/tanks/search/ndjson/route";
+import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import { SearchSource } from "@unicum.gg/core/search";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
@@ -136,7 +134,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/players/search?${qParam}`, {
+        fetch(`/api/${region}/players/search/ndjson?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
@@ -167,7 +165,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/clans/search?${qParam}`, {
+        fetch(`/api/${region}/clans/search/ndjson?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {
@@ -198,7 +196,7 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/tanks/search?${qParam}`, {
+        fetch(`/api/${region}/tanks/search/ndjson?${qParam}`, {
           signal: controller.signal,
         })
           .then(async (res) => {

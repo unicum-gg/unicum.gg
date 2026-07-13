@@ -34,10 +34,8 @@ import {
 import { styles } from "@/lib/styles";
 import type { ClanDetailData } from "@/services/clans/detail";
 import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
-import {
-  ClanDetailResponse,
-  ClanVehiclesResponse,
-} from "@/services/openapi/schemas";
+import { ClanDetailResponse } from "@/app/api/[region]/clans/[tag]/schema.api";
+import { ClanVehiclesResponse } from "@/app/api/[region]/clans/[tag]/vehicles/schema.api";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

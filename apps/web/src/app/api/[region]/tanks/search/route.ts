@@ -1,29 +1,23 @@
-import { SearchSource } from "@unicum.gg/core/search";
 import {
   searchTanks,
   type TankSearchResult,
 } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming/region";
+import { TankSearchResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";
 
 export type { TankSearchResult };
 
-/** One NDJSON line of the streamed tank search response. Tanks come entirely
- * from our in-memory catalogue, so there is only ever a single `local` chunk. */
-export type TankSearchChunk = {
-  source: SearchSource;
-  results: TankSearchResult[];
-};
-
 /**
  * Search tanks
- * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue.
+ * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
  * @pathParams regionParams
  * @queryParams searchQuery
- * @response TankSearchChunk
- * @tag System
+ * @response TankSearchResponse
+ * @tag Tanks
  * @openapi
  */
 export async function GET(
@@ -38,11 +32,9 @@ export async function GET(
   const q = new URL(req.url).searchParams.get("q")?.trim() ?? "";
   const parsed = S.searchQuery.safeParse({ q });
   const results = parsed.success ? await searchTanks(region, parsed.data.q, 5) : [];
-  const body = `${JSON.stringify({ source: SearchSource.Local, results })}\n`;
-  return new Response(body, {
-    headers: {
-      "content-type": "application/x-ndjson; charset=utf-8",
-      "cache-control": "no-store",
-    },
-  });
+  return jsonResponse(
+    TankSearchResponse,
+    { results },
+    { headers: { "cache-control": "no-store" } },
+  );
 }
