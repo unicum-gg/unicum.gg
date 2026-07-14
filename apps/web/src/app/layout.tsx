@@ -64,7 +64,7 @@ export default async function RootLayout({
           <RatingMetricRoot />
           <BuildBanner />
           <HomeLayout {...layoutProps}>
-            <div id="page-content">{children}</div>
+            <div id="page-content" className="flex flex-1 flex-col">{children}</div>
             <Footer />
           </HomeLayout>
           <Toaster />
