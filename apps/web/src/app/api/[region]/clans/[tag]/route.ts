@@ -1,4 +1,4 @@
-import { computeClanRatings } from "@unicum.gg/core/clans/members";
+import { computeClanRatings } from "@unicum.gg/shared";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { jsonResponse } from "@/services/openapi/json-response";

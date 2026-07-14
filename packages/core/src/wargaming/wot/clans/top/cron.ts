@@ -1,8 +1,7 @@
 import { and, eq } from "drizzle-orm";
-import { RATING_METRICS } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, topClansByRegion } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
-import { topClansByRegion } from "@unicum.gg/core/db/schema";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { computeTopClansAllMetrics, TopClansPeriod } from ".";
 

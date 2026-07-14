@@ -1,7 +1,7 @@
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
-import { env } from "@unicum.gg/core/env";
-import * as schema from "./schema";
+import { env } from "@unicum.gg/shared";
+import { schema } from "@unicum.gg/shared";
 
 type DbContext = "request" | "background";
 

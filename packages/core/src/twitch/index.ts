@@ -1,4 +1,4 @@
-import { env } from "@unicum.gg/core/env";
+import { env } from "@unicum.gg/shared";
 
 /**
  * Minimal Twitch Helix client for the "top players streaming now" feature. Uses

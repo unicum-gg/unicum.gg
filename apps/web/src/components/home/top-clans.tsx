@@ -5,10 +5,7 @@ import Link from "next/link";
 import { LeaderboardPeriod } from "@/components/home/leaderboard-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
-import {
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
@@ -24,12 +21,6 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopClanResult } from "@unicum.gg/core/wargaming/wot/clans/top";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],

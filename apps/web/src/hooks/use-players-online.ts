@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { OnlinePayload } from "@unicum.gg/core/wargaming/wot/server/online";
+import type { OnlinePayload } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { unicum } from "@/services/sdk";
 

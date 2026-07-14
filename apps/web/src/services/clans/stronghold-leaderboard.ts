@@ -1,12 +1,7 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import {
-  STRONGHOLD_MIN_BATTLES,
-  StrongholdSort,
-  StrongholdTier,
-} from "@unicum.gg/core/constants/stronghold";
+import { STRONGHOLD_MIN_BATTLES, StrongholdSort, StrongholdTier, clanSnapshotsByRegion, clansByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import { clanSnapshotsByRegion, clansByRegion } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming";
 
 export type StrongholdLeaderboardEntry = {

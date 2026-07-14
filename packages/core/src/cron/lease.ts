@@ -1,7 +1,7 @@
 import { randomUUID } from "node:crypto";
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { cronLeader } from "@unicum.gg/core/db/schema";
+import { cronLeader } from "@unicum.gg/shared";
 
 const INSTANCE_ID = randomUUID();
 const LEASE_DURATION_MS = 90 * 1000;

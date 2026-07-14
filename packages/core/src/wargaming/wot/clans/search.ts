@@ -2,14 +2,8 @@ import type { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 import { pickEmblem } from "./info";
 
-export type ClanSearchResult = {
-  clan_id: number;
-  tag: string;
-  name: string;
-  color: string;
-  members_count: number;
-  emblem: string | null;
-};
+import type { ClanSearchResult } from "@unicum.gg/shared";
+export type { ClanSearchResult } from "@unicum.gg/shared";
 
 const SEARCH_FIELDS = [
   "clan_id",

@@ -1,4 +1,4 @@
-import type { TankSpec } from "@unicum.gg/core/db/schema";
+import type { TankSpec } from "@unicum.gg/shared";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 
 type Row = {

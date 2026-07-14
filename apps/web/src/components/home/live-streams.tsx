@@ -15,19 +15,7 @@ import {
   useState,
   useSyncExternalStore,
 } from "react";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
 import {
   LeaderboardPeriod,

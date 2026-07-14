@@ -32,15 +32,9 @@ export type ClanFullInfo = {
   languages: string[];
 };
 
-export type ClanRef = {
-  id: number;
-  tag: string;
-  name: string;
-  color: string;
-  emblem: string;
-  // Empty `[]` from the public API (no languages there); enriched by callers.
-  languages: string[];
-};
+// Client-safe shape lives in `@unicum.gg/shared`; re-exported for back-compat.
+import type { ClanRef } from "@unicum.gg/shared";
+export type { ClanRef } from "@unicum.gg/shared";
 
 const FULL_INFO_FIELDS = [
   "clan_id",

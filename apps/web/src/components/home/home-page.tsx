@@ -24,7 +24,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, RatingMetric } from "@unicum.gg/shared";
 import { styles } from "@/lib/styles";
 import {
   getTopClansByMetricByRegions,

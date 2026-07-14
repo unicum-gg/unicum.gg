@@ -1,4 +1,4 @@
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
+import type { VehicleMeta } from "./meta";
 
 /**
  * URL slug for a tank, derived from its short name. Lowercased, accents

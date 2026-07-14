@@ -1,13 +1,6 @@
 import { and, asc, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import {
-  type NewPlayerSnapshot,
-  type Player,
-  type PlayerSnapshot,
-  playerSnapshotsByRegion,
-  playersByRegion,
-  tankSnapshotsByRegion,
-} from "@unicum.gg/core/db/schema";
+import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
@@ -17,13 +10,6 @@ import type {
   PlayerSearchResult,
 } from "@unicum.gg/core/wargaming/wot/accounts";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
@@ -34,37 +20,7 @@ import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
-export type Stats = {
-  battles: number;
-  wins: number;
-  losses: number;
-  draws: number;
-  survivedBattles: number;
-  frags: number;
-  damageDealt: number;
-  xp: number;
-  spotted: number;
-  capturePoints: number;
-  droppedCapturePoints: number;
-  hits: number;
-  shots: number;
-  globalRating: number;
-  wtr: number | null;
-};
-
-export type StrongholdStats = {
-  battles: number;
-  wins: number;
-  losses: number;
-  draws: number;
-  survivedBattles: number;
-  frags: number;
-  damageDealt: number;
-  spotted: number;
-  capturePoints: number;
-  droppedCapturePoints: number;
-  battleAvgXp: number;
-};
+export type { Stats, StrongholdStats };
 
 export type SnapshotContext = {
   player: Player;

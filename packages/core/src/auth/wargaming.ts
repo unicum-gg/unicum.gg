@@ -5,7 +5,7 @@ import { setSessionCookie } from "better-auth/cookies";
 import { handleOAuthUserInfo } from "better-auth/oauth2";
 import { isRegion } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
-import { env } from "@unicum.gg/core/env";
+import { env } from "@unicum.gg/shared";
 
 const PROVIDER_ID = "wargaming";
 

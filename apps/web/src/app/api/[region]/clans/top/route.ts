@@ -1,4 +1,4 @@
-import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
+import { ratingMetricFromCookie } from "@unicum.gg/shared";
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import {

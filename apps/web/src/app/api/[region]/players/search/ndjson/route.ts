@@ -1,4 +1,4 @@
-import { SearchSource } from "@unicum.gg/core/search";
+import { SearchSource } from "@unicum.gg/shared";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming";
 import {

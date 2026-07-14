@@ -1,17 +1,8 @@
 import { sql } from "drizzle-orm";
 import { traced } from "@unicum.gg/core/lib/perf-trace";
 import { db } from "@unicum.gg/core/db";
-import {
-  type Player,
-  type PlayerSnapshot,
-  type TankSnapshot,
-  playerClanHistoryByRegion,
-  playerSnapshotsByRegion,
-  playersByRegion,
-  tankSnapshotsByRegion,
-} from "@unicum.gg/core/db/schema";
+import { type Player, type PlayerSnapshot, type TankSnapshot, playerClanHistoryByRegion, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, type PlayerClanHistoryFull } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
 import {
   type SerializedClanHistory,
   deserializeClanHistory,
@@ -364,7 +355,6 @@ function tankSnapshotMapFromRaws(rows: RawTankSnapshot[] | null): TankSnapshotMa
   for (const r of rows) map.set(Number(r.tank_id), tankSnapshotFromRaw(r));
   return map;
 }
-
 
 export type PlayerLookup = { accountId: number } | { nickname: string };
 

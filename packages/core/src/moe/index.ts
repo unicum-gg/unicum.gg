@@ -1,5 +1,5 @@
 import { db } from "@unicum.gg/core/db";
-import { type TankMoe, moeByRegion } from "@unicum.gg/core/db/schema";
+import { type TankMoe, moeByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 // The combined-damage thresholds for the three Marks of Excellence, keyed by

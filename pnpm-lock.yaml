@@ -19,6 +19,9 @@ importers:
       '@unicum.gg/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
+      '@unicum.gg/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../../packages/wargaming
@@ -62,6 +65,9 @@ importers:
       '@unicum.gg/sdk':
         specifier: workspace:*
         version: link:../../packages/sdk
+      '@unicum.gg/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../../packages/wargaming
@@ -234,6 +240,9 @@ importers:
       '@unicum.gg/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@unicum.gg/shared':
+        specifier: workspace:*
+        version: link:../../packages/shared
     devDependencies:
       '@types/node':
         specifier: ^22.10.5
@@ -247,6 +256,9 @@ importers:
       '@t3-oss/env-core':
         specifier: ^0.13.11
         version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
+      '@unicum.gg/shared':
+        specifier: workspace:*
+        version: link:../shared
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../wargaming
@@ -281,9 +293,9 @@ importers:
 
   packages/sdk:
     dependencies:
-      '@unicum.gg/core':
+      '@unicum.gg/shared':
         specifier: workspace:*
-        version: link:../core
+        version: link:../shared
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../wargaming
@@ -300,6 +312,21 @@ importers:
       typescript:
         specifier: ^5
         version: 5.9.3
+
+  packages/shared:
+    dependencies:
+      '@t3-oss/env-core':
+        specifier: ^0.13.11
+        version: 0.13.11(typescript@5.9.3)(zod@4.4.3)
+      '@unicum.gg/wargaming':
+        specifier: workspace:*
+        version: link:../wargaming
+      drizzle-orm:
+        specifier: ^0.45.2
+        version: 0.45.2(@opentelemetry/api@1.9.0)(kysely@0.29.3)(postgres@3.4.9)
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
 
   packages/wargaming:
     dependencies:

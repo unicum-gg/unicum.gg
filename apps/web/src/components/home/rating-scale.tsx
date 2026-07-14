@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import {
   RATING_COLOR_CLASS,
   RatingColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+} from "@unicum.gg/shared";
 
 type TierRow = {
   color: RatingColor;

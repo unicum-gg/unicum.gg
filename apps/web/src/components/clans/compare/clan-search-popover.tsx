@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
-import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/shared";
 
 const SEARCH_DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 2;

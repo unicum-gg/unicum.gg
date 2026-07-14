@@ -1,9 +1,8 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewVehicle, vehiclesByRegion } from "@unicum.gg/core/db/schema";
+import { type NewVehicle, vehiclesByRegion, type VehicleMeta } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import { fetchVehicleCatalog } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
-import type { VehicleMeta } from "./meta";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
 // (cleared on deploy/restart) and is shared across all callers — both inside

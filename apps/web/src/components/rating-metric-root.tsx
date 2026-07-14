@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
-} from "@unicum.gg/core/constants/rating";
+} from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 

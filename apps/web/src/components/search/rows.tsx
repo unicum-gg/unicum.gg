@@ -7,7 +7,7 @@ import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
-import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
+import type { ClanSearchResult } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {

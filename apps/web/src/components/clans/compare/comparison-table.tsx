@@ -11,10 +11,8 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
-import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
+import { type ClanMemberStats, type VehicleMeta, RATING_COLOR_CLASS } from "@unicum.gg/shared";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import { RATING_COLOR_CLASS } from "@unicum.gg/core/wargaming/wot/ratings";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type ClanCompareSlot = {

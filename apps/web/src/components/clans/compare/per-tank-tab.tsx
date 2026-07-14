@@ -25,25 +25,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type VehicleMeta, buildWN8Fallback, type RatingColor, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  buildWN8Fallback,
-  type RatingColor,
-  type WN8Expected,
-  wn7Color,
-  wn8Color,
-  type WNXExpected,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { bestIndex } from "@/components/compare/cells";
 import {

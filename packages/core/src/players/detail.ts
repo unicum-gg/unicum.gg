@@ -1,4 +1,4 @@
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerVehicleRows, type PlayerVehicleRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData } from "@unicum.gg/shared";
 import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
@@ -15,90 +15,26 @@ import {
   type StrongholdStats,
 } from "@unicum.gg/core/players";
 import {
-  buildPlayerDerivedStats,
-  type PeriodStats,
-  type PlayerDerivedStats,
-} from "@unicum.gg/core/players/derived-stats";
-import {
   type PlayerInitialData,
   loadPlayerInitialData,
 } from "@unicum.gg/core/players/initial-data";
-import { buildLiftDrag, type LiftDrag } from "@unicum.gg/core/players/lift-drag";
 import {
   getRatingHistory,
   type RatingHistoryPoint,
 } from "@unicum.gg/core/players/rating-history";
 import { diffTanks, tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
-import {
-  buildPlayerVehicleRows,
-  type PlayerVehicleRow,
-} from "@unicum.gg/core/players/vehicles";
-import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming";
-import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import {
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
-export type StrongholdPeriodStats = {
-  h24: StrongholdStats | null;
-  d7: StrongholdStats | null;
-  d30: StrongholdStats | null;
-};
-
-export type StrongholdModeData = {
-  current: StrongholdStats | null;
-  periods: StrongholdPeriodStats;
-};
-
-// One entry per non-random game mode shown on the player page, keyed by the
-// domain mode name (the WG snapshot column prefixes), not by UI tab id.
-export type PlayerStrongholdModes = {
-  skirmish: StrongholdModeData;
-  fortified: StrongholdModeData;
-  epic: StrongholdModeData;
-  ranked: StrongholdModeData;
-  fallout: StrongholdModeData;
-  cwAbsolute: StrongholdModeData;
-  cwChampion: StrongholdModeData;
-  cwMiddle: StrongholdModeData;
-};
-
-// The player detail resource: everything the player page tabs render and the
-// `GET /api/[region]/players/[nickname]` endpoint exposes. All tank-breakdown
-// derivations (stats grid, lift/drag, vehicle rows) are computed here so the
-// payload carries values, never the encyclopedia or expected-value tables.
-// `liftDrag` and `ratingHistory` depend on the requested metric.
-export type PlayerDetailData = {
-  player: {
-    accountId: number;
-    nickname: string;
-    createdAt: Date;
-    lastBattleAt: Date;
-    updatedAt: Date;
-  };
-  metric: RatingMetric;
-  current: Stats;
-  periods: PeriodStats;
-  derived: PlayerDerivedStats;
-  vehicles: PlayerVehicleRow[];
-  liftDrag: LiftDrag | null;
-  ratingHistory: RatingHistoryPoint[];
-  clanHistory: PlayerClanHistoryFull;
-  strongholds: PlayerStrongholdModes;
-};
-
-export const EMPTY_CLAN_HISTORY: PlayerClanHistoryFull = {
-  currentStint: null,
-  pastStints: [],
-  totalClans: 0,
-  timeInClansSeconds: 0,
-};
+// The client-safe shapes (`PlayerDetailData`, the stronghold-mode types) and
+// the pure `EMPTY_CLAN_HISTORY` const live in `@unicum.gg/shared/players/detail`;
+// re-exported here for back-compat. This module keeps the server-side builders.
+export * from "@unicum.gg/shared/players/detail";
 
 /**
  * Assembles the player detail from already-resolved inputs. Shared by the

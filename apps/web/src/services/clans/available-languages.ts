@@ -5,7 +5,7 @@ import {
   clansByRegion,
   playerSnapshotsByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
 // Matches `MIN_MEMBERS_BY_LANGUAGE` in

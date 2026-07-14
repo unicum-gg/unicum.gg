@@ -8,7 +8,8 @@
     "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts"
   },
   "dependencies": {
-    "@unicum.gg/core": "workspace:*"
+    "@unicum.gg/core": "workspace:*",
+    "@unicum.gg/shared": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

@@ -4,7 +4,7 @@ import { db } from "@unicum.gg/core/db";
 import {
   playerRefreshQueueByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import {
   getAccountWTR,

@@ -1,6 +1,6 @@
 "use client";
 
-import type { ServerOnline } from "@unicum.gg/core/wargaming/wot/server/online";
+import type { ServerOnline } from "@unicum.gg/shared";
 import {
   Tooltip,
   TooltipContent,

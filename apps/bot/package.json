@@ -11,6 +11,7 @@
     "@t3-oss/env-core": "^0.13.11",
     "@unicum.gg/core": "workspace:*",
     "@unicum.gg/sdk": "workspace:*",
+    "@unicum.gg/shared": "workspace:*",
     "@unicum.gg/wargaming": "workspace:*",
     "discord.js": "^14.9.0",
     "dixt": "^5.0.7",

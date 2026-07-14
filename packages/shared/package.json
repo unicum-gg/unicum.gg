@@ -1,0 +1,18 @@
+{
+  "name": "@unicum.gg/shared",
+  "version": "0.1.0",
+  "private": true,
+  "sideEffects": [
+    "**/env.ts"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@t3-oss/env-core": "^0.13.11",
+    "@unicum.gg/wargaming": "workspace:*",
+    "drizzle-orm": "^0.45.2",
+    "zod": "^4.4.3"
+  }
+}

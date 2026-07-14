@@ -1,6 +1,6 @@
 import { desc, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion } from "@unicum.gg/core/db/schema";
+import { clansByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 export type LocalClanResult = {

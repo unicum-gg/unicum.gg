@@ -1,16 +1,9 @@
 import { toRoman } from "roman-numerals";
 import { TankIcon } from "@/components/players/tank-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric, type LiftDrag, type LiftDragRow, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
-import type { LiftDrag, LiftDragRow } from "@unicum.gg/core/players/lift-drag";
 import type { Region } from "@unicum.gg/wargaming";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {

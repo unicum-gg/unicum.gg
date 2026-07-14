@@ -5,7 +5,7 @@ import {
   playerSnapshotsByRegion,
   playersByRegion,
   tankSnapshotsByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { bulkInsertTankSnapshots } from "@unicum.gg/core/players/tanks";
 import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { isRegion, type Region } from "@unicum.gg/wargaming";

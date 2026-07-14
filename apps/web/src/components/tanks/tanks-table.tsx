@@ -50,7 +50,7 @@ import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
   RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 enum SortDirection {

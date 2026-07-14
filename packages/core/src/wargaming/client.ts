@@ -1,6 +1,5 @@
 import { WargamingClient, type CacheOptions, type RateLimiterFactory, Region } from "@unicum.gg/wargaming";
-import { env } from "@unicum.gg/core/env";
-import { botHeaders } from "@unicum.gg/core/lib/bot-headers";
+import { env, botHeaders } from "@unicum.gg/shared";
 import { traced } from "@unicum.gg/core/lib/perf-trace";
 import { getRedisClient } from "@unicum.gg/core/redis";
 import { RedisCacheStore } from "./redis-cache";

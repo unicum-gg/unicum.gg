@@ -1,33 +1,16 @@
 import { asc, eq } from "drizzle-orm";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import { tankSnapshotsByRegion } from "@unicum.gg/core/db/schema";
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  type WN8Expected,
-  type WNXExpected,
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
-export type RatingHistoryPoint = {
-  day: string;
-  lifetime: number | null;
-  session: number | null;
-};
-
-export type RatingHistory = {
-  points: RatingHistoryPoint[];
-};
+// Client-safe shapes live in `@unicum.gg/shared`; re-exported for back-compat.
+export type { RatingHistory, RatingHistoryPoint };
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 const DEFAULT_LOOKBACK_DAYS = 90;

@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import type { LiveStreamer } from "@unicum.gg/shared";
 import { HomeHero } from "@/components/home/home-hero";
 import { LiveStreams } from "@/components/home/live-streams";
 import STORAGE from "@/constants/storage";

@@ -12,7 +12,7 @@ import {
 } from "@/components/home/top-players";
 import { TopPlayersLeaderboardLink } from "@/components/home/top-players-leaderboard-link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {

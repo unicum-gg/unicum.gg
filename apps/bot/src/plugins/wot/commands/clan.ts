@@ -1,6 +1,6 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
-import { APP_IDENTITY } from "@unicum.gg/core/app-identity";
+import { APP_IDENTITY } from "@unicum.gg/shared";
 import { searchClansLocal } from "@unicum.gg/core/clans/search-local";
 import {
   isRegion,

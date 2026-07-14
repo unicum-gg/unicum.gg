@@ -10,24 +10,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
-import {
-  RATING_COLOR_CLASS,
-  type RatingColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import type { Region } from "@unicum.gg/wargaming";
 import { dec2Fmt } from "@/components/compare/cells";
 import { type ClanCompareSlot } from "./comparison-table";

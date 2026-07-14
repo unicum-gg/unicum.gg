@@ -12,8 +12,6 @@ import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
 import { isRegion } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";

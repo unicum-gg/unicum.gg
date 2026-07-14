@@ -15,7 +15,7 @@ import {
 } from "@/lib/og";
 import { loadPlayerInitialData } from "@unicum.gg/core/players/initial-data";
 import { isRegion } from "@unicum.gg/wargaming";
-import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
+import { wnxColor } from "@unicum.gg/shared";
 
 export const runtime = "nodejs";
 

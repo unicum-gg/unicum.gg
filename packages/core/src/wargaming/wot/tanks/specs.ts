@@ -1,6 +1,6 @@
 import { getTableColumns, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/core/db/schema";
+import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 

@@ -1,8 +1,9 @@
 import { type Region, REGION_LABEL, WgnGame } from "@unicum.gg/wargaming";
+import type { OnlinePayload } from "@unicum.gg/shared";
 import { wg } from "../../client";
 
-export type ServerOnline = { server: string; players_online: number };
-export type OnlinePayload = { total: number; servers: ServerOnline[] } | null;
+// Client-safe shapes live in `@unicum.gg/shared`; re-exported for back-compat.
+export type { ServerOnline, OnlinePayload } from "@unicum.gg/shared";
 
 export const fetchPlayersOnline = async (region: Region): Promise<OnlinePayload> => {
   try {

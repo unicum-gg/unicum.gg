@@ -1,18 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-  type WN8Expected,
-  wn7Color,
-  wn8Color,
-  type WNXExpected,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { type VehicleMeta, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import {
   avgCell,
   bestIndex,

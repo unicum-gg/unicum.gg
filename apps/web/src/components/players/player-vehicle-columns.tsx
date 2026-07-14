@@ -13,15 +13,7 @@ import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MoMIcon } from "@/components/tanks/mom-icon";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { useCookie } from "@/hooks/use-cookie";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
-import {
-  RATING_COLOR_CLASS,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
+import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerVehicleRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
@@ -36,7 +28,6 @@ const pct2Fmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 2,
 });
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
-
 
 export function ratingForMetric(
   row: PlayerVehicleRow,

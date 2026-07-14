@@ -30,20 +30,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import {
-  StrongholdSort,
-  StrongholdTier,
-  STRONGHOLD_MIN_BATTLES,
-  STRONGHOLD_SORT_LABEL,
-  STRONGHOLD_TIER_LABEL,
-} from "@unicum.gg/core/constants/stronghold";
+import { StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
-import {
-  RATING_COLOR_CLASS,
-  strongholdWinrateColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const pctFmt = new Intl.NumberFormat("en-US", {

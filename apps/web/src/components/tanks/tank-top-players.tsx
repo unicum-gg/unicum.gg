@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { RankMedal } from "@/components/rank-medal";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -14,12 +14,6 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { TopTankPlayer } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import { Region } from "@unicum.gg/wargaming";
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {

@@ -16,7 +16,7 @@ import type { MomValues } from "@unicum.gg/core/mom";
 import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
 import type { MoeValues } from "@unicum.gg/core/moe";
 import type { MoeHistoryPoint } from "@unicum.gg/core/moe/poliroid";
-import type { TankSpec } from "@unicum.gg/core/db/schema";
+import { type TankSpec, RATING_METRIC_LABEL, RATING_METRICS, RatingMetric, type VehicleMeta, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type WN8Expected, type WNXExpected, VEHICLE_CLASS_LABEL_FULL, VEHICLE_ROLE_LABEL, roleSuffix } from "@unicum.gg/shared";
 import { VehicleRoleIcon } from "@/components/players/vehicle-role-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
@@ -28,32 +28,12 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import {
-  RATING_METRIC_LABEL,
-  RATING_METRICS,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
 import type {
   TankServerStats,
   TopTankPlayersByMetric,
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
-import {
-  RATING_COLOR_CLASS,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-  type WN8Expected,
-  type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import { cn } from "@/lib/utils";
-import {
-  VEHICLE_CLASS_LABEL_FULL,
-  VEHICLE_ROLE_LABEL,
-  roleSuffix,
-} from "@unicum.gg/core/constants/tanks";
 import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
 
 const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {

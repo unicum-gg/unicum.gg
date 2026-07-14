@@ -11,7 +11,7 @@
     "generate": "tsx scripts/generate.ts"
   },
   "dependencies": {
-    "@unicum.gg/core": "workspace:*",
+    "@unicum.gg/shared": "workspace:*",
     "@unicum.gg/wargaming": "workspace:*",
     "openapi-fetch": "^0.13.5"
   },

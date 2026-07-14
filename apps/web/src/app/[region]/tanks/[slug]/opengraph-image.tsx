@@ -16,11 +16,10 @@ import {
   StatCard,
   VehicleTypeGlyph,
 } from "@/components/og";
-import { VEHICLE_CLASS_LABEL_FULL } from "@unicum.gg/core/constants/tanks";
+import { VEHICLE_CLASS_LABEL_FULL, wnxColor } from "@unicum.gg/shared";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import { isRegion, Region, defaultVehicleRenderUrl, tankopediaImageUrl } from "@unicum.gg/wargaming";
-import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 import { toRoman } from "roman-numerals";
 
 export const runtime = "nodejs";

@@ -6,7 +6,7 @@ import {
   StatCard,
 } from "@/components/og";
 import APP from "@/constants/app";
-import { weightedAverage } from "@unicum.gg/core/lib/stats";
+import { weightedAverage, overallPoints, wnxColor } from "@unicum.gg/shared";
 import {
   loadOgAssets,
   OG_SIZE,
@@ -17,8 +17,6 @@ import {
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { isRegion } from "@unicum.gg/wargaming";
-import { overallPoints } from "@unicum.gg/core/clans/members";
-import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const runtime = "nodejs";
 

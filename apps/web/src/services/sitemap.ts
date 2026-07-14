@@ -9,7 +9,7 @@ import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 

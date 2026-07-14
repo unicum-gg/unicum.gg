@@ -3,7 +3,7 @@ import {
   DEFAULT_RATING_METRIC,
   RATING_METRICS,
   type RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+} from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 // Imported from the dependency-free `period` modules (not the DB-heavy index)
 // so loading these schemas never pulls in the leaderboard logic.

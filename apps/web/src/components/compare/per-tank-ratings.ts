@@ -1,12 +1,4 @@
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  computeWN7,
-  computeWN8,
-  computeWNX,
-  type WN8Expected,
-  type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { RatingMetric, type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type RatingContext = {

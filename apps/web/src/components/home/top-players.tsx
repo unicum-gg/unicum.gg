@@ -4,10 +4,7 @@ import Link from "next/link";
 import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
-import {
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -22,12 +19,6 @@ import {
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { TopPlayerResult } from "@unicum.gg/core/wargaming/wot/players/top";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {

@@ -2,6 +2,22 @@
 
 Read [`AGENTS.md`](./AGENTS.md) first. It contains the non-obvious repo rules that matter for safe changes.
 
+## Repo layout
+
+pnpm workspace with one-way dependencies, no cycles:
+
+```
+@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/{web,worker,bot}
+```
+
+- `packages/wargaming` — neutral Wargaming API SDK. Import from the barrel: `import { Region } from "@unicum.gg/wargaming"`.
+- `packages/shared` — client-safe code only (env, constants, db schema, pure domain math and types). Also barrel-imported: `import { PlayerDetailData } from "@unicum.gg/shared"`. Never add anything here that opens a connection or imports Node-only APIs.
+- `packages/core` — server-only (db pool, redis, crons, repositories, WG fetchers, auth). Not a barrel on purpose: modules have import-time side effects, so import the precise subpath (`@unicum.gg/core/db`, `@unicum.gg/core/players`, ...). Client components must never import it.
+- `packages/sdk` — fluent client for our own public API (types generated from the OpenAPI spec). The front end fetches through it.
+- `apps/web` (site + API), `apps/worker` (crons), `apps/bot` (Discord).
+
+Rule of thumb for new code: pure logic or a type a client component needs goes in `shared`; anything touching db/redis/WG goes in `core`; a mixed module keeps the server function in `core` and re-exports the type from `shared`.
+
 ## Prerequisites
 
 - Node.js 22+
@@ -29,19 +45,19 @@ If you already have a `.env.local`, the script backs it up first.
 pnpm dev
 ```
 
-`pnpm dev` starts the Next.js app and the cron loop via `src/instrumentation.ts`.
+`pnpm dev` starts the Next.js app (from `apps/web`) and, in local dev, the cron loop via its `src/instrumentation.ts`. In production the crons run in `apps/worker` instead.
 
 ## Database
 
 Apply migrations manually:
 
 ```bash
-for f in drizzle/0*.sql; do psql "$DATABASE_URL" -f "$f"; done
+for f in apps/web/drizzle/0*.sql; do psql "$DATABASE_URL" -f "$f"; done
 ```
 
 Do not use `pnpm db:push`. It is intentionally disabled because the schema uses per-region table factories and drizzle-kit can emit destructive `DROP TABLE ... CASCADE` SQL.
 
-If you change a schema file under `src/services/db/schema/`:
+If you change a schema file under `packages/shared/src/db/schema/`:
 
 1. Run `pnpm db:generate`
 2. Review the generated SQL carefully
@@ -87,7 +103,7 @@ Examples:
 
 ## Common Gotchas
 
-- Routes are region-aware. Most public pages live under `src/app/[region]/...`.
+- Routes are region-aware. Most public pages live under `apps/web/src/app/[region]/...`.
 - The app is intentionally eventual-consistent: render from cache, refresh in the background, update via SSE.
 - Wargaming and portal APIs are rate-limited and can throttle hard through G-Core CDN.
 - The repo uses generated OpenAPI output. `postinstall`, `predev`, and `prebuild` regenerate it automatically.

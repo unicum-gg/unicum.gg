@@ -1,4 +1,4 @@
-import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
+import type { ClanSnapshot } from "../db/schema";
 
 // Pure, db-free projections and diffs over a clan snapshot row. Kept apart from
 // `snapshots.ts` (which imports `db`) so client components can pull these

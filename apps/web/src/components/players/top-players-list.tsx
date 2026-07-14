@@ -2,7 +2,7 @@ import Link from "next/link";
 import { LanguageFlags } from "@/components/language-flags";
 import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
-import { RATING_METRIC_LABEL, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -15,12 +15,6 @@ import {
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
-import {
-  RATING_COLOR_CLASS,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

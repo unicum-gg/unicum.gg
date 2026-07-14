@@ -1,5 +1,5 @@
 import { db } from "@unicum.gg/core/db";
-import { streamers } from "@unicum.gg/core/db/schema";
+import { streamers, type LiveStreamer } from "@unicum.gg/shared";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
@@ -12,25 +12,7 @@ import { getWotStreamsByLogin } from "./index";
  * WNX ship so the rail's Overall / Past-30-days toggle (and the navbar metric
  * selector) can re-rank entirely client-side, with no refetch.
  */
-export type LiveStreamer = {
-  region: Region;
-  accountId: number;
-  nickname: string;
-  clanTag: string | null;
-  clanColor: string | null;
-  wn7: number | null;
-  wn8: number | null;
-  wnx: number | null;
-  wn730d: number | null;
-  wn830d: number | null;
-  wnx30d: number | null;
-  twitchLogin: string;
-  twitchUserName: string;
-  title: string;
-  viewerCount: number;
-  startedAt: string;
-  thumbnailUrl: string;
-};
+export type { LiveStreamer } from "@unicum.gg/shared";
 
 /**
  * Everyone in the `streamers` table who is live in the WoT category right now,

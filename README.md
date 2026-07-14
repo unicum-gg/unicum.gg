@@ -8,6 +8,26 @@ Live at [unicum.gg](https://unicum.gg).
 
 Next.js 16, React 19, TypeScript, PostgreSQL via Drizzle, Tailwind v4, shadcn/ui, Recharts.
 
+## Monorepo
+
+pnpm workspace. Dependencies flow one way, no cycles:
+
+```
+@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps
+```
+
+| Package / app | Role |
+|---|---|
+| `packages/wargaming` | Neutral Wargaming API SDK (client, rate limiting, full response types) |
+| `packages/shared` | Client-safe foundations: env, constants, db schema, pure domain math and types |
+| `packages/core` | Server-only: db pool, redis, crons, repositories, WG fetchers, auth |
+| `packages/sdk` | Fluent client for our own public API, types generated from the OpenAPI spec |
+| `apps/web` | The Next.js site and public API |
+| `apps/worker` | Standalone cron runner |
+| `apps/bot` | Discord bot (`/player`, `/clan`) |
+
+`wargaming`, `shared` and `sdk` are imported from their package barrel (`import { Region } from "@unicum.gg/wargaming"`). `core` is deliberately not a barrel: its modules have import-time side effects (db pool, auth secret assert), so server code imports the specific subpath it needs (`@unicum.gg/core/db`, ...). The front end never imports `core`; it consumes the API through `@unicum.gg/sdk` and types through `@unicum.gg/shared`.
+
 ## Run locally
 
 ```bash
@@ -23,7 +43,7 @@ Get the three WG application IDs at [developers.wargaming.net](https://developer
 ### Database
 
 ```bash
-for f in drizzle/0*.sql; do psql "$DATABASE_URL" -f "$f"; done
+for f in apps/web/drizzle/0*.sql; do psql "$DATABASE_URL" -f "$f"; done
 ```
 
 ## Contributing

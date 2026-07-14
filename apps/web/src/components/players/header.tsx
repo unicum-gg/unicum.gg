@@ -9,7 +9,7 @@ import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/player-actions-menu";
-import type { ClanStint } from "@unicum.gg/core/wargaming/wot/clans/player";
+import type { ClanStint } from "@unicum.gg/shared";
 
 const MONTH_FORMAT = "MMM yyyy";
 const DAY_FORMAT = "MMM d, yyyy";

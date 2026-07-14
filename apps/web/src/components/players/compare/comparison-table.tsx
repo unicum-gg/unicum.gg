@@ -10,9 +10,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import { RATING_COLOR_CLASS } from "@unicum.gg/core/wargaming/wot/ratings";
+import { type Player, type PlayerSnapshot, type VehicleMeta, RATING_COLOR_CLASS } from "@unicum.gg/shared";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 export type CompareSlot = {

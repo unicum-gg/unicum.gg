@@ -1,5 +1,11 @@
 import type { Region } from "@unicum.gg/wargaming";
+import type { TankStats } from "@unicum.gg/shared";
 import { wg } from "../../client";
+
+// The `TankStats` shape is client-safe, so it lives in `@unicum.gg/shared`;
+// re-exported here so `import { TankStats } from ".../wargaming/wot/tanks"`
+// (alongside the fetchers) keeps working.
+export type { TankStats } from "@unicum.gg/shared";
 
 /** The per-tank fields this app surfaces (WN8/WNX inputs + mastery). */
 const TANK_STATS_FIELDS = [
@@ -20,34 +26,6 @@ const TANK_STATS_FIELDS = [
   "all.piercings",
   "all.avg_damage_blocked",
 ] as const;
-
-/** The curated per-tank shape the app consumes (a narrow slice of the WG response). */
-export type TankStats = {
-  tank_id: number;
-  mark_of_mastery: number | null;
-  // Marks of Excellence on the gun (0-3). Not part of the WG public API — merged
-  // in from the WoT portal, so it is optional/absent on the raw API shape.
-  marks_on_gun?: number | null;
-  all: {
-    battles: number;
-    damage_dealt: number;
-    spotted: number;
-    frags: number;
-    dropped_capture_points: number;
-    wins: number;
-    radio_assisted_damage: number;
-    track_assisted_damage: number;
-    xp: number;
-    // Added for the per-tank server-average table. `piercings` and
-    // `avg_damage_blocked` are optional in WG's response; the rest are always
-    // present but may be absent on tanks with no random battles.
-    survived_battles?: number;
-    hits?: number;
-    shots?: number;
-    piercings?: number;
-    avg_damage_blocked?: number;
-  };
-};
 
 export const getTanksStats = (region: Region, accountId: number): Promise<TankStats[]> =>
   wg.region(region).api.wot.tanks.stats({ accountId, fields: TANK_STATS_FIELDS });

@@ -1,22 +1,9 @@
 import { and, asc, desc, eq, gte, isNotNull, sql } from "drizzle-orm";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, topPlayersByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import {
-  playerSnapshotsByRegion,
-  playersByRegion,
-  tankSnapshotsByRegion,
-  topPlayersByRegion,
-} from "@unicum.gg/core/db/schema";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import { type Region } from "@unicum.gg/wargaming";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,

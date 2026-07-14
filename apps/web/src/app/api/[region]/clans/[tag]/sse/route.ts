@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion } from "@unicum.gg/core/db/schema";
+import { clansByRegion } from "@unicum.gg/shared";
 import { clanChannel, subscribe } from "@unicum.gg/core/live/pubsub";
 import { isRegion } from "@unicum.gg/wargaming";
 

@@ -1,11 +1,6 @@
 import { and, asc, eq, sql } from "drizzle-orm";
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, RatingMetric, clanMembersByRegion, playersByRegion, topClansByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import {
-  clanMembersByRegion,
-  playersByRegion,
-  topClansByRegion,
-} from "@unicum.gg/core/db/schema";
 import { getClansBriefInfo } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import {
   computePlayerPeriodRatings,

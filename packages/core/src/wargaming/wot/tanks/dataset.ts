@@ -1,9 +1,8 @@
-import type { TankSpec } from "@unicum.gg/core/db/schema";
+import { type TankSpec, type VehicleMeta } from "@unicum.gg/shared";
 import { type MoeValues, getTankMoeByRegion } from "@unicum.gg/core/moe";
 import { type MomValues, getTankMomByRegion } from "@unicum.gg/core/mom";
 import type { Region } from "@unicum.gg/wargaming";
 import { getAllTankStats, type TankServerStats } from "../players/top/by-tank";
-import type { VehicleMeta } from "./meta";
 import { listTanks } from "./resolve";
 import { getAllTankSpecs } from "./specs";
 

@@ -1,6 +1,6 @@
 import { eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { playerRefreshQueueByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
+import { playerRefreshQueueByRegion, playersByRegion } from "@unicum.gg/shared";
 import { enqueuePlayerRefresh } from "@unicum.gg/core/players/refresh-queue";
 import { isRegion } from "@unicum.gg/wargaming";
 

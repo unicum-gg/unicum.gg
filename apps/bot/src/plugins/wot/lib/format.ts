@@ -1,8 +1,4 @@
-import { APP_IDENTITY } from "@unicum.gg/core/app-identity";
-import {
-  RATING_COLOR_HEX,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { APP_IDENTITY, RATING_COLOR_HEX, wnxColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /** Link to a player's profile on the site. */

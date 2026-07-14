@@ -7,7 +7,7 @@ import {
   RATING_METRIC_LABEL,
   RATING_METRICS,
   RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+} from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {

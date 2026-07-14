@@ -1,13 +1,9 @@
 import { and, asc, desc, eq, lt, lte, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import {
-  type ClanSnapshot,
-  clanSnapshotsByRegion,
-} from "@unicum.gg/core/db/schema";
+import { type ClanSnapshot, clanSnapshotsByRegion, type ClanSnapshotPeriods } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanGlobalMapData } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
 import type { ClanStrongholdData } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
-import type { ClanSnapshotPeriods } from "./snapshot-stats";
 
 const SNAPSHOT_THROTTLE_MS = 24 * 60 * 60 * 1000;
 

@@ -1,4 +1,4 @@
-import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
+import type { PlayerClanHistoryFull } from "@unicum.gg/shared";
 
 /**
  * Threshold for keeping a language alongside the leader. Anything scoring

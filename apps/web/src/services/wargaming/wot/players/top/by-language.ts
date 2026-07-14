@@ -5,7 +5,7 @@ import {
   clansByRegion,
   playerClanHistoryByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
 export type TopPlayerByLanguageResult = {

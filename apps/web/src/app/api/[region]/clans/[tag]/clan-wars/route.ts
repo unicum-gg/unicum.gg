@@ -1,4 +1,4 @@
-import { clanGlobalMapView } from "@unicum.gg/core/clans/snapshot-stats";
+import { clanGlobalMapView } from "@unicum.gg/shared";
 import { loadClanDetailByTag } from "@/services/clans/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";

@@ -1,10 +1,6 @@
 import { and, asc, eq } from "drizzle-orm";
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, RatingMetric, tankStatsByRegion, topPlayersByTankByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import {
-  tankStatsByRegion,
-  topPlayersByTankByRegion,
-} from "@unicum.gg/core/db/schema";
 import { type Region } from "@unicum.gg/wargaming";
 
 export type TopTankPlayer = {

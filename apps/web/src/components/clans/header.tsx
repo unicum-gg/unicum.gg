@@ -20,7 +20,7 @@ import {
   wn7Color,
   wn8Color,
   wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+} from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
 const DAY_FORMAT = "MMM d, yyyy";

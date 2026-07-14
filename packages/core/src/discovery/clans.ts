@@ -1,7 +1,7 @@
 import { inArray } from "drizzle-orm";
 import { enqueueClanRefresh } from "@unicum.gg/core/clans/refresh-queue";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion } from "@unicum.gg/core/db/schema";
+import { clansByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const CHUNK_SIZE = 500;

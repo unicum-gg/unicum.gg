@@ -8,11 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { RATING_COLOR_CLASS, RatingColor } from "@unicum.gg/core/wargaming/wot/ratings";
-import type {
-  ClanGlobalMapStats,
-  ClanGlobalMapView,
-} from "@unicum.gg/core/clans/snapshot-stats";
+import { RATING_COLOR_CLASS, RatingColor, type ClanGlobalMapStats, type ClanGlobalMapView } from "@unicum.gg/shared";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntFmt = new Intl.NumberFormat("en-US", {

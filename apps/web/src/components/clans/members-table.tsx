@@ -19,16 +19,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
+import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import {
-  RATING_COLOR_CLASS,
-  type RatingColor,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 function prettyRole(role: string): string {
   if (!role) return "—";

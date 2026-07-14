@@ -1,5 +1,4 @@
-import type { Stats } from "@unicum.gg/core/players";
-import type { PlayerDerivedStats } from "@unicum.gg/core/players/derived-stats";
+import { type Stats, type PlayerDerivedStats } from "@unicum.gg/shared";
 import { renderTable, type TableRow } from "./table.js";
 
 // Text mirror of the player page's stats table (components/players/stats-table

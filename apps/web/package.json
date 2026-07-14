@@ -26,6 +26,7 @@
     "@t3-oss/env-nextjs": "^0.13.11",
     "@unicum.gg/core": "workspace:*",
     "@unicum.gg/sdk": "workspace:*",
+    "@unicum.gg/shared": "workspace:*",
     "@unicum.gg/wargaming": "workspace:*",
     "better-auth": "^1.6.23",
     "class-variance-authority": "^0.7.1",

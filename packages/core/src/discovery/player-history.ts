@@ -4,7 +4,7 @@ import {
   storePlayerClanHistory,
 } from "@unicum.gg/core/players/clan-history";
 import type { Region } from "@unicum.gg/wargaming";
-import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
+import type { PlayerClanHistoryFull } from "@unicum.gg/shared";
 import { discoverClans } from "./clans";
 
 function collectClanIds(data: PlayerClanHistoryFull): number[] {

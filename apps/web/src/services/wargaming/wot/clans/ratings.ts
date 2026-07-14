@@ -12,20 +12,8 @@ import {
   type PlayerStatistics,
 } from "@unicum.gg/core/wargaming/wot/accounts";
 import type { Region } from "@unicum.gg/wargaming";
-import {
-  computeAvgTier,
-  type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-  type WN8Expected,
-  type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { computeAvgTier, type VehicleMeta, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type WN8Expected, type WNXExpected, type MemberRatings } from "@unicum.gg/shared";
 import { getTanksStatsBatch, type TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
-import type { MemberRatings } from "@unicum.gg/core/clans/members";
 
 export type { MemberRatings };
 

@@ -12,13 +12,12 @@ import {
 import { PlayerTabsView } from "@/components/players/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
-import { RATING_METRIC_LABEL } from "@unicum.gg/core/constants/rating";
+import { RATING_METRIC_LABEL, type Player, type PlayerSnapshot, type PlayerClanHistoryFull } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getRatingMetricFromCookies } from "@/lib/rating-metric";
 import { PerfTrace, currentTrace, runWithTrace } from "@unicum.gg/core/lib/perf-trace";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
-import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
 import { recordCurrentSnapshot } from "@unicum.gg/core/players";
 import {
   loadPlayerClanHistoryFromWG,
@@ -40,7 +39,6 @@ import {
   getAccountWTR,
   getPlayerInfo,
 } from "@unicum.gg/core/wargaming/wot/accounts";
-import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
 import { type TankStats, getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 
 const loadInitialByNickname = cache((region: Region, nickname: string) =>

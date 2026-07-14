@@ -1,7 +1,7 @@
 import type {
   ClanGlobalMapStats,
   ClanStrongholdStats,
-} from "@unicum.gg/core/clans/snapshot-stats";
+} from "@unicum.gg/shared";
 import { renderTable, type TableRow } from "./table.js";
 
 // Text mirror of the clan page's Stronghold and Clan Wars tables

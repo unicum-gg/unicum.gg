@@ -1,5 +1,5 @@
 import { subscribe } from "@unicum.gg/core/live/pubsub";
-import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import type { LiveStreamer } from "@unicum.gg/shared";
 import { LIVE_STREAMERS_CHANNEL } from "@unicum.gg/core/twitch/live-poller";
 
 export const dynamic = "force-dynamic";

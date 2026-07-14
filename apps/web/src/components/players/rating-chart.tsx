@@ -7,15 +7,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
-import type { RatingHistoryPoint } from "@unicum.gg/core/players/rating-history";
-import {
-  RATING_COLOR_HEX,
-  type RatingColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { RatingMetric, type RatingHistoryPoint, RATING_COLOR_HEX, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
 const dayFmt = new Intl.DateTimeFormat("en-US", {
   month: "short",

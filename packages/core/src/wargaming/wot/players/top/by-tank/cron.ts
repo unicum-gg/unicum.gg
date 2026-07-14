@@ -1,18 +1,8 @@
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RATING_METRICS, RatingMetric, tankStatsByRegion, topPlayersByTankByRegion, buildWN8Fallback, computeWN7, computeWN8, computeWNX } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db, pgClient } from "@unicum.gg/core/db";
-import {
-  tankStatsByRegion,
-  topPlayersByTankByRegion,
-} from "@unicum.gg/core/db/schema";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   getWN8ExpectedValues,

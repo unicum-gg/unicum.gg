@@ -27,10 +27,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
-import type {
-  ClanStint,
-  PlayerClanHistoryFull,
-} from "@unicum.gg/core/wargaming/wot/clans/player";
+import type { ClanStint, PlayerClanHistoryFull } from "@unicum.gg/shared";
 
 function prettyRole(role: string): string {
   if (!role) return "—";

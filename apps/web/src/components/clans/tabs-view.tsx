@@ -35,13 +35,7 @@ import {
 import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import type { ClanDetailData } from "@/services/clans/detail";
-import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
-import {
-  type ClanGlobalMapView,
-  type ClanStrongholdView,
-  clanGlobalMapView,
-  clanStrongholdView,
-} from "@unicum.gg/core/clans/snapshot-stats";
+import { type ClanVehicleRow, type ClanGlobalMapView, type ClanStrongholdView, clanGlobalMapView, clanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

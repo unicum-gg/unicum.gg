@@ -17,25 +17,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RATING_METRIC_LABEL,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type ClanVehicleRow, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useRegion } from "@/hooks/use-region";
 import { cn } from "@/lib/utils";
-import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
-import {
-  RATING_COLOR_CLASS,
-  type RatingColor,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {

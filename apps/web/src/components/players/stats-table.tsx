@@ -7,20 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import { type Stats } from "@unicum.gg/core/players";
-import type {
-  PeriodStats,
-  PeriodValues,
-  PlayerDerivedStats,
-} from "@unicum.gg/core/players/derived-stats";
-import {
-  RATING_COLOR_CLASS,
-  type RatingColor,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
 const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntegerFmt = new Intl.NumberFormat("en-US", {

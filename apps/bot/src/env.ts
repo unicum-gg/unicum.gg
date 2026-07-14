@@ -5,7 +5,7 @@ import * as z from "zod";
  * The bot's own env — its Discord application credentials — validated at boot so
  * a missing token fails fast with a clear error instead of a cryptic Discord
  * one. The shared data vars (`DATABASE_URL`, `WARGAMING_APPLICATION_ID_*`,
- * `NEXT_PUBLIC_APP_URL`) are validated separately by `@unicum.gg/core/env`.
+ * `NEXT_PUBLIC_APP_URL`) are validated separately by `@unicum.gg/shared/env`.
  */
 export const env = createEnv({
   server: {

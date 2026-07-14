@@ -5,10 +5,10 @@ import {
   computeWNX,
   type WN8Expected,
   type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import { buildTankSlugIndex } from "@unicum.gg/core/wargaming/wot/tanks/slug";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
+} from "../wot/ratings";
+import { buildTankSlugIndex } from "../wot/tanks/slug";
+import type { TankStats } from "../wot/tank-stats";
+import type { VehicleMeta } from "../wot/tanks/meta";
 
 // One computed row per tank a player has battles in: vehicle metadata joined
 // from the encyclopedia plus derived per-battle stats and all three ratings.

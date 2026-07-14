@@ -5,7 +5,7 @@ import {
   clanMembersByRegion,
   clansByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 import { VALID_METRIC_COLUMNS } from "@unicum.gg/core/wargaming/wot/clans/top";
 

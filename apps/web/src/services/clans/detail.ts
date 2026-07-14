@@ -6,13 +6,11 @@ import {
   getClanSnapshotPeriods,
   getLatestClanSnapshot,
 } from "@unicum.gg/core/clans/snapshots";
-import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
+import { type ClanSnapshot, type ClanMemberStats, type ClanSnapshotPeriods } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanRecentEvent } from "@unicum.gg/core/wargaming/wot/clans/event-types";
-import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
 import type { PreviousClanRow } from "./previous-clans";
-import type { ClanSnapshotPeriods } from "@unicum.gg/core/clans/snapshot-stats";
 
 // The clan detail resource: everything the clan page and the
 // `GET /api/[region]/clans/[tag]` endpoint expose. Consumed client-side (via

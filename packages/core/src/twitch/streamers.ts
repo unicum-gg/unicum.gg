@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { streamers } from "@unicum.gg/core/db/schema";
+import { streamers } from "@unicum.gg/shared";
 
 /**
  * Link (or re-link) a WoT account to a Twitch channel. Keyed on the same

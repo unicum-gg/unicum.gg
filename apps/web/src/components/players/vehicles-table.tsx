@@ -9,11 +9,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
-import {
-  DEFAULT_RATING_METRIC,
-  isRatingMetric,
-  RatingMetric,
-} from "@unicum.gg/core/constants/rating";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RatingMetric, type PlayerVehicleRow } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -49,7 +45,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
 import type { Region } from "@unicum.gg/wargaming";
 
 enum SortDirection {

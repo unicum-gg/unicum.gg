@@ -1,31 +1,18 @@
 import type { Region } from "@unicum.gg/wargaming";
+import type {
+  ClanStint,
+  RawClanMemberStint,
+} from "@unicum.gg/shared";
 import { wg } from "../../client";
-import { type ClanRef, pickEmblem } from "./info";
+import { pickEmblem } from "./info";
 
-export type { ClanRef } from "./info";
-
-export type ClanStint = {
-  clan: ClanRef;
-  joinedAt: Date;
-  leftAt: Date | null;
-  role: string;
-  roleLocalized: string;
-};
-
-/** A past clan membership as returned by `clans/memberhistory` (app-shaped). */
-export type RawClanMemberStint = {
-  clanId: number;
-  role: string;
-  joinedAt: Date;
-  leftAt: Date;
-};
-
-export type PlayerClanHistoryFull = {
-  currentStint: ClanStint | null;
-  pastStints: ClanStint[];
-  totalClans: number;
-  timeInClansSeconds: number;
-};
+// Client-safe shapes live in `@unicum.gg/shared`; re-exported for back-compat.
+export type { ClanRef } from "@unicum.gg/shared";
+export type {
+  ClanStint,
+  PlayerClanHistoryFull,
+  RawClanMemberStint,
+} from "@unicum.gg/shared";
 
 const ACCOUNT_CLAN_FIELDS = [
   "joined_at",

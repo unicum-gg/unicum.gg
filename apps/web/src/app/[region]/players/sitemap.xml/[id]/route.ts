@@ -2,7 +2,7 @@ import { generateSitemapXml } from "@onruntime/next-sitemap";
 import { asc } from "drizzle-orm";
 import ROUTES from "@/constants/routes";
 import { db } from "@unicum.gg/core/db";
-import { playersByRegion } from "@unicum.gg/core/db/schema";
+import { playersByRegion } from "@unicum.gg/shared";
 import {
   createSitemapEntry,
   URLS_PER_SITEMAP,

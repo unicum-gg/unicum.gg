@@ -1,5 +1,5 @@
 import Redis from "ioredis";
-import { env } from "@unicum.gg/core/env";
+import { env } from "@unicum.gg/shared";
 
 /**
  * Redis connections, currently used only for live pub/sub (LiveSync SSE fanned

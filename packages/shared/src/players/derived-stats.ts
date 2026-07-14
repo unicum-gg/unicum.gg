@@ -1,4 +1,4 @@
-import type { Stats } from "@unicum.gg/core/players";
+import type { Stats } from "./stats";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -6,12 +6,12 @@ import {
   computeWNX,
   type WN8Expected,
   type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+} from "../wot/ratings";
+import type { TankStats } from "../wot/tank-stats";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/tanks/meta";
+} from "../wot/tanks/meta";
 
 // The period diffs feeding the stats table: lifetime stats minus the snapshot
 // taken at each cutoff, null when no snapshot that old exists yet.

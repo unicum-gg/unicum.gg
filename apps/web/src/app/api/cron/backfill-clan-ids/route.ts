@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { env } from "env";
 import { db } from "@unicum.gg/core/db";
-import { playerSnapshotsByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
+import { playerSnapshotsByRegion, playersByRegion } from "@unicum.gg/shared";
 import { getPlayersInfoBatch } from "@unicum.gg/core/wargaming/wot/accounts";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 

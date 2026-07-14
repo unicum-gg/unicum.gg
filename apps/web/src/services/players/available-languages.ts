@@ -4,7 +4,7 @@ import { db } from "@unicum.gg/core/db";
 import {
   playerClanHistoryByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
 // Match the overshoot pool used by `getTopPlayersByLanguage`: chip

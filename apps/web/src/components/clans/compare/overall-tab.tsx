@@ -3,13 +3,7 @@
 import { useMemo } from "react";
 import { LanguageFlags } from "@/components/language-flags";
 import type { Region } from "@unicum.gg/wargaming";
-import { weightedAverage, type WeightedDataPoint } from "@unicum.gg/core/lib/stats";
-import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
-import {
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { weightedAverage, type WeightedDataPoint, type ClanMemberStats, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import {
   bestIndex,
   dashCell,

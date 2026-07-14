@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import type { LiveStreamer } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { unicum } from "@/services/sdk";
 

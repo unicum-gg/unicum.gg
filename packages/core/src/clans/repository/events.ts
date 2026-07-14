@@ -4,7 +4,7 @@ import {
   type ClanRecentEventRow,
   clanRecentEventsByRegion,
   clansByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
 import type { Region } from "@unicum.gg/wargaming";

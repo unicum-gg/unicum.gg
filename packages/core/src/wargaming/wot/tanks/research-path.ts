@@ -1,8 +1,7 @@
 import { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
-import { buildTankSlugIndex } from "@unicum.gg/core/wargaming/wot/tanks/slug";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
+import { buildTankSlugIndex, type VehicleMeta } from "@unicum.gg/shared";
 
 export type ResearchPathItem = {
   tankId: number;

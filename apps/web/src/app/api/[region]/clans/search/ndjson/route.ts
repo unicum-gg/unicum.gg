@@ -1,5 +1,4 @@
-import { SearchSource } from "@unicum.gg/core/search";
-import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
+import { SearchSource, type ClanSearchResult } from "@unicum.gg/shared";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming";
 import {

@@ -1,4 +1,4 @@
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
+import { RatingMetric } from "../constants/rating";
 import {
   buildWN8Fallback,
   computeWN7,
@@ -6,12 +6,12 @@ import {
   computeWNX,
   type WN8Expected,
   type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+} from "../wot/ratings";
+import type { TankStats } from "../wot/tank-stats";
 import {
   computeAvgTier,
   type VehicleMeta,
-} from "@unicum.gg/core/wargaming/wot/tanks/meta";
+} from "../wot/tanks/meta";
 
 // Below this you can't tell if a player is actually that good on the
 // tank or just got lucky on a few games. Same threshold as the period

@@ -1,9 +1,5 @@
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import {
-  buildTankSlugIndex,
-  type TankSlugIndex,
-} from "@unicum.gg/core/wargaming/wot/tanks/slug";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
+import { buildTankSlugIndex, type TankSlugIndex, type VehicleMeta } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 
 // Some wot-src entries have no display name (retired IGR premiums, training-room

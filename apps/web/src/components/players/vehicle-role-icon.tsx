@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 // Official WoT vehicle-role glyphs (the tech-tree role badges), traced from
 // WG's own 18x18 `role-<suffix>.svg` icons (same CDN folder as the nation
 // flags). Keyed by the role suffix we persist per tank (see `roleSuffix` in
-// `@unicum.gg/core/constants/tanks`). Rendered in `currentColor` so they follow
+// `@unicum.gg/shared/constants/tanks`). Rendered in `currentColor` so they follow
 // the theme, exactly like `VehicleTypeIcon`.
 const VEHICLE_ROLE_PATHS: Record<string, string> = {
   assault:

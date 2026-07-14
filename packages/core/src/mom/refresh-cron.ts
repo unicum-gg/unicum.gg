@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewTankMom, momByRegion } from "@unicum.gg/core/db/schema";
+import { type NewTankMom, momByRegion } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { fetchMomFromPoliroid } from "./poliroid";

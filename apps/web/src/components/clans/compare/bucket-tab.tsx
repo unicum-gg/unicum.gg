@@ -1,23 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
-import {
-  VEHICLE_CLASS_LABEL,
-  VEHICLE_CLASSES,
-} from "@unicum.gg/core/constants/tanks";
+import { VEHICLE_CLASS_LABEL, VEHICLE_CLASSES, type VehicleMeta, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  buildWN8Fallback,
-  computeWN7,
-  computeWN8,
-  computeWNX,
-  type WN8Expected,
-  wn7Color,
-  wn8Color,
-  type WNXExpected,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   avgCell,
@@ -39,7 +24,6 @@ import {
 } from "./comparison-table";
 
 export type BucketKey = "class" | "tier";
-
 
 function bucketTanks(
   tanks: TankStats[],

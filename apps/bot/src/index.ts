@@ -17,7 +17,7 @@ async function main(): Promise<void> {
   globalThis.__dbContext = "background";
 
   const { env } = await import("./env.js");
-  const { APP_IDENTITY } = await import("@unicum.gg/core/app-identity");
+  const { APP_IDENTITY } = await import("@unicum.gg/shared/app-identity");
   const { default: dixt, dixtDefaults } = await import("dixt");
   const { default: wotPlugin } = await import("./plugins/wot/index.js");
 

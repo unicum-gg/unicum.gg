@@ -12,11 +12,7 @@ import { ShareButton } from "@/components/share-button";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import {
-  type WN8Expected,
-  type WNXExpected,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { type VehicleMeta, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BucketTab } from "./bucket-tab";
 import type { ClanCompareSlot } from "./comparison-table";

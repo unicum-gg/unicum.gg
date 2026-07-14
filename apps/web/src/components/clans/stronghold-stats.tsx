@@ -8,14 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import {
-  RATING_COLOR_CLASS,
-  strongholdWinrateColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
-import type {
-  ClanStrongholdStats,
-  ClanStrongholdView,
-} from "@unicum.gg/core/clans/snapshot-stats";
+import { RATING_COLOR_CLASS, strongholdWinrateColor, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntFmt = new Intl.NumberFormat("en-US", {
@@ -27,7 +20,6 @@ const pctFmt = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
-
 
 type Cell = { primary: string; className?: string };
 const DASH: Cell = { primary: "—", className: "text-muted-foreground" };

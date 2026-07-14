@@ -4,14 +4,7 @@ import { SlidersHorizontalIcon } from "@phosphor-icons/react";
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TankStatsRow } from "@/components/tanks/tanks-index";
 import { useCookie } from "@/hooks/use-cookie";
-import { RatingMetric } from "@unicum.gg/core/constants/rating";
-import {
-  RATING_COLOR_CLASS,
-  winrateColor,
-  wn7Color,
-  wn8Color,
-  wnxColor,
-} from "@unicum.gg/core/wargaming/wot/ratings";
+import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
 const COLS_COOKIE = "unicum.perf_columns";
 

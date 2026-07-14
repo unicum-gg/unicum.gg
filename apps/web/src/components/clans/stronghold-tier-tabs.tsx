@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Panel, PanelHeader } from "@/components/panel";
 import ROUTES from "@/constants/routes";
-import { STRONGHOLD_TIER_LABEL, StrongholdTier } from "@unicum.gg/core/constants/stronghold";
+import { STRONGHOLD_TIER_LABEL, StrongholdTier } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 

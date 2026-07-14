@@ -14,7 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
-import { SearchSource } from "@unicum.gg/core/search";
+import { SearchSource, type ClanSearchResult } from "@unicum.gg/shared";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
   type Outcome,
@@ -35,7 +35,6 @@ import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
-import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import {
   isRegion,
   Region,

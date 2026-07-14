@@ -1,5 +1,4 @@
-import { botHeaders } from "@unicum.gg/core/lib/bot-headers";
-import type { WN8Expected, WNXExpected } from "./ratings";
+import { botHeaders, type WN8Expected, type WNXExpected } from "@unicum.gg/shared";
 
 type WN8ExpectedRaw = {
   IDNum: number;

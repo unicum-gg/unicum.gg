@@ -36,7 +36,7 @@ import {
   VEHICLE_ROLE_LABEL,
   VEHICLE_ROLES,
   roleSuffix,
-} from "@unicum.gg/core/constants/tanks";
+} from "@unicum.gg/shared";
 
 // The minimal shape any filterable tank/vehicle row must expose. Both the tanks
 // catalogue (`TankListItem`) and a player's vehicles (`PlayerVehicleRow`)

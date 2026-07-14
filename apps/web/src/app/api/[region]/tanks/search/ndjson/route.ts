@@ -1,4 +1,4 @@
-import { SearchSource } from "@unicum.gg/core/search";
+import { SearchSource } from "@unicum.gg/shared";
 import {
   searchTanks,
   type TankSearchResult,

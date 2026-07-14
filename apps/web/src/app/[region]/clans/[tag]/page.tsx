@@ -23,11 +23,9 @@ import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
 import {
   buildClanVehicleRows,
   type ClanVehicleRow,
-} from "@unicum.gg/core/clans/vehicles";
+} from "@unicum.gg/shared";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import {
-} from "@unicum.gg/core/wargaming/wot/ratings";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,

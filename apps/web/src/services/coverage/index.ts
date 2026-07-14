@@ -10,7 +10,7 @@ import {
   playerRefreshQueueByRegion,
   playerSnapshotsByRegion,
   playersByRegion,
-} from "@unicum.gg/core/db/schema";
+} from "@unicum.gg/shared";
 import {
   ACTIVITY_BUCKET_ORDER,
   ActivityBucket,
