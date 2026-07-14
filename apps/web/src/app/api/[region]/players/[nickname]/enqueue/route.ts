@@ -2,7 +2,7 @@ import { eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playerRefreshQueueByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
 import { enqueuePlayerRefresh } from "@unicum.gg/core/players/refresh-queue";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 
 const LIVE_PRIORITY = 20;
 const BATCH_SIZE = 25;

@@ -2,7 +2,7 @@ import { generateSitemapXml } from "@onruntime/next-sitemap";
 import ROUTES from "@/constants/routes";
 import { getLanguageStats } from "@/services/clans/available-languages";
 import { createSitemapEntry } from "@/services/sitemap";
-import { REGIONS } from "@unicum.gg/wargaming/region";
+import { REGIONS } from "@unicum.gg/wargaming";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;

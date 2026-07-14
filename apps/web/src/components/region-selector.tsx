@@ -16,7 +16,7 @@ import {
   REGION_LABEL,
   REGIONS,
   Region,
-} from "@unicum.gg/wargaming/region";
+} from "@unicum.gg/wargaming";
 
 const COVERAGE_PATHS = new Set<string>(REGIONS.map((r) => ROUTES.COVERAGE(r)));
 // Any `/clans`, `/eu/clans/...`, `/na/clans/lang/pt`, etc. Clans, languages,

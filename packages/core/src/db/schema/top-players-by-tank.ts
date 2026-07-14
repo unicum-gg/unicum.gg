@@ -8,7 +8,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 /**
  * Per-tank leaderboard: the best players ON a given tank, precomputed nightly

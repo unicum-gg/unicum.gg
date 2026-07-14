@@ -50,7 +50,7 @@ import {
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 enum SortDirection {
   Asc = "asc",

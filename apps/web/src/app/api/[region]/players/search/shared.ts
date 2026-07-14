@@ -5,7 +5,7 @@ import {
   getPlayerClansBatch,
   type PlayerClanInfo,
 } from "@unicum.gg/core/wargaming/wot/clans/listings";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 /** A single player search hit. Shared by the plain and NDJSON search routes. */
 export type SearchPlayerResult = {

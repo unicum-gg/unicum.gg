@@ -39,8 +39,7 @@ import {
 } from "@unicum.gg/core/constants/stronghold";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import ROUTES from "@/constants/routes";
-import type { Region } from "@unicum.gg/wargaming/region";
-import { REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming/region";
+import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 import {
   RATING_COLOR_CLASS,
   strongholdWinrateColor,

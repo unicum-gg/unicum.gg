@@ -1,7 +1,7 @@
 import { eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playerRefreshQueueByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const CHUNK_SIZE = 500;
 

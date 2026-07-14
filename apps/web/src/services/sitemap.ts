@@ -11,7 +11,7 @@ import {
   playersByRegion,
 } from "@unicum.gg/core/db/schema";
 import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { REGIONS } from "@unicum.gg/wargaming/region";
+import { REGIONS, type Region } from "@unicum.gg/wargaming";
 
 export const URLS_PER_SITEMAP = 25000;
 
@@ -32,8 +32,6 @@ export function createSitemapEntry(
     priority: getPriority(path, "auto"),
   };
 }
-
-import type { Region } from "@unicum.gg/wargaming/region";
 
 export type RegionCounts = Record<
   Region,

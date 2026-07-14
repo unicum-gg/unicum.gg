@@ -1,7 +1,7 @@
 import { getTableColumns, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/core/db/schema";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
 /** Every tank's in-game specs (global, top config), keyed by tank id. Powers

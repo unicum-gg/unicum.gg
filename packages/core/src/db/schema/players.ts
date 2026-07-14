@@ -10,7 +10,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // One physical table per region (eu_players, na_players, asia_players).
 // Callers index by region via `playersByRegion[region]`. No `region` column —

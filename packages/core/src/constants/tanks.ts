@@ -1,4 +1,4 @@
-import { VehicleType } from "@unicum.gg/wargaming/api/wot/encyclopedia";
+import { VehicleType } from "@unicum.gg/wargaming";
 
 // Single source of truth for the five WoT vehicle classes. Values come from the
 // SDK's canonical `VehicleType` enum; the order and labels are the app's display

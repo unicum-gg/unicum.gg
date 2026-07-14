@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { HomePage } from "@/components/home/home-page";
 import ROUTES from "@/constants/routes";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 
 export async function generateStaticParams() {
   return [Region.NA, Region.ASIA].map((region) => ({ region }));

@@ -2,7 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { unicum } from "@/services/sdk";
 
 // One shared SSE connection for the whole page: the home rail and every 🔴 badge

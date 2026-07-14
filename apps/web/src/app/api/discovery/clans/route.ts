@@ -1,6 +1,6 @@
 import { env } from "env";
 import { discoverTopClanPlayers } from "@unicum.gg/core/discovery";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 
 export async function POST(req: Request) {
   if (req.headers.get("authorization") !== `Bearer ${env.CRON_SECRET}`) {

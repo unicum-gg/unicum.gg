@@ -1,6 +1,6 @@
 import { SearchSource } from "@unicum.gg/core/search";
 import * as S from "@/services/openapi/schemas";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import {
   discoverPlayers,
   searchPlayersLocalPart,

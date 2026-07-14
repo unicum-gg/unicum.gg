@@ -8,7 +8,7 @@ import {
   Region,
   REGION_LABEL,
   REGIONS,
-} from "@unicum.gg/wargaming/region";
+} from "@unicum.gg/wargaming";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { playerUrl, wnxColorInt } from "../lib/format.js";
 import { unicum } from "../lib/sdk.js";

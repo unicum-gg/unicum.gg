@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import { unicum } from "@/services/sdk";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const SEARCH_DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;

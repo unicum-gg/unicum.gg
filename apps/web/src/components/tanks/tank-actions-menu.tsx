@@ -24,7 +24,7 @@ import {
 } from "@/hooks/use-search-history";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming/region";
+import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming";
 
 /**
  * Overflow menu for the tank header, folding the per-tank actions (favorite,

@@ -1,6 +1,5 @@
 import sanitizeHtml from "sanitize-html";
-import type { Region } from "@unicum.gg/wargaming/region";
-import type { ClanEmblems } from "@unicum.gg/wargaming/api/wot/clans";
+import { type Region, type ClanEmblems } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
 export type Emblems = ClanEmblems;

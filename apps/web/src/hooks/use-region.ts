@@ -3,7 +3,7 @@
 import { usePathname } from "next/navigation";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import { isRegion, Region, regionFromPathname } from "@unicum.gg/wargaming/region";
+import { isRegion, Region, regionFromPathname } from "@unicum.gg/wargaming";
 
 /**
  * Region the user is operating in, with a setter that persists to the

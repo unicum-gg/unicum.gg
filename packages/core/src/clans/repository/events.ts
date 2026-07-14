@@ -7,7 +7,7 @@ import {
 } from "@unicum.gg/core/db/schema";
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { getClanRecentEvents } from "@unicum.gg/core/wargaming/wot/clans/events";
 import type {
   ClanEventType,

@@ -1,4 +1,4 @@
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 const LANGUAGE_TO_COUNTRY: Record<string, string> = {
   en: "GB-UKM",

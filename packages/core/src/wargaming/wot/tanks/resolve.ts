@@ -4,7 +4,7 @@ import {
   type TankSlugIndex,
 } from "@unicum.gg/core/wargaming/wot/tanks/slug";
 import type { VehicleMeta } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // Some wot-src entries have no display name (retired IGR premiums, training-room
 // bot placeholders), so the parser falls back to the raw i18n key

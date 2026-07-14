@@ -37,7 +37,7 @@ import {
   isRatingMetric,
   RatingMetric,
 } from "@unicum.gg/core/constants/rating";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 export type TankStatsRow = {
   players: number; // number of players in the sample (the "Count" column)

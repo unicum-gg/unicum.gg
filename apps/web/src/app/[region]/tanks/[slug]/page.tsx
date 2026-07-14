@@ -23,7 +23,7 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
-import { type Region, isRegion } from "@unicum.gg/wargaming/region";
+import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
 const TOP_LIMIT = 25;

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { StrongholdLeaderboardPage } from "@/components/clans/stronghold-leaderboard-page";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { isRegion, REGION_LABEL } from "@unicum.gg/wargaming/region";
+import { isRegion, REGION_LABEL } from "@unicum.gg/wargaming";
 import {
   STRONGHOLD_MIN_BATTLES,
   STRONGHOLD_TIER_LABEL,

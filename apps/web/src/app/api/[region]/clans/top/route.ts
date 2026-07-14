@@ -5,7 +5,7 @@ import {
   getTopClansByMetric,
   TopClansPeriod,
 } from "@unicum.gg/core/wargaming/wot/clans/top";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { TopClansResponse } from "./schema.api";
 
 /**

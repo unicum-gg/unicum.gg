@@ -4,7 +4,7 @@ import {
   type ClanSnapshot,
   clanSnapshotsByRegion,
 } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { ClanGlobalMapData } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
 import type { ClanStrongholdData } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 import type { ClanSnapshotPeriods } from "./snapshot-stats";

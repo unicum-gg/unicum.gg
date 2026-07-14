@@ -8,7 +8,7 @@ import {
   fetchMoeHistoryFromPoliroid,
   type MoeHistoryPoint,
 } from "@unicum.gg/core/moe/poliroid";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 // Poliroid publishes a fresh daily aggregate, so a 6h cache keeps the chart
 // current without hitting the provider on every page view. Both wrappers

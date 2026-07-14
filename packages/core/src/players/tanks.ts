@@ -5,7 +5,7 @@ import {
   type TankSnapshot,
   tankSnapshotsByRegion,
 } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { getPlayerIdsByAccounts } from ".";
 

@@ -13,7 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import {
   RATING_COLOR_CLASS,

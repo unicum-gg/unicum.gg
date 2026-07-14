@@ -1,4 +1,4 @@
-import { isRegion, type Region } from "@unicum.gg/wargaming/region";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
 
 /**
  * Recover a signed-in player's WoT identity from their synthetic auth email

@@ -18,7 +18,7 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
-import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
+import { REGIONS, type Region } from "@unicum.gg/wargaming";
 
 const SCHEDULE = "30 3 * * *"; // nightly, after the other leaderboard crons
 const TOP_N = 30;

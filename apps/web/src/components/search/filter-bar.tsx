@@ -8,7 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
-import { type Region, REGIONS } from "@unicum.gg/wargaming/region";
+import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 export enum SearchType {
   All = "all",

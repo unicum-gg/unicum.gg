@@ -1,6 +1,6 @@
 import { loadClanDetailByTag } from "@/services/clans/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { ClanPreviousClansResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";

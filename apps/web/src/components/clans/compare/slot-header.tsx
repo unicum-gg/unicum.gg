@@ -4,7 +4,7 @@ import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { ClanSearchPopover } from "./clan-search-popover";
 import type { ClanCompareSlot } from "./comparison-table";
 

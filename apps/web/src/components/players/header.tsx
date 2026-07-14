@@ -6,7 +6,7 @@ import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/player-actions-menu";
 import type { ClanStint } from "@unicum.gg/core/wargaming/wot/clans/player";

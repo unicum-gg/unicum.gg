@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playersByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import {
   getClansMembers,
   listTopClansByMembers,

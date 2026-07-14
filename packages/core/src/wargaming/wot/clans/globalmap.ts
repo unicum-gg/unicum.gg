@@ -1,4 +1,4 @@
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
 /** The flat Global Map shape this app stores in clan snapshots. */

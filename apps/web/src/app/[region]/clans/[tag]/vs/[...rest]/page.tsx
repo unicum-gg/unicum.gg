@@ -7,7 +7,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
-import { isRegion, type Region } from "@unicum.gg/wargaming/region";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
 } from "@unicum.gg/core/wargaming/wot/ratings";

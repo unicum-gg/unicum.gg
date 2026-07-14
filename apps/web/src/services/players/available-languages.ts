@@ -5,7 +5,7 @@ import {
   playerClanHistoryByRegion,
   playersByRegion,
 } from "@unicum.gg/core/db/schema";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 
 // Match the overshoot pool used by `getTopPlayersByLanguage`: chip
 // counts then describe the same population that the leaderboard ranks

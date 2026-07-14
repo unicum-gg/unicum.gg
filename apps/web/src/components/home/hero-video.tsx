@@ -2,7 +2,7 @@
 
 import { PauseIcon, PlayIcon, SpinnerIcon } from '@phosphor-icons/react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
-import { promoVideoAssetUrl } from '@unicum.gg/wargaming/cdn';
+import { promoVideoAssetUrl } from '@unicum.gg/wargaming';
 import STORAGE from '@/constants/storage';
 import { useRegion } from '@/hooks/use-region';
 import { useVideoControl } from '@/hooks/use-video-control';

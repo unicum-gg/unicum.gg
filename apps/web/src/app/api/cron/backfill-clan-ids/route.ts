@@ -3,7 +3,7 @@ import { env } from "env";
 import { db } from "@unicum.gg/core/db";
 import { playerSnapshotsByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
 import { getPlayersInfoBatch } from "@unicum.gg/core/wargaming/wot/accounts";
-import { isRegion, type Region } from "@unicum.gg/wargaming/region";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
 
 const BATCH_SIZE = 100;
 

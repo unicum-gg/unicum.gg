@@ -12,7 +12,7 @@ import {
   type PlayerPeriodRating,
   TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 import { TopClansPeriod } from "./period";
 
 export { TopClansPeriod } from "./period";

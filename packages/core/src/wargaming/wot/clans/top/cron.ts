@@ -3,7 +3,7 @@ import { RATING_METRICS } from "@unicum.gg/core/constants/rating";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { topClansByRegion } from "@unicum.gg/core/db/schema";
-import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
+import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { computeTopClansAllMetrics, TopClansPeriod } from ".";
 
 const SCHEDULE = "0 * * * *";

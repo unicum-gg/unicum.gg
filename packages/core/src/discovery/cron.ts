@@ -1,5 +1,5 @@
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
-import { REGIONS } from "@unicum.gg/wargaming/region";
+import { REGIONS } from "@unicum.gg/wargaming";
 import { refreshVehicles } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { refreshTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { discoverTopClanPlayers } from ".";

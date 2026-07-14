@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
-import { Region, regionFromPathname } from "@unicum.gg/wargaming/region";
+import { Region, regionFromPathname } from "@unicum.gg/wargaming";
 
 type Section = "players" | "clans" | "tanks";
 

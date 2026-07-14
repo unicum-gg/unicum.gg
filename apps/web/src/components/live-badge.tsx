@@ -1,7 +1,7 @@
 "use client";
 
 import { useLiveStreamer } from "@/hooks/use-live-streamers";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { cn } from "@/lib/utils";
 
 /**

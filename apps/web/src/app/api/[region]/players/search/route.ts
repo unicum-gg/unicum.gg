@@ -1,6 +1,6 @@
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerSearchResponse } from "./schema.api";
 import {
   discoverPlayers,

@@ -5,7 +5,7 @@ import {
   tankStatsByRegion,
   topPlayersByTankByRegion,
 } from "@unicum.gg/core/db/schema";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 
 export type TopTankPlayer = {
   account_id: number;

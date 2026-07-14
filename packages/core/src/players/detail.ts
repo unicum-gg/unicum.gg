@@ -34,7 +34,7 @@ import {
   type PlayerVehicleRow,
 } from "@unicum.gg/core/players/vehicles";
 import type { Player, PlayerSnapshot } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { PlayerClanHistoryFull } from "@unicum.gg/core/wargaming/wot/clans/player";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {

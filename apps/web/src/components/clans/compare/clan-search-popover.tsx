@@ -14,7 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { unicum } from "@/services/sdk";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 
 const SEARCH_DEBOUNCE_MS = 250;

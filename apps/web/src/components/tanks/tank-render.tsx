@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { Region } from "@unicum.gg/wargaming/region";
-import {
-  defaultVehicleRenderUrl,
-  tankopediaImageUrl,
-} from "@unicum.gg/wargaming/cdn";
+import { Region, defaultVehicleRenderUrl, tankopediaImageUrl } from "@unicum.gg/wargaming";
 
 // High-resolution tankopedia render (1920x900) served from WG's portal CDN,
 // keyed by the vehicle tag. Falls back to the lower-res encyclopedia render,

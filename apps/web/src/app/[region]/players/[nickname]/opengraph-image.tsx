@@ -18,7 +18,7 @@ import {
   StatCard,
 } from "@/components/og";
 import { loadPlayerInitialData } from "@unicum.gg/core/players/initial-data";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { winrateColor, wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const runtime = "nodejs";

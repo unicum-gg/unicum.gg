@@ -6,7 +6,7 @@ import { account as accountTable } from "@unicum.gg/core/db/schema";
 import { env } from "@unicum.gg/core/env";
 import { getTwitchUsersById, isTwitchEnabled } from "@unicum.gg/core/twitch";
 import { upsertStreamer } from "@unicum.gg/core/twitch/streamers";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { wargaming } from "./wargaming";
 
 /**

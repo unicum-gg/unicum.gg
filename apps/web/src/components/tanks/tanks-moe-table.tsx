@@ -38,7 +38,7 @@ import {
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 enum SortDirection {
   Asc = "asc",

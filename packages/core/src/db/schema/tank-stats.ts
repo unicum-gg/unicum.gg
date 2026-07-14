@@ -6,7 +6,7 @@ import {
   real,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 /**
  * Server-wide averages for a tank across every tracked player with a real

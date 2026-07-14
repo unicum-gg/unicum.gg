@@ -3,7 +3,7 @@ import {
   generateMetadata as generateRegionMetadata,
   renderTankPage,
 } from "@/app/[region]/tanks/[slug]/page";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // EU shortcut: /tanks/:slug renders the same page as /eu/tanks/:slug.
 export function generateMetadata({

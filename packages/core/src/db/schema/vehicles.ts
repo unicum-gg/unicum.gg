@@ -5,7 +5,7 @@ import {
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // One physical table per region (eu_vehicles, na_vehicles, asia_vehicles).
 // Some servers (e.g. CN, future regions) ship tanks the others don't, so we

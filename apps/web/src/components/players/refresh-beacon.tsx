@@ -2,7 +2,7 @@
 
 import { intervalToDuration } from "date-fns";
 import { useEffect, useRef, useState } from "react";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { unicum } from "@/services/sdk";
 
 type Phase = "refreshing" | "done" | "idle";

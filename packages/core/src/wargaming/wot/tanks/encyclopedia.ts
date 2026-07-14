@@ -1,7 +1,7 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewVehicle, vehiclesByRegion } from "@unicum.gg/core/db/schema";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 import { fetchVehicleCatalog } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
 import type { VehicleMeta } from "./meta";
 

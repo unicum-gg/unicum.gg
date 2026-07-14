@@ -8,7 +8,7 @@ import { ClanRow, PlayerRow, TankRow } from "@/components/search/rows";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 export type Outcome<T> =
   | { status: "loading"; previous: T[] | null; forQuery: string }

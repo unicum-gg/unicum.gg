@@ -1,7 +1,7 @@
 import { eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion, playersByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 export type LocalPlayerResult = {
   account_id: number;

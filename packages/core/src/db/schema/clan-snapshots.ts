@@ -6,7 +6,7 @@ import {
   serial,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 import { type ClansTable, clansByRegion } from "./clans";
 
 export function makeClanSnapshotsTable(region: string, clans: ClansTable) {

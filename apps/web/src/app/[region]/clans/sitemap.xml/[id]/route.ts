@@ -7,7 +7,7 @@ import {
   createSitemapEntry,
   URLS_PER_SITEMAP,
 } from "@/services/sitemap";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 3600;

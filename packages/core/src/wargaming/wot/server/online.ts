@@ -1,5 +1,4 @@
-import { type Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
-import { WgnGame } from "@unicum.gg/wargaming/api/wgn/servers";
+import { type Region, REGION_LABEL, WgnGame } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
 export type ServerOnline = { server: string; players_online: number };

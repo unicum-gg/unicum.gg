@@ -1,6 +1,6 @@
 import { db } from "@unicum.gg/core/db";
 import { type TankMom, momByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 // The XP thresholds for the four Mark of Mastery badges, keyed by tank id.
 export type MomValues = Pick<

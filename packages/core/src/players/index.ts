@@ -11,7 +11,7 @@ import {
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type {
   PlayerInfo,
   PlayerSearchResult,

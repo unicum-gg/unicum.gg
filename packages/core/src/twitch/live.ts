@@ -2,7 +2,7 @@ import { db } from "@unicum.gg/core/db";
 import { streamers } from "@unicum.gg/core/db/schema";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 import { getWotStreamsByLogin } from "./index";
 
 /**

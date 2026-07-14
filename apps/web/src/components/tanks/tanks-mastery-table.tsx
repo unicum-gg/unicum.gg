@@ -11,7 +11,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { type ReactNode, useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
-import { portalIconUrl } from "@unicum.gg/wargaming/cdn";
+import { portalIconUrl, type Region } from "@unicum.gg/wargaming";
 import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
@@ -40,7 +40,6 @@ import {
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
 
 enum SortDirection {
   Asc = "asc",

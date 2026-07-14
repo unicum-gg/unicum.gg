@@ -1,5 +1,4 @@
-import type { Region } from "@unicum.gg/wargaming/region";
-import { ClanListOrder } from "@unicum.gg/wargaming/api/wot/clans";
+import { type Region, ClanListOrder } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 import { pickEmblem } from "./info";
 

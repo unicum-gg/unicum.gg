@@ -3,7 +3,7 @@ import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
 

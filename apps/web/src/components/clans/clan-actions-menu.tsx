@@ -20,7 +20,7 @@ import { ShareModal } from "@/components/share-modal";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming/region";
+import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming";
 
 /**
  * Overflow menu for the clan header, folding the per-clan actions (favorite,

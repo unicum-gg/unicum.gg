@@ -13,7 +13,7 @@ import {
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const compactFmt = new Intl.NumberFormat("en-US", {
   notation: "compact",

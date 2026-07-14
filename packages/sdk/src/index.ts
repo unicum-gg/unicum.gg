@@ -2,7 +2,7 @@ import { APP_IDENTITY } from "@unicum.gg/core";
 import type { SearchSource } from "@unicum.gg/core/search";
 import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
 import type { OnlinePayload } from "@unicum.gg/core/wargaming/wot/server/online";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 import createClient, { type Client } from "openapi-fetch";
 import type { paths } from "./generated/schema";
 

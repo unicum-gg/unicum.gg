@@ -7,7 +7,7 @@ import {
   Region,
   REGION_LABEL,
   REGIONS,
-} from "@unicum.gg/wargaming/region";
+} from "@unicum.gg/wargaming";
 import {
   buildClanWarsBlock,
   buildStrongholdBlock,

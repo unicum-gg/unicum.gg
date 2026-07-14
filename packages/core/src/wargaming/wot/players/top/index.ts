@@ -10,7 +10,7 @@ import {
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 import {
   buildWN8Fallback,
   computeWN7,

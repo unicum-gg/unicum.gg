@@ -2,7 +2,7 @@ import { computeClanRatings } from "@unicum.gg/core/clans/members";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { ClanOverviewResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";

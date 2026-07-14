@@ -5,7 +5,7 @@ import {
   pgTable,
   timestamp,
 } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // User-initiated and cron-initiated player refreshes queue. The refresh-cron
 // drains by priority desc then queued_at asc.

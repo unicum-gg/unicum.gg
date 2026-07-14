@@ -24,7 +24,7 @@ import {
   buildClanVehicleRows,
   type ClanVehicleRow,
 } from "@unicum.gg/core/clans/vehicles";
-import { isRegion, type Region } from "@unicum.gg/wargaming/region";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
 } from "@unicum.gg/core/wargaming/wot/ratings";

@@ -5,7 +5,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getLanguageStats } from "@/services/clans/available-languages";
-import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
+import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
 

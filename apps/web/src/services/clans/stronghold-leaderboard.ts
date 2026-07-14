@@ -7,7 +7,7 @@ import {
 } from "@unicum.gg/core/constants/stronghold";
 import { db } from "@unicum.gg/core/db";
 import { clanSnapshotsByRegion, clansByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 export type StrongholdLeaderboardEntry = {
   clanId: number;

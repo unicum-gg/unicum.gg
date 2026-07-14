@@ -1,6 +1,6 @@
 import { getTankDataset } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { tankSpecifications } from "../categories.api";
 import { TankSpecsResponse } from "./schema.api";
 

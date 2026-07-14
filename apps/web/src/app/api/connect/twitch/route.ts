@@ -2,7 +2,7 @@ import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { auth } from "@unicum.gg/core/auth";
 import { env } from "@unicum.gg/core/env";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 

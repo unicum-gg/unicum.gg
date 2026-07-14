@@ -1,15 +1,11 @@
-import type { Region } from "@unicum.gg/wargaming/region";
-import {
-  AccountListSearchType,
-  AccountInfoExtra,
-} from "@unicum.gg/wargaming/api/wot/accounts";
+import { type Region, AccountListSearchType, AccountInfoExtra } from "@unicum.gg/wargaming";
 import { wg } from "../client";
 
 export type {
   PlayerInfo,
   PlayerStatistics,
   PlayerSearchResult,
-} from "@unicum.gg/wargaming/api/wot/accounts";
+} from "@unicum.gg/wargaming";
 
 // The per-mode stat blocks this app surfaces on player pages. The SDK is
 // field-neutral; we tell it which extra blocks we want.

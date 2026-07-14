@@ -5,7 +5,7 @@ import {
   getTopPlayersByMetric,
   type TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { TopPlayersResponse } from "./schema.api";
 
 /**

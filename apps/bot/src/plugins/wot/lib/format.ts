@@ -3,7 +3,7 @@ import {
   RATING_COLOR_HEX,
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 /** Link to a player's profile on the site. */
 export const playerUrl = (region: Region, nickname: string): string =>

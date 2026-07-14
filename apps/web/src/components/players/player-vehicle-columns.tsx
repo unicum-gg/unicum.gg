@@ -22,7 +22,7 @@ import {
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
 

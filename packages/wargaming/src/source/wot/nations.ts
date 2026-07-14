@@ -1,6 +1,6 @@
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
-import { rawUrl, WotSrcBranch } from "./index";
+import { rawUrl, WotSrcBranch } from "./mirror";
 
 // The canonical nation order is WG's own `nations.NAMES` tuple, mirrored in the
 // wot-src client scripts. The array INDEX is the nation's encoded value inside a

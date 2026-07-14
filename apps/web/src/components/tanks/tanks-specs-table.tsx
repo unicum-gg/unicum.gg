@@ -47,7 +47,7 @@ import {
 import ROUTES from "@/constants/routes";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.spec_columns";
 

@@ -16,7 +16,7 @@ import {
 } from "@/lib/og";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { overallPoints } from "@unicum.gg/core/clans/members";
 import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 

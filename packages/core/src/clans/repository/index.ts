@@ -2,7 +2,7 @@ import { eq, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type Clan, clansByRegion } from "@unicum.gg/core/db/schema";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import {
   type ClanFullInfo,
   getClanFullInfo,

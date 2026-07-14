@@ -41,7 +41,7 @@ import type { LiftDrag } from "@unicum.gg/core/players/lift-drag";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
 import type { LiveUpdate } from "@unicum.gg/sdk";
 import { unicum } from "@/services/sdk";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

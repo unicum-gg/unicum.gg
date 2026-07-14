@@ -9,7 +9,7 @@ import {
   rawUrl,
   VEHICLE_TYPES,
   WotSrcBranch,
-} from "./index";
+} from "./mirror";
 
 /**
  * A fully-derived, top-configuration stat block for one vehicle, computed from

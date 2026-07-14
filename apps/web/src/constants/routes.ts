@@ -1,6 +1,6 @@
 import { pathcat } from "pathcat";
 import { StrongholdTier } from "@unicum.gg/core/constants/stronghold";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 const ROUTES = {
   NONE: "#",

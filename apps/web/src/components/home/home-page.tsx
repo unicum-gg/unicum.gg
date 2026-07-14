@@ -35,7 +35,7 @@ import {
   TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
 import { getCachedLiveStreamers } from "@/services/twitch";
-import { type Region, REGIONS } from "@unicum.gg/wargaming/region";
+import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 const TOP_LIMIT = 9;
 const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {

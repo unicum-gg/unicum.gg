@@ -4,7 +4,7 @@ import {
   renderTanksIndex,
 } from "@/app/[region]/tanks/page";
 import { tankTabFromQuery } from "@/components/tanks/tabs";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // EU shortcut: /tanks renders the same index as /eu/tanks.
 export function generateMetadata(): Promise<Metadata> {

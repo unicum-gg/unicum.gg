@@ -19,11 +19,7 @@ import {
 import { VEHICLE_CLASS_LABEL_FULL } from "@unicum.gg/core/constants/tanks";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
-import {
-  defaultVehicleRenderUrl,
-  tankopediaImageUrl,
-} from "@unicum.gg/wargaming/cdn";
+import { isRegion, Region, defaultVehicleRenderUrl, tankopediaImageUrl } from "@unicum.gg/wargaming";
 import { wnxColor } from "@unicum.gg/core/wargaming/wot/ratings";
 import { toRoman } from "roman-numerals";
 

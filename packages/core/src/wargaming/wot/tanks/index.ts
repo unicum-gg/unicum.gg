@@ -1,4 +1,4 @@
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
 /** The per-tank fields this app surfaces (WN8/WNX inputs + mastery). */

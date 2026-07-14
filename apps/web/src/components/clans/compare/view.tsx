@@ -17,7 +17,7 @@ import {
   type WN8Expected,
   type WNXExpected,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { BucketTab } from "./bucket-tab";
 import type { ClanCompareSlot } from "./comparison-table";
 import { OverallTab } from "./overall-tab";

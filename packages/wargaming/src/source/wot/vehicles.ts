@@ -9,7 +9,7 @@ import {
   rawUrl,
   VEHICLE_TYPES,
   WotSrcBranch,
-} from "./index";
+} from "./mirror";
 
 // UK's .po file doesn't match its dir name (historical artifact).
 function poFilename(nation: string): string {

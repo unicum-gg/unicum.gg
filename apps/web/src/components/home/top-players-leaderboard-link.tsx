@@ -6,7 +6,7 @@ import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 
 /**
  * "See all →" affordance rendered in the Top players Overall panel

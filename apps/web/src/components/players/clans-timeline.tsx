@@ -11,7 +11,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { ClanStint } from "@unicum.gg/core/wargaming/wot/clans/player";
 
 function prettyRole(role: string): string {

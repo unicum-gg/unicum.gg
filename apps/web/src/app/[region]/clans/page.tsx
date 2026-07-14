@@ -4,7 +4,7 @@ import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
+import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
 
 export async function generateMetadata({
   params,

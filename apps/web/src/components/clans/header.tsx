@@ -21,7 +21,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import { type Region } from "@unicum.gg/wargaming/region";
+import { type Region } from "@unicum.gg/wargaming";
 
 const DAY_FORMAT = "MMM d, yyyy";
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

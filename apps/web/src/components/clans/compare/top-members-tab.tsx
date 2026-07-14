@@ -28,7 +28,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { dec2Fmt } from "@/components/compare/cells";
 import { type ClanCompareSlot } from "./comparison-table";
 

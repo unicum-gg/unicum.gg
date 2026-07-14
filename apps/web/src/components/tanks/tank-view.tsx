@@ -54,10 +54,7 @@ import {
   VEHICLE_ROLE_LABEL,
   roleSuffix,
 } from "@unicum.gg/core/constants/tanks";
-import { Region, REGION_LABEL } from "@unicum.gg/wargaming/region";
-import { hangarBgUrl } from "@unicum.gg/wargaming/cdn";
-
-
+import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
 
 const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
   [RatingMetric.Wn7]: "wn7",

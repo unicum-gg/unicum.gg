@@ -4,7 +4,7 @@ import {
 } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { TankSearchResponse } from "./schema.api";
 
 export const dynamic = "force-dynamic";

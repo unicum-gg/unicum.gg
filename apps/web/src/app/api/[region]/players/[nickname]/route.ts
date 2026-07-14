@@ -1,7 +1,7 @@
 import { ratingMetricFromCookie } from "@unicum.gg/core/constants/rating";
 import { loadPlayerDetail } from "@unicum.gg/core/players/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
 
 /**

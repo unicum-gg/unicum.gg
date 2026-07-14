@@ -1,5 +1,5 @@
 import { integer, pgTable, timestamp } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // One physical table per region (eu_tank_moe, na_tank_moe, asia_tank_moe). Like
 // mastery, the Marks of Excellence thresholds are server-specific: WG recomputes

@@ -1,13 +1,11 @@
-import type { Region } from "@unicum.gg/wargaming/region";
-import { ClanRole } from "@unicum.gg/wargaming/portal/wot/clan-enums";
-import type { PortalClanMember } from "@unicum.gg/wargaming/portal/wot/clans";
+import { type Region, ClanRole, type PortalClanMember } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
-export { ClanRole } from "@unicum.gg/wargaming/portal/wot/clan-enums";
+export { ClanRole } from "@unicum.gg/wargaming";
 export type {
   ClanMemberPeriodStats,
   PortalClanMember,
-} from "@unicum.gg/wargaming/portal/wot/clans";
+} from "@unicum.gg/wargaming";
 
 // Role hierarchy → numeric rank (0 = commander, highest). The batchable API
 // gives the role string + localized label but not the `role.rank` the portal

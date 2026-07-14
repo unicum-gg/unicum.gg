@@ -7,7 +7,7 @@ import {
   getLatestClanSnapshot,
 } from "@unicum.gg/core/clans/snapshots";
 import type { ClanSnapshot } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanRecentEvent } from "@unicum.gg/core/wargaming/wot/clans/event-types";
 import type { ClanMemberStats } from "@unicum.gg/core/clans/members";

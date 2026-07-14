@@ -1,7 +1,7 @@
 import { SearchSource } from "@unicum.gg/core/search";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import * as S from "@/services/openapi/schemas";
-import { isRegion } from "@unicum.gg/wargaming/region";
+import { isRegion } from "@unicum.gg/wargaming";
 import {
   discoverClans,
   searchClansLocalPart,

@@ -51,7 +51,7 @@ import {
   isRatingMetric,
   RatingMetric,
 } from "@unicum.gg/core/constants/rating";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 enum SortDirection {
   Asc = "asc",

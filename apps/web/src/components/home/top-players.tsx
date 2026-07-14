@@ -28,7 +28,7 @@ import {
   wn8Color,
   wnxColor,
 } from "@unicum.gg/core/wargaming/wot/ratings";
-import { isRegion, Region } from "@unicum.gg/wargaming/region";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],

@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import type { ClanMemberStats } from "@unicum.gg/core/clans/members";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,

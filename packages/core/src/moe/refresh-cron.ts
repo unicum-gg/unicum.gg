@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewTankMoe, moeByRegion } from "@unicum.gg/core/db/schema";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
-import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
+import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { fetchMoeFromPoliroid } from "./poliroid";
 
 // Poliroid recomputes daily; run just after the mastery cron (07:15) so both

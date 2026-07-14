@@ -2,7 +2,7 @@ import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewTankMom, momByRegion } from "@unicum.gg/core/db/schema";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
-import { REGIONS, type Region } from "@unicum.gg/wargaming/region";
+import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { fetchMomFromPoliroid } from "./poliroid";
 
 // Poliroid recomputes daily; run shortly after the vehicles cron (07:00) so a

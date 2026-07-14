@@ -1,5 +1,5 @@
 import { integer, pgTable, timestamp } from "drizzle-orm/pg-core";
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // One physical table per region (eu_tank_mom, na_tank_mom,
 // asia_tank_mom). Unlike specs, the Mark of Mastery XP thresholds are

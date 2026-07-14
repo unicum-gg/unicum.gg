@@ -1,9 +1,5 @@
 import Image from "next/image";
-import { Region } from "@unicum.gg/wargaming/region";
-import {
-  nationFilterFlagUrl,
-  nationWavingFlagUrl,
-} from "@unicum.gg/wargaming/cdn";
+import { Region, nationFilterFlagUrl, nationWavingFlagUrl } from "@unicum.gg/wargaming";
 import { cn } from "@/lib/utils";
 
 // Natural size of every filter-<nation>.png on WG CDN.

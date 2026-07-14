@@ -42,7 +42,7 @@ import {
   clanGlobalMapView,
   clanStrongholdView,
 } from "@unicum.gg/core/clans/snapshot-stats";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

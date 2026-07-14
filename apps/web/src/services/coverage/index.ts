@@ -18,7 +18,7 @@ import {
   REFRESH_CADENCE_MS,
   refreshCutoffSql,
 } from "@unicum.gg/core/players/refresh-policy";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 
 export type DailyPoint = { day: string; count: number };
 

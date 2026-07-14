@@ -1,4 +1,4 @@
-import { Region } from "@unicum.gg/wargaming/region";
+import { Region } from "@unicum.gg/wargaming";
 
 // Marks of Excellence thresholds are computed by WG servers and are not exposed
 // by the public WG API, so we mirror the community aggregate published by

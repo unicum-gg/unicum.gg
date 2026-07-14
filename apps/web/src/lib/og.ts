@@ -1,7 +1,6 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
-import { hangarBgUrl } from "@unicum.gg/wargaming/cdn";
-import type { Region } from "@unicum.gg/wargaming/region";
+import { hangarBgUrl, type Region } from "@unicum.gg/wargaming";
 import type { RatingColor } from "@unicum.gg/core/wargaming/wot/ratings";
 
 export const OG_SIZE = { width: 1200, height: 630 } as const;

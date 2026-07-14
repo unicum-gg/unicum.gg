@@ -19,7 +19,7 @@ import {
   Region,
   REGION_EMOJI,
   REGION_LABEL,
-} from "@unicum.gg/wargaming/region";
+} from "@unicum.gg/wargaming";
 
 const LIMIT = 100;
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });

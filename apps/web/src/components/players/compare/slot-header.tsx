@@ -4,7 +4,7 @@ import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import type { CompareSlot } from "./comparison-table";
 import { PlayerSearchPopover } from "./player-search-popover";
 

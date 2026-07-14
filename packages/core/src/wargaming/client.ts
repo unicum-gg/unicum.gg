@@ -1,9 +1,4 @@
-import {
-  WargamingClient,
-  type CacheOptions,
-  type RateLimiterFactory,
-} from "@unicum.gg/wargaming";
-import { Region } from "@unicum.gg/wargaming/region";
+import { WargamingClient, type CacheOptions, type RateLimiterFactory, Region } from "@unicum.gg/wargaming";
 import { env } from "@unicum.gg/core/env";
 import { botHeaders } from "@unicum.gg/core/lib/bot-headers";
 import { traced } from "@unicum.gg/core/lib/perf-trace";

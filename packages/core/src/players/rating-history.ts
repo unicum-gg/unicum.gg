@@ -2,7 +2,7 @@ import { asc, eq } from "drizzle-orm";
 import { RatingMetric } from "@unicum.gg/core/constants/rating";
 import { db } from "@unicum.gg/core/db";
 import { tankSnapshotsByRegion } from "@unicum.gg/core/db/schema";
-import type { Region } from "@unicum.gg/wargaming/region";
+import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { computeAvgTier } from "@unicum.gg/core/wargaming/wot/tanks/meta";
 import {
