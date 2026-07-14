@@ -157,19 +157,25 @@ async function* streamNdjson<T>(
   const decoder = new TextDecoder();
   let buffer = "";
   const parse = (line: string): T => reviveDates(JSON.parse(line)) as T;
-  for (;;) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    buffer += decoder.decode(value, { stream: true });
-    let newline: number;
-    while ((newline = buffer.indexOf("\n")) >= 0) {
-      const line = buffer.slice(0, newline).trim();
-      buffer = buffer.slice(newline + 1);
-      if (line) yield parse(line);
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      let newline: number;
+      while ((newline = buffer.indexOf("\n")) >= 0) {
+        const line = buffer.slice(0, newline).trim();
+        buffer = buffer.slice(newline + 1);
+        if (line) yield parse(line);
+      }
     }
+    const tail = buffer.trim();
+    if (tail) yield parse(tail);
+  } finally {
+    // Runs on early exit too (a consumer `break`ing after the first chunk),
+    // closing the HTTP stream instead of leaving it open until GC.
+    await reader.cancel().catch(() => {});
   }
-  const tail = buffer.trim();
-  if (tail) yield parse(tail);
 }
 
 /** The item type of a `/search` endpoint's `results`, reused to type its

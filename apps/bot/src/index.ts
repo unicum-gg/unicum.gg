@@ -1,21 +1,11 @@
-// Standalone Discord bot (dixt). It reads unicum.gg's data straight from
-// `@unicum.gg/core` — the same WG SDK + snapshot DB the site uses — so `/stats`
-// can surface the ratings and deltas the aggregator bots don't have, and every
-// reply links back to the player's unicum.gg page. Deployed as its own service.
+// Standalone Discord bot (dixt). It is a pure client of unicum.gg's own public
+// API through `@unicum.gg/sdk` (command data + autocomplete via the streamed
+// search) — no direct DB access — so `/player` and `/clan` surface the ratings
+// and deltas the aggregator bots don't have, and every reply links back to the
+// player's unicum.gg page. Deployed as its own service.
 import { GatewayIntentBits } from "discord.js";
 
-export {};
-
-declare global {
-  // eslint-disable-next-line no-var
-  var __dbContext: "request" | "background" | undefined;
-}
-
 async function main(): Promise<void> {
-  // Background service: route every DB access to the background pool. Set before
-  // importing anything that touches core's db (mirrors apps/worker).
-  globalThis.__dbContext = "background";
-
   const { env } = await import("./env.js");
   const { APP_IDENTITY } = await import("@unicum.gg/shared/app-identity");
   const { default: dixt, dixtDefaults } = await import("dixt");

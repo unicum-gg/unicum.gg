@@ -7,14 +7,17 @@ Read [`AGENTS.md`](./AGENTS.md) first. It contains the non-obvious repo rules th
 pnpm workspace with one-way dependencies, no cycles:
 
 ```
-@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/{web,worker,bot}
+@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/web (server) + apps/worker
+                                                       │ HTTP API
+                                @unicum.gg/sdk ◀───────┘
+                                       └──▶ web front + apps/bot
 ```
 
 - `packages/wargaming` — neutral Wargaming API SDK. Import from the barrel: `import { Region } from "@unicum.gg/wargaming"`.
 - `packages/shared` — client-safe code only (env, constants, db schema, pure domain math and types). Also barrel-imported: `import { PlayerDetailData } from "@unicum.gg/shared"`. Never add anything here that opens a connection or imports Node-only APIs.
 - `packages/core` — server-only (db pool, redis, crons, repositories, WG fetchers, auth). Not a barrel on purpose: modules have import-time side effects, so import the precise subpath (`@unicum.gg/core/db`, `@unicum.gg/core/players`, ...). Client components must never import it.
-- `packages/sdk` — fluent client for our own public API (types generated from the OpenAPI spec). The front end fetches through it.
-- `apps/web` (site + API), `apps/worker` (crons), `apps/bot` (Discord).
+- `packages/sdk` — fluent client for our own public API (types generated from the OpenAPI spec). The web front end and the Discord bot fetch through it; never write raw `fetch` calls against our own API.
+- `apps/web` (site + API), `apps/worker` (crons), `apps/bot` (Discord — a pure SDK client, no core/db access).
 
 Rule of thumb for new code: pure logic or a type a client component needs goes in `shared`; anything touching db/redis/WG goes in `core`; a mixed module keeps the server function in `core` and re-exports the type from `shared`.
 

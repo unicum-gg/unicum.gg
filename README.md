@@ -13,7 +13,10 @@ Next.js 16, React 19, TypeScript, PostgreSQL via Drizzle, Tailwind v4, shadcn/ui
 pnpm workspace. Dependencies flow one way, no cycles:
 
 ```
-@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps
+@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/web (server) + apps/worker
+                                                       │ HTTP API
+                                @unicum.gg/sdk ◀───────┘
+                                       └──▶ web front + apps/bot
 ```
 
 | Package / app | Role |
@@ -26,7 +29,7 @@ pnpm workspace. Dependencies flow one way, no cycles:
 | `apps/worker` | Standalone cron runner |
 | `apps/bot` | Discord bot (`/player`, `/clan`) |
 
-`wargaming`, `shared` and `sdk` are imported from their package barrel (`import { Region } from "@unicum.gg/wargaming"`). `core` is deliberately not a barrel: its modules have import-time side effects (db pool, auth secret assert), so server code imports the specific subpath it needs (`@unicum.gg/core/db`, ...). The front end never imports `core`; it consumes the API through `@unicum.gg/sdk` and types through `@unicum.gg/shared`.
+`wargaming`, `shared` and `sdk` are imported from their package barrel (`import { Region } from "@unicum.gg/wargaming"`). `core` is deliberately not a barrel: its modules have import-time side effects (db pool, auth secret assert), so server code imports the specific subpath it needs (`@unicum.gg/core/db`, ...). The front end and the Discord bot never import `core`; they consume the API through `@unicum.gg/sdk` and types through `@unicum.gg/shared`.
 
 ## Run locally
 

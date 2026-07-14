@@ -1,7 +1,6 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
-import { APP_IDENTITY } from "@unicum.gg/shared";
-import { searchClansLocal } from "@unicum.gg/core/clans/search-local";
+import { APP_IDENTITY, SearchSource } from "@unicum.gg/shared";
 import {
   isRegion,
   Region,
@@ -69,14 +68,31 @@ export const clanCommand: DixtSlashCommandBuilder = {
       await interaction.respond([]);
       return;
     }
-    // Instant prefix search over our tracked clans (ordered by member count, so
-    // an empty field surfaces the biggest clans). WG's remote clan search is too
-    // slow for Discord's 3s autocomplete window.
+    // Instant suggestions via our own API's streamed search: the first NDJSON
+    // chunk is the local DB hit (near-instant, well inside Discord's 3s
+    // window); we respond with it and abort before the slow WG chunk. The API
+    // needs 3+ chars, so shorter input yields no suggestions yet.
     const query = focused.value.trim();
-    const results = await searchClansLocal(region, query, 25).catch(() => []);
-    await interaction.respond(
-      results.map((c) => ({ name: `[${c.tag}] ${c.name}`, value: c.tag })),
-    );
+    if (query.length < 3) {
+      await interaction.respond([]);
+      return;
+    }
+    const controller = new AbortController();
+    try {
+      for await (const chunk of unicum
+        .region(region)
+        .clans.searchStream(query, { signal: controller.signal })) {
+        if (chunk.source !== SearchSource.Local) break;
+        await interaction.respond(
+          chunk.results.map((c) => ({ name: `[${c.tag}] ${c.name}`, value: c.tag })),
+        );
+        break;
+      }
+    } catch {
+      await interaction.respond([]).catch(() => {});
+    } finally {
+      controller.abort();
+    }
   },
   execute: async (interaction) => {
     if (!interaction.isChatInputCommand()) return;

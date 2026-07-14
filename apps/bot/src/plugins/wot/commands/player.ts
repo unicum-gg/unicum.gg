@@ -1,8 +1,7 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
 import { UnicumError } from "@unicum.gg/sdk";
-import { APP_IDENTITY } from "@unicum.gg/shared";
-import { searchPlayersLocal } from "@unicum.gg/core/players/search-local";
+import { APP_IDENTITY, SearchSource } from "@unicum.gg/shared";
 import {
   isRegion,
   Region,
@@ -53,32 +52,40 @@ export const playerCommand: DixtSlashCommandBuilder = {
       await interaction.respond([]);
       return;
     }
-    // Instant prefix search over our tracked players (the local half of the
-    // site's search; WG's remote search is too slow for Discord's 3s window).
-    // Typed 3+ chars: search that. Empty/short field: suggest the caller's own
-    // account first (their Discord name is usually their WoT nickname), then
-    // fall back to the most-tracked players so focusing the field is never empty.
+    // Instant suggestions via our own API's streamed search: the first NDJSON
+    // chunk is the local DB hit (near-instant, well inside Discord's 3s
+    // window); we respond with it and abort before the slow WG chunk.
+    // Typed 3+ chars (the API minimum): search that. Shorter: guess the
+    // caller's own account from their Discord display name (in a WoT community
+    // it's usually their in-game name).
     const typed = focused.value.trim();
-    // Empty/short field: guess the caller's own account. Prefer their per-server
-    // nickname (in a WoT community it's usually their in-game name), then their
-    // global Discord name, then username — exactly what `displayName` resolves.
     const self = interaction.inCachedGuild()
       ? interaction.member.displayName
       : (interaction.user.globalName ?? interaction.user.username);
-    let results = await searchPlayersLocal(
-      region,
-      typed.length >= 3 ? typed : self.trim(),
-      25,
-    ).catch(() => []);
-    if (results.length === 0 && typed.length < 3) {
-      results = await searchPlayersLocal(region, "", 25).catch(() => []);
+    const q = typed.length >= 3 ? typed : self.trim();
+    if (q.length < 3) {
+      await interaction.respond([]);
+      return;
     }
-    await interaction.respond(
-      results.map((r) => ({
-        name: r.clan ? `${r.nickname} [${r.clan.tag}]` : r.nickname,
-        value: r.nickname,
-      })),
-    );
+    const controller = new AbortController();
+    try {
+      for await (const chunk of unicum
+        .region(region)
+        .players.searchStream(q, { signal: controller.signal })) {
+        if (chunk.source !== SearchSource.Local) break;
+        await interaction.respond(
+          chunk.results.map((r) => ({
+            name: r.clan ? `${r.nickname} [${r.clan.tag}]` : r.nickname,
+            value: r.nickname,
+          })),
+        );
+        break;
+      }
+    } catch {
+      await interaction.respond([]).catch(() => {});
+    } finally {
+      controller.abort();
+    }
   },
   execute: async (interaction) => {
     if (!interaction.isChatInputCommand()) return;
