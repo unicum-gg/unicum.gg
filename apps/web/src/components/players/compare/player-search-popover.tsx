@@ -14,7 +14,9 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
+import { mergeSearchChunks } from "@/lib/search-merge";
 import { unicum } from "@/services/sdk";
+import { SearchSource } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const SEARCH_DEBOUNCE_MS = 250;
@@ -58,12 +60,20 @@ export function PlayerSearchPopover({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        let acc: SearchPlayerResult[] = [];
+        // Merge (not append) the local and remote chunks: one capped page,
+        // exact nickname hoisted first.
+        let local: SearchPlayerResult[] = [];
+        let remote: SearchPlayerResult[] = [];
         for await (const chunk of unicum
           .region(region)
           .players.searchStream(trimmed, { signal: controller.signal })) {
-          acc = [...acc, ...(chunk.results as SearchPlayerResult[])];
-          setResults({ query: trimmed, items: acc });
+          const results = chunk.results as SearchPlayerResult[];
+          if (chunk.source === SearchSource.Local) local = results;
+          else remote = results;
+          setResults({
+            query: trimmed,
+            items: mergeSearchChunks(local, remote, (r) => r.nickname, trimmed),
+          });
         }
       } catch {
         // aborted or network failure, ignore

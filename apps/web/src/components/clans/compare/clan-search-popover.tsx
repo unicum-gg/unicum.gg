@@ -13,9 +13,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { mergeSearchChunks } from "@/lib/search-merge";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
-import type { ClanSearchResult } from "@unicum.gg/shared";
+import { type ClanSearchResult, SearchSource } from "@unicum.gg/shared";
 
 const SEARCH_DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 2;
@@ -58,12 +59,20 @@ export function ClanSearchPopover({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        let acc: ClanSearchResult[] = [];
+        // Merge (not append) the local and remote chunks: one capped page,
+        // exact tag hoisted first.
+        let local: ClanSearchResult[] = [];
+        let remote: ClanSearchResult[] = [];
         for await (const chunk of unicum
           .region(region)
           .clans.searchStream(trimmed, { signal: controller.signal })) {
-          acc = [...acc, ...(chunk.results as ClanSearchResult[])];
-          setResults({ query: trimmed, items: acc });
+          const results = chunk.results as ClanSearchResult[];
+          if (chunk.source === SearchSource.Local) local = results;
+          else remote = results;
+          setResults({
+            query: trimmed,
+            items: mergeSearchChunks(local, remote, (r) => r.tag, trimmed),
+          });
         }
       } catch {
         // aborted or network failure, ignore

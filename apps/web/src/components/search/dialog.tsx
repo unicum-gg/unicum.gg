@@ -33,6 +33,7 @@ import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
+import { mergeSearchChunks } from "@/lib/search-merge";
 import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
 import {
@@ -130,17 +131,25 @@ export default function SearchDialog(props: SharedProps) {
         }));
         void (async () => {
           try {
-            let acc: SearchPlayerResult[] = [];
+            // The two chunks merge into one capped list (exact match hoisted)
+            // instead of appending, so the section stays at one page and the
+            // count doesn't double when the WG chunk lands.
+            let local: SearchPlayerResult[] = [];
+            let remote: SearchPlayerResult[] = [];
+            const merged = () =>
+              mergeSearchChunks(local, remote, (r) => r.nickname, trimmedQuery);
             for await (const chunk of unicum
               .region(region)
               .players.searchStream(trimmedQuery, {
                 signal: controller.signal,
               })) {
-              acc = [...acc, ...(chunk.results as SearchPlayerResult[])];
+              const results = chunk.results as SearchPlayerResult[];
+              if (chunk.source === SearchSource.Local) local = results;
+              else remote = results;
               // Partial: keep the loading indicator on until the stream ends.
               setPlayersOutcome({
                 status: "streaming",
-                results: acc,
+                results: merged(),
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
@@ -148,7 +157,7 @@ export default function SearchDialog(props: SharedProps) {
             // Stream closed (remote chunk landed): settle to the final result.
             setPlayersOutcome({
               status: "ok",
-              results: acc,
+              results: merged(),
               forQuery: trimmedQuery,
             });
           } catch (err) {
@@ -166,17 +175,23 @@ export default function SearchDialog(props: SharedProps) {
         }));
         void (async () => {
           try {
-            let acc: ClanSearchResult[] = [];
+            // Same merge-not-append as the players section (exact tag first).
+            let local: ClanSearchResult[] = [];
+            let remote: ClanSearchResult[] = [];
+            const merged = () =>
+              mergeSearchChunks(local, remote, (r) => r.tag, trimmedQuery);
             for await (const chunk of unicum
               .region(region)
               .clans.searchStream(trimmedQuery, {
                 signal: controller.signal,
               })) {
-              acc = [...acc, ...(chunk.results as ClanSearchResult[])];
+              const results = chunk.results as ClanSearchResult[];
+              if (chunk.source === SearchSource.Local) local = results;
+              else remote = results;
               // Partial: keep the loading indicator on until the stream ends.
               setClansOutcome({
                 status: "streaming",
-                results: acc,
+                results: merged(),
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
@@ -184,7 +199,7 @@ export default function SearchDialog(props: SharedProps) {
             // Stream closed (remote chunk landed): settle to the final result.
             setClansOutcome({
               status: "ok",
-              results: acc,
+              results: merged(),
               forQuery: trimmedQuery,
             });
           } catch (err) {
