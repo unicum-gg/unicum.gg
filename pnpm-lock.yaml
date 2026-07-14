@@ -56,6 +56,9 @@ importers:
       '@unicum.gg/core':
         specifier: workspace:*
         version: link:../../packages/core
+      '@unicum.gg/sdk':
+        specifier: workspace:*
+        version: link:../../packages/sdk
       '@unicum.gg/wargaming':
         specifier: workspace:*
         version: link:../../packages/wargaming
@@ -278,6 +281,9 @@ importers:
       '@unicum.gg/core':
         specifier: workspace:*
         version: link:../core
+      '@unicum.gg/wargaming':
+        specifier: workspace:*
+        version: link:../wargaming
       openapi-fetch:
         specifier: ^0.13.5
         version: 0.13.8
@@ -285,6 +291,12 @@ importers:
       openapi-typescript:
         specifier: ^7.6.1
         version: 7.13.0(typescript@5.9.3)
+      tsx:
+        specifier: ^4.19.2
+        version: 4.22.4
+      typescript:
+        specifier: ^5
+        version: 5.9.3
 
   packages/wargaming:
     dependencies:

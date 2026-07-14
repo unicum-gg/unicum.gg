@@ -39,7 +39,7 @@ import type { PlayerDerivedStats } from "@unicum.gg/core/players/derived-stats";
 import type { PlayerDetailData } from "@unicum.gg/core/players/detail";
 import type { LiftDrag } from "@unicum.gg/core/players/lift-drag";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
-import { PlayerDetailResponse } from "@/app/api/[region]/players/[nickname]/schema.api";
+import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -77,20 +77,6 @@ const STRONGHOLD_MODES: {
   { id: PlayerMode.ClanWarsVI, label: "Clan Wars Tier VI" },
   { id: PlayerMode.SteelHunter, label: "Steel Hunter" },
 ];
-
-// Parse the player detail response with the shared OpenAPI schema: it
-// validates the shape and `z.coerce.date()` revives ISO date strings into
-// `Date`s. The cast restores the rich domain types the components expect (the
-// schema is intentionally `.loose()`).
-async function playerDetailFetcher(url: string): Promise<PlayerDetailData> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Request failed (${res.status}) for ${url}`);
-  }
-  return PlayerDetailResponse.parse(
-    await res.json(),
-  ) as unknown as PlayerDetailData;
-}
 
 export type PlayerTabsViewProps = {
   region: Region;
@@ -153,7 +139,15 @@ export function PlayerTabsView({
   const dataUrl = `/api/${region}/players/${encodeURIComponent(nickname)}?metric=${initialData.metric}`;
   const { data: liveData, mutate: mutateData } = useSWR(
     dataUrl,
-    playerDetailFetcher,
+    () =>
+      unicum
+        .region(region)
+        .players(nickname)
+        // `RatingMetric`'s values are exactly these literals; cast to the
+        // typed query. The SDK hits our API and revives dates, so the cast
+        // just restores the rich domain type the components expect.
+        .detail({ metric: initialData.metric as "wn7" | "wn8" | "wnx" })
+        .then((r) => r as unknown as PlayerDetailData),
     { fallbackData: initialData, revalidateOnMount: false },
   );
   const detail = liveData ?? initialData;

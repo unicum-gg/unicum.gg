@@ -8,13 +8,16 @@
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "generate": "openapi-typescript http://localhost:3000/api/openapi.json -o src/generated/schema.ts"
+    "generate": "tsx scripts/generate.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",
+    "@unicum.gg/wargaming": "workspace:*",
     "openapi-fetch": "^0.13.5"
   },
   "devDependencies": {
-    "openapi-typescript": "^7.6.1"
+    "openapi-typescript": "^7.6.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5"
   }
 }

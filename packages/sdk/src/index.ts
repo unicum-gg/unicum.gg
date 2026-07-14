@@ -1,18 +1,23 @@
 import { APP_IDENTITY } from "@unicum.gg/core";
+import { Region } from "@unicum.gg/wargaming/region";
 import createClient, { type Client } from "openapi-fetch";
 import type { paths } from "./generated/schema";
 
-/** The three World of Tanks regions the API is scoped to. */
-export type Region = "eu" | "na" | "asia";
-
 /**
- * Default API base URL: this instance's own origin plus `/api`, so the client
- * follows the environment it runs in (dev server locally, `unicum.gg` in prod)
- * instead of hardcoding a domain. Sourced from `APP_IDENTITY.URL`
- * (`NEXT_PUBLIC_APP_URL`), the single source of truth in core. Override per
- * client via `new Unicum({ baseUrl })`.
+ * Default API base URL, resolved per environment so the client always hits the
+ * right origin without a hardcoded domain:
+ *
+ * - In the **browser**, a relative `/api` keeps every call same-origin. This
+ *   avoids CORS entirely and doesn't care whether the page is served from
+ *   `localhost`, the `127.0.0.1` loopback, or `unicum.gg` (an absolute
+ *   `NEXT_PUBLIC_APP_URL` would mismatch the host the user is actually on).
+ * - On the **server** (SSR / Node), relative fetch has no base, so we derive an
+ *   absolute URL from `APP_IDENTITY.URL` (`NEXT_PUBLIC_APP_URL`).
+ *
+ * Override per client via `new Unicum({ baseUrl })`.
  */
-export const UNICUM_API_URL = `${APP_IDENTITY.URL}/api`;
+export const UNICUM_API_URL =
+  typeof window === "undefined" ? `${APP_IDENTITY.URL}/api` : "/api";
 
 export type UnicumOptions = {
   /** API base URL. Defaults to the production API; point it at a dev server for
@@ -31,7 +36,7 @@ export class UnicumError extends Error {
     readonly url: string,
     readonly body: unknown,
   ) {
-    super(`unicum.gg API request to ${url} failed with ${status}`);
+    super(`${APP_IDENTITY.NAME} API request to ${url} failed with ${status}`);
     this.name = "UnicumError";
   }
 }
@@ -43,6 +48,32 @@ type QueryOf<P extends keyof paths> = Get<P> extends {
   ? Q
   : undefined;
 
+const ISO_DATE_TIME =
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?$/;
+
+/**
+ * Recursively revive ISO-8601 date-time strings into `Date`, so responses match
+ * the `date-time → Date` typing of the generated schema (openapi-fetch returns
+ * raw JSON, where dates are strings). Walks in place; the payload is freshly
+ * parsed and owned by us. The full-timestamp regex means plain identifiers
+ * (nicknames, tags, slugs) are never mistaken for dates.
+ */
+function reviveDates(value: unknown): unknown {
+  if (typeof value === "string") {
+    return ISO_DATE_TIME.test(value) ? new Date(value) : value;
+  }
+  if (Array.isArray(value)) {
+    for (let i = 0; i < value.length; i++) value[i] = reviveDates(value[i]);
+    return value;
+  }
+  if (value !== null && typeof value === "object") {
+    const record = value as Record<string, unknown>;
+    for (const key of Object.keys(record)) record[key] = reviveDates(record[key]);
+    return value;
+  }
+  return value;
+}
+
 async function unwrap<T>(
   call: Promise<{ data?: T; error?: unknown; response: Response }>,
 ): Promise<T> {
@@ -50,7 +81,7 @@ async function unwrap<T>(
   if (!response.ok || error !== undefined) {
     throw new UnicumError(response.status, response.url, error ?? data);
   }
-  return data as T;
+  return reviveDates(data) as T;
 }
 
 /** A single player: `unicum.eu.players("Rice")`. */
@@ -62,11 +93,12 @@ class PlayerClient {
   ) {}
 
   /** Full player detail (profile, overall stats, periods, derived, vehicles,
-   * rating history, clan history, strongholds). */
-  detail() {
+   * rating history, clan history, strongholds). Pass `{ metric }` to pin the
+   * rating metric that drives `liftDrag` and `ratingHistory`. */
+  detail(query?: QueryOf<"/{region}/players/{nickname}">) {
     return unwrap(
       this.api.GET("/{region}/players/{nickname}", {
-        params: { path: { region: this.region, nickname: this.nickname } },
+        params: { path: { region: this.region, nickname: this.nickname }, query },
       }),
     );
   }
@@ -317,15 +349,15 @@ export class Unicum {
   }
   /** Europe. */
   get eu(): RegionClient {
-    return this.region("eu");
+    return this.region(Region.EU);
   }
   /** North America. */
   get na(): RegionClient {
-    return this.region("na");
+    return this.region(Region.NA);
   }
   /** Asia. */
   get asia(): RegionClient {
-    return this.region("asia");
+    return this.region(Region.ASIA);
   }
 }
 

@@ -32,14 +32,9 @@ import {
   type SkeletonColumn,
 } from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
+import { unicum } from "@/services/sdk";
 import type { ClanDetailData } from "@/services/clans/detail";
 import type { ClanVehicleRow } from "@unicum.gg/core/clans/vehicles";
-import { ClanActivityResponse } from "@/app/api/[region]/clans/[tag]/activity/schema.api";
-import { ClanWarsResponse } from "@/app/api/[region]/clans/[tag]/clan-wars/schema.api";
-import { ClanMembersResponse } from "@/app/api/[region]/clans/[tag]/members/schema.api";
-import { ClanPreviousClansResponse } from "@/app/api/[region]/clans/[tag]/previous-clans/schema.api";
-import { ClanStrongholdResponse } from "@/app/api/[region]/clans/[tag]/stronghold/schema.api";
-import { ClanVehiclesResponse } from "@/app/api/[region]/clans/[tag]/vehicles/schema.api";
 import {
   type ClanGlobalMapView,
   type ClanStrongholdView,
@@ -65,49 +60,6 @@ const VEHICLES_SKELETON_COLUMNS: SkeletonColumn[] = [
   { width: "w-12", align: "right" }, // Winrate
   { width: "w-14", align: "right" }, // Rating
 ];
-
-async function vehiclesFetcher(url: string): Promise<ClanVehicleRow[]> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Request failed (${res.status}) for ${url}`);
-  }
-  return ClanVehiclesResponse.parse(await res.json())
-    .vehicles as unknown as ClanVehicleRow[];
-}
-
-// Per-section fetchers over the dedicated sub-endpoints (the page consumes its
-// own API). Each parses with the shared OpenAPI schema (validates + revives
-// dates via `z.coerce.date()`); the cast restores the rich domain types the
-// components expect (the schemas are intentionally `.loose()`).
-async function fetchJson(url: string): Promise<unknown> {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`Request failed (${res.status}) for ${url}`);
-  }
-  return res.json();
-}
-async function membersFetcher(url: string): Promise<ClanDetailData["members"]> {
-  return ClanMembersResponse.parse(await fetchJson(url))
-    .members as unknown as ClanDetailData["members"];
-}
-async function previousClansFetcher(
-  url: string,
-): Promise<ClanDetailData["previousClans"]> {
-  return ClanPreviousClansResponse.parse(await fetchJson(url))
-    .previousClans as unknown as ClanDetailData["previousClans"];
-}
-async function activityFetcher(url: string): Promise<ClanDetailData["events"]> {
-  return ClanActivityResponse.parse(await fetchJson(url))
-    .events as unknown as ClanDetailData["events"];
-}
-async function strongholdFetcher(url: string): Promise<ClanStrongholdView> {
-  return ClanStrongholdResponse.parse(
-    await fetchJson(url),
-  ) as unknown as ClanStrongholdView;
-}
-async function clanWarsFetcher(url: string): Promise<ClanGlobalMapView> {
-  return ClanWarsResponse.parse(await fetchJson(url)) as unknown as ClanGlobalMapView;
-}
 
 // Renders a panel title prefixed with the clan tag, its brackets tinted with
 // the clan's own color (matching the header's `[TAG]` treatment).
@@ -187,13 +139,22 @@ export function ClanTabsView({
     window.history.pushState(null, "", clanModeHref(basePath, next));
   }
 
+  // Section content is fetched on demand through the SDK (`@/services/sdk`),
+  // which hits our own API and revives dates. SWR keys stay the endpoint URLs
+  // (stable cache identities); the `as unknown as` casts restore the rich
+  // domain types the tables expect (the API schemas are intentionally loose).
+  const clanApi = unicum.region(region).clans(tag);
+
   // Only the Tanks section needs an on-demand fetch. SWR keys on the URL and
   // only runs when Tanks is active (null key = no request).
   const vehiclesUrl = `/api/${region}/clans/${encodeURIComponent(tag)}/vehicles`;
   const seededVehicles = initialVehicles != null;
   const { data: vehicles } = useSWR(
     section === ClanSection.Tanks ? vehiclesUrl : null,
-    vehiclesFetcher,
+    () =>
+      clanApi
+        .vehicles()
+        .then((r) => r.vehicles as unknown as ClanVehicleRow[]),
     {
       fallbackData: initialVehicles ?? undefined,
       // When the server already rendered Tanks (`initialVehicles` seeds the
@@ -212,17 +173,28 @@ export function ClanTabsView({
   const base = `/api/${region}/clans/${encodeURIComponent(tag)}`;
   const { data: membersData, mutate: mutateMembers } = useSWR(
     `${base}/members`,
-    membersFetcher,
+    () =>
+      clanApi
+        .members()
+        .then((r) => r.members as unknown as ClanDetailData["members"]),
     { fallbackData: initialData.members, revalidateOnMount: false },
   );
   const { data: previousClansData, mutate: mutatePrevious } = useSWR(
     `${base}/previous-clans`,
-    previousClansFetcher,
+    () =>
+      clanApi
+        .previousClans()
+        .then(
+          (r) => r.previousClans as unknown as ClanDetailData["previousClans"],
+        ),
     { fallbackData: initialData.previousClans, revalidateOnMount: false },
   );
   const { data: eventsData, mutate: mutateActivity } = useSWR(
     `${base}/activity`,
-    activityFetcher,
+    () =>
+      clanApi
+        .activity()
+        .then((r) => r.events as unknown as ClanDetailData["events"]),
     { fallbackData: initialData.events, revalidateOnMount: false },
   );
   const members = membersData ?? initialData.members;
@@ -240,12 +212,12 @@ export function ClanTabsView({
   );
   const { data: strongholdData, mutate: mutateStronghold } = useSWR(
     `${base}/stronghold`,
-    strongholdFetcher,
+    () => clanApi.stronghold().then((r) => r as unknown as ClanStrongholdView),
     { fallbackData: strongholdSeed, revalidateOnMount: false },
   );
   const { data: clanWarsData, mutate: mutateClanWars } = useSWR(
     `${base}/clan-wars`,
-    clanWarsFetcher,
+    () => clanApi.clanWars().then((r) => r as unknown as ClanGlobalMapView),
     { fallbackData: clanWarsSeed, revalidateOnMount: false },
   );
   const stronghold = strongholdData ?? strongholdSeed;
