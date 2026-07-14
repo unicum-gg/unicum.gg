@@ -38,12 +38,12 @@ export function NavDebug() {
       } catch {
         /* localStorage unavailable */
       }
-      console.log(`[navdebug] ${on ? "ON" : "OFF"} — reload to apply`);
+      console.log(`[navdebug] ${on ? "ON" : "OFF"}, reload to apply`);
     };
 
     enabledRef.current = readEnabled();
     if (!enabledRef.current) return;
-    console.log("[navdebug] active — profiling client navigations");
+    console.log("[navdebug] active, profiling client navigations");
 
     function onClick(event: MouseEvent) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
@@ -83,11 +83,11 @@ export function NavDebug() {
       const client = Math.round(total - (rsc.responseEnd - rsc.startTime));
       const kb = Math.round((rsc.transferSize || rsc.encodedBodySize || 0) / 1024);
       console.log(
-        `[navdebug] ✔ ${pathname} — click→render ${total}ms  [server(TTFB)=${server}ms · download=${download}ms · client=${client}ms · size=${kb}KB]`,
+        `[navdebug] ✔ ${pathname} click→render ${total}ms  [server(TTFB)=${server}ms · download=${download}ms · client=${client}ms · size=${kb}KB]`,
       );
     } else {
       console.log(
-        `[navdebug] ✔ ${pathname} — click→render ${total}ms (no RSC fetch — cache hit?)`,
+        `[navdebug] ✔ ${pathname} click→render ${total}ms (no RSC fetch, cache hit?)`,
       );
     }
   }, [pathname]);

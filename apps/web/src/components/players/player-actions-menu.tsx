@@ -27,7 +27,7 @@ import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming";
 
 /**
  * Overflow menu for the player header, folding the per-player actions (favorite,
- * share, WoT portal, and — on your own profile — connect Twitch) behind a single
+ * share, WoT portal, and, on your own profile, connect Twitch) behind a single
  * "⋯" button so the header stays uncluttered. Compare keeps its own button since
  * its search popover doesn't nest inside a menu.
  */

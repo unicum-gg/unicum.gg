@@ -170,7 +170,7 @@ export function LiveStreams({
   return (
     <>
       <h1 className="sr-only">
-        {APP.NAME} — World of Tanks player, clan and tank stats
+        {APP.NAME}: World of Tanks player, clan and tank stats
       </h1>
       <Panel className="flex flex-col">
         <PanelHeader className="flex items-center justify-between gap-3">

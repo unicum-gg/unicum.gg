@@ -150,7 +150,7 @@ export function StrongholdLeaderboardView({
         <PanelContent className="p-0">
           {results.length === 0 ? (
             <p className="p-4 text-sm text-muted-foreground">
-              No data yet — check back once clans have been refreshed.
+              No data yet. Check back once clans have been refreshed.
             </p>
           ) : (
             <TooltipProvider delayDuration={150}>
