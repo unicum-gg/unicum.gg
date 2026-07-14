@@ -39,20 +39,21 @@ export function PlayerSearchPopover({
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<SearchPlayerResult[]>([]);
+  // Results are tagged with the query they belong to, so a stale set from a
+  // previous query is hidden by derivation (below) instead of a state reset in
+  // the effect.
+  const [results, setResults] = useState<{
+    query: string;
+    items: SearchPlayerResult[];
+  }>({ query: "", items: [] });
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
+  const trimmed = query.trim();
+  const active = open && trimmed.length >= MIN_QUERY_LENGTH;
+
   useEffect(() => {
-    if (!open) {
-      setResults([]);
-      return;
-    }
-    const trimmed = query.trim();
-    if (trimmed.length < MIN_QUERY_LENGTH) {
-      setResults([]);
-      return;
-    }
+    if (!active) return;
     const controller = new AbortController();
     const timer = setTimeout(async () => {
       setLoading(true);
@@ -62,7 +63,7 @@ export function PlayerSearchPopover({
           .region(region)
           .players.searchStream(trimmed, { signal: controller.signal })) {
           acc = [...acc, ...(chunk.results as SearchPlayerResult[])];
-          setResults(acc);
+          setResults({ query: trimmed, items: acc });
         }
       } catch {
         // aborted or network failure, ignore
@@ -74,7 +75,7 @@ export function PlayerSearchPopover({
       clearTimeout(timer);
       controller.abort();
     };
-  }, [query, open, region]);
+  }, [active, trimmed, region]);
 
   function pick(nickname: string) {
     onPick(nickname);
@@ -82,9 +83,11 @@ export function PlayerSearchPopover({
     setQuery("");
   }
 
+  // Only show results for the current, valid, open query.
+  const shown = active && results.query === trimmed ? results.items : [];
   const filtered = excludeKeys
-    ? results.filter((r) => !excludeKeys.has(r.nickname.toLowerCase()))
-    : results;
+    ? shown.filter((r) => !excludeKeys.has(r.nickname.toLowerCase()))
+    : shown;
 
   const trigger = (
     <PopoverTrigger asChild>

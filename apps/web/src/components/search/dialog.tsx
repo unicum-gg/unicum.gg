@@ -116,9 +116,9 @@ export default function SearchDialog(props: SharedProps) {
   );
 
   useEffect(() => {
-    if (!wantPlayers) setPlayersOutcome(null);
-    if (!wantClans) setClansOutcome(null);
-    if (!wantTanks) setTanksOutcome(null);
+    // A disabled section (`!wantX`) or a too-short query is hidden by
+    // `deriveSection`, which also ignores an outcome left over from another
+    // query — so there's nothing to clear here, we just skip fetching.
     if (trimmedQuery.length < MIN_QUERY_LENGTH) return;
 
     const controller = new AbortController();
@@ -269,34 +269,34 @@ export default function SearchDialog(props: SharedProps) {
 
   const showArea = hasAnyVisible || anyLoading || allErrored || allEmpty;
 
-  // Freeze content during close animation so the dialog doesn't flash
-  // empty before unmounting. Refs hold the last-painted rows/status.
-  const frozenRowsRef = useRef<Row[]>(rows);
-  const frozenSelectableRef = useRef<SelectableRow[]>(selectable);
-  const frozenStatusRef = useRef<ResultsStatus>({
+  // Freeze content during the close animation so the dialog doesn't flash empty
+  // before unmounting: keep the last-painted rows + status and refresh them
+  // while the area is shown. Uses React's "value from a previous render"
+  // pattern (conditional set-state during render) rather than a ref read during
+  // render or a state update from an effect.
+  const liveStatus: ResultsStatus = {
     anyLoading,
     allErrored,
     allEmpty,
     hasAnyVisible,
+  };
+  const [frozen, setFrozen] = useState<{ rows: Row[]; status: ResultsStatus }>({
+    rows,
+    status: liveStatus,
   });
+  if (
+    showArea &&
+    (frozen.rows !== rows ||
+      frozen.status.anyLoading !== anyLoading ||
+      frozen.status.allErrored !== allErrored ||
+      frozen.status.allEmpty !== allEmpty ||
+      frozen.status.hasAnyVisible !== hasAnyVisible)
+  ) {
+    setFrozen({ rows, status: liveStatus });
+  }
 
-  useEffect(() => {
-    if (showArea) {
-      frozenRowsRef.current = rows;
-      frozenSelectableRef.current = selectable;
-      frozenStatusRef.current = {
-        anyLoading,
-        allErrored,
-        allEmpty,
-        hasAnyVisible,
-      };
-    }
-  }, [showArea, rows, selectable, anyLoading, allErrored, allEmpty, hasAnyVisible]);
-
-  const renderRows = showArea ? rows : frozenRowsRef.current;
-  const renderStatus: ResultsStatus = showArea
-    ? { anyLoading, allErrored, allEmpty, hasAnyVisible }
-    : frozenStatusRef.current;
+  const renderRows = showArea ? rows : frozen.rows;
+  const renderStatus: ResultsStatus = showArea ? liveStatus : frozen.status;
 
   function close() {
     props.onOpenChange?.(false);
