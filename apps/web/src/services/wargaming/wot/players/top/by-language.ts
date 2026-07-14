@@ -30,7 +30,7 @@ const CANDIDATE_OVERSHOOT = 10000;
 // leaderboard. Below 10k WNX is statistical noise.
 const MIN_BATTLES = 10000;
 // Keep-ratio for the inference, matches `inferPlayerLanguages` in
-// `@unicum.gg/core/players/language-inference`. Any language scoring at least
+// `@unicum.gg/shared`. Any language scoring at least
 // half the player's top language survives.
 const KEEP_RATIO = 0.5;
 

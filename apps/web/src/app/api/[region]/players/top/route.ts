@@ -5,6 +5,7 @@ import {
   getTopPlayersByMetric,
   type TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
+import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";
 import { isRegion } from "@unicum.gg/wargaming";
 import { TopPlayersResponse } from "./schema.api";
 
@@ -41,7 +42,23 @@ export async function GET(
   );
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
+  const language = url.searchParams.get("language");
+  const withLanguages = url.searchParams.get("languages") === "true";
+  const strict = url.searchParams.get("strict") === "true";
+
   try {
+    if (language || withLanguages) {
+      // Language boards are lifetime WNX rankings scoped to clans declaring
+      // the language (`strict` = the clan declares only that one).
+      const results = await getTopPlayersByLanguage(
+        region,
+        metric,
+        language,
+        limit,
+        strict,
+      );
+      return jsonResponse(TopPlayersResponse, { results, computed_at: null });
+    }
     const { results, computedAt } = await getTopPlayersByMetric(
       region,
       metric,

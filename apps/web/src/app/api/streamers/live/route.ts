@@ -1,23 +1,15 @@
-import { jsonResponse } from "@/services/openapi/json-response";
 import { getCachedLiveStreamers } from "@/services/twitch";
+import { jsonResponse } from "@/services/openapi/json-response";
 import { LiveStreamersResponse } from "./schema.api";
-
-// Public JSON snapshot of who's live. The site's own UI streams live updates
-// over `/api/streamers/live/sse` instead; this stays a plain cached endpoint for
-// API consumers. `getCachedLiveStreamers` dedupes the Twitch work to ~one poll
-// per 30s regardless of how many clients hit it.
-export const dynamic = "force-dynamic";
 
 /**
  * Live streamers
- * @description Tracked players live on Twitch in the World of Tanks category across all regions, with cached WN7/WN8/WNX ratings and clan tag, sorted by WNX (empty when nobody tracked is live).
+ * @description Tracked players currently live on Twitch, across all regions, with their WN7/WN8/WNX ratings. Snapshot form of the `/streamers/live/sse` stream; cached ~30s server-side.
  * @response LiveStreamersResponse
  * @tag Streamers
  * @openapi
  */
 export async function GET() {
-  const streamers = await getCachedLiveStreamers();
-  return jsonResponse(LiveStreamersResponse, streamers, {
-    headers: { "Cache-Control": "no-store" },
-  });
+  const results = await getCachedLiveStreamers();
+  return jsonResponse(LiveStreamersResponse, { results });
 }

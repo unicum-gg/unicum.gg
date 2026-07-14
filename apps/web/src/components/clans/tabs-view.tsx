@@ -34,8 +34,24 @@ import {
 } from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
-import type { ClanDetailData } from "@/services/clans/detail";
-import { type ClanVehicleRow, type ClanGlobalMapView, type ClanStrongholdView, clanGlobalMapView, clanStrongholdView } from "@unicum.gg/shared";
+import type { ClanRecentEvent } from "@unicum.gg/wargaming";
+import {
+  type ClanMemberStats,
+  type ClanVehicleRow,
+  type ClanGlobalMapView,
+  type ClanStrongholdView,
+} from "@unicum.gg/shared";
+import type { PreviousClanRow } from "@/services/clans/previous-clans";
+
+// The SSR seed: exactly what the per-section endpoints return, fetched by the
+// page through the SDK (stronghold/clan-wars arrive as ready-made views).
+export type ClanTabsInitialData = {
+  members: ClanMemberStats[];
+  previousClans: PreviousClanRow[];
+  events: ClanRecentEvent[];
+  stronghold: ClanStrongholdView;
+  clanWars: ClanGlobalMapView;
+};
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -87,7 +103,7 @@ export type ClanTabsViewProps = {
   descriptionHtml: string | null;
   // Freshness-sensitive clan detail, seeded from the SSR render and kept live
   // by SWR (see the LiveSync wiring below).
-  initialData: ClanDetailData;
+  initialData: ClanTabsInitialData;
   // Present only when Tanks is the section the server rendered, so its content
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
@@ -177,7 +193,7 @@ export function ClanTabsView({
     () =>
       clanApi
         .members()
-        .then((r) => r.members as unknown as ClanDetailData["members"]),
+        .then((r) => r.members as unknown as ClanMemberStats[]),
     { fallbackData: initialData.members, revalidateOnMount: false },
   );
   const { data: previousClansData, mutate: mutatePrevious } = useSWR(
@@ -186,7 +202,7 @@ export function ClanTabsView({
       clanApi
         .previousClans()
         .then(
-          (r) => r.previousClans as unknown as ClanDetailData["previousClans"],
+          (r) => r.previousClans as unknown as PreviousClanRow[],
         ),
     { fallbackData: initialData.previousClans, revalidateOnMount: false },
   );
@@ -195,22 +211,17 @@ export function ClanTabsView({
     () =>
       clanApi
         .activity()
-        .then((r) => r.events as unknown as ClanDetailData["events"]),
+        .then((r) => r.events as unknown as ClanRecentEvent[]),
     { fallbackData: initialData.events, revalidateOnMount: false },
   );
   const members = membersData ?? initialData.members;
   const previousClans = previousClansData ?? initialData.previousClans;
   const events = eventsData ?? initialData.events;
-  // Stronghold / Clan Wars: seed the table-ready view (latest + period diffs)
-  // from the SSR snapshot, then refresh it from the sub-endpoints on LiveSync.
-  const strongholdSeed = clanStrongholdView(
-    initialData.snapshotLatest,
-    initialData.snapshotPeriods,
-  );
-  const clanWarsSeed = clanGlobalMapView(
-    initialData.snapshotLatest,
-    initialData.snapshotPeriods,
-  );
+  // Stronghold / Clan Wars: the SSR seed is already the table-ready view
+  // (latest + period diffs) served by the sub-endpoints; LiveSync refetches
+  // the same endpoints.
+  const strongholdSeed = initialData.stronghold;
+  const clanWarsSeed = initialData.clanWars;
   const { data: strongholdData, mutate: mutateStronghold } = useSWR(
     `${base}/stronghold`,
     () => clanApi.stronghold().then((r) => r as unknown as ClanStrongholdView),

@@ -130,16 +130,35 @@ export function limitField(max: number) {
   });
 }
 
+const languageField = z.string().meta({
+  description:
+    "Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX).",
+});
+const strictField = z.enum(["true", "false"]).meta({
+  description:
+    "With `language`: only count clans that declare exactly this one language.",
+});
+const withLanguagesField = z.enum(["true", "false"]).meta({
+  description:
+    "Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.",
+});
+
 export const playersTopQuery = z.object({
   period: periodField.optional(),
   limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
+  language: languageField.optional(),
+  strict: strictField.optional(),
+  languages: withLanguagesField.optional(),
 });
 
 export const clansTopQuery = z.object({
   period: clanPeriodField.optional(),
   limit: limitField(CLANS_TOP_MAX_LIMIT).optional(),
   metric: metricField.optional(),
+  language: languageField.optional(),
+  strict: strictField.optional(),
+  languages: withLanguagesField.optional(),
 });
 
 // next-openapi-gen doesn't serialize `.default()` on enum params, so the doc

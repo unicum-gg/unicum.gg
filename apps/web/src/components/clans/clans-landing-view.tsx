@@ -13,8 +13,8 @@ import {
 } from "@/components/panel";
 import { RatingMetric } from "@unicum.gg/shared";
 import { languageToCountryCode } from "@/lib/language-flags";
-import { getLanguageStats } from "@/services/clans/available-languages";
-import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";
+import { unicum } from "@/services/sdk";
+import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
 import {
   Region,
   REGION_EMOJI,
@@ -63,12 +63,25 @@ export async function ClansLandingView({
   language: string | null;
   strict?: boolean;
 }) {
-  const [wn7Results, wn8Results, wnxResults, stats] = await Promise.all([
-    getTopClansByLanguage(region, RatingMetric.Wn7, language, LIMIT, strict),
-    getTopClansByLanguage(region, RatingMetric.Wn8, language, LIMIT, strict),
-    getTopClansByLanguage(region, RatingMetric.Wnx, language, LIMIT, strict),
-    getLanguageStats(region),
+  // The landing consumes its own public API through the SDK (see the players
+  // landing for the same pattern).
+  const api = unicum.region(region).clans;
+  const topQuery = (metric: "wn7" | "wn8" | "wnx") => ({
+    metric,
+    limit: LIMIT,
+    ...(language ? { language } : { languages: "true" as const }),
+    ...(strict ? { strict: "true" as const } : {}),
+  });
+  const [wn7Top, wn8Top, wnxTop, languageStats] = await Promise.all([
+    api.top(topQuery("wn7")),
+    api.top(topQuery("wn8")),
+    api.top(topQuery("wnx")),
+    api.languages(),
   ]);
+  const wn7Results = wn7Top.results as unknown as TopClanByLanguageResult[];
+  const wn8Results = wn8Top.results as unknown as TopClanByLanguageResult[];
+  const wnxResults = wnxTop.results as unknown as TopClanByLanguageResult[];
+  const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;

@@ -12,8 +12,8 @@ import {
 } from "@/components/panel";
 import { RatingMetric } from "@unicum.gg/shared";
 import { languageToCountryCode } from "@/lib/language-flags";
-import { getPlayerLanguageStats } from "@/services/players/available-languages";
-import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";
+import { unicum } from "@/services/sdk";
+import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import {
   Region,
   REGION_EMOJI,
@@ -61,12 +61,26 @@ export async function PlayersLandingView({
   language: string | null;
   strict?: boolean;
 }) {
-  const [wn7Results, wn8Results, wnxResults, stats] = await Promise.all([
-    getTopPlayersByLanguage(region, RatingMetric.Wn7, language, LIMIT, strict),
-    getTopPlayersByLanguage(region, RatingMetric.Wn8, language, LIMIT, strict),
-    getTopPlayersByLanguage(region, RatingMetric.Wnx, language, LIMIT, strict),
-    getPlayerLanguageStats(region),
+  // The landing consumes its own public API through the SDK: the lifetime
+  // by-language boards (rows carry their inferred languages) + the language
+  // populations for the chips.
+  const api = unicum.region(region).players;
+  const topQuery = (metric: "wn7" | "wn8" | "wnx") => ({
+    metric,
+    limit: LIMIT,
+    ...(language ? { language } : { languages: "true" as const }),
+    ...(strict ? { strict: "true" as const } : {}),
+  });
+  const [wn7Top, wn8Top, wnxTop, languageStats] = await Promise.all([
+    api.top(topQuery("wn7")),
+    api.top(topQuery("wn8")),
+    api.top(topQuery("wnx")),
+    api.languages(),
   ]);
+  const wn7Results = wn7Top.results as TopPlayerByLanguageResult[];
+  const wn8Results = wn8Top.results as TopPlayerByLanguageResult[];
+  const wnxResults = wnxTop.results as TopPlayerByLanguageResult[];
+  const stats = languageStats.results;
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;

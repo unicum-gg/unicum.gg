@@ -9,11 +9,11 @@ import {
 import { RelativeTime } from "@/components/relative-time";
 import APP from "@/constants/app";
 import { cn } from "@/lib/utils";
-import { getCoverageStats } from "@/services/coverage";
+import { unicum } from "@/services/sdk";
 import {
   ACTIVITY_BUCKET_LABEL,
   formatCadence,
-} from "@unicum.gg/core/players/refresh-policy";
+} from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 import { ChartMode, CoverageAreaChart } from "./coverage-charts";
 
@@ -54,7 +54,7 @@ function formatBytes(bytes: number): string {
 }
 
 export async function CoverageView({ region }: { region: Region }) {
-  const stats = await getCoverageStats(region);
+  const stats = await unicum.region(region).coverage();
 
   return (
     <div className="mx-auto w-full max-w-7xl">

@@ -8,11 +8,11 @@ import { LanguageFlags } from "@/components/language-flags";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
+import { ClanRole } from "@unicum.gg/wargaming";
 import {
   type ClanMemberStats,
-  ClanRole,
-  computeClanRatings,
-} from "@unicum.gg/core/clans/members";
+  type ClanRatings,
+} from "@unicum.gg/shared";
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
@@ -54,12 +54,11 @@ function metricCell(
   };
 }
 
-function computeMetrics(members: ClanMemberStats[]): {
+function computeMetrics(r: ClanRatings): {
   recent: MetricSet;
   lifetime: MetricSet;
   avgWinrate: MetricCell;
 } {
-  const r = computeClanRatings(members);
   return {
     recent: {
       wn7: metricCell("Avg WN7 · 30d", r.recent.wn7, wn7Color),
@@ -83,12 +82,14 @@ export function ClanHeader({
   region,
   clan,
   members,
+  ratings,
 }: {
   region: Region;
   clan: ClanFullInfo;
   members: ClanMemberStats[];
+  ratings: ClanRatings;
 }) {
-  const metrics = computeMetrics(members);
+  const metrics = computeMetrics(ratings);
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex items-stretch sm:contents">

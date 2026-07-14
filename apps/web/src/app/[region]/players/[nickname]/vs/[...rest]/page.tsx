@@ -4,17 +4,9 @@ import { PlayerCompareView } from "@/components/players/compare/view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import {
-  type PlayerInitialData,
-  loadPlayerInitialData,
-} from "@unicum.gg/core/players/initial-data";
-import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
+import { unicum } from "@/services/sdk";
+import type { WN8Expected, WNXExpected } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@unicum.gg/core/wargaming/wot/wn-expected";
 
 const MAX_PLAYERS = 4;
 const MIN_PLAYERS = 2;
@@ -77,37 +69,24 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
   const requested = `/${region}/players/${nickname}/vs/${(rest ?? []).join("/")}`;
   if (canonical !== requested) redirect(canonical);
 
-  const [encyclopedia, wn8Expected, wnxExpected, ...initials] =
-    await Promise.all([
-      getVehicleEncyclopedia(region),
-      getWN8ExpectedValues(),
-      getWNXExpectedValues(),
-      ...nicks.map((nick) => loadPlayerInitialData(region, { nickname: nick })),
-    ]);
-
-  type Loaded = {
-    requested: string;
-    initial: PlayerInitialData;
-  };
-  const loaded: Loaded[] = nicks.map((nick, i) => ({
-    requested: nick,
-    initial: initials[i],
-  }));
-
-  const visibleSlots = loaded.map((l) => {
-    const player = l.initial.player;
-    const latest = l.initial.latestSnapshot;
-    const tanks =
-      player && latest
-        ? tankSnapshotsToTankStats(l.initial.latestTankSnapshots)
-        : [];
-    return {
-      requested: l.requested,
-      player,
-      latest,
-      tanks,
-    };
-  });
+  // The page consumes its own public API through the SDK: one composite
+  // compare payload with every player's raw inputs + the shared tables.
+  const data = await unicum.region(region).players.compare(nicks);
+  type ViewProps = React.ComponentProps<typeof PlayerCompareView>;
+  const visibleSlots = data.slots as unknown as ViewProps["slots"];
+  const encyclopedia = data.encyclopedia as unknown as ViewProps["encyclopedia"];
+  const wn8Expected = new Map(
+    Object.entries(data.wn8Expected).map(([k, v]) => [
+      Number(k),
+      v as unknown as WN8Expected,
+    ]),
+  );
+  const wnxExpected = new Map(
+    Object.entries(data.wnxExpected).map(([k, v]) => [
+      Number(k),
+      v as unknown as WNXExpected,
+    ]),
+  );
 
   return (
     <div className="mx-auto w-full max-w-7xl">

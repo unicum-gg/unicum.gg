@@ -6,10 +6,12 @@ import {
   PanelSeparator,
 } from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/tanks-index";
+import type { TankSpecRow } from "@/components/tanks/spec-columns";
+import type { MasteryRow, MoeRow } from "@/components/tanks/tanks-index";
 import { TankTab, tankTabFromQuery } from "@/components/tanks/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getTankDataset } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
+import { unicum } from "@/services/sdk";
 import {
   type Region,
   isRegion,
@@ -50,10 +52,38 @@ export async function renderTanksIndex(
   region: Region,
   activeTab: TankTab = TankTab.Performances,
 ) {
-  // Same in-process dataset the /tanks API serves, so the page and the API can't
-  // drift. This view keeps the page's stat labels (dpg, wr, ...) and columns.
-  const items = (await getTankDataset(region)).map(
-    ({ identity: i, stats: s, specs, mastery, moe }) => ({
+  // The page consumes its own public API through the SDK: the five bulk tank
+  // endpoints (performance, specifications, economics, MoE, MoM), zipped back
+  // together by slug. This view keeps the page's stat labels (dpg, wr, ...)
+  // and columns.
+  const api = unicum.region(region).tanks;
+  const [perf, specifications, economics, marksOfExcellence, marksOfMastery] =
+    await Promise.all([
+      api.list(),
+      api.specifications(),
+      api.economics(),
+      api.marksOfExcellence(),
+      api.marksOfMastery(),
+    ]);
+  const specBySlug = new Map(
+    specifications.results.map((r) => [r.identity.slug, r.specifications]),
+  );
+  const econBySlug = new Map(
+    economics.results.map((r) => [r.identity.slug, r.economics]),
+  );
+  const moeBySlug = new Map(
+    marksOfExcellence.results.map((r) => [r.identity.slug, r.moe]),
+  );
+  const masteryBySlug = new Map(
+    marksOfMastery.results.map((r) => [r.identity.slug, r.mastery]),
+  );
+
+  const items = perf.results.map(({ identity: i, stats: s }) => {
+    // The page's spec columns span both the specifications and the economics
+    // projections of the same underlying spec row; merge them back.
+    const spec = specBySlug.get(i.slug) ?? null;
+    const econ = econBySlug.get(i.slug) ?? null;
+    return {
       tankId: i.tankId,
       slug: i.slug,
       name: i.name,
@@ -84,11 +114,11 @@ export async function renderTanksIndex(
             survival: s.survival,
           }
         : null,
-      specs,
-      mastery,
-      moe,
-    }),
-  );
+      specs: (spec || econ ? { ...spec, ...econ } : null) as TankSpecRow | null,
+      mastery: (masteryBySlug.get(i.slug) ?? null) as MasteryRow | null,
+      moe: (moeBySlug.get(i.slug) ?? null) as MoeRow | null,
+    };
+  });
 
   return (
     <div className="mx-auto w-full max-w-7xl">

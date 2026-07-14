@@ -6,27 +6,25 @@ import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
-import { getTankMomByRegion } from "@unicum.gg/core/mom";
-import { getTankMoeByRegion } from "@unicum.gg/core/moe";
-import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
-import {
-  getMomHistory,
-  getMoeHistory,
-} from "@/services/tanks/marks-history";
-import {
-  getTankStats,
-  getTopPlayersByTankAllMetrics,
-} from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@unicum.gg/core/wargaming/wot/wn-expected";
+import { unicum } from "@/services/sdk";
+import { UnicumError } from "@unicum.gg/sdk";
+import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import type { TankSpec } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
-const TOP_LIMIT = 25;
+// The page consumes its own public API through the SDK: one composite
+// `GET /{region}/tanks/{slug}/detail` payload carries everything the view
+// renders. Next memoizes identical fetches within one render pass, so
+// generateMetadata and the page body share a single request.
+async function loadDetail(region: Region, slug: string) {
+  try {
+    return await unicum.region(region).tanks(slug).detail();
+  } catch (error) {
+    if (error instanceof UnicumError && error.status === 404) return null;
+    throw error;
+  }
+}
 
 export async function generateMetadata({
   params,
@@ -35,9 +33,9 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { region, slug } = await params;
   if (!isRegion(region)) return {};
-  const tank = await getTankBySlug(region, slug);
-  if (!tank) return {};
-  const { meta } = tank;
+  const detail = await loadDetail(region, slug).catch(() => null);
+  if (!detail) return {};
+  const { meta } = detail;
   const regionLabel = region.toUpperCase();
   const tier = meta.tier ? toRoman(meta.tier) : String(meta.tier);
   return constructMetadata({
@@ -45,7 +43,7 @@ export async function generateMetadata({
     description: `${meta.name} (${regionLabel}) World of Tanks stats: the best players on this tier ${tier} ${meta.nation.toUpperCase()} tank ranked by WN7, WN8 and WNX, plus expected values.`,
     // Point at the readable slug so a legacy numeric-id URL doesn't become the
     // canonical.
-    canonical: ROUTES.TANK(region, tank.slug),
+    canonical: ROUTES.TANK(region, detail.slug),
     ogImage: false,
   });
 }
@@ -61,36 +59,12 @@ export default async function TankPage({
 }
 
 export async function renderTankPage(region: Region, slug: string) {
-  const tank = await getTankBySlug(region, slug);
-  if (!tank) notFound();
+  const detail = await loadDetail(region, slug);
+  if (!detail) notFound();
   // Send legacy numeric-id (or wrong-case) URLs to the readable canonical slug
   // with a 308 so links, history, and search engines settle on one URL.
-  if (slug !== tank.slug) permanentRedirect(ROUTES.TANK(region, tank.slug));
-  const { tankId, meta, slug: canonicalSlug } = tank;
-
-  const [
-    topByMetric,
-    serverStats,
-    wn8Map,
-    wnxMap,
-    specsMap,
-    moeMap,
-    momMap,
-    researchPath,
-    moeHistory,
-    momHistory,
-  ] = await Promise.all([
-    getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
-    getTankStats(region, tankId),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-    getAllTankSpecs(),
-    getTankMoeByRegion(region),
-    getTankMomByRegion(region),
-    getResearchPath(region, tankId),
-    getMoeHistory(region, tankId),
-    getMomHistory(region, tankId),
-  ]);
+  if (slug !== detail.slug) permanentRedirect(ROUTES.TANK(region, detail.slug));
+  const { tankId, meta, slug: canonicalSlug } = detail;
 
   const regionLabel = region.toUpperCase();
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
@@ -122,16 +96,16 @@ export async function renderTankPage(region: Region, slug: string) {
         tankId={tankId}
         slug={canonicalSlug}
         meta={meta}
-        topByMetric={topByMetric}
-        serverStats={serverStats}
-        wn8Expected={wn8Map.get(tankId) ?? null}
-        wnxExpected={wnxMap.get(tankId) ?? null}
-        specs={specsMap.get(tankId) ?? null}
-        moe={moeMap.get(tankId) ?? null}
-        mom={momMap.get(tankId) ?? null}
-        researchPath={researchPath}
-        moeHistory={moeHistory}
-        momHistory={momHistory}
+        topByMetric={detail.topByMetric}
+        serverStats={detail.serverStats}
+        wn8Expected={detail.wn8Expected}
+        wnxExpected={detail.wnxExpected}
+        specs={detail.specs as unknown as TankSpec | null}
+        moe={detail.moe}
+        mom={detail.mom}
+        researchPath={detail.researchPath as unknown as ResearchBranch}
+        moeHistory={detail.moeHistory}
+        momHistory={detail.momHistory}
       />
     </>
   );

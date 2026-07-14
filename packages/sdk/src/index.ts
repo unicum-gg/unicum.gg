@@ -243,10 +243,15 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/players/search">>>;
-  /** Player leaderboard for the region. */
+  /** Player leaderboard for the region. Pass `{ language }` for the
+   * by-language board (lifetime WNX). */
   top(
     query?: QueryOf<"/{region}/players/top">,
   ): Promise<Data<"/{region}/players/top">>;
+  /** Languages the region's tracked players speak, with populations. */
+  languages(): Promise<Data<"/{region}/players/languages">>;
+  /** Side-by-side comparison inputs for up to 4 players. */
+  compare(names: string[]): Promise<Data<"/{region}/players/compare">>;
 };
 
 /** A single clan: `unicum.eu.clans("FAME")`. */
@@ -358,6 +363,14 @@ type ClansNamespace = ((tag: string) => ClanClient) & {
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/clans/search">>>;
   top(query?: QueryOf<"/{region}/clans/top">): Promise<Data<"/{region}/clans/top">>;
+  /** Languages the region's clans declare, with populations. */
+  languages(): Promise<Data<"/{region}/clans/languages">>;
+  /** Stronghold clan leaderboard for one mode/tier. */
+  strongholdTop(
+    query?: QueryOf<"/{region}/clans/stronghold/top">,
+  ): Promise<Data<"/{region}/clans/stronghold/top">>;
+  /** Side-by-side comparison inputs for up to 4 clans. */
+  compare(tags: string[]): Promise<Data<"/{region}/clans/compare">>;
 };
 
 /** A single tank: `unicum.eu.tanks("is-7")`. */
@@ -373,6 +386,17 @@ class TankClient {
     const { region, slug } = this;
     return unwrap(
       this.api.GET("/{region}/tanks/{slug}", { params: { path: { region, slug } } }),
+    );
+  }
+  /** Everything the tank page renders in one payload (identity, top players,
+   * server averages, expected values, specs, MoE/MoM + history, research
+   * path). `slug` in the response is the canonical slug. */
+  detail() {
+    const { region, slug } = this;
+    return unwrap(
+      this.api.GET("/{region}/tanks/{slug}/detail", {
+        params: { path: { region, slug } },
+      }),
     );
   }
   /** Combat specifications. */
@@ -484,6 +508,16 @@ class RegionClient {
       unwrap(
         api.GET("/{region}/players/top", { params: { path: { region }, query } }),
       );
+    ns.languages = () =>
+      unwrap(
+        api.GET("/{region}/players/languages", { params: { path: { region } } }),
+      );
+    ns.compare = (names) =>
+      unwrap(
+        api.GET("/{region}/players/compare", {
+          params: { path: { region }, query: { names: names.join(",") } },
+        }),
+      );
     return ns;
   }
 
@@ -506,6 +540,22 @@ class RegionClient {
     ns.top = (query) =>
       unwrap(
         api.GET("/{region}/clans/top", { params: { path: { region }, query } }),
+      );
+    ns.languages = () =>
+      unwrap(
+        api.GET("/{region}/clans/languages", { params: { path: { region } } }),
+      );
+    ns.strongholdTop = (query) =>
+      unwrap(
+        api.GET("/{region}/clans/stronghold/top", {
+          params: { path: { region }, query },
+        }),
+      );
+    ns.compare = (tags) =>
+      unwrap(
+        api.GET("/{region}/clans/compare", {
+          params: { path: { region }, query: { tags: tags.join(",") } },
+        }),
       );
     return ns;
   }
@@ -538,6 +588,15 @@ class RegionClient {
     return ns;
   }
 
+  /** Tracker coverage for this region: counts, refresh-policy health, 30-day
+   * trends and infrastructure facts. */
+  coverage() {
+    const { api, region } = this;
+    return unwrap(
+      api.GET("/{region}/coverage", { params: { path: { region } } }),
+    );
+  }
+
   /** Server-wide live signals for this region. */
   get server(): ServerNamespace {
     const { baseUrl, region } = this;
@@ -554,6 +613,8 @@ class RegionClient {
 }
 
 type StreamersNamespace = {
+  /** Currently-live tracked streamers across all regions (snapshot). */
+  list(): Promise<Data<"/streamers/live">>;
   /** Currently-live tracked streamers across all regions, pushed over SSE.
    * Returns an unsubscribe function; browser-only. */
   live(
@@ -620,6 +681,8 @@ export class Unicum {
   get streamers(): StreamersNamespace {
     const baseUrl = this.#baseUrl;
     return {
+      list: () =>
+        unwrap(this.#api.GET("/streamers/live", {})),
       live: (onData, onError) =>
         subscribeSse<LiveStreamer[]>(
           `${baseUrl}/streamers/live/sse`,

@@ -3,7 +3,6 @@ import { ClansLandingView } from "@/components/clans/clans-landing-view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getLanguageStats } from "@/services/clans/available-languages";
 import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
 
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
@@ -29,13 +28,6 @@ export async function generateMetadata({
   });
 }
 
-export async function generateStaticParams() {
-  // Prerender common languages only (≥100 eligible clans). Niche
-  // languages fall through to on-demand rendering and ISR.
-  const stats = await getLanguageStats(Region.EU);
-  return stats.filter((s) => s.total >= 100).map((s) => ({ language: s.code }));
-}
-
 export default async function Page({
   params,
 }: {
@@ -47,5 +39,8 @@ export default async function Page({
   );
 }
 
-export const dynamic = "force-static";
-export const revalidate = 600;
+// Dynamic on purpose: the page consumes our own API through the SDK, and
+// prerendering it at build time would make the build depend on a running API.
+// The endpoints cache server-side, so per-request cost is local HTTP hops onto
+// cached payloads.
+export const dynamic = "force-dynamic";

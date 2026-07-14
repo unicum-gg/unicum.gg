@@ -1,5 +1,6 @@
 import { StrongholdLeaderboardView } from "./stronghold-leaderboard-view";
-import { getStrongholdLeaderboard } from "@/services/clans/stronghold-leaderboard";
+import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
+import { unicum } from "@/services/sdk";
 import {
   StrongholdSort,
   StrongholdTier,
@@ -7,7 +8,6 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
-const LIMIT = 100;
 
 function parseTier(raw: string): StrongholdTier | null {
   return (Object.values(StrongholdTier) as string[]).includes(raw)
@@ -32,7 +32,13 @@ export async function StrongholdLeaderboardPage({
 }) {
   const tier = parseTier(tierParam) ?? StrongholdTier.T10;
   const sort = parseSort(sortParam, tier);
-  const results = await getStrongholdLeaderboard(region, tier, sort, LIMIT);
+  // The page consumes its own public API through the SDK (top 100 fixed by
+  // the endpoint).
+  const { results } = (await unicum
+    .region(region)
+    .clans.strongholdTop({ tier, sort })) as unknown as {
+    results: StrongholdLeaderboardEntry[];
+  };
 
   return (
     <StrongholdLeaderboardView

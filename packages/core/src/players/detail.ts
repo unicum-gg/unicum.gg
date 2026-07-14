@@ -9,6 +9,7 @@ import {
   falloutStatsFromSnapshot,
   fortifiedStatsFromSnapshot,
   rankedStatsFromSnapshot,
+  recordCurrentSnapshot,
   skirmishStatsFromSnapshot,
   statsFromSnapshot,
   type Stats,
@@ -23,6 +24,16 @@ import {
   type RatingHistoryPoint,
 } from "@unicum.gg/core/players/rating-history";
 import { diffTanks, tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
+import {
+  loadPlayerClanHistoryFromWG,
+  storePlayerClanHistory,
+} from "@unicum.gg/core/players/clan-history";
+import {
+  findPlayerByNickname,
+  getAccountWTR,
+  getPlayerInfo,
+} from "@unicum.gg/core/wargaming/wot/accounts";
+import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import {
@@ -171,6 +182,90 @@ export async function loadPlayerDetail(
     latest: initial.latestSnapshot,
     tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
     clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
+    initial,
+    metric,
+  });
+}
+
+/**
+ * Stale-while-revalidate loader for the player detail endpoint (the flow the
+ * player page used to run inline). DB first: a player with at least one
+ * snapshot renders immediately from cache (a missing clan history backfills in
+ * the background and LiveSync refetches when it lands). On a cold DB, resolve the
+ * account on WG, fetch live, and record a snapshot, which also starts tracking
+ * the player. Returns null only when WG doesn't know the nickname either.
+ */
+export async function loadPlayerDetailLive(
+  region: Region,
+  nickname: string,
+  metric: RatingMetric,
+): Promise<PlayerDetailData | null> {
+  let initial = await loadPlayerInitialData(region, { nickname });
+
+  // Resolve accountId for true first-ever visits.
+  let accountId = initial.player?.accountId ?? null;
+  if (accountId === null) {
+    const found = await findPlayerByNickname(region, nickname).catch(() => null);
+    if (!found) return null;
+    accountId = found.account_id;
+    initial = await loadPlayerInitialData(region, { accountId });
+  }
+
+  if (initial.player && initial.latestSnapshot) {
+    // Cache hit. A stub clan history backfills in the background; LiveSync's
+    // SSE triggers a refetch once it is stored.
+    if (!initial.clanHistory) {
+      void loadPlayerClanHistoryFromWG(region, accountId)
+        .then((history) => storePlayerClanHistory(region, accountId!, history))
+        .catch((err) =>
+          console.error("[bg] backfill clan history failed:", err),
+        );
+    }
+    return buildPlayerDetail({
+      region,
+      accountId,
+      player: initial.player,
+      latest: initial.latestSnapshot,
+      tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
+      clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
+      initial,
+      metric,
+    });
+  }
+
+  // Cold DB: fetch everything live from WG and record a snapshot (which also
+  // starts tracking the player).
+  const [info, fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
+    getPlayerInfo(region, accountId),
+    getTanksStats(region, accountId).catch((err) => {
+      console.warn("[player detail] getTanksStats failed:", err);
+      return [] as TankStats[];
+    }),
+    getAccountWTR(region, accountId).catch(() => null),
+    loadPlayerClanHistoryFromWG(region, accountId).catch((err) => {
+      console.error("[player detail] loadPlayerClanHistoryFromWG failed:", err);
+      return EMPTY_CLAN_HISTORY;
+    }),
+  ]);
+  if (!info) return null;
+
+  const { player, latest } = await recordCurrentSnapshot(
+    region,
+    info,
+    fetchedWtr,
+    fetchedTanks,
+  );
+  void storePlayerClanHistory(region, accountId, fetchedClanHistory).catch(
+    (err) => console.error("[bg] storePlayerClanHistory failed:", err),
+  );
+
+  return buildPlayerDetail({
+    region,
+    accountId,
+    player,
+    latest,
+    tanks: fetchedTanks,
+    clanHistory: fetchedClanHistory,
     initial,
     metric,
   });

@@ -7,10 +7,10 @@ Read [`AGENTS.md`](./AGENTS.md) first. It contains the non-obvious repo rules th
 pnpm workspace with one-way dependencies, no cycles:
 
 ```
-@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/web (server) + apps/worker
+@unicum.gg/wargaming ──▶ @unicum.gg/shared ──▶ @unicum.gg/core ──▶ apps/web (API routes) + apps/worker
                                                        │ HTTP API
                                 @unicum.gg/sdk ◀───────┘
-                                       └──▶ web front + apps/bot
+                                       └──▶ web front (pages, SSR included) + apps/bot
 ```
 
 - `packages/wargaming` — neutral Wargaming API SDK. Import from the barrel: `import { Region } from "@unicum.gg/wargaming"`.
@@ -18,6 +18,8 @@ pnpm workspace with one-way dependencies, no cycles:
 - `packages/core` — server-only (db pool, redis, crons, repositories, WG fetchers, auth). Not a barrel on purpose: modules have import-time side effects, so import the precise subpath (`@unicum.gg/core/db`, `@unicum.gg/core/players`, ...). Client components must never import it.
 - `packages/sdk` — fluent client for our own public API (types generated from the OpenAPI spec). The web front end and the Discord bot fetch through it; never write raw `fetch` calls against our own API.
 - `apps/web` (site + API), `apps/worker` (crons), `apps/bot` (Discord — a pure SDK client, no core/db access).
+
+Inside `apps/web` the same one-way rule applies: only `app/api/**` (plus the og-image/sitemap/auth routes and the API-side `services/*` helpers) imports `core` by value. Pages and components (server-rendered ones included) fetch through the public API via `@unicum.gg/sdk`, exactly like the bot. `import type` from core is fine (erased at build). If a page needs data no endpoint serves yet, add the endpoint first, then consume it through the SDK.
 
 Rule of thumb for new code: pure logic or a type a client component needs goes in `shared`; anything touching db/redis/WG goes in `core`; a mixed module keeps the server function in `core` and re-exports the type from `shared`.
 

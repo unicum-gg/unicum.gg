@@ -19,6 +19,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Compare clans
+         * @description Inputs for a side-by-side comparison of up to 4 clans (`?tags=a,b,c`): each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and the WN8/WNX expected-value tables. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-clans-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/languages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan languages
+         * @description Languages the region's clans declare, with total and strict (single-language) counts. Backs the by-language leaderboards.
+         */
+        get: operations["get-{region}-clans-languages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/clans/search": {
         parameters: {
             query?: never;
@@ -239,6 +279,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/stronghold/top": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Stronghold clan leaderboard
+         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by Elo (or battles for Advances, which has no Elo). Top 100; cached ~10 min server-side.
+         */
+        get: operations["get-{region}-clans-stronghold-top"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/mcp": {
         parameters: {
             query?: never;
@@ -268,9 +328,49 @@ export interface paths {
         };
         /**
          * Player detail
-         * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Serves the tracker's cached data; a player unknown to the tracker returns 404. Dates are ISO 8601 strings.
+         * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Works for ANY player: cached data is served immediately; on a cold cache the account is resolved on Wargaming, fetched live and recorded (which also starts tracking it). 404 only when Wargaming doesn't know the nickname either. Dates are ISO 8601 strings.
          */
         get: operations["get-{region}-players-{nickname}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Compare players
+         * @description Inputs for a side-by-side comparison of up to 4 players (`?names=a,b,c`): each player's tracked row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and the WN8/WNX expected-value tables the ratings derive from. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-players-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/languages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player languages
+         * @description Languages the region's tracked players speak (inferred from their clan's declared languages), with total and strict (single-language clans) counts. Backs the by-language leaderboards.
+         */
+        get: operations["get-{region}-players-languages"];
         put?: never;
         post?: never;
         delete?: never;
@@ -408,7 +508,7 @@ export interface paths {
         };
         /**
          * Live streamers
-         * @description Tracked players live on Twitch in the World of Tanks category across all regions, with cached WN7/WN8/WNX ratings and clan tag, sorted by WNX (empty when nobody tracked is live).
+         * @description Tracked players currently live on Twitch, across all regions, with their WN7/WN8/WNX ratings. Snapshot form of the `/streamers/live/sse` stream; cached ~30s server-side.
          */
         get: operations["get-streamers-live"];
         put?: never;
@@ -451,6 +551,26 @@ export interface paths {
          * @description Liveness probe. Referenced as the `status` link relation in the
          */
         get: operations["get-health"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Coverage
+         * @description How much of the region the tracker covers: player/clan/snapshot counts, refresh-policy health (per activity bucket), 30-day discovery and snapshot trends, and infrastructure size/cost. Cached for 60s server-side. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-coverage"];
         put?: never;
         post?: never;
         delete?: never;
@@ -599,6 +719,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/{slug}/detail": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank detail
+         * @description Everything the tank page renders in one payload: identity, top players per rating metric (WN7/WN8/WNX), server-average performance, WN8/WNX expected values, combat specifications, current Marks of Excellence/Mastery with their daily history, and the cheapest research path. `slug` in the response is the canonical slug; callers that reached the tank through a legacy numeric id should redirect to it. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-tanks-{slug}-detail"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/{slug}/economics": {
         parameters: {
             query?: never;
@@ -706,6 +846,16 @@ export interface components {
         ClanActivityResponse: {
             events: components["schemas"]["ClanEvent"][];
         };
+        clanCompareSlot: {
+            /** @description The clan tag as requested. */
+            requested: string;
+            /** @description The clan's profile (null when unknown). */
+            clan: string | null;
+            /** @description Members with cached WN7/WN8/WNX ratings. */
+            members: string[];
+            /** @description Per-tank aggregates across the clan's members. */
+            tankAggregates: string[];
+        };
         /** @description A recent join, leave or role-change event. */
         ClanEvent: {
             type: string;
@@ -749,6 +899,15 @@ export interface components {
             creatorName: string;
             isDisbanded: boolean;
             languages: string[];
+        };
+        ClanLanguagesResponse: {
+            results: components["schemas"]["clanLanguageStat"][];
+        };
+        clanLanguageStat: {
+            /** @description Two-letter language code. */
+            code: string;
+            total: number;
+            strict: number;
         };
         /** @description A clan member with cached WN7/WN8/WNX ratings. */
         ClanMember: {
@@ -801,6 +960,32 @@ export interface components {
             lifetime: components["schemas"]["ratingTriplet"];
             recent: components["schemas"]["ratingTriplet"];
             avgWinrate: number | null;
+        };
+        /** @description Inputs for a side-by-side clan comparison: each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and WN8/WNX expected-value tables. */
+        ClansCompare: {
+            slots: components["schemas"]["clanCompareSlot"][];
+            encyclopedia: {
+                [key: string]: string;
+            };
+            wn8Expected: {
+                [key: string]: string;
+            };
+            wnxExpected: {
+                [key: string]: string;
+            };
+        };
+        /** @description Inputs for a side-by-side clan comparison: each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and WN8/WNX expected-value tables. */
+        ClansCompareResponse: {
+            slots: components["schemas"]["clanCompareSlot"][];
+            encyclopedia: {
+                [key: string]: string;
+            };
+            wn8Expected: {
+                [key: string]: string;
+            };
+            wnxExpected: {
+                [key: string]: string;
+            };
         };
         ClanSearchChunk: unknown;
         ClanSearchResponse: {
@@ -880,9 +1065,153 @@ export interface components {
                 d30: components["schemas"]["ClanGlobalMapStats"] | null;
             };
         };
+        compareSlot: {
+            /** @description The nickname as requested. */
+            requested: string;
+            /** @description The tracked player row (null when unknown to the tracker). */
+            player: string | null;
+            /** @description The player's latest snapshot (null when never snapped). */
+            latest: string | null;
+            /** @description Raw per-tank stats (WN8/WNX inputs). */
+            tanks: string[];
+        };
+        /** @description Tracker coverage for one region: row counts, refresh-policy health, 30-day discovery/snapshot trends and infrastructure size/cost. */
+        Coverage: {
+            /** @enum {string} */
+            region: "eu" | "na" | "asia";
+            players: number;
+            clans: number;
+            playerSnapshots: number;
+            tankSnapshots: number;
+            clanMembers: number;
+            clanRecentEvents: number;
+            clanRefreshQueue: number;
+            playerRefreshQueue: number;
+            snapshotBacklog: number;
+            activity: {
+                /** Format: date-time */
+                lastPlayerSnapshotAt: Date | null;
+                /** Format: date-time */
+                lastClanRefreshAt: Date | null;
+                playerSnapshotsLast24h: number;
+                clansRefreshedLast24h: number;
+                snapshotFreshness: {
+                    onTime: number;
+                    fetched: number;
+                };
+                awaitingFirstSnapshot: number;
+            };
+            refreshPolicy: components["schemas"]["refreshPolicyBucket"][];
+            funFacts: {
+                /** Format: date-time */
+                oldestPlayerSnapshotAt: Date | null;
+                biggestClan: {
+                    tag: string;
+                    name: string;
+                    membersCount: number;
+                } | null;
+                totalBattlesTracked: number;
+            };
+            trends: {
+                playersDiscoveredDaily: components["schemas"]["dailyPoint"][];
+                clansDiscoveredDaily: components["schemas"]["dailyPoint"][];
+                playerSnapshotsDaily: components["schemas"]["dailyPoint"][];
+                firstSnapshotsDaily: components["schemas"]["dailyPoint"][];
+            };
+            infrastructure: {
+                databaseBytes: number;
+                tables: {
+                    name: string;
+                    bytes: number;
+                }[];
+                costs: {
+                    breakdown: {
+                        label: string;
+                        usdAnnual: number;
+                        note?: string;
+                    }[];
+                    totalAnnualUsd: number;
+                };
+            };
+        };
+        /** @description Tracker coverage for one region: row counts, refresh-policy health, 30-day discovery/snapshot trends and infrastructure size/cost. */
+        CoverageResponse: {
+            /** @enum {string} */
+            region: "eu" | "na" | "asia";
+            players: number;
+            clans: number;
+            playerSnapshots: number;
+            tankSnapshots: number;
+            clanMembers: number;
+            clanRecentEvents: number;
+            clanRefreshQueue: number;
+            playerRefreshQueue: number;
+            snapshotBacklog: number;
+            activity: {
+                /** Format: date-time */
+                lastPlayerSnapshotAt: Date | null;
+                /** Format: date-time */
+                lastClanRefreshAt: Date | null;
+                playerSnapshotsLast24h: number;
+                clansRefreshedLast24h: number;
+                snapshotFreshness: {
+                    onTime: number;
+                    fetched: number;
+                };
+                awaitingFirstSnapshot: number;
+            };
+            refreshPolicy: components["schemas"]["refreshPolicyBucket"][];
+            funFacts: {
+                /** Format: date-time */
+                oldestPlayerSnapshotAt: Date | null;
+                biggestClan: {
+                    tag: string;
+                    name: string;
+                    membersCount: number;
+                } | null;
+                totalBattlesTracked: number;
+            };
+            trends: {
+                playersDiscoveredDaily: components["schemas"]["dailyPoint"][];
+                clansDiscoveredDaily: components["schemas"]["dailyPoint"][];
+                playerSnapshotsDaily: components["schemas"]["dailyPoint"][];
+                firstSnapshotsDaily: components["schemas"]["dailyPoint"][];
+            };
+            infrastructure: {
+                databaseBytes: number;
+                tables: {
+                    name: string;
+                    bytes: number;
+                }[];
+                costs: {
+                    breakdown: {
+                        label: string;
+                        usdAnnual: number;
+                        note?: string;
+                    }[];
+                    totalAnnualUsd: number;
+                };
+            };
+        };
+        dailyPoint: {
+            /** @description UTC day, YYYY-MM-DD. */
+            day: string;
+            count: number;
+        };
         HealthResponse: {
             /** @example ok */
             status: string;
+        };
+        /** @description Two-letter language code. When set, the leaderboard is filtered to players/clans whose clan declares this language (period is ignored: language boards are lifetime WNX). */
+        languageField: string;
+        /** @description One language's population. */
+        LanguageStat: {
+            /** @description Two-letter language code. */
+            code: string;
+            /** @description Players/clans with this language among their declared ones. */
+            total: number;
+            /** @description Players/clans whose clan declares only this language. */
+            strict: number;
         };
         /** @description A tank whose removal would move the overall rating by removalDelta (negative = it lifts the rating, positive = it drags it). */
         LiftDragRow: {
@@ -896,12 +1225,9 @@ export interface components {
             rating: number;
             removalDelta: number;
         };
-        /** @description A tracked player live on Twitch in the World of Tanks category, with cached WN7/WN8/WNX ratings and clan tag. */
+        /** @description A tracked player currently live on Twitch, with ratings. */
         LiveStreamer: {
-            /**
-             * @description Game server region.
-             * @enum {string}
-             */
+            /** @enum {string} */
             region: "eu" | "na" | "asia";
             accountId: number;
             nickname: string;
@@ -910,15 +1236,20 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            wn730d: number | null;
+            wn830d: number | null;
+            wnx30d: number | null;
             twitchLogin: string;
             twitchUserName: string;
             title: string;
             viewerCount: number;
+            /** @description Stream start, ISO 8601. */
             startedAt: string;
             thumbnailUrl: string;
         };
-        /** @description Tracked players live on Twitch right now, sorted by WNX. */
-        LiveStreamersResponse: components["schemas"]["LiveStreamer"][];
+        LiveStreamersResponse: {
+            results: components["schemas"]["LiveStreamer"][];
+        };
         /** @description A JSON-RPC 2.0 response from the MCP endpoint (carries a method-specific `result` or a JSON-RPC `error`). */
         McpResponse: {
             jsonrpc: string;
@@ -988,6 +1319,41 @@ export interface components {
                 cwAbsolute: components["schemas"]["StrongholdMode"];
                 cwChampion: components["schemas"]["StrongholdMode"];
                 cwMiddle: components["schemas"]["StrongholdMode"];
+            };
+        };
+        PlayerLanguagesResponse: {
+            results: components["schemas"]["LanguageStat"][];
+        };
+        /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
+        PlayersCompare: {
+            slots: components["schemas"]["compareSlot"][];
+            /** @description Vehicle catalogue keyed by tank id. */
+            encyclopedia: {
+                [key: string]: string;
+            };
+            /** @description WN8 expected values keyed by tank id. */
+            wn8Expected: {
+                [key: string]: string;
+            };
+            /** @description WNX expected values keyed by tank id. */
+            wnxExpected: {
+                [key: string]: string;
+            };
+        };
+        /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
+        PlayersCompareResponse: {
+            slots: components["schemas"]["compareSlot"][];
+            /** @description Vehicle catalogue keyed by tank id. */
+            encyclopedia: {
+                [key: string]: string;
+            };
+            /** @description WN8 expected values keyed by tank id. */
+            wn8Expected: {
+                [key: string]: string;
+            };
+            /** @description WNX expected values keyed by tank id. */
+            wnxExpected: {
+                [key: string]: string;
             };
         };
         PlayerSearchChunk: unknown;
@@ -1069,6 +1435,42 @@ export interface components {
             wn8: number | null;
             wnx: number | null;
         };
+        refreshPolicyBucket: {
+            /** @enum {string} */
+            bucket: "unfetched" | "hidden" | "active_24h" | "active_7d" | "recent_30d" | "recent_90d" | "dormant_1y" | "inactive";
+            /** @description Target refresh cadence for this activity bucket, in ms. */
+            cadenceMs: number;
+            total: number;
+            onTime: number;
+            neverSnapped: number;
+        };
+        researchPathItem: {
+            tankId: number;
+            slug: string;
+            meta: components["schemas"]["VehicleMeta"];
+            researchXp: number | null;
+            buyCredits: number | null;
+        };
+        /**
+         * @description With `language`: only count clans that declare exactly this one language.
+         * @enum {string}
+         */
+        strictField: "true" | "false";
+        /** @description One clan on the stronghold leaderboard. */
+        StrongholdLeaderboardEntry: {
+            clanId: number;
+            tag: string;
+            name: string;
+            color: string;
+            emblem: string;
+            languages: string[];
+            membersCount: number;
+            /** @description Tier Elo (null for Advances, which has no Elo). */
+            elo: number | null;
+            battles: number;
+            battles30d: number | null;
+            wins: number;
+        };
         /** @description One game mode's totals plus 24h/7d/30d period diffs. */
         StrongholdMode: {
             current: components["schemas"]["StrongholdStats"] | null;
@@ -1091,6 +1493,123 @@ export interface components {
             capturePoints: number;
             droppedCapturePoints: number;
             battleAvgXp: number;
+        };
+        StrongholdTopResponse: {
+            results: components["schemas"]["StrongholdLeaderboardEntry"][];
+        };
+        /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
+        TankDetail: {
+            tankId: number;
+            /** @description Canonical slug. Callers that reached the tank through a legacy id or wrong-case slug should redirect to it. */
+            slug: string;
+            meta: components["schemas"]["VehicleMeta"];
+            topByMetric: {
+                wn7: components["schemas"]["topTankPlayer"][];
+                wn8: components["schemas"]["topTankPlayer"][];
+                wnx: components["schemas"]["topTankPlayer"][];
+                /** Format: date-time */
+                computedAt: Date | null;
+            };
+            serverStats: components["schemas"]["TankServerStats"] | null;
+            wn8Expected: {
+                expDamage: number;
+                expSpot: number;
+                expFrag: number;
+                expDef: number;
+                expWinRate: number;
+            } | null;
+            wnxExpected: {
+                damage: number;
+                frags: number;
+                spots: number;
+                assist: number;
+            } | null;
+            specs: string | null;
+            moe: {
+                mark1: number;
+                mark2: number;
+                mark3: number;
+            } | null;
+            mom: {
+                class3: number;
+                class2: number;
+                class1: number;
+                ace: number;
+            } | null;
+            researchPath: {
+                lineage: components["schemas"]["researchPathItem"][];
+                next: components["schemas"]["researchPathItem"][];
+            } | null;
+            moeHistory: {
+                day: string;
+                mark1: number;
+                mark2: number;
+                mark3: number;
+            }[];
+            momHistory: {
+                day: string;
+                class3: number;
+                class2: number;
+                class1: number;
+                ace: number;
+            }[];
+        };
+        /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
+        TankDetailResponse: {
+            tankId: number;
+            /** @description Canonical slug. Callers that reached the tank through a legacy id or wrong-case slug should redirect to it. */
+            slug: string;
+            meta: components["schemas"]["VehicleMeta"];
+            topByMetric: {
+                wn7: components["schemas"]["topTankPlayer"][];
+                wn8: components["schemas"]["topTankPlayer"][];
+                wnx: components["schemas"]["topTankPlayer"][];
+                /** Format: date-time */
+                computedAt: Date | null;
+            };
+            serverStats: components["schemas"]["TankServerStats"] | null;
+            wn8Expected: {
+                expDamage: number;
+                expSpot: number;
+                expFrag: number;
+                expDef: number;
+                expWinRate: number;
+            } | null;
+            wnxExpected: {
+                damage: number;
+                frags: number;
+                spots: number;
+                assist: number;
+            } | null;
+            specs: string | null;
+            moe: {
+                mark1: number;
+                mark2: number;
+                mark3: number;
+            } | null;
+            mom: {
+                class3: number;
+                class2: number;
+                class1: number;
+                ace: number;
+            } | null;
+            researchPath: {
+                lineage: components["schemas"]["researchPathItem"][];
+                next: components["schemas"]["researchPathItem"][];
+            } | null;
+            moeHistory: {
+                day: string;
+                mark1: number;
+                mark2: number;
+                mark3: number;
+            }[];
+            momHistory: {
+                day: string;
+                class3: number;
+                class2: number;
+                class1: number;
+                ace: number;
+            }[];
         };
         /** @description A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1. */
         TankEconomics: {
@@ -1166,17 +1685,17 @@ export interface components {
         TankSearchResponse: {
             results: components["schemas"]["TankSummary"][];
         };
-        /** @description Server-wide performance for a tank, averaged over tracked players. moeN/momN are holder counts among tracked players; null until the by-tank cron has coverage. */
+        /** @description Server-average performance across tracked players. */
         TankServerStats: {
             players: number;
             avg_battles: number;
             total_battles: number | null;
             avg_damage: number;
             winrate: number;
-            player_wr: number | null;
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            player_wr: number | null;
             avg_spots: number | null;
             avg_assist: number | null;
             kdr: number | null;
@@ -1265,6 +1784,36 @@ export interface components {
             results: components["schemas"]["PlayerSummary"][];
             computed_at: string | null;
         };
+        topTankPlayer: {
+            account_id: number;
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            battles: number;
+            avg_damage: number;
+            winrate: number;
+            /** @description The ranked metric's value. */
+            value: number;
+        };
+        /** @description The tank's catalogue identity. */
+        VehicleMeta: {
+            tier: number;
+            type: string;
+            nation: string;
+            name: string;
+            shortName: string;
+            tag: string;
+            isPremium: boolean;
+            isReward: boolean;
+            role: string | null;
+            contourIcon: string | null;
+            bigIcon: string | null;
+        };
+        /**
+         * @description Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.
+         * @enum {string}
+         */
+        withLanguagesField: "true" | "false";
     };
     responses: never;
     parameters: never;
@@ -1302,6 +1851,55 @@ export interface operations {
             };
         };
     };
+    "get-{region}-clans-compare": {
+        parameters: {
+            query?: {
+                /** @example example */
+                tags?: string;
+            };
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClansCompare"];
+                };
+            };
+        };
+    };
+    "get-{region}-clans-languages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanLanguagesResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-clans-search": {
         parameters: {
             query: {
@@ -1335,6 +1933,9 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
+                language?: components["schemas"]["languageField"];
+                strict?: components["schemas"]["strictField"];
+                languages?: components["schemas"]["withLanguagesField"];
             };
             header?: never;
             path: {
@@ -1594,6 +2195,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-clans-stronghold-top": {
+        parameters: {
+            query?: {
+                /** @description Stronghold mode/tier (default t10). */
+                tier?: "advances" | "t10" | "t8" | "t6";
+                /** @description Ranking column (default elo; battles for Advances). */
+                sort?: "elo" | "battles" | "battles30d" | "winrate";
+            };
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StrongholdTopResponse"];
+                };
+            };
+        };
+    };
     "post-mcp": {
         parameters: {
             query?: never;
@@ -1644,6 +2273,55 @@ export interface operations {
             };
         };
     };
+    "get-{region}-players-compare": {
+        parameters: {
+            query?: {
+                /** @example example */
+                names?: string;
+            };
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayersCompare"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-languages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerLanguagesResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-players-search": {
         parameters: {
             query: {
@@ -1677,6 +2355,9 @@ export interface operations {
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
+                language?: components["schemas"]["languageField"];
+                strict?: components["schemas"]["strictField"];
+                languages?: components["schemas"]["withLanguagesField"];
             };
             header?: never;
             path: {
@@ -1831,6 +2512,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["HealthResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Coverage"];
                 };
             };
         };
@@ -2000,6 +2704,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankSpecsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-detail": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example slug
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankDetail"];
                 };
             };
         };

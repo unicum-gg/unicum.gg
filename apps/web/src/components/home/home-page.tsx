@@ -24,17 +24,17 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import APP from "@/constants/app";
-import { RATING_METRICS, RatingMetric } from "@unicum.gg/shared";
+import { RATING_METRICS, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { styles } from "@/lib/styles";
-import {
-  getTopClansByMetricByRegions,
+import type {
   TopClansPeriod,
+  TopClansSnapshot,
 } from "@unicum.gg/core/wargaming/wot/clans/top";
-import {
-  getTopPlayersByMetricByRegions,
+import type {
   TopPlayersPeriod,
+  TopPlayersSnapshot,
 } from "@unicum.gg/core/wargaming/wot/players/top";
-import { getCachedLiveStreamers } from "@/services/twitch";
+import { unicum } from "@/services/sdk";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 const TOP_LIMIT = 9;
@@ -43,6 +43,51 @@ const RATING_COL: Record<RatingMetric, "wn7" | "wn8" | "wnx"> = {
   [RatingMetric.Wn8]: "wn8",
   [RatingMetric.Wnx]: "wnx",
 };
+
+// The home consumes its own public API through the SDK: one `/top` call per
+// (region, metric, period), all precomputed leaderboards server-side, plus
+// the live-streamers snapshot. Next memoizes identical fetches per render.
+async function playersTopByRegions(
+  metric: RatingMetric,
+  period: `${TopPlayersPeriod}`,
+): Promise<Record<Region, TopPlayersSnapshot>> {
+  const entries = await Promise.all(
+    REGIONS.map(async (region) => {
+      const { results, computed_at } = await unicum
+        .region(region)
+        .players.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT });
+      return [
+        region,
+        {
+          results,
+          computedAt: computed_at ? new Date(computed_at) : null,
+        } as unknown as TopPlayersSnapshot,
+      ] as const;
+    }),
+  );
+  return Object.fromEntries(entries) as Record<Region, TopPlayersSnapshot>;
+}
+
+async function clansTopByRegions(
+  metric: RatingMetric,
+  period: `${TopClansPeriod}`,
+): Promise<Record<Region, TopClansSnapshot>> {
+  const entries = await Promise.all(
+    REGIONS.map(async (region) => {
+      const { results, computed_at } = await unicum
+        .region(region)
+        .clans.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT });
+      return [
+        region,
+        {
+          results,
+          computedAt: computed_at ? new Date(computed_at) : null,
+        } as unknown as TopClansSnapshot,
+      ] as const;
+    }),
+  );
+  return Object.fromEntries(entries) as Record<Region, TopClansSnapshot>;
+}
 
 export async function HomePage({
   regionOverride,
@@ -58,67 +103,13 @@ export async function HomePage({
     topPlayersMonthByMetric,
     liveStreamers,
   ] = await Promise.all([
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopClansByMetricByRegions(
-          REGIONS,
-          m,
-          TopClansPeriod.Overall,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopClansByMetricByRegions(
-          REGIONS,
-          m,
-          TopClansPeriod.Month,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopPlayersByMetricByRegions(
-          REGIONS,
-          m,
-          TopPlayersPeriod.Day,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopPlayersByMetricByRegions(
-          REGIONS,
-          m,
-          TopPlayersPeriod.Week,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopPlayersByMetricByRegions(
-          REGIONS,
-          m,
-          TopPlayersPeriod.Overall,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    Promise.all(
-      RATING_METRICS.map((m) =>
-        getTopPlayersByMetricByRegions(
-          REGIONS,
-          m,
-          TopPlayersPeriod.Month,
-          TOP_LIMIT,
-        ),
-      ),
-    ),
-    getCachedLiveStreamers(),
+    Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "overall"))),
+    Promise.all(RATING_METRICS.map((m) => clansTopByRegions(m, "30d"))),
+    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "24h"))),
+    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "7d"))),
+    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "overall"))),
+    Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "30d"))),
+    unicum.streamers.list().then((r) => r.results as unknown as LiveStreamer[]),
   ]);
 
   return (
