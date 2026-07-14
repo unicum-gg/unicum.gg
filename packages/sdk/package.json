@@ -2,6 +2,7 @@
   "name": "@unicum.gg/sdk",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "description": "Fluent, typed client for the unicum.gg public API (World of Tanks player, clan and tank stats).",
   "exports": {
     ".": "./src/index.ts",
