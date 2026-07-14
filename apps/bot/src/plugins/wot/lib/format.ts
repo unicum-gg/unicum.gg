@@ -9,6 +9,10 @@ export const playerUrl = (region: Region, nickname: string): string =>
 export const clanUrl = (region: Region, tag: string): string =>
   `${APP_IDENTITY.URL}/${region}/clans/${encodeURIComponent(tag)}`;
 
+/** Link to a tank's page on the site. */
+export const tankUrl = (region: Region, slug: string): string =>
+  `${APP_IDENTITY.URL}/${region}/tanks/${encodeURIComponent(slug)}`;
+
 /** The WNX rating-tier colour as a Discord embed integer (matches the site). */
 export const wnxColorInt = (wnx: number | null): number =>
   parseInt(RATING_COLOR_HEX[wnxColor(wnx ?? 0)].slice(1), 16);
