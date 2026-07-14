@@ -1,4 +1,6 @@
 import { APP_IDENTITY } from "@unicum.gg/core";
+import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
+import type { OnlinePayload } from "@unicum.gg/core/wargaming/wot/server/online";
 import { Region } from "@unicum.gg/wargaming/region";
 import createClient, { type Client } from "openapi-fetch";
 import type { paths } from "./generated/schema";
@@ -84,10 +86,48 @@ async function unwrap<T>(
   return reviveDates(data) as T;
 }
 
+/** Cancels an SSE subscription; call it to close the underlying `EventSource`
+ * (e.g. from a React effect cleanup). */
+export type Unsubscribe = () => void;
+
+/** Payload of a clan/player live `"update"` event: a hint at what changed so the
+ * client can refetch just that slice. `kind` is `undefined` for a generic
+ * "something changed" signal. */
+export type LiveUpdate = { kind?: string };
+
+/**
+ * Subscribe to a Server-Sent Events stream, parsing each event's JSON `data`
+ * into `T`. Browser-only: on the server (SSR / Node) there is no `EventSource`,
+ * so it is a harmless no-op returning a no-op unsubscribe. The returned function
+ * closes the stream. `EventSource` auto-reconnects on transient errors, so
+ * `onError` is advisory (the stream stays open).
+ */
+function subscribeSse<T>(
+  url: string,
+  event: string,
+  onData: (data: T) => void,
+  onError?: (error: Event) => void,
+): Unsubscribe {
+  if (typeof window === "undefined" || typeof EventSource === "undefined") {
+    return () => {};
+  }
+  const source = new EventSource(url);
+  source.addEventListener(event, (e) => {
+    try {
+      onData(JSON.parse((e as MessageEvent).data) as T);
+    } catch {
+      // ignore malformed payloads
+    }
+  });
+  if (onError) source.onerror = onError;
+  return () => source.close();
+}
+
 /** A single player: `unicum.eu.players("Rice")`. */
 class PlayerClient {
   constructor(
     private readonly api: Client<paths>,
+    private readonly baseUrl: string,
     private readonly region: Region,
     private readonly nickname: string,
   ) {}
@@ -100,6 +140,33 @@ class PlayerClient {
       this.api.GET("/{region}/players/{nickname}", {
         params: { path: { region: this.region, nickname: this.nickname }, query },
       }),
+    );
+  }
+
+  /** Enqueue an on-demand refresh of this player; returns the estimated seconds
+   * until it completes. */
+  enqueue() {
+    const { region, nickname } = this;
+    return unwrap(
+      this.api.POST("/{region}/players/{nickname}/enqueue", {
+        params: { path: { region, nickname } },
+      }),
+    );
+  }
+
+  /** Subscribe to live updates for this player (SSE): `onUpdate` fires when
+   * fresh stats land server-side, so refetch `detail()` in response. Returns an
+   * unsubscribe function; browser-only. */
+  live(
+    onUpdate: (event: LiveUpdate) => void,
+    onError?: (error: Event) => void,
+  ): Unsubscribe {
+    const { region, nickname } = this;
+    return subscribeSse(
+      `${this.baseUrl}/${region}/players/${encodeURIComponent(nickname)}/sse`,
+      "update",
+      onUpdate,
+      onError,
     );
   }
 }
@@ -117,6 +184,7 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
 class ClanClient {
   constructor(
     private readonly api: Client<paths>,
+    private readonly baseUrl: string,
     private readonly region: Region,
     private readonly tag: string,
   ) {}
@@ -180,6 +248,33 @@ class ClanClient {
       this.api.GET("/{region}/clans/{tag}/vehicles", {
         params: { path: { region, tag } },
       }),
+    );
+  }
+
+  /** Enqueue an on-demand refresh of this clan. */
+  async enqueue(): Promise<void> {
+    const { region, tag } = this;
+    const { error, response } = await this.api.POST("/{region}/clans/{tag}/enqueue", {
+      params: { path: { region, tag } },
+    });
+    if (!response.ok || error !== undefined) {
+      throw new UnicumError(response.status, response.url, error);
+    }
+  }
+
+  /** Subscribe to live updates for this clan (SSE): `onUpdate` fires when the
+   * clan's data changes server-side, so refetch the affected slice in response.
+   * Returns an unsubscribe function; browser-only. */
+  live(
+    onUpdate: (event: LiveUpdate) => void,
+    onError?: (error: Event) => void,
+  ): Unsubscribe {
+    const { region, tag } = this;
+    return subscribeSse(
+      `${this.baseUrl}/${region}/clans/${encodeURIComponent(tag)}/sse`,
+      "update",
+      onUpdate,
+      onError,
     );
   }
 }
@@ -257,17 +352,28 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   search(q: string): Promise<Data<"/{region}/tanks/search">>;
 };
 
+type ServerNamespace = {
+  /** Live count of players online for this region (SSE). The payload is `null`
+   * on a transient upstream failure; keep the last known value. Returns an
+   * unsubscribe function; browser-only. */
+  online(
+    onData: (payload: OnlinePayload) => void,
+    onError?: (error: Event) => void,
+  ): Unsubscribe;
+};
+
 /** Every resource scoped to one region: `unicum.eu`, `unicum.region("na")`. */
 class RegionClient {
   constructor(
     private readonly api: Client<paths>,
+    private readonly baseUrl: string,
     readonly region: Region,
   ) {}
 
   get players(): PlayersNamespace {
-    const { api, region } = this;
+    const { api, baseUrl, region } = this;
     const ns = ((nickname: string) =>
-      new PlayerClient(api, region, nickname)) as PlayersNamespace;
+      new PlayerClient(api, baseUrl, region, nickname)) as PlayersNamespace;
     ns.search = (q) =>
       unwrap(
         api.GET("/{region}/players/search", {
@@ -282,9 +388,9 @@ class RegionClient {
   }
 
   get clans(): ClansNamespace {
-    const { api, region } = this;
+    const { api, baseUrl, region } = this;
     const ns = ((tag: string) =>
-      new ClanClient(api, region, tag)) as ClansNamespace;
+      new ClanClient(api, baseUrl, region, tag)) as ClansNamespace;
     ns.search = (q) =>
       unwrap(
         api.GET("/{region}/clans/search", {
@@ -319,7 +425,30 @@ class RegionClient {
       );
     return ns;
   }
+
+  /** Server-wide live signals for this region. */
+  get server(): ServerNamespace {
+    const { baseUrl, region } = this;
+    return {
+      online: (onData, onError) =>
+        subscribeSse<OnlinePayload>(
+          `${baseUrl}/${region}/server/online/sse`,
+          "message",
+          onData,
+          onError,
+        ),
+    };
+  }
 }
+
+type StreamersNamespace = {
+  /** Currently-live tracked streamers across all regions, pushed over SSE.
+   * Returns an unsubscribe function; browser-only. */
+  live(
+    onData: (streamers: LiveStreamer[]) => void,
+    onError?: (error: Event) => void,
+  ): Unsubscribe;
+};
 
 /**
  * A fluent, typed client for the unicum.gg public API.
@@ -330,14 +459,17 @@ class RegionClient {
  * const members = await unicum.eu.clans("FAME").members();
  * const spec = await unicum.eu.tanks("is-7").specifications();
  * const top = await unicum.eu.players.top({ metric: "wnx" });
+ * const stop = unicum.eu.clans("FAME").live(() => refetch()); // SSE
  * ```
  */
 export class Unicum {
   readonly #api: Client<paths>;
+  readonly #baseUrl: string;
 
   constructor(options: UnicumOptions = {}) {
+    this.#baseUrl = options.baseUrl ?? UNICUM_API_URL;
     this.#api = createClient<paths>({
-      baseUrl: options.baseUrl ?? UNICUM_API_URL,
+      baseUrl: this.#baseUrl,
       fetch: options.fetch,
       headers: options.headers,
     });
@@ -345,7 +477,7 @@ export class Unicum {
 
   /** Scope to a region dynamically. */
   region(region: Region): RegionClient {
-    return new RegionClient(this.#api, region);
+    return new RegionClient(this.#api, this.#baseUrl, region);
   }
   /** Europe. */
   get eu(): RegionClient {
@@ -358,6 +490,20 @@ export class Unicum {
   /** Asia. */
   get asia(): RegionClient {
     return this.region(Region.ASIA);
+  }
+
+  /** Global (not region-scoped) live streamers over SSE. */
+  get streamers(): StreamersNamespace {
+    const baseUrl = this.#baseUrl;
+    return {
+      live: (onData, onError) =>
+        subscribeSse<LiveStreamer[]>(
+          `${baseUrl}/streamers/live/sse`,
+          "message",
+          onData,
+          onError,
+        ),
+    };
   }
 }
 

@@ -3,10 +3,9 @@
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
+import type { LiveUpdate, Unsubscribe } from "@unicum.gg/sdk";
 
 const REFRESH_DEBOUNCE_MS = 500;
-
-type UpdatePayload = { kind?: string };
 
 const TOAST_BY_KIND: Record<string, string> = {
   info: "Clan info updated",
@@ -16,19 +15,23 @@ const TOAST_BY_KIND: Record<string, string> = {
 };
 
 /**
- * Opens an SSE connection to the given URL and triggers `router.refresh()`
- * whenever a server-side refresh signal arrives. Multiple signals within
+ * Subscribes to a live SSE stream through the SDK and triggers a refresh
+ * whenever an update signal arrives. Multiple signals within
  * `REFRESH_DEBOUNCE_MS` collapse into a single refresh + a single toast.
+ *
+ * `subscribe` comes from the SDK (e.g. `(cb) => unicum.region(r).clans(tag).live(cb)`)
+ * and must be stable (memoize it so it only changes when the target stream does,
+ * otherwise the SSE reconnects on every render).
  *
  * By default it calls `router.refresh()` (re-renders the whole route on the
  * server). Pass `onUpdate` to instead revalidate client-side data (e.g. SWR
  * `mutate`), so only the affected components re-render with no server round-trip.
  */
 export function LiveSync({
-  url,
+  subscribe,
   onUpdate,
 }: {
-  url: string;
+  subscribe: (onUpdate: (event: LiveUpdate) => void) => Unsubscribe;
   onUpdate?: () => void;
 }) {
   const router = useRouter();
@@ -41,14 +44,8 @@ export function LiveSync({
   }, [onUpdate]);
 
   useEffect(() => {
-    const es = new EventSource(url);
-    const handleUpdate = (e: MessageEvent) => {
-      try {
-        const payload = JSON.parse(e.data) as UpdatePayload;
-        if (payload.kind) pendingKindsRef.current.add(payload.kind);
-      } catch {
-        // ignore malformed payloads
-      }
+    const unsubscribe = subscribe((payload) => {
+      if (payload.kind) pendingKindsRef.current.add(payload.kind);
       if (debounceRef.current) clearTimeout(debounceRef.current);
       debounceRef.current = setTimeout(() => {
         const kinds = Array.from(pendingKindsRef.current);
@@ -64,16 +61,12 @@ export function LiveSync({
           router.refresh();
         }
       }, REFRESH_DEBOUNCE_MS);
-    };
-    es.addEventListener("update", handleUpdate);
-    es.onerror = () => {
-      // EventSource auto-reconnects with backoff. Nothing to do.
-    };
+    });
     return () => {
-      es.close();
+      unsubscribe();
       if (debounceRef.current) clearTimeout(debounceRef.current);
     };
-  }, [url, router]);
+  }, [subscribe, router]);
 
   return null;
 }

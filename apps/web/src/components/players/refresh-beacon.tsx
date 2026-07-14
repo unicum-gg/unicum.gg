@@ -2,6 +2,8 @@
 
 import { intervalToDuration } from "date-fns";
 import { useEffect, useRef, useState } from "react";
+import type { Region } from "@unicum.gg/wargaming/region";
+import { unicum } from "@/services/sdk";
 
 type Phase = "refreshing" | "done" | "idle";
 
@@ -14,10 +16,12 @@ function formatEta(seconds: number): string {
 const FALLBACK_SECONDS = 12;
 
 export function RefreshBeacon({
-  url,
+  region,
+  nickname,
   updatedAt,
 }: {
-  url: string;
+  region: Region;
+  nickname: string;
   updatedAt: Date;
 }) {
   const prevMs = useRef(updatedAt.getTime());
@@ -26,16 +30,20 @@ export function RefreshBeacon({
 
   useEffect(() => {
     let cancelled = false;
-    fetch(url, { method: "POST" })
-      .then((r) => r.json())
-      .then(({ estimatedSeconds }: { estimatedSeconds: number }) => {
+    unicum
+      .region(region)
+      .players(nickname)
+      .enqueue()
+      .then(({ estimatedSeconds }) => {
         if (!cancelled) setRemaining(estimatedSeconds);
       })
       .catch(() => {
         if (!cancelled) setRemaining(FALLBACK_SECONDS);
       });
-    return () => { cancelled = true; };
-  }, [url]);
+    return () => {
+      cancelled = true;
+    };
+  }, [region, nickname]);
 
   useEffect(() => {
     if (remaining === null || remaining <= 0) return;

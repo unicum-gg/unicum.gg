@@ -70,7 +70,8 @@ export function PlayerHeader({
                 title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
               />
               <RefreshBeacon
-                url={`/api/${region}/players/${encodeURIComponent(nickname)}/enqueue`}
+                region={region}
+                nickname={nickname}
                 updatedAt={updatedAt}
               />
             </span>

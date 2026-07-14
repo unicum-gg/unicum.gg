@@ -168,9 +168,7 @@ async function render(
           },
         ])}
       />
-      <ViewBeacon
-        url={`/api/${region}/clans/${encodeURIComponent(clan.tag)}/enqueue`}
-      />
+      <ViewBeacon region={region} tag={clan.tag} />
       <Panel>
         <PanelContent className="p-0">
           <ClanHeader region={region} clan={clan} members={members} />

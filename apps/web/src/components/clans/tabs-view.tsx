@@ -1,8 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import useSWR from "swr";
+import type { LiveUpdate } from "@unicum.gg/sdk";
 import { LiveSync } from "@/components/live-sync";
 import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
 import { ExpandableDescription } from "@/components/clans/description";
@@ -144,6 +145,12 @@ export function ClanTabsView({
   // (stable cache identities); the `as unknown as` casts restore the rich
   // domain types the tables expect (the API schemas are intentionally loose).
   const clanApi = unicum.region(region).clans(tag);
+  // Memoized so LiveSync only re-subscribes when the target clan changes.
+  const liveSubscribe = useCallback(
+    (onUpdate: (event: LiveUpdate) => void) =>
+      unicum.region(region).clans(tag).live(onUpdate),
+    [region, tag],
+  );
 
   // Only the Tanks section needs an on-demand fetch. SWR keys on the URL and
   // only runs when Tanks is active (null key = no request).
@@ -228,7 +235,7 @@ export function ClanTabsView({
   return (
     <>
       <LiveSync
-        url={`/api/${region}/clans/${encodeURIComponent(tag)}/sse`}
+        subscribe={liveSubscribe}
         onUpdate={() => {
           void mutateMembers();
           void mutatePrevious();

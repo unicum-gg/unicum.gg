@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import useSWR from "swr";
 import { LiveSync } from "@/components/live-sync";
 import { MountOnVisible } from "@/components/mount-on-visible";
@@ -39,6 +39,7 @@ import type { PlayerDerivedStats } from "@unicum.gg/core/players/derived-stats";
 import type { PlayerDetailData } from "@unicum.gg/core/players/detail";
 import type { LiftDrag } from "@unicum.gg/core/players/lift-drag";
 import type { PlayerVehicleRow } from "@unicum.gg/core/players/vehicles";
+import type { LiveUpdate } from "@unicum.gg/sdk";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming/region";
 
@@ -152,6 +153,13 @@ export function PlayerTabsView({
   );
   const detail = liveData ?? initialData;
 
+  // Memoized so LiveSync only re-subscribes when the target player changes.
+  const liveSubscribe = useCallback(
+    (onUpdate: (event: LiveUpdate) => void) =>
+      unicum.region(region).players(nickname).live(onUpdate),
+    [region, nickname],
+  );
+
   const overall: OverallData = {
     current: detail.current,
     periods: detail.periods,
@@ -179,7 +187,7 @@ export function PlayerTabsView({
   return (
     <>
       <LiveSync
-        url={`/api/${region}/players/${encodeURIComponent(nickname)}/sse`}
+        subscribe={liveSubscribe}
         onUpdate={() => {
           void mutateData();
         }}
