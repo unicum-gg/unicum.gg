@@ -1,16 +1,8 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
+import { UnicumError } from "@unicum.gg/sdk";
 import { APP_IDENTITY } from "@unicum.gg/core/app-identity";
-import { DEFAULT_RATING_METRIC } from "@unicum.gg/core/constants/rating";
-import { recordCurrentSnapshot } from "@unicum.gg/core/players";
-import { loadPlayerDetail } from "@unicum.gg/core/players/detail";
 import { searchPlayersLocal } from "@unicum.gg/core/players/search-local";
-import {
-  findPlayerByNickname,
-  getAccountWTR,
-  getPlayerInfo,
-} from "@unicum.gg/core/wargaming/wot/accounts";
-import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
   isRegion,
   Region,
@@ -19,6 +11,7 @@ import {
 } from "@unicum.gg/wargaming/region";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { playerUrl, wnxColorInt } from "../lib/format.js";
+import { unicum } from "../lib/sdk.js";
 import { buildStatsBlock } from "../lib/stats-lines.js";
 
 /**
@@ -101,47 +94,25 @@ export const playerCommand: DixtSlashCommandBuilder = {
     // Private by default; the caller can promote it to the channel (see below).
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-    // 1. Everything the tracker already has, computed exactly like the site's
-    //    player page (same `loadPlayerDetail`: overall stats + tank-derived rows).
-    let detail = await loadPlayerDetail(region, nickname, DEFAULT_RATING_METRIC);
-
-    // 2. Cold DB: resolve the account on WG, fetch live, and record a snapshot
-    //    (this also starts tracking the player), then read the detail back.
-    if (!detail) {
-      const found = await findPlayerByNickname(region, nickname).catch(
-        () => null,
-      );
-      if (!found) {
+    // Fetch from our own API (same data the site's player page renders). The
+    // endpoint handles the cold-DB case server-side: on a miss it resolves the
+    // account on WG, fetches live, and records a snapshot (which also starts
+    // tracking the player, so every lookup grows the DB). 404 = no such player;
+    // any other failure (e.g. WG upstream) → "try again".
+    let detail;
+    try {
+      detail = await unicum.region(region).players(nickname).detail();
+    } catch (error) {
+      if (error instanceof UnicumError && error.status === 404) {
         await interaction.editReply(
           `No World of Tanks player named **${nickname}** on ${region.toUpperCase()}. Check the spelling or the region.`,
         );
-        return;
-      }
-      const info = await getPlayerInfo(region, found.account_id).catch(
-        () => null,
-      );
-      if (!info) {
+      } else {
         await interaction.editReply(
           `Couldn't load **${nickname}** from Wargaming right now. Try again shortly: ${url}`,
         );
-        return;
       }
-      const [tanks, wtr] = await Promise.all([
-        getTanksStats(region, found.account_id).catch(() => []),
-        getAccountWTR(region, found.account_id).catch(() => null),
-      ]);
-      const recorded = await recordCurrentSnapshot(region, info, wtr, tanks);
-      detail = await loadPlayerDetail(
-        region,
-        recorded.player.nickname,
-        DEFAULT_RATING_METRIC,
-      );
-      if (!detail) {
-        await interaction.editReply(
-          `Couldn't load **${nickname}** from Wargaming right now. Try again shortly: ${url}`,
-        );
-        return;
-      }
+      return;
     }
 
     const clan = detail.clanHistory.currentStint?.clan ?? null;

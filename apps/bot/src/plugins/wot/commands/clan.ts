@@ -1,15 +1,7 @@
 import { EmbedBuilder, MessageFlags, SlashCommandBuilder } from "discord.js";
 import type { DixtSlashCommandBuilder } from "dixt";
 import { APP_IDENTITY } from "@unicum.gg/core/app-identity";
-import { computeClanRatings } from "@unicum.gg/core/clans/members";
-import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
-import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { searchClansLocal } from "@unicum.gg/core/clans/search-local";
-import { getLatestClanSnapshot } from "@unicum.gg/core/clans/snapshots";
-import {
-  globalMapStatsFromClanSnapshot,
-  strongholdStatsFromClanSnapshot,
-} from "@unicum.gg/core/clans/snapshot-stats";
 import {
   isRegion,
   Region,
@@ -22,6 +14,7 @@ import {
 } from "../lib/clan-lines.js";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { clanUrl, wnxColorInt } from "../lib/format.js";
+import { unicum } from "../lib/sdk.js";
 import { renderTable } from "../lib/table.js";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -99,25 +92,23 @@ export const clanCommand: DixtSlashCommandBuilder = {
     // Private by default; the caller can promote it to the channel (Share).
     await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
-    // DB first, resolving on WG and fetching live on a cold miss (this also
-    // starts tracking the clan, so a Discord lookup feeds the DB).
-    const cached = await getClanByTagCached(region, tag).catch(() => null);
-    if (!cached) {
+    // Fetch from our own API. The overview endpoint mirrors the site's clan
+    // header (profile + battle-weighted member ratings) and handles the cold-DB
+    // case server-side: on a miss it resolves the tag on WG and fetches live,
+    // which also starts tracking the clan. Any failure → "no clan" (same as the
+    // previous DB-first behaviour).
+    const overview = await unicum
+      .region(region)
+      .clans(tag)
+      .overview()
+      .catch(() => null);
+    if (!overview) {
       await interaction.editReply(
         `No World of Tanks clan tagged **[${tag}]** on ${region.toUpperCase()}. Check the tag or the region.`,
       );
       return;
     }
-    const clan = cached.info;
-
-    // Battle-weighted member ratings, exactly like the site's clan header. Empty
-    // (a brand-new clan whose members haven't been cached yet) leaves them at
-    // "—"; the info and OG image still render.
-    const cachedMembers = await getClanMembersCached(region, clan.id).catch(
-      () => null,
-    );
-    const members = cachedMembers?.members ?? [];
-    const ratings = computeClanRatings(members);
+    const { clan, ratings } = overview;
     const { wnx: avgWnx, wn8: avgWn8, wn7: avgWn7 } = ratings.lifetime;
     const avgWinrate = ratings.avgWinrate;
 
@@ -139,16 +130,26 @@ export const clanCommand: DixtSlashCommandBuilder = {
       { label: "Leader", primary: clan.leaderName || "—" },
       { label: "Languages", primary: languages },
     ]);
-    // Stronghold and Clan Wars come from the latest clan snapshot, and are only
-    // appended when the clan actually has data in that category.
-    const snapshot = await getLatestClanSnapshot(region, clan.id).catch(
-      () => null,
-    );
-    const strongholdBlock = snapshot
-      ? buildStrongholdBlock(strongholdStatsFromClanSnapshot(snapshot))
+    // Stronghold and Clan Wars come from the dedicated sub-endpoints (latest
+    // snapshot projection), appended only when the clan has data in that
+    // category.
+    const [stronghold, clanWars] = await Promise.all([
+      unicum
+        .region(region)
+        .clans(tag)
+        .stronghold()
+        .catch(() => null),
+      unicum
+        .region(region)
+        .clans(tag)
+        .clanWars()
+        .catch(() => null),
+    ]);
+    const strongholdBlock = stronghold?.latest
+      ? buildStrongholdBlock(stronghold.latest)
       : null;
-    const clanWarsBlock = snapshot
-      ? buildClanWarsBlock(globalMapStatsFromClanSnapshot(snapshot))
+    const clanWarsBlock = clanWars?.latest
+      ? buildClanWarsBlock(clanWars.latest)
       : null;
 
     const motto = clan.motto.trim();
