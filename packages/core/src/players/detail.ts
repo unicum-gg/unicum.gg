@@ -187,27 +187,49 @@ export async function loadPlayerDetail(
   });
 }
 
+export enum PlayerDetailLiveStatus {
+  /** Full detail payload available. */
+  Found = "found",
+  /** WG resolves the nickname but the account is locked (info is null). */
+  Locked = "locked",
+  /** WG doesn't know the nickname on this region. */
+  Unknown = "unknown",
+}
+
+export type PlayerDetailLiveResult =
+  | { status: PlayerDetailLiveStatus.Found; detail: PlayerDetailData }
+  | {
+      status: PlayerDetailLiveStatus.Locked;
+      accountId: number;
+      nickname: string;
+    }
+  | { status: PlayerDetailLiveStatus.Unknown };
+
 /**
  * Stale-while-revalidate loader for the player detail endpoint (the flow the
  * player page used to run inline). DB first: a player with at least one
  * snapshot renders immediately from cache (a missing clan history backfills in
  * the background and LiveSync refetches when it lands). On a cold DB, resolve the
  * account on WG, fetch live, and record a snapshot, which also starts tracking
- * the player. Returns null only when WG doesn't know the nickname either.
+ * the player. `Locked` when WG resolves the nickname but returns no account
+ * data (an account locked by Wargaming), `Unknown` when WG doesn't know the
+ * nickname either.
  */
 export async function loadPlayerDetailLive(
   region: Region,
   nickname: string,
   metric: RatingMetric,
-): Promise<PlayerDetailData | null> {
+): Promise<PlayerDetailLiveResult> {
   let initial = await loadPlayerInitialData(region, { nickname });
 
   // Resolve accountId for true first-ever visits.
   let accountId = initial.player?.accountId ?? null;
+  let resolvedNickname = initial.player?.nickname ?? null;
   if (accountId === null) {
     const found = await findPlayerByNickname(region, nickname).catch(() => null);
-    if (!found) return null;
+    if (!found) return { status: PlayerDetailLiveStatus.Unknown };
     accountId = found.account_id;
+    resolvedNickname = found.nickname;
     initial = await loadPlayerInitialData(region, { accountId });
   }
 
@@ -221,22 +243,36 @@ export async function loadPlayerDetailLive(
           console.error("[bg] backfill clan history failed:", err),
         );
     }
-    return buildPlayerDetail({
-      region,
-      accountId,
-      player: initial.player,
-      latest: initial.latestSnapshot,
-      tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
-      clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
-      initial,
-      metric,
-    });
+    return {
+      status: PlayerDetailLiveStatus.Found,
+      detail: await buildPlayerDetail({
+        region,
+        accountId,
+        player: initial.player,
+        latest: initial.latestSnapshot,
+        tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
+        clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
+        initial,
+        metric,
+      }),
+    };
   }
 
   // Cold DB: fetch everything live from WG and record a snapshot (which also
-  // starts tracking the player).
-  const [info, fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
-    getPlayerInfo(region, accountId),
+  // starts tracking the player). Account info comes first and gates the rest:
+  // WG's account/list can resolve a nickname whose account/info is null
+  // (wiped/deleted account), and the other fetches are expensive to run for
+  // nothing (the portal clan history retries through a 1 RPS limiter, which
+  // once stretched this 404 to minutes).
+  const info = await getPlayerInfo(region, accountId);
+  if (!info) {
+    return {
+      status: PlayerDetailLiveStatus.Locked,
+      accountId,
+      nickname: resolvedNickname ?? nickname,
+    };
+  }
+  const [fetchedTanks, fetchedWtr, fetchedClanHistory] = await Promise.all([
     getTanksStats(region, accountId).catch((err) => {
       console.warn("[player detail] getTanksStats failed:", err);
       return [] as TankStats[];
@@ -247,7 +283,6 @@ export async function loadPlayerDetailLive(
       return EMPTY_CLAN_HISTORY;
     }),
   ]);
-  if (!info) return null;
 
   const { player, latest } = await recordCurrentSnapshot(
     region,
@@ -259,14 +294,17 @@ export async function loadPlayerDetailLive(
     (err) => console.error("[bg] storePlayerClanHistory failed:", err),
   );
 
-  return buildPlayerDetail({
-    region,
-    accountId,
-    player,
-    latest,
-    tanks: fetchedTanks,
-    clanHistory: fetchedClanHistory,
-    initial,
-    metric,
-  });
+  return {
+    status: PlayerDetailLiveStatus.Found,
+    detail: await buildPlayerDetail({
+      region,
+      accountId,
+      player,
+      latest,
+      tanks: fetchedTanks,
+      clanHistory: fetchedClanHistory,
+      initial,
+      metric,
+    }),
+  };
 }

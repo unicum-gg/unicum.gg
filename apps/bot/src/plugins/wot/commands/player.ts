@@ -105,7 +105,7 @@ export const playerCommand: DixtSlashCommandBuilder = {
     // endpoint handles the cold-DB case server-side: on a miss it resolves the
     // account on WG, fetches live, and records a snapshot (which also starts
     // tracking the player, so every lookup grows the DB). 404 = no such player;
-    // any other failure (e.g. WG upstream) → "try again".
+    // 403 = account locked by WG; any other failure (e.g. WG upstream) → "try again".
     let detail;
     try {
       detail = await unicum.region(region).players(nickname).detail();
@@ -113,6 +113,12 @@ export const playerCommand: DixtSlashCommandBuilder = {
       if (error instanceof UnicumError && error.status === 404) {
         await interaction.editReply(
           `No World of Tanks player named **${nickname}** on ${region.toUpperCase()}. Check the spelling or the region.`,
+        );
+      } else if (error instanceof UnicumError && error.status === 403) {
+        // The endpoint answers 403 "account_locked" when WG resolves the
+        // nickname but has locked the account (no stats available).
+        await interaction.editReply(
+          `**${nickname}** exists on ${region.toUpperCase()}, but Wargaming has locked this account, so its stats are not available.`,
         );
       } else {
         await interaction.editReply(

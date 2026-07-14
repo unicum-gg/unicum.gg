@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/header";
 import { modeFromQuery, sectionFromQuery } from "@/components/players/tabs";
@@ -10,6 +12,7 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { getRatingMetricFromCookies } from "@/lib/rating-metric";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
+import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
@@ -32,11 +35,13 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 // a cold cache resolves the account on WG, fetches live and records a
 // snapshot). Next memoizes identical fetches within one render pass, so
 // generateMetadata and the page body share a single request.
+type LockedAccount = { locked: true; nickname: string };
+
 async function loadDetail(
   region: Region,
   nickname: string,
   metric: RatingMetric,
-): Promise<PlayerDetailData | null> {
+): Promise<PlayerDetailData | LockedAccount | null> {
   try {
     const detail = await unicum
       .region(region)
@@ -45,6 +50,14 @@ async function loadDetail(
     return detail as unknown as PlayerDetailData;
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
+    // The endpoint answers 403 "account_locked" when WG resolves the nickname
+    // but has locked the account (its data is gone from the API).
+    if (error instanceof UnicumError && error.status === 403) {
+      const body = error.body as { error?: string; nickname?: string } | null;
+      if (body?.error === "account_locked") {
+        return { locked: true, nickname: body.nickname ?? nickname };
+      }
+    }
     throw error;
   }
 }
@@ -58,9 +71,19 @@ export async function generateMetadata({
   if (!isRegion(region)) return {};
   const decoded = decodeURIComponent(nickname);
   const metric = await getRatingMetricFromCookies();
-  const detail = await loadDetail(region, decoded, metric).catch(() => null);
-  const displayName = detail?.player.nickname ?? decoded;
+  const result = await loadDetail(region, decoded, metric).catch(() => null);
   const regionLabel = region.toUpperCase();
+
+  if (result && "locked" in result) {
+    return constructMetadata({
+      title: `${result.nickname} World of Tanks account locked (${regionLabel})`,
+      description: `${result.nickname} (${regionLabel}) exists but Wargaming has locked this account, so its World of Tanks stats are not available.`,
+      ogImage: false,
+    });
+  }
+
+  const detail = result;
+  const displayName = detail?.player.nickname ?? decoded;
 
   if (!detail || detail.current.battles === 0) {
     return constructMetadata({
@@ -98,6 +121,9 @@ export default async function PlayerPage({
 
   const metric = await getRatingMetricFromCookies();
   const detail = await loadDetail(region, decoded, metric);
+  if (detail && "locked" in detail) {
+    return <AccountLockedView nickname={detail.nickname} region={region} />;
+  }
   if (!detail) notFound();
 
   const metricLabel = RATING_METRIC_LABEL[metric];
@@ -162,6 +188,36 @@ export default async function PlayerPage({
         nowMs={nowMs}
         initialData={detail}
       />
+    </div>
+  );
+}
+
+// Distinct from the not-found page: the nickname resolves on Wargaming, but
+// the account has been locked, so there are no stats to show.
+function AccountLockedView({
+  nickname,
+  region,
+}: {
+  nickname: string;
+  region: Region;
+}) {
+  return (
+    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
+      <div
+        className={`relative ${styles.borderX} screen-line-before flex flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center`}
+      >
+        <h1 className="font-heading text-3xl font-bold tracking-tight">
+          Account locked
+        </h1>
+        <p className="max-w-md text-fd-muted-foreground">
+          <span className="font-semibold text-fd-foreground">{nickname}</span>{" "}
+          exists on {region.toUpperCase()}, but Wargaming has locked this
+          account, so its stats are not available.
+        </p>
+        <Link href="/" className={buttonVariants({ variant: "primary" })}>
+          Back to home
+        </Link>
+      </div>
     </div>
   );
 }

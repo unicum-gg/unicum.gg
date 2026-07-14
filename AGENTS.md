@@ -91,7 +91,7 @@ The transport (`src/client/transport.ts`) wraps every call: injects `application
 
 1. Read everything available from the DB (`loadPlayerInitialData`).
 2. If we have at least the player row and the latest snapshot, respond immediately from cache and enqueue an on-demand refresh in the background.
-3. If the DB is cold for that account, fetch live from WG and write back before responding, so the endpoint (and therefore the page and the Discord bot) works for any nickname WG knows. 404 only when WG doesn't know it either.
+3. If the DB is cold for that account, fetch live from WG and write back before responding, so the endpoint (and therefore the page and the Discord bot) works for any nickname WG knows. `account/info` gates the other WG fetches: WG's `account/list` can resolve a nickname whose info is null (an account locked by Wargaming), and the endpoint answers 403 `account_locked` for those (the page and the bot render a dedicated "account locked" state). 404 only when WG doesn't know the nickname at all.
 
 `LiveSync` (SSE channel in `packages/core/src/live/`, bridged across processes via Redis pub/sub when `REDIS_URL` is set) lets the browser hot-swap fresh data without a manual reload once the background refresh lands.
 

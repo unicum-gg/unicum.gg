@@ -1,12 +1,15 @@
 import { ratingMetricFromCookie } from "@unicum.gg/shared";
-import { loadPlayerDetailLive } from "@unicum.gg/core/players/detail";
+import {
+  PlayerDetailLiveStatus,
+  loadPlayerDetailLive,
+} from "@unicum.gg/core/players/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
 
 /**
  * Player detail
- * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Works for ANY player: cached data is served immediately; on a cold cache the account is resolved on Wargaming, fetched live and recorded (which also starts tracking it). 404 only when Wargaming doesn't know the nickname either. Dates are ISO 8601 strings.
+ * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Works for ANY player: cached data is served immediately; on a cold cache the account is resolved on Wargaming, fetched live and recorded (which also starts tracking it). 403 with error "account_locked" when the account exists but Wargaming has locked it (no stats available), 404 only when Wargaming doesn't know the nickname either. Dates are ISO 8601 strings.
  * @pathParams playerLiveParams
  * @queryParams playerDetailQuery
  * @response PlayerDetailResponse
@@ -31,11 +34,21 @@ export async function GET(
   try {
     // Dates serialize to ISO strings here and are revived client-side by
     // parsing with the shared `PlayerDetailResponse` schema (z.coerce.date).
-    const data = await loadPlayerDetailLive(region, decoded, metric);
-    if (!data) {
+    const result = await loadPlayerDetailLive(region, decoded, metric);
+    if (result.status === PlayerDetailLiveStatus.Unknown) {
       return Response.json({ error: "not_found" }, { status: 404 });
     }
-    return jsonResponse(PlayerDetailResponse, data);
+    if (result.status === PlayerDetailLiveStatus.Locked) {
+      return Response.json(
+        {
+          error: "account_locked",
+          nickname: result.nickname,
+          accountId: result.accountId,
+        },
+        { status: 403 },
+      );
+    }
+    return jsonResponse(PlayerDetailResponse, result.detail);
   } catch (err) {
     console.error(`[api/${region}/players/${decoded}] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });
