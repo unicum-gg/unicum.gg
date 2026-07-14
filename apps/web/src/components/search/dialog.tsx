@@ -12,10 +12,7 @@ import {
 } from "fumadocs-ui/components/dialog/search";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/ndjson/route";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/ndjson/route";
-import type { TankSearchChunk } from "@/app/api/[region]/tanks/search/ndjson/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import { SearchSource } from "@unicum.gg/core/search";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
@@ -36,7 +33,7 @@ import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { readNdjson } from "@/lib/ndjson";
+import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 import {
@@ -126,25 +123,21 @@ export default function SearchDialog(props: SharedProps) {
 
     const controller = new AbortController();
     const timer = setTimeout(() => {
-      const qParam = `q=${encodeURIComponent(trimmedQuery)}`;
-
       if (wantPlayers) {
         setPlayersOutcome((prev) => ({
           status: "loading",
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/players/search/ndjson?${qParam}`, {
-          signal: controller.signal,
-        })
-          .then(async (res) => {
-            if (!res.ok) {
-              setPlayersOutcome({ status: "error", forQuery: trimmedQuery });
-              return;
-            }
+        void (async () => {
+          try {
             let acc: SearchPlayerResult[] = [];
-            await readNdjson<PlayerSearchChunk>(res, (chunk) => {
-              acc = [...acc, ...chunk.results];
+            for await (const chunk of unicum
+              .region(region)
+              .players.searchStream(trimmedQuery, {
+                signal: controller.signal,
+              })) {
+              acc = [...acc, ...(chunk.results as SearchPlayerResult[])];
               // Partial: keep the loading indicator on until the stream ends.
               setPlayersOutcome({
                 status: "streaming",
@@ -152,18 +145,18 @@ export default function SearchDialog(props: SharedProps) {
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            });
+            }
             // Stream closed (remote chunk landed): settle to the final result.
             setPlayersOutcome({
               status: "ok",
               results: acc,
               forQuery: trimmedQuery,
             });
-          })
-          .catch((err) => {
-            if (err?.name === "AbortError") return;
+          } catch (err) {
+            if ((err as Error)?.name === "AbortError") return;
             setPlayersOutcome({ status: "error", forQuery: trimmedQuery });
-          });
+          }
+        })();
       }
 
       if (wantClans) {
@@ -172,17 +165,15 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/clans/search/ndjson?${qParam}`, {
-          signal: controller.signal,
-        })
-          .then(async (res) => {
-            if (!res.ok) {
-              setClansOutcome({ status: "error", forQuery: trimmedQuery });
-              return;
-            }
+        void (async () => {
+          try {
             let acc: ClanSearchResult[] = [];
-            await readNdjson<ClanSearchChunk>(res, (chunk) => {
-              acc = [...acc, ...chunk.results];
+            for await (const chunk of unicum
+              .region(region)
+              .clans.searchStream(trimmedQuery, {
+                signal: controller.signal,
+              })) {
+              acc = [...acc, ...(chunk.results as ClanSearchResult[])];
               // Partial: keep the loading indicator on until the stream ends.
               setClansOutcome({
                 status: "streaming",
@@ -190,18 +181,18 @@ export default function SearchDialog(props: SharedProps) {
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            });
+            }
             // Stream closed (remote chunk landed): settle to the final result.
             setClansOutcome({
               status: "ok",
               results: acc,
               forQuery: trimmedQuery,
             });
-          })
-          .catch((err) => {
-            if (err?.name === "AbortError") return;
+          } catch (err) {
+            if ((err as Error)?.name === "AbortError") return;
             setClansOutcome({ status: "error", forQuery: trimmedQuery });
-          });
+          }
+        })();
       }
 
       if (wantTanks) {
@@ -210,17 +201,15 @@ export default function SearchDialog(props: SharedProps) {
           previous: previousOf(prev),
           forQuery: trimmedQuery,
         }));
-        fetch(`/api/${region}/tanks/search/ndjson?${qParam}`, {
-          signal: controller.signal,
-        })
-          .then(async (res) => {
-            if (!res.ok) {
-              setTanksOutcome({ status: "error", forQuery: trimmedQuery });
-              return;
-            }
+        void (async () => {
+          try {
             let acc: TankSearchResult[] = [];
-            await readNdjson<TankSearchChunk>(res, (chunk) => {
-              acc = [...acc, ...chunk.results];
+            for await (const chunk of unicum
+              .region(region)
+              .tanks.searchStream(trimmedQuery, {
+                signal: controller.signal,
+              })) {
+              acc = [...acc, ...(chunk.results as TankSearchResult[])];
               // Partial: keep the loading indicator on until the stream ends.
               setTanksOutcome({
                 status: "streaming",
@@ -228,18 +217,18 @@ export default function SearchDialog(props: SharedProps) {
                 forQuery: trimmedQuery,
               });
               if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            });
+            }
             // Stream closed: settle to the final result.
             setTanksOutcome({
               status: "ok",
               results: acc,
               forQuery: trimmedQuery,
             });
-          })
-          .catch((err) => {
-            if (err?.name === "AbortError") return;
+          } catch (err) {
+            if ((err as Error)?.name === "AbortError") return;
             setTanksOutcome({ status: "error", forQuery: trimmedQuery });
-          });
+          }
+        })();
       }
     }, DEBOUNCE_MS);
 

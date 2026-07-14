@@ -1,4 +1,5 @@
 import { APP_IDENTITY } from "@unicum.gg/core";
+import type { SearchSource } from "@unicum.gg/core/search";
 import type { LiveStreamer } from "@unicum.gg/core/twitch/live";
 import type { OnlinePayload } from "@unicum.gg/core/wargaming/wot/server/online";
 import { Region } from "@unicum.gg/wargaming/region";
@@ -123,6 +124,65 @@ function subscribeSse<T>(
   return () => source.close();
 }
 
+/**
+ * One NDJSON line of a streamed search: a batch of results tagged by where they
+ * came from. The `local` chunk (our DB) arrives first and near-instantly; the
+ * `remote` chunk (deduped Wargaming hits) follows once the rate-limited WG call
+ * returns — which is why the streamed variant paints faster than `search()`.
+ */
+export type SearchChunk<T> = { source: SearchSource; results: T[] };
+
+/** Options for a streamed search. */
+export type SearchStreamOptions = {
+  /** Abort the stream, e.g. when the query changes. The pending request rejects
+   * with an `AbortError`, which the generator propagates. */
+  signal?: AbortSignal;
+};
+
+/**
+ * Stream an NDJSON endpoint, yielding each line parsed (and date-revived) as `T`.
+ * Works in the browser and Node (both stream `Response.body`).
+ */
+async function* streamNdjson<T>(
+  url: string,
+  fetchImpl: typeof fetch,
+  headers: Record<string, string> | undefined,
+  signal: AbortSignal | undefined,
+): AsyncGenerator<T> {
+  const response = await fetchImpl(url, {
+    signal,
+    headers: { Accept: "application/x-ndjson", ...headers },
+  });
+  if (!response.ok || !response.body) {
+    throw new UnicumError(response.status, response.url, undefined);
+  }
+  const reader = response.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+  const parse = (line: string): T => reviveDates(JSON.parse(line)) as T;
+  for (;;) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    buffer += decoder.decode(value, { stream: true });
+    let newline: number;
+    while ((newline = buffer.indexOf("\n")) >= 0) {
+      const line = buffer.slice(0, newline).trim();
+      buffer = buffer.slice(newline + 1);
+      if (line) yield parse(line);
+    }
+  }
+  const tail = buffer.trim();
+  if (tail) yield parse(tail);
+}
+
+/** The item type of a `/search` endpoint's `results`, reused to type its
+ * streamed (`/search/ndjson`) chunks. */
+type SearchItemOf<P extends keyof paths> = Data<P> extends {
+  results: readonly (infer I)[];
+}
+  ? I
+  : never;
+
 /** A single player: `unicum.eu.players("Rice")`. */
 class PlayerClient {
   constructor(
@@ -174,6 +234,12 @@ class PlayerClient {
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Combined (non-streamed) player search by nickname prefix. */
   search(q: string): Promise<Data<"/{region}/players/search">>;
+  /** Streamed player search: an async iterator of NDJSON chunks (local DB hits
+   * first, then Wargaming), so results paint progressively. */
+  searchStream(
+    q: string,
+    options?: SearchStreamOptions,
+  ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/players/search">>>;
   /** Player leaderboard for the region. */
   top(
     query?: QueryOf<"/{region}/players/top">,
@@ -280,7 +346,14 @@ class ClanClient {
 }
 
 type ClansNamespace = ((tag: string) => ClanClient) & {
+  /** Combined (non-streamed) clan search by name or tag prefix. */
   search(q: string): Promise<Data<"/{region}/clans/search">>;
+  /** Streamed clan search: an async iterator of NDJSON chunks (local DB hits
+   * first, then Wargaming), so results paint progressively. */
+  searchStream(
+    q: string,
+    options?: SearchStreamOptions,
+  ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/clans/search">>>;
   top(query?: QueryOf<"/{region}/clans/top">): Promise<Data<"/{region}/clans/top">>;
 };
 
@@ -350,6 +423,12 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   marksOfMastery(): Promise<Data<"/{region}/tanks/marks-of-mastery">>;
   /** Vehicle catalogue search by name / short name / tag. */
   search(q: string): Promise<Data<"/{region}/tanks/search">>;
+  /** Streamed vehicle search: an async iterator of NDJSON chunks (a single
+   * `local` chunk from the in-memory catalogue). */
+  searchStream(
+    q: string,
+    options?: SearchStreamOptions,
+  ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/tanks/search">>>;
 };
 
 type ServerNamespace = {
@@ -367,18 +446,36 @@ class RegionClient {
   constructor(
     private readonly api: Client<paths>,
     private readonly baseUrl: string,
+    private readonly fetchImpl: typeof fetch,
+    private readonly headers: Record<string, string> | undefined,
     readonly region: Region,
   ) {}
 
+  /** Build a streamed-search generator for one of the `/search/ndjson` endpoints. */
+  #searchStream<T>(resource: "players" | "clans" | "tanks", q: string, signal?: AbortSignal) {
+    return streamNdjson<T>(
+      `${this.baseUrl}/${this.region}/${resource}/search/ndjson?q=${encodeURIComponent(q)}`,
+      this.fetchImpl,
+      this.headers,
+      signal,
+    );
+  }
+
   get players(): PlayersNamespace {
-    const { api, baseUrl, region } = this;
+    const { api, region } = this;
     const ns = ((nickname: string) =>
-      new PlayerClient(api, baseUrl, region, nickname)) as PlayersNamespace;
+      new PlayerClient(api, this.baseUrl, region, nickname)) as PlayersNamespace;
     ns.search = (q) =>
       unwrap(
         api.GET("/{region}/players/search", {
           params: { path: { region }, query: { q } },
         }),
+      );
+    ns.searchStream = (q, options) =>
+      this.#searchStream<SearchChunk<SearchItemOf<"/{region}/players/search">>>(
+        "players",
+        q,
+        options?.signal,
       );
     ns.top = (query) =>
       unwrap(
@@ -388,14 +485,20 @@ class RegionClient {
   }
 
   get clans(): ClansNamespace {
-    const { api, baseUrl, region } = this;
+    const { api, region } = this;
     const ns = ((tag: string) =>
-      new ClanClient(api, baseUrl, region, tag)) as ClansNamespace;
+      new ClanClient(api, this.baseUrl, region, tag)) as ClansNamespace;
     ns.search = (q) =>
       unwrap(
         api.GET("/{region}/clans/search", {
           params: { path: { region }, query: { q } },
         }),
+      );
+    ns.searchStream = (q, options) =>
+      this.#searchStream<SearchChunk<SearchItemOf<"/{region}/clans/search">>>(
+        "clans",
+        q,
+        options?.signal,
       );
     ns.top = (query) =>
       unwrap(
@@ -422,6 +525,12 @@ class RegionClient {
         api.GET("/{region}/tanks/search", {
           params: { path: { region }, query: { q } },
         }),
+      );
+    ns.searchStream = (q, options) =>
+      this.#searchStream<SearchChunk<SearchItemOf<"/{region}/tanks/search">>>(
+        "tanks",
+        q,
+        options?.signal,
       );
     return ns;
   }
@@ -465,9 +574,15 @@ type StreamersNamespace = {
 export class Unicum {
   readonly #api: Client<paths>;
   readonly #baseUrl: string;
+  readonly #fetch: typeof fetch;
+  readonly #headers: Record<string, string> | undefined;
 
   constructor(options: UnicumOptions = {}) {
     this.#baseUrl = options.baseUrl ?? UNICUM_API_URL;
+    // Raw fetch + headers for the streamed (`searchStream`) path, which bypasses
+    // openapi-fetch to read the NDJSON body incrementally.
+    this.#fetch = options.fetch ?? fetch;
+    this.#headers = options.headers;
     this.#api = createClient<paths>({
       baseUrl: this.#baseUrl,
       fetch: options.fetch,
@@ -477,7 +592,13 @@ export class Unicum {
 
   /** Scope to a region dynamically. */
   region(region: Region): RegionClient {
-    return new RegionClient(this.#api, this.#baseUrl, region);
+    return new RegionClient(
+      this.#api,
+      this.#baseUrl,
+      this.#fetch,
+      this.#headers,
+      region,
+    );
   }
   /** Europe. */
   get eu(): RegionClient {

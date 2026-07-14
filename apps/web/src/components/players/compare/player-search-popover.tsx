@@ -14,8 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { PlayerSearchChunk } from "@/app/api/[region]/players/search/ndjson/route";
-import { readNdjson } from "@/lib/ndjson";
+import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming/region";
 
 const SEARCH_DEBOUNCE_MS = 250;
@@ -58,16 +57,13 @@ export function PlayerSearchPopover({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/${region}/players/search/ndjson?q=${encodeURIComponent(trimmed)}`,
-          { signal: controller.signal },
-        );
-        if (!res.ok) return;
         let acc: SearchPlayerResult[] = [];
-        await readNdjson<PlayerSearchChunk>(res, (chunk) => {
-          acc = [...acc, ...chunk.results];
+        for await (const chunk of unicum
+          .region(region)
+          .players.searchStream(trimmed, { signal: controller.signal })) {
+          acc = [...acc, ...(chunk.results as SearchPlayerResult[])];
           setResults(acc);
-        });
+        }
       } catch {
         // aborted or network failure, ignore
       } finally {

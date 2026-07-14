@@ -13,8 +13,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import type { ClanSearchChunk } from "@/app/api/[region]/clans/search/ndjson/route";
-import { readNdjson } from "@/lib/ndjson";
+import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming/region";
 import type { ClanSearchResult } from "@unicum.gg/core/wargaming/wot/clans/search";
 
@@ -58,16 +57,13 @@ export function ClanSearchPopover({
     const timer = setTimeout(async () => {
       setLoading(true);
       try {
-        const res = await fetch(
-          `/api/${region}/clans/search/ndjson?q=${encodeURIComponent(trimmed)}`,
-          { signal: controller.signal },
-        );
-        if (!res.ok) return;
         let acc: ClanSearchResult[] = [];
-        await readNdjson<ClanSearchChunk>(res, (chunk) => {
-          acc = [...acc, ...chunk.results];
+        for await (const chunk of unicum
+          .region(region)
+          .clans.searchStream(trimmed, { signal: controller.signal })) {
+          acc = [...acc, ...(chunk.results as ClanSearchResult[])];
           setResults(acc);
-        });
+        }
       } catch {
         // aborted or network failure, ignore
       } finally {
