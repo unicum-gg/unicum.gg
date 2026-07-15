@@ -3,26 +3,28 @@
 import {
   ArrowsInSimpleIcon,
   ArrowsOutSimpleIcon,
+  ChatCircleIcon,
+  ChatCircleSlashIcon,
   TwitchLogoIcon,
+  UsersIcon,
   XIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-  useSyncExternalStore,
-} from "react";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor, type LiveStreamer } from "@unicum.gg/shared";
+import { useTheme } from "next-themes";
+import { useMemo, useState, useSyncExternalStore } from "react";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
+import { FeaturedPlayer } from "@/components/home/featured-player";
 import {
-  LeaderboardPeriod,
   LeaderboardPeriodSelect,
   useLeaderboardPeriod,
 } from "@/components/home/leaderboard-period";
+import {
+  ClanTag,
+  METRIC_VALUE,
+  StreamRow,
+} from "@/components/home/stream-row";
 import {
   Panel,
   PanelContent,
@@ -39,7 +41,6 @@ import {
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
   TableRow,
@@ -53,81 +54,10 @@ import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
-// Rank on either lifetime or 30-day WN*, driven by the header's period toggle
-// (shared with the "Top players" / "Top clans" panels). 30-day reflects who is
-// playing well right now rather than career averages.
-const METRIC_VALUE: Record<
-  LeaderboardPeriod,
-  Record<RatingMetric, (s: LiveStreamer) => number | null>
-> = {
-  [LeaderboardPeriod.Overall]: {
-    [RatingMetric.Wn7]: (s) => s.wn7,
-    [RatingMetric.Wn8]: (s) => s.wn8,
-    [RatingMetric.Wnx]: (s) => s.wnx,
-  },
-  [LeaderboardPeriod.Month]: {
-    [RatingMetric.Wn7]: (s) => s.wn730d,
-    [RatingMetric.Wn8]: (s) => s.wn830d,
-    [RatingMetric.Wnx]: (s) => s.wnx30d,
-  },
-};
-
-const METRIC_COLOR: Record<RatingMetric, (v: number) => string> = {
-  [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
-  [RatingMetric.Wn8]: (v) => RATING_COLOR_CLASS[wn8Color(v)],
-  [RatingMetric.Wnx]: (v) => RATING_COLOR_CLASS[wnxColor(v)],
-};
-
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 function thumb(url: string, w: number, h: number): string {
   return url.replace("{width}", String(w)).replace("{height}", String(h));
-}
-
-type TwitchPlayerInstance = {
-  setChannel: (channel: string) => void;
-  destroy?: () => void;
-};
-
-type TwitchEmbed = {
-  Player: new (
-    el: string | HTMLElement,
-    options: {
-      channel: string;
-      parent: string[];
-      width: string | number;
-      height: string | number;
-      muted: boolean;
-      autoplay: boolean;
-    },
-  ) => TwitchPlayerInstance;
-};
-
-declare global {
-  interface Window {
-    Twitch?: TwitchEmbed;
-  }
-}
-
-const TWITCH_EMBED_SRC = "https://player.twitch.tv/js/embed/v1.js";
-let twitchEmbedPromise: Promise<void> | null = null;
-
-// Load Twitch's player SDK once. Unlike a bare <iframe>, a `Twitch.Player`
-// instance lets us change channels with `setChannel` without tearing the player
-// down, so the viewer's volume and mute choice carry from one stream to the next
-// instead of resetting to muted on every switch.
-function loadTwitchEmbed(): Promise<void> {
-  if (window.Twitch?.Player) return Promise.resolve();
-  if (twitchEmbedPromise) return twitchEmbedPromise;
-  twitchEmbedPromise = new Promise((resolve, reject) => {
-    const script = document.createElement("script");
-    script.src = TWITCH_EMBED_SRC;
-    script.async = true;
-    script.onload = () => resolve();
-    script.onerror = () => reject(new Error("Twitch embed failed to load"));
-    document.head.appendChild(script);
-  });
-  return twitchEmbedPromise;
 }
 
 export function LiveStreams({
@@ -157,10 +87,18 @@ export function LiveStreams({
     return [...streamers].sort((a, b) => (value(b) ?? -1) - (value(a) ?? -1));
   }, [streamers, metric, period]);
 
-  const [activeLogin, setActiveLogin] = useState(initial[0]?.twitchLogin ?? "");
+  // The featured stream follows the top of the current sort (metric + period)
+  // until the visitor explicitly picks one in the table; their pick then
+  // sticks across re-sorts, and falls back to the top if that stream ends.
+  const [selectedLogin, setSelectedLogin] = useState<string | null>(null);
   // Theater mode (desktop): drop the sidebar below the player so the stream
   // goes full width, YouTube-style. Desktop-only; mobile is always stacked.
   const [theater, setTheater] = useState(false);
+  // Twitch chat for the active stream, closed by default (Twitch's own
+  // video-with-chat layout cannot start collapsed, so the chat is a separate
+  // embed iframe we toggle ourselves).
+  const [chatOpen, setChatOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
   // Twitch's embed requires the exact host serving the page as `parent`, only
   // known client-side (covers unicum.gg and the 127.0.0.1 loopback in dev).
   // `useSyncExternalStore` reads it without a hydration mismatch: `null` on the
@@ -172,7 +110,66 @@ export function LiveStreams({
   );
 
   if (sorted.length === 0) return null;
-  const active = sorted.find((s) => s.twitchLogin === activeLogin) ?? sorted[0];
+  const active =
+    (selectedLogin
+      ? sorted.find((s) => s.twitchLogin === selectedLogin)
+      : undefined) ?? sorted[0];
+
+  // In the normal layout the chat REPLACES the streamers list, so closing it
+  // reads as bringing the list back; in theater both are visible side by side.
+  const chatLabel = chatOpen
+    ? theater
+      ? "Hide chat"
+      : "Show streamers"
+    : "Show chat";
+  const chatIcon = chatOpen ? (
+    theater ? (
+      <ChatCircleSlashIcon className="size-4" />
+    ) : (
+      <UsersIcon className="size-4" />
+    )
+  ) : (
+    <ChatCircleIcon className="size-4" />
+  );
+
+  const streamersTable = (
+    <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr]:h-11">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="pl-4!">Player</TableHead>
+          <TableHead className="w-20 whitespace-nowrap text-right!">
+            Viewers
+          </TableHead>
+          <TableHead className="w-20 pr-4 text-right!">{metricLabel}</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {sorted.map((s) => (
+          <StreamRow
+            key={s.twitchLogin}
+            streamer={s}
+            metric={metric}
+            period={period}
+            active={s.twitchLogin === active.twitchLogin}
+            onSelect={() => setSelectedLogin(s.twitchLogin)}
+          />
+        ))}
+      </TableBody>
+    </Table>
+  );
+  // The 1px bottom padding keeps the panel's screen line visible: it is
+  // painted at z-index -1 on the panel's last pixel row, so an opaque iframe
+  // reaching the very edge would cover it (the table shows it through its
+  // transparent background).
+  const chatFrame = parent ? (
+    <div className="h-96 w-full pb-0.5 lg:h-full">
+      <iframe
+        src={`https://www.twitch.tv/embed/${encodeURIComponent(active.twitchLogin)}/chat?parent=${parent}${resolvedTheme === "dark" ? "&darkpopout" : ""}`}
+        title={`${active.nickname} Twitch chat`}
+        className="size-full"
+      />
+    </div>
+  ) : null;
 
   return (
     <>
@@ -258,6 +255,22 @@ export function LiveStreams({
                         type="button"
                         variant="outline"
                         size="icon-sm"
+                        onClick={() => setChatOpen((o) => !o)}
+                        aria-pressed={chatOpen}
+                        aria-label={chatLabel}
+                        className="shrink-0"
+                      >
+                        {chatIcon}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">{chatLabel}</TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon-sm"
                         onClick={() => setTheater((t) => !t)}
                         aria-pressed={theater}
                         aria-label={theater ? "Exit theater mode" : "Theater mode"}
@@ -300,40 +313,38 @@ export function LiveStreams({
               </div>
             </div>
 
-            {/* Sidebar: the live table, ranked by the selected metric. In
-                theater mode it sits full-width below the player instead of to
-                the right. */}
+            {/* Sidebar. Normal layout: the live table, swapped for the active
+                stream's Twitch chat when toggled (official standalone chat
+                embed; switching streams swaps the iframe src). Theater: the
+                full-width band below the player fits both, table on the left
+                and chat on the right. */}
             <div
               className={cn(
                 "border-t border-fd-border",
-                !theater && "lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
+                !theater && "lg:relative lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
               )}
             >
-              <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr]:h-11">
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="pl-4!">Player</TableHead>
-                    <TableHead className="w-20 whitespace-nowrap text-right!">
-                      Viewers
-                    </TableHead>
-                    <TableHead className="w-20 pr-4 text-right!">
-                      {metricLabel}
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {sorted.map((s) => (
-                    <StreamRow
-                      key={s.twitchLogin}
-                      streamer={s}
-                      metric={metric}
-                      period={period}
-                      active={s.twitchLogin === active.twitchLogin}
-                      onSelect={() => setActiveLogin(s.twitchLogin)}
-                    />
-                  ))}
-                </TableBody>
-              </Table>
+              {theater ? (
+                <div className="flex flex-col lg:flex-row">
+                  <div className="min-w-0 flex-1">{streamersTable}</div>
+                  {chatOpen && chatFrame ? (
+                    <div className="border-t border-fd-border lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l">
+                      {chatFrame}
+                    </div>
+                  ) : null}
+                </div>
+              ) : chatOpen && chatFrame ? (
+                chatFrame
+              ) : (
+                /* Absolutely positioned (desktop) so a long streamer list can
+                   never stretch the panel past the player column: the panel
+                   height is the video's, and the list scrolls inside. It also
+                   keeps the height identical whether the table or the chat is
+                   shown. */
+                <div className="lg:absolute lg:inset-0 lg:overflow-y-auto">
+                  {streamersTable}
+                </div>
+              )}
             </div>
           </div>
         </PanelContent>
@@ -371,119 +382,5 @@ function StreamLanguageFlag({
         <TooltipContent side="top">Stream language · {name}</TooltipContent>
       </Tooltip>
     </TooltipProvider>
-  );
-}
-
-/**
- * The featured stream, driven by Twitch's Player SDK instead of a bare iframe so
- * that switching channels reuses a single player instance. Reusing it preserves
- * the viewer's volume and mute across streams; a keyed iframe would remount and
- * reset to muted on every switch.
- */
-function FeaturedPlayer({
-  channel,
-  parent,
-}: {
-  channel: string;
-  parent: string;
-}) {
-  // Twitch's SDK mounts into a div it finds by id (`getElementById`), so give
-  // the container a stable, collision-free one.
-  const domId = useId();
-  const playerRef = useRef<TwitchPlayerInstance | null>(null);
-  // If the active channel changes while the SDK is still loading, create the
-  // player on the latest one rather than the value captured at mount. Kept in a
-  // ref (synced from an effect, never during render) so it isn't an effect dep.
-  const channelRef = useRef(channel);
-  useEffect(() => {
-    channelRef.current = channel;
-  }, [channel]);
-
-  useEffect(() => {
-    let disposed = false;
-    void loadTwitchEmbed()
-      .then(() => {
-        if (disposed || playerRef.current || !window.Twitch?.Player) return;
-        if (!document.getElementById(domId)) return;
-        const player = new window.Twitch.Player(domId, {
-          channel: channelRef.current,
-          parent: [parent],
-          width: "100%",
-          height: "100%",
-          muted: true,
-          autoplay: true,
-        });
-        playerRef.current = player;
-      })
-      .catch(() => {});
-    return () => {
-      disposed = true;
-      playerRef.current?.destroy?.();
-      playerRef.current = null;
-    };
-  }, [parent, domId]);
-
-  // Swap channels on the live instance; volume and mute persist because it is
-  // the same player.
-  useEffect(() => {
-    playerRef.current?.setChannel(channel);
-  }, [channel]);
-
-  return <div id={domId} className="absolute inset-0 size-full" />;
-}
-
-function StreamRow({
-  streamer,
-  metric,
-  period,
-  active,
-  onSelect,
-}: {
-  streamer: LiveStreamer;
-  metric: RatingMetric;
-  period: LeaderboardPeriod;
-  active: boolean;
-  onSelect: () => void;
-}) {
-  const value = METRIC_VALUE[period][metric](streamer);
-  return (
-    <TableRow
-      onClick={onSelect}
-      aria-pressed={active}
-      className={cn("cursor-pointer", active && "bg-fd-border/50")}
-    >
-      <TableCell className="pl-4!">
-        <div className="truncate">
-          <span className="font-medium">{streamer.nickname}</span>
-          {streamer.clanTag ? (
-            <>
-              {" "}
-              <ClanTag tag={streamer.clanTag} color={streamer.clanColor} />
-            </>
-          ) : null}
-        </div>
-      </TableCell>
-      <TableCell className="text-right tabular-nums text-fd-muted-foreground">
-        {intFmt.format(streamer.viewerCount)}
-      </TableCell>
-      <TableCell
-        className={cn(
-          "pr-4 text-right font-semibold tabular-nums",
-          value != null && METRIC_COLOR[metric](value),
-        )}
-      >
-        {value != null ? intFmt.format(value) : "—"}
-      </TableCell>
-    </TableRow>
-  );
-}
-
-function ClanTag({ tag, color }: { tag: string; color: string | null }) {
-  return (
-    <span className="font-mono text-xs">
-      <span style={{ color: color ?? undefined }}>[</span>
-      {tag}
-      <span style={{ color: color ?? undefined }}>]</span>
-    </span>
   );
 }
