@@ -22,7 +22,16 @@ function toZodShape(schema: ToolInputSchema): Record<string, z.ZodTypeAny> {
 
 function createServer(): McpServer {
   const server = new McpServer(
-    { name: `${APP.NAME}/${MCP_NAME}`, version: APP.VERSION },
+    {
+      name: `${APP.NAME}/${MCP_NAME}`,
+      version: APP.VERSION,
+      title: APP.NAME,
+      websiteUrl: APP.URL,
+      // Branding for clients that render serverInfo.icons (SEP-973). APP.LOGO
+      // is `${URL}/icon.svg`; clients that ignore it fall back to a generic
+      // icon.
+      icons: [{ src: APP.LOGO, mimeType: "image/svg+xml" }],
+    },
     { capabilities: { tools: {} } },
   );
 
