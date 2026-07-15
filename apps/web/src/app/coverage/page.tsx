@@ -20,8 +20,8 @@ export default async function Page() {
   return <CoverageView region={Region.EU} />;
 }
 
-// Dynamic on purpose: the page consumes our own /coverage API through the SDK
-// (fetching at build time would make the build depend on a running API). The
-// endpoint itself caches for 60s server-side, so per-request cost is one local
-// HTTP hop onto a cached payload.
-export const dynamic = "force-dynamic";
+// ISR: prerendered and revalidated in the background, so the (expensive)
+// coverage computation never blocks a visitor. The SDK loopback handles the
+// build-time fetch, so a build no longer depends on a running API.
+export const dynamic = "force-static";
+export const revalidate = 600;
