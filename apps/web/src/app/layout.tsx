@@ -1,3 +1,6 @@
+// Installs the build-time SDK loopback (side-effect import, server graph only:
+// prerendered pages resolve SDK calls against this build's own route handlers).
+import "@/services/sdk/loopback";
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
