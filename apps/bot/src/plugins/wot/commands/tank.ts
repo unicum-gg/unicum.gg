@@ -16,7 +16,11 @@ import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { tankUrl, wnxColorInt } from "../lib/format.js";
 import { unicum } from "../lib/sdk.js";
 import { renderTable, type TableRow } from "../lib/table.js";
-import { toRoman } from "roman-numerals";
+import romanNumerals from "roman-numerals";
+
+// `roman-numerals` is CommonJS: a named ESM import (`{ toRoman }`) throws at boot
+// under native ESM (tsx), so take the default export and destructure at runtime.
+const { toRoman } = romanNumerals;
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
