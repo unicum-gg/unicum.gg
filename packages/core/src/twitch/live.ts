@@ -79,6 +79,7 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       title: stream.title,
       viewerCount: stream.viewerCount,
       startedAt: stream.startedAt,
+      language: stream.language,
       thumbnailUrl: stream.thumbnailUrl,
     });
   }

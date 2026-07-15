@@ -1245,6 +1245,8 @@ export interface components {
             viewerCount: number;
             /** @description Stream start, ISO 8601. */
             startedAt: string;
+            /** @description Stream language, ISO 639-1. */
+            language: string;
             thumbnailUrl: string;
         };
         LiveStreamersResponse: {

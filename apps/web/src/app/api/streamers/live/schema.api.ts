@@ -19,6 +19,7 @@ const liveStreamer = z
     title: z.string(),
     viewerCount: z.number(),
     startedAt: z.string().meta({ description: "Stream start, ISO 8601." }),
+    language: z.string().meta({ description: "Stream language, ISO 639-1." }),
     thumbnailUrl: z.string(),
   })
   .meta({

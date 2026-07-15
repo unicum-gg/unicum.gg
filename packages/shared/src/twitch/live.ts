@@ -19,5 +19,7 @@ export type LiveStreamer = {
   title: string;
   viewerCount: number;
   startedAt: string;
+  /** Stream language (ISO 639-1, from Twitch). */
+  language: string;
   thumbnailUrl: string;
 };

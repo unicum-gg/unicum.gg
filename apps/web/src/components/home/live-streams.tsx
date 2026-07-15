@@ -48,8 +48,10 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
+import { languageToCountryCode } from "@/lib/language-flags";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { cn } from "@/lib/utils";
+import type { Region } from "@unicum.gg/wargaming";
 
 // Rank on either lifetime or 30-day WN*, driven by the header's period toggle
 // (shared with the "Top players" / "Top clans" panels). 30-day reflects who is
@@ -243,6 +245,10 @@ export function LiveStreams({
                     ) : null}
                     {" · "}
                     {intFmt.format(active.viewerCount)} viewers
+                    <StreamLanguageFlag
+                      language={active.language}
+                      region={active.region}
+                    />
                   </p>
                 </div>
                 <TooltipProvider>
@@ -333,6 +339,38 @@ export function LiveStreams({
         </PanelContent>
       </Panel>
     </>
+  );
+}
+
+const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
+
+/** The stream's spoken language (from Twitch) as a small inline flag. */
+function StreamLanguageFlag({
+  language,
+  region,
+}: {
+  language: string;
+  region: Region;
+}) {
+  // Tolerate payloads predating the field (stale SSE snapshots, old caches).
+  const country = language ? languageToCountryCode(language, region) : null;
+  if (!country) return null;
+  const name = LANGUAGE_NAMES.of(language) ?? language.toUpperCase();
+  return (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <Image
+            src={`/flags/s/${country}.svg`}
+            alt={`Stream language: ${name}`}
+            width={16}
+            height={12}
+            className="ml-2 inline-block rounded-[2px] align-baseline"
+          />
+        </TooltipTrigger>
+        <TooltipContent side="top">Stream language · {name}</TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 

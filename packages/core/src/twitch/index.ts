@@ -26,6 +26,8 @@ export type TwitchStream = {
   title: string;
   viewerCount: number;
   startedAt: string;
+  /** Stream language (ISO 639-1, e.g. "en"). */
+  language: string;
   /** URL template with `{width}`/`{height}` placeholders to fill client-side. */
   thumbnailUrl: string;
 };
@@ -40,6 +42,7 @@ type RawStream = {
   title: string;
   viewer_count: number;
   started_at: string;
+  language: string;
   thumbnail_url: string;
 };
 
@@ -53,6 +56,7 @@ function mapStream(s: RawStream): TwitchStream {
     title: s.title,
     viewerCount: s.viewer_count,
     startedAt: s.started_at,
+    language: s.language,
     thumbnailUrl: s.thumbnail_url,
   };
 }
