@@ -23,9 +23,6 @@ export async function generateMetadata({
   });
 }
 
-export async function generateStaticParams() {
-  return [Region.NA, Region.ASIA].map((region) => ({ region }));
-}
 
 export default async function CoveragePage({
   params,
@@ -43,3 +40,7 @@ export default async function CoveragePage({
 // endpoint itself caches for 60s server-side, so per-request cost is one local
 // HTTP hop onto a cached payload.
 export const dynamic = "force-dynamic";
+
+export async function generateStaticParams() {
+  return [Region.NA, Region.ASIA].map((region) => ({ region }));
+}

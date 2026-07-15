@@ -16,6 +16,11 @@ function parseTier(tier: string): StrongholdTier {
     : StrongholdTier.T10;
 }
 
+// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
+// own API through the SDK. The endpoints cache server-side, so the per-request
+// cost is local HTTP hops onto cached payloads.
+export const dynamic = "force-dynamic";
+
 export async function generateMetadata({
   params,
 }: {

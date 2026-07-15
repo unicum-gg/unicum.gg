@@ -6,6 +6,21 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
 
+
+// ISR: served as prerendered HTML and revalidated in the background, so
+// navigation stays instant while the data follows the endpoints' cadence.
+// The SDK calls fail-soft to an empty shell at build time (a build must not
+// depend on a running API); the first revalidation after deploy fills it in.
+export const dynamic = "force-static";
+export const revalidate = 600;
+
+export function generateStaticParams() {
+  // EU lives at /clans (handled by app/clans/page.tsx + a redirect from
+  // /eu/clans), so only NA and ASIA are enumerated here. Exposing the
+  // params also lets next-sitemap pick the routes up at build time.
+  return [{ region: Region.NA }, { region: Region.ASIA }];
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -22,12 +37,6 @@ export async function generateMetadata({
   });
 }
 
-export function generateStaticParams() {
-  // EU lives at /clans (handled by app/clans/page.tsx + a redirect from
-  // /eu/clans), so only NA and ASIA are enumerated here. Exposing the
-  // params also lets next-sitemap pick the routes up at build time.
-  return [{ region: Region.NA }, { region: Region.ASIA }];
-}
 
 export default async function Page({
   params,
@@ -40,4 +49,3 @@ export default async function Page({
   return <ClansLandingView region={region} language={null} />;
 }
 
-export const revalidate = 600;

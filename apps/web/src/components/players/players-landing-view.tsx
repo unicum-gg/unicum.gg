@@ -12,7 +12,7 @@ import {
 } from "@/components/panel";
 import { RatingMetric } from "@unicum.gg/shared";
 import { languageToCountryCode } from "@/lib/language-flags";
-import { unicum } from "@/services/sdk";
+import { buildSafe, unicum } from "@/services/sdk";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 import {
   Region,
@@ -71,11 +71,12 @@ export async function PlayersLandingView({
     ...(language ? { language } : { languages: "true" as const }),
     ...(strict ? { strict: "true" as const } : {}),
   });
+  const EMPTY_TOP = { results: [], computed_at: null };
   const [wn7Top, wn8Top, wnxTop, languageStats] = await Promise.all([
-    api.top(topQuery("wn7")),
-    api.top(topQuery("wn8")),
-    api.top(topQuery("wnx")),
-    api.languages(),
+    buildSafe(() => api.top(topQuery("wn7")), EMPTY_TOP),
+    buildSafe(() => api.top(topQuery("wn8")), EMPTY_TOP),
+    buildSafe(() => api.top(topQuery("wnx")), EMPTY_TOP),
+    buildSafe(() => api.languages(), { results: [] }),
   ]);
   const wn7Results = wn7Top.results as TopPlayerByLanguageResult[];
   const wn8Results = wn8Top.results as TopPlayerByLanguageResult[];

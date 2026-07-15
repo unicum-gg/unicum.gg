@@ -11,7 +11,7 @@ import type { MasteryRow, MoeRow } from "@/components/tanks/tanks-index";
 import { TankTab, tankTabFromQuery } from "@/components/tanks/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { unicum } from "@/services/sdk";
+import { buildSafe, unicum } from "@/services/sdk";
 import {
   type Region,
   isRegion,
@@ -20,6 +20,11 @@ import {
 } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
+// own API through the SDK. The endpoints cache server-side, so the per-request
+// cost is local HTTP hops onto cached payloads.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -57,13 +62,14 @@ export async function renderTanksIndex(
   // together by slug. This view keeps the page's stat labels (dpg, wr, ...)
   // and columns.
   const api = unicum.region(region).tanks;
+  const EMPTY = { results: [] };
   const [perf, specifications, economics, marksOfExcellence, marksOfMastery] =
     await Promise.all([
-      api.list(),
-      api.specifications(),
-      api.economics(),
-      api.marksOfExcellence(),
-      api.marksOfMastery(),
+      buildSafe(() => api.list(), EMPTY),
+      buildSafe(() => api.specifications(), EMPTY),
+      buildSafe(() => api.economics(), EMPTY),
+      buildSafe(() => api.marksOfExcellence(), EMPTY),
+      buildSafe(() => api.marksOfMastery(), EMPTY),
     ]);
   const specBySlug = new Map(
     specifications.results.map((r) => [r.identity.slug, r.specifications]),

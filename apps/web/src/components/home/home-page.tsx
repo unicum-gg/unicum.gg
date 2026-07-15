@@ -34,7 +34,7 @@ import type {
   TopPlayersPeriod,
   TopPlayersSnapshot,
 } from "@unicum.gg/core/wargaming/wot/players/top";
-import { unicum } from "@/services/sdk";
+import { buildSafe, unicum } from "@/services/sdk";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 const TOP_LIMIT = 9;
@@ -53,9 +53,13 @@ async function playersTopByRegions(
 ): Promise<Record<Region, TopPlayersSnapshot>> {
   const entries = await Promise.all(
     REGIONS.map(async (region) => {
-      const { results, computed_at } = await unicum
-        .region(region)
-        .players.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT });
+      const { results, computed_at } = await buildSafe(
+        () =>
+          unicum
+            .region(region)
+            .players.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT }),
+        { results: [], computed_at: null },
+      );
       return [
         region,
         {
@@ -74,9 +78,13 @@ async function clansTopByRegions(
 ): Promise<Record<Region, TopClansSnapshot>> {
   const entries = await Promise.all(
     REGIONS.map(async (region) => {
-      const { results, computed_at } = await unicum
-        .region(region)
-        .clans.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT });
+      const { results, computed_at } = await buildSafe(
+        () =>
+          unicum
+            .region(region)
+            .clans.top({ metric: RATING_COL[metric], period, limit: TOP_LIMIT }),
+        { results: [], computed_at: null },
+      );
       return [
         region,
         {
@@ -109,7 +117,9 @@ export async function HomePage({
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "7d"))),
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "overall"))),
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "30d"))),
-    unicum.streamers.list().then((r) => r.results as unknown as LiveStreamer[]),
+    buildSafe(() => unicum.streamers.list(), { results: [] }).then(
+      (r) => r.results as unknown as LiveStreamer[],
+    ),
   ]);
 
   return (

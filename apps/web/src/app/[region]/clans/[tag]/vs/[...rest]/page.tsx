@@ -8,6 +8,13 @@ import { unicum } from "@/services/sdk";
 import type { WN8Expected, WNXExpected } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
 
+
+// Dynamic on purpose: the page consumes our own API through the SDK, and
+// prerendering it at build time would make the build depend on a running API.
+// The endpoints cache server-side, so per-request cost is local HTTP hops onto
+// cached payloads.
+export const dynamic = "force-dynamic";
+
 const MAX_CLANS = 4;
 const MIN_CLANS = 2;
 
