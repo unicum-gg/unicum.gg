@@ -77,8 +77,6 @@ function thumb(url: string, w: number, h: number): string {
 
 type TwitchPlayerInstance = {
   setChannel: (channel: string) => void;
-  play: () => void;
-  addEventListener: (event: string, callback: () => void) => void;
   destroy?: () => void;
 };
 
@@ -348,14 +346,6 @@ function FeaturedPlayer({
           height: "100%",
           muted: true,
           autoplay: true,
-        });
-        // Twitch's embed auto-pauses when the window loses focus, and no embed
-        // option disables it (its JS lives in the cross-origin iframe, out of
-        // our reach). Resume unless the pause was a deliberate click while the
-        // page is focused, so the featured stream keeps playing (and audible)
-        // when the visitor switches to another window.
-        player.addEventListener("pause", () => {
-          if (!document.hasFocus()) player.play();
         });
         playerRef.current = player;
       })
