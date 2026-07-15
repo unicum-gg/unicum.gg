@@ -3,6 +3,7 @@
 import {
   ArrowsInSimpleIcon,
   ArrowsOutSimpleIcon,
+  TwitchLogoIcon,
   XIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
@@ -29,6 +30,12 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { Button } from "@/components/ui/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import {
   Table,
   TableBody,
@@ -238,31 +245,52 @@ export function LiveStreams({
                     {intFmt.format(active.viewerCount)} viewers
                   </p>
                 </div>
-                <Button
-                  type="button"
-                  variant="outline"
-                  size="icon-sm"
-                  onClick={() => setTheater((t) => !t)}
-                  aria-pressed={theater}
-                  aria-label={theater ? "Exit theater mode" : "Theater mode"}
-                  title={theater ? "Exit theater mode" : "Theater mode"}
-                  className="hidden shrink-0 lg:inline-flex"
-                >
-                  {theater ? (
-                    <ArrowsInSimpleIcon className="size-4" />
-                  ) : (
-                    <ArrowsOutSimpleIcon className="size-4" />
-                  )}
-                </Button>
-                <Button asChild variant="outline" size="sm">
-                  <a
-                    href={`https://www.twitch.tv/${active.twitchLogin}`}
-                    target="_blank"
-                    rel="nofollow noopener noreferrer"
-                  >
-                    Watch on Twitch
-                  </a>
-                </Button>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="icon-sm"
+                        onClick={() => setTheater((t) => !t)}
+                        aria-pressed={theater}
+                        aria-label={theater ? "Exit theater mode" : "Theater mode"}
+                        className="hidden shrink-0 lg:inline-flex"
+                      >
+                        {theater ? (
+                          <ArrowsInSimpleIcon className="size-4" />
+                        ) : (
+                          <ArrowsOutSimpleIcon className="size-4" />
+                        )}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      {theater ? "Exit theater mode" : "Theater mode"}
+                    </TooltipContent>
+                  </Tooltip>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        asChild
+                        variant="outline"
+                        size="icon-sm"
+                        className="shrink-0"
+                      >
+                        <a
+                          href={`https://www.twitch.tv/${active.twitchLogin}`}
+                          target="_blank"
+                          rel="nofollow noopener noreferrer"
+                          aria-label={`Watch ${active.nickname} on Twitch`}
+                        >
+                          <TwitchLogoIcon className="size-4" />
+                        </a>
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="top">
+                      Watch {active.nickname} on Twitch
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
               </div>
             </div>
 
