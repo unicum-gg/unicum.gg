@@ -84,15 +84,22 @@ export function wargaming(): BetterAuthPlugin {
             ctx.context.secret,
             stateCookie.attributes,
           );
-          // Redirect the browser straight to WG's login endpoint, which issues
-          // its own 302 onward to the OpenID page. Unlike calling `login()`
-          // server-side (a WG API round-trip through the shared per-region rate
-          // limiter, which queues behind background traffic and froze the click
-          // for 1-3s), this builds the URL locally: the sign-in redirect is
-          // instant and makes no WG call.
-          const location = wg
-            .region(region)
-            .api.wot.auth.loginUrl({ redirectUri });
+          // Resolve the OpenID URL server-side (`nofollow=1`) and send the
+          // browser there. The browser must NOT hit `/wot/auth/login/` itself
+          // (the old `loginUrl` approach): our WG apps are "Server" type, so
+          // WG checks the caller's IP against the whitelist on that endpoint,
+          // and any player outside it got 407 INVALID_IP_ADDRESS. The server's
+          // IP is whitelisted; `skipRateLimit` keeps the click from queueing
+          // behind background traffic (the 1-3s freeze that motivated the old
+          // approach came from the shared limiter, not the WG round-trip).
+          let location: string;
+          try {
+            ({ location } = await wg
+              .region(region)
+              .api.wot.auth.login({ redirectUri }, { skipRateLimit: true }));
+          } catch {
+            throw ctx.redirect(appUrl("/?auth=error"));
+          }
           throw ctx.redirect(location);
         },
       ),

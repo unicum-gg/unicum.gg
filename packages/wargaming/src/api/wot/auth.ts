@@ -40,24 +40,34 @@ export class AuthResource {
    * user authenticates, WG appends `access_token`, `expires_at`, `account_id`
    * and `nickname` to `redirectUri`.
    */
-  async login(params: {
-    /** URL WG sends the user back to after authentication. */
-    redirectUri?: string;
-    /** Page layout — `Page` (default) or `Popup` for mobile apps. */
-    display?: AuthDisplay;
+  async login(
+    params: {
+      /** URL WG sends the user back to after authentication. */
+      redirectUri?: string;
+      /** Page layout — `Page` (default) or `Popup` for mobile apps. */
+      display?: AuthDisplay;
+      /**
+       * `access_token` expiration as a UNIX timestamp, or a delta in seconds.
+       * Must not exceed two weeks from now.
+       */
+      expiresAt?: number;
+      language?: WgLanguage;
+    } = {},
     /**
-     * `access_token` expiration as a UNIX timestamp, or a delta in seconds.
-     * Must not exceed two weeks from now.
+     * `skipRateLimit` exempts this call from the per-region rate limiter, for
+     * the interactive sign-in path where resolving the OpenID URL blocks the
+     * user's click and must not queue behind background traffic.
      */
-    expiresAt?: number;
-    language?: WgLanguage;
-  } = {}): Promise<LoginRedirect> {
+    opts?: { skipRateLimit?: boolean },
+  ): Promise<LoginRedirect> {
     const query = buildQuery(params);
     query.nofollow = "1";
     if (params.redirectUri) query.redirect_uri = params.redirectUri;
     if (params.display) query.display = params.display;
     if (params.expiresAt !== undefined) query.expires_at = String(params.expiresAt);
-    return this.t.wgFetch<LoginRedirect>(this.region, "/wot/auth/login/", query);
+    return this.t.wgFetch<LoginRedirect>(this.region, "/wot/auth/login/", query, {
+      skipRateLimit: opts?.skipRateLimit,
+    });
   }
 
   /**
@@ -66,9 +76,13 @@ export class AuthResource {
    * OpenID URL and hands it back, this just assembles the `/wot/auth/login/`
    * URL: WG then issues its own `302` to the OpenID page when the browser lands
    * there. So it makes no API call and never touches the rate limiter — the
-   * user's browser makes the request, not us. Prefer it for the interactive
-   * sign-in redirect; use {@link login} only when the resolved URL is needed
-   * server-side.
+   * user's browser makes the request, not us.
+   *
+   * WARNING: unusable with "Server"-type (IP-whitelisted) applications. WG
+   * validates the caller's IP on `/wot/auth/login/` itself, and here the
+   * caller is the user's browser — any player outside the whitelist gets 407
+   * `INVALID_IP_ADDRESS`. For a server-type app, resolve the URL server-side
+   * with {@link login} and redirect the browser to the returned `location`.
    */
   loginUrl(params: {
     /** URL WG sends the user back to after authentication. */
