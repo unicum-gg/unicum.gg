@@ -270,6 +270,12 @@
   #nd-nav > div > div > nav {
     @apply border-x border-fd-border;
   }
+  /* The mega-menu ("More") viewport is the nav wrapper's sibling, centered to
+     the same layout width: give it the same side borders. Invisible while the
+     menu is closed (the viewport collapses to zero height). */
+  #nd-nav > div > div:has(nav) + div {
+    @apply border-x border-fd-border;
+  }
 
 }
 
