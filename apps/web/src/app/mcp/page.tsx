@@ -181,7 +181,7 @@ export default function McpPage() {
             and ask about players, clans, tanks and leaderboards in plain
             language. Free, no API key required.
           </p>
-          <div className="mx-auto mt-6 max-w-xl text-left">
+          <div className="mt-6 inline-block max-w-full text-left">
             <CopySnippet text={MCP_ENDPOINT} />
           </div>
         </PanelContent>
