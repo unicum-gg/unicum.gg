@@ -144,6 +144,7 @@ Login is **Wargaming.net ID (OpenID) only**, via Better Auth. The instance lives
 # Conventions
 
 - Enums over union types or `as const` arrays. The codebase uses real TypeScript `enum` declarations consistently (`enum SortColumn`, `enum RatingMetric`, etc.).
+- Keep files under ~400 lines. When one grows past that, extract a component/module into its own file instead of letting it sprawl.
 - No section divider comments (e.g. `// ─── X ───`). Split the file instead.
 - English only in code, comments, UI strings, and Intl locales.
 - ESLint, not Biome. Never emit `// biome-ignore ...` directives.
