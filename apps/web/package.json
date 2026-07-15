@@ -19,6 +19,7 @@
     "env:init": "tsx scripts/init-env.ts"
   },
   "dependencies": {
+    "@discordjs/rest": "^2.6.1",
     "@modelcontextprotocol/sdk": "^1.29.0",
     "@onruntime/next-sitemap": "^0.9.5",
     "@phosphor-icons/react": "^2.1.10",
