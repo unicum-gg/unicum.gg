@@ -22,8 +22,12 @@ type OpenApiSpec = { paths?: Record<string, { get?: OpenApiOperation }> };
 function deriveToolName(operationId: string): string {
   return operationId
     .replace(/^get-/, "")
-    .replace(/-\{[^}]+\}/g, "")
-    .replace(/\{[^}]+\}-/g, "")
+    // `{region}` is on every route: drop it as noise. Other path params are
+    // kept as `by-<name>` so distinct routes never collapse to the same tool
+    // name (e.g. `/tanks` vs `/tanks/{slug}` must stay distinct, or the MCP
+    // server throws "already registered" on the second registerTool).
+    .replace(/\{region\}-?/g, "")
+    .replace(/\{([^}]+)\}/g, "by-$1")
     .replace(/-+/g, "_")
     .replace(/^_+|_+$/g, "");
 }
@@ -75,6 +79,20 @@ export const TOOL_DEFS: ToolDef[] = Object.entries(
       path,
     };
   });
+
+// Fail loud at module load if two operations derive the same tool name: the MCP
+// server registers tools by name and throws on a duplicate, which would 500
+// every request. This turns a future collision into a build/dev-time error
+// instead of a silent production outage.
+const seenToolNames = new Set<string>();
+for (const { name, path } of TOOL_DEFS) {
+  if (seenToolNames.has(name)) {
+    throw new Error(
+      `Duplicate MCP tool name "${name}" (from ${path}). deriveToolName must map each API route to a unique name.`,
+    );
+  }
+  seenToolNames.add(name);
+}
 
 /**
  * Builds the path + query string for an API call given a URL template and
