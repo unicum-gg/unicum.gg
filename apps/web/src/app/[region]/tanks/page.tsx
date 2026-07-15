@@ -8,12 +8,12 @@ import {
 import { TanksIndex } from "@/components/tanks/tanks-index";
 import type { TankSpecRow } from "@/components/tanks/spec-columns";
 import type { MasteryRow, MoeRow } from "@/components/tanks/tanks-index";
-import { TankTab, tankTabFromQuery } from "@/components/tanks/tabs";
+import { TankTab } from "@/components/tanks/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
 import {
-  type Region,
+  Region,
   isRegion,
   REGION_EMOJI,
   REGION_LABEL,
@@ -21,10 +21,19 @@ import {
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
-// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
-// own API through the SDK. The endpoints cache server-side, so the per-request
-// cost is local HTTP hops onto cached payloads.
-export const dynamic = "force-dynamic";
+// ISR like the other landings: served as prerendered HTML, revalidated in the
+// background. The active tab and filters are read client-side from the URL
+// (TanksIndex + useTankFilters sync them from the query string), so the page
+// never needs searchParams and can be static.
+export const dynamic = "force-static";
+export const revalidate = 600;
+
+export function generateStaticParams() {
+  // EU lives at /tanks (handled by app/tanks/page.tsx), so only NA and ASIA are
+  // enumerated here. Exposing the params also lets next-sitemap pick the routes
+  // up at build time.
+  return [{ region: Region.NA }, { region: Region.ASIA }];
+}
 
 export async function generateMetadata({
   params,
@@ -43,14 +52,12 @@ export async function generateMetadata({
 
 export default async function TanksIndexPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string }>;
-  searchParams: Promise<{ tab?: string }>;
 }) {
-  const [{ region }, { tab }] = await Promise.all([params, searchParams]);
+  const { region } = await params;
   if (!isRegion(region)) notFound();
-  return renderTanksIndex(region, tankTabFromQuery(tab));
+  return renderTanksIndex(region);
 }
 
 export async function renderTanksIndex(

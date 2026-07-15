@@ -1,7 +1,6 @@
 "use client";
 
 import { StarIcon } from "@phosphor-icons/react";
-import { useSearchParams } from "next/navigation";
 import {
   type Dispatch,
   forwardRef,
@@ -9,6 +8,7 @@ import {
   type SetStateAction,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import { toRoman } from "roman-numerals";
@@ -123,34 +123,57 @@ export function useTankFilters<T extends FilterableTank>(
 ): { filtered: T[]; filters: TankFilters<T> } {
   // Filters live in the URL (?q=&tier=&nation=&class=&role=&cat=&rc=&min=&max=)
   // so a filtered view is shareable, bookmarkable, and survives a reload. State
-  // seeds from the query string; changes are written back (merged with any other
-  // params like ?tab=/?section=) via replaceState — no history spam, no reload.
-  const searchParams = useSearchParams();
-  const [query, setQuery] = useState(() => searchParams.get("q") ?? "");
-  const [rangeCol, setRangeCol] = useState(
-    () => searchParams.get("rc") ?? initialRangeCol,
-  );
-  const [minVal, setMinVal] = useState(() => searchParams.get("min") ?? "");
-  const [maxVal, setMaxVal] = useState(() => searchParams.get("max") ?? "");
-  const [tiersSel, setTiersSel] = useState<Set<number>>(() =>
-    parseNumSet(searchParams.get("tier")),
-  );
-  const [nationsSel, setNationsSel] = useState<Set<string>>(() =>
-    parseSet(searchParams.get("nation")),
-  );
-  const [classesSel, setClassesSel] = useState<Set<string>>(() =>
-    parseSet(searchParams.get("class")),
-  );
-  const [rolesSel, setRolesSel] = useState<Set<string>>(() =>
-    parseSet(searchParams.get("role")),
-  );
+  // starts empty and seeds from the query string on mount (below); changes are
+  // written back (merged with any other params like ?tab=/?section=) via
+  // replaceState — no history spam, no reload. The URL is read via
+  // window.location, not useSearchParams, so this component stays out of the
+  // dynamic-rendering path and the page can be statically prerendered.
+  const [query, setQuery] = useState("");
+  const [rangeCol, setRangeCol] = useState(initialRangeCol);
+  const [minVal, setMinVal] = useState("");
+  const [maxVal, setMaxVal] = useState("");
+  const [tiersSel, setTiersSel] = useState<Set<number>>(() => new Set());
+  const [nationsSel, setNationsSel] = useState<Set<string>>(() => new Set());
+  const [classesSel, setClassesSel] = useState<Set<string>>(() => new Set());
+  const [rolesSel, setRolesSel] = useState<Set<string>>(() => new Set());
   // "standard" | "premium" | "reward" — reward (earned/special) is checked
   // before premium since reward tanks also carry a gold price.
-  const [categorySel, setCategorySel] = useState<Set<string>>(() =>
-    parseSet(searchParams.get("cat")),
-  );
+  const [categorySel, setCategorySel] = useState<Set<string>>(() => new Set());
 
+  // Seed filter state from the URL once, on mount (client-side only). A
+  // deep-linked filter view applies right after hydration.
+  /* eslint-disable react-hooks/set-state-in-effect -- one-shot hydration from the URL on mount, avoids an SSR mismatch */
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const q = params.get("q");
+    if (q) setQuery(q);
+    const rc = params.get("rc");
+    if (rc) setRangeCol(rc);
+    const min = params.get("min");
+    if (min) setMinVal(min);
+    const max = params.get("max");
+    if (max) setMaxVal(max);
+    const tier = parseNumSet(params.get("tier"));
+    if (tier.size) setTiersSel(tier);
+    const nation = parseSet(params.get("nation"));
+    if (nation.size) setNationsSel(nation);
+    const klass = parseSet(params.get("class"));
+    if (klass.size) setClassesSel(klass);
+    const role = parseSet(params.get("role"));
+    if (role.size) setRolesSel(role);
+    const cat = parseSet(params.get("cat"));
+    if (cat.size) setCategorySel(cat);
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
+  // Skip the write-back on the first commit so the mount-time seed above (which
+  // runs after) is never clobbered by an empty-state URL write.
+  const skipNextWriteback = useRef(true);
+  useEffect(() => {
+    if (skipNextWriteback.current) {
+      skipNextWriteback.current = false;
+      return;
+    }
     const params = new URLSearchParams(window.location.search);
     const setOrDel = (key: string, val: string) => {
       if (val) params.set(key, val);

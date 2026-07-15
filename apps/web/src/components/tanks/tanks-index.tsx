@@ -1,7 +1,6 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { type MouseEvent, useMemo, useState } from "react";
+import { type MouseEvent, useEffect, useMemo, useState } from "react";
 import {
   PERF_COLUMNS,
   PerfColumnSelector,
@@ -128,13 +127,21 @@ export function TanksIndex({
   basePath: string;
 }) {
   // Tab is client state kept in sync with the URL (?tab=), so switching tabs
-  // preserves the shared filters below without a server round-trip.
+  // preserves the shared filters below without a server round-trip. Read from
+  // the URL on mount/back-forward via window.location instead of
+  // useSearchParams, so this subtree stays statically prerenderable (the page
+  // is force-static): the server renders the default tab, the client syncs to
+  // ?tab= right after hydration.
   const [tab, setTab] = useState(activeTab);
-  const searchParams = useSearchParams();
-  const urlTab =
-    TANK_TABS.find((t) => t.query === searchParams.get("tab"))?.id ??
-    TankTab.Performances;
-  if (urlTab !== tab) setTab(urlTab);
+  useEffect(() => {
+    const sync = () => {
+      const q = new URLSearchParams(window.location.search).get("tab");
+      setTab(TANK_TABS.find((t) => t.query === q)?.id ?? TankTab.Performances);
+    };
+    sync();
+    window.addEventListener("popstate", sync);
+    return () => window.removeEventListener("popstate", sync);
+  }, []);
 
   const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const rangeMetric: RatingMetric = isRatingMetric(storedRating)

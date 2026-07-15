@@ -3,14 +3,14 @@ import {
   generateMetadata as generateRegionMetadata,
   renderTanksIndex,
 } from "@/app/[region]/tanks/page";
-import { tankTabFromQuery } from "@/components/tanks/tabs";
 import { Region } from "@unicum.gg/wargaming";
 
 // EU shortcut: /tanks renders the same index as /eu/tanks.
-// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
-// own API through the SDK. The endpoints cache server-side, so the per-request
-// cost is local HTTP hops onto cached payloads.
-export const dynamic = "force-dynamic";
+// ISR like the other landings: prerendered, revalidated in the background. The
+// active tab and filters are read client-side from the URL, so no searchParams
+// are needed.
+export const dynamic = "force-static";
+export const revalidate = 600;
 
 export function generateMetadata(): Promise<Metadata> {
   return generateRegionMetadata({
@@ -18,11 +18,6 @@ export function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default async function TanksIndexPageEU({
-  searchParams,
-}: {
-  searchParams: Promise<{ tab?: string }>;
-}) {
-  const { tab } = await searchParams;
-  return renderTanksIndex(Region.EU, tankTabFromQuery(tab));
+export default async function TanksIndexPageEU() {
+  return renderTanksIndex(Region.EU);
 }
