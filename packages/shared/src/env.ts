@@ -32,6 +32,16 @@ export const env = createEnv({
     // Optional so the app + worker boot without it (feature degrades to off).
     TWITCH_CLIENT_ID: z.string().optional(),
     TWITCH_CLIENT_SECRET: z.string().optional(),
+    // Discord application for the "Add to Discord" install flow (`/bot`): a
+    // single OAuth2 authorization adds the bot to the user's server AND joins
+    // them to our community server (`guilds.join`). All four are needed for the
+    // flow; optional so the app/worker boot without them (the install button
+    // hides and the routes 404 when unconfigured). `DISCORD_APP_ID` is the
+    // public client id; the secret + bot token are real secrets.
+    DISCORD_APP_ID: z.string().optional(),
+    DISCORD_CLIENT_SECRET: z.string().optional(),
+    DISCORD_BOT_TOKEN: z.string().optional(),
+    DISCORD_GUILD_ID: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
@@ -46,6 +56,10 @@ export const env = createEnv({
     REDIS_URL: process.env.REDIS_URL,
     TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
     TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET,
+    DISCORD_APP_ID: process.env.DISCORD_APP_ID,
+    DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+    DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN,
+    DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   emptyStringAsUndefined: true,

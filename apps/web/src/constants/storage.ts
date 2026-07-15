@@ -10,6 +10,8 @@ const STORAGE = {
     REGION: "unicum.region",
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
+    // CSRF nonce for the Discord "Add to Discord" OAuth flow (/api/discord/*).
+    DISCORD_OAUTH_STATE: "unicum.discord-oauth-state",
   },
 };
 
