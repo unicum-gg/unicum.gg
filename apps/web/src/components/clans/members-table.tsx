@@ -66,7 +66,9 @@ function getSortValue(
     case SortColumn.Name:
       return m.name.toLowerCase();
     case SortColumn.Role:
-      return m.roleRank;
+      // roleRank is the ClanRole enum index (0 = commander), so negate it to
+      // make "descending" mean most senior first like every other column.
+      return -m.roleRank;
     case SortColumn.WN7:
       return m.wn7 ?? -1;
     case SortColumn.WN730d:
@@ -96,7 +98,7 @@ function compareMembers(
   state: SortState,
 ): number {
   if (!state) {
-    if (a.roleRank !== b.roleRank) return b.roleRank - a.roleRank;
+    if (a.roleRank !== b.roleRank) return a.roleRank - b.roleRank;
     return (b.personalRating ?? -1) - (a.personalRating ?? -1);
   }
   const mul = state.direction === SortDirection.Asc ? 1 : -1;
