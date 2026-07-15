@@ -72,6 +72,9 @@ export function Footer() {
             <Link href={ROUTES.DOCS} className={styles.linkHover}>
               API Docs
             </Link>
+            <Link href={ROUTES.MCP} className={styles.linkHover}>
+              MCP
+            </Link>
             <Link href={ROUTES.BOT} className={styles.linkHover}>
               Discord bot
             </Link>

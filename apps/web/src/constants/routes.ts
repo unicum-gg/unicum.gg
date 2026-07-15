@@ -12,6 +12,9 @@ const ROUTES = {
   // - Discord bot landing page
   BOT: "/bot",
 
+  // - MCP server landing page
+  MCP: "/mcp",
+
   // - Auth: Wargaming.net ID sign-in. The region rides as a query param (WG
   //   rejects a query string on the callback path, not on this start URL).
   //   `callbackURL` is the same-origin path to land on once logged in (e.g.
