@@ -16,6 +16,10 @@ import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import {
+  ColumnSelector,
+  useColumnVisibility,
+} from "@/components/tanks/column-visibility";
 import type { TankListItem } from "@/components/tanks/tanks-index";
 import {
   Select,
@@ -98,7 +102,29 @@ const MASTERY_COLUMNS: MasteryColumn[] = [
   },
 ];
 
-function sortValue(t: TankListItem, key: string): number | string | null {
+const MASTERY_KEYS = MASTERY_COLUMNS.map((c) => c.key);
+const MASTERY_COOKIE = "unicum.mom_columns";
+
+function useMasteryColumns() {
+  return useColumnVisibility(MASTERY_COOKIE, MASTERY_KEYS, MASTERY_KEYS);
+}
+
+export function MasteryColumnSelector() {
+  const [selected, onToggle] = useMasteryColumns();
+  return (
+    <ColumnSelector
+      items={MASTERY_COLUMNS}
+      selected={selected}
+      onToggle={onToggle}
+    />
+  );
+}
+
+function sortValue(
+  t: TankListItem,
+  key: string,
+  columns: MasteryColumn[],
+): number | string | null {
   switch (key) {
     case "tier":
       return t.tier;
@@ -109,7 +135,7 @@ function sortValue(t: TankListItem, key: string): number | string | null {
     case "type":
       return t.type;
     default: {
-      const col = MASTERY_COLUMNS.find((c) => c.key === key);
+      const col = columns.find((c) => c.key === key);
       return col ? col.value(t) : null;
     }
   }
@@ -127,11 +153,17 @@ export function TanksMasteryTable({
     direction: SortDirection.Desc,
   });
 
+  const [selected] = useMasteryColumns();
+  const columns = useMemo(
+    () => MASTERY_COLUMNS.filter((c) => selected.has(c.key)),
+    [selected],
+  );
+
   const sorted = useMemo(() => {
     const mul = sort.direction === SortDirection.Asc ? 1 : -1;
     return [...rows].sort((a, b) => {
-      const av = sortValue(a, sort.key);
-      const bv = sortValue(b, sort.key);
+      const av = sortValue(a, sort.key, columns);
+      const bv = sortValue(b, sort.key, columns);
       if (av === null && bv === null) return a.name.localeCompare(b.name);
       if (av === null) return 1;
       if (bv === null) return -1;
@@ -142,7 +174,7 @@ export function TanksMasteryTable({
         mul * ((av as number) - (bv as number)) || a.name.localeCompare(b.name)
       );
     });
-  }, [rows, sort]);
+  }, [rows, sort, columns]);
 
   function toggleSort(key: string) {
     setSort((prev) =>
@@ -204,7 +236,7 @@ export function TanksMasteryTable({
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
                 Name
               </SortHead>
-              {MASTERY_COLUMNS.map((c) => (
+              {columns.map((c) => (
                 <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
                   <Image
                     src={portalIconUrl(region, c.iconFile)}
@@ -253,7 +285,7 @@ export function TanksMasteryTable({
                     </span>
                   </Link>
                 </TableCell>
-                {MASTERY_COLUMNS.map((c) => {
+                {columns.map((c) => {
                   const v = c.value(t);
                   return (
                     <TableCell key={c.key} className="text-right tabular-nums">

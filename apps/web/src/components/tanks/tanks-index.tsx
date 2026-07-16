@@ -10,9 +10,18 @@ import {
   TankFilterBar,
   useTankFilters,
 } from "@/components/tanks/tank-filter-bar";
-import { TanksEconTable } from "@/components/tanks/tanks-econ-table";
-import { TanksMasteryTable } from "@/components/tanks/tanks-mastery-table";
-import { TanksMoeTable } from "@/components/tanks/tanks-moe-table";
+import {
+  EconColumnSelector,
+  TanksEconTable,
+} from "@/components/tanks/tanks-econ-table";
+import {
+  MasteryColumnSelector,
+  TanksMasteryTable,
+} from "@/components/tanks/tanks-mastery-table";
+import {
+  MoeColumnSelector,
+  TanksMoeTable,
+} from "@/components/tanks/tanks-moe-table";
 import {
   SPEC_COLUMNS,
   type TankSpecRow,
@@ -213,6 +222,9 @@ export function TanksIndex({
             <>
               {tab === TankTab.Performances && <PerfColumnSelector />}
               {tab === TankTab.Specifications && <SpecColumnSelector />}
+              {tab === TankTab.Economics && <EconColumnSelector />}
+              {tab === TankTab.MarksOfMastery && <MasteryColumnSelector />}
+              {tab === TankTab.MarksOfExcellence && <MoeColumnSelector />}
             </>
           }
         />

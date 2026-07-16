@@ -53,6 +53,7 @@ export type TankSpecRow = {
   buyCredits: number | null;
   buyGold: number | null;
   researchXp: number | null;
+  totalFreeXp: number | null;
   shellCost: number | null;
   ammoCost: number | null;
 };

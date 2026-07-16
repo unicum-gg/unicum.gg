@@ -14,6 +14,10 @@ import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import {
+  ColumnSelector,
+  useColumnVisibility,
+} from "@/components/tanks/column-visibility";
 import type { TankListItem } from "@/components/tanks/tanks-index";
 import {
   Select,
@@ -112,7 +116,25 @@ function MarkIcon({ marks, label }: { marks: 1 | 2 | 3; label: string }) {
   );
 }
 
-function sortValue(t: TankListItem, key: string): number | string | null {
+const MOE_KEYS = MOE_COLUMNS.map((c) => c.key);
+const MOE_COOKIE = "unicum.moe_columns";
+
+function useMoeColumns() {
+  return useColumnVisibility(MOE_COOKIE, MOE_KEYS, MOE_KEYS);
+}
+
+export function MoeColumnSelector() {
+  const [selected, onToggle] = useMoeColumns();
+  return (
+    <ColumnSelector items={MOE_COLUMNS} selected={selected} onToggle={onToggle} />
+  );
+}
+
+function sortValue(
+  t: TankListItem,
+  key: string,
+  columns: MoeColumn[],
+): number | string | null {
   switch (key) {
     case "tier":
       return t.tier;
@@ -123,7 +145,7 @@ function sortValue(t: TankListItem, key: string): number | string | null {
     case "type":
       return t.type;
     default: {
-      const col = MOE_COLUMNS.find((c) => c.key === key);
+      const col = columns.find((c) => c.key === key);
       return col ? col.value(t) : null;
     }
   }
@@ -141,11 +163,17 @@ export function TanksMoeTable({
     direction: SortDirection.Desc,
   });
 
+  const [selected] = useMoeColumns();
+  const columns = useMemo(
+    () => MOE_COLUMNS.filter((c) => selected.has(c.key)),
+    [selected],
+  );
+
   const sorted = useMemo(() => {
     const mul = sort.direction === SortDirection.Asc ? 1 : -1;
     return [...rows].sort((a, b) => {
-      const av = sortValue(a, sort.key);
-      const bv = sortValue(b, sort.key);
+      const av = sortValue(a, sort.key, columns);
+      const bv = sortValue(b, sort.key, columns);
       if (av === null && bv === null) return a.name.localeCompare(b.name);
       if (av === null) return 1;
       if (bv === null) return -1;
@@ -156,7 +184,7 @@ export function TanksMoeTable({
         mul * ((av as number) - (bv as number)) || a.name.localeCompare(b.name)
       );
     });
-  }, [rows, sort]);
+  }, [rows, sort, columns]);
 
   function toggleSort(key: string) {
     setSort((prev) =>
@@ -218,7 +246,7 @@ export function TanksMoeTable({
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
                 Name
               </SortHead>
-              {MOE_COLUMNS.map((c) => (
+              {columns.map((c) => (
                 <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
                   <MarkIcon marks={c.marks} label={c.label} />
                 </SortHead>
@@ -260,7 +288,7 @@ export function TanksMoeTable({
                     </span>
                   </Link>
                 </TableCell>
-                {MOE_COLUMNS.map((c) => {
+                {columns.map((c) => {
                   const v = c.value(t);
                   return (
                     <TableCell key={c.key} className="text-right tabular-nums">
