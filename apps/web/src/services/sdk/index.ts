@@ -1,10 +1,16 @@
 import { Unicum } from "@unicum.gg/sdk";
+import { env } from "../../../env";
 
 /**
- * Shared frontend client for our own public API. The SDK's default base URL is
- * `${APP_IDENTITY.URL}/api` (from `NEXT_PUBLIC_APP_URL`), so it targets the
- * right origin in every environment (dev server locally, `unicum.gg` in prod)
- * for both client and server components without any per-call config.
+ * Shared frontend client for our own public API. The base URL is env-driven and
+ * split by environment:
+ *
+ * - **Browser** → `NEXT_PUBLIC_UNICUM_API_URL`, or the SDK default (relative
+ *   `/api`, same-origin, no CORS) when unset.
+ * - **Server** (SSR/ISR) → `UNICUM_API_URL`, or the SDK default
+ *   (`${NEXT_PUBLIC_APP_URL}/api`) when unset. In prod set it to the loopback
+ *   (`http://127.0.0.1:${PORT}/api`) so renders hit the same container
+ *   in-process instead of hairpinning out through the public domain/CDN.
  *
  * Use it via the region entry point: `unicum.region(region).clans(tag).members()`.
  */
@@ -21,7 +27,17 @@ const dispatchingFetch: typeof fetch = (input, init) => {
   return impl(input, init);
 };
 
-export const unicum = new Unicum({ fetch: dispatchingFetch });
+// Pick the base per environment; `undefined` lets the SDK apply its own default
+// (browser → relative `/api`, server → `${NEXT_PUBLIC_APP_URL}/api`). The server
+// var is only read on the server branch, so env-nextjs never surfaces it to the
+// client. During `next build` the loopback dispatcher above short-circuits fetch
+// entirely, so the server base need not be reachable then.
+const baseUrl =
+  typeof window === "undefined"
+    ? env.UNICUM_API_URL
+    : env.NEXT_PUBLIC_UNICUM_API_URL;
+
+export const unicum = new Unicum({ fetch: dispatchingFetch, baseUrl });
 
 const BUILD_PHASE = process.env.NEXT_PHASE === "phase-production-build";
 
