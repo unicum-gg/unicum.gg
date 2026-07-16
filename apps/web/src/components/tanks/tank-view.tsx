@@ -387,7 +387,7 @@ export function TankView({
           </div>
           {specs && (
             <div className="absolute bottom-4 right-4 z-10 sm:bottom-6 sm:right-6">
-              <TankCost specs={specs} />
+              <TankCost specs={specs} region={region} />
             </div>
           )}
           <div className="relative z-10 space-y-2 px-6 py-8 sm:px-10 sm:py-10">
