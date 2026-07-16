@@ -109,7 +109,7 @@ export const tankEconomics = z
   .meta({
     id: "TankEconomics",
     description:
-      "A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1.",
+      "A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1 (cheapest path, prerequisite modules included).",
   });
 
 export const tankMoe = z

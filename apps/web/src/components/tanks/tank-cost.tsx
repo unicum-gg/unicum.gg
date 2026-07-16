@@ -155,7 +155,8 @@ export function TankCost({ specs }: { specs: TankSpec }) {
                     {eurosFmt.format(goldToEuros(specs.totalFreeXp / XP_PER_GOLD))}
                   </p>
                   <p className="mt-1 text-xs opacity-70">
-                    Cumulative XP to research from tier 1 · 25 XP = 1 gold
+                    Cumulative XP to research from tier 1, prerequisite
+                    modules included · 25 XP = 1 gold
                   </p>
                 </div>
               </TooltipContent>
