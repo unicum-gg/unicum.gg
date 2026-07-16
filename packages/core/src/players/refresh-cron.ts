@@ -17,7 +17,10 @@ import {
 } from "./clan-history";
 import { recordCurrentSnapshot } from ".";
 import { dequeuePlayerRefresh } from "./refresh-queue";
-import { recordRefreshLatency } from "./refresh-metrics";
+import {
+  RefreshSubject,
+  recordRefreshLatency,
+} from "@unicum.gg/core/refresh-metrics";
 
 // 10s tick — fast enough for user-initiated refreshes to feel live,
 // loose enough to coalesce bursts on the same player into a single drain.
@@ -134,7 +137,7 @@ export async function drainPlayerRefreshQueueForRegion(
         // backfill contention). NOT now - queuedAt: enqueue pins queued_at to
         // the EARLIEST interest via LEAST(), so that would measure "time since
         // first viewer" and wildly inflate the p75 for popular players.
-        recordRefreshLatency(region, Date.now() - startedAt);
+        recordRefreshLatency(RefreshSubject.Player, region, Date.now() - startedAt);
       } else failed += 1;
       // Always dequeue — failures are logged, and the snapshot-cron 24h
       // backfill will eventually retry stale players. We don't want a

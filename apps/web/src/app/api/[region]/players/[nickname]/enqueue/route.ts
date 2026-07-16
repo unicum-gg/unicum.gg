@@ -5,7 +5,10 @@ import {
   LIVE_REFRESH_PRIORITY,
   enqueuePlayerRefresh,
 } from "@unicum.gg/core/players/refresh-queue";
-import { getRefreshLatencyMs } from "@unicum.gg/core/players/refresh-metrics";
+import {
+  RefreshSubject,
+  getRefreshLatencyMs,
+} from "@unicum.gg/core/refresh-metrics";
 import { isRegion } from "@unicum.gg/wargaming";
 
 // Each refresh fans out to WG (account/info, tanks/stats, WTR, clan history);
@@ -84,7 +87,9 @@ export async function POST(
   // already folds in WG/G-Core latency, rate-limiter contention from the
   // backfill cron and retries. Cold start / quiet region falls back to a
   // plausible flat latency.
-  const baseMs = (await getRefreshLatencyMs(region)) ?? FALLBACK_LATENCY_MS;
+  const baseMs =
+    (await getRefreshLatencyMs(RefreshSubject.Player, region)) ??
+    FALLBACK_LATENCY_MS;
   // Marginal cost of each player genuinely ahead of us right now (rare: the
   // cron drains 25/s, so the live queue almost never has depth). One player's
   // WG calls' worth of rate-limiter time.
