@@ -1,19 +1,24 @@
 "use client";
 
-import { intervalToDuration } from "date-fns";
 import { useEffect, useRef, useState } from "react";
 import type { Region } from "@unicum.gg/wargaming";
+import { Spinner } from "@/components/ui/spinner";
 import { unicum } from "@/services/sdk";
 
-type Phase = "refreshing" | "done" | "idle";
-
-function formatEta(seconds: number): string {
-  const { minutes = 0, seconds: s = 0 } = intervalToDuration({ start: 0, end: seconds * 1000 });
-  if (minutes > 0) return `~${minutes}m${s > 0 ? `${s}s` : ""}`;
-  return `~${s}s`;
+enum Phase {
+  Refreshing = "refreshing",
+  Done = "done",
+  Idle = "idle",
 }
 
-const FALLBACK_SECONDS = 12;
+// Skip the "Refreshing..." nag when the data was updated this recently: an
+// on-demand refresh already ran on the last view, so there is nothing to wait
+// for.
+const FRESH_MS = 60_000;
+// Give up after this long if the background refresh never reports a new
+// `updatedAt` (LiveSync not connected, refresh deduped/skipped, no detectable
+// change) so the indicator never sticks on "Refreshing..." forever.
+const MAX_REFRESHING_MS = 25_000;
 
 export function RefreshBeacon({
   region,
@@ -25,48 +30,65 @@ export function RefreshBeacon({
   updatedAt: Date;
 }) {
   const prevMs = useRef(updatedAt.getTime());
-  const [phase, setPhase] = useState<Phase>("refreshing");
-  const [remaining, setRemaining] = useState<number | null>(null);
+  // SSR-safe: render nothing until the client decides (avoids a hydration
+  // mismatch on the time-dependent freshness check).
+  const [phase, setPhase] = useState<Phase>(Phase.Idle);
 
+  // On mount, only announce a refresh if the data is actually stale.
   useEffect(() => {
-    let cancelled = false;
+    if (Date.now() - prevMs.current >= FRESH_MS) setPhase(Phase.Refreshing);
+  }, []);
+
+  // Signal a live viewer so the refresh queue prioritises this player. The
+  // endpoint's estimated ETA is deliberately ignored: it models the queue and
+  // rate-limiter, never the real completion time (cron tick + LiveSync
+  // propagation), so showing it as a countdown was permanently wrong.
+  useEffect(() => {
+    if (phase !== Phase.Refreshing) return;
     unicum
       .region(region)
       .players(nickname)
       .enqueue()
-      .then(({ estimatedSeconds }) => {
-        if (!cancelled) setRemaining(estimatedSeconds);
-      })
-      .catch(() => {
-        if (!cancelled) setRemaining(FALLBACK_SECONDS);
-      });
-    return () => {
-      cancelled = true;
-    };
-  }, [region, nickname]);
+      .catch(() => {});
+  }, [region, nickname, phase]);
 
+  // Give up if the refresh never lands, rather than hang on "Refreshing...".
   useEffect(() => {
-    if (remaining === null || remaining <= 0) return;
-    const t = setTimeout(() => setRemaining((r) => (r !== null ? r - 1 : null)), 1_000);
+    if (phase !== Phase.Refreshing) return;
+    const t = setTimeout(() => setPhase(Phase.Idle), MAX_REFRESHING_MS);
     return () => clearTimeout(t);
-  }, [remaining]);
+  }, [phase]);
 
+  // When the background refresh lands, `updatedAt` changes (LiveSync refetch):
+  // flash "Updated" briefly, then hide.
   useEffect(() => {
     const ms = updatedAt.getTime();
     if (ms === prevMs.current) return;
     prevMs.current = ms;
-    setPhase("done");
-    const t = setTimeout(() => setPhase("idle"), 3_000);
+    setPhase(Phase.Done);
+    const t = setTimeout(() => setPhase(Phase.Idle), 3_000);
     return () => clearTimeout(t);
   }, [updatedAt]);
 
-  if (phase === "idle") return null;
-  if (phase === "done") return <span className="text-muted-foreground"> · Updated</span>;
-
-  return (
-    <span className="text-muted-foreground">
-      {" · Refreshing..."}
-      {remaining !== null && remaining > 0 && ` (${formatEta(remaining)})`}
-    </span>
-  );
+  // Rendered as direct children of the header's flex meta line, so the "·"
+  // separator gets the same `gap-x-2` spacing as the other header separators
+  // (Joined · Last battle · Updated).
+  if (phase === Phase.Done)
+    return (
+      <>
+        <span className="hidden sm:inline">·</span>
+        <span>Updated</span>
+      </>
+    );
+  if (phase === Phase.Refreshing)
+    return (
+      <>
+        <span className="hidden sm:inline">·</span>
+        <span className="inline-flex items-center gap-1">
+          <Spinner className="size-3" aria-hidden />
+          Refreshing
+        </span>
+      </>
+    );
+  return null;
 }
