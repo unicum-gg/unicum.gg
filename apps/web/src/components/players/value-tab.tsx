@@ -196,13 +196,9 @@ export function ValueTab({
                 <Row
                   label="Tier X + premiums"
                   hint={`${market.tierXCount} + ${market.premiumCount}`}
-                  value={money(market.base + market.tierX + market.premiums)}
+                  value={money(market.tierX + market.premiums)}
                   tip={
                     <div className="space-y-0.5 text-xs tabular-nums">
-                      <div className="flex justify-between gap-3">
-                        <span>Base account</span>
-                        <span>{money(market.base)}</span>
-                      </div>
                       <div className="flex justify-between gap-3">
                         <span>{market.tierXCount} tier X × €2.5</span>
                         <span>{money(market.tierX)}</span>

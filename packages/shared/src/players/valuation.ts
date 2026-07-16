@@ -39,9 +39,6 @@ export const REWARD_VALUE_DEFAULT = 40;
 export const MARK3_VALUE_PER_TIER = 2.5;
 export const MARK2_VALUE_PER_TIER = 0.6;
 
-// Garage floor: base account access plus a small per-tank contribution for the
-// tech-tree grind, which the market barely prices.
-export const MARKET_BASE = 15;
 export const TIER_X_VALUE = 2.5;
 
 // Premium tanks by tier: a tier VIII (Skorpion, Bourrasque, the credit farmers)
@@ -103,7 +100,6 @@ export type TierContribution = {
 
 export type MarketValueBreakdown = {
   amount: number;
-  base: number;
   tierX: number;
   premiums: number;
   rewards: number;
@@ -184,9 +180,8 @@ export function computeMarketValue(
     }
   }
 
-  const base = MARKET_BASE;
   const tierX = tierXCount * TIER_X_VALUE;
-  const subtotal = base + tierX + premiums + rewards + marks;
+  const subtotal = tierX + premiums + rewards + marks;
 
   const confidence = clamp(battles / STATS_CONFIDENCE_BATTLES, 0, 1);
   const rawMult = wn8 != null ? wn8Multiplier(wn8) : 1;
@@ -195,7 +190,6 @@ export function computeMarketValue(
 
   return {
     amount: subtotal * statMultiplier,
-    base,
     tierX,
     premiums,
     rewards,

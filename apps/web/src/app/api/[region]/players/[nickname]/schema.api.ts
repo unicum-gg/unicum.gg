@@ -229,7 +229,6 @@ export const PlayerDetailResponse = z.object({
     .object({
       market: z.object({
         amount: z.number(),
-        base: z.number(),
         tierX: z.number(),
         premiums: z.number(),
         rewards: z.number(),
