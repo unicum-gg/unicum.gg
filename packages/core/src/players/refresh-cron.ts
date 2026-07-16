@@ -17,6 +17,7 @@ import {
 } from "./clan-history";
 import { recordCurrentSnapshot } from ".";
 import { dequeuePlayerRefresh } from "./refresh-queue";
+import { recordRefreshCompletion } from "./refresh-metrics";
 
 // 10s tick — fast enough for user-initiated refreshes to feel live,
 // loose enough to coalesce bursts on the same player into a single drain.
@@ -125,8 +126,12 @@ export async function drainPlayerRefreshQueueForRegion(
   await Promise.all(
     entries.map(async (entry) => {
       const success = await refreshOne(entry);
-      if (success) ok += 1;
-      else failed += 1;
+      if (success) {
+        ok += 1;
+        // Feed the throughput metric that drives the queue ETA (endpoint reads
+        // completions/min for this region to estimate the live refresh wait).
+        recordRefreshCompletion(region, entry.accountId);
+      } else failed += 1;
       // Always dequeue — failures are logged, and the snapshot-cron 24h
       // backfill will eventually retry stale players. We don't want a
       // poisoned entry blocking the queue forever.
