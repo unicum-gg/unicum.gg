@@ -34,7 +34,15 @@ type CostRow = {
 // priced in gold directly. The money estimate only shows for regions we have a
 // bundle table for (EU today); elsewhere the gold figures stand alone. Renders
 // nothing when we have no economics for the tank.
-export function TankCost({ specs, region }: { specs: TankSpec; region: Region }) {
+export function TankCost({
+  specs,
+  region,
+  isReward,
+}: {
+  specs: TankSpec;
+  region: Region;
+  isReward: boolean;
+}) {
   const fmt = moneyFmt(region);
   const price = (gold: number) => goldToMoney(region, gold)?.amount ?? null;
   const money = (n: number | null) =>
@@ -65,7 +73,9 @@ export function TankCost({ specs, region }: { specs: TankSpec; region: Region })
       rate: `${CREDITS_PER_GOLD} credits = 1 gold`,
     });
   }
-  if (specs.buyGold && specs.buyGold > 0) {
+  // Reward tanks aren't store-purchasable; their `buyGold` is a restore-price
+  // placeholder, so showing it as a cost would mislead (see the economics table).
+  if (!isReward && specs.buyGold && specs.buyGold > 0) {
     rows.push({
       label: "Cost",
       unit: "gold",

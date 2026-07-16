@@ -106,6 +106,9 @@ function freeXpMoney(t: TankListItem, region: Region): number | null {
 function acquireMoney(t: TankListItem, region: Region): number | null {
   const s = t.specs;
   if (!s) return null;
+  // Reward tanks aren't store-purchasable (their `buyGold` in WG's data is a
+  // restore placeholder, not a price), so a "buy cost" is meaningless for them.
+  if (t.isReward) return null;
   const parts: number[] = [];
   if (s.buyGold) {
     const m = goldToMoney(region, s.buyGold)?.amount;
@@ -137,8 +140,10 @@ function buildEconColumns(region: Region): EconColumn[] {
       key: "buyGold",
       label: "Cost (gold)",
       tip: "Purchase price in gold (premium tanks)",
-      render: (t) => gold(t.specs?.buyGold ?? null),
-      sortValue: (t) => t.specs?.buyGold ?? null,
+      // Reward tanks carry a restore-price placeholder in `buyGold`, not a real
+      // store price, and aren't purchasable — show a dash rather than mislead.
+      render: (t) => gold(t.isReward ? null : (t.specs?.buyGold ?? null)),
+      sortValue: (t) => (t.isReward ? null : (t.specs?.buyGold ?? null)),
     },
     {
       key: "researchXp",
