@@ -437,9 +437,12 @@ export function TankView({
                     tankName={meta.name}
                   />
                 )}
-                {researchPath.lineage.length > 0 && modules.length > 0 && (
-                  <PanelSeparator />
+                {researchPath.lineage.length > 0 && specs && <PanelSeparator />}
+                {specs && (
+                  <TankCharacteristics specs={specs} tankName={meta.name} />
                 )}
+                {(researchPath.lineage.length > 0 || specs) &&
+                  modules.length > 0 && <PanelSeparator />}
                 {modules.length > 0 && (
                   <TankModules
                     region={region}
@@ -447,11 +450,6 @@ export function TankView({
                     nodes={modules}
                     nextTanks={researchPath.next}
                   />
-                )}
-                {(researchPath.lineage.length > 0 || modules.length > 0) &&
-                  specs && <PanelSeparator />}
-                {specs && (
-                  <TankCharacteristics specs={specs} tankName={meta.name} />
                 )}
                 {specs?.description && (
                   <>
