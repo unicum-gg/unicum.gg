@@ -244,6 +244,7 @@ export const PlayerDetailResponse = z.object({
         wn8: z.number().nullable(),
         battles: z.number(),
         rewardsByTier: z.array(tierContribution),
+        premiumsByTier: z.array(tierContribution),
         marks3ByTier: z.array(tierContribution),
         marks2ByTier: z.array(tierContribution),
       }),

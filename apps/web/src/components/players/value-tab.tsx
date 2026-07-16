@@ -207,10 +207,11 @@ export function ValueTab({
                         <span>{market.tierXCount} tier X × €2.5</span>
                         <span>{money(market.tierX)}</span>
                       </div>
-                      <div className="flex justify-between gap-3">
-                        <span>{market.premiumCount} premiums × €0.7</span>
+                      <div className="flex justify-between gap-3 opacity-70">
+                        <span>{market.premiumCount} premiums (by tier)</span>
                         <span>{money(market.premiums)}</span>
                       </div>
+                      <TierLines rows={market.premiumsByTier} money={money} />
                     </div>
                   }
                 />

@@ -43,7 +43,25 @@ export const MARK2_VALUE_PER_TIER = 0.6;
 // tech-tree grind, which the market barely prices.
 export const MARKET_BASE = 15;
 export const TIER_X_VALUE = 2.5;
-export const PREMIUM_VALUE = 0.7;
+
+// Premium tanks by tier: a tier VIII (Skorpion, Bourrasque, the credit farmers)
+// is worth far more than a low-tier premium, but all stay well below the reward
+// table since a premium is store-purchasable, not earned. Reward tanks that are
+// also flagged premium are valued via REWARD_VALUE_BY_TIER only, never here.
+export const PREMIUM_VALUE_BY_TIER: Record<number, number> = {
+  1: 0.2,
+  2: 0.2,
+  3: 0.2,
+  4: 0.2,
+  5: 0.3,
+  6: 0.4,
+  7: 0.6,
+  8: 1,
+  9: 1.5,
+  10: 2.5,
+  11: 4,
+};
+export const PREMIUM_VALUE_DEFAULT = 0.6;
 
 // Skill multiplier from WN8. Pivots at 1.0 for an average 1600 WN8.
 export const WN8_MULT_PIVOT = 1600;
@@ -101,6 +119,7 @@ export type MarketValueBreakdown = {
   wn8: number | null;
   battles: number;
   rewardsByTier: TierContribution[];
+  premiumsByTier: TierContribution[];
   marks3ByTier: TierContribution[];
   marks2ByTier: TierContribution[];
 };
@@ -132,8 +151,10 @@ export function computeMarketValue(
   let rewardCount = 0;
   let mark3Count = 0;
   let rewards = 0;
+  let premiums = 0;
   let marks = 0;
   const rewardTierCounts = new Map<number, number>();
+  const premiumTierCounts = new Map<number, number>();
   const mark3TierCounts = new Map<number, number>();
   const mark2TierCounts = new Map<number, number>();
   const bump = (m: Map<number, number>, k: number) =>
@@ -142,11 +163,16 @@ export function computeMarketValue(
   for (const v of vehicles) {
     const tier = v.tier ?? 0;
     if (tier === 10) tierXCount += 1;
-    if (v.isPremium) premiumCount += 1;
     if (v.isReward) {
       rewardCount += 1;
       rewards += REWARD_VALUE_BY_TIER[tier] ?? REWARD_VALUE_DEFAULT;
       bump(rewardTierCounts, tier);
+    } else if (v.isPremium) {
+      // Reward tanks are excluded (valued via the reward table above) so a
+      // premium reward isn't counted twice.
+      premiumCount += 1;
+      premiums += PREMIUM_VALUE_BY_TIER[tier] ?? PREMIUM_VALUE_DEFAULT;
+      bump(premiumTierCounts, tier);
     }
     if (v.moe === 3) {
       mark3Count += 1;
@@ -160,7 +186,6 @@ export function computeMarketValue(
 
   const base = MARKET_BASE;
   const tierX = tierXCount * TIER_X_VALUE;
-  const premiums = premiumCount * PREMIUM_VALUE;
   const subtotal = base + tierX + premiums + rewards + marks;
 
   const confidence = clamp(battles / STATS_CONFIDENCE_BATTLES, 0, 1);
@@ -187,6 +212,10 @@ export function computeMarketValue(
     rewardsByTier: toTierContributions(
       rewardTierCounts,
       (t) => REWARD_VALUE_BY_TIER[t] ?? REWARD_VALUE_DEFAULT,
+    ),
+    premiumsByTier: toTierContributions(
+      premiumTierCounts,
+      (t) => PREMIUM_VALUE_BY_TIER[t] ?? PREMIUM_VALUE_DEFAULT,
     ),
     marks3ByTier: toTierContributions(
       mark3TierCounts,
