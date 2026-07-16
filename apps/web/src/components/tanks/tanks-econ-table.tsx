@@ -41,8 +41,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
-import { CREDITS_PER_GOLD, XP_PER_GOLD } from "@/constants/shop";
-import { goldToMoney, moneyFmt } from "@/lib/shop";
+import {
+  CREDITS_PER_GOLD,
+  XP_PER_GOLD,
+  goldToMoney,
+  moneyFmt,
+} from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 

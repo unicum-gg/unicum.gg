@@ -9,8 +9,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { CREDITS_PER_GOLD, XP_PER_GOLD } from "@/constants/shop";
-import { goldToMoney, moneyFmt } from "@/lib/shop";
+import {
+  CREDITS_PER_GOLD,
+  XP_PER_GOLD,
+  goldToMoney,
+  moneyFmt,
+} from "@unicum.gg/shared";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 

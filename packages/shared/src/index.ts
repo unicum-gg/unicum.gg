@@ -9,6 +9,7 @@
 export * from "./app-identity";
 export * from "./env";
 export * from "./search";
+export * from "./shop";
 export * from "./constants";
 export * from "./lib";
 export * from "./db";
