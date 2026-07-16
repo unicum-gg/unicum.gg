@@ -96,6 +96,7 @@ const clanInfo = z
     motto: z.string(),
     descriptionHtml: z.string(),
     createdAt: z.coerce.date(),
+    updatedAt: z.coerce.date().nullable(),
     membersCount: z.number(),
     leaderId: z.number(),
     leaderName: z.string(),

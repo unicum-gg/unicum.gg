@@ -1,10 +1,8 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
-import type { LiveUpdate } from "@unicum.gg/sdk";
-import { LiveSync } from "@/components/live-sync";
 import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
 import { ExpandableDescription } from "@/components/clans/description";
 import { ClanMembersTable } from "@/components/clans/members-table";
@@ -108,6 +106,10 @@ export type ClanTabsViewProps = {
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
   initialVehicles: ClanVehicleRow[] | null;
+  // Bumped by the parent (ClanProfile) on each LiveSync tick; watched below to
+  // refetch every section. The single LiveSync subscription lives in the parent
+  // so the header stays in sync too.
+  liveVersion: number;
 };
 
 export function ClanTabsView({
@@ -120,6 +122,7 @@ export function ClanTabsView({
   descriptionHtml,
   initialData,
   initialVehicles,
+  liveVersion,
 }: ClanTabsViewProps) {
   // `activeSection`/`activeMode` seed the first client render so it matches the
   // server HTML. A nav click updates local state immediately (instant switch)
@@ -155,12 +158,6 @@ export function ClanTabsView({
   // (stable cache identities); the `as unknown as` casts restore the rich
   // domain types the tables expect (the API schemas are intentionally loose).
   const clanApi = unicum.region(region).clans(tag);
-  // Memoized so LiveSync only re-subscribes when the target clan changes.
-  const liveSubscribe = useCallback(
-    (onUpdate: (event: LiveUpdate) => void) =>
-      unicum.region(region).clans(tag).live(onUpdate),
-    [region, tag],
-  );
 
   // Only the Tanks section needs an on-demand fetch. SWR keys on the URL and
   // only runs when Tanks is active (null key = no request).
@@ -235,20 +232,29 @@ export function ClanTabsView({
   const stronghold = strongholdData ?? strongholdSeed;
   const clanWars = clanWarsData ?? clanWarsSeed;
 
+  // A LiveSync tick in the parent bumps `liveVersion`; refetch every section's
+  // JSON so the tables re-render client-side (skip the initial 0, whose data is
+  // the fresh SSR seed).
+  useEffect(() => {
+    if (liveVersion === 0) return;
+    void mutateMembers();
+    void mutatePrevious();
+    void mutateActivity();
+    void mutateStronghold();
+    void mutateClanWars();
+  }, [
+    liveVersion,
+    mutateMembers,
+    mutatePrevious,
+    mutateActivity,
+    mutateStronghold,
+    mutateClanWars,
+  ]);
+
   const onTanks = section === ClanSection.Tanks;
 
   return (
     <>
-      <LiveSync
-        subscribe={liveSubscribe}
-        onUpdate={() => {
-          void mutateMembers();
-          void mutatePrevious();
-          void mutateActivity();
-          void mutateStronghold();
-          void mutateClanWars();
-        }}
-      />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
           <ClanSectionNav

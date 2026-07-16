@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
-import { RefreshBeacon } from "@/components/players/refresh-beacon";
+import { RefreshBeacon, RefreshKind } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
 import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
@@ -71,8 +71,9 @@ export function PlayerHeader({
               />
             </span>
             <RefreshBeacon
+              kind={RefreshKind.Player}
               region={region}
-              nickname={nickname}
+              id={nickname}
               updatedAt={updatedAt}
             />
           </div>

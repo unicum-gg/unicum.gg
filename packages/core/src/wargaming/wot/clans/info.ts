@@ -30,6 +30,10 @@ export type ClanFullInfo = {
   creatorName: string;
   isDisbanded: boolean;
   languages: string[];
+  // Last time the clan's data was refreshed (from `clans.last_refreshed_at`);
+  // drives the clan page's "Updated X ago" + refresh beacon. Null for a clan
+  // never refreshed through the tracked pipeline.
+  updatedAt: Date | null;
 };
 
 // Client-safe shape lives in `@unicum.gg/shared`; re-exported for back-compat.
@@ -124,6 +128,8 @@ function clanFullInfoFromRaw(raw: RawFullInfo, languages: string[]): ClanFullInf
     creatorName: raw.creator_name || "",
     isDisbanded: raw.is_clan_disbanded,
     languages,
+    // Fetched live from WG just now, so the data is current as of this moment.
+    updatedAt: new Date(),
   };
 }
 

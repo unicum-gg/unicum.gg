@@ -27,6 +27,7 @@ function clanFullInfoFromRow(row: Clan): ClanFullInfo {
     creatorName: row.creatorName,
     isDisbanded: row.isDisbanded,
     languages: row.languages ?? [],
+    updatedAt: row.lastRefreshedAt,
   };
 }
 

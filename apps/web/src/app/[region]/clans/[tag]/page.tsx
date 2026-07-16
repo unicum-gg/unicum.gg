@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ClanHeader } from "@/components/clans/header";
+import { ClanProfile } from "@/components/clans/clan-profile";
 import {
   ClanSection,
   modeFromQuery,
   sectionFromQuery,
 } from "@/components/clans/tabs";
-import {
-  ClanTabsView,
-  type ClanTabsInitialData,
-} from "@/components/clans/tabs-view";
-import { ViewBeacon } from "@/components/view-beacon";
-import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
+import type { ClanTabsInitialData } from "@/components/clans/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -19,11 +14,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, clanSchema } from "@/lib/schema-org";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
-import type {
-  ClanMemberStats,
-  ClanRatings,
-  ClanVehicleRow,
-} from "@unicum.gg/shared";
+import type { ClanRatings, ClanVehicleRow } from "@unicum.gg/shared";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 
@@ -152,21 +143,7 @@ export default async function ClanPage({
           },
         ])}
       />
-      <ViewBeacon region={region} tag={clan.tag} />
-      <Panel>
-        <PanelContent className="p-0">
-          <ClanHeader
-            region={region}
-            clan={clan}
-            members={initialData.members as ClanMemberStats[]}
-            ratings={ratings}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <ClanTabsView
+      <ClanProfile
         region={region}
         tag={clan.tag}
         color={clan.color}
@@ -174,6 +151,8 @@ export default async function ClanPage({
         activeSection={section}
         activeMode={mode}
         descriptionHtml={clan.descriptionHtml ?? null}
+        initialClan={clan}
+        initialRatings={ratings}
         initialData={initialData}
         initialVehicles={initialVehicles}
       />

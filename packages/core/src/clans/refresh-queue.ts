@@ -5,6 +5,10 @@ import type { Region } from "@unicum.gg/wargaming";
 
 const CHUNK_SIZE = 500;
 
+// Priority a live clan page view enqueues at (drained before discovery
+// priority 0).
+export const LIVE_CLAN_REFRESH_PRIORITY = 10;
+
 export type EnqueueClanOptions = {
   // Higher = drained sooner. Use >0 for user-initiated, 0 for discovery.
   priority?: number;

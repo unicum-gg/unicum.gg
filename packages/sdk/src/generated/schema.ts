@@ -892,6 +892,8 @@ export interface components {
             descriptionHtml: string;
             /** Format: date-time */
             createdAt: Date;
+            /** Format: date-time */
+            updatedAt: Date | null;
             membersCount: number;
             leaderId: number;
             leaderName: string;
@@ -1310,7 +1312,6 @@ export interface components {
             valuation: {
                 market: {
                     amount: number;
-                    base: number;
                     tierX: number;
                     premiums: number;
                     rewards: number;
@@ -1325,6 +1326,7 @@ export interface components {
                     wn8: number | null;
                     battles: number;
                     rewardsByTier: components["schemas"]["tierContribution"][];
+                    premiumsByTier: components["schemas"]["tierContribution"][];
                     marks3ByTier: components["schemas"]["tierContribution"][];
                     marks2ByTier: components["schemas"]["tierContribution"][];
                 };
@@ -2088,12 +2090,16 @@ export interface operations {
         };
         requestBody?: never;
         responses: {
-            /** @description Refresh enqueued. No body. */
-            204: {
+            /** @description Estimated seconds until the refresh completes. */
+            200: {
                 headers: {
                     [name: string]: unknown;
                 };
-                content?: never;
+                content: {
+                    "application/json": {
+                        estimatedSeconds: number;
+                    };
+                };
             };
         };
     };

@@ -1,3 +1,5 @@
+"use client";
+
 import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
@@ -5,6 +7,13 @@ import { AutoFitText } from "@/components/auto-fit-text";
 import { ClanActionsMenu } from "@/components/clans/clan-actions-menu";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
+import { RelativeTime } from "@/components/relative-time";
+import {
+  type BeaconState,
+  RefreshIndicator,
+  RefreshKind,
+  useRefreshBeacon,
+} from "@/components/players/refresh-beacon";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
@@ -90,6 +99,15 @@ export function ClanHeader({
   ratings: ClanRatings;
 }) {
   const metrics = computeMetrics(ratings);
+  // Run the beacon once here (the header renders its meta line twice, for the
+  // desktop and mobile layouts); both InfoRows render the indicator from this
+  // shared state so we don't fire duplicate enqueues.
+  const beacon = useRefreshBeacon(
+    RefreshKind.Clan,
+    region,
+    clan.tag,
+    clan.updatedAt,
+  );
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex items-stretch sm:contents">
@@ -131,6 +149,7 @@ export function ClanHeader({
             region={region}
             clan={clan}
             members={members}
+            beacon={beacon}
             className="hidden h-8 sm:flex"
             flagWrapperClassName="h-full"
           />
@@ -140,6 +159,7 @@ export function ClanHeader({
         region={region}
         clan={clan}
         members={members}
+        beacon={beacon}
         className="flex min-h-8 sm:hidden"
         flagWrapperClassName="h-6 self-end"
       />
@@ -187,12 +207,14 @@ function InfoRow({
   region,
   clan,
   members,
+  beacon,
   className,
   flagWrapperClassName,
 }: {
   region: Region;
   clan: ClanFullInfo;
   members: ClanMemberStats[];
+  beacon: BeaconState;
   className?: string;
   flagWrapperClassName?: string;
 }) {
@@ -231,6 +253,19 @@ function InfoRow({
             <span className="font-medium text-destructive">Disbanded</span>
           </>
         )}
+        {clan.updatedAt && (
+          <>
+            <span className="hidden sm:inline">·</span>
+            <span>
+              <span className="font-medium">Updated</span>{" "}
+              <RelativeTime
+                date={clan.updatedAt}
+                title={format(clan.updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
+              />
+            </span>
+          </>
+        )}
+        <RefreshIndicator {...beacon} />
       </div>
       {clan.languages.length > 0 && (
         <div className={cn("flex shrink-0 items-center", flagWrapperClassName)}>

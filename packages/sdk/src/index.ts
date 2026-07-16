@@ -325,15 +325,15 @@ class ClanClient {
     );
   }
 
-  /** Enqueue an on-demand refresh of this clan. */
-  async enqueue(): Promise<void> {
+  /** Enqueue an on-demand refresh of this clan; returns the estimated seconds
+   * until it completes. */
+  enqueue() {
     const { region, tag } = this;
-    const { error, response } = await this.api.POST("/{region}/clans/{tag}/enqueue", {
-      params: { path: { region, tag } },
-    });
-    if (!response.ok || error !== undefined) {
-      throw new UnicumError(response.status, response.url, error);
-    }
+    return unwrap(
+      this.api.POST("/{region}/clans/{tag}/enqueue", {
+        params: { path: { region, tag } },
+      }),
+    );
   }
 
   /** Subscribe to live updates for this clan (SSE): `onUpdate` fires when the

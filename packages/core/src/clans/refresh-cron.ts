@@ -5,6 +5,10 @@ import { clanRefreshQueueByRegion } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { recordClanSnapshot } from "./snapshots";
 import { dequeueClanRefresh } from "./refresh-queue";
+import {
+  RefreshSubject,
+  recordRefreshLatency,
+} from "@unicum.gg/core/refresh-metrics";
 import { getClanMembersBatch } from "@unicum.gg/core/clans/members";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
@@ -82,6 +86,7 @@ export async function drainClanRefreshQueueForRegion(
       await dequeueClanRefresh(region, clanId);
       continue;
     }
+    const startedAt = Date.now();
     try {
       await Promise.all([
         refreshClanMembers(region, clanId, rosters?.get(clanId)).catch((err) =>
@@ -108,6 +113,9 @@ export async function drainClanRefreshQueueForRegion(
           ),
       ]);
       ok += 1;
+      // Processing wall-time of this clan's refresh (portal calls incl.
+      // rate-limiter waits), the signal driving the clan-page refresh ETA.
+      recordRefreshLatency(RefreshSubject.Clan, region, Date.now() - startedAt);
     } catch (err) {
       failed += 1;
       console.error(`[clan-refresh-cron-${region}] ${clanId} failed:`, err);
