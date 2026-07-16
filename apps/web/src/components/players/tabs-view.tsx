@@ -1,9 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback, useState } from "react";
-import useSWR from "swr";
-import { LiveSync } from "@/components/live-sync";
+import { useState } from "react";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import {
   Panel,
@@ -36,8 +34,6 @@ import { ValueTab } from "@/components/players/value-tab";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
 import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerVehicleRow } from "@unicum.gg/shared";
-import type { LiveUpdate } from "@unicum.gg/sdk";
-import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -84,9 +80,9 @@ export type PlayerTabsViewProps = {
   activeMode: PlayerMode;
   metricLabel: string;
   nowMs: number;
-  // Full player detail, seeded from the SSR render and kept live by SWR (see
-  // the LiveSync wiring below).
-  initialData: PlayerDetailData;
+  // Live player detail (SWR + LiveSync owned by the parent `PlayerProfile`, so
+  // the header and these tabs share one stream and one source of truth).
+  detail: PlayerDetailData;
 };
 
 export function PlayerTabsView({
@@ -97,7 +93,7 @@ export function PlayerTabsView({
   activeMode,
   metricLabel,
   nowMs,
-  initialData,
+  detail,
 }: PlayerTabsViewProps) {
   // `activeSection`/`activeMode` seed the first client render so it matches the
   // server HTML. A nav click updates local state immediately (instant switch)
@@ -128,35 +124,6 @@ export function PlayerTabsView({
     window.history.pushState(null, "", playerModeHref(basePath, next));
   }
 
-  // The page data lives behind SWR so a LiveSync tick refetches just this
-  // JSON and re-renders client-side, instead of `router.refresh()`
-  // re-rendering the whole route on the server. `initialData` seeds it from
-  // the SSR render, so there's no fetch on load; only `mutateData()` (below)
-  // triggers a refetch. Keyed by the SSR-resolved metric so lift/drag and the
-  // rating history stay consistent with what the server rendered.
-  const dataUrl = `/api/${region}/players/${encodeURIComponent(nickname)}?metric=${initialData.metric}`;
-  const { data: liveData, mutate: mutateData } = useSWR(
-    dataUrl,
-    () =>
-      unicum
-        .region(region)
-        .players(nickname)
-        // `RatingMetric`'s values are exactly these literals; cast to the
-        // typed query. The SDK hits our API and revives dates, so the cast
-        // just restores the rich domain type the components expect.
-        .detail({ metric: initialData.metric as "wn7" | "wn8" | "wnx" })
-        .then((r) => r as unknown as PlayerDetailData),
-    { fallbackData: initialData, revalidateOnMount: false },
-  );
-  const detail = liveData ?? initialData;
-
-  // Memoized so LiveSync only re-subscribes when the target player changes.
-  const liveSubscribe = useCallback(
-    (onUpdate: (event: LiveUpdate) => void) =>
-      unicum.region(region).players(nickname).live(onUpdate),
-    [region, nickname],
-  );
-
   const overall: OverallData = {
     current: detail.current,
     periods: detail.periods,
@@ -185,12 +152,6 @@ export function PlayerTabsView({
 
   return (
     <>
-      <LiveSync
-        subscribe={liveSubscribe}
-        onUpdate={() => {
-          void mutateData();
-        }}
-      />
       <Panel>
         <PanelHeader className="px-0! py-0!" screenLines={false}>
           <PlayerSectionNav

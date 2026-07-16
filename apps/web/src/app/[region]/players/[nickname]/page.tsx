@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
-import { PlayerHeader } from "@/components/players/header";
 import { modeFromQuery, sectionFromQuery } from "@/components/players/tabs";
-import { PlayerTabsView } from "@/components/players/tabs-view";
+import { PlayerProfile } from "@/components/players/player-profile";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -16,7 +14,6 @@ import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
-  inferPlayerLanguages,
   RATING_METRIC_LABEL,
   type PlayerDetailData,
   type RatingMetric,
@@ -134,7 +131,7 @@ export default async function PlayerPage({
 
   const metricLabel = RATING_METRIC_LABEL[metric];
   const { current, clanHistory } = detail;
-  const { accountId, createdAt, lastBattleAt, updatedAt } = detail.player;
+  const { accountId } = detail.player;
   const displayName = detail.player.nickname;
   // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
   const nowMs = Date.now();
@@ -168,31 +165,15 @@ export default async function PlayerPage({
           },
         ])}
       />
-      <Panel>
-        <PanelContent className="p-0">
-          <PlayerHeader
-            region={region}
-            accountId={accountId}
-            nickname={displayName}
-            createdAt={createdAt}
-            lastBattleAt={lastBattleAt}
-            updatedAt={updatedAt}
-            currentStint={clanHistory.currentStint}
-            inferredLanguages={inferPlayerLanguages(clanHistory, nowMs)}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <PlayerTabsView
+      <PlayerProfile
         region={region}
-        basePath={ROUTES.PLAYER(region, displayName)}
         nickname={displayName}
-        activeSection={section}
-        activeMode={mode}
+        basePath={ROUTES.PLAYER(region, displayName)}
+        accountId={accountId}
         metricLabel={metricLabel}
         nowMs={nowMs}
+        activeSection={section}
+        activeMode={mode}
         initialData={detail}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side

@@ -69,12 +69,12 @@ export function PlayerHeader({
                 date={updatedAt}
                 title={format(updatedAt, "MMM d, yyyy 'at' h:mm:ss a")}
               />
-              <RefreshBeacon
-                region={region}
-                nickname={nickname}
-                updatedAt={updatedAt}
-              />
             </span>
+            <RefreshBeacon
+              region={region}
+              nickname={nickname}
+              updatedAt={updatedAt}
+            />
           </div>
           {inferredLanguages.length > 0 && (
             <div className="flex h-6 shrink-0 items-center self-end sm:h-full sm:self-auto">
