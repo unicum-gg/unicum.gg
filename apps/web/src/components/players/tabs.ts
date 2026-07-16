@@ -10,6 +10,7 @@
 export enum PlayerSection {
   Overview = "overview",
   Tanks = "tanks",
+  Value = "value",
 }
 
 export enum PlayerMode {
@@ -31,6 +32,7 @@ export const PLAYER_SECTIONS: {
 }[] = [
   { id: PlayerSection.Overview, label: "Overview", query: null },
   { id: PlayerSection.Tanks, label: "Tanks", query: "tanks" },
+  { id: PlayerSection.Value, label: "Value", query: "value" },
 ];
 
 export const PLAYER_MODES: {

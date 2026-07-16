@@ -32,6 +32,7 @@ import {
   sectionFromQuery,
 } from "@/components/players/tabs";
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
+import { ValueTab } from "@/components/players/value-tab";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
 import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerVehicleRow } from "@unicum.gg/shared";
@@ -179,6 +180,8 @@ export function PlayerTabsView({
     [PlayerMode.SteelHunter]: detail.strongholds.fallout,
   };
   const onTanks = section === PlayerSection.Tanks;
+  const onValue = section === PlayerSection.Value;
+  const showModes = !onTanks && !onValue;
 
   return (
     <>
@@ -201,7 +204,7 @@ export function PlayerTabsView({
 
       {/* The mode row is a sibling section under Overview, so it gets the same
           diagonal separator as the content sections below it. */}
-      {!onTanks && (
+      {showModes && (
         <>
           <PanelSeparator />
           <Panel>
@@ -216,7 +219,13 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onTanks ? (
+      {onValue ? (
+        <ValueTab
+          region={region}
+          nickname={nickname}
+          valuation={detail.valuation}
+        />
+      ) : onTanks ? (
         <TanksTab
           region={region}
           nickname={nickname}

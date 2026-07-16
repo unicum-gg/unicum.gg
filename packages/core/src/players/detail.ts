@@ -36,11 +36,13 @@ import {
 import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
+import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
+import { computePlayerValuation, type VehicleEconomics } from "@unicum.gg/shared";
 
 // The client-safe shapes (`PlayerDetailData`, the stronghold-mode types) and
 // the pure `EMPTY_CLAN_HISTORY` const live in `@unicum.gg/shared/players/detail`;
@@ -66,13 +68,23 @@ export async function buildPlayerDetail(args: {
   const { region, accountId, player, latest, tanks, clanHistory, initial, metric } =
     args;
 
-  const [encyclopedia, wn8Expected, wnxExpected, ratingHistory] =
+  const [encyclopedia, wn8Expected, wnxExpected, ratingHistory, specs] =
     await Promise.all([
       getVehicleEncyclopedia(region),
       getWN8ExpectedValues(),
       getWNXExpectedValues(),
       getRatingHistory(region, player.id, metric),
+      getAllTankSpecs(),
     ]);
+  // Lite economics map for the vehicle rows' account-value fields.
+  const economics = new Map<number, VehicleEconomics>();
+  for (const [tankId, s] of specs) {
+    economics.set(tankId, {
+      buyGold: s.buyGold,
+      buyCredits: s.buyCredits,
+      researchXp: s.researchXp,
+    });
+  }
 
   const current = statsFromSnapshot(latest);
   const periods: PeriodStats = {
@@ -120,6 +132,23 @@ export async function buildPlayerDetail(args: {
     };
   }
 
+  const derived = buildPlayerDerivedStats(
+    current,
+    periods,
+    tanks,
+    periodTanks,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+  );
+  const vehicles = buildPlayerVehicleRows(
+    tanks,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    economics,
+  );
+
   return {
     player: {
       accountId,
@@ -131,20 +160,13 @@ export async function buildPlayerDetail(args: {
     metric,
     current,
     periods,
-    derived: buildPlayerDerivedStats(
-      current,
-      periods,
-      tanks,
-      periodTanks,
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
-    ),
-    vehicles: buildPlayerVehicleRows(
-      tanks,
-      encyclopedia,
-      wn8Expected,
-      wnxExpected,
+    derived,
+    vehicles,
+    valuation: computePlayerValuation(
+      vehicles,
+      derived.wn8?.total ?? null,
+      current.battles,
+      region,
     ),
     liftDrag: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, metric),
     ratingHistory: ratingHistory.points,

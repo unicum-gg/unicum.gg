@@ -136,6 +136,7 @@ export default async function PlayerPage({
   const { current, clanHistory } = detail;
   const { accountId, createdAt, lastBattleAt, updatedAt } = detail.player;
   const displayName = detail.player.nickname;
+  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
   const nowMs = Date.now();
 
   const regionLabel = region.toUpperCase();
@@ -147,7 +148,7 @@ export default async function PlayerPage({
       : `${displayName} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`;
 
   return (
-    <div className="mx-auto w-full max-w-7xl">
+    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
       <JsonLd
         data={personSchema({
           nickname: displayName,
@@ -194,6 +195,11 @@ export default async function PlayerPage({
         nowMs={nowMs}
         initialData={detail}
       />
+      {/* Fills the leftover height on short tabs (e.g. Value) so the side
+          borders run down to the footer instead of stopping at the last panel,
+          mirroring the footer's own bordered spacer. Collapses to 0 when the
+          content already fills the viewport. */}
+      <div aria-hidden className={`flex-1 ${styles.borderX}`} />
     </div>
   );
 }

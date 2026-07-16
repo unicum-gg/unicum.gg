@@ -1306,6 +1306,28 @@ export interface components {
             };
             derived: components["schemas"]["PlayerDerivedStats"];
             vehicles: components["schemas"]["PlayerVehicle"][];
+            /** @description Estimated account worth: market resale value (modelled from grey-market listings — reward tanks, WN8 skill, marks) and the store rebuild cost. */
+            valuation: {
+                market: {
+                    amount: number;
+                    base: number;
+                    tierX: number;
+                    premiums: number;
+                    rewards: number;
+                    marks: number;
+                    subtotal: number;
+                    statMultiplier: number;
+                    statConfidence: number;
+                    rewardCount: number;
+                    tierXCount: number;
+                    premiumCount: number;
+                    mark3Count: number;
+                };
+                account: {
+                    amount: number;
+                    currency: string;
+                } | null;
+            };
             liftDrag: {
                 lift: components["schemas"]["LiftDragRow"][];
                 drag: components["schemas"]["LiftDragRow"][];
@@ -1414,6 +1436,9 @@ export interface components {
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
+            buyGold: number | null;
+            buyCredits: number | null;
+            researchXp: number | null;
         };
         /** @description A clan that current members previously belonged to. */
         PreviousClan: {

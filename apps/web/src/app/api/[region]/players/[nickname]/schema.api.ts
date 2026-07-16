@@ -86,6 +86,9 @@ const playerVehicle = z
     wn7: z.number().nullable(),
     wn8: z.number().nullable(),
     wnx: z.number().nullable(),
+    buyGold: z.number().nullable(),
+    buyCredits: z.number().nullable(),
+    researchXp: z.number().nullable(),
   })
   .loose()
   .meta({
@@ -214,6 +217,31 @@ export const PlayerDetailResponse = z.object({
   }),
   derived: playerDerivedStats,
   vehicles: z.array(playerVehicle),
+  valuation: z
+    .object({
+      market: z.object({
+        amount: z.number(),
+        base: z.number(),
+        tierX: z.number(),
+        premiums: z.number(),
+        rewards: z.number(),
+        marks: z.number(),
+        subtotal: z.number(),
+        statMultiplier: z.number(),
+        statConfidence: z.number(),
+        rewardCount: z.number(),
+        tierXCount: z.number(),
+        premiumCount: z.number(),
+        mark3Count: z.number(),
+      }),
+      account: z
+        .object({ amount: z.number(), currency: z.string() })
+        .nullable(),
+    })
+    .meta({
+      description:
+        "Estimated account worth: market resale value (modelled from grey-market listings — reward tanks, WN8 skill, marks) and the store rebuild cost.",
+    }),
   liftDrag: z
     .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })
     .nullable(),

@@ -7,3 +7,4 @@ export * from "./rating-history";
 export * from "./stats";
 export * from "./stronghold-stats";
 export * from "./vehicles";
+export * from "./valuation";

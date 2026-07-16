@@ -41,6 +41,19 @@ export type PlayerVehicleRow = {
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
+  // Economics (from the global tank specs), for the account-value estimate:
+  // gold purchase price (premiums), credits purchase price, and XP to research
+  // from the direct parent. Null when the tank is absent from the specs table.
+  buyGold: number | null;
+  buyCredits: number | null;
+  researchXp: number | null;
+};
+
+/** Per-tank economics the vehicle rows carry for the account-value estimate. */
+export type VehicleEconomics = {
+  buyGold: number | null;
+  buyCredits: number | null;
+  researchXp: number | null;
 };
 
 export function buildPlayerVehicleRows(
@@ -48,6 +61,7 @@ export function buildPlayerVehicleRows(
   encyclopedia: Record<string, VehicleMeta>,
   wn8Expected: Map<number, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
+  economics?: Map<number, VehicleEconomics>,
 ): PlayerVehicleRow[] {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
   const { idToSlug } = buildTankSlugIndex(encyclopedia);
@@ -94,6 +108,9 @@ export function buildPlayerVehicleRows(
         ),
         wn8: computeWN8([tank], wn8Expected, encyclopedia, wn8Fallback),
         wnx: computeWNX([tank], wnxExpected),
+        buyGold: economics?.get(tank.tank_id)?.buyGold ?? null,
+        buyCredits: economics?.get(tank.tank_id)?.buyCredits ?? null,
+        researchXp: economics?.get(tank.tank_id)?.researchXp ?? null,
       };
     });
 }

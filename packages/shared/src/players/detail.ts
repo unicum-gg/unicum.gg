@@ -8,6 +8,7 @@ import type { LiftDrag } from "./lift-drag";
 import type { RatingHistoryPoint } from "./rating-history";
 import type { Stats } from "./stats";
 import type { StrongholdStats } from "./stronghold-stats";
+import type { PlayerValuation } from "./valuation";
 import type { PlayerVehicleRow } from "./vehicles";
 
 export type StrongholdPeriodStats = {
@@ -53,6 +54,9 @@ export type PlayerDetailData = {
   periods: PeriodStats;
   derived: PlayerDerivedStats;
   vehicles: PlayerVehicleRow[];
+  // Estimated account worth (market resale + store rebuild cost), computed from
+  // the garage. See `./valuation`.
+  valuation: PlayerValuation;
   liftDrag: LiftDrag | null;
   ratingHistory: RatingHistoryPoint[];
   clanHistory: PlayerClanHistoryFull;
