@@ -198,6 +198,14 @@ const strongholdMode = z
     description: "One game mode's totals plus 24h/7d/30d period diffs.",
   });
 
+// Per-tier contribution of a valuation group (reward tanks, N-mark tanks).
+const tierContribution = z.object({
+  tier: z.number(),
+  count: z.number(),
+  unit: z.number(),
+  value: z.number(),
+});
+
 export const PlayerDetailResponse = z.object({
   player: z
     .object({
@@ -233,6 +241,11 @@ export const PlayerDetailResponse = z.object({
         tierXCount: z.number(),
         premiumCount: z.number(),
         mark3Count: z.number(),
+        wn8: z.number().nullable(),
+        battles: z.number(),
+        rewardsByTier: z.array(tierContribution),
+        marks3ByTier: z.array(tierContribution),
+        marks2ByTier: z.array(tierContribution),
       }),
       account: z
         .object({ amount: z.number(), currency: z.string() })
@@ -240,7 +253,7 @@ export const PlayerDetailResponse = z.object({
     })
     .meta({
       description:
-        "Estimated account worth: market resale value (modelled from grey-market listings — reward tanks, WN8 skill, marks) and the store rebuild cost.",
+        "Estimated account worth: market resale value (modelled from grey-market listings, driven by reward tanks, WN8 skill and marks) and the store rebuild cost.",
     }),
   liftDrag: z
     .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })

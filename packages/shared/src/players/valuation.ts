@@ -72,6 +72,17 @@ export function wn8Multiplier(wn8: number): number {
   );
 }
 
+/** Per-tier contribution of a group (reward tanks, N-mark tanks), for tooltips
+ * that spell out the calculation. Sorted highest tier first. */
+export type TierContribution = {
+  tier: number;
+  count: number;
+  /** Per-unit weight at this tier. */
+  unit: number;
+  /** count × unit. */
+  value: number;
+};
+
 export type MarketValueBreakdown = {
   amount: number;
   base: number;
@@ -86,7 +97,25 @@ export type MarketValueBreakdown = {
   tierXCount: number;
   premiumCount: number;
   mark3Count: number;
+  // Inputs + per-tier detail, so the UI can show the calculation on hover.
+  wn8: number | null;
+  battles: number;
+  rewardsByTier: TierContribution[];
+  marks3ByTier: TierContribution[];
+  marks2ByTier: TierContribution[];
 };
+
+function toTierContributions(
+  counts: Map<number, number>,
+  unitOf: (tier: number) => number,
+): TierContribution[] {
+  return [...counts.entries()]
+    .sort((a, b) => b[0] - a[0])
+    .map(([tier, count]) => {
+      const unit = unitOf(tier);
+      return { tier, count, unit, value: count * unit };
+    });
+}
 
 /**
  * Estimated grey-market value of the account. A small garage floor plus reward
@@ -104,6 +133,11 @@ export function computeMarketValue(
   let mark3Count = 0;
   let rewards = 0;
   let marks = 0;
+  const rewardTierCounts = new Map<number, number>();
+  const mark3TierCounts = new Map<number, number>();
+  const mark2TierCounts = new Map<number, number>();
+  const bump = (m: Map<number, number>, k: number) =>
+    m.set(k, (m.get(k) ?? 0) + 1);
 
   for (const v of vehicles) {
     const tier = v.tier ?? 0;
@@ -112,12 +146,15 @@ export function computeMarketValue(
     if (v.isReward) {
       rewardCount += 1;
       rewards += REWARD_VALUE_BY_TIER[tier] ?? REWARD_VALUE_DEFAULT;
+      bump(rewardTierCounts, tier);
     }
     if (v.moe === 3) {
       mark3Count += 1;
       marks += MARK3_VALUE_PER_TIER * tier;
+      bump(mark3TierCounts, tier);
     } else if (v.moe === 2) {
       marks += MARK2_VALUE_PER_TIER * tier;
+      bump(mark2TierCounts, tier);
     }
   }
 
@@ -145,6 +182,20 @@ export function computeMarketValue(
     tierXCount,
     premiumCount,
     mark3Count,
+    wn8,
+    battles,
+    rewardsByTier: toTierContributions(
+      rewardTierCounts,
+      (t) => REWARD_VALUE_BY_TIER[t] ?? REWARD_VALUE_DEFAULT,
+    ),
+    marks3ByTier: toTierContributions(
+      mark3TierCounts,
+      (t) => MARK3_VALUE_PER_TIER * t,
+    ),
+    marks2ByTier: toTierContributions(
+      mark2TierCounts,
+      (t) => MARK2_VALUE_PER_TIER * t,
+    ),
   };
 }
 
@@ -153,7 +204,7 @@ export type AccountValue = { amount: number; currency: string } | null;
 /**
  * Reconstruction cost of the garage through the official store, in the region
  * store currency: each non-reward tank's gold price (premiums) or research XP +
- * credits price (tech-tree), converted to money. Reward tanks are excluded —
+ * credits price (tech-tree), converted to money. Reward tanks are excluded:
  * they aren't store-purchasable (their `buyGold` is a restore placeholder).
  * Returns null for a region with no store pricing table.
  */

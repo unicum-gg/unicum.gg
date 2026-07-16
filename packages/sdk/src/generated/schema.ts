@@ -1306,7 +1306,7 @@ export interface components {
             };
             derived: components["schemas"]["PlayerDerivedStats"];
             vehicles: components["schemas"]["PlayerVehicle"][];
-            /** @description Estimated account worth: market resale value (modelled from grey-market listings — reward tanks, WN8 skill, marks) and the store rebuild cost. */
+            /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven by reward tanks, WN8 skill and marks) and the store rebuild cost. */
             valuation: {
                 market: {
                     amount: number;
@@ -1322,6 +1322,11 @@ export interface components {
                     tierXCount: number;
                     premiumCount: number;
                     mark3Count: number;
+                    wn8: number | null;
+                    battles: number;
+                    rewardsByTier: components["schemas"]["tierContribution"][];
+                    marks3ByTier: components["schemas"]["tierContribution"][];
+                    marks2ByTier: components["schemas"]["tierContribution"][];
                 };
                 account: {
                     amount: number;
@@ -1822,6 +1827,12 @@ export interface components {
             tier: number;
             nation: string;
             type: string;
+        };
+        tierContribution: {
+            tier: number;
+            count: number;
+            unit: number;
+            value: number;
         };
         TopClansResponse: {
             results: components["schemas"]["ClanSummary"][];
