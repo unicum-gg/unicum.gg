@@ -5,9 +5,9 @@ import type { Region } from "@unicum.gg/wargaming";
 // smooth out per-refresh noise, short enough to react to a throttling spell or
 // a backfill burst saturating the rate limiter.
 const WINDOW_MS = 60_000;
-// Ignore an entry whose measured latency exceeds this: a paused cron or a stale
-// row would otherwise poison the percentile with a bogus multi-minute sample.
-const MAX_SANE_LATENCY_MS = 120_000;
+// A single refresh's processing time never legitimately reaches this; a sample
+// above it means something stalled, so drop it rather than poison the p75.
+const MAX_SANE_LATENCY_MS = 60_000;
 
 const key = (region: Region) => `refresh:latency:${region}`;
 
@@ -17,11 +17,13 @@ const key = (region: Region) => `refresh:latency:${region}`;
 const memory = new Map<Region, Array<{ t: number; ms: number }>>();
 
 /**
- * Record the end-to-end latency (enqueue to snapshot written) of one completed
+ * Record the processing time (WG fetch to snapshot written) of one completed
  * live refresh in `region`. A single signal that folds in WG/G-Core latency,
- * rate-limiter contention from the backfill cron, retries and any queue wait,
- * none of which a formula can predict. Fire-and-forget: a Redis blip must never
- * slow a refresh.
+ * rate-limiter contention from the backfill cron and retries, none of which a
+ * formula can predict. Deliberately not enqueue-to-completion: `enqueue` pins
+ * queued_at to the earliest interest via LEAST(), which would inflate the p75
+ * with "time since first viewer" for popular players. Fire-and-forget: a Redis
+ * blip must never slow a refresh.
  */
 export function recordRefreshLatency(region: Region, ms: number): void {
   if (!Number.isFinite(ms) || ms <= 0 || ms > MAX_SANE_LATENCY_MS) return;

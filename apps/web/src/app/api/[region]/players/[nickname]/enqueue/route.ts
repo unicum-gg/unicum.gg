@@ -80,10 +80,10 @@ export async function POST(
     ahead = aheadRow?.count ?? 0;
   }
 
-  // Measured p75 end-to-end latency of a recent live refresh: one signal that
+  // Measured p75 processing time of a recent live refresh: one signal that
   // already folds in WG/G-Core latency, rate-limiter contention from the
-  // backfill cron, retries and any queue wait it saw. Cold start / quiet region
-  // falls back to a plausible flat latency.
+  // backfill cron and retries. Cold start / quiet region falls back to a
+  // plausible flat latency.
   const baseMs = (await getRefreshLatencyMs(region)) ?? FALLBACK_LATENCY_MS;
   // Marginal cost of each player genuinely ahead of us right now (rare: the
   // cron drains 25/s, so the live queue almost never has depth). One player's

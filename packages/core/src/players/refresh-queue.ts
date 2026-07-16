@@ -6,9 +6,7 @@ import type { Region } from "@unicum.gg/wargaming";
 const CHUNK_SIZE = 500;
 
 // Priority a live page view enqueues at (drained before page-hit priority 10
-// and cron backfill priority 0). Also the threshold above which a completed
-// refresh feeds the latency metric, since only these entries were queued
-// "just now" and so measure real end-to-end wait rather than hours of backlog.
+// and cron backfill priority 0).
 export const LIVE_REFRESH_PRIORITY = 20;
 
 export type EnqueuePlayerOptions = {
