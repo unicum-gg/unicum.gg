@@ -4,6 +4,7 @@ import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { getTankMomByRegion } from "@unicum.gg/core/mom";
 import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import {
   getTankStats,
   getTopPlayersByTankAllMetrics,
@@ -49,6 +50,7 @@ export async function GET(
     moeMap,
     momMap,
     researchPath,
+    modules,
     moeHistory,
     momHistory,
   ] = await Promise.all([
@@ -60,6 +62,7 @@ export async function GET(
     getTankMoeByRegion(region),
     getTankMomByRegion(region),
     getResearchPath(region, tankId),
+    getTankModules(region, tankId),
     getMoeHistory(region, tankId),
     getMomHistory(region, tankId),
   ]);
@@ -76,6 +79,7 @@ export async function GET(
     moe: moeMap.get(tankId) ?? null,
     mom: momMap.get(tankId) ?? null,
     researchPath,
+    modules,
     moeHistory,
     momHistory,
   });

@@ -9,6 +9,7 @@ import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { TankSpec } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
@@ -111,6 +112,7 @@ export async function renderTankPage(region: Region, slug: string) {
         moe={detail.moe}
         mom={detail.mom}
         researchPath={detail.researchPath as unknown as ResearchBranch}
+        modules={detail.modules as unknown as TankModuleNode[]}
         moeHistory={detail.moeHistory}
         momHistory={detail.momHistory}
       />

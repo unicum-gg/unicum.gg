@@ -61,6 +61,29 @@ const tankServerStats = z
     description: "Server-average performance across tracked players.",
   });
 
+const tankModuleNode = z.object({
+  moduleId: z.number(),
+  type: z.string().meta({
+    description:
+      "WG module class: vehicleChassis, vehicleTurret, vehicleGun, vehicleEngine or vehicleRadio.",
+  }),
+  name: z.string(),
+  tier: z.number().nullable(),
+  image: z.string().nullable(),
+  isDefault: z
+    .boolean()
+    .meta({ description: "True for the stock module the tank ships with." }),
+  priceXp: z.number(),
+  priceCredit: z.number(),
+  nextModules: z.array(z.number()).meta({
+    description:
+      "Module ids this one unlocks (edges may cross classes, e.g. a turret unlocking a gun).",
+  }),
+  nextTanks: z.array(z.number()).meta({
+    description: "Vehicle ids this module's research opens up.",
+  }),
+});
+
 const researchPathItem = z.object({
   tankId: z.number(),
   slug: z.string(),
@@ -123,6 +146,10 @@ export const TankDetailResponse = z
         next: z.array(researchPathItem),
       })
       .nullable(),
+    modules: z.array(tankModuleNode).meta({
+      description:
+        "The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail.",
+    }),
     moeHistory: z.array(
       z.object({
         day: z.string(),

@@ -8,6 +8,7 @@ import { TankDetailTabs } from "@/components/tanks/tank-detail-tabs";
 import { TankDetailTab } from "@/components/tanks/detail-tabs";
 import { TankRender } from "@/components/tanks/tank-render";
 import { TankActionsMenu } from "@/components/tanks/tank-actions-menu";
+import { TankModules } from "@/components/tanks/tank-modules";
 import { TankResearchPath } from "@/components/tanks/tank-research-path";
 import ROUTES from "@/constants/routes";
 import { TankCharacteristics } from "@/components/tanks/tank-characteristics";
@@ -33,6 +34,7 @@ import type {
   TopTankPlayersByMetric,
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import { cn } from "@/lib/utils";
 import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
 
@@ -65,6 +67,7 @@ export function TankView({
   moe,
   mom,
   researchPath,
+  modules,
   moeHistory,
   momHistory,
 }: {
@@ -80,6 +83,7 @@ export function TankView({
   moe: MoeValues | null;
   mom: MomValues | null;
   researchPath: ResearchBranch;
+  modules: TankModuleNode[];
   moeHistory: MoeHistoryPoint[];
   momHistory: MomHistoryPoint[];
 }) {
@@ -422,7 +426,7 @@ export function TankView({
         basePath={ROUTES.TANK(region, slug)}
         content={{
           [TankDetailTab.Specifications]:
-            specs || researchPath.lineage.length > 0 ? (
+            specs || researchPath.lineage.length > 0 || modules.length > 0 ? (
               <>
                 {researchPath.lineage.length > 0 && (
                   <TankResearchPath
@@ -433,7 +437,19 @@ export function TankView({
                     tankName={meta.name}
                   />
                 )}
-                {researchPath.lineage.length > 0 && specs && <PanelSeparator />}
+                {researchPath.lineage.length > 0 && modules.length > 0 && (
+                  <PanelSeparator />
+                )}
+                {modules.length > 0 && (
+                  <TankModules
+                    region={region}
+                    meta={meta}
+                    nodes={modules}
+                    nextTanks={researchPath.next}
+                  />
+                )}
+                {(researchPath.lineage.length > 0 || modules.length > 0) &&
+                  specs && <PanelSeparator />}
                 {specs && (
                   <TankCharacteristics specs={specs} tankName={meta.name} />
                 )}

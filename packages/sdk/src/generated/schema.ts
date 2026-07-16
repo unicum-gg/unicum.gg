@@ -1542,6 +1542,8 @@ export interface components {
                 lineage: components["schemas"]["researchPathItem"][];
                 next: components["schemas"]["researchPathItem"][];
             } | null;
+            /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
+            modules: components["schemas"]["tankModuleNode"][];
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -1599,6 +1601,8 @@ export interface components {
                 lineage: components["schemas"]["researchPathItem"][];
                 next: components["schemas"]["researchPathItem"][];
             } | null;
+            /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
+            modules: components["schemas"]["tankModuleNode"][];
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -1666,6 +1670,22 @@ export interface components {
         TankMasteryRow: {
             identity: components["schemas"]["TankIdentity"];
             mastery: components["schemas"]["TankMarksOfMastery"] | null;
+        };
+        tankModuleNode: {
+            moduleId: number;
+            /** @description WG module class: vehicleChassis, vehicleTurret, vehicleGun, vehicleEngine or vehicleRadio. */
+            type: string;
+            name: string;
+            tier: number | null;
+            image: string | null;
+            /** @description True for the stock module the tank ships with. */
+            isDefault: boolean;
+            priceXp: number;
+            priceCredit: number;
+            /** @description Module ids this one unlocks (edges may cross classes, e.g. a turret unlocking a gun). */
+            nextModules: number[];
+            /** @description Vehicle ids this module's research opens up. */
+            nextTanks: number[];
         };
         TankMoeResponse: {
             results: components["schemas"]["TankMoeRow"][];
