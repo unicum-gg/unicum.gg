@@ -1,10 +1,13 @@
 import { getRedisClient } from "@unicum.gg/core/redis";
 import type { Region } from "@unicum.gg/wargaming";
 
-// Rolling window over which we measure live refresh latency. Long enough to
-// smooth out per-refresh noise, short enough to react to a throttling spell or
-// a backfill burst saturating the rate limiter.
-const WINDOW_MS = 60_000;
+// Rolling window over which we measure live refresh latency. Sized for the
+// sparse regions: on a quiet region an on-demand refresh may land only once
+// every few minutes, so a 60s window is almost always empty and the ETA falls
+// back to the optimistic default even when the real processing time is high
+// (e.g. EU at ~37s while the backfill saturates the rate limiter). 10 min keeps
+// those rare samples alive; load varies on a minutes scale, so it stays timely.
+const WINDOW_MS = 600_000;
 // A single refresh's processing time never legitimately reaches this; a sample
 // above it means something stalled, so drop it rather than poison the p75.
 const MAX_SANE_LATENCY_MS = 60_000;
