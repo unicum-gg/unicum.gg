@@ -88,10 +88,19 @@ async function fetchStrongholdLeaderboard(
       ORDER BY clan_id, taken_at DESC
     ),
     baseline_30d AS (
-      SELECT DISTINCT ON (clan_id) clan_id, ${battlesCol} AS battles
-      FROM ${snapshots}
-      WHERE taken_at <= now() - interval '30 days' AND ${battlesCol} IS NOT NULL
-      ORDER BY clan_id, taken_at DESC
+      -- Mirror the clan page's baseline (getClanSnapshotPeriods.periodBaseline):
+      -- per clan, the newest snapshot at or before J-30, else the oldest one
+      -- before the latest. Advances history is only weeks deep and season-
+      -- sparse, so a strict ">30d old" cutoff leaves it empty for nearly every
+      -- clan; this fallback keeps the 30d column consistent with the clan page.
+      SELECT DISTINCT ON (s.clan_id) s.clan_id, s.${battlesCol} AS battles
+      FROM ${snapshots} s
+      JOIN latest l ON l.clan_id = s.clan_id
+      WHERE s.taken_at < l.taken_at
+      ORDER BY s.clan_id,
+        (s.taken_at <= now() - interval '30 days') DESC,
+        CASE WHEN s.taken_at <= now() - interval '30 days' THEN s.taken_at END DESC,
+        s.taken_at ASC
     )
     SELECT
       c.id AS clan_id,
