@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
@@ -20,14 +21,15 @@ export function ModuleNode({ module }: { module: TankModuleNode }) {
     <div className="flex w-24 shrink-0 flex-col items-center gap-1.5">
       <div className="flex h-7 w-full items-center justify-center">
         {module.image ? (
-          // WG's own per-class Tankopedia glyph (a plain CDN <img>, like the
-          // tank contour icons).
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          // WG's per-class Tankopedia glyph (uniform 59x59 on
+          // api.worldoftanks.*/static, an allowed remote host), through
+          // next/image for format negotiation + caching. Rendered at h-7.
+          <Image
             src={module.image}
             alt=""
+            width={59}
+            height={59}
             className="h-7 w-auto object-contain opacity-80"
-            loading="lazy"
           />
         ) : null}
       </div>
