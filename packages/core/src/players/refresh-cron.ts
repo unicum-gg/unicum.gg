@@ -16,8 +16,11 @@ import {
   storePlayerClanHistory,
 } from "./clan-history";
 import { recordCurrentSnapshot } from ".";
-import { dequeuePlayerRefresh } from "./refresh-queue";
-import { recordRefreshCompletion } from "./refresh-metrics";
+import {
+  LIVE_REFRESH_PRIORITY,
+  dequeuePlayerRefresh,
+} from "./refresh-queue";
+import { recordRefreshLatency } from "./refresh-metrics";
 
 // 10s tick — fast enough for user-initiated refreshes to feel live,
 // loose enough to coalesce bursts on the same player into a single drain.
@@ -47,6 +50,8 @@ type QueueEntry = {
   accountId: number;
   playerId: number;
   nickname: string;
+  priority: number;
+  queuedAt: Date;
 };
 
 async function pickEntriesForRegion(
@@ -65,6 +70,8 @@ async function pickEntriesForRegion(
       accountId: queue.accountId,
       playerId: players.id,
       nickname: players.nickname,
+      priority: queue.priority,
+      queuedAt: queue.queuedAt,
     })
     .from(queue)
     .innerJoin(players, eq(players.accountId, queue.accountId))
@@ -76,6 +83,8 @@ async function pickEntriesForRegion(
     accountId: Number(r.accountId),
     playerId: Number(r.playerId),
     nickname: r.nickname,
+    priority: r.priority,
+    queuedAt: r.queuedAt,
   }));
 }
 
@@ -128,9 +137,12 @@ export async function drainPlayerRefreshQueueForRegion(
       const success = await refreshOne(entry);
       if (success) {
         ok += 1;
-        // Feed the throughput metric that drives the queue ETA (endpoint reads
-        // completions/min for this region to estimate the live refresh wait).
-        recordRefreshCompletion(region, entry.accountId);
+        // Feed the latency metric that drives the live-refresh ETA. Only
+        // live-priority entries: those were queued "just now", so their
+        // enqueue-to-now time is a real end-to-end wait, not hours of backlog.
+        if (entry.priority >= LIVE_REFRESH_PRIORITY) {
+          recordRefreshLatency(region, Date.now() - entry.queuedAt.getTime());
+        }
       } else failed += 1;
       // Always dequeue — failures are logged, and the snapshot-cron 24h
       // backfill will eventually retry stale players. We don't want a

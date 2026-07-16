@@ -1,54 +1,61 @@
 import { getRedisClient } from "@unicum.gg/core/redis";
 import type { Region } from "@unicum.gg/wargaming";
 
-// Rolling window over which we measure the live refresh throughput. Long enough
-// to smooth out per-batch bursts, short enough to react to a throttling spell.
+// Rolling window over which we measure live refresh latency. Long enough to
+// smooth out per-refresh noise, short enough to react to a throttling spell or
+// a backfill burst saturating the rate limiter.
 const WINDOW_MS = 60_000;
+// Ignore an entry whose measured latency exceeds this: a paused cron or a stale
+// row would otherwise poison the percentile with a bogus multi-minute sample.
+const MAX_SANE_LATENCY_MS = 120_000;
 
-const key = (region: Region) => `refresh:completions:${region}`;
+const key = (region: Region) => `refresh:latency:${region}`;
 
-// In-process fallback when Redis is unset (local single-process dev): a plain
-// list of completion timestamps per region. Useless across processes, which is
+// In-process fallback when Redis is unset (local single-process dev): recent
+// (timestamp, latency) pairs per region. Useless across processes, which is
 // exactly why prod (worker writes, web reads) needs Redis.
-const memory = new Map<Region, number[]>();
+const memory = new Map<Region, Array<{ t: number; ms: number }>>();
 
 /**
- * Record that the live refresh cron just completed one player in `region`. The
- * completion RATE of this cron is our throughput signal for the queue ETA: it
- * already folds in the WG rate limiter, G-Core throttling, retries and
- * contention from the backfill cron, none of which a formula can predict.
- * Fire-and-forget: a Redis blip must never slow a refresh.
+ * Record the end-to-end latency (enqueue to snapshot written) of one completed
+ * live refresh in `region`. A single signal that folds in WG/G-Core latency,
+ * rate-limiter contention from the backfill cron, retries and any queue wait,
+ * none of which a formula can predict. Fire-and-forget: a Redis blip must never
+ * slow a refresh.
  */
-export function recordRefreshCompletion(
-  region: Region,
-  accountId: number,
-): void {
+export function recordRefreshLatency(region: Region, ms: number): void {
+  if (!Number.isFinite(ms) || ms <= 0 || ms > MAX_SANE_LATENCY_MS) return;
   const now = Date.now();
   const redis = getRedisClient();
   if (redis) {
-    // Unique member per completion (`ts-accountId`); trim the window on write.
+    // Score = timestamp for windowing; member encodes the latency (unique per
+    // completion via `ts-ms-region`). Trim the window on write.
     void redis
       .multi()
-      .zadd(key(region), now, `${now}-${accountId}`)
+      .zadd(key(region), now, `${now}-${ms}`)
       .zremrangebyscore(key(region), 0, now - WINDOW_MS)
       .exec()
       .catch(() => {});
     return;
   }
-  const list = memory.get(region) ?? [];
-  list.push(now);
-  memory.set(
-    region,
-    list.filter((t) => t > now - WINDOW_MS),
-  );
+  const list = (memory.get(region) ?? []).filter((e) => e.t > now - WINDOW_MS);
+  list.push({ t: now, ms });
+  memory.set(region, list);
+}
+
+// Nearest-rank 75th percentile of a numeric sample (ascending).
+function p75(samples: number[]): number {
+  const sorted = [...samples].sort((a, b) => a - b);
+  const rank = Math.ceil(0.75 * sorted.length);
+  return sorted[Math.min(sorted.length, rank) - 1];
 }
 
 /**
- * Measured live-refresh throughput for `region`, in players per second over the
- * last minute. Null when there's no recent signal (cold start / Redis down), so
- * callers fall back to a theoretical rate.
+ * The 75th-percentile live-refresh latency for `region` over the last minute,
+ * in milliseconds. Null when there's no recent signal (cold start / quiet
+ * region / Redis down), so callers fall back to a theoretical estimate.
  */
-export async function getRefreshThroughput(
+export async function getRefreshLatencyMs(
   region: Region,
 ): Promise<number | null> {
   const now = Date.now();
@@ -56,12 +63,17 @@ export async function getRefreshThroughput(
   const redis = getRedisClient();
   if (redis) {
     try {
-      const count = await redis.zcount(key(region), since, now);
-      return count > 0 ? count / (WINDOW_MS / 1000) : null;
+      const members = await redis.zrangebyscore(key(region), since, now);
+      const samples = members
+        .map((m) => Number(m.slice(m.indexOf("-") + 1)))
+        .filter((n) => Number.isFinite(n));
+      return samples.length > 0 ? p75(samples) : null;
     } catch {
       return null;
     }
   }
-  const list = (memory.get(region) ?? []).filter((t) => t > since);
-  return list.length > 0 ? list.length / (WINDOW_MS / 1000) : null;
+  const samples = (memory.get(region) ?? [])
+    .filter((e) => e.t > since)
+    .map((e) => e.ms);
+  return samples.length > 0 ? p75(samples) : null;
 }

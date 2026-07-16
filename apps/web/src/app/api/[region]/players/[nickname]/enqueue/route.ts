@@ -1,26 +1,25 @@
 import { and, eq, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playerRefreshQueueByRegion, playersByRegion } from "@unicum.gg/shared";
-import { enqueuePlayerRefresh } from "@unicum.gg/core/players/refresh-queue";
-import { getRefreshThroughput } from "@unicum.gg/core/players/refresh-metrics";
+import {
+  LIVE_REFRESH_PRIORITY,
+  enqueuePlayerRefresh,
+} from "@unicum.gg/core/players/refresh-queue";
+import { getRefreshLatencyMs } from "@unicum.gg/core/players/refresh-metrics";
 import { isRegion } from "@unicum.gg/wargaming";
 
-const LIVE_PRIORITY = 20;
 // Each refresh fans out to WG (account/info, tanks/stats, WTR, clan history);
-// only used as the cold-start fallback rate before the measured throughput has
-// any recent completions to report.
+// used for the per-player marginal cost of anyone ahead, and for the cold-start
+// fallback before any measured latency exists.
 const WG_CALLS_PER_PLAYER = 4;
 const WG_RPS: Record<string, number> = { eu: 6, na: 8, asia: 8 };
-// Wall time between a snapshot landing and the browser showing it: LiveSync
-// publish, SSE hop, SWR refetch. Added on top of the queue drain time.
-const PROPAGATION_SECONDS = 2;
-// The estimate can never credibly beat the in-flight refresh + propagation, and
-// past ~2min a countdown stops being useful, so we clamp both ends.
+// Cold-start / quiet-region fallback: a plausible end-to-end latency (ms) when
+// the p75 metric has no recent live-refresh sample to report.
+const FALLBACK_LATENCY_MS = 4_000;
+// A countdown below the in-flight refresh + propagation isn't credible, and
+// past ~2min it stops being useful, so we clamp both ends.
 const MIN_ETA_SECONDS = 3;
 const MAX_ETA_SECONDS = 120;
-// Guard the division: if the measured throughput ever reads absurdly low we'd
-// project a runaway ETA. This is the slowest per-player rate we'll model.
-const MIN_THROUGHPUT = 0.2;
 
 /**
  * Enqueue player refresh
@@ -49,7 +48,9 @@ export async function POST(
     return new Response("not_found", { status: 404 });
   }
   const accountId = Number(player.accountId);
-  await enqueuePlayerRefresh(region, [accountId], { priority: LIVE_PRIORITY });
+  await enqueuePlayerRefresh(region, [accountId], {
+    priority: LIVE_REFRESH_PRIORITY,
+  });
 
   const queue = playerRefreshQueueByRegion[region];
   // Read back OUR entry: enqueue keeps the earliest queued_at (LEAST), so our
@@ -79,19 +80,19 @@ export async function POST(
     ahead = aheadRow?.count ?? 0;
   }
 
-  // Measured live-refresh throughput (players/sec) folds in the rate limiter,
-  // G-Core throttling, retries and backfill contention. Cold start falls back
-  // to the theoretical per-region ceiling.
-  const measured = await getRefreshThroughput(region);
-  const fallback = (WG_RPS[region] ?? 6) / WG_CALLS_PER_PLAYER;
-  const throughput = Math.max(MIN_THROUGHPUT, measured ?? fallback);
+  // Measured p75 end-to-end latency of a recent live refresh: one signal that
+  // already folds in WG/G-Core latency, rate-limiter contention from the
+  // backfill cron, retries and any queue wait it saw. Cold start / quiet region
+  // falls back to a plausible flat latency.
+  const baseMs = (await getRefreshLatencyMs(region)) ?? FALLBACK_LATENCY_MS;
+  // Marginal cost of each player genuinely ahead of us right now (rare: the
+  // cron drains 25/s, so the live queue almost never has depth). One player's
+  // WG calls' worth of rate-limiter time.
+  const marginalMs = (WG_CALLS_PER_PLAYER / (WG_RPS[region] ?? 6)) * 1000;
 
-  // Time for the (ahead + our own) refreshes to complete at that rate, plus the
-  // propagation hop, clamped to a credible range.
-  const drainSeconds = (ahead + 1) / throughput;
   const estimatedSeconds = Math.min(
     MAX_ETA_SECONDS,
-    Math.max(MIN_ETA_SECONDS, Math.round(drainSeconds + PROPAGATION_SECONDS)),
+    Math.max(MIN_ETA_SECONDS, Math.round((baseMs + ahead * marginalMs) / 1000)),
   );
 
   return Response.json({ estimatedSeconds });
