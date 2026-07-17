@@ -283,6 +283,9 @@ importers:
       sanitize-html:
         specifier: ^2.17.4
         version: 2.17.4
+      undici:
+        specifier: ^7.24.0
+        version: 7.28.0
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -5765,6 +5768,10 @@ packages:
   undici@6.24.1:
     resolution: {integrity: sha512-sC+b0tB1whOCzbtlx20fx3WgCXwkW627p4EA9uM+/tNNPkSS+eSEld6pAs9nDv7WbY1UUljBMYPtu9BCOrCWKA==}
     engines: {node: '>=18.17'}
+
+  undici@7.28.0:
+    resolution: {integrity: sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==}
+    engines: {node: '>=20.18.1'}
 
   unhead@2.1.15:
     resolution: {integrity: sha512-MCt5T90mCWyr3Z6pUCdM9lVRXoMoVBlL7z7U4CYVIiaDiuzad/UCfLuMqz5MeNmpZUgoBCQnrucJimU7EZR+XA==}
@@ -12104,6 +12111,8 @@ snapshots:
   undici-types@7.18.2: {}
 
   undici@6.24.1: {}
+
+  undici@7.28.0: {}
 
   unhead@2.1.15:
     dependencies:
