@@ -7,6 +7,7 @@ import {
   clanRecentEventsByRegion,
   clanRefreshQueueByRegion,
   clansByRegion,
+  env,
   playerRefreshQueueByRegion,
   playerSnapshotsByRegion,
   playersByRegion,
@@ -88,6 +89,24 @@ export type CoverageStats = {
 // ≈ $30.45/mo at ~1.08 USD/EUR.
 const HOSTING_USD_MONTHLY = 30.45;
 const DOMAIN_USD_ANNUAL = 51.6;
+
+// OVH additional IPv4, €2.39 TTC/mo ≈ $2.58. Each extra egress IP buys its own
+// G-Core per-IP rate budget so we can spread Wargaming traffic across them.
+const EGRESS_IP_USD_MONTHLY = 2.58;
+// Additional egress IPs = the distinct Wargaming egress targets we route through
+// minus the one primary IP included with the VPS. Derived from env so the cost
+// tracks reality automatically as we add or drop IPs (WG_EGRESS_* holds one
+// entry per egress path; see packages/core wargaming/client).
+const ADDITIONAL_EGRESS_IPS = Math.max(
+  0,
+  new Set(
+    [env.WG_EGRESS_EU, env.WG_EGRESS_NA, env.WG_EGRESS_ASIA]
+      .flatMap((v) => v?.split(",") ?? [])
+      .map((s) => s.trim())
+      .filter(Boolean),
+  ).size - 1,
+);
+const EGRESS_IPS_USD_ANNUAL = ADDITIONAL_EGRESS_IPS * EGRESS_IP_USD_MONTHLY * 12;
 
 const DAYS_WINDOW = 30;
 
@@ -424,13 +443,23 @@ async function getCoverageStatsUncached(
             usdAnnual: DOMAIN_USD_ANNUAL,
             note: `${APP.NAME}, billed yearly`,
           },
+          ...(ADDITIONAL_EGRESS_IPS > 0
+            ? [
+                {
+                  label: "Egress IPs",
+                  usdAnnual: EGRESS_IPS_USD_ANNUAL,
+                  note: `${ADDITIONAL_EGRESS_IPS} additional OVH IPv4 for multi-IP Wargaming throughput`,
+                },
+              ]
+            : []),
           {
             label: "CDN, SSL, deploys",
             usdAnnual: 0,
             note: "Cloudflare free tier + Let's Encrypt + self-hosted Coolify",
           },
         ],
-        totalAnnualUsd: HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL,
+        totalAnnualUsd:
+          HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL + EGRESS_IPS_USD_ANNUAL,
       },
     },
   };
