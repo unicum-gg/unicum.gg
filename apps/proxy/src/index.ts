@@ -33,6 +33,29 @@ if (!EGRESS_IP) {
   process.exit(1);
 }
 
+// A G-Core block manifests as the upstream TCP connect hanging (not an error),
+// so cap it and count it: a rising `timeouts` on one instance is our per-IP
+// early warning that this egress IP is being throttled.
+const UPSTREAM_TIMEOUT_MS = 30_000;
+const HEARTBEAT_MS = 60_000;
+
+// Rolling per-interval counters, flushed by the heartbeat. Per-request logging
+// would flood at our WG volume, so we aggregate instead.
+let tunnels = 0;
+let errors = 0;
+let timeouts = 0;
+
+// Throttle the error/timeout warnings so a sustained block (which hits every
+// request) can't drown the logs; the heartbeat carries the real totals.
+let lastWarnAt = 0;
+const warnSampled = (message: string) => {
+  const now = Date.now();
+  if (now - lastWarnAt > 5_000) {
+    lastWarnAt = now;
+    console.warn(message);
+  }
+};
+
 const server = http.createServer((req, res) => {
   // This proxy only speaks CONNECT; a plain request is just the health check.
   const ok = req.url === "/" || req.url === "/health";
@@ -48,17 +71,29 @@ server.on("connect", (req, clientSocket, head) => {
     return;
   }
   const upstream = net.connect({ host, port, localAddress: EGRESS_IP }, () => {
+    tunnels += 1;
+    upstream.setTimeout(0); // connected: drop the connect-phase watchdog
     clientSocket.write("HTTP/1.1 200 Connection Established\r\n\r\n");
     if (head.length) upstream.write(head);
     upstream.pipe(clientSocket);
     clientSocket.pipe(upstream);
   });
-  const kill = () => {
+  upstream.setTimeout(UPSTREAM_TIMEOUT_MS, () => {
+    timeouts += 1;
+    warnSampled(`[proxy ${EGRESS_IP}] upstream timeout to ${host}:${port} (G-Core block?)`);
     upstream.destroy();
     clientSocket.destroy();
-  };
-  upstream.on("error", kill);
-  clientSocket.on("error", kill);
+  });
+  upstream.on("error", (err: NodeJS.ErrnoException) => {
+    errors += 1;
+    warnSampled(`[proxy ${EGRESS_IP}] upstream error ${err.code ?? err.message} to ${host}:${port}`);
+    upstream.destroy();
+    clientSocket.destroy();
+  });
+  clientSocket.on("error", () => {
+    upstream.destroy();
+    clientSocket.destroy();
+  });
 });
 
 server.on("clientError", (_err, socket) => socket.destroy());
@@ -67,7 +102,22 @@ server.listen(PORT, BIND_ADDR, () => {
   console.log(`[proxy] CONNECT proxy listening on ${BIND_ADDR}:${PORT}, egress ${EGRESS_IP}`);
 });
 
+// Per-IP throughput + health heartbeat. Silent when idle to avoid noise; a
+// non-zero `timeouts` is the signal that this egress IP is being blocked.
+const heartbeat = setInterval(() => {
+  if (tunnels || errors || timeouts) {
+    console.log(
+      `[proxy ${EGRESS_IP}] 60s: ${tunnels} tunnels, ${errors} errors, ${timeouts} timeouts`,
+    );
+    tunnels = 0;
+    errors = 0;
+    timeouts = 0;
+  }
+}, HEARTBEAT_MS);
+heartbeat.unref();
+
 const shutdown = () => {
+  clearInterval(heartbeat);
   server.close(() => process.exit(0));
 };
 process.on("SIGTERM", shutdown);
