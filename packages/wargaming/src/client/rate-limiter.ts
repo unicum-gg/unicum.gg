@@ -154,12 +154,14 @@ export function regionLimiters(
  * plus undici's own `fetch`).
  */
 export type EgressConfig = {
-  /** Source IPs per region. Each must be a local address on the host AND
-   * whitelisted on that region's WG application, else calls fail. */
+  /** Egress targets per region, round-robined over. Each is an opaque string the
+   * app maps to a dispatcher (e.g. a proxy URL or a source IP); the transport
+   * only round-robins and rate-limits per entry, it never parses them. */
   ips?: Partial<Record<Region, string[]>>;
-  /** Builds a fetch `dispatcher` bound to one source IP. Typed `unknown` to
-   * avoid depending on undici here; passed straight to `fetchImpl`. */
-  dispatcherFor: (ip: string) => unknown;
+  /** Builds a fetch `dispatcher` for one egress target (e.g. a ProxyAgent for a
+   * proxy URL, or an Agent bound to a source IP). Typed `unknown` to avoid
+   * depending on undici here; passed straight to `fetchImpl`. */
+  dispatcherFor: (target: string) => unknown;
   /**
    * The fetch implementation paired with `dispatcherFor`. Required for the
    * source-IP binding to actually take effect: Node's global fetch silently

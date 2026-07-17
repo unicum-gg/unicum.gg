@@ -5,7 +5,7 @@ import {
   type RateLimiterFactory,
   Region,
 } from "@unicum.gg/wargaming";
-import { Agent, fetch as undiciFetch } from "undici";
+import { Agent, ProxyAgent, type Dispatcher, fetch as undiciFetch } from "undici";
 import { env, botHeaders } from "@unicum.gg/shared";
 import { traced } from "@unicum.gg/core/lib/perf-trace";
 import { getRedisClient } from "@unicum.gg/core/redis";
@@ -32,39 +32,45 @@ const rateLimit: { factory: RateLimiterFactory } | undefined = redis
     }
   : undefined;
 
-const parseIps = (v?: string): string[] | undefined => {
-  const ips = v?.split(",").map((s) => s.trim()).filter(Boolean);
-  return ips && ips.length > 0 ? ips : undefined;
+const parseTargets = (v?: string): string[] | undefined => {
+  const t = v?.split(",").map((s) => s.trim()).filter(Boolean);
+  return t && t.length > 0 ? t : undefined;
 };
 
-// Optional multi-egress: spread WG traffic across whitelisted source IPs to
-// multiply the per-IP G-Core budget. Bind each to its socket via an undici
-// Agent's top-level `localAddress` (one Agent per IP, reused across requests).
-// NB: `localAddress` is a Client option, NOT `connect.localAddress` (the latter
-// is clobbered by undici's per-connect arg and silently no-ops). Unset env =>
-// no egress => the SDK's default single-IP behaviour.
-const egressIps: Partial<Record<Region, string[]>> = {
-  [Region.EU]: parseIps(env.WG_EGRESS_EU),
-  [Region.NA]: parseIps(env.WG_EGRESS_NA),
-  [Region.ASIA]: parseIps(env.WG_EGRESS_ASIA),
+// Optional multi-egress: spread WG traffic across our whitelisted source IPs to
+// multiply the per-IP G-Core budget (each IP has its own budget; see wargaming
+// DEFAULT_WG_RPS). Each WG_EGRESS_* entry is one egress path; the app round-robins
+// over them and rate-limits each on its own bucket.
+//
+// An entry is a `apps/proxy` CONNECT proxy URL (http://<gateway>:<port>) in prod:
+// binding a public source IP only works on the host, not inside our bridge
+// containers, so the source-IP pinning lives in that proxy and we tunnel through
+// it via a ProxyAgent. A bare IP entry is still supported (Agent `localAddress`)
+// for host-network / local runs. Unset env => no egress => default behaviour.
+const egressTargets: Partial<Record<Region, string[]>> = {
+  [Region.EU]: parseTargets(env.WG_EGRESS_EU),
+  [Region.NA]: parseTargets(env.WG_EGRESS_NA),
+  [Region.ASIA]: parseTargets(env.WG_EGRESS_ASIA),
 };
-const agents = new Map<string, Agent>();
-const egress: EgressConfig | undefined = Object.values(egressIps).some((v) => v?.length)
+const dispatchers = new Map<string, Dispatcher>();
+const egress: EgressConfig | undefined = Object.values(egressTargets).some((v) => v?.length)
   ? {
-      ips: egressIps,
-      dispatcherFor: (ip) => {
-        let agent = agents.get(ip);
-        if (!agent) {
-          agent = new Agent({ localAddress: ip });
-          agents.set(ip, agent);
+      ips: egressTargets,
+      dispatcherFor: (target) => {
+        let dispatcher = dispatchers.get(target);
+        if (!dispatcher) {
+          dispatcher = /^https?:\/\//.test(target)
+            ? new ProxyAgent(target)
+            : new Agent({ localAddress: target });
+          dispatchers.set(target, dispatcher);
         }
-        return agent;
+        return dispatcher;
       },
       // Must be undici's own fetch, not Node's global one: the global fetch
       // ignores a dispatcher built by this (separately-installed) undici, so the
-      // localAddress bind would silently no-op and every IP would collapse onto
-      // the default egress. Cast because undici's fetch types don't line up
-      // exactly with the DOM `fetch` lib type (runtime behaviour is identical).
+      // ProxyAgent/localAddress binding would silently no-op and every request
+      // would collapse onto the default egress. Cast because undici's fetch types
+      // don't line up exactly with the DOM `fetch` lib type (runtime identical).
       fetchImpl: undiciFetch as unknown as typeof fetch,
     }
   : undefined;
