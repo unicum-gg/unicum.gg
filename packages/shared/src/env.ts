@@ -18,6 +18,14 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_EU: z.string(),
     WARGAMING_APPLICATION_ID_NA: z.string(),
     WARGAMING_APPLICATION_ID_ASIA: z.string(),
+    // Optional comma-separated source IPs to spread WG API + portal traffic
+    // across per region (each gets its own G-Core per-IP rate budget). Every IP
+    // must be a local address on the host AND whitelisted on that region's WG
+    // application, else calls from it fail with INVALID_IP_ADDRESS. Unset = the
+    // single default egress (current behaviour).
+    WG_EGRESS_EU: z.string().optional(),
+    WG_EGRESS_NA: z.string().optional(),
+    WG_EGRESS_ASIA: z.string().optional(),
     DATABASE_URL: z.url(),
     CRON_SECRET: z.string(),
     // Better Auth session/cookie signing + encryption key. Optional at the env
@@ -50,6 +58,9 @@ export const env = createEnv({
     WARGAMING_APPLICATION_ID_EU: process.env.WARGAMING_APPLICATION_ID_EU,
     WARGAMING_APPLICATION_ID_NA: process.env.WARGAMING_APPLICATION_ID_NA,
     WARGAMING_APPLICATION_ID_ASIA: process.env.WARGAMING_APPLICATION_ID_ASIA,
+    WG_EGRESS_EU: process.env.WG_EGRESS_EU,
+    WG_EGRESS_NA: process.env.WG_EGRESS_NA,
+    WG_EGRESS_ASIA: process.env.WG_EGRESS_ASIA,
     DATABASE_URL: process.env.DATABASE_URL,
     CRON_SECRET: process.env.CRON_SECRET,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,

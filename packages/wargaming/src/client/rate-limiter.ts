@@ -24,6 +24,12 @@ export type RateLimiterFactory = (ctx: {
   region: Region;
   kind: RateLimiterKind;
   rps: number;
+  /**
+   * When set, this limiter serves one specific egress source IP, so a
+   * distributed (e.g. Redis) key must include it: each IP has its own G-Core
+   * per-IP budget, and lumping them under one key would defeat multi-egress.
+   */
+  egress?: string;
 }) => WgRateLimiter;
 
 /**
@@ -132,6 +138,68 @@ export function regionLimiters(
 ): Record<Region, WgRateLimiter> {
   const make = (region: Region): WgRateLimiter =>
     factory ? factory({ region, kind, rps: rps[region] }) : new RateLimiter(rps[region], rps[region]);
+  return {
+    [Region.EU]: make(Region.EU),
+    [Region.NA]: make(Region.NA),
+    [Region.ASIA]: make(Region.ASIA),
+  };
+}
+
+/**
+ * Spread WG traffic across several source IPs to multiply the per-IP G-Core
+ * budget (see DEFAULT_WG_RPS): each IP has its own rate-limiter bucket, and the
+ * socket is bound to it via `dispatcherFor`. Kept fully injectable so this
+ * package stays runtime-neutral (the app supplies the IP list + a dispatcher
+ * factory + the matching fetch, e.g. an undici Agent bound via `localAddress`
+ * plus undici's own `fetch`).
+ */
+export type EgressConfig = {
+  /** Source IPs per region. Each must be a local address on the host AND
+   * whitelisted on that region's WG application, else calls fail. */
+  ips?: Partial<Record<Region, string[]>>;
+  /** Builds a fetch `dispatcher` bound to one source IP. Typed `unknown` to
+   * avoid depending on undici here; passed straight to `fetchImpl`. */
+  dispatcherFor: (ip: string) => unknown;
+  /**
+   * The fetch implementation paired with `dispatcherFor`. Required for the
+   * source-IP binding to actually take effect: Node's global fetch silently
+   * IGNORES a `dispatcher` created by a separately-installed undici (instance
+   * mismatch), so the app must pass undici's own `fetch` here so the two match.
+   * Defaults to global fetch (fine only when no dispatcher is used).
+   */
+  fetchImpl?: typeof fetch;
+};
+
+/** One egress path for a region: a rate-limiter bucket plus an optional
+ * source-IP dispatcher. A region with no egress config has a single lane with
+ * no dispatcher, i.e. the default single-IP behavior. */
+export type Lane = { limiter: WgRateLimiter; dispatcher?: unknown };
+
+/**
+ * Per region, the egress lanes to round-robin over: one lane per configured
+ * source IP (each with its own IP-keyed limiter), or a single default lane when
+ * no egress is set for that region.
+ */
+export function regionLanes(
+  rps: RegionRps,
+  kind: RateLimiterKind,
+  factory?: RateLimiterFactory,
+  egress?: EgressConfig,
+): Record<Region, Lane[]> {
+  const bucket = (region: Region, ip?: string): WgRateLimiter =>
+    factory
+      ? factory({ region, kind, rps: rps[region], egress: ip })
+      : new RateLimiter(rps[region], rps[region]);
+  const make = (region: Region): Lane[] => {
+    const ips = egress?.ips?.[region]?.filter(Boolean);
+    if (ips && ips.length > 0) {
+      return ips.map((ip) => ({
+        limiter: bucket(region, ip),
+        dispatcher: egress!.dispatcherFor(ip),
+      }));
+    }
+    return [{ limiter: bucket(region) }];
+  };
   return {
     [Region.EU]: make(Region.EU),
     [Region.NA]: make(Region.NA),
