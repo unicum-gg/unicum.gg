@@ -9,7 +9,12 @@
 # Ports 18001/18002 are the URLs the app puts in WG_EGRESS_* on web + worker.
 services:
   wg-egress-a:
-    build: .
+    # Context is apps/proxy relative to the repo root: Coolify runs compose with
+    # --project-directory at the repo root (Base Directory `/`), so a bare `.`
+    # would look for the Dockerfile there and fail.
+    build:
+      context: apps/proxy
+      dockerfile: Dockerfile
     restart: unless-stopped
     network_mode: host
     environment:
@@ -17,7 +22,9 @@ services:
       PORT: ${WG_EGRESS_PORT_A:-18001}
       BIND_ADDR: ${WG_EGRESS_BIND_ADDR:-10.0.1.1}
   wg-egress-b:
-    build: .
+    build:
+      context: apps/proxy
+      dockerfile: Dockerfile
     restart: unless-stopped
     network_mode: host
     environment:
