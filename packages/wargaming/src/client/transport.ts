@@ -121,7 +121,8 @@ function isTimeoutError(err: unknown): boolean {
 
 // Both api.worldoftanks.* and *.wargaming.net sit behind G-Core CDN. i*i*2
 // backoff is the proven-safe pattern (short linear retries make the WAF kick
-// in harder). ~110s across 5 retries.
+// in harder). ~110s across 5 retries. (G-Core WAF mechanism + the empirical
+// per-IP RPS ceilings: see rate-limiter.ts DEFAULT_WG_RPS.)
 const RETRY_DELAYS_MS = [2_000, 8_000, 18_000, 32_000, 50_000] as const;
 const FETCH_TIMEOUT_MS = 30_000;
 

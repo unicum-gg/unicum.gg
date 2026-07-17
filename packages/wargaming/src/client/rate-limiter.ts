@@ -88,17 +88,33 @@ export class RateLimiter implements WgRateLimiter {
 
 export type RegionRps = Record<Region, number>;
 
-// Defaults tuned empirically against G-Core (api.worldoftanks.* and the clan
-// portals are geo-routed to G-Core CDN IPs from most VPS hosts, whose WAF
-// throttles well below WG's official 20 RPS). Overridable via client options.
+// Per-region sustainable RPS, found empirically. api.worldoftanks.* and the
+// clan portals are geo-routed to G-Core CDN edges (*.fe.core.pw) from most VPS
+// hosts; G-Core's WAF rate-limits well below WG's own ~20 RPS per-application
+// ceiling.
+//
+// G-Core WAF mechanism (docs.gcore.com/waap/waap-rules/advanced-rules/advanced-rate-limiting-rules):
+// a fixed-window counter, PER CLIENT IP by default ("each request is counted
+// individually per IP"), that blocks the IP for a configurable duration once a
+// threshold is crossed. WG's exact threshold + ban length are unpublished, so
+// these numbers are empirical; a trip shows up as request TIMEOUTS (not 429),
+// and WG's ban runs ~2h (see DEFAULT_PORTAL_RPS). Aggressive short retries make
+// it kick in harder, so back off long (transport.ts RETRY_DELAYS_MS).
+//
+// The counter being per-IP is the key lever: two whitelisted egress IPs measured
+// ~2x the throughput (each gets its own budget). So raise throughput by adding
+// whitelisted source IPs, NOT by bumping these values — a higher *sustained*
+// per-IP rate just earns the per-IP ban (a short burst won't show it).
+// Overridable via client options.
 export const DEFAULT_WG_RPS: RegionRps = {
   [Region.EU]: 6,
   [Region.NA]: 8,
   [Region.ASIA]: 8,
 };
 
-// The portal WAF bans an IP for ~2h past an unpublished volume threshold;
-// negri/wotclans's long-running empirical ceiling is ~1 RPS sustained.
+// Portal WAF is stricter: ~1 RPS sustained is negri/wotclans's long-running
+// empirical ceiling, and crossing the (unpublished) volume threshold bans the
+// IP for ~2h. Same per-IP, block-for-duration model as DEFAULT_WG_RPS above.
 export const DEFAULT_PORTAL_RPS: RegionRps = {
   [Region.EU]: 1,
   [Region.NA]: 1,
