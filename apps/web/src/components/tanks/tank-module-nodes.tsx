@@ -6,9 +6,18 @@ import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
 import { TankIcon } from "@/components/players/tank-icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import type { VehicleMeta } from "@unicum.gg/shared";
-import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
+import type {
+  ModuleStats,
+  TankModuleNode,
+} from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 
 const compactFmt = new Intl.NumberFormat("en-US", {
@@ -16,53 +25,169 @@ const compactFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1,
 });
 
+// "A, B and C" (no Oxford comma), for the "mounted on" tank list.
+const nameListFmt = new Intl.ListFormat("en-GB", {
+  style: "long",
+  type: "conjunction",
+});
+
+const SHELL_LABEL: Record<string, string> = {
+  ARMOR_PIERCING: "AP",
+  ARMOR_PIERCING_CR: "APCR",
+  HIGH_EXPLOSIVE: "HE",
+  HOLLOW_CHARGE: "HEAT",
+};
+
+const n1 = (v: number) => v.toFixed(1);
+const n0 = (v: number) => Math.round(v).toString();
+
+/** One "label: value" line in the module hover. */
+function Stat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex justify-between gap-4 tabular-nums">
+      <span className="text-background/60">{label}</span>
+      <span>{value}</span>
+    </div>
+  );
+}
+
+/** The module's reference stats, laid out by class. */
+function ModuleStatsBlock({ stats }: { stats: ModuleStats }) {
+  switch (stats.kind) {
+    case "gun":
+      return (
+        <div className="space-y-0.5">
+          <Stat label="Reload" value={`${n1(stats.reloadTime)} s`} />
+          <Stat label="Aim time" value={`${n1(stats.aimTime)} s`} />
+          <Stat label="Dispersion" value={`${stats.dispersion.toFixed(2)} m`} />
+          <Stat
+            label="Gun arc"
+            value={`-${n0(stats.moveDownArc)}° / +${n0(stats.moveUpArc)}°`}
+          />
+          <Stat label="Ammo" value={n0(stats.maxAmmo)} />
+          {stats.shells.length > 0 && (
+            <div className="mt-1 space-y-0.5 border-t border-background/20 pt-1">
+              {stats.shells.map((s, i) => (
+                <Stat
+                  key={i}
+                  label={SHELL_LABEL[s.type] ?? s.type}
+                  value={`${n0(s.damage)} dmg · ${n0(s.penetration)} mm`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      );
+    case "turret":
+      return (
+        <div className="space-y-0.5">
+          <Stat
+            label="Armor"
+            value={`${n0(stats.armorFront)} / ${n0(stats.armorSides)} / ${n0(stats.armorRear)}`}
+          />
+          <Stat label="View range" value={`${n0(stats.viewRange)} m`} />
+          <Stat label="Hit points" value={n0(stats.hp)} />
+          <Stat label="Traverse" value={`${n0(stats.traverseSpeed)}°/s`} />
+        </div>
+      );
+    case "engine":
+      return (
+        <div className="space-y-0.5">
+          <Stat label="Power" value={`${n0(stats.power)} hp`} />
+          <Stat label="Fire chance" value={`${n0(stats.fireChance * 100)}%`} />
+        </div>
+      );
+    case "chassis":
+      return (
+        <div className="space-y-0.5">
+          <Stat label="Load limit" value={`${n1(stats.loadLimit)} t`} />
+          <Stat label="Traverse" value={`${n0(stats.traverseSpeed)}°/s`} />
+        </div>
+      );
+    case "radio":
+      return <Stat label="Signal range" value={`${n0(stats.signalRange)} m`} />;
+  }
+}
+
+/** Everything about a module, shown on hover: reference stats + every vehicle
+ * that can mount it. */
+function ModuleTooltip({ module }: { module: TankModuleNode }) {
+  const mountedList = nameListFmt.format(module.tanks.map((t) => t.name));
+  return (
+    <div className="w-56 space-y-2 text-xs">
+      <div className="font-medium">
+        {module.name}
+        {module.tier ? (
+          <span className="text-background/60">
+            {" "}
+            · Tier {toRoman(module.tier)}
+          </span>
+        ) : null}
+      </div>
+      {module.stats && <ModuleStatsBlock stats={module.stats} />}
+      {module.tanks.length > 0 && (
+        <div className="border-t border-background/20 pt-1.5">
+          <span className="text-background/60">Mounted on </span>
+          <span className="text-background/90">{mountedList}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function ModuleNode({ module }: { module: TankModuleNode }) {
   return (
-    <div className="flex w-24 shrink-0 flex-col items-center gap-1.5">
-      <div className="flex h-7 w-full items-center justify-center">
-        {module.image ? (
-          // WG's per-class Tankopedia glyph (uniform 59x59 on
-          // api.worldoftanks.*/static, an allowed remote host), through
-          // next/image for format negotiation + caching. Rendered at h-7.
-          <Image
-            src={module.image}
-            alt=""
-            width={59}
-            height={59}
-            className="h-7 w-auto object-contain opacity-80"
-          />
-        ) : null}
-      </div>
-      <div className="flex flex-col items-center gap-1 text-center leading-none">
-        {module.tier ? (
-          <span className="text-[11px] font-bold text-fd-muted-foreground">
-            {toRoman(module.tier)}
-          </span>
-        ) : null}
-        <span
-          className="max-w-24 truncate text-xs text-fd-foreground/85"
-          title={module.name}
-        >
-          {module.name}
-        </span>
-        {module.isDefault ? (
-          <span className="text-[10px] leading-none text-fd-muted-foreground">
-            Stock
-          </span>
-        ) : (
-          <div className="flex items-center gap-2 text-[10px] leading-none text-fd-muted-foreground">
-            <span className="flex items-center gap-0.5">
-              <CurrencyIcon type="xp" className="size-2.5" />
-              {compactFmt.format(module.priceXp)}
-            </span>
-            <span className="flex items-center gap-0.5">
-              <CurrencyIcon type="credits" className="h-2.5 w-auto" />
-              {compactFmt.format(module.priceCredit)}
-            </span>
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="flex w-24 shrink-0 cursor-help flex-col items-center gap-1.5">
+            <div className="flex h-7 w-full items-center justify-center">
+              {module.image ? (
+                // WG's per-class Tankopedia glyph (uniform 59x59 on
+                // api.worldoftanks.*/static, an allowed remote host), through
+                // next/image for format negotiation + caching. Rendered at h-7.
+                <Image
+                  src={module.image}
+                  alt=""
+                  width={59}
+                  height={59}
+                  className="h-7 w-auto object-contain opacity-80"
+                />
+              ) : null}
+            </div>
+            <div className="flex flex-col items-center gap-1 text-center leading-none">
+              {module.tier ? (
+                <span className="text-[11px] font-bold text-fd-muted-foreground">
+                  {toRoman(module.tier)}
+                </span>
+              ) : null}
+              <span className="max-w-24 truncate text-xs text-fd-foreground/85">
+                {module.name}
+              </span>
+              {module.isDefault ? (
+                <span className="text-[10px] leading-none text-fd-muted-foreground">
+                  Stock
+                </span>
+              ) : (
+                <div className="flex items-center gap-2 text-[10px] leading-none text-fd-muted-foreground">
+                  <span className="flex items-center gap-0.5">
+                    <CurrencyIcon type="xp" className="size-2.5" />
+                    {compactFmt.format(module.priceXp)}
+                  </span>
+                  <span className="flex items-center gap-0.5">
+                    <CurrencyIcon type="credits" className="h-2.5 w-auto" />
+                    {compactFmt.format(module.priceCredit)}
+                  </span>
+                </div>
+              )}
+            </div>
           </div>
-        )}
-      </div>
-    </div>
+        </TooltipTrigger>
+        <TooltipContent side="top" className="max-w-none">
+          <ModuleTooltip module={module} />
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }
 

@@ -61,6 +61,56 @@ const tankServerStats = z
     description: "Server-average performance across tracked players.",
   });
 
+const moduleShell = z.object({
+  type: z.string(),
+  damage: z.number(),
+  penetration: z.number(),
+});
+
+const moduleStats = z.discriminatedUnion("kind", [
+  z.object({
+    kind: z.literal("gun"),
+    reloadTime: z.number(),
+    fireRate: z.number(),
+    aimTime: z.number(),
+    dispersion: z.number(),
+    maxAmmo: z.number(),
+    moveDownArc: z.number(),
+    moveUpArc: z.number(),
+    traverseSpeed: z.number(),
+    shells: z.array(moduleShell),
+  }),
+  z.object({
+    kind: z.literal("turret"),
+    armorFront: z.number(),
+    armorSides: z.number(),
+    armorRear: z.number(),
+    hp: z.number(),
+    viewRange: z.number(),
+    traverseSpeed: z.number(),
+  }),
+  z.object({
+    kind: z.literal("engine"),
+    power: z.number(),
+    fireChance: z.number(),
+  }),
+  z.object({
+    kind: z.literal("chassis"),
+    loadLimit: z.number(),
+    traverseSpeed: z.number(),
+  }),
+  z.object({ kind: z.literal("radio"), signalRange: z.number() }),
+]);
+
+const moduleTankRef = z.object({
+  tankId: z.number(),
+  slug: z.string(),
+  name: z.string(),
+  tier: z.number(),
+  type: z.string(),
+  tag: z.string(),
+});
+
 const tankModuleNode = z.object({
   moduleId: z.number(),
   type: z.string().meta({
@@ -81,6 +131,13 @@ const tankModuleNode = z.object({
   }),
   nextTanks: z.array(z.number()).meta({
     description: "Vehicle ids this module's research opens up.",
+  }),
+  stats: moduleStats.nullable().meta({
+    description:
+      "Reference stats for the module (WG default profile), tagged by class via `kind`.",
+  }),
+  tanks: z.array(moduleTankRef).meta({
+    description: "Every vehicle that can mount this module, highest tier first.",
   }),
 });
 

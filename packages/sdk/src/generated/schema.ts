@@ -1337,6 +1337,55 @@ export interface components {
             jsonrpc: string;
             id: (string | number) | null;
         };
+        moduleShell: {
+            type: string;
+            damage: number;
+            penetration: number;
+        };
+        moduleStats: {
+            /** @enum {string} */
+            kind: "gun";
+            reloadTime: number;
+            fireRate: number;
+            aimTime: number;
+            dispersion: number;
+            maxAmmo: number;
+            moveDownArc: number;
+            moveUpArc: number;
+            traverseSpeed: number;
+            shells: components["schemas"]["moduleShell"][];
+        } | {
+            /** @enum {string} */
+            kind: "turret";
+            armorFront: number;
+            armorSides: number;
+            armorRear: number;
+            hp: number;
+            viewRange: number;
+            traverseSpeed: number;
+        } | {
+            /** @enum {string} */
+            kind: "engine";
+            power: number;
+            fireChance: number;
+        } | {
+            /** @enum {string} */
+            kind: "chassis";
+            loadLimit: number;
+            traverseSpeed: number;
+        } | {
+            /** @enum {string} */
+            kind: "radio";
+            signalRange: number;
+        };
+        moduleTankRef: {
+            tankId: number;
+            slug: string;
+            name: string;
+            tier: number;
+            type: string;
+            tag: string;
+        };
         /** @description One derived value per column: lifetime, 24h, 7d, 30d. */
         PeriodValues: {
             total: number | null;
@@ -1835,6 +1884,10 @@ export interface components {
             nextModules: number[];
             /** @description Vehicle ids this module's research opens up. */
             nextTanks: number[];
+            /** @description Reference stats for the module (WG default profile), tagged by class via `kind`. */
+            stats: components["schemas"]["moduleStats"] | null;
+            /** @description Every vehicle that can mount this module, highest tier first. */
+            tanks: components["schemas"]["moduleTankRef"][];
         };
         TankMoeResponse: {
             results: components["schemas"]["TankMoeRow"][];

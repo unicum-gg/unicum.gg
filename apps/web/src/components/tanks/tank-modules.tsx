@@ -120,6 +120,11 @@ function ModuleTree({
   const rows = TYPE_ORDER.filter((t) => nodes.some((n) => n.type === t));
   const moduleCols = 1 + Math.max(...[...depths.values()], 0);
   const tankCol = nextTanks.length > 0 ? moduleCols : null;
+  // A "flat" tree (reward tanks: every module stock, nothing to research and no
+  // next tank) is just the current tank + one module column, which the
+  // full-width grid would otherwise leave floating with a big empty right side.
+  // Push that lone module column to the right edge so it reads tank -> modules.
+  const isFlat = tankCol === null && moduleCols === 1;
 
   // Group the nodes per grid cell (same class + same depth stack vertically).
   const cells = new Map<string, TankModuleNode[]>();
@@ -250,7 +255,7 @@ function ModuleTree({
           return (
             <div
               key={key}
-              className="flex flex-col items-center gap-4"
+              className={`flex flex-col gap-4 ${isFlat ? "items-end" : "items-center"}`}
               style={{ gridRow: row + 1, gridColumn: col + 2 }}
             >
               {stack.map((node) => (
