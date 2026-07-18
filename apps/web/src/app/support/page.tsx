@@ -18,5 +18,10 @@ export default async function Page() {
   return <SupportView />;
 }
 
-// The podium reflects live subscription state; low-traffic page, kept fresh.
-export const dynamic = "force-dynamic";
+// ISR like the other catalog pages (incl. /coverage, which shares the heavy
+// coverage query): the page is prerendered and served instantly, and the slow
+// data fetch happens during background revalidation, never on a user request.
+// The podium/funding here can lag up to `revalidate`; the top-bar funding bar
+// stays live client-side, so real-time freshness is covered there.
+export const dynamic = "force-static";
+export const revalidate = 600;
