@@ -102,9 +102,9 @@ export async function getSubscriptionByCustomer(
   return row ?? null;
 }
 
-/** Record a successful support payment (idempotent on the Stripe invoice id). */
+/** Record a successful support payment (idempotent on the Stripe charge id). */
 export async function recordPayment(input: {
-  invoiceId: string;
+  chargeId: string;
   userId: string;
   amountCents: number;
   currency: string;
@@ -112,7 +112,7 @@ export async function recordPayment(input: {
   await db
     .insert(supportPayment)
     .values({
-      id: input.invoiceId,
+      id: input.chargeId,
       userId: input.userId,
       amountCents: input.amountCents,
       currency: input.currency,
@@ -135,13 +135,13 @@ export async function getTotalReceivedCents(): Promise<number> {
  * cumulative refund on the charge, so this sets rather than increments, which
  * naturally covers repeated partial refunds. No-op if the payment is unknown. */
 export async function recordRefund(
-  invoiceId: string,
+  chargeId: string,
   refundedCents: number,
 ): Promise<void> {
   await db
     .update(supportPayment)
     .set({ amountRefundedCents: refundedCents })
-    .where(eq(supportPayment.id, invoiceId));
+    .where(eq(supportPayment.id, chargeId));
 }
 
 /** Toggle whether the supporter is shown anonymously on the podium. */

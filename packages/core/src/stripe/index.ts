@@ -121,58 +121,43 @@ function periodEnd(sub: Stripe.Subscription): Date | null {
   return ts ? new Date(ts * 1000) : null;
 }
 
-/** The `userId` we stamped on the subscription, mirrored by Stripe onto each
- * invoice's `subscription_details.metadata`; undefined for unrelated invoices. */
-function invoiceUserId(invoice: Stripe.Invoice): string | undefined {
-  const details = (
-    invoice as unknown as {
-      subscription_details?: { metadata?: Record<string, string> | null };
-    }
-  ).subscription_details;
-  return details?.metadata?.userId ?? undefined;
+function chargeCustomerId(charge: Stripe.Charge): string | undefined {
+  return typeof charge.customer === "string"
+    ? charge.customer
+    : (charge.customer?.id ?? undefined);
 }
 
 /**
- * Record a paid invoice into the support ledger (called from the webhook). The
- * amount actually charged is `amount_paid`; the user is resolved from the
- * invoice's subscription metadata, falling back to a lookup by customer.
+ * Record a successful charge into the support ledger (called from the webhook),
+ * keyed by the charge id so a refund on the same charge can be matched later.
+ * The recent Stripe API dropped the invoice<->charge link from event payloads,
+ * so the ledger is charge-based: the user is resolved from the charge's customer
+ * via their subscription. Ignores charges from customers with no support sub.
  */
-export async function recordInvoicePayment(invoice: Stripe.Invoice): Promise<void> {
-  if (!invoice.id) return;
-  const amountCents = invoice.amount_paid ?? 0;
-  if (amountCents <= 0) return; // nothing received (e.g. a zero-amount invoice)
-
-  let userId = invoiceUserId(invoice);
-  if (!userId) {
-    const customerId =
-      typeof invoice.customer === "string" ? invoice.customer : invoice.customer?.id;
-    if (customerId) userId = (await getSubscriptionByCustomer(customerId))?.userId;
-  }
-  if (!userId) return; // not one of ours / can't attribute
-
+export async function recordChargePayment(charge: Stripe.Charge): Promise<void> {
+  if (!charge.id || !charge.paid) return;
+  const amountCents = charge.amount ?? 0;
+  if (amountCents <= 0) return;
+  const customerId = chargeCustomerId(charge);
+  if (!customerId) return;
+  const sub = await getSubscriptionByCustomer(customerId);
+  if (!sub) return; // not one of our support customers
   await recordPayment({
-    invoiceId: invoice.id,
-    userId,
+    chargeId: charge.id,
+    userId: sub.userId,
     amountCents,
-    currency: invoice.currency,
+    currency: charge.currency,
   });
 }
 
 /**
- * Reflect a refund on the support ledger (called from the webhook). Maps the
- * charge back to its invoice (our ledger key) and stores the cumulative refunded
- * amount, so a refunded payment stops counting toward funding. Ignores charges
- * not backed by a subscription invoice.
+ * Reflect a refund on the support ledger (called from the webhook): the charge
+ * id is the ledger key, so we store the cumulative refunded amount directly. A
+ * no-op if the charge is not one of ours.
  */
 export async function recordChargeRefund(charge: Stripe.Charge): Promise<void> {
-  // `invoice` is present at runtime for subscription charges but dropped from
-  // the pinned version's types; read it defensively.
-  const invoice = (
-    charge as unknown as { invoice?: string | { id: string } | null }
-  ).invoice;
-  const invoiceId = typeof invoice === "string" ? invoice : invoice?.id;
-  if (!invoiceId) return;
-  await recordRefund(invoiceId, charge.amount_refunded ?? 0);
+  if (!charge.id) return;
+  await recordRefund(charge.id, charge.amount_refunded ?? 0);
 }
 
 /** Mirror a Stripe subscription into our DB (called from the webhook). */

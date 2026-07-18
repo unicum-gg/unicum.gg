@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import {
   parseWebhookEvent,
+  recordChargePayment,
   recordChargeRefund,
-  recordInvoicePayment,
   stripeConfigured,
   syncSubscription,
 } from "@unicum.gg/core/stripe";
@@ -43,9 +43,10 @@ export async function POST(request: Request): Promise<Response> {
     case "customer.subscription.deleted":
       await syncSubscription(event.data.object);
       break;
-    case "invoice.payment_succeeded":
-      // Append to the support ledger so the cumulative funding bar reflects it.
-      await recordInvoicePayment(event.data.object);
+    case "charge.succeeded":
+      // Append to the support ledger (keyed by charge id) so the cumulative
+      // funding bar reflects it.
+      await recordChargePayment(event.data.object);
       break;
     case "charge.refunded":
       // Subtract the refund from the ledger so it stops counting as received.
