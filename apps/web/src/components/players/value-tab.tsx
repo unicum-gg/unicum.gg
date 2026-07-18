@@ -156,8 +156,9 @@ export function ValueTab({
                   tip={
                     <div className="space-y-1.5 text-xs">
                       <p className="opacity-70">
-                        Reward tanks are valued by tier (the market&apos;s
-                        biggest driver: rare campaign and collector tanks).
+                        Reward tanks add a little by tier. On the real market a
+                        stacked garage is only worth a few dozen euros, so this
+                        is a floor, not the driver.
                       </p>
                       <TierLines rows={market.rewardsByTier} money={money} />
                     </div>
@@ -175,8 +176,9 @@ export function ValueTab({
                     <div className="space-y-1.5 text-xs">
                       <p className="opacity-70">
                         Marks weighted by tier (3-marking a tier X is far harder
-                        than a tier V). 3 marks = €2.5 × tier, 2 marks = €0.6 ×
-                        tier.
+                        than a tier V). 3 marks = €0.12 × tier, 2 marks = €0.03 ×
+                        tier. Kept small: the skill is already priced by the
+                        rating below.
                       </p>
                       {market.marks3ByTier.length > 0 && (
                         <div>
@@ -200,7 +202,7 @@ export function ValueTab({
                   tip={
                     <div className="space-y-0.5 text-xs tabular-nums">
                       <div className="flex justify-between gap-3">
-                        <span>{market.tierXCount} tier X × €2.5</span>
+                        <span>{market.tierXCount} tier X × €0.25</span>
                         <span>{money(market.tierX)}</span>
                       </div>
                       <div className="flex justify-between gap-3 opacity-70">
@@ -211,33 +213,35 @@ export function ValueTab({
                     </div>
                   }
                 />
-                <Row label="Subtotal" value={money(market.subtotal)} strong />
+                <Row label="Garage subtotal" value={money(market.content)} strong />
                 <Row
-                  label="Skill multiplier"
-                  hint={
-                    market.wn8 != null
-                      ? `WN8 ${intFmt.format(market.wn8)}${market.statConfidence < 1 ? `, ${Math.round(market.statConfidence * 100)}% proven` : ""}`
-                      : "no WN8"
-                  }
-                  value={`× ${market.statMultiplier.toFixed(2)}`}
+                  label="Skill premium"
+                  hint={`WGR ${intFmt.format(market.wgr)}`}
+                  value={`+ ${money(market.skillPremium)}`}
                   tip={
                     <div className="space-y-1 text-xs opacity-80">
                       <p>
-                        A WN8-based multiplier on the whole account: a strong
-                        account is worth multiples of the same garage played
-                        badly.
+                        The real driver. Based on the WG global rating (Personal
+                        Rating), which blends skill, win rate and activity, and
+                        is the figure grey-market listings quote. Zero for an
+                        average account, rising steeply for strong ones.
                       </p>
-                      {market.statConfidence < 1 && (
-                        <p>
-                          Only {Math.round(market.statConfidence * 100)}% applied:
-                          the stats aren&apos;t proven yet over{" "}
-                          {intFmt.format(market.battles)} battles (full trust at
-                          10,000).
-                        </p>
-                      )}
                     </div>
                   }
                 />
+                {market.depthBonus > 0 && (
+                  <Row
+                    label="Depth bonus"
+                    hint={`${intFmt.format(market.battles)} battles`}
+                    value={`+ ${money(market.depthBonus)}`}
+                    tip={
+                      <div className="text-xs opacity-80">
+                        An exceptional battle count is a mega-account in itself.
+                        Applies above 20,000 battles.
+                      </div>
+                    }
+                  />
+                )}
               </div>
             </section>
           </TooltipProvider>
@@ -283,10 +287,11 @@ export function ValueTab({
         <PanelContent className="px-4 py-4">
           <p className="text-xs leading-relaxed text-fd-muted-foreground">
             Indicative estimates only. The market value is modelled from prices
-            of comparable accounts and is driven mostly by rare reward tanks,
-            proven skill (WN8) and marks of excellence. Trading Wargaming
-            accounts is against the game&apos;s terms of service; these figures
-            are for reference and we do not facilitate any sale.
+            of comparable accounts and is driven mostly by the account&apos;s
+            global rating (skill + activity) and battle count, with the garage as
+            a small floor. Trading Wargaming accounts is against the game&apos;s
+            terms of service; these figures are for reference and we do not
+            facilitate any sale.
           </p>
         </PanelContent>
       </Panel>

@@ -1402,22 +1402,22 @@ export interface components {
             };
             derived: components["schemas"]["PlayerDerivedStats"];
             vehicles: components["schemas"]["PlayerVehicle"][];
-            /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven by reward tanks, WN8 skill and marks) and the store rebuild cost. */
+            /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
             valuation: {
                 market: {
                     amount: number;
+                    content: number;
                     tierX: number;
                     premiums: number;
                     rewards: number;
                     marks: number;
-                    subtotal: number;
-                    statMultiplier: number;
-                    statConfidence: number;
+                    skillPremium: number;
+                    depthBonus: number;
                     rewardCount: number;
                     tierXCount: number;
                     premiumCount: number;
                     mark3Count: number;
-                    wn8: number | null;
+                    wgr: number;
                     battles: number;
                     rewardsByTier: components["schemas"]["tierContribution"][];
                     premiumsByTier: components["schemas"]["tierContribution"][];

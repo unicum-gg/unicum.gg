@@ -230,18 +230,18 @@ export const PlayerDetailResponse = z.object({
     .object({
       market: z.object({
         amount: z.number(),
+        content: z.number(),
         tierX: z.number(),
         premiums: z.number(),
         rewards: z.number(),
         marks: z.number(),
-        subtotal: z.number(),
-        statMultiplier: z.number(),
-        statConfidence: z.number(),
+        skillPremium: z.number(),
+        depthBonus: z.number(),
         rewardCount: z.number(),
         tierXCount: z.number(),
         premiumCount: z.number(),
         mark3Count: z.number(),
-        wn8: z.number().nullable(),
+        wgr: z.number(),
         battles: z.number(),
         rewardsByTier: z.array(tierContribution),
         premiumsByTier: z.array(tierContribution),
@@ -254,7 +254,7 @@ export const PlayerDetailResponse = z.object({
     })
     .meta({
       description:
-        "Estimated account worth: market resale value (modelled from grey-market listings, driven by reward tanks, WN8 skill and marks) and the store rebuild cost.",
+        "Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost.",
     }),
   liftDrag: z
     .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })

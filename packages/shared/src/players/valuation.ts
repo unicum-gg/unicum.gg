@@ -1,10 +1,14 @@
-// Account-valuation model: two figures derived from a player's garage.
+// Account-valuation model: two figures derived from a player's garage + account.
 //
-//   - Account value : reconstruction cost through the official store (research
+//   - Rebuild value : reconstruction cost through the official store (research
 //     XP + credits + gold of every non-reward tank), in the region currency.
-//   - Market value  : what a comparable account trades for. Dominated by three
-//     factors, calibrated from a scrape of ~2000 live grey-market listings:
-//     reward tanks, player skill (WN8, gated by battle count), and marks.
+//   - Market value  : what a comparable account trades for on the grey market,
+//     calibrated against live listings (eldorado). The price is driven mostly by
+//     SKILL/DEPTH (WG global rating + battle count), with the garage itself only
+//     a small floor: even a stacked farmed account (Object 279 + reward tanks +
+//     70 tier X) trades for a few dozen euros, while an elite account is worth
+//     thousands for the account itself. A content-only model can't span that, so
+//     skill/depth is the driver here, not the tank collection.
 //
 // Pure and client-safe: computed server-side for the API/SDK (so the bot and
 // external consumers get it too), and the constants stay tunable in one place.
@@ -13,77 +17,61 @@ import type { Region } from "@unicum.gg/wargaming";
 import { CREDITS_PER_GOLD, XP_PER_GOLD, goldToMoney } from "../shop";
 import type { PlayerVehicleRow } from "./vehicles";
 
-// --- Market-model weights (indicative money units in the region currency; the
-// account-trading market is global and priced similarly across servers). ---
+// --- Content floor (money units, region currency): the garage baseline. Kept
+// small on purpose. Live listings compress even a fully-loaded garage into a few
+// dozen euros, so these weights are a floor, never the main driver. ---
 
-// Reward tanks by tier: the single biggest driver of a high-value account. All
-// reward tanks of the same tier are weighted the same.
-export const REWARD_VALUE_BY_TIER: Record<number, number> = {
-  1: 5,
-  2: 5,
-  3: 5,
-  4: 8,
-  5: 10,
-  6: 15,
-  7: 25,
-  8: 40,
-  9: 80,
-  10: 150,
-  11: 350,
-};
-export const REWARD_VALUE_DEFAULT = 40;
-
-// Marks of Excellence, weighted by tier (3 marks on a tier X is far harder, and
-// worth far more, than on a tier V). Kept modest so it doesn't double-count the
-// skill signal already captured by the WN8 multiplier.
-export const MARK3_VALUE_PER_TIER = 2.5;
-export const MARK2_VALUE_PER_TIER = 0.6;
-
-export const TIER_X_VALUE = 2.5;
-
-// Premium tanks by tier: a tier VIII (Skorpion, Bourrasque, the credit farmers)
-// is worth far more than a low-tier premium, but all stay well below the reward
-// table since a premium is store-purchasable, not earned. Reward tanks that are
-// also flagged premium are valued via REWARD_VALUE_BY_TIER only, never here.
-export const PREMIUM_VALUE_BY_TIER: Record<number, number> = {
-  1: 0.2,
-  2: 0.2,
-  3: 0.2,
-  4: 0.2,
-  5: 0.3,
-  6: 0.4,
-  7: 0.6,
-  8: 1,
+// Reward tanks by tier. All reward tanks of a tier weigh the same (the market
+// barely distinguishes an ultra-rare campaign tank from a mode-grind one).
+export const REWARD_FLOOR_BY_TIER: Record<number, number> = {
+  8: 0.8,
   9: 1.5,
   10: 2.5,
   11: 4,
 };
-export const PREMIUM_VALUE_DEFAULT = 0.6;
+export const REWARD_FLOOR_DEFAULT = 2;
 
-// Skill multiplier from WN8. Pivots at 1.0 for an average 1600 WN8.
-export const WN8_MULT_PIVOT = 1600;
-export const WN8_MULT_SLOPE = 1 / 1400; // +1.0 multiplier per +1400 WN8
-export const WN8_MULT_MIN = 0.6;
-// No upper cap: WN8 naturally tops out around ~5000 (only the very best), so the
-// multiplier is effectively bounded to ~×3.4 in practice. Letting it scale keeps
-// genuine super-unicum accounts credible (a fully-maxed, heavily 3-marked
-// account lands in the tens of thousands, matching "ultra statist" listings).
-export const WN8_MULT_MAX = Number.POSITIVE_INFINITY;
+export const TIERX_FLOOR = 0.25;
 
-// The skill multiplier only counts once the stats are proven: a WN8 3000 over
-// 50 battles means nothing. Confidence ramps linearly to full at this many
-// battles, pulling the multiplier back toward neutral (1.0) below it.
-export const STATS_CONFIDENCE_BATTLES = 10000;
+export const PREMIUM_FLOOR_BY_TIER: Record<number, number> = {
+  8: 0.25,
+  9: 0.35,
+  10: 0.5,
+  11: 0.8,
+};
+export const PREMIUM_FLOOR_DEFAULT = 0.15;
 
-const clamp = (v: number, lo: number, hi: number) =>
-  Math.max(lo, Math.min(hi, v));
+// Marks of Excellence, weighted by tier (a 3-mark on a tier X is far harder than
+// on a tier V). Small: the skill they signal is already priced by the WGR term.
+export const MARK3_FLOOR_PER_TIER = 0.12;
+export const MARK2_FLOOR_PER_TIER = 0.03;
 
-/** WN8 skill multiplier, before the battle-confidence gate. */
-export function wn8Multiplier(wn8: number): number {
-  return clamp(
-    1 + (wn8 - WN8_MULT_PIVOT) * WN8_MULT_SLOPE,
-    WN8_MULT_MIN,
-    WN8_MULT_MAX,
+// --- Skill/depth premium: the real driver of account price. WG's global rating
+// (WGR / "Personal Rating", the figure grey-market listings quote) blends skill,
+// activity and battle count into one number. Zero below an average account,
+// superlinear above, so only genuinely strong accounts command real value. ---
+export const WGR_PREMIUM_FLOOR = 5000;
+// Very steep on purpose: a top-of-server account (~12.5k WGR) is drastically
+// rarer, and worth far more, than the "good" accounts that actually get listed
+// (~9.5k WGR). Tuned so ~9.5k WGR lands ~€2.4k (the legit for-sale band) while a
+// genuine top unicum (~11.5-12.7k) lands ~€8.5k-15k, above every real listing.
+export const WGR_PREMIUM_EXP = 3.3;
+export const WGR_PREMIUM_COEF = 2.2e-9;
+
+// Extreme-veteran depth bonus: a huge battle count is a mega-account in itself,
+// regardless of the garage. Only kicks in above the pivot.
+export const BATTLES_DEPTH_PIVOT = 20000;
+export const BATTLES_DEPTH_PER_1K = 100;
+
+// No artificial ceiling: the value is driven by the WG global rating, which is
+// itself bounded (no player exceeds ~13-15k), so the top is naturally limited
+// without a cap that would otherwise flatten the very best accounts together.
+
+/** WGR skill/depth premium (money units): the dominant term for strong accounts. */
+export function wgrPremium(wgr: number): number {
+  return (
+    WGR_PREMIUM_COEF *
+    Math.pow(Math.max(0, wgr - WGR_PREMIUM_FLOOR), WGR_PREMIUM_EXP)
   );
 }
 
@@ -100,19 +88,22 @@ export type TierContribution = {
 
 export type MarketValueBreakdown = {
   amount: number;
+  /** Garage floor: rewards + tierX + premiums + marks. */
+  content: number;
   tierX: number;
   premiums: number;
   rewards: number;
   marks: number;
-  subtotal: number;
-  statMultiplier: number;
-  statConfidence: number;
+  /** Skill/depth premium from the WG global rating. */
+  skillPremium: number;
+  /** Extra value from an exceptional battle count. */
+  depthBonus: number;
   rewardCount: number;
   tierXCount: number;
   premiumCount: number;
   mark3Count: number;
   // Inputs + per-tier detail, so the UI can show the calculation on hover.
-  wn8: number | null;
+  wgr: number;
   battles: number;
   rewardsByTier: TierContribution[];
   premiumsByTier: TierContribution[];
@@ -133,13 +124,14 @@ function toTierContributions(
 }
 
 /**
- * Estimated grey-market value of the account. A small garage floor plus reward
- * tanks (by tier) and marks (by tier), scaled by a WN8 skill multiplier that
- * only counts once proven over enough battles.
+ * Estimated grey-market value of the account: a small garage floor (reward tanks
+ * + marks + tier X + premiums, all cheap) plus the two real drivers (a skill
+ * premium from the WG global rating and a depth bonus for an exceptional battle
+ * count), capped at the top mega-account level.
  */
 export function computeMarketValue(
   vehicles: PlayerVehicleRow[],
-  wn8: number | null,
+  wgr: number,
   battles: number,
 ): MarketValueBreakdown {
   let tierXCount = 0;
@@ -161,63 +153,62 @@ export function computeMarketValue(
     if (tier === 10) tierXCount += 1;
     if (v.isReward) {
       rewardCount += 1;
-      rewards += REWARD_VALUE_BY_TIER[tier] ?? REWARD_VALUE_DEFAULT;
+      rewards += REWARD_FLOOR_BY_TIER[tier] ?? REWARD_FLOOR_DEFAULT;
       bump(rewardTierCounts, tier);
     } else if (v.isPremium) {
       // Reward tanks are excluded (valued via the reward table above) so a
       // premium reward isn't counted twice.
       premiumCount += 1;
-      premiums += PREMIUM_VALUE_BY_TIER[tier] ?? PREMIUM_VALUE_DEFAULT;
+      premiums += PREMIUM_FLOOR_BY_TIER[tier] ?? PREMIUM_FLOOR_DEFAULT;
       bump(premiumTierCounts, tier);
     }
     if (v.moe === 3) {
       mark3Count += 1;
-      marks += MARK3_VALUE_PER_TIER * tier;
+      marks += MARK3_FLOOR_PER_TIER * tier;
       bump(mark3TierCounts, tier);
     } else if (v.moe === 2) {
-      marks += MARK2_VALUE_PER_TIER * tier;
+      marks += MARK2_FLOOR_PER_TIER * tier;
       bump(mark2TierCounts, tier);
     }
   }
 
-  const tierX = tierXCount * TIER_X_VALUE;
-  const subtotal = tierX + premiums + rewards + marks;
-
-  const confidence = clamp(battles / STATS_CONFIDENCE_BATTLES, 0, 1);
-  const rawMult = wn8 != null ? wn8Multiplier(wn8) : 1;
-  // Pull the multiplier toward neutral (1.0) until the stats are proven.
-  const statMultiplier = 1 + (rawMult - 1) * confidence;
+  const tierX = tierXCount * TIERX_FLOOR;
+  const content = tierX + premiums + rewards + marks;
+  const skillPremium = wgrPremium(wgr);
+  const depthBonus =
+    Math.max(0, (battles - BATTLES_DEPTH_PIVOT) / 1000) * BATTLES_DEPTH_PER_1K;
+  const amount = Math.max(0, content + skillPremium + depthBonus);
 
   return {
-    amount: subtotal * statMultiplier,
+    amount,
+    content,
     tierX,
     premiums,
     rewards,
     marks,
-    subtotal,
-    statMultiplier,
-    statConfidence: confidence,
+    skillPremium,
+    depthBonus,
     rewardCount,
     tierXCount,
     premiumCount,
     mark3Count,
-    wn8,
+    wgr,
     battles,
     rewardsByTier: toTierContributions(
       rewardTierCounts,
-      (t) => REWARD_VALUE_BY_TIER[t] ?? REWARD_VALUE_DEFAULT,
+      (t) => REWARD_FLOOR_BY_TIER[t] ?? REWARD_FLOOR_DEFAULT,
     ),
     premiumsByTier: toTierContributions(
       premiumTierCounts,
-      (t) => PREMIUM_VALUE_BY_TIER[t] ?? PREMIUM_VALUE_DEFAULT,
+      (t) => PREMIUM_FLOOR_BY_TIER[t] ?? PREMIUM_FLOOR_DEFAULT,
     ),
     marks3ByTier: toTierContributions(
       mark3TierCounts,
-      (t) => MARK3_VALUE_PER_TIER * t,
+      (t) => MARK3_FLOOR_PER_TIER * t,
     ),
     marks2ByTier: toTierContributions(
       mark2TierCounts,
-      (t) => MARK2_VALUE_PER_TIER * t,
+      (t) => MARK2_FLOOR_PER_TIER * t,
     ),
   };
 }
@@ -260,12 +251,12 @@ export type PlayerValuation = {
 
 export function computePlayerValuation(
   vehicles: PlayerVehicleRow[],
-  wn8: number | null,
+  wgr: number,
   battles: number,
   region: Region,
 ): PlayerValuation {
   return {
-    market: computeMarketValue(vehicles, wn8, battles),
+    market: computeMarketValue(vehicles, wgr, battles),
     account: computeAccountValue(vehicles, region),
   };
 }

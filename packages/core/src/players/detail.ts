@@ -171,7 +171,7 @@ export async function buildPlayerDetail(args: {
     vehicles,
     valuation: computePlayerValuation(
       vehicles,
-      derived.wn8?.total ?? null,
+      current.globalRating,
       current.battles,
       region,
     ),
