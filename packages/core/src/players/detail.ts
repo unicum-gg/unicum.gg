@@ -15,6 +15,7 @@ import {
   type Stats,
   type StrongholdStats,
 } from "@unicum.gg/core/players";
+import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
@@ -68,14 +69,19 @@ export async function buildPlayerDetail(args: {
   const { region, accountId, player, latest, tanks, clanHistory, initial, metric } =
     args;
 
-  const [encyclopedia, wn8Expected, wnxExpected, ratingHistory, specs] =
+  const [encyclopedia, wn8Expected, wnxExpected, ratingHistory, specs, supporterSub] =
     await Promise.all([
       getVehicleEncyclopedia(region),
       getWN8ExpectedValues(),
       getWNXExpectedValues(),
       getRatingHistory(region, player.id, metric),
       getAllTankSpecs(),
+      getAccountSubscription(region, accountId),
     ]);
+  // Public supporter badge: active, and not opted out via podium anonymity.
+  const isSupporter = supporterSub
+    ? isActiveStatus(supporterSub.status) && !supporterSub.anonymous
+    : false;
   // Lite economics map for the vehicle rows' account-value fields.
   const economics = new Map<number, VehicleEconomics>();
   for (const [tankId, s] of specs) {
@@ -157,6 +163,7 @@ export async function buildPlayerDetail(args: {
       lastBattleAt: player.lastBattleAt ?? new Date(0),
       updatedAt: player.lastSeenAt,
     },
+    isSupporter,
     metric,
     current,
     periods,

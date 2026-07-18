@@ -35,6 +35,9 @@ const ROUTES = {
       ? "/coverage"
       : pathcat("/:region/coverage", { region }),
 
+  // - Support (region-less)
+  SUPPORT: "/support",
+
   // - Players
   PLAYERS: (region: Region) =>
     region === Region.EU ? "/players" : pathcat("/:region/players", { region }),

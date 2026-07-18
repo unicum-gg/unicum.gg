@@ -216,6 +216,7 @@ export const PlayerDetailResponse = z.object({
       updatedAt: z.coerce.date(),
     })
     .loose(),
+  isSupporter: z.boolean(),
   metric: metricField,
   current: playerStats,
   periods: z.object({

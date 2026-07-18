@@ -9,6 +9,10 @@ import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/player-actions-menu";
+import {
+  SupporterBadge,
+  SupporterBadgeState,
+} from "@/components/players/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 
 const MONTH_FORMAT = "MMM yyyy";
@@ -23,6 +27,7 @@ export function PlayerHeader({
   updatedAt,
   currentStint,
   inferredLanguages,
+  supporterBadge,
 }: {
   region: Region;
   accountId: number;
@@ -32,6 +37,7 @@ export function PlayerHeader({
   updatedAt: Date;
   currentStint: ClanStint | null;
   inferredLanguages: string[];
+  supporterBadge: SupporterBadgeState | null;
 }) {
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
@@ -44,6 +50,12 @@ export function PlayerHeader({
               accountId={accountId}
               className="ml-2 align-middle text-xs"
             />
+            {supporterBadge && (
+              <SupporterBadge
+                state={supporterBadge}
+                className="ml-2 align-middle"
+              />
+            )}
           </h1>
           <CompareWithButton region={region} current={nickname} />
           <PlayerActionsMenu

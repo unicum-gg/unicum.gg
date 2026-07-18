@@ -17,7 +17,7 @@ export function PlayersOnline() {
   const payload = usePlayersOnline(region);
 
   const label = (
-    <span className="shrink-0 cursor-default font-medium tabular-nums text-[#f25322]">
+    <span className="shrink-0 cursor-default font-medium tabular-nums text-fd-muted-foreground">
       {payload ? fmt.format(payload.total) : "—"} players online
     </span>
   );

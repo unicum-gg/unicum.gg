@@ -18,4 +18,5 @@ export * from "./top-players";
 export * from "./top-players-by-tank";
 export * from "./vehicles";
 export * from "./auth";
+export * from "./subscription";
 export * from "./streamers";

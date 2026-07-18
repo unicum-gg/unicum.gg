@@ -49,6 +49,9 @@ export type PlayerDetailData = {
     lastBattleAt: Date;
     updatedAt: Date;
   };
+  // This account belongs to an active (and non-anonymous) unicum.gg supporter,
+  // for the supporter badge on the player header.
+  isSupporter: boolean;
   metric: RatingMetric;
   current: Stats;
   periods: PeriodStats;

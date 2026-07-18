@@ -2,6 +2,7 @@ import {
   DiscordLogoIcon,
   FileCodeIcon,
   GithubLogoIcon,
+  HeartIcon,
   PlugsConnectedIcon,
   RobotIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -57,6 +58,12 @@ export async function baseOptions(): Promise<BaseLayoutProps> {
             description: "Free public REST API, no key required",
             url: ROUTES.DOCS,
             icon: <FileCodeIcon />,
+          },
+          {
+            text: "Support us",
+            description: `Keep ${APP.NAME} free, open and ad-free`,
+            url: ROUTES.SUPPORT,
+            icon: <HeartIcon />,
           },
         ],
       },

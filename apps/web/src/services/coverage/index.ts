@@ -107,6 +107,17 @@ const ADDITIONAL_EGRESS_IPS = Math.max(
   ).size - 1,
 );
 const EGRESS_IPS_USD_ANNUAL = ADDITIONAL_EGRESS_IPS * EGRESS_IP_USD_MONTHLY * 12;
+const TOTAL_ANNUAL_USD =
+  HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL + EGRESS_IPS_USD_ANNUAL;
+
+/**
+ * Current monthly infrastructure cost (USD). A pure constant-derived figure (no
+ * DB), so the funding endpoint and the top-bar mini bar can use it cheaply on
+ * every request without touching the heavy coverage query.
+ */
+export function getMonthlyInfraCostUsd(): number {
+  return TOTAL_ANNUAL_USD / 12;
+}
 
 const DAYS_WINDOW = 30;
 
@@ -458,8 +469,7 @@ async function getCoverageStatsUncached(
             note: "Cloudflare free tier + Let's Encrypt + self-hosted Coolify",
           },
         ],
-        totalAnnualUsd:
-          HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL + EGRESS_IPS_USD_ANNUAL,
+        totalAnnualUsd: TOTAL_ANNUAL_USD,
       },
     },
   };

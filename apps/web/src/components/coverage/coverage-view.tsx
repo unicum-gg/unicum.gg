@@ -16,6 +16,7 @@ import {
 } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 import { ChartMode, CoverageAreaChart } from "./coverage-charts";
+import { CostBreakdown } from "./cost-breakdown";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decFmt = new Intl.NumberFormat("en-US", {
@@ -25,11 +26,6 @@ const decFmt = new Intl.NumberFormat("en-US", {
 const pctFmt = new Intl.NumberFormat("en-US", {
   style: "percent",
   maximumFractionDigits: 0,
-});
-const usdFmt = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 2,
 });
 
 function formatOnTime(onTime: number, total: number): string {
@@ -279,54 +275,11 @@ export async function CoverageView({ region }: { region: Region }) {
           <PanelTitle>Infrastructure</PanelTitle>
         </PanelHeader>
         <PanelContent className="space-y-6 p-4">
-          <div className="space-y-1">
-            <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-              Estimated annual cost
-            </div>
-            <div className="font-heading text-4xl font-bold tabular-nums text-[#f25322]">
-              {usdFmt.format(stats.infrastructure.costs.totalAnnualUsd)}
-            </div>
-            <div className="text-sm text-fd-muted-foreground">
-              Fixed monthly bill, no surprises. Hosted on an OVH VPS, no
-              third-party SaaS in the data path. Will only grow if we outgrow
-              the current server.
-            </div>
-          </div>
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <StatCell
-              label="Database size"
-              value={formatBytes(stats.infrastructure.databaseBytes)}
-            />
-            <StatCell
-              label="Monthly run rate"
-              value={usdFmt.format(stats.infrastructure.costs.totalAnnualUsd / 12)}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">
-              Cost breakdown
-            </div>
-            <ul className="divide-y divide-fd-border text-sm">
-              {stats.infrastructure.costs.breakdown.map((line) => (
-                <li
-                  key={line.label}
-                  className="flex items-start justify-between gap-4 py-2"
-                >
-                  <span>
-                    <span className="text-fd-foreground">{line.label}</span>
-                    {line.note && (
-                      <span className="block text-xs text-fd-muted-foreground">
-                        {line.note}
-                      </span>
-                    )}
-                  </span>
-                  <span className="tabular-nums">
-                    {line.usdAnnual > 0 ? usdFmt.format(line.usdAnnual) : "free"}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <CostBreakdown costs={stats.infrastructure.costs} />
+          <StatCell
+            label="Database size"
+            value={formatBytes(stats.infrastructure.databaseBytes)}
+          />
           {stats.infrastructure.tables.length > 0 && (
             <div className="space-y-1.5">
               <div className="text-xs uppercase tracking-wide text-fd-muted-foreground">

@@ -206,6 +206,18 @@ class PlayerClient {
     );
   }
 
+  /** The player's current clan (tag, name, color) from cached data only, no
+   * live Wargaming call. Null when not in a clan or not yet tracked. A cheap
+   * alternative to `detail()` for compact UI like nav bars. */
+  clan() {
+    const { region, nickname } = this;
+    return unwrap(
+      this.api.GET("/{region}/players/{nickname}/clan", {
+        params: { path: { region, nickname } },
+      }),
+    );
+  }
+
   /** Enqueue an on-demand refresh of this player; returns the estimated seconds
    * until it completes. */
   enqueue() {
@@ -623,6 +635,13 @@ type StreamersNamespace = {
   ): Unsubscribe;
 };
 
+type SupportNamespace = {
+  /** Active supporters ranked by current monthly pledge (amount not exposed). */
+  podium(): Promise<Data<"/support/podium">>;
+  /** Compact cumulative funding progress (percentage + raised/goal in USD). */
+  funding(): Promise<Data<"/support/funding">>;
+};
+
 /**
  * A fluent, typed client for the unicum.gg public API.
  *
@@ -690,6 +709,14 @@ export class Unicum {
           onData,
           onError,
         ),
+    };
+  }
+
+  /** Global (not region-scoped) supporters podium. */
+  get support(): SupportNamespace {
+    return {
+      podium: () => unwrap(this.#api.GET("/support/podium", {})),
+      funding: () => unwrap(this.#api.GET("/support/funding", {})),
     };
   }
 }

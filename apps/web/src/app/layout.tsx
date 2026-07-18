@@ -5,7 +5,7 @@ import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
-import { BuildBanner } from "@/components/build-banner";
+import { TopBar } from "@/components/top-bar";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { NavDebug } from "@/components/nav-debug";
@@ -65,7 +65,7 @@ export default async function RootLayout({
           <WebMcp />
           <NavDebug />
           <RatingMetricRoot />
-          <BuildBanner />
+          <TopBar />
           <HomeLayout {...layoutProps}>
             <div id="page-content" className="flex flex-1 flex-col">{children}</div>
             <Footer />

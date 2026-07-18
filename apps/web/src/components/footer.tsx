@@ -69,6 +69,9 @@ export function Footer() {
               Top tanks
             </Link>
             <FooterCoverageLink />
+            <Link href={ROUTES.SUPPORT} className={styles.linkHover}>
+              Support
+            </Link>
             <Link href={ROUTES.DOCS} className={styles.linkHover}>
               API Docs
             </Link>
