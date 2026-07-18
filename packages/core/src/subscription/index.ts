@@ -120,15 +120,28 @@ export async function recordPayment(input: {
     .onConflictDoNothing({ target: supportPayment.id });
 }
 
-/** Total amount received from supporters since launch (cents of `currency`,
- * EUR), for the cumulative funding bar. */
+/** Net amount received from supporters since launch (cents of `currency`, EUR),
+ * i.e. payments minus refunds, for the cumulative funding bar. */
 export async function getTotalReceivedCents(): Promise<number> {
   const [row] = await db
     .select({
-      total: sql<number>`coalesce(sum(${supportPayment.amountCents}), 0)`,
+      total: sql<number>`coalesce(sum(${supportPayment.amountCents} - ${supportPayment.amountRefundedCents}), 0)`,
     })
     .from(supportPayment);
   return Number(row?.total ?? 0);
+}
+
+/** Record the total refunded amount on a payment (cents). Stripe reports the
+ * cumulative refund on the charge, so this sets rather than increments, which
+ * naturally covers repeated partial refunds. No-op if the payment is unknown. */
+export async function recordRefund(
+  invoiceId: string,
+  refundedCents: number,
+): Promise<void> {
+  await db
+    .update(supportPayment)
+    .set({ amountRefundedCents: refundedCents })
+    .where(eq(supportPayment.id, invoiceId));
 }
 
 /** Toggle whether the supporter is shown anonymously on the podium. */

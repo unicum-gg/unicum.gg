@@ -58,6 +58,9 @@ export const supportPayment = pgTable("support_payment", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   amountCents: integer("amount_cents").notNull(),
+  // Amount refunded on this payment (cents). Subtracted from `amountCents` when
+  // summing what was actually received, so a refund stops counting as income.
+  amountRefundedCents: integer("amount_refunded_cents").notNull().default(0),
   currency: text("currency").notNull().default("eur"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });

@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   parseWebhookEvent,
+  recordChargeRefund,
   recordInvoicePayment,
   stripeConfigured,
   syncSubscription,
@@ -45,6 +46,10 @@ export async function POST(request: Request): Promise<Response> {
     case "invoice.payment_succeeded":
       // Append to the support ledger so the cumulative funding bar reflects it.
       await recordInvoicePayment(event.data.object);
+      break;
+    case "charge.refunded":
+      // Subtract the refund from the ledger so it stops counting as received.
+      await recordChargeRefund(event.data.object);
       break;
     default:
       break;

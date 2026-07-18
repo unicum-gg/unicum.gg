@@ -4,6 +4,7 @@ import {
   getSubscription,
   getSubscriptionByCustomer,
   recordPayment,
+  recordRefund,
   upsertSubscription,
 } from "@unicum.gg/core/subscription";
 
@@ -155,6 +156,23 @@ export async function recordInvoicePayment(invoice: Stripe.Invoice): Promise<voi
     amountCents,
     currency: invoice.currency,
   });
+}
+
+/**
+ * Reflect a refund on the support ledger (called from the webhook). Maps the
+ * charge back to its invoice (our ledger key) and stores the cumulative refunded
+ * amount, so a refunded payment stops counting toward funding. Ignores charges
+ * not backed by a subscription invoice.
+ */
+export async function recordChargeRefund(charge: Stripe.Charge): Promise<void> {
+  // `invoice` is present at runtime for subscription charges but dropped from
+  // the pinned version's types; read it defensively.
+  const invoice = (
+    charge as unknown as { invoice?: string | { id: string } | null }
+  ).invoice;
+  const invoiceId = typeof invoice === "string" ? invoice : invoice?.id;
+  if (!invoiceId) return;
+  await recordRefund(invoiceId, charge.amount_refunded ?? 0);
 }
 
 /** Mirror a Stripe subscription into our DB (called from the webhook). */
