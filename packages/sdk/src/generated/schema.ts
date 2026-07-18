@@ -1697,6 +1697,18 @@ export interface components {
             /** @description Total amount received from supporters since launch, in EUR cents (aggregate only, for the cumulative funding bar). */
             receivedCents: number;
         };
+        tankConfig: {
+            /** @description The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class). */
+            modules: {
+                gun: number | null;
+                turret: number | null;
+                engine: number | null;
+                chassis: number | null;
+                radio: number | null;
+            };
+            /** @description The full combat specification for this module combination, same shape as the top-level `specs` row. */
+            specs: string;
+        };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
         TankDetail: {
             tankId: number;
@@ -1742,6 +1754,8 @@ export interface components {
             } | null;
             /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
             modules: components["schemas"]["tankModuleNode"][];
+            /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
+            configs: components["schemas"]["tankConfig"][];
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -1801,6 +1815,8 @@ export interface components {
             } | null;
             /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
             modules: components["schemas"]["tankModuleNode"][];
+            /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
+            configs: components["schemas"]["tankConfig"][];
             moeHistory: {
                 day: string;
                 mark1: number;

@@ -8,10 +8,9 @@ import { TankDetailTabs } from "@/components/tanks/tank-detail-tabs";
 import { TankDetailTab } from "@/components/tanks/detail-tabs";
 import { TankRender } from "@/components/tanks/tank-render";
 import { TankActionsMenu } from "@/components/tanks/tank-actions-menu";
-import { TankModules } from "@/components/tanks/tank-modules";
 import { TankResearchPath } from "@/components/tanks/tank-research-path";
 import ROUTES from "@/constants/routes";
-import { TankCharacteristics } from "@/components/tanks/tank-characteristics";
+import { TankConfigurator } from "@/components/tanks/tank-configurator";
 import { TankMarksMastery } from "@/components/tanks/tank-marks-mastery";
 import type { MomValues } from "@unicum.gg/core/mom";
 import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
@@ -35,6 +34,7 @@ import type {
 } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
+import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import { cn } from "@/lib/utils";
 import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
 
@@ -68,6 +68,7 @@ export function TankView({
   mom,
   researchPath,
   modules,
+  configs,
   moeHistory,
   momHistory,
 }: {
@@ -84,6 +85,7 @@ export function TankView({
   mom: MomValues | null;
   researchPath: ResearchBranch;
   modules: TankModuleNode[];
+  configs: TankConfig[];
   moeHistory: MoeHistoryPoint[];
   momHistory: MomHistoryPoint[];
 }) {
@@ -441,17 +443,16 @@ export function TankView({
                     tankName={meta.name}
                   />
                 )}
-                {researchPath.lineage.length > 0 && specs && <PanelSeparator />}
-                {specs && (
-                  <TankCharacteristics specs={specs} tankName={meta.name} />
-                )}
-                {(researchPath.lineage.length > 0 || specs) &&
-                  modules.length > 0 && <PanelSeparator />}
-                {modules.length > 0 && (
-                  <TankModules
+                {researchPath.lineage.length > 0 &&
+                  (specs || modules.length > 0) && <PanelSeparator />}
+                {(specs || modules.length > 0) && (
+                  <TankConfigurator
                     region={region}
                     meta={meta}
-                    nodes={modules}
+                    tankName={meta.name}
+                    stockSpecs={specs}
+                    modules={modules}
+                    configs={configs}
                     nextTanks={researchPath.next}
                   />
                 )}

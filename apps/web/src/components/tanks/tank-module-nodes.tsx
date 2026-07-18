@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { CheckIcon } from "lucide-react";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
@@ -13,6 +14,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
+import { cn } from "@/lib/utils";
 import type { VehicleMeta } from "@unicum.gg/shared";
 import type {
   ModuleStats,
@@ -135,24 +137,61 @@ function ModuleTooltip({ module }: { module: TankModuleNode }) {
   );
 }
 
-export function ModuleNode({ module }: { module: TankModuleNode }) {
-  return (
-    <TooltipProvider delayDuration={100}>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <div className="flex w-24 shrink-0 cursor-help flex-col items-center gap-1.5">
-            <div className="flex h-7 w-full items-center justify-center">
+export function ModuleNode({
+  module,
+  selected = false,
+  onSelect,
+}: {
+  module: TankModuleNode;
+  /** Highlight as the module mounted in the active configuration. */
+  selected?: boolean;
+  /** When set, the node is a button that switches to this module. */
+  onSelect?: () => void;
+}) {
+  const selectable = !!onSelect;
+  const body = (
+    <div
+      role={selectable ? "button" : undefined}
+      tabIndex={selectable ? 0 : undefined}
+      onClick={onSelect}
+      onKeyDown={
+        selectable
+          ? (e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                onSelect?.();
+              }
+            }
+          : undefined
+      }
+      className={cn(
+        "flex w-24 shrink-0 flex-col items-center gap-1.5 rounded-md p-1",
+        selectable ? "cursor-pointer" : "cursor-help",
+      )}
+    >
+      <div className="flex h-7 w-full items-center justify-center">
               {module.image ? (
                 // WG's per-class Tankopedia glyph (uniform 59x59 on
                 // api.worldoftanks.*/static, an allowed remote host), through
                 // next/image for format negotiation + caching. Rendered at h-7.
-                <Image
-                  src={module.image}
-                  alt=""
-                  width={59}
-                  height={59}
-                  className="h-7 w-auto object-contain opacity-80"
-                />
+                // A check badge marks the module mounted in the active config.
+                <span className="relative inline-flex">
+                  <Image
+                    src={module.image}
+                    alt=""
+                    width={59}
+                    height={59}
+                    className={cn(
+                      "h-7 w-auto object-contain transition-opacity",
+                      selected ? "opacity-100" : "opacity-80",
+                    )}
+                  />
+                  {selected ? (
+                    <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+                      <CheckIcon className="size-2.5 text-white" strokeWidth={3} />
+                    </span>
+                  ) : null}
+                </span>
               ) : null}
             </div>
             <div className="flex flex-col items-center gap-1 text-center leading-none">
@@ -181,8 +220,13 @@ export function ModuleNode({ module }: { module: TankModuleNode }) {
                 </div>
               )}
             </div>
-          </div>
-        </TooltipTrigger>
+    </div>
+  );
+
+  return (
+    <TooltipProvider delayDuration={100}>
+      <Tooltip>
+        <TooltipTrigger asChild>{body}</TooltipTrigger>
         <TooltipContent side="top" className="max-w-none">
           <ModuleTooltip module={module} />
         </TooltipContent>

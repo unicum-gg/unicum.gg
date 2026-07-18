@@ -16,6 +16,7 @@ import {
 } from "@/components/panel";
 import type { VehicleMeta } from "@unicum.gg/shared";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
+import type { TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 
 // Row order of the in-game Modules screen.
@@ -26,6 +27,14 @@ const TYPE_ORDER: ModuleType[] = [
   ModuleType.Chassis,
   ModuleType.Radio,
 ];
+
+const SLOT_BY_TYPE: Partial<Record<ModuleType, keyof TankConfigModules>> = {
+  [ModuleType.Gun]: "gun",
+  [ModuleType.Turret]: "turret",
+  [ModuleType.Engine]: "engine",
+  [ModuleType.Chassis]: "chassis",
+  [ModuleType.Radio]: "radio",
+};
 
 // Vertical anchor of the connector lines inside a node: the icon centre. Tank
 // nodes use the same icon-container height as modules so the lines stay flat.
@@ -79,11 +88,17 @@ export function TankModules({
   meta,
   nodes,
   nextTanks,
+  selectedModules,
+  onSelectModule,
 }: {
   region: Region;
   meta: VehicleMeta;
   nodes: TankModuleNode[];
   nextTanks: ResearchPathItem[];
+  /** The modules of the active configuration, highlighted as selected. */
+  selectedModules?: TankConfigModules | null;
+  /** When set, module nodes become clickable to change the configuration. */
+  onSelectModule?: (type: ModuleType, moduleId: number) => void;
 }) {
   if (nodes.length === 0) return null;
   return (
@@ -98,6 +113,8 @@ export function TankModules({
             meta={meta}
             nodes={nodes}
             nextTanks={nextTanks}
+            selectedModules={selectedModules}
+            onSelectModule={onSelectModule}
           />
         </ResearchRail>
       </PanelContent>
@@ -110,11 +127,15 @@ function ModuleTree({
   meta,
   nodes,
   nextTanks,
+  selectedModules,
+  onSelectModule,
 }: {
   region: Region;
   meta: VehicleMeta;
   nodes: TankModuleNode[];
   nextTanks: ResearchPathItem[];
+  selectedModules?: TankConfigModules | null;
+  onSelectModule?: (type: ModuleType, moduleId: number) => void;
 }) {
   const depths = useMemo(() => computeDepths(nodes), [nodes]);
   const rows = TYPE_ORDER.filter((t) => nodes.some((n) => n.type === t));
@@ -258,11 +279,27 @@ function ModuleTree({
               className={`flex flex-col gap-4 ${isFlat ? "items-end" : "items-center"}`}
               style={{ gridRow: row + 1, gridColumn: col + 2 }}
             >
-              {stack.map((node) => (
-                <div key={node.moduleId} ref={registerNode(`m${node.moduleId}`)}>
-                  <ModuleNode module={node} />
-                </div>
-              ))}
+              {stack.map((node) => {
+                const slot = SLOT_BY_TYPE[node.type];
+                const selected =
+                  !!slot && selectedModules?.[slot] === node.moduleId;
+                return (
+                  <div
+                    key={node.moduleId}
+                    ref={registerNode(`m${node.moduleId}`)}
+                  >
+                    <ModuleNode
+                      module={node}
+                      selected={selected}
+                      onSelect={
+                        onSelectModule
+                          ? () => onSelectModule(node.type, node.moduleId)
+                          : undefined
+                      }
+                    />
+                  </div>
+                );
+              })}
             </div>
           );
         })}

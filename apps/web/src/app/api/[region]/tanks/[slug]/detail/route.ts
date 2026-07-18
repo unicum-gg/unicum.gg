@@ -14,6 +14,7 @@ import {
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import { getMoeHistory, getMomHistory } from "@/services/tanks/marks-history";
+import { getTankConfigsCached } from "@/services/tanks/configs";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { TankDetailResponse } from "./schema.api";
 
@@ -51,6 +52,7 @@ export async function GET(
     momMap,
     researchPath,
     modules,
+    configs,
     moeHistory,
     momHistory,
   ] = await Promise.all([
@@ -63,6 +65,7 @@ export async function GET(
     getTankMomByRegion(region),
     getResearchPath(region, tankId),
     getTankModules(region, tankId),
+    getTankConfigsCached(region, tankId),
     getMoeHistory(region, tankId),
     getMomHistory(region, tankId),
   ]);
@@ -80,6 +83,7 @@ export async function GET(
     mom: momMap.get(tankId) ?? null,
     researchPath,
     modules,
+    configs,
     moeHistory,
     momHistory,
   });

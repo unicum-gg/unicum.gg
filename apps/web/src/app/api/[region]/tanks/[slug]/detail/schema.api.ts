@@ -141,6 +141,25 @@ const tankModuleNode = z.object({
   }),
 });
 
+const tankConfig = z.object({
+  modules: z
+    .object({
+      gun: z.number().nullable(),
+      turret: z.number().nullable(),
+      engine: z.number().nullable(),
+      chassis: z.number().nullable(),
+      radio: z.number().nullable(),
+    })
+    .meta({
+      description:
+        "The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class).",
+    }),
+  specs: z.looseObject({}).meta({
+    description:
+      "The full combat specification for this module combination, same shape as the top-level `specs` row.",
+  }),
+});
+
 const researchPathItem = z.object({
   tankId: z.number(),
   slug: z.string(),
@@ -206,6 +225,10 @@ export const TankDetailResponse = z
     modules: z.array(tankModuleNode).meta({
       description:
         "The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail.",
+    }),
+    configs: z.array(tankConfig).meta({
+      description:
+        "Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs).",
     }),
     moeHistory: z.array(
       z.object({
