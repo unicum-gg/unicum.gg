@@ -19,6 +19,32 @@ import {
  * exist for that vehicle class (e.g. `intraClipReload` on a single-shot gun, or
  * `turretArmorFront` on a casemate TD).
  */
+/**
+ * One derived stat block for a specific module combination, tagged by the
+ * wot-src module keys that produced it. The keys are opaque wot-src identifiers
+ * (e.g. `_AMX_50_120`); the consumer bridges them to WG moduleIds by matching a
+ * few raw stats (`spec.reload`, `enginePower`, `turretTraverse`, `hullTraverse`,
+ * `radioRange`) against WG's `vehicleprofiles`, since both sources derive from
+ * the same game data and those numbers are identical.
+ */
+export interface WotSrcConfig {
+  keys: {
+    chassis: string;
+    turret: string;
+    gun: string;
+    engine: string;
+    radio: string;
+  };
+  spec: WotSrcSpec;
+}
+
+/** Every valid module combination for one tank, each fully derived. */
+export interface TankConfigs {
+  tankId: number;
+  tag: string;
+  configs: WotSrcConfig[];
+}
+
 export type WotSrcSpec = {
   tankId: number;
   tag: string;
@@ -294,50 +320,127 @@ export class SourceSpecsResource {
     },
     listEntry: XmlNode,
   ): WotSrcSpec {
+    const { m } = this.#resolveModules(root, shared);
+    return this.#computeSpec(tankId, tag, root, listEntry, shared, m);
+  }
+
+  /**
+   * Resolve one module per slot to its full (shared-merged) definition. With no
+   * `sel`, every slot takes its TOP module (the stock top-config, byte-identical
+   * to the former inline resolution). `sel` overrides individual slots by key so
+   * the per-config enumeration can walk every combination. The gun lives under
+   * the *resolved* turret (`T.guns`), so its key is looked up after the turret.
+   */
+  #resolveModules(
+    root: XmlNode,
+    shared: {
+      guns: XmlNode;
+      shells: XmlNode;
+      turrets: XmlNode;
+      engines: XmlNode;
+      chassis: XmlNode;
+      radios: XmlNode;
+      fuelTanks: XmlNode;
+    },
+    sel?: {
+      chassisKey?: string;
+      turretKey?: string;
+      gunKey?: string;
+      engineKey?: string;
+      radioKey?: string;
+      fuelKey?: string;
+    },
+  ): {
+    m: { hull: XmlNode; C: XmlNode; T: XmlNode; G: XmlNode; E: XmlNode; R: XmlNode; F: XmlNode };
+    keys: {
+      chassis: string | null;
+      turret: string | null;
+      gun: string | null;
+      engine: string | null;
+      radio: string | null;
+      fuel: string | null;
+    };
+  } {
     const hull = isObject(root.hull) ? root.hull : {};
 
-    // --- top chassis (inline in vehicle; may need shared fallback) ---
     const chassisSlot = root.chassis;
-    const topChassisKey = topModuleKey(chassisSlot);
+    const chassisKey = sel?.chassisKey ?? topModuleKey(chassisSlot);
     const chassisInline =
-      topChassisKey && isObject(chassisSlot) ? chassisSlot[topChassisKey] : undefined;
+      chassisKey && isObject(chassisSlot) ? chassisSlot[chassisKey] : undefined;
     const C =
-      resolveModule(chassisInline, topChassisKey ? shared.chassis[topChassisKey] : undefined) ?? {};
+      resolveModule(chassisInline, chassisKey ? shared.chassis[chassisKey] : undefined) ?? {};
 
-    // --- top turret (inline; casemate has a fixed pseudo-turret) ---
     const turretSlot = root.turrets0;
-    const topTurretKey = topModuleKey(turretSlot);
+    const turretKey = sel?.turretKey ?? topModuleKey(turretSlot);
     const turretInline =
-      topTurretKey && isObject(turretSlot) ? turretSlot[topTurretKey] : undefined;
+      turretKey && isObject(turretSlot) ? turretSlot[turretKey] : undefined;
     const T =
-      resolveModule(turretInline, topTurretKey ? shared.turrets[topTurretKey] : undefined) ?? {};
+      resolveModule(turretInline, turretKey ? shared.turrets[turretKey] : undefined) ?? {};
 
-    // --- top gun (last gun of top turret's guns block) ---
     const gunsSlot = isObject(T) ? (T as XmlNode).guns : undefined;
-    const topGunKey = topModuleKey(gunsSlot);
-    const gunInline = topGunKey && isObject(gunsSlot) ? (gunsSlot as XmlNode)[topGunKey] : undefined;
-    const G =
-      resolveModule(gunInline, topGunKey ? shared.guns[topGunKey] : undefined) ?? {};
+    const gunKey = sel?.gunKey ?? topModuleKey(gunsSlot);
+    const gunInline = gunKey && isObject(gunsSlot) ? (gunsSlot as XmlNode)[gunKey] : undefined;
+    const G = resolveModule(gunInline, gunKey ? shared.guns[gunKey] : undefined) ?? {};
 
-    // --- top engine / radio (shared) ---
-    const topEngineKey = topModuleKey(root.engines);
+    const engineKey = sel?.engineKey ?? topModuleKey(root.engines);
     const engineInline =
-      topEngineKey && isObject(root.engines) ? (root.engines as XmlNode)[topEngineKey] : undefined;
+      engineKey && isObject(root.engines) ? (root.engines as XmlNode)[engineKey] : undefined;
     const E =
-      resolveModule(engineInline, topEngineKey ? shared.engines[topEngineKey] : undefined) ?? {};
+      resolveModule(engineInline, engineKey ? shared.engines[engineKey] : undefined) ?? {};
 
-    const topRadioKey = topModuleKey(root.radios);
+    const radioKey = sel?.radioKey ?? topModuleKey(root.radios);
     const radioInline =
-      topRadioKey && isObject(root.radios) ? (root.radios as XmlNode)[topRadioKey] : undefined;
+      radioKey && isObject(root.radios) ? (root.radios as XmlNode)[radioKey] : undefined;
     const R =
-      resolveModule(radioInline, topRadioKey ? shared.radios[topRadioKey] : undefined) ?? {};
+      resolveModule(radioInline, radioKey ? shared.radios[radioKey] : undefined) ?? {};
 
-    const topFuelKey = topModuleKey(root.fuelTanks);
+    const fuelKey = sel?.fuelKey ?? topModuleKey(root.fuelTanks);
     const fuelInline =
-      topFuelKey && isObject(root.fuelTanks) ? (root.fuelTanks as XmlNode)[topFuelKey] : undefined;
+      fuelKey && isObject(root.fuelTanks) ? (root.fuelTanks as XmlNode)[fuelKey] : undefined;
     const F =
-      resolveModule(fuelInline, topFuelKey ? shared.fuelTanks[topFuelKey] : undefined) ?? {};
+      resolveModule(fuelInline, fuelKey ? shared.fuelTanks[fuelKey] : undefined) ?? {};
 
+    return {
+      m: { hull, C, T, G, E, R, F },
+      keys: {
+        chassis: chassisKey,
+        turret: turretKey,
+        gun: gunKey,
+        engine: engineKey,
+        radio: radioKey,
+        fuel: fuelKey,
+      },
+    };
+  }
+
+  /** The full derived stat block from an already-resolved set of modules (one
+   * per slot). Shared by the top-config `#derive` and the per-config
+   * enumeration below, so both produce identical numbers. */
+  #computeSpec(
+    tankId: number,
+    tag: string,
+    root: XmlNode,
+    listEntry: XmlNode,
+    shared: {
+      guns: XmlNode;
+      shells: XmlNode;
+      turrets: XmlNode;
+      engines: XmlNode;
+      chassis: XmlNode;
+      radios: XmlNode;
+      fuelTanks: XmlNode;
+    },
+    m: {
+      hull: XmlNode;
+      C: XmlNode;
+      T: XmlNode;
+      G: XmlNode;
+      E: XmlNode;
+      R: XmlNode;
+      F: XmlNode;
+    },
+  ): WotSrcSpec {
+    const { hull, C, T, G, E, R, F } = m;
     // --- default shell + shot on the gun ---
     const shots = isObject(G.shots) ? (G.shots as XmlNode) : {};
     const shotEntries = Object.entries(shots).filter(([, v]) => isObject(v)) as [string, XmlNode][];
@@ -542,5 +645,125 @@ export class SourceSpecsResource {
       shellCost,
       ammoCost,
     };
+  }
+
+  /**
+   * Every valid module combination for one tank, each fully derived. Fetches the
+   * one nation's shared component files plus the tank's own XML, then walks the
+   * cartesian product of chassis x turret x (that turret's guns) x engine x
+   * radio. `tankId` is decoded to (nationIdx, localId) with the same bit layout
+   * `computeTankId` produces, so the caller only needs the numeric id.
+   */
+  async configs(tankId: number): Promise<TankConfigs | null> {
+    const branch = BRANCH_BY_REGION[this.region];
+    const nations = await fetchNations(this.t, branch);
+    const nationIdx = (tankId >> 4) & 0xf;
+    const localId = tankId >> 8;
+    const nation = nations[nationIdx];
+    if (!nation) return null;
+
+    const parser = new XMLParser({
+      ignoreAttributes: true,
+      parseTagValue: false,
+      trimValues: true,
+      ignoreDeclaration: true,
+    });
+    const base = `sources/res/scripts/item_defs/vehicles/${nation}`;
+    const comp = (c: string) => this.#text(rawUrl(branch, `${base}/components/${c}.xml`));
+    const [listXml, gunsXml, shellsXml, turretsXml, enginesXml, chassisXml, radiosXml, fuelXml] =
+      await Promise.all([
+        this.#text(rawUrl(branch, `${base}/list.xml`)),
+        comp("guns"),
+        comp("shells"),
+        comp("turrets"),
+        comp("engines"),
+        comp("chassis"),
+        comp("radios"),
+        comp("fuelTanks"),
+      ]);
+
+    const list = this.#root(parser, listXml);
+    const shared = {
+      guns: this.#shared(this.#root(parser, gunsXml)),
+      shells: this.#root(parser, shellsXml),
+      turrets: this.#shared(this.#root(parser, turretsXml)),
+      engines: this.#shared(this.#root(parser, enginesXml)),
+      chassis: this.#shared(this.#root(parser, chassisXml)),
+      radios: this.#shared(this.#root(parser, radiosXml)),
+      fuelTanks: this.#shared(this.#root(parser, fuelXml)),
+    };
+
+    let match: { tag: string; entry: XmlNode } | null = null;
+    for (const [tag, entry] of Object.entries(list)) {
+      if (tag === "ids" || !isObject(entry)) continue;
+      if (Number.parseInt(String(entry.id ?? "").trim(), 10) === localId) {
+        match = { tag, entry };
+        break;
+      }
+    }
+    if (!match) return null;
+
+    const vehXml = await this.#text(rawUrl(branch, `${base}/${match.tag}.xml`));
+    const root = this.#root(parser, vehXml);
+    const configs = this.#deriveConfigs(tankId, match.tag, root, shared, match.entry);
+    return { tankId, tag: match.tag, configs };
+  }
+
+  /** Walk every module combination and derive its stat block. */
+  #deriveConfigs(
+    tankId: number,
+    tag: string,
+    root: XmlNode,
+    shared: {
+      guns: XmlNode;
+      shells: XmlNode;
+      turrets: XmlNode;
+      engines: XmlNode;
+      chassis: XmlNode;
+      radios: XmlNode;
+      fuelTanks: XmlNode;
+    },
+    listEntry: XmlNode,
+  ): WotSrcConfig[] {
+    const chassisKeys = moduleKeys(root.chassis);
+    const turretKeys = moduleKeys(root.turrets0);
+    const engineKeys = moduleKeys(root.engines);
+    const radioKeys = moduleKeys(root.radios);
+    const out: WotSrcConfig[] = [];
+
+    for (const turretKey of turretKeys) {
+      // Guns are nested under the resolved turret, so the gun key set depends on
+      // which turret is mounted.
+      const turretInline = isObject(root.turrets0)
+        ? (root.turrets0 as XmlNode)[turretKey]
+        : undefined;
+      const T0 = resolveModule(turretInline, shared.turrets[turretKey]) ?? {};
+      const gunKeys = moduleKeys(isObject(T0) ? (T0 as XmlNode).guns : undefined);
+
+      for (const gunKey of gunKeys)
+        for (const chassisKey of chassisKeys)
+          for (const engineKey of engineKeys)
+            for (const radioKey of radioKeys) {
+              const { m } = this.#resolveModules(root, shared, {
+                chassisKey,
+                turretKey,
+                gunKey,
+                engineKey,
+                radioKey,
+              });
+              const spec = this.#computeSpec(tankId, tag, root, listEntry, shared, m);
+              out.push({
+                keys: {
+                  chassis: chassisKey,
+                  turret: turretKey,
+                  gun: gunKey,
+                  engine: engineKey,
+                  radio: radioKey,
+                },
+                spec,
+              });
+            }
+    }
+    return out;
   }
 }
