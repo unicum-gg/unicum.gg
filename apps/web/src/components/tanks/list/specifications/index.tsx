@@ -1,24 +1,26 @@
 "use client";
 
 import {
-  CaretDownIcon,
   CaretLeftIcon,
   CaretRightIcon,
-  CaretUpDownIcon,
-  CaretUpIcon,
+  SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
+import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
 import Link from "next/link";
-import { type ReactNode, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import {
-  ColumnSelector,
-  useColumnVisibility,
-} from "@/components/tanks/column-visibility";
-import type { TankListItem } from "@/components/tanks/tanks-index";
+  DEFAULT_SPEC_COLUMN_KEYS,
+  SPEC_COLUMN_BY_KEY,
+  SPEC_COLUMNS,
+  SPEC_GROUP_ORDER,
+  type SpecColumn,
+} from "@/components/tanks/list/spec-columns";
+import type { TankListItem } from "@/components/tanks/list";
 import {
   Select,
   SelectContent,
@@ -30,111 +32,21 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import {
-  Tooltip,
-  TooltipContent,
   TooltipProvider,
-  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
+import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
-enum SortDirection {
-  Asc = "asc",
-  Desc = "desc",
-}
-type SortState = { key: string; direction: SortDirection };
-const PAGE_SIZES = [25, 50, 100, 200] as const;
-type PageSize = number | "all";
+const COLS_COOKIE = "unicum.spec_columns";
 
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
-type MoeColumn = {
-  key: string;
-  label: string;
-  marks: 1 | 2 | 3;
-  tip: string;
-  value: (t: TankListItem) => number | null;
-};
-
-// The three marks map to WG's 65/85/95th combined-damage percentiles. The mark
-// glyph is drawn as 1/2/3 tally bars (see MarkIcon); the exact percentile lives
-// in the tooltip.
-const MOE_COLUMNS: MoeColumn[] = [
-  {
-    key: "mark1",
-    label: "1 Mark",
-    marks: 1,
-    tip: "1 Mark: your rolling average combined damage (last ~100 battles) must beat 65% of players on this tank over the last 14 days",
-    value: (t) => t.moe?.mark1 ?? null,
-  },
-  {
-    key: "mark2",
-    label: "2 Marks",
-    marks: 2,
-    tip: "2 Marks: your rolling average combined damage (last ~100 battles) must beat 85% of players on this tank over the last 14 days",
-    value: (t) => t.moe?.mark2 ?? null,
-  },
-  {
-    key: "mark3",
-    label: "3 Marks",
-    marks: 3,
-    tip: "3 Marks: your rolling average combined damage (last ~100 battles) must beat 95% of players on this tank over the last 14 days",
-    value: (t) => t.moe?.mark3 ?? null,
-  },
-];
-
-// The Marks of Excellence glyph is a row of slanted tally bars (WG's own
-// `ico-stats__marks` SVG, transcribed so we do not couple to its versioned CDN
-// chunk). Each subpath is one bar, drawn left to right, so N marks = the first N
-// bars. Uses currentColor, so it tracks the sort header's active/hover state.
-const MARK_BARS = [
-  "M3.765 0h2.824L2.823 12H0L3.765 0z",
-  "m4.706 0h2.824L7.529 12H4.706L8.471 0z",
-  "m4.706 0H16l-3.765 12H9.412l3.764-12h.001z",
-];
-const MARK_VIEW_WIDTH = { 1: 6.6, 2: 11.3, 3: 16 } as const;
-
-function MarkIcon({ marks, label }: { marks: 1 | 2 | 3; label: string }) {
-  return (
-    <svg
-      viewBox={`0 0 ${MARK_VIEW_WIDTH[marks]} 12`}
-      xmlns="http://www.w3.org/2000/svg"
-      role="img"
-      aria-label={label}
-      className="inline-block h-3.5 w-auto align-middle"
-      fill="currentColor"
-    >
-      <path fillRule="evenodd" d={MARK_BARS.slice(0, marks).join("")} />
-    </svg>
-  );
-}
-
-const MOE_KEYS = MOE_COLUMNS.map((c) => c.key);
-const MOE_COOKIE = "unicum.moe_columns";
-
-function useMoeColumns() {
-  return useColumnVisibility(MOE_COOKIE, MOE_KEYS, MOE_KEYS);
-}
-
-export function MoeColumnSelector() {
-  const [selected, onToggle] = useMoeColumns();
-  return (
-    <ColumnSelector items={MOE_COLUMNS} selected={selected} onToggle={onToggle} />
-  );
-}
-
-function sortValue(
-  t: TankListItem,
-  key: string,
-  columns: MoeColumn[],
-): number | string | null {
+function sortValue(t: TankListItem, key: string): number | string | null {
   switch (key) {
     case "tier":
       return t.tier;
@@ -145,46 +57,73 @@ function sortValue(
     case "type":
       return t.type;
     default: {
-      const col = columns.find((c) => c.key === key);
-      return col ? col.value(t) : null;
+      const col = SPEC_COLUMN_BY_KEY[key];
+      return col && t.specs ? col.sortValue(t.specs) : null;
     }
   }
 }
 
-export function TanksMoeTable({
+// Cookie-backed set of visible spec-column keys, shared between the selector
+// (rendered in the filter bar) and the table via useCookie's broadcast.
+export function useSpecColumns(): [Set<string>, (key: string) => void] {
+  const [colsRaw, setColsRaw] = useCookie(
+    COLS_COOKIE,
+    DEFAULT_SPEC_COLUMN_KEYS.join(","),
+  );
+  const selected = useMemo(() => {
+    const set = new Set(colsRaw.split(",").filter((k) => SPEC_COLUMN_BY_KEY[k]));
+    return set.size > 0 ? set : new Set(DEFAULT_SPEC_COLUMN_KEYS);
+  }, [colsRaw]);
+  const toggle = useCallback(
+    (key: string) => {
+      const next = new Set(selected);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      // Persist in canonical order so it reads back stable.
+      setColsRaw(
+        SPEC_COLUMNS.filter((c) => next.has(c.key))
+          .map((c) => c.key)
+          .join(","),
+      );
+    },
+    [selected, setColsRaw],
+  );
+  return [selected, toggle];
+}
+
+export function TanksSpecsTable({
   region,
   rows,
 }: {
   region: Region;
   rows: TankListItem[];
 }) {
-  const [sort, setSort] = useState<SortState>({
-    key: "mark3",
-    direction: SortDirection.Desc,
-  });
-
-  const [selected] = useMoeColumns();
-  const columns = useMemo(
-    () => MOE_COLUMNS.filter((c) => selected.has(c.key)),
+  const [selected] = useSpecColumns();
+  // Keep the canonical (grouped) order regardless of toggle order.
+  const visible: SpecColumn[] = useMemo(
+    () => SPEC_COLUMNS.filter((c) => selected.has(c.key)),
     [selected],
   );
+
+  const [sort, setSort] = useState<SortState>({
+    key: "dpm",
+    direction: SortDirection.Desc,
+  });
 
   const sorted = useMemo(() => {
     const mul = sort.direction === SortDirection.Asc ? 1 : -1;
     return [...rows].sort((a, b) => {
-      const av = sortValue(a, sort.key, columns);
-      const bv = sortValue(b, sort.key, columns);
+      const av = sortValue(a, sort.key);
+      const bv = sortValue(b, sort.key);
       if (av === null && bv === null) return a.name.localeCompare(b.name);
       if (av === null) return 1;
       if (bv === null) return -1;
       if (typeof av === "string" && typeof bv === "string") {
         return mul * av.localeCompare(bv) || a.name.localeCompare(b.name);
       }
-      return (
-        mul * ((av as number) - (bv as number)) || a.name.localeCompare(b.name)
-      );
+      return mul * ((av as number) - (bv as number)) || a.name.localeCompare(b.name);
     });
-  }, [rows, sort, columns]);
+  }, [rows, sort]);
 
   function toggleSort(key: string) {
     setSort((prev) =>
@@ -229,7 +168,7 @@ export function TanksMoeTable({
   return (
     <TooltipProvider delayDuration={150}>
       <div className="overflow-x-auto">
-        <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-4!">
+        <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_thead_th:first-child>button]:pl-4!">
           <TableHeader>
             <TableRow>
               <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
@@ -246,9 +185,9 @@ export function TanksMoeTable({
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
                 Name
               </SortHead>
-              {columns.map((c) => (
+              {visible.map((c) => (
                 <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
-                  <MarkIcon marks={c.marks} label={c.label} />
+                  {c.label}
                 </SortHead>
               ))}
             </TableRow>
@@ -288,14 +227,15 @@ export function TanksMoeTable({
                     </span>
                   </Link>
                 </TableCell>
-                {columns.map((c) => {
-                  const v = c.value(t);
-                  return (
-                    <TableCell key={c.key} className="text-right tabular-nums">
-                      {v != null ? intFmt.format(v) : DASH}
-                    </TableCell>
-                  );
-                })}
+                {visible.map((c) => (
+                  <TableCell key={c.key} className="text-right tabular-nums">
+                    {t.specs ? (
+                      c.render(t.specs)
+                    ) : (
+                      <span className="text-fd-muted-foreground">—</span>
+                    )}
+                  </TableCell>
+                ))}
               </TableRow>
             ))}
           </TableBody>
@@ -355,57 +295,58 @@ export function TanksMoeTable({
   );
 }
 
-function SortHead({
-  sort,
-  col,
-  onToggle,
-  align = "start",
-  tip,
-  headClassName,
-  children,
-}: {
-  sort: SortState;
-  col: string;
-  onToggle: (c: string) => void;
-  align?: "start" | "center" | "end";
-  tip?: string;
-  headClassName?: string;
-  children: React.ReactNode;
-}) {
-  const active = sort.key === col;
-  const Icon = active
-    ? sort.direction === SortDirection.Asc
-      ? CaretUpIcon
-      : CaretDownIcon
-    : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onToggle(col)}
-      className={cn(
-        "flex w-full cursor-pointer items-center gap-1 px-3 py-2 font-medium select-none hover:text-foreground",
-        align === "center" && "justify-center",
-        align === "end" && "justify-end",
-        active && "text-foreground",
-      )}
-    >
-      {children}
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
+export function SpecColumnSelector() {
+  const [selected, onToggle] = useSpecColumns();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    return () => document.removeEventListener("mousedown", onDown);
+  }, [open]);
+
   return (
-    <TableHead className={cn("p-0", headClassName)}>
-      {tip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="flex h-7 cursor-pointer items-center gap-1.5 rounded-md border border-fd-border px-3 text-xs font-medium transition-colors hover:bg-fd-secondary/40"
+      >
+        <SlidersHorizontalIcon weight="bold" className="size-3.5" />
+        Columns
+        <span className="text-fd-muted-foreground">
+          {selected.size}/{SPEC_COLUMNS.length}
+        </span>
+      </button>
+      {open && (
+        <div className="absolute left-0 z-20 mt-1 max-h-96 w-64 overflow-y-auto rounded-lg border border-fd-border bg-fd-popover p-2 shadow-lg">
+          {SPEC_GROUP_ORDER.map((group) => (
+            <div key={group} className="mb-2 last:mb-0">
+              <div className="px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-fd-muted-foreground">
+                {group}
+              </div>
+              {SPEC_COLUMNS.filter((c) => c.group === group).map((c) => (
+                <label
+                  key={c.key}
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-xs hover:bg-fd-secondary/40"
+                >
+                  <input
+                    type="checkbox"
+                    checked={selected.has(c.key)}
+                    onChange={() => onToggle(c.key)}
+                    className="size-3.5 accent-[#f25322]"
+                  />
+                  <span>{c.label}</span>
+                </label>
+              ))}
+            </div>
+          ))}
+        </div>
       )}
-    </TableHead>
+    </div>
   );
 }

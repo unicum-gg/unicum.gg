@@ -1,26 +1,24 @@
 "use client";
 
 import {
-  CaretDownIcon,
   CaretLeftIcon,
   CaretRightIcon,
-  CaretUpDownIcon,
-  CaretUpIcon,
 } from "@phosphor-icons/react";
-import Image from "next/image";
+import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
 import Link from "next/link";
-import { type ReactNode, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
-import { portalIconUrl, type Region } from "@unicum.gg/wargaming";
 import { NationFlag } from "@/components/players/nation-flag";
 import { TankIcon } from "@/components/players/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import {
-  ColumnSelector,
-  useColumnVisibility,
-} from "@/components/tanks/column-visibility";
-import type { TankListItem } from "@/components/tanks/tanks-index";
+  PERF_COLUMN_BY_KEY,
+  PERF_COLUMNS,
+  type PerfColumn,
+  usePerfColumns,
+} from "@/components/tanks/perf-columns";
+import type { TankListItem } from "@/components/tanks/list";
 import {
   Select,
   SelectContent,
@@ -32,98 +30,28 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import {
-  Tooltip,
-  TooltipContent,
   TooltipProvider,
-  TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
+import STORAGE from "@/constants/storage";
+import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
+import {
+  DEFAULT_RATING_METRIC,
+  isRatingMetric,
+  RatingMetric,
+} from "@unicum.gg/shared";
+import type { Region } from "@unicum.gg/wargaming";
 
-enum SortDirection {
-  Asc = "asc",
-  Desc = "desc",
-}
-type SortState = { key: string; direction: SortDirection };
-const PAGE_SIZES = [25, 50, 100, 200] as const;
-type PageSize = number | "all";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
-
-type MasteryColumn = {
-  key: string;
-  label: string;
-  iconFile: string;
-  tip: string;
-  value: (t: TankListItem) => number | null;
-};
-
-// Badge icons served from WG's portal CDN under the version-less `latest`
-// alias (the same art the account profile pages use). The mastery badge art is
-// server-agnostic, so the URL is region-hosted only for consistency; the file
-// is built at render via `portalIconUrl(region, ...)`.
-
-// From least to most demanding badge. Values are the single-battle XP each
-// badge requires on that vehicle, mirrored per region (see the mastery cron).
-const MASTERY_COLUMNS: MasteryColumn[] = [
-  {
-    key: "class3",
-    label: "3rd Class",
-    iconFile: "rank_03.png",
-    tip: "3rd Class: XP needed to beat 50% of players",
-    value: (t) => t.mastery?.class3 ?? null,
-  },
-  {
-    key: "class2",
-    label: "2nd Class",
-    iconFile: "rank_02.png",
-    tip: "2nd Class: XP needed to beat 80% of players",
-    value: (t) => t.mastery?.class2 ?? null,
-  },
-  {
-    key: "class1",
-    label: "1st Class",
-    iconFile: "rank_01.png",
-    tip: "1st Class: XP needed to beat 95% of players",
-    value: (t) => t.mastery?.class1 ?? null,
-  },
-  {
-    key: "ace",
-    label: "Ace Tanker",
-    iconFile: "rank_m.png",
-    tip: "Ace Tanker: XP needed to beat 99% of players",
-    value: (t) => t.mastery?.ace ?? null,
-  },
-];
-
-const MASTERY_KEYS = MASTERY_COLUMNS.map((c) => c.key);
-const MASTERY_COOKIE = "unicum.mom_columns";
-
-function useMasteryColumns() {
-  return useColumnVisibility(MASTERY_COOKIE, MASTERY_KEYS, MASTERY_KEYS);
-}
-
-export function MasteryColumnSelector() {
-  const [selected, onToggle] = useMasteryColumns();
-  return (
-    <ColumnSelector
-      items={MASTERY_COLUMNS}
-      selected={selected}
-      onToggle={onToggle}
-    />
-  );
-}
 
 function sortValue(
   t: TankListItem,
   key: string,
-  columns: MasteryColumn[],
+  metric: RatingMetric,
 ): number | string | null {
   switch (key) {
     case "tier":
@@ -135,35 +63,40 @@ function sortValue(
     case "type":
       return t.type;
     default: {
-      const col = columns.find((c) => c.key === key);
-      return col ? col.value(t) : null;
+      const col = PERF_COLUMN_BY_KEY[key];
+      return col ? col.sortValue(t.stats, metric) : null;
     }
   }
 }
 
-export function TanksMasteryTable({
+export function TanksTable({
   region,
   rows,
 }: {
   region: Region;
   rows: TankListItem[];
 }) {
-  const [sort, setSort] = useState<SortState>({
-    key: "ace",
-    direction: SortDirection.Desc,
-  });
+  const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
+  const metric: RatingMetric = isRatingMetric(storedRating)
+    ? storedRating
+    : DEFAULT_RATING_METRIC;
 
-  const [selected] = useMasteryColumns();
-  const columns = useMemo(
-    () => MASTERY_COLUMNS.filter((c) => selected.has(c.key)),
+  const [selected] = usePerfColumns();
+  const visible: PerfColumn[] = useMemo(
+    () => PERF_COLUMNS.filter((c) => selected.has(c.key)),
     [selected],
   );
+
+  const [sort, setSort] = useState<SortState>({
+    key: "battles",
+    direction: SortDirection.Desc,
+  });
 
   const sorted = useMemo(() => {
     const mul = sort.direction === SortDirection.Asc ? 1 : -1;
     return [...rows].sort((a, b) => {
-      const av = sortValue(a, sort.key, columns);
-      const bv = sortValue(b, sort.key, columns);
+      const av = sortValue(a, sort.key, metric);
+      const bv = sortValue(b, sort.key, metric);
       if (av === null && bv === null) return a.name.localeCompare(b.name);
       if (av === null) return 1;
       if (bv === null) return -1;
@@ -174,7 +107,7 @@ export function TanksMasteryTable({
         mul * ((av as number) - (bv as number)) || a.name.localeCompare(b.name)
       );
     });
-  }, [rows, sort, columns]);
+  }, [rows, sort, metric]);
 
   function toggleSort(key: string) {
     setSort((prev) =>
@@ -236,16 +169,16 @@ export function TanksMasteryTable({
               <SortHead sort={sort} col="name" onToggle={toggleSort} headClassName="min-w-52">
                 Name
               </SortHead>
-              {columns.map((c) => (
-                <SortHead key={c.key} sort={sort} col={c.key} onToggle={toggleSort} align="end" tip={c.tip}>
-                  <Image
-                    src={portalIconUrl(region, c.iconFile)}
-                    alt={c.label}
-                    width={20}
-                    height={20}
-                    className="h-5 w-auto object-contain"
-                    unoptimized
-                  />
+              {visible.map((c) => (
+                <SortHead
+                  key={c.key}
+                  sort={sort}
+                  col={c.key}
+                  onToggle={toggleSort}
+                  align="end"
+                  tip={c.tip}
+                >
+                  {c.header ? c.header(metric) : c.label}
                 </SortHead>
               ))}
             </TableRow>
@@ -285,11 +218,14 @@ export function TanksMasteryTable({
                     </span>
                   </Link>
                 </TableCell>
-                {columns.map((c) => {
-                  const v = c.value(t);
+                {visible.map((c) => {
+                  const { node, className } = c.cell(t.stats, metric);
                   return (
-                    <TableCell key={c.key} className="text-right tabular-nums">
-                      {v != null ? intFmt.format(v) : DASH}
+                    <TableCell
+                      key={c.key}
+                      className={cn("text-right tabular-nums", className)}
+                    >
+                      {node}
                     </TableCell>
                   );
                 })}
@@ -349,60 +285,5 @@ export function TanksMasteryTable({
         </div>
       </div>
     </TooltipProvider>
-  );
-}
-
-function SortHead({
-  sort,
-  col,
-  onToggle,
-  align = "start",
-  tip,
-  headClassName,
-  children,
-}: {
-  sort: SortState;
-  col: string;
-  onToggle: (c: string) => void;
-  align?: "start" | "center" | "end";
-  tip?: string;
-  headClassName?: string;
-  children: React.ReactNode;
-}) {
-  const active = sort.key === col;
-  const Icon = active
-    ? sort.direction === SortDirection.Asc
-      ? CaretUpIcon
-      : CaretDownIcon
-    : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onToggle(col)}
-      className={cn(
-        "flex w-full cursor-pointer items-center gap-1 px-3 py-2 font-medium select-none hover:text-foreground",
-        align === "center" && "justify-center",
-        align === "end" && "justify-end",
-        active && "text-foreground",
-      )}
-    >
-      {children}
-      <Icon
-        weight="bold"
-        className={cn("size-3.5 shrink-0", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead className={cn("p-0", headClassName)}>
-      {tip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
-    </TableHead>
   );
 }

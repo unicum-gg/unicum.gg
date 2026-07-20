@@ -2,7 +2,7 @@
 
 import { SlidersHorizontalIcon } from "@phosphor-icons/react";
 import { type ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { TankStatsRow } from "@/components/tanks/tanks-index";
+import type { TankStatsRow } from "@/components/tanks/list";
 import { useCookie } from "@/hooks/use-cookie";
 import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 

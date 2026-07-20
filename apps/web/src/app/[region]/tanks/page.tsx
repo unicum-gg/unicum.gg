@@ -5,10 +5,10 @@ import {
   PanelContent,
   PanelSeparator,
 } from "@/components/panel";
-import { TanksIndex } from "@/components/tanks/tanks-index";
-import type { TankSpecRow } from "@/components/tanks/spec-columns";
-import type { MasteryRow, MoeRow } from "@/components/tanks/tanks-index";
-import { TankTab } from "@/components/tanks/tabs";
+import { TanksIndex } from "@/components/tanks/list";
+import type { TankSpecRow } from "@/components/tanks/list/spec-columns";
+import type { MasteryRow, MoeRow } from "@/components/tanks/list";
+import { TankTab } from "@/components/tanks/list/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";

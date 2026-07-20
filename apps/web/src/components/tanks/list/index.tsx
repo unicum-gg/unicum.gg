@@ -5,37 +5,34 @@ import {
   PERF_COLUMNS,
   PerfColumnSelector,
 } from "@/components/tanks/perf-columns";
-import {
-  type RangeColumn,
-  TankFilterBar,
-  useTankFilters,
-} from "@/components/tanks/tank-filter-bar";
+import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
+import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import {
   EconColumnSelector,
   TanksEconTable,
-} from "@/components/tanks/tanks-econ-table";
+} from "@/components/tanks/list/economics";
 import {
   MasteryColumnSelector,
   TanksMasteryTable,
-} from "@/components/tanks/tanks-mastery-table";
+} from "@/components/tanks/list/marks-of-mastery";
 import {
   MoeColumnSelector,
   TanksMoeTable,
-} from "@/components/tanks/tanks-moe-table";
+} from "@/components/tanks/list/marks-of-excellence";
 import {
   SPEC_COLUMNS,
   type TankSpecRow,
-} from "@/components/tanks/spec-columns";
+} from "@/components/tanks/list/spec-columns";
 import {
   TankTab,
   TANK_TABS,
   tankTabHref,
-} from "@/components/tanks/tabs";
+} from "@/components/tanks/list/tabs";
 import {
   SpecColumnSelector,
   TanksSpecsTable,
-} from "@/components/tanks/tanks-specs-table";
-import { TanksTable } from "@/components/tanks/tanks-table";
+} from "@/components/tanks/list/specifications";
+import { TanksTable } from "@/components/tanks/list/performances";
 import { Panel, PanelContent, PanelHeader } from "@/components/panel";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
