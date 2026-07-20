@@ -33,11 +33,8 @@ import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-ico
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
 import { TablePager, usePagination } from "@/components/table-pager";
 import { metricLabel } from "@/components/tanks/perf-columns";
-import {
-  type RangeColumn,
-  TankFilterBar,
-  useTankFilters,
-} from "@/components/tanks/tank-filter-bar";
+import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
+import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import {
   Tooltip,
   TooltipContent,
