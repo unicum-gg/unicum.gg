@@ -81,6 +81,26 @@ export function defaultVehicleRenderUrl(region: Region): string {
   return `https://${HOST[region]}/static/${STATIC_VERSION}/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/tanks/default_image.png`;
 }
 
+// Tankopedia crew assets (portraits + role badges), from the same
+// `tankopedia-detail` static bundle under `latest`.
+function crewImgBase(region: Region): string {
+  return `https://${HOST[region]}/static/latest/wotp_static/img/tankopedia_new/frontend/scss/tankopedia-detail/img/crew`;
+}
+
+// A crew member's nation portrait: one of six face variants per slot position.
+export function crewFaceUrl(
+  region: Region,
+  nation: string,
+  index: number,
+): string {
+  return `${crewImgBase(region)}/${nation}-face-${(index % 6) + 1}.png`;
+}
+
+// The role badge (commander, gunner, ...) overlaid on the crew portrait.
+export function crewRoleBadgeUrl(region: Region, role: string): string {
+  return `${crewImgBase(region)}/${role}.webp`;
+}
+
 // The home hero's promo video/poster bundle, pinned to the build these assets
 // shipped in (they are not published under `latest`).
 const PROMO_VERSION = "6.10.0_4edfb4";

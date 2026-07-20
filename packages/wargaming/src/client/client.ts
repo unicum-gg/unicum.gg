@@ -16,6 +16,10 @@ import { PortalProfileResource } from "../portal/wot/profile";
 import { StrongholdResource } from "../stronghold/wot";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
 import { SourceSpecsResource } from "../source/wot/specs";
+import { SourceEquipmentResource } from "../source/wot/equipment";
+import { SourceCrewResource } from "../source/wot/crew";
+import { SourcePostProgressionResource } from "../source/wot/post-progression";
+import { SourceSkillTreeResource } from "../source/wot/skill-tree";
 
 /** World of Tanks endpoints (`/wot/*`). */
 class WotApiSurface {
@@ -80,10 +84,18 @@ class PortalSurface {
 class SourceSurface {
   readonly vehicles: SourceVehiclesResource;
   readonly specs: SourceSpecsResource;
+  readonly equipment: SourceEquipmentResource;
+  readonly crew: SourceCrewResource;
+  readonly postProgression: SourcePostProgressionResource;
+  readonly skillTree: SourceSkillTreeResource;
 
   constructor(transport: Transport, region: Region) {
     this.vehicles = new SourceVehiclesResource(transport, region);
     this.specs = new SourceSpecsResource(transport, region);
+    this.equipment = new SourceEquipmentResource(transport, region);
+    this.crew = new SourceCrewResource(transport, region);
+    this.postProgression = new SourcePostProgressionResource(transport, region);
+    this.skillTree = new SourceSkillTreeResource(transport, region);
   }
 }
 
