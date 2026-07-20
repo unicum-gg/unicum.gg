@@ -1255,10 +1255,78 @@ export interface components {
                 };
             };
         };
+        crewMember: {
+            memberId: string;
+            roles: string[];
+            /** @description The member's WG tankopedia nation portrait, by slot position. */
+            image: string | null;
+            /** @description Skill keys this member can learn (its roles' + universal). */
+            skills: string[];
+        };
+        crewSkill: {
+            key: string;
+            name: string;
+            image: string | null;
+            description: string;
+            isPerk: boolean;
+            /** @description Owning role (commander, gunner, ...) or 'common' (universal). */
+            role: string;
+            /** @description Passive per-skill-level effects on a displayed characteristic; empty for situational or non-spec skills (still shown, no delta). */
+            effects: {
+                attribute: string;
+                value: number;
+            }[];
+            /** @description Crew-training-level bonus in level points (Brothers in Arms = 5), 0 for a normal skill; applied to every crew-affected stat, not a single one. */
+            crewLevel: number;
+            /** @description The Camouflage skill: scales the camo values by 0.57 + 0.43 * level, applied to camo rather than a single characteristic. */
+            camouflage: boolean;
+        };
         dailyPoint: {
             /** @description UTC day, YYYY-MM-DD. */
             day: string;
             count: number;
+        };
+        equipmentEffect: {
+            attribute: string;
+            /** @enum {string} */
+            type: "mul" | "add";
+            base: number;
+            /** @description Value applied when the slot's category matches (Equipment 2.0). */
+            bonus: number;
+        };
+        equipmentSlot: {
+            /** @description The slot's category (null for a legacy universal slot). */
+            category: string | null;
+            /** @description True for the swappable role slot. */
+            role: boolean;
+            roleOptions?: string[];
+        };
+        fieldModItem: {
+            key: string;
+            name: string;
+            image: string | null;
+            effects: {
+                attribute: string;
+                /** @enum {string} */
+                type: "mul" | "add";
+                value: number;
+            }[];
+        };
+        fieldModStep: {
+            level: number;
+            /** @enum {string} */
+            kind: "feature" | "modification" | "pair";
+            feature: {
+                key: string;
+                name: string;
+                image: string | null;
+            } | null;
+            modification: components["schemas"]["fieldModItem"] | null;
+            pair: {
+                key: string;
+                first: components["schemas"]["fieldModItem"];
+                second: components["schemas"]["fieldModItem"];
+            } | null;
         };
         /** @description Compact funding progress for the top-bar bar: how much of what has been spent since launch the community has covered. Amounts are aggregate only. */
         FundingSummary: {
@@ -1331,6 +1399,57 @@ export interface components {
         };
         LiveStreamersResponse: {
             results: components["schemas"]["LiveStreamer"][];
+        };
+        loadoutConsumable: {
+            key: string;
+            name: string;
+            image: string | null;
+            /** @description Passive multiplicative effects on a characteristic (fuel, extinguisher, ...); empty for repair/first-aid kits and crew rations. */
+            effects: {
+                attribute: string;
+                value: number;
+            }[];
+        };
+        loadoutDirective: {
+            key: string;
+            /** @description The equipment family (its `icon`) an equipment directive enhances; empty for crew directives. Any mounted device of that family enables it. */
+            equipmentIcon: string;
+            name: string;
+            image: string | null;
+            attribute: string;
+            /** @enum {string} */
+            type: "mul" | "add";
+            value: number;
+            /** @description A crew directive (boosts a crew skill, always mountable) rather than an equipment directive. */
+            crew: boolean;
+            /**
+             * @description Crew directives: scales the boosted skill's effective level or its efficiency.
+             * @enum {string|null}
+             */
+            boostKind: "level" | "efficiency" | null;
+            boostValue: number;
+            /** @description The boosted skill's per-level spec effects. */
+            effects: {
+                attribute: string;
+                value: number;
+            }[];
+            camouflage: boolean;
+            commander: boolean;
+        };
+        loadoutEquipment: {
+            key: string;
+            name: string;
+            image: string | null;
+            /**
+             * @description Acquisition grade: standard (credits), bond (improved), bounty, bountyUpgraded or experimental.
+             * @enum {string}
+             */
+            grade: "standard" | "bond" | "bounty" | "bountyUpgraded" | "experimental";
+            /** @description wot-src family icon; the directive/equipment family key. */
+            icon: string;
+            /** @description Equipment 2.0 categories (firepower, mobility, survivability, stealth). */
+            categories: string[];
+            effects: components["schemas"]["equipmentEffect"][];
         };
         /** @description A JSON-RPC 2.0 response from the MCP endpoint (carries a method-specific `result` or a JSON-RPC `error`). */
         McpResponse: {
@@ -1635,6 +1754,31 @@ export interface components {
             researchXp: number | null;
             buyCredits: number | null;
         };
+        skillNode: {
+            id: number;
+            /** @description Importance/size tier: common | major | final, or special (feature node). */
+            type: string;
+            /** @description firepower | mobility | survivability | mechanics; empty for feature nodes. */
+            category: string;
+            isFeature: boolean;
+            name: string;
+            image: string | null;
+            effects: {
+                attribute: string;
+                /** @enum {string} */
+                type: "mul" | "add";
+                value: number;
+            }[];
+            /** @description The client's 2D layout coordinates (x, y). */
+            position: [
+                number,
+                number
+            ];
+            /** @description Forward-edge node ids this node unlocks. */
+            unlocks: number[];
+            /** @description Reachable as soon as ANY predecessor is unlocked (else all). */
+            unlockStrategyAny: boolean;
+        };
         /**
          * @description With `language`: only count clans that declare exactly this one language.
          * @enum {string}
@@ -1709,6 +1853,10 @@ export interface components {
             /** @description The full combat specification for this module combination, same shape as the top-level `specs` row. */
             specs: string;
         };
+        tankCrew: {
+            members: components["schemas"]["crewMember"][];
+            skills: components["schemas"]["crewSkill"][];
+        };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
         TankDetail: {
             tankId: number;
@@ -1756,6 +1904,14 @@ export interface components {
             modules: components["schemas"]["tankModuleNode"][];
             /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
             configs: components["schemas"]["tankConfig"][];
+            /** @description The tank's Equipment 2.0 slots and every compatible device (with effects), so the page can apply equipment to the characteristics. Null when the wot-src catalogue has nothing for the tank. */
+            loadout: components["schemas"]["tankLoadout"] | null;
+            /** @description The tank's crew composition and the crew-skill catalogue (name, icon, role, per-level spec effects), so the page can apply crew skills to the characteristics. Null when WG has no crew for the vehicle. */
+            crew: components["schemas"]["tankCrew"] | null;
+            /** @description The tank's field modifications (post progression): the level steps with their stat effects and dual-modification choices. Null below tier VI or when the wot-src catalogue has nothing for the tank. */
+            fieldMods: components["schemas"]["tankFieldMods"] | null;
+            /** @description The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead). */
+            skillTree: components["schemas"]["tankSkillTree"] | null;
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -1817,6 +1973,14 @@ export interface components {
             modules: components["schemas"]["tankModuleNode"][];
             /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
             configs: components["schemas"]["tankConfig"][];
+            /** @description The tank's Equipment 2.0 slots and every compatible device (with effects), so the page can apply equipment to the characteristics. Null when the wot-src catalogue has nothing for the tank. */
+            loadout: components["schemas"]["tankLoadout"] | null;
+            /** @description The tank's crew composition and the crew-skill catalogue (name, icon, role, per-level spec effects), so the page can apply crew skills to the characteristics. Null when WG has no crew for the vehicle. */
+            crew: components["schemas"]["tankCrew"] | null;
+            /** @description The tank's field modifications (post progression): the level steps with their stat effects and dual-modification choices. Null below tier VI or when the wot-src catalogue has nothing for the tank. */
+            fieldMods: components["schemas"]["tankFieldMods"] | null;
+            /** @description The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead). */
+            skillTree: components["schemas"]["tankSkillTree"] | null;
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -1848,6 +2012,11 @@ export interface components {
             identity: components["schemas"]["TankIdentity"];
             economics: components["schemas"]["TankEconomics"] | null;
         };
+        tankFieldMods: {
+            /** @description The post-progression tree: the vehicle's role or its own special tree. */
+            treeKey: string;
+            steps: components["schemas"]["fieldModStep"][];
+        };
         /** @description A vehicle's identity: tier, class, nation, names, tag, premium/reward flags, role and icon URLs. */
         TankIdentity: {
             tankId: number;
@@ -1863,6 +2032,14 @@ export interface components {
             role: string | null;
             contourIcon: string | null;
             bigIcon: string | null;
+        };
+        tankLoadout: {
+            slots: components["schemas"]["equipmentSlot"][];
+            equipment: components["schemas"]["loadoutEquipment"][];
+            /** @description Directives (battle boosters) that enhance a compatible device, each tied to its equipment; applied on top of the mounted equipment. */
+            directives: components["schemas"]["loadoutDirective"][];
+            /** @description The consumables the vehicle can mount (repair/first-aid kits, extinguishers, food, fuel, ...) in three generic slots. */
+            consumables: components["schemas"]["loadoutConsumable"][];
         };
         /** @description The combined-damage thresholds for the 1st, 2nd and 3rd Marks of Excellence on a tank, mirrored per region. */
         TankMarksOfExcellence: {
@@ -1950,6 +2127,10 @@ export interface components {
             mom_class2: number | null;
             mom_class1: number | null;
             mom_ace: number | null;
+        };
+        tankSkillTree: {
+            rootStep: number;
+            nodes: components["schemas"]["skillNode"][];
         };
         /** @description A tank's top-configuration combat specifications: firepower, gun handling, mobility, survivability, concealment and recon. Region-agnostic values. */
         TankSpecifications: {

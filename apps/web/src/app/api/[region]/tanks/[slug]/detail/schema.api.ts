@@ -160,6 +160,219 @@ const tankConfig = z.object({
   }),
 });
 
+const equipmentEffect = z.object({
+  attribute: z.string(),
+  type: z.enum(["mul", "add"]),
+  base: z.number(),
+  bonus: z.number().meta({
+    description: "Value applied when the slot's category matches (Equipment 2.0).",
+  }),
+});
+
+const loadoutEquipment = z.object({
+  key: z.string(),
+  name: z.string(),
+  description: z.string().meta({
+    description: "The device's in-game description, from the client localization.",
+  }),
+  image: z.string().nullable(),
+  grade: z
+    .enum(["standard", "bond", "bounty", "bountyUpgraded", "experimental"])
+    .meta({
+      description:
+        "Acquisition grade: standard (credits), bond (improved), bounty, bountyUpgraded or experimental.",
+    }),
+  icon: z.string().meta({
+    description: "wot-src family icon; the directive/equipment family key.",
+  }),
+  categories: z.array(z.string()).meta({
+    description: "Equipment 2.0 categories (firepower, mobility, survivability, stealth).",
+  }),
+  effects: z.array(equipmentEffect),
+});
+
+const equipmentSlot = z.object({
+  category: z.string().nullable().meta({
+    description: "The slot's category (null for a legacy universal slot).",
+  }),
+  role: z.boolean().meta({ description: "True for the swappable role slot." }),
+  roleOptions: z.array(z.string()).optional(),
+});
+
+const loadoutDirective = z.object({
+  key: z.string(),
+  equipmentIcon: z.string().meta({
+    description:
+      "The equipment family (its `icon`) an equipment directive enhances; empty for crew directives. Any mounted device of that family enables it.",
+  }),
+  name: z.string(),
+  description: z.string().meta({
+    description: "The directive's in-game description, from the client localization.",
+  }),
+  image: z.string().nullable(),
+  attribute: z.string(),
+  type: z.enum(["mul", "add"]),
+  value: z.number(),
+  crew: z.boolean().meta({
+    description:
+      "A crew directive (boosts a crew skill, always mountable) rather than an equipment directive.",
+  }),
+  boostKind: z.enum(["level", "efficiency"]).nullable().meta({
+    description:
+      "Crew directives: scales the boosted skill's effective level or its efficiency.",
+  }),
+  boostValue: z.number(),
+  effects: z
+    .array(z.object({ attribute: z.string(), value: z.number() }))
+    .meta({ description: "The boosted skill's per-level spec effects." }),
+  camouflage: z.boolean(),
+  commander: z.boolean(),
+});
+
+const loadoutConsumable = z.object({
+  key: z.string(),
+  name: z.string(),
+  description: z.string().meta({
+    description: "The consumable's in-game description, from the client localization.",
+  }),
+  image: z.string().nullable(),
+  effects: z.array(
+    z.object({ attribute: z.string(), value: z.number() }),
+  ).meta({
+    description:
+      "Passive multiplicative effects on a characteristic (fuel, extinguisher, ...); empty for repair/first-aid kits and crew rations.",
+  }),
+});
+
+const fieldModItem = z.object({
+  key: z.string(),
+  name: z.string(),
+  image: z.string().nullable(),
+  effects: z.array(
+    z.object({
+      attribute: z.string(),
+      type: z.enum(["mul", "add"]),
+      value: z.number(),
+    }),
+  ),
+});
+
+const fieldModStep = z.object({
+  level: z.number(),
+  kind: z.enum(["feature", "modification", "pair"]),
+  feature: z
+    .object({
+      key: z.string(),
+      name: z.string(),
+      description: z.string().nullable(),
+      image: z.string().nullable(),
+    })
+    .nullable(),
+  modification: fieldModItem.nullable(),
+  pair: z
+    .object({ key: z.string(), first: fieldModItem, second: fieldModItem })
+    .nullable(),
+});
+
+const tankFieldMods = z.object({
+  treeKey: z.string().meta({
+    description: "The post-progression tree: the vehicle's role or its own special tree.",
+  }),
+  steps: z.array(fieldModStep),
+});
+
+const skillNode = z.object({
+  id: z.number(),
+  type: z.string().meta({
+    description: "Importance/size tier: common | major | final, or special (feature node).",
+  }),
+  category: z.string().meta({
+    description: "firepower | mobility | survivability | mechanics; empty for feature nodes.",
+  }),
+  isFeature: z.boolean(),
+  name: z.string(),
+  description: z.string().nullable(),
+  image: z.string().nullable(),
+  effects: z.array(
+    z.object({
+      attribute: z.string(),
+      type: z.enum(["mul", "add"]),
+      value: z.number(),
+    }),
+  ),
+  position: z.tuple([z.number(), z.number()]).meta({
+    description: "The client's 2D layout coordinates (x, y).",
+  }),
+  unlocks: z.array(z.number()).meta({
+    description: "Forward-edge node ids this node unlocks.",
+  }),
+  unlockStrategyAny: z.boolean().meta({
+    description: "Reachable as soon as ANY predecessor is unlocked (else all).",
+  }),
+});
+
+const tankSkillTree = z.object({
+  rootStep: z.number(),
+  nodes: z.array(skillNode),
+});
+
+const tankLoadout = z.object({
+  slots: z.array(equipmentSlot),
+  equipment: z.array(loadoutEquipment),
+  directives: z.array(loadoutDirective).meta({
+    description:
+      "Directives (battle boosters) that enhance a compatible device, each tied to its equipment; applied on top of the mounted equipment.",
+  }),
+  consumables: z.array(loadoutConsumable).meta({
+    description:
+      "The consumables the vehicle can mount (repair/first-aid kits, extinguishers, food, fuel, ...) in three generic slots.",
+  }),
+});
+
+const crewSkill = z.object({
+  key: z.string(),
+  name: z.string(),
+  image: z.string().nullable(),
+  description: z.string(),
+  isPerk: z.boolean(),
+  role: z.string().meta({
+    description: "Owning role (commander, gunner, ...) or 'common' (universal).",
+  }),
+  effects: z
+    .array(z.object({ attribute: z.string(), value: z.number() }))
+    .meta({
+      description:
+        "Passive per-skill-level effects on a displayed characteristic; empty for situational or non-spec skills (still shown, no delta).",
+    }),
+  crewLevel: z.number().meta({
+    description:
+      "Crew-training-level bonus in level points (Brothers in Arms = 5), 0 for a normal skill; applied to every crew-affected stat, not a single one.",
+  }),
+  camouflage: z.boolean().meta({
+    description:
+      "The Camouflage skill: scales the camo values by 0.57 + 0.43 * level, applied to camo rather than a single characteristic.",
+  }),
+});
+
+const crewMember = z.object({
+  memberId: z.string(),
+  roles: z.array(z.string()),
+  image: z.string().nullable().meta({
+    description: "The member's WG tankopedia nation portrait, by slot position.",
+  }),
+  roleBadge: z.string().nullable().meta({
+    description: "The role badge overlaid on the portrait (its primary role).",
+  }),
+  skills: z.array(z.string()).meta({
+    description: "Skill keys this member can learn (its roles' + universal).",
+  }),
+});
+
+const tankCrew = z.object({
+  members: z.array(crewMember),
+  skills: z.array(crewSkill),
+});
+
 const researchPathItem = z.object({
   tankId: z.number(),
   slug: z.string(),
@@ -229,6 +442,22 @@ export const TankDetailResponse = z
     configs: z.array(tankConfig).meta({
       description:
         "Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs).",
+    }),
+    loadout: tankLoadout.nullable().meta({
+      description:
+        "The tank's Equipment 2.0 slots and every compatible device (with effects), so the page can apply equipment to the characteristics. Null when the wot-src catalogue has nothing for the tank.",
+    }),
+    crew: tankCrew.nullable().meta({
+      description:
+        "The tank's crew composition and the crew-skill catalogue (name, icon, role, per-level spec effects), so the page can apply crew skills to the characteristics. Null when WG has no crew for the vehicle.",
+    }),
+    fieldMods: tankFieldMods.nullable().meta({
+      description:
+        "The tank's field modifications (post progression): the level steps with their stat effects and dual-modification choices. Null below tier VI or when the wot-src catalogue has nothing for the tank.",
+    }),
+    skillTree: tankSkillTree.nullable().meta({
+      description:
+        "The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead).",
     }),
     moeHistory: z.array(
       z.object({
