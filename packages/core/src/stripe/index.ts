@@ -29,6 +29,29 @@ function requireStripe(): Stripe {
   return stripe;
 }
 
+/**
+ * Whether a stored customer id still resolves under the *active* Stripe key. A
+ * customer created in one mode (e.g. a local test run) does not exist under a
+ * live key, and reusing its id makes Stripe reject the call with
+ * `resource_missing`; the same happens if the customer was deleted. Returns
+ * false in those cases so callers recreate instead of failing. Any other error
+ * (network, auth) propagates.
+ */
+async function customerExists(s: Stripe, customerId: string): Promise<boolean> {
+  try {
+    const customer = await s.customers.retrieve(customerId);
+    return !("deleted" in customer && customer.deleted);
+  } catch (err) {
+    if (
+      err instanceof Stripe.errors.StripeError &&
+      err.code === "resource_missing"
+    ) {
+      return false;
+    }
+    throw err;
+  }
+}
+
 // Pay-what-you-want bounds (EUR cents): €3 floor, €1000 sanity cap.
 export const SUPPORT_MIN_CENTS = 300;
 export const SUPPORT_MAX_CENTS = 100_000;
@@ -53,9 +76,15 @@ export async function createSupportCheckout(opts: {
   if (!env.STRIPE_PRODUCT_ID) throw new Error("STRIPE_PRODUCT_ID missing");
   const amount = clampSupportAmount(opts.amountCents);
 
-  // Reuse the Stripe customer across (re)subscriptions to avoid duplicates.
+  // Reuse the Stripe customer across (re)subscriptions to avoid duplicates, but
+  // only if it still resolves under the active key: a stored id from another
+  // Stripe mode (e.g. a local test run against the shared DB) or a deleted
+  // customer would otherwise make Checkout fail with `No such customer`.
   const existing = await getSubscription(opts.userId);
   let customerId = existing?.stripeCustomerId;
+  if (customerId && !(await customerExists(s, customerId))) {
+    customerId = undefined;
+  }
   if (!customerId) {
     // No email set: WG accounts carry a synthetic `.local` email that can't
     // receive receipts, so Checkout collects a real one from the supporter.
@@ -97,6 +126,11 @@ export async function createSupportPortal(opts: {
   const s = requireStripe();
   const existing = await getSubscription(opts.userId);
   if (!existing) throw new Error("No subscription for this user");
+  // A stored customer from another Stripe mode (or a deleted one) has nothing to
+  // manage; treat it as no subscription rather than surfacing a Stripe error.
+  if (!(await customerExists(s, existing.stripeCustomerId))) {
+    throw new Error("No subscription for this user");
+  }
   const session = await s.billingPortal.sessions.create({
     customer: existing.stripeCustomerId,
     return_url: opts.returnUrl,
