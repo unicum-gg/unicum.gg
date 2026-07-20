@@ -13,15 +13,25 @@ import { hasCategoryBonus } from "@/components/tanks/detail/specifications/equip
 const CONSUMABLE_SLOTS = 3;
 
 export function useLoadout(loadout: TankLoadout | null) {
+  // The default equipment state: no device mounted, the configurable slot with
+  // no category, fixed slots with their own. Kept as the reset target and the
+  // baseline the dirty flag compares against.
+  const initialEquipped = useMemo(
+    () => (loadout ? loadout.slots.map(() => null) : []),
+    [loadout],
+  );
+  const initialRoleCats = useMemo(
+    () => (loadout ? loadout.slots.map((s) => (s.role ? null : s.category)) : []),
+    [loadout],
+  );
+
   // Equipment loadout state: the mounted device key per slot, and the chosen
   // category per slot (only the role slot's is swappable).
-  const [equipped, setEquipped] = useState<(string | null)[]>(() =>
-    loadout ? loadout.slots.map(() => null) : [],
+  const [equipped, setEquipped] = useState<(string | null)[]>(
+    () => initialEquipped,
   );
-  const [roleCats, setRoleCats] = useState<(string | null)[]>(() =>
-    // The configurable slot starts with no category (setting one is optional);
-    // fixed slots keep their own category.
-    loadout ? loadout.slots.map((s) => (s.role ? null : s.category)) : [],
+  const [roleCats, setRoleCats] = useState<(string | null)[]>(
+    () => initialRoleCats,
   );
 
   // The equipment mounted right now, tagged with whether each earns its
@@ -236,6 +246,25 @@ export function useLoadout(loadout: TankLoadout | null) {
     });
   }
 
+  // Per-section reset + dirty flags, so each panel can offer a reset button only
+  // when it deviates from its default.
+  const equipmentDirty =
+    equipped.some((k) => k !== null) ||
+    roleCats.some((c, i) => c !== initialRoleCats[i]);
+  function resetEquipment() {
+    setEquipped(initialEquipped);
+    setRoleCats(initialRoleCats);
+  }
+  const directivesDirty = activeDirectives.size > 0;
+  function resetDirectives() {
+    setActiveDirectives(new Set());
+  }
+  const consumablesDirty = consumableSlots.some((k) => k !== null);
+  function resetConsumables() {
+    setConsumableSlots(Array.from({ length: CONSUMABLE_SLOTS }, () => null));
+    setActiveConsumableSlot(0);
+  }
+
   return {
     equipped,
     roleCats,
@@ -259,5 +288,11 @@ export function useLoadout(loadout: TankLoadout | null) {
     setRoleCategory,
     toggleDirective,
     pickConsumable,
+    equipmentDirty,
+    resetEquipment,
+    directivesDirty,
+    resetDirectives,
+    consumablesDirty,
+    resetConsumables,
   };
 }

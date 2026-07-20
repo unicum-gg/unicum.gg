@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { SlotBox } from "./slot-box";
 import { DeviceBox } from "./device-box";
 import { CategoryGlyph } from "./category-glyph";
@@ -42,6 +43,8 @@ export function TankEquipment({
   onToggle,
   onAssign,
   onRoleCategory,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -56,6 +59,10 @@ export function TankEquipment({
   onAssign: (key: string, slotIndex: number) => void;
   /** Set the configurable slot's category (null clears it — it's optional). */
   onRoleCategory: (slotIndex: number, category: string | null) => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (no device mounted, no chosen category). */
+  onReset?: () => void;
   /** The decorative full-width edge lines; disable when beside another panel. */
   screenLines?: boolean;
   /** A local under-title line (column-width), when stacked below another panel. */
@@ -136,9 +143,13 @@ export function TankEquipment({
       <Panel screenLines={screenLines}>
         <PanelHeader
           screenLines={screenLines}
-          className={headerBorder ? "border-b border-fd-border" : undefined}
+          className={cn(
+            "flex items-center justify-between gap-4",
+            headerBorder && "border-b border-fd-border",
+          )}
         >
           <PanelTitle>Equipment</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="space-y-5 px-4 py-6">
           <div className="flex flex-wrap gap-3">

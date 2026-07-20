@@ -47,5 +47,20 @@ export function useFieldMods(fieldMods: TankFieldMods | null) {
     }));
   }
 
-  return { level, setLevel, maxLevel, pairChoices, togglePair, appliedFieldMods };
+  const isDirty = level > 0 || Object.values(pairChoices).some((v) => v != null);
+  function reset() {
+    setLevel(0);
+    setPairChoices({});
+  }
+
+  return {
+    level,
+    setLevel,
+    maxLevel,
+    pairChoices,
+    togglePair,
+    appliedFieldMods,
+    isDirty,
+    reset,
+  };
 }

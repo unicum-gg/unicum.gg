@@ -16,6 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 const SLOTS = 3;
 
@@ -78,6 +79,8 @@ export function TankConsumables({
   activeSlot,
   onSelectSlot,
   onPick,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -88,6 +91,10 @@ export function TankConsumables({
   activeSlot: number;
   onSelectSlot: (index: number) => void;
   onPick: (key: string) => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (no consumable mounted). */
+  onReset?: () => void;
   /** The decorative full-width edge lines; disable when beside another panel. */
   screenLines?: boolean;
   /** A local under-title line (column-width), when stacked below another panel. */
@@ -101,9 +108,13 @@ export function TankConsumables({
       <Panel screenLines={screenLines}>
         <PanelHeader
           screenLines={screenLines}
-          className={headerBorder ? "border-b border-fd-border" : undefined}
+          className={cn(
+            "flex items-center justify-between gap-4",
+            headerBorder && "border-b border-fd-border",
+          )}
         >
           <PanelTitle>Consumables</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="space-y-5 px-4 py-6">
           <div className="flex flex-wrap gap-3">

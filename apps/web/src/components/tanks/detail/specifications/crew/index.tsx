@@ -24,6 +24,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // Human labels for the crew roles (WG role keys) and the characteristics a skill
 // effect maps to, for the member headers and the effect tooltips.
@@ -271,6 +272,8 @@ export function TankCrew({
   onToggle,
   level,
   onLevel,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -281,6 +284,10 @@ export function TankCrew({
   /** Crew training level as a 0–1 fraction. */
   level: number;
   onLevel: (level: number) => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (no skill, full crew level). */
+  onReset?: () => void;
   screenLines?: boolean;
   headerBorder?: boolean;
 }) {
@@ -297,7 +304,10 @@ export function TankCrew({
             headerBorder && "border-b border-fd-border",
           )}
         >
-          <PanelTitle>Crew Skills</PanelTitle>
+          <div className="flex items-center gap-3">
+            <PanelTitle>Crew Skills</PanelTitle>
+            {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
+          </div>
           <div className="flex items-center gap-2 text-xs text-fd-muted-foreground">
             <span className="whitespace-nowrap">Crew level</span>
             <Slider

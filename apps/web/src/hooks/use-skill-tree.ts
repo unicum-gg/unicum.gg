@@ -80,5 +80,10 @@ export function useSkillTree(skillTree: TankSkillTree | null) {
     return out;
   }, [skillTree, unlocked]);
 
-  return { unlocked, isAvailable, toggleNode, appliedSkillTree };
+  const isDirty = unlocked.size > 0;
+  function reset() {
+    setUnlocked(new Set());
+  }
+
+  return { unlocked, isAvailable, toggleNode, appliedSkillTree, isDirty, reset };
 }

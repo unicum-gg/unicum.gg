@@ -16,6 +16,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // The characteristic a directive attribute reads as, for the hover tooltip. The
 // spec application itself lives in @unicum.gg/shared; this only labels it.
@@ -98,6 +99,8 @@ export function TankDirectives({
   mountedIcons,
   active,
   onToggle,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -107,6 +110,10 @@ export function TankDirectives({
   /** The directive keys currently applied. */
   active: Set<string>;
   onToggle: (key: string) => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (no directive applied). */
+  onReset?: () => void;
   /** The decorative full-width edge lines. Disable when this panel sits beside
    * another (the neighbour's lines already span the row, so drawing them here
    * too would darken/double them). */
@@ -121,9 +128,13 @@ export function TankDirectives({
       <Panel screenLines={screenLines}>
         <PanelHeader
           screenLines={screenLines}
-          className={headerBorder ? "border-b border-fd-border" : undefined}
+          className={cn(
+            "flex items-center justify-between gap-4",
+            headerBorder && "border-b border-fd-border",
+          )}
         >
           <PanelTitle>Directives</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">
           <div className="flex flex-wrap gap-3">

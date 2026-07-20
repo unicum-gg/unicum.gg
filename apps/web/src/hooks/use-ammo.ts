@@ -121,5 +121,9 @@ export function useAmmo(active: TankConfig | null, modules: TankModuleNode[]) {
   const [activeShell, setActiveShell] = useState(0);
   const shellIdx = Math.min(activeShell, Math.max(ammoShells.length - 1, 0));
 
-  return { ammoShells, shellIdx, setActiveShell };
+  // The default shell is the first one; "dirty" once another is selected.
+  const isDirty = shellIdx > 0;
+  const reset = useCallback(() => setActiveShell(0), []);
+
+  return { ammoShells, shellIdx, setActiveShell, isDirty, reset };
 }

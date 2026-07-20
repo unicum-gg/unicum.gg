@@ -18,6 +18,7 @@ import type { VehicleMeta } from "@unicum.gg/shared";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // Row order of the in-game Modules screen.
 const TYPE_ORDER: ModuleType[] = [
@@ -90,6 +91,8 @@ export function TankModules({
   nextTanks,
   selectedModules,
   onSelectModule,
+  dirty = false,
+  onReset,
 }: {
   region: Region;
   meta: VehicleMeta;
@@ -99,12 +102,17 @@ export function TankModules({
   selectedModules?: TankConfigModules | null;
   /** When set, module nodes become clickable to change the configuration. */
   onSelectModule?: (type: ModuleType, moduleId: number) => void;
+  /** Whether the selected configuration deviates from stock (shows reset). */
+  dirty?: boolean;
+  /** Reset the modules to the stock configuration. */
+  onReset?: () => void;
 }) {
   if (nodes.length === 0) return null;
   return (
     <Panel>
-      <PanelHeader>
+      <PanelHeader className="flex items-center justify-between gap-4">
         <PanelTitle>{meta.name} modules</PanelTitle>
+        {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
       </PanelHeader>
       <PanelContent className="py-6">
         <ResearchRail>

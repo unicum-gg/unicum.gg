@@ -2,6 +2,7 @@ import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { TankSpec } from "@unicum.gg/shared";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { GROUPS, type Group } from "./rows";
 import { deltaColor, formatSpecValue as format, specValue } from "./format";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
@@ -138,18 +139,27 @@ export function TankCharacteristics({
   specs,
   tankName,
   baseline = null,
+  canResetAll = false,
+  onResetAll,
 }: {
   specs: TankSpec | null;
   tankName: string;
   // The reference configuration (the tank's top config); values that differ
   // from it are coloured green/red. Omit to disable the comparison.
   baseline?: TankSpec | null;
+  /** Whether any section is modified (shows the "Reset all" button). */
+  canResetAll?: boolean;
+  /** Reset every configurator section to its default at once. */
+  onResetAll?: () => void;
 }) {
   if (!specs) return null;
   return (
     <Panel>
-      <PanelHeader>
+      <PanelHeader className="flex items-center justify-between gap-4">
         <PanelTitle>{tankName} characteristics</PanelTitle>
+        {canResetAll && onResetAll ? (
+          <ResetButton onReset={onResetAll} label="Reset all" />
+        ) : null}
       </PanelHeader>
       <PanelContent className="grid grid-cols-1 gap-x-8 gap-y-6 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
         {GROUPS.map((group) => (

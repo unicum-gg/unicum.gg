@@ -20,6 +20,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // Short labels for the characteristics a field-mod attribute moves, for the
 // effect tooltips. Unlisted attributes (damaged-state fines, stun, ...) show
@@ -226,6 +227,8 @@ export function TankFieldModifications({
   onLevel,
   pairChoices,
   onTogglePair,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -234,6 +237,10 @@ export function TankFieldModifications({
   onLevel: (level: number) => void;
   pairChoices: Record<string, "first" | "second" | null>;
   onTogglePair: (key: string, side: "first" | "second") => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (level 0, no pair chosen). */
+  onReset?: () => void;
   /** The decorative full-width edge lines; disable when beside another panel. */
   screenLines?: boolean;
   /** A local under-title line (column-width), when stacked below another panel. */
@@ -247,9 +254,13 @@ export function TankFieldModifications({
       <Panel screenLines={screenLines}>
         <PanelHeader
           screenLines={screenLines}
-          className={headerBorder ? "border-b border-fd-border" : undefined}
+          className={cn(
+            "flex items-center justify-between gap-4",
+            headerBorder && "border-b border-fd-border",
+          )}
         >
           <PanelTitle>Field Modifications</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="overflow-x-auto px-4 py-6">
           <div className="relative flex items-start gap-6">

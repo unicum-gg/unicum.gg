@@ -139,7 +139,13 @@ export function TankConfigurator({
 
   const selectedModules = active?.modules ?? null;
 
-  const { ammoShells, shellIdx, setActiveShell } = useAmmo(active, modules);
+  const {
+    ammoShells,
+    shellIdx,
+    setActiveShell,
+    isDirty: ammoDirty,
+    reset: resetAmmo,
+  } = useAmmo(active, modules);
 
   const specs: TankSpec | null = useMemo(() => {
     if (!active) return stockSpecs;
@@ -172,6 +178,12 @@ export function TankConfigurator({
     setRoleCategory,
     toggleDirective,
     pickConsumable,
+    equipmentDirty,
+    resetEquipment,
+    directivesDirty,
+    resetDirectives,
+    consumablesDirty,
+    resetConsumables,
   } = useLoadout(loadout);
   const {
     selectedSkills,
@@ -183,6 +195,8 @@ export function TankConfigurator({
     repairLevel,
     camoLevel,
     toggleCrewSkill,
+    crewDirty,
+    resetCrew,
   } = useCrewConfig(crew);
   const {
     level: fieldModLevel,
@@ -190,12 +204,16 @@ export function TankConfigurator({
     pairChoices,
     togglePair,
     appliedFieldMods,
+    isDirty: fieldModsDirty,
+    reset: resetFieldMods,
   } = useFieldMods(fieldMods);
   const {
     unlocked: unlockedNodes,
     isAvailable: isNodeAvailable,
     toggleNode,
     appliedSkillTree,
+    isDirty: skillTreeDirty,
+    reset: resetSkillTree,
   } = useSkillTree(skillTree);
 
   // Characteristics reflect the selected shell first (it *replaces* base values:
@@ -326,6 +344,34 @@ export function TankConfigurator({
     if (best >= 0) setActiveIdx(best);
   }
 
+  // Modules deviate from stock when a non-default configuration is selected;
+  // resetting snaps back to the all-stock config.
+  const modulesDirty = interactive && activeIdx !== stockIdx;
+  const resetModules = () => setActiveIdx(stockIdx);
+
+  // The whole-configurator reset (the "Reset all" button): every section back to
+  // its default at once. `canResetAll` gates the button so it only shows when
+  // something is actually modified.
+  const canResetAll =
+    ammoDirty ||
+    equipmentDirty ||
+    consumablesDirty ||
+    directivesDirty ||
+    fieldModsDirty ||
+    skillTreeDirty ||
+    crewDirty ||
+    modulesDirty;
+  function resetAll() {
+    resetAmmo();
+    resetEquipment();
+    resetConsumables();
+    resetDirectives();
+    resetFieldMods();
+    resetSkillTree();
+    resetCrew();
+    resetModules();
+  }
+
   return (
     <>
       {finalSpecs && (
@@ -334,6 +380,8 @@ export function TankConfigurator({
             specs={finalSpecs}
             tankName={tankName}
             baseline={baselineSpec}
+            canResetAll={canResetAll}
+            onResetAll={resetAll}
           />
         </div>
       )}
@@ -364,6 +412,8 @@ export function TankConfigurator({
                     shells={ammoShells}
                     active={shellIdx}
                     onSelect={setActiveShell}
+                    dirty={ammoDirty}
+                    onReset={resetAmmo}
                     screenLines={false}
                     headerBorder
                   />
@@ -376,6 +426,8 @@ export function TankConfigurator({
                     onToggle={toggleEquip}
                     onAssign={assignEquip}
                     onRoleCategory={setRoleCategory}
+                    dirty={equipmentDirty}
+                    onReset={resetEquipment}
                     screenLines={false}
                     headerBorder
                   />
@@ -387,6 +439,8 @@ export function TankConfigurator({
                     activeSlot={activeConsumableSlot}
                     onSelectSlot={setActiveConsumableSlot}
                     onPick={pickConsumable}
+                    dirty={consumablesDirty}
+                    onReset={resetConsumables}
                     screenLines={false}
                     headerBorder
                   />
@@ -397,6 +451,8 @@ export function TankConfigurator({
                     mountedIcons={mountedIcons}
                     active={activeDirectives}
                     onToggle={toggleDirective}
+                    dirty={directivesDirty}
+                    onReset={resetDirectives}
                     screenLines={false}
                     headerBorder
                   />
@@ -408,6 +464,8 @@ export function TankConfigurator({
                     onLevel={setFieldModLevel}
                     pairChoices={pairChoices}
                     onTogglePair={togglePair}
+                    dirty={fieldModsDirty}
+                    onReset={resetFieldMods}
                     screenLines={false}
                     headerBorder
                   />
@@ -426,6 +484,8 @@ export function TankConfigurator({
                     onToggle={toggleCrewSkill}
                     level={crewLevel}
                     onLevel={setCrewLevel}
+                    dirty={crewDirty}
+                    onReset={resetCrew}
                     screenLines={false}
                     headerBorder
                   />
@@ -444,6 +504,8 @@ export function TankConfigurator({
           unlocked={unlockedNodes}
           isAvailable={isNodeAvailable}
           onToggle={toggleNode}
+          dirty={skillTreeDirty}
+          onReset={resetSkillTree}
         />
       )}
       {(finalSpecs || leftCol || rightCol || skillTree) &&
@@ -456,6 +518,8 @@ export function TankConfigurator({
           nextTanks={nextTanks}
           selectedModules={selectedModules}
           onSelectModule={interactive ? select : undefined}
+          dirty={modulesDirty}
+          onReset={resetModules}
         />
       )}
     </>

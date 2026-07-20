@@ -24,6 +24,7 @@ import {
   fmtEffect,
 } from "@/components/tanks/detail/specifications/field-mods";
 import { CATEGORY } from "@/components/tanks/detail/specifications/equipment/category";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 
 // A node's accent colour: firepower/mobility/survivability reuse the Equipment
 // section's category tints (same category, same colour across the page); the
@@ -88,12 +89,18 @@ export function TankSkillTree({
   unlocked,
   isAvailable,
   onToggle,
+  dirty = false,
+  onReset,
 }: {
   skillTree: TankSkillTree;
   tankName: string;
   unlocked: Set<number>;
   isAvailable: (id: number) => boolean;
   onToggle: (id: number) => void;
+  /** Whether any node is unlocked (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (every node re-locked). */
+  onReset?: () => void;
 }) {
   const { nodes } = skillTree;
   const byId = useMemo(
@@ -135,8 +142,9 @@ export function TankSkillTree({
   return (
     <TooltipProvider delayDuration={100}>
       <Panel>
-        <PanelHeader>
+        <PanelHeader className="flex items-center justify-between gap-4">
           <PanelTitle>{tankName} upgrades</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">
           <div

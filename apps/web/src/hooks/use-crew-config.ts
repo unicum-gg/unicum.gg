@@ -127,6 +127,12 @@ export function useCrewConfig(crew: TankCrewData | null) {
     });
   }
 
+  const crewDirty = selectedSkills.size > 0 || crewLevel !== 1;
+  function resetCrew() {
+    setSelectedSkills(new Set());
+    setCrewLevel(1);
+  }
+
   return {
     crewSkills,
     selectedSkills,
@@ -138,5 +144,7 @@ export function useCrewConfig(crew: TankCrewData | null) {
     repairLevel,
     camoLevel,
     toggleCrewSkill,
+    crewDirty,
+    resetCrew,
   };
 }

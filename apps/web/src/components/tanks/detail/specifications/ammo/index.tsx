@@ -17,6 +17,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
 
 // WG's own shell-type icons, from our wot.assets mirror (keyed by the raw shell
@@ -32,6 +33,8 @@ export function TankAmmo({
   shells,
   active,
   onSelect,
+  dirty = false,
+  onReset,
   screenLines = true,
   headerBorder = false,
 }: {
@@ -49,6 +52,10 @@ export function TankAmmo({
   /** Index of the selected shell. */
   active: number;
   onSelect: (index: number) => void;
+  /** Whether the section deviates from its default (shows the reset button). */
+  dirty?: boolean;
+  /** Reset the section to its default (the first shell). */
+  onReset?: () => void;
   /** The decorative full-width edge lines; disable when beside another panel. */
   screenLines?: boolean;
   /** A local under-title line (column-width), when stacked below another panel. */
@@ -60,9 +67,13 @@ export function TankAmmo({
       <Panel screenLines={screenLines}>
         <PanelHeader
           screenLines={screenLines}
-          className={headerBorder ? "border-b border-fd-border" : undefined}
+          className={cn(
+            "flex items-center justify-between gap-4",
+            headerBorder && "border-b border-fd-border",
+          )}
         >
           <PanelTitle>Ammunition</PanelTitle>
+          {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>
         <PanelContent className="px-4 py-6">
           <div className="flex flex-wrap gap-3">
