@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
-import { TankView } from "@/components/tanks/tank-view";
+import { TankView } from "@/components/tanks/detail/view";
 import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
@@ -11,6 +11,10 @@ import { UnicumError } from "@unicum.gg/sdk";
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
+import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
+import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
+import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
+import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import type { TankSpec } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
@@ -115,6 +119,10 @@ export async function renderTankPage(region: Region, slug: string) {
         researchPath={detail.researchPath as unknown as ResearchBranch}
         modules={detail.modules as unknown as TankModuleNode[]}
         configs={detail.configs as unknown as TankConfig[]}
+        loadout={detail.loadout as unknown as TankLoadout | null}
+        crew={detail.crew as unknown as TankCrew | null}
+        fieldMods={detail.fieldMods as unknown as TankFieldMods | null}
+        skillTree={detail.skillTree as unknown as TankSkillTree | null}
         moeHistory={detail.moeHistory}
         momHistory={detail.momHistory}
       />

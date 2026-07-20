@@ -6,8 +6,8 @@ import {
   CurrentTankNode,
   ModuleNode,
   NextTankNode,
-} from "@/components/tanks/tank-module-nodes";
-import { ResearchRail } from "@/components/tanks/research-rail";
+} from "@/components/tanks/detail/specifications/modules/module-nodes";
+import { ResearchRail } from "@/components/tanks/detail/specifications/research-rail";
 import {
   Panel,
   PanelContent,

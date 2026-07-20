@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { toRoman } from "roman-numerals";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
-import { ResearchRail } from "@/components/tanks/research-rail";
+import { ResearchRail } from "@/components/tanks/detail/specifications/research-rail";
 import { TankIcon } from "@/components/players/tank-icon";
 import {
   Panel,

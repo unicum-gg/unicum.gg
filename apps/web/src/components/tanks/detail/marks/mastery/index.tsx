@@ -9,7 +9,7 @@ import { MOM_COLORS, MoMIcon } from "@/components/tanks/mom-icon";
 import {
   MarksHistoryChart,
   type MarksSeries,
-} from "@/components/tanks/marks-history-chart";
+} from "@/components/tanks/detail/marks/mastery/history-chart";
 import {
   Panel,
   PanelContent,

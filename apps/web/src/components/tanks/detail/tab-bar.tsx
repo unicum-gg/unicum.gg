@@ -8,7 +8,7 @@ import {
   type TankDetailTab,
   tankDetailTabFromQuery,
   tankDetailTabHref,
-} from "@/components/tanks/detail-tabs";
+} from "@/components/tanks/detail/tabs";
 import { cn } from "@/lib/utils";
 
 // Client tab bar for the tank detail page. Content for each tab is rendered on
