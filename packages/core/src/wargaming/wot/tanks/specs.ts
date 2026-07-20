@@ -206,7 +206,8 @@ export async function refreshTankSpecs(): Promise<number> {
     fetchResearchGraph(),
   ]);
   const totalFreeXp = computeTotalFreeXp(graph);
-  const rows: NewTankSpec[] = catalog.map(({ tag: _tag, ...spec }) => {
+  const rows: NewTankSpec[] = catalog.map(
+    ({ tag: _tag, shellStats: _ss, ...spec }) => {
     const node = graph.get(spec.tankId);
     const total = totalFreeXp.get(spec.tankId) ?? 0;
     return {
