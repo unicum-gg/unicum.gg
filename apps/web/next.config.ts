@@ -74,6 +74,13 @@ const nextConfig: NextConfig = {
       { protocol: "https", hostname: "api.worldoftanks.asia", pathname: "/static/**" },
       // Twitch live-stream thumbnails for the "streaming now" cards.
       { protocol: "https", hostname: "static-cdn.jtvnw.net", pathname: "/**" },
+      // Game GUI assets (e.g. equipment grade overlays) from our wot.assets
+      // mirror, so we don't commit copies of them into the repo.
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/unicum-gg/wot.assets/**",
+      },
     ],
     // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
     // SVG sources by default; enabling this allows them through the optimizer
