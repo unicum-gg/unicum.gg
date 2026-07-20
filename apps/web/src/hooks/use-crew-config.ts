@@ -4,16 +4,34 @@ import { useMemo, useState } from "react";
 import { MAX_MAJOR_PERKS, type AppliedCrewSkill } from "@unicum.gg/shared";
 import type { TankCrew as TankCrewData } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 
-export function useCrewConfig(crew: TankCrewData | null) {
+/** The subset of a shared config URL this hook seeds its state from. */
+export interface InitialCrew {
+  skills?: string[];
+  /** Crew training level as a 0-1 fraction. */
+  level?: number;
+}
+
+export function useCrewConfig(crew: TankCrewData | null, initial?: InitialCrew) {
   // Crew skills: which skills are selected (keyed "<memberIndex>:<skillKey>") and
   // the training level; both start empty/full so the section is ready to reveal
   // an effect on the first pick. Applied effects are the selected skills that
-  // move a displayed characteristic.
+  // move a displayed characteristic. Seeded from a shared config URL when present,
+  // dropping any skill the addressed member can't actually train.
   const crewSkills = useMemo(() => crew?.skills ?? [], [crew]);
-  const [selectedSkills, setSelectedSkills] = useState<Set<string>>(
-    () => new Set(),
+  const [selectedSkills, setSelectedSkills] = useState<Set<string>>(() => {
+    if (!crew || !initial?.skills) return new Set();
+    const out = new Set<string>();
+    for (const id of initial.skills) {
+      const sep = id.indexOf(":");
+      const mi = Number(id.slice(0, sep));
+      const key = id.slice(sep + 1);
+      if (crew.members[mi]?.skills.includes(key)) out.add(id);
+    }
+    return out;
+  });
+  const [crewLevel, setCrewLevel] = useState(
+    initial?.level != null ? Math.min(1, Math.max(0.5, initial.level)) : 1,
   );
-  const [crewLevel, setCrewLevel] = useState(1);
 
   // The commander raises every other crew member's effective skill level by 10%
   // of his own level (the game's COMMANDER_ADDITION_RATIO = 10); he gets no self

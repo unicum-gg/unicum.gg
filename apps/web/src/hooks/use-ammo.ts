@@ -76,7 +76,11 @@ function shellDistance(
  * shell by kind then closest damage/penetration) and the selected shell index.
  * `active` is the mounted config.
  */
-export function useAmmo(active: TankConfig | null, modules: TankModuleNode[]) {
+export function useAmmo(
+  active: TankConfig | null,
+  modules: TankModuleNode[],
+  initialShell = 0,
+) {
   // The shells of a gun module (its module id), falling back to the default gun.
   const gunShells = useCallback(
     (gunId: number | null | undefined): ModuleShell[] => {
@@ -118,7 +122,7 @@ export function useAmmo(active: TankConfig | null, modules: TankModuleNode[]) {
       };
     });
   }, [gunShells, active]);
-  const [activeShell, setActiveShell] = useState(0);
+  const [activeShell, setActiveShell] = useState(initialShell);
   const shellIdx = Math.min(activeShell, Math.max(ammoShells.length - 1, 0));
 
   // The default shell is the first one; "dirty" once another is selected.

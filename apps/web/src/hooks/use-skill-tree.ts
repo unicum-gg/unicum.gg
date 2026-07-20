@@ -10,8 +10,15 @@ import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tr
  * ANY when `unlockStrategyAny`). Unlocking a node applies its stat effects;
  * re-locking one cascades to any node that then loses its prerequisites.
  */
-export function useSkillTree(skillTree: TankSkillTree | null) {
-  const [unlocked, setUnlocked] = useState<Set<number>>(() => new Set());
+export function useSkillTree(
+  skillTree: TankSkillTree | null,
+  initialUnlocked?: number[],
+) {
+  const [unlocked, setUnlocked] = useState<Set<number>>(() => {
+    if (!skillTree || !initialUnlocked) return new Set();
+    const ids = new Set(skillTree.nodes.map((n) => n.id));
+    return new Set(initialUnlocked.filter((id) => ids.has(id)));
+  });
 
   // node id -> the ids that unlock it (its prerequisites).
   const prereqs = useMemo(() => {

@@ -12,10 +12,19 @@ import { hasCategoryBonus } from "@/components/tanks/detail/specifications/equip
 
 const CONSUMABLE_SLOTS = 3;
 
-export function useLoadout(loadout: TankLoadout | null) {
+/** The subset of a shared config URL this hook seeds its state from. */
+export interface InitialLoadout {
+  equipment?: (string | null)[];
+  roleCats?: Record<number, string>;
+  directives?: string[];
+  consumables?: (string | null)[];
+}
+
+export function useLoadout(loadout: TankLoadout | null, initial?: InitialLoadout) {
   // The default equipment state: no device mounted, the configurable slot with
   // no category, fixed slots with their own. Kept as the reset target and the
-  // baseline the dirty flag compares against.
+  // baseline the dirty flag compares against (never the shared-URL seed, so a
+  // reset clears the setup rather than restoring the shared one).
   const initialEquipped = useMemo(
     () => (loadout ? loadout.slots.map(() => null) : []),
     [loadout],
@@ -26,13 +35,26 @@ export function useLoadout(loadout: TankLoadout | null) {
   );
 
   // Equipment loadout state: the mounted device key per slot, and the chosen
-  // category per slot (only the role slot's is swappable).
-  const [equipped, setEquipped] = useState<(string | null)[]>(
-    () => initialEquipped,
-  );
-  const [roleCats, setRoleCats] = useState<(string | null)[]>(
-    () => initialRoleCats,
-  );
+  // category per slot (only the role slot's is swappable). Seeded from a shared
+  // config URL when present, dropping any key/category the tank doesn't have.
+  const [equipped, setEquipped] = useState<(string | null)[]>(() => {
+    if (!loadout || !initial?.equipment) return initialEquipped;
+    const valid = new Set(loadout.equipment.map((e) => e.key));
+    return loadout.slots.map((_, i) => {
+      const k = initial.equipment?.[i];
+      return k && valid.has(k) ? k : null;
+    });
+  });
+  const [roleCats, setRoleCats] = useState<(string | null)[]>(() => {
+    if (!loadout) return [];
+    const base = [...initialRoleCats];
+    for (const [i, cat] of Object.entries(initial?.roleCats ?? {})) {
+      const idx = Number(i);
+      const slot = loadout.slots[idx];
+      if (slot?.role && (slot.roleOptions?.includes(cat) ?? true)) base[idx] = cat;
+    }
+    return base;
+  });
 
   // The equipment mounted right now, tagged with whether each earns its
   // category bonus, ready to apply to the spec.
@@ -52,9 +74,11 @@ export function useLoadout(loadout: TankLoadout | null) {
 
   // Directives: the applied set, and which equipment families are mounted (a
   // directive enhances a family, so any grade of that icon enables it).
-  const [activeDirectives, setActiveDirectives] = useState<Set<string>>(
-    () => new Set(),
-  );
+  const [activeDirectives, setActiveDirectives] = useState<Set<string>>(() => {
+    if (!loadout || !initial?.directives) return new Set();
+    const valid = new Set((loadout.directives ?? []).map((d) => d.key));
+    return new Set(initial.directives.filter((k) => valid.has(k)));
+  });
   const mountedIcons = useMemo(() => {
     if (!loadout) return new Set<string>();
     const byKey = new Map(loadout.equipment.map((e) => [e.key, e.icon]));
@@ -114,9 +138,18 @@ export function useLoadout(loadout: TankLoadout | null) {
   // Start with empty slots: a mounted consumable can change characteristics
   // (the extinguisher lowers fire chance, food/fuel boost stats), so the default
   // view should be the bare vehicle.
-  const [consumableSlots, setConsumableSlots] = useState<(string | null)[]>(() =>
-    Array.from({ length: CONSUMABLE_SLOTS }, () => null),
-  );
+  const [consumableSlots, setConsumableSlots] = useState<(string | null)[]>(() => {
+    const base = Array.from<unknown, string | null>(
+      { length: CONSUMABLE_SLOTS },
+      () => null,
+    );
+    if (!loadout || !initial?.consumables) return base;
+    const valid = new Set((loadout.consumables ?? []).map((c) => c.key));
+    initial.consumables.forEach((k, i) => {
+      if (i < CONSUMABLE_SLOTS && k && valid.has(k)) base[i] = k;
+    });
+    return base;
+  });
   const [activeConsumableSlot, setActiveConsumableSlot] = useState(0);
   const appliedConsumables: AppliedConsumable[] = useMemo(() => {
     const byKey = new Map(consumables.map((c) => [c.key, c]));

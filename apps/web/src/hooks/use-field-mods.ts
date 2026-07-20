@@ -10,11 +10,37 @@ import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mo
  * ("Modification I/II") choices, reduced to the flat effect list the
  * characteristics pipeline applies.
  */
-export function useFieldMods(fieldMods: TankFieldMods | null) {
-  const [level, setLevel] = useState(0);
+/** The subset of a shared config URL this hook seeds its state from. */
+export interface InitialFieldMods {
+  level?: number;
+  pairs?: Record<string, "first" | "second">;
+}
+
+export function useFieldMods(
+  fieldMods: TankFieldMods | null,
+  initial?: InitialFieldMods,
+) {
+  const [level, setLevel] = useState(() => {
+    if (!fieldMods || !initial?.level) return 0;
+    const max = fieldMods.steps.length
+      ? Math.max(...fieldMods.steps.map((s) => s.level))
+      : 0;
+    return Math.min(initial.level, max);
+  });
   const [pairChoices, setPairChoices] = useState<
     Record<string, "first" | "second" | null>
-  >({});
+  >(() => {
+    if (!fieldMods || !initial?.pairs) return {};
+    const validKeys = new Set(
+      fieldMods.steps
+        .filter((s) => s.kind === "pair" && s.pair)
+        .map((s) => s.pair!.key),
+    );
+    const out: Record<string, "first" | "second" | null> = {};
+    for (const [k, side] of Object.entries(initial.pairs))
+      if (validKeys.has(k)) out[k] = side;
+    return out;
+  });
 
   const maxLevel = useMemo(
     () =>

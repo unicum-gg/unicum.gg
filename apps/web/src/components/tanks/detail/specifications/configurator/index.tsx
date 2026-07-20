@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { ModuleType, type Region } from "@unicum.gg/wargaming";
 import {
   applyEquipment,
@@ -43,6 +44,12 @@ import { useCrewConfig } from "@/hooks/use-crew-config";
 import { useFieldMods } from "@/hooks/use-field-mods";
 import { useSkillTree } from "@/hooks/use-skill-tree";
 import { useAmmo, applyShell } from "@/hooks/use-ammo";
+import {
+  decodeConfig,
+  encodeConfig,
+  resolveModuleIdx,
+  MODULE_SLOTS,
+} from "@/components/tanks/detail/specifications/config-url";
 
 type Slot = keyof TankConfigModules;
 
@@ -95,6 +102,14 @@ export function TankConfigurator({
 }) {
   const interactive = configs.length > 0;
 
+  // A shared setup rides in the query string: decode it once (SSR and client see
+  // the same params, so the initial render matches), seed every section from it,
+  // and mirror later edits back into the URL so the link stays shareable.
+  const searchParams = useSearchParams();
+  const [initialConfig] = useState(() =>
+    decodeConfig(new URLSearchParams(searchParams.toString())),
+  );
+
   // The all-stock configuration (every module the tank ships with): the page
   // opens on it and it is the baseline the characteristics diff against, so
   // upgrading modules or mounting equipment shows the change from stock.
@@ -123,7 +138,9 @@ export function TankConfigurator({
     return best;
   }, [configs, modules, interactive]);
 
-  const [activeIdx, setActiveIdx] = useState(stockIdx);
+  const [activeIdx, setActiveIdx] = useState(() =>
+    interactive ? resolveModuleIdx(configs, initialConfig.modules, stockIdx) : 0,
+  );
   const active = interactive ? configs[activeIdx] : null;
 
   // The stock spec (all default modules, no equipment): the reference every
@@ -145,7 +162,7 @@ export function TankConfigurator({
     setActiveShell,
     isDirty: ammoDirty,
     reset: resetAmmo,
-  } = useAmmo(active, modules);
+  } = useAmmo(active, modules, initialConfig.shell);
 
   const specs: TankSpec | null = useMemo(() => {
     if (!active) return stockSpecs;
@@ -184,7 +201,12 @@ export function TankConfigurator({
     resetDirectives,
     consumablesDirty,
     resetConsumables,
-  } = useLoadout(loadout);
+  } = useLoadout(loadout, {
+    equipment: initialConfig.equipment,
+    roleCats: initialConfig.roleCats,
+    directives: initialConfig.directives,
+    consumables: initialConfig.consumables,
+  });
   const {
     selectedSkills,
     crewLevel,
@@ -197,7 +219,10 @@ export function TankConfigurator({
     toggleCrewSkill,
     crewDirty,
     resetCrew,
-  } = useCrewConfig(crew);
+  } = useCrewConfig(crew, {
+    skills: initialConfig.crewSkills,
+    level: initialConfig.crewLevel,
+  });
   const {
     level: fieldModLevel,
     setLevel: setFieldModLevel,
@@ -206,7 +231,10 @@ export function TankConfigurator({
     appliedFieldMods,
     isDirty: fieldModsDirty,
     reset: resetFieldMods,
-  } = useFieldMods(fieldMods);
+  } = useFieldMods(fieldMods, {
+    level: initialConfig.fieldModLevel,
+    pairs: initialConfig.fieldModPairs,
+  });
   const {
     unlocked: unlockedNodes,
     isAvailable: isNodeAvailable,
@@ -214,7 +242,7 @@ export function TankConfigurator({
     appliedSkillTree,
     isDirty: skillTreeDirty,
     reset: resetSkillTree,
-  } = useSkillTree(skillTree);
+  } = useSkillTree(skillTree, initialConfig.unlocked);
 
   // Characteristics reflect the selected shell first (it *replaces* base values:
   // damage, penetration, velocity, cost), then modules + equipment + directives
@@ -371,6 +399,56 @@ export function TankConfigurator({
     resetCrew();
     resetModules();
   }
+
+  // Mirror the current selection into the URL (replaceState, so no navigation or
+  // scroll): a pristine config writes no params, so the query stays empty until
+  // something is touched and clears again on reset. Non-config params are kept.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const curModules = MODULE_SLOTS.map((s) => active?.modules[s] ?? null);
+    const stockModules = MODULE_SLOTS.map(
+      (s) => configs[stockIdx]?.modules[s] ?? null,
+    );
+    const params = encodeConfig(
+      {
+        shell: shellIdx,
+        modules: curModules,
+        stockModules,
+        equipment: equipped,
+        roleCats,
+        slots: loadout?.slots ?? [],
+        consumables: consumableSlots,
+        directives: [...activeDirectives],
+        fieldModLevel,
+        fieldModPairs: pairChoices,
+        unlocked: [...unlockedNodes],
+        crewSkills: [...selectedSkills],
+        crewLevel,
+      },
+      new URLSearchParams(window.location.search),
+    );
+    const qs = params.toString();
+    const url = qs
+      ? `${window.location.pathname}?${qs}`
+      : window.location.pathname;
+    const current = `${window.location.pathname}${window.location.search}`;
+    if (url !== current) window.history.replaceState(null, "", url);
+  }, [
+    active,
+    configs,
+    stockIdx,
+    loadout,
+    shellIdx,
+    equipped,
+    roleCats,
+    consumableSlots,
+    activeDirectives,
+    fieldModLevel,
+    pairChoices,
+    unlockedNodes,
+    selectedSkills,
+    crewLevel,
+  ]);
 
   return (
     <>
