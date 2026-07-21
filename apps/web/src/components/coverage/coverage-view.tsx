@@ -133,9 +133,9 @@ export async function CoverageView({ region }: { region: Region }) {
           <p className="text-xs text-fd-muted-foreground">
             Snapshot cadence adapts to each player based on their last-battle
             recency. Active players (last 24h) refresh every 6h, dormants on
-            longer windows up to 90 days. On-time counts players whose latest
-            snapshot is within their bucket target. The breakdown below shows
-            the policy in detail.
+            longer windows up to 90 days. On-time counts players we re-checked
+            within their target bucket cadence. The breakdown below shows the
+            policy in detail.
           </p>
         </PanelContent>
       </Panel>

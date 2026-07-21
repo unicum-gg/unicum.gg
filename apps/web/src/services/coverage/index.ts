@@ -49,10 +49,11 @@ export type CoverageStats = {
     lastClanRefreshAt: Date | null;
     playerSnapshotsLast24h: number;
     clansRefreshedLast24h: number;
-    // Refresh-policy health on the fetched portion of the player base.
-    // Excludes Unfetched players (they have nothing to snapshot yet) so
-    // the % stays a clean signal about the adaptive cadence rather than
-    // being dragged down by the discovery backlog.
+    // Refresh-policy health on the fetched portion of the player base:
+    // `onTime` = players we re-checked within their bucket's cadence (keyed on
+    // last_seen_at, see the query for why not snapshot taken_at). Excludes
+    // Unfetched players (nothing fetched yet) so the % stays a clean signal
+    // about the adaptive cadence rather than the discovery backlog.
     snapshotFreshness: {
       onTime: number;
       fetched: number;
@@ -335,12 +336,21 @@ async function getCoverageStatsUncached(
         on_time: string;
         never_snapped: string;
       }>(
-        // Per-bucket breakdown: total players in each activity bucket and
-        // how many have a recent enough snapshot to count as "on-time"
-        // against their bucket's target cadence. Aggregated client-side
-        // into both the headline freshness stat (Unfetched excluded from
-        // denominator so the % reflects refresh-policy health, not the
-        // discovery backlog) and the per-bucket breakdown panel.
+        // Per-bucket breakdown: total players in each activity bucket and how
+        // many we re-checked within their bucket's target cadence ("on-time").
+        // Freshness is keyed on `last_seen_at` (when the pipeline last refreshed
+        // the player), NOT on snapshot `taken_at`: a snapshot row is only
+        // written when a player's stats change, so `taken_at` freezes the moment
+        // a player stops playing and can never re-enter its cadence window no
+        // matter how faithfully we re-check them. `last_seen_at` measures what
+        // the refresh policy actually controls — did we revisit them in time —
+        // so it credits an inactive player we correctly re-checked at their
+        // 90-day cadence and doesn't penalise us for them not playing. We still
+        // require a snapshot to exist (ls.taken_at IS NOT NULL) so a never-
+        // fetched player never counts as on-time. Aggregated client-side into
+        // both the headline freshness stat (Unfetched excluded from denominator
+        // so the % reflects refresh-policy health, not the discovery backlog)
+        // and the per-bucket breakdown panel.
         sql`WITH last_snap AS (
               SELECT player_id, MAX(taken_at) AS taken_at
               FROM ${playerSnapshotsTable}
@@ -351,7 +361,7 @@ async function getCoverageStatsUncached(
               COUNT(*)::text AS total,
               COUNT(*) FILTER (
                 WHERE ls.taken_at IS NOT NULL
-                  AND ls.taken_at >= ${refreshCutoffSql(playersTable.lastBattleAt)}
+                  AND ${playersTable.lastSeenAt} >= ${refreshCutoffSql(playersTable.lastBattleAt)}
               )::text AS on_time,
               COUNT(*) FILTER (WHERE ls.taken_at IS NULL)::text AS never_snapped
             FROM ${playersTable}
