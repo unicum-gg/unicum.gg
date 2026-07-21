@@ -17,6 +17,13 @@ import { refreshCutoffSql } from "./refresh-policy";
 
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 400;
+// The WG fetch for a batch is a handful of chunked requests, but the write-back
+// (`recordCurrentSnapshot`: reads + inserts into the 300M-row tank_snapshots
+// table + rating recompute) is the real cost and was run strictly serially, so
+// throughput was bound to ~1 player/s regardless of WG headroom. Record players
+// concurrently instead, bounded so we don't exhaust the background DB pool (12)
+// or starve the other background crons.
+const WRITE_CONCURRENCY = 8;
 // Soft-delete tunables — see schema/players.ts for the rationale.
 const NULL_THRESHOLD = 3;
 const SOFT_DELETE_RECHECK_MS = 30 * 24 * 60 * 60 * 1000;
@@ -117,7 +124,11 @@ async function processRegionBatch(
   let succeeded = 0;
   let failed = 0;
 
-  for (const player of rows) {
+  // Record one player's snapshot (or handle its WG-null / error case). Fully
+  // self-contained per player so it is safe to run several at once; the counters
+  // are plain increments (JS is single-threaded, so no atomicity concern between
+  // awaits).
+  const processOne = async (player: Player): Promise<void> => {
     const info = infosByAccount.get(player.accountId);
     if (!info) {
       // WG returned null. Bump the null counter; if we cross the threshold,
@@ -135,7 +146,7 @@ async function processRegionBatch(
             nextCount >= NULL_THRESHOLD ? sql`NOW()` : players.softDeletedAt,
         })
         .where(eq(players.id, player.id));
-      continue;
+      return;
     }
     try {
       const wtr = wtrByAccount.get(player.accountId) ?? null;
@@ -165,7 +176,19 @@ async function processRegionBatch(
         .set({ lastSeenAt: sql`NOW()` })
         .where(eq(players.id, player.id));
     }
-  }
+  };
+
+  // Bounded concurrency: `WRITE_CONCURRENCY` workers each drain a round-robin
+  // slice of the batch serially. Steady N-way parallelism with no per-chunk
+  // barrier (a slow player never blocks a whole chunk). Each row maps to exactly
+  // one worker, so no player is processed twice.
+  const lanes: Player[][] = Array.from({ length: WRITE_CONCURRENCY }, () => []);
+  rows.forEach((player, i) => lanes[i % WRITE_CONCURRENCY].push(player));
+  await Promise.all(
+    lanes.map(async (lane) => {
+      for (const player of lane) await processOne(player);
+    }),
+  );
 
   return { succeeded, failed };
 }
