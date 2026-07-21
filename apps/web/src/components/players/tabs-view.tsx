@@ -337,7 +337,7 @@ function OverallTab({
       {nameHistory.length > 0 && (
         <>
           <PanelSeparator />
-          <PlayerNameHistory history={nameHistory} />
+          <PlayerNameHistory history={nameHistory} nickname={nickname} />
         </>
       )}
     </>

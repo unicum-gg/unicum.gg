@@ -23,14 +23,22 @@ const DAY_FORMAT = "MMM d, yyyy";
  */
 export function ClanNameHistory({
   history,
+  tag,
+  color,
 }: {
   history: ClanNameHistoryEntry[];
+  tag: string;
+  color: string;
 }) {
   if (history.length === 0) return null;
   return (
     <Panel>
       <PanelHeader>
-        <PanelTitle>Previous names</PanelTitle>
+        <PanelTitle>
+          <span style={{ color }}>[</span>
+          {tag}
+          <span style={{ color }}>]</span> previous names
+        </PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">
         <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!">
@@ -38,7 +46,7 @@ export function ClanNameHistory({
             <TableRow>
               <TableHead>Tag</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead className="text-right">Changed</TableHead>
+              <TableHead className="w-32 text-right">Changed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

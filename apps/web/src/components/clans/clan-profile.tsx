@@ -133,7 +133,7 @@ export function ClanProfile({
       {activeSection === ClanSection.Overview && nameHistory.length > 0 && (
         <>
           <PanelSeparator />
-          <ClanNameHistory history={nameHistory} />
+          <ClanNameHistory history={nameHistory} tag={tag} color={color} />
         </>
       )}
     </>
