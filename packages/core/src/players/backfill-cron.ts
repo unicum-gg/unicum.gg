@@ -1,5 +1,5 @@
-import { and, asc, eq, isNull, lt, or, sql } from "drizzle-orm";
-import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { and, asc, eq, inArray, isNull, lt, or, sql } from "drizzle-orm";
+import { tryAcquireLease } from "@unicum.gg/core/cron/lease";
 import { db } from "@unicum.gg/core/db";
 import { type Player, playersByRegion } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
@@ -15,36 +15,124 @@ import {
 import { recordCurrentSnapshot } from ".";
 import { refreshCutoffSql } from "./refresh-policy";
 
-const SCHEDULE = "* * * * * *";
-const BATCH_SIZE_PER_REGION = 400;
-// The WG fetch for a batch is a handful of chunked requests, but the write-back
-// (`recordCurrentSnapshot`: reads + inserts into the 300M-row tank_snapshots
-// table + rating recompute) is the real cost and was run strictly serially, so
-// throughput was bound to ~1 player/s regardless of WG headroom. Record players
-// concurrently instead, bounded so we don't exhaust the background DB pool (12)
-// or starve the other background crons.
-const WRITE_CONCURRENCY = 8;
+// Players fetched per chunk. Kept at the WG batch granularity so one chunk is
+// still a handful of batched requests (info /100, tanks/stats /25, wtr /100),
+// not one request per player.
+const FETCH_CHUNK = 100;
+// Chunks processed concurrently per region. This is the pipeline: N workers each
+// claim a chunk straight from the DB and run fetch -> write in a tight loop, so
+// one worker's slow WG wait overlaps the others' fetches/writes instead of
+// stalling the whole region. N concurrent fetches also actually use the WG budget
+// (a single serial batch left ~80% of it idle). Bounded so N x WRITE_CONCURRENCY
+// writers stay within the background DB pool. There is NO intermediate work queue:
+// the players table + the `eu_players_due_idx` index IS the durable queue, so a
+// restart loses nothing beyond the chunk a worker is mid-processing.
+const PIPELINE_CONCURRENCY = 3;
+// Per-player write fan-out inside a chunk. Total concurrent writers is roughly
+// REGIONS x PIPELINE_CONCURRENCY x WRITE_CONCURRENCY; kept so that (with NA/Asia
+// usually drained and only EU busy) it stays within the background DB pool.
+const WRITE_CONCURRENCY = 3;
+// Back-off when a region's due queue is momentarily empty, or after an error.
+const IDLE_SLEEP_MS = 2_000;
+const ERROR_BACKOFF_MS = 5_000;
+// Re-check the leader lease this often (lease itself lasts 90s).
+const LEASE_REFRESH_MS = 30_000;
 // Soft-delete tunables — see schema/players.ts for the rationale.
 const NULL_THRESHOLD = 3;
 const SOFT_DELETE_RECHECK_MS = 30 * 24 * 60 * 60 * 1000;
 
+const SKIP_LEASE = process.env.NODE_ENV === "development";
+const SKIP_CRONS = process.env.SKIP_CRONS === "true";
+
+const sleep = (ms: number): Promise<void> =>
+  new Promise((resolve) => setTimeout(resolve, ms));
+
+// Cached leader flag, refreshed on an interval so the N workers don't each hit
+// the lease row every iteration. Only the leader instance processes; others idle.
+let isLeader = SKIP_LEASE;
+async function refreshLease(): Promise<void> {
+  if (SKIP_LEASE) return;
+  try {
+    isLeader = await tryAcquireLease();
+  } catch {
+    // Keep the last known state on a transient DB blip rather than flipping.
+  }
+}
+
 /**
- * Schedules one independent cron per region instead of a single cron that
- * processes all three in parallel. The single-cron design was bottlenecked
- * by EU's G-Core throttling: a slow EU tick held the global overlap guard
- * and caused NA/Asia to skip their own ticks ("previous tick still in
- * flight"). Per-region crons keep each region's overlap guard isolated, so
- * EU's timeouts can't starve NA/Asia of compute.
+ * Continuous per-region snapshot pipeline. Instead of a cron tick that runs one
+ * batch to completion (fetch, THEN write) before the next tick — which left the
+ * pipeline idle during the WG wait and used a fraction of the WG budget — each
+ * region runs `PIPELINE_CONCURRENCY` persistent workers. Every worker atomically
+ * claims a chunk of due players (bumping `last_seen_at` under FOR UPDATE SKIP
+ * LOCKED so two workers never grab the same rows), fetches + writes it, and
+ * immediately claims the next. Fetches and writes overlap continuously.
  */
 export function startPlayerBackfillCron(): void {
+  if (SKIP_CRONS) {
+    console.log(`[snapshot-pipeline] SKIP_CRONS=true, not starting`);
+    return;
+  }
+  void refreshLease();
+  setInterval(() => void refreshLease(), LEASE_REFRESH_MS);
+  // Throughput accounting, logged once a minute instead of per chunk (chunks now
+  // complete several times a second across the pool).
+  setInterval(() => {
+    for (const region of REGIONS) {
+      const s = stats[region];
+      if (s && s.chunks > 0) {
+        console.log(
+          `[snapshot-pipeline-${region}] last 60s: ${s.ok} ok, ${s.failed} failed, ${s.chunks} chunks`,
+        );
+        stats[region] = { ok: 0, failed: 0, chunks: 0 };
+      }
+    }
+  }, 60_000);
   for (const region of REGIONS) {
-    const name = `snapshot-cron-${region}`;
-    if (
-      scheduleCron(name, SCHEDULE, async () => {
-        await refreshDuePlayersForRegion(region);
-      })
-    ) {
-      console.log(`[${name}] snapshot refresh scheduled (${SCHEDULE})`);
+    for (let i = 0; i < PIPELINE_CONCURRENCY; i++) {
+      void regionWorker(region, i);
+    }
+  }
+  console.log(
+    `[snapshot-pipeline] started: ${PIPELINE_CONCURRENCY} workers x ${REGIONS.length} regions, ${FETCH_CHUNK}/chunk`,
+  );
+}
+
+// Lightweight per-region throughput accounting for the once-a-minute log above.
+const stats: Record<string, { ok: number; failed: number; chunks: number }> =
+  {};
+function bump(region: Region, ok: number, failed: number): void {
+  const s = (stats[region] ??= { ok: 0, failed: 0, chunks: 0 });
+  s.ok += ok;
+  s.failed += failed;
+  s.chunks += 1;
+}
+
+async function regionWorker(region: Region, workerIdx: number): Promise<void> {
+  // Persistent loop: never returns for the process lifetime. Each iteration
+  // claims one chunk straight from the DB and processes it end-to-end; errors are
+  // isolated so the worker self-heals. No in-memory buffer — the claim IS the
+  // dequeue, so nothing is stranded in memory across a restart.
+  for (;;) {
+    try {
+      if (!isLeader) {
+        await sleep(LEASE_REFRESH_MS);
+        continue;
+      }
+      const rows = await claimDuePlayers(region, FETCH_CHUNK);
+      if (rows.length === 0) {
+        // Region's backlog momentarily drained.
+        await sleep(IDLE_SLEEP_MS);
+        continue;
+      }
+      const { succeeded, failed } = await processRegionBatch(region, rows);
+      bump(region, succeeded, failed);
+    } catch (err) {
+      console.error(
+        `[snapshot-pipeline-${region}] worker ${workerIdx} error:`,
+        err,
+      );
+      await sleep(ERROR_BACKOFF_MS);
     }
   }
 }
@@ -55,28 +143,31 @@ export type RefreshResult = {
   failed: number;
 };
 
-async function collectDuePlayers(
+/**
+ * Atomically claim up to `limit` due players for one worker.
+ *
+ * Adaptive cadence — see refresh-policy.ts: the cutoff is per-row from
+ * `last_battle_at` (actives every few hours, dormants weeks-to-months,
+ * `last_battle_at IS NULL` — discovered via clan walk, never fetched — is
+ * perpetually due). ORDER BY puts unfetched first, then most-recently-active,
+ * then oldest `last_seen_at` for fairness.
+ *
+ * The claim is a single UPDATE that bumps `last_seen_at` on the selected rows
+ * under `FOR UPDATE SKIP LOCKED`, so the region's concurrent workers never grab
+ * the same players. Bumping `last_seen_at` IS the claim: the row instantly drops
+ * out of the "due" predicate, so there's no double-processing even before the
+ * (later) snapshot write. `recordCurrentSnapshot` re-stamps it on success; the
+ * null/error paths update it too. A crash between claim and write just lets those
+ * players wait one cadence — acceptable, and rare.
+ */
+async function claimDuePlayers(
   region: Region,
   limit: number,
-): Promise<{ rows: Player[] }> {
-  // Adaptive cadence — see refresh-policy.ts for the per-bucket targets.
-  // The cutoff is computed per-row from `last_battle_at`: actives get
-  // refreshed every few hours, dormants every weeks-to-months, and
-  // `last_battle_at IS NULL` (= we know the account from clan discovery
-  // but never called /wot/account/info/) is perpetually due so it dominates
-  // the queue until cleared.
-  //
-  // ORDER BY puts unfetched first (NULLS FIRST), then most-recently-active,
-  // then oldest `last_seen_at` for fairness within ties. This keeps the
-  // discovery backlog clearing fast while still rotating fetched players.
+): Promise<Player[]> {
   const players = playersByRegion[region];
-  // Skip players that WG has been returning null for if we already marked
-  // them soft-deleted within the past 30 days. After the recheck window the
-  // OR branch lets them back in; if WG keeps returning null we re-stamp
-  // softDeletedAt and they go back to sleep.
-  const softDeleteCutoff = new Date(
-    Date.now() - SOFT_DELETE_RECHECK_MS,
-  );
+  // Skip players WG keeps returning null for, if soft-deleted within the recheck
+  // window; after it the OR branch lets them back in for one retry.
+  const softDeleteCutoff = new Date(Date.now() - SOFT_DELETE_RECHECK_MS);
   const where = and(
     sql`${players.lastSeenAt} < ${refreshCutoffSql(players.lastBattleAt)}`,
     or(
@@ -84,22 +175,21 @@ async function collectDuePlayers(
       lt(players.softDeletedAt, softDeleteCutoff),
     ),
   );
-  // NB: we deliberately do NOT also `count(*)` the full due set. The predicate is
-  // a non-sargable per-row CASE, so that count is a full seq scan of the 2M-row
-  // players table — and running it every batch, per region, made it the single
-  // most-active query on the whole DB (pegging Postgres CPU), purely to print a
-  // "/Y" in the log. The `LIMIT`ed select below still tells us if we filled a
-  // batch; the exact backlog size isn't worth a 2M-row scan per tick.
-  const rows = await db
-    .select()
+  const claimIds = db
+    .select({ id: players.id })
     .from(players)
     .where(where)
     .orderBy(
       sql`${players.lastBattleAt} DESC NULLS FIRST`,
       asc(players.lastSeenAt),
     )
-    .limit(limit);
-  return { rows };
+    .limit(limit)
+    .for("update", { skipLocked: true });
+  return db
+    .update(players)
+    .set({ lastSeenAt: sql`NOW()` })
+    .where(inArray(players.id, claimIds))
+    .returning();
 }
 
 async function processRegionBatch(
@@ -111,15 +201,15 @@ async function processRegionBatch(
 
   const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
     getPlayersInfoBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-cron-${region}] account/info batch failed:`, err);
+      console.error(`[snapshot-pipeline-${region}] account/info batch failed:`, err);
       return new Map<number, PlayerInfo>();
     }),
     getTanksStatsBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-cron-${region}] tanks/stats batch failed:`, err);
+      console.error(`[snapshot-pipeline-${region}] tanks/stats batch failed:`, err);
       return new Map<number, TankStats[]>();
     }),
     getAccountsWTRBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-cron-${region}] wtr batch failed:`, err);
+      console.error(`[snapshot-pipeline-${region}] wtr batch failed:`, err);
       return new Map<number, number>();
     }),
   ]);
@@ -171,7 +261,7 @@ async function processRegionBatch(
     } catch (err) {
       failed += 1;
       console.error(
-        `[snapshot-cron-${region}] snapshot insert failed for ${player.nickname}:`,
+        `[snapshot-pipeline-${region}] snapshot insert failed for ${player.nickname}:`,
         err,
       );
       await db
@@ -199,23 +289,17 @@ async function processRegionBatch(
 export async function refreshDuePlayersForRegion(
   region: Region,
 ): Promise<RefreshResult> {
-  const { rows } = await collectDuePlayers(region, BATCH_SIZE_PER_REGION);
+  const rows = await claimDuePlayers(region, FETCH_CHUNK);
   if (rows.length === 0) return { processed: 0, succeeded: 0, failed: 0 };
 
-  console.log(`[snapshot-cron-${region}] refreshing ${rows.length} due`);
-
   const { succeeded, failed } = await processRegionBatch(region, rows);
-
-  console.log(
-    `[snapshot-cron-${region}] done: ${succeeded} ok, ${failed} failed`,
-  );
   return { processed: rows.length, succeeded, failed };
 }
 
 /**
- * Run a single round across all three regions in parallel. Kept for the
- * manual `/api/cron/refresh-snapshots` HTTP trigger; production background
- * work goes through the per-region scheduled crons.
+ * Run a single chunk across all three regions in parallel. Kept for the
+ * manual `/api/cron/refresh-snapshots` HTTP trigger; production background work
+ * goes through the continuous per-region pipeline (`startPlayerBackfillCron`).
  */
 export async function refreshDuePlayers(): Promise<RefreshResult> {
   const results = await Promise.all(
