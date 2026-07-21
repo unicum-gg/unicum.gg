@@ -134,18 +134,23 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
         continue;
       }
       const rows = await claimDuePlayers(region, FETCH_CHUNK);
-      if (rows.length === 0) {
-        // Region caught up. Back off exponentially so a drained region (e.g.
-        // NA/Asia, whose queues are usually empty) doesn't hammer the DB with
-        // claim scans that find nothing — that polling was a big chunk of the
-        // Postgres load. Reset to a tight loop the moment work reappears.
+      if (rows.length > 0) {
+        const { succeeded, failed } = await processRegionBatch(region, rows);
+        bump(region, succeeded, failed);
+      }
+      if (rows.length < FETCH_CHUNK) {
+        // Couldn't fill a chunk => this region is caught up on its immediate
+        // backlog. Back off exponentially so a nearly-drained region (NA/Asia,
+        // where only a trickle of players comes due) stops hammering the DB with
+        // claim scans — that polling, not the writes, was most of the Postgres
+        // load there. A region with a real backlog (EU) always fills its chunk,
+        // so it never backs off. Reset to a tight loop the moment a full chunk
+        // reappears.
         emptyStreak += 1;
         await sleep(Math.min(IDLE_SLEEP_MS * 2 ** emptyStreak, MAX_IDLE_SLEEP_MS));
-        continue;
+      } else {
+        emptyStreak = 0;
       }
-      emptyStreak = 0;
-      const { succeeded, failed } = await processRegionBatch(region, rows);
-      bump(region, succeeded, failed);
     } catch (err) {
       console.error(
         `[snapshot-pipeline-${region}] worker ${workerIdx} error:`,
