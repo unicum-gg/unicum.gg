@@ -13,10 +13,23 @@ const strongholdLeaderboardEntry = z
     elo: z.number().nullable().meta({
       description: "Tier Elo (null for Advances, which has no Elo).",
     }),
-    battles: z.number(),
-    battles30d: z.number().nullable(),
-    wins: z.number(),
-    wins30d: z.number().nullable(),
+    battles: z.number().meta({
+      description: "Battles over the selected period.",
+    }),
+    wins: z.number().meta({
+      description: "Wins over the selected period.",
+    }),
+    personalRating: z.number().nullable().meta({
+      description: "Median WG Personal Rating (WGR) of the clan's roster.",
+    }),
+    boostRatio: z.number().nullable().meta({
+      description:
+        "Share of the roster (0..1) that reads as boost accounts (few random battles). Higher discounts SR.",
+    }),
+    sr: z.number().nullable().meta({
+      description:
+        "Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period.",
+    }),
   })
   .meta({
     id: "StrongholdLeaderboardEntry",
@@ -29,12 +42,13 @@ export const strongholdTopQuery = z.object({
   tier: z.enum(["advances", "t10", "t8", "t6"]).optional().meta({
     description: "Stronghold mode/tier (default t10).",
   }),
-  sort: z
-    .enum(["elo", "battles", "battles30d", "winrate30d", "winrate"])
-    .optional()
-    .meta({
-      description: "Ranking column (default elo; battles for Advances).",
-    }),
+  sort: z.enum(["sr", "elo", "battles", "winrate"]).optional().meta({
+    description: "Ranking column (default sr).",
+  }),
+  period: z.enum(["overall", "30d"]).optional().meta({
+    description:
+      "Window the stats are computed over: all-time or the last 30 days (default overall).",
+  }),
 });
 
 /** Response of `GET /{region}/clans/stronghold/top`. */

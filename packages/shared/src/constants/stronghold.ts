@@ -6,12 +6,23 @@ export enum StrongholdTier {
 }
 
 export enum StrongholdSort {
+  Rating = "sr",
   Elo = "elo",
   Battles = "battles",
-  Battles30d = "battles30d",
-  Winrate30d = "winrate30d",
   Winrate = "winrate",
 }
+
+// The Overall / last-30-days window the whole leaderboard is computed over
+// (SR, battles, win rate all follow it), mirroring the home page's toggle.
+export enum StrongholdPeriod {
+  Overall = "overall",
+  Month = "30d",
+}
+
+export const STRONGHOLD_PERIOD_LABEL: Record<StrongholdPeriod, string> = {
+  [StrongholdPeriod.Overall]: "Overall",
+  [StrongholdPeriod.Month]: "Past 30 days",
+};
 
 export const STRONGHOLD_TIER_LABEL: Record<StrongholdTier, string> = {
   [StrongholdTier.Advances]: "Advances",
@@ -21,10 +32,9 @@ export const STRONGHOLD_TIER_LABEL: Record<StrongholdTier, string> = {
 };
 
 export const STRONGHOLD_SORT_LABEL: Record<StrongholdSort, string> = {
+  [StrongholdSort.Rating]: "SR",
   [StrongholdSort.Elo]: "ELO",
   [StrongholdSort.Battles]: "Battles",
-  [StrongholdSort.Battles30d]: "30d battles",
-  [StrongholdSort.Winrate30d]: "30d win rate",
   [StrongholdSort.Winrate]: "Win rate",
 };
 
@@ -38,33 +48,16 @@ export const STRONGHOLD_MIN_BATTLES: Record<StrongholdTier, number> = {
   [StrongholdTier.T6]: 50,
 };
 
+const DEFAULT_SORT_OPTIONS: StrongholdSort[] = [
+  StrongholdSort.Rating,
+  StrongholdSort.Elo,
+  StrongholdSort.Battles,
+  StrongholdSort.Winrate,
+];
+
 export const TIER_SORT_OPTIONS: Record<StrongholdTier, StrongholdSort[]> = {
-  [StrongholdTier.T10]: [
-    StrongholdSort.Elo,
-    StrongholdSort.Battles,
-    StrongholdSort.Battles30d,
-    StrongholdSort.Winrate30d,
-    StrongholdSort.Winrate,
-  ],
-  [StrongholdTier.T8]: [
-    StrongholdSort.Elo,
-    StrongholdSort.Battles,
-    StrongholdSort.Battles30d,
-    StrongholdSort.Winrate30d,
-    StrongholdSort.Winrate,
-  ],
-  [StrongholdTier.T6]: [
-    StrongholdSort.Elo,
-    StrongholdSort.Battles,
-    StrongholdSort.Battles30d,
-    StrongholdSort.Winrate30d,
-    StrongholdSort.Winrate,
-  ],
-  [StrongholdTier.Advances]: [
-    StrongholdSort.Elo,
-    StrongholdSort.Battles,
-    StrongholdSort.Battles30d,
-    StrongholdSort.Winrate30d,
-    StrongholdSort.Winrate,
-  ],
+  [StrongholdTier.T10]: DEFAULT_SORT_OPTIONS,
+  [StrongholdTier.T8]: DEFAULT_SORT_OPTIONS,
+  [StrongholdTier.T6]: DEFAULT_SORT_OPTIONS,
+  [StrongholdTier.Advances]: DEFAULT_SORT_OPTIONS,
 };

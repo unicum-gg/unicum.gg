@@ -228,7 +228,7 @@ export interface paths {
         };
         /**
          * Stronghold clan leaderboard
-         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by Elo (or battles for Advances, which has no Elo). Top 100; cached ~10 min server-side.
+         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over all-time or the last 30 days. Top 100; cached ~10 min server-side.
          */
         get: operations["get-{region}-clans-stronghold-top"];
         put?: never;
@@ -1818,10 +1818,16 @@ export interface components {
             membersCount: number;
             /** @description Tier Elo (null for Advances, which has no Elo). */
             elo: number | null;
+            /** @description Battles over the selected period. */
             battles: number;
-            battles30d: number | null;
+            /** @description Wins over the selected period. */
             wins: number;
-            wins30d: number | null;
+            /** @description Median WG Personal Rating (WGR) of the clan's roster. */
+            personalRating: number | null;
+            /** @description Share of the roster (0..1) that reads as boost accounts (few random battles). Higher discounts SR. */
+            boostRatio: number | null;
+            /** @description Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period. */
+            sr: number | null;
         };
         /** @description One game mode's totals plus 24h/7d/30d period diffs. */
         StrongholdMode: {
@@ -2580,8 +2586,10 @@ export interface operations {
             query?: {
                 /** @description Stronghold mode/tier (default t10). */
                 tier?: "advances" | "t10" | "t8" | "t6";
-                /** @description Ranking column (default elo; battles for Advances). */
-                sort?: "elo" | "battles" | "battles30d" | "winrate30d" | "winrate";
+                /** @description Ranking column (default sr). */
+                sort?: "sr" | "elo" | "battles" | "winrate";
+                /** @description Window the stats are computed over: all-time or the last 30 days (default overall). */
+                period?: "overall" | "30d";
             };
             header?: never;
             path: {
