@@ -1,6 +1,10 @@
 "use client";
 
-import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
+import {
+  CaretDownIcon,
+  CaretUpDownIcon,
+  WarningIcon,
+} from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -24,16 +28,27 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
+import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+
+// Only flag rosters where boost accounts are a real share, not the handful
+// every clan carries.
+const BOOST_BADGE_MIN = 0.15;
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const pctFmt = new Intl.NumberFormat("en-US", {
@@ -95,19 +110,33 @@ export function StrongholdLeaderboardView({
   region,
   tier,
   sort,
+  period,
   results,
 }: {
   region: Region;
   tier: StrongholdTier;
   sort: StrongholdSort;
+  period: StrongholdPeriod;
   results: StrongholdLeaderboardEntry[];
 }) {
   const router = useRouter();
 
-  function setSort(s: StrongholdSort) {
-    router.push(`${ROUTES.STRONGHOLD(region, tier)}?sort=${s}`, {
+  function navigate(nextSort: StrongholdSort, nextPeriod: StrongholdPeriod) {
+    const params = new URLSearchParams({ sort: nextSort });
+    // Only carry the period when it deviates from the default, keeping the
+    // Overall URL clean.
+    if (nextPeriod !== StrongholdPeriod.Overall) params.set("period", nextPeriod);
+    router.push(`${ROUTES.STRONGHOLD(region, tier)}?${params}`, {
       scroll: false,
     });
+  }
+
+  function setSort(s: StrongholdSort) {
+    navigate(s, period);
+  }
+
+  function setPeriod(p: StrongholdPeriod) {
+    navigate(sort, p);
   }
 
   return (
@@ -129,7 +158,10 @@ export function StrongholdLeaderboardView({
             {STRONGHOLD_SORT_LABEL[sort]} across all tracked clans
             {tier === StrongholdTier.Advances
               ? " in Advances (15v15)"
-              : ` in ${STRONGHOLD_TIER_LABEL[tier]} (7v7)`}{" "}
+              : ` in ${STRONGHOLD_TIER_LABEL[tier]} (7v7)`}
+            {period === StrongholdPeriod.Month
+              ? " over the past 30 days"
+              : ""}{" "}
             (minimum {STRONGHOLD_MIN_BATTLES[tier]} battles).
           </p>
         </PanelContent>
@@ -144,7 +176,26 @@ export function StrongholdLeaderboardView({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans
+            Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans ·{" "}
+            <Select
+              value={period}
+              onValueChange={(v) => setPeriod(v as StrongholdPeriod)}
+            >
+              <SelectTrigger
+                size="sm"
+                aria-label="Period"
+                className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4"
+              >
+                <SelectValue>{STRONGHOLD_PERIOD_LABEL[period]}</SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                {Object.values(StrongholdPeriod).map((per) => (
+                  <SelectItem key={per} value={per}>
+                    {STRONGHOLD_PERIOD_LABEL[per]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
@@ -168,6 +219,15 @@ export function StrongholdLeaderboardView({
                     <TableHead>Clan</TableHead>
                     <TableHead className="w-24 text-center!">Members</TableHead>
                     <SortableHead
+                      sortKey={StrongholdSort.Rating}
+                      active={sort === StrongholdSort.Rating}
+                      onSort={setSort}
+                      className="w-24"
+                      tooltip="Skirmish Rating. Win rate and battle volume weighted by the roster's average WG Personal Rating (rewards winning with a strong roster, discounts farming with weak accounts)."
+                    >
+                      SR
+                    </SortableHead>
+                    <SortableHead
                       sortKey={StrongholdSort.Elo}
                       active={sort === StrongholdSort.Elo}
                       onSort={setSort}
@@ -184,23 +244,6 @@ export function StrongholdLeaderboardView({
                       Battles
                     </SortableHead>
                     <SortableHead
-                      sortKey={StrongholdSort.Battles30d}
-                      active={sort === StrongholdSort.Battles30d}
-                      onSort={setSort}
-                      className="w-32"
-                    >
-                      30d battles
-                    </SortableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.Winrate30d}
-                      active={sort === StrongholdSort.Winrate30d}
-                      onSort={setSort}
-                      className="w-28"
-                      tooltip="Win rate over the last 30 days"
-                    >
-                      30d WR
-                    </SortableHead>
-                    <SortableHead
                       sortKey={StrongholdSort.Winrate}
                       active={sort === StrongholdSort.Winrate}
                       onSort={setSort}
@@ -215,12 +258,6 @@ export function StrongholdLeaderboardView({
                   {results.map((entry, i) => {
                     const winrate =
                       entry.battles > 0 ? entry.wins / entry.battles : null;
-                    const winrate30d =
-                      entry.wins30d !== null &&
-                      entry.battles30d !== null &&
-                      entry.battles30d > 0
-                        ? entry.wins30d / entry.battles30d
-                        : null;
                     return (
                       <TableRow key={entry.clanId}>
                         <TableCell className="text-center text-muted-foreground tabular-nums">
@@ -261,6 +298,26 @@ export function StrongholdLeaderboardView({
                                   {entry.name}
                                 </span>
                               </span>
+                              {entry.boostRatio !== null &&
+                                entry.boostRatio >= BOOST_BADGE_MIN && (
+                                  <Tooltip>
+                                    <TooltipTrigger asChild>
+                                      <span className="inline-flex shrink-0 items-center gap-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-500">
+                                        <WarningIcon
+                                          weight="fill"
+                                          className="size-3"
+                                        />
+                                        {Math.round(entry.boostRatio * 100)}%
+                                      </span>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                      {Math.round(entry.boostRatio * 100)}% of
+                                      this roster read as boost accounts (very
+                                      few random battles, used to inflate
+                                      stronghold results). This discounts the SR.
+                                    </TooltipContent>
+                                  </Tooltip>
+                                )}
                               {entry.languages.length > 0 && (
                                 <span className="hidden h-4 shrink-0 sm:inline-flex">
                                   <LanguageFlags
@@ -278,29 +335,14 @@ export function StrongholdLeaderboardView({
                         <TableCell className="text-center text-muted-foreground tabular-nums">
                           {intFmt.format(entry.membersCount)}
                         </TableCell>
+                        <TableCell className="text-right font-bold tabular-nums">
+                          {entry.sr !== null ? intFmt.format(entry.sr) : "—"}
+                        </TableCell>
                         <TableCell className="text-right font-semibold tabular-nums">
                           {entry.elo !== null ? intFmt.format(entry.elo) : "—"}
                         </TableCell>
                         <TableCell className="text-right font-semibold tabular-nums">
                           {intFmt.format(entry.battles)}
-                        </TableCell>
-                        <TableCell className="text-right text-muted-foreground tabular-nums">
-                          {entry.battles30d !== null
-                            ? `+${intFmt.format(entry.battles30d)}`
-                            : "—"}
-                        </TableCell>
-                        <TableCell
-                          className={cn(
-                            "text-right font-semibold tabular-nums",
-                            winrate30d !== null &&
-                              RATING_COLOR_CLASS[
-                                strongholdWinrateColor(winrate30d)
-                              ],
-                          )}
-                        >
-                          {winrate30d !== null
-                            ? pctFmt.format(winrate30d)
-                            : "—"}
                         </TableCell>
                         <TableCell
                           className={cn(

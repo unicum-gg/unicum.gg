@@ -2,6 +2,7 @@ import { StrongholdLeaderboardView } from "./stronghold-leaderboard-view";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import {
+  StrongholdPeriod,
   StrongholdSort,
   StrongholdTier,
   TIER_SORT_OPTIONS,
@@ -21,22 +22,31 @@ function parseSort(raw: string | undefined, tier: StrongholdTier): StrongholdSor
   return found ?? allowed[0];
 }
 
+function parsePeriod(raw: string | undefined): StrongholdPeriod {
+  return (Object.values(StrongholdPeriod) as string[]).includes(raw ?? "")
+    ? (raw as StrongholdPeriod)
+    : StrongholdPeriod.Overall;
+}
+
 export async function StrongholdLeaderboardPage({
   region,
   tierParam,
   sortParam,
+  periodParam,
 }: {
   region: Region;
   tierParam: string;
   sortParam?: string;
+  periodParam?: string;
 }) {
   const tier = parseTier(tierParam) ?? StrongholdTier.T10;
   const sort = parseSort(sortParam, tier);
+  const period = parsePeriod(periodParam);
   // The page consumes its own public API through the SDK (top 100 fixed by
   // the endpoint).
   const { results } = (await unicum
     .region(region)
-    .clans.strongholdTop({ tier, sort })) as unknown as {
+    .clans.strongholdTop({ tier, sort, period })) as unknown as {
     results: StrongholdLeaderboardEntry[];
   };
 
@@ -45,6 +55,7 @@ export async function StrongholdLeaderboardPage({
       region={region}
       tier={tier}
       sort={sort}
+      period={period}
       results={results}
     />
   );

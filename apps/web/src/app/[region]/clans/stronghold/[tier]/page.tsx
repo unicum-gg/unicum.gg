@@ -33,7 +33,7 @@ export async function generateMetadata({
   const tierLabel = STRONGHOLD_TIER_LABEL[tierEnum];
   return constructMetadata({
     title: `Top ${tierLabel} clans (${label})`,
-    description: `${label} ${tierLabel} clan leaderboard. Ranked by ELO, battles, and win rate. Minimum ${STRONGHOLD_MIN_BATTLES[tierEnum]} battles.`,
+    description: `${label} ${tierLabel} clan leaderboard. Ranked by SR (skirmish rating), ELO, battles, and win rate. Minimum ${STRONGHOLD_MIN_BATTLES[tierEnum]} battles.`,
     canonical: ROUTES.STRONGHOLD(region, tierEnum),
   });
 }
@@ -43,9 +43,19 @@ export default async function RegionStrongholdPage({
   searchParams,
 }: {
   params: Promise<{ region: string; tier: string }>;
-  searchParams: Promise<{ sort?: string }>;
+  searchParams: Promise<{ sort?: string; period?: string }>;
 }) {
-  const [{ region, tier }, { sort }] = await Promise.all([params, searchParams]);
+  const [{ region, tier }, { sort, period }] = await Promise.all([
+    params,
+    searchParams,
+  ]);
   if (!isRegion(region)) notFound();
-  return <StrongholdLeaderboardPage region={region} tierParam={tier} sortParam={sort} />;
+  return (
+    <StrongholdLeaderboardPage
+      region={region}
+      tierParam={tier}
+      sortParam={sort}
+      periodParam={period}
+    />
+  );
 }
