@@ -102,30 +102,54 @@ export async function buildPlayerDetail(args: {
   }
 
   const current = statsFromSnapshot(latest);
+  // Account-stat diff for a period. An empty first fetch (battles === 0, the
+  // poisoned snapshot where WG's aggregate lagged) means the whole period is
+  // "everything since we started tracking" = the lifetime total, so return
+  // `current`. This keeps the rating-delta rows honest too: the poisoned
+  // baseline carried a non-zero wtr (e.g. 8313) even with battles 0, so a naive
+  // diff showed a partial change (wtr 10072 - 8313 = +1759) instead of the real
+  // +10072. Legit players have battles > 0 at first fetch, so this only fires on
+  // the artifact.
+  function periodDiff(baseline: PlayerSnapshot | null): typeof current | null {
+    if (!baseline) return null;
+    if (baseline.battles === 0) return current;
+    return diffStats(current, statsFromSnapshot(baseline));
+  }
   const periods: PeriodStats = {
-    h24: initial.periodSnapshots.h24
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.h24))
-      : null,
-    d7: initial.periodSnapshots.d7
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.d7))
-      : null,
-    d30: initial.periodSnapshots.d30
-      ? diffStats(current, statsFromSnapshot(initial.periodSnapshots.d30))
-      : null,
+    h24: periodDiff(initial.periodSnapshots.h24),
+    d7: periodDiff(initial.periodSnapshots.d7),
+    d30: periodDiff(initial.periodSnapshots.d30),
   };
+  // Per-tank diff for a period. When the account baseline is an *empty* first
+  // fetch (battles === 0 — a poisoned snapshot where WG's `statistics.all`
+  // aggregate lagged the per-tank data at first sight), the account rows already
+  // read as the lifetime total (subtracting zero), but the per-tank baseline
+  // caught a battle or two, so a naive tank diff would drop them and make the
+  // derived stats (combined dmg, WN8, WNX) disagree with the account rows for the
+  // same column. Treat such a period as "= lifetime" for the tanks too (return
+  // the full `tanks`), keeping the column internally consistent. Legit players
+  // always have battles > 0 at first fetch, so this only fires on that artifact.
+  function periodTankDiff(
+    baseline: PlayerSnapshot | null,
+    baselineTanks: (typeof initial.periodTankSnapshots)["d30"],
+  ): typeof tanks | null {
+    if (!baseline) return null;
+    if (baseline.battles === 0) return tanks;
+    return baselineTanks.size > 0 ? diffTanks(tanks, baselineTanks) : null;
+  }
   const periodTanks = {
-    h24:
-      initial.periodTankSnapshots.h24.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.h24)
-        : null,
-    d7:
-      initial.periodTankSnapshots.d7.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.d7)
-        : null,
-    d30:
-      initial.periodTankSnapshots.d30.size > 0
-        ? diffTanks(tanks, initial.periodTankSnapshots.d30)
-        : null,
+    h24: periodTankDiff(
+      initial.periodSnapshots.h24,
+      initial.periodTankSnapshots.h24,
+    ),
+    d7: periodTankDiff(
+      initial.periodSnapshots.d7,
+      initial.periodTankSnapshots.d7,
+    ),
+    d30: periodTankDiff(
+      initial.periodSnapshots.d30,
+      initial.periodTankSnapshots.d30,
+    ),
   };
 
   function mode(
