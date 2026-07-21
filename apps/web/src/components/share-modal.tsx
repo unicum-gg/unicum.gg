@@ -20,6 +20,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
@@ -38,6 +39,8 @@ export function ShareModal({
   emailSubject,
   nativeShareTitle,
   ogImage,
+  setupParams,
+  setupLabel = "Share with setup",
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -47,21 +50,33 @@ export function ShareModal({
   emailSubject?: string;
   nativeShareTitle?: string;
   ogImage?: string;
+  /** Extra query string (no leading `?`) to optionally append to the shared link
+   * via a "Share with setup" checkbox. Omit/empty to hide the checkbox. */
+  setupParams?: string;
+  setupLabel?: string;
 }) {
   const [copied, setCopied] = useState(false);
   const [ogLoaded, setOgLoaded] = useState(false);
+  const [withSetup, setWithSetup] = useState(true);
 
   useEffect(() => {
     setOgLoaded(false);
   }, [ogImage]);
 
+  // The link actually shared: the clean URL, plus the current configurator setup
+  // when the box is ticked and there is a setup to carry.
+  const shareUrl =
+    setupParams && withSetup
+      ? `${url}${url.includes("?") ? "&" : "?"}${setupParams}`
+      : url;
+
   const encodedText = encodeURIComponent(shareText);
-  const encodedUrl = encodeURIComponent(url);
+  const encodedUrl = encodeURIComponent(shareUrl);
   const subject = encodeURIComponent(emailSubject ?? title);
 
   async function copyLink() {
     try {
-      await navigator.clipboard.writeText(url);
+      await navigator.clipboard.writeText(shareUrl);
       setCopied(true);
       toast.success("Link copied");
       setTimeout(() => setCopied(false), 1500);
@@ -83,7 +98,7 @@ export function ShareModal({
       await navigator.share({
         title: nativeShareTitle ?? title,
         text: shareText,
-        url,
+        url: shareUrl,
       });
     } catch {
       // user cancelled, no toast
@@ -92,7 +107,7 @@ export function ShareModal({
 
   async function copyForDiscord() {
     try {
-      await navigator.clipboard.writeText(`${shareText} ${url}`);
+      await navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
       toast.success("Copied, paste in Discord");
     } catch {
       toast.error("Could not copy link");
@@ -178,7 +193,12 @@ export function ShareModal({
               Link
             </label>
             <div className="flex gap-2">
-              <Input id="share-link" value={url} readOnly className="flex-1" />
+              <Input
+                id="share-link"
+                value={shareUrl}
+                readOnly
+                className="flex-1"
+              />
               <button
                 type="button"
                 onClick={copyLink}
@@ -195,6 +215,15 @@ export function ShareModal({
                 )}
               </button>
             </div>
+            {setupParams ? (
+              <label className="flex cursor-pointer items-center gap-2 pt-0.5 text-xs text-muted-foreground">
+                <Checkbox
+                  checked={withSetup}
+                  onCheckedChange={(v) => setWithSetup(v === true)}
+                />
+                {setupLabel}
+              </label>
+            ) : null}
           </div>
 
           <div className="space-y-2">

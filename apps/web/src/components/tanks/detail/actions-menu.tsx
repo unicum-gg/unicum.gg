@@ -18,6 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { ShareModal } from "@/components/share-modal";
+import { SETUP_PARAM } from "@/components/tanks/detail/specifications/config-url";
 import {
   type SearchHistoryItem,
   useSearchHistory,
@@ -48,8 +49,18 @@ export function TankActionsMenu({
 }) {
   const { isFavorite, toggleFavorite } = useSearchHistory();
   const [shareOpen, setShareOpen] = useState(false);
+  // The configurator setup lives in the current URL's query string; capture it
+  // when Share opens so the modal can offer "Share with setup" (empty when the
+  // tank is at its stock config).
+  const [setupParams, setSetupParams] = useState("");
   const fav = isFavorite(favoriteItem);
   const url = `${APP.URL}${ROUTES.TANK(region, slug)}`;
+
+  function openShare() {
+    const token = new URLSearchParams(window.location.search).get(SETUP_PARAM);
+    setSetupParams(token ? `${SETUP_PARAM}=${token}` : "");
+    setShareOpen(true);
+  }
 
   return (
     <>
@@ -70,7 +81,7 @@ export function TankActionsMenu({
             <StarIcon weight={fav ? "fill" : "bold"} />
             {fav ? "Remove from favorites" : "Add to favorites"}
           </DropdownMenuItem>
-          <DropdownMenuItem onSelect={() => setShareOpen(true)}>
+          <DropdownMenuItem onSelect={() => openShare()}>
             <ShareNetworkIcon weight="bold" />
             Share
           </DropdownMenuItem>
@@ -108,6 +119,7 @@ export function TankActionsMenu({
         url={url}
         shareText={`Check ${name}'s WoT stats on ${APP.NAME}`}
         ogImage={`${APP.URL}/${region}/tanks/${slug}/opengraph-image`}
+        setupParams={setupParams}
       />
     </>
   );
