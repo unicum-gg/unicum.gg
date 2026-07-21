@@ -55,6 +55,20 @@ const LEASE_REFRESH_MS = 30_000;
 const NULL_THRESHOLD = 3;
 const SOFT_DELETE_RECHECK_MS = 30 * 24 * 60 * 60 * 1000;
 
+// The claim runs in two orderings, split across the workers (see
+// startSnapshotPipeline) so the pipeline drains the overdue backlog WITHOUT
+// starving fresh players — neither ordering alone does both:
+// - Active: most-recently-active first. Keeps the tight 6h/24h cadences met, so
+//   the pages people actually look at stay fresh.
+// - Backlog: longest-unchecked first. Drains the recent90d/dormant backlog that
+//   the active ordering perpetually deprioritises. These are mostly idle
+//   players, so the change detector skips ~80% of them (no tanks/stats, no
+//   write) and the drain moves fast on almost no WG budget.
+enum ClaimMode {
+  Active = "active",
+  Backlog = "backlog",
+}
+
 const SKIP_LEASE = process.env.NODE_ENV === "development";
 const SKIP_CRONS = process.env.SKIP_CRONS === "true";
 
@@ -106,13 +120,18 @@ export function startSnapshotPipeline(): void {
       }
     }
   }, 60_000);
+  // Split each region's workers: half drain the backlog (longest-overdue first),
+  // half keep active players fresh (most-recently-active first). Both run
+  // concurrently so neither goal starves the other.
+  const backlogWorkers = Math.floor(PIPELINE_CONCURRENCY / 2);
   for (const region of REGIONS) {
     for (let i = 0; i < PIPELINE_CONCURRENCY; i++) {
-      void regionWorker(region, i);
+      const mode = i < backlogWorkers ? ClaimMode.Backlog : ClaimMode.Active;
+      void regionWorker(region, i, mode);
     }
   }
   console.log(
-    `[snapshot-pipeline] started: ${PIPELINE_CONCURRENCY} workers x ${REGIONS.length} regions, ${FETCH_CHUNK}/chunk`,
+    `[snapshot-pipeline] started: ${PIPELINE_CONCURRENCY} workers x ${REGIONS.length} regions (${backlogWorkers} backlog + ${PIPELINE_CONCURRENCY - backlogWorkers} active), ${FETCH_CHUNK}/chunk`,
   );
 }
 
@@ -152,7 +171,11 @@ function bump(
   s.writeMs += writeMs;
 }
 
-async function regionWorker(region: Region, workerIdx: number): Promise<void> {
+async function regionWorker(
+  region: Region,
+  workerIdx: number,
+  mode: ClaimMode,
+): Promise<void> {
   // Persistent loop: never returns for the process lifetime. Each iteration
   // claims one chunk straight from the DB and processes it end-to-end; errors are
   // isolated so the worker self-heals. No in-memory buffer — the claim IS the
@@ -164,7 +187,7 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
         await sleep(LEASE_REFRESH_MS);
         continue;
       }
-      const rows = await claimDuePlayers(region, FETCH_CHUNK);
+      const rows = await claimDuePlayers(region, FETCH_CHUNK, mode);
       if (rows.length > 0) {
         const { succeeded, failed, skipped, fetchMs, writeMs } =
           await processRegionBatch(region, rows);
@@ -219,6 +242,7 @@ export type RefreshResult = {
 async function claimDuePlayers(
   region: Region,
   limit: number,
+  mode: ClaimMode,
 ): Promise<Player[]> {
   const players = playersByRegion[region];
   // Skip players WG keeps returning null for, if soft-deleted within the recheck
@@ -231,14 +255,18 @@ async function claimDuePlayers(
       lt(players.softDeletedAt, softDeleteCutoff),
     ),
   );
+  // Both orderings claim from the same due set; FOR UPDATE SKIP LOCKED keeps the
+  // two worker groups from grabbing the same rows, so they naturally partition
+  // into "freshest active" vs "longest overdue" without coordinating.
+  const orderBy =
+    mode === ClaimMode.Backlog
+      ? [asc(players.lastSeenAt)]
+      : [sql`${players.lastBattleAt} DESC NULLS FIRST`, asc(players.lastSeenAt)];
   const claimIds = db
     .select({ id: players.id })
     .from(players)
     .where(where)
-    .orderBy(
-      sql`${players.lastBattleAt} DESC NULLS FIRST`,
-      asc(players.lastSeenAt),
-    )
+    .orderBy(...orderBy)
     .limit(limit)
     .for("update", { skipLocked: true });
   return db
@@ -423,7 +451,7 @@ async function processRegionBatch(
 export async function refreshDuePlayersForRegion(
   region: Region,
 ): Promise<RefreshResult> {
-  const rows = await claimDuePlayers(region, FETCH_CHUNK);
+  const rows = await claimDuePlayers(region, FETCH_CHUNK, ClaimMode.Active);
   if (rows.length === 0) return { processed: 0, succeeded: 0, failed: 0 };
 
   const { succeeded, failed } = await processRegionBatch(region, rows);
