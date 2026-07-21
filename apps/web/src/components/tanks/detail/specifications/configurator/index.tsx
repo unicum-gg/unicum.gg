@@ -45,10 +45,11 @@ import { useFieldMods } from "@/hooks/use-field-mods";
 import { useSkillTree } from "@/hooks/use-skill-tree";
 import { useAmmo, applyShell } from "@/hooks/use-ammo";
 import {
-  decodeConfig,
-  encodeConfig,
+  decodeSetup,
+  encodeSetup,
   resolveModuleIdx,
   MODULE_SLOTS,
+  SETUP_PARAM,
 } from "@/components/tanks/detail/specifications/config-url";
 
 type Slot = keyof TankConfigModules;
@@ -107,7 +108,7 @@ export function TankConfigurator({
   // and mirror later edits back into the URL so the link stays shareable.
   const searchParams = useSearchParams();
   const [initialConfig] = useState(() =>
-    decodeConfig(new URLSearchParams(searchParams.toString())),
+    decodeSetup(searchParams.get(SETUP_PARAM)),
   );
 
   // The all-stock configuration (every module the tank ships with): the page
@@ -409,24 +410,24 @@ export function TankConfigurator({
     const stockModules = MODULE_SLOTS.map(
       (s) => configs[stockIdx]?.modules[s] ?? null,
     );
-    const params = encodeConfig(
-      {
-        shell: shellIdx,
-        modules: curModules,
-        stockModules,
-        equipment: equipped,
-        roleCats,
-        slots: loadout?.slots ?? [],
-        consumables: consumableSlots,
-        directives: [...activeDirectives],
-        fieldModLevel,
-        fieldModPairs: pairChoices,
-        unlocked: [...unlockedNodes],
-        crewSkills: [...selectedSkills],
-        crewLevel,
-      },
-      new URLSearchParams(window.location.search),
-    );
+    const token = encodeSetup({
+      shell: shellIdx,
+      modules: curModules,
+      stockModules,
+      equipment: equipped,
+      roleCats,
+      slots: loadout?.slots ?? [],
+      consumables: consumableSlots,
+      directives: [...activeDirectives],
+      fieldModLevel,
+      fieldModPairs: pairChoices,
+      unlocked: [...unlockedNodes],
+      crewSkills: [...selectedSkills],
+      crewLevel,
+    });
+    const params = new URLSearchParams(window.location.search);
+    params.delete(SETUP_PARAM);
+    if (token) params.set(SETUP_PARAM, token);
     const qs = params.toString();
     const url = qs
       ? `${window.location.pathname}?${qs}`
