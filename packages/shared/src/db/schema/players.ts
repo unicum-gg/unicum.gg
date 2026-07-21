@@ -87,6 +87,13 @@ export function makePlayersTable(region: string) {
         sql`${t.lastBattleAt} DESC NULLS FIRST`,
         sql`${t.lastSeenAt} ASC`,
       ),
+      // Serves the pipeline's *backlog* claim (ClaimMode.Backlog), which orders
+      // by last_seen_at ASC (longest-overdue first) to drain the recent90d/
+      // dormant backlog. The due_idx above can't serve that sort (its leading
+      // column is last_battle_at), so without this index the backlog claim would
+      // top-N sort the whole due set on every call — the exact Postgres peg the
+      // due_idx was added to avoid.
+      index(`${region}_players_last_seen_idx`).on(sql`${t.lastSeenAt} ASC`),
     ],
   );
 }
