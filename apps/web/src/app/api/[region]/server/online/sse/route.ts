@@ -4,6 +4,10 @@ import { fetchPlayersOnline, type OnlinePayload } from "@unicum.gg/core/wargamin
 export const dynamic = "force-dynamic";
 
 const POLL_MS = 3_000;
+// Keep the connection warm during WG outages (a failed tick sends nothing, so
+// the stream can otherwise go silent past the HTTP/3 idle timeout and QUIC
+// tears it down with QUIC_NETWORK_IDLE_TIMEOUT). Below the ~30s idle window.
+const HEARTBEAT_MS = 25_000;
 
 declare global {
   var __wotOnlineCache: Record<string, OnlinePayload>;
@@ -53,6 +57,7 @@ export async function GET(
   ensurePolling(region);
 
   const encoder = new TextEncoder();
+  let heartbeat: NodeJS.Timeout | null = null;
   const stream = new ReadableStream({
     start(controller) {
       function send(payload: OnlinePayload) {
@@ -72,7 +77,16 @@ export async function GET(
       globalThis.__wotOnlineListeners[region] ??= new Set();
       globalThis.__wotOnlineListeners[region].add(send);
 
+      heartbeat = setInterval(() => {
+        try {
+          controller.enqueue(encoder.encode(`: heartbeat\n\n`));
+        } catch {
+          // closed
+        }
+      }, HEARTBEAT_MS);
+
       req.signal.addEventListener("abort", () => {
+        if (heartbeat) clearInterval(heartbeat);
         globalThis.__wotOnlineListeners[region]?.delete(send);
         try {
           controller.close();
@@ -80,6 +94,9 @@ export async function GET(
           // already closed
         }
       });
+    },
+    cancel() {
+      if (heartbeat) clearInterval(heartbeat);
     },
   });
 

@@ -4,6 +4,11 @@ import { LIVE_STREAMERS_CHANNEL } from "@unicum.gg/core/twitch/live-poller";
 
 export const dynamic = "force-dynamic";
 
+// This stream is event-driven (Redis pub/sub), so it can stay silent between
+// streamer state changes. A periodic comment keeps the connection alive past
+// the HTTP/3 idle timeout (QUIC otherwise kills it with QUIC_NETWORK_IDLE_TIMEOUT).
+const HEARTBEAT_MS = 25_000;
+
 type Send = (streamers: LiveStreamer[]) => void;
 
 declare global {
@@ -44,6 +49,7 @@ function ensureWired(): Set<Send> {
 export function GET(req: Request): Response {
   const sends = ensureWired();
   const encoder = new TextEncoder();
+  let heartbeat: NodeJS.Timeout | null = null;
   const stream = new ReadableStream({
     start(controller) {
       const send: Send = (streamers) => {
@@ -60,7 +66,16 @@ export function GET(req: Request): Response {
       if (globalThis.__liveStreamersLast) send(globalThis.__liveStreamersLast);
       sends.add(send);
 
+      heartbeat = setInterval(() => {
+        try {
+          controller.enqueue(encoder.encode(`: heartbeat\n\n`));
+        } catch {
+          // closed
+        }
+      }, HEARTBEAT_MS);
+
       req.signal.addEventListener("abort", () => {
+        if (heartbeat) clearInterval(heartbeat);
         sends.delete(send);
         try {
           controller.close();
@@ -68,6 +83,9 @@ export function GET(req: Request): Response {
           // already closed
         }
       });
+    },
+    cancel() {
+      if (heartbeat) clearInterval(heartbeat);
     },
   });
 
