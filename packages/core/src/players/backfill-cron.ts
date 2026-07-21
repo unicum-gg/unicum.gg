@@ -1,4 +1,4 @@
-import { and, asc, count, eq, isNull, lt, or, sql } from "drizzle-orm";
+import { and, asc, eq, isNull, lt, or, sql } from "drizzle-orm";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { type Player, playersByRegion } from "@unicum.gg/shared";
@@ -58,7 +58,7 @@ export type RefreshResult = {
 async function collectDuePlayers(
   region: Region,
   limit: number,
-): Promise<{ rows: Player[]; queued: number }> {
+): Promise<{ rows: Player[] }> {
   // Adaptive cadence — see refresh-policy.ts for the per-bucket targets.
   // The cutoff is computed per-row from `last_battle_at`: actives get
   // refreshed every few hours, dormants every weeks-to-months, and
@@ -84,19 +84,22 @@ async function collectDuePlayers(
       lt(players.softDeletedAt, softDeleteCutoff),
     ),
   );
-  const [rows, [{ queued }]] = await Promise.all([
-    db
-      .select()
-      .from(players)
-      .where(where)
-      .orderBy(
-        sql`${players.lastBattleAt} DESC NULLS FIRST`,
-        asc(players.lastSeenAt),
-      )
-      .limit(limit),
-    db.select({ queued: count() }).from(players).where(where),
-  ]);
-  return { rows, queued };
+  // NB: we deliberately do NOT also `count(*)` the full due set. The predicate is
+  // a non-sargable per-row CASE, so that count is a full seq scan of the 2M-row
+  // players table — and running it every batch, per region, made it the single
+  // most-active query on the whole DB (pegging Postgres CPU), purely to print a
+  // "/Y" in the log. The `LIMIT`ed select below still tells us if we filled a
+  // batch; the exact backlog size isn't worth a 2M-row scan per tick.
+  const rows = await db
+    .select()
+    .from(players)
+    .where(where)
+    .orderBy(
+      sql`${players.lastBattleAt} DESC NULLS FIRST`,
+      asc(players.lastSeenAt),
+    )
+    .limit(limit);
+  return { rows };
 }
 
 async function processRegionBatch(
@@ -196,15 +199,10 @@ async function processRegionBatch(
 export async function refreshDuePlayersForRegion(
   region: Region,
 ): Promise<RefreshResult> {
-  const { rows, queued } = await collectDuePlayers(
-    region,
-    BATCH_SIZE_PER_REGION,
-  );
+  const { rows } = await collectDuePlayers(region, BATCH_SIZE_PER_REGION);
   if (rows.length === 0) return { processed: 0, succeeded: 0, failed: 0 };
 
-  console.log(
-    `[snapshot-cron-${region}] refreshing ${rows.length}/${queued} due`,
-  );
+  console.log(`[snapshot-cron-${region}] refreshing ${rows.length} due`);
 
   const { succeeded, failed } = await processRegionBatch(region, rows);
 
