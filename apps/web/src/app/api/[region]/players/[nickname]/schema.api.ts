@@ -216,6 +216,17 @@ export const PlayerDetailResponse = z.object({
       updatedAt: z.coerce.date(),
     })
     .loose(),
+  nameHistory: z
+    .array(
+      z.object({
+        nickname: z.string(),
+        recordedAt: z.coerce.date(),
+      }),
+    )
+    .meta({
+      description:
+        "Previous nicknames of this account, newest first. Empty until a rename is observed (WG exposes no historical names).",
+    }),
   isSupporter: z.boolean(),
   metric: metricField,
   current: playerStats,

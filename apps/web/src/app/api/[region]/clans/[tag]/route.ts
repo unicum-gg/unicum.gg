@@ -1,6 +1,7 @@
 import { computeClanRatings } from "@unicum.gg/shared";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
+import { getClanNameHistory } from "@unicum.gg/core/clans/name-history";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanOverviewResponse } from "./schema.api";
@@ -30,12 +31,14 @@ export async function GET(
     return Response.json({ error: "not_found" }, { status: 404 });
   }
 
-  const cached = await getClanMembersCached(region, clanCached.info.id).catch(
-    () => null,
-  );
+  const [cached, nameHistory] = await Promise.all([
+    getClanMembersCached(region, clanCached.info.id).catch(() => null),
+    getClanNameHistory(region, clanCached.info.id),
+  ]);
   const ratings = computeClanRatings(cached?.members ?? []);
   return jsonResponse(ClanOverviewResponse, {
     clan: clanCached.info,
     ratings,
+    nameHistory,
   });
 }

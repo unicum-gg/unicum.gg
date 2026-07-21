@@ -1007,6 +1007,13 @@ export interface components {
         ClanOverviewResponse: {
             clan: components["schemas"]["ClanInfo"];
             ratings: components["schemas"]["ClanRatings"];
+            /** @description Previous tags + names of this clan, newest first. Empty until a rename is observed. */
+            nameHistory: {
+                tag: string;
+                name: string;
+                /** Format: date-time */
+                recordedAt: Date;
+            }[];
         };
         /**
          * @description Clan leaderboard time window.
@@ -1260,6 +1267,8 @@ export interface components {
             roles: string[];
             /** @description The member's WG tankopedia nation portrait, by slot position. */
             image: string | null;
+            /** @description The role badge overlaid on the portrait (its primary role). */
+            roleBadge: string | null;
             /** @description Skill keys this member can learn (its roles' + universal). */
             skills: string[];
         };
@@ -1319,6 +1328,7 @@ export interface components {
             feature: {
                 key: string;
                 name: string;
+                description: string | null;
                 image: string | null;
             } | null;
             modification: components["schemas"]["fieldModItem"] | null;
@@ -1403,6 +1413,8 @@ export interface components {
         loadoutConsumable: {
             key: string;
             name: string;
+            /** @description The consumable's in-game description, from the client localization. */
+            description: string;
             image: string | null;
             /** @description Passive multiplicative effects on a characteristic (fuel, extinguisher, ...); empty for repair/first-aid kits and crew rations. */
             effects: {
@@ -1415,6 +1427,8 @@ export interface components {
             /** @description The equipment family (its `icon`) an equipment directive enhances; empty for crew directives. Any mounted device of that family enables it. */
             equipmentIcon: string;
             name: string;
+            /** @description The directive's in-game description, from the client localization. */
+            description: string;
             image: string | null;
             attribute: string;
             /** @enum {string} */
@@ -1439,6 +1453,8 @@ export interface components {
         loadoutEquipment: {
             key: string;
             name: string;
+            /** @description The device's in-game description, from the client localization. */
+            description: string;
             image: string | null;
             /**
              * @description Acquisition grade: standard (credits), bond (improved), bounty, bountyUpgraded or experimental.
@@ -1556,6 +1572,12 @@ export interface components {
                 /** Format: date-time */
                 updatedAt: Date;
             };
+            /** @description Previous nicknames of this account, newest first. Empty until a rename is observed (WG exposes no historical names). */
+            nameHistory: {
+                nickname: string;
+                /** Format: date-time */
+                recordedAt: Date;
+            }[];
             isSupporter: boolean;
             /**
              * @description Rating metric the leaderboard is ranked by.
@@ -1762,6 +1784,7 @@ export interface components {
             category: string;
             isFeature: boolean;
             name: string;
+            description: string | null;
             image: string | null;
             effects: {
                 attribute: string;

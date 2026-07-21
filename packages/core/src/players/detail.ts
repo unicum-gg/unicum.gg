@@ -16,6 +16,7 @@ import {
   type StrongholdStats,
 } from "@unicum.gg/core/players";
 import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
+import { getPlayerNameHistory } from "@unicum.gg/core/players/name-history";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
@@ -69,15 +70,23 @@ export async function buildPlayerDetail(args: {
   const { region, accountId, player, latest, tanks, clanHistory, initial, metric } =
     args;
 
-  const [encyclopedia, wn8Expected, wnxExpected, ratingHistory, specs, supporterSub] =
-    await Promise.all([
-      getVehicleEncyclopedia(region),
-      getWN8ExpectedValues(),
-      getWNXExpectedValues(),
-      getRatingHistory(region, player.id, metric),
-      getAllTankSpecs(),
-      getAccountSubscription(region, accountId),
-    ]);
+  const [
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    ratingHistory,
+    specs,
+    supporterSub,
+    nameHistory,
+  ] = await Promise.all([
+    getVehicleEncyclopedia(region),
+    getWN8ExpectedValues(),
+    getWNXExpectedValues(),
+    getRatingHistory(region, player.id, metric),
+    getAllTankSpecs(),
+    getAccountSubscription(region, accountId),
+    getPlayerNameHistory(region, accountId),
+  ]);
   // Public supporter badge: active, and not opted out via podium anonymity.
   const isSupporter = supporterSub
     ? isActiveStatus(supporterSub.status) && !supporterSub.anonymous
@@ -163,6 +172,7 @@ export async function buildPlayerDetail(args: {
       lastBattleAt: player.lastBattleAt ?? new Date(0),
       updatedAt: player.lastSeenAt,
     },
+    nameHistory,
     isSupporter,
     metric,
     current,

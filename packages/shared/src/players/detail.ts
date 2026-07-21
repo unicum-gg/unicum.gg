@@ -41,6 +41,10 @@ export type PlayerStrongholdModes = {
 // (core `players/detail`) so the payload carries values, never the
 // encyclopedia or expected-value tables. `liftDrag` and `ratingHistory` depend
 // on the requested metric.
+/** A name a player (or clan) used before its current one, with when we observed
+ * it stop being current. Newest first. */
+export type NameHistoryEntry = { nickname: string; recordedAt: Date };
+
 export type PlayerDetailData = {
   player: {
     accountId: number;
@@ -49,6 +53,9 @@ export type PlayerDetailData = {
     lastBattleAt: Date;
     updatedAt: Date;
   };
+  /** Previous nicknames of this account, newest first (empty until a rename is
+   * observed; WG exposes no historical names). */
+  nameHistory: NameHistoryEntry[];
   // This account belongs to an active (and non-anonymous) unicum.gg supporter,
   // for the supporter badge on the player header.
   isSupporter: boolean;

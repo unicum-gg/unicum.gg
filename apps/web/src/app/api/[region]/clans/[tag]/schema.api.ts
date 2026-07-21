@@ -134,4 +134,16 @@ const clanRatings = z
 export const ClanOverviewResponse = z.object({
   clan: clanInfo,
   ratings: clanRatings,
+  nameHistory: z
+    .array(
+      z.object({
+        tag: z.string(),
+        name: z.string(),
+        recordedAt: z.coerce.date(),
+      }),
+    )
+    .meta({
+      description:
+        "Previous tags + names of this clan, newest first. Empty until a rename is observed.",
+    }),
 });
