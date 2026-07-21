@@ -139,6 +139,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/tanks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player tanks
+         * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). 404 when the player is unknown.
+         */
+        get: operations["get-{region}-players-{nickname}-tanks"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/enqueue": {
         parameters: {
             query?: never;
@@ -1591,7 +1611,6 @@ export interface components {
                 d30: components["schemas"]["PlayerStats"] | null;
             };
             derived: components["schemas"]["PlayerDerivedStats"];
-            vehicles: components["schemas"]["PlayerVehicle"][];
             /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
             valuation: {
                 market: {
@@ -1707,6 +1726,9 @@ export interface components {
         PlayerSummary: {
             account_id: number;
             nickname: string;
+        };
+        PlayerTanksResponse: {
+            tanks: components["schemas"]["PlayerVehicle"][];
         };
         /** @description A tank the player has battles in, with per-battle averages and WN7/WN8/WNX ratings. */
         PlayerVehicle: {
@@ -2471,6 +2493,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerClan"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tanks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTanksResponse"];
                 };
             };
         };

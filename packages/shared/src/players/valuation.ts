@@ -15,7 +15,7 @@
 
 import type { Region } from "@unicum.gg/wargaming";
 import { CREDITS_PER_GOLD, XP_PER_GOLD, goldToMoney } from "../shop";
-import type { PlayerVehicleRow } from "./vehicles";
+import type { PlayerTankRow } from "./tanks";
 
 // --- Content floor (money units, region currency): the garage baseline. Kept
 // small on purpose. Live listings compress even a fully-loaded garage into a few
@@ -130,7 +130,7 @@ function toTierContributions(
  * count), capped at the top mega-account level.
  */
 export function computeMarketValue(
-  vehicles: PlayerVehicleRow[],
+  vehicles: PlayerTankRow[],
   wgr: number,
   battles: number,
 ): MarketValueBreakdown {
@@ -223,7 +223,7 @@ export type AccountValue = { amount: number; currency: string } | null;
  * Returns null for a region with no store pricing table.
  */
 export function computeAccountValue(
-  vehicles: PlayerVehicleRow[],
+  vehicles: PlayerTankRow[],
   region: Region,
 ): AccountValue {
   const probe = goldToMoney(region, 0);
@@ -250,7 +250,7 @@ export type PlayerValuation = {
 };
 
 export function computePlayerValuation(
-  vehicles: PlayerVehicleRow[],
+  vehicles: PlayerTankRow[],
   wgr: number,
   battles: number,
   region: Region,

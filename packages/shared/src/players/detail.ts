@@ -9,7 +9,6 @@ import type { RatingHistoryPoint } from "./rating-history";
 import type { Stats } from "./stats";
 import type { StrongholdStats } from "./stronghold-stats";
 import type { PlayerValuation } from "./valuation";
-import type { PlayerVehicleRow } from "./vehicles";
 
 export type StrongholdPeriodStats = {
   h24: StrongholdStats | null;
@@ -63,7 +62,6 @@ export type PlayerDetailData = {
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;
-  vehicles: PlayerVehicleRow[];
   // Estimated account worth (market resale + store rebuild cost), computed from
   // the garage. See `./valuation`.
   valuation: PlayerValuation;

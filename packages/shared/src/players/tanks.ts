@@ -16,7 +16,7 @@ import type { VehicleMeta } from "../wot/tanks/meta";
 // (instead of shipping the whole encyclopedia + expected-value tables to the
 // client). All three ratings are computed so the client can switch the
 // displayed metric (WN7/WN8/WNX) without another round-trip.
-export type PlayerVehicleRow = {
+export type PlayerTankRow = {
   tankId: number;
   // URL slug for the tank page (null if the tank is not in the catalogue).
   slug: string | null;
@@ -50,19 +50,19 @@ export type PlayerVehicleRow = {
 };
 
 /** Per-tank economics the vehicle rows carry for the account-value estimate. */
-export type VehicleEconomics = {
+export type TankEconomics = {
   buyGold: number | null;
   buyCredits: number | null;
   researchXp: number | null;
 };
 
-export function buildPlayerVehicleRows(
+export function buildPlayerTankRows(
   tanks: TankStats[],
   encyclopedia: Record<string, VehicleMeta>,
   wn8Expected: Map<number, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
-  economics?: Map<number, VehicleEconomics>,
-): PlayerVehicleRow[] {
+  economics?: Map<number, TankEconomics>,
+): PlayerTankRow[] {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
   const { idToSlug } = buildTankSlugIndex(encyclopedia);
   return tanks

@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import useSWR from "swr";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import {
   Panel,
@@ -32,12 +33,34 @@ import {
 } from "@/components/players/tabs";
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { ValueTab } from "@/components/players/value-tab";
-import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
+import { PlayerTanksTable } from "@/components/players/tanks-table";
+import {
+  TableSkeleton,
+  type SkeletonColumn,
+} from "@/components/table-skeleton";
 import { styles } from "@/lib/styles";
-import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerVehicleRow, type NameHistoryEntry } from "@unicum.gg/shared";
+import { unicum } from "@/services/sdk";
+import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerTankRow, type NameHistoryEntry } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+
+// Mirrors PlayerTanksTable's columns so the on-demand loading placeholder lines
+// up with the real table: centered icon columns, a wide left-aligned name, then
+// right-aligned numeric columns.
+const TANKS_SKELETON_COLUMNS: SkeletonColumn[] = [
+  { width: "w-6", align: "center" }, // Nation
+  { width: "w-6", align: "center" }, // Type
+  { width: "w-6", align: "center" }, // Tier
+  { width: "w-28" }, // Name
+  { width: "w-6", align: "center" }, // Mastery
+  { width: "w-8", align: "center" }, // Marks
+  { width: "w-14", align: "right" }, // Battles
+  { width: "w-12", align: "right" }, // Avg damage
+  { width: "w-12", align: "right" }, // Avg XP
+  { width: "w-12", align: "right" }, // Winrate
+  { width: "w-14", align: "right" }, // Rating
+];
 
 type OverallData = {
   current: React.ComponentProps<typeof PlayerStatsTable>["current"];
@@ -85,6 +108,10 @@ export type PlayerTabsViewProps = {
   // Live player detail (SWR + LiveSync owned by the parent `PlayerProfile`, so
   // the header and these tabs share one stream and one source of truth).
   detail: PlayerDetailData;
+  // Present only when Tanks is the section the server rendered, so its content
+  // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
+  // section fetches on demand when first opened.
+  initialTanks: PlayerTankRow[] | null;
 };
 
 export function PlayerTabsView({
@@ -96,6 +123,7 @@ export function PlayerTabsView({
   metricLabel,
   nowMs,
   detail,
+  initialTanks,
 }: PlayerTabsViewProps) {
   // `activeSection`/`activeMode` seed the first client render so it matches the
   // server HTML. A nav click updates local state immediately (instant switch)
@@ -115,6 +143,26 @@ export function PlayerTabsView({
     setSection(urlSection);
     setMode(urlMode);
   }
+
+  // The per-tank list lives on its own endpoint and is fetched on demand
+  // through the SDK. SWR keys on the URL and only runs when the Tanks section is
+  // active (null key = no request); when the server already rendered Tanks
+  // (`initialTanks` seeds the cache), skip the on-mount revalidation.
+  const tanksUrl = `/api/${region}/players/${encodeURIComponent(nickname)}/tanks`;
+  const seededTanks = initialTanks != null;
+  const { data: tanks } = useSWR(
+    section === PlayerSection.Tanks ? tanksUrl : null,
+    () =>
+      unicum
+        .region(region)
+        .players(nickname)
+        .tanks()
+        .then((r) => r.tanks as unknown as PlayerTankRow[]),
+    {
+      fallbackData: initialTanks ?? undefined,
+      revalidateOnMount: !seededTanks,
+    },
+  );
 
   function selectSection(next: PlayerSection) {
     setSection(next);
@@ -193,7 +241,8 @@ export function PlayerTabsView({
         <TanksTab
           region={region}
           nickname={nickname}
-          vehicles={detail.vehicles}
+          vehicles={tanks ?? []}
+          loading={onTanks && !tanks}
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
@@ -209,17 +258,19 @@ export function PlayerTabsView({
 }
 
 // Its own tab (not part of Overall) so the ~700-row table isn't server-rendered
-// on the default page load, which was the dominant SSR cost. The rows are
-// already in the detail payload, so opening the tab renders client-side with no
-// fetch; a `?tab=tanks` deep-link still server-renders them for SEO.
+// on the default page load, which was the dominant SSR cost. The rows load from
+// a separate endpoint on demand when the tab is opened; a `?section=tanks`
+// deep-link seeds them from the server render for SEO.
 function TanksTab({
   region,
   nickname,
   vehicles,
+  loading,
 }: {
   region: Region;
   nickname: string;
-  vehicles: PlayerVehicleRow[];
+  vehicles: PlayerTankRow[];
+  loading: boolean;
 }) {
   return (
     <>
@@ -227,11 +278,16 @@ function TanksTab({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s tanks ({intFmt.format(vehicles.length)})
+            {nickname}&apos;s tanks
+            {loading ? "" : ` (${intFmt.format(vehicles.length)})`}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          <PlayerVehiclesTable region={region} vehicles={vehicles} />
+          {loading ? (
+            <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
+          ) : (
+            <PlayerTanksTable region={region} vehicles={vehicles} />
+          )}
         </PanelContent>
       </Panel>
     </>

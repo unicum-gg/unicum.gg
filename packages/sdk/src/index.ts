@@ -206,6 +206,18 @@ class PlayerClient {
     );
   }
 
+  /** The player's per-tank rows (tank-by-tank breakdown with per-battle
+   * averages and WN7/WN8/WNX ratings). The heavy list, loaded on demand
+   * separately from `detail()`. */
+  tanks() {
+    const { region, nickname } = this;
+    return unwrap(
+      this.api.GET("/{region}/players/{nickname}/tanks", {
+        params: { path: { region, nickname } },
+      }),
+    );
+  }
+
   /** The player's current clan (tag, name, color) from cached data only, no
    * live Wargaming call. Null when not in a clan or not yet tracked. A cheap
    * alternative to `detail()` for compact UI like nav bars. */

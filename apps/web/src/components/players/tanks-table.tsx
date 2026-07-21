@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RatingMetric, type PlayerVehicleRow } from "@unicum.gg/shared";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RatingMetric, type PlayerTankRow } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -60,7 +60,7 @@ const TYPE_ABBR: Record<string, string> = {
 };
 
 function sortValue(
-  row: PlayerVehicleRow,
+  row: PlayerTankRow,
   key: string,
   metric: RatingMetric,
 ): number | string {
@@ -79,8 +79,8 @@ function sortValue(
 }
 
 function compareRows(
-  a: PlayerVehicleRow,
-  b: PlayerVehicleRow,
+  a: PlayerTankRow,
+  b: PlayerTankRow,
   state: SortState,
   metric: RatingMetric,
 ): number {
@@ -158,12 +158,12 @@ function SortableHead({
   );
 }
 
-export function PlayerVehiclesTable({
+export function PlayerTanksTable({
   region,
   vehicles,
 }: {
   region: Region;
-  vehicles: PlayerVehicleRow[];
+  vehicles: PlayerTankRow[];
 }) {
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
@@ -180,7 +180,7 @@ export function PlayerVehiclesTable({
 
   // Numeric columns the min/max range filter can target (the rating column
   // follows the selected metric, like the table's own rating column).
-  const rangeCols: RangeColumn<PlayerVehicleRow>[] = useMemo(
+  const rangeCols: RangeColumn<PlayerTankRow>[] = useMemo(
     () => [
       { key: "battles", label: "Battles", value: (r) => r.battles },
       { key: "avgDamage", label: "Avg damage", value: (r) => r.avgDamage },

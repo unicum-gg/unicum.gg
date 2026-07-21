@@ -67,7 +67,7 @@ const playerDerivedStats = z
       "Per-tank-breakdown derivations: average tier, assistance damages and WN7/WN8/WNX per column.",
   });
 
-const playerVehicle = z
+export const playerVehicle = z
   .object({
     tankId: z.number(),
     name: z.string(),
@@ -236,7 +236,6 @@ export const PlayerDetailResponse = z.object({
     d30: playerStats.nullable(),
   }),
   derived: playerDerivedStats,
-  vehicles: z.array(playerVehicle),
   valuation: z
     .object({
       market: z.object({

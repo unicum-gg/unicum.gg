@@ -11,7 +11,11 @@ import { SupporterBadgeState } from "@/components/players/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/tabs";
 import { PlayerTabsView } from "@/components/players/tabs-view";
 import { unicum } from "@/services/sdk";
-import { type PlayerDetailData, inferPlayerLanguages } from "@unicum.gg/shared";
+import {
+  type PlayerDetailData,
+  type PlayerTankRow,
+  inferPlayerLanguages,
+} from "@unicum.gg/shared";
 import type { LiveUpdate } from "@unicum.gg/sdk";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -32,6 +36,7 @@ export function PlayerProfile({
   activeSection,
   activeMode,
   initialData,
+  initialTanks,
 }: {
   region: Region;
   nickname: string;
@@ -42,6 +47,9 @@ export function PlayerProfile({
   activeSection: PlayerSection;
   activeMode: PlayerMode;
   initialData: PlayerDetailData;
+  // Present only when Tanks is the section the server rendered (so its rows are
+  // in the initial HTML); null otherwise, so the tabs view fetches on demand.
+  initialTanks: PlayerTankRow[] | null;
 }) {
   const dataUrl = `/api/${region}/players/${encodeURIComponent(nickname)}?metric=${initialData.metric}`;
   const { data: liveData, mutate: mutateData } = useSWR(
@@ -130,6 +138,7 @@ export function PlayerProfile({
         metricLabel={metricLabel}
         nowMs={nowMs}
         detail={detail}
+        initialTanks={initialTanks}
       />
     </>
   );

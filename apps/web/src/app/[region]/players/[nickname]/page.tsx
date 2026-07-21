@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import { modeFromQuery, sectionFromQuery } from "@/components/players/tabs";
+import { modeFromQuery, sectionFromQuery, PlayerSection } from "@/components/players/tabs";
 import { PlayerProfile } from "@/components/players/player-profile";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
@@ -16,6 +16,7 @@ import { UnicumError } from "@unicum.gg/sdk";
 import {
   RATING_METRIC_LABEL,
   type PlayerDetailData,
+  type PlayerTankRow,
   type RatingMetric,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
@@ -130,6 +131,16 @@ export default async function PlayerPage({
   if (!detail) notFound();
 
   const metricLabel = RATING_METRIC_LABEL[metric];
+  // The per-tank list is ~92% of the former detail payload but only the Tanks
+  // section renders it, so it lives on its own endpoint and is fetched on
+  // demand. Server-render it only for a `?section=tanks` deep-link (SEO /
+  // crawlers); every other section leaves `initialTanks` null so the client
+  // loads it lazily when the section is first opened.
+  const initialTanks: PlayerTankRow[] | null =
+    section === PlayerSection.Tanks
+      ? ((await unicum.region(region).players(decoded).tanks())
+          .tanks as unknown as PlayerTankRow[])
+      : null;
   const { current, clanHistory } = detail;
   const { accountId } = detail.player;
   const displayName = detail.player.nickname;
@@ -175,6 +186,7 @@ export default async function PlayerPage({
         activeSection={section}
         activeMode={mode}
         initialData={detail}
+        initialTanks={initialTanks}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

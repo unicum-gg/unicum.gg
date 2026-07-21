@@ -13,7 +13,7 @@ import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MoMIcon } from "@/components/tanks/mom-icon";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { useCookie } from "@/hooks/use-cookie";
-import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerVehicleRow } from "@unicum.gg/shared";
+import { RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor, type PlayerTankRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const COLS_COOKIE = "unicum.player_vehicle_columns";
@@ -30,7 +30,7 @@ const pct2Fmt = new Intl.NumberFormat("en-US", {
 const DASH: ReactNode = <span className="text-fd-muted-foreground">—</span>;
 
 export function ratingForMetric(
-  row: PlayerVehicleRow,
+  row: PlayerTankRow,
   metric: RatingMetric,
 ): number | null {
   if (metric === RatingMetric.Wn7) return row.wn7;
@@ -55,8 +55,8 @@ export type PlayerColumn = {
   hideOnMobile?: boolean;
   // The rating column's header follows the selected metric.
   header?: (metric: RatingMetric) => string;
-  cell: (r: PlayerVehicleRow, ctx: PlayerCellCtx) => PlayerCell;
-  sortValue: (r: PlayerVehicleRow, metric: RatingMetric) => number;
+  cell: (r: PlayerTankRow, ctx: PlayerCellCtx) => PlayerCell;
+  sortValue: (r: PlayerTankRow, metric: RatingMetric) => number;
 };
 
 export const PLAYER_COLUMNS: PlayerColumn[] = [

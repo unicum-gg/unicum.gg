@@ -1,4 +1,4 @@
-import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerVehicleRows, type PlayerVehicleRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData } from "@unicum.gg/shared";
+import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData } from "@unicum.gg/shared";
 import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
@@ -44,7 +44,7 @@ import {
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
-import { computePlayerValuation, type VehicleEconomics } from "@unicum.gg/shared";
+import { computePlayerValuation, type TankEconomics } from "@unicum.gg/shared";
 
 // The client-safe shapes (`PlayerDetailData`, the stronghold-mode types) and
 // the pure `EMPTY_CLAN_HISTORY` const live in `@unicum.gg/shared/players/detail`;
@@ -92,7 +92,7 @@ export async function buildPlayerDetail(args: {
     ? isActiveStatus(supporterSub.status) && !supporterSub.anonymous
     : false;
   // Lite economics map for the vehicle rows' account-value fields.
-  const economics = new Map<number, VehicleEconomics>();
+  const economics = new Map<number, TankEconomics>();
   for (const [tankId, s] of specs) {
     economics.set(tankId, {
       buyGold: s.buyGold,
@@ -180,7 +180,7 @@ export async function buildPlayerDetail(args: {
     wn8Expected,
     wnxExpected,
   );
-  const vehicles = buildPlayerVehicleRows(
+  const vehicles = buildPlayerTankRows(
     tanks,
     encyclopedia,
     wn8Expected,
@@ -202,7 +202,6 @@ export async function buildPlayerDetail(args: {
     current,
     periods,
     derived,
-    vehicles,
     valuation: computePlayerValuation(
       vehicles,
       current.globalRating,
@@ -248,6 +247,45 @@ export async function loadPlayerDetail(
     initial,
     metric,
   });
+}
+
+/**
+ * Loader for the on-demand per-tank list endpoint (the heavy `vehicles` array
+ * that used to ride along in the detail payload). Resolves the player from the
+ * DB, loads the latest per-tank snapshots and builds the rows the exact same way
+ * `buildPlayerDetail` does. DB-only (no live WG fetch): the detail endpoint
+ * already resolves/records cold accounts, so by the time the Tanks section is
+ * opened the player is tracked. Returns null when the player is unknown.
+ */
+export async function loadPlayerTanks(
+  region: Region,
+  nickname: string,
+): Promise<PlayerTankRow[] | null> {
+  const initial = await loadPlayerInitialData(region, { nickname });
+  if (!initial.player) return null;
+
+  const tanks = tankSnapshotsToTankStats(initial.latestTankSnapshots);
+  const [encyclopedia, wn8Expected, wnxExpected, specs] = await Promise.all([
+    getVehicleEncyclopedia(region),
+    getWN8ExpectedValues(),
+    getWNXExpectedValues(),
+    getAllTankSpecs(),
+  ]);
+  const economics = new Map<number, TankEconomics>();
+  for (const [tankId, s] of specs) {
+    economics.set(tankId, {
+      buyGold: s.buyGold,
+      buyCredits: s.buyCredits,
+      researchXp: s.researchXp,
+    });
+  }
+  return buildPlayerTankRows(
+    tanks,
+    encyclopedia,
+    wn8Expected,
+    wnxExpected,
+    economics,
+  );
 }
 
 export enum PlayerDetailLiveStatus {
