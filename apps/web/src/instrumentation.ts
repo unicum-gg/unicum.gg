@@ -27,10 +27,10 @@ export async function register() {
     );
     installShutdownHandler();
 
-    const { startPlayerBackfillCron } = await import(
-      "@unicum.gg/core/players/backfill-cron"
+    const { startSnapshotPipeline } = await import(
+      "@unicum.gg/core/players/snapshot-pipeline"
     );
-    startPlayerBackfillCron();
+    startSnapshotPipeline();
 
     const { startPlayerRefreshCron } = await import(
       "@unicum.gg/core/players/refresh-cron"

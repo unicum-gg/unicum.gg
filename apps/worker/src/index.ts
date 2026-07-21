@@ -21,10 +21,10 @@ async function main(): Promise<void> {
   const { installShutdownHandler } = await import("@unicum.gg/core/cron/shutdown");
   installShutdownHandler();
 
-  const { startPlayerBackfillCron } = await import(
-    "@unicum.gg/core/players/backfill-cron"
+  const { startSnapshotPipeline } = await import(
+    "@unicum.gg/core/players/snapshot-pipeline"
   );
-  startPlayerBackfillCron();
+  startSnapshotPipeline();
 
   const { startPlayerRefreshCron } = await import(
     "@unicum.gg/core/players/refresh-cron"

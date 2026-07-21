@@ -15,9 +15,10 @@ import {
 import { recordCurrentSnapshot } from ".";
 import { refreshCutoffSql } from "./refresh-policy";
 
-// Players fetched per chunk. Kept at the WG batch granularity so one chunk is
-// still a handful of batched requests (info /100, tanks/stats /25, wtr /100),
-// not one request per player.
+// Players claimed per chunk. Sized to the account/info batch granularity (/100):
+// one chunk is a single cheap account/info request that gates which players even
+// need the expensive per-account tanks/stats + wtr fetches (see the change
+// detector in processRegionBatch).
 const FETCH_CHUNK = 100;
 // Chunks processed concurrently per region. This is the pipeline: N workers each
 // claim a chunk straight from the DB and run fetch -> write in a tight loop, so
@@ -81,7 +82,7 @@ async function refreshLease(): Promise<void> {
  * LOCKED so two workers never grab the same rows), fetches + writes it, and
  * immediately claims the next. Fetches and writes overlap continuously.
  */
-export function startPlayerBackfillCron(): void {
+export function startSnapshotPipeline(): void {
   if (SKIP_CRONS) {
     console.log(`[snapshot-pipeline] SKIP_CRONS=true, not starting`);
     return;
@@ -99,9 +100,9 @@ export function startPlayerBackfillCron(): void {
         const fetchAvg = Math.round(s.fetchMs / s.chunks);
         const writeAvg = Math.round(s.writeMs / s.chunks);
         console.log(
-          `[snapshot-pipeline-${region}] last 60s: ${s.ok} ok, ${s.failed} failed, ${s.chunks} chunks, avg/chunk fetch ${fetchAvg}ms / write ${writeAvg}ms`,
+          `[snapshot-pipeline-${region}] last 60s: ${s.ok} ok (${s.skipped} unchanged), ${s.failed} failed, ${s.chunks} chunks, avg/chunk fetch ${fetchAvg}ms / write ${writeAvg}ms`,
         );
-        stats[region] = { ok: 0, failed: 0, chunks: 0, fetchMs: 0, writeMs: 0 };
+        stats[region] = { ok: 0, failed: 0, skipped: 0, chunks: 0, fetchMs: 0, writeMs: 0 };
       }
     }
   }, 60_000);
@@ -121,6 +122,7 @@ export function startPlayerBackfillCron(): void {
 type RegionStat = {
   ok: number;
   failed: number;
+  skipped: number;
   chunks: number;
   fetchMs: number;
   writeMs: number;
@@ -130,18 +132,21 @@ function bump(
   region: Region,
   ok: number,
   failed: number,
+  skipped: number,
   fetchMs: number,
   writeMs: number,
 ): void {
   const s = (stats[region] ??= {
     ok: 0,
     failed: 0,
+    skipped: 0,
     chunks: 0,
     fetchMs: 0,
     writeMs: 0,
   });
   s.ok += ok;
   s.failed += failed;
+  s.skipped += skipped;
   s.chunks += 1;
   s.fetchMs += fetchMs;
   s.writeMs += writeMs;
@@ -161,9 +166,9 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
       }
       const rows = await claimDuePlayers(region, FETCH_CHUNK);
       if (rows.length > 0) {
-        const { succeeded, failed, fetchMs, writeMs } =
+        const { succeeded, failed, skipped, fetchMs, writeMs } =
           await processRegionBatch(region, rows);
-        bump(region, succeeded, failed, fetchMs, writeMs);
+        bump(region, succeeded, failed, skipped, fetchMs, writeMs);
       }
       if (rows.length < FETCH_CHUNK) {
         // Couldn't fill a chunk => this region is caught up on its immediate
@@ -249,29 +254,72 @@ async function processRegionBatch(
 ): Promise<{
   succeeded: number;
   failed: number;
+  skipped: number;
   fetchMs: number;
   writeMs: number;
 }> {
   const players = playersByRegion[region];
   const accountIds = rows.map((r) => r.accountId);
 
-  // Phase 1: the WG fetch (all batched/chunked + rate-limited). Timed so we can
-  // see, in the once-a-minute log, whether the pipeline is fetch-bound (WG /
-  // rate-limiter) or write-bound (DB) — instead of inferring it from proxy logs.
+  // Phase 1a: account/info — the change detector. It is a real batch endpoint
+  // (100 accounts/request, tiny payload) and carries each account's
+  // last_battle_time, which advances on a battle in ANY mode (random,
+  // stronghold, clan wars, ...). So if it hasn't moved past the timestamp we
+  // stored, the player has played nothing since our last snapshot => no stat
+  // anywhere can have changed => the expensive per-account tanks/stats fetch +
+  // tank_snapshots read-back/insert would only dedup to nothing. We gate on it
+  // to skip that work entirely for the (usually ~80%) idle players. (Gating on
+  // statistics.all.battles instead would be wrong: that counts random battles
+  // only and would miss a stronghold/CW-only session.)
   const tFetch0 = Date.now();
-  const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
-    getPlayersInfoBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-pipeline-${region}] account/info batch failed:`, err);
-      return new Map<number, PlayerInfo>();
-    }),
-    getTanksStatsBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-pipeline-${region}] tanks/stats batch failed:`, err);
-      return new Map<number, TankStats[]>();
-    }),
-    getAccountsWTRBatch(region, accountIds).catch((err) => {
-      console.error(`[snapshot-pipeline-${region}] wtr batch failed:`, err);
-      return new Map<number, number>();
-    }),
+  const infosByAccount = await getPlayersInfoBatch(region, accountIds).catch((err) => {
+    console.error(`[snapshot-pipeline-${region}] account/info batch failed:`, err);
+    return new Map<number, PlayerInfo>();
+  });
+
+  // A player needs the full snapshot only if we have no baseline yet (`battles`
+  // null => never snapshotted) or they played since our last snapshot
+  // (last_battle_time moved past the `lastBattleAt` we stored). Null-info players
+  // go through `toProcess` too, so `processOne` runs their soft-delete handling.
+  // Everyone else is unchanged: nothing to fetch or write.
+  const toProcess: Player[] = [];
+  const unchanged: Player[] = [];
+  for (const player of rows) {
+    const info = infosByAccount.get(player.accountId);
+    if (!info) {
+      toProcess.push(player);
+      continue;
+    }
+    const played =
+      player.lastBattleAt == null ||
+      info.last_battle_time * 1000 > player.lastBattleAt.getTime();
+    if (player.battles == null || played) {
+      toProcess.push(player);
+    } else {
+      unchanged.push(player);
+    }
+  }
+
+  // Phase 1b: the expensive per-account fetches (tanks/stats is single-account,
+  // so this is one WG request per player — the true floor), only for the players
+  // whose battle count actually moved. Null-info players are excluded (they take
+  // the soft-delete path, never the snapshot).
+  const changedIds = toProcess
+    .filter((p) => infosByAccount.has(p.accountId))
+    .map((p) => p.accountId);
+  const [tanksByAccount, wtrByAccount] = await Promise.all([
+    changedIds.length
+      ? getTanksStatsBatch(region, changedIds).catch((err) => {
+          console.error(`[snapshot-pipeline-${region}] tanks/stats batch failed:`, err);
+          return new Map<number, TankStats[]>();
+        })
+      : new Map<number, TankStats[]>(),
+    changedIds.length
+      ? getAccountsWTRBatch(region, changedIds).catch((err) => {
+          console.error(`[snapshot-pipeline-${region}] wtr batch failed:`, err);
+          return new Map<number, number>();
+        })
+      : new Map<number, number>(),
   ]);
   const fetchMs = Date.now() - tFetch0;
 
@@ -333,22 +381,43 @@ async function processRegionBatch(
   };
 
   // Bounded concurrency: `WRITE_CONCURRENCY` workers each drain a round-robin
-  // slice of the batch serially. Steady N-way parallelism with no per-chunk
-  // barrier (a slow player never blocks a whole chunk). Each row maps to exactly
-  // one worker, so no player is processed twice.
+  // slice serially. Steady N-way parallelism with no per-chunk barrier (a slow
+  // player never blocks a whole chunk). Each row maps to exactly one worker, so
+  // no player is processed twice.
   // Phase 2: the DB write-back (per-player recordCurrentSnapshot: read-backs on
-  // the 300M-row tank_snapshots table + rating recompute + inserts), fanned out.
+  // the 300M-row tank_snapshots table + rating recompute + inserts), fanned out
+  // over only the players that actually moved.
   const tWrite0 = Date.now();
   const lanes: Player[][] = Array.from({ length: WRITE_CONCURRENCY }, () => []);
-  rows.forEach((player, i) => lanes[i % WRITE_CONCURRENCY].push(player));
+  toProcess.forEach((player, i) => lanes[i % WRITE_CONCURRENCY].push(player));
   await Promise.all(
     lanes.map(async (lane) => {
       for (const player of lane) await processOne(player);
     }),
   );
-  const writeMs = Date.now() - tWrite0;
 
-  return { succeeded, failed, fetchMs, writeMs };
+  // Unchanged players: no new stats, so no snapshot work. `last_seen_at` was
+  // already bumped by the claim, so they count as on-time. Only touch the DB to
+  // clear a stale soft-delete flag now that account/info confirmed the account
+  // is alive (rare — most have none).
+  const toClear = unchanged.filter(
+    (p) => (p.nullCount ?? 0) > 0 || p.softDeletedAt,
+  );
+  if (toClear.length > 0) {
+    await db
+      .update(players)
+      .set({ nullCount: 0, softDeletedAt: null })
+      .where(
+        inArray(
+          players.id,
+          toClear.map((p) => p.id),
+        ),
+      );
+  }
+  const writeMs = Date.now() - tWrite0;
+  succeeded += unchanged.length;
+
+  return { succeeded, failed, skipped: unchanged.length, fetchMs, writeMs };
 }
 
 export async function refreshDuePlayersForRegion(
@@ -364,7 +433,7 @@ export async function refreshDuePlayersForRegion(
 /**
  * Run a single chunk across all three regions in parallel. Kept for the
  * manual `/api/cron/refresh-snapshots` HTTP trigger; production background work
- * goes through the continuous per-region pipeline (`startPlayerBackfillCron`).
+ * goes through the continuous per-region pipeline (`startSnapshotPipeline`).
  */
 export async function refreshDuePlayers(): Promise<RefreshResult> {
   const results = await Promise.all(

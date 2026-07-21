@@ -1,5 +1,5 @@
 import { env } from "env";
-import { refreshDuePlayers } from "@unicum.gg/core/players/backfill-cron";
+import { refreshDuePlayers } from "@unicum.gg/core/players/snapshot-pipeline";
 
 export async function POST(req: Request) {
   if (req.headers.get("authorization") !== `Bearer ${env.CRON_SECRET}`) {
