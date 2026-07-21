@@ -27,11 +27,18 @@ const FETCH_CHUNK = 100;
 // writers stay within the background DB pool. There is NO intermediate work queue:
 // the players table + the `eu_players_due_idx` index IS the durable queue, so a
 // restart loses nothing beyond the chunk a worker is mid-processing.
-const PIPELINE_CONCURRENCY = 3;
+//
+// Sized to clear the on-time backlog: EU needs ~385k refreshes/day to keep every
+// bucket within its cadence (see /coverage). At ~1.8 players/s per worker, 8
+// workers ~= 1.2M/day — comfortably above the need, so the ~800k backlog drains
+// in ~a day and on-time climbs to ~100%. Plenty of headroom to go here (worker
+// was ~10% CPU, Postgres ~31%, WG at 2 of 12 RPS at concurrency 3).
+const PIPELINE_CONCURRENCY = 8;
 // Per-player write fan-out inside a chunk. Total concurrent writers is roughly
-// REGIONS x PIPELINE_CONCURRENCY x WRITE_CONCURRENCY; kept so that (with NA/Asia
-// usually drained and only EU busy) it stays within the background DB pool.
-const WRITE_CONCURRENCY = 3;
+// REGIONS x PIPELINE_CONCURRENCY x WRITE_CONCURRENCY; with NA/Asia usually drained
+// (only EU busy) that's ~8 x 2 = 16, within the background DB pool (writes release
+// their connection between queries, so this is a peak, not a sustained hold).
+const WRITE_CONCURRENCY = 2;
 // Back-off when a region's due queue is momentarily empty, or after an error.
 const IDLE_SLEEP_MS = 2_000;
 const ERROR_BACKOFF_MS = 5_000;

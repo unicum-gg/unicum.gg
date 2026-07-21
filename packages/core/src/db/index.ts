@@ -63,10 +63,10 @@ function resolveClient(): ReturnType<typeof postgres> {
   const context = globalForDb.__dbContext ?? "request";
   if (context === "background") {
     // Sized for the snapshot pipeline: several regions x workers x per-chunk
-    // writers all draw from here, plus the other background crons. 20 + the
-    // request pool (14) stays well under postgres `max_connections=100`, with
-    // room for a second replica.
-    return (globalForDb.__pgBackground ??= createClient(20));
+    // writers all draw from here, plus the refill claims and the other background
+    // crons. 30 + the request pool (14) stays well under postgres
+    // `max_connections=100`, with room for a second replica.
+    return (globalForDb.__pgBackground ??= createClient(30));
   }
   return (globalForDb.__pgRequest ??= createClient(14));
 }
