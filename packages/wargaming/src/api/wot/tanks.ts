@@ -121,9 +121,6 @@ export type TankMastery = {
   updated_at: number;
 };
 
-// Response is large; keep chunks small so a single request stays well-sized.
-const TANKS_STATS_BATCH_SIZE = 25;
-
 /** `/wot/tanks/*` — per-vehicle statistics, achievements, and mastery distribution. */
 export class TanksResource {
   constructor(
@@ -155,7 +152,17 @@ export class TanksResource {
     return data[String(params.accountId)] ?? [];
   }
 
-  /** Batched per-tank stats; chunks + bisects on INVALID_ACCOUNT_ID. */
+  /**
+   * Per-tank stats for many accounts. `/wot/tanks/stats/` is a SINGLE-account
+   * endpoint: unlike `account/info`, its `account_id` is not a list, so a
+   * comma-joined value comes back as INVALID_ACCOUNT_ID for the whole call.
+   * This therefore fans out one request per account concurrently rather than
+   * batching. The transport's per-region rate limiter throttles the fan-out to
+   * the region's RPS, so N accounts cost N requests (the true floor for a
+   * per-account endpoint) instead of ~2N with bisection to isolate a value WG
+   * was never going to accept. An unknown/purged account is skipped (empty); a
+   * genuine error rejects that one request only.
+   */
   async statsBatch<const F extends readonly FieldPath<TankStats>[] = readonly never[]>(params: {
     accountIds: number[];
     tankId?: readonly number[];
@@ -168,16 +175,12 @@ export class TanksResource {
     const out = new Map<number, Selected<TankStats, F>[]>();
     const unique = Array.from(new Set(params.accountIds));
     const query = this.#query(params);
-    const chunks: number[][] = [];
-    for (let i = 0; i < unique.length; i += TANKS_STATS_BATCH_SIZE) {
-      chunks.push(unique.slice(i, i + TANKS_STATS_BATCH_SIZE));
-    }
     const results = await Promise.allSettled(
-      chunks.map((batch) => this.#chunk("/wot/tanks/stats/", batch, out, query)),
+      unique.map((id) => this.#one("/wot/tanks/stats/", id, out, query)),
     );
     for (const res of results) {
       if (res.status === "rejected") {
-        console.error("[tanks.statsBatch] chunk failed:", res.reason);
+        console.error("[tanks.statsBatch] request failed:", res.reason);
       }
     }
     return out;
@@ -202,7 +205,11 @@ export class TanksResource {
     return data[String(params.accountId)] ?? [];
   }
 
-  /** Batched per-tank achievements; chunks + bisects on INVALID_ACCOUNT_ID. */
+  /**
+   * Per-tank achievements for many accounts. Like `statsBatch`,
+   * `/wot/tanks/achievements/` is single-account, so this fans out one
+   * rate-limited request per account rather than batching.
+   */
   async achievementsBatch<const F extends readonly FieldPath<TankAchievements>[] = readonly never[]>(params: {
     accountIds: number[];
     tankId?: readonly number[];
@@ -214,16 +221,12 @@ export class TanksResource {
     const out = new Map<number, Selected<TankAchievements, F>[]>();
     const unique = Array.from(new Set(params.accountIds));
     const query = this.#query(params);
-    const chunks: number[][] = [];
-    for (let i = 0; i < unique.length; i += TANKS_STATS_BATCH_SIZE) {
-      chunks.push(unique.slice(i, i + TANKS_STATS_BATCH_SIZE));
-    }
     const results = await Promise.allSettled(
-      chunks.map((batch) => this.#chunk("/wot/tanks/achievements/", batch, out, query)),
+      unique.map((id) => this.#one("/wot/tanks/achievements/", id, out, query)),
     );
     for (const res of results) {
       if (res.status === "rejected") {
-        console.error("[tanks.achievementsBatch] chunk failed:", res.reason);
+        console.error("[tanks.achievementsBatch] request failed:", res.reason);
       }
     }
     return out;
@@ -266,36 +269,27 @@ export class TanksResource {
     return query;
   }
 
-  async #chunk<R>(
+  /**
+   * Fetch one account's per-vehicle rows and merge into `out`. The `/wot/tanks/*`
+   * per-vehicle endpoints are single-account, so callers fan this out. An
+   * unknown/purged account (INVALID_ACCOUNT_ID) is skipped rather than failing
+   * the whole fan-out; any other error propagates.
+   */
+  async #one<R>(
     path: string,
-    ids: number[],
+    id: number,
     out: Map<number, R[]>,
     query: Record<string, string>,
   ): Promise<void> {
-    if (ids.length === 0) return;
     try {
       const data = await this.t.wgFetch<Record<string, R[] | null>>(this.region, path, {
         ...query,
-        account_id: ids.join(","),
+        account_id: String(id),
       });
-      for (const [id, tanks] of Object.entries(data)) {
-        out.set(Number(id), tanks ?? []);
+      for (const [key, tanks] of Object.entries(data)) {
+        out.set(Number(key), tanks ?? []);
       }
     } catch (err) {
-      // WG rejects the whole chunk if any account_id is invalid; bisect to
-      // isolate the bad one, single bad id → drop it.
-      if (
-        err instanceof WargamingApiError &&
-        err.code === "INVALID_ACCOUNT_ID" &&
-        ids.length > 1
-      ) {
-        const mid = Math.floor(ids.length / 2);
-        await Promise.all([
-          this.#chunk(path, ids.slice(0, mid), out, query),
-          this.#chunk(path, ids.slice(mid), out, query),
-        ]);
-        return;
-      }
       if (err instanceof WargamingApiError && err.code === "INVALID_ACCOUNT_ID") return;
       throw err;
     }
