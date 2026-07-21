@@ -79,6 +79,14 @@ export function makePlayersTable(region: string) {
       index(`${region}_players_nickname_prefix_idx`).on(
         sql`LOWER(${t.nickname}) text_pattern_ops`,
       ),
+      // Drives the snapshot pipeline's due-player claim. Matches the claim's
+      // ORDER BY (last_battle_at DESC NULLS FIRST, last_seen_at ASC), so Postgres
+      // walks the index in priority order and stops at the LIMIT instead of a
+      // full seq scan + top-N sort of the ~2M rows on every claim.
+      index(`${region}_players_due_idx`).on(
+        sql`${t.lastBattleAt} DESC NULLS FIRST`,
+        sql`${t.lastSeenAt} ASC`,
+      ),
     ],
   );
 }
