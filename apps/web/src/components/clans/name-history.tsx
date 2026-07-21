@@ -46,7 +46,7 @@ export function ClanNameHistory({
             <TableRow>
               <TableHead>Tag</TableHead>
               <TableHead>Name</TableHead>
-              <TableHead className="w-32 text-right">Changed</TableHead>
+              <TableHead className="w-32 text-right!">Changed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -56,7 +56,7 @@ export function ClanNameHistory({
                 <TableCell className="text-fd-muted-foreground">
                   {entry.name}
                 </TableCell>
-                <TableCell className="text-right tabular-nums text-fd-muted-foreground">
+                <TableCell className="text-right text-xs tabular-nums text-fd-muted-foreground">
                   {format(entry.recordedAt, DAY_FORMAT)}
                 </TableCell>
               </TableRow>

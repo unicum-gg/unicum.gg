@@ -40,14 +40,14 @@ export function PlayerNameHistory({
           <TableHeader>
             <TableRow>
               <TableHead>Name</TableHead>
-              <TableHead className="w-32 text-right">Changed</TableHead>
+              <TableHead className="w-32 text-right!">Changed</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {history.map((entry, i) => (
               <TableRow key={`${entry.nickname}-${i}`}>
                 <TableCell className="font-medium">{entry.nickname}</TableCell>
-                <TableCell className="text-right tabular-nums text-fd-muted-foreground">
+                <TableCell className="text-right text-xs tabular-nums text-fd-muted-foreground">
                   {format(entry.recordedAt, DAY_FORMAT)}
                 </TableCell>
               </TableRow>
