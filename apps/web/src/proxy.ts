@@ -1,13 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import STORAGE from "@/constants/storage";
-import {
-  isRegion,
-  Region,
-  regionFromPathname,
-} from "@unicum.gg/wargaming";
+import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const PATHNAME_HEADER = "x-pathname";
-const ONE_YEAR_SECONDS = 365 * 24 * 60 * 60;
 
 export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
@@ -57,20 +52,12 @@ export function proxy(req: NextRequest) {
   // `Accept: text/markdown` never receives a cached HTML response.
   response.headers.set("Vary", "Accept");
 
-  // Sync the cookie to the URL whenever the URL carries a region. Without
-  // this, manually visiting /asia/clans/X with `cookie=eu` leaves them
-  // out of sync, and a later link that consults the cookie (the / -> /eu
-  // redirect above, or any client-side default) sends the user back to
-  // the wrong region.
-  const urlRegion = regionFromPathname(pathname);
-  if (urlRegion && urlRegion !== stored) {
-    response.cookies.set(STORAGE.COOKIES.REGION, urlRegion, {
-      maxAge: ONE_YEAR_SECONDS,
-      sameSite: "lax",
-      path: "/",
-    });
-  }
-
+  // NB: we deliberately do NOT sync the region cookie to the URL here. The
+  // cookie is the user's *chosen* default (written only by the region selector
+  // / search dialog), and a regional URL wins locally via `useRegion` anyway.
+  // Auto-writing it made merely opening a shared `/na/...` link hijack the
+  // default region for a year, so a later bare path (`/`, `/clans`) sent the
+  // user to the wrong region.
   return response;
 }
 
