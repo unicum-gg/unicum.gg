@@ -9,6 +9,7 @@ export enum StrongholdSort {
   Elo = "elo",
   Battles = "battles",
   Battles30d = "battles30d",
+  Winrate30d = "winrate30d",
   Winrate = "winrate",
 }
 
@@ -23,6 +24,7 @@ export const STRONGHOLD_SORT_LABEL: Record<StrongholdSort, string> = {
   [StrongholdSort.Elo]: "ELO",
   [StrongholdSort.Battles]: "Battles",
   [StrongholdSort.Battles30d]: "30d battles",
+  [StrongholdSort.Winrate30d]: "30d win rate",
   [StrongholdSort.Winrate]: "Win rate",
 };
 
@@ -41,24 +43,28 @@ export const TIER_SORT_OPTIONS: Record<StrongholdTier, StrongholdSort[]> = {
     StrongholdSort.Elo,
     StrongholdSort.Battles,
     StrongholdSort.Battles30d,
+    StrongholdSort.Winrate30d,
     StrongholdSort.Winrate,
   ],
   [StrongholdTier.T8]: [
     StrongholdSort.Elo,
     StrongholdSort.Battles,
     StrongholdSort.Battles30d,
+    StrongholdSort.Winrate30d,
     StrongholdSort.Winrate,
   ],
   [StrongholdTier.T6]: [
     StrongholdSort.Elo,
     StrongholdSort.Battles,
     StrongholdSort.Battles30d,
+    StrongholdSort.Winrate30d,
     StrongholdSort.Winrate,
   ],
   [StrongholdTier.Advances]: [
     StrongholdSort.Elo,
     StrongholdSort.Battles,
     StrongholdSort.Battles30d,
+    StrongholdSort.Winrate30d,
     StrongholdSort.Winrate,
   ],
 };

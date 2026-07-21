@@ -16,6 +16,7 @@ export type StrongholdLeaderboardEntry = {
   battles: number;
   battles30d: number | null;
   wins: number;
+  wins30d: number | null;
 };
 
 type RawEntry = {
@@ -30,6 +31,7 @@ type RawEntry = {
   battles: number;
   battles_30d: number | null;
   wins: number;
+  wins_30d: number | null;
 };
 
 function tierColumns(tier: StrongholdTier): {
@@ -58,6 +60,11 @@ function sortExpr(sort: StrongholdSort, cols: ReturnType<typeof tierColumns>): s
       return `${cols.battles} DESC NULLS LAST`;
     case StrongholdSort.Battles30d:
       return `battles_30d DESC NULLS LAST`;
+    case StrongholdSort.Winrate30d:
+      // Win rate over the 30-day battle diff. Uses the base columns (not the
+      // `wins_30d`/`battles_30d` output aliases, which can't appear inside an
+      // ORDER BY expression) and needs a positive diff to divide.
+      return `CASE WHEN (latest.${cols.battles} - b30.battles) > 0 THEN (latest.${cols.wins} - b30.wins)::float / (latest.${cols.battles} - b30.battles) ELSE NULL END DESC NULLS LAST`;
     case StrongholdSort.Winrate:
       return `CASE WHEN ${cols.battles} > 0 THEN ${cols.wins}::float / ${cols.battles} ELSE NULL END DESC NULLS LAST`;
   }
@@ -93,7 +100,7 @@ async function fetchStrongholdLeaderboard(
       -- before the latest. Advances history is only weeks deep and season-
       -- sparse, so a strict ">30d old" cutoff leaves it empty for nearly every
       -- clan; this fallback keeps the 30d column consistent with the clan page.
-      SELECT DISTINCT ON (s.clan_id) s.clan_id, s.${battlesCol} AS battles
+      SELECT DISTINCT ON (s.clan_id) s.clan_id, s.${battlesCol} AS battles, s.${winsCol} AS wins
       FROM ${snapshots} s
       JOIN latest l ON l.clan_id = s.clan_id
       WHERE s.taken_at < l.taken_at
@@ -113,7 +120,8 @@ async function fetchStrongholdLeaderboard(
       ${eloCol ? sql`latest.${eloCol} AS elo,` : sql`NULL::integer AS elo,`}
       latest.${battlesCol} AS battles,
       (latest.${battlesCol} - b30.battles) AS battles_30d,
-      latest.${winsCol} AS wins
+      latest.${winsCol} AS wins,
+      (latest.${winsCol} - b30.wins) AS wins_30d
     FROM latest
     JOIN ${clans} c ON c.id = latest.clan_id
     LEFT JOIN baseline_30d b30 ON b30.clan_id = latest.clan_id
@@ -134,6 +142,7 @@ async function fetchStrongholdLeaderboard(
     battles: Number(r.battles),
     battles30d: r.battles_30d === null ? null : Number(r.battles_30d),
     wins: Number(r.wins),
+    wins30d: r.wins_30d === null ? null : Number(r.wins_30d),
   }));
 }
 

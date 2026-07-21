@@ -62,7 +62,11 @@ function resolveClient(): ReturnType<typeof postgres> {
   // connections that serve page reads: the two workloads never share a pool.
   const context = globalForDb.__dbContext ?? "request";
   if (context === "background") {
-    return (globalForDb.__pgBackground ??= createClient(6));
+    // Sized so the snapshot cron can record several players concurrently (see
+    // its bounded pool) while still leaving connections for the other
+    // background crons. 12 + the request pool (14) stays well under postgres
+    // `max_connections=100`, with room for a second replica.
+    return (globalForDb.__pgBackground ??= createClient(12));
   }
   return (globalForDb.__pgRequest ??= createClient(14));
 }

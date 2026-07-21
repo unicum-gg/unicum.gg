@@ -192,6 +192,15 @@ export function StrongholdLeaderboardView({
                       30d battles
                     </SortableHead>
                     <SortableHead
+                      sortKey={StrongholdSort.Winrate30d}
+                      active={sort === StrongholdSort.Winrate30d}
+                      onSort={setSort}
+                      className="w-28"
+                      tooltip="Win rate over the last 30 days"
+                    >
+                      30d WR
+                    </SortableHead>
+                    <SortableHead
                       sortKey={StrongholdSort.Winrate}
                       active={sort === StrongholdSort.Winrate}
                       onSort={setSort}
@@ -206,6 +215,12 @@ export function StrongholdLeaderboardView({
                   {results.map((entry, i) => {
                     const winrate =
                       entry.battles > 0 ? entry.wins / entry.battles : null;
+                    const winrate30d =
+                      entry.wins30d !== null &&
+                      entry.battles30d !== null &&
+                      entry.battles30d > 0
+                        ? entry.wins30d / entry.battles30d
+                        : null;
                     return (
                       <TableRow key={entry.clanId}>
                         <TableCell className="text-center text-muted-foreground tabular-nums">
@@ -272,6 +287,19 @@ export function StrongholdLeaderboardView({
                         <TableCell className="text-right text-muted-foreground tabular-nums">
                           {entry.battles30d !== null
                             ? `+${intFmt.format(entry.battles30d)}`
+                            : "—"}
+                        </TableCell>
+                        <TableCell
+                          className={cn(
+                            "text-right font-semibold tabular-nums",
+                            winrate30d !== null &&
+                              RATING_COLOR_CLASS[
+                                strongholdWinrateColor(winrate30d)
+                              ],
+                          )}
+                        >
+                          {winrate30d !== null
+                            ? pctFmt.format(winrate30d)
                             : "—"}
                         </TableCell>
                         <TableCell

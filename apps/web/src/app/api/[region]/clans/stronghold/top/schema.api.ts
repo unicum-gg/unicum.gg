@@ -16,6 +16,7 @@ const strongholdLeaderboardEntry = z
     battles: z.number(),
     battles30d: z.number().nullable(),
     wins: z.number(),
+    wins30d: z.number().nullable(),
   })
   .meta({
     id: "StrongholdLeaderboardEntry",
@@ -28,9 +29,12 @@ export const strongholdTopQuery = z.object({
   tier: z.enum(["advances", "t10", "t8", "t6"]).optional().meta({
     description: "Stronghold mode/tier (default t10).",
   }),
-  sort: z.enum(["elo", "battles", "battles30d", "winrate"]).optional().meta({
-    description: "Ranking column (default elo; battles for Advances).",
-  }),
+  sort: z
+    .enum(["elo", "battles", "battles30d", "winrate30d", "winrate"])
+    .optional()
+    .meta({
+      description: "Ranking column (default elo; battles for Advances).",
+    }),
 });
 
 /** Response of `GET /{region}/clans/stronghold/top`. */

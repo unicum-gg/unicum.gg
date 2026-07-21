@@ -1821,6 +1821,7 @@ export interface components {
             battles: number;
             battles30d: number | null;
             wins: number;
+            wins30d: number | null;
         };
         /** @description One game mode's totals plus 24h/7d/30d period diffs. */
         StrongholdMode: {
@@ -2580,7 +2581,7 @@ export interface operations {
                 /** @description Stronghold mode/tier (default t10). */
                 tier?: "advances" | "t10" | "t8" | "t6";
                 /** @description Ranking column (default elo; battles for Advances). */
-                sort?: "elo" | "battles" | "battles30d" | "winrate";
+                sort?: "elo" | "battles" | "battles30d" | "winrate30d" | "winrate";
             };
             header?: never;
             path: {
