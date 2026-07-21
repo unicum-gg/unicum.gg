@@ -29,7 +29,7 @@ This is a pnpm workspace (`pnpm-workspace.yaml`, `packages: ["apps/*", "packages
 
 So data flows `WG → core (fetch/store) → web API → sdk → front/bot`, and client-safe types/math flow from `shared` into everything. Hand-written `fetch`/SWR fetchers against our own API are not allowed, go through the SDK.
 
-The root `package.json` holds workspace config + thin scripts that delegate to `apps/web` (`pnpm --filter @unicum.gg/web ...`), so the `pnpm <cmd>` commands below run from the repo root. **Paths in this document that begin `src/...` are relative to `apps/web/`; backend code they refer to has usually moved to `packages/core/src/...` under the matching subpath** (e.g. `services/players/backfill-cron.ts` → `packages/core/src/players/backfill-cron.ts`, imported as `@unicum.gg/core/players/backfill-cron`).
+The root `package.json` holds workspace config + thin scripts that delegate to `apps/web` (`pnpm --filter @unicum.gg/web ...`), so the `pnpm <cmd>` commands below run from the repo root. **Paths in this document that begin `src/...` are relative to `apps/web/`; backend code they refer to has usually moved to `packages/core/src/...` under the matching subpath** (e.g. `services/players/refresh-cron.ts` → `packages/core/src/players/refresh-cron.ts`, imported as `@unicum.gg/core/players/refresh-cron`).
 
 # Commands
 
@@ -68,7 +68,7 @@ Crons run in the standalone **`apps/worker`** process (`src/index.ts`), which st
 
 | Cron | Source (`@unicum.gg/core/…`) | Cadence |
 |---|---|---|
-| `snapshot-cron-<region>` | `players/backfill-cron` | Every minute. Refreshes up to 200 players whose last snapshot is older than 24h. |
+| `snapshot-pipeline-<region>` | `players/snapshot-pipeline` | Continuous per-region worker pool (not a scheduled tick): each worker claims a chunk of due players (adaptive cadence), gates the expensive per-account `tanks/stats` fetch on a cheap batched `account/info` change check, and writes only movers. Workers split into `backlog` (longest-overdue first) + `active` (freshest first) so the backlog drains without starving fresh players. |
 | `player-cron-<region>` | `players/refresh-cron` | Every 10s. Drains the on-demand player refresh queue (page hits enqueue at priority 10). |
 | `clan-refresh-cron-<region>` | `clans/refresh-cron` | Every 10s. Drains on-demand clan refresh queue. |
 | `clan-backfill-cron-<region>` | `clans/backfill-cron` | Every minute. Re-fetches the oldest tracked clans. |
