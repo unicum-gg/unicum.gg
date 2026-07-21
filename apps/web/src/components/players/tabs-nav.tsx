@@ -61,11 +61,15 @@ export function PlayerSectionNav({
   basePath,
   section,
   mode,
+  tankCount,
   onSelect,
 }: {
   basePath: string;
   section: PlayerSection;
   mode: PlayerMode;
+  // Battle-having tank count, shown as "Tanks (N)". Comes from the detail
+  // payload (a single number), not the on-demand /tanks list.
+  tankCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
   return (
@@ -79,7 +83,9 @@ export function PlayerSectionNav({
             if (section !== s.id) onSelect(s.id);
           }}
         >
-          {s.label}
+          {s.id === PlayerSection.Tanks
+            ? `${s.label} (${tankCount.toLocaleString("en-US")})`
+            : s.label}
         </NavAnchor>
       ))}
     </nav>

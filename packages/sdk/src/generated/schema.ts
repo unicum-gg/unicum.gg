@@ -1611,6 +1611,7 @@ export interface components {
                 d30: components["schemas"]["PlayerStats"] | null;
             };
             derived: components["schemas"]["PlayerDerivedStats"];
+            tankCount: number;
             /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
             valuation: {
                 market: {

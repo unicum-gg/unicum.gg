@@ -236,6 +236,7 @@ export const PlayerDetailResponse = z.object({
     d30: playerStats.nullable(),
   }),
   derived: playerDerivedStats,
+  tankCount: z.number(),
   valuation: z
     .object({
       market: z.object({

@@ -209,6 +209,7 @@ export function PlayerTabsView({
             basePath={basePath}
             section={section}
             mode={mode}
+            tankCount={detail.tankCount}
             onSelect={selectSection}
           />
         </PanelHeader>

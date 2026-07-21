@@ -202,6 +202,7 @@ export async function buildPlayerDetail(args: {
     current,
     periods,
     derived,
+    tankCount: vehicles.length,
     valuation: computePlayerValuation(
       vehicles,
       current.globalRating,

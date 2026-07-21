@@ -62,6 +62,10 @@ export type PlayerDetailData = {
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;
+  // Count of tanks the player has battles in — a single number so the "Tanks"
+  // tab can show "Tanks (N)" without shipping the (heavy) per-tank list, which
+  // lives on its own `/tanks` endpoint and loads on demand.
+  tankCount: number;
   // Estimated account worth (market resale + store rebuild cost), computed from
   // the garage. See `./valuation`.
   valuation: PlayerValuation;
