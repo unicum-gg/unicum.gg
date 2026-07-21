@@ -51,6 +51,7 @@ import {
   MODULE_SLOTS,
   SETUP_PARAM,
 } from "@/components/tanks/detail/specifications/config-url";
+import { BuildShare } from "@/components/tanks/detail/specifications/build-share";
 
 type Slot = keyof TankConfigModules;
 
@@ -80,6 +81,7 @@ export function TankConfigurator({
   region,
   meta,
   tankName,
+  slug,
   stockSpecs,
   modules,
   configs,
@@ -92,6 +94,7 @@ export function TankConfigurator({
   region: Region;
   meta: VehicleMeta;
   tankName: string;
+  slug: string;
   stockSpecs: TankSpec | null;
   modules: TankModuleNode[];
   configs: TankConfig[];
@@ -401,16 +404,14 @@ export function TankConfigurator({
     resetModules();
   }
 
-  // Mirror the current selection into the URL (replaceState, so no navigation or
-  // scroll): a pristine config writes no params, so the query stays empty until
-  // something is touched and clears again on reset. Non-config params are kept.
-  useEffect(() => {
-    if (typeof window === "undefined") return;
+  // The opaque token for the current selection (null when pristine). Shared by
+  // the URL mirror and the "Share build" affordance so both stay in sync.
+  const setupToken = useMemo(() => {
     const curModules = MODULE_SLOTS.map((s) => active?.modules[s] ?? null);
     const stockModules = MODULE_SLOTS.map(
       (s) => configs[stockIdx]?.modules[s] ?? null,
     );
-    const token = encodeSetup({
+    return encodeSetup({
       shell: shellIdx,
       modules: curModules,
       stockModules,
@@ -425,15 +426,6 @@ export function TankConfigurator({
       crewSkills: [...selectedSkills],
       crewLevel,
     });
-    const params = new URLSearchParams(window.location.search);
-    params.delete(SETUP_PARAM);
-    if (token) params.set(SETUP_PARAM, token);
-    const qs = params.toString();
-    const url = qs
-      ? `${window.location.pathname}?${qs}`
-      : window.location.pathname;
-    const current = `${window.location.pathname}${window.location.search}`;
-    if (url !== current) window.history.replaceState(null, "", url);
   }, [
     active,
     configs,
@@ -451,6 +443,22 @@ export function TankConfigurator({
     crewLevel,
   ]);
 
+  // Mirror the token into the URL (replaceState, so no navigation or scroll): a
+  // pristine config writes no param, so the query stays empty until something is
+  // touched and clears again on reset. Non-config params are kept.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    params.delete(SETUP_PARAM);
+    if (setupToken) params.set(SETUP_PARAM, setupToken);
+    const qs = params.toString();
+    const url = qs
+      ? `${window.location.pathname}?${qs}`
+      : window.location.pathname;
+    const current = `${window.location.pathname}${window.location.search}`;
+    if (url !== current) window.history.replaceState(null, "", url);
+  }, [setupToken]);
+
   return (
     <>
       {finalSpecs && (
@@ -461,6 +469,16 @@ export function TankConfigurator({
             baseline={baselineSpec}
             canResetAll={canResetAll}
             onResetAll={resetAll}
+            actions={
+              setupToken ? (
+                <BuildShare
+                  region={region}
+                  tankName={tankName}
+                  slug={slug}
+                  setupToken={setupToken}
+                />
+              ) : null
+            }
           />
         </div>
       )}

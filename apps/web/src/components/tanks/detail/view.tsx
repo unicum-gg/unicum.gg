@@ -223,6 +223,7 @@ export function TankView({
                     region={region}
                     meta={meta}
                     tankName={meta.name}
+                    slug={slug}
                     stockSpecs={specs}
                     modules={modules}
                     configs={configs}

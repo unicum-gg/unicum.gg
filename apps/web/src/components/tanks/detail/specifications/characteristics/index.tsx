@@ -141,6 +141,7 @@ export function TankCharacteristics({
   baseline = null,
   canResetAll = false,
   onResetAll,
+  actions,
 }: {
   specs: TankSpec | null;
   tankName: string;
@@ -151,14 +152,22 @@ export function TankCharacteristics({
   canResetAll?: boolean;
   /** Reset every configurator section to its default at once. */
   onResetAll?: () => void;
+  /** Extra header controls (e.g. the "Share build" affordance), left of Reset. */
+  actions?: React.ReactNode;
 }) {
   if (!specs) return null;
+  const hasActions = actions || (canResetAll && onResetAll);
   return (
     <Panel>
       <PanelHeader className="flex items-center justify-between gap-4">
         <PanelTitle>{tankName} characteristics</PanelTitle>
-        {canResetAll && onResetAll ? (
-          <ResetButton onReset={onResetAll} label="Reset all" />
+        {hasActions ? (
+          <div className="flex items-center gap-3">
+            {actions}
+            {canResetAll && onResetAll ? (
+              <ResetButton onReset={onResetAll} label="Reset all" />
+            ) : null}
+          </div>
         ) : null}
       </PanelHeader>
       <PanelContent className="grid grid-cols-1 gap-x-8 gap-y-6 px-4 py-6 sm:grid-cols-2 lg:grid-cols-4">
