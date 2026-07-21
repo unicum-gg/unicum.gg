@@ -70,6 +70,20 @@ async function main(): Promise<void> {
   );
   startLiveStreamersPoller();
 
+  // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
+  // real per-region req/s (all consumers, vs the rate-limit budget) is only
+  // observable here, at the transport. Log it every 60s as requests/second.
+  const { drainWgRequestCounts } = await import("@unicum.gg/wargaming");
+  setInterval(() => {
+    const counts = drainWgRequestCounts();
+    const entries = Object.entries(counts).filter(([, n]) => n > 0);
+    if (entries.length === 0) return;
+    const parts = entries
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([key, n]) => `${key}=${(n / 60).toFixed(1)}/s`);
+    console.log(`[wg-rate] last 60s: ${parts.join(" ")}`);
+  }, 60_000).unref();
+
   console.log("[worker] all crons scheduled");
 }
 

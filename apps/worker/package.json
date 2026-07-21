@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",
-    "@unicum.gg/shared": "workspace:*"
+    "@unicum.gg/shared": "workspace:*",
+    "@unicum.gg/wargaming": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^22.10.5",

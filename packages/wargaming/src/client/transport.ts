@@ -39,6 +39,21 @@ function defaultCacheTtl(path: string): number {
   return 0;
 }
 
+// Egress request counter, keyed `api:<region>` / `portal:<region>`. Incremented
+// in `#pickLane`, which every real network attempt passes through exactly once
+// (cache hits short-circuit before it), so this is the true count of requests
+// leaving for WG — including retries — across every consumer sharing the client.
+// The proxy can't see this (CONNECT tunnels are opaque TLS), so it's the only
+// place the real per-region req/s is observable. Drain + log it on a heartbeat.
+const wgRequestCounts: Record<string, number> = {};
+
+/** Read and reset the per-region/lane egress request counts since the last drain. */
+export function drainWgRequestCounts(): Record<string, number> {
+  const snapshot = { ...wgRequestCounts };
+  for (const key of Object.keys(wgRequestCounts)) wgRequestCounts[key] = 0;
+  return snapshot;
+}
+
 export type WargamingClientOptions = {
   /** WG `application_id` per region — a map or a resolver. */
   applicationId: Partial<Record<Region, string>> | ((region: Region) => string);
@@ -244,6 +259,9 @@ export class Transport {
       kind === RateLimit.Wg ? this.#wgCursor : this.#portalCursor;
     const i = cursor[region] % lanes.length;
     cursor[region] = (i + 1) % lanes.length;
+    const laneKind = kind === RateLimit.Wg ? "api" : "portal";
+    const key = `${laneKind}:${region}`;
+    wgRequestCounts[key] = (wgRequestCounts[key] ?? 0) + 1;
     return lanes[i]!;
   }
 
