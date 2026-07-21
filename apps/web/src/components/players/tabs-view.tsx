@@ -11,6 +11,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/clans-history";
+import { PlayerNameHistory } from "@/components/players/name-history";
 import { PlayerRatingChart } from "@/components/players/rating-chart";
 import { PlayerStatsTable } from "@/components/players/stats-table";
 import {
@@ -33,7 +34,7 @@ import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { ValueTab } from "@/components/players/value-tab";
 import { PlayerVehiclesTable } from "@/components/players/vehicles-table";
 import { styles } from "@/lib/styles";
-import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerVehicleRow } from "@unicum.gg/shared";
+import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerVehicleRow, type NameHistoryEntry } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -47,6 +48,7 @@ type OverallData = {
   metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
   metricLabel: string;
   clanHistory: React.ComponentProps<typeof PlayerClansHistory>["clanHistory"];
+  nameHistory: NameHistoryEntry[];
   createdAt: Date;
   nowMs: number;
 };
@@ -133,6 +135,7 @@ export function PlayerTabsView({
     metric: detail.metric,
     metricLabel,
     clanHistory: detail.clanHistory,
+    nameHistory: detail.nameHistory,
     createdAt: detail.player.createdAt,
     nowMs,
   };
@@ -246,6 +249,7 @@ function OverallTab({
   metric,
   metricLabel,
   clanHistory,
+  nameHistory,
   createdAt,
   nowMs,
 }: OverallData & { region: Region; nickname: string }) {
@@ -329,6 +333,13 @@ function OverallTab({
         clanHistory={clanHistory}
         nowMs={nowMs}
       />
+
+      {nameHistory.length > 0 && (
+        <>
+          <PanelSeparator />
+          <PlayerNameHistory history={nameHistory} />
+        </>
+      )}
     </>
   );
 }

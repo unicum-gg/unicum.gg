@@ -16,6 +16,7 @@ import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import type { ClanRatings, ClanVehicleRow } from "@unicum.gg/shared";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
+import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -27,10 +28,14 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 // endpoint owns the cold-cache path (resolve tag on WG + fetch live).
 async function loadOverview(region: Region, tag: string) {
   try {
-    const { clan, ratings } = await unicum.region(region).clans(tag).overview();
+    const { clan, ratings, nameHistory } = await unicum
+      .region(region)
+      .clans(tag)
+      .overview();
     return {
       clan: clan as unknown as ClanFullInfo,
       ratings: ratings as unknown as ClanRatings,
+      nameHistory: nameHistory as unknown as ClanNameHistoryEntry[],
     };
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -155,6 +160,9 @@ export default async function ClanPage({
         initialRatings={ratings}
         initialData={initialData}
         initialVehicles={initialVehicles}
+        initialNameHistory={
+          overview.nameHistory as unknown as ClanNameHistoryEntry[]
+        }
       />
     </div>
   );

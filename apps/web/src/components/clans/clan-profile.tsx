@@ -5,7 +5,9 @@ import useSWR from "swr";
 import type { LiveUpdate } from "@unicum.gg/sdk";
 import { LiveSync } from "@/components/live-sync";
 import { ClanHeader } from "@/components/clans/header";
+import { ClanNameHistory } from "@/components/clans/name-history";
 import { ClanSection, ClanMode } from "@/components/clans/tabs";
+import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import {
   ClanTabsView,
   type ClanTabsInitialData,
@@ -41,6 +43,7 @@ export function ClanProfile({
   initialRatings,
   initialData,
   initialVehicles,
+  initialNameHistory,
 }: {
   region: Region;
   tag: string;
@@ -53,6 +56,7 @@ export function ClanProfile({
   initialRatings: ClanRatings;
   initialData: ClanTabsInitialData;
   initialVehicles: ClanVehicleRow[] | null;
+  initialNameHistory: ClanNameHistoryEntry[];
 }) {
   const overviewUrl = `/api/${region}/clans/${encodeURIComponent(tag)}`;
   const { data: overview, mutate: mutateOverview } = useSWR(
@@ -65,14 +69,20 @@ export function ClanProfile({
         .then((r) => ({
           clan: r.clan as unknown as ClanFullInfo,
           ratings: r.ratings as unknown as ClanRatings,
+          nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
         })),
     {
-      fallbackData: { clan: initialClan, ratings: initialRatings },
+      fallbackData: {
+        clan: initialClan,
+        ratings: initialRatings,
+        nameHistory: initialNameHistory,
+      },
       revalidateOnMount: false,
     },
   );
   const clan = overview?.clan ?? initialClan;
   const ratings = overview?.ratings ?? initialRatings;
+  const nameHistory = overview?.nameHistory ?? initialNameHistory;
 
   // Incremented on each live tick; the tabs view refetches its sections when it
   // changes (see ClanTabsView's effect on `liveVersion`).
@@ -119,6 +129,13 @@ export function ClanProfile({
         initialVehicles={initialVehicles}
         liveVersion={liveVersion}
       />
+
+      {activeSection === ClanSection.Overview && nameHistory.length > 0 && (
+        <>
+          <PanelSeparator />
+          <ClanNameHistory history={nameHistory} />
+        </>
+      )}
     </>
   );
 }
