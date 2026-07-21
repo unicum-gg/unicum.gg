@@ -28,19 +28,25 @@ const FETCH_CHUNK = 100;
 // the players table + the `eu_players_due_idx` index IS the durable queue, so a
 // restart loses nothing beyond the chunk a worker is mid-processing.
 //
-// Sized to clear the on-time backlog: EU needs ~385k refreshes/day to keep every
-// bucket within its cadence (see /coverage). At ~1.8 players/s per worker, 8
-// workers ~= 1.2M/day — comfortably above the need, so the ~800k backlog drains
-// in ~a day and on-time climbs to ~100%. Plenty of headroom to go here (worker
-// was ~10% CPU, Postgres ~31%, WG at 2 of 12 RPS at concurrency 3).
-const PIPELINE_CONCURRENCY = 8;
+// Sized to clear the on-time backlog (EU needs ~385k refreshes/day, see
+// /coverage) WITHOUT overloading Postgres. The per-player write path
+// (recordCurrentSnapshot's d30 + carryForward read-backs on the 300M-row
+// tank_snapshots table) is the real cost and scales super-linearly with
+// concurrency: at 3 workers Postgres sat at ~31% CPU, at 8 it spiked to ~530%
+// (host load 15). 4 keeps a healthy margin above the ~3-worker throughput while
+// staying well under the host's 8 cores. Going higher needs that write path
+// optimized first, not more workers.
+const PIPELINE_CONCURRENCY = 4;
 // Per-player write fan-out inside a chunk. Total concurrent writers is roughly
 // REGIONS x PIPELINE_CONCURRENCY x WRITE_CONCURRENCY; with NA/Asia usually drained
 // (only EU busy) that's ~8 x 2 = 16, within the background DB pool (writes release
 // their connection between queries, so this is a peak, not a sustained hold).
 const WRITE_CONCURRENCY = 2;
 // Back-off when a region's due queue is momentarily empty, or after an error.
+// A drained region's workers grow their idle sleep exponentially up to the cap so
+// they stop hammering the DB with claim scans that find nothing.
 const IDLE_SLEEP_MS = 2_000;
+const MAX_IDLE_SLEEP_MS = 30_000;
 const ERROR_BACKOFF_MS = 5_000;
 // Re-check the leader lease this often (lease itself lasts 90s).
 const LEASE_REFRESH_MS = 30_000;
@@ -120,6 +126,7 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
   // claims one chunk straight from the DB and processes it end-to-end; errors are
   // isolated so the worker self-heals. No in-memory buffer — the claim IS the
   // dequeue, so nothing is stranded in memory across a restart.
+  let emptyStreak = 0;
   for (;;) {
     try {
       if (!isLeader) {
@@ -128,10 +135,15 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
       }
       const rows = await claimDuePlayers(region, FETCH_CHUNK);
       if (rows.length === 0) {
-        // Region's backlog momentarily drained.
-        await sleep(IDLE_SLEEP_MS);
+        // Region caught up. Back off exponentially so a drained region (e.g.
+        // NA/Asia, whose queues are usually empty) doesn't hammer the DB with
+        // claim scans that find nothing — that polling was a big chunk of the
+        // Postgres load. Reset to a tight loop the moment work reappears.
+        emptyStreak += 1;
+        await sleep(Math.min(IDLE_SLEEP_MS * 2 ** emptyStreak, MAX_IDLE_SLEEP_MS));
         continue;
       }
+      emptyStreak = 0;
       const { succeeded, failed } = await processRegionBatch(region, rows);
       bump(region, succeeded, failed);
     } catch (err) {
