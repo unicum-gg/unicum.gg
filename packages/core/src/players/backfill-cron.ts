@@ -94,10 +94,14 @@ export function startPlayerBackfillCron(): void {
     for (const region of REGIONS) {
       const s = stats[region];
       if (s && s.chunks > 0) {
+        // avg per-chunk fetch vs write: the split that says fetch-bound (WG/rate
+        // limiter) vs write-bound (DB). e.g. "fetch 1.2s / write 45s" = write-bound.
+        const fetchAvg = Math.round(s.fetchMs / s.chunks);
+        const writeAvg = Math.round(s.writeMs / s.chunks);
         console.log(
-          `[snapshot-pipeline-${region}] last 60s: ${s.ok} ok, ${s.failed} failed, ${s.chunks} chunks`,
+          `[snapshot-pipeline-${region}] last 60s: ${s.ok} ok, ${s.failed} failed, ${s.chunks} chunks, avg/chunk fetch ${fetchAvg}ms / write ${writeAvg}ms`,
         );
-        stats[region] = { ok: 0, failed: 0, chunks: 0 };
+        stats[region] = { ok: 0, failed: 0, chunks: 0, fetchMs: 0, writeMs: 0 };
       }
     }
   }, 60_000);
@@ -112,13 +116,35 @@ export function startPlayerBackfillCron(): void {
 }
 
 // Lightweight per-region throughput accounting for the once-a-minute log above.
-const stats: Record<string, { ok: number; failed: number; chunks: number }> =
-  {};
-function bump(region: Region, ok: number, failed: number): void {
-  const s = (stats[region] ??= { ok: 0, failed: 0, chunks: 0 });
+// `fetchMs`/`writeMs` are summed so the log can show the fetch-vs-write split —
+// the direct evidence of whether we're WG/rate-limit-bound or DB-write-bound.
+type RegionStat = {
+  ok: number;
+  failed: number;
+  chunks: number;
+  fetchMs: number;
+  writeMs: number;
+};
+const stats: Record<string, RegionStat> = {};
+function bump(
+  region: Region,
+  ok: number,
+  failed: number,
+  fetchMs: number,
+  writeMs: number,
+): void {
+  const s = (stats[region] ??= {
+    ok: 0,
+    failed: 0,
+    chunks: 0,
+    fetchMs: 0,
+    writeMs: 0,
+  });
   s.ok += ok;
   s.failed += failed;
   s.chunks += 1;
+  s.fetchMs += fetchMs;
+  s.writeMs += writeMs;
 }
 
 async function regionWorker(region: Region, workerIdx: number): Promise<void> {
@@ -135,8 +161,9 @@ async function regionWorker(region: Region, workerIdx: number): Promise<void> {
       }
       const rows = await claimDuePlayers(region, FETCH_CHUNK);
       if (rows.length > 0) {
-        const { succeeded, failed } = await processRegionBatch(region, rows);
-        bump(region, succeeded, failed);
+        const { succeeded, failed, fetchMs, writeMs } =
+          await processRegionBatch(region, rows);
+        bump(region, succeeded, failed, fetchMs, writeMs);
       }
       if (rows.length < FETCH_CHUNK) {
         // Couldn't fill a chunk => this region is caught up on its immediate
@@ -219,10 +246,19 @@ async function claimDuePlayers(
 async function processRegionBatch(
   region: Region,
   rows: Player[],
-): Promise<{ succeeded: number; failed: number }> {
+): Promise<{
+  succeeded: number;
+  failed: number;
+  fetchMs: number;
+  writeMs: number;
+}> {
   const players = playersByRegion[region];
   const accountIds = rows.map((r) => r.accountId);
 
+  // Phase 1: the WG fetch (all batched/chunked + rate-limited). Timed so we can
+  // see, in the once-a-minute log, whether the pipeline is fetch-bound (WG /
+  // rate-limiter) or write-bound (DB) — instead of inferring it from proxy logs.
+  const tFetch0 = Date.now();
   const [infosByAccount, tanksByAccount, wtrByAccount] = await Promise.all([
     getPlayersInfoBatch(region, accountIds).catch((err) => {
       console.error(`[snapshot-pipeline-${region}] account/info batch failed:`, err);
@@ -237,6 +273,7 @@ async function processRegionBatch(
       return new Map<number, number>();
     }),
   ]);
+  const fetchMs = Date.now() - tFetch0;
 
   let succeeded = 0;
   let failed = 0;
@@ -299,6 +336,9 @@ async function processRegionBatch(
   // slice of the batch serially. Steady N-way parallelism with no per-chunk
   // barrier (a slow player never blocks a whole chunk). Each row maps to exactly
   // one worker, so no player is processed twice.
+  // Phase 2: the DB write-back (per-player recordCurrentSnapshot: read-backs on
+  // the 300M-row tank_snapshots table + rating recompute + inserts), fanned out.
+  const tWrite0 = Date.now();
   const lanes: Player[][] = Array.from({ length: WRITE_CONCURRENCY }, () => []);
   rows.forEach((player, i) => lanes[i % WRITE_CONCURRENCY].push(player));
   await Promise.all(
@@ -306,8 +346,9 @@ async function processRegionBatch(
       for (const player of lane) await processOne(player);
     }),
   );
+  const writeMs = Date.now() - tWrite0;
 
-  return { succeeded, failed };
+  return { succeeded, failed, fetchMs, writeMs };
 }
 
 export async function refreshDuePlayersForRegion(
