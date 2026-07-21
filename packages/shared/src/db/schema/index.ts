@@ -6,6 +6,8 @@ export * from "./clans";
 export * from "./cron-leader";
 export * from "./players";
 export * from "./player-clan-history";
+export * from "./player-name-history";
+export * from "./clan-name-history";
 export * from "./player-refresh-queue";
 export * from "./player-snapshots";
 export * from "./tank-mom";
