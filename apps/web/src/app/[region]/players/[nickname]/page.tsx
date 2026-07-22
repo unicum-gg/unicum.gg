@@ -141,7 +141,12 @@ export default async function PlayerPage({
     <Suspense
       fallback={
         <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-          <PlayerProfileSkeleton nickname={decoded} metricLabel={metricLabel} />
+          <PlayerProfileSkeleton
+            nickname={decoded}
+            metricLabel={metricLabel}
+            section={section}
+            mode={mode}
+          />
           <div aria-hidden className={`flex-1 ${styles.borderX}`} />
         </div>
       }
