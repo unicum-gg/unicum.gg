@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { VEHICLE_CLASS_LABEL, VEHICLE_CLASSES, type VehicleMeta, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
+import { VEHICLE_CLASS_LABEL, VEHICLE_CLASSES, type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import {
@@ -56,18 +56,16 @@ export function BucketTab({
   encyclopedia,
   wn8Expected,
   wnxExpected,
+  wn8Fallback,
   bucketKey,
 }: {
   slots: ClanCompareSlot[];
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
+  wn8Fallback: Map<string, WN8Expected>;
   bucketKey: BucketKey;
 }) {
-  const wn8Fallback = useMemo(
-    () => buildWN8Fallback(wn8Expected, encyclopedia),
-    [wn8Expected, encyclopedia],
-  );
 
   const data = useMemo(() => {
     const slotTanks = slots.map((s) =>

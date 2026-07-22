@@ -45,6 +45,7 @@ export function PlayerCompareView({
   encyclopedia,
   wn8Expected,
   wnxExpected,
+  wn8Fallback,
   maxPlayers,
 }: {
   region: Region;
@@ -52,6 +53,7 @@ export function PlayerCompareView({
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
+  wn8Fallback: Map<string, WN8Expected>;
   maxPlayers: number;
 }) {
   const router = useRouter();
@@ -147,6 +149,7 @@ export function PlayerCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
             />
           )}
           {tab === CompareTab.PerClass && (
@@ -155,6 +158,7 @@ export function PlayerCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
               bucketKey="class"
             />
           )}
@@ -164,6 +168,7 @@ export function PlayerCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
               bucketKey="tier"
             />
           )}
@@ -173,6 +178,7 @@ export function PlayerCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
             />
           )}
         </PanelContent>

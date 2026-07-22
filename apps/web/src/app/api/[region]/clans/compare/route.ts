@@ -1,4 +1,5 @@
 import { isRegion, type Region } from "@unicum.gg/wargaming";
+import { buildWN8Fallback } from "@unicum.gg/shared";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanTankAggregates } from "@unicum.gg/core/clans/repository/tanks";
@@ -61,10 +62,30 @@ export async function GET(
       ...tags.map((tag) => loadClanForCompare(region, tag)),
     ]);
 
+  const slots = tags.map((requested, i) => ({ requested, ...clanData[i] }));
+
+  // Ship only the reference-table entries for the tanks the compared clans
+  // actually field (their per-tank aggregates), instead of the full ~1200-tank
+  // catalogue + expected tables. The WN8 fallback (per tier+type average for
+  // tanks missing from the expected table) is computed from the FULL tables and
+  // sent, so the trimmed tables never change any rating. Mirrors players/compare.
+  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
+  const ownedIds = new Set<number>();
+  for (const slot of slots) {
+    for (const a of slot.tankAggregates) ownedIds.add(a.tankId);
+  }
+  const pickRecord = <V>(rec: Record<string, V>): Record<string, V> =>
+    Object.fromEntries(
+      Object.entries(rec).filter(([id]) => ownedIds.has(Number(id))),
+    );
+  const pickMap = <V>(map: Map<number, V>): Record<string, V> =>
+    Object.fromEntries([...map].filter(([id]) => ownedIds.has(id)));
+
   return jsonResponse(ClansCompareResponse, {
-    slots: tags.map((requested, i) => ({ requested, ...clanData[i] })),
-    encyclopedia,
-    wn8Expected: Object.fromEntries(wn8Expected),
-    wnxExpected: Object.fromEntries(wnxExpected),
+    slots,
+    encyclopedia: pickRecord(encyclopedia),
+    wn8Expected: pickMap(wn8Expected),
+    wnxExpected: pickMap(wnxExpected),
+    wn8Fallback: Object.fromEntries(wn8Fallback),
   });
 }

@@ -94,6 +94,14 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
       v as unknown as WNXExpected,
     ]),
   );
+  // Precomputed server-side from the full tables (keyed by `tier-type`), so the
+  // client never rebuilds it from the trimmed owned-only expected table.
+  const wn8Fallback = new Map(
+    Object.entries(
+      (data as unknown as { wn8Fallback: Record<string, WN8Expected> })
+        .wn8Fallback,
+    ),
+  );
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -103,6 +111,7 @@ export default async function ComparePlayersPage({ params }: RouteParams) {
         encyclopedia={encyclopedia}
         wn8Expected={wn8Expected}
         wnxExpected={wnxExpected}
+        wn8Fallback={wn8Fallback}
         maxPlayers={MAX_PLAYERS}
       />
     </div>

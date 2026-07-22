@@ -48,6 +48,7 @@ export function ClanCompareView({
   encyclopedia,
   wn8Expected,
   wnxExpected,
+  wn8Fallback,
   maxClans,
 }: {
   region: Region;
@@ -55,6 +56,7 @@ export function ClanCompareView({
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
+  wn8Fallback: Map<string, WN8Expected>;
   maxClans: number;
 }) {
   const router = useRouter();
@@ -156,6 +158,7 @@ export function ClanCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
               bucketKey="class"
             />
           )}
@@ -165,6 +168,7 @@ export function ClanCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
               bucketKey="tier"
             />
           )}
@@ -174,6 +178,7 @@ export function ClanCompareView({
               encyclopedia={encyclopedia}
               wn8Expected={wn8Expected}
               wnxExpected={wnxExpected}
+              wn8Fallback={wn8Fallback}
             />
           )}
         </PanelContent>

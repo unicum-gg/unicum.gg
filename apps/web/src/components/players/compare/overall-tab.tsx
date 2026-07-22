@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
-import { type VehicleMeta, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
+import { type VehicleMeta, computeWN7, computeWN8, computeWNX, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import {
   avgCell,
   bestIndex,
@@ -29,16 +29,14 @@ export function OverallTab({
   encyclopedia,
   wn8Expected,
   wnxExpected,
+  wn8Fallback,
 }: {
   slots: CompareSlot[];
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
+  wn8Fallback: Map<string, WN8Expected>;
 }) {
-  const wn8Fallback = useMemo(
-    () => buildWN8Fallback(wn8Expected, encyclopedia),
-    [wn8Expected, encyclopedia],
-  );
 
   const { rows, headerWinners } = useMemo(() => {
     const overallAggs = slots.map((s) => aggregateTanks(s.tanks));

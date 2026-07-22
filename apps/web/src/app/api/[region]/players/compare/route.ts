@@ -1,4 +1,5 @@
 import { isRegion } from "@unicum.gg/wargaming";
+import { buildWN8Fallback } from "@unicum.gg/shared";
 import { loadPlayerInitialData } from "@unicum.gg/core/players/initial-data";
 import { tankSnapshotsToTankStats } from "@unicum.gg/core/players/tanks";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
@@ -44,21 +45,42 @@ export async function GET(
       ...names.map((nick) => loadPlayerInitialData(region, { nickname: nick })),
     ]);
 
+  const slots = names.map((requested, i) => {
+    const initial = initials[i];
+    const renderable = initial.player && initial.latestSnapshot;
+    return {
+      requested,
+      player: initial.player,
+      latest: initial.latestSnapshot,
+      tanks: renderable
+        ? tankSnapshotsToTankStats(initial.latestTankSnapshots)
+        : [],
+    };
+  });
+
+  // The client only ever indexes the reference tables by the tank ids the
+  // compared players actually own, so ship just those entries instead of the
+  // full ~1200-tank catalogue + expected tables (which are 94% of the payload).
+  // The WN8 fallback (per tier+type average, used for tanks missing from the
+  // expected table) must be computed from the FULL tables, so precompute it
+  // here and send it rather than have the client rebuild it from a trimmed set.
+  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
+  const ownedIds = new Set<number>();
+  for (const slot of slots) {
+    for (const t of slot.tanks) ownedIds.add(t.tank_id);
+  }
+  const pickRecord = <V>(rec: Record<string, V>): Record<string, V> =>
+    Object.fromEntries(
+      Object.entries(rec).filter(([id]) => ownedIds.has(Number(id))),
+    );
+  const pickMap = <V>(map: Map<number, V>): Record<string, V> =>
+    Object.fromEntries([...map].filter(([id]) => ownedIds.has(id)));
+
   return jsonResponse(PlayersCompareResponse, {
-    slots: names.map((requested, i) => {
-      const initial = initials[i];
-      const renderable = initial.player && initial.latestSnapshot;
-      return {
-        requested,
-        player: initial.player,
-        latest: initial.latestSnapshot,
-        tanks: renderable
-          ? tankSnapshotsToTankStats(initial.latestTankSnapshots)
-          : [],
-      };
-    }),
-    encyclopedia,
-    wn8Expected: Object.fromEntries(wn8Expected),
-    wnxExpected: Object.fromEntries(wnxExpected),
+    slots,
+    encyclopedia: pickRecord(encyclopedia),
+    wn8Expected: pickMap(wn8Expected),
+    wnxExpected: pickMap(wnxExpected),
+    wn8Fallback: Object.fromEntries(wn8Fallback),
   });
 }

@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type VehicleMeta, buildWN8Fallback, type RatingColor, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
+import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type VehicleMeta, type RatingColor, type WN8Expected, wn7Color, wn8Color, type WNXExpected, wnxColor } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { ClanTankAggregate } from "@unicum.gg/core/clans/repository/tanks";
@@ -92,11 +92,13 @@ export function PerTankTab({
   encyclopedia,
   wn8Expected,
   wnxExpected,
+  wn8Fallback,
 }: {
   slots: ClanCompareSlot[];
   encyclopedia: Record<string, VehicleMeta>;
   wn8Expected: Map<number, WN8Expected>;
   wnxExpected: Map<number, WNXExpected>;
+  wn8Fallback: Map<string, WN8Expected>;
 }) {
   const [sort, setSort] = useState<SortState<SortMetric>>(null);
   const [storedRating] = useCookie(
@@ -107,11 +109,6 @@ export function PerTankTab({
     ? storedRating
     : DEFAULT_RATING_METRIC;
   const metricLabel = RATING_METRIC_LABEL[metric];
-
-  const wn8Fallback = useMemo(
-    () => buildWN8Fallback(wn8Expected, encyclopedia),
-    [wn8Expected, encyclopedia],
-  );
 
   const ctx = useMemo(
     () => ({ encyclopedia, wn8Expected, wn8Fallback, wnxExpected }),

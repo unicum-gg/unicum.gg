@@ -28,6 +28,10 @@ export const PlayersCompareResponse = z
     wnxExpected: z.record(z.string(), z.looseObject({})).meta({
       description: "WNX expected values keyed by tank id.",
     }),
+    wn8Fallback: z.record(z.string(), z.looseObject({})).meta({
+      description:
+        "Precomputed WN8 fallback (per tier+type average) for owned tanks missing from the expected table, keyed by `tier-type`.",
+    }),
   })
   .meta({
     id: "PlayersCompare",

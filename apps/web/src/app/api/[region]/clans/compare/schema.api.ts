@@ -21,6 +21,10 @@ export const ClansCompareResponse = z
     encyclopedia: z.record(z.string(), z.looseObject({})),
     wn8Expected: z.record(z.string(), z.looseObject({})),
     wnxExpected: z.record(z.string(), z.looseObject({})),
+    wn8Fallback: z.record(z.string(), z.looseObject({})).meta({
+      description:
+        "Precomputed WN8 fallback (per tier+type average) for fielded tanks missing from the expected table, keyed by `tier-type`.",
+    }),
   })
   .meta({
     id: "ClansCompare",
