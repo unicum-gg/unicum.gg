@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { notFound } from "next/navigation";
-import Link from "next/link";
-import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { modeFromQuery, sectionFromQuery, PlayerSection } from "@/components/players/tabs";
 import { PlayerProfile } from "@/components/players/player-profile";
+import { AccountLockedView } from "@/components/players/account-locked-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -44,7 +44,7 @@ async function loadDetail(
     const detail = await unicum
       .region(region)
       .players(nickname)
-      .detail({ metric: metric as "wn7" | "wn8" | "wnx" });
+      .detail({ metric });
     return detail as unknown as PlayerDetailData;
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -66,6 +66,17 @@ async function loadDetail(
 // cached payloads.
 export const dynamic = "force-dynamic";
 
+// Distinguish a client-side (soft) navigation from a direct document load or a
+// crawler. Next strips its internal `RSC` header before `headers()` sees it, but
+// an RSC fetch (soft nav or prefetch) always carries `Accept: text/x-component`,
+// whereas a document load / crawler sends `text/html`. On a soft nav we skip the
+// server detail fetch and let the profile load it over SWR behind the skeleton
+// (instant intra-app nav); direct/crawler hits get the full SSR page (SEO).
+async function isSoftNavigation(): Promise<boolean> {
+  const accept = (await headers()).get("accept") ?? "";
+  return accept.includes("text/x-component");
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -74,9 +85,20 @@ export async function generateMetadata({
   const { region, nickname } = await params;
   if (!isRegion(region)) return {};
   const decoded = decodeURIComponent(nickname);
+  const regionLabel = region.toUpperCase();
+
+  // Soft nav: don't pay the fetch just for the tab title; a lightweight one
+  // from the nickname suffices (crawlers hard-load and get the rich metadata).
+  if (await isSoftNavigation()) {
+    return constructMetadata({
+      title: `${decoded} World of Tanks player stats (${regionLabel})`,
+      description: `${decoded} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`,
+      ogImage: false,
+    });
+  }
+
   const metric = await getRatingMetricFromCookies();
   const result = await loadDetail(region, decoded, metric).catch(() => null);
-  const regionLabel = region.toUpperCase();
 
   if (result && "locked" in result) {
     return constructMetadata({
@@ -124,13 +146,39 @@ export default async function PlayerPage({
   const mode = modeFromQuery(tabParam);
 
   const metric = await getRatingMetricFromCookies();
+  const metricLabel = RATING_METRIC_LABEL[metric];
+  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
+  const nowMs = Date.now();
+
+  // Soft nav: render the profile shell immediately; PlayerProfile's SWR loads
+  // the detail behind the skeleton (no blocking server round-trip). No JSON-LD
+  // and a URL-derived nickname are fine here (crawlers hard-load the SSR path).
+  if (await isSoftNavigation()) {
+    return (
+      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
+        <PlayerProfile
+          region={region}
+          nickname={decoded}
+          basePath={ROUTES.PLAYER(region, decoded)}
+          metric={metric}
+          metricLabel={metricLabel}
+          nowMs={nowMs}
+          activeSection={section}
+          activeMode={mode}
+          initialData={null}
+          initialTanks={null}
+        />
+        <div aria-hidden className={`flex-1 ${styles.borderX}`} />
+      </div>
+    );
+  }
+
   const detail = await loadDetail(region, decoded, metric);
   if (detail && "locked" in detail) {
     return <AccountLockedView nickname={detail.nickname} region={region} />;
   }
   if (!detail) notFound();
 
-  const metricLabel = RATING_METRIC_LABEL[metric];
   // The per-tank list is ~92% of the former detail payload but only the Tanks
   // section renders it, so it lives on its own endpoint and is fetched on
   // demand. Server-render it only for a `?section=tanks` deep-link (SEO /
@@ -142,10 +190,7 @@ export default async function PlayerPage({
           .tanks as unknown as PlayerTankRow[])
       : null;
   const { current, clanHistory } = detail;
-  const { accountId } = detail.player;
   const displayName = detail.player.nickname;
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
-  const nowMs = Date.now();
 
   const regionLabel = region.toUpperCase();
   const winrate =
@@ -180,7 +225,7 @@ export default async function PlayerPage({
         region={region}
         nickname={displayName}
         basePath={ROUTES.PLAYER(region, displayName)}
-        accountId={accountId}
+        metric={metric}
         metricLabel={metricLabel}
         nowMs={nowMs}
         activeSection={section}
@@ -193,36 +238,6 @@ export default async function PlayerPage({
           mirroring the footer's own bordered spacer. Collapses to 0 when the
           content already fills the viewport. */}
       <div aria-hidden className={`flex-1 ${styles.borderX}`} />
-    </div>
-  );
-}
-
-// Distinct from the not-found page: the nickname resolves on Wargaming, but
-// the account has been locked, so there are no stats to show.
-function AccountLockedView({
-  nickname,
-  region,
-}: {
-  nickname: string;
-  region: Region;
-}) {
-  return (
-    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-      <div
-        className={`relative ${styles.borderX} screen-line-before flex flex-1 flex-col items-center justify-center gap-4 px-6 py-24 text-center`}
-      >
-        <h1 className="font-heading text-3xl font-bold tracking-tight">
-          Account locked
-        </h1>
-        <p className="max-w-md text-fd-muted-foreground">
-          <span className="font-semibold text-fd-foreground">{nickname}</span>{" "}
-          exists on {region.toUpperCase()}, but Wargaming has locked this
-          account, so its stats are not available.
-        </p>
-        <Link href="/" className={buttonVariants({ variant: "primary" })}>
-          Back to home
-        </Link>
-      </div>
     </div>
   );
 }
