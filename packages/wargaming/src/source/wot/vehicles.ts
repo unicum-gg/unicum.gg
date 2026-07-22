@@ -8,6 +8,7 @@ import {
   computeTankId,
   rawUrl,
   VEHICLE_TYPES,
+  WOTSRC_CACHE_TTL_MS,
   WotSrcBranch,
 } from "./mirror";
 
@@ -103,8 +104,10 @@ export class SourceVehiclesResource {
   }
 
   async #text(url: string): Promise<string> {
-    const res = await this.t.get(new URL(url), { limit: RateLimit.None });
-    return res.text();
+    return this.t.getText(new URL(url), {
+      limit: RateLimit.None,
+      cache: WOTSRC_CACHE_TTL_MS,
+    });
   }
 
   async #nation(

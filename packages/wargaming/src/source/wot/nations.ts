@@ -1,6 +1,6 @@
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
-import { rawUrl, WotSrcBranch } from "./mirror";
+import { rawUrl, WOTSRC_CACHE_TTL_MS, WotSrcBranch } from "./mirror";
 
 // The canonical nation order is WG's own `nations.NAMES` tuple, mirrored in the
 // wot-src client scripts. The array INDEX is the nation's encoded value inside a
@@ -36,8 +36,11 @@ export async function fetchNations(
   branch: WotSrcBranch,
 ): Promise<readonly string[]> {
   try {
-    const res = await t.get(new URL(nationsUrl(branch)), { limit: RateLimit.None });
-    const names = parseNationNames(await res.text());
+    const py = await t.getText(new URL(nationsUrl(branch)), {
+      limit: RateLimit.None,
+      cache: WOTSRC_CACHE_TTL_MS,
+    });
+    const names = parseNationNames(py);
     return names.length > 0 ? names : FALLBACK_NATIONS;
   } catch {
     return FALLBACK_NATIONS;

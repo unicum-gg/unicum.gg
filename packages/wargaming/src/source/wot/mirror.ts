@@ -20,6 +20,13 @@ export function rawUrl(branch: WotSrcBranch, path: string): string {
   return `https://raw.githubusercontent.com/${REPO}/${branch}/${path}`;
 }
 
+// The mirror's XML/PO files change only on a game patch. They are static between
+// patches and heavily shared across tanks (the per-nation component files back
+// every tank of that nation), so we cache each raw fetch for a day. Without this
+// the shared files are re-fetched once per tank, turning a single tank page into
+// ~9 GitHub-raw round trips. Passed as `cache` (ms) to `transport.getText`.
+export const WOTSRC_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+
 export const BRANCH_BY_REGION: Record<Region, WotSrcBranch> = {
   [Region.EU]: WotSrcBranch.EU,
   [Region.NA]: WotSrcBranch.NA,

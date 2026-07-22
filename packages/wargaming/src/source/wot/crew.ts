@@ -3,7 +3,7 @@ import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { loadPo } from "./localization";
-import { BRANCH_BY_REGION, rawUrl } from "./mirror";
+import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS } from "./mirror";
 
 type XmlNode = Record<string, unknown>;
 
@@ -66,8 +66,10 @@ export class SourceCrewResource {
   ) {}
 
   async #text(url: string): Promise<string> {
-    const res = await this.t.get(new URL(url), { limit: RateLimit.None });
-    return res.text();
+    return this.t.getText(new URL(url), {
+      limit: RateLimit.None,
+      cache: WOTSRC_CACHE_TTL_MS,
+    });
   }
 
   async skills(): Promise<CrewSkillDef[]> {

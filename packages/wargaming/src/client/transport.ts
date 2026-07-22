@@ -450,6 +450,37 @@ export class Transport {
   }
 
   /**
+   * GET whose text body can be read through the response cache. For static
+   * third-party files (the wot-src client XML/PO on GitHub raw) that change only
+   * on a game patch: pass `cache` (a TTL in ms) so the body is stored under a
+   * `TEXT:<url>` key in the pluggable store. Without a `cache` TTL (or without a
+   * configured store) it behaves exactly like `get(...).text()`. Cached bodies
+   * are shared across every tank that reads the same file (per-nation component
+   * files, global crew/skill configs, localization), collapsing the per-tank
+   * GitHub-raw fan-out to a single fetch per file per TTL window.
+   */
+  async getText(
+    url: URL,
+    opts?: {
+      region?: Region;
+      limit?: RateLimit;
+      headers?: Record<string, string>;
+      cache?: number;
+    },
+  ): Promise<string> {
+    const ttl = opts?.cache ?? 0;
+    const cacheKey = this.#cache && ttl > 0 ? `TEXT:${url.toString()}` : null;
+    if (cacheKey) {
+      const hit = await this.#cache!.get<string>(cacheKey);
+      if (hit !== undefined) return hit;
+    }
+    const res = await this.get(url, opts);
+    const text = await res.text();
+    if (cacheKey) await this.#cache!.set(cacheKey, text, ttl);
+    return text;
+  }
+
+  /**
    * Low-level JSON POST with the same retries + optional per-region rate limit
    * as `get`, for the handful of portal SPA endpoints that only accept POST
    * (e.g. the profile vehicles list).
