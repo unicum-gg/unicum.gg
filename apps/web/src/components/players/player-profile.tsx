@@ -1,11 +1,8 @@
 "use client";
 
-import { notFound } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import useSWR from "swr";
-import { UnicumError } from "@unicum.gg/sdk";
 import { useSession } from "@/lib/auth-client";
-import { AccountLockedView } from "@/components/players/account-locked-view";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { LiveSync } from "@/components/live-sync";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
@@ -13,7 +10,6 @@ import { PlayerHeader } from "@/components/players/header";
 import { SupporterBadgeState } from "@/components/players/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/tabs";
 import { PlayerTabsView } from "@/components/players/tabs-view";
-import { PlayerProfileSkeleton } from "@/components/players/player-profile-skeleton";
 import { unicum } from "@/services/sdk";
 import {
   type PlayerDetailData,
@@ -46,17 +42,16 @@ export function PlayerProfile({
   region: Region;
   nickname: string;
   basePath: string;
-  // Active rating metric (from the cookie). Drives the SWR key + fetch; kept
-  // independent of `initialData` so it still resolves when the profile loads
-  // client-side (soft nav) with no server-seeded data.
+  // Active rating metric (from the cookie); drives the SWR key so it can't drift
+  // from what the SDK fetches.
   metric: RatingMetric;
   metricLabel: string;
   nowMs: number;
   activeSection: PlayerSection;
   activeMode: PlayerMode;
-  // Server-seeded detail on a direct/crawler hit (SSR, SEO). Null on a client
-  // navigation: the profile renders a skeleton and this SWR loads the data.
-  initialData: PlayerDetailData | null;
+  // Server-rendered detail (the page fetches it inside a Suspense boundary and
+  // seeds it here), so this SWR only revalidates on a LiveSync tick.
+  initialData: PlayerDetailData;
   // Present only when Tanks is the section the server rendered (so its rows are
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
   initialTanks: PlayerTankRow[] | null;
@@ -65,20 +60,19 @@ export function PlayerProfile({
   // the SDK actually fetches — no hand-built string to keep in sync.
   const detailReq = () =>
     unicum.region(region).players(nickname).detail({ metric });
-  const { data: liveData, error, mutate: mutateData } = useSWR(
+  const { data: liveData, mutate: mutateData } = useSWR(
     detailReq().url(),
     () => detailReq().then((r) => r as unknown as PlayerDetailData),
-    { fallbackData: initialData ?? undefined, revalidateOnMount: initialData == null },
+    { fallbackData: initialData, revalidateOnMount: false },
   );
-  const detail = liveData ?? initialData ?? null;
+  const detail = liveData ?? initialData;
 
   // Whether the signed-in user is viewing their own profile: unlocks the muted
   // supporter badge (a nudge, or a "hidden because anonymous" hint) even when
-  // they display none publicly. Keyed off the loaded detail's account id so it
-  // still resolves once the client fetch lands on a soft nav.
+  // they display none publicly.
   const { data: session } = useSession();
   const wg = wgIdentityFromEmail(session?.user?.email);
-  const accountId = detail?.player.accountId ?? null;
+  const accountId = detail.player.accountId;
   const isOwnProfile =
     !!wg && wg.region === region && wg.accountId === accountId;
 
@@ -102,7 +96,7 @@ export function PlayerProfile({
     };
   }, [isOwnProfile]);
 
-  const supporterBadge: SupporterBadgeState | null = detail?.isSupporter
+  const supporterBadge: SupporterBadgeState | null = detail.isSupporter
     ? SupporterBadgeState.Active
     : isOwnProfile
       ? me?.isSupporter && me.anonymous
@@ -116,34 +110,6 @@ export function PlayerProfile({
       unicum.region(region).players(nickname).live(onUpdate),
     [region, nickname],
   );
-
-  // Client navigation (soft nav): no server-seeded data, so the outcome is
-  // decided by the SWR fetch. The server page handles these states directly on
-  // a direct/crawler hit; here we mirror them once the fetch resolves.
-  if (!detail) {
-    if (error instanceof UnicumError) {
-      // Wargaming doesn't know the nickname at all.
-      if (error.status === 404) notFound();
-      // Resolves on WG but the account is locked (no stats available).
-      const body = error.body as { error?: string; nickname?: string } | null;
-      if (error.status === 403 && body?.error === "account_locked") {
-        return (
-          <AccountLockedView
-            region={region}
-            nickname={body.nickname ?? nickname}
-          />
-        );
-      }
-    }
-    // Loading (or a transient error SWR will retry): paint the skeleton.
-    // LiveSync stays mounted so a tick landing mid-load still refreshes.
-    return (
-      <>
-        <LiveSync subscribe={liveSubscribe} onUpdate={() => void mutateData()} />
-        <PlayerProfileSkeleton nickname={nickname} metricLabel={metricLabel} />
-      </>
-    );
-  }
 
   return (
     <>

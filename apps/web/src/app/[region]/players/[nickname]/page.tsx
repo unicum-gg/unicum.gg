@@ -1,8 +1,14 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { modeFromQuery, sectionFromQuery, PlayerSection } from "@/components/players/tabs";
+import {
+  modeFromQuery,
+  sectionFromQuery,
+  PlayerMode,
+  PlayerSection,
+} from "@/components/players/tabs";
 import { PlayerProfile } from "@/components/players/player-profile";
+import { PlayerProfileSkeleton } from "@/components/players/player-profile-skeleton";
 import { AccountLockedView } from "@/components/players/account-locked-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
@@ -66,17 +72,6 @@ async function loadDetail(
 // cached payloads.
 export const dynamic = "force-dynamic";
 
-// Distinguish a client-side (soft) navigation from a direct document load or a
-// crawler. Next strips its internal `RSC` header before `headers()` sees it, but
-// an RSC fetch (soft nav or prefetch) always carries `Accept: text/x-component`,
-// whereas a document load / crawler sends `text/html`. On a soft nav we skip the
-// server detail fetch and let the profile load it over SWR behind the skeleton
-// (instant intra-app nav); direct/crawler hits get the full SSR page (SEO).
-async function isSoftNavigation(): Promise<boolean> {
-  const accept = (await headers()).get("accept") ?? "";
-  return accept.includes("text/x-component");
-}
-
 export async function generateMetadata({
   params,
 }: {
@@ -86,17 +81,6 @@ export async function generateMetadata({
   if (!isRegion(region)) return {};
   const decoded = decodeURIComponent(nickname);
   const regionLabel = region.toUpperCase();
-
-  // Soft nav: don't pay the fetch just for the tab title; a lightweight one
-  // from the nickname suffices (crawlers hard-load and get the rich metadata).
-  if (await isSoftNavigation()) {
-    return constructMetadata({
-      title: `${decoded} World of Tanks player stats (${regionLabel})`,
-      description: `${decoded} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`,
-      ogImage: false,
-    });
-  }
-
   const metric = await getRatingMetricFromCookies();
   const result = await loadDetail(region, decoded, metric).catch(() => null);
 
@@ -144,35 +128,53 @@ export default async function PlayerPage({
   // Two independent nav axes, each its own query param (see components/players/tabs).
   const section = sectionFromQuery(sectionParam);
   const mode = modeFromQuery(tabParam);
-
   const metric = await getRatingMetricFromCookies();
   const metricLabel = RATING_METRIC_LABEL[metric];
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
-  const nowMs = Date.now();
 
-  // Soft nav: render the profile shell immediately; PlayerProfile's SWR loads
-  // the detail behind the skeleton (no blocking server round-trip). No JSON-LD
-  // and a URL-derived nickname are fine here (crawlers hard-load the SSR path).
-  if (await isSoftNavigation()) {
-    return (
-      <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-        <PlayerProfile
-          region={region}
-          nickname={decoded}
-          basePath={ROUTES.PLAYER(region, decoded)}
-          metric={metric}
-          metricLabel={metricLabel}
-          nowMs={nowMs}
-          activeSection={section}
-          activeMode={mode}
-          initialData={null}
-          initialTanks={null}
-        />
-        <div aria-hidden className={`flex-1 ${styles.borderX}`} />
-      </div>
-    );
-  }
+  // Nothing before this boundary blocks (params + a cookie read), so Next flushes
+  // the shell and the full-fidelity skeleton immediately, then streams the real,
+  // server-rendered profile in when `loadDetail` resolves. Navigation shows the
+  // skeleton at ~ttfb while every load stays fully server-rendered (crawlers get
+  // the streamed content). Scoped to this page, so the `vs/` compare child keeps
+  // its own loading UI — unlike a `loading.tsx`, which would leak here.
+  return (
+    <Suspense
+      fallback={
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
+          <PlayerProfileSkeleton nickname={decoded} metricLabel={metricLabel} />
+          <div aria-hidden className={`flex-1 ${styles.borderX}`} />
+        </div>
+      }
+    >
+      <PlayerProfileServer
+        region={region}
+        decoded={decoded}
+        section={section}
+        mode={mode}
+        metric={metric}
+        metricLabel={metricLabel}
+      />
+    </Suspense>
+  );
+}
 
+/** The data-dependent half of the page, isolated behind the Suspense boundary so
+ * its `loadDetail` await streams in rather than blocking the initial paint. */
+async function PlayerProfileServer({
+  region,
+  decoded,
+  section,
+  mode,
+  metric,
+  metricLabel,
+}: {
+  region: Region;
+  decoded: string;
+  section: PlayerSection;
+  mode: PlayerMode;
+  metric: RatingMetric;
+  metricLabel: string;
+}) {
   const detail = await loadDetail(region, decoded, metric);
   if (detail && "locked" in detail) {
     return <AccountLockedView nickname={detail.nickname} region={region} />;
@@ -191,6 +193,8 @@ export default async function PlayerPage({
       : null;
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
+  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
+  const nowMs = Date.now();
 
   const regionLabel = region.toUpperCase();
   const winrate =
