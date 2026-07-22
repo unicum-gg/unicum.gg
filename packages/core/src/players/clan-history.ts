@@ -1,6 +1,10 @@
-import { eq, inArray } from "drizzle-orm";
+import { eq, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion, playerClanHistoryByRegion } from "@unicum.gg/shared";
+import {
+  clansByRegion,
+  playerClanHistoryByRegion,
+  playersByRegion,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { getClansShortRefBatch } from "@unicum.gg/core/wargaming/wot/clans/info";
 import {
@@ -85,6 +89,38 @@ export async function getStoredPlayerClanHistory(
     .select()
     .from(playerClanHistory)
     .where(eq(playerClanHistory.accountId, accountId))
+    .limit(1);
+  if (!row) return null;
+  return {
+    fetchedAt: row.fetchedAt,
+    data: deserializeClanHistory(row.data as SerializedClanHistory),
+  };
+}
+
+/**
+ * Nickname → stored clan history in a single query, joining the players table
+ * (case-insensitive nickname lookup, hits `*_players_nickname_prefix_idx`) to
+ * the clan-history table on account_id. One DB round-trip / one pool connection
+ * instead of the resolve-then-read two-step, so callers like the nav-bar clan
+ * endpoint pay half the exposure to connection-pool contention.
+ */
+export async function getStoredPlayerClanHistoryByNickname(
+  region: Region,
+  nickname: string,
+): Promise<StoredPlayerClanHistory | null> {
+  const players = playersByRegion[region];
+  const playerClanHistory = playerClanHistoryByRegion[region];
+  const [row] = await db
+    .select({
+      fetchedAt: playerClanHistory.fetchedAt,
+      data: playerClanHistory.data,
+    })
+    .from(players)
+    .innerJoin(
+      playerClanHistory,
+      eq(playerClanHistory.accountId, players.accountId),
+    )
+    .where(sql`LOWER(${players.nickname}) = LOWER(${nickname})`)
     .limit(1);
   if (!row) return null;
   return {
