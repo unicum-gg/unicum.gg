@@ -99,6 +99,7 @@ export function ClanProfile({
           void mutateOverview();
           setLiveVersion((v) => v + 1);
         }}
+        subject={tag}
       />
       <Panel>
         <PanelContent className="p-0">

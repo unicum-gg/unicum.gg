@@ -113,7 +113,11 @@ export function PlayerProfile({
 
   return (
     <>
-      <LiveSync subscribe={liveSubscribe} onUpdate={() => void mutateData()} />
+      <LiveSync
+        subscribe={liveSubscribe}
+        onUpdate={() => void mutateData()}
+        subject={nickname}
+      />
       <Panel>
         <PanelContent className="p-0">
           <PlayerHeader

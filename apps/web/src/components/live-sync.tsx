@@ -7,11 +7,14 @@ import type { LiveUpdate, Unsubscribe } from "@unicum.gg/sdk";
 
 const REFRESH_DEBOUNCE_MS = 500;
 
-const TOAST_BY_KIND: Record<string, string> = {
-  info: "Clan info updated",
-  members: "Members list updated",
-  events: "Recent activity updated",
-  snapshot: "Stats updated",
+// Noun phrases (lowercase) so they read naturally after a possessive subject,
+// e.g. `Animal's stats updated`. Without a subject the first letter is
+// capitalized (`Stats updated`).
+const PHRASE_BY_KIND: Record<string, string> = {
+  info: "info updated",
+  members: "members list updated",
+  events: "recent activity updated",
+  snapshot: "stats updated",
 };
 
 /**
@@ -30,18 +33,24 @@ const TOAST_BY_KIND: Record<string, string> = {
 export function LiveSync({
   subscribe,
   onUpdate,
+  subject,
 }: {
   subscribe: (onUpdate: (event: LiveUpdate) => void) => Unsubscribe;
   onUpdate?: () => void;
+  /** Whose data updated (player nickname / clan tag). Prefixes the toast as
+   * `${subject}'s stats updated`; omitted → a plain `Stats updated`. */
+  subject?: string;
 }) {
   const router = useRouter();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pendingKindsRef = useRef<Set<string>>(new Set());
-  // Kept in a ref so a changing callback identity doesn't tear down the SSE.
+  // Kept in refs so changing identity/value doesn't tear down the SSE.
   const onUpdateRef = useRef(onUpdate);
+  const subjectRef = useRef(subject);
   useEffect(() => {
     onUpdateRef.current = onUpdate;
-  }, [onUpdate]);
+    subjectRef.current = subject;
+  }, [onUpdate, subject]);
 
   useEffect(() => {
     const unsubscribe = subscribe((payload) => {
@@ -50,10 +59,14 @@ export function LiveSync({
       debounceRef.current = setTimeout(() => {
         const kinds = Array.from(pendingKindsRef.current);
         pendingKindsRef.current.clear();
-        const message =
+        const phrase =
           kinds.length === 1
-            ? (TOAST_BY_KIND[kinds[0]] ?? "Data updated")
-            : "Live update";
+            ? (PHRASE_BY_KIND[kinds[0]] ?? "data updated")
+            : "data updated";
+        const subject = subjectRef.current;
+        const message = subject
+          ? `${subject}'s ${phrase}`
+          : phrase.charAt(0).toUpperCase() + phrase.slice(1);
         toast.success(message, { duration: 3000 });
         if (onUpdateRef.current) {
           onUpdateRef.current();
