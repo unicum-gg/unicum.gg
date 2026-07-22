@@ -1,4 +1,4 @@
-import { StrongholdLeaderboardView } from "./stronghold-leaderboard-view";
+import { StrongholdLeaderboardView } from "./view";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import {

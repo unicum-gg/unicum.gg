@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { StrongholdLeaderboardPage } from "@/components/clans/stronghold-leaderboard-page";
+import { StrongholdLeaderboardPage } from "@/components/clans/list/stronghold";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { isRegion, REGION_LABEL } from "@unicum.gg/wargaming";

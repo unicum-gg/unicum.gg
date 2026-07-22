@@ -3,13 +3,8 @@
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
-import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
-import { ExpandableDescription } from "@/components/clans/description";
-import { ClanMembersTable } from "@/components/clans/members-table";
-import { PreviousClansTable } from "@/components/clans/previous-clans-table";
-import { ClanRecentActivity } from "@/components/clans/recent-activity";
-import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
-import { ClanModeNav, ClanSectionNav } from "@/components/clans/tabs-nav";
+import { ExpandableDescription } from "@/components/clans/detail/description";
+import { ClanModeNav, ClanSectionNav } from "@/components/clans/detail/tabs-nav";
 import {
   ClanMode,
   ClanSection,
@@ -17,18 +12,17 @@ import {
   clanSectionHref,
   modeFromQuery,
   sectionFromQuery,
-} from "@/components/clans/tabs";
-import { ClanVehiclesTable } from "@/components/clans/vehicles-table";
+} from "@/components/clans/detail/tabs";
+import { ClanTanksTab } from "@/components/clans/detail/tanks";
+import { RandomBattlesTab } from "@/components/clans/detail/overview";
+import { StrongholdTab } from "@/components/clans/detail/overview/stronghold";
+import { ClanWarsTab } from "@/components/clans/detail/overview/clan-wars";
 import {
   Panel,
   PanelContent,
   PanelHeader,
   PanelSeparator,
-  PanelTitle,
 } from "@/components/panel";
-import { TableSkeleton } from "@/components/table-skeleton";
-import { VEHICLES_SKELETON_COLUMNS } from "@/components/clans/clan-vehicles-columns";
-import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import type { ClanRecentEvent } from "@unicum.gg/wargaming";
 import {
@@ -38,6 +32,7 @@ import {
   type ClanStrongholdView,
 } from "@unicum.gg/shared";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
+import type { Region } from "@unicum.gg/wargaming";
 
 // The SSR seed: exactly what the per-section endpoints return, fetched by the
 // page through the SDK (stronghold/clan-wars arrive as ready-made views).
@@ -48,29 +43,6 @@ export type ClanTabsInitialData = {
   stronghold: ClanStrongholdView;
   clanWars: ClanGlobalMapView;
 };
-import type { Region } from "@unicum.gg/wargaming";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-
-// Renders a panel title prefixed with the clan tag, its brackets tinted with
-// the clan's own color (matching the header's `[TAG]` treatment).
-function TaggedTitle({
-  tag,
-  color,
-  children,
-}: {
-  tag: string;
-  color: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <>
-      <span style={{ color }}>[</span>
-      {tag}
-      <span style={{ color }}>]</span> {children}
-    </>
-  );
-}
 
 export type ClanTabsViewProps = {
   region: Region;
@@ -178,9 +150,7 @@ export function ClanTabsView({
     () =>
       clanApi
         .previousClans()
-        .then(
-          (r) => r.previousClans as unknown as PreviousClanRow[],
-        ),
+        .then((r) => r.previousClans as unknown as PreviousClanRow[]),
     { fallbackData: initialData.previousClans, revalidateOnMount: false },
   );
   const { data: eventsData, mutate: mutateActivity } = useSWR(
@@ -266,139 +236,27 @@ export function ClanTabsView({
           <PanelSeparator />
           <Panel>
             <PanelHeader className="px-0! py-0!" screenLines={false}>
-              <ClanModeNav
-                basePath={basePath}
-                mode={mode}
-                onSelect={selectMode}
-              />
+              <ClanModeNav basePath={basePath} mode={mode} onSelect={selectMode} />
             </PanelHeader>
           </Panel>
         </>
       )}
 
       {onTanks ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                <TaggedTitle tag={tag} color={color}>
-                  tanks
-                  {vehicles ? ` (${intFmt.format(vehicles.length)})` : ""}
-                </TaggedTitle>
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {vehicles ? (
-                <ClanVehiclesTable vehicles={vehicles} />
-              ) : (
-                <TableSkeleton columns={VEHICLES_SKELETON_COLUMNS} rows={12} />
-              )}
-            </PanelContent>
-          </Panel>
-        </>
+        <ClanTanksTab tag={tag} color={color} vehicles={vehicles} />
       ) : mode === ClanMode.RandomBattles ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                <TaggedTitle tag={tag} color={color}>
-                  members random battles stats
-                </TaggedTitle>
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              <ClanMembersTable region={region} members={members} />
-            </PanelContent>
-          </Panel>
-
-          {previousClans.length > 0 && (
-            <>
-              <PanelSeparator />
-              <Panel>
-                <PanelHeader>
-                  <PanelTitle>
-                    <TaggedTitle tag={tag} color={color}>
-                      members previous clans
-                    </TaggedTitle>
-                  </PanelTitle>
-                </PanelHeader>
-                <PanelContent className="p-0">
-                  <PreviousClansTable region={region} rows={previousClans} />
-                </PanelContent>
-              </Panel>
-            </>
-          )}
-
-          {events.length > 0 && (
-            <>
-              <PanelSeparator />
-              <Panel>
-                <PanelHeader>
-                  <PanelTitle>
-                    <TaggedTitle tag={tag} color={color}>
-                      recent activity
-                    </TaggedTitle>
-                  </PanelTitle>
-                </PanelHeader>
-                <PanelContent className="p-0">
-                  <ClanRecentActivity region={region} events={events} />
-                </PanelContent>
-              </Panel>
-            </>
-          )}
-        </>
+        <RandomBattlesTab
+          region={region}
+          tag={tag}
+          color={color}
+          members={members}
+          previousClans={previousClans}
+          events={events}
+        />
       ) : mode === ClanMode.Stronghold ? (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                <TaggedTitle tag={tag} color={color}>
-                  stronghold stats
-                </TaggedTitle>
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {stronghold.latest ? (
-                <ClanStrongholdStatsTable
-                  latest={stronghold.latest}
-                  periods={stronghold.periods}
-                />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No stronghold data yet. Check back after the next clan refresh.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
+        <StrongholdTab tag={tag} color={color} stronghold={stronghold} />
       ) : (
-        <>
-          <PanelSeparator />
-          <Panel>
-            <PanelHeader>
-              <PanelTitle>
-                <TaggedTitle tag={tag} color={color}>
-                  clan wars stats
-                </TaggedTitle>
-              </PanelTitle>
-            </PanelHeader>
-            <PanelContent className="p-0">
-              {clanWars.latest ? (
-                <ClanWarsStatsTable
-                  latest={clanWars.latest}
-                  periods={clanWars.periods}
-                />
-              ) : (
-                <div className={`p-4 ${styles.mutedDescription}`}>
-                  No Clan Wars data yet. Check back after the next clan refresh.
-                </div>
-              )}
-            </PanelContent>
-          </Panel>
-        </>
+        <ClanWarsTab tag={tag} color={color} clanWars={clanWars} />
       )}
     </>
   );

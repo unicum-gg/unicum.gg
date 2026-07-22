@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { LanguageChips } from "@/components/clans/language-chips";
-import { StrictModeToggle } from "@/components/clans/strict-mode-toggle";
-import { StrongholdTierTabs } from "@/components/clans/stronghold-tier-tabs";
-import { TopClansList } from "@/components/clans/top-clans-list";
+import { LanguageChips } from "@/components/clans/list/language-chips";
+import { StrictModeToggle } from "@/components/clans/list/strict-mode-toggle";
+import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
+import { TopClansList } from "@/components/clans/list/top-clans-list";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import {
   Panel,

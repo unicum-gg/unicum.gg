@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ClansLandingView } from "@/components/clans/clans-landing-view";
+import { ClansLandingView } from "@/components/clans/list/view";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";

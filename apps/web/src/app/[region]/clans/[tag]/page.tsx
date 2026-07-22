@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
-import { ClanProfile } from "@/components/clans/clan-profile";
-import { ClanProfileSkeleton } from "@/components/clans/clan-profile-skeleton";
+import { ClanProfile } from "@/components/clans/detail/view";
+import { ClanProfileSkeleton } from "@/components/clans/detail/skeleton";
 import {
   ClanMode,
   ClanSection,
   modeFromQuery,
   sectionFromQuery,
-} from "@/components/clans/tabs";
-import type { ClanTabsInitialData } from "@/components/clans/tabs-view";
+} from "@/components/clans/detail/tabs";
+import type { ClanTabsInitialData } from "@/components/clans/detail/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";

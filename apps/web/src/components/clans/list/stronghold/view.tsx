@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { StrongholdTierTabs } from "@/components/clans/stronghold-tier-tabs";
+import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
 import {
   Panel,
   PanelContent,

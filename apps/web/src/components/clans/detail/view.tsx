@@ -4,14 +4,14 @@ import { useCallback, useState } from "react";
 import useSWR from "swr";
 import type { LiveUpdate } from "@unicum.gg/sdk";
 import { LiveSync } from "@/components/live-sync";
-import { ClanHeader } from "@/components/clans/header";
-import { ClanNameHistory } from "@/components/clans/name-history";
-import { ClanSection, ClanMode } from "@/components/clans/tabs";
+import { ClanHeader } from "@/components/clans/detail/header";
+import { ClanNameHistory } from "@/components/clans/detail/name-history";
+import { ClanSection, ClanMode } from "@/components/clans/detail/tabs";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import {
   ClanTabsView,
   type ClanTabsInitialData,
-} from "@/components/clans/tabs-view";
+} from "@/components/clans/detail/tabs-view";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { unicum } from "@/services/sdk";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";

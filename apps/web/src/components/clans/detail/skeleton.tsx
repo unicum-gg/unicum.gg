@@ -7,18 +7,18 @@ import {
 } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "@/components/table-skeleton";
-import { ClanHeader } from "@/components/clans/header";
-import { ClanMembersTable } from "@/components/clans/members-table";
-import { ClanRecentActivity } from "@/components/clans/recent-activity";
-import { ClanStrongholdStatsTable } from "@/components/clans/stronghold-stats";
-import { ClanWarsStatsTable } from "@/components/clans/clan-wars-stats";
-import { VEHICLES_SKELETON_COLUMNS } from "@/components/clans/clan-vehicles-columns";
+import { ClanHeader } from "@/components/clans/detail/header";
+import { ClanMembersTable } from "@/components/clans/detail/overview/members-table";
+import { ClanRecentActivity } from "@/components/clans/detail/overview/recent-activity";
+import { ClanStrongholdStatsTable } from "@/components/clans/detail/overview/stronghold-stats";
+import { ClanWarsStatsTable } from "@/components/clans/detail/overview/clan-wars-stats";
+import { VEHICLES_SKELETON_COLUMNS } from "@/components/clans/detail/tanks/columns";
 import {
   CLAN_MODES,
   CLAN_SECTIONS,
   ClanMode,
   ClanSection,
-} from "@/components/clans/tabs";
+} from "@/components/clans/detail/tabs";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
