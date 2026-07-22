@@ -11,6 +11,12 @@ import {
   iconUrl,
 } from "@unicum.gg/shared";
 import { wg } from "../../client";
+import { cachedInRedis } from "../../../redis";
+
+// wot-src client data changes only on a game patch (refreshed daily by
+// vehicles-cron); the parsed result is cached in Redis for a day (shared across
+// instances, surviving deploys).
+const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 
 // Crew-skill icons live on the wot.assets mirror by skill key (WG's are dead),
 // same source the crew section uses.
@@ -108,7 +114,16 @@ function httpsUrl(url: string | null | undefined): string | null {
  * equals the wot-src key) for the localized name and icon. Returns null when the
  * wot-src catalogue has nothing for the tank.
  */
-export async function getTankLoadout(
+export function getTankLoadout(
+  region: Region,
+  tankId: number,
+): Promise<TankLoadout | null> {
+  return cachedInRedis(`wotsrc:loadout:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankLoadout(region, tankId),
+  );
+}
+
+async function computeTankLoadout(
   region: Region,
   tankId: number,
 ): Promise<TankLoadout | null> {

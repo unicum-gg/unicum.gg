@@ -1,6 +1,12 @@
 import { Region, type SkillNodeModifier } from "@unicum.gg/wargaming";
 import { fieldModAffectsSpec, iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
+import { cachedInRedis } from "../../../redis";
+
+// wot-src client data changes only on a game patch (refreshed daily by
+// vehicles-cron); the parsed result is cached in Redis for a day (shared across
+// instances, surviving deploys).
+const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 
 /** A skill-tree node's effect on one attribute (raw wot-src attribute; the front
  * maps it to a displayed characteristic, reusing the field-mod apply logic). */
@@ -51,7 +57,16 @@ const skillIcon = (type: string, img: string): string | null =>
  * and apply unlocked nodes to the characteristics. Null when the vehicle has no
  * skill tree (every tier <= X vehicle, which uses field modifications instead).
  */
-export async function getTankSkillTree(
+export function getTankSkillTree(
+  region: Region,
+  tankId: number,
+): Promise<TankSkillTree | null> {
+  return cachedInRedis(`wotsrc:skill-tree:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankSkillTree(region, tankId),
+  );
+}
+
+async function computeTankSkillTree(
   region: Region,
   tankId: number,
 ): Promise<TankSkillTree | null> {

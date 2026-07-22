@@ -45,6 +45,40 @@ export function getRedisClient(): Redis | null {
   return globalThis.__redisClient;
 }
 
+/**
+ * Read-through JSON cache backed by the shared Redis command connection.
+ *
+ * Unlike Next's `unstable_cache` (in-process, wiped on every deploy, per-
+ * instance), this survives restarts and is shared across instances — so the
+ * expensive wot-src fetch+parse behind each tank page is paid at most once per
+ * `ttlSeconds` across the whole fleet, and a deploy no longer means every tank
+ * is cold. Fails open in every direction: no `REDIS_URL` (local dev), a Redis
+ * blip, or an unparseable value all fall through to `compute()`, so a cache
+ * problem is only ever a slowdown, never an error. `compute`'s result must be
+ * JSON-serialisable (the wot-src datasets are plain game data — no Dates).
+ */
+export async function cachedInRedis<T>(
+  key: string,
+  ttlSeconds: number,
+  compute: () => Promise<T>,
+): Promise<T> {
+  const redis = getRedisClient();
+  if (!redis) return compute();
+  try {
+    const hit = await redis.get(key);
+    if (hit !== null) return JSON.parse(hit) as T;
+  } catch {
+    // Redis miss/blip/parse error → recompute below.
+  }
+  const value = await compute();
+  try {
+    await redis.set(key, JSON.stringify(value), "EX", ttlSeconds);
+  } catch {
+    // Best-effort write; a failed set just means the next read recomputes.
+  }
+  return value;
+}
+
 export function getRedisPubSub(): RedisPubSub | null {
   if (globalThis.__redisPubSub !== undefined) return globalThis.__redisPubSub;
 

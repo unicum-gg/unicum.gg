@@ -1,5 +1,12 @@
 import { ModuleType, Region, type WotSrcSpec } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
+import { cachedInRedis } from "../../../redis";
+
+// wot-src client data changes only on a game patch (refreshed daily by
+// vehicles-cron), so the parsed result is cached in Redis for a day — shared
+// across instances and, unlike an in-process cache, surviving deploys so tank
+// pages aren't all cold after a ship.
+const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 import { getTankModules, type ModuleStats, type TankModuleNode } from "./modules";
 
 /** The WG module ids mounted in one configuration, one per slot (null when the
@@ -78,7 +85,17 @@ const sqDist = (a: number[], b: number[]) =>
  * Returns an empty array when either source has nothing for the tank (the page
  * then shows the static stock specs, unchanged).
  */
-export async function getTankConfigs(
+export function getTankConfigs(
+  region: Region,
+  tankId: number,
+  modules?: TankModuleNode[],
+): Promise<TankConfig[]> {
+  return cachedInRedis(`wotsrc:configs:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankConfigs(region, tankId, modules),
+  );
+}
+
+async function computeTankConfigs(
   region: Region,
   tankId: number,
   modules?: TankModuleNode[],

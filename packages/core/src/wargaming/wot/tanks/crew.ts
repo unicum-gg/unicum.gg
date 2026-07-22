@@ -1,6 +1,12 @@
 import { crewFaceUrl, crewRoleBadgeUrl, Region } from "@unicum.gg/wargaming";
 import { crewSkillAffectsSpec, iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
+import { cachedInRedis } from "../../../redis";
+
+// wot-src/WG data changes only on a game patch (refreshed daily by
+// vehicles-cron); the parsed result is cached in Redis for a day (shared across
+// instances, surviving deploys).
+const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 
 /** A crew skill's passive effect on a characteristic: `attribute` is the wot-src
  * param name (the front maps it to a spec field), `value` the per-skill-level
@@ -65,7 +71,16 @@ const skillIcon = (key: string): string => `${SKILL_ICON_BASE}/${key}.png`;
  * by the shared `skill` string key. Fully derived, no hand-maintained mapping.
  * Returns null when WG has no crew for the vehicle.
  */
-export async function getTankCrew(
+export function getTankCrew(
+  region: Region,
+  tankId: number,
+): Promise<TankCrew | null> {
+  return cachedInRedis(`wotsrc:crew:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankCrew(region, tankId),
+  );
+}
+
+async function computeTankCrew(
   region: Region,
   tankId: number,
 ): Promise<TankCrew | null> {

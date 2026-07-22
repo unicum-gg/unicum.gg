@@ -5,6 +5,12 @@ import {
 } from "@unicum.gg/wargaming";
 import { iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
+import { cachedInRedis } from "../../../redis";
+
+// wot-src client data changes only on a game patch (refreshed daily by
+// vehicles-cron); the parsed result is cached in Redis for a day (shared across
+// instances, surviving deploys).
+const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 
 /** How a field modification changes one vehicle attribute (raw wot-src
  * attribute name; the front maps it to a displayed characteristic). */
@@ -60,7 +66,16 @@ const featureImage = (key: string): string => {
  * from the client XML, and display names from the client localization. Returns
  * null below tier VI (no tree) or when wot-src has nothing for the tank.
  */
-export async function getTankFieldMods(
+export function getTankFieldMods(
+  region: Region,
+  tankId: number,
+): Promise<TankFieldMods | null> {
+  return cachedInRedis(`wotsrc:field-mods:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankFieldMods(region, tankId),
+  );
+}
+
+async function computeTankFieldMods(
   region: Region,
   tankId: number,
 ): Promise<TankFieldMods | null> {
