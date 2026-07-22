@@ -159,12 +159,11 @@ export function ClanTabsView({
   // domain types the tables expect (the API schemas are intentionally loose).
   const clanApi = unicum.region(region).clans(tag);
 
-  // Only the Tanks section needs an on-demand fetch. SWR keys on the URL and
-  // only runs when Tanks is active (null key = no request).
-  const vehiclesUrl = `/api/${region}/clans/${encodeURIComponent(tag)}/vehicles`;
+  // Only the Tanks section needs an on-demand fetch. The key is the request's
+  // own `.url()`, and only runs when Tanks is active (null key = no request).
   const seededVehicles = initialVehicles != null;
   const { data: vehicles } = useSWR(
-    section === ClanSection.Tanks ? vehiclesUrl : null,
+    section === ClanSection.Tanks ? clanApi.vehicles().url() : null,
     () =>
       clanApi
         .vehicles()
@@ -184,9 +183,8 @@ export function ClanTabsView({
   // of `router.refresh()` re-rendering the whole route on the server.
   // `initialData` seeds it from the SSR render, so there's no fetch on load;
   // only `mutateData()` (below) triggers a refetch.
-  const base = `/api/${region}/clans/${encodeURIComponent(tag)}`;
   const { data: membersData, mutate: mutateMembers } = useSWR(
-    `${base}/members`,
+    clanApi.members().url(),
     () =>
       clanApi
         .members()
@@ -194,7 +192,7 @@ export function ClanTabsView({
     { fallbackData: initialData.members, revalidateOnMount: false },
   );
   const { data: previousClansData, mutate: mutatePrevious } = useSWR(
-    `${base}/previous-clans`,
+    clanApi.previousClans().url(),
     () =>
       clanApi
         .previousClans()
@@ -204,7 +202,7 @@ export function ClanTabsView({
     { fallbackData: initialData.previousClans, revalidateOnMount: false },
   );
   const { data: eventsData, mutate: mutateActivity } = useSWR(
-    `${base}/activity`,
+    clanApi.activity().url(),
     () =>
       clanApi
         .activity()
@@ -220,12 +218,12 @@ export function ClanTabsView({
   const strongholdSeed = initialData.stronghold;
   const clanWarsSeed = initialData.clanWars;
   const { data: strongholdData, mutate: mutateStronghold } = useSWR(
-    `${base}/stronghold`,
+    clanApi.stronghold().url(),
     () => clanApi.stronghold().then((r) => r as unknown as ClanStrongholdView),
     { fallbackData: strongholdSeed, revalidateOnMount: false },
   );
   const { data: clanWarsData, mutate: mutateClanWars } = useSWR(
-    `${base}/clan-wars`,
+    clanApi.clanWars().url(),
     () => clanApi.clanWars().then((r) => r as unknown as ClanGlobalMapView),
     { fallbackData: clanWarsSeed, revalidateOnMount: false },
   );

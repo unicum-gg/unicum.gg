@@ -148,16 +148,12 @@ export function PlayerTabsView({
   // through the SDK. SWR keys on the URL and only runs when the Tanks section is
   // active (null key = no request); when the server already rendered Tanks
   // (`initialTanks` seeds the cache), skip the on-mount revalidation.
-  const tanksUrl = `/api/${region}/players/${encodeURIComponent(nickname)}/tanks`;
+  const tanksReq = () => unicum.region(region).players(nickname).tanks();
   const seededTanks = initialTanks != null;
   const { data: tanks } = useSWR(
-    section === PlayerSection.Tanks ? tanksUrl : null,
-    () =>
-      unicum
-        .region(region)
-        .players(nickname)
-        .tanks()
-        .then((r) => r.tanks as unknown as PlayerTankRow[]),
+    // Key off the request's own URL; null disables the fetch until Tanks is open.
+    section === PlayerSection.Tanks ? tanksReq().url() : null,
+    () => tanksReq().then((r) => r.tanks as unknown as PlayerTankRow[]),
     {
       fallbackData: initialTanks ?? undefined,
       revalidateOnMount: !seededTanks,

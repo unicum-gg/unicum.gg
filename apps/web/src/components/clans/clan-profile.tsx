@@ -58,15 +58,11 @@ export function ClanProfile({
   initialVehicles: ClanVehicleRow[] | null;
   initialNameHistory: ClanNameHistoryEntry[];
 }) {
-  const overviewUrl = `/api/${region}/clans/${encodeURIComponent(tag)}`;
+  const overviewReq = () => unicum.region(region).clans(tag).overview();
   const { data: overview, mutate: mutateOverview } = useSWR(
-    overviewUrl,
+    overviewReq().url(),
     () =>
-      unicum
-        .region(region)
-        .clans(tag)
-        .overview()
-        .then((r) => ({
+      overviewReq().then((r) => ({
           clan: r.clan as unknown as ClanFullInfo,
           ratings: r.ratings as unknown as ClanRatings,
           nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
