@@ -17,6 +17,7 @@ import {
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { fetchPlayerMarksOnGun } from "./marks";
 import { bulkInsertTankSnapshots, diffTanks } from "./tanks";
+import { dueAtSql } from "./refresh-policy";
 
 const SNAPSHOT_THROTTLE_MS = 60 * 60 * 1000; // 1 hour
 
@@ -378,6 +379,7 @@ export async function markPlayerSeen(
       createdAt,
       lastBattleAt,
       clanId: info.clan_id,
+      dueAt: dueAtSql(sql`${lastBattleAt}`),
     })
     .onConflictDoUpdate({
       target: players.accountId,
@@ -387,6 +389,8 @@ export async function markPlayerSeen(
         lastBattleAt,
         clanId: info.clan_id,
         lastSeenAt: new Date(),
+        // Fresh last_battle_at ⇒ recompute the next-due time in lockstep.
+        dueAt: dueAtSql(sql`${lastBattleAt}`),
       },
     })
     .returning();
@@ -419,6 +423,7 @@ export async function recordCurrentSnapshot(
       createdAt,
       lastBattleAt,
       clanId: info.clan_id,
+      dueAt: dueAtSql(sql`${lastBattleAt}`),
     })
     .onConflictDoUpdate({
       target: players.accountId,
@@ -428,6 +433,8 @@ export async function recordCurrentSnapshot(
         lastBattleAt,
         clanId: info.clan_id,
         lastSeenAt: new Date(),
+        // Fresh last_battle_at ⇒ recompute the next-due time in lockstep.
+        dueAt: dueAtSql(sql`${lastBattleAt}`),
       },
     })
     .returning();

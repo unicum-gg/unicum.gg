@@ -13,7 +13,7 @@ import {
   type TankStats,
 } from "@unicum.gg/core/wargaming/wot/tanks";
 import { recordCurrentSnapshot } from ".";
-import { refreshCutoffSql } from "./refresh-policy";
+import { dueAtSql } from "./refresh-policy";
 
 // Players claimed per chunk. Sized to the account/info batch granularity (/100):
 // one chunk is a single cheap account/info request that gates which players even
@@ -249,7 +249,10 @@ async function claimDuePlayers(
   // window; after it the OR branch lets them back in for one retry.
   const softDeleteCutoff = new Date(Date.now() - SOFT_DELETE_RECHECK_MS);
   const where = and(
-    sql`${players.lastSeenAt} < ${refreshCutoffSql(players.lastBattleAt)}`,
+    // Sargable: range-scans due_at_idx instead of seq-scanning every row to
+    // evaluate the old CASE predicate (see dueAtSql). `due_at` is kept in
+    // lockstep with last_seen_at on every write below.
+    sql`${players.dueAt} <= NOW()`,
     or(
       isNull(players.softDeletedAt),
       lt(players.softDeletedAt, softDeleteCutoff),
@@ -258,10 +261,16 @@ async function claimDuePlayers(
   // Both orderings claim from the same due set; FOR UPDATE SKIP LOCKED keeps the
   // two worker groups from grabbing the same rows, so they naturally partition
   // into "freshest active" vs "longest overdue" without coordinating.
+  // Lead the sort with due_at so the due_at index serves the WHERE *and* the
+  // ORDER BY as one range scan — no seq/index walk, no top-N sort of the whole
+  // table (both the old orderings forced the planner off the due_at index onto
+  // a full walk; see the migration notes). Backlog drains most-overdue-first;
+  // active adds a freshest-last_battle tiebreak within the (rare) rows that
+  // share a due_at, keeping its bias toward fresh accounts.
   const orderBy =
     mode === ClaimMode.Backlog
-      ? [asc(players.lastSeenAt)]
-      : [sql`${players.lastBattleAt} DESC NULLS FIRST`, asc(players.lastSeenAt)];
+      ? [asc(players.dueAt)]
+      : [asc(players.dueAt), sql`${players.lastBattleAt} DESC NULLS FIRST`];
   const claimIds = db
     .select({ id: players.id })
     .from(players)
@@ -271,7 +280,9 @@ async function claimDuePlayers(
     .for("update", { skipLocked: true });
   return db
     .update(players)
-    .set({ lastSeenAt: sql`NOW()` })
+    // Bumping last_seen_at IS the claim; due_at moves with it (one cadence out)
+    // so the row drops out of the due set until it's actually processed.
+    .set({ lastSeenAt: sql`NOW()`, dueAt: dueAtSql(players.lastBattleAt) })
     .where(inArray(players.id, claimIds))
     .returning();
 }
@@ -371,6 +382,7 @@ async function processRegionBatch(
         .update(players)
         .set({
           lastSeenAt: sql`NOW()`,
+          dueAt: dueAtSql(players.lastBattleAt),
           nullCount: nextCount,
           softDeletedAt:
             nextCount >= NULL_THRESHOLD ? sql`NOW()` : players.softDeletedAt,
@@ -403,7 +415,7 @@ async function processRegionBatch(
       );
       await db
         .update(players)
-        .set({ lastSeenAt: sql`NOW()` })
+        .set({ lastSeenAt: sql`NOW()`, dueAt: dueAtSql(players.lastBattleAt) })
         .where(eq(players.id, player.id));
     }
   };

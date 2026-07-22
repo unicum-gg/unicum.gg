@@ -99,6 +99,35 @@ export function refreshCutoffSql(lastBattle: AnyColumn): SQL {
 }
 
 /**
+ * SQL for the `due_at` column: the wall-clock time a row (whose `last_seen_at`
+ * is NOW at write time) next becomes due. It is the sargable inverse of
+ * {@link refreshCutoffSql}: a row is due when `due_at <= NOW()`, which is
+ * exactly `last_seen_at < refreshCutoffSql(last_battle_at)` evaluated at the
+ * moment `last_seen_at` was stamped — but as a plain timestamp comparison it can
+ * use a btree index instead of seq-scanning the whole players table every claim.
+ *
+ * `due_at = NOW() + cadence(last_battle_at)`. Unfetched rows (`last_battle_at IS
+ * NULL`) map to `epoch` (perpetually due, top priority — the head of a
+ * `due_at ASC` scan), mirroring the `NOW() + 1 day` cutoff sentinel.
+ *
+ * `${lastBattle}` is an expression, so pass the column (`players.lastBattleAt`)
+ * for a set-from-columns UPDATE, or a bound value (`sql\`${date}\``) for an
+ * upsert that already knows the fresh last-battle timestamp. Both must move
+ * together with REFRESH_CADENCE_MS / refreshCutoffSql.
+ */
+export function dueAtSql(lastBattle: AnyColumn | SQL): SQL {
+  return sql`CASE
+    WHEN ${lastBattle} IS NULL THEN 'epoch'::timestamptz
+    WHEN ${lastBattle} > NOW() - INTERVAL '24 hours' THEN NOW() + INTERVAL '6 hours'
+    WHEN ${lastBattle} > NOW() - INTERVAL '7 days' THEN NOW() + INTERVAL '24 hours'
+    WHEN ${lastBattle} > NOW() - INTERVAL '30 days' THEN NOW() + INTERVAL '3 days'
+    WHEN ${lastBattle} > NOW() - INTERVAL '90 days' THEN NOW() + INTERVAL '7 days'
+    WHEN ${lastBattle} > NOW() - INTERVAL '365 days' THEN NOW() + INTERVAL '30 days'
+    ELSE NOW() + INTERVAL '90 days'
+  END`;
+}
+
+/**
  * SQL CASE that resolves to the `ActivityBucket` string for a player row.
  * Use to GROUP BY bucket in reporting queries. Hidden test runs before
  * Unfetched so soft-deleted ghosts get pulled out cleanly instead of
