@@ -35,6 +35,17 @@ export function makePlayersTable(region: string) {
       lastSeenAt: timestamp("last_seen_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
+      // The wall-clock time this row next becomes due for a snapshot refresh:
+      // `last_seen_at + cadence(last_battle_at)` at write time (see dueAtSql in
+      // refresh-policy). A row is due when `due_at <= NOW()` — the sargable,
+      // index-backed replacement for the old `last_seen_at <
+      // refreshCutoffSql(last_battle_at)` predicate, which compared two columns
+      // through a CASE and forced a full seq scan of the players table on every
+      // pipeline claim. Defaults to epoch so freshly-discovered rows (and any
+      // pre-backfill row) read as immediately due.
+      dueAt: timestamp("due_at", { withTimezone: true })
+        .notNull()
+        .default(sql`'epoch'::timestamptz`),
       // Cached ratings — updated by the snapshot-cron whenever a new tank
       // snapshot is recorded. Lets the player page render synchronously and
       // the clan page JOIN for member ratings without per-request compute.
@@ -106,6 +117,11 @@ export function makePlayersTable(region: string) {
       // top-N sort the whole due set on every call — the exact Postgres peg the
       // due_idx was added to avoid.
       index(`${region}_players_last_seen_idx`).on(sql`${t.lastSeenAt} ASC`),
+      // Drives the sargable due-player filter (`WHERE due_at <= NOW()`). This is
+      // the index that replaces the full seq scan: the claim range-scans it to
+      // find the (usually small) due set, then the mode's ORDER BY sorts that
+      // subset via the two indexes above.
+      index(`${region}_players_due_at_idx`).on(sql`${t.dueAt} ASC`),
     ],
   );
 }
