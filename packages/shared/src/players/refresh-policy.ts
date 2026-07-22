@@ -115,6 +115,33 @@ export function refreshCutoffSql(lastBattle: AnyColumn): SQL {
  * upsert that already knows the fresh last-battle timestamp. Both must move
  * together with REFRESH_CADENCE_MS / refreshCutoffSql.
  */
+/**
+ * JS mirror of {@link dueAtSql} for the upsert write paths, where
+ * `last_battle_at` is a known `Date` value. `dueAtSql` takes a SQL column /
+ * expression; binding a JS `Date` through its CASE fails to serialise
+ * ("Received an instance of Date"), so those call sites compute the timestamp
+ * here instead. Same thresholds as REFRESH_CADENCE_MS / refreshCutoffSql — all
+ * must move together.
+ */
+export function computeDueAt(lastBattle: Date | null): Date {
+  if (lastBattle === null) return new Date(0); // epoch: perpetually due
+  const now = Date.now();
+  const age = now - lastBattle.getTime();
+  const cadence =
+    age < DAY_MS
+      ? 6 * HOUR_MS
+      : age < 7 * DAY_MS
+        ? DAY_MS
+        : age < 30 * DAY_MS
+          ? 3 * DAY_MS
+          : age < 90 * DAY_MS
+            ? 7 * DAY_MS
+            : age < 365 * DAY_MS
+              ? 30 * DAY_MS
+              : 90 * DAY_MS;
+  return new Date(now + cadence);
+}
+
 export function dueAtSql(lastBattle: AnyColumn | SQL): SQL {
   return sql`CASE
     WHEN ${lastBattle} IS NULL THEN 'epoch'::timestamptz
