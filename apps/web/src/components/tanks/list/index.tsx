@@ -19,10 +19,7 @@ import {
   MoeColumnSelector,
   TanksMoeTable,
 } from "@/components/tanks/list/marks-of-excellence";
-import {
-  SPEC_COLUMNS,
-  type TankSpecRow,
-} from "@/components/tanks/list/spec-columns";
+import { SPEC_COLUMNS } from "@/components/tanks/list/spec-columns";
 import {
   TankTab,
   TANK_TABS,
@@ -43,57 +40,23 @@ import {
   RatingMetric,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
+import useSWR from "swr";
+import { TableSkeleton, type SkeletonColumn } from "@/components/table-skeleton";
+import {
+  groupForTab,
+  type TankListItem,
+} from "@/components/tanks/list/build";
+import { groupKey, loadGroup } from "@/components/tanks/list/load-group";
 
-export type TankStatsRow = {
-  players: number; // number of players in the sample (the "Count" column)
-  battles: number | null; // total games played on the tank
-  wr: number; // win rate, 0-100
-  playerWr: number | null; // avg driver account WR, 0-100
-  dpg: number; // avg damage
-  wn7: number | null;
-  wn8: number | null;
-  wnx: number | null;
-  kdr: number | null;
-  assists: number | null; // avg assisted damage
-  hitPct: number | null; // 0-100
-  penPct: number | null; // 0-100
-  spots: number | null; // avg spots
-  blocked: number | null; // avg blocked damage
-  survival: number | null; // 0-100
-};
-
-export type TankListItem = {
-  tankId: number;
-  slug: string;
-  name: string;
-  shortName: string;
-  tag: string;
-  tier: number;
-  nation: string;
-  type: string;
-  role: string | null;
-  isPremium: boolean;
-  isReward: boolean;
-  stats: TankStatsRow | null;
-  specs: TankSpecRow | null;
-  mastery: MasteryRow | null;
-  moe: MoeRow | null;
-};
-
-// XP thresholds for the four Mark of Mastery badges (3rd/2nd/1st/Ace).
-export type MasteryRow = {
-  class3: number;
-  class2: number;
-  class1: number;
-  ace: number;
-};
-
-// Combined-damage thresholds for the three Marks of Excellence (65/85/95%).
-export type MoeRow = {
-  mark1: number;
-  mark2: number;
-  mark3: number;
-};
+// The row types + builders live in the framework-free `./build` (shared with the
+// server page); re-exported here so existing importers of these types keep
+// working.
+export type {
+  TankStatsRow,
+  TankListItem,
+  MasteryRow,
+  MoeRow,
+} from "@/components/tanks/list/build";
 
 const ECON_RANGE_COLS: RangeColumn<TankListItem>[] = [
   { key: "buyCredits", label: "Cost (credits)", value: (t) => t.specs?.buyCredits ?? null },
@@ -120,6 +83,24 @@ const RANGE_DEFAULT: Record<TankTab, string> = {
   [TankTab.MarksOfExcellence]: "mark3",
   [TankTab.MarksOfMastery]: "ace",
 };
+
+// Stable empty reference for a not-yet-loaded tab (keeps useTankFilters memo
+// input from changing identity every render).
+const EMPTY_ROWS: TankListItem[] = [];
+
+// Placeholder columns while a tab's data loads: 3 tiny icon columns (nation /
+// type / tier), a wide name, then numeric stat columns — a rough match of the
+// list tables so the swap to real rows doesn't jump.
+const LIST_SKELETON_COLUMNS: SkeletonColumn[] = [
+  { width: "w-6", align: "center" },
+  { width: "w-6", align: "center" },
+  { width: "w-6", align: "center" },
+  { width: "w-28" },
+  ...Array.from(
+    { length: 7 },
+    () => ({ width: "w-12", align: "right" }) as SkeletonColumn,
+  ),
+];
 
 export function TanksIndex({
   tanks,
@@ -154,6 +135,25 @@ export function TanksIndex({
     ? storedRating
     : DEFAULT_RATING_METRIC;
 
+  // Only the active tab's data group ships in the page (`tanks`); the others
+  // load on first open. SWR keys on the group's request URL and caches per key,
+  // so revisiting a tab is instant and Specifications/Economics (one group)
+  // share a single fetch. `items` is undefined while a not-yet-loaded tab
+  // fetches → the table area shows a skeleton.
+  const currentGroup = groupForTab(tab);
+  const seededGroup = groupForTab(activeTab);
+  const { data: items } = useSWR(
+    groupKey(region, currentGroup),
+    () => loadGroup(region, currentGroup),
+    {
+      fallbackData: currentGroup === seededGroup ? tanks : undefined,
+      revalidateOnMount: currentGroup !== seededGroup,
+      revalidateIfStale: false,
+      revalidateOnFocus: false,
+    },
+  );
+  const rows = items ?? EMPTY_ROWS;
+
   // Columns the min/max range filter can target, per active tab.
   const rangeCols: RangeColumn<TankListItem>[] = useMemo(() => {
     if (tab === TankTab.Specifications) {
@@ -175,7 +175,7 @@ export function TanksIndex({
   }, [tab, rangeMetric]);
 
   const { filtered, filters } = useTankFilters(
-    tanks,
+    rows,
     rangeCols,
     RANGE_DEFAULT[activeTab],
   );
@@ -227,20 +227,26 @@ export function TanksIndex({
         />
       </PanelContent>
       <div className="border-t border-fd-border">
-        {tab === TankTab.Performances && (
-          <TanksTable region={region} rows={filtered} />
-        )}
-        {tab === TankTab.Specifications && (
-          <TanksSpecsTable region={region} rows={filtered} />
-        )}
-        {tab === TankTab.Economics && (
-          <TanksEconTable region={region} rows={filtered} />
-        )}
-        {tab === TankTab.MarksOfMastery && (
-          <TanksMasteryTable region={region} rows={filtered} />
-        )}
-        {tab === TankTab.MarksOfExcellence && (
-          <TanksMoeTable region={region} rows={filtered} />
+        {!items ? (
+          <TableSkeleton columns={LIST_SKELETON_COLUMNS} rows={14} />
+        ) : (
+          <>
+            {tab === TankTab.Performances && (
+              <TanksTable region={region} rows={filtered} />
+            )}
+            {tab === TankTab.Specifications && (
+              <TanksSpecsTable region={region} rows={filtered} />
+            )}
+            {tab === TankTab.Economics && (
+              <TanksEconTable region={region} rows={filtered} />
+            )}
+            {tab === TankTab.MarksOfMastery && (
+              <TanksMasteryTable region={region} rows={filtered} />
+            )}
+            {tab === TankTab.MarksOfExcellence && (
+              <TanksMoeTable region={region} rows={filtered} />
+            )}
+          </>
         )}
       </div>
     </Panel>

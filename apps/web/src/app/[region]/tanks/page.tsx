@@ -6,8 +6,15 @@ import {
   PanelSeparator,
 } from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/list";
-import type { TankSpecRow } from "@/components/tanks/list/spec-columns";
-import type { MasteryRow, MoeRow } from "@/components/tanks/list";
+import {
+  TankGroup,
+  buildMasteryItems,
+  buildMoeItems,
+  buildSpecItems,
+  buildStatsItems,
+  groupForTab,
+  type TankListItem,
+} from "@/components/tanks/list/build";
 import { TankTab } from "@/components/tanks/list/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
@@ -64,74 +71,36 @@ export async function renderTanksIndex(
   region: Region,
   activeTab: TankTab = TankTab.Performances,
 ) {
-  // The page consumes its own public API through the SDK: the five bulk tank
-  // endpoints (performance, specifications, economics, MoE, MoM), zipped back
-  // together by slug. This view keeps the page's stat labels (dpg, wr, ...)
-  // and columns.
+  // Only the active tab's data group is fetched + embedded here; the client lazy-
+  // loads the other tabs on demand (see components/tanks/list/load-group). This
+  // keeps the initial payload to one group instead of all five (~5x smaller) and
+  // means a cold ISR revalidation fetches 1-2 endpoints, not 5. The shared
+  // builders (list/build) produce the exact same rows the client would.
   const api = unicum.region(region).tanks;
   const EMPTY = { results: [] };
-  const [perf, specifications, economics, marksOfExcellence, marksOfMastery] =
-    await Promise.all([
-      buildSafe(() => api.list(), EMPTY),
+  const group = groupForTab(activeTab);
+  let items: TankListItem[];
+  if (group === TankGroup.Specs) {
+    const [specifications, economics] = await Promise.all([
       buildSafe(() => api.specifications(), EMPTY),
       buildSafe(() => api.economics(), EMPTY),
-      buildSafe(() => api.marksOfExcellence(), EMPTY),
-      buildSafe(() => api.marksOfMastery(), EMPTY),
     ]);
-  const specBySlug = new Map(
-    specifications.results.map((r) => [r.identity.slug, r.specifications]),
-  );
-  const econBySlug = new Map(
-    economics.results.map((r) => [r.identity.slug, r.economics]),
-  );
-  const moeBySlug = new Map(
-    marksOfExcellence.results.map((r) => [r.identity.slug, r.moe]),
-  );
-  const masteryBySlug = new Map(
-    marksOfMastery.results.map((r) => [r.identity.slug, r.mastery]),
-  );
-
-  const items = perf.results.map(({ identity: i, stats: s }) => {
-    // The page's spec columns span both the specifications and the economics
-    // projections of the same underlying spec row; merge them back.
-    const spec = specBySlug.get(i.slug) ?? null;
-    const econ = econBySlug.get(i.slug) ?? null;
-    return {
-      tankId: i.tankId,
-      slug: i.slug,
-      name: i.name,
-      shortName: i.shortName,
-      tag: i.tag,
-      tier: i.tier,
-      nation: i.nation,
-      type: i.type,
-      role: i.role,
-      isPremium: i.isPremium,
-      isReward: i.isReward,
-      stats: s
-        ? {
-            players: s.players,
-            battles: s.total_battles,
-            wr: s.winrate,
-            playerWr: s.player_wr,
-            dpg: s.avg_damage,
-            wn7: s.wn7,
-            wn8: s.wn8,
-            wnx: s.wnx,
-            kdr: s.kdr,
-            assists: s.avg_assist,
-            hitPct: s.hit_pct,
-            penPct: s.pen_pct,
-            spots: s.avg_spots,
-            blocked: s.avg_blocked,
-            survival: s.survival,
-          }
-        : null,
-      specs: (spec || econ ? { ...spec, ...econ } : null) as TankSpecRow | null,
-      mastery: (masteryBySlug.get(i.slug) ?? null) as MasteryRow | null,
-      moe: (moeBySlug.get(i.slug) ?? null) as MoeRow | null,
-    };
-  });
+    items = buildSpecItems(
+      specifications.results as Parameters<typeof buildSpecItems>[0],
+      economics.results as Parameters<typeof buildSpecItems>[1],
+    );
+  } else if (group === TankGroup.Moe) {
+    const moe = await buildSafe(() => api.marksOfExcellence(), EMPTY);
+    items = buildMoeItems(moe.results as Parameters<typeof buildMoeItems>[0]);
+  } else if (group === TankGroup.Mastery) {
+    const mastery = await buildSafe(() => api.marksOfMastery(), EMPTY);
+    items = buildMasteryItems(
+      mastery.results as Parameters<typeof buildMasteryItems>[0],
+    );
+  } else {
+    const perf = await buildSafe(() => api.list(), EMPTY);
+    items = buildStatsItems(perf.results as Parameters<typeof buildStatsItems>[0]);
+  }
 
   return (
     <div className="mx-auto w-full max-w-7xl">
