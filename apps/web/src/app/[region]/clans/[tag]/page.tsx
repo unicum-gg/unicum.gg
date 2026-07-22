@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { ClanProfile } from "@/components/clans/clan-profile";
+import { ClanProfileSkeleton } from "@/components/clans/clan-profile-skeleton";
 import {
+  ClanMode,
   ClanSection,
   modeFromQuery,
   sectionFromQuery,
@@ -91,6 +94,47 @@ export default async function ClanPage({
   const section = sectionFromQuery(sectionParam);
   const mode = modeFromQuery(tabParam);
 
+  // Nothing before this boundary blocks, so Next flushes the shell + skeleton
+  // immediately, then streams the real profile once the (heavier) clan fetches
+  // resolve. The color isn't known yet, so the skeleton's `[TAG]` brackets
+  // inherit the text color until the real one streams in.
+  return (
+    <Suspense
+      fallback={
+        <div className="mx-auto w-full max-w-7xl">
+          <ClanProfileSkeleton
+            region={region}
+            tag={decoded}
+            color="inherit"
+            section={section}
+            mode={mode}
+          />
+        </div>
+      }
+    >
+      <ClanProfileServer
+        region={region}
+        decoded={decoded}
+        section={section}
+        mode={mode}
+      />
+    </Suspense>
+  );
+}
+
+/** The data-dependent half of the page, behind the Suspense boundary so its
+ * overview + section fetches stream in rather than blocking the initial paint. */
+async function ClanProfileServer({
+  region,
+  decoded,
+  section,
+  mode,
+}: {
+  region: Region;
+  decoded: string;
+  section: ClanSection;
+  mode: ClanMode;
+}) {
   const overview = await loadOverview(region, decoded);
   if (!overview) notFound();
   const { clan, ratings } = overview;

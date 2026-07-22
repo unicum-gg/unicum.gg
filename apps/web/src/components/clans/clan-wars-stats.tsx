@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor, type ClanGlobalMapStats, type ClanGlobalMapView } from "@unicum.gg/shared";
 
@@ -162,17 +163,23 @@ function PeriodCell({ cell, hideOnMobile }: { cell: Cell; hideOnMobile?: boolean
   );
 }
 
-export function ClanWarsStatsTable({
-  latest,
-  periods,
-}: {
-  latest: ClanGlobalMapStats;
-  periods: ClanGlobalMapView["periods"];
-}) {
-  const current = latest;
-  const p24 = periods.h24;
-  const p7 = periods.d7;
-  const p30 = periods.d30;
+/** A period-cell placeholder, right-aligned like the real number. */
+function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
+  return (
+    <TableCell
+      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+    >
+      <Skeleton className="ml-auto h-4 w-12" />
+    </TableCell>
+  );
+}
+
+export function ClanWarsStatsTable(
+  props:
+    | { loading: true }
+    | { latest: ClanGlobalMapStats; periods: ClanGlobalMapView["periods"] },
+) {
+  const loading = "loading" in props;
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
@@ -202,10 +209,29 @@ export function ClanWarsStatsTable({
             )}
             <TableRow>
               <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
-              <PeriodCell cell={row.current(current)} />
-              <PeriodCell cell={p24 ? row.delta(p24) : DASH} hideOnMobile />
-              <PeriodCell cell={p7 ? row.delta(p7) : DASH} hideOnMobile />
-              <PeriodCell cell={p30 ? row.delta(p30) : DASH} />
+              {loading ? (
+                <>
+                  <PeriodSkeleton />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton />
+                </>
+              ) : (
+                <>
+                  <PeriodCell cell={row.current(props.latest)} />
+                  <PeriodCell
+                    cell={props.periods.h24 ? row.delta(props.periods.h24) : DASH}
+                    hideOnMobile
+                  />
+                  <PeriodCell
+                    cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
+                    hideOnMobile
+                  />
+                  <PeriodCell
+                    cell={props.periods.d30 ? row.delta(props.periods.d30) : DASH}
+                  />
+                </>
+              )}
             </TableRow>
           </Fragment>
         ))}

@@ -18,6 +18,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -201,19 +202,53 @@ function RatingCell({
   );
 }
 
-export function ClanMembersTable({
-  region,
-  members,
-}: {
-  region: Region;
-  members: ClanMemberStats[];
-}) {
+// One placeholder row matching the 12 columns (same alignment + rating-column
+// tags, so the rating-column toggle keeps the skeleton aligned with the header).
+// Each bar sits in an h-6 line-box so the row matches the real 24px content
+// height (name line-height / LiveBadge) instead of collapsing to the bar height.
+function MemberRowSkeleton() {
+  const bar = (w: string, justify = "justify-end") => (
+    <div className={cn("flex h-6 items-center", justify)}>
+      <Skeleton className={cn("h-4", w)} />
+    </div>
+  );
+  const rating = (col: string) => (
+    <TableCell key={col} data-rating-col={col}>
+      {bar("w-10")}
+    </TableCell>
+  );
+  return (
+    <TableRow>
+      <TableCell>{bar("w-4")}</TableCell>
+      <TableCell>{bar("w-28", "justify-start")}</TableCell>
+      <TableCell className="hidden sm:table-cell">
+        {bar("w-16", "justify-start")}
+      </TableCell>
+      {rating("wn7")}
+      {rating("wn7-30d")}
+      {rating("wn8")}
+      {rating("wn8-30d")}
+      <TableCell className="max-[480px]:hidden">{bar("w-10")}</TableCell>
+      {rating("wnx")}
+      {rating("wnx-30d")}
+      <TableCell className="hidden sm:table-cell">{bar("w-12")}</TableCell>
+      <TableCell className="hidden sm:table-cell">{bar("w-16")}</TableCell>
+    </TableRow>
+  );
+}
+
+export function ClanMembersTable(
+  props: { loading: true } | { region: Region; members: ClanMemberStats[] },
+) {
   const [sort, setSort] = useState<SortState>({
     column: SortColumn.Role,
     direction: SortDirection.Desc,
   });
 
-  const sorted = [...members].sort((a, b) => compareMembers(a, b, sort));
+  const loading = "loading" in props;
+  const sorted = loading
+    ? []
+    : [...props.members].sort((a, b) => compareMembers(a, b, sort));
 
   function toggleSort(column: SortColumn) {
     setSort((prev) => {
@@ -327,7 +362,9 @@ export function ClanMembersTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {sorted.map((m, idx) => {
+        {loading
+          ? Array.from({ length: 12 }, (_, i) => <MemberRowSkeleton key={i} />)
+          : sorted.map((m, idx) => {
           return (
             <TableRow key={m.accountId}>
               <TableCell className="text-right tabular-nums text-muted-foreground">
@@ -336,12 +373,12 @@ export function ClanMembersTable({
               <TableCell className="font-medium">
                 <span className="flex items-center gap-1.5">
                   <Link
-                    href={ROUTES.PLAYER(region, m.name)}
+                    href={ROUTES.PLAYER(props.region, m.name)}
                     className="truncate hover:underline"
                   >
                     {m.name}
                   </Link>
-                  <LiveBadge region={region} accountId={m.accountId} />
+                  <LiveBadge region={props.region} accountId={m.accountId} />
                 </span>
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">

@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
 import Link from "next/link";
+import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import {
   ClanEventType,
@@ -87,13 +88,28 @@ function changeText(e: ClanRecentEvent): React.ReactNode {
   }
 }
 
-export function ClanRecentActivity({
-  region,
-  events,
-}: {
-  region: Region;
-  events: ClanRecentEvent[];
-}) {
+export function ClanRecentActivity(
+  props: { loading: true } | { region: Region; events: ClanRecentEvent[] },
+) {
+  if ("loading" in props) {
+    return (
+      <ul className="divide-y divide-fd-border">
+        {Array.from({ length: 5 }, (_, i) => (
+          <li
+            key={i}
+            className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 text-sm"
+          >
+            <Skeleton className="size-4 shrink-0 rounded-sm" />
+            <Skeleton className="h-4 w-28" />
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className="ms-auto h-3 w-40" />
+          </li>
+        ))}
+      </ul>
+    );
+  }
+
+  const { region, events } = props;
   if (events.length === 0) return null;
   return (
     <ul className="divide-y divide-fd-border">

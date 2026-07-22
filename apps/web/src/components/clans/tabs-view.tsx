@@ -26,10 +26,8 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import {
-  TableSkeleton,
-  type SkeletonColumn,
-} from "@/components/table-skeleton";
+import { TableSkeleton } from "@/components/table-skeleton";
+import { VEHICLES_SKELETON_COLUMNS } from "@/components/clans/clan-vehicles-columns";
 import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import type { ClanRecentEvent } from "@unicum.gg/wargaming";
@@ -53,22 +51,6 @@ export type ClanTabsInitialData = {
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-
-// Mirrors ClanVehiclesTable's columns so the loading placeholder lines up with
-// the real table: centered icon columns, a wide left-aligned name, then
-// right-aligned numeric columns.
-const VEHICLES_SKELETON_COLUMNS: SkeletonColumn[] = [
-  { width: "w-6", align: "center" }, // Nation
-  { width: "w-6", align: "center" }, // Type
-  { width: "w-6", align: "center" }, // Tier
-  { width: "w-28" }, // Name
-  { width: "w-8", align: "right" }, // Members
-  { width: "w-14", align: "right" }, // Battles
-  { width: "w-12", align: "right" }, // Avg damage
-  { width: "w-12", align: "right" }, // Avg XP
-  { width: "w-12", align: "right" }, // Winrate
-  { width: "w-14", align: "right" }, // Rating
-];
 
 // Renders a panel title prefixed with the clan tag, its brackets tinted with
 // the clan's own color (matching the header's `[TAG]` treatment).

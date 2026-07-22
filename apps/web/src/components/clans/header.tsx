@@ -8,6 +8,7 @@ import { ClanActionsMenu } from "@/components/clans/clan-actions-menu";
 import { CompareWithButton } from "@/components/clans/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RelativeTime } from "@/components/relative-time";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   type BeaconState,
   RefreshIndicator,
@@ -87,27 +88,34 @@ function computeMetrics(r: ClanRatings): {
   };
 }
 
-export function ClanHeader({
-  region,
-  clan,
-  members,
-  ratings,
-}: {
-  region: Region;
-  clan: ClanFullInfo;
-  members: ClanMemberStats[];
-  ratings: ClanRatings;
-}) {
-  const metrics = computeMetrics(ratings);
+export function ClanHeader(
+  props:
+    | { loading: true; region: Region; tag: string; color: string }
+    | {
+        region: Region;
+        clan: ClanFullInfo;
+        members: ClanMemberStats[];
+        ratings: ClanRatings;
+      },
+) {
+  const loading = "loading" in props;
   // Run the beacon once here (the header renders its meta line twice, for the
   // desktop and mobile layouts); both InfoRows render the indicator from this
-  // shared state so we don't fire duplicate enqueues.
+  // shared state so we don't fire duplicate enqueues. Called unconditionally
+  // (rules of hooks); a null `updatedAt` while loading is a no-op.
   const beacon = useRefreshBeacon(
     RefreshKind.Clan,
-    region,
-    clan.tag,
-    clan.updatedAt,
+    props.region,
+    loading ? props.tag : props.clan.tag,
+    loading ? null : props.clan.updatedAt,
   );
+
+  if (loading) {
+    return <ClanHeaderSkeleton tag={props.tag} color={props.color} />;
+  }
+
+  const { region, clan, members, ratings } = props;
+  const metrics = computeMetrics(ratings);
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex items-stretch sm:contents">
@@ -278,5 +286,67 @@ function InfoRow({
         </div>
       )}
     </div>
+  );
+}
+
+/** The loading twin: real [tag] + the same emblem / meta / 7 metric columns as
+ * placeholders. The size-24 emblem and the h1 row set the header height, so it
+ * matches the loaded header. */
+function ClanHeaderSkeleton({ tag, color }: { tag: string; color: string }) {
+  // The seven metric columns, tagged for the rating-column toggle like the real
+  // ones (recent wn7/8/x, lifetime wn7/8/x, avg winrate).
+  const ratingCols = ["wn7", "wn8", "wnx", "wn7", "wn8", "wnx", undefined];
+  const metaRow = (className: string) => (
+    <div className={cn("border-t border-fd-border", className)}>
+      <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2 px-4 py-1 text-xs sm:py-0">
+        <Skeleton className="h-3 w-24" />
+        <Skeleton className="h-3 w-44" />
+        <Skeleton className="h-3 w-28" />
+      </div>
+    </div>
+  );
+  return (
+    <header className="flex flex-col sm:flex-row sm:items-stretch">
+      <div className="flex items-stretch sm:contents">
+        <div className="flex size-24 shrink-0 items-center justify-center border-r border-fd-border p-3">
+          <Skeleton className="size-full rounded-md" />
+        </div>
+        <div className="flex min-w-0 flex-1 flex-col">
+          <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
+            <h1 className="flex min-w-0 flex-1 items-center font-heading text-2xl font-bold tracking-tight sm:text-4xl">
+              <span className="shrink-0">
+                <span style={{ color }}>[</span>
+                {tag}
+                <span style={{ color }}>]</span>
+              </span>
+              {/* The clan name isn't known before the fetch — placeholder next
+                  to the real [tag], like the loaded `[TAG] Name`. */}
+              <Skeleton className="ml-2 h-6 w-48 max-w-full sm:h-8" />
+            </h1>
+            {/* The compare + actions triggers are 28px square icon buttons. */}
+            <Skeleton className="size-7 rounded-md" />
+            <Skeleton className="size-7 rounded-md" />
+          </div>
+          {metaRow("hidden h-8 sm:flex")}
+        </div>
+      </div>
+      {metaRow("flex min-h-8 sm:hidden")}
+      <div className="flex border-t border-fd-border sm:contents sm:border-t-0">
+        {ratingCols.map((c, i) => (
+          <div
+            key={i}
+            data-rating-col={c}
+            className="flex flex-1 flex-col border-l border-fd-border max-sm:first:border-l-0 sm:w-32 sm:flex-none sm:shrink-0"
+          >
+            <div className="flex justify-center px-4 py-2">
+              <Skeleton className="h-3 w-16" />
+            </div>
+            <div className="flex flex-1 items-center justify-center border-t border-fd-border">
+              <Skeleton className="h-6 w-12" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </header>
   );
 }

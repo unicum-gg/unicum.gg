@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
@@ -17,14 +18,11 @@ import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
-export function PreviousClansTable({
-  region,
-  rows,
-}: {
-  region: Region;
-  rows: PreviousClanRow[];
-}) {
-  if (rows.length === 0) {
+export function PreviousClansTable(
+  props: { loading: true } | { region: Region; rows: PreviousClanRow[] },
+) {
+  const loading = "loading" in props;
+  if (!loading && props.rows.length === 0) {
     return (
       <div className="px-4 py-12 text-center text-sm text-muted-foreground">
         No previous-clan history recorded for the current roster.
@@ -51,7 +49,27 @@ export function PreviousClansTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {rows.map((r, i) => {
+        {loading
+          ? Array.from({ length: 5 }, (_, i) => (
+              <TableRow key={i}>
+                <TableCell className="text-center">
+                  <Skeleton className="mx-auto h-4 w-4" />
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-3">
+                    <Skeleton className="size-6 shrink-0 rounded" />
+                    <Skeleton className="h-4 w-40" />
+                  </div>
+                </TableCell>
+                <TableCell className="text-right">
+                  <Skeleton className="ml-auto h-4 w-10" />
+                </TableCell>
+                <TableCell className="text-right">
+                  <Skeleton className="ml-auto h-4 w-10" />
+                </TableCell>
+              </TableRow>
+            ))
+          : props.rows.map((r, i) => {
           const rank = i + 1;
           return (
             <TableRow key={r.clanId}>
@@ -64,7 +82,7 @@ export function PreviousClansTable({
               </TableCell>
               <TableCell>
                 <Link
-                  href={ROUTES.CLAN(region, r.tag)}
+                  href={ROUTES.CLAN(props.region, r.tag)}
                   className="flex items-center gap-3 hover:underline"
                 >
                   {r.emblem ? (
@@ -93,7 +111,7 @@ export function PreviousClansTable({
                           languages={r.languages}
                           source="declared"
                           size="s"
-                          region={region}
+                          region={props.region}
                           link={false}
                         />
                       </span>
