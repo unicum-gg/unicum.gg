@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import useSWR from "swr";
 import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";

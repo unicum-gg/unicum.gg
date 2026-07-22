@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import {
   Tooltip,
   TooltipContent,

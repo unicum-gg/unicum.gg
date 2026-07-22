@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { Fragment } from "react";
 import { toRoman } from "roman-numerals";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";

@@ -1,7 +1,7 @@
 "use client";
 
 import { HeartIcon } from "@phosphor-icons/react/dist/ssr";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";

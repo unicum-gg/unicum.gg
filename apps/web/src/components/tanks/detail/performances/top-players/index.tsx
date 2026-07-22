@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -22,8 +22,9 @@ export function TopClansLeaderboardLink({
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
+  // Secondary affordance: warm on intent, not eagerly. See HoverPrefetchLink.
   return (
-    <Link
+    <HoverPrefetchLink
       href={ROUTES.CLANS(region)}
       className={cn(
         styles.linkHover,
@@ -31,6 +32,6 @@ export function TopClansLeaderboardLink({
       )}
     >
       See all →
-    </Link>
+    </HoverPrefetchLink>
   );
 }

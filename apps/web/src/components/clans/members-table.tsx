@@ -6,7 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { LiveBadge } from "@/components/live-badge";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { styles } from "@/lib/styles";
 import { type Region } from "@unicum.gg/wargaming";

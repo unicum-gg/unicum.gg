@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { CheckIcon } from "lucide-react";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";

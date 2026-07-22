@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon, RefreshKind } from "@/components/players/refresh-beacon";

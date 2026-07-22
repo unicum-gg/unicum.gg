@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { LanguageFlags } from "@/components/language-flags";
 import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
@@ -80,7 +80,6 @@ export function TopPlayersList({
                 <span className="flex items-center gap-1.5">
                   <Link
                     href={ROUTES.PLAYER(region, r.nickname)}
-                    prefetch={false}
                     className="flex min-w-0 flex-1 items-center gap-3 hover:underline"
                   >
                     <span className="flex min-w-0 flex-1 items-center gap-2">

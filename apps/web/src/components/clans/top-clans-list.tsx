@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -78,7 +78,6 @@ export function TopClansList({
               <TableCell>
                 <Link
                   href={ROUTES.CLAN(region, r.tag)}
-                  prefetch={false}
                   className="flex items-center gap-3 hover:underline"
                 >
                   {r.emblem ? (

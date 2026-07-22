@@ -5,7 +5,7 @@ import {
   CaretUpDownIcon,
   CaretUpIcon,
 } from "@phosphor-icons/react";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";

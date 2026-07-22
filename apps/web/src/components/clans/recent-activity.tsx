@@ -6,7 +6,7 @@ import {
   SignOutIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import {

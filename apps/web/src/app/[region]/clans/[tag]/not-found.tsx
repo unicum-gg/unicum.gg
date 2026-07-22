@@ -1,5 +1,5 @@
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { styles } from "@/lib/styles";
 
 export default function NotFound() {

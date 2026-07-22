@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRegion } from "@/hooks/use-region";

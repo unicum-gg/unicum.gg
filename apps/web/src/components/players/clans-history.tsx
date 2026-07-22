@@ -7,7 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { format, formatDistanceStrict } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
 import {

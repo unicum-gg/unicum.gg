@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
@@ -49,38 +50,42 @@ export function Footer() {
           <div className="text-sm text-fd-muted-foreground">
             Built for the World of Tanks community
           </div>
+          {/* Footer links sit below the fold and are rarely the next click, so
+              they warm on hover/focus rather than eagerly on viewport entry
+              (see HoverPrefetchLink). GitHub is external, so it stays a plain
+              Link (Next never prefetches cross-origin hrefs). */}
           <div className="flex justify-center gap-4 text-sm">
-            <Link
+            <HoverPrefetchLink
               href={ROUTES.PLAYERS(Region.EU)}
               className={styles.linkHover}
             >
               Top players
-            </Link>
-            <Link
+            </HoverPrefetchLink>
+            <HoverPrefetchLink
               href={ROUTES.CLANS(Region.EU)}
               className={styles.linkHover}
             >
               Top clans
-            </Link>
-            <Link
+            </HoverPrefetchLink>
+            <HoverPrefetchLink
               href={ROUTES.TANKS(Region.EU)}
               className={styles.linkHover}
             >
               Top tanks
-            </Link>
+            </HoverPrefetchLink>
             <FooterCoverageLink />
-            <Link href={ROUTES.SUPPORT} className={styles.linkHover}>
+            <HoverPrefetchLink href={ROUTES.SUPPORT} className={styles.linkHover}>
               Support
-            </Link>
-            <Link href={ROUTES.DOCS} className={styles.linkHover}>
+            </HoverPrefetchLink>
+            <HoverPrefetchLink href={ROUTES.DOCS} className={styles.linkHover}>
               API Docs
-            </Link>
-            <Link href={ROUTES.MCP} className={styles.linkHover}>
+            </HoverPrefetchLink>
+            <HoverPrefetchLink href={ROUTES.MCP} className={styles.linkHover}>
               MCP
-            </Link>
-            <Link href={ROUTES.BOT} className={styles.linkHover}>
+            </HoverPrefetchLink>
+            <HoverPrefetchLink href={ROUTES.BOT} className={styles.linkHover}>
               Discord bot
-            </Link>
+            </HoverPrefetchLink>
             <Link
               href={APP.EXTERNAL.GITHUB}
               className={styles.linkHover}

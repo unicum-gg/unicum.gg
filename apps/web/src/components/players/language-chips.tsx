@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import ROUTES from "@/constants/routes";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { cn } from "@/lib/utils";
@@ -79,7 +79,6 @@ function ChipLink({
   return (
     <Link
       href={href}
-      prefetch={false}
       className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium transition-colors",
         active

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import type { ComponentProps } from "react";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";

@@ -6,7 +6,7 @@ import {
 } from "@phosphor-icons/react";
 import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { type ReactNode, useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { portalIconUrl, type Region } from "@unicum.gg/wargaming";

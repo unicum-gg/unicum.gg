@@ -6,7 +6,7 @@ import {
   WarningIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
-import Link from "next/link";
+import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 import { LanguageFlags } from "@/components/language-flags";
@@ -273,7 +273,6 @@ export function StrongholdLeaderboardView({
                         <TableCell>
                           <Link
                             href={ROUTES.CLAN(region, entry.tag)}
-                            prefetch={false}
                             className="flex items-center gap-3 hover:underline"
                           >
                             {entry.emblem ? (
