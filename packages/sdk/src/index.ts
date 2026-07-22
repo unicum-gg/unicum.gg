@@ -84,6 +84,93 @@ async function unwrap<T>(
   return reviveDates(data) as T;
 }
 
+/**
+ * The result of a data endpoint call. It is a `PromiseLike<T>`, so `await`,
+ * `Promise.all`, and SWR/React `use` treat it exactly like the promise it used
+ * to be — but it also carries `.url()`, the request's target URL, so a cache key
+ * can be derived from the same call instead of hand-built (and can never drift
+ * from what the SDK actually fetches).
+ *
+ * Execution is lazy: the underlying request fires on `await`/`.then()`, not when
+ * the method is called, so reading `.url()` has no side effect.
+ */
+export class RequestHandle<T> implements PromiseLike<T> {
+  constructor(
+    private readonly _url: string,
+    private readonly run: () => Promise<T>,
+  ) {}
+
+  /** The URL this request targets (absolute on the server, same-origin relative
+   * in the browser). Side-effect-free; does not fire the request. */
+  url(): string {
+    return this._url;
+  }
+
+  then<R1 = T, R2 = never>(
+    onFulfilled?: ((value: T) => R1 | PromiseLike<R1>) | null,
+    onRejected?: ((reason: unknown) => R2 | PromiseLike<R2>) | null,
+  ): Promise<R1 | R2> {
+    return this.run().then(onFulfilled, onRejected);
+  }
+
+  catch<R = never>(
+    onRejected?: ((reason: unknown) => R | PromiseLike<R>) | null,
+  ): Promise<T | R> {
+    return this.run().catch(onRejected);
+  }
+
+  finally(onFinally?: (() => void) | null): Promise<T> {
+    return this.run().finally(onFinally);
+  }
+
+  // With `then`/`catch`/`finally` above, this makes `RequestHandle<T>`
+  // structurally a `Promise<T>`, so it stays a drop-in wherever a `Promise` is
+  // expected (helpers like `buildSafe`, `Promise.all`, `React.use`).
+  get [Symbol.toStringTag](): string {
+    return "RequestHandle";
+  }
+}
+
+/**
+ * Build the URL an openapi-fetch call targets: substitute `{param}` path holders
+ * and append a flat query string. Matches openapi-fetch's default serialization
+ * for our endpoints (simple path params + scalar/comma-joined query values), so
+ * `.url()` lines up with the request that actually goes out.
+ */
+function buildUrl(
+  baseUrl: string,
+  path: string,
+  pathParams?: Record<string, string | number>,
+  query?: Record<string, unknown>,
+): string {
+  let built = path;
+  if (pathParams) {
+    for (const [key, value] of Object.entries(pathParams)) {
+      built = built.replace(`{${key}}`, encodeURIComponent(String(value)));
+    }
+  }
+  const search = new URLSearchParams();
+  if (query) {
+    for (const [key, value] of Object.entries(query)) {
+      if (value !== undefined && value !== null) search.set(key, String(value));
+    }
+  }
+  const qs = search.toString();
+  return `${baseUrl}${built}${qs ? `?${qs}` : ""}`;
+}
+
+/**
+ * Wrap a deferred openapi-fetch call as a `RequestHandle`. The `call` thunk is
+ * only invoked when the handle is awaited, keeping `.url()` side-effect-free.
+ * `T` is inferred from the call's `data`, so callers keep full response typing.
+ */
+function handle<T>(
+  url: string,
+  call: () => Promise<{ data?: T; error?: unknown; response: Response }>,
+): RequestHandle<T> {
+  return new RequestHandle(url, () => unwrap(call()));
+}
+
 /** Cancels an SSE subscription; call it to close the underlying `EventSource`
  * (e.g. from a React effect cleanup). */
 export type Unsubscribe = () => void;
@@ -199,10 +286,11 @@ class PlayerClient {
    * rating history, clan history, strongholds). Pass `{ metric }` to pin the
    * rating metric that drives `liftDrag` and `ratingHistory`. */
   detail(query?: QueryOf<"/{region}/players/{nickname}">) {
-    return unwrap(
-      this.api.GET("/{region}/players/{nickname}", {
-        params: { path: { region: this.region, nickname: this.nickname }, query },
-      }),
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}", path, query),
+      () =>
+        this.api.GET("/{region}/players/{nickname}", { params: { path, query } }),
     );
   }
 
@@ -210,11 +298,11 @@ class PlayerClient {
    * averages and WN7/WN8/WNX ratings). The heavy list, loaded on demand
    * separately from `detail()`. */
   tanks() {
-    const { region, nickname } = this;
-    return unwrap(
-      this.api.GET("/{region}/players/{nickname}/tanks", {
-        params: { path: { region, nickname } },
-      }),
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks", path),
+      () =>
+        this.api.GET("/{region}/players/{nickname}/tanks", { params: { path } }),
     );
   }
 
@@ -222,22 +310,24 @@ class PlayerClient {
    * live Wargaming call. Null when not in a clan or not yet tracked. A cheap
    * alternative to `detail()` for compact UI like nav bars. */
   clan() {
-    const { region, nickname } = this;
-    return unwrap(
-      this.api.GET("/{region}/players/{nickname}/clan", {
-        params: { path: { region, nickname } },
-      }),
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/clan", path),
+      () =>
+        this.api.GET("/{region}/players/{nickname}/clan", { params: { path } }),
     );
   }
 
   /** Enqueue an on-demand refresh of this player; returns the estimated seconds
    * until it completes. */
   enqueue() {
-    const { region, nickname } = this;
-    return unwrap(
-      this.api.POST("/{region}/players/{nickname}/enqueue", {
-        params: { path: { region, nickname } },
-      }),
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/enqueue", path),
+      () =>
+        this.api.POST("/{region}/players/{nickname}/enqueue", {
+          params: { path },
+        }),
     );
   }
 
@@ -260,7 +350,7 @@ class PlayerClient {
 
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Combined (non-streamed) player search by nickname prefix. */
-  search(q: string): Promise<Data<"/{region}/players/search">>;
+  search(q: string): RequestHandle<Data<"/{region}/players/search">>;
   /** Streamed player search: an async iterator of NDJSON chunks (local DB hits
    * first, then Wargaming), so results paint progressively. */
   searchStream(
@@ -271,11 +361,11 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
    * by-language board (lifetime WNX). */
   top(
     query?: QueryOf<"/{region}/players/top">,
-  ): Promise<Data<"/{region}/players/top">>;
+  ): RequestHandle<Data<"/{region}/players/top">>;
   /** Languages the region's tracked players speak, with populations. */
-  languages(): Promise<Data<"/{region}/players/languages">>;
+  languages(): RequestHandle<Data<"/{region}/players/languages">>;
   /** Side-by-side comparison inputs for up to 4 players. */
-  compare(names: string[]): Promise<Data<"/{region}/players/compare">>;
+  compare(names: string[]): RequestHandle<Data<"/{region}/players/compare">>;
 };
 
 /** A single clan: `unicum.eu.clans("FAME")`. */
@@ -289,74 +379,74 @@ class ClanClient {
 
   /** Clan overview: profile + aggregate ratings. */
   overview() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}", { params: { path: { region, tag } } }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}", path),
+      () => this.api.GET("/{region}/clans/{tag}", { params: { path } }),
     );
   }
   /** Members with cached WN7/WN8/WNX ratings. */
   members() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/members", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/members", path),
+      () => this.api.GET("/{region}/clans/{tag}/members", { params: { path } }),
     );
   }
   /** Clans the members previously belonged to. */
   previousClans() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/previous-clans", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/previous-clans", path),
+      () =>
+        this.api.GET("/{region}/clans/{tag}/previous-clans", {
+          params: { path },
+        }),
     );
   }
   /** Recent join / leave / role-change events. */
   activity() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/activity", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/activity", path),
+      () => this.api.GET("/{region}/clans/{tag}/activity", { params: { path } }),
     );
   }
   /** Stronghold Elo + skirmish/advances (latest + period diffs). */
   stronghold() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/stronghold", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/stronghold", path),
+      () =>
+        this.api.GET("/{region}/clans/{tag}/stronghold", { params: { path } }),
     );
   }
   /** Global Map (Clan Wars) stats (latest + period diffs). */
   clanWars() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/clan-wars", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/clan-wars", path),
+      () =>
+        this.api.GET("/{region}/clans/{tag}/clan-wars", { params: { path } }),
     );
   }
   /** Per-tank aggregates across all members. */
   vehicles() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.GET("/{region}/clans/{tag}/vehicles", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/vehicles", path),
+      () => this.api.GET("/{region}/clans/{tag}/vehicles", { params: { path } }),
     );
   }
 
   /** Enqueue an on-demand refresh of this clan; returns the estimated seconds
    * until it completes. */
   enqueue() {
-    const { region, tag } = this;
-    return unwrap(
-      this.api.POST("/{region}/clans/{tag}/enqueue", {
-        params: { path: { region, tag } },
-      }),
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/enqueue", path),
+      () =>
+        this.api.POST("/{region}/clans/{tag}/enqueue", { params: { path } }),
     );
   }
 
@@ -379,101 +469,110 @@ class ClanClient {
 
 type ClansNamespace = ((tag: string) => ClanClient) & {
   /** Combined (non-streamed) clan search by name or tag prefix. */
-  search(q: string): Promise<Data<"/{region}/clans/search">>;
+  search(q: string): RequestHandle<Data<"/{region}/clans/search">>;
   /** Streamed clan search: an async iterator of NDJSON chunks (local DB hits
    * first, then Wargaming), so results paint progressively. */
   searchStream(
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/clans/search">>>;
-  top(query?: QueryOf<"/{region}/clans/top">): Promise<Data<"/{region}/clans/top">>;
+  top(
+    query?: QueryOf<"/{region}/clans/top">,
+  ): RequestHandle<Data<"/{region}/clans/top">>;
   /** Languages the region's clans declare, with populations. */
-  languages(): Promise<Data<"/{region}/clans/languages">>;
+  languages(): RequestHandle<Data<"/{region}/clans/languages">>;
   /** Stronghold clan leaderboard for one mode/tier. */
   strongholdTop(
     query?: QueryOf<"/{region}/clans/stronghold/top">,
-  ): Promise<Data<"/{region}/clans/stronghold/top">>;
+  ): RequestHandle<Data<"/{region}/clans/stronghold/top">>;
   /** Side-by-side comparison inputs for up to 4 clans. */
-  compare(tags: string[]): Promise<Data<"/{region}/clans/compare">>;
+  compare(tags: string[]): RequestHandle<Data<"/{region}/clans/compare">>;
 };
 
 /** A single tank: `unicum.eu.tanks("is-7")`. */
 class TankClient {
   constructor(
     private readonly api: Client<paths>,
+    private readonly baseUrl: string,
     private readonly region: Region,
     private readonly slug: string,
   ) {}
 
   /** Server-wide performance for this tank. */
   performance() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}", { params: { path: { region, slug } } }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}", path),
+      () => this.api.GET("/{region}/tanks/{slug}", { params: { path } }),
     );
   }
   /** Everything the tank page renders in one payload (identity, top players,
    * server averages, expected values, specs, MoE/MoM + history, research
    * path). `slug` in the response is the canonical slug. */
   detail() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}/detail", {
-        params: { path: { region, slug } },
-      }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/detail", path),
+      () => this.api.GET("/{region}/tanks/{slug}/detail", { params: { path } }),
     );
   }
   /** Combat specifications. */
   specifications() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}/specifications", {
-        params: { path: { region, slug } },
-      }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/specifications", path),
+      () =>
+        this.api.GET("/{region}/tanks/{slug}/specifications", {
+          params: { path },
+        }),
     );
   }
   /** Economics (price, ammo cost, research XP). */
   economics() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}/economics", {
-        params: { path: { region, slug } },
-      }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/economics", path),
+      () =>
+        this.api.GET("/{region}/tanks/{slug}/economics", { params: { path } }),
     );
   }
   /** Marks of Excellence thresholds. */
   marksOfExcellence() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}/marks-of-excellence", {
-        params: { path: { region, slug } },
-      }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/marks-of-excellence", path),
+      () =>
+        this.api.GET("/{region}/tanks/{slug}/marks-of-excellence", {
+          params: { path },
+        }),
     );
   }
   /** Marks of Mastery XP thresholds. */
   marksOfMastery() {
-    const { region, slug } = this;
-    return unwrap(
-      this.api.GET("/{region}/tanks/{slug}/marks-of-mastery", {
-        params: { path: { region, slug } },
-      }),
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/marks-of-mastery", path),
+      () =>
+        this.api.GET("/{region}/tanks/{slug}/marks-of-mastery", {
+          params: { path },
+        }),
     );
   }
 }
 
 type TanksNamespace = ((slug: string) => TankClient) & {
   /** Per-tank server performance for the whole region catalogue. */
-  list(): Promise<Data<"/{region}/tanks">>;
+  list(): RequestHandle<Data<"/{region}/tanks">>;
   /** Combat specifications for the whole region catalogue. */
-  specifications(): Promise<Data<"/{region}/tanks/specifications">>;
+  specifications(): RequestHandle<Data<"/{region}/tanks/specifications">>;
   /** Economics for the whole region catalogue. */
-  economics(): Promise<Data<"/{region}/tanks/economics">>;
+  economics(): RequestHandle<Data<"/{region}/tanks/economics">>;
   /** Marks of Excellence thresholds for the whole region catalogue. */
-  marksOfExcellence(): Promise<Data<"/{region}/tanks/marks-of-excellence">>;
+  marksOfExcellence(): RequestHandle<Data<"/{region}/tanks/marks-of-excellence">>;
   /** Marks of Mastery thresholds for the whole region catalogue. */
-  marksOfMastery(): Promise<Data<"/{region}/tanks/marks-of-mastery">>;
+  marksOfMastery(): RequestHandle<Data<"/{region}/tanks/marks-of-mastery">>;
   /** Vehicle catalogue search by name / short name / tag. */
-  search(q: string): Promise<Data<"/{region}/tanks/search">>;
+  search(q: string): RequestHandle<Data<"/{region}/tanks/search">>;
   /** Streamed vehicle search: an async iterator of NDJSON chunks (a single
    * `local` chunk from the in-memory catalogue). */
   searchStream(
@@ -513,14 +612,16 @@ class RegionClient {
   }
 
   get players(): PlayersNamespace {
-    const { api, region } = this;
+    const { api, region, baseUrl } = this;
     const ns = ((nickname: string) =>
-      new PlayerClient(api, this.baseUrl, region, nickname)) as PlayersNamespace;
+      new PlayerClient(api, baseUrl, region, nickname)) as PlayersNamespace;
     ns.search = (q) =>
-      unwrap(
-        api.GET("/{region}/players/search", {
-          params: { path: { region }, query: { q } },
-        }),
+      handle(
+        buildUrl(baseUrl, "/{region}/players/search", { region }, { q }),
+        () =>
+          api.GET("/{region}/players/search", {
+            params: { path: { region }, query: { q } },
+          }),
       );
     ns.searchStream = (q, options) =>
       this.#searchStream<SearchChunk<SearchItemOf<"/{region}/players/search">>>(
@@ -529,31 +630,41 @@ class RegionClient {
         options?.signal,
       );
     ns.top = (query) =>
-      unwrap(
-        api.GET("/{region}/players/top", { params: { path: { region }, query } }),
+      handle(
+        buildUrl(baseUrl, "/{region}/players/top", { region }, query),
+        () =>
+          api.GET("/{region}/players/top", { params: { path: { region }, query } }),
       );
     ns.languages = () =>
-      unwrap(
-        api.GET("/{region}/players/languages", { params: { path: { region } } }),
+      handle(
+        buildUrl(baseUrl, "/{region}/players/languages", { region }),
+        () =>
+          api.GET("/{region}/players/languages", { params: { path: { region } } }),
       );
     ns.compare = (names) =>
-      unwrap(
-        api.GET("/{region}/players/compare", {
-          params: { path: { region }, query: { names: names.join(",") } },
+      handle(
+        buildUrl(baseUrl, "/{region}/players/compare", { region }, {
+          names: names.join(","),
         }),
+        () =>
+          api.GET("/{region}/players/compare", {
+            params: { path: { region }, query: { names: names.join(",") } },
+          }),
       );
     return ns;
   }
 
   get clans(): ClansNamespace {
-    const { api, region } = this;
+    const { api, region, baseUrl } = this;
     const ns = ((tag: string) =>
-      new ClanClient(api, this.baseUrl, region, tag)) as ClansNamespace;
+      new ClanClient(api, baseUrl, region, tag)) as ClansNamespace;
     ns.search = (q) =>
-      unwrap(
-        api.GET("/{region}/clans/search", {
-          params: { path: { region }, query: { q } },
-        }),
+      handle(
+        buildUrl(baseUrl, "/{region}/clans/search", { region }, { q }),
+        () =>
+          api.GET("/{region}/clans/search", {
+            params: { path: { region }, query: { q } },
+          }),
       );
     ns.searchStream = (q, options) =>
       this.#searchStream<SearchChunk<SearchItemOf<"/{region}/clans/search">>>(
@@ -562,46 +673,69 @@ class RegionClient {
         options?.signal,
       );
     ns.top = (query) =>
-      unwrap(
-        api.GET("/{region}/clans/top", { params: { path: { region }, query } }),
+      handle(
+        buildUrl(baseUrl, "/{region}/clans/top", { region }, query),
+        () =>
+          api.GET("/{region}/clans/top", { params: { path: { region }, query } }),
       );
     ns.languages = () =>
-      unwrap(
-        api.GET("/{region}/clans/languages", { params: { path: { region } } }),
+      handle(
+        buildUrl(baseUrl, "/{region}/clans/languages", { region }),
+        () =>
+          api.GET("/{region}/clans/languages", { params: { path: { region } } }),
       );
     ns.strongholdTop = (query) =>
-      unwrap(
-        api.GET("/{region}/clans/stronghold/top", {
-          params: { path: { region }, query },
-        }),
+      handle(
+        buildUrl(baseUrl, "/{region}/clans/stronghold/top", { region }, query),
+        () =>
+          api.GET("/{region}/clans/stronghold/top", {
+            params: { path: { region }, query },
+          }),
       );
     ns.compare = (tags) =>
-      unwrap(
-        api.GET("/{region}/clans/compare", {
-          params: { path: { region }, query: { tags: tags.join(",") } },
+      handle(
+        buildUrl(baseUrl, "/{region}/clans/compare", { region }, {
+          tags: tags.join(","),
         }),
+        () =>
+          api.GET("/{region}/clans/compare", {
+            params: { path: { region }, query: { tags: tags.join(",") } },
+          }),
       );
     return ns;
   }
 
   get tanks(): TanksNamespace {
-    const { api, region } = this;
+    const { api, region, baseUrl } = this;
     const ns = ((slug: string) =>
-      new TankClient(api, region, slug)) as TanksNamespace;
+      new TankClient(api, baseUrl, region, slug)) as TanksNamespace;
     const p = { params: { path: { region } } } as const;
-    ns.list = () => unwrap(api.GET("/{region}/tanks", p));
+    const tanksUrl = (path: string) => buildUrl(baseUrl, path, { region });
+    ns.list = () =>
+      handle(tanksUrl("/{region}/tanks"), () => api.GET("/{region}/tanks", p));
     ns.specifications = () =>
-      unwrap(api.GET("/{region}/tanks/specifications", p));
-    ns.economics = () => unwrap(api.GET("/{region}/tanks/economics", p));
+      handle(tanksUrl("/{region}/tanks/specifications"), () =>
+        api.GET("/{region}/tanks/specifications", p),
+      );
+    ns.economics = () =>
+      handle(tanksUrl("/{region}/tanks/economics"), () =>
+        api.GET("/{region}/tanks/economics", p),
+      );
     ns.marksOfExcellence = () =>
-      unwrap(api.GET("/{region}/tanks/marks-of-excellence", p));
+      handle(tanksUrl("/{region}/tanks/marks-of-excellence"), () =>
+        api.GET("/{region}/tanks/marks-of-excellence", p),
+      );
     ns.marksOfMastery = () =>
-      unwrap(api.GET("/{region}/tanks/marks-of-mastery", p));
+      handle(tanksUrl("/{region}/tanks/marks-of-mastery"), () =>
+        api.GET("/{region}/tanks/marks-of-mastery", p),
+      );
     ns.search = (q) =>
-      unwrap(
-        api.GET("/{region}/tanks/search", {
-          params: { path: { region }, query: { q } },
-        }),
+      handle(
+        buildUrl(baseUrl, "/{region}/tanks/search", { region }, { q }),
+        () =>
+          api.GET("/{region}/tanks/search", {
+            params: { path: { region }, query: { q } },
+          }),
       );
     ns.searchStream = (q, options) =>
       this.#searchStream<SearchChunk<SearchItemOf<"/{region}/tanks/search">>>(
@@ -615,9 +749,10 @@ class RegionClient {
   /** Tracker coverage for this region: counts, refresh-policy health, 30-day
    * trends and infrastructure facts. */
   coverage() {
-    const { api, region } = this;
-    return unwrap(
-      api.GET("/{region}/coverage", { params: { path: { region } } }),
+    const { api, region, baseUrl } = this;
+    return handle(
+      buildUrl(baseUrl, "/{region}/coverage", { region }),
+      () => api.GET("/{region}/coverage", { params: { path: { region } } }),
     );
   }
 
@@ -638,7 +773,7 @@ class RegionClient {
 
 type StreamersNamespace = {
   /** Currently-live tracked streamers across all regions (snapshot). */
-  list(): Promise<Data<"/streamers/live">>;
+  list(): RequestHandle<Data<"/streamers/live">>;
   /** Currently-live tracked streamers across all regions, pushed over SSE.
    * Returns an unsubscribe function; browser-only. */
   live(
@@ -649,9 +784,9 @@ type StreamersNamespace = {
 
 type SupportNamespace = {
   /** Active supporters ranked by current monthly pledge (amount not exposed). */
-  podium(): Promise<Data<"/support/podium">>;
+  podium(): RequestHandle<Data<"/support/podium">>;
   /** Compact cumulative funding progress (percentage + raised/goal in USD). */
-  funding(): Promise<Data<"/support/funding">>;
+  funding(): RequestHandle<Data<"/support/funding">>;
 };
 
 /**
@@ -713,7 +848,9 @@ export class Unicum {
     const baseUrl = this.#baseUrl;
     return {
       list: () =>
-        unwrap(this.#api.GET("/streamers/live", {})),
+        handle(buildUrl(baseUrl, "/streamers/live"), () =>
+          this.#api.GET("/streamers/live", {}),
+        ),
       live: (onData, onError) =>
         subscribeSse<LiveStreamer[]>(
           `${baseUrl}/streamers/live/sse`,
@@ -726,9 +863,16 @@ export class Unicum {
 
   /** Global (not region-scoped) supporters podium. */
   get support(): SupportNamespace {
+    const baseUrl = this.#baseUrl;
     return {
-      podium: () => unwrap(this.#api.GET("/support/podium", {})),
-      funding: () => unwrap(this.#api.GET("/support/funding", {})),
+      podium: () =>
+        handle(buildUrl(baseUrl, "/support/podium"), () =>
+          this.#api.GET("/support/podium", {}),
+        ),
+      funding: () =>
+        handle(buildUrl(baseUrl, "/support/funding"), () =>
+          this.#api.GET("/support/funding", {}),
+        ),
     };
   }
 }
