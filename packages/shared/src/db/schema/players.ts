@@ -47,12 +47,24 @@ export function makePlayersTable(region: string) {
       wn730d: real("wn7_30d"),
       wn830d: real("wn8_30d"),
       wnx30d: real("wnx_30d"),
+      // Same recent-window ratings for the 24h and 7d leaderboard periods, kept
+      // in lockstep by the snapshot pipeline, so the top-players cron ranks by a
+      // cached column instead of scanning the 300M-row tank_snapshots table
+      // every hour (see wargaming/wot/players/top).
+      wn724h: real("wn7_24h"),
+      wn824h: real("wn8_24h"),
+      wnx24h: real("wnx_24h"),
+      wn77d: real("wn7_7d"),
+      wn87d: real("wn8_7d"),
+      wnx7d: real("wnx_7d"),
       // Lifetime battle count, copied from the latest snapshot's `battles`
       // field at every snapshot-cron tick. Lets the Overall top-players
       // ranking apply the 20k-battle minimum without DISTINCT-ON-scanning
       // the whole player_snapshots table.
       battles: integer("battles"),
       battles30d: integer("battles_30d"),
+      battles24h: integer("battles_24h"),
+      battles7d: integer("battles_7d"),
       // Lifetime account win rate (0-1), copied from the latest snapshot's
       // wins/battles at every snapshot-cron tick. Powers the "Player WR" column
       // of the per-tank server-average table (average driver account WR).
