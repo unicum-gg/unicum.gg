@@ -1,24 +1,11 @@
-import { and, asc, desc, eq, gte, isNotNull, sql } from "drizzle-orm";
-import { RatingMetric, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, topPlayersByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX } from "@unicum.gg/shared";
+import { and, asc, desc, eq, gte, isNotNull } from "drizzle-orm";
+import { RatingMetric, playersByRegion, topPlayersByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
-import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { type Region } from "@unicum.gg/wargaming";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@unicum.gg/core/wargaming/wot/wn-expected";
-import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { TopPlayersPeriod } from "./period";
 
 export { TopPlayersPeriod } from "./period";
-
-const PERIOD_INTERVAL: Record<TopPlayersPeriod, string | null> = {
-  [TopPlayersPeriod.Day]: "24 hours",
-  [TopPlayersPeriod.Week]: "7 days",
-  [TopPlayersPeriod.Month]: "30 days",
-  [TopPlayersPeriod.Overall]: null,
-};
 
 const MIN_BATTLES: Record<TopPlayersPeriod, number> = {
   [TopPlayersPeriod.Day]: 20,
@@ -36,19 +23,6 @@ export type TopPlayerResult = {
   clan_color: string | null;
   battles: number;
   wnx: number;
-};
-
-type DiffRow = {
-  account_id: number;
-  nickname: string;
-  tank_id: number;
-  diff_battles: string | number;
-  diff_wins: string | number;
-  diff_damage: string | number;
-  diff_spotted: string | number;
-  diff_frags: string | number;
-  diff_dropped_cap: string | number;
-  diff_assist: string | number;
 };
 
 export type TopPlayersAllMetrics = {
@@ -155,179 +129,62 @@ export async function computePlayerPeriodRatings(
   minBattles: number,
 ): Promise<PlayerPeriodRating[]> {
   const players = playersByRegion[region];
-  const playerSnapshots = playerSnapshotsByRegion[region];
-  const tankSnapshots = tankSnapshotsByRegion[region];
-  const interval = PERIOD_INTERVAL[period];
-  if (interval === null) {
-    throw new Error(
-      `computePlayerPeriodRatings: unexpected null interval for ${period}`,
-    );
-  }
-  const intervalSql = sql.raw(`INTERVAL '${interval}'`);
-
-  // Two-stage strategy: filter to active player IDs via the small
-  // player_snapshots table (171 MB on EU vs 22 GB on tank_snapshots —
-  // ~150x smaller), then run the per-tank diff query restricted to
-  // those IDs so the planner uses the (player_id, taken_at) index for
-  // narrow lookups. The previous single-stage query did a DISTINCT ON
-  // over the full tank_snapshots and ran out of temp space (SQLSTATE
-  // 53100) on EU. Inlining both stages into one CTE chain also fails
-  // here: the planner doesn't push the active-player filter past the
-  // DISTINCT ON sort, so it still scans the whole window.
-  //
-  // `earlier` is unbounded on the past side: we pick the latest snapshot
-  // strictly older than the period. Same logic the player page uses for
-  // its "Last 24h / 7d" deltas — keeps the two views consistent. The
-  // diff may stretch beyond the labelled period for players whose last
-  // baseline snapshot is older than that window, but that's already
-  // baked into the player-page semantics.
-  const activeRows = (await db.execute(sql`
-    SELECT lp.player_id
-    FROM (
-      SELECT DISTINCT ON (player_id) player_id, battles
-      FROM ${playerSnapshots}
-      WHERE taken_at > NOW() - ${intervalSql}
-      ORDER BY player_id, taken_at DESC
-    ) lp
-    INNER JOIN (
-      SELECT DISTINCT ON (player_id) player_id, battles
-      FROM ${playerSnapshots}
-      WHERE taken_at <= NOW() - ${intervalSql}
-      ORDER BY player_id, taken_at DESC
-    ) ep USING (player_id)
-    WHERE lp.battles - ep.battles >= ${minBattles}
-  `)) as unknown as Array<{ player_id: number | string }>;
-  const activeIds = activeRows.map((r) => Number(r.player_id));
-  if (activeIds.length === 0) return [];
-  const activeIdsSql = sql.raw(`ARRAY[${activeIds.join(",")}]::int[]`);
-
-  const rows = (await db.execute(sql`
-    WITH latest AS (
-      SELECT DISTINCT ON (player_id, tank_id)
-        player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
-        dropped_capture_points, radio_assisted_damage, track_assisted_damage
-      FROM ${tankSnapshots}
-      WHERE player_id = ANY(${activeIdsSql})
-        AND taken_at > NOW() - ${intervalSql}
-      ORDER BY player_id, tank_id, taken_at DESC
-    ),
-    earlier AS (
-      SELECT DISTINCT ON (player_id, tank_id)
-        player_id, tank_id, battles, wins, damage_dealt, spotted, frags,
-        dropped_capture_points, radio_assisted_damage, track_assisted_damage
-      FROM ${tankSnapshots}
-      WHERE player_id = ANY(${activeIdsSql})
-        AND taken_at <= NOW() - ${intervalSql}
-      ORDER BY player_id, tank_id, taken_at DESC
-    )
-    SELECT
-      p.account_id, p.nickname, l.tank_id,
-      (l.battles - e.battles) AS diff_battles,
-      (l.wins - e.wins) AS diff_wins,
-      (l.damage_dealt - e.damage_dealt) AS diff_damage,
-      (l.spotted - e.spotted) AS diff_spotted,
-      (l.frags - e.frags) AS diff_frags,
-      (l.dropped_capture_points - e.dropped_capture_points) AS diff_dropped_cap,
-      ((l.radio_assisted_damage - e.radio_assisted_damage) + (l.track_assisted_damage - e.track_assisted_damage)) AS diff_assist
-    FROM latest l
-    INNER JOIN earlier e USING (player_id, tank_id)
-    INNER JOIN ${players} p ON p.id = l.player_id
-    WHERE l.battles > e.battles
-  `)) as unknown as DiffRow[];
-
-  type Agg = {
-    account_id: number;
-    nickname: string;
-    tanks: TankStats[];
-    totalBattles: number;
-    totalWins: number;
-    totalFrags: number;
-    totalDamage: number;
-    totalSpotted: number;
-    totalDroppedCap: number;
+  // The snapshot pipeline keeps a cached recent-window rating per period on the
+  // players row (see players/index.ts updatePlayerRatings), in lockstep with
+  // every snapshot. So this is a single indexed read of the ~2M-row players
+  // table instead of a DISTINCT-ON seq scan + on-disk sort over the 300M-row
+  // tank_snapshots table every hour — the same idea the Overall fast path uses.
+  // The window is relative to each player's last snapshot rather than exactly
+  // now, but leaderboard players are active (re-snapshotted within hours), so it
+  // tracks closely and self-corrects on their next snapshot.
+  const byPeriod = {
+    [TopPlayersPeriod.Day]: {
+      battles: players.battles24h,
+      wn7: players.wn724h,
+      wn8: players.wn824h,
+      wnx: players.wnx24h,
+    },
+    [TopPlayersPeriod.Week]: {
+      battles: players.battles7d,
+      wn7: players.wn77d,
+      wn8: players.wn87d,
+      wnx: players.wnx7d,
+    },
+    [TopPlayersPeriod.Month]: {
+      battles: players.battles30d,
+      wn7: players.wn730d,
+      wn8: players.wn830d,
+      wnx: players.wnx30d,
+    },
+    [TopPlayersPeriod.Overall]: null,
   };
-  const byPlayer = new Map<number, Agg>();
-  for (const row of rows) {
-    const battles = Number(row.diff_battles);
-    if (battles <= 0) continue;
-    const accountId = Number(row.account_id);
-    const wins = Number(row.diff_wins);
-    const damage = Number(row.diff_damage);
-    const spotted = Number(row.diff_spotted);
-    const frags = Number(row.diff_frags);
-    const droppedCap = Number(row.diff_dropped_cap);
-    let agg = byPlayer.get(accountId);
-    if (!agg) {
-      agg = {
-        account_id: accountId,
-        nickname: row.nickname,
-        tanks: [],
-        totalBattles: 0,
-        totalWins: 0,
-        totalFrags: 0,
-        totalDamage: 0,
-        totalSpotted: 0,
-        totalDroppedCap: 0,
-      };
-      byPlayer.set(accountId, agg);
-    }
-    agg.tanks.push({
-      tank_id: Number(row.tank_id),
-      mark_of_mastery: null,
-      all: {
-        battles,
-        wins,
-        damage_dealt: damage,
-        spotted,
-        frags,
-        dropped_capture_points: droppedCap,
-        radio_assisted_damage: Number(row.diff_assist),
-        track_assisted_damage: 0,
-        xp: 0,
-      },
-    });
-    agg.totalBattles += battles;
-    agg.totalWins += wins;
-    agg.totalFrags += frags;
-    agg.totalDamage += damage;
-    agg.totalSpotted += spotted;
-    agg.totalDroppedCap += droppedCap;
-  }
-
-  const [encyclopedia, wn8Expected, wnxExpected] = await Promise.all([
-    getVehicleEncyclopedia(region),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-  ]);
-  const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-
-  const ratings: PlayerPeriodRating[] = [];
-  for (const agg of byPlayer.values()) {
-    if (agg.totalBattles < minBattles) continue;
-    const wnx = computeWNX(agg.tanks, wnxExpected);
-    const wn8 = computeWN8(agg.tanks, wn8Expected, encyclopedia, wn8Fallback);
-    const avgTier = computeAvgTier(agg.tanks, encyclopedia);
-    const wn7 = computeWN7(
-      {
-        battles: agg.totalBattles,
-        wins: agg.totalWins,
-        frags: agg.totalFrags,
-        damageDealt: agg.totalDamage,
-        spotted: agg.totalSpotted,
-        droppedCapturePoints: agg.totalDroppedCap,
-      },
-      avgTier,
+  const cols = byPeriod[period];
+  if (!cols) {
+    throw new Error(
+      `computePlayerPeriodRatings: unexpected period ${period}`,
     );
-    ratings.push({
-      account_id: agg.account_id,
-      nickname: agg.nickname,
-      battles: agg.totalBattles,
-      wn7: wn7 != null && Number.isFinite(wn7) ? wn7 : null,
-      wn8: Number.isFinite(wn8) ? wn8 : null,
-      wnx: wnx != null && Number.isFinite(wnx) ? wnx : null,
-    });
   }
-  return ratings;
+
+  const rows = await db
+    .select({
+      account_id: players.accountId,
+      nickname: players.nickname,
+      battles: cols.battles,
+      wn7: cols.wn7,
+      wn8: cols.wn8,
+      wnx: cols.wnx,
+    })
+    .from(players)
+    .where(gte(cols.battles, minBattles));
+
+  return rows.map((r) => ({
+    account_id: Number(r.account_id),
+    nickname: r.nickname,
+    battles: r.battles ?? 0,
+    wn7: r.wn7,
+    wn8: r.wn8,
+    wnx: r.wnx,
+  }));
 }
 
 /**

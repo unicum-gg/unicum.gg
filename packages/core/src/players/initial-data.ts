@@ -24,8 +24,16 @@ type RawPlayer = {
   wn7_30d: number | null;
   wn8_30d: number | null;
   wnx_30d: number | null;
+  wn7_24h: number | null;
+  wn8_24h: number | null;
+  wnx_24h: number | null;
+  wn7_7d: number | null;
+  wn8_7d: number | null;
+  wnx_7d: number | null;
   battles: number | null;
   battles_30d: number | null;
+  battles_24h: number | null;
+  battles_7d: number | null;
   winrate: number | null;
   null_count: number;
   soft_deleted_at: string | null;
@@ -200,8 +208,16 @@ function playerFromRaw(r: RawPlayer): Player {
     wn730d: r.wn7_30d,
     wn830d: r.wn8_30d,
     wnx30d: r.wnx_30d,
+    wn724h: r.wn7_24h,
+    wn824h: r.wn8_24h,
+    wnx24h: r.wnx_24h,
+    wn77d: r.wn7_7d,
+    wn87d: r.wn8_7d,
+    wnx7d: r.wnx_7d,
     battles: r.battles,
     battles30d: r.battles_30d,
+    battles24h: r.battles_24h,
+    battles7d: r.battles_7d,
     winrate: r.winrate,
     nullCount: r.null_count,
     softDeletedAt: r.soft_deleted_at ? new Date(r.soft_deleted_at) : null,

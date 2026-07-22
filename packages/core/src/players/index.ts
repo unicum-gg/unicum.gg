@@ -672,112 +672,115 @@ async function updatePlayerRatings(
   const wn8 = computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   const wnx = computeWNX(tanks, wnxExpected);
 
-  // Recent ratings use a 30-day window so they match the "Last 30d" column
-  // on the player page and the clan aggregate (`weighted by battles30d`).
-  // Single query per player: cheap inside the snapshot path.
-  const d30Cutoff = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
-  const d30CutoffTs = sql`${d30Cutoff.toISOString()}::timestamptz`;
-  // Per tank: the newest snapshot older than 30 days, or (for players tracked
-  // less than 30 days) the oldest snapshot other than the current one, so the
-  // recent-rating window still reflects the games they played instead of coming
+  // Recent-window ratings for each leaderboard period (24h / 7d / 30d). Per
+  // tank we take the newest snapshot older than the cutoff, or (for players
+  // tracked less than the window) the oldest snapshot other than the current
+  // one, so a short history still reflects the games played instead of coming
   // back empty. Mirrors the player-page period baseline in initial-data.ts.
-  const d30Rows = await db
-    .selectDistinctOn([tankSnapshots.tankId], {
-      tankId: tankSnapshots.tankId,
-      battles: tankSnapshots.battles,
-      wins: tankSnapshots.wins,
-      damageDealt: tankSnapshots.damageDealt,
-      spotted: tankSnapshots.spotted,
-      frags: tankSnapshots.frags,
-      droppedCapturePoints: tankSnapshots.droppedCapturePoints,
-      radioAssistedDamage: tankSnapshots.radioAssistedDamage,
-      trackAssistedDamage: tankSnapshots.trackAssistedDamage,
-      xp: tankSnapshots.xp,
-      markOfMastery: tankSnapshots.markOfMastery,
-      takenAt: tankSnapshots.takenAt,
-    })
-    .from(tankSnapshots)
-    .where(
-      and(
-        eq(tankSnapshots.playerId, playerId),
-        or(
-          lt(tankSnapshots.takenAt, d30Cutoff),
-          sql`${tankSnapshots.takenAt} < (SELECT MAX(ts2.taken_at) FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId} AND ts2.tank_id = ${tankSnapshots.tankId})`,
+  // Cheap per-player DISTINCT-ON queries run in parallel; keeping these cached
+  // columns in lockstep with every snapshot is what lets the top-players cron
+  // rank by a column (see wargaming/wot/players/top) instead of scanning the
+  // 300M-row tank_snapshots table every hour.
+  const periodRating = async (cutoffMs: number) => {
+    const cutoff = new Date(Date.now() - cutoffMs);
+    const cutoffTs = sql`${cutoff.toISOString()}::timestamptz`;
+    const rows = await db
+      .selectDistinctOn([tankSnapshots.tankId], {
+        tankId: tankSnapshots.tankId,
+        battles: tankSnapshots.battles,
+        wins: tankSnapshots.wins,
+        damageDealt: tankSnapshots.damageDealt,
+        spotted: tankSnapshots.spotted,
+        frags: tankSnapshots.frags,
+        droppedCapturePoints: tankSnapshots.droppedCapturePoints,
+        radioAssistedDamage: tankSnapshots.radioAssistedDamage,
+        trackAssistedDamage: tankSnapshots.trackAssistedDamage,
+        xp: tankSnapshots.xp,
+        markOfMastery: tankSnapshots.markOfMastery,
+        takenAt: tankSnapshots.takenAt,
+      })
+      .from(tankSnapshots)
+      .where(
+        and(
+          eq(tankSnapshots.playerId, playerId),
+          or(
+            lt(tankSnapshots.takenAt, cutoff),
+            sql`${tankSnapshots.takenAt} < (SELECT MAX(ts2.taken_at) FROM ${tankSnapshots} ts2 WHERE ts2.player_id = ${playerId} AND ts2.tank_id = ${tankSnapshots.tankId})`,
+          ),
         ),
-      ),
-    )
-    .orderBy(
-      tankSnapshots.tankId,
-      sql`(${tankSnapshots.takenAt} < ${d30CutoffTs}) DESC`,
-      sql`CASE WHEN ${tankSnapshots.takenAt} < ${d30CutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
-      asc(tankSnapshots.takenAt),
-      desc(tankSnapshots.id),
-    );
-
-  let wn730d: number | null = null;
-  let wn830d: number | null = null;
-  let wnx30d: number | null = null;
-  let battles30d: number | null = null;
-  if (d30Rows.length > 0) {
-    const d30Map = new Map(
-      d30Rows.map((r) => [
-        r.tankId,
-        {
-          id: 0,
-          playerId,
-          tankId: r.tankId,
-          takenAt: r.takenAt,
-          battles: r.battles,
-          wins: r.wins,
-          damageDealt: r.damageDealt,
-          spotted: r.spotted,
-          frags: r.frags,
-          droppedCapturePoints: r.droppedCapturePoints,
-          radioAssistedDamage: r.radioAssistedDamage,
-          trackAssistedDamage: r.trackAssistedDamage,
-          xp: r.xp,
-          markOfMastery: r.markOfMastery,
-          // Not needed for the 30-day rating diff.
-          marksOnGun: null,
-          survivedBattles: null,
-          hits: null,
-          shots: null,
-          piercings: null,
-          damageBlocked: null,
-        },
-      ]),
-    );
-    const recent = diffTanks(tanks, d30Map);
-    if (recent.length > 0) {
-      wnx30d = computeWNX(recent, wnxExpected);
-      wn830d = computeWN8(recent, wn8Expected, encyclopedia, wn8Fallback);
-      battles30d = recent.reduce((sum, t) => sum + t.all.battles, 0);
-      // WN7 needs aggregate stats and the average tier over the same window.
-      const recentAggregates = recent.reduce(
-        (acc, t) => {
-          acc.battles += t.all.battles;
-          acc.wins += t.all.wins;
-          acc.frags += t.all.frags;
-          acc.damageDealt += t.all.damage_dealt;
-          acc.spotted += t.all.spotted;
-          acc.droppedCapturePoints += t.all.dropped_capture_points;
-          return acc;
-        },
-        {
-          battles: 0,
-          wins: 0,
-          frags: 0,
-          damageDealt: 0,
-          spotted: 0,
-          droppedCapturePoints: 0,
-        },
+      )
+      .orderBy(
+        tankSnapshots.tankId,
+        sql`(${tankSnapshots.takenAt} < ${cutoffTs}) DESC`,
+        sql`CASE WHEN ${tankSnapshots.takenAt} < ${cutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
+        asc(tankSnapshots.takenAt),
+        desc(tankSnapshots.id),
       );
-      if (recentAggregates.battles > 0) {
-        const recentAvgTier = computeAvgTier(recent, encyclopedia);
-        wn730d = computeWN7(recentAggregates, recentAvgTier);
+    let pWn7: number | null = null;
+    let pWn8: number | null = null;
+    let pWnx: number | null = null;
+    let pBattles: number | null = null;
+    if (rows.length > 0) {
+      const baseline = new Map(
+        rows.map((r) => [
+          r.tankId,
+          {
+            id: 0,
+            playerId,
+            tankId: r.tankId,
+            takenAt: r.takenAt,
+            battles: r.battles,
+            wins: r.wins,
+            damageDealt: r.damageDealt,
+            spotted: r.spotted,
+            frags: r.frags,
+            droppedCapturePoints: r.droppedCapturePoints,
+            radioAssistedDamage: r.radioAssistedDamage,
+            trackAssistedDamage: r.trackAssistedDamage,
+            xp: r.xp,
+            markOfMastery: r.markOfMastery,
+            // Not needed for the rating diff.
+            marksOnGun: null,
+            survivedBattles: null,
+            hits: null,
+            shots: null,
+            piercings: null,
+            damageBlocked: null,
+          },
+        ]),
+      );
+      const recent = diffTanks(tanks, baseline);
+      if (recent.length > 0) {
+        pWnx = computeWNX(recent, wnxExpected);
+        pWn8 = computeWN8(recent, wn8Expected, encyclopedia, wn8Fallback);
+        pBattles = recent.reduce((sum, t) => sum + t.all.battles, 0);
+        // WN7 needs aggregate stats and the average tier over the same window.
+        const agg = recent.reduce(
+          (acc, t) => {
+            acc.battles += t.all.battles;
+            acc.wins += t.all.wins;
+            acc.frags += t.all.frags;
+            acc.damageDealt += t.all.damage_dealt;
+            acc.spotted += t.all.spotted;
+            acc.droppedCapturePoints += t.all.dropped_capture_points;
+            return acc;
+          },
+          { battles: 0, wins: 0, frags: 0, damageDealt: 0, spotted: 0, droppedCapturePoints: 0 },
+        );
+        if (agg.battles > 0) {
+          pWn7 = computeWN7(agg, computeAvgTier(recent, encyclopedia));
+        }
       }
     }
-  }
+    return { wn7: pWn7, wn8: pWn8, wnx: pWnx, battles: pBattles };
+  };
+
+  const DAY_MS = 24 * 60 * 60 * 1000;
+  const [p24h, p7d, p30d] = await Promise.all([
+    periodRating(DAY_MS),
+    periodRating(7 * DAY_MS),
+    periodRating(30 * DAY_MS),
+  ]);
 
   await db
     .update(players)
@@ -785,10 +788,18 @@ async function updatePlayerRatings(
       wn7,
       wn8,
       wnx,
-      wn730d,
-      wn830d,
-      wnx30d,
-      battles30d,
+      wn730d: p30d.wn7,
+      wn830d: p30d.wn8,
+      wnx30d: p30d.wnx,
+      battles30d: p30d.battles,
+      wn724h: p24h.wn7,
+      wn824h: p24h.wn8,
+      wnx24h: p24h.wnx,
+      battles24h: p24h.battles,
+      wn77d: p7d.wn7,
+      wn87d: p7d.wn8,
+      wnx7d: p7d.wnx,
+      battles7d: p7d.battles,
       battles: overall.battles,
       winrate: overall.battles > 0 ? overall.wins / overall.battles : null,
     })
