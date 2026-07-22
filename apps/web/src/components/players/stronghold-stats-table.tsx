@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { winrateColor, RATING_COLOR_CLASS, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
 
@@ -169,13 +170,27 @@ export type StrongholdPeriods = {
   d30: StrongholdStats | null;
 };
 
-export function StrongholdStatsTable({
-  current,
-  periods,
-}: {
-  current: StrongholdStats;
-  periods: StrongholdPeriods;
-}) {
+/** A period-cell placeholder spanning the two sub-columns, right-aligned like the
+ * real numbers. Shown when `loading`. */
+function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
+  return (
+    <TableCell
+      colSpan={2}
+      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+    >
+      <Skeleton className="ml-auto h-4 w-12" />
+    </TableCell>
+  );
+}
+
+/** Pass `{ loading }` to render the same shell + row labels with placeholder
+ * cells (one `ROW_DEFS`, so the skeleton can't drift from the real table). */
+export function StrongholdStatsTable(
+  props:
+    | { loading: true }
+    | { current: StrongholdStats; periods: StrongholdPeriods },
+) {
+  const loading = "loading" in props;
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
       <colgroup>
@@ -208,17 +223,32 @@ export function StrongholdStatsTable({
       </TableHeader>
       <TableBody>
         {ROW_DEFS.map((row) => {
-          const total = row.render(current);
-          const h24 = periods.h24 ? row.render(periods.h24) : EMPTY_CELL;
-          const d7 = periods.d7 ? row.render(periods.d7) : EMPTY_CELL;
-          const d30 = periods.d30 ? row.render(periods.d30) : EMPTY_CELL;
+          const cells = loading
+            ? null
+            : {
+                total: row.render(props.current),
+                h24: props.periods.h24 ? row.render(props.periods.h24) : EMPTY_CELL,
+                d7: props.periods.d7 ? row.render(props.periods.d7) : EMPTY_CELL,
+                d30: props.periods.d30 ? row.render(props.periods.d30) : EMPTY_CELL,
+              };
           return (
             <TableRow key={row.label}>
               <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
-              <PeriodCells cell={total} />
-              <PeriodCells cell={h24} hideOnMobile />
-              <PeriodCells cell={d7} hideOnMobile />
-              <PeriodCells cell={d30} />
+              {cells ? (
+                <>
+                  <PeriodCells cell={cells.total} />
+                  <PeriodCells cell={cells.h24} hideOnMobile />
+                  <PeriodCells cell={cells.d7} hideOnMobile />
+                  <PeriodCells cell={cells.d30} />
+                </>
+              ) : (
+                <>
+                  <PeriodSkeleton />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton />
+                </>
+              )}
             </TableRow>
           );
         })}

@@ -5,6 +5,7 @@ import { CompareWithButton } from "@/components/players/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon, RefreshKind } from "@/components/players/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
+import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
@@ -18,27 +19,37 @@ import type { ClanStint } from "@unicum.gg/shared";
 const MONTH_FORMAT = "MMM yyyy";
 const DAY_FORMAT = "MMM d, yyyy";
 
-export function PlayerHeader({
-  region,
-  accountId,
-  nickname,
-  createdAt,
-  lastBattleAt,
-  updatedAt,
-  currentStint,
-  inferredLanguages,
-  supporterBadge,
-}: {
-  region: Region;
-  accountId: number;
-  nickname: string;
-  createdAt: Date;
-  lastBattleAt: Date;
-  updatedAt: Date;
-  currentStint: ClanStint | null;
-  inferredLanguages: string[];
-  supporterBadge: SupporterBadgeState | null;
-}) {
+export function PlayerHeader(
+  props:
+    | { loading: true; nickname: string }
+    | {
+        region: Region;
+        accountId: number;
+        nickname: string;
+        createdAt: Date;
+        lastBattleAt: Date;
+        updatedAt: Date;
+        currentStint: ClanStint | null;
+        inferredLanguages: string[];
+        supporterBadge: SupporterBadgeState | null;
+      },
+) {
+  if ("loading" in props) {
+    return <PlayerHeaderSkeleton nickname={props.nickname} />;
+  }
+
+  const {
+    region,
+    accountId,
+    nickname,
+    createdAt,
+    lastBattleAt,
+    updatedAt,
+    currentStint,
+    inferredLanguages,
+    supporterBadge,
+  } = props;
+
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex min-w-0 flex-1 flex-col">
@@ -131,6 +142,47 @@ export function PlayerHeader({
           </div>
         </Link>
       )}
+    </header>
+  );
+}
+
+/** The loading twin: real nickname + the same structure, with the meta line and
+ * clan block as placeholders. The size-24 emblem sets the header height, so it
+ * matches the loaded header. */
+function PlayerHeaderSkeleton({ nickname }: { nickname: string }) {
+  return (
+    <header className="flex flex-col sm:flex-row sm:items-stretch">
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
+          <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
+            {nickname}
+          </h1>
+          <Skeleton className="h-8 w-24 rounded-md" />
+          <Skeleton className="size-8 rounded-md" />
+        </div>
+        <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
+          <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
+            <Skeleton className="h-3 w-24" />
+            <span className="hidden sm:inline">·</span>
+            <Skeleton className="h-3 w-32" />
+            <span className="hidden sm:inline">·</span>
+            <Skeleton className="h-3 w-28" />
+          </div>
+        </div>
+      </div>
+      <div className="flex items-stretch border-t border-fd-border text-sm sm:border-t-0 sm:border-l">
+        <div className="flex min-w-0 flex-1 flex-col justify-center p-4 sm:flex-none sm:whitespace-nowrap sm:text-right">
+          <div>
+            <Skeleton className="inline-block h-3.5 w-40 align-middle sm:ml-auto" />
+          </div>
+          <div className="mt-1 text-xs">
+            <Skeleton className="inline-block h-3 w-28 align-middle sm:ml-auto" />
+          </div>
+        </div>
+        <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">
+          <Skeleton className="size-full rounded-md" />
+        </div>
+      </div>
     </header>
   );
 }

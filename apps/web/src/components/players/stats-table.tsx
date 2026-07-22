@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
@@ -28,10 +29,21 @@ type Cell = { primary: string; secondary?: string; color?: RatingColor; classNam
 
 const EMPTY_CELL: Cell = { primary: "—" };
 
+type PeriodCellSet = { total: Cell; h24: Cell; d7: Cell; d30: Cell };
+
+type RowInput = {
+  current: Stats;
+  periods: PeriodStats;
+  derived: PlayerDerivedStats;
+};
+
+// One ordered row of the table. `cells` derives its four period cells from the
+// data. Defined once, so the real table and its loading skeleton share the exact
+// same rows (labels + order) — the skeleton can never drift from the real table.
 type RowDef = {
   label: string;
-  render: (s: Stats) => Cell;
-  renderDelta?: (s: Stats) => Cell;
+  ratingRow?: "wn7" | "wn8" | "wnx";
+  cells: (input: RowInput) => PeriodCellSet;
 };
 
 function pctOrDash(n: number, d: number): string {
@@ -42,110 +54,148 @@ function avgOrDash(n: number, d: number): string {
   return d <= 0 ? "—" : decimalFmt.format(n / d);
 }
 
-const ROW_DEFS: RowDef[] = [
-  {
-    label: "Battles",
-    render: (s) => ({ primary: integerFmt.format(s.battles) }),
-  },
-  {
-    label: "Wins",
-    render: (s) => ({
-      primary: integerFmt.format(s.wins),
-      secondary: pctOrDash(s.wins, s.battles),
-      color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
-    }),
-  },
-  {
-    label: "Losses",
-    render: (s) => ({
-      primary: integerFmt.format(s.losses),
-      secondary: pctOrDash(s.losses, s.battles),
-    }),
-  },
-  {
-    label: "Draws",
-    render: (s) => ({
-      primary: integerFmt.format(s.draws),
-      secondary: pctOrDash(s.draws, s.battles),
-    }),
-  },
-  {
-    label: "Battles survived",
-    render: (s) => ({
-      primary: integerFmt.format(s.survivedBattles),
-      secondary: pctOrDash(s.survivedBattles, s.battles),
-    }),
-  },
-  {
-    label: "Tanks destroyed",
-    render: (s) => ({
-      primary: integerFmt.format(s.frags),
-      secondary: avgOrDash(s.frags, s.battles),
-    }),
-  },
-  {
-    label: "Destruction ratio",
-    render: (s) => ({
-      primary: avgOrDash(s.frags, s.battles - s.survivedBattles),
-    }),
-  },
-  {
-    label: "Tanks spotted",
-    render: (s) => ({
-      primary: integerFmt.format(s.spotted),
-      secondary: avgOrDash(s.spotted, s.battles),
-    }),
-  },
-  {
-    label: "Damages",
-    render: (s) => ({
-      primary: avgOrDash(s.damageDealt, s.battles),
-    }),
-  },
-  {
-    label: "Base capture",
-    render: (s) => ({
-      primary: integerFmt.format(s.capturePoints),
-      secondary: avgOrDash(s.capturePoints, s.battles),
-    }),
-  },
-  {
-    label: "Base defense",
-    render: (s) => ({
-      primary: integerFmt.format(s.droppedCapturePoints),
-      secondary: avgOrDash(s.droppedCapturePoints, s.battles),
-    }),
-  },
-  {
-    label: "Experience",
-    render: (s) => ({
-      primary: avgOrDash(s.xp, s.battles),
-    }),
-  },
-  {
-    label: "Hit rate",
-    render: (s) => ({
-      primary: pctOrDash(s.hits, s.shots),
-    }),
-  },
-  {
-    label: "Personal rating",
-    render: (s) => ({ primary: integerFmt.format(s.globalRating) }),
-    renderDelta: (s) => ({
+// Turns the server-computed numeric values into display cells, optionally
+// color-coding them with the matching rating scale.
+function cellsFrom(
+  values: PeriodValues,
+  color?: (v: number) => RatingColor,
+): PeriodCellSet {
+  const cell = (value: number | null): Cell => {
+    if (value === null) return EMPTY_CELL;
+    return {
+      primary: decimalFmt.format(value),
+      color: color ? color(value) : undefined,
+    };
+  };
+  return {
+    total: cell(values.total),
+    h24: cell(values.h24),
+    d7: cell(values.d7),
+    d30: cell(values.d30),
+  };
+}
+
+// A row whose cells come from the raw account `Stats` (Total from `current`, the
+// period columns from the diffs). `renderDelta` formats the period cells when it
+// differs from the total (signed values for ratings).
+function statRow(
+  label: string,
+  render: (s: Stats) => Cell,
+  renderDelta?: (s: Stats) => Cell,
+): RowDef {
+  return {
+    label,
+    cells: ({ current, periods }) => {
+      const delta = renderDelta ?? render;
+      return {
+        total: render(current),
+        h24: periods.h24 ? delta(periods.h24) : EMPTY_CELL,
+        d7: periods.d7 ? delta(periods.d7) : EMPTY_CELL,
+        d30: periods.d30 ? delta(periods.d30) : EMPTY_CELL,
+      };
+    },
+  };
+}
+
+// A row whose per-period values are pre-computed server-side (tank-breakdown
+// stats: tier, assistance damages, WN7/8/X).
+function derivedRow(
+  label: string,
+  pick: (d: PlayerDerivedStats) => PeriodValues,
+  options: { color?: (v: number) => RatingColor; ratingRow?: RowDef["ratingRow"] } = {},
+): RowDef {
+  return {
+    label,
+    ratingRow: options.ratingRow,
+    cells: ({ derived }) => cellsFrom(pick(derived), options.color),
+  };
+}
+
+// The single source of truth for the table's rows and their order (Tier after
+// Battles, the four damage-breakdown rows after Damages, ratings last).
+const ROWS: RowDef[] = [
+  statRow("Battles", (s) => ({ primary: integerFmt.format(s.battles) })),
+  derivedRow("Tier", (d) => d.tier),
+  statRow("Wins", (s) => ({
+    primary: integerFmt.format(s.wins),
+    secondary: pctOrDash(s.wins, s.battles),
+    color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
+  })),
+  statRow("Losses", (s) => ({
+    primary: integerFmt.format(s.losses),
+    secondary: pctOrDash(s.losses, s.battles),
+  })),
+  statRow("Draws", (s) => ({
+    primary: integerFmt.format(s.draws),
+    secondary: pctOrDash(s.draws, s.battles),
+  })),
+  statRow("Battles survived", (s) => ({
+    primary: integerFmt.format(s.survivedBattles),
+    secondary: pctOrDash(s.survivedBattles, s.battles),
+  })),
+  statRow("Tanks destroyed", (s) => ({
+    primary: integerFmt.format(s.frags),
+    secondary: avgOrDash(s.frags, s.battles),
+  })),
+  statRow("Destruction ratio", (s) => ({
+    primary: avgOrDash(s.frags, s.battles - s.survivedBattles),
+  })),
+  statRow("Tanks spotted", (s) => ({
+    primary: integerFmt.format(s.spotted),
+    secondary: avgOrDash(s.spotted, s.battles),
+  })),
+  statRow("Damages", (s) => ({
+    primary: avgOrDash(s.damageDealt, s.battles),
+  })),
+  derivedRow("Track damages", (d) => d.trackDamage),
+  derivedRow("Spotting damages", (d) => d.spottingDamage),
+  derivedRow("Assisting damages", (d) => d.assistingDamage),
+  derivedRow("Combined damages", (d) => d.combinedDamage),
+  statRow("Base capture", (s) => ({
+    primary: integerFmt.format(s.capturePoints),
+    secondary: avgOrDash(s.capturePoints, s.battles),
+  })),
+  statRow("Base defense", (s) => ({
+    primary: integerFmt.format(s.droppedCapturePoints),
+    secondary: avgOrDash(s.droppedCapturePoints, s.battles),
+  })),
+  statRow("Experience", (s) => ({
+    primary: avgOrDash(s.xp, s.battles),
+  })),
+  statRow("Hit rate", (s) => ({
+    primary: pctOrDash(s.hits, s.shots),
+  })),
+  statRow(
+    "Personal rating",
+    (s) => ({ primary: integerFmt.format(s.globalRating) }),
+    (s) => ({
       primary: signedIntegerFmt.format(s.globalRating),
-      className: s.globalRating > 0 ? "text-emerald-500" : s.globalRating < 0 ? "text-red-500" : undefined,
+      className:
+        s.globalRating > 0
+          ? "text-emerald-500"
+          : s.globalRating < 0
+            ? "text-red-500"
+            : undefined,
     }),
-  },
-  {
-    label: "World of Tanks Rating",
-    render: (s) => ({
-      primary: s.wtr === null ? "—" : integerFmt.format(s.wtr),
-    }),
-    renderDelta: (s) => ({
+  ),
+  statRow(
+    "World of Tanks Rating",
+    (s) => ({ primary: s.wtr === null ? "—" : integerFmt.format(s.wtr) }),
+    (s) => ({
       primary: s.wtr === null ? "—" : signedIntegerFmt.format(s.wtr),
-      className: s.wtr === null ? undefined : s.wtr > 0 ? "text-emerald-500" : s.wtr < 0 ? "text-red-500" : undefined,
+      className:
+        s.wtr === null
+          ? undefined
+          : s.wtr > 0
+            ? "text-emerald-500"
+            : s.wtr < 0
+              ? "text-red-500"
+              : undefined,
     }),
-  },
+  ),
+  derivedRow("WN7", (d) => d.wn7, { color: wn7Color, ratingRow: "wn7" }),
+  derivedRow("WN8", (d) => d.wn8, { color: wn8Color, ratingRow: "wn8" }),
+  derivedRow("WNX", (d) => d.wnx, { color: wnxColor, ratingRow: "wnx" }),
 ];
 
 function PeriodCells({
@@ -193,164 +243,90 @@ function PeriodCells({
   );
 }
 
-type PeriodCellSet = { total: Cell; h24: Cell; d7: Cell; d30: Cell };
-
-// Turns the server-computed numeric values into display cells, optionally
-// color-coding them with the matching rating scale.
-function cellsFrom(
-  values: PeriodValues,
-  color?: (v: number) => RatingColor,
-): PeriodCellSet {
-  const cell = (value: number | null): Cell => {
-    if (value === null) return EMPTY_CELL;
-    return {
-      primary: decimalFmt.format(value),
-      color: color ? color(value) : undefined,
-    };
-  };
-  return {
-    total: cell(values.total),
-    h24: cell(values.h24),
-    d7: cell(values.d7),
-    d30: cell(values.d30),
-  };
+/** A period-cell placeholder spanning the two sub-columns, right-aligned like the
+ * real numbers. Shown when `loading`. */
+function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
+  return (
+    <TableCell
+      colSpan={2}
+      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+    >
+      <Skeleton className="ml-auto h-4 w-12" />
+    </TableCell>
+  );
 }
 
-export function PlayerStatsTable({
-  current,
-  periods,
-  derived,
-}: {
-  current: Stats;
-  periods: PeriodStats;
-  derived: PlayerDerivedStats;
-}) {
-  // All tank-breakdown rows arrive pre-computed from the server (see
-  // services/players/derived-stats); this component only formats them.
-  const tierCells = cellsFrom(derived.tier);
-  const trackDmgCells = cellsFrom(derived.trackDamage);
-  const spottingDmgCells = cellsFrom(derived.spottingDamage);
-  const assistingDmgCells = cellsFrom(derived.assistingDamage);
-  const combinedDmgCells = cellsFrom(derived.combinedDamage);
-  const wn7Cells = cellsFrom(derived.wn7, wn7Color);
-  const wn8Cells = cellsFrom(derived.wn8, wn8Color);
-  const wnxCells = cellsFrom(derived.wnx, wnxColor);
+/**
+ * The random-battles stats table. Rows arrive pre-computed from the server (see
+ * services/players/derived-stats); this only formats them. Pass `{ loading }` to
+ * render the same table shell + row labels with placeholder cells — one row list,
+ * so the skeleton can't drift from the real table.
+ */
+export function PlayerStatsTable(
+  props:
+    | { loading: true }
+    | { current: Stats; periods: PeriodStats; derived: PlayerDerivedStats },
+) {
+  const loading = "loading" in props;
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
-        <colgroup>
-          <col />
-          <col className="w-[20%] sm:w-[9%]" />
-          <col className="w-[20%] sm:w-[9%]" />
-          <col className="max-sm:w-0! sm:w-[9%]" />
-          <col className="max-sm:w-0! sm:w-[9%]" />
-          <col className="max-sm:w-0! sm:w-[9%]" />
-          <col className="max-sm:w-0! sm:w-[9%]" />
-          <col className="w-[20%] sm:w-[9%]" />
-          <col className="w-[20%] sm:w-[9%]" />
-        </colgroup>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Stat</TableHead>
-            <TableHead className="text-right" colSpan={2}>
-              Total
-            </TableHead>
-            <TableHead className="text-right max-sm:hidden" colSpan={2}>
-              Last 24h
-            </TableHead>
-            <TableHead className="text-right max-sm:hidden" colSpan={2}>
-              Last 7d
-            </TableHead>
-            <TableHead className="text-right" colSpan={2}>
-              Last 30d
-            </TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {ROW_DEFS.flatMap((row) => {
-            const deltaRender = row.renderDelta ?? row.render;
-            const total = row.render(current);
-            const h24 = periods.h24 ? deltaRender(periods.h24) : EMPTY_CELL;
-            const d7 = periods.d7 ? deltaRender(periods.d7) : EMPTY_CELL;
-            const d30 = periods.d30 ? deltaRender(periods.d30) : EMPTY_CELL;
-            const rowEl = (
-              <TableRow key={row.label}>
-                <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
-                <PeriodCells cell={total} />
-                <PeriodCells cell={h24} hideOnMobile />
-                <PeriodCells cell={d7} hideOnMobile />
-                <PeriodCells cell={d30} />
-              </TableRow>
-            );
-            if (row.label === "Battles") {
-              return [
-                rowEl,
-                <TableRow key="Tier">
-                  <TableCell className="py-1.5! font-medium">Tier</TableCell>
-                  <PeriodCells cell={tierCells.total} />
-                  <PeriodCells cell={tierCells.h24} hideOnMobile />
-                  <PeriodCells cell={tierCells.d7} hideOnMobile />
-                  <PeriodCells cell={tierCells.d30} />
-                </TableRow>,
-              ];
-            }
-            if (row.label === "Damages") {
-              return [
-                rowEl,
-                <TableRow key="Track damages">
-                  <TableCell className="py-1.5! font-medium">Track damages</TableCell>
-                  <PeriodCells cell={trackDmgCells.total} />
-                  <PeriodCells cell={trackDmgCells.h24} hideOnMobile />
-                  <PeriodCells cell={trackDmgCells.d7} hideOnMobile />
-                  <PeriodCells cell={trackDmgCells.d30} />
-                </TableRow>,
-                <TableRow key="Spotting damages">
-                  <TableCell className="py-1.5! font-medium">Spotting damages</TableCell>
-                  <PeriodCells cell={spottingDmgCells.total} />
-                  <PeriodCells cell={spottingDmgCells.h24} hideOnMobile />
-                  <PeriodCells cell={spottingDmgCells.d7} hideOnMobile />
-                  <PeriodCells cell={spottingDmgCells.d30} />
-                </TableRow>,
-                <TableRow key="Assisting damages">
-                  <TableCell className="py-1.5! font-medium">Assisting damages</TableCell>
-                  <PeriodCells cell={assistingDmgCells.total} />
-                  <PeriodCells cell={assistingDmgCells.h24} hideOnMobile />
-                  <PeriodCells cell={assistingDmgCells.d7} hideOnMobile />
-                  <PeriodCells cell={assistingDmgCells.d30} />
-                </TableRow>,
-                <TableRow key="Combined damages">
-                  <TableCell className="py-1.5! font-medium">Combined damages</TableCell>
-                  <PeriodCells cell={combinedDmgCells.total} />
-                  <PeriodCells cell={combinedDmgCells.h24} hideOnMobile />
-                  <PeriodCells cell={combinedDmgCells.d7} hideOnMobile />
-                  <PeriodCells cell={combinedDmgCells.d30} />
-                </TableRow>,
-              ];
-            }
-            return [rowEl];
-          })}
-          <TableRow key="WN7" data-rating-row="wn7">
-            <TableCell className="py-1.5! font-medium">WN7</TableCell>
-            <PeriodCells cell={wn7Cells.total} />
-            <PeriodCells cell={wn7Cells.h24} hideOnMobile />
-            <PeriodCells cell={wn7Cells.d7} hideOnMobile />
-            <PeriodCells cell={wn7Cells.d30} />
-          </TableRow>
-          <TableRow key="WN8" data-rating-row="wn8">
-            <TableCell className="py-1.5! font-medium">WN8</TableCell>
-            <PeriodCells cell={wn8Cells.total} />
-            <PeriodCells cell={wn8Cells.h24} hideOnMobile />
-            <PeriodCells cell={wn8Cells.d7} hideOnMobile />
-            <PeriodCells cell={wn8Cells.d30} />
-          </TableRow>
-          <TableRow key="WNX" data-rating-row="wnx">
-            <TableCell className="py-1.5! font-medium">WNX</TableCell>
-            <PeriodCells cell={wnxCells.total} />
-            <PeriodCells cell={wnxCells.h24} hideOnMobile />
-            <PeriodCells cell={wnxCells.d7} hideOnMobile />
-            <PeriodCells cell={wnxCells.d30} />
-          </TableRow>
-        </TableBody>
+      <colgroup>
+        <col />
+        <col className="w-[20%] sm:w-[9%]" />
+        <col className="w-[20%] sm:w-[9%]" />
+        <col className="max-sm:w-0! sm:w-[9%]" />
+        <col className="max-sm:w-0! sm:w-[9%]" />
+        <col className="max-sm:w-0! sm:w-[9%]" />
+        <col className="max-sm:w-0! sm:w-[9%]" />
+        <col className="w-[20%] sm:w-[9%]" />
+        <col className="w-[20%] sm:w-[9%]" />
+      </colgroup>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Stat</TableHead>
+          <TableHead className="text-right" colSpan={2}>
+            Total
+          </TableHead>
+          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+            Last 24h
+          </TableHead>
+          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+            Last 7d
+          </TableHead>
+          <TableHead className="text-right" colSpan={2}>
+            Last 30d
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {ROWS.map((row) => {
+          const cells = loading ? null : row.cells(props);
+          return (
+            <TableRow
+              key={row.label}
+              data-rating-row={row.ratingRow}
+            >
+              <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
+              {cells ? (
+                <>
+                  <PeriodCells cell={cells.total} />
+                  <PeriodCells cell={cells.h24} hideOnMobile />
+                  <PeriodCells cell={cells.d7} hideOnMobile />
+                  <PeriodCells cell={cells.d30} />
+                </>
+              ) : (
+                <>
+                  <PeriodSkeleton />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton hideOnMobile />
+                  <PeriodSkeleton />
+                </>
+              )}
+            </TableRow>
+          );
+        })}
+      </TableBody>
     </Table>
   );
 }

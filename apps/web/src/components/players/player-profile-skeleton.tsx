@@ -3,20 +3,24 @@ import {
   PanelContent,
   PanelHeader,
   PanelSeparator,
+  PanelTitle,
 } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  OverviewContentSkeleton,
-  StrongholdContentSkeleton,
-  TanksContentSkeleton,
-  ValueContentSkeleton,
-} from "@/components/players/player-profile-skeleton-content";
+import { TableSkeleton } from "@/components/table-skeleton";
+import { PlayerHeader } from "@/components/players/header";
+import { PlayerStatsTable } from "@/components/players/stats-table";
+import { StrongholdStatsTable } from "@/components/players/stronghold-stats-table";
+import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
+import { PlayerClansHistory } from "@/components/players/clans-history";
+import { ValueTab } from "@/components/players/value-tab";
+import { TANKS_SKELETON_COLUMNS } from "@/components/players/tanks-skeleton-columns";
 import {
   PLAYER_MODES,
   PLAYER_SECTIONS,
   PlayerMode,
   PlayerSection,
 } from "@/components/players/tabs";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 // Mode → panel-title label, mirroring STRONGHOLD_MODES in tabs-view.
@@ -59,52 +63,72 @@ function StaticNav({
   );
 }
 
-function HeaderSkeleton({ nickname }: { nickname: string }) {
-  // Mirrors PlayerHeader's structure so its line-boxes drive the height: the
-  // size-24 clan emblem sets the header height, matching the loaded header.
+/** The Overview + Random Battles layout: the real components in `loading` mode
+ * so nothing is re-implemented here (the tables/lists own their own skeletons). */
+function OverviewSkeleton({
+  nickname,
+  metricLabel,
+}: {
+  nickname: string;
+  metricLabel: string;
+}) {
   return (
-    <header className="flex flex-col sm:flex-row sm:items-stretch">
-      <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
-          <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
-            {nickname}
-          </h1>
-          <Skeleton className="h-8 w-24 rounded-md" />
-          <Skeleton className="size-8 rounded-md" />
-        </div>
-        <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
-          <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
-            <Skeleton className="h-3 w-24" />
-            <span className="hidden sm:inline">·</span>
-            <Skeleton className="h-3 w-32" />
-            <span className="hidden sm:inline">·</span>
-            <Skeleton className="h-3 w-28" />
+    <>
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{nickname}&apos;s random battles stats</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <PlayerStatsTable loading />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>
+            {nickname}&apos;s {metricLabel} progression
+          </PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          {/* The description is static text, so render it for real (matches the
+              loaded page's height); the chart area mirrors the h-56 placeholder. */}
+          <div className={`p-4 ${styles.mutedDescription}`}>
+            Solid line is overall {metricLabel} (matches the Total column above),
+            drifting slowly as new battles accumulate. Dashed line is per-session{" "}
+            {metricLabel}, computed from the battles played since the previous
+            snapshot. It shows hot and cold streaks. Line color follows the
+            rating tier.
           </div>
-        </div>
-      </div>
-      <div className="flex items-stretch border-t border-fd-border text-sm sm:border-t-0 sm:border-l">
-        <div className="flex min-w-0 flex-1 flex-col justify-center p-4 sm:flex-none sm:whitespace-nowrap sm:text-right">
-          <div>
-            <Skeleton className="inline-block h-3.5 w-40 align-middle sm:ml-auto" />
+          <div className="px-4 pb-4">
+            <Skeleton className="h-56 w-full rounded-md" />
           </div>
-          <div className="mt-1 text-xs">
-            <Skeleton className="inline-block h-3 w-28 align-middle sm:ml-auto" />
-          </div>
-        </div>
-        <div className="flex size-24 shrink-0 items-center justify-center border-l border-fd-border p-3">
-          <Skeleton className="size-full rounded-md" />
-        </div>
-      </div>
-    </header>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Tanks shaping {nickname}&apos;s rating</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <TanksLiftDrag loading metricLabel={metricLabel} />
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+      <PlayerClansHistory loading nickname={nickname} />
+    </>
   );
 }
 
 /**
  * Full-fidelity placeholder for the player profile, shown while the detail loads
- * (Suspense fallback in the page). The static parts are the real thing — the
- * nickname, tab labels, panel titles, table headers and row labels — so only the
- * values are placeholders. The content matches the active section/mode so the
- * fallback lines up with whatever streams in (no layout jump on swap).
+ * (Suspense fallback in the page). It composes the real components in their
+ * `loading` mode, so the skeleton can never drift from what it stands in for.
+ * The content matches the active section/mode so the fallback lines up with
+ * whatever streams in (no layout jump on swap).
  */
 export function PlayerProfileSkeleton({
   nickname,
@@ -127,7 +151,7 @@ export function PlayerProfileSkeleton({
     <>
       <Panel>
         <PanelContent className="p-0">
-          <HeaderSkeleton nickname={nickname} />
+          <PlayerHeader loading nickname={nickname} />
         </PanelContent>
       </Panel>
 
@@ -150,13 +174,35 @@ export function PlayerProfileSkeleton({
       )}
 
       {onValue ? (
-        <ValueContentSkeleton nickname={nickname} />
+        <ValueTab loading nickname={nickname} />
       ) : onTanks ? (
-        <TanksContentSkeleton nickname={nickname} />
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>{nickname}&apos;s tanks</PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
+            </PanelContent>
+          </Panel>
+        </>
       ) : strongholdLabel ? (
-        <StrongholdContentSkeleton nickname={nickname} label={strongholdLabel} />
+        <>
+          <PanelSeparator />
+          <Panel>
+            <PanelHeader>
+              <PanelTitle>
+                {nickname}&apos;s {strongholdLabel} stats
+              </PanelTitle>
+            </PanelHeader>
+            <PanelContent className="p-0">
+              <StrongholdStatsTable loading />
+            </PanelContent>
+          </Panel>
+        </>
       ) : (
-        <OverviewContentSkeleton nickname={nickname} metricLabel={metricLabel} />
+        <OverviewSkeleton nickname={nickname} metricLabel={metricLabel} />
       )}
     </>
   );

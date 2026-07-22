@@ -24,6 +24,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Skeleton } from "@/components/ui/skeleton";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
@@ -109,15 +110,16 @@ function TierLines({
  * reconstruction cost through the store (Rebuild value). Each market line
  * spells out its calculation on hover.
  */
-export function ValueTab({
-  region,
-  nickname,
-  valuation,
-}: {
-  region: Region;
-  nickname: string;
-  valuation: PlayerValuation;
-}) {
+export function ValueTab(
+  props:
+    | { loading: true; nickname: string }
+    | { region: Region; nickname: string; valuation: PlayerValuation },
+) {
+  if ("loading" in props) {
+    return <ValueTabSkeleton nickname={props.nickname} />;
+  }
+
+  const { region, nickname, valuation } = props;
   const fmt = moneyFmt(region);
   const money = (n: number) => (fmt ? fmt.format(n) : `~${n.toFixed(0)}`);
   const { market, account } = valuation;
@@ -293,6 +295,68 @@ export function ValueTab({
             terms of service; these figures are for reference and we do not
             facilitate any sale.
           </p>
+        </PanelContent>
+      </Panel>
+    </>
+  );
+}
+
+/** The loading twin: same panels + real title, the two valuation columns and the
+ * disclaimer rendered as placeholders. */
+function ValueTabSkeleton({ nickname }: { nickname: string }) {
+  return (
+    <>
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>{nickname}&apos;s account value</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="grid gap-px p-0 md:grid-cols-2">
+          {(["market", "rebuild"] as const).map((col) => (
+            <section key={col} className="space-y-3 p-6">
+              <div className="flex items-center gap-2">
+                <Skeleton className="size-6 rounded-md" />
+                <div className="space-y-1">
+                  <Skeleton className="h-4 w-24" />
+                  <Skeleton className="h-3 w-56" />
+                </div>
+              </div>
+              <Skeleton className="h-10 w-40" />
+              {col === "market" ? (
+                <div className="space-y-2.5 border-t border-fd-border pt-3">
+                  {Array.from({ length: 6 }, (_, i) => (
+                    <div
+                      key={i}
+                      className="flex items-baseline justify-between gap-2"
+                    >
+                      <Skeleton className="h-4 w-32" />
+                      <Skeleton className="h-4 w-16" />
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <div className={`space-y-1.5 ${styles.mutedDescription}`}>
+                    <Skeleton className="h-3 w-full max-w-md" />
+                    <Skeleton className="h-3 w-full max-w-sm" />
+                    <Skeleton className="h-3 w-2/3 max-w-xs" />
+                  </div>
+                  <div className="flex flex-wrap gap-4 border-t border-fd-border pt-3">
+                    <Skeleton className="h-4 w-28" />
+                    <Skeleton className="h-4 w-28" />
+                  </div>
+                </>
+              )}
+            </section>
+          ))}
+        </PanelContent>
+      </Panel>
+      <PanelSeparator />
+      <Panel>
+        <PanelContent className="space-y-1.5 px-4 py-4">
+          <Skeleton className="h-3 w-full" />
+          <Skeleton className="h-3 w-full" />
+          <Skeleton className="h-3 w-3/4" />
         </PanelContent>
       </Panel>
     </>

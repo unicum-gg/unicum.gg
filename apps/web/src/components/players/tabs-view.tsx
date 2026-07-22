@@ -34,43 +34,24 @@ import {
 import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
 import { ValueTab } from "@/components/players/value-tab";
 import { PlayerTanksTable } from "@/components/players/tanks-table";
-import {
-  TableSkeleton,
-  type SkeletonColumn,
-} from "@/components/table-skeleton";
+import { TableSkeleton } from "@/components/table-skeleton";
+import { TANKS_SKELETON_COLUMNS } from "@/components/players/tanks-skeleton-columns";
 import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
-import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerTankRow, type NameHistoryEntry } from "@unicum.gg/shared";
+import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerTankRow, type NameHistoryEntry, type Stats, type PeriodStats, type PlayerClanHistoryFull } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
-// Mirrors PlayerTanksTable's columns so the on-demand loading placeholder lines
-// up with the real table: centered icon columns, a wide left-aligned name, then
-// right-aligned numeric columns.
-const TANKS_SKELETON_COLUMNS: SkeletonColumn[] = [
-  { width: "w-6", align: "center" }, // Nation
-  { width: "w-6", align: "center" }, // Type
-  { width: "w-6", align: "center" }, // Tier
-  { width: "w-28" }, // Name
-  { width: "w-6", align: "center" }, // Mastery
-  { width: "w-8", align: "center" }, // Marks
-  { width: "w-14", align: "right" }, // Battles
-  { width: "w-12", align: "right" }, // Avg damage
-  { width: "w-12", align: "right" }, // Avg XP
-  { width: "w-12", align: "right" }, // Winrate
-  { width: "w-14", align: "right" }, // Rating
-];
-
 type OverallData = {
-  current: React.ComponentProps<typeof PlayerStatsTable>["current"];
-  periods: React.ComponentProps<typeof PlayerStatsTable>["periods"];
+  current: Stats;
+  periods: PeriodStats;
   derived: PlayerDerivedStats;
   liftDrag: LiftDrag | null;
   ratingData: React.ComponentProps<typeof PlayerRatingChart>["data"];
   metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
   metricLabel: string;
-  clanHistory: React.ComponentProps<typeof PlayerClansHistory>["clanHistory"];
+  clanHistory: PlayerClanHistoryFull;
   nameHistory: NameHistoryEntry[];
   createdAt: Date;
   nowMs: number;

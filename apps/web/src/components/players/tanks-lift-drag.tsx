@@ -1,6 +1,7 @@
 import { toRoman } from "roman-numerals";
 import { TankIcon } from "@/components/players/tank-icon";
 import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { Skeleton } from "@/components/ui/skeleton";
 import { RatingMetric, type LiftDrag, type LiftDragRow, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -19,17 +20,26 @@ function ratingColorClass(metric: RatingMetric, value: number): string {
 
 // Rows arrive pre-computed from the server (see services/players/lift-drag);
 // this component only renders them.
-export function TanksLiftDrag({
-  region,
-  liftDrag,
-  metric,
-  metricLabel,
-}: {
-  region: Region;
-  liftDrag: LiftDrag | null;
-  metric: RatingMetric;
-  metricLabel: string;
-}): React.ReactElement | null {
+export function TanksLiftDrag(
+  props:
+    | { loading: true; metricLabel: string }
+    | {
+        region: Region;
+        liftDrag: LiftDrag | null;
+        metric: RatingMetric;
+        metricLabel: string;
+      },
+): React.ReactElement | null {
+  if ("loading" in props) {
+    return (
+      <div className="grid gap-px bg-fd-border md:grid-cols-2">
+        <ColumnSkeleton kind="lift" metricLabel={props.metricLabel} />
+        <ColumnSkeleton kind="drag" metricLabel={props.metricLabel} />
+      </div>
+    );
+  }
+
+  const { region, liftDrag, metric, metricLabel } = props;
   if (!liftDrag) return null;
 
   return (
@@ -48,6 +58,59 @@ export function TanksLiftDrag({
         metric={metric}
         metricLabel={metricLabel}
       />
+    </div>
+  );
+}
+
+// The loading twin of `Column`: same header (static text + the real metricLabel)
+// and the same row line-boxes, only the values are placeholders.
+function ColumnSkeleton({
+  kind,
+  metricLabel,
+}: {
+  kind: "lift" | "drag";
+  metricLabel: string;
+}) {
+  const isLift = kind === "lift";
+  return (
+    <div className="bg-fd-card">
+      <div className="border-b border-fd-border px-4 py-2">
+        <div className="flex items-baseline justify-between gap-2">
+          <span className="text-sm font-semibold">
+            {isLift ? "🚀 Lifting the rating" : "⚓ Dragging the rating"}
+          </span>
+          <span className="text-xs text-fd-muted-foreground">{metricLabel}</span>
+        </div>
+        <p className="mt-0.5 text-xs text-fd-muted-foreground">
+          {isLift
+            ? "Tanks that prop the overall up: dropping them would lower the rating."
+            : "Tanks that weigh the overall down: dropping them would raise the rating."}
+        </p>
+      </div>
+      <ul>
+        {Array.from({ length: 5 }, (_, i) => (
+          <li
+            key={i}
+            className="flex items-center gap-3 border-b border-fd-border/40 px-4 py-2 last:border-fd-border"
+          >
+            <span className="flex w-10 shrink-0 items-center justify-center">
+              <Skeleton className="h-3 w-8" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="truncate text-sm font-medium">
+                <Skeleton className="h-3.5 w-28" />
+              </div>
+              <div className="flex items-center gap-1.5 text-xs text-fd-muted-foreground">
+                <Skeleton className="h-3 w-24" />
+              </div>
+            </div>
+            <div className="flex flex-col items-end gap-0.5 tabular-nums">
+              <Skeleton className="h-5 w-12" />
+              <Skeleton className="h-4 w-16" />
+            </div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

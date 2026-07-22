@@ -17,6 +17,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { PlayerClansTimeline } from "@/components/players/clans-timeline";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -152,20 +153,25 @@ function SortableHead({
   );
 }
 
-export function PlayerClansHistory({
-  region,
-  nickname,
-  accountCreatedAt,
-  clanHistory,
-  nowMs,
-}: {
-  region: Region;
-  nickname: string;
-  accountCreatedAt: Date;
-  clanHistory: PlayerClanHistoryFull;
-  nowMs: number;
-}) {
+export function PlayerClansHistory(
+  props:
+    | { loading: true; nickname: string }
+    | {
+        region: Region;
+        nickname: string;
+        accountCreatedAt: Date;
+        clanHistory: PlayerClanHistoryFull;
+        nowMs: number;
+      },
+) {
+  // Hook runs unconditionally (rules of hooks); the loading branch returns after.
   const [sort, setSort] = useState<SortState>(null);
+
+  if ("loading" in props) {
+    return <ClansHistoryLoading nickname={props.nickname} />;
+  }
+
+  const { region, nickname, accountCreatedAt, clanHistory, nowMs } = props;
 
   const stints: ClanStint[] = clanHistory.currentStint
     ? [clanHistory.currentStint, ...clanHistory.pastStints]
@@ -299,6 +305,72 @@ export function PlayerClansHistory({
             </Table>
           </>
         )}
+      </PanelContent>
+    </Panel>
+  );
+}
+
+/** The loading twin: same panel + real title + the same table headers, with a
+ * placeholder timeline and rows. */
+function ClansHistoryLoading({ nickname }: { nickname: string }) {
+  const HEADS = ["Tag", "Name", "Role", "From", "To", "Duration"];
+  return (
+    <Panel>
+      <PanelHeader>
+        <div className="flex items-baseline justify-between gap-4">
+          <PanelTitle>{nickname}&apos;s clans history</PanelTitle>
+          <Skeleton className="h-3 w-36" />
+        </div>
+      </PanelHeader>
+      <PanelContent className="p-0">
+        <div className="p-4">
+          <Skeleton className="h-19 w-full rounded-md" />
+        </div>
+        <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-3!">
+          <TableHeader>
+            <TableRow>
+              {HEADS.map((h, i) => (
+                <TableHead
+                  key={h}
+                  className={cn(
+                    "px-3 py-2",
+                    (i === 2 || i === 3) && "hidden sm:table-cell",
+                    i === 5 && "text-right",
+                  )}
+                >
+                  {h}
+                </TableHead>
+              ))}
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {Array.from({ length: 4 }, (_, r) => (
+              <TableRow key={r}>
+                <TableCell className="pl-4!">
+                  <Skeleton className="h-4 w-14" />
+                </TableCell>
+                <TableCell>
+                  <div className="flex items-center gap-2">
+                    <Skeleton className="size-5 shrink-0 rounded-sm" />
+                    <Skeleton className="h-4 w-32" />
+                  </div>
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  <Skeleton className="h-4 w-20" />
+                </TableCell>
+                <TableCell className="hidden sm:table-cell">
+                  <Skeleton className="h-4 w-20" />
+                </TableCell>
+                <TableCell>
+                  <Skeleton className="h-4 w-20" />
+                </TableCell>
+                <TableCell className="pr-3!">
+                  <Skeleton className="ml-auto h-4 w-16" />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
       </PanelContent>
     </Panel>
   );
