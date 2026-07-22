@@ -350,7 +350,7 @@ function ClansHistoryLoading({ nickname }: { nickname: string }) {
                   <Skeleton className="h-4 w-14" />
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-2">
+                  <div className="flex h-6 items-center gap-2">
                     <Skeleton className="size-5 shrink-0 rounded-sm" />
                     <Skeleton className="h-4 w-32" />
                   </div>

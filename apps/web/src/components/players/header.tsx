@@ -157,8 +157,9 @@ function PlayerHeaderSkeleton({ nickname }: { nickname: string }) {
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
           </h1>
-          <Skeleton className="h-8 w-24 rounded-md" />
-          <Skeleton className="size-8 rounded-md" />
+          {/* The compare + actions triggers are 28px square icon buttons. */}
+          <Skeleton className="size-7 rounded-md" />
+          <Skeleton className="size-7 rounded-md" />
         </div>
         <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
           <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">

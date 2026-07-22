@@ -16,19 +16,21 @@ export type SkeletonColumn = {
   align?: "left" | "right" | "center";
 };
 
-// A block-level bar with a fixed width honours these auto margins, so the
-// placeholder sits where real cell content would (numbers right, icons centered).
-const ALIGN_CLASS: Record<NonNullable<SkeletonColumn["align"]>, string> = {
-  left: "mr-auto",
-  right: "ml-auto",
-  center: "mx-auto",
+// Justify the bar inside a fixed-height line-box, so the placeholder sits where
+// real cell content would (numbers right, icons centered).
+const JUSTIFY: Record<NonNullable<SkeletonColumn["align"]>, string> = {
+  left: "justify-start",
+  right: "justify-end",
+  center: "justify-center",
 };
 
 /**
  * Placeholder shaped like a data table, shown while a table's rows are being
  * fetched on demand. `columns` mirrors the real table's column widths and
- * alignment so the skeleton lines up with the content it stands in for. Padding
- * matches the app's compact tables (`py-1.5` cells). Purely presentational.
+ * alignment so the skeleton lines up with the content it stands in for. Each
+ * cell's bar sits in a fixed-height line-box (`h-6` body / `h-4` head) so the
+ * rows match the app's compact icon/text tables (~24px content) instead of
+ * collapsing to the bar height. Purely presentational.
  */
 export function TableSkeleton({
   columns,
@@ -47,13 +49,14 @@ export function TableSkeleton({
           <TableRow>
             {columns.map((col, c) => (
               <TableHead key={c}>
-                <Skeleton
+                <div
                   className={cn(
-                    "h-3",
-                    col.width,
-                    ALIGN_CLASS[col.align ?? "left"],
+                    "flex h-4 items-center",
+                    JUSTIFY[col.align ?? "left"],
                   )}
-                />
+                >
+                  <Skeleton className={cn("h-3", col.width)} />
+                </div>
               </TableHead>
             ))}
           </TableRow>
@@ -64,13 +67,14 @@ export function TableSkeleton({
           <TableRow key={r}>
             {columns.map((col, c) => (
               <TableCell key={c}>
-                <Skeleton
+                <div
                   className={cn(
-                    "h-4",
-                    col.width,
-                    ALIGN_CLASS[col.align ?? "left"],
+                    "flex h-6 items-center",
+                    JUSTIFY[col.align ?? "left"],
                   )}
-                />
+                >
+                  <Skeleton className={cn("h-4", col.width)} />
+                </div>
               </TableCell>
             ))}
           </TableRow>
