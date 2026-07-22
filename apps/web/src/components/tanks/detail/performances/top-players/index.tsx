@@ -4,6 +4,7 @@ import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
   TableBody,
@@ -28,17 +29,18 @@ const pctFmt = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1,
 });
 
-export function TankTopPlayers({
-  players,
-  metric,
-  metricLabel,
-  region,
-}: {
-  players: TopTankPlayer[];
-  metric: RatingMetric;
-  metricLabel: string;
-  region: Region;
-}) {
+export function TankTopPlayers(
+  props:
+    | { loading: true }
+    | {
+        players: TopTankPlayer[];
+        metric: RatingMetric;
+        metricLabel: string;
+        region: Region;
+      },
+) {
+  if ("loading" in props) return <TopPlayersSkeleton />;
+  const { players, metric, metricLabel, region } = props;
   if (players.length === 0) {
     return (
       <div className="border-t border-fd-border p-6 text-center text-sm text-fd-muted-foreground">
@@ -135,5 +137,56 @@ function PlayerRow({
         {intFmt.format(player.value)}
       </TableCell>
     </TableRow>
+  );
+}
+
+/** The loading twin: the same h-11 table with the real headers and 10
+ * placeholder rows, mirroring the responsive column visibility. */
+function TopPlayersSkeleton() {
+  return (
+    <Table className="mb-px! [&_tr]:h-11">
+      <TableHeader>
+        <TableRow>
+          <TableHead className="w-12 whitespace-nowrap px-4! text-center!">
+            #
+          </TableHead>
+          <TableHead>Player</TableHead>
+          <TableHead className="hidden w-24 text-right! sm:table-cell">
+            Battles
+          </TableHead>
+          <TableHead className="hidden w-24 text-right! md:table-cell">
+            Avg dmg
+          </TableHead>
+          <TableHead className="hidden w-20 text-right! md:table-cell">
+            WR
+          </TableHead>
+          <TableHead className="w-24 pr-4 text-right!">Rating</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {Array.from({ length: 25 }, (_, i) => (
+          <TableRow key={i}>
+            <TableCell className="px-2! text-center">
+              <Skeleton className="mx-auto h-4 w-4" />
+            </TableCell>
+            <TableCell className="min-w-0">
+              <Skeleton className="h-4 w-40 max-w-full" />
+            </TableCell>
+            <TableCell className="hidden text-right sm:table-cell">
+              <Skeleton className="ml-auto h-4 w-12" />
+            </TableCell>
+            <TableCell className="hidden text-right md:table-cell">
+              <Skeleton className="ml-auto h-4 w-12" />
+            </TableCell>
+            <TableCell className="hidden text-right md:table-cell">
+              <Skeleton className="ml-auto h-4 w-10" />
+            </TableCell>
+            <TableCell className="pr-4 text-right">
+              <Skeleton className="ml-auto h-4 w-12" />
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
   );
 }

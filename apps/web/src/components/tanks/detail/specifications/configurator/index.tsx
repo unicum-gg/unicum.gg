@@ -28,6 +28,7 @@ import type { TankFieldMods as TankFieldModsData } from "@unicum.gg/core/wargami
 import type { TankSkillTree as TankSkillTreeData } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import type { ResearchPathItem } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import { TankCharacteristics } from "@/components/tanks/detail/specifications/characteristics";
+import { TankConfiguratorSkeleton } from "@/components/tanks/detail/specifications/configurator/skeleton";
 import { CharacteristicsChanges } from "@/components/tanks/detail/specifications/characteristics/changes-overlay";
 import { TankModules } from "@/components/tanks/detail/specifications/modules";
 import { TankEquipment } from "@/components/tanks/detail/specifications/equipment";
@@ -77,20 +78,7 @@ function overlap(a: TankConfigModules, b: TankConfigModules): number {
  * combination. When there are no configs (wot-src has nothing for the tank) it
  * degrades to the static stock specs + a non-interactive module tree.
  */
-export function TankConfigurator({
-  region,
-  meta,
-  tankName,
-  slug,
-  stockSpecs,
-  modules,
-  configs,
-  loadout,
-  crew,
-  fieldMods,
-  skillTree,
-  nextTanks,
-}: {
+type TankConfiguratorProps = {
   region: Region;
   meta: VehicleMeta;
   tankName: string;
@@ -103,7 +91,32 @@ export function TankConfigurator({
   fieldMods: TankFieldModsData | null;
   skillTree: TankSkillTreeData | null;
   nextTanks: ResearchPathItem[];
-}) {
+};
+
+// The stateful configurator can't be threaded with a `loading` flag (its ~15
+// hooks would break the rules-of-hooks early return), so the loading twin is a
+// thin wrapper that swaps in the co-located skeleton before any hook runs.
+export function TankConfigurator(
+  props: { loading: true } | TankConfiguratorProps,
+) {
+  if ("loading" in props) return <TankConfiguratorSkeleton />;
+  return <TankConfiguratorInner {...props} />;
+}
+
+function TankConfiguratorInner({
+  region,
+  meta,
+  tankName,
+  slug,
+  stockSpecs,
+  modules,
+  configs,
+  loadout,
+  crew,
+  fieldMods,
+  skillTree,
+  nextTanks,
+}: TankConfiguratorProps) {
   const interactive = configs.length > 0;
 
   // A shared setup rides in the query string: decode it once (SSR and client see

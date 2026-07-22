@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { TankView } from "@/components/tanks/detail/view";
+import { TankViewSkeleton } from "@/components/tanks/detail/view-skeleton";
+import {
+  TankDetailTab,
+  tankDetailTabFromQuery,
+} from "@/components/tanks/detail/tabs";
 import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
@@ -63,15 +69,39 @@ export async function generateMetadata({
 
 export default async function TankPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ region: string; slug: string }>;
+  searchParams: Promise<{ tab?: string }>;
 }) {
-  const { region, slug } = await params;
+  const [{ region, slug }, sp] = await Promise.all([params, searchParams]);
   if (!isRegion(region)) notFound();
-  return renderTankPage(region, slug);
+  return renderTankPage(region, slug, tankDetailTabFromQuery(sp.tab));
 }
 
-export async function renderTankPage(region: Region, slug: string) {
+// Thin boundary: nothing here blocks, so Next flushes the shell + skeleton
+// immediately, then streams the real view once the (heavier) detail fetch
+// resolves. The redirect/notFound live in the async child, where a redirect
+// mid-stream becomes a client redirect.
+export function renderTankPage(
+  region: Region,
+  slug: string,
+  tab: TankDetailTab,
+) {
+  return (
+    <Suspense fallback={<TankViewSkeleton region={region} tab={tab} />}>
+      <TankPageServer region={region} slug={slug} />
+    </Suspense>
+  );
+}
+
+async function TankPageServer({
+  region,
+  slug,
+}: {
+  region: Region;
+  slug: string;
+}) {
   const detail = await loadDetail(region, slug);
   if (!detail) notFound();
   // Send legacy numeric-id (or wrong-case) URLs to the readable canonical slug
