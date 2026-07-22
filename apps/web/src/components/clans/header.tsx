@@ -14,7 +14,7 @@ import {
   RefreshIndicator,
   RefreshKind,
   useRefreshBeacon,
-} from "@/components/players/refresh-beacon";
+} from "@/components/refresh-beacon";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";

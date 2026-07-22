@@ -16,7 +16,7 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
-import { PlayerClansTimeline } from "@/components/players/clans-timeline";
+import { PlayerClansTimeline } from "@/components/players/detail/overview/clans-timeline";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,

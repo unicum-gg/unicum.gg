@@ -7,19 +7,19 @@ import {
 } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "@/components/table-skeleton";
-import { PlayerHeader } from "@/components/players/header";
-import { PlayerStatsTable } from "@/components/players/stats-table";
-import { StrongholdStatsTable } from "@/components/players/stronghold-stats-table";
-import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
-import { PlayerClansHistory } from "@/components/players/clans-history";
-import { ValueTab } from "@/components/players/value-tab";
-import { TANKS_SKELETON_COLUMNS } from "@/components/players/tanks-skeleton-columns";
+import { PlayerHeader } from "@/components/players/detail/header";
+import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
+import { StrongholdStatsTable } from "@/components/players/detail/overview/stronghold-stats-table";
+import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
+import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
+import { ValueTab } from "@/components/players/detail/value";
+import { TANKS_SKELETON_COLUMNS } from "@/components/players/detail/tanks/skeleton-columns";
 import {
   PLAYER_MODES,
   PLAYER_SECTIONS,
   PlayerMode,
   PlayerSection,
-} from "@/components/players/tabs";
+} from "@/components/players/detail/tabs";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 

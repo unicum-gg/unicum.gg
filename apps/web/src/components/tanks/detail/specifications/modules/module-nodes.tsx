@@ -6,7 +6,7 @@ import { CheckIcon } from "lucide-react";
 import { toRoman } from "roman-numerals";
 import type { Region } from "@unicum.gg/wargaming";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
-import { TankIcon } from "@/components/players/tank-icon";
+import { TankIcon } from "@/components/tanks/tank-icon";
 import {
   Tooltip,
   TooltipContent,

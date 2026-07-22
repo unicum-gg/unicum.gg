@@ -6,10 +6,10 @@ import {
   sectionFromQuery,
   PlayerMode,
   PlayerSection,
-} from "@/components/players/tabs";
-import { PlayerProfile } from "@/components/players/player-profile";
-import { PlayerProfileSkeleton } from "@/components/players/player-profile-skeleton";
-import { AccountLockedView } from "@/components/players/account-locked-view";
+} from "@/components/players/detail/tabs";
+import { PlayerProfile } from "@/components/players/detail/view";
+import { PlayerProfileSkeleton } from "@/components/players/detail/skeleton";
+import { AccountLockedView } from "@/components/players/detail/account-locked";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";

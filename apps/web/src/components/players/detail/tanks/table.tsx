@@ -20,17 +20,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { NationFlag } from "@/components/players/nation-flag";
+import { NationFlag } from "@/components/tanks/nation-flag";
 import {
   PLAYER_COLUMNS,
   PLAYER_COLUMN_BY_KEY,
   PlayerColumnSelector,
   ratingForMetric,
   usePlayerColumns,
-} from "@/components/players/player-vehicle-columns";
-import { TankIcon } from "@/components/players/tank-icon";
-import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+} from "@/components/players/detail/tanks/vehicle-columns";
+import { TankIcon } from "@/components/tanks/tank-icon";
+import { TankopediaHeaderIcon } from "@/components/tanks/tankopedia-header-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { TablePager, usePagination } from "@/components/table-pager";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";

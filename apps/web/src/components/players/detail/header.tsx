@@ -1,19 +1,19 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import { CompareWithButton } from "@/components/players/compare-with-button";
+import { CompareWithButton } from "@/components/players/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
-import { RefreshBeacon, RefreshKind } from "@/components/players/refresh-beacon";
+import { RefreshBeacon, RefreshKind } from "@/components/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
 import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
-import { PlayerActionsMenu } from "@/components/players/player-actions-menu";
+import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
 import {
   SupporterBadge,
   SupporterBadgeState,
-} from "@/components/players/supporter-badge";
+} from "@/components/players/detail/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 
 const MONTH_FORMAT = "MMM yyyy";

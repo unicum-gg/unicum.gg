@@ -4,9 +4,9 @@ import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
-import { NationFlag } from "@/components/players/nation-flag";
-import { TankIcon } from "@/components/players/tank-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { NationFlag } from "@/components/tanks/nation-flag";
+import { TankIcon } from "@/components/tanks/tank-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import type { ClanSearchResult } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 

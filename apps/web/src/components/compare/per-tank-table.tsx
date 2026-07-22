@@ -6,7 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { toRoman } from "roman-numerals";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { TableCell, TableHead } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 import { intFmt, type MetricCell, ratingCell } from "./cells";

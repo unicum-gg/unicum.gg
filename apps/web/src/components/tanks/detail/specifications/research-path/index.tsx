@@ -3,7 +3,7 @@ import { Fragment } from "react";
 import { toRoman } from "roman-numerals";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
 import { ResearchRail } from "@/components/tanks/detail/specifications/research-rail";
-import { TankIcon } from "@/components/players/tank-icon";
+import { TankIcon } from "@/components/tanks/tank-icon";
 import {
   Panel,
   PanelContent,

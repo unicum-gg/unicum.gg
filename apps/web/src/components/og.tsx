@@ -1,6 +1,6 @@
 import type React from "react";
 import APP from "@/constants/app";
-import { VEHICLE_TYPE_PATHS } from "@/components/players/vehicle-type-icon";
+import { VEHICLE_TYPE_PATHS } from "@/components/tanks/vehicle-type-icon";
 
 // Satori renders inline SVG, so we reuse the site's vehicle-type glyph paths
 // with an explicit fill (Satori ignores Tailwind/currentColor).

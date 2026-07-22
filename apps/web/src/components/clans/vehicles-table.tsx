@@ -7,8 +7,8 @@ import {
 } from "@phosphor-icons/react";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
-import { NationFlag } from "@/components/players/nation-flag";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { NationFlag } from "@/components/tanks/nation-flag";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   Table,
   TableBody,

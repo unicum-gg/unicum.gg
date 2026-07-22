@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
-import { PlayerLanguageChips } from "@/components/players/language-chips";
-import { PlayerStrictModeToggle } from "@/components/players/strict-mode-toggle";
-import { TopPlayersList } from "@/components/players/top-players-list";
+import { PlayerLanguageChips } from "@/components/players/list/language-chips";
+import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
+import { TopPlayersList } from "@/components/players/list/top-players-list";
 import {
   Panel,
   PanelContent,

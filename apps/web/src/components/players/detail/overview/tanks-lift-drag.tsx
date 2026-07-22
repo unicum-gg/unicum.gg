@@ -1,6 +1,6 @@
 import { toRoman } from "roman-numerals";
-import { TankIcon } from "@/components/players/tank-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { TankIcon } from "@/components/tanks/tank-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Skeleton } from "@/components/ui/skeleton";
 import { RatingMetric, type LiftDrag, type LiftDragRow, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";

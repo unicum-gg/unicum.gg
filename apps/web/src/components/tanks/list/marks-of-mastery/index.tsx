@@ -10,10 +10,10 @@ import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import { type ReactNode, useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { portalIconUrl, type Region } from "@unicum.gg/wargaming";
-import { NationFlag } from "@/components/players/nation-flag";
-import { TankIcon } from "@/components/players/tank-icon";
-import { TankopediaHeaderIcon } from "@/components/players/tankopedia-header-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { NationFlag } from "@/components/tanks/nation-flag";
+import { TankIcon } from "@/components/tanks/tank-icon";
+import { TankopediaHeaderIcon } from "@/components/tanks/tankopedia-header-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   ColumnSelector,
   useColumnVisibility,

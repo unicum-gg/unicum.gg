@@ -3,26 +3,11 @@
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import useSWR from "swr";
-import { MountOnVisible } from "@/components/mount-on-visible";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-  PanelTitle,
-} from "@/components/panel";
-import { PlayerClansHistory } from "@/components/players/clans-history";
-import { PlayerNameHistory } from "@/components/players/name-history";
-import { PlayerRatingChart } from "@/components/players/rating-chart";
-import { PlayerStatsTable } from "@/components/players/stats-table";
-import {
-  StrongholdStatsTable,
-  type StrongholdPeriods,
-} from "@/components/players/stronghold-stats-table";
+import { Panel, PanelHeader, PanelSeparator } from "@/components/panel";
 import {
   PlayerModeNav,
   PlayerSectionNav,
-} from "@/components/players/tabs-nav";
+} from "@/components/players/detail/tabs-nav";
 import {
   PlayerMode,
   PlayerSection,
@@ -30,34 +15,20 @@ import {
   playerModeHref,
   playerSectionHref,
   sectionFromQuery,
-} from "@/components/players/tabs";
-import { TanksLiftDrag } from "@/components/players/tanks-lift-drag";
-import { ValueTab } from "@/components/players/value-tab";
-import { PlayerTanksTable } from "@/components/players/tanks-table";
-import { TableSkeleton } from "@/components/table-skeleton";
-import { TANKS_SKELETON_COLUMNS } from "@/components/players/tanks-skeleton-columns";
-import { styles } from "@/lib/styles";
+} from "@/components/players/detail/tabs";
+import {
+  OverallTab,
+  type OverallData,
+} from "@/components/players/detail/overview";
+import {
+  StrongholdTab,
+  type StrongholdData,
+} from "@/components/players/detail/overview/stronghold";
+import { TanksTab } from "@/components/players/detail/tanks";
+import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
-import { type StrongholdStats, type PlayerDerivedStats, type PlayerDetailData, type LiftDrag, type PlayerTankRow, type NameHistoryEntry, type Stats, type PeriodStats, type PlayerClanHistoryFull } from "@unicum.gg/shared";
+import type { PlayerDetailData, PlayerTankRow } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-
-type OverallData = {
-  current: Stats;
-  periods: PeriodStats;
-  derived: PlayerDerivedStats;
-  liftDrag: LiftDrag | null;
-  ratingData: React.ComponentProps<typeof PlayerRatingChart>["data"];
-  metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
-  metricLabel: string;
-  clanHistory: PlayerClanHistoryFull;
-  nameHistory: NameHistoryEntry[];
-  createdAt: Date;
-  nowMs: number;
-};
-
-type StrongholdData = { current: StrongholdStats | null; periods: StrongholdPeriods };
 
 // The eight stronghold modes (every mode but Random Battles) share one shape:
 // a single stronghold-style table with a "no data yet" fallback. `label` fills
@@ -231,181 +202,6 @@ export function PlayerTabsView({
           data={strongholds[mode]}
         />
       )}
-    </>
-  );
-}
-
-// Its own tab (not part of Overall) so the ~700-row table isn't server-rendered
-// on the default page load, which was the dominant SSR cost. The rows load from
-// a separate endpoint on demand when the tab is opened; a `?section=tanks`
-// deep-link seeds them from the server render for SEO.
-function TanksTab({
-  region,
-  nickname,
-  vehicles,
-  loading,
-}: {
-  region: Region;
-  nickname: string;
-  vehicles: PlayerTankRow[];
-  loading: boolean;
-}) {
-  return (
-    <>
-      <PanelSeparator />
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>
-            {nickname}&apos;s tanks
-            {loading ? "" : ` (${intFmt.format(vehicles.length)})`}
-          </PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          {loading ? (
-            <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
-          ) : (
-            <PlayerTanksTable region={region} vehicles={vehicles} />
-          )}
-        </PanelContent>
-      </Panel>
-    </>
-  );
-}
-
-function OverallTab({
-  region,
-  nickname,
-  current,
-  periods,
-  derived,
-  liftDrag,
-  ratingData,
-  metric,
-  metricLabel,
-  clanHistory,
-  nameHistory,
-  createdAt,
-  nowMs,
-}: OverallData & { region: Region; nickname: string }) {
-  return (
-    <>
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>{nickname}&apos;s random battles stats</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <PlayerStatsTable
-            current={current}
-            periods={periods}
-            derived={derived}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>
-            {nickname}&apos;s {metricLabel} progression
-          </PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          {ratingData.length > 0 ? (
-            <>
-              <div className={`p-4 ${styles.mutedDescription}`}>
-                Solid line is overall {metricLabel} (matches the Total column
-                above), drifting slowly as new battles accumulate. Dashed line
-                is per-session {metricLabel}, computed from the battles played
-                since the previous snapshot. It shows hot and cold streaks. Line
-                color follows the rating tier.
-              </div>
-              <MountOnVisible
-                className="px-4 pb-4"
-                placeholder={<div className="h-56 w-full" />}
-              >
-                <PlayerRatingChart
-                  data={ratingData}
-                  metricLabel={metricLabel}
-                  metric={metric}
-                />
-              </MountOnVisible>
-            </>
-          ) : (
-            <div className={`p-4 ${styles.mutedDescription}`}>
-              Not enough history yet. We need at least one snapshot to draw the
-              curve. Check back soon.
-            </div>
-          )}
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>Tanks shaping {nickname}&apos;s rating</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <TanksLiftDrag
-            region={region}
-            liftDrag={liftDrag}
-            metric={metric}
-            metricLabel={metricLabel}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <PlayerClansHistory
-        region={region}
-        nickname={nickname}
-        accountCreatedAt={createdAt}
-        clanHistory={clanHistory}
-        nowMs={nowMs}
-      />
-
-      {nameHistory.length > 0 && (
-        <>
-          <PanelSeparator />
-          <PlayerNameHistory history={nameHistory} nickname={nickname} />
-        </>
-      )}
-    </>
-  );
-}
-
-function StrongholdTab({
-  nickname,
-  label,
-  data,
-}: {
-  nickname: string;
-  label: string;
-  data: StrongholdData;
-}) {
-  return (
-    <>
-      <PanelSeparator />
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>
-            {nickname}&apos;s {label} stats
-          </PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          {data.current !== null ? (
-            <StrongholdStatsTable current={data.current} periods={data.periods} />
-          ) : (
-            <div className={`p-4 ${styles.mutedDescription}`}>
-              No {label} data yet. Check back after the next snapshot.
-            </div>
-          )}
-        </PanelContent>
-      </Panel>
     </>
   );
 }

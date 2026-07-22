@@ -3,10 +3,10 @@
 import { StarIcon } from "@phosphor-icons/react";
 import { forwardRef, type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
-import { NationFlag, nationLabel } from "@/components/players/nation-flag";
+import { NationFlag, nationLabel } from "@/components/tanks/nation-flag";
 import { useRegion } from "@/hooks/use-region";
-import { VehicleRoleIcon } from "@/components/players/vehicle-role-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   Select,
   SelectContent,

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { toRoman } from "roman-numerals";
-import { NationFlag } from "@/components/players/nation-flag";
+import { NationFlag } from "@/components/tanks/nation-flag";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
@@ -17,8 +17,8 @@ import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
 import type { MoeValues } from "@unicum.gg/core/moe";
 import type { MoeHistoryPoint } from "@unicum.gg/core/moe/poliroid";
 import { type TankSpec, type VehicleMeta, type WN8Expected, type WNXExpected, VEHICLE_CLASS_LABEL_FULL, VEHICLE_ROLE_LABEL, roleSuffix } from "@unicum.gg/shared";
-import { VehicleRoleIcon } from "@/components/players/vehicle-role-icon";
-import { VehicleTypeIcon } from "@/components/players/vehicle-type-icon";
+import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   Panel,
   PanelContent,
