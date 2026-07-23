@@ -26,11 +26,16 @@ import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
 
-// Dynamic on purpose: the page consumes our own API through the SDK, and
-// prerendering it at build time would make the build depend on a running API.
-// The endpoints cache server-side, so per-request cost is local HTTP hops onto
-// cached payloads.
-export const dynamic = "force-dynamic";
+// ISR, not dynamic: every tab's content is rendered here and the whole page is
+// cached, so a navigation serves prerendered HTML instead of re-running the
+// heavy tank-view render each time (measured 0.3-4.4s/nav while force-dynamic,
+// vs ~50ms for the static pages). The active tab lives in `?tab=` and is swapped
+// entirely client-side (see tab-bar), so this page reads no searchParams and
+// stays static. On-demand: pages generate on first request (no
+// generateStaticParams for the ~1229 slugs) and revalidate on the tank data's
+// daily cadence. The SDK loopback covers any build-time prerender.
+export const dynamic = "force-static";
+export const revalidate = 1800; // 30 min
 
 // The page consumes its own public API through the SDK: one composite
 // `GET /{region}/tanks/{slug}/detail` payload carries everything the view
@@ -69,14 +74,14 @@ export async function generateMetadata({
 
 export default async function TankPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string; slug: string }>;
-  searchParams: Promise<{ tab?: string }>;
 }) {
-  const [{ region, slug }, sp] = await Promise.all([params, searchParams]);
+  const { region, slug } = await params;
   if (!isRegion(region)) notFound();
-  return renderTankPage(region, slug, tankDetailTabFromQuery(sp.tab));
+  // Skeleton falls back to the default tab; the client tab-bar reads `?tab=` and
+  // switches after hydration. Reading searchParams here would force dynamic.
+  return renderTankPage(region, slug, tankDetailTabFromQuery(undefined));
 }
 
 // Thin boundary: nothing here blocks, so Next flushes the shell + skeleton
