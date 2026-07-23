@@ -73,6 +73,10 @@ export async function generateMetadata({
       title: `[${decoded}] World of Tanks clan (${regionLabel})`,
       description: `[${decoded}] World of Tanks clan on ${regionLabel}: members table with WN8/WNX ratings, join/leave activity, recent battles and full clan history.`,
       ogImage: false,
+      // Static (ISR) page: pass the canonical explicitly, since generateCanonical()
+      // reads headers() which isn't available during static generation (it would
+      // otherwise fall back to the site root).
+      canonical: ROUTES.CLAN(region, decoded),
     });
   }
   const { clan } = overview;
@@ -81,6 +85,8 @@ export async function generateMetadata({
     title: `[${clan.tag}] ${clan.name} World of Tanks clan (${regionLabel}), ${members} members`,
     description: `${clan.name} [${clan.tag}] on ${regionLabel}: ${members} members, full members table with WN8 and WNX ratings, recent join/leave activity and clan history.`,
     ogImage: false,
+    // Static (ISR) page: canonical must be explicit (see the not-found branch).
+    canonical: ROUTES.CLAN(region, clan.tag),
   });
 }
 
