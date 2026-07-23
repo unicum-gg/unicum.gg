@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { ModuleType, type Region } from "@unicum.gg/wargaming";
 import {
   CurrentTankNode,
@@ -173,7 +173,14 @@ function ModuleTree({
     };
   }, []);
 
-  useLayoutEffect(() => {
+  // useEffect (not useLayoutEffect) on purpose: the connector paths start empty,
+  // so the first paint never shows them anyway. Reading getBoundingClientRect in
+  // a layout effect would force a synchronous layout of this large module-tree
+  // DOM *before* paint (measured ~295ms of forced reflow on the critical path of
+  // every tank navigation). After paint the layout is already computed, so the
+  // measure is cheap and the connectors just draw a frame later — imperceptible
+  // for decorative SVG lines.
+  useEffect(() => {
     const content = contentRef.current;
     if (!content) return;
 
