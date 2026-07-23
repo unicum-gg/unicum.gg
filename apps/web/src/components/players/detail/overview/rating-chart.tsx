@@ -72,10 +72,14 @@ function buildGradientStops(
   return stops;
 }
 
+// The chart datum is the metric-projected point (one number per series), not
+// the raw all-metric `RatingHistoryPoint`.
+type ChartDatum = { day: string; lifetime: number | null; session: number | null };
+
 type DotProps = {
   cx?: number;
   cy?: number;
-  payload?: RatingHistoryPoint;
+  payload?: ChartDatum;
 };
 
 const PRIMARY_COLOR = "var(--color-fd-primary)";
@@ -92,11 +96,15 @@ export function PlayerRatingChart({
   // Round at the source so the tooltip, axis, and dots all show the same
   // integer values. The chart doesn't need sub-unit precision and the
   // default tooltip formatter prints every decimal otherwise.
-  const chartData = data.map((d) => ({
-    day: d.day,
-    lifetime: d.lifetime === null ? null : Math.round(d.lifetime),
-    session: d.session === null ? null : Math.round(d.session),
-  }));
+  const chartData: ChartDatum[] = data.map((d) => {
+    const lifetime = d.lifetime[metric];
+    const session = d.session[metric];
+    return {
+      day: d.day,
+      lifetime: lifetime === null ? null : Math.round(lifetime),
+      session: session === null ? null : Math.round(session),
+    };
+  });
   const colorFn = COLOR_FN[metric];
   const sessionValues = chartData
     .map((d) => d.session)

@@ -1,10 +1,9 @@
-import type { RatingMetric } from "../constants/rating";
 import type { PlayerClanHistoryFull } from "../clans/player-history";
 import type {
   PeriodStats,
   PlayerDerivedStats,
 } from "./derived-stats";
-import type { LiftDrag } from "./lift-drag";
+import type { LiftDragByMetric } from "./lift-drag";
 import type { RatingHistoryPoint } from "./rating-history";
 import type { Stats } from "./stats";
 import type { StrongholdStats } from "./stronghold-stats";
@@ -38,8 +37,9 @@ export type PlayerStrongholdModes = {
 // `GET /api/[region]/players/[nickname]` endpoint exposes. All tank-breakdown
 // derivations (stats grid, lift/drag, vehicle rows) are computed server-side
 // (core `players/detail`) so the payload carries values, never the
-// encyclopedia or expected-value tables. `liftDrag` and `ratingHistory` depend
-// on the requested metric.
+// encyclopedia or expected-value tables. `liftDrag` and `ratingHistory` carry
+// all three metrics, so the payload is metric-agnostic (and the page cacheable);
+// the client selects the active metric from its rating-metric cookie.
 /** A name a player (or clan) used before its current one, with when we observed
  * it stop being current. Newest first. */
 export type NameHistoryEntry = { nickname: string; recordedAt: Date };
@@ -58,7 +58,6 @@ export type PlayerDetailData = {
   // This account belongs to an active (and non-anonymous) unicum.gg supporter,
   // for the supporter badge on the player header.
   isSupporter: boolean;
-  metric: RatingMetric;
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;
@@ -69,7 +68,7 @@ export type PlayerDetailData = {
   // Estimated account worth (market resale + store rebuild cost), computed from
   // the garage. See `./valuation`.
   valuation: PlayerValuation;
-  liftDrag: LiftDrag | null;
+  liftDrag: LiftDragByMetric;
   ratingHistory: RatingHistoryPoint[];
   clanHistory: PlayerClanHistoryFull;
   strongholds: PlayerStrongholdModes;

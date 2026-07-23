@@ -27,7 +27,11 @@ import {
 import { TanksTab } from "@/components/players/detail/tanks";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
-import type { PlayerDetailData, PlayerTankRow } from "@unicum.gg/shared";
+import type {
+  PlayerDetailData,
+  PlayerTankRow,
+  RatingMetric,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 // The eight stronghold modes (every mode but Random Battles) share one shape:
@@ -55,6 +59,9 @@ export type PlayerTabsViewProps = {
   nickname: string;
   activeSection: PlayerSection;
   activeMode: PlayerMode;
+  // Active rating metric (client-derived from the cookie in the parent), used to
+  // project the metric-agnostic payload (liftDrag + ratingHistory carry all three).
+  metric: RatingMetric;
   metricLabel: string;
   nowMs: number;
   // Live player detail (SWR + LiveSync owned by the parent `PlayerProfile`, so
@@ -72,6 +79,7 @@ export function PlayerTabsView({
   nickname,
   activeSection,
   activeMode,
+  metric,
   metricLabel,
   nowMs,
   detail,
@@ -126,9 +134,9 @@ export function PlayerTabsView({
     current: detail.current,
     periods: detail.periods,
     derived: detail.derived,
-    liftDrag: detail.liftDrag,
+    liftDrag: detail.liftDrag[metric],
     ratingData: detail.ratingHistory,
-    metric: detail.metric,
+    metric,
     metricLabel,
     clanHistory: detail.clanHistory,
     nameHistory: detail.nameHistory,

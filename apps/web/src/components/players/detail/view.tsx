@@ -10,11 +10,15 @@ import { PlayerHeader } from "@/components/players/detail/header";
 import { SupporterBadgeState } from "@/components/players/detail/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
+import { useCookie } from "@/hooks/use-cookie";
+import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
 import {
+  DEFAULT_RATING_METRIC,
+  RATING_METRIC_LABEL,
+  isRatingMetric,
   type PlayerDetailData,
   type PlayerTankRow,
-  type RatingMetric,
   inferPlayerLanguages,
 } from "@unicum.gg/shared";
 import type { LiveUpdate } from "@unicum.gg/sdk";
@@ -31,9 +35,6 @@ export function PlayerProfile({
   region,
   nickname,
   basePath,
-  metric,
-  metricLabel,
-  nowMs,
   activeSection,
   activeMode,
   initialData,
@@ -42,11 +43,6 @@ export function PlayerProfile({
   region: Region;
   nickname: string;
   basePath: string;
-  // Active rating metric (from the cookie); drives the SWR key so it can't drift
-  // from what the SDK fetches.
-  metric: RatingMetric;
-  metricLabel: string;
-  nowMs: number;
   activeSection: PlayerSection;
   activeMode: PlayerMode;
   // Server-rendered detail (the page fetches it inside a Suspense boundary and
@@ -56,10 +52,21 @@ export function PlayerProfile({
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
   initialTanks: PlayerTankRow[] | null;
 }) {
-  // The SWR key is the request's own URL (`.url()`), so it can't drift from what
-  // the SDK actually fetches — no hand-built string to keep in sync.
-  const detailReq = () =>
-    unicum.region(region).players(nickname).detail({ metric });
+  // The active metric is client state (the cookie), not a server prop: the page
+  // is statically cached and metric-agnostic (the payload carries all three
+  // metrics), so switching metric never refetches.
+  const [storedMetric] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
+  const metric = isRatingMetric(storedMetric)
+    ? storedMetric
+    : DEFAULT_RATING_METRIC;
+  const metricLabel = RATING_METRIC_LABEL[metric];
+  // "Last battle N ago" reference time, taken client-side (the page can't call
+  // Date.now() without opting out of static generation).
+  const [nowMs] = useState(() => Date.now());
+
+  // The payload is the same for every metric, so a single SWR entry keyed on the
+  // request URL; a LiveSync tick revalidates it.
+  const detailReq = () => unicum.region(region).players(nickname).detail();
   const { data: liveData, mutate: mutateData } = useSWR(
     detailReq().url(),
     () => detailReq().then((r) => r as unknown as PlayerDetailData),
@@ -140,6 +147,7 @@ export function PlayerProfile({
         nickname={nickname}
         activeSection={activeSection}
         activeMode={activeMode}
+        metric={metric}
         metricLabel={metricLabel}
         nowMs={nowMs}
         detail={detail}

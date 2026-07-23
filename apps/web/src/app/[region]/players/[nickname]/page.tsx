@@ -4,7 +4,6 @@ import { notFound } from "next/navigation";
 import {
   modeFromQuery,
   sectionFromQuery,
-  PlayerMode,
   PlayerSection,
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
@@ -14,16 +13,15 @@ import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { getRatingMetricFromCookies } from "@/lib/rating-metric";
 import { breadcrumbSchema, personSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
+  DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
   type PlayerDetailData,
   type PlayerTankRow,
-  type RatingMetric,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 
@@ -33,24 +31,21 @@ const pctFmt = new Intl.NumberFormat("en-US", {
 });
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
-// The page consumes its own public API through the SDK: the same
-// `GET /{region}/players/{nickname}` payload the client refetches on LiveSync.
-// The endpoint owns the stale-while-revalidate flow (cached data immediately;
-// a cold cache resolves the account on WG, fetches live and records a
-// snapshot). Next memoizes identical fetches within one render pass, so
-// generateMetadata and the page body share a single request.
+// The page consumes its own public API through the SDK: one metric-agnostic
+// payload (liftDrag + ratingHistory carry all three metrics), the same
+// `GET /{region}/players/{nickname}` the client refetches on LiveSync. The
+// endpoint owns the stale-while-revalidate flow (cached data immediately; a cold
+// cache resolves the account on WG, fetches live and records a snapshot). Next
+// memoizes identical fetches within one render pass, so generateMetadata and the
+// page body share a single request.
 type LockedAccount = { locked: true; nickname: string };
 
 async function loadDetail(
   region: Region,
   nickname: string,
-  metric: RatingMetric,
 ): Promise<PlayerDetailData | LockedAccount | null> {
   try {
-    const detail = await unicum
-      .region(region)
-      .players(nickname)
-      .detail({ metric });
+    const detail = await unicum.region(region).players(nickname).detail();
     return detail as unknown as PlayerDetailData;
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -66,11 +61,19 @@ async function loadDetail(
   }
 }
 
-// Dynamic on purpose: the page consumes our own API through the SDK, and
-// prerendering it at build time would make the build depend on a running API.
-// The endpoints cache server-side, so per-request cost is local HTTP hops onto
-// cached payloads.
-export const dynamic = "force-dynamic";
+// ISR, not dynamic (mirrors the clan/tank pages): the whole rendered profile is
+// cached, so a navigation serves prerendered HTML instead of re-running the
+// heavy player-view render each time (measured 1.5-3s/nav while force-dynamic,
+// vs ~18ms edge-cached — the render was the machine's #1 CPU cost). Everything
+// that used to force dynamic rendering is now client-side: the metric is read
+// from the cookie (the payload is metric-agnostic), the section/mode nav lives
+// in the URL (tabs-view reads it), and the "last battle N ago" reference time is
+// taken client-side. So this page reads no cookies/searchParams/Date.now() and
+// stays static. Live data still hot-swaps via the player SSE (LiveSync), and
+// per-page-hit refreshes are enqueued by the endpoint. On-demand generation (no
+// generateStaticParams); the SDK loopback covers any build-time prerender.
+export const dynamic = "force-static";
+export const revalidate = 1800; // 30 min
 
 export async function generateMetadata({
   params,
@@ -81,8 +84,7 @@ export async function generateMetadata({
   if (!isRegion(region)) return {};
   const decoded = decodeURIComponent(nickname);
   const regionLabel = region.toUpperCase();
-  const metric = await getRatingMetricFromCookies();
-  const result = await loadDetail(region, decoded, metric).catch(() => null);
+  const result = await loadDetail(region, decoded).catch(() => null);
 
   if (result && "locked" in result) {
     return constructMetadata({
@@ -119,27 +121,26 @@ export async function generateMetadata({
 
 export default async function PlayerPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string; nickname: string }>;
-  searchParams: Promise<{ tab?: string; section?: string }>;
 }) {
-  const [{ region, nickname }, { tab: tabParam, section: sectionParam }] =
-    await Promise.all([params, searchParams]);
+  const { region, nickname } = await params;
   if (!isRegion(region)) notFound();
   const decoded = decodeURIComponent(nickname);
-  // Two independent nav axes, each its own query param (see components/players/tabs).
-  const section = sectionFromQuery(sectionParam);
-  const mode = modeFromQuery(tabParam);
-  const metric = await getRatingMetricFromCookies();
-  const metricLabel = RATING_METRIC_LABEL[metric];
+  // Two independent nav axes (section + mode) live entirely in the URL and are
+  // read client-side by tabs-view; these defaults only seed the skeleton and the
+  // initial props, which the client reconciles from the URL on hydration.
+  // Reading searchParams here would force dynamic rendering.
+  const section = sectionFromQuery(undefined);
+  const mode = modeFromQuery(undefined);
+  // The skeleton's rating-column header uses the default metric's label; the
+  // client swaps to the user's cookie metric once the real profile hydrates.
+  const metricLabel = RATING_METRIC_LABEL[DEFAULT_RATING_METRIC];
 
-  // Nothing before this boundary blocks (params + a cookie read), so Next flushes
-  // the shell and the full-fidelity skeleton immediately, then streams the real,
-  // server-rendered profile in when `loadDetail` resolves. Navigation shows the
-  // skeleton at ~ttfb while every load stays fully server-rendered (crawlers get
-  // the streamed content). Scoped to this page, so the `vs/` compare child keeps
-  // its own loading UI — unlike a `loading.tsx`, which would leak here.
+  // Nothing before this boundary blocks (just params), so Next flushes the shell
+  // and the full-fidelity skeleton immediately, then streams the real profile in
+  // when `loadDetail` resolves. Scoped to this page, so the `vs/` compare child
+  // keeps its own loading UI.
   return (
     <Suspense
       fallback={
@@ -159,8 +160,6 @@ export default async function PlayerPage({
         decoded={decoded}
         section={section}
         mode={mode}
-        metric={metric}
-        metricLabel={metricLabel}
       />
     </Suspense>
   );
@@ -173,17 +172,13 @@ async function PlayerProfileServer({
   decoded,
   section,
   mode,
-  metric,
-  metricLabel,
 }: {
   region: Region;
   decoded: string;
-  section: PlayerSection;
-  mode: PlayerMode;
-  metric: RatingMetric;
-  metricLabel: string;
+  section: ReturnType<typeof sectionFromQuery>;
+  mode: ReturnType<typeof modeFromQuery>;
 }) {
-  const detail = await loadDetail(region, decoded, metric);
+  const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView nickname={detail.nickname} region={region} />;
   }
@@ -192,8 +187,8 @@ async function PlayerProfileServer({
   // The per-tank list is ~92% of the former detail payload but only the Tanks
   // section renders it, so it lives on its own endpoint and is fetched on
   // demand. Server-render it only for a `?section=tanks` deep-link (SEO /
-  // crawlers); every other section leaves `initialTanks` null so the client
-  // loads it lazily when the section is first opened.
+  // crawlers); with the static section default it is normally null, so the
+  // client loads it lazily when the section is first opened.
   const initialTanks: PlayerTankRow[] | null =
     section === PlayerSection.Tanks
       ? ((await unicum.region(region).players(decoded).tanks())
@@ -201,8 +196,6 @@ async function PlayerProfileServer({
       : null;
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" drives the "last battle N ago" relative times
-  const nowMs = Date.now();
 
   const regionLabel = region.toUpperCase();
   const winrate =
@@ -237,9 +230,6 @@ async function PlayerProfileServer({
         region={region}
         nickname={displayName}
         basePath={ROUTES.PLAYER(region, displayName)}
-        metric={metric}
-        metricLabel={metricLabel}
-        nowMs={nowMs}
         activeSection={section}
         activeMode={mode}
         initialData={detail}

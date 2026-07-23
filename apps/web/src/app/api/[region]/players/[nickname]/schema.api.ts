@@ -1,16 +1,13 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it). Client-
-// safe (only zod + the shared metricField): the player page parses with it.
+// safe (only zod): the player page parses with it.
 import { z } from "zod";
-import { metricField } from "@/services/openapi/schemas";
 
 // --- Player detail (GET /api/{region}/players/{nickname}) ---
 // Everything the player page renders, fully computed server-side (the
 // encyclopedia and WN8/WNX expected-value tables never leave the server).
-// camelCase + `z.coerce.date()` for the same reasons as the clan detail.
-
-export const playerDetailQuery = z.object({
-  metric: metricField.optional(),
-});
+// camelCase + `z.coerce.date()` for the same reasons as the clan detail. The
+// payload is metric-agnostic (liftDrag + ratingHistory carry all three
+// metrics), so it takes no query params and the page is cacheable.
 
 const playerStats = z
   .object({
@@ -116,16 +113,27 @@ const liftDragRow = z
       "A tank whose removal would move the overall rating by removalDelta (negative = it lifts the rating, positive = it drags it).",
   });
 
+// Lift/drag for one metric (null when the player has too few rated tanks).
+const liftDragByMetricEntry = z
+  .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })
+  .nullable();
+
+const ratingMetricValues = z.object({
+  wn7: z.number().nullable(),
+  wn8: z.number().nullable(),
+  wnx: z.number().nullable(),
+});
+
 const ratingHistoryPoint = z
   .object({
     day: z.string(),
-    lifetime: z.number().nullable(),
-    session: z.number().nullable(),
+    lifetime: ratingMetricValues,
+    session: ratingMetricValues,
   })
   .meta({
     id: "RatingHistoryPoint",
     description:
-      "Daily rating sample: lifetime value plus the per-session value computed from that day's battles.",
+      "Daily rating sample: lifetime and per-session values, each carrying all three metrics (wn7/wn8/wnx) so the client can switch metric without a refetch.",
   });
 
 const clanStint = z
@@ -228,7 +236,6 @@ export const PlayerDetailResponse = z.object({
         "Previous nicknames of this account, newest first. Empty until a rename is observed (WG exposes no historical names).",
     }),
   isSupporter: z.boolean(),
-  metric: metricField,
   current: playerStats,
   periods: z.object({
     h24: playerStats.nullable(),
@@ -267,9 +274,11 @@ export const PlayerDetailResponse = z.object({
       description:
         "Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost.",
     }),
-  liftDrag: z
-    .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })
-    .nullable(),
+  liftDrag: z.object({
+    wn7: liftDragByMetricEntry,
+    wn8: liftDragByMetricEntry,
+    wnx: liftDragByMetricEntry,
+  }),
   ratingHistory: z.array(ratingHistoryPoint),
   clanHistory: playerClanHistory,
   strongholds: z.object({

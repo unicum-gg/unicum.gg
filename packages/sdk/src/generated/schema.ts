@@ -1062,6 +1062,10 @@ export interface components {
             wnxExpected: {
                 [key: string]: string;
             };
+            /** @description Precomputed WN8 fallback (per tier+type average) for fielded tanks missing from the expected table, keyed by `tier-type`. */
+            wn8Fallback: {
+                [key: string]: string;
+            };
         };
         /** @description Inputs for a side-by-side clan comparison: each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and WN8/WNX expected-value tables. */
         ClansCompareResponse: {
@@ -1073,6 +1077,10 @@ export interface components {
                 [key: string]: string;
             };
             wnxExpected: {
+                [key: string]: string;
+            };
+            /** @description Precomputed WN8 fallback (per tier+type average) for fielded tanks missing from the expected table, keyed by `tier-type`. */
+            wn8Fallback: {
                 [key: string]: string;
             };
         };
@@ -1391,6 +1399,10 @@ export interface components {
             /** @description Players/clans whose clan declares only this language. */
             strict: number;
         };
+        liftDragByMetricEntry: {
+            lift: components["schemas"]["LiftDragRow"][];
+            drag: components["schemas"]["LiftDragRow"][];
+        } | null;
         /** @description A tank whose removal would move the overall rating by removalDelta (negative = it lifts the rating, positive = it drags it). */
         LiftDragRow: {
             tankId: number;
@@ -1599,11 +1611,6 @@ export interface components {
                 recordedAt: Date;
             }[];
             isSupporter: boolean;
-            /**
-             * @description Rating metric the leaderboard is ranked by.
-             * @enum {string}
-             */
-            metric: "wn7" | "wn8" | "wnx";
             current: components["schemas"]["PlayerStats"];
             periods: {
                 h24: components["schemas"]["PlayerStats"] | null;
@@ -1640,9 +1647,10 @@ export interface components {
                 } | null;
             };
             liftDrag: {
-                lift: components["schemas"]["LiftDragRow"][];
-                drag: components["schemas"]["LiftDragRow"][];
-            } | null;
+                wn7: components["schemas"]["liftDragByMetricEntry"];
+                wn8: components["schemas"]["liftDragByMetricEntry"];
+                wnx: components["schemas"]["liftDragByMetricEntry"];
+            };
             ratingHistory: components["schemas"]["RatingHistoryPoint"][];
             clanHistory: components["schemas"]["PlayerClanHistory"];
             strongholds: {
@@ -1674,6 +1682,10 @@ export interface components {
             wnxExpected: {
                 [key: string]: string;
             };
+            /** @description Precomputed WN8 fallback (per tier+type average) for owned tanks missing from the expected table, keyed by `tier-type`. */
+            wn8Fallback: {
+                [key: string]: string;
+            };
         };
         /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
         PlayersCompareResponse: {
@@ -1688,6 +1700,10 @@ export interface components {
             };
             /** @description WNX expected values keyed by tank id. */
             wnxExpected: {
+                [key: string]: string;
+            };
+            /** @description Precomputed WN8 fallback (per tier+type average) for owned tanks missing from the expected table, keyed by `tier-type`. */
+            wn8Fallback: {
                 [key: string]: string;
             };
         };
@@ -1772,11 +1788,16 @@ export interface components {
             totalCount: number;
             cameFromCount: number;
         };
-        /** @description Daily rating sample: lifetime value plus the per-session value computed from that day's battles. */
+        /** @description Daily rating sample: lifetime and per-session values, each carrying all three metrics (wn7/wn8/wnx) so the client can switch metric without a refetch. */
         RatingHistoryPoint: {
             day: string;
-            lifetime: number | null;
-            session: number | null;
+            lifetime: components["schemas"]["ratingMetricValues"];
+            session: components["schemas"]["ratingMetricValues"];
+        };
+        ratingMetricValues: {
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
         };
         ratingTriplet: {
             wn7: number | null;
@@ -2442,9 +2463,7 @@ export interface operations {
     };
     "get-{region}-players-{nickname}": {
         parameters: {
-            query?: {
-                metric?: "wn7" | "wn8" | "wnx";
-            };
+            query?: never;
             header?: never;
             path: {
                 /** @example eu */

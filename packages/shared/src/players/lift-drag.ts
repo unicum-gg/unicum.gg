@@ -44,6 +44,17 @@ export type LiftDrag = {
   drag: LiftDragRow[];
 };
 
+// Lift/drag for all three metrics, so the page payload is metric-agnostic and
+// the client picks the active one from its rating-metric cookie. The removal
+// scan runs three times (once per metric) at build time, but only inside the
+// Redis-cached detail endpoint, so it is paid once per cache window, not per
+// navigation.
+export type LiftDragByMetric = {
+  wn7: LiftDrag | null;
+  wn8: LiftDrag | null;
+  wnx: LiftDrag | null;
+};
+
 function computePerTankRating(
   tank: TankStats,
   meta: VehicleMeta,

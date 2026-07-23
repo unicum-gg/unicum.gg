@@ -65,9 +65,8 @@ export async function buildPlayerDetail(args: {
   tanks: TankStats[];
   clanHistory: PlayerClanHistoryFull;
   initial: PlayerInitialData;
-  metric: RatingMetric;
 }): Promise<PlayerDetailData> {
-  const { region, accountId, player, latest, tanks, clanHistory, initial, metric } =
+  const { region, accountId, player, latest, tanks, clanHistory, initial } =
     args;
 
   const [
@@ -82,7 +81,7 @@ export async function buildPlayerDetail(args: {
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
     getWNXExpectedValues(),
-    getRatingHistory(region, player.id, metric),
+    getRatingHistory(region, player.id),
     getAllTankSpecs(),
     getAccountSubscription(region, accountId),
     getPlayerNameHistory(region, accountId),
@@ -198,7 +197,6 @@ export async function buildPlayerDetail(args: {
     },
     nameHistory,
     isSupporter,
-    metric,
     current,
     periods,
     derived,
@@ -209,7 +207,11 @@ export async function buildPlayerDetail(args: {
       current.battles,
       region,
     ),
-    liftDrag: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, metric),
+    liftDrag: {
+      wn7: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn7),
+      wn8: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn8),
+      wnx: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wnx),
+    },
     ratingHistory: ratingHistory.points,
     clanHistory,
     strongholds: {
@@ -234,7 +236,6 @@ export async function buildPlayerDetail(args: {
 export async function loadPlayerDetail(
   region: Region,
   nickname: string,
-  metric: RatingMetric,
 ): Promise<PlayerDetailData | null> {
   const initial = await loadPlayerInitialData(region, { nickname });
   if (!initial.player || !initial.latestSnapshot) return null;
@@ -246,7 +247,6 @@ export async function loadPlayerDetail(
     tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
     clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
     initial,
-    metric,
   });
 }
 
@@ -320,7 +320,6 @@ export type PlayerDetailLiveResult =
 export async function loadPlayerDetailLive(
   region: Region,
   nickname: string,
-  metric: RatingMetric,
 ): Promise<PlayerDetailLiveResult> {
   let initial = await loadPlayerInitialData(region, { nickname });
 
@@ -355,7 +354,6 @@ export async function loadPlayerDetailLive(
         tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
         clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
         initial,
-        metric,
       }),
     };
   }
@@ -406,7 +404,6 @@ export async function loadPlayerDetailLive(
       tanks: fetchedTanks,
       clanHistory: fetchedClanHistory,
       initial,
-      metric,
     }),
   };
 }

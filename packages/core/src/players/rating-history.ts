@@ -1,5 +1,5 @@
 import { asc, eq } from "drizzle-orm";
-import { RatingMetric, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint } from "@unicum.gg/shared";
+import { RatingMetric, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint, type RatingHistoryMetricValues } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
@@ -42,7 +42,6 @@ type TankSnapshotRow = {
 export async function getRatingHistory(
   region: Region,
   playerId: number,
-  metric: RatingMetric,
   lookbackDays = DEFAULT_LOOKBACK_DAYS,
 ): Promise<RatingHistory> {
   const tankSnapshots = tankSnapshotsByRegion[region];
@@ -100,8 +99,7 @@ export async function getRatingHistory(
     }
     const currentTanks = Array.from(currentCumulative.values());
 
-    const lifetime = computeMetric(
-      metric,
+    const lifetime = computeAllMetrics(
       currentTanks,
       encyclopedia,
       wn8Expected,
@@ -109,7 +107,11 @@ export async function getRatingHistory(
       wnxExpected,
     );
 
-    let session: number | null = null;
+    let session: RatingHistoryMetricValues = {
+      wn7: null,
+      wn8: null,
+      wnx: null,
+    };
     if (prevCumulative !== null) {
       const sessionDelta: TankStats[] = [];
       for (const t of currentTanks) {
@@ -142,8 +144,7 @@ export async function getRatingHistory(
           },
         });
       }
-      session = computeMetric(
-        metric,
+      session = computeAllMetrics(
         sessionDelta,
         encyclopedia,
         wn8Expected,
@@ -156,6 +157,23 @@ export async function getRatingHistory(
     prevCumulative = currentCumulative;
   }
   return { points };
+}
+
+// All three metrics from one tank set (the DB scan + day bucketing is the
+// expensive part and shared; computing three ratings per day instead of one is
+// cheap in-memory, and makes the payload metric-agnostic / cacheable).
+function computeAllMetrics(
+  tanks: TankStats[],
+  encyclopedia: Awaited<ReturnType<typeof getVehicleEncyclopedia>>,
+  wn8Expected: Map<number, WN8Expected>,
+  wn8Fallback: ReturnType<typeof buildWN8Fallback>,
+  wnxExpected: Map<number, WNXExpected>,
+): RatingHistoryMetricValues {
+  return {
+    wn7: computeMetric(RatingMetric.Wn7, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
+    wn8: computeMetric(RatingMetric.Wn8, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
+    wnx: computeMetric(RatingMetric.Wnx, tanks, encyclopedia, wn8Expected, wn8Fallback, wnxExpected),
+  };
 }
 
 function computeMetric(

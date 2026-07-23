@@ -1,4 +1,3 @@
-import { RATING_METRICS, type RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { getRedisClient } from "@unicum.gg/core/redis";
 
@@ -21,49 +20,47 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  */
 export const PLAYER_DETAIL_TTL_SECONDS = 60;
 
-function key(region: Region, nickname: string, metric: RatingMetric): string {
-  return `pdetail:${region}:${nickname.toLowerCase()}:${metric}`;
+function key(region: Region, nickname: string): string {
+  return `pdetail:${region}:${nickname.toLowerCase()}`;
 }
 
-/** Cached JSON body for this (region, nickname, metric), or null on miss / no Redis. */
+/** Cached JSON body for this (region, nickname), or null on miss / no Redis. The
+ * payload is metric-agnostic, so there is a single entry per player. */
 export async function getCachedPlayerDetailJson(
   region: Region,
   nickname: string,
-  metric: RatingMetric,
 ): Promise<string | null> {
   const redis = getRedisClient();
   if (!redis) return null;
   try {
-    return await redis.get(key(region, nickname, metric));
+    return await redis.get(key(region, nickname));
   } catch {
     return null; // fail open: a Redis blip degrades to "no cache", never an error
   }
 }
 
-/** Store the serialized detail JSON for one metric variant. Best-effort. */
+/** Store the serialized detail JSON. Best-effort. */
 export async function setCachedPlayerDetailJson(
   region: Region,
   nickname: string,
-  metric: RatingMetric,
   json: string,
 ): Promise<void> {
   const redis = getRedisClient();
   if (!redis) return;
   try {
-    await redis.set(key(region, nickname, metric), json, "EX", PLAYER_DETAIL_TTL_SECONDS);
+    await redis.set(key(region, nickname), json, "EX", PLAYER_DETAIL_TTL_SECONDS);
   } catch {
     // ignore — caching is best-effort
   }
 }
 
 /**
- * Invalidate every metric variant for a player. Call this whenever a fresh
- * snapshot is committed so a refresh becomes visible immediately. Fire-and-forget
- * and fail-open: a delete failure just leaves the (TTL-bounded) stale entry.
+ * Invalidate a player's cached detail. Call this whenever a fresh snapshot is
+ * committed so a refresh becomes visible immediately. Fire-and-forget and
+ * fail-open: a delete failure just leaves the (TTL-bounded) stale entry.
  */
 export function bustPlayerDetailCache(region: Region, nickname: string): void {
   const redis = getRedisClient();
   if (!redis) return;
-  const keys = RATING_METRICS.map((m) => key(region, nickname, m));
-  void redis.del(...keys).catch(() => {});
+  void redis.del(key(region, nickname)).catch(() => {});
 }
