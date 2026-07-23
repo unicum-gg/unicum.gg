@@ -3,9 +3,15 @@ import {
   PlayerDetailLiveStatus,
   loadPlayerDetailLive,
 } from "@unicum.gg/core/players/detail";
+import {
+  getCachedPlayerDetailJson,
+  setCachedPlayerDetailJson,
+} from "@unicum.gg/core/players/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
+
+const JSON_HEADERS = { "content-type": "application/json" } as const;
 
 /**
  * Player detail
@@ -31,6 +37,11 @@ export async function GET(
   const url = new URL(req.url);
   const metric = ratingMetricFromCookie(url.searchParams.get("metric"));
 
+  // Short-TTL cache of the serialized payload. A completed refresh busts the key
+  // (recordCurrentSnapshot), so this only ever serves data as fresh as the DB.
+  const cached = await getCachedPlayerDetailJson(region, decoded, metric);
+  if (cached) return new Response(cached, { headers: JSON_HEADERS });
+
   try {
     // Dates serialize to ISO strings here and are revived client-side by
     // parsing with the shared `PlayerDetailResponse` schema (z.coerce.date).
@@ -48,7 +59,14 @@ export async function GET(
         { status: 403 },
       );
     }
-    return jsonResponse(PlayerDetailResponse, result.detail);
+    // Response.json serializes identically; stringify once to both cache and
+    // return, keeping jsonResponse's dev-only schema-drift check on the miss.
+    const json = JSON.stringify(result.detail);
+    void setCachedPlayerDetailJson(region, decoded, metric, json);
+    if (process.env.NODE_ENV !== "production") {
+      jsonResponse(PlayerDetailResponse, result.detail);
+    }
+    return new Response(json, { headers: JSON_HEADERS });
   } catch (err) {
     console.error(`[api/${region}/players/${decoded}] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

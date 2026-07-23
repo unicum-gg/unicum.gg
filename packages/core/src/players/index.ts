@@ -4,6 +4,7 @@ import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapsho
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
+import { bustPlayerDetailCache } from "./detail-cache";
 import type { Region } from "@unicum.gg/wargaming";
 import type {
   PlayerInfo,
@@ -589,6 +590,10 @@ export async function recordCurrentSnapshot(
     await updatePlayerRatings(region, player.id, info, tanks);
   }
   publish(playerChannel(region, info.account_id), { kind: "snapshot" });
+  // Fresh data just landed: drop the cached detail payload so the next request
+  // rebuilds from it instead of serving the (now stale) cache until its TTL.
+  // Same trigger as the LiveSync publish above, so cache + SSE stay in lockstep.
+  bustPlayerDetailCache(region, info.nickname);
 
   if (inserted) return { player, latest: inserted };
 
