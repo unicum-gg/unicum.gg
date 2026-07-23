@@ -4,11 +4,46 @@ import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
-/** Every tank's in-game specs (global, top config), keyed by tank id. Powers
- * the /tanks Specifications table. */
-export async function getAllTankSpecs(): Promise<Map<number, TankSpec>> {
+// Module-level cache for the global tank-specs catalogue. `tank_specs` is a
+// static-between-patches table (refreshed once a day by vehicles-cron), yet
+// `getAllTankSpecs` sits on the player-detail render path and was measured as
+// the single busiest read in prod: ~104k full-table scans of all ~1229 rows in
+// under 7h (≈10% of all Postgres exec time). A plain process-lifetime cache with
+// in-flight dedup collapses that to one scan per TTL per process. Mirrors the
+// `getVehicleEncyclopedia` pattern (a Map, not `unstable_cache`, so cron-driven
+// callers without an IncrementalCache context don't throw). `refreshTankSpecs`
+// busts it so a daily catalogue refresh is visible at once instead of after TTL.
+const SPECS_CACHE_TTL_MS = 6 * 60 * 60 * 1000;
+let specsCache: { data: Map<number, TankSpec>; expiresAt: number } | null = null;
+let specsInFlight: Promise<Map<number, TankSpec>> | null = null;
+
+async function loadAllTankSpecs(): Promise<Map<number, TankSpec>> {
   const rows = await db.select().from(tankSpecs);
   return new Map(rows.map((r) => [r.tankId, r]));
+}
+
+/** Every tank's in-game specs (global, top config), keyed by tank id. Powers
+ * the /tanks Specifications table. Cached for the process lifetime (see above);
+ * concurrent callers share the in-flight scan. */
+export function getAllTankSpecs(): Promise<Map<number, TankSpec>> {
+  if (specsCache && specsCache.expiresAt > Date.now()) {
+    return Promise.resolve(specsCache.data);
+  }
+  if (specsInFlight) return specsInFlight;
+  specsInFlight = loadAllTankSpecs()
+    .then((data) => {
+      specsCache = { data, expiresAt: Date.now() + SPECS_CACHE_TTL_MS };
+      return data;
+    })
+    .finally(() => {
+      specsInFlight = null;
+    });
+  return specsInFlight;
+}
+
+/** Drop the cached catalogue so the next read reloads (called after a refresh). */
+export function invalidateTankSpecsCache(): void {
+  specsCache = null;
 }
 
 const SPEC_INSERT_CHUNK = 500;
@@ -237,5 +272,8 @@ export async function refreshTankSpecs(): Promise<number> {
       .values(rows.slice(i, i + SPEC_INSERT_CHUNK))
       .onConflictDoUpdate({ target: tankSpecs.tankId, set });
   }
+  // Fresh catalogue written: drop the cache so this process serves it at once
+  // (other processes pick it up within the TTL).
+  invalidateTankSpecsCache();
   return rows.length;
 }
