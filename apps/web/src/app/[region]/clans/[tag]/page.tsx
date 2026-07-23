@@ -46,11 +46,16 @@ async function loadOverview(region: Region, tag: string) {
   }
 }
 
-// Dynamic on purpose: the page consumes our own API through the SDK, and
-// prerendering it at build time would make the build depend on a running API.
-// The endpoints cache server-side, so per-request cost is local HTTP hops onto
-// cached payloads.
-export const dynamic = "force-dynamic";
+// ISR, not dynamic: the whole rendered profile is cached, so a navigation serves
+// prerendered HTML instead of re-running the heavy clan-view render each time
+// (measured 0.7-1.3s/nav while force-dynamic, vs ~50ms static). The section/mode
+// nav is entirely client-side (tabs-view reads them from the URL), so this page
+// reads no searchParams and stays static. Live data still hot-swaps via the
+// clan SSE (LiveSync) client-side, and per-page-hit refreshes are enqueued by
+// the client, exactly like the player page. On-demand generation (no
+// generateStaticParams); the SDK loopback covers any build-time prerender.
+export const dynamic = "force-static";
+export const revalidate = 1800; // 30 min
 
 export async function generateMetadata({
   params,
@@ -81,18 +86,18 @@ export async function generateMetadata({
 
 export default async function ClanPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string; tag: string }>;
-  searchParams: Promise<{ tab?: string; section?: string }>;
 }) {
-  const [{ region, tag }, { tab: tabParam, section: sectionParam }] =
-    await Promise.all([params, searchParams]);
+  const { region, tag } = await params;
   if (!isRegion(region)) notFound();
   const decoded = decodeURIComponent(tag);
-  // Two independent nav axes, each its own query param (see components/clans/tabs).
-  const section = sectionFromQuery(sectionParam);
-  const mode = modeFromQuery(tabParam);
+  // Two independent nav axes (section + mode) live entirely in the URL and are
+  // read client-side by tabs-view; these defaults only seed the skeleton and the
+  // initial props, which the client reconciles from the URL on hydration.
+  // Reading searchParams here would force dynamic rendering.
+  const section = sectionFromQuery(undefined);
+  const mode = modeFromQuery(undefined);
 
   // Nothing before this boundary blocks, so Next flushes the shell + skeleton
   // immediately, then streams the real profile once the (heavier) clan fetches
