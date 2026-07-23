@@ -1,9 +1,10 @@
-import { desc, eq, sql } from "drizzle-orm";
+import { desc, eq, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
   type ClanRecentEventRow,
   clanRecentEventsByRegion,
   clansByRegion,
+  playersByRegion,
 } from "@unicum.gg/shared";
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
@@ -26,6 +27,32 @@ function eventFromRow(row: ClanRecentEventRow): ClanRecentEvent {
     oldRank: row.oldRank,
     newRank: row.newRank,
   };
+}
+
+/**
+ * The stored `accountName` is frozen at the WG feed's event time, so a member who
+ * has since renamed would be shown (and linked) under a dead nickname. We keep
+ * each tracked account's current nickname on the players row, so overlay it by
+ * the stable `accountId`; accounts we don't track keep the feed name.
+ */
+async function withCurrentNicknames(
+  region: Region,
+  events: ClanRecentEvent[],
+): Promise<ClanRecentEvent[]> {
+  const ids = [...new Set(events.map((e) => e.accountId))];
+  if (ids.length === 0) return events;
+  const players = playersByRegion[region];
+  const rows = await db
+    .select({ accountId: players.accountId, nickname: players.nickname })
+    .from(players)
+    .where(inArray(players.accountId, ids));
+  const byId = new Map(rows.map((r) => [Number(r.accountId), r.nickname]));
+  return events.map((e) => {
+    const current = byId.get(e.accountId);
+    return current && current !== e.accountName
+      ? { ...e, accountName: current }
+      : e;
+  });
 }
 
 export type ClanEventsCached = {
@@ -59,14 +86,18 @@ export async function getClanEventsCached(
     const stale = !clanRow || isStale(clanRow.lastRefreshedAt);
     if (stale) refreshClanEventsInBackground(region, clanId, limit);
     return {
-      events: rows.map(eventFromRow),
+      events: await withCurrentNicknames(region, rows.map(eventFromRow)),
       fromDb: true,
       refreshing: stale,
     };
   }
 
   const events = await refreshClanEvents(region, clanId, limit);
-  return { events, fromDb: false, refreshing: false };
+  return {
+    events: await withCurrentNicknames(region, events),
+    fromDb: false,
+    refreshing: false,
+  };
 }
 
 export async function refreshClanEvents(
