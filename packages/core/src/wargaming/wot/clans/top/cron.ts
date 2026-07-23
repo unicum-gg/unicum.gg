@@ -1,9 +1,14 @@
 import { and, eq } from "drizzle-orm";
-import { RATING_METRICS, topClansByRegion } from "@unicum.gg/shared";
+import {
+  RATING_METRICS,
+  clanRatingsByRegion,
+  topClansByRegion,
+} from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { computeTopClansAllMetrics, TopClansPeriod } from ".";
+import { recomputeClanRatings } from "./ratings";
 
 const SCHEDULE = "0 * * * *";
 const TOP_N = 30;
@@ -31,6 +36,24 @@ async function runInitialIfEmpty(): Promise<void> {
       if (existing.length === 0) {
         console.log(`[top-clans cron] ${region} empty, running initial refresh`);
         await refreshRegion(region);
+        continue;
+      }
+      // The top-30 board may already be seeded from a prior deploy while the
+      // materialized ratings table was just added — seed it independently so
+      // the by-language boards don't return empty until the next hourly tick.
+      const ratings = clanRatingsByRegion[region];
+      const hasRatings = await db
+        .select({ clanId: ratings.clanId })
+        .from(ratings)
+        .limit(1);
+      if (hasRatings.length === 0) {
+        console.log(`[top-clans cron] ${region} ratings empty, seeding`);
+        try {
+          const n = await recomputeClanRatings(region);
+          console.log(`[top-clans cron] ${region}/ratings seeded: ${n} rows`);
+        } catch (err) {
+          console.error(`[top-clans cron] ${region}/ratings seed failed:`, err);
+        }
       }
     }
   } catch (err) {
@@ -100,5 +123,16 @@ async function refreshRegion(region: Region): Promise<void> {
     } catch (err) {
       console.error(`[top-clans cron] ${region}/${period} failed:`, err);
     }
+  }
+  // Materialize the full per-clan ratings so the by-language boards read a
+  // cheap indexed table instead of re-running the ~8s aggregation per request.
+  try {
+    const start = Date.now();
+    const n = await recomputeClanRatings(region);
+    console.log(
+      `[top-clans cron] ${region}/ratings: ${n} rows in ${Date.now() - start}ms`,
+    );
+  } catch (err) {
+    console.error(`[top-clans cron] ${region}/ratings failed:`, err);
   }
 }
