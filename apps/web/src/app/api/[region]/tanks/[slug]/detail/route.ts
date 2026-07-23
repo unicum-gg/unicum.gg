@@ -19,10 +19,15 @@ import { getTankLoadoutCached } from "@/services/tanks/loadout";
 import { getTankCrewCached } from "@/services/tanks/crew";
 import { getTankFieldModsCached } from "@/services/tanks/field-mods";
 import { getTankSkillTreeCached } from "@/services/tanks/skill-tree";
+import {
+  getCachedTankDetailJson,
+  setCachedTankDetailJson,
+} from "@unicum.gg/core/wargaming/wot/tanks/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { TankDetailResponse } from "./schema.api";
 
 const TOP_LIMIT = 25;
+const JSON_HEADERS = { "content-type": "application/json" } as const;
 
 /**
  * Tank detail
@@ -40,7 +45,14 @@ export async function GET(
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  const tank = await getTankBySlug(region, decodeURIComponent(slug));
+  const decoded = decodeURIComponent(slug);
+
+  // Tank detail is static between patches / daily-cron data; serve the whole
+  // assembled payload from cache so a navigation isn't a fresh 16-source render.
+  const cached = await getCachedTankDetailJson(region, decoded);
+  if (cached) return new Response(cached, { headers: JSON_HEADERS });
+
+  const tank = await getTankBySlug(region, decoded);
   if (!tank) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
@@ -82,7 +94,7 @@ export async function GET(
     getMomHistory(region, tankId),
   ]);
 
-  return jsonResponse(TankDetailResponse, {
+  const payload = {
     tankId,
     slug: canonicalSlug,
     meta,
@@ -102,5 +114,14 @@ export async function GET(
     skillTree,
     moeHistory,
     momHistory,
-  });
+  };
+
+  // Response.json serializes identically; stringify once to both cache and
+  // return, keeping jsonResponse's dev-only schema-drift check on the miss.
+  const json = JSON.stringify(payload);
+  void setCachedTankDetailJson(region, decoded, json);
+  if (process.env.NODE_ENV !== "production") {
+    jsonResponse(TankDetailResponse, payload);
+  }
+  return new Response(json, { headers: JSON_HEADERS });
 }
