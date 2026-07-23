@@ -54,6 +54,9 @@ export async function generateMetadata({
     title: `All World of Tanks tanks (${regionLabel}), browse every vehicle`,
     description: `Browse every World of Tanks tank on ${regionLabel}: filter by tier, nation, class and role, then dive into per-tank stats, top players and expected values.`,
     ogImage: false,
+    // Static (ISR) page: canonical must be explicit, since generateCanonical()
+    // reads headers() which isn't available during static generation.
+    canonical: ROUTES.TANKS(region),
   });
 }
 

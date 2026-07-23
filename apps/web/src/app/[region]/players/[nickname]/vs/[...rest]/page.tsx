@@ -61,6 +61,7 @@ export async function generateMetadata({
     title: `${list} compared on World of Tanks (${region.toUpperCase()})`,
     description: `Side-by-side World of Tanks stats for ${list}: WN7, WN8, WNX, win rate, average damage and more. ${APP.NAME}.`,
     ogImage,
+    canonical: ROUTES.COMPARE_PLAYERS(region, nicks),
   });
 }
 

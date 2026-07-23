@@ -34,6 +34,9 @@ export async function generateMetadata({
     description: `${APP.NAME} ${label} clan leaderboard, ranked by WNX, filterable by declared clan language.`,
     ogTitle: "Top clans",
     ogSubtitle: `${label} leaderboard`,
+    // Static (ISR) page: canonical must be explicit, since generateCanonical()
+    // reads headers() which isn't available during static generation.
+    canonical: ROUTES.CLANS(region),
   });
 }
 

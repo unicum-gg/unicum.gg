@@ -1,13 +1,12 @@
 import "server-only";
 import type { Metadata } from "next";
-import { headers } from "next/headers";
 import APP from "@/constants/app";
 
 const SITE_URL = APP.URL;
 const SITE_NAME = APP.NAME;
 const SITE_DESCRIPTION = APP.DESCRIPTION;
 
-export async function constructMetadata({
+export function constructMetadata({
   title,
   description = SITE_DESCRIPTION,
   ogTitle,
@@ -27,15 +26,14 @@ export async function constructMetadata({
   ogImage?: string | false;
   ogType?: "website" | "article";
   noIndex?: boolean;
-  // Static pages should pass their absolute path (e.g. "/players") so the
-  // canonical can be built without touching `headers()`, which would
-  // opt the page out of static generation. Falls back to the request's
-  // pathname only when not provided.
-  canonical?: string;
-} = {}): Promise<Metadata> {
-  const canonical = explicitCanonical
-    ? buildCanonical(explicitCanonical)
-    : await generateCanonical();
+  // The page's own absolute path (e.g. "/eu/players/Straik", usually a
+  // `ROUTES.X(...)`). Required and never auto-derived: a static (ISR) page is
+  // rendered without a request, so there is no path to read — the old
+  // `headers()` fallback silently returned the site root for every static page
+  // (and reading `headers()` also opts a page out of static rendering).
+  canonical: string;
+}): Metadata {
+  const canonical = buildCanonical(explicitCanonical);
   const formattedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const resolvedOgImage =
     ogImage === false
@@ -81,18 +79,6 @@ function buildOgImageUrl(title?: string, subtitle?: string): string {
   if (subtitle) params.set("subtitle", subtitle);
   const qs = params.toString();
   return qs ? `/api/og?${qs}` : "/api/og";
-}
-
-async function getPathname(): Promise<string> {
-  const h = await headers();
-  const pathname =
-    h.get("x-pathname") ?? h.get("x-invoke-path") ?? "/";
-  return (pathname.split("?")[0] || "/").replace(/\/+$/, "") || "/";
-}
-
-async function generateCanonical(): Promise<string> {
-  const pathname = await getPathname();
-  return buildCanonical(pathname);
 }
 
 function buildCanonical(pathname: string): string {

@@ -19,6 +19,7 @@ import { organizationSchema, websiteSchema } from "@/lib/schema-org";
 import { WebMcp } from "@/components/script/webmcp";
 import { Provider } from "./provider";
 import "./globals.css";
+import ROUTES from "@/constants/routes";
 
 const figtree = Figtree({
   subsets: ["latin"],
@@ -29,6 +30,8 @@ const figtree = Figtree({
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
     title: "World of Tanks player, clan & tank stats",
+    // Site-wide default; per-page generateMetadata overrides this.
+    canonical: ROUTES.HOME,
   });
 }
 
