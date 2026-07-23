@@ -46,6 +46,16 @@ const nextConfig: NextConfig = {
   // cross-origin dev requests from 127.0.0.1 (HMR + client fetches never fire
   // and interactive widgets stay frozen on their SSR placeholder). Dev-only.
   allowedDevOrigins: ["127.0.0.1"],
+  // Next streams metadata (`<title>`, canonical, og:*) into the body as React-19
+  // hoistable elements and hoists them to `<head>` client-side, so a crawler
+  // that doesn't run JS sees an empty `<head>`. `/.*/` is Next's documented way
+  // to fully disable streaming metadata, so every request renders it blocking in
+  // the `<head>`. ISR/prerendered pages (tanks, clans, home) already resolve
+  // metadata at build and never streamed, so this only affects the pages still
+  // rendered dynamically (player). The cost is minimal: generateMetadata shares
+  // the page's memoized fetch, so the head flushes with it instead of before it.
+  // https://nextjs.org/docs/app/api-reference/config/next-config-js/htmlLimitedBots#disabling
+  htmlLimitedBots: /.*/,
   ...(BUILD_ID
     ? {
         generateBuildId: async () => BUILD_ID,
