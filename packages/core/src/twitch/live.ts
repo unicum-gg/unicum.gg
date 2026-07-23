@@ -54,14 +54,56 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
     }),
   );
 
-  const out: LiveStreamer[] = [];
+  // Resolve each live row to its card inputs, dropping accounts we have no
+  // cached player/stream for.
+  type PlayersMap = Awaited<ReturnType<typeof getPlayersByAccounts>>;
+  type ClansMap = Awaited<ReturnType<typeof getPlayerClansBatch>>;
+  type Resolved = {
+    row: (typeof liveRows)[number];
+    region: Region;
+    player: NonNullable<ReturnType<PlayersMap["get"]>>;
+    stream: NonNullable<ReturnType<typeof byLogin.get>>;
+    clan: ReturnType<ClansMap["get"]>;
+  };
+  const resolved: Resolved[] = [];
   for (const row of liveRows) {
     const region = row.region as Region;
     const bucket = perRegion.get(region);
     const player = bucket?.players.get(row.accountId);
     const stream = byLogin.get(row.twitchLogin);
     if (!player || !stream) continue;
-    const clan = bucket?.clans.get(row.accountId);
+    resolved.push({
+      row,
+      region,
+      player,
+      stream,
+      clan: bucket?.clans.get(row.accountId),
+    });
+  }
+
+  // One card per live channel: a streamer can link several WoT accounts to the
+  // same Twitch channel, so collapse them to the most active account (most
+  // 30-day battles, WNX as tiebreak) rather than duplicating the same stream.
+  const bestByLogin = new Map<string, Resolved>();
+  const activityOf = (r: Resolved): [number, number] => [
+    r.player.battles30d ?? -1,
+    r.player.wnx ?? 0,
+  ];
+  for (const r of resolved) {
+    const cur = bestByLogin.get(r.row.twitchLogin);
+    if (!cur) {
+      bestByLogin.set(r.row.twitchLogin, r);
+      continue;
+    }
+    const [rb, rw] = activityOf(r);
+    const [cb, cw] = activityOf(cur);
+    if (rb > cb || (rb === cb && rw > cw)) {
+      bestByLogin.set(r.row.twitchLogin, r);
+    }
+  }
+
+  const out: LiveStreamer[] = [];
+  for (const { row, region, player, stream, clan } of bestByLogin.values()) {
     out.push({
       region,
       accountId: row.accountId,

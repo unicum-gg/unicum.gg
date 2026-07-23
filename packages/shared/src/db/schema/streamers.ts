@@ -4,7 +4,7 @@ import {
   bigint,
   boolean,
   timestamp,
-  uniqueIndex,
+  index,
 } from "drizzle-orm/pg-core";
 
 /**
@@ -16,6 +16,11 @@ import {
  * user id, so a self-service Twitch link upserts the very row a curated seed
  * created. `verified` is true only for owner-confirmed links (Twitch OAuth);
  * curated seeds stay false.
+ *
+ * `twitch_login` is intentionally NOT unique: one streamer can play (and stream)
+ * across several WoT accounts, so multiple rows may share a channel. The home
+ * rail collapses them to one card per live channel, showing the most active
+ * account (see `getLiveStreamers`).
  */
 export const streamers = pgTable(
   "streamers",
@@ -34,5 +39,5 @@ export const streamers = pgTable(
       .$onUpdate(() => /* @__PURE__ */ new Date())
       .notNull(),
   },
-  (t) => [uniqueIndex("streamers_twitch_login_idx").on(t.twitchLogin)],
+  (t) => [index("streamers_twitch_login_idx").on(t.twitchLogin)],
 );
