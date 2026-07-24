@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   generateMetadata as generateRegionMetadata,
   renderTanksIndex,
-} from "@/app/[region]/tanks/page";
+} from "@/app/(site)/[region]/tanks/page";
 import { Region } from "@unicum.gg/wargaming";
 
 // EU shortcut: /tanks renders the same index as /eu/tanks.

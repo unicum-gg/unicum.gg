@@ -1,19 +1,13 @@
 // Installs the build-time SDK loopback (side-effect import, server graph only:
 // prerendered pages resolve SDK calls against this build's own route handlers).
 import "@/services/sdk/loopback";
-import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
-import { TopBar } from "@/components/top-bar";
-import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
-import { NavDebug } from "@/components/nav-debug";
-import { RatingMetricRoot } from "@/components/rating-metric-root";
 import { Toaster } from "@/components/ui/sonner";
 import { DEFAULT_RATING_METRIC } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
-import { baseOptions } from "@/lib/layout.shared";
 import { constructMetadata } from "@/lib/metadata";
 import { organizationSchema, websiteSchema } from "@/lib/schema-org";
 import { WebMcp } from "@/components/script/webmcp";
@@ -44,12 +38,14 @@ export async function generateMetadata(): Promise<Metadata> {
 // in sync after cookie changes during the session.
 const INITIAL_METRIC_SCRIPT = `(function(){try{var m=document.cookie.match(/(?:^|;\\s*)${STORAGE.COOKIES.RATING.replace(/\./g, "\\.")}=([^;]+)/);var v=m?decodeURIComponent(m[1]):${JSON.stringify(DEFAULT_RATING_METRIC)};if(v==='wn7'||v==='wn8'||v==='wnx'){document.documentElement.dataset.ratingMetric=v;}else{document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}}catch(e){document.documentElement.dataset.ratingMetric=${JSON.stringify(DEFAULT_RATING_METRIC)};}})();`;
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const layoutProps = await baseOptions();
+  // The shell only: fonts, providers, global schema + toasts. The site chrome
+  // (top bar, nav, footer) lives in the `(site)` route group so standalone
+  // sections like `/docs` (its own fumadocs DocsLayout) can opt out of it.
   return (
     <html
       lang="en"
@@ -67,13 +63,7 @@ export default async function RootLayout({
         <JsonLd data={organizationSchema()} />
         <Provider>
           <WebMcp />
-          <NavDebug />
-          <RatingMetricRoot />
-          <TopBar />
-          <HomeLayout {...layoutProps}>
-            <div id="page-content" className="flex flex-1 flex-col">{children}</div>
-            <Footer />
-          </HomeLayout>
+          {children}
           <Toaster />
         </Provider>
       </body>

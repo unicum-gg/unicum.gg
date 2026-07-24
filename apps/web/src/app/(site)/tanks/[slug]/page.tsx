@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import {
   generateMetadata as generateRegionMetadata,
   renderTankPage,
-} from "@/app/[region]/tanks/[slug]/page";
+} from "@/app/(site)/[region]/tanks/[slug]/page";
 import { Region } from "@unicum.gg/wargaming";
 
 // Mirror the region page: force-static, on-demand. The tab lives in `?tab=` and
