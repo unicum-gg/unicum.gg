@@ -4,6 +4,7 @@ export * from "./clan-recent-events";
 export * from "./clan-refresh-queue";
 export * from "./clans";
 export * from "./clan-ratings";
+export * from "./stronghold-ratings";
 export * from "./cron-leader";
 export * from "./players";
 export * from "./player-ratings";

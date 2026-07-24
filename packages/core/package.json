@@ -19,6 +19,7 @@
     "./discovery": "./src/discovery/index.ts",
     "./twitch": "./src/twitch/index.ts",
     "./clans/repository": "./src/clans/repository/index.ts",
+    "./clans/stronghold-leaderboard": "./src/clans/stronghold-leaderboard.ts",
     "./wargaming/wot/clans/top": "./src/wargaming/wot/clans/top/index.ts",
     "./wargaming/wot/players/top": "./src/wargaming/wot/players/top/index.ts",
     "./wargaming/wot/players/top/by-tank": "./src/wargaming/wot/players/top/by-tank/index.ts",

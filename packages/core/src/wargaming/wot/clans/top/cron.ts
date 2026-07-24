@@ -2,11 +2,13 @@ import { and, eq } from "drizzle-orm";
 import {
   RATING_METRICS,
   clanRatingsByRegion,
+  strongholdRatingsByRegion,
   topClansByRegion,
 } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
+import { recomputeStrongholdRatings } from "@unicum.gg/core/clans/stronghold-leaderboard";
 import { computeTopClansAllMetrics, TopClansPeriod } from ".";
 import { recomputeClanRatings } from "./ratings";
 
@@ -53,6 +55,24 @@ async function runInitialIfEmpty(): Promise<void> {
           console.log(`[top-clans cron] ${region}/ratings seeded: ${n} rows`);
         } catch (err) {
           console.error(`[top-clans cron] ${region}/ratings seed failed:`, err);
+        }
+      }
+      // Likewise seed the stronghold board if it was just added.
+      const stronghold = strongholdRatingsByRegion[region];
+      const hasStronghold = await db
+        .select({ clanId: stronghold.clanId })
+        .from(stronghold)
+        .limit(1);
+      if (hasStronghold.length === 0) {
+        console.log(`[top-clans cron] ${region} stronghold empty, seeding`);
+        try {
+          const n = await recomputeStrongholdRatings(region);
+          console.log(`[top-clans cron] ${region}/stronghold seeded: ${n} rows`);
+        } catch (err) {
+          console.error(
+            `[top-clans cron] ${region}/stronghold seed failed:`,
+            err,
+          );
         }
       }
     }
@@ -134,5 +154,19 @@ async function refreshRegion(region: Region): Promise<void> {
     );
   } catch (err) {
     console.error(`[top-clans cron] ${region}/ratings failed:`, err);
+  }
+  // Materialize the stronghold leaderboard so the board reads a cheap indexed
+  // table instead of re-running the ~3s snapshots x members aggregation per
+  // (tier, sort, period) request.
+  try {
+    const start = Date.now();
+    const n = await recomputeStrongholdRatings(region);
+    console.log(
+      `[top-clans cron] ${region}/stronghold: ${n} rows in ${
+        Date.now() - start
+      }ms`,
+    );
+  } catch (err) {
+    console.error(`[top-clans cron] ${region}/stronghold failed:`, err);
   }
 }
