@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Standalone CommonJS module loaded by the Next server runtime (outside the
+    // transpiled bundle), so it legitimately uses `require`/`module.exports`.
+    "cache-handler.js",
   ]),
 ]);
 

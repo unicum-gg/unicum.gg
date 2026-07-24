@@ -33,6 +33,14 @@ const AGENT_DISCOVERY_LINK =
   '</docs>; rel="service-doc"';
 
 const nextConfig: NextConfig = {
+  // ISR / server cache handler. The default handler writes every generated page
+  // to the container's local disk with no eviction, so the `force-static` player
+  // and clan pages (on-demand over ~2M+ entities) grow it without bound and fill
+  // the disk. Per the Next.js self-hosting guide, we swap in a Redis-backed
+  // handler with a TTL eviction policy (see `cache-handler.js`) and disable the
+  // in-memory LRU so every instance reads the same shared, bounded cache.
+  cacheHandler: require.resolve("./cache-handler.js"),
+  cacheMaxMemorySize: 0,
   // Workspace packages ship TypeScript source; Next transpiles them.
   transpilePackages: [
     "@unicum.gg/core",
