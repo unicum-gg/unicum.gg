@@ -16,6 +16,9 @@ node_modules
 
 # next.js
 apps/web/.next/
+# Side-by-side prod build dir (NEXT_DIST_DIR), e.g. running `next start` on one
+# port while `next dev` uses `.next` on another.
+apps/web/.next-*/
 apps/web/out/
 
 # production

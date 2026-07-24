@@ -41,6 +41,10 @@ const nextConfig: NextConfig = {
   // in-memory LRU so every instance reads the same shared, bounded cache.
   cacheHandler: require.resolve("./cache-handler.js"),
   cacheMaxMemorySize: 0,
+  // Allow a separate build output dir (e.g. running a prod `next start` on one
+  // port while `next dev` uses the default `.next` on another). Defaults to
+  // `.next`; override with NEXT_DIST_DIR for a side-by-side prod instance.
+  distDir: process.env.NEXT_DIST_DIR || ".next",
   // Workspace packages ship TypeScript source; Next transpiles them.
   transpilePackages: [
     "@unicum.gg/core",
