@@ -2,6 +2,7 @@
 @import "tw-animate-css";
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
+@import "fumadocs-openapi/css/preset.css";
 @import "../styles/custom.css";
 
 /* Register the shared package as a Tailwind content source. Its ratings module

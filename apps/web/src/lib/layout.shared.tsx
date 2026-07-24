@@ -14,7 +14,14 @@ import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 
-export async function baseOptions(): Promise<BaseLayoutProps> {
+// `sections` toggles the Players/Clans/Tanks + "More" site-navigation links, and
+// `selectors` the rating-metric + region pickers. The main site nav shows both,
+// but a standalone section like `/docs` (its own nav + a tag-grouped sidebar
+// that would otherwise duplicate the section links) passes both `false`.
+export async function baseOptions({
+  selectors = true,
+  sections = true,
+}: { selectors?: boolean; sections?: boolean } = {}): Promise<BaseLayoutProps> {
   return {
     nav: {
       // NavLogo is a Client Component that picks its href from usePathname,
@@ -23,60 +30,68 @@ export async function baseOptions(): Promise<BaseLayoutProps> {
       title: NavLogo,
     },
     links: [
-      {
-        type: "custom",
-        children: <NavSectionLink text="Players" section="players" />,
-      },
-      {
-        type: "custom",
-        children: <NavSectionLink text="Clans" section="clans" />,
-      },
-      {
-        type: "custom",
-        children: <NavSectionLink text="Tanks" section="tanks" />,
-      },
-      // The region-less surfaces (integrations + API), grouped under one
-      // dropdown so the main nav stays three sections.
-      {
-        type: "menu",
-        text: "More",
-        items: [
-          {
-            text: "Discord bot",
-            description: "Player, clan and tank stats as slash commands",
-            url: ROUTES.BOT,
-            icon: <RobotIcon />,
-          },
-          {
-            text: "MCP server",
-            description: "Connect Claude, ChatGPT or any MCP client",
-            url: ROUTES.MCP,
-            icon: <PlugsConnectedIcon />,
-          },
-          {
-            text: "API",
-            description: "Free public REST API, no key required",
-            url: ROUTES.DOCS,
-            icon: <FileCodeIcon />,
-          },
-          {
-            text: "Support us",
-            description: `Keep ${APP.NAME} free, open and ad-free`,
-            url: ROUTES.SUPPORT,
-            icon: <HeartIcon />,
-          },
-        ],
-      },
-      {
-        type: "custom",
-        secondary: true,
-        children: <RatingSelector />,
-      },
-      {
-        type: "custom",
-        secondary: true,
-        children: <RegionSelector />,
-      },
+      ...(sections
+        ? ([
+            {
+              type: "custom",
+              children: <NavSectionLink text="Players" section="players" />,
+            },
+            {
+              type: "custom",
+              children: <NavSectionLink text="Clans" section="clans" />,
+            },
+            {
+              type: "custom",
+              children: <NavSectionLink text="Tanks" section="tanks" />,
+            },
+            // The region-less surfaces (integrations + API), grouped under one
+            // dropdown so the main nav stays three sections.
+            {
+              type: "menu",
+              text: "More",
+              items: [
+                {
+                  text: "Discord bot",
+                  description: "Player, clan and tank stats as slash commands",
+                  url: ROUTES.BOT,
+                  icon: <RobotIcon />,
+                },
+                {
+                  text: "MCP server",
+                  description: "Connect Claude, ChatGPT or any MCP client",
+                  url: ROUTES.MCP,
+                  icon: <PlugsConnectedIcon />,
+                },
+                {
+                  text: "API",
+                  description: "Free public REST API, no key required",
+                  url: ROUTES.DOCS,
+                  icon: <FileCodeIcon />,
+                },
+                {
+                  text: "Support us",
+                  description: `Keep ${APP.NAME} free, open and ad-free`,
+                  url: ROUTES.SUPPORT,
+                  icon: <HeartIcon />,
+                },
+              ],
+            },
+          ] satisfies BaseLayoutProps["links"])
+        : []),
+      ...(selectors
+        ? ([
+            {
+              type: "custom",
+              secondary: true,
+              children: <RatingSelector />,
+            },
+            {
+              type: "custom",
+              secondary: true,
+              children: <RegionSelector />,
+            },
+          ] satisfies BaseLayoutProps["links"])
+        : []),
       // Discord + GitHub as Phosphor icons in the nav's secondary slot, in place
       // of fumadocs' built-in `githubUrl` icon, so both share the same style.
       {
