@@ -48,4 +48,4 @@ export default async function Page({
 // Language params are generated on demand (no build-time prerender, so the
 // build never depends on a running API) and cached between revalidations.
 export const dynamic = "force-static";
-export const revalidate = 600;
+export const revalidate = 1800; // 30 min, matches the detail pages (board data is materialized hourly)
