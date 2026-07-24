@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { TankView } from "@/components/tanks/detail/view";
-import { TankViewSkeleton } from "@/components/tanks/detail/view-skeleton";
-import {
-  TankDetailTab,
-  tankDetailTabFromQuery,
-} from "@/components/tanks/detail/tabs";
 import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
@@ -79,25 +73,18 @@ export default async function TankPage({
 }) {
   const { region, slug } = await params;
   if (!isRegion(region)) notFound();
-  // Skeleton falls back to the default tab; the client tab-bar reads `?tab=` and
-  // switches after hydration. Reading searchParams here would force dynamic.
-  return renderTankPage(region, slug, tankDetailTabFromQuery(undefined));
+  // The active tab lives in `?tab=` and is read client-side by the tab-bar, so
+  // the server render is tab-agnostic and reads no searchParams (stays static).
+  return renderTankPage(region, slug);
 }
 
-// Thin boundary: nothing here blocks, so Next flushes the shell + skeleton
-// immediately, then streams the real view once the (heavier) detail fetch
-// resolves. The redirect/notFound live in the async child, where a redirect
-// mid-stream becomes a client redirect.
-export function renderTankPage(
-  region: Region,
-  slug: string,
-  tab: TankDetailTab,
-) {
-  return (
-    <Suspense fallback={<TankViewSkeleton region={region} tab={tab} />}>
-      <TankPageServer region={region} slug={slug} />
-    </Suspense>
-  );
+// Renders the tank view inline (blocking on the detail fetch) rather than
+// streaming it behind a Suspense skeleton: force-static prerenders the whole
+// page, so the real stats land in the cached HTML. That keeps the `.md` twin and
+// non-JS crawlers complete (a Suspense boundary would leave only the skeleton in
+// `#page-content`). The redirect/notFound run here in the blocking render.
+export function renderTankPage(region: Region, slug: string) {
+  return <TankPageServer region={region} slug={slug} />;
 }
 
 async function TankPageServer({

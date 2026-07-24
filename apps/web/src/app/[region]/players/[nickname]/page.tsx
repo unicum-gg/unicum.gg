@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import {
   modeFromQuery,
@@ -7,7 +6,6 @@ import {
   PlayerSection,
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
-import { PlayerProfileSkeleton } from "@/components/players/detail/skeleton";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
@@ -18,8 +16,6 @@ import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
-  DEFAULT_RATING_METRIC,
-  RATING_METRIC_LABEL,
   type PlayerDetailData,
   type PlayerTankRow,
 } from "@unicum.gg/shared";
@@ -133,40 +129,24 @@ export default async function PlayerPage({
   // Reading searchParams here would force dynamic rendering.
   const section = sectionFromQuery(undefined);
   const mode = modeFromQuery(undefined);
-  // The skeleton's rating-column header uses the default metric's label; the
-  // client swaps to the user's cookie metric once the real profile hydrates.
-  const metricLabel = RATING_METRIC_LABEL[DEFAULT_RATING_METRIC];
 
-  // Nothing before this boundary blocks (just params), so Next flushes the shell
-  // and the full-fidelity skeleton immediately, then streams the real profile in
-  // when `loadDetail` resolves. Scoped to this page, so the `vs/` compare child
-  // keeps its own loading UI.
+  // Render the profile inline (blocking on `loadDetail`) rather than streaming it
+  // behind a Suspense skeleton: force-static prerenders the whole page, so the
+  // real stats land in the cached HTML. That keeps the `.md` twin and non-JS
+  // crawlers complete (a Suspense boundary would leave only the skeleton in
+  // `#page-content`, with the stats streamed into a hidden node only JS swaps in).
   return (
-    <Suspense
-      fallback={
-        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col">
-          <PlayerProfileSkeleton
-            nickname={decoded}
-            metricLabel={metricLabel}
-            section={section}
-            mode={mode}
-          />
-          <div aria-hidden className={`flex-1 ${styles.borderX}`} />
-        </div>
-      }
-    >
-      <PlayerProfileServer
-        region={region}
-        decoded={decoded}
-        section={section}
-        mode={mode}
-      />
-    </Suspense>
+    <PlayerProfileServer
+      region={region}
+      decoded={decoded}
+      section={section}
+      mode={mode}
+    />
   );
 }
 
-/** The data-dependent half of the page, isolated behind the Suspense boundary so
- * its `loadDetail` await streams in rather than blocking the initial paint. */
+/** The data-dependent half of the page. Its `loadDetail` await blocks the render
+ * so the static prerender captures the full profile (see the note above). */
 async function PlayerProfileServer({
   region,
   decoded,

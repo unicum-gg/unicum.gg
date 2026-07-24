@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { ClanProfile } from "@/components/clans/detail/view";
-import { ClanProfileSkeleton } from "@/components/clans/detail/skeleton";
 import {
   ClanMode,
   ClanSection,
@@ -105,36 +103,24 @@ export default async function ClanPage({
   const section = sectionFromQuery(undefined);
   const mode = modeFromQuery(undefined);
 
-  // Nothing before this boundary blocks, so Next flushes the shell + skeleton
-  // immediately, then streams the real profile once the (heavier) clan fetches
-  // resolve. The color isn't known yet, so the skeleton's `[TAG]` brackets
-  // inherit the text color until the real one streams in.
+  // Render the profile inline (blocking on the clan fetches) rather than
+  // streaming it behind a Suspense skeleton: force-static prerenders the whole
+  // page, so the real stats land in the cached HTML. That keeps the `.md` twin
+  // and non-JS crawlers complete (a Suspense boundary would leave only the
+  // skeleton in `#page-content`, with the stats streamed into a hidden node only
+  // JS swaps in).
   return (
-    <Suspense
-      fallback={
-        <div className="mx-auto w-full max-w-7xl">
-          <ClanProfileSkeleton
-            region={region}
-            tag={decoded}
-            color="inherit"
-            section={section}
-            mode={mode}
-          />
-        </div>
-      }
-    >
-      <ClanProfileServer
-        region={region}
-        decoded={decoded}
-        section={section}
-        mode={mode}
-      />
-    </Suspense>
+    <ClanProfileServer
+      region={region}
+      decoded={decoded}
+      section={section}
+      mode={mode}
+    />
   );
 }
 
-/** The data-dependent half of the page, behind the Suspense boundary so its
- * overview + section fetches stream in rather than blocking the initial paint. */
+/** The data-dependent half of the page. Its overview + section fetches block the
+ * render so the static prerender captures the full profile (see the note above). */
 async function ClanProfileServer({
   region,
   decoded,
