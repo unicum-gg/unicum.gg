@@ -16,10 +16,8 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { FeaturedPlayer } from "@/components/home/featured-player";
-import {
-  LeaderboardPeriodSelect,
-  useLeaderboardPeriod,
-} from "@/components/home/leaderboard-period";
+import { usePeriod } from "@/hooks/use-period";
+import { PeriodSelect } from "@/components/home/period-select";
 import {
   ClanTag,
   METRIC_VALUE,
@@ -80,7 +78,7 @@ export function LiveStreams({
     : DEFAULT_RATING_METRIC;
   const metricLabel = RATING_METRIC_LABEL[metric];
 
-  const [period, setPeriod] = useLeaderboardPeriod();
+  const [period, setPeriod] = usePeriod();
 
   const sorted = useMemo(() => {
     const value = METRIC_VALUE[period][metric];
@@ -181,7 +179,7 @@ export function LiveStreams({
           <PanelTitle>
             <span className="mr-2 text-[#eb0400]">●</span>
             Top players streaming now ·{" "}
-            <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
+            <PeriodSelect period={period} onChange={setPeriod} />
           </PanelTitle>
           <div className="flex items-center gap-1.5">
             <AddChannelCta />

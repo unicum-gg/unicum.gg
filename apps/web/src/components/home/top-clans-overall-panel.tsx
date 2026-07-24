@@ -1,10 +1,7 @@
 "use client";
 
-import {
-  LeaderboardPeriod,
-  LeaderboardPeriodSelect,
-  useLeaderboardPeriod,
-} from "@/components/home/leaderboard-period";
+import { Period, usePeriod } from "@/hooks/use-period";
+import { PeriodSelect } from "@/components/home/period-select";
 import { TopClans, type TopClansInitial } from "@/components/home/top-clans";
 import { TopClansLeaderboardLink } from "@/components/home/top-clans-leaderboard-link";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
@@ -33,8 +30,8 @@ export function TopClansOverallPanel({
   monthByMetric: TopClansInitial[];
   regionOverride?: Region;
 }) {
-  const [period, setPeriod] = useLeaderboardPeriod();
-  const isOverall = period === LeaderboardPeriod.Overall;
+  const [period, setPeriod] = usePeriod();
+  const isOverall = period === Period.Overall;
   const data = isOverall ? overallByMetric : monthByMetric;
 
   return (
@@ -42,7 +39,7 @@ export function TopClansOverallPanel({
       <PanelHeader className="flex items-center justify-between gap-3">
         <PanelTitle>
           Top clans ·{" "}
-          <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
+          <PeriodSelect period={period} onChange={setPeriod} />
         </PanelTitle>
         {isOverall && (
           <TopClansLeaderboardLink regionOverride={regionOverride} />

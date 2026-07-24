@@ -8,7 +8,7 @@ import {
   wnxColor,
   type LiveStreamer,
 } from "@unicum.gg/shared";
-import { LeaderboardPeriod } from "@/components/home/leaderboard-period";
+import { Period } from "@/hooks/use-period";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
@@ -16,15 +16,15 @@ import { cn } from "@/lib/utils";
 // (shared with the "Top players" / "Top clans" panels). 30-day reflects who is
 // playing well right now rather than career averages.
 export const METRIC_VALUE: Record<
-  LeaderboardPeriod,
+  Period,
   Record<RatingMetric, (s: LiveStreamer) => number | null>
 > = {
-  [LeaderboardPeriod.Overall]: {
+  [Period.Overall]: {
     [RatingMetric.Wn7]: (s) => s.wn7,
     [RatingMetric.Wn8]: (s) => s.wn8,
     [RatingMetric.Wnx]: (s) => s.wnx,
   },
-  [LeaderboardPeriod.Month]: {
+  [Period.Month]: {
     [RatingMetric.Wn7]: (s) => s.wn730d,
     [RatingMetric.Wn8]: (s) => s.wn830d,
     [RatingMetric.Wnx]: (s) => s.wnx30d,
@@ -49,7 +49,7 @@ export function StreamRow({
 }: {
   streamer: LiveStreamer;
   metric: RatingMetric;
-  period: LeaderboardPeriod;
+  period: Period;
   active: boolean;
   onSelect: () => void;
 }) {

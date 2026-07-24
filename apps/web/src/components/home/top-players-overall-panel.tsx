@@ -1,11 +1,8 @@
 "use client";
 
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
-import {
-  LeaderboardPeriod,
-  LeaderboardPeriodSelect,
-  useLeaderboardPeriod,
-} from "@/components/home/leaderboard-period";
+import { Period, usePeriod } from "@/hooks/use-period";
+import { PeriodSelect } from "@/components/home/period-select";
 import {
   TopPlayers,
   type TopPlayersInitial,
@@ -37,8 +34,8 @@ export function TopPlayersOverallPanel({
   monthByMetric: TopPlayersInitial[];
   regionOverride?: Region;
 }) {
-  const [period, setPeriod] = useLeaderboardPeriod();
-  const isOverall = period === LeaderboardPeriod.Overall;
+  const [period, setPeriod] = usePeriod();
+  const isOverall = period === Period.Overall;
   const data = isOverall ? overallByMetric : monthByMetric;
 
   return (
@@ -49,7 +46,7 @@ export function TopPlayersOverallPanel({
       >
         <PanelTitle>
           Top players ·{" "}
-          <LeaderboardPeriodSelect period={period} onChange={setPeriod} />
+          <PeriodSelect period={period} onChange={setPeriod} />
         </PanelTitle>
         {isOverall && (
           <TopPlayersLeaderboardLink regionOverride={regionOverride} />

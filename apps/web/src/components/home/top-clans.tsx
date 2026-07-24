@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import { LeaderboardPeriod } from "@/components/home/leaderboard-period";
+import { Period } from "@/hooks/use-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -44,12 +44,12 @@ export type TopClansInitial = Record<
 export function TopClans({
   initial,
   metric,
-  period = LeaderboardPeriod.Overall,
+  period = Period.Overall,
   regionOverride,
 }: {
   initial: TopClansInitial;
   metric: RatingMetric;
-  period?: LeaderboardPeriod;
+  period?: Period;
   regionOverride?: Region;
 }) {
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
@@ -61,7 +61,7 @@ export function TopClans({
   return (
     <div className="flex h-full flex-col">
       <div className={cn("p-4", styles.mutedDescription)}>
-        {period === LeaderboardPeriod.Month ? (
+        {period === Period.Month ? (
           <>
             Showing top {REGION_EMOJI[region]} {REGION_LABEL[region]} clans with
             more than 50 members with battles, ranked by{" "}
