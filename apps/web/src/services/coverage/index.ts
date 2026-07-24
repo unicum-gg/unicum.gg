@@ -161,6 +161,13 @@ async function getCoverageStatsUncached(
   const clanRefreshQueueTable = clanRefreshQueueByRegion[region];
   const playerRefreshQueueTable = playerRefreshQueueByRegion[region];
 
+  // Oldest + newest snapshot in a single scan. player_snapshots has no index on
+  // `taken_at`, so MIN and MAX each seq-scan the whole table; sharing one query
+  // (awaited twice below) pays for a single scan instead of two.
+  const snapshotBounds = db.execute<{ oldest: string | null; newest: string | null }>(
+    sql`SELECT MIN(taken_at)::text AS oldest, MAX(taken_at)::text AS newest FROM ${playerSnapshotsTable}`,
+  );
+
   const [
     players,
     clans,
@@ -237,11 +244,9 @@ async function getCoverageStatsUncached(
                    OR ${playersTable.softDeletedAt} < NOW() - INTERVAL '30 days')`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
-    db
-      .execute<{ at: string | null }>(
-        sql`SELECT MAX(taken_at)::text AS at FROM ${playerSnapshotsTable}`,
-      )
-      .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
+    snapshotBounds.then((r) =>
+      r[0]?.newest ? new Date(r[0].newest) : null,
+    ),
     db
       .execute<{ at: string | null }>(
         sql`SELECT MAX(last_refreshed_at)::text AS at FROM ${clansTable}`,
@@ -261,11 +266,9 @@ async function getCoverageStatsUncached(
             WHERE last_refreshed_at > NOW() - INTERVAL '24 hours'`,
       )
       .then((r) => Number(r[0]?.count ?? 0)),
-    db
-      .execute<{ at: string | null }>(
-        sql`SELECT MIN(taken_at)::text AS at FROM ${playerSnapshotsTable}`,
-      )
-      .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
+    snapshotBounds.then((r) =>
+      r[0]?.oldest ? new Date(r[0].oldest) : null,
+    ),
     db
       .execute<{ tag: string; name: string; members_count: number }>(
         sql`SELECT tag, name, members_count
@@ -282,14 +285,12 @@ async function getCoverageStatsUncached(
           membersCount: Number(row.members_count),
         };
       }),
+    // `players.battles` is the latest snapshot's battle count, refreshed on every
+    // snapshot-cron tick — so summing it is one scan of the (narrower) players
+    // table instead of a DISTINCT ON over all 4.3M player_snapshots rows.
     db
       .execute<{ total: string | null }>(
-        sql`SELECT SUM(latest.battles)::text AS total
-            FROM (
-              SELECT DISTINCT ON (player_id) battles
-              FROM ${playerSnapshotsTable}
-              ORDER BY player_id, taken_at DESC
-            ) latest`,
+        sql`SELECT SUM(battles)::text AS total FROM ${playersTable}`,
       )
       .then((r) => Number(r[0]?.total ?? 0)),
     db.execute<{ day: string; count: string }>(
@@ -346,26 +347,24 @@ async function getCoverageStatsUncached(
         // the refresh policy actually controls — did we revisit them in time —
         // so it credits an inactive player we correctly re-checked at their
         // 90-day cadence and doesn't penalise us for them not playing. We still
-        // require a snapshot to exist (ls.taken_at IS NOT NULL) so a never-
-        // fetched player never counts as on-time. Aggregated client-side into
-        // both the headline freshness stat (Unfetched excluded from denominator
-        // so the % reflects refresh-policy health, not the discovery backlog)
-        // and the per-bucket breakdown panel.
-        sql`WITH last_snap AS (
-              SELECT player_id, MAX(taken_at) AS taken_at
-              FROM ${playerSnapshotsTable}
-              GROUP BY player_id
-            )
-            SELECT
+        // require a fetch to have happened (`due_at <> 'epoch'`) so a never-
+        // fetched player never counts as on-time. `due_at` defaults to epoch on
+        // discovery and every pipeline touch (success/null/error) sets it to a
+        // real time, so `due_at = 'epoch'` is an exact "never fetched / no
+        // snapshot row" signal (verified equal to the old MAX(taken_at) GROUP BY
+        // player_id result) that avoids a full seq-scan of player_snapshots.
+        // Aggregated client-side into both the headline freshness stat (Unfetched
+        // excluded from denominator so the % reflects refresh-policy health, not
+        // the discovery backlog) and the per-bucket breakdown panel.
+        sql`SELECT
               ${activityBucketSql(playersTable.lastBattleAt, playersTable.softDeletedAt)} AS bucket,
               COUNT(*)::text AS total,
               COUNT(*) FILTER (
-                WHERE ls.taken_at IS NOT NULL
+                WHERE ${playersTable.dueAt} <> 'epoch'::timestamptz
                   AND ${playersTable.lastSeenAt} >= ${refreshCutoffSql(playersTable.lastBattleAt)}
               )::text AS on_time,
-              COUNT(*) FILTER (WHERE ls.taken_at IS NULL)::text AS never_snapped
+              COUNT(*) FILTER (WHERE ${playersTable.dueAt} = 'epoch'::timestamptz)::text AS never_snapped
             FROM ${playersTable}
-            LEFT JOIN last_snap ls ON ls.player_id = ${playersTable.id}
             GROUP BY bucket`,
       )
       .then((rows) => {
@@ -491,6 +490,10 @@ async function getCoverageStatsUncached(
 const getCoverageStatsCached = unstable_cache(
   getCoverageStatsUncached,
   ["coverage-stats"],
+  // 60s: the live-monitoring figures (last-24h counts, last-snapshot time,
+  // backlog) must stay fresh, so we keep the short window. It's affordable now
+  // that the per-player 100s+ scans are gone — the remaining player_snapshots
+  // scans are single-digit seconds and only run on a background revalidation.
   { revalidate: 60, tags: ["coverage"] },
 );
 
@@ -500,9 +503,10 @@ function toDate(v: Date | string | null): Date | null {
 }
 
 /**
- * Cached coverage stats: 60s fresh, then revalidate in background. Without
- * this cache the page would hit ~18 DB queries (incl. a multi-second
- * aggregate) on every request.
+ * Cached coverage stats: 60s fresh, then revalidate in background. The heavy
+ * per-player aggregates (two ~100s scans) were replaced with cached `players`
+ * columns and a shared MIN/MAX scan, so the 60s window is cheap to sustain and
+ * the live-monitoring figures stay fresh.
  */
 export async function getCoverageStats(region: Region): Promise<CoverageStats> {
   const c = (await getCoverageStatsCached(region)) as CoverageStats & {
