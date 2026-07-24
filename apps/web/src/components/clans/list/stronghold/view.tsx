@@ -43,6 +43,10 @@ import {
 import { cn } from "@/lib/utils";
 import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
+import {
+  type LeaderboardPeriod,
+  useLeaderboardPeriod,
+} from "@/components/home/leaderboard-period";
 import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 
@@ -120,6 +124,12 @@ export function StrongholdLeaderboardView({
   results: StrongholdLeaderboardEntry[];
 }) {
   const router = useRouter();
+  // Writes the shared period cookie (the same one the home leaderboards use, via
+  // `useLeaderboardPeriod`) so a period picked here carries back to them and
+  // survives a reload; reading it as the default happens server-side (see
+  // StrongholdLeaderboardPage). `LeaderboardPeriod` and `StrongholdPeriod` are
+  // distinct enums with identical values, so the cast is a no-op at runtime.
+  const [, setSharedPeriod] = useLeaderboardPeriod();
 
   function navigate(nextSort: StrongholdSort, nextPeriod: StrongholdPeriod) {
     const params = new URLSearchParams({ sort: nextSort });
@@ -136,6 +146,7 @@ export function StrongholdLeaderboardView({
   }
 
   function setPeriod(p: StrongholdPeriod) {
+    setSharedPeriod(p as unknown as LeaderboardPeriod);
     navigate(sort, p);
   }
 

@@ -1,6 +1,8 @@
+import { cookies } from "next/headers";
 import { StrongholdLeaderboardView } from "./view";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
+import STORAGE from "@/constants/storage";
 import {
   StrongholdPeriod,
   StrongholdSort,
@@ -41,7 +43,14 @@ export async function StrongholdLeaderboardPage({
 }) {
   const tier = parseTier(tierParam) ?? StrongholdTier.T10;
   const sort = parseSort(sortParam, tier);
-  const period = parsePeriod(periodParam);
+  // Period sync: an explicit `?period=` (a shared link, or a click on this page)
+  // wins; otherwise fall back to the shared `unicum.period` cookie so the choice
+  // made on the home leaderboards carries over (the values match). The view
+  // writes the same cookie on change, keeping the two in sync both ways.
+  const cookiePeriod = periodParam
+    ? undefined
+    : (await cookies()).get(STORAGE.COOKIES.PERIOD)?.value;
+  const period = parsePeriod(periodParam ?? cookiePeriod);
   // The page consumes its own public API through the SDK (top 100 fixed by
   // the endpoint).
   const { results } = (await unicum
