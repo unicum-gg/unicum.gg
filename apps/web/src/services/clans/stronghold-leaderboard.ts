@@ -4,6 +4,7 @@ import {
   StrongholdSort,
   StrongholdTier,
   strongholdRatingsByRegion,
+  type ClanStrongholdSr,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import type { Region } from "@unicum.gg/wargaming";
@@ -66,7 +67,7 @@ export async function getStrongholdLeaderboard(
       clan_id, tag, name, color, COALESCE(emblem, '') AS emblem, languages,
       members_count, elo, battles, wins, personal_rating, boost_ratio, sr
     FROM ${table}
-    WHERE tier = ${tier} AND period = ${period}
+    WHERE tier = ${tier} AND period = ${period} AND is_active
     ORDER BY ${orderExpr(sort)}
     LIMIT ${sql.raw(String(limit))}
   `)) as unknown as Array<{
@@ -101,4 +102,31 @@ export async function getStrongholdLeaderboard(
     boostRatio: r.boost_ratio === null ? null : Number(r.boost_ratio),
     sr: r.sr === null ? null : Number(r.sr),
   }));
+}
+
+/**
+ * The clan's current (overall) SR per mode/tier, read from the materialized
+ * `stronghold_ratings` table (the same SR the boards rank by). Returns null per
+ * tier when the clan is below the ranking threshold or the region is unseeded.
+ * Powers the SR rows in the clan page's stronghold section.
+ */
+export async function getClanStrongholdSr(
+  region: Region,
+  clanId: number,
+): Promise<ClanStrongholdSr> {
+  const table = strongholdRatingsByRegion[region];
+  const rows = (await db.execute(sql`
+    SELECT tier, sr
+    FROM ${table}
+    WHERE clan_id = ${clanId} AND period = ${StrongholdPeriod.Overall}
+  `)) as unknown as Array<{ tier: string; sr: number | string | null }>;
+  const byTier = new Map(
+    rows.map((r) => [r.tier, r.sr === null ? null : Number(r.sr)]),
+  );
+  return {
+    advances: byTier.get(StrongholdTier.Advances) ?? null,
+    t10: byTier.get(StrongholdTier.T10) ?? null,
+    t8: byTier.get(StrongholdTier.T8) ?? null,
+    t6: byTier.get(StrongholdTier.T6) ?? null,
+  };
 }

@@ -1,5 +1,6 @@
 import {
   bigint,
+  boolean,
   index,
   integer,
   numeric,
@@ -11,11 +12,14 @@ import {
 import { Region } from "@unicum.gg/wargaming";
 
 // Materialized stronghold leaderboard, one row per (tier, period, clan). Holds
-// every clan that qualifies for the board (min battles + active in the last 30
-// days), with all metrics precomputed, so the endpoint serves any (tier, sort,
-// period) slice as a cheap indexed read (`WHERE tier = $1 AND period = $2 ORDER
-// BY <sort> LIMIT 100`) instead of re-running the ~3s snapshots x members
-// aggregation on every request. Recomputed hourly by the top-clans cron.
+// every clan that meets the min-battles threshold, with all metrics precomputed,
+// so the endpoint serves any (tier, sort, period) slice as a cheap indexed read
+// (`WHERE tier = $1 AND period = $2 AND is_active ORDER BY <sort> LIMIT 100`)
+// instead of re-running the ~3s snapshots x members aggregation on every request.
+// `is_active` (a positive 30-day battle diff) gates the board so it only ranks
+// currently-active clans; the clan page reads a clan's own SR ignoring it, so a
+// tier a clan played historically but not recently still shows its rating.
+// Recomputed hourly by the top-clans cron.
 export function makeStrongholdRatingsTable(region: string) {
   return pgTable(
     `${region}_stronghold_ratings`,
@@ -46,6 +50,9 @@ export function makeStrongholdRatingsTable(region: string) {
       boostRatio: numeric("boost_ratio"),
       // Composite skirmish rating (roster x win rate x volume x maturity).
       sr: numeric("sr"),
+      // True when the clan has a positive 30-day battle diff on this tier. The
+      // board filters on it (only rank active clans); the clan page ignores it.
+      isActive: boolean("is_active").notNull().default(true),
       computedAt: timestamp("computed_at", { withTimezone: true })
         .notNull()
         .defaultNow(),

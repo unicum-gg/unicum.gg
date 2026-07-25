@@ -121,6 +121,17 @@ export function diffClanStrongholdStats(
 // the `/stronghold` + `/clan-wars` endpoints and the clan page's SSR seed
 // produce the exact same shape, and the tables render it with no client-side
 // projection or diffing.
+// The clan's current (overall) Skirmish Rating per mode/tier, from the
+// materialized ratings table (the same SR the boards rank by). Null per tier for
+// a clan below the ranking threshold. Unlike the snapshot stats it isn't a
+// per-period diff, so it only fills the "Total" column of the stronghold table.
+export type ClanStrongholdSr = {
+  advances: number | null;
+  t10: number | null;
+  t8: number | null;
+  t6: number | null;
+};
+
 export type ClanStrongholdView = {
   latest: ClanStrongholdStats | null;
   periods: {
@@ -128,14 +139,16 @@ export type ClanStrongholdView = {
     d7: ClanStrongholdStats | null;
     d30: ClanStrongholdStats | null;
   };
+  sr: ClanStrongholdSr | null;
 };
 
 export function clanStrongholdView(
   latest: ClanSnapshot | null,
   periods: ClanSnapshotPeriods,
+  sr: ClanStrongholdSr | null = null,
 ): ClanStrongholdView {
   if (!latest) {
-    return { latest: null, periods: { h24: null, d7: null, d30: null } };
+    return { latest: null, periods: { h24: null, d7: null, d30: null }, sr };
   }
   const current = strongholdStatsFromClanSnapshot(latest);
   const diff = (s: ClanSnapshot | null) =>
@@ -147,6 +160,7 @@ export function clanStrongholdView(
       d7: diff(periods.d7),
       d30: diff(periods.d30),
     },
+    sr,
   };
 }
 

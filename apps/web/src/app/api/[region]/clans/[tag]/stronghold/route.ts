@@ -1,5 +1,6 @@
 import { clanStrongholdView } from "@unicum.gg/shared";
 import { loadClanDetailByTag } from "@/services/clans/detail";
+import { getClanStrongholdSr } from "@/services/clans/stronghold-leaderboard";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanStrongholdResponse } from "./schema.api";
@@ -26,8 +27,9 @@ export async function GET(
   if (!detail) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
+  const sr = await getClanStrongholdSr(region, detail.clan.id);
   return jsonResponse(
     ClanStrongholdResponse,
-    clanStrongholdView(detail.snapshotLatest, detail.snapshotPeriods),
+    clanStrongholdView(detail.snapshotLatest, detail.snapshotPeriods, sr),
   );
 }

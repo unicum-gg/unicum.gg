@@ -254,7 +254,12 @@ export function ClanTabsView({
           events={events}
         />
       ) : mode === ClanMode.Stronghold ? (
-        <StrongholdTab tag={tag} color={color} stronghold={stronghold} />
+        <StrongholdTab
+          region={region}
+          tag={tag}
+          color={color}
+          stronghold={stronghold}
+        />
       ) : (
         <ClanWarsTab tag={tag} color={color} clanWars={clanWars} />
       )}

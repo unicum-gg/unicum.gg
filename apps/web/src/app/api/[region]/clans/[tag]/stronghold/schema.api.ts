@@ -31,4 +31,9 @@ export const ClanStrongholdResponse = z.object({
     d7: clanStrongholdStats.nullable(),
     d30: clanStrongholdStats.nullable(),
   }),
+  // Current (overall) Skirmish Rating per mode/tier, from the materialized
+  // leaderboard. Null (or a null tier) when the clan isn't ranked.
+  sr: z
+    .object({ advances: n(), t10: n(), t8: n(), t6: n() })
+    .nullable(),
 });

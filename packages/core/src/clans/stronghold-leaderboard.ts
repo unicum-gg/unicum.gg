@@ -130,6 +130,7 @@ type RawRow = {
   personal_rating: number | null;
   boost_ratio: number | string | null;
   sr: number | string | null;
+  is_active: boolean;
 };
 
 type InsertValue = StrongholdRatingsTable["$inferInsert"];
@@ -206,14 +207,18 @@ async function computeStrongholdRows(
       ${winsRaw} AS wins,
       round(roster.median_pr) AS personal_rating,
       round(roster.boost_ratio::numeric, 3) AS boost_ratio,
-      ${srRaw} AS sr
+      ${srRaw} AS sr,
+      -- Active = a positive 30-day battle diff (a null baseline reads as
+      -- inactive). The board filters on this so it only ranks currently-active
+      -- clans; the clan page ignores it. We materialize every min-battles clan
+      -- (not only active ones) so a clan's own SR on a tier it played but hasn't
+      -- touched in 30 days is still readable on its page.
+      COALESCE((latest.${battlesCol} - b30.battles) > 0, false) AS is_active
     FROM latest
     JOIN ${clans} c ON c.id = latest.clan_id
     LEFT JOIN baseline_30d b30 ON b30.clan_id = latest.clan_id
     LEFT JOIN roster ON roster.clan_id = latest.clan_id
-    -- Only rank clans active in the last 30 days (a positive 30-day battle diff).
     WHERE c.is_disbanded = false
-      AND (latest.${battlesCol} - b30.battles) > 0
   `)) as unknown as RawRow[];
 }
 
@@ -251,6 +256,7 @@ export async function recomputeStrongholdRatings(
             r.personal_rating === null ? null : Number(r.personal_rating),
           boostRatio: r.boost_ratio === null ? null : String(r.boost_ratio),
           sr: r.sr === null ? null : String(r.sr),
+          isActive: r.is_active,
         });
       }
     }
