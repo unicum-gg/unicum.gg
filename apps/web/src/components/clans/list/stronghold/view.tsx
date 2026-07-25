@@ -7,8 +7,8 @@ import {
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import { useRouter } from "next/navigation";
-import type { ReactNode } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+import useSWR from "swr";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
@@ -41,9 +41,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
+import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
-import { type Period, usePeriod } from "@/hooks/use-period";
+import { unicum } from "@/services/sdk";
+import { type Period, usePeriod, isPeriod } from "@/hooks/use-period";
 import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 
@@ -59,8 +60,9 @@ const pctFmt = new Intl.NumberFormat("en-US", {
 });
 
 // The leaderboard is ranked server-side, always descending (best first), so a
-// header click just re-navigates with the new `sort` param. The caret marks the
-// active column rather than toggling asc/desc.
+// header click just re-fetches that sort's top 100 (a different set of clans,
+// not a reorder). The caret marks the active column rather than toggling
+// asc/desc.
 function SortableHead({
   sortKey,
   active,
@@ -110,42 +112,80 @@ function SortableHead({
 export function StrongholdLeaderboardView({
   region,
   tier,
-  sort,
-  period,
-  results,
+  initialResults,
 }: {
   region: Region;
   tier: StrongholdTier;
-  sort: StrongholdSort;
-  period: StrongholdPeriod;
-  results: StrongholdLeaderboardEntry[];
+  initialResults: StrongholdLeaderboardEntry[];
 }) {
-  const router = useRouter();
-  // Writes the shared period cookie (the same one the home leaderboards use, via
-  // `usePeriod`) so a period picked here carries back to them and survives a
-  // reload; reading it as the default happens server-side (see
-  // StrongholdLeaderboardPage). `Period` and `StrongholdPeriod` are distinct
-  // enums with identical values, so the cast is a no-op at runtime.
-  const [, setSharedPeriod] = usePeriod();
+  // Sort is per-tier local state (not shared); period IS the shared
+  // `unicum.period` cookie (same one the home leaderboards use), so picking it
+  // here carries back to them and vice versa. `Period` and `StrongholdPeriod`
+  // are distinct enums with identical values, so the casts are runtime no-ops.
+  const [sort, setSortState] = useState<StrongholdSort>(StrongholdSort.Rating);
+  const [periodCookie, setPeriodCookie] = usePeriod();
+  const period = periodCookie as unknown as StrongholdPeriod;
 
-  function navigate(nextSort: StrongholdSort, nextPeriod: StrongholdPeriod) {
-    const params = new URLSearchParams({ sort: nextSort });
-    // Only carry the period when it deviates from the default, keeping the
-    // Overall URL clean.
-    if (nextPeriod !== StrongholdPeriod.Overall) params.set("period", nextPeriod);
-    router.push(`${ROUTES.STRONGHOLD(region, tier)}?${params}`, {
-      scroll: false,
-    });
+  // The page is prerendered (ISR) at the canonical view (SR + Overall), seeded
+  // here as `initialResults`. Sort/period are then swapped client-side by
+  // re-fetching that variant's top 100 through the SDK — no route navigation, so
+  // switching stays a single cheap hit onto the materialized endpoint. The
+  // cookie hydrating to `30d` after mount flips the key and refetches on its own.
+  const { data } = useSWR(
+    ["stronghold-top", region, tier, sort, period] as const,
+    ([, r, t, s, p]) =>
+      unicum
+        .region(r)
+        .clans.strongholdTop({ tier: t, sort: s, period: p })
+        .then((res) => res.results as unknown as StrongholdLeaderboardEntry[]),
+    {
+      fallbackData: initialResults,
+      revalidateOnMount: false,
+      keepPreviousData: true,
+    },
+  );
+  const results = data ?? initialResults;
+
+  // Reflect sort/period in the URL without a Next navigation (a plain
+  // `history.replaceState`, so no RSC round-trip), keeping the Overall/SR URL
+  // clean. This preserves shareable deep links, which the mount effect re-reads.
+  function syncUrl(nextSort: StrongholdSort, nextPeriod: StrongholdPeriod) {
+    const params = new URLSearchParams();
+    if (nextSort !== StrongholdSort.Rating) params.set("sort", nextSort);
+    if (nextPeriod !== StrongholdPeriod.Overall)
+      params.set("period", nextPeriod);
+    const qs = params.toString();
+    window.history.replaceState(
+      null,
+      "",
+      qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
+    );
   }
 
   function setSort(s: StrongholdSort) {
-    navigate(s, period);
+    setSortState(s);
+    syncUrl(s, period);
   }
 
   function setPeriod(p: StrongholdPeriod) {
-    setSharedPeriod(p as unknown as Period);
-    navigate(sort, p);
+    setPeriodCookie(p as unknown as Period);
+    syncUrl(sort, p);
   }
+
+  // Adopt a `?sort=`/`?period=` deep link once on mount (window.location is only
+  // client-side; a shared `?period=` also becomes the saved preference).
+  const seeded = useRef(false);
+  useEffect(() => {
+    if (seeded.current) return;
+    seeded.current = true;
+    const sp = new URLSearchParams(window.location.search);
+    const rawSort = sp.get("sort");
+    const nextSort = TIER_SORT_OPTIONS[tier].find((s) => s === rawSort);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- deep link is only readable client-side after mount (the page is static)
+    if (nextSort) setSortState(nextSort);
+    const rawPeriod = sp.get("period");
+    if (rawPeriod && isPeriod(rawPeriod)) setPeriodCookie(rawPeriod);
+  }, [tier, setPeriodCookie]);
 
   return (
     <div className="mx-auto w-full max-w-7xl">

@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { StrongholdLeaderboardPage } from "@/components/clans/list/stronghold";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { isRegion, REGION_LABEL } from "@unicum.gg/wargaming";
+import { isRegion, REGION_LABEL, REGIONS } from "@unicum.gg/wargaming";
 import {
   STRONGHOLD_MIN_BATTLES,
   STRONGHOLD_TIER_LABEL,
@@ -16,10 +16,23 @@ function parseTier(tier: string): StrongholdTier {
     : StrongholdTier.T10;
 }
 
-// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
-// own API through the SDK. The endpoints cache server-side, so the per-request
-// cost is local HTTP hops onto cached payloads.
-export const dynamic = "force-dynamic";
+// ISR like the rest of the clan boards: prerendered per (region, tier) at the
+// canonical view (default sort SR + Overall period), so the tier tabs navigate
+// onto cached HTML instead of a per-request dynamic render. Sort/period are
+// swapped client-side via the SDK (no navigation, see the view), and deep links
+// (`?sort=`/`?period=`) are re-applied on mount, so nothing here reads
+// searchParams or the cookie — which is what let this go static.
+export const dynamic = "force-static";
+export const revalidate = 1800; // 30 min, matches the other boards (data materialized hourly)
+
+export function generateStaticParams() {
+  return REGIONS.flatMap((region) =>
+    (Object.values(StrongholdTier) as StrongholdTier[]).map((tier) => ({
+      region,
+      tier,
+    })),
+  );
+}
 
 export async function generateMetadata({
   params,
@@ -40,22 +53,10 @@ export async function generateMetadata({
 
 export default async function RegionStrongholdPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string; tier: string }>;
-  searchParams: Promise<{ sort?: string; period?: string }>;
 }) {
-  const [{ region, tier }, { sort, period }] = await Promise.all([
-    params,
-    searchParams,
-  ]);
+  const { region, tier } = await params;
   if (!isRegion(region)) notFound();
-  return (
-    <StrongholdLeaderboardPage
-      region={region}
-      tierParam={tier}
-      sortParam={sort}
-      periodParam={period}
-    />
-  );
+  return <StrongholdLeaderboardPage region={region} tierParam={tier} />;
 }

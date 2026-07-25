@@ -15,10 +15,18 @@ function parseTier(tier: string): StrongholdTier {
     : StrongholdTier.T10;
 }
 
-// Dynamic on purpose: the page reads searchParams (tab/sort) and consumes our
-// own API through the SDK. The endpoints cache server-side, so the per-request
-// cost is local HTTP hops onto cached payloads.
-export const dynamic = "force-dynamic";
+// ISR: prerendered per tier at the canonical view (default sort SR + Overall
+// period). Sort/period swap client-side via the SDK (see the view), so nothing
+// here reads searchParams or the cookie — which is what let this go static and
+// makes the tier tabs navigate onto cached HTML.
+export const dynamic = "force-static";
+export const revalidate = 1800;
+
+export function generateStaticParams() {
+  return (Object.values(StrongholdTier) as StrongholdTier[]).map((tier) => ({
+    tier,
+  }));
+}
 
 export async function generateMetadata({
   params,
@@ -38,18 +46,9 @@ export async function generateMetadata({
 
 export default async function EuStrongholdPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ tier: string }>;
-  searchParams: Promise<{ sort?: string; period?: string }>;
 }) {
-  const [{ tier }, { sort, period }] = await Promise.all([params, searchParams]);
-  return (
-    <StrongholdLeaderboardPage
-      region={Region.EU}
-      tierParam={tier}
-      sortParam={sort}
-      periodParam={period}
-    />
-  );
+  const { tier } = await params;
+  return <StrongholdLeaderboardPage region={Region.EU} tierParam={tier} />;
 }
