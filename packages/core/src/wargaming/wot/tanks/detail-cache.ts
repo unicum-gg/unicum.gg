@@ -16,8 +16,15 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  * We cache the serialized string (not the object) so `Date`s stay ISO strings —
  * revived client-side by the shared response schema — exactly like the API's own
  * `Response.json`, and so a hit skips re-serialization too.
+ *
+ * The worker's `tank-warm` cron proactively refreshes every tank daily (bust +
+ * re-fetch), so entries no longer rely on a visitor to (re)populate them. The
+ * TTL is therefore set just above the daily warm interval: long enough that a
+ * warmed entry never lapses back to cold between two runs (so navigation stays
+ * instant across the whole catalogue), while the daily bust keeps the payload
+ * within one day of the source's daily-granularity crons.
  */
-export const TANK_DETAIL_TTL_SECONDS = 30 * 60;
+export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
 
 function key(region: Region, slug: string): string {
   return `tankdetail:${region}:${slug.toLowerCase()}`;
