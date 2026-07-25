@@ -1,24 +1,5 @@
 import { isRegion } from "@unicum.gg/wargaming";
-import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
-import { getTankMomByRegion } from "@unicum.gg/core/mom";
-import { getTankMoeByRegion } from "@unicum.gg/core/moe";
-import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
-import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
-import {
-  getTankStats,
-  getTopPlayersByTankAllMetrics,
-} from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import {
-  getWN8ExpectedValues,
-  getWNXExpectedValues,
-} from "@unicum.gg/core/wargaming/wot/wn-expected";
-import { getMoeHistory, getMomHistory } from "@/services/tanks/marks-history";
-import { getTankConfigsCached } from "@/services/tanks/configs";
-import { getTankLoadoutCached } from "@/services/tanks/loadout";
-import { getTankCrewCached } from "@/services/tanks/crew";
-import { getTankFieldModsCached } from "@/services/tanks/field-mods";
-import { getTankSkillTreeCached } from "@/services/tanks/skill-tree";
+import { assembleTankDetail } from "@unicum.gg/core/wargaming/wot/tanks/detail-assemble";
 import {
   getCachedTankDetailJson,
   setCachedTankDetailJson,
@@ -26,7 +7,6 @@ import {
 import { jsonResponse } from "@/services/openapi/json-response";
 import { TankDetailResponse } from "./schema.api";
 
-const TOP_LIMIT = 25;
 const JSON_HEADERS = { "content-type": "application/json" } as const;
 
 /**
@@ -52,69 +32,13 @@ export async function GET(
   const cached = await getCachedTankDetailJson(region, decoded);
   if (cached) return new Response(cached, { headers: JSON_HEADERS });
 
-  const tank = await getTankBySlug(region, decoded);
-  if (!tank) {
+  // The 16-source assembly is shared with the worker's tank-warm cron (see
+  // `detail-assemble`) so the request path and the proactive warm produce the
+  // exact same cached shape.
+  const payload = await assembleTankDetail(region, decoded);
+  if (!payload) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-  const { tankId, meta, slug: canonicalSlug } = tank;
-
-  const [
-    topByMetric,
-    serverStats,
-    wn8Map,
-    wnxMap,
-    specsMap,
-    moeMap,
-    momMap,
-    researchPath,
-    modules,
-    configs,
-    loadout,
-    crew,
-    fieldMods,
-    skillTree,
-    moeHistory,
-    momHistory,
-  ] = await Promise.all([
-    getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
-    getTankStats(region, tankId),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-    getAllTankSpecs(),
-    getTankMoeByRegion(region),
-    getTankMomByRegion(region),
-    getResearchPath(region, tankId),
-    getTankModules(region, tankId),
-    getTankConfigsCached(region, tankId),
-    getTankLoadoutCached(region, tankId),
-    getTankCrewCached(region, tankId),
-    getTankFieldModsCached(region, tankId),
-    getTankSkillTreeCached(region, tankId),
-    getMoeHistory(region, tankId),
-    getMomHistory(region, tankId),
-  ]);
-
-  const payload = {
-    tankId,
-    slug: canonicalSlug,
-    meta,
-    topByMetric,
-    serverStats,
-    wn8Expected: wn8Map.get(tankId) ?? null,
-    wnxExpected: wnxMap.get(tankId) ?? null,
-    specs: specsMap.get(tankId) ?? null,
-    moe: moeMap.get(tankId) ?? null,
-    mom: momMap.get(tankId) ?? null,
-    researchPath,
-    modules,
-    configs,
-    loadout,
-    crew,
-    fieldMods,
-    skillTree,
-    moeHistory,
-    momHistory,
-  };
 
   // Response.json serializes identically; stringify once to both cache and
   // return, keeping jsonResponse's dev-only schema-drift check on the miss.
