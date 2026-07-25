@@ -90,62 +90,82 @@ type RowDef = {
   label: string;
   current: (s: ClanGlobalMapStats) => Cell;
   delta: (s: ClanGlobalMapStats) => Cell;
-  separator?: boolean;
 };
 
-const ROWS: RowDef[] = [
+// One section per Global Map front, mirroring the stronghold table: each tier
+// keeps its ELO/battles/win rate together under a header, plus a "Territory"
+// section for the global province count. No links (there's no Clan Wars
+// leaderboard yet — that comes later).
+const SECTIONS: { title: string; rows: RowDef[] }[] = [
   {
-    label: "Provinces",
-    current: (s) => provincesCell(s.gmProvinces),
-    delta: (s) => provincesCell(s.gmProvinces, s.gmProvinces),
+    title: "Territory",
+    rows: [
+      {
+        label: "Provinces",
+        current: (s) => provincesCell(s.gmProvinces),
+        delta: (s) => provincesCell(s.gmProvinces, s.gmProvinces),
+      },
+    ],
   },
   {
-    label: "ELO T10",
-    current: (s) => eloCell(s.gmEloT10),
-    delta: (s) => eloCell(s.gmEloT10, s.gmEloT10),
-    separator: true,
+    title: "Tier X",
+    rows: [
+      {
+        label: "ELO",
+        current: (s) => eloCell(s.gmEloT10),
+        delta: (s) => eloCell(s.gmEloT10, s.gmEloT10),
+      },
+      {
+        label: "Battles",
+        current: (s) => battlesCell(s.gmBattlesT10),
+        delta: (s) => battlesCell(s.gmBattlesT10, s.gmBattlesT10),
+      },
+      {
+        label: "Win rate",
+        current: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
+        delta: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
+      },
+    ],
   },
   {
-    label: "Battles T10",
-    current: (s) => battlesCell(s.gmBattlesT10),
-    delta: (s) => battlesCell(s.gmBattlesT10, s.gmBattlesT10),
+    title: "Tier VIII",
+    rows: [
+      {
+        label: "ELO",
+        current: (s) => eloCell(s.gmEloT8),
+        delta: (s) => eloCell(s.gmEloT8, s.gmEloT8),
+      },
+      {
+        label: "Battles",
+        current: (s) => battlesCell(s.gmBattlesT8),
+        delta: (s) => battlesCell(s.gmBattlesT8, s.gmBattlesT8),
+      },
+      {
+        label: "Win rate",
+        current: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
+        delta: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
+      },
+    ],
   },
   {
-    label: "Win rate T10",
-    current: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
-    delta: (s) => wrCell(s.gmWinsT10, s.gmBattlesT10),
-  },
-  {
-    label: "ELO T8",
-    current: (s) => eloCell(s.gmEloT8),
-    delta: (s) => eloCell(s.gmEloT8, s.gmEloT8),
-    separator: true,
-  },
-  {
-    label: "Battles T8",
-    current: (s) => battlesCell(s.gmBattlesT8),
-    delta: (s) => battlesCell(s.gmBattlesT8, s.gmBattlesT8),
-  },
-  {
-    label: "Win rate T8",
-    current: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
-    delta: (s) => wrCell(s.gmWinsT8, s.gmBattlesT8),
-  },
-  {
-    label: "ELO T6",
-    current: (s) => eloCell(s.gmEloT6),
-    delta: (s) => eloCell(s.gmEloT6, s.gmEloT6),
-    separator: true,
-  },
-  {
-    label: "Battles T6",
-    current: (s) => battlesCell(s.gmBattlesT6),
-    delta: (s) => battlesCell(s.gmBattlesT6, s.gmBattlesT6),
-  },
-  {
-    label: "Win rate T6",
-    current: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
-    delta: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
+    title: "Tier VI",
+    rows: [
+      {
+        label: "ELO",
+        current: (s) => eloCell(s.gmEloT6),
+        delta: (s) => eloCell(s.gmEloT6, s.gmEloT6),
+      },
+      {
+        label: "Battles",
+        current: (s) => battlesCell(s.gmBattlesT6),
+        delta: (s) => battlesCell(s.gmBattlesT6, s.gmBattlesT6),
+      },
+      {
+        label: "Win rate",
+        current: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
+        delta: (s) => wrCell(s.gmWinsT6, s.gmBattlesT6),
+      },
+    ],
   },
 ];
 
@@ -200,39 +220,50 @@ export function ClanWarsStatsTable(
         </TableRow>
       </TableHeader>
       <TableBody>
-        {ROWS.map((row) => (
-          <Fragment key={row.label}>
-            {row.separator && (
-              <TableRow>
-                <td colSpan={5} className="h-px bg-border p-0!" />
-              </TableRow>
-            )}
+        {SECTIONS.map((section) => (
+          <Fragment key={section.title}>
             <TableRow>
-              <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
-              {loading ? (
-                <>
-                  <PeriodSkeleton />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton />
-                </>
-              ) : (
-                <>
-                  <PeriodCell cell={row.current(props.latest)} />
-                  <PeriodCell
-                    cell={props.periods.h24 ? row.delta(props.periods.h24) : DASH}
-                    hideOnMobile
-                  />
-                  <PeriodCell
-                    cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
-                    hideOnMobile
-                  />
-                  <PeriodCell
-                    cell={props.periods.d30 ? row.delta(props.periods.d30) : DASH}
-                  />
-                </>
-              )}
+              <TableCell
+                colSpan={5}
+                className="bg-muted/40 py-1! text-xs font-semibold text-muted-foreground uppercase"
+              >
+                {section.title}
+              </TableCell>
             </TableRow>
+            {section.rows.map((row) => (
+              <TableRow key={section.title + row.label}>
+                <TableCell className="py-1.5! font-medium">
+                  {row.label}
+                </TableCell>
+                {loading ? (
+                  <>
+                    <PeriodSkeleton />
+                    <PeriodSkeleton hideOnMobile />
+                    <PeriodSkeleton hideOnMobile />
+                    <PeriodSkeleton />
+                  </>
+                ) : (
+                  <>
+                    <PeriodCell cell={row.current(props.latest)} />
+                    <PeriodCell
+                      cell={
+                        props.periods.h24 ? row.delta(props.periods.h24) : DASH
+                      }
+                      hideOnMobile
+                    />
+                    <PeriodCell
+                      cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
+                      hideOnMobile
+                    />
+                    <PeriodCell
+                      cell={
+                        props.periods.d30 ? row.delta(props.periods.d30) : DASH
+                      }
+                    />
+                  </>
+                )}
+              </TableRow>
+            ))}
           </Fragment>
         ))}
       </TableBody>
