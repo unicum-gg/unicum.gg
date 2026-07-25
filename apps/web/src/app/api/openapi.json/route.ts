@@ -21,7 +21,7 @@ export function GET(): Response {
       version: APP.VERSION,
       description: APP.DESCRIPTION,
     },
-    servers: [{ url: `${APP.URL}/api` }],
+    // `servers` is set by `normalizeDoc` (shared with the fumadocs docs).
     // Empty security array = all endpoints are public; no OAuth server needed.
     security: [],
   };

@@ -1,3 +1,4 @@
+import APP from "@/constants/app";
 import {
   PARAM_EXAMPLES,
   QUERY_PARAM_DEFAULTS,
@@ -152,12 +153,25 @@ function normalizeParameters(doc: OpenApiDoc): void {
 }
 
 /**
+ * The generated spec ships a relative `servers: [{ url: "/api" }]`. That works
+ * for the served openapi.json, but fumadocs needs an absolute base to build the
+ * request/code samples and falls back to a `https://example.com` placeholder for
+ * a host-less URL. Patch it to the app's absolute API base so the samples show
+ * the real host (and stay same-origin in prod, where `APP.URL` is `unicum.gg`).
+ */
+function patchServers(doc: OpenApiDoc): void {
+  doc.servers = [{ url: `${APP.URL}/api` }];
+}
+
+/**
  * Prepare the generated OpenAPI document for a docs UI: normalize parameter
- * examples/defaults and reorder tags + endpoints. Mutates `doc` in place. Shared
- * by the served `/api/openapi.json` (Scalar-era external consumers) and the
- * fumadocs source, so both render the curated examples and the logical order.
+ * examples/defaults, reorder tags + endpoints, and set the absolute server base.
+ * Mutates `doc` in place. Shared by the served `/api/openapi.json` (external
+ * consumers) and the fumadocs source, so both render the curated examples, the
+ * logical order and the right server URL.
  */
 export function normalizeDoc(doc: OpenApiDoc): void {
   normalizeParameters(doc);
   reorderDoc(doc);
+  patchServers(doc);
 }
