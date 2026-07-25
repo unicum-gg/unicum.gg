@@ -4,15 +4,16 @@ import { getPlayerLanguageStats } from "@/services/players/available-languages";
 import { createSitemapEntry } from "@/services/sitemap";
 import { REGIONS } from "@unicum.gg/wargaming";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 3600;
 
 /**
- * One-shot sitemap for `/<region>/players/lang/<code>` URLs. Hits
- * `getPlayerLanguageStats` per region at request time so the sitemap
- * reflects the inferred-language pool the leaderboard actually uses
- * (top 10k by WNX) rather than a static constant. Output is small (max
- * a few dozen languages × 3 regions), no pagination needed.
+ * One-shot sitemap for `/<region>/players/lang/<code>` URLs. ISR (static +
+ * hourly revalidate): cached and rebuilt in the background so crawler hits
+ * don't re-run the per-region `getPlayerLanguageStats` scan every time. It
+ * still reflects the inferred-language pool the leaderboard uses (top 10k by
+ * WNX) rather than a static constant, refreshed once per revalidation window.
+ * Output is small (max a few dozen languages × 3 regions), no pagination needed.
  */
 export async function GET() {
   const perRegion = await Promise.all(

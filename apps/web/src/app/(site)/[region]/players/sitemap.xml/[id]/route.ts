@@ -9,7 +9,7 @@ import {
 } from "@/services/sitemap";
 import { isRegion } from "@unicum.gg/wargaming";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 3600;
 
 export async function GET(

@@ -4,7 +4,7 @@ import { createSitemapEntry, URLS_PER_SITEMAP } from "@/services/sitemap";
 import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { isRegion } from "@unicum.gg/wargaming";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
 export const revalidate = 3600;
 
 /**
