@@ -132,7 +132,7 @@ export function TankView({
             <TankRender
               tag={meta.tag}
               region={region}
-              fallback={meta.bigIcon}
+              slug={slug}
               name={meta.name}
             />
           </div>

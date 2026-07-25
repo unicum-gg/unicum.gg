@@ -17,3 +17,11 @@ export function assetUrl(path: string): string {
 export function iconUrl(path: string): string {
   return assetUrl(`gui/maps/icons/${path}`);
 }
+
+/** The largest in-client vehicle render on the mirror (420x307), keyed by the
+ * lowercased vehicle tag (e.g. `F139_Terrifiant` -> `f139_terrifiant`). Used as
+ * the tank-hero fallback when WG's portal CDN has no hi-res render: not every
+ * tank has one, so callers fall through to a placeholder on a 404. */
+export function vehicleRenderUrl(tag: string): string {
+  return iconUrl(`vehicle/420x307/${tag.toLowerCase()}.png`);
+}

@@ -56,6 +56,7 @@
     "recharts": "^3.8.1",
     "roman-numerals": "^0.3.2",
     "sanitize-html": "^2.17.4",
+    "sharp": "^0.34.5",
     "sonner": "^2.0.7",
     "swr": "^2.4.2",
     "tailwind-merge": "^3.6.0",
