@@ -25,7 +25,12 @@ export default async function Layout({ children }: { children: ReactNode }) {
   const base = await baseOptions({ selectors: false, sections: false });
   return (
     <DocsLayout {...base} tree={source.pageTree}>
-      {children}
+      {/* `#page-content` is what the `.md` twin route extracts and converts (see
+          `api/md/[...slug]`); `display:contents` keeps it transparent to
+          fumadocs' own layout while still exposing the node for extraction. */}
+      <div id="page-content" className="contents">
+        {children}
+      </div>
     </DocsLayout>
   );
 }
