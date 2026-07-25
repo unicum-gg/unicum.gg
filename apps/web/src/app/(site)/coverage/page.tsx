@@ -22,6 +22,8 @@ export default async function Page() {
 
 // ISR: prerendered and revalidated in the background, so the (expensive)
 // coverage computation never blocks a visitor. The SDK loopback handles the
-// build-time fetch, so a build no longer depends on a running API.
+// build-time fetch, so a build no longer depends on a running API. The window
+// matches the coverage stats' own 60s cache (live-monitoring figures must stay
+// fresh) rather than relying on that cache to implicitly lower the segment.
 export const dynamic = "force-static";
-export const revalidate = 600;
+export const revalidate = 60;
