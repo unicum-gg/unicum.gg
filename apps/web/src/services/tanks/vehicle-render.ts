@@ -20,16 +20,22 @@ import { vehicleRenderUrl } from "@unicum.gg/shared";
 // Size is NOT fixed: a fixed width blows small tanks up to 2x their real portal
 // size. WG sizes each tank individually, and the ratio between its portal box
 // width (fraction of 1920) and its mirror box width (fraction of the mirror
-// canvas) is empirically constant at ~0.537 (measured on vehicles that publish
-// both; sd ~9%), so we derive the target width from each tank's OWN mirror box,
-// matching WG's per-tank scale to within ~1.4pp.
+// canvas) is empirically ~0.537 (measured on vehicles that publish both; sd
+// ~9%), so we derive the target width from each tank's OWN mirror box. This
+// route only ever runs for mirror-ONLY tanks (portal tanks use the real render),
+// so there's no ground truth to hit exactly. We bias the ratio a touch below the
+// mean (0.475) because WG's mirror crops are inconsistently zoomed (a given
+// tank's mirror can be ~10% larger than its sibling's) and, in the full-frame
+// hero, a slightly smaller vehicle sits on the hangar floor with its tracks
+// alongside the rail imprints rather than covering them. Portal-backed tanks are
+// unaffected (they never use this path), so this only shrinks the mirror outliers.
 const W = 1920;
 const H = 900;
 const CENTROID_X = 0.387;
 const CENTROID_Y = 0.556;
-// portal-box-width-fraction / mirror-box-width-fraction, averaged over vehicles
-// that publish both a portal render and a 420x307 mirror.
-const MIRROR_TO_PORTAL_WIDTH_RATIO = 0.537;
+// portal-box-width-fraction / mirror-box-width-fraction, biased just below the
+// ~0.537 mean to avoid oversizing inconsistently-zoomed mirror crops.
+const MIRROR_TO_PORTAL_WIDTH_RATIO = 0.475;
 // Ignore near-transparent antialiasing fringe when locating the vehicle.
 const ALPHA_FLOOR = 30;
 
