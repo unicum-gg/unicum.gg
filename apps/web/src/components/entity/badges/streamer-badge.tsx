@@ -1,3 +1,5 @@
+"use client";
+
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,
