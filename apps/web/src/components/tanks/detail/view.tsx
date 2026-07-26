@@ -107,7 +107,7 @@ export function TankView({
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel className="border-b border-fd-border">
-        <div className="relative min-h-[320px] overflow-hidden sm:min-h-[400px] lg:min-h-[470px]">
+        <div className="relative min-h-[300px] overflow-hidden sm:min-h-0 sm:aspect-[32/15]">
           {/* The exact hangar-floor backdrop WG's own tankopedia detail page
               uses (1920x900, matching the render), served from its portal CDN.
               `latest` keeps the URL stable across client version bumps. Rendered
