@@ -53,6 +53,7 @@ import {
   SETUP_PARAM,
 } from "@/components/tanks/detail/specifications/config-url";
 import { BuildShare } from "@/components/tanks/detail/specifications/build-share";
+import { CopyToTank } from "@/components/tanks/detail/specifications/copy-to-tank";
 
 type Slot = keyof TankConfigModules;
 
@@ -484,12 +485,19 @@ function TankConfiguratorInner({
             onResetAll={resetAll}
             actions={
               setupToken ? (
-                <BuildShare
-                  region={region}
-                  tankName={tankName}
-                  slug={slug}
-                  setupToken={setupToken}
-                />
+                <div className="flex items-center gap-1.5">
+                  <BuildShare
+                    region={region}
+                    tankName={tankName}
+                    slug={slug}
+                    setupToken={setupToken}
+                  />
+                  <CopyToTank
+                    region={region}
+                    slug={slug}
+                    setupToken={setupToken}
+                  />
+                </div>
               ) : null
             }
           />
