@@ -18,6 +18,7 @@ import {
   computeSlotAggRating,
   computeTankRating,
 } from "@/components/compare/per-tank-ratings";
+import { ClanTag } from "@/components/entity/clan-tag";
 import {
   Table,
   TableBody,
@@ -236,11 +237,11 @@ export function PerTankTab({
                 className="text-center"
               >
                 <span className="inline-flex items-center justify-center gap-1.5">
-                  <span className="font-mono">
-                    <span style={{ color: s.clan?.color }}>[</span>
-                    {s.clan?.tag ?? s.requested}
-                    <span style={{ color: s.clan?.color }}>]</span>
-                  </span>
+                  <ClanTag
+                    tag={s.clan?.tag ?? s.requested}
+                    color={s.clan?.color ?? null}
+                    className="font-mono"
+                  />
                   {headerWinners.has(idx) && (
                     <span
                       aria-hidden

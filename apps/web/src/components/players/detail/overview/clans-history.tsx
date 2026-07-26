@@ -8,6 +8,7 @@ import {
 import { format, formatDistanceStrict } from "date-fns";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { useState } from "react";
 import ROUTES from "@/constants/routes";
 import {
@@ -262,9 +263,7 @@ export function PlayerClansHistory(
                   <TableRow key={`${s.clan.id}-${s.joinedAt.getTime()}`}>
                     <TableCell className="font-semibold">
                       <Link href={clanHref} className="hover:underline">
-                        <span style={{ color: s.clan.color }}>[</span>
-                        {s.clan.tag}
-                        <span style={{ color: s.clan.color }}>]</span>
+                        <ClanTag tag={s.clan.tag} color={s.clan.color} />
                       </Link>
                     </TableCell>
                     <TableCell>

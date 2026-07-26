@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -93,11 +94,11 @@ export function TopClansList({
                   )}
                   <span className="flex min-w-0 flex-1 items-center gap-2">
                     <span className="min-w-0 flex-1 truncate">
-                      <span className="font-mono font-semibold">
-                        <span style={{ color: r.color }}>[</span>
-                        {r.tag}
-                        <span style={{ color: r.color }}>]</span>
-                      </span>{" "}
+                      <ClanTag
+                        tag={r.tag}
+                        color={r.color}
+                        className="font-mono font-semibold"
+                      />{" "}
                       <span className="text-muted-foreground">{r.name}</span>
                     </span>
                     {r.languages.length > 0 && (

@@ -1,9 +1,8 @@
 "use client";
 
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { PlayerName } from "@/components/entity/player-name";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import ROUTES from "@/constants/routes";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   Table,
@@ -105,22 +104,15 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell className="min-w-0">
-        <Link
-          href={ROUTES.PLAYER(region, player.nickname)}
-          className="block truncate hover:underline"
-        >
-          <span className="font-medium">{player.nickname}</span>
-          {player.clan_tag ? (
-            <>
-              {" "}
-              <span className="font-mono text-xs">
-                <span style={{ color: player.clan_color ?? undefined }}>[</span>
-                {player.clan_tag}
-                <span style={{ color: player.clan_color ?? undefined }}>]</span>
-              </span>
-            </>
-          ) : null}
-        </Link>
+        <PlayerName
+          region={region}
+          nickname={player.nickname}
+          clan={
+            player.clan_tag
+              ? { tag: player.clan_tag, color: player.clan_color }
+              : null
+          }
+        />
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
         {intFmt.format(player.battles)}

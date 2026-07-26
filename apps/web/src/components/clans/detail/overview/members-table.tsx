@@ -6,10 +6,9 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import { LiveBadge } from "@/components/live-badge";
+import { PlayerName } from "@/components/entity/player-name";
+import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { useState } from "react";
-import ROUTES from "@/constants/routes";
 import {
   Table,
   TableBody,
@@ -371,15 +370,19 @@ export function ClanMembersTable(
                 {idx + 1}
               </TableCell>
               <TableCell className="font-medium">
-                <span className="flex items-center gap-1.5">
-                  <Link
-                    href={ROUTES.PLAYER(props.region, m.name)}
-                    className="truncate hover:underline"
-                  >
-                    {m.name}
-                  </Link>
-                  <LiveBadge region={props.region} accountId={m.accountId} />
-                </span>
+                <PlayerName
+                  region={props.region}
+                  nickname={m.name}
+                  badges={
+                    <PlayerBadges
+                      region={props.region}
+                      accountId={m.accountId}
+                      verified={m.isVerified}
+                      supporter={m.isSupporter}
+                      twitchLogin={m.twitchLogin}
+                    />
+                  }
+                />
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">
                 {prettyRole(m.role)}

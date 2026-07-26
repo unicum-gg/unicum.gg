@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { useMemo } from "react";
 import ROUTES from "@/constants/routes";
 import {
@@ -122,9 +123,7 @@ export function PlayerClansTimeline({
                     />
                     <div className="grid gap-0.5">
                       <div className="font-semibold">
-                        <span style={{ color: s.clan.color }}>[</span>
-                        {tag}
-                        <span style={{ color: s.clan.color }}>]</span>{" "}
+                        <ClanTag tag={tag} color={s.clan.color} />{" "}
                         {s.clan.name}
                       </div>
                       <div>{prettyRole(s.role)}</div>

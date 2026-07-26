@@ -7,7 +7,7 @@ import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { LiveSync } from "@/components/live-sync";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { PlayerHeader } from "@/components/players/detail/header";
-import { SupporterBadgeState } from "@/components/players/detail/supporter-badge";
+import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
 import { useCookie } from "@/hooks/use-cookie";
@@ -137,6 +137,8 @@ export function PlayerProfile({
             currentStint={detail.clanHistory.currentStint}
             inferredLanguages={inferPlayerLanguages(detail.clanHistory, nowMs)}
             supporterBadge={supporterBadge}
+            verified={detail.isVerified}
+            twitchLogin={detail.twitchLogin}
           />
         </PanelContent>
       </Panel>

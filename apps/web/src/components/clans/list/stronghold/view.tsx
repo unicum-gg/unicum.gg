@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { LanguageFlags } from "@/components/language-flags";
@@ -336,11 +337,11 @@ export function StrongholdLeaderboardView({
                             )}
                             <span className="flex min-w-0 flex-1 items-center gap-2">
                               <span className="min-w-0 flex-1 truncate">
-                                <span className="font-mono font-semibold">
-                                  <span style={{ color: entry.color }}>[</span>
-                                  {entry.tag}
-                                  <span style={{ color: entry.color }}>]</span>
-                                </span>{" "}
+                                <ClanTag
+                                  tag={entry.tag}
+                                  color={entry.color}
+                                  className="font-mono font-semibold"
+                                />{" "}
                                 <span className="text-muted-foreground">
                                   {entry.name}
                                 </span>

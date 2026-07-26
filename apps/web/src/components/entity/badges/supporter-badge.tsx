@@ -1,19 +1,16 @@
-"use client";
-
-import { HeartIcon } from "@phosphor-icons/react/dist/ssr";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
+import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import APP from "@/constants/app";
+import ROUTES from "@/constants/routes";
 
 export enum SupporterBadgeState {
-  /** Public supporter: accent pill, visible to everyone. */
+  /** Public supporter: accent crest, visible to everyone. */
   Active = "active",
   /** Owner only: a supporter, but hidden from the public because anonymous. */
   HiddenAnonymous = "hidden-anonymous",
@@ -29,17 +26,17 @@ const TOOLTIP: Record<SupporterBadgeState, string> = {
 };
 
 /**
- * Small badge on a player header, linking to /support. The active state is the
- * public accent pill shown for supporters; the other two are muted, greyed pills
- * shown only to the logged-in owner of the profile, with a tooltip explaining
- * either that their badge is hidden (anonymous) or how to earn one.
+ * Supporter crest, linking to /support. The active state is the public accent
+ * crest shown for supporters; the other two are slate crests shown only to the
+ * logged-in owner of the profile, explaining that their badge is hidden
+ * (anonymous) or how to earn one.
  */
 export function SupporterBadge({
   state,
-  className,
+  size = 16,
 }: {
   state: SupporterBadgeState;
-  className?: string;
+  size?: number;
 }) {
   const active = state === SupporterBadgeState.Active;
   return (
@@ -48,16 +45,10 @@ export function SupporterBadge({
         <TooltipTrigger asChild>
           <Link
             href={ROUTES.SUPPORT}
-            className={cn(
-              "inline-flex items-center gap-1 rounded-full border px-2 py-0.5 text-xs font-semibold",
-              active
-                ? "border-[#f25322]/40 bg-[#f25322]/10 text-[#f25322] hover:bg-[#f25322]/20"
-                : "border-fd-border text-fd-muted-foreground opacity-60 hover:opacity-100",
-              className,
-            )}
+            className="inline-flex"
+            aria-label="Supporter"
           >
-            <HeartIcon weight={active ? "fill" : "regular"} className="size-3" />
-            Supporter
+            <Crest kind={CrestKind.Supporter} size={size} muted={!active} />
           </Link>
         </TooltipTrigger>
         <TooltipContent>{TOOLTIP[state]}</TooltipContent>

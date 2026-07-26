@@ -1,6 +1,9 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
+import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
+import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
 import { CompareWithButton } from "@/components/players/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon, RefreshKind } from "@/components/refresh-beacon";
@@ -13,7 +16,7 @@ import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
 import {
   SupporterBadge,
   SupporterBadgeState,
-} from "@/components/players/detail/supporter-badge";
+} from "@/components/entity/badges/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 
 const MONTH_FORMAT = "MMM yyyy";
@@ -32,6 +35,8 @@ export function PlayerHeader(
         currentStint: ClanStint | null;
         inferredLanguages: string[];
         supporterBadge: SupporterBadgeState | null;
+        verified: boolean;
+        twitchLogin: string | null;
       },
 ) {
   if ("loading" in props) {
@@ -48,6 +53,8 @@ export function PlayerHeader(
     currentStint,
     inferredLanguages,
     supporterBadge,
+    verified,
+    twitchLogin,
   } = props;
 
   return (
@@ -56,17 +63,20 @@ export function PlayerHeader(
         <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
+            {(verified || supporterBadge || twitchLogin) && (
+              <span className="ml-2 inline-flex items-center gap-1 align-middle">
+                {verified && <VerifiedBadge size={24} />}
+                {supporterBadge && (
+                  <SupporterBadge state={supporterBadge} size={24} />
+                )}
+                {twitchLogin && <StreamerBadge login={twitchLogin} size={24} />}
+              </span>
+            )}
             <LiveBadge
               region={region}
               accountId={accountId}
               className="ml-2 align-middle text-xs"
             />
-            {supporterBadge && (
-              <SupporterBadge
-                state={supporterBadge}
-                className="ml-2 align-middle"
-              />
-            )}
           </h1>
           <CompareWithButton region={region} current={nickname} />
           <PlayerActionsMenu
@@ -119,11 +129,11 @@ export function PlayerHeader(
         >
           <div className="flex min-w-0 flex-1 flex-col justify-center p-4 sm:flex-none sm:whitespace-nowrap sm:text-right">
             <div>
-              <span className="font-semibold">
-                <span style={{ color: currentStint.clan.color }}>[</span>
-                {currentStint.clan.tag}
-                <span style={{ color: currentStint.clan.color }}>]</span>
-              </span>{" "}
+              <ClanTag
+                tag={currentStint.clan.tag}
+                color={currentStint.clan.color}
+                className="font-semibold"
+              />{" "}
               <span>{currentStint.clan.name}</span>
             </div>
             <div className="text-xs text-muted-foreground">

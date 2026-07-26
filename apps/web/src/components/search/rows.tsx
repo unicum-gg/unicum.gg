@@ -4,6 +4,13 @@ import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
+import { ClanTag } from "@/components/entity/clan-tag";
+import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
+import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
+import {
+  SupporterBadge,
+  SupporterBadgeState,
+} from "@/components/entity/badges/supporter-badge";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
@@ -12,16 +19,21 @@ import type { Region } from "@unicum.gg/wargaming";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {
   return (
-    <>
-      <span className="truncate font-medium">{player.nickname}</span>
+    <span className="flex min-w-0 items-center gap-1.5">
+      <span className="min-w-0 truncate font-medium">{player.nickname}</span>
       {player.clan ? (
-        <span className="shrink-0 font-mono text-xs font-semibold">
-          <span style={{ color: player.clan.color }}>[</span>
-          {player.clan.tag}
-          <span style={{ color: player.clan.color }}>]</span>
-        </span>
+        <ClanTag
+          tag={player.clan.tag}
+          color={player.clan.color}
+          className="shrink-0 font-mono text-xs font-semibold"
+        />
       ) : null}
-    </>
+      {player.is_verified && <VerifiedBadge />}
+      {player.is_supporter && (
+        <SupporterBadge state={SupporterBadgeState.Active} />
+      )}
+      {player.twitch_login && <StreamerBadge login={player.twitch_login} />}
+    </span>
   );
 }
 
@@ -40,11 +52,11 @@ export function ClanRow({ clan }: { clan: ClanSearchResult }) {
         ) : (
           <span className="size-5 shrink-0" />
         )}
-        <span className="font-mono text-sm font-semibold">
-          <span style={{ color: clan.color }}>[</span>
-          {clan.tag}
-          <span style={{ color: clan.color }}>]</span>
-        </span>
+        <ClanTag
+          tag={clan.tag}
+          color={clan.color}
+          className="font-mono text-sm font-semibold"
+        />
         <span className="truncate text-sm text-fd-muted-foreground">
           {clan.name}
         </span>

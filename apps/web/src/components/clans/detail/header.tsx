@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { ClanActionsMenu } from "@/components/clans/detail/actions-menu";
 import { CompareWithButton } from "@/components/clans/detail/compare-with-button";
@@ -134,10 +135,12 @@ export function ClanHeader(
           <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
             <h1 className="min-w-0 flex-1 font-heading font-bold tracking-tight">
               <AutoFitText maxPx={36} minPx={18} allowWrap className="w-full">
-                <span style={{ color: clan.color }}>[</span>
-                {clan.tag}
-                <span style={{ color: clan.color }}>]</span>
-                <span className="ml-2">{clan.name}</span>
+                <ClanTag
+                  tag={clan.tag}
+                  color={clan.color}
+                  name={clan.name}
+                  nameClassName="ml-2"
+                />
               </AutoFitText>
             </h1>
             <CompareWithButton region={region} current={clan.tag} />
@@ -315,9 +318,7 @@ function ClanHeaderSkeleton({ tag, color }: { tag: string; color: string }) {
           <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
             <h1 className="flex min-w-0 flex-1 items-center font-heading text-2xl font-bold tracking-tight sm:text-4xl">
               <span className="shrink-0">
-                <span style={{ color }}>[</span>
-                {tag}
-                <span style={{ color }}>]</span>
+                <ClanTag tag={tag} color={color} />
               </span>
               {/* The clan name isn't known before the fetch — placeholder next
                   to the real [tag], like the loaded `[TAG] Name`. */}

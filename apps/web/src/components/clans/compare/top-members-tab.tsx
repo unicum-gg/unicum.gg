@@ -2,6 +2,7 @@
 
 import { Fragment, useMemo } from "react";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import {
   Table,
   TableBody,
@@ -89,11 +90,11 @@ export function TopMembersTab({
                 colSpan={2}
                 className="text-center"
               >
-                <span className="font-mono">
-                  <span style={{ color: s.clan?.color }}>[</span>
-                  {s.clan?.tag ?? s.requested}
-                  <span style={{ color: s.clan?.color }}>]</span>
-                </span>
+                <ClanTag
+                  tag={s.clan?.tag ?? s.requested}
+                  color={s.clan?.color ?? null}
+                  className="font-mono"
+                />
               </TableHead>
             ))}
           </TableRow>

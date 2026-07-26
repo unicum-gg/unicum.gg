@@ -2,6 +2,7 @@
 
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -38,9 +39,10 @@ export function SlotHeader({
             href={ROUTES.CLAN(region, slot.requested)}
             className="font-mono font-medium hover:underline"
           >
-            <span style={{ color: slot.clan?.color }}>[</span>
-            {slot.clan?.tag ?? slot.requested}
-            <span style={{ color: slot.clan?.color }}>]</span>
+            <ClanTag
+              tag={slot.clan?.tag ?? slot.requested}
+              color={slot.clan?.color ?? null}
+            />
           </Link>
           {!slot.clan && (
             <span className="text-xs text-destructive">not found</span>

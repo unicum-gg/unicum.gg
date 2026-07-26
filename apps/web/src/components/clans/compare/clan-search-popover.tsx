@@ -2,6 +2,7 @@
 
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { ClanTag } from "@/components/entity/clan-tag";
 import {
   Popover,
   PopoverContent,
@@ -169,11 +170,7 @@ export function ClanSearchPopover({
                 onClick={() => pick(r.tag)}
                 className="flex w-full cursor-pointer items-center justify-between gap-2 px-3 py-2 text-left text-sm hover:bg-fd-accent hover:text-fd-accent-foreground"
               >
-                <span className="font-mono">
-                  <span style={{ color: r.color }}>[</span>
-                  {r.tag}
-                  <span style={{ color: r.color }}>]</span>
-                </span>
+                <ClanTag tag={r.tag} color={r.color} className="font-mono" />
                 <span className="truncate text-xs text-fd-muted-foreground">
                   {r.name}
                 </span>

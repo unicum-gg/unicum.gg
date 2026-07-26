@@ -6,6 +6,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { ClanHeader } from "@/components/clans/detail/header";
 import { ClanMembersTable } from "@/components/clans/detail/overview/members-table";
@@ -34,9 +35,7 @@ function TaggedTitle({
 }) {
   return (
     <PanelTitle>
-      <span style={{ color }}>[</span>
-      {tag}
-      <span style={{ color }}>]</span> {children}
+      <ClanTag tag={tag} color={color} /> {children}
     </PanelTitle>
   );
 }

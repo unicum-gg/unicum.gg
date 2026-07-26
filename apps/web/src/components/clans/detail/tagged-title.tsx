@@ -1,3 +1,5 @@
+import { ClanTag } from "@/components/entity/clan-tag";
+
 /**
  * `[TAG] {children}` fragment, its brackets tinted with the clan's own color
  * (matching the header's `[TAG]` treatment). Rendered inside a `PanelTitle` by
@@ -14,9 +16,7 @@ export function TaggedTitle({
 }) {
   return (
     <>
-      <span style={{ color }}>[</span>
-      {tag}
-      <span style={{ color }}>]</span> {children}
+      <ClanTag tag={tag} color={color} /> {children}
     </>
   );
 }

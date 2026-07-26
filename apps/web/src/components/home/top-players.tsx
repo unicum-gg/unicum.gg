@@ -1,11 +1,10 @@
 "use client";
 
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
-import { LiveBadge } from "@/components/live-badge";
+import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { PlayerName } from "@/components/entity/player-name";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -120,29 +119,24 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell>
-        <span className="flex items-center gap-1.5">
-          <Link
-            href={ROUTES.PLAYER(region, player.nickname)}
-            className="min-w-0 truncate hover:underline"
-          >
-            <span className="font-medium">{player.nickname}</span>
-            {player.clan_tag ? (
-              <>
-                {" "}
-                <span className="font-mono text-xs">
-                  <span style={{ color: player.clan_color ?? undefined }}>
-                    [
-                  </span>
-                  {player.clan_tag}
-                  <span style={{ color: player.clan_color ?? undefined }}>
-                    ]
-                  </span>
-                </span>
-              </>
-            ) : null}
-          </Link>
-          <LiveBadge region={region} accountId={player.account_id} />
-        </span>
+        <PlayerName
+          region={region}
+          nickname={player.nickname}
+          clan={
+            player.clan_tag
+              ? { tag: player.clan_tag, color: player.clan_color }
+              : null
+          }
+          badges={
+            <PlayerBadges
+              region={region}
+              accountId={player.account_id}
+              verified={player.is_verified}
+              supporter={player.is_supporter}
+              twitchLogin={player.twitch_login}
+            />
+          }
+        />
       </TableCell>
       <TableCell
         className={cn("pr-4 text-right font-semibold tabular-nums", colorClass)}

@@ -1,4 +1,5 @@
 import { format } from "date-fns";
+import { ClanTag } from "@/components/entity/clan-tag";
 import {
   Panel,
   PanelContent,
@@ -35,9 +36,7 @@ export function ClanNameHistory({
     <Panel>
       <PanelHeader>
         <PanelTitle>
-          <span style={{ color }}>[</span>
-          {tag}
-          <span style={{ color }}>]</span> previous names
+          <ClanTag tag={tag} color={color} /> previous names
         </PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">

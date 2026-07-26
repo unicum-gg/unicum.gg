@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { Period } from "@/hooks/use-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
@@ -155,11 +156,11 @@ function ClanRow({
             <span className="size-6 shrink-0 rounded bg-muted" />
           )}
           <span className="min-w-0 flex-1 truncate">
-            <span className="font-mono font-semibold">
-              <span style={{ color: clan.color }}>[</span>
-              {clan.tag}
-              <span style={{ color: clan.color }}>]</span>
-            </span>{" "}
+            <ClanTag
+              tag={clan.tag}
+              color={clan.color}
+              className="font-mono font-semibold"
+            />{" "}
             <span className="text-muted-foreground">{clan.name}</span>
           </span>
         </Link>

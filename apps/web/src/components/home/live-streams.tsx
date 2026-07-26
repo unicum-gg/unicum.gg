@@ -18,11 +18,8 @@ import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { FeaturedPlayer } from "@/components/home/featured-player";
 import { usePeriod } from "@/hooks/use-period";
 import { PeriodSelect } from "@/components/home/period-select";
-import {
-  ClanTag,
-  METRIC_VALUE,
-  StreamRow,
-} from "@/components/home/stream-row";
+import { ClanTag } from "@/components/entity/clan-tag";
+import { METRIC_VALUE, StreamRow } from "@/components/home/stream-row";
 import {
   Panel,
   PanelContent,
@@ -235,6 +232,7 @@ export function LiveStreams({
                         <ClanTag
                           tag={active.clanTag}
                           color={active.clanColor}
+                          className="font-mono text-xs"
                         />
                       </>
                     ) : null}

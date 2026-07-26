@@ -1,6 +1,7 @@
 "use client";
 
 import { bestIndex, type MetricRow } from "@/components/compare/cells";
+import { ClanTag } from "@/components/entity/clan-tag";
 import {
   Table,
   TableBody,
@@ -115,11 +116,11 @@ export function ComparisonTable({
           {slots.map((s, idx) => (
             <TableHead key={`${s.requested}-${idx}`} className="text-right">
               <span className="inline-flex items-center justify-end gap-1.5">
-                <span className="font-mono">
-                  <span style={{ color: s.clan?.color }}>[</span>
-                  {s.clan?.tag ?? s.requested}
-                  <span style={{ color: s.clan?.color }}>]</span>
-                </span>
+                <ClanTag
+                  tag={s.clan?.tag ?? s.requested}
+                  color={s.clan?.color ?? null}
+                  className="font-mono"
+                />
                 {headerWinners?.has(idx) && (
                   <span
                     aria-hidden

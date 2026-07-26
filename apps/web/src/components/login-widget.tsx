@@ -1,6 +1,7 @@
 "use client";
 
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "@/lib/auth-client";
 import { useRegion } from "@/hooks/use-region";
@@ -8,7 +9,7 @@ import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 
-type ClanTag = { tag: string; name: string; color: string };
+type UserClanTag = { tag: string; name: string; color: string };
 
 /**
  * Top-bar Wargaming.net ID login, styled after WG's own discreet top-right
@@ -24,7 +25,7 @@ export function LoginWidget() {
   // (and so we never need a synchronous clear on logout).
   const [clan, setClan] = useState<{
     userId: string;
-    tag: ClanTag | null;
+    tag: UserClanTag | null;
   } | null>(null);
 
   const userId = session?.user?.id;
@@ -80,15 +81,11 @@ export function LoginWidget() {
               href={ROUTES.CLAN(wg.region, clanTag.tag)}
               className="tabular-nums text-fd-foreground hover:underline"
             >
-              <span style={{ color: clanTag.color }}>[</span>
-              {clanTag.tag}
-              <span style={{ color: clanTag.color }}>]</span>
+              <ClanTag tag={clanTag.tag} color={clanTag.color} />
             </Link>
           ) : (
             <span className="tabular-nums text-fd-foreground">
-              <span style={{ color: clanTag.color }}>[</span>
-              {clanTag.tag}
-              <span style={{ color: clanTag.color }}>]</span>
+              <ClanTag tag={clanTag.tag} color={clanTag.color} />
             </span>
           ))}
       </span>

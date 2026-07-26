@@ -9,6 +9,7 @@ import {
   type LiveStreamer,
 } from "@unicum.gg/shared";
 import { Period } from "@/hooks/use-period";
+import { ClanTag } from "@/components/entity/clan-tag";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utils";
 
@@ -66,7 +67,11 @@ export function StreamRow({
           {streamer.clanTag ? (
             <>
               {" "}
-              <ClanTag tag={streamer.clanTag} color={streamer.clanColor} />
+              <ClanTag
+                tag={streamer.clanTag}
+                color={streamer.clanColor}
+                className="font-mono text-xs"
+              />
             </>
           ) : null}
         </div>
@@ -83,15 +88,5 @@ export function StreamRow({
         {value != null ? intFmt.format(value) : "—"}
       </TableCell>
     </TableRow>
-  );
-}
-
-export function ClanTag({ tag, color }: { tag: string; color: string | null }) {
-  return (
-    <span className="font-mono text-xs">
-      <span style={{ color: color ?? undefined }}>[</span>
-      {tag}
-      <span style={{ color: color ?? undefined }}>]</span>
-    </span>
   );
 }

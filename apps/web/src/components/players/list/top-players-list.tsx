@@ -1,6 +1,7 @@
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import { ClanTag } from "@/components/entity/clan-tag";
+import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LanguageFlags } from "@/components/language-flags";
-import { LiveBadge } from "@/components/live-badge";
 import { RankMedal } from "@/components/rank-medal";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
@@ -88,19 +89,11 @@ export function TopPlayersList({
                         {r.clan_tag ? (
                           <>
                             {" "}
-                            <span className="font-mono text-xs">
-                              <span
-                                style={{ color: r.clan_color ?? undefined }}
-                              >
-                                [
-                              </span>
-                              {r.clan_tag}
-                              <span
-                                style={{ color: r.clan_color ?? undefined }}
-                              >
-                                ]
-                              </span>
-                            </span>
+                            <ClanTag
+                              tag={r.clan_tag}
+                              color={r.clan_color}
+                              className="font-mono text-xs"
+                            />
                           </>
                         ) : null}
                       </span>
@@ -117,7 +110,13 @@ export function TopPlayersList({
                       )}
                     </span>
                   </Link>
-                  <LiveBadge region={region} accountId={r.account_id} />
+                  <PlayerBadges
+                    region={region}
+                    accountId={r.account_id}
+                    verified={r.is_verified}
+                    supporter={r.is_supporter}
+                    twitchLogin={r.twitch_login}
+                  />
                 </span>
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
