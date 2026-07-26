@@ -18,6 +18,7 @@ import {
 import { Spinner } from "@/components/ui/spinner";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
+import UMAMI from "@/constants/umami";
 import {
   FeedbackTopic,
   MESSAGE_MAX_LENGTH,
@@ -62,6 +63,9 @@ export function FeedbackWidget() {
         sentiment: sentiment ?? undefined,
         message: message.trim(),
         page: window.location.pathname + window.location.search,
+        umamiSessionId: (window as unknown as Record<string, string | undefined>)[
+          UMAMI.SESSION_GLOBAL
+        ],
       };
       const res = await fetch("/api/feedback", {
         method: "POST",

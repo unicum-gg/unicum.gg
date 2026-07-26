@@ -1,5 +1,6 @@
 import "server-only";
 import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import UMAMI from "@/constants/umami";
 import {
   FeedbackSentiment,
   SENTIMENT_EMOJI,
@@ -30,6 +31,8 @@ type FeedbackPayload = {
   message: string;
   /** The page it was sent from (path + search). */
   page?: string;
+  /** The visitor's Umami session id, when captured. */
+  umamiSessionId?: string;
   author: FeedbackAuthor;
 };
 
@@ -43,7 +46,7 @@ const SENTIMENT_COLOR: Record<FeedbackSentiment, number> = {
 const BRAND_COLOR = 0xf25322;
 
 function buildEmbed(payload: FeedbackPayload) {
-  const { topic, sentiment, message, page, author } = payload;
+  const { topic, sentiment, message, page, umamiSessionId, author } = payload;
   const emoji = sentiment ? SENTIMENT_EMOJI[sentiment] : "";
   const fields: { name: string; value: string; inline?: boolean }[] = [
     { name: "Topic", value: TOPIC_LABELS[topic], inline: true },
@@ -67,6 +70,12 @@ function buildEmbed(payload: FeedbackPayload) {
   if (page) {
     const url = `${APP_IDENTITY.URL}${page}`;
     fields.push({ name: "Page", value: `[${page}](${url})` });
+  }
+  if (umamiSessionId) {
+    fields.push({
+      name: "Analytics",
+      value: `[View session](${UMAMI.sessionUrl(umamiSessionId)})`,
+    });
   }
   return {
     title: `New feedback${emoji ? ` ${emoji}` : ""}`,

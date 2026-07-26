@@ -66,6 +66,9 @@ export const feedbackBodySchema = z.object({
   message: z.string().trim().min(1).max(MESSAGE_MAX_LENGTH),
   /** The page the feedback was sent from (path + search), for context. */
   page: z.string().max(1000).optional(),
+  /** The visitor's Umami session id, when captured client-side. Falls back to
+   * undefined on anything unexpected so a bad value never rejects the feedback. */
+  umamiSessionId: z.uuid().optional().catch(undefined),
 });
 
 export type FeedbackBody = z.infer<typeof feedbackBodySchema>;

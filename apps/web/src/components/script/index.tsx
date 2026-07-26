@@ -3,6 +3,7 @@
 import NextScript from "next/script";
 import { useEffect, useState } from "react";
 import STORAGE from "@/constants/storage";
+import UMAMI from "@/constants/umami";
 
 /**
  * Two-tier analytics loading:
@@ -43,10 +44,20 @@ export default function Script({ useGoogleCMP }: { useGoogleCMP: boolean }) {
 
   return (
     <>
+      {/* Capture the visitor's Umami session id before the tracker loads: wrap
+          `fetch` and read `sessionId` from the tracker's `/api/send` response
+          (Umami returns it in plaintext), stashing it on a global the feedback
+          widget reads. Inline + synchronous so it patches `fetch` ahead of the
+          deferred tracker; pass-through for every non-Umami request. */}
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `(function(){var f=window.fetch;if(!f||window.__umamiFetchPatched)return;window.__umamiFetchPatched=1;window.fetch=function(){var p=f.apply(this,arguments);try{var a=arguments[0];var u=a&&(a.url||a);if(typeof u==='string'&&u.indexOf('umami')!==-1&&u.indexOf('/api/send')!==-1){p.then(function(r){r.clone().json().then(function(d){if(d&&d.sessionId)window.${UMAMI.SESSION_GLOBAL}=d.sessionId;}).catch(function(){});}).catch(function(){});}}catch(e){}return p;};})();`,
+        }}
+      />
       <NextScript
         defer
         src="https://cloud.umami.is/script.js"
-        data-website-id="ddbebdb6-bb2f-4501-bd55-037e2410b943"
+        data-website-id={UMAMI.WEBSITE_ID}
       />
 
       {useGoogleCMP ? (

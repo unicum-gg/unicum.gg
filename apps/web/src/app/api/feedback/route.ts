@@ -55,7 +55,7 @@ export async function POST(request: Request): Promise<Response> {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
-  const { topic, sentiment, message, page } = parsed.data;
+  const { topic, sentiment, message, page, umamiSessionId } = parsed.data;
 
   const session = await auth.api.getSession({ headers: hdrs });
   const wg = wgIdentityFromEmail(session?.user?.email);
@@ -74,6 +74,7 @@ export async function POST(request: Request): Promise<Response> {
     sentiment,
     message,
     page,
+    umamiSessionId,
     author,
   });
   if (!ok) {
