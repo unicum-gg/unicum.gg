@@ -1011,6 +1011,9 @@ export interface components {
             wn830d: number | null;
             wnx30d: number | null;
             battles30d: number | null;
+            isVerified?: boolean;
+            isSupporter?: boolean;
+            twitchLogin?: string | null;
         };
         /** @description A member's aggregate stats over a period. */
         ClanMemberPeriodStats: {
@@ -1112,6 +1115,12 @@ export interface components {
                 d7: components["schemas"]["ClanStrongholdStats"] | null;
                 d30: components["schemas"]["ClanStrongholdStats"] | null;
             };
+            sr: {
+                advances: number | null;
+                t10: number | null;
+                t8: number | null;
+                t6: number | null;
+            } | null;
         };
         /** @description A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10). */
         ClanStrongholdStats: {
@@ -1611,6 +1620,8 @@ export interface components {
                 recordedAt: Date;
             }[];
             isSupporter: boolean;
+            isVerified: boolean;
+            twitchLogin: string | null;
             current: components["schemas"]["PlayerStats"];
             periods: {
                 h24: components["schemas"]["PlayerStats"] | null;
@@ -1717,6 +1728,9 @@ export interface components {
                 tag: string;
                 color: string;
             } | null;
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
         };
         PlayerSearchResponse: {
             results: components["schemas"]["PlayerSearchHit"][];
@@ -1743,6 +1757,9 @@ export interface components {
         PlayerSummary: {
             account_id: number;
             nickname: string;
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
         };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];

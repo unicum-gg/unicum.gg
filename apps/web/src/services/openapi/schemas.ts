@@ -184,6 +184,12 @@ export const playerSummary = z
   .object({
     account_id: z.number(),
     nickname: z.string(),
+    // Public badges (present on leaderboard/list rows): the owner connected this
+    // account on the site, is an active non-anonymous supporter, and/or has a
+    // linked Twitch channel.
+    is_verified: z.boolean().optional(),
+    is_supporter: z.boolean().optional(),
+    twitch_login: z.string().nullable().optional(),
   })
   .loose()
   .meta({

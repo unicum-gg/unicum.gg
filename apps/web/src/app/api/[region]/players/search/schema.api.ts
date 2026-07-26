@@ -17,6 +17,9 @@ export const playerSearchHit = z
       .object({ tag: z.string(), color: z.string() })
       .nullable()
       .meta({ description: "The player's clan tag and color, when tracked." }),
+    is_verified: z.boolean().optional(),
+    is_supporter: z.boolean().optional(),
+    twitch_login: z.string().nullable().optional(),
   })
   .meta({
     id: "PlayerSearchHit",

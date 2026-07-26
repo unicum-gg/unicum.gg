@@ -6,6 +6,7 @@ import {
   type TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
 import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";
+import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
 import { TopPlayersResponse } from "./schema.api";
 
@@ -57,7 +58,10 @@ export async function GET(
         limit,
         strict,
       );
-      return jsonResponse(TopPlayersResponse, { results, computed_at: null });
+      return jsonResponse(TopPlayersResponse, {
+        results: await attachPlayerBadges(region, results),
+        computed_at: null,
+      });
     }
     const { results, computedAt } = await getTopPlayersByMetric(
       region,
@@ -66,7 +70,7 @@ export async function GET(
       limit,
     );
     return jsonResponse(TopPlayersResponse, {
-      results,
+      results: await attachPlayerBadges(region, results),
       computed_at: computedAt?.toISOString() ?? null,
     });
   } catch (err) {

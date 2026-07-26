@@ -1,5 +1,6 @@
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
+import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerSearchResponse } from "./schema.api";
 import {
@@ -55,7 +56,7 @@ export async function GET(
   discoverPlayers(region, results);
   return jsonResponse(
     PlayerSearchResponse,
-    { results },
+    { results: await attachPlayerBadges(region, results) },
     { headers: { "cache-control": "no-store" } },
   );
 }

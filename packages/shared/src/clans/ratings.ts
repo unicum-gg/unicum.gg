@@ -19,6 +19,12 @@ export type ClanMemberStats = PortalClanMember &
     wn830d: number | null;
     wnx30d: number | null;
     battles30d: number | null;
+    // Public badges, attached at the API boundary (absent in the cron/cache
+    // path). The owner connected this account on the site, is an active
+    // non-anonymous supporter, and/or has a linked Twitch channel.
+    isVerified?: boolean;
+    isSupporter?: boolean;
+    twitchLogin?: string | null;
   };
 
 /**

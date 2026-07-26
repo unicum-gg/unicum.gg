@@ -236,6 +236,8 @@ export const PlayerDetailResponse = z.object({
         "Previous nicknames of this account, newest first. Empty until a rename is observed (WG exposes no historical names).",
     }),
   isSupporter: z.boolean(),
+  isVerified: z.boolean(),
+  twitchLogin: z.string().nullable(),
   current: playerStats,
   periods: z.object({
     h24: playerStats.nullable(),

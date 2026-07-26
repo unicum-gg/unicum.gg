@@ -16,6 +16,7 @@ import {
   type StrongholdStats,
 } from "@unicum.gg/core/players";
 import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
+import { getAccountTwitchLogin, isAccountVerified } from "@unicum.gg/core/players/badges";
 import { getPlayerNameHistory } from "@unicum.gg/core/players/name-history";
 import {
   type PlayerInitialData,
@@ -77,6 +78,8 @@ export async function buildPlayerDetail(args: {
     specs,
     supporterSub,
     nameHistory,
+    isVerified,
+    twitchLogin,
   ] = await Promise.all([
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
@@ -85,6 +88,8 @@ export async function buildPlayerDetail(args: {
     getAllTankSpecs(),
     getAccountSubscription(region, accountId),
     getPlayerNameHistory(region, accountId),
+    isAccountVerified(region, accountId),
+    getAccountTwitchLogin(region, accountId),
   ]);
   // Public supporter badge: active, and not opted out via podium anonymity.
   const isSupporter = supporterSub
@@ -197,6 +202,8 @@ export async function buildPlayerDetail(args: {
     },
     nameHistory,
     isSupporter,
+    isVerified,
+    twitchLogin,
     current,
     periods,
     derived,

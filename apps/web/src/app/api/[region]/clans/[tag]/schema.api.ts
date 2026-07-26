@@ -45,6 +45,9 @@ export const clanMember = z
     wn830d: z.number().nullable(),
     wnx30d: z.number().nullable(),
     battles30d: z.number().nullable(),
+    isVerified: z.boolean().optional(),
+    isSupporter: z.boolean().optional(),
+    twitchLogin: z.string().nullable().optional(),
   })
   .loose()
   .meta({

@@ -6,13 +6,14 @@ import {
   type PlayerClanInfo,
 } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import type { Region } from "@unicum.gg/wargaming";
+import type { PlayerBadgeFlags } from "@unicum.gg/shared";
 
 /** A single player search hit. Shared by the plain and NDJSON search routes. */
 export type SearchPlayerResult = {
   account_id: number;
   nickname: string;
   clan: PlayerClanInfo | null;
-};
+} & PlayerBadgeFlags;
 
 const SEARCH_LIMIT = 5;
 

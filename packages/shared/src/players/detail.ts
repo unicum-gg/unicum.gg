@@ -58,6 +58,12 @@ export type PlayerDetailData = {
   // This account belongs to an active (and non-anonymous) unicum.gg supporter,
   // for the supporter badge on the player header.
   isSupporter: boolean;
+  // The owner has connected this account on the site (Wargaming.net ID sign-in),
+  // for the verified badge.
+  isVerified: boolean;
+  // The Twitch login of this account's linked channel (for the streamer badge's
+  // link), or null when the account is not a streamer.
+  twitchLogin: string | null;
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;

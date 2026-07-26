@@ -1,5 +1,5 @@
 import { and, asc, desc, eq, gte, isNotNull } from "drizzle-orm";
-import { RatingMetric, playersByRegion, topPlayersByRegion } from "@unicum.gg/shared";
+import { RatingMetric, playersByRegion, topPlayersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { type Region } from "@unicum.gg/wargaming";
@@ -23,7 +23,7 @@ export type TopPlayerResult = {
   clan_color: string | null;
   battles: number;
   wnx: number;
-};
+} & PlayerBadgeFlags;
 
 export type TopPlayersAllMetrics = {
   [RatingMetric.Wn7]: TopPlayerResult[];

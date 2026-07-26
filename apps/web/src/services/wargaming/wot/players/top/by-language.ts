@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { clansByRegion, playerRatingsByRegion, playersByRegion } from "@unicum.gg/shared";
+import { clansByRegion, playerRatingsByRegion, playersByRegion, type PlayerBadgeFlags } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 
 export type TopPlayerByLanguageResult = {
@@ -11,7 +11,7 @@ export type TopPlayerByLanguageResult = {
   battles: number;
   wnx: number;
   languages: string[];
-};
+} & PlayerBadgeFlags;
 
 // Lower than the global Overall leaderboard floor (20k) because the
 // language-filtered pool is smaller — a 10k floor surfaces enough candidates

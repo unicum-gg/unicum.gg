@@ -1,5 +1,6 @@
 import { SearchSource } from "@unicum.gg/shared";
 import * as S from "@/services/openapi/schemas";
+import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
 import {
   discoverPlayers,
@@ -62,11 +63,17 @@ export async function GET(
       });
 
       const local = await localP;
-      send({ source: SearchSource.Local, results: local });
+      send({
+        source: SearchSource.Local,
+        results: await attachPlayerBadges(region, local),
+      });
 
       const seen = new Set(local.map((r) => r.account_id));
       const remote = (await remoteP).filter((r) => !seen.has(r.account_id));
-      send({ source: SearchSource.Remote, results: remote });
+      send({
+        source: SearchSource.Remote,
+        results: await attachPlayerBadges(region, remote),
+      });
 
       discoverPlayers(region, [...local, ...remote]);
       controller.close();
