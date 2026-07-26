@@ -1,5 +1,7 @@
 import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
 import ROUTES from "@/constants/routes";
+import { isFeedbackEnabled } from "@/services/discord/feedback";
+import { FeedbackWidget } from "./feedback/feedback-widget";
 import { LoginWidget } from "./login-widget";
 import { MiniFundingBar } from "./support/mini-funding-bar";
 import { PlayersOnline } from "./players-online";
@@ -25,6 +27,7 @@ export function TopBar() {
             >
               Support us
             </Link>
+            {isFeedbackEnabled() && <FeedbackWidget />}
             <LoginWidget />
           </div>
           {/* Centered on the container (page content) rather than the leftover

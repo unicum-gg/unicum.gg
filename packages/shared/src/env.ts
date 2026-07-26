@@ -50,6 +50,11 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: z.string().optional(),
     DISCORD_BOT_TOKEN: z.string().optional(),
     DISCORD_GUILD_ID: z.string().optional(),
+    // Discord incoming-webhook URL for the site feedback widget: submissions are
+    // posted as an embed to a private channel. Web-only. Optional so the app/worker
+    // boot without it and the feature degrades off when unset (the top-bar
+    // "Feedback" button hides and `POST /api/feedback` 404s).
+    DISCORD_FEEDBACK_WEBHOOK_URL: z.string().optional(),
     // Stripe (support subscriptions). Web-only. Optional so the worker/bot boot
     // without them and the feature degrades off when unset (subscribe button
     // hidden). PRODUCT_ID is the "unicum.gg Support" product the pay-what-you-want
@@ -78,6 +83,7 @@ export const env = createEnv({
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
     DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN,
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
+    DISCORD_FEEDBACK_WEBHOOK_URL: process.env.DISCORD_FEEDBACK_WEBHOOK_URL,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
