@@ -16,7 +16,7 @@ import type { MomValues } from "@unicum.gg/core/mom";
 import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
 import type { MoeValues } from "@unicum.gg/core/moe";
 import type { MoeHistoryPoint } from "@unicum.gg/core/moe/poliroid";
-import { type TankSpec, type VehicleMeta, type WN8Expected, type WNXExpected, VEHICLE_CLASS_LABEL_FULL, VEHICLE_ROLE_LABEL, roleSuffix } from "@unicum.gg/shared";
+import { type TankSpec, type VehicleMeta, type VehicleMode, type WN8Expected, type WNXExpected, VEHICLE_CLASS_LABEL_FULL, VEHICLE_ROLE_LABEL, roleSuffix } from "@unicum.gg/shared";
 import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
@@ -59,6 +59,7 @@ export function TankView({
   crew,
   fieldMods,
   skillTree,
+  modes,
   moeHistory,
   momHistory,
 }: {
@@ -80,6 +81,7 @@ export function TankView({
   crew: TankCrew | null;
   fieldMods: TankFieldMods | null;
   skillTree: TankSkillTree | null;
+  modes: VehicleMode[];
   moeHistory: MoeHistoryPoint[];
   momHistory: MomHistoryPoint[];
 }) {
@@ -231,6 +233,7 @@ export function TankView({
                     crew={crew}
                     fieldMods={fieldMods}
                     skillTree={skillTree}
+                    modes={modes}
                     nextTanks={researchPath.next}
                   />
                 )}

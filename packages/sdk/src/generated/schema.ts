@@ -2125,6 +2125,8 @@ export interface components {
             fieldMods: components["schemas"]["tankFieldMods"] | null;
             /** @description The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead). */
             skillTree: components["schemas"]["tankSkillTree"] | null;
+            /** @description The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode. */
+            modes: components["schemas"]["vehicleMode"][];
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -2194,6 +2196,8 @@ export interface components {
             fieldMods: components["schemas"]["tankFieldMods"] | null;
             /** @description The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead). */
             skillTree: components["schemas"]["tankSkillTree"] | null;
+            /** @description The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode. */
+            modes: components["schemas"]["vehicleMode"][];
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -2448,6 +2452,20 @@ export interface components {
             role: string | null;
             contourIcon: string | null;
             bigIcon: string | null;
+        };
+        vehicleMode: {
+            /** @enum {string} */
+            kind: "siege" | "rapid";
+            switchOnTime: number;
+            switchOffTime: number;
+            factors: {
+                attribute: string;
+                /** @enum {string} */
+                type: "mul" | "add";
+                value: number;
+            }[];
+            depression: number | null;
+            elevation: number | null;
         };
         /**
          * @description Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.

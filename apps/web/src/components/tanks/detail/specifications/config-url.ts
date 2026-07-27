@@ -1,4 +1,5 @@
 import type { TankConfig, TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
+import { VehicleModeKind } from "@unicum.gg/shared";
 
 /** The module slots, in the order they are encoded in the URL. */
 export const MODULE_SLOTS: (keyof TankConfigModules)[] = [
@@ -45,6 +46,8 @@ export interface DecodedConfig {
   crewSkills?: string[];
   /** Crew training level as a 0-1 fraction. */
   crewLevel?: number;
+  /** The engaged driving mode (siege / rapid), or absent for travel. */
+  mode?: VehicleModeKind;
 }
 
 /** The live selection to serialize. Defaults are omitted from the URL. */
@@ -63,6 +66,8 @@ export interface EncodeInput {
   crewSkills: string[];
   /** Crew training level as a 0-1 fraction. */
   crewLevel: number;
+  /** The engaged driving mode, or null for travel (the default). */
+  mode: VehicleModeKind | null;
 }
 
 const csv = (parts: (string | number | null)[]): string =>
@@ -84,6 +89,7 @@ const K = {
   upgrades: "u",
   crewSkills: "k",
   crewLevel: "l",
+  mode: "g",
 } as const;
 
 /** Build the compact inner query string, writing only what differs from the
@@ -126,6 +132,8 @@ function buildSetupString(input: EncodeInput): string {
 
   const pct = Math.round(input.crewLevel * 100);
   if (pct !== 100) add(K.crewLevel, String(pct));
+
+  if (input.mode) add(K.mode, input.mode);
 
   return parts.join("&");
 }
@@ -199,6 +207,10 @@ function decodeConfig(params: URLSearchParams): DecodedConfig {
   const crewLevel = Number(params.get(K.crewLevel));
   if (Number.isFinite(crewLevel) && crewLevel > 0 && crewLevel <= 100)
     out.crewLevel = crewLevel / 100;
+
+  const mode = params.get(K.mode);
+  if (mode === VehicleModeKind.Siege || mode === VehicleModeKind.Rapid)
+    out.mode = mode;
 
   return out;
 }

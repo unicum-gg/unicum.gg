@@ -281,6 +281,21 @@ const tankFieldMods = z.object({
   steps: z.array(fieldModStep),
 });
 
+const vehicleMode = z.object({
+  kind: z.enum(["siege", "rapid"]),
+  switchOnTime: z.number(),
+  switchOffTime: z.number(),
+  factors: z.array(
+    z.object({
+      attribute: z.string(),
+      type: z.enum(["mul", "add"]),
+      value: z.number(),
+    }),
+  ),
+  depression: z.number().nullable(),
+  elevation: z.number().nullable(),
+});
+
 const skillNode = z.object({
   id: z.number(),
   type: z.string().meta({
@@ -458,6 +473,10 @@ export const TankDetailResponse = z
     skillTree: tankSkillTree.nullable().meta({
       description:
         "The tank's vehicle skill tree (the tier-XI 'upgrades'): the node graph with each node's stat effects and 2D layout. Null for every tier <= X vehicle (which uses field modifications instead).",
+    }),
+    modes: z.array(vehicleMode).meta({
+      description:
+        "The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode.",
     }),
     moeHistory: z.array(
       z.object({

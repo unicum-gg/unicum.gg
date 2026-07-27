@@ -151,6 +151,8 @@ export function TankCharacteristics(
         onResetAll?: () => void;
         /** Extra header controls (e.g. "Share build"), left of Reset. */
         actions?: React.ReactNode;
+        /** Inline control sat next to the title (the driving-mode toggle). */
+        titleControl?: React.ReactNode;
       },
 ) {
   if ("loading" in props) return <CharacteristicsSkeleton />;
@@ -161,13 +163,17 @@ export function TankCharacteristics(
     canResetAll = false,
     onResetAll,
     actions,
+    titleControl,
   } = props;
   if (!specs) return null;
   const hasActions = actions || (canResetAll && onResetAll);
   return (
     <Panel>
       <PanelHeader className="flex items-center justify-between gap-4">
-        <PanelTitle>{tankName} characteristics</PanelTitle>
+        <div className="flex items-center gap-3">
+          <PanelTitle>{tankName} characteristics</PanelTitle>
+          {titleControl}
+        </div>
         {hasActions ? (
           <div className="flex items-center gap-3">
             {actions}

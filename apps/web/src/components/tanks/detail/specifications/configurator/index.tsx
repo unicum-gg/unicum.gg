@@ -14,7 +14,9 @@ import {
   applyCrewQualification,
   applyCamouflage,
   applyCamoNet,
+  applyVehicleMode,
   type VehicleMeta,
+  type VehicleMode,
   type TankSpec,
 } from "@unicum.gg/shared";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
@@ -38,12 +40,14 @@ import { TankConsumables } from "@/components/tanks/detail/specifications/consum
 import { TankCrew } from "@/components/tanks/detail/specifications/crew";
 import { TankFieldModifications } from "@/components/tanks/detail/specifications/field-mods";
 import { TankSkillTree } from "@/components/tanks/detail/specifications/skill-tree";
+import { VehicleModeToggle } from "@/components/tanks/detail/specifications/vehicle-mode";
 import { PanelSeparator } from "@/components/panel";
 import { cn } from "@/lib/utils";
 import { useLoadout } from "@/hooks/use-loadout";
 import { useCrewConfig } from "@/hooks/use-crew-config";
 import { useFieldMods } from "@/hooks/use-field-mods";
 import { useSkillTree } from "@/hooks/use-skill-tree";
+import { useVehicleMode } from "@/hooks/use-vehicle-mode";
 import { useAmmo, applyShell } from "@/hooks/use-ammo";
 import {
   decodeSetup,
@@ -91,6 +95,7 @@ type TankConfiguratorProps = {
   crew: TankCrewData | null;
   fieldMods: TankFieldModsData | null;
   skillTree: TankSkillTreeData | null;
+  modes: VehicleMode[];
   nextTanks: ResearchPathItem[];
 };
 
@@ -116,6 +121,7 @@ function TankConfiguratorInner({
   crew,
   fieldMods,
   skillTree,
+  modes,
   nextTanks,
 }: TankConfiguratorProps) {
   const interactive = configs.length > 0;
@@ -261,6 +267,13 @@ function TankConfiguratorInner({
     isDirty: skillTreeDirty,
     reset: resetSkillTree,
   } = useSkillTree(skillTree, initialConfig.unlocked);
+  const {
+    active: modeActive,
+    appliedMode,
+    toggle: toggleMode,
+    isDirty: modeDirty,
+    reset: resetMode,
+  } = useVehicleMode(modes, initialConfig.mode);
 
   // Characteristics reflect the selected shell first (it *replaces* base values:
   // damage, penetration, velocity, cost), then modules + equipment + directives
@@ -271,11 +284,18 @@ function TankConfiguratorInner({
     if (!specs) return specs;
     const withShell = applyShell(specs, ammoShells[shellIdx]);
     if (!withShell) return withShell;
+    // Driving mode (siege / rapid) is a base-state swap: it scales the handling
+    // and mobility characteristics by WG's mode-vs-travel ratios before anything
+    // else, so equipment, crew and field mods then compose on top of the
+    // deployed values (a mounted rammer speeds up the siege reload, etc.).
+    const withMode = appliedMode
+      ? applyVehicleMode(withShell, appliedMode, shellIdx)
+      : withShell;
     // The crew's major-qualification level (the slider) degrades every
     // crew-affected stat below 100%; nominal at 100%. Applied first, then the
     // trained skills/perks build on top.
     const withQual =
-      crewLevel < 1 ? applyCrewQualification(withShell, crewLevel) : withShell;
+      crewLevel < 1 ? applyCrewQualification(withMode, crewLevel) : withMode;
     const withEquip = mounted.length ? applyEquipment(withQual, mounted) : withQual;
     const withDirectives = appliedDirectives.length
       ? applyDirectives(withEquip, appliedDirectives)
@@ -328,6 +348,7 @@ function TankConfiguratorInner({
     return withNet;
   }, [
     specs,
+    appliedMode,
     mounted,
     appliedDirectives,
     appliedCrewDirectives,
@@ -405,6 +426,7 @@ function TankConfiguratorInner({
     directivesDirty ||
     fieldModsDirty ||
     skillTreeDirty ||
+    modeDirty ||
     crewDirty ||
     modulesDirty;
   function resetAll() {
@@ -414,6 +436,7 @@ function TankConfiguratorInner({
     resetDirectives();
     resetFieldMods();
     resetSkillTree();
+    resetMode();
     resetCrew();
     resetModules();
   }
@@ -439,6 +462,7 @@ function TankConfiguratorInner({
       unlocked: [...unlockedNodes],
       crewSkills: [...selectedSkills],
       crewLevel,
+      mode: modeActive,
     });
   }, [
     active,
@@ -455,6 +479,7 @@ function TankConfiguratorInner({
     unlockedNodes,
     selectedSkills,
     crewLevel,
+    modeActive,
   ]);
 
   // Mirror the token into the URL (replaceState, so no navigation or scroll): a
@@ -483,6 +508,13 @@ function TankConfiguratorInner({
             baseline={baselineSpec}
             canResetAll={canResetAll}
             onResetAll={resetAll}
+            titleControl={
+              <VehicleModeToggle
+                modes={modes}
+                active={modeActive}
+                onToggle={toggleMode}
+              />
+            }
             actions={
               setupToken ? (
                 <div className="flex items-center gap-1.5">

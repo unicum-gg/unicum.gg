@@ -15,7 +15,7 @@ import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
 import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
-import type { TankSpec } from "@unicum.gg/shared";
+import type { TankSpec, VehicleMode } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
@@ -145,6 +145,7 @@ async function TankPageServer({
         crew={detail.crew as unknown as TankCrew | null}
         fieldMods={detail.fieldMods as unknown as TankFieldMods | null}
         skillTree={detail.skillTree as unknown as TankSkillTree | null}
+        modes={(detail.modes ?? []) as unknown as VehicleMode[]}
         moeHistory={detail.moeHistory}
         momHistory={detail.momHistory}
       />
