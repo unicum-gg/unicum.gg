@@ -9,7 +9,9 @@
     "./*": "./src/*.ts"
   },
   "scripts": {
-    "generate": "tsx scripts/generate.ts"
+    "generate:schema": "tsx scripts/generate-schema.ts",
+    "generate:client": "tsx scripts/generate-client.ts",
+    "generate": "tsx scripts/generate-schema.ts && tsx scripts/generate-client.ts"
   },
   "dependencies": {
     "@unicum.gg/shared": "workspace:*",

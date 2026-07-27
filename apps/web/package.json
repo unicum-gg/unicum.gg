@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "predev": "openapi-gen generate && node scripts/generate-local-routes.mjs",
-    "prebuild": "openapi-gen generate && node scripts/generate-local-routes.mjs",
+    "predev": "openapi-gen generate && node scripts/generate-local-routes.mjs && pnpm --filter @unicum.gg/sdk generate:client",
+    "prebuild": "openapi-gen generate && node scripts/generate-local-routes.mjs && pnpm --filter @unicum.gg/sdk generate:client",
     "openapi:generate": "openapi-gen generate",
     "openapi:watch": "openapi-gen generate --watch",
     "build": "next build",
