@@ -20,6 +20,7 @@ import {
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { DiscordInstallStatus } from "@/services/discord";
+import { unicumPublic } from "@/services/sdk";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import { styles } from "@/lib/styles";
@@ -99,7 +100,7 @@ const FEATURES = [
 // same formatter as `apps/bot/.../lib/stats-lines.ts`) plus the player's OG
 // card (the embed image). `Animal` is populated, so both are real and match.
 const EXAMPLE_PLAYER = "Animal";
-const EXAMPLE_OG_PATH = `/eu/players/${EXAMPLE_PLAYER}/opengraph-image`;
+const EXAMPLE_OG_URL = unicumPublic.og.eu.players(EXAMPLE_PLAYER).url();
 const EXAMPLE_TABLE = `Battles                  27,655
 Tier                       9.35
 Wins                     18,794  67.96%
@@ -282,7 +283,7 @@ export default async function BotPage({
               </pre>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`${APP.URL}${EXAMPLE_OG_PATH}`}
+                src={EXAMPLE_OG_URL}
                 alt="Example unicum.gg World of Tanks player stats card"
                 width={1200}
                 height={630}

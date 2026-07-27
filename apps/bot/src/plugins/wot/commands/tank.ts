@@ -14,7 +14,7 @@ import {
 } from "@unicum.gg/wargaming";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { tankUrl, wnxColorInt } from "../lib/format.js";
-import { unicum } from "../lib/sdk.js";
+import { unicum, unicumPublic } from "../lib/sdk.js";
 import { renderTable, type TableRow } from "../lib/table.js";
 import romanNumerals from "roman-numerals";
 
@@ -190,7 +190,7 @@ export const tankCommand: DixtSlashCommandBuilder = {
     // The catalogue icon is hosted by WG, so it renders everywhere (unlike the
     // OG image, which Discord can only fetch when the app URL is public).
     if (meta.bigIcon) embed.setThumbnail(meta.bigIcon);
-    embed.setImage(`${url}/opengraph-image`);
+    embed.setImage(unicumPublic.og.region(region).tanks(detail.slug).url());
 
     await editReplyWithShare(interaction, embed, {
       url,

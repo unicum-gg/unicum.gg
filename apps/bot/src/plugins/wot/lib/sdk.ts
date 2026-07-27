@@ -14,3 +14,11 @@ import { env } from "../../../env.js";
 export const unicum = new Unicum(
   env.UNICUM_API_URL ? { baseUrl: env.UNICUM_API_URL } : {},
 );
+
+/**
+ * Public-origin client for **OG image URLs** (`unicumPublic.og.region(r)
+ * .players(nick).url()`). Discord fetches embed images externally, so they must
+ * use the public `NEXT_PUBLIC_APP_URL` — not the internal container the data
+ * `unicum` above points at in prod. `.url()` is side-effect-free (never fetches).
+ */
+export const unicumPublic = new Unicum();

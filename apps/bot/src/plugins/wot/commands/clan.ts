@@ -13,7 +13,7 @@ import {
 } from "../lib/clan-lines.js";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { clanUrl, wnxColorInt } from "../lib/format.js";
-import { unicum } from "../lib/sdk.js";
+import { unicum, unicumPublic } from "../lib/sdk.js";
 import { renderTable } from "../lib/table.js";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -180,7 +180,7 @@ export const clanCommand: DixtSlashCommandBuilder = {
       .setDescription(description)
       // The clan's rich card. Discord fetches it server-side, so it only renders
       // when the URL is publicly reachable (i.e. in prod).
-      .setImage(`${url}/opengraph-image`)
+      .setImage(unicumPublic.og.region(region).clans(tag).url())
       .setFooter({ text: `${APP_IDENTITY.NAME} · ${region.toUpperCase()}` });
 
     await editReplyWithShare(interaction, embed, {

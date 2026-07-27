@@ -10,7 +10,7 @@ import {
 } from "@unicum.gg/wargaming";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
 import { playerUrl, wnxColorInt } from "../lib/format.js";
-import { unicum } from "../lib/sdk.js";
+import { unicum, unicumPublic } from "../lib/sdk.js";
 import { buildStatsBlock } from "../lib/stats-lines.js";
 
 /**
@@ -140,7 +140,7 @@ export const playerCommand: DixtSlashCommandBuilder = {
       .setDescription(buildStatsBlock(detail.current, detail.derived))
       // The player's rich stats card. Discord fetches it server-side, so it
       // only renders when the URL is publicly reachable (i.e. in prod).
-      .setImage(`${url}/opengraph-image`)
+      .setImage(unicumPublic.og.region(region).players(nickname).url())
       .setFooter({ text: `${APP_IDENTITY.NAME} · ${region.toUpperCase()}` })
       .setTimestamp(detail.player.updatedAt);
 

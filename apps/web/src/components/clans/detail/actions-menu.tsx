@@ -21,6 +21,7 @@ import { useSearchHistory } from "@/hooks/use-search-history";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { REGION_PORTAL_HOST, type Region } from "@unicum.gg/wargaming";
+import { unicumPublic } from "@/services/sdk";
 
 /**
  * Overflow menu for the clan header, folding the per-clan actions (favorite,
@@ -105,7 +106,7 @@ export function ClanActionsMenu({
         title={`Share [${clan.tag}]`}
         url={url}
         shareText={`Check [${clan.tag}] ${clan.name} on ${APP.NAME}`}
-        ogImage={`${url}/opengraph-image`}
+        ogImage={unicumPublic.og.region(region).clans(clan.tag).url()}
       />
     </>
   );

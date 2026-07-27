@@ -24,6 +24,7 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
 import { REGION_WOT_HOST, type Region } from "@unicum.gg/wargaming";
+import { unicumPublic } from "@/services/sdk";
 
 /**
  * Overflow menu for the player header, folding the per-player actions (favorite,
@@ -143,7 +144,7 @@ export function PlayerActionsMenu({
         title={`Share ${nickname}`}
         url={url}
         shareText={`Check ${nickname}'s WoT stats on ${APP.NAME}`}
-        ogImage={`${url}/opengraph-image`}
+        ogImage={unicumPublic.og.region(region).players(nickname).url()}
       />
     </>
   );

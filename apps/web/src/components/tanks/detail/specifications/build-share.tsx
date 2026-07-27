@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react";
 import { toast } from "sonner";
 import type { Region } from "@unicum.gg/wargaming";
+import { unicumPublic } from "@/services/sdk";
 import { ShareModal } from "@/components/share-modal";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -80,7 +81,7 @@ export function BuildShare({
         title={`Share ${tankName}`}
         url={cleanUrl}
         shareText={`Check out this ${tankName} build on ${APP.NAME}`}
-        ogImage={`${APP.URL}/${region}/tanks/${slug}/opengraph-image`}
+        ogImage={unicumPublic.og.region(region).tanks(slug).url()}
         setupParams={setupParams}
         setupLabel="Include setup"
       />

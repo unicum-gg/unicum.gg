@@ -39,6 +39,16 @@ const baseUrl =
 
 export const unicum = new Unicum({ fetch: dispatchingFetch, baseUrl });
 
+/**
+ * Public-origin client for building **OG image URLs** (`unicum.og.eu.players("x")
+ * .url()`). These URLs are rendered into HTML / embeds and loaded by a browser or
+ * Discord, so they must use the SDK default base — the public origin on the
+ * server, a same-origin relative `/api` in the browser — never the loopback /
+ * internal container the data `unicum` above points at. `.url()` is
+ * side-effect-free, so this never fetches.
+ */
+export const unicumPublic = new Unicum();
+
 const BUILD_PHASE = process.env.NEXT_PHASE === "phase-production-build";
 
 /**
