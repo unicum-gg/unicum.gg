@@ -16,6 +16,7 @@ const MAX_PLAYERS = 4;
  * Compare players
  * @description Inputs for a side-by-side comparison of up to 4 players (`?names=a,b,c`): each player's tracked row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and the WN8/WNX expected-value tables the ratings derive from. Dates are ISO 8601 strings.
  * @pathParams regionParams
+ * @queryParams compareNamesQuery
  * @response PlayersCompareResponse
  * @tag Players
  * @openapi

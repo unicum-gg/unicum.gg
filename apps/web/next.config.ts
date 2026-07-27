@@ -141,6 +141,25 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/favicon.ico", destination: "/icon.svg", permanent: true },
+      // Legacy OG image path (the Next `opengraph-image` file convention, whose
+      // URL got a route-group hash after the `(site)` move) → the stable
+      // hash-free `/api/og` route. Keeps old embeds (Discord bot, shared links)
+      // resolving without touching every caller.
+      {
+        source: "/:region(eu|na|asia)/players/:nickname/opengraph-image",
+        destination: "/api/og/:region/players/:nickname",
+        permanent: true,
+      },
+      {
+        source: "/:region(eu|na|asia)/clans/:tag/opengraph-image",
+        destination: "/api/og/:region/clans/:tag",
+        permanent: true,
+      },
+      {
+        source: "/:region(eu|na|asia)/tanks/:slug/opengraph-image",
+        destination: "/api/og/:region/tanks/:slug",
+        permanent: true,
+      },
     ];
   },
   async headers() {

@@ -49,6 +49,16 @@ function pickNameFontSize(joined: string): number {
   return 52;
 }
 
+/**
+ * Players comparison OG card
+ * @description A side-by-side comparison card (up to 4 players, WNX each) as a 1200×630 PNG.
+ * @pathParams regionParams
+ * @queryParams compareNamesQuery
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ region: string }> },

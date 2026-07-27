@@ -51,6 +51,16 @@ function pickNameFontSize(joined: string): number {
   return 52;
 }
 
+/**
+ * Clans comparison OG card
+ * @description A side-by-side comparison card (up to 4 clans, WNX each) as a 1200×630 PNG.
+ * @pathParams regionParams
+ * @queryParams compareTagsQuery
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ region: string }> },

@@ -86,7 +86,7 @@ export async function generateMetadata({
     return constructMetadata({
       title: `${result.nickname} World of Tanks account locked (${regionLabel})`,
       description: `${result.nickname} (${regionLabel}) exists but Wargaming has locked this account, so its World of Tanks stats are not available.`,
-      ogImage: false,
+      ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
       canonical: ROUTES.PLAYER(region, decoded),
     });
   }
@@ -98,7 +98,7 @@ export async function generateMetadata({
     return constructMetadata({
       title: `${displayName} World of Tanks player stats (${regionLabel})`,
       description: `${displayName} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`,
-      ogImage: false,
+      ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
       canonical: ROUTES.PLAYER(region, decoded),
     });
   }
@@ -110,7 +110,7 @@ export async function generateMetadata({
   return constructMetadata({
     title: `${displayName} World of Tanks stats (${regionLabel}), ${battles} battles, ${winrate}% WR`,
     description: `${displayName} on ${regionLabel}: ${battles} battles, ${winrate}% winrate, ${intFmt.format(rating)} rating. Tank-by-tank breakdown, WN8, WNX and full clans history.`,
-    ogImage: false,
+    ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
     canonical: ROUTES.PLAYER(region, decoded),
   });
 }

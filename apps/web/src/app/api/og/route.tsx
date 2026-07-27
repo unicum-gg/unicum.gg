@@ -6,6 +6,15 @@ import { loadOgAssets, OG_SIZE, ogFonts } from "@/lib/og";
 
 export const runtime = "nodejs";
 
+/**
+ * Generic OG card
+ * @description A generic 1200×630 PNG social card with a customizable title and subtitle, used as the link-unfurl image for pages without a dedicated per-entity card.
+ * @queryParams ogTextQuery
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
   const title = searchParams.get("title") ?? "World of Tanks";

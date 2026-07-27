@@ -62,7 +62,7 @@ export async function generateMetadata({
     // Point at the readable slug so a legacy numeric-id URL doesn't become the
     // canonical.
     canonical: ROUTES.TANK(region, detail.slug),
-    ogImage: false,
+    ogImage: `/api/og/${region}/tanks/${encodeURIComponent(detail.slug)}`,
   });
 }
 

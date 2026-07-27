@@ -33,6 +33,7 @@ async function loadClanForCompare(region: Region, tag: string) {
  * Compare clans
  * @description Inputs for a side-by-side comparison of up to 4 clans (`?tags=a,b,c`): each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and the WN8/WNX expected-value tables. Dates are ISO 8601 strings.
  * @pathParams regionParams
+ * @queryParams compareTagsQuery
  * @response ClansCompareResponse
  * @tag Clans
  * @openapi

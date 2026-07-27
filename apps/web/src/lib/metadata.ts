@@ -20,9 +20,8 @@ export function constructMetadata({
   description?: string;
   ogTitle?: string;
   ogSubtitle?: string;
-  // `false` skips the images field entirely so a page-local
-  // `opengraph-image.tsx` (Next convention) is auto-bound instead of being
-  // overridden by the dynamic /api/og route.
+  // A stable `/api/og/...` route URL for the page's card, or `false` to skip the
+  // images field entirely (a listing/index page with no per-entity card).
   ogImage?: string | false;
   ogType?: "website" | "article";
   noIndex?: boolean;

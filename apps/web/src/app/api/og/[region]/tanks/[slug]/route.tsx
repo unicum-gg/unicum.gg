@@ -1,10 +1,10 @@
 import { ImageResponse } from "next/og";
+import { type NextRequest } from "next/server";
 import APP from "@/constants/app";
 import {
   fetchImageDataUrl,
   hangarBgDataUrl,
   loadOgAssets,
-  OG_CONTENT_TYPE,
   OG_SIZE,
   ogFonts,
   RATING_BG,
@@ -19,19 +19,29 @@ import {
 import { VEHICLE_CLASS_LABEL_FULL, wnxColor } from "@unicum.gg/shared";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import { isRegion, Region, defaultVehicleRenderUrl, tankopediaImageUrl } from "@unicum.gg/wargaming";
+import {
+  isRegion,
+  Region,
+  defaultVehicleRenderUrl,
+  tankopediaImageUrl,
+} from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
 export const runtime = "nodejs";
-export const alt = `World of Tanks tank stats on ${APP.NAME}`;
-export const size = OG_SIZE;
-export const contentType = OG_CONTENT_TYPE;
 
-export default async function Image({
-  params,
-}: {
-  params: Promise<{ region: string; slug: string }>;
-}) {
+/**
+ * Tank OG card
+ * @description The tank's stats card as a stable, hash-free 1200×630 PNG (tier, class, best player, top WNX, with the vehicle render). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+ * @pathParams tankParams
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ region: string; slug: string }> },
+) {
   const { region, slug } = await params;
   const [assets, hangarBg] = await Promise.all([
     loadOgAssets(),

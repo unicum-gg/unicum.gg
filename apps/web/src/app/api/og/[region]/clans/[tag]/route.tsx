@@ -1,35 +1,43 @@
 import { ImageResponse } from "next/og";
+import { type NextRequest } from "next/server";
 import APP from "@/constants/app";
-import { botHeaders, weightedAverage, overallPoints, d30Points, winrateColor, wnxColor } from "@unicum.gg/shared";
+import {
+  botHeaders,
+  weightedAverage,
+  overallPoints,
+  d30Points,
+  winrateColor,
+  wnxColor,
+} from "@unicum.gg/shared";
 import {
   intFmt,
   loadOgAssets,
   normalizeTagColor,
-  OG_CONTENT_TYPE,
   OG_SIZE,
   ogFonts,
   pctFmt,
   RATING_BG,
 } from "@/lib/og";
-import {
-  BrandHeaderCell,
-  RegionHeaderCell,
-  StatCard,
-} from "@/components/og";
+import { BrandHeaderCell, RegionHeaderCell, StatCard } from "@/components/og";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { isRegion } from "@unicum.gg/wargaming";
 
 export const runtime = "nodejs";
-export const alt = `World of Tanks clan on ${APP.NAME}`;
-export const size = OG_SIZE;
-export const contentType = OG_CONTENT_TYPE;
 
-export default async function Image({
-  params,
-}: {
-  params: Promise<{ region: string; tag: string }>;
-}) {
+/**
+ * Clan OG card
+ * @description The clan's stats card as a stable, hash-free 1200×630 PNG (members, average WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+ * @pathParams clanLiveParams
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ region: string; tag: string }> },
+) {
   const { region, tag } = await params;
   const decoded = decodeURIComponent(tag);
   const assets = await loadOgAssets();
@@ -73,9 +81,7 @@ export default async function Image({
         await getClanMembersCached(region, cached.info.id)
       ).members;
       avgWnx = weightedAverage(overallPoints(memberStats, (m) => m.wnx));
-      avgWnx30d = weightedAverage(
-        d30Points(memberStats, (m) => m.wnx30d),
-      );
+      avgWnx30d = weightedAverage(d30Points(memberStats, (m) => m.wnx30d));
       const wr = weightedAverage(
         overallPoints(memberStats, (m) => m.overall?.winsPercentage ?? null),
       );
@@ -219,4 +225,3 @@ export default async function Image({
     { ...OG_SIZE, fonts: ogFonts(assets) },
   );
 }
-

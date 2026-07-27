@@ -55,6 +55,36 @@ export const searchQuery = z.object({
   }),
 });
 
+// The `/api/og/**` routes all return a 1200×630 PNG stats card (not JSON), so
+// they document their body with this binary response + `@responseContentType
+// image/png`.
+export const ogImageResponse = z.string().meta({
+  description: "A 1200×630 PNG stats card.",
+  format: "binary",
+});
+
+// Title/subtitle for the generic text card. Optional: the route falls back to
+// site defaults.
+export const ogTextQuery = z.object({
+  title: z.string().optional().meta({ description: "Card title." }),
+  subtitle: z.string().optional().meta({ description: "Card subtitle." }),
+});
+
+// Compare inputs are honest arrays in the spec (serialized to `?names=a,b` CSV,
+// which the routes parse and the SDK produces from a `string[]`). Shared by the
+// data compare endpoints and their OG-image counterparts.
+export const compareNamesQuery = z.object({
+  names: z.array(z.string()).meta({
+    description: "Player nicknames to compare (2 to 4).",
+  }),
+});
+
+export const compareTagsQuery = z.object({
+  tags: z.array(z.string()).meta({
+    description: "Clan tags to compare (2 to 4).",
+  }),
+});
+
 export const periodField = z.enum(["24h", "7d", "30d", "overall"]).meta({
   description: "Leaderboard time window.",
   example: "overall",

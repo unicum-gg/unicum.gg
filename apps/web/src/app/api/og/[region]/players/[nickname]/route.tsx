@@ -1,35 +1,36 @@
 import { ImageResponse } from "next/og";
+import { type NextRequest } from "next/server";
 import APP from "@/constants/app";
 import { botHeaders, winrateColor, wnxColor } from "@unicum.gg/shared";
 import {
   intFmt,
   loadOgAssets,
   normalizeTagColor,
-  OG_CONTENT_TYPE,
   OG_SIZE,
   ogFonts,
   pctFmt,
   RATING_BG,
   ratingFmt,
 } from "@/lib/og";
-import {
-  BrandHeaderCell,
-  RegionHeaderCell,
-  StatCard,
-} from "@/components/og";
+import { BrandHeaderCell, RegionHeaderCell, StatCard } from "@/components/og";
 import { loadPlayerInitialData } from "@unicum.gg/core/players/initial-data";
 import { isRegion } from "@unicum.gg/wargaming";
 
 export const runtime = "nodejs";
-export const alt = `World of Tanks player stats on ${APP.NAME}`;
-export const size = OG_SIZE;
-export const contentType = OG_CONTENT_TYPE;
 
-export default async function Image({
-  params,
-}: {
-  params: Promise<{ region: string; nickname: string }>;
-}) {
+/**
+ * Player OG card
+ * @description The player's stats card as a stable, hash-free 1200×630 PNG (battles, WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+ * @pathParams playerLiveParams
+ * @response ogImageResponse
+ * @responseContentType image/png
+ * @tag OG Images
+ * @openapi
+ */
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ region: string; nickname: string }> },
+) {
   const { region, nickname } = await params;
   const decoded = decodeURIComponent(nickname);
   const assets = await loadOgAssets();
