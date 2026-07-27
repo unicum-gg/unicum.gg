@@ -9,7 +9,6 @@ import {
   type LiveStreamer,
   type LiveUpdate,
   ndjsonSearch,
-  type OnlinePayload,
   type QueryOf,
   type RequestHandle,
   type SearchChunk,
@@ -20,6 +19,7 @@ import {
   subscribeServerOnline,
   subscribeStreamersLive,
   type Unsubscribe,
+  type OnlinePayload,
   type UnicumOptions,
   UNICUM_API_URL,
   buildUrl,
@@ -229,37 +229,37 @@ class TankClient {
 }
 
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
+  /** Compare players */
+  compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
   /** Player languages */
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
+  /** Search players */
+  search(q: NonNullable<QueryOf<"/{region}/players/search">>["q"]): RequestHandle<Data<"/{region}/players/search">>;
   /** Top players */
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
-  /** Combined (non-streamed) player search. */
-  search(q: string): RequestHandle<Data<"/{region}/players/search">>;
   /** Streamed player search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/players/search">>>;
-  /** Side-by-side comparison inputs for up to 4 players. */
-  compare(names: string[]): RequestHandle<Data<"/{region}/players/compare">>;
 };
 
 type ClansNamespace = ((tag: string) => ClanClient) & {
+  /** Compare clans */
+  compare(tags: NonNullable<QueryOf<"/{region}/clans/compare">>["tags"]): RequestHandle<Data<"/{region}/clans/compare">>;
   /** Clan languages */
   languages(): RequestHandle<Data<"/{region}/clans/languages">>;
+  /** Search clans */
+  search(q: NonNullable<QueryOf<"/{region}/clans/search">>["q"]): RequestHandle<Data<"/{region}/clans/search">>;
   /** Top clans */
   top(query?: QueryOf<"/{region}/clans/top">): RequestHandle<Data<"/{region}/clans/top">>;
   /** Stronghold clan leaderboard */
   strongholdTop(query?: QueryOf<"/{region}/clans/stronghold/top">): RequestHandle<Data<"/{region}/clans/stronghold/top">>;
-  /** Combined (non-streamed) clan search. */
-  search(q: string): RequestHandle<Data<"/{region}/clans/search">>;
   /** Streamed clan search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/clans/search">>>;
-  /** Side-by-side comparison inputs for up to 4 clans. */
-  compare(tags: string[]): RequestHandle<Data<"/{region}/clans/compare">>;
 };
 
 type TanksNamespace = ((slug: string) => TankClient) & {
@@ -271,10 +271,10 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   marksOfExcellence(): RequestHandle<Data<"/{region}/tanks/marks-of-excellence">>;
   /** Tanks Marks of Mastery */
   marksOfMastery(): RequestHandle<Data<"/{region}/tanks/marks-of-mastery">>;
+  /** Search tanks */
+  search(q: NonNullable<QueryOf<"/{region}/tanks/search">>["q"]): RequestHandle<Data<"/{region}/tanks/search">>;
   /** Tanks specifications */
   specifications(): RequestHandle<Data<"/{region}/tanks/specifications">>;
-  /** Combined (non-streamed) tank search. */
-  search(q: string): RequestHandle<Data<"/{region}/tanks/search">>;
   /** Streamed tank search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -303,18 +303,20 @@ class RegionClient {
   get players(): PlayersNamespace {
     const ns = ((nickname: string) =>
       new PlayerClient(this.api, this.baseUrl, this.region, nickname)) as PlayersNamespace;
+    ns.compare = (names) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/compare", { region: this.region }, { names }),
+        () =>
+          this.api.GET("/{region}/players/compare", {
+            params: { path: { region: this.region }, query: { names } },
+          }),
+      );
     ns.languages = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/players/languages", { region: this.region }),
         () =>
-          this.api.GET("/{region}/players/languages", { params: { path: { region: this.region } } }),
-      );
-    ns.top = (query) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/players/top", { region: this.region }, query),
-        () =>
-          this.api.GET("/{region}/players/top", {
-            params: { path: { region: this.region }, query },
+          this.api.GET("/{region}/players/languages", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.search = (q) =>
@@ -323,6 +325,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/search", {
             params: { path: { region: this.region }, query: { q } },
+          }),
+      );
+    ns.top = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/top", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/players/top", {
+            params: { path: { region: this.region }, query },
           }),
       );
     ns.searchStream = (q, options) =>
@@ -335,27 +345,35 @@ class RegionClient {
         q,
         options?.signal,
       );
-    ns.compare = (names) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/players/compare", { region: this.region }, {
-          names: names.join(","),
-        }),
-        () =>
-          this.api.GET("/{region}/players/compare", {
-            params: { path: { region: this.region }, query: { names: names.join(",") } },
-          }),
-      );
     return ns;
   }
 
   get clans(): ClansNamespace {
     const ns = ((tag: string) =>
       new ClanClient(this.api, this.baseUrl, this.region, tag)) as ClansNamespace;
+    ns.compare = (tags) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/clans/compare", { region: this.region }, { tags }),
+        () =>
+          this.api.GET("/{region}/clans/compare", {
+            params: { path: { region: this.region }, query: { tags } },
+          }),
+      );
     ns.languages = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/clans/languages", { region: this.region }),
         () =>
-          this.api.GET("/{region}/clans/languages", { params: { path: { region: this.region } } }),
+          this.api.GET("/{region}/clans/languages", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.search = (q) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/clans/search", { region: this.region }, { q }),
+        () =>
+          this.api.GET("/{region}/clans/search", {
+            params: { path: { region: this.region }, query: { q } },
+          }),
       );
     ns.top = (query) =>
       handle(
@@ -373,14 +391,6 @@ class RegionClient {
             params: { path: { region: this.region }, query },
           }),
       );
-    ns.search = (q) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/clans/search", { region: this.region }, { q }),
-        () =>
-          this.api.GET("/{region}/clans/search", {
-            params: { path: { region: this.region }, query: { q } },
-          }),
-      );
     ns.searchStream = (q, options) =>
       ndjsonSearch<SearchItemOf<"/{region}/clans/search">>(
         this.baseUrl,
@@ -390,16 +400,6 @@ class RegionClient {
         "clans",
         q,
         options?.signal,
-      );
-    ns.compare = (tags) =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/clans/compare", { region: this.region }, {
-          tags: tags.join(","),
-        }),
-        () =>
-          this.api.GET("/{region}/clans/compare", {
-            params: { path: { region: this.region }, query: { tags: tags.join(",") } },
-          }),
       );
     return ns;
   }
@@ -411,31 +411,33 @@ class RegionClient {
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks", { region: this.region }),
         () =>
-          this.api.GET("/{region}/tanks", { params: { path: { region: this.region } } }),
+          this.api.GET("/{region}/tanks", {
+            params: { path: { region: this.region } },
+          }),
       );
     ns.economics = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks/economics", { region: this.region }),
         () =>
-          this.api.GET("/{region}/tanks/economics", { params: { path: { region: this.region } } }),
+          this.api.GET("/{region}/tanks/economics", {
+            params: { path: { region: this.region } },
+          }),
       );
     ns.marksOfExcellence = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks/marks-of-excellence", { region: this.region }),
         () =>
-          this.api.GET("/{region}/tanks/marks-of-excellence", { params: { path: { region: this.region } } }),
+          this.api.GET("/{region}/tanks/marks-of-excellence", {
+            params: { path: { region: this.region } },
+          }),
       );
     ns.marksOfMastery = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks/marks-of-mastery", { region: this.region }),
         () =>
-          this.api.GET("/{region}/tanks/marks-of-mastery", { params: { path: { region: this.region } } }),
-      );
-    ns.specifications = () =>
-      handle(
-        buildUrl(this.baseUrl, "/{region}/tanks/specifications", { region: this.region }),
-        () =>
-          this.api.GET("/{region}/tanks/specifications", { params: { path: { region: this.region } } }),
+          this.api.GET("/{region}/tanks/marks-of-mastery", {
+            params: { path: { region: this.region } },
+          }),
       );
     ns.search = (q) =>
       handle(
@@ -443,6 +445,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/tanks/search", {
             params: { path: { region: this.region }, query: { q } },
+          }),
+      );
+    ns.specifications = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tanks/specifications", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/tanks/specifications", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.searchStream = (q, options) =>
@@ -472,6 +482,97 @@ class RegionClient {
       online: (onData, onError) =>
         subscribeServerOnline(this.baseUrl, this.region, onData, onError),
     };
+  }
+}
+
+type OgClans = ((tag: string) => RequestHandle<unknown>) & {
+  compare(tags: NonNullable<QueryOf<"/og/{region}/clans/compare">>["tags"]): RequestHandle<unknown>;
+};
+
+type OgPlayers = ((nickname: string) => RequestHandle<unknown>) & {
+  compare(names: NonNullable<QueryOf<"/og/{region}/players/compare">>["names"]): RequestHandle<unknown>;
+};
+
+type OgTanks = (slug: string) => RequestHandle<unknown>;
+
+/** The `/og/{region}/…` image cards, mirroring the entity paths: their `.url()`
+ * is the stable PNG URL (used for og:image / embeds; not meant to be awaited). */
+class OgRegionClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly region: Region,
+  ) {}
+
+  get clans(): OgClans {
+    const ns = ((tag: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/clans/{tag}", { region: this.region, tag }),
+        () =>
+          this.api.GET("/og/{region}/clans/{tag}", {
+            params: { path: { region: this.region, tag } },
+          }),
+      )) as OgClans;
+    ns.compare = (tags) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/clans/compare", { region: this.region }, { tags }),
+        () =>
+          this.api.GET("/og/{region}/clans/compare", {
+            params: { path: { region: this.region }, query: { tags } },
+          }),
+      );
+    return ns;
+  }
+
+  get players(): OgPlayers {
+    const ns = ((nickname: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/players/{nickname}", { region: this.region, nickname }),
+        () =>
+          this.api.GET("/og/{region}/players/{nickname}", {
+            params: { path: { region: this.region, nickname } },
+          }),
+      )) as OgPlayers;
+    ns.compare = (names) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/players/compare", { region: this.region }, { names }),
+        () =>
+          this.api.GET("/og/{region}/players/compare", {
+            params: { path: { region: this.region }, query: { names } },
+          }),
+      );
+    return ns;
+  }
+
+  get tanks(): OgTanks {
+    return (slug: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/tanks/{slug}", { region: this.region, slug }),
+        () =>
+          this.api.GET("/og/{region}/tanks/{slug}", {
+            params: { path: { region: this.region, slug } },
+          }),
+      );
+  }
+}
+
+class OgClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+  ) {}
+
+  region(region: Region): OgRegionClient {
+    return new OgRegionClient(this.api, this.baseUrl, region);
+  }
+  get eu(): OgRegionClient {
+    return this.region(Region.EU);
+  }
+  get na(): OgRegionClient {
+    return this.region(Region.NA);
+  }
+  get asia(): OgRegionClient {
+    return this.region(Region.ASIA);
   }
 }
 
@@ -514,6 +615,8 @@ export class Unicum {
       baseUrl: this.baseUrl,
       fetch: options.fetch,
       headers: options.headers,
+      // Array query params serialize as CSV (?names=a,b), matching the routes.
+      querySerializer: { array: { style: "form", explode: false } },
     });
   }
 
@@ -532,6 +635,19 @@ export class Unicum {
   /** The ASIA region. */
   get asia(): RegionClient {
     return this.region(Region.ASIA);
+  }
+
+  /** Health check */
+  health() {
+    return handle(
+      buildUrl(this.baseUrl, "/health"),
+      () => this.api.GET("/health", {}),
+    );
+  }
+
+  /** OG image cards: unicum.og.eu.players("Rice").url() → /og/eu/players/Rice. */
+  get og(): OgClient {
+    return new OgClient(this.api, this.baseUrl);
   }
 
   /** Global (not region-scoped) streamers. */
