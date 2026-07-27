@@ -6,6 +6,15 @@ import type { RatingColor } from "@unicum.gg/shared";
 export const OG_SIZE = { width: 1200, height: 630 } as const;
 export const OG_CONTENT_TYPE = "image/png" as const;
 
+// Cache-Control for the `/api/og/**` cards: without it Next marks these dynamic
+// route handlers `max-age=0` and Cloudflare (whose cache rule respects the
+// origin header) leaves them DYNAMIC, re-rendering satori on every hit. Stats
+// cards don't need second-fresh, so cache 5 min in the browser, 1 h at the edge
+// (`s-maxage`, which CF reads for its Edge TTL), and serve stale for a day while
+// revalidating. Purge the CF cache to force an early refresh.
+export const OG_CACHE_CONTROL =
+  "public, max-age=300, s-maxage=3600, stale-while-revalidate=86400";
+
 // Module-level promises so each cold start fetches once and every render
 // reuses the resolved buffer instead of re-downloading.
 const figtreeRegular = fetch(

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import type { NextRequest } from "next/server";
 import { BrandHeaderCell } from "@/components/og";
 import APP from "@/constants/app";
-import { loadOgAssets, OG_SIZE, ogFonts } from "@/lib/og";
+import { loadOgAssets, OG_CACHE_CONTROL, OG_SIZE, ogFonts } from "@/lib/og";
 
 export const runtime = "nodejs";
 
@@ -91,6 +91,10 @@ export async function GET(req: NextRequest) {
         </div>
       </div>
     ),
-    { ...OG_SIZE, fonts: ogFonts(assets) },
+    {
+      ...OG_SIZE,
+      fonts: ogFonts(assets),
+      headers: { "Cache-Control": OG_CACHE_CONTROL },
+    },
   );
 }

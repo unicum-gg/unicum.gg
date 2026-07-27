@@ -8,6 +8,7 @@ import {
 import APP from "@/constants/app";
 import {
   loadOgAssets,
+  OG_CACHE_CONTROL,
   OG_SIZE,
   ogFonts,
   RATING_BG,
@@ -240,6 +241,10 @@ export async function GET(
         </div>
       </div>
     ),
-    { ...OG_SIZE, fonts: ogFonts(assets) },
+    {
+      ...OG_SIZE,
+      fonts: ogFonts(assets),
+      headers: { "Cache-Control": OG_CACHE_CONTROL },
+    },
   );
 }

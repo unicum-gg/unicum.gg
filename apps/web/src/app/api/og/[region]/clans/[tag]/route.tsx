@@ -13,6 +13,7 @@ import {
   intFmt,
   loadOgAssets,
   normalizeTagColor,
+  OG_CACHE_CONTROL,
   OG_SIZE,
   ogFonts,
   pctFmt,
@@ -222,6 +223,10 @@ export async function GET(
         </div>
       </div>
     ),
-    { ...OG_SIZE, fonts: ogFonts(assets) },
+    {
+      ...OG_SIZE,
+      fonts: ogFonts(assets),
+      headers: { "Cache-Control": OG_CACHE_CONTROL },
+    },
   );
 }
