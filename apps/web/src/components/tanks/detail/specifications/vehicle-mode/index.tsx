@@ -1,5 +1,11 @@
 "use client";
 
+import type { ReactNode } from "react";
+import {
+  CrosshairSimpleIcon,
+  GaugeIcon,
+  SteeringWheelIcon,
+} from "@phosphor-icons/react";
 import { VehicleModeKind, type VehicleMode } from "@unicum.gg/shared";
 import {
   Tooltip,
@@ -17,6 +23,15 @@ const MODE_LABEL: Record<VehicleModeKind, string> = {
   [VehicleModeKind.Siege]: "Siege",
   [VehicleModeKind.Rapid]: "Rapid",
 };
+
+// WG ships no standalone icon for the drive modes, so these are Phosphor stand-ins:
+// a crosshair for the siege deploy (plant + aim), a gauge for the wheeled rapid
+// switch (top speed), and a steering wheel for the default travel state.
+const MODE_ICON: Record<VehicleModeKind, ReactNode> = {
+  [VehicleModeKind.Siege]: <CrosshairSimpleIcon className="size-3.5" weight="bold" />,
+  [VehicleModeKind.Rapid]: <GaugeIcon className="size-3.5" weight="bold" />,
+};
+const TRAVEL_ICON = <SteeringWheelIcon className="size-3.5" weight="bold" />;
 
 // The switch-time and gun-arc rows are shown alongside the ratio factors so the
 // tooltip is a complete picture of what engaging the mode does, not just the
@@ -57,11 +72,13 @@ function ModeTooltip({ mode }: { mode: VehicleMode }) {
 
 function Segment({
   label,
+  icon,
   active,
   onClick,
   tooltip,
 }: {
   label: string;
+  icon: ReactNode;
   active: boolean;
   onClick: () => void;
   tooltip?: React.ReactNode;
@@ -72,12 +89,13 @@ function Segment({
       onClick={onClick}
       aria-pressed={active}
       className={cn(
-        "cursor-pointer rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
+        "inline-flex cursor-pointer items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
         active
           ? "bg-[#f25322]/10 text-[#f25322] ring-1 ring-[#f25322]/60"
           : "text-fd-muted-foreground hover:bg-fd-secondary/30",
       )}
     >
+      {icon}
       {label}
     </button>
   );
@@ -114,6 +132,7 @@ export function VehicleModeToggle({
       <div className="inline-flex items-center gap-1 rounded-lg border border-fd-border p-0.5">
         <Segment
           label="Travel"
+          icon={TRAVEL_ICON}
           active={active === null}
           // Clicking Travel disengages whichever mode is active.
           onClick={() => active !== null && onToggle(active)}
@@ -122,6 +141,7 @@ export function VehicleModeToggle({
           <Segment
             key={mode.kind}
             label={MODE_LABEL[mode.kind]}
+            icon={MODE_ICON[mode.kind]}
             active={active === mode.kind}
             onClick={() => onToggle(mode.kind)}
             tooltip={<ModeTooltip mode={mode} />}
