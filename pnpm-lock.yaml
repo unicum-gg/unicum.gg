@@ -92,6 +92,9 @@ importers:
       date-fns:
         specifier: ^4.3.0
         version: 4.3.0
+      discord-api-types:
+        specifier: ^0.38.49
+        version: 0.38.49
       drizzle-orm:
         specifier: ^0.45.2
         version: 0.45.2(@opentelemetry/api@1.9.0)(kysely@0.29.3)(postgres@3.4.9)
