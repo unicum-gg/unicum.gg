@@ -166,7 +166,7 @@ export function TankEquipment({
                     className={cn(
                       "cursor-pointer rounded-lg transition-shadow",
                       activeSlot === i
-                        ? "ring-2 ring-[#f25322] ring-offset-2 ring-offset-fd-background"
+                        ? "ring-2 ring-brand ring-offset-2 ring-offset-fd-background"
                         : "",
                     )}
                   >

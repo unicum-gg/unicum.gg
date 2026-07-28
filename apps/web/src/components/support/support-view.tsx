@@ -37,7 +37,7 @@ export async function SupportView() {
             Community-funded · Ad-free
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            Support <span className="text-[#f25322]">{APP.NAME}</span>
+            Support <span className="text-brand">{APP.NAME}</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             {APP.NAME} is free, open-source and ad-free, and it runs at a loss.
@@ -121,7 +121,7 @@ export async function SupportView() {
                       key={s.rank}
                       className={cn(
                         "flex flex-1 flex-col items-center gap-2 rounded-lg border border-fd-border p-4 text-center",
-                        s.rank === 1 && "order-2 bg-[#f25322]/10",
+                        s.rank === 1 && "order-2 bg-brand/10",
                         s.rank === 2 && "order-1",
                         s.rank === 3 && "order-3",
                       )}

@@ -58,12 +58,12 @@
 
 /* Custom primary button color */
 :root {
-  --color-fd-primary: #f25322;
+  --color-fd-primary: var(--brand);
   --color-fd-primary-foreground: #ffffff;
 }
 
 .dark {
-  --color-fd-primary: #f25322;
+  --color-fd-primary: var(--brand);
   --color-fd-primary-foreground: #ffffff;
 }
 

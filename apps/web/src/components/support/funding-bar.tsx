@@ -31,7 +31,7 @@ function Stat({
       <span
         className={
           accent
-            ? "font-heading text-2xl font-bold tabular-nums text-[#f25322]"
+            ? "font-heading text-2xl font-bold tabular-nums text-brand"
             : "font-heading text-2xl font-bold tabular-nums"
         }
       >
@@ -91,7 +91,7 @@ export function FundingBar({
       <div>
         <div className="relative h-6 w-full overflow-hidden rounded-md bg-fd-border/50">
           <div
-            className="absolute inset-y-0 left-0 rounded-md bg-[#f25322]"
+            className="absolute inset-y-0 left-0 rounded-md bg-brand"
             style={{ width: `${pct}%` }}
           />
         </div>

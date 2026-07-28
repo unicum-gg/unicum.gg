@@ -98,7 +98,7 @@ export function TankAmmo({
                         className={cn(
                           "relative flex size-14 items-center justify-center rounded-lg border-2 transition-colors",
                           selected
-                            ? "border-[#f25322]/60 bg-[#f25322]/10"
+                            ? "border-brand/60 bg-brand/10"
                             : "border-fd-border bg-fd-secondary/30 hover:bg-fd-secondary/50",
                         )}
                       >
@@ -111,7 +111,7 @@ export function TankAmmo({
                           style={{ width: 36, height: 36 }}
                         />
                         {selected ? (
-                          <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+                          <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-brand ring-2 ring-fd-background">
                             <CheckIcon
                               className="size-2.5 text-white"
                               strokeWidth={3}
@@ -124,7 +124,7 @@ export function TankAmmo({
                           className={cn(
                             "text-[11px] font-semibold",
                             selected
-                              ? "text-[#f25322]"
+                              ? "text-brand"
                               : "text-fd-foreground/85",
                           )}
                         >

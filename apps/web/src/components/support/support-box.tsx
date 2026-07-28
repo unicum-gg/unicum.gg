@@ -185,7 +185,7 @@ export function SupportBox() {
             className={cn(
               "rounded-md border px-3 py-2 text-sm font-semibold tabular-nums transition-colors",
               eur === p
-                ? "border-[#f25322] bg-[#f25322]/10 text-[#f25322]"
+                ? "border-brand bg-brand/10 text-brand"
                 : "border-fd-border text-fd-muted-foreground hover:bg-fd-border/40",
             )}
           >

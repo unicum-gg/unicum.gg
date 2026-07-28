@@ -218,7 +218,7 @@ function SkillButton({
             className={cn(
               "relative flex size-11 items-center justify-center rounded-lg border-2 transition-colors",
               isOn
-                ? "border-[#f25322]/60 bg-[#f25322]/10"
+                ? "border-brand/60 bg-brand/10"
                 : "border-fd-border hover:bg-fd-secondary/30",
               blocked && "opacity-40 hover:bg-transparent",
             )}
@@ -234,12 +234,12 @@ function SkillButton({
               />
             ) : null}
             {isOn ? (
-              <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+              <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-brand ring-2 ring-fd-background">
                 <CheckIcon className="size-2.5 text-white" strokeWidth={3} />
               </span>
             ) : null}
             {hasEffect ? (
-              <span className="absolute -top-1 -left-1 size-1.5 rounded-full bg-[#f25322]/70" />
+              <span className="absolute -top-1 -left-1 size-1.5 rounded-full bg-brand/70" />
             ) : null}
           </span>
         </button>
@@ -318,7 +318,7 @@ export function TankCrew({
               value={[pct]}
               onValueChange={([v]) => onLevel(v / 100)}
               aria-label="Crew training level"
-              className="w-28 [&_[data-slot=slider-range]]:bg-[#f25322] [&_[data-slot=slider-thumb]]:border-[#f25322]"
+              className="w-28 [&_[data-slot=slider-range]]:bg-brand [&_[data-slot=slider-thumb]]:border-brand"
             />
             <span className="w-9 text-right tabular-nums text-fd-foreground">
               {pct}%

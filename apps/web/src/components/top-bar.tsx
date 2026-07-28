@@ -23,7 +23,7 @@ export function TopBar() {
                 the persistent top-bar CTA doesn't need to prefetch it too. */}
             <Link
               href={ROUTES.SUPPORT}
-              className="shrink-0 font-medium text-[#f25322] transition-opacity hover:opacity-80"
+              className="shrink-0 font-medium text-brand transition-opacity hover:opacity-80"
             >
               Support us
             </Link>

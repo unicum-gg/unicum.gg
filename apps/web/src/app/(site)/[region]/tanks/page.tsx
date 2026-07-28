@@ -113,7 +113,7 @@ export async function renderTanksIndex(
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            All <span className="text-[#f25322]">tanks</span>
+            All <span className="text-brand">tanks</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             Every one of the {intFmt.format(items.length)} World of Tanks

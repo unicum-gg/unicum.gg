@@ -94,7 +94,7 @@ export function TankRow({
         </span>
       </span>
       <span className="flex shrink-0 items-center gap-1.5 text-xs text-fd-muted-foreground">
-        <span className="font-semibold text-[#f25322]">{tier}</span>
+        <span className="font-semibold text-brand">{tier}</span>
         <NationFlag nation={tank.nation} region={region} className="h-3" />
         <VehicleTypeIcon type={tank.type} premium={tank.is_premium} className="scale-75" />
       </span>

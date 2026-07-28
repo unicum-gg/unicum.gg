@@ -61,11 +61,11 @@ export async function CoverageView({ region }: { region: Region }) {
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
             Tracking{" "}
-            <span className="text-[#f25322]">
+            <span className="text-brand">
               {intFmt.format(stats.players)}
             </span>{" "}
             players across{" "}
-            <span className="text-[#f25322]">{intFmt.format(stats.clans)}</span>{" "}
+            <span className="text-brand">{intFmt.format(stats.clans)}</span>{" "}
             clans
           </h1>
           <p className="mt-4 text-fd-muted-foreground">

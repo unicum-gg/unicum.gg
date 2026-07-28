@@ -47,7 +47,7 @@ export function DeviceBox({
         className={cn(
           "relative flex size-14 items-center justify-center rounded-lg border-2 transition-colors",
           isMounted
-            ? "border-[#f25322]/60 bg-[#f25322]/10"
+            ? "border-brand/60 bg-brand/10"
             : hint
               ? "hover:bg-fd-secondary/30"
               : "border-fd-border hover:bg-fd-secondary/30",
@@ -78,7 +78,7 @@ export function DeviceBox({
           />
         ) : null}
         {isMounted ? (
-          <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+          <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-brand ring-2 ring-fd-background">
             <CheckIcon className="size-2.5 text-white" strokeWidth={3} />
           </span>
         ) : null}

@@ -54,7 +54,7 @@ function Segment({
       className={cn(
         "inline-flex items-center gap-1.5 rounded px-2 py-1 transition-colors",
         active
-          ? "bg-[#f25322]/15 text-fd-foreground"
+          ? "bg-brand/15 text-fd-foreground"
           : "text-fd-muted-foreground hover:text-fd-foreground",
       )}
     >

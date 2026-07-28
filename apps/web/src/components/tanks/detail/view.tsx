@@ -173,7 +173,7 @@ export function TankView({
           )}
           <div className="relative z-10 space-y-2 px-6 py-8 sm:px-10 sm:py-10">
             <div className="flex flex-wrap items-center gap-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
-              <span className="font-semibold text-[#f25322]">{tierLabel}</span>
+              <span className="font-semibold text-brand">{tierLabel}</span>
               <NationFlag nation={meta.nation} region={region} variant="flag" />
               <VehicleTypeIcon type={meta.type} premium={meta.isPremium} />
               <span>{classLabel}</span>

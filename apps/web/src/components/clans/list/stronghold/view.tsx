@@ -197,7 +197,7 @@ export function StrongholdLeaderboardView({
           </p>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
             Top{" "}
-            <span className="text-[#f25322]">
+            <span className="text-brand">
               {STRONGHOLD_TIER_LABEL[tier]}
             </span>{" "}
             clans

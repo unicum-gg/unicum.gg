@@ -187,7 +187,7 @@ export function ModuleNode({
                     )}
                   />
                   {selected ? (
-                    <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+                    <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-brand ring-2 ring-fd-background">
                       <CheckIcon className="size-2.5 text-white" strokeWidth={3} />
                     </span>
                   ) : null}
@@ -256,11 +256,11 @@ export function CurrentTankNode({
         />
       </div>
       <div className="flex flex-col items-center gap-1 text-center leading-none">
-        <span className="text-[11px] font-bold text-[#f25322]">
+        <span className="text-[11px] font-bold text-brand">
           {meta.tier ? toRoman(meta.tier) : String(meta.tier)}
         </span>
         <span
-          className="max-w-24 truncate text-xs font-semibold text-[#f25322]"
+          className="max-w-24 truncate text-xs font-semibold text-brand"
           title={meta.name}
         >
           {meta.shortName || meta.name}

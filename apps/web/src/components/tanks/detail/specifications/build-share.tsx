@@ -56,7 +56,7 @@ export function BuildShare({
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-[#f25322] px-2.5 py-1 text-xs font-medium text-white transition-colors hover:bg-[#f25322]/90"
+          className="inline-flex cursor-pointer items-center gap-1.5 rounded-md bg-brand px-2.5 py-1 text-xs font-medium text-white transition-colors hover:bg-brand/90"
         >
           <ShareNetworkIcon className="size-3.5" weight="bold" />
           Share build

@@ -44,11 +44,11 @@ export function MiniFundingBar() {
             </span>
             <span className="relative h-1.5 w-20 shrink-0 overflow-hidden rounded-full bg-fd-border/70 sm:w-32">
               <span
-                className="absolute inset-y-0 left-0 rounded-full bg-[#f25322]"
+                className="absolute inset-y-0 left-0 rounded-full bg-brand"
                 style={{ width: `${pct}%` }}
               />
             </span>
-            <span className="shrink-0 font-medium tabular-nums text-[#f25322]">
+            <span className="shrink-0 font-medium tabular-nums text-brand">
               {pct}% funded
             </span>
           </Link>

@@ -86,7 +86,7 @@ export function PlayerActionsMenu({
         >
           <DotsThreeVerticalIcon className="size-3.5" weight="bold" />
           {needsTwitch ? (
-            <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-[#f25322] ring-2 ring-fd-background" />
+            <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-brand ring-2 ring-fd-background" />
           ) : null}
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
@@ -131,7 +131,7 @@ export function PlayerActionsMenu({
               >
                 <TwitchLogoIcon weight="bold" />
                 Connect Twitch
-                <span className="ml-auto size-2 rounded-full bg-[#f25322]" />
+                <span className="ml-auto size-2 rounded-full bg-brand" />
               </DropdownMenuItem>
             </>
           ) : null}

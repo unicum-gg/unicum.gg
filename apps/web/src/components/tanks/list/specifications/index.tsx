@@ -338,7 +338,7 @@ export function SpecColumnSelector() {
                     type="checkbox"
                     checked={selected.has(c.key)}
                     onChange={() => onToggle(c.key)}
-                    className="size-3.5 accent-[#f25322]"
+                    className="size-3.5 accent-brand"
                   />
                   <span>{c.label}</span>
                 </label>

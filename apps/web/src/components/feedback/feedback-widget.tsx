@@ -132,7 +132,7 @@ export function FeedbackWidget() {
                   className={cn(
                     "flex size-8 cursor-pointer items-center justify-center rounded-md text-lg transition-all hover:bg-fd-accent",
                     sentiment === s
-                      ? "bg-fd-accent ring-2 ring-[#f25322]"
+                      ? "bg-fd-accent ring-2 ring-brand"
                       : "opacity-60 hover:opacity-100",
                   )}
                 >

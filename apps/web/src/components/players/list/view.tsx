@@ -112,11 +112,11 @@ export async function PlayersLandingView({
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
             {language ? (
               <>
-                Top <span className="text-[#f25322]">{langName}</span> players
+                Top <span className="text-brand">{langName}</span> players
               </>
             ) : (
               <>
-                Top <span className="text-[#f25322]">players</span>
+                Top <span className="text-brand">players</span>
               </>
             )}
           </h1>

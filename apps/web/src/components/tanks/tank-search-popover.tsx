@@ -170,7 +170,7 @@ export function TankSearchPopover({
                 onClick={() => pick(t)}
                 className="flex w-full cursor-pointer items-center gap-2 px-3 py-2 text-left text-sm hover:bg-fd-accent hover:text-fd-accent-foreground"
               >
-                <span className="w-6 shrink-0 text-center text-xs font-semibold text-[#f25322]">
+                <span className="w-6 shrink-0 text-center text-xs font-semibold text-brand">
                   {t.tier ? toRoman(t.tier) : t.tier}
                 </span>
                 <NationFlag nation={t.nation} region={region} className="h-3" />

@@ -111,7 +111,7 @@ export function LoginWidget() {
   return (
     <a
       href={ROUTES.AUTH_SIGN_IN(region)}
-      className="shrink-0 font-medium text-fd-foreground transition-colors hover:text-[#f25322]"
+      className="shrink-0 font-medium text-fd-foreground transition-colors hover:text-brand"
     >
       Log in
     </a>

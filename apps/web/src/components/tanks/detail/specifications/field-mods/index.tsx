@@ -185,7 +185,7 @@ function PairTile({
             className={cn(
               "relative flex size-12 items-center justify-center rounded-lg border-2 transition-colors",
               mounted
-                ? "border-[#f25322]/60 bg-[#f25322]/10"
+                ? "border-brand/60 bg-brand/10"
                 : "border-fd-border hover:bg-fd-secondary/30",
               locked && "opacity-40 hover:bg-transparent",
             )}
@@ -201,7 +201,7 @@ function PairTile({
               />
             ) : null}
             {mounted ? (
-              <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-[#f25322] ring-2 ring-fd-background">
+              <span className="absolute -right-1.5 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-brand ring-2 ring-fd-background">
                 <CheckIcon className="size-2.5 text-white" strokeWidth={3} />
               </span>
             ) : null}
@@ -294,7 +294,7 @@ export function TankFieldModifications({
                           className={cn(
                             "relative flex size-12 items-center justify-center rounded-lg border-2 bg-fd-background transition-colors",
                             unlocked
-                              ? "border-[#f25322]/60 bg-[#f25322]/10"
+                              ? "border-brand/60 bg-brand/10"
                               : "border-fd-border hover:bg-fd-secondary/30",
                           )}
                         >
@@ -312,7 +312,7 @@ export function TankFieldModifications({
                               className={cn(
                                 "text-sm font-semibold",
                                 unlocked
-                                  ? "text-[#f25322]"
+                                  ? "text-brand"
                                   : "text-fd-muted-foreground",
                               )}
                             >

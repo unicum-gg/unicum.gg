@@ -151,7 +151,7 @@ function PathNode({
         <span
           className={cn(
             "text-[11px] font-bold",
-            current ? "text-[#f25322]" : "text-fd-muted-foreground",
+            current ? "text-brand" : "text-fd-muted-foreground",
           )}
         >
           {tier}
@@ -159,7 +159,7 @@ function PathNode({
         <span
           className={cn(
             "max-w-20 truncate text-xs",
-            current ? "font-semibold text-[#f25322]" : "text-fd-foreground/85",
+            current ? "font-semibold text-brand" : "text-fd-foreground/85",
           )}
           title={meta.name}
         >

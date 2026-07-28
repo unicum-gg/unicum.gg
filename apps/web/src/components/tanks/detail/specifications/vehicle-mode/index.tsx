@@ -91,7 +91,7 @@ function Segment({
       className={cn(
         "inline-flex cursor-pointer items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
         active
-          ? "bg-[#f25322]/10 text-[#f25322] ring-1 ring-[#f25322]/60"
+          ? "bg-brand/10 text-brand ring-1 ring-brand/60"
           : "text-fd-muted-foreground hover:bg-fd-secondary/30",
       )}
     >

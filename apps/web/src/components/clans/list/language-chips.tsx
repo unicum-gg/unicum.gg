@@ -85,7 +85,7 @@ function ChipLink({
       className={cn(
         "inline-flex items-center gap-1.5 rounded-md border px-2 py-1 text-xs font-medium transition-colors",
         active
-          ? "border-[#f25322] bg-[#f25322]/15 text-fd-foreground"
+          ? "border-brand bg-brand/15 text-fd-foreground"
           : "border-fd-border bg-fd-card text-fd-muted-foreground hover:border-fd-foreground/40 hover:text-fd-foreground",
       )}
     >
