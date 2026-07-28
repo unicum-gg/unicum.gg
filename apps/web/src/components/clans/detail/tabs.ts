@@ -12,6 +12,9 @@
 export enum ClanSection {
   Overview = "overview",
   Tanks = "tanks",
+  // Officer-only: the Stronghold boost console. The tab is shown client-side
+  // only when the logged-in user is an officer of this clan.
+  Manage = "manage",
 }
 
 export enum ClanMode {
@@ -27,6 +30,7 @@ export const CLAN_SECTIONS: {
 }[] = [
   { id: ClanSection.Overview, label: "Overview", query: null },
   { id: ClanSection.Tanks, label: "Tanks", query: "tanks" },
+  { id: ClanSection.Manage, label: "Manage", query: "manage" },
 ];
 
 export const CLAN_MODES: {

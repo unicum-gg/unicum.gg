@@ -62,11 +62,15 @@ export function ClanSectionNav({
   section,
   mode,
   onSelect,
+  tankCount,
 }: {
   basePath: string;
   section: ClanSection;
   mode: ClanMode;
   onSelect: (section: ClanSection) => void;
+  // Distinct battle-having vehicle count, shown as "Tanks (N)" once loaded
+  // (mirrors the player page). Undefined until the vehicles aggregation lands.
+  tankCount?: number;
 }) {
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
@@ -79,7 +83,9 @@ export function ClanSectionNav({
             if (section !== s.id) onSelect(s.id);
           }}
         >
-          {s.label}
+          {s.id === ClanSection.Tanks && tankCount !== undefined
+            ? `${s.label} (${tankCount.toLocaleString("en-US")})`
+            : s.label}
         </NavAnchor>
       ))}
     </nav>

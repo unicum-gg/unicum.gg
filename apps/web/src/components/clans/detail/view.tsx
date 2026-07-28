@@ -43,6 +43,7 @@ export function ClanProfile({
   initialRatings,
   initialData,
   initialVehicles,
+  initialVehiclesCount,
   initialNameHistory,
 }: {
   region: Region;
@@ -56,6 +57,7 @@ export function ClanProfile({
   initialRatings: ClanRatings;
   initialData: ClanTabsInitialData;
   initialVehicles: ClanVehicleRow[] | null;
+  initialVehiclesCount: number | null;
   initialNameHistory: ClanNameHistoryEntry[];
 }) {
   const overviewReq = () => unicum.region(region).clans(tag).overview();
@@ -66,12 +68,14 @@ export function ClanProfile({
           clan: r.clan as unknown as ClanFullInfo,
           ratings: r.ratings as unknown as ClanRatings,
           nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
+          vehiclesCount: r.vehiclesCount ?? null,
         })),
     {
       fallbackData: {
         clan: initialClan,
         ratings: initialRatings,
         nameHistory: initialNameHistory,
+        vehiclesCount: initialVehiclesCount,
       },
       revalidateOnMount: false,
     },
@@ -79,6 +83,7 @@ export function ClanProfile({
   const clan = overview?.clan ?? initialClan;
   const ratings = overview?.ratings ?? initialRatings;
   const nameHistory = overview?.nameHistory ?? initialNameHistory;
+  const vehiclesCount = overview?.vehiclesCount ?? initialVehiclesCount;
 
   // Incremented on each live tick; the tabs view refetches its sections when it
   // changes (see ClanTabsView's effect on `liveVersion`).
@@ -117,6 +122,8 @@ export function ClanProfile({
       <ClanTabsView
         region={region}
         tag={tag}
+        clanId={clan.id}
+        vehiclesCount={vehiclesCount}
         color={color}
         basePath={basePath}
         activeSection={activeSection}

@@ -14,6 +14,7 @@ import {
   sectionFromQuery,
 } from "@/components/clans/detail/tabs";
 import { ClanTanksTab } from "@/components/clans/detail/tanks";
+import { ClanBoostConsole } from "@/components/clans/detail/boost-console";
 import { RandomBattlesTab } from "@/components/clans/detail/overview";
 import { StrongholdTab } from "@/components/clans/detail/overview/stronghold";
 import { ClanWarsTab } from "@/components/clans/detail/overview/clan-wars";
@@ -47,6 +48,10 @@ export type ClanTabsInitialData = {
 export type ClanTabsViewProps = {
   region: Region;
   tag: string;
+  clanId: number;
+  // Materialized distinct-vehicle count from the overview, so "Tanks (N)" shows
+  // before the (heavy) vehicles aggregation loads. Null until first computed.
+  vehiclesCount: number | null;
   // The clan's custom color, used to tint the `[TAG]` brackets in panel titles.
   color: string;
   basePath: string;
@@ -69,6 +74,8 @@ export type ClanTabsViewProps = {
 export function ClanTabsView({
   region,
   tag,
+  clanId,
+  vehiclesCount,
   color,
   basePath,
   activeSection,
@@ -79,17 +86,22 @@ export function ClanTabsView({
   liveVersion,
 }: ClanTabsViewProps) {
   // `activeSection`/`activeMode` seed the first client render so it matches the
-  // server HTML. A nav click updates local state immediately (instant switch)
-  // and pushes the URL. Back/forward instead moves through history, which Next
-  // reflects in `useSearchParams`; we reconcile both axes during render (no
-  // effect) so the view follows the URL without a server round-trip.
+  // server HTML (the page is force-static and can't read searchParams, so the
+  // server always assumes Overview). A nav click updates local state immediately
+  // (instant switch) and pushes the URL. Back/forward instead moves through
+  // history, which Next reflects in `useSearchParams`; we reconcile both axes
+  // during render (no effect) so the view follows the URL without a server
+  // round-trip. The `synced*` trackers seed from the SERVER assumption, not the
+  // URL, so a deep link (`?section=manage`) is reconciled on the very first read
+  // (seeding them from the URL would leave them already "in sync" and never
+  // flip off Overview).
   const searchParams = useSearchParams();
   const urlSection = sectionFromQuery(searchParams.get("section"));
   const urlMode = modeFromQuery(searchParams.get("tab"));
   const [section, setSection] = useState(activeSection);
   const [mode, setMode] = useState(activeMode);
-  const [syncedSection, setSyncedSection] = useState(urlSection);
-  const [syncedMode, setSyncedMode] = useState(urlMode);
+  const [syncedSection, setSyncedSection] = useState(activeSection);
+  const [syncedMode, setSyncedMode] = useState(activeMode);
   if (urlSection !== syncedSection || urlMode !== syncedMode) {
     setSyncedSection(urlSection);
     setSyncedMode(urlMode);
@@ -201,7 +213,14 @@ export function ClanTabsView({
     mutateClanWars,
   ]);
 
+  // The Manage tab is visible to everyone (visitors see a teaser inviting them
+  // to log in); the console component itself gates the real controls to
+  // officers of this clan, so no officer check is needed here.
   const onTanks = section === ClanSection.Tanks;
+  const onManage = section === ClanSection.Manage;
+  // Live length once the tanks aggregation has loaded, otherwise the
+  // materialized count from the overview (so "(N)" shows without opening Tanks).
+  const tankCount = vehicles?.length ?? vehiclesCount ?? undefined;
 
   return (
     <>
@@ -212,13 +231,15 @@ export function ClanTabsView({
             section={section}
             mode={mode}
             onSelect={selectSection}
+            tankCount={tankCount}
           />
         </PanelHeader>
       </Panel>
 
       {/* The description is clan-level metadata, so it stays visible on every
-          section, sitting between the section row and the mode row. */}
-      {descriptionHtml && (
+          content section, sitting between the section row and the mode row.
+          Hidden on Manage, which is a tool, not clan content. */}
+      {descriptionHtml && !onManage && (
         <>
           <PanelSeparator />
           <Panel>
@@ -231,7 +252,7 @@ export function ClanTabsView({
 
       {/* The mode row is a sibling section under Overview, so it gets the same
           diagonal separator as the content sections below it. */}
-      {!onTanks && (
+      {section === ClanSection.Overview && (
         <>
           <PanelSeparator />
           <Panel>
@@ -242,7 +263,9 @@ export function ClanTabsView({
         </>
       )}
 
-      {onTanks ? (
+      {onManage ? (
+        <ClanBoostConsole region={region} tag={tag} clanId={clanId} />
+      ) : onTanks ? (
         <ClanTanksTab tag={tag} color={color} vehicles={vehicles} />
       ) : mode === ClanMode.RandomBattles ? (
         <RandomBattlesTab

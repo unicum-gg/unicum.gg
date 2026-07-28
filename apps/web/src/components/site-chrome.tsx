@@ -20,7 +20,7 @@ export async function SiteChrome({
       <RatingMetricRoot />
       <TopBar />
       <HomeLayout {...layoutProps}>
-        <div id="page-content" className="flex flex-1 flex-col">
+        <div id="page-content" className="flex flex-col">
           {children}
         </div>
         <Footer />

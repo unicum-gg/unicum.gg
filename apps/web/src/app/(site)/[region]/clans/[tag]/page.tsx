@@ -29,7 +29,7 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 // endpoint owns the cold-cache path (resolve tag on WG + fetch live).
 async function loadOverview(region: Region, tag: string) {
   try {
-    const { clan, ratings, nameHistory } = await unicum
+    const { clan, ratings, nameHistory, vehiclesCount } = await unicum
       .region(region)
       .clans(tag)
       .overview();
@@ -37,6 +37,7 @@ async function loadOverview(region: Region, tag: string) {
       clan: clan as unknown as ClanFullInfo,
       ratings: ratings as unknown as ClanRatings,
       nameHistory: nameHistory as unknown as ClanNameHistoryEntry[],
+      vehiclesCount: vehiclesCount ?? null,
     };
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -201,6 +202,7 @@ async function ClanProfileServer({
         initialRatings={ratings}
         initialData={initialData}
         initialVehicles={initialVehicles}
+        initialVehiclesCount={overview.vehiclesCount ?? null}
         initialNameHistory={
           overview.nameHistory as unknown as ClanNameHistoryEntry[]
         }
