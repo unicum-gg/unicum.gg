@@ -39,6 +39,11 @@ async function main(): Promise<void> {
   );
   startClanBackfillCron();
 
+  const { startBoostWorkflowCron } = await import(
+    "@unicum.gg/core/clans/boost-workflow/cron"
+  );
+  startBoostWorkflowCron();
+
   const { startDiscoveryCron } = await import("@unicum.gg/core/discovery/cron");
   startDiscoveryCron();
 
