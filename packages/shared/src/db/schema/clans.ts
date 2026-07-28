@@ -35,6 +35,10 @@ export function makeClansTable(region: string) {
         .notNull()
         .defaultNow(),
       lastRefreshedAt: timestamp("last_refreshed_at", { withTimezone: true }),
+      // Materialized distinct battle-having vehicle count, written back each
+      // time the (heavy) /vehicles aggregation runs, so the clan page can show
+      // "Tanks (N)" up front without re-running the ~300M-row DISTINCT ON.
+      vehiclesCount: integer("vehicles_count"),
     },
     (t) => [
       uniqueIndex(`${region}_clans_tag_lower_idx`).on(t.tagLower),

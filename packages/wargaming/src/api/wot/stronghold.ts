@@ -195,10 +195,13 @@ export class ApiStrongholdResource {
     const query = buildQuery(params);
     query.reserve_level = String(params.reserveLevel);
     query.reserve_type = params.reserveType;
+    // Write endpoint: WG requires POST (the access token must ride in the form
+    // body, like `auth/prolongate`/`auth/logout`); a GET is silently rejected.
     return this.t.wgFetch<Selected<StrongholdReserveActivation, F>>(
       this.region,
       "/wot/stronghold/activateclanreserve/",
       query,
+      { method: "POST" },
     );
   }
 }
