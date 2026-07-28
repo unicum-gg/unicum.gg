@@ -1,4 +1,6 @@
-import { computeClanRatings } from "@unicum.gg/shared";
+import { eq } from "drizzle-orm";
+import { computeClanRatings, clansByRegion } from "@unicum.gg/shared";
+import { db } from "@unicum.gg/core/db";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanNameHistory } from "@unicum.gg/core/clans/name-history";
@@ -31,14 +33,23 @@ export async function GET(
     return Response.json({ error: "not_found" }, { status: 404 });
   }
 
-  const [cached, nameHistory] = await Promise.all([
+  const clans = clansByRegion[region];
+  const [cached, nameHistory, countRow] = await Promise.all([
     getClanMembersCached(region, clanCached.info.id).catch(() => null),
     getClanNameHistory(region, clanCached.info.id),
+    db
+      .select({ vehiclesCount: clans.vehiclesCount })
+      .from(clans)
+      .where(eq(clans.id, clanCached.info.id))
+      .limit(1)
+      .then((rows) => rows[0] ?? null)
+      .catch(() => null),
   ]);
   const ratings = computeClanRatings(cached?.members ?? []);
   return jsonResponse(ClanOverviewResponse, {
     clan: clanCached.info,
     ratings,
     nameHistory,
+    vehiclesCount: countRow?.vehiclesCount ?? null,
   });
 }

@@ -149,4 +149,11 @@ export const ClanOverviewResponse = z.object({
       description:
         "Previous tags + names of this clan, newest first. Empty until a rename is observed.",
     }),
+  vehiclesCount: z
+    .number()
+    .nullable()
+    .meta({
+      description:
+        "Distinct battle-having vehicle count for the clan, materialized from the last /vehicles load. Null until the vehicles tab has been opened at least once.",
+    }),
 });

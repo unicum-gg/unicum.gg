@@ -12,6 +12,10 @@ const STORAGE = {
     PERIOD: "unicum.period",
     // CSRF nonce for the Discord "Add to Discord" OAuth flow (/api/discord/*).
     DISCORD_OAUTH_STATE: "unicum.discord-oauth-state",
+    // Signed context {nonce, region, tag} for the boost-notification connect
+    // flow, and the resulting server options carried back to the picker.
+    DISCORD_BOOST_STATE: "unicum.discord-boost-state",
+    DISCORD_BOOST_GUILDS: "unicum.discord-boost-guilds",
   },
 };
 

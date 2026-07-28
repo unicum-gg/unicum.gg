@@ -1,3 +1,4 @@
+import { after } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion, buildClanVehicleRows } from "@unicum.gg/shared";
@@ -51,6 +52,15 @@ export async function GET(
       encyclopedia,
       wn8Expected,
       wnxExpected,
+    );
+    // Materialize the count so the clan page shows "Tanks (N)" without re-running
+    // this aggregation. After the response, so it never delays it.
+    after(() =>
+      db
+        .update(clansByRegion[region])
+        .set({ vehiclesCount: vehicles.length })
+        .where(eq(clansByRegion[region].id, Number(row.id)))
+        .catch(() => {}),
     );
     return jsonResponse(ClanVehiclesResponse, { vehicles });
   } catch (err) {

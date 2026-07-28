@@ -1157,6 +1157,8 @@ export interface components {
                 /** Format: date-time */
                 recordedAt: Date;
             }[];
+            /** @description Distinct battle-having vehicle count for the clan, materialized from the last /vehicles load. Null until the vehicles tab has been opened at least once. */
+            vehiclesCount: number | null;
         };
         /**
          * @description Clan leaderboard time window.
