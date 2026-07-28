@@ -19,6 +19,7 @@
 @custom-variant data-vertical (&[data-orientation="vertical"]);
 
 @theme inline {
+  --color-brand: var(--brand);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
@@ -163,6 +164,10 @@
 }
 
 :root {
+  /* Brand orange, the unicum.gg logo mark. Theme-independent, so it's only
+     declared here (no `.dark` override). Exposed as the `brand` Tailwind color
+     via @theme, so `bg-brand`/`text-brand` replace the scattered `#f25322`. */
+  --brand: #f25322;
   --destructive-foreground: var(--color-red-700);
   --info: var(--color-blue-500);
   --info-foreground: var(--color-blue-700);
@@ -306,4 +311,21 @@ html[data-rating-metric="wn8"] [data-rating-col="wnx-30d"],
 html[data-rating-metric="wnx"] [data-rating-col="wn7-30d"],
 html[data-rating-metric="wnx"] [data-rating-col="wn8-30d"] {
   display: none !important;
+}
+/* Global route-transition progress bar (components/navigation-progress.tsx).
+   Kept outside @layer base so its transitions win, and so the reduced-motion
+   override below can strip them (an inline style couldn't be overridden). */
+.nav-progress {
+  transition: opacity 200ms ease 120ms;
+}
+.nav-progress-bar {
+  background-color: var(--brand);
+  transition: width 200ms ease-out;
+  box-shadow: 0 0 8px 0 var(--brand), 0 0 3px 0 var(--brand);
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-progress,
+  .nav-progress-bar {
+    transition: none;
+  }
 }

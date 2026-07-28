@@ -5,6 +5,7 @@ import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import { JsonLd } from "@/components/json-ld";
+import { NavigationProgress } from "@/components/navigation-progress";
 import { Toaster } from "@/components/ui/sonner";
 import { DEFAULT_RATING_METRIC } from "@unicum.gg/shared";
 import STORAGE from "@/constants/storage";
@@ -59,6 +60,7 @@ export default function RootLayout({
         />
       </head>
       <body className="flex min-h-screen flex-col overflow-x-hidden antialiased">
+        <NavigationProgress />
         <JsonLd data={websiteSchema()} />
         <JsonLd data={organizationSchema()} />
         <Provider>
