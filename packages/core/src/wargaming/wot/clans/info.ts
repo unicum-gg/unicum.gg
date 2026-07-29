@@ -1,4 +1,5 @@
 import sanitizeHtml from "sanitize-html";
+import { LinkifyIt } from "linkify-it";
 import { type Region, type ClanEmblems } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 
@@ -96,20 +97,28 @@ const DESCRIPTION_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
     }),
   },
 };
-const URL_REGEX = /https?:\/\/[^\s<>"']+/g;
-const TRAILING_PUNCT_REGEX = /([.,;:!?)\]}>]+)$/;
 const DOUBLE_ENCODED_ENTITY_REGEX = /&amp;(#?\w+;)/g;
 // Split into HTML tags and the text runs between them, so linkify only ever
 // touches visible text and never the inside of a tag.
 const TOKEN_REGEX = /<[^>]+>|[^<]+/g;
 
+// linkify-it does TLD-aware fuzzy detection, so it catches scheme-less domains
+// (discord.gg/x, www.clan.com) and emails without false-positiving on
+// "3.5k"/"e.g."/"IS7", trims trailing punctuation, and keeps its TLD list
+// upstream. fuzzyLink (off by default) enables the scheme-less case; `m.url` is
+// the normalized href (http:// or mailto: prepended for fuzzy matches).
+const linkify = new LinkifyIt({ fuzzyLink: true });
+
 function linkifyText(text: string): string {
-  return text.replace(URL_REGEX, (match) => {
-    const trail = match.match(TRAILING_PUNCT_REGEX);
-    const url = trail ? match.slice(0, -trail[0].length) : match;
-    const tail = trail ? trail[0] : "";
-    return `<a href="${url}">${url}</a>${tail}`;
-  });
+  const matches = linkify.match(text);
+  if (!matches) return text;
+  let out = "";
+  let last = 0;
+  for (const m of matches) {
+    out += `${text.slice(last, m.index)}<a href="${m.url}">${m.text}</a>`;
+    last = m.lastIndex;
+  }
+  return out + text.slice(last);
 }
 
 /**
