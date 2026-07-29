@@ -7,6 +7,7 @@ import {
   recordRefund,
   upsertSubscription,
 } from "@unicum.gg/core/subscription";
+import { reconcileSupporterRole } from "@unicum.gg/core/discord/supporter-role";
 
 /**
  * Stripe client + support-subscription helpers. Web-only in practice (the secret
@@ -209,4 +210,7 @@ export async function syncSubscription(sub: Stripe.Subscription): Promise<void> 
     currentPeriodEnd: periodEnd(sub),
     cancelAtPeriodEnd: sub.cancel_at_period_end,
   });
+  // Grant/revoke the Discord supporter role to match the new status (only acts if
+  // the user ever claimed it). Best-effort, never throws.
+  await reconcileSupporterRole(userId);
 }

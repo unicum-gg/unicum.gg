@@ -56,6 +56,11 @@ export const env = createEnv({
     // without it and the feature degrades off when unset (the top-bar "Feedback"
     // button hides and `POST /api/feedback` 404s).
     DISCORD_FEEDBACK_CHANNEL_ID: z.string().optional(),
+    // Role id granted to active supporters who claim it (via the bot) in our
+    // guild. Web-only. Optional so the app/worker boot without it; the claim
+    // button hides and the routes 404 when unset. The bot must have Manage Roles
+    // and sit above this role in the hierarchy.
+    DISCORD_SUPPORTER_ROLE_ID: z.string().optional(),
     // Stripe (support subscriptions). Web-only. Optional so the worker/bot boot
     // without them and the feature degrades off when unset (subscribe button
     // hidden). PRODUCT_ID is the "unicum.gg Support" product the pay-what-you-want
@@ -85,6 +90,7 @@ export const env = createEnv({
     DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN,
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     DISCORD_FEEDBACK_CHANNEL_ID: process.env.DISCORD_FEEDBACK_CHANNEL_ID,
+    DISCORD_SUPPORTER_ROLE_ID: process.env.DISCORD_SUPPORTER_ROLE_ID,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,

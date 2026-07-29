@@ -42,16 +42,32 @@ export const auth = betterAuth({
       allowDifferentEmails: true,
     },
   },
-  // Twitch is offered only for LINKING (a logged-in WG player connecting their
-  // channel), never as a primary login. Absent creds → provider omitted.
-  socialProviders: isTwitchEnabled()
-    ? {
-        twitch: {
-          clientId: env.TWITCH_CLIENT_ID as string,
-          clientSecret: env.TWITCH_CLIENT_SECRET as string,
-        },
-      }
-    : undefined,
+  // Social providers are offered only for LINKING (a logged-in WG player
+  // connecting an account), never as a primary login. Absent creds → omitted.
+  //  - twitch: connect a channel (live rail/badges).
+  //  - discord: the single canonical Discord identity link, used by the supporter
+  //    role. `guilds.join` lets us add the user to our server before the bot grants
+  //    the role; `identify` reads their id. Their token is stored (encrypted) so
+  //    `getAccessToken` can hand it back for the add-to-guild call.
+  socialProviders: {
+    ...(isTwitchEnabled()
+      ? {
+          twitch: {
+            clientId: env.TWITCH_CLIENT_ID as string,
+            clientSecret: env.TWITCH_CLIENT_SECRET as string,
+          },
+        }
+      : {}),
+    ...(env.DISCORD_APP_ID && env.DISCORD_CLIENT_SECRET
+      ? {
+          discord: {
+            clientId: env.DISCORD_APP_ID,
+            clientSecret: env.DISCORD_CLIENT_SECRET,
+            scope: ["identify", "guilds.join"],
+          },
+        }
+      : {}),
+  },
   databaseHooks: {
     account: {
       create: {

@@ -201,7 +201,7 @@ function botRest(config: DiscordConfig): REST {
  * a member); a missing-permission / bad-token error rejects, which the caller
  * treats as "not joined".
  */
-async function addUserToGuild(
+export async function addUserToGuild(
   config: DiscordConfig,
   userId: string,
   accessToken: string,

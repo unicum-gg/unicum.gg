@@ -56,6 +56,52 @@ export async function listGuildChannels(
     .map((c) => ({ id: c.id, name: c.name, position: c.position }));
 }
 
+/** Bot-token request that only cares about success (role ops return 204, which
+ * `botFetch` can't distinguish from a failure since it parses JSON). */
+async function botRequestOk(path: string, init: RequestInit): Promise<boolean> {
+  if (!env.DISCORD_BOT_TOKEN) return false;
+  const res = await fetch(`${API}${path}`, {
+    ...init,
+    headers: {
+      authorization: `Bot ${env.DISCORD_BOT_TOKEN}`,
+      "content-type": "application/json",
+      ...init.headers,
+    },
+  }).catch(() => null);
+  return Boolean(res?.ok);
+}
+
+/** Grant a role to a guild member as the bot. Idempotent (204 whether or not the
+ * member already had it). Needs the bot to have Manage Roles and to sit above the
+ * role in the hierarchy, else Discord answers 403. Best-effort boolean. */
+export async function assignGuildRole(
+  guildId: string,
+  userId: string,
+  roleId: string,
+): Promise<boolean> {
+  return botRequestOk(`/guilds/${guildId}/members/${userId}/roles/${roleId}`, {
+    method: "PUT",
+  });
+}
+
+/** Remove a role from a guild member as the bot. Idempotent; `true` also when the
+ * member is unknown/left (404), since the desired end state — no role — holds. */
+export async function removeGuildRole(
+  guildId: string,
+  userId: string,
+  roleId: string,
+): Promise<boolean> {
+  if (!env.DISCORD_BOT_TOKEN) return false;
+  const res = await fetch(
+    `${API}/guilds/${guildId}/members/${userId}/roles/${roleId}`,
+    {
+      method: "DELETE",
+      headers: { authorization: `Bot ${env.DISCORD_BOT_TOKEN}` },
+    },
+  ).catch(() => null);
+  return Boolean(res && (res.ok || res.status === 404));
+}
+
 /** Post a single embed to a channel as the bot. Best-effort: `true` on success,
  * `false` if the bot can't post (removed, missing permission, unknown channel). */
 export async function postChannelEmbed(

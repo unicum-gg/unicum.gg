@@ -3,6 +3,10 @@ import { NextResponse } from "next/server";
 import { auth } from "@unicum.gg/core/auth";
 import { getSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
 import { stripeConfigured } from "@unicum.gg/core/stripe";
+import {
+  getDiscordUserId,
+  isSupporterRoleEnabled,
+} from "@unicum.gg/core/discord/supporter-role";
 
 // Per-session support status; not cacheable.
 export const dynamic = "force-dynamic";
@@ -13,17 +17,34 @@ export const dynamic = "force-dynamic";
  * anonymity preference. Never throws for logged-out users (returns not-supporter).
  */
 export async function GET(): Promise<Response> {
+  const discordRoleEnabled = isSupporterRoleEnabled();
   if (!stripeConfigured) {
-    return NextResponse.json({ enabled: false, isSupporter: false, anonymous: false });
+    return NextResponse.json({
+      enabled: false,
+      isSupporter: false,
+      anonymous: false,
+      discordRoleEnabled,
+      discordLinked: false,
+    });
   }
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
-    return NextResponse.json({ enabled: true, isSupporter: false, anonymous: false });
+    return NextResponse.json({
+      enabled: true,
+      isSupporter: false,
+      anonymous: false,
+      discordRoleEnabled,
+      discordLinked: false,
+    });
   }
   const sub = await getSubscription(session.user.id);
   return NextResponse.json({
     enabled: true,
     isSupporter: sub ? isActiveStatus(sub.status) : false,
     anonymous: sub?.anonymous ?? false,
+    discordRoleEnabled,
+    discordLinked: discordRoleEnabled
+      ? !!(await getDiscordUserId(session.user.id))
+      : false,
   });
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { LockIcon } from "@phosphor-icons/react/dist/ssr";
+import { DiscordLogoIcon, LockIcon } from "@phosphor-icons/react/dist/ssr";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
@@ -17,7 +17,13 @@ import { cn } from "@/lib/utils";
 const MIN_EUR = 3;
 const PRESETS = [3, 5, 10, 20, 50, 100] as const;
 
-type MeStatus = { enabled: boolean; isSupporter: boolean; anonymous: boolean };
+type MeStatus = {
+  enabled: boolean;
+  isSupporter: boolean;
+  anonymous: boolean;
+  discordRoleEnabled: boolean;
+  discordLinked: boolean;
+};
 
 async function postJson(
   url: string,
@@ -55,7 +61,13 @@ export function SupportBox() {
       .catch(
         () =>
           alive &&
-          setStatus({ enabled: true, isSupporter: false, anonymous: false }),
+          setStatus({
+            enabled: true,
+            isSupporter: false,
+            anonymous: false,
+            discordRoleEnabled: false,
+            discordLinked: false,
+          }),
       );
     return () => {
       alive = false;
@@ -63,11 +75,18 @@ export function SupportBox() {
   }, [session?.user?.id]);
 
   useEffect(() => {
-    const s = new URLSearchParams(window.location.search).get("status");
+    const params = new URLSearchParams(window.location.search);
+    const s = params.get("status");
     if (s === "success")
       toast.success(`Thank you for supporting ${APP.NAME}!`);
     if (s === "canceled") toast("Checkout canceled.");
-    if (s) window.history.replaceState({}, "", ROUTES.SUPPORT);
+    const claim = params.get("claim");
+    if (claim === "ok") toast.success("Supporter role added on Discord!");
+    if (claim === "not_supporter")
+      toast.error("Only active supporters can claim the Discord role.");
+    if (claim === "error")
+      toast.error("Could not add the Discord role. Please try again.");
+    if (s || claim) window.history.replaceState({}, "", ROUTES.SUPPORT);
   }, []);
 
   async function subscribe() {
@@ -158,6 +177,19 @@ export function SupportBox() {
             onCheckedChange={toggleAnonymous}
           />
         </div>
+        {status.discordRoleEnabled && (
+          <Button
+            variant="secondary"
+            onClick={() => {
+              window.location.href = "/api/connect/discord";
+            }}
+          >
+            <DiscordLogoIcon className="size-4" />
+            {status.discordLinked
+              ? "Re-sync Discord role"
+              : "Claim your supporter role on Discord"}
+          </Button>
+        )}
         <Button variant="secondary" onClick={manage} disabled={busy}>
           {busy ? <Spinner /> : "Manage subscription"}
         </Button>
