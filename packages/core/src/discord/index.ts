@@ -56,6 +56,19 @@ export async function listGuildChannels(
     .map((c) => ({ id: c.id, name: c.name, position: c.position }));
 }
 
+/** Post a single embed to a channel as the bot. Best-effort: `true` on success,
+ * `false` if the bot can't post (removed, missing permission, unknown channel). */
+export async function postChannelEmbed(
+  channelId: string,
+  embed: object,
+): Promise<boolean> {
+  const res = await botFetch(`/channels/${channelId}/messages`, {
+    method: "POST",
+    body: JSON.stringify({ embeds: [embed] }),
+  });
+  return res !== null;
+}
+
 export type BoostNotification = {
   clanTag: string;
   clanUrl: string;
@@ -74,22 +87,13 @@ export async function sendBoostNotification(
     (r) =>
       `• **${r.name}** L${r.level}${r.percent != null ? ` (+${r.percent}%)` : ""}`,
   );
-  const res = await botFetch(`/channels/${channelId}/messages`, {
-    method: "POST",
-    body: JSON.stringify({
-      embeds: [
-        {
-          title: "⚡ Stronghold boosts activated",
-          url: n.clanUrl,
-          description: `**[${n.clanTag}]** · ${n.workflowName || "Boost workflow"}\n${lines.join("\n")}`,
-          color: BRAND,
-          footer: { text: `${n.onlineCount} online · ${APP_IDENTITY.NAME}` },
-          timestamp: undefined,
-        },
-      ],
-    }),
+  return postChannelEmbed(channelId, {
+    title: "⚡ Stronghold boosts activated",
+    url: n.clanUrl,
+    description: `**[${n.clanTag}]** · ${n.workflowName || "Boost workflow"}\n${lines.join("\n")}`,
+    color: BRAND,
+    footer: { text: `${n.onlineCount} online · ${APP_IDENTITY.NAME}` },
   });
-  return res !== null;
 }
 
 /** Post a plain test message so the officer can confirm the channel works. */
@@ -97,18 +101,10 @@ export async function sendTestNotification(
   channelId: string,
   clanTag: string,
 ): Promise<boolean> {
-  const res = await botFetch(`/channels/${channelId}/messages`, {
-    method: "POST",
-    body: JSON.stringify({
-      embeds: [
-        {
-          title: "✅ Boost notifications connected",
-          description: `[${clanTag}] Stronghold boost activations will be posted here.`,
-          color: BRAND,
-          footer: { text: APP_IDENTITY.NAME },
-        },
-      ],
-    }),
+  return postChannelEmbed(channelId, {
+    title: "✅ Boost notifications connected",
+    description: `[${clanTag}] Stronghold boost activations will be posted here.`,
+    color: BRAND,
+    footer: { text: APP_IDENTITY.NAME },
   });
-  return res !== null;
 }

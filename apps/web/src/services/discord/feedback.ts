@@ -1,5 +1,6 @@
 import "server-only";
 import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import { discordBotEnabled, postChannelEmbed } from "@unicum.gg/core/discord";
 import UMAMI from "@/constants/umami";
 import {
   FeedbackSentiment,
@@ -9,10 +10,11 @@ import {
   type FeedbackTopic,
 } from "@/components/feedback/schema";
 
-/** The feedback widget is available only when a Discord webhook is configured;
- * otherwise the top-bar button hides and `POST /api/feedback` 404s. */
+/** The feedback widget is available only when the bot is configured and a target
+ * channel is set; otherwise the top-bar button hides and `POST /api/feedback`
+ * 404s. Posted via the bot (same path as boost notifications), not a webhook. */
 export function isFeedbackEnabled(): boolean {
-  return !!env.DISCORD_FEEDBACK_WEBHOOK_URL;
+  return discordBotEnabled() && !!env.DISCORD_FEEDBACK_CHANNEL_ID;
 }
 
 /** Who sent it, derived server-side from the session (never from the client). */
@@ -87,26 +89,15 @@ function buildEmbed(payload: FeedbackPayload) {
 }
 
 /**
- * Post a feedback submission to the configured Discord channel as an embed.
- * Returns whether the webhook accepted it (Discord replies 204 on success);
- * best-effort, the caller surfaces a failure to the user.
+ * Post a feedback submission to the configured Discord channel as an embed, sent
+ * by the bot (bot-token REST, same mechanism as boost notifications). Returns
+ * whether the bot could post it; best-effort, the caller surfaces a failure to
+ * the user.
  */
 export async function sendFeedbackToDiscord(
   payload: FeedbackPayload,
 ): Promise<boolean> {
-  const webhookUrl = env.DISCORD_FEEDBACK_WEBHOOK_URL;
-  if (!webhookUrl) return false;
-  try {
-    const res = await fetch(webhookUrl, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        username: APP_IDENTITY.NAME,
-        embeds: [buildEmbed(payload)],
-      }),
-    });
-    return res.ok;
-  } catch {
-    return false;
-  }
+  const channelId = env.DISCORD_FEEDBACK_CHANNEL_ID;
+  if (!channelId) return false;
+  return postChannelEmbed(channelId, buildEmbed(payload));
 }

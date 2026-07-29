@@ -35,8 +35,8 @@ function rateLimited(key: string): boolean {
  * Receive a site feedback submission and forward it to the private Discord
  * channel. Open to everyone: the sender's WG identity is attached from the
  * session when signed in, otherwise the feedback is anonymous. 404 when the
- * feature is unconfigured (no webhook), 400 on a bad body, 429 when rate
- * limited, 502 if the webhook rejects it.
+ * feature is unconfigured (no bot/channel), 400 on a bad body, 429 when rate
+ * limited, 502 if the bot can't post it.
  */
 export async function POST(request: Request): Promise<Response> {
   if (!isFeedbackEnabled()) {
