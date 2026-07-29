@@ -1,4 +1,5 @@
 import { ActivityType, type Client, type PresenceData } from "discord.js";
+import { APP_IDENTITY } from "@unicum.gg/shared/app-identity";
 import { REGIONS } from "@unicum.gg/wargaming";
 import { unicum } from "./plugins/wot/lib/sdk.js";
 
@@ -63,7 +64,7 @@ function watching(name: string): PresenceData {
 function line(pick: (t: Totals) => string): () => PresenceData {
   return () => {
     if (Date.now() - lastFetch > REFRESH_MS) void refreshTotals();
-    return watching(totals ? pick(totals) : "unicum.gg");
+    return watching(totals ? pick(totals) : APP_IDENTITY.NAME);
   };
 }
 
