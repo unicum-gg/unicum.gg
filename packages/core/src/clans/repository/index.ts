@@ -7,6 +7,7 @@ import {
   type ClanFullInfo,
   getClanFullInfo,
   getClansFullInfoBatch,
+  sanitizeClanDescription,
 } from "@unicum.gg/core/wargaming/wot/clans/info";
 import { findClanIdByTag } from "@unicum.gg/core/wargaming/wot/clans/search";
 
@@ -18,7 +19,9 @@ function clanFullInfoFromRow(row: Clan): ClanFullInfo {
     color: row.color,
     emblem: row.emblem,
     motto: row.motto,
-    descriptionHtml: row.descriptionHtml,
+    // Re-linkify at read so clans stored before the linkify fix heal without
+    // waiting for a WG refresh. Idempotent on already-linkified HTML.
+    descriptionHtml: sanitizeClanDescription(row.descriptionHtml),
     createdAt: row.createdAtWg,
     membersCount: row.membersCount,
     leaderId: Number(row.leaderId),

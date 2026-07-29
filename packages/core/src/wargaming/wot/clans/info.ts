@@ -88,22 +88,51 @@ const DESCRIPTION_SANITIZE_OPTIONS: sanitizeHtml.IOptions = {
   allowedAttributes: { a: ["href", "title", "target", "rel"] },
   allowedSchemes: ["http", "https", "mailto"],
   transformTags: {
-    a: sanitizeHtml.simpleTransform("a", { target: "_blank", rel: "noopener noreferrer" }),
+    a: sanitizeHtml.simpleTransform("a", {
+      target: "_blank",
+      // User-generated outbound links: nofollow so we neither pass link equity
+      // to arbitrary sites nor reward spamming URLs into a clan description.
+      rel: "nofollow noopener noreferrer",
+    }),
   },
 };
-const URL_REGEX = /(?<!["'=>])(https?:\/\/[^\s<>"']+)/g;
+const URL_REGEX = /https?:\/\/[^\s<>"']+/g;
 const TRAILING_PUNCT_REGEX = /([.,;:!?)\]}>]+)$/;
 const DOUBLE_ENCODED_ENTITY_REGEX = /&amp;(#?\w+;)/g;
+// Split into HTML tags and the text runs between them, so linkify only ever
+// touches visible text and never the inside of a tag.
+const TOKEN_REGEX = /<[^>]+>|[^<]+/g;
 
-function sanitizeClanDescription(html: string): string {
-  const linkified = (html || "")
-    .replace(DOUBLE_ENCODED_ENTITY_REGEX, "&$1")
-    .replace(URL_REGEX, (match) => {
-      const trail = match.match(TRAILING_PUNCT_REGEX);
-      const url = trail ? match.slice(0, -trail[0].length) : match;
-      const tail = trail ? trail[0] : "";
-      return `<a href="${url}">${url}</a>${tail}`;
-    });
+function linkifyText(text: string): string {
+  return text.replace(URL_REGEX, (match) => {
+    const trail = match.match(TRAILING_PUNCT_REGEX);
+    const url = trail ? match.slice(0, -trail[0].length) : match;
+    const tail = trail ? trail[0] : "";
+    return `<a href="${url}">${url}</a>${tail}`;
+  });
+}
+
+/**
+ * Sanitize a WG clan description and turn bare URLs into links. WG wraps URLs in
+ * tags (`<strong>https://…</strong>`), so a lookbehind that vetoes on a
+ * preceding `>` would skip most of them. Instead we walk tag/text tokens and
+ * linkify only text, tracking `<a>` depth so an existing anchor's visible text
+ * is never double-wrapped. Idempotent, so it is safe to re-run on stored HTML.
+ */
+export function sanitizeClanDescription(html: string): string {
+  const normalized = (html || "").replace(DOUBLE_ENCODED_ENTITY_REGEX, "&$1");
+  let anchorDepth = 0;
+  const linkified = (normalized.match(TOKEN_REGEX) ?? [])
+    .map((token) => {
+      if (token[0] === "<") {
+        if (/^<a[\s/>]/i.test(token)) anchorDepth++;
+        else if (/^<\/a\s*>/i.test(token))
+          anchorDepth = Math.max(0, anchorDepth - 1);
+        return token;
+      }
+      return anchorDepth > 0 ? token : linkifyText(token);
+    })
+    .join("");
   return sanitizeHtml(linkified, DESCRIPTION_SANITIZE_OPTIONS);
 }
 
