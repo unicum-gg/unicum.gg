@@ -1,7 +1,7 @@
 import { ActivityType, type Client, type PresenceData } from "discord.js";
 import { APP_IDENTITY } from "@unicum.gg/shared/app-identity";
 import { REGIONS } from "@unicum.gg/wargaming";
-import { unicum } from "./plugins/wot/lib/sdk.js";
+import { unicum } from "../plugins/wot/lib/sdk.js";
 
 // Rotation itself is handled by `dixt-plugin-presence`; this module only feeds it
 // dynamic `() => PresenceData` entries backed by live totals. Discord renders a

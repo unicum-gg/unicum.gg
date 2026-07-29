@@ -2,10 +2,9 @@
   "name": "@unicum.gg/bot",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "start": "tsx src/index.ts",
-    "dev": "tsx watch --env-file-if-exists=../web/.env.local --env-file-if-exists=.env.local src/index.ts"
+    "dev": "node --env-file-if-exists=../web/.env.local --env-file-if-exists=.env.local node_modules/.bin/dixt dev"
   },
   "dependencies": {
     "@t3-oss/env-core": "^0.13.11",
