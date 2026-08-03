@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
+import { and, asc, between, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
@@ -628,6 +628,10 @@ async function carryForwardMarks(
       and(
         eq(tankSnapshots.playerId, playerId),
         isNotNull(tankSnapshots.marksOnGun),
+        // Never carry a value that isn't a real mark count forward: rows written
+        // before the portal column fix (commit ca2804e) hold battle counts, and
+        // copying them onto every new row is what kept them alive for weeks.
+        between(tankSnapshots.marksOnGun, 0, 3),
       ),
     )
     .orderBy(

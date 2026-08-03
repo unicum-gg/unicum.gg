@@ -17,7 +17,16 @@ export async function fetchPlayerMarksOnGun(
       .region(region)
       .portal.profile.vehicleMarks({ accountId });
     const map = new Map<number, number>();
-    for (const r of rows) map.set(r.tankId, r.marksOnGun);
+    for (const r of rows) {
+      // Marks are 0-3 by definition. Anything else means the portal handed us a
+      // different column than we think (its rows are positional and the order
+      // moves between responses, which is exactly how battle counts once ended
+      // up stored as marks), so drop the value instead of persisting nonsense.
+      if (!Number.isInteger(r.marksOnGun) || r.marksOnGun < 0 || r.marksOnGun > 3) {
+        continue;
+      }
+      map.set(r.tankId, r.marksOnGun);
+    }
     return map;
   } catch {
     return new Map();
