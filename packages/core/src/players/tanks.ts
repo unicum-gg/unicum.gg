@@ -95,9 +95,8 @@ export async function getLatestTankSnapshotsByAccounts(
     SELECT DISTINCT ON (player_id, tank_id) *
     FROM ${tankSnapshots}
     WHERE player_id IN ${sql.raw(`(${playerIds.join(",")})`)}
-    ORDER BY player_id, tank_id, taken_at DESC, id DESC
+    ORDER BY player_id, tank_id, taken_at DESC, battles DESC
   `)) as unknown as Array<{
-    id: number;
     player_id: number;
     tank_id: number;
     taken_at: Date;
@@ -124,7 +123,6 @@ export async function getLatestTankSnapshotsByAccounts(
     if (accountId === undefined) continue;
     const arr = out.get(accountId) ?? [];
     arr.push({
-      id: Number(row.id),
       playerId: Number(row.player_id),
       tankId: Number(row.tank_id),
       takenAt: row.taken_at instanceof Date ? row.taken_at : new Date(row.taken_at),
@@ -172,9 +170,8 @@ export async function getTankSnapshotsByAccountsBefore(
     FROM ${tankSnapshots}
     WHERE player_id IN ${sql.raw(`(${playerIds.join(",")})`)}
       AND taken_at < ${cutoff.toISOString()}
-    ORDER BY player_id, tank_id, taken_at DESC, id DESC
+    ORDER BY player_id, tank_id, taken_at DESC, battles DESC
   `)) as unknown as Array<{
-    id: number;
     player_id: number;
     tank_id: number;
     taken_at: Date;
@@ -201,7 +198,6 @@ export async function getTankSnapshotsByAccountsBefore(
     if (accountId === undefined) continue;
     const arr = out.get(accountId) ?? [];
     arr.push({
-      id: Number(row.id),
       playerId: Number(row.player_id),
       tankId: Number(row.tank_id),
       takenAt:

@@ -3,9 +3,8 @@ import {
   index,
   integer,
   pgTable,
-  serial,
+  primaryKey,
   timestamp,
-  uniqueIndex,
 } from "drizzle-orm/pg-core";
 import { Region } from "@unicum.gg/wargaming";
 import { type PlayersTable, playersByRegion } from "./players";
@@ -17,7 +16,6 @@ export function makeTankSnapshotsTable(
   return pgTable(
     `${region}_tank_snapshots`,
     {
-      id: serial("id").primaryKey(),
       playerId: integer("player_id")
         .notNull()
         .references(() => players.id, { onDelete: "cascade" }),
@@ -62,9 +60,13 @@ export function makeTankSnapshotsTable(
         t.playerId,
         t.takenAt,
       ),
-      uniqueIndex(
-        `${region}_tank_snapshots_player_tank_battles_unique_idx`,
-      ).on(t.playerId, t.tankId, t.battles),
+      // (player, tank, battles) IS the identity of a row: the same counter state
+      // for the same tank is the same observation. A surrogate `serial` id used
+      // to carry the primary key, but it bought nothing (nothing referenced it,
+      // it only broke ties between rows sharing a `taken_at`) and its 4-byte
+      // counter ran out on EU at 2.1B rows, which stopped every tank write dead
+      // (migration 0061). The natural key has no ceiling.
+      primaryKey({ columns: [t.playerId, t.tankId, t.battles] }),
     ],
   );
 }

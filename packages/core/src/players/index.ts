@@ -633,7 +633,10 @@ async function carryForwardMarks(
     .orderBy(
       tankSnapshots.tankId,
       desc(tankSnapshots.takenAt),
-      desc(tankSnapshots.id),
+      // Tie-break rows sharing a `taken_at` (a bulk insert stamps one `now()`
+      // across the whole chunk): battles only ever grows on a given tank, so the
+      // highest count is the latest state.
+      desc(tankSnapshots.battles),
     );
   if (rows.length === 0) return;
   const byTank = new Map(rows.map((r) => [r.tankId, r.marksOnGun]));
@@ -726,7 +729,9 @@ async function updatePlayerRatings(
         sql`(${tankSnapshots.takenAt} < ${cutoffTs}) DESC`,
         sql`CASE WHEN ${tankSnapshots.takenAt} < ${cutoffTs} THEN ${tankSnapshots.takenAt} END DESC`,
         asc(tankSnapshots.takenAt),
-        desc(tankSnapshots.id),
+        // Same-`taken_at` tie-break: battles is monotonic per tank (see
+        // carryForwardMarks).
+        desc(tankSnapshots.battles),
       );
     let pWn7: number | null = null;
     let pWn8: number | null = null;

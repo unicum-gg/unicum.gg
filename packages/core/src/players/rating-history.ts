@@ -61,7 +61,9 @@ export async function getRatingHistory(
     })
     .from(tankSnapshots)
     .where(eq(tankSnapshots.playerId, playerId))
-    .orderBy(asc(tankSnapshots.takenAt), asc(tankSnapshots.id));
+    // Same-`taken_at` tie-break on battles (monotonic per tank), so a chunk
+    // written under one `now()` still replays in the order it happened.
+    .orderBy(asc(tankSnapshots.takenAt), asc(tankSnapshots.battles));
 
   if (rows.length === 0) return { points: [] };
 

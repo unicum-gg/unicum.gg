@@ -154,7 +154,6 @@ type RawPlayerSnapshot = {
 };
 
 type RawTankSnapshot = {
-  id: number;
   player_id: number;
   tank_id: number;
   taken_at: string;
@@ -343,7 +342,6 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
 
 function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
   return {
-    id: Number(r.id),
     playerId: Number(r.player_id),
     tankId: Number(r.tank_id),
     takenAt: new Date(r.taken_at),
@@ -446,7 +444,7 @@ export async function loadPlayerInitialData(
       SELECT DISTINCT ON (tank_id) *
       FROM ${tankSnapshots}
       WHERE player_id = (SELECT id FROM p)
-      ORDER BY tank_id, taken_at DESC, id DESC
+      ORDER BY tank_id, taken_at DESC, battles DESC
     ),
     snap_24h AS (${playerPeriodCte("24 hours")}),
     snap_7d AS (${playerPeriodCte("7 days")}),
