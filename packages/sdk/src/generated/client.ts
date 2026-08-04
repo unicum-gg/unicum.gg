@@ -228,6 +228,25 @@ class TankClient {
   }
 }
 
+/** A single map: unicum.eu.maps("..."). */
+class MapClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly region: Region,
+    private readonly slug: string,
+  ) {}
+
+  /** Map detail */
+  detail() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}", path),
+      () => this.api.GET("/{region}/maps/{slug}", { params: { path } }),
+    );
+  }
+}
+
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
@@ -280,6 +299,18 @@ type TanksNamespace = ((slug: string) => TankClient) & {
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/tanks/search">>>;
+};
+
+type MapsNamespace = ((slug: string) => MapClient) & {
+  /** Maps */
+  list(): RequestHandle<Data<"/{region}/maps">>;
+  /** Search maps */
+  search(q: NonNullable<QueryOf<"/{region}/maps/search">>["q"]): RequestHandle<Data<"/{region}/maps/search">>;
+  /** Streamed map search: NDJSON chunks (local DB first, then Wargaming). */
+  searchStream(
+    q: string,
+    options?: SearchStreamOptions,
+  ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/maps/search">>>;
 };
 
 type ServerNamespace = {
@@ -468,6 +499,38 @@ class RegionClient {
     return ns;
   }
 
+  get maps(): MapsNamespace {
+    const ns = ((slug: string) =>
+      new MapClient(this.api, this.baseUrl, this.region, slug)) as MapsNamespace;
+    ns.list = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/maps", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/maps", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.search = (q) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/maps/search", { region: this.region }, { q }),
+        () =>
+          this.api.GET("/{region}/maps/search", {
+            params: { path: { region: this.region }, query: { q } },
+          }),
+      );
+    ns.searchStream = (q, options) =>
+      ndjsonSearch<SearchItemOf<"/{region}/maps/search">>(
+        this.baseUrl,
+        this.region,
+        this.fetchImpl,
+        this.headers,
+        "maps",
+        q,
+        options?.signal,
+      );
+    return ns;
+  }
+
   /** Coverage */
   coverage() {
     return handle(
@@ -488,6 +551,8 @@ class RegionClient {
 type OgClans = ((tag: string) => RequestHandle<unknown>) & {
   compare(tags: NonNullable<QueryOf<"/og/{region}/clans/compare">>["tags"]): RequestHandle<unknown>;
 };
+
+type OgMaps = (slug: string) => RequestHandle<unknown>;
 
 type OgPlayers = ((nickname: string) => RequestHandle<unknown>) & {
   compare(names: NonNullable<QueryOf<"/og/{region}/players/compare">>["names"]): RequestHandle<unknown>;
@@ -522,6 +587,17 @@ class OgRegionClient {
           }),
       );
     return ns;
+  }
+
+  get maps(): OgMaps {
+    return (slug: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/maps/{slug}", { region: this.region, slug }),
+        () =>
+          this.api.GET("/og/{region}/maps/{slug}", {
+            params: { path: { region: this.region, slug } },
+          }),
+      );
   }
 
   get players(): OgPlayers {

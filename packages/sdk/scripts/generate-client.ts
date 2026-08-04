@@ -68,6 +68,14 @@ const RESOURCES: Resource[] = [
     namespaceRoot: "list",
     searchStream: true,
   },
+  {
+    name: "maps",
+    key: "slug",
+    client: "MapClient",
+    root: "detail",
+    namespaceRoot: "list",
+    searchStream: true,
+  },
 ];
 
 const GLOBALS = [{ name: "streamers", live: true }, { name: "support" }] as const;

@@ -919,6 +919,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search maps
+         * @description Search the battle-map catalogue by name (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
+         */
+        get: operations["get-{region}-maps-search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/search/ndjson": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search maps (streamed)
+         * @description Search the battle-map catalogue by name (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue. For a plain JSON response, use `/search`.
+         */
+        get: operations["get-{region}-maps-search-ndjson"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Maps
+         * @description Every World of Tanks battle map on a region: display name, minimap image, camouflage kind (summer/winter/desert), square size in metres, and the random-battle modes it supports (Standard/Encounter/Assault). Derived from the game client scripts, so removed or event-reskin maps are included. One entry per distinct map, name-sorted.
+         */
+        get: operations["get-{region}-maps"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/og": {
         parameters: {
             query?: never;
@@ -979,6 +1039,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map detail
+         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `slug` in the response is the canonical slug.
+         */
+        get: operations["get-{region}-maps-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/og/{region}/clans/{tag}": {
         parameters: {
             query?: never;
@@ -991,6 +1071,26 @@ export interface paths {
          * @description The clan's stats card as a stable, hash-free 1200×630 PNG (members, average WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
          */
         get: operations["get-og-{region}-clans-{tag}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/maps/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map OG card
+         * @description The battle map's card as a stable, hash-free 1200×630 PNG (minimap, size, battle time, team size, modes). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-maps-{slug}"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1629,6 +1729,96 @@ export interface components {
             /** @description Equipment 2.0 categories (firepower, mobility, survivability, stealth). */
             categories: string[];
             effects: components["schemas"]["equipmentEffect"][];
+        };
+        /**
+         * @description Top-level battle type a map belongs to.
+         * @enum {string}
+         */
+        mapBattleTypeField: "random" | "battle_royale" | "frontline" | "onslaught" | "grand_battle" | "clan_wars" | "waffentrager" | "last_stand" | "arcade" | "story_mode" | "training";
+        /**
+         * @description Vehicle camouflage kind the map is skinned with.
+         * @enum {string}
+         */
+        mapCamouflageField: "summer" | "winter" | "desert";
+        /** @description A battle map's gallery summary. */
+        MapDetailResponse: {
+            arenaId: string;
+            slug: string;
+            name: string;
+            camouflage: components["schemas"]["mapCamouflageField"];
+            /** @description Square side length in metres. */
+            sizeMeters: number;
+            modes: components["schemas"]["mapModeField"][];
+            battleTypes: components["schemas"]["mapBattleTypeField"][];
+            minimapUrl: string;
+            /** @description Standard-mode base positions, for the gallery thumbnail. */
+            bases: components["schemas"]["teamMarkers"];
+            description: string;
+            /** @description Battle timer in seconds. */
+            roundLength: number;
+            maxPlayersInTeam: number;
+            widthMeters: number;
+            heightMeters: number;
+            geometry: components["schemas"]["MapModeGeometry"][];
+            onslaught: components["schemas"]["MapOnslaught"] | null;
+        };
+        mapMarker: {
+            left: number;
+            top: number;
+        };
+        /**
+         * @description Random-battle game mode a map supports.
+         * @enum {string}
+         */
+        mapModeField: "standard" | "encounter" | "assault";
+        /** @description Base flags, team spawns and control point for one game mode. */
+        MapModeGeometry: {
+            mode: components["schemas"]["mapModeField"];
+            label: string;
+            bases: components["schemas"]["teamMarkers"];
+            spawns: components["schemas"]["teamMarkers"];
+            controlPoint: components["schemas"]["mapMarker"] | null;
+        };
+        /** @description Onslaught (comp7) minimap, reduced play area and geometry. */
+        MapOnslaught: {
+            minimapUrl: string;
+            widthMeters: number;
+            heightMeters: number;
+            spawns: components["schemas"]["teamMarkers"];
+            controlPoint: components["schemas"]["mapMarker"] | null;
+            pointsOfInterest: {
+                marker: components["schemas"]["mapMarker"];
+                type: number;
+            }[];
+        };
+        MapSearchChunk: unknown;
+        MapSearchResponse: {
+            results: components["schemas"]["MapSearchRow"][];
+        };
+        /** @description Map row (additional fields may be present). */
+        MapSearchRow: {
+            arena_id: string;
+            slug: string;
+            name: string;
+            camouflage: string;
+            minimap_url: string;
+        };
+        MapsListResponse: {
+            results: components["schemas"]["MapSummary"][];
+        };
+        /** @description A battle map's gallery summary. */
+        MapSummary: {
+            arenaId: string;
+            slug: string;
+            name: string;
+            camouflage: components["schemas"]["mapCamouflageField"];
+            /** @description Square side length in metres. */
+            sizeMeters: number;
+            modes: components["schemas"]["mapModeField"][];
+            battleTypes: components["schemas"]["mapBattleTypeField"][];
+            minimapUrl: string;
+            /** @description Standard-mode base positions, for the gallery thumbnail. */
+            bases: components["schemas"]["teamMarkers"];
         };
         /** @description A JSON-RPC 2.0 response from the MCP endpoint (carries a method-specific `result` or a JSON-RPC `error`). */
         McpResponse: {
@@ -2415,6 +2605,10 @@ export interface components {
             tier: number;
             nation: string;
             type: string;
+        };
+        teamMarkers: {
+            team1: components["schemas"]["mapMarker"][];
+            team2: components["schemas"]["mapMarker"][];
         };
         tierContribution: {
             tier: number;
@@ -3652,6 +3846,87 @@ export interface operations {
             };
         };
     };
+    "get-{region}-maps-search": {
+        parameters: {
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapSearchResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-search-ndjson": {
+        parameters: {
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapSearchChunk"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapsListResponse"];
+                };
+            };
+        };
+    };
     "get-og": {
         parameters: {
             query?: {
@@ -3729,6 +4004,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-maps-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapDetailResponse"];
+                };
+            };
+        };
+    };
     "get-og-{region}-clans-{tag}": {
         parameters: {
             query?: never;
@@ -3741,6 +4044,34 @@ export interface operations {
                  * @example FAME
                  */
                 tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-maps-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example is-7
+                 */
+                slug: string;
             };
             cookie?: never;
         };
