@@ -4,7 +4,8 @@ import { StarIcon, XIcon } from "@phosphor-icons/react";
 import { useEffect, useRef } from "react";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
-import { ClanRow, PlayerRow, TankRow } from "@/components/search/rows";
+import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
+import { ClanRow, MapRow, PlayerRow, TankRow } from "@/components/search/rows";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/shared";
@@ -49,11 +50,21 @@ export type Row =
       region: Region;
       key: string;
       isRecent?: boolean;
+    }
+  | {
+      type: "map";
+      map: MapSearchResult;
+      region: Region;
+      key: string;
+      isRecent?: boolean;
     };
 
-export type SelectableRow = Extract<Row, { type: "player" | "clan" | "tank" }>;
+export type SelectableRow = Extract<
+  Row,
+  { type: "player" | "clan" | "tank" | "map" }
+>;
 // Rows that can be pinned as a favorite / stored in recent history — players,
-// clans, and tanks alike.
+// clans, tanks, and maps alike.
 export type HistoryRow = SelectableRow;
 
 export type ResultsStatus = {
@@ -131,6 +142,7 @@ export function flattenSections(
   players: SearchPlayerResult[] | null,
   clans: ClanSearchResult[] | null,
   tanks: TankSearchResult[] | null,
+  maps: MapSearchResult[] | null,
 ): Row[] {
   const rows: Row[] = [];
   if (players && players.length > 0) {
@@ -166,6 +178,17 @@ export function flattenSections(
       });
     }
   }
+  if (maps && maps.length > 0) {
+    rows.push({ type: "header", label: "Maps", key: "h-maps" });
+    for (const map of maps) {
+      rows.push({
+        type: "map",
+        map,
+        region,
+        key: `m-${map.arena_id}`,
+      });
+    }
+  }
   return rows;
 }
 
@@ -177,6 +200,8 @@ function sameItem(a: SearchHistoryItem, b: SearchHistoryItem): boolean {
     return a.clan.clan_id === b.clan.clan_id;
   if (a.kind === "tank" && b.kind === "tank")
     return a.tank.tank_id === b.tank.tank_id;
+  if (a.kind === "map" && b.kind === "map")
+    return a.map.arena_id === b.map.arena_id;
   return false;
 }
 
@@ -228,11 +253,20 @@ export function itemToRow(
       isRecent,
     };
   }
+  if (item.kind === "tank") {
+    return {
+      type: "tank",
+      tank: item.tank,
+      region: item.region,
+      key: `${keyPrefix}-t-${item.region}-${item.tank.tank_id}`,
+      isRecent,
+    };
+  }
   return {
-    type: "tank",
-    tank: item.tank,
+    type: "map",
+    map: item.map,
     region: item.region,
-    key: `${keyPrefix}-t-${item.region}-${item.tank.tank_id}`,
+    key: `${keyPrefix}-m-${item.region}-${item.map.arena_id}`,
     isRecent,
   };
 }
@@ -242,7 +276,9 @@ export function rowToItem(row: HistoryRow): SearchHistoryItem {
     return { kind: "player", region: row.region, player: row.player };
   if (row.type === "clan")
     return { kind: "clan", region: row.region, clan: row.clan };
-  return { kind: "tank", region: row.region, tank: row.tank };
+  if (row.type === "tank")
+    return { kind: "tank", region: row.region, tank: row.tank };
+  return { kind: "map", region: row.region, map: row.map };
 }
 
 export function ResultsArea({
@@ -317,8 +353,10 @@ export function ResultsArea({
                   <PlayerRow player={row.player} />
                 ) : row.type === "clan" ? (
                   <ClanRow clan={row.clan} />
-                ) : (
+                ) : row.type === "tank" ? (
                   <TankRow tank={row.tank} region={row.region} />
+                ) : (
+                  <MapRow map={row.map} />
                 )}
               </button>
               {historyRow ? (

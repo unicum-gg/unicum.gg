@@ -14,6 +14,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
+import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
 import { SearchSource, type ClanSearchResult } from "@unicum.gg/shared";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
 import {
@@ -84,6 +85,8 @@ export default function SearchDialog(props: SharedProps) {
     useState<Outcome<ClanSearchResult> | null>(null);
   const [tanksOutcome, setTanksOutcome] =
     useState<Outcome<TankSearchResult> | null>(null);
+  const [mapsOutcome, setMapsOutcome] =
+    useState<Outcome<MapSearchResult> | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const {
     recent,
@@ -101,6 +104,8 @@ export default function SearchDialog(props: SharedProps) {
     searchType === SearchType.All || searchType === SearchType.Clans;
   const wantTanks =
     searchType === SearchType.All || searchType === SearchType.Tanks;
+  const wantMaps =
+    searchType === SearchType.All || searchType === SearchType.Maps;
 
   const playersSection = useMemo(
     () => deriveSection(wantPlayers, trimmedQuery, MIN_QUERY_LENGTH, playersOutcome),
@@ -113,6 +118,10 @@ export default function SearchDialog(props: SharedProps) {
   const tanksSection = useMemo(
     () => deriveSection(wantTanks, trimmedQuery, MIN_QUERY_LENGTH, tanksOutcome),
     [wantTanks, trimmedQuery, tanksOutcome],
+  );
+  const mapsSection = useMemo(
+    () => deriveSection(wantMaps, trimmedQuery, MIN_QUERY_LENGTH, mapsOutcome),
+    [wantMaps, trimmedQuery, mapsOutcome],
   );
 
   useEffect(() => {
@@ -244,13 +253,49 @@ export default function SearchDialog(props: SharedProps) {
           }
         })();
       }
+
+      if (wantMaps) {
+        setMapsOutcome((prev) => ({
+          status: "loading",
+          previous: previousOf(prev),
+          forQuery: trimmedQuery,
+        }));
+        void (async () => {
+          try {
+            let acc: MapSearchResult[] = [];
+            for await (const chunk of unicum
+              .region(region)
+              .maps.searchStream(trimmedQuery, {
+                signal: controller.signal,
+              })) {
+              acc = [...acc, ...(chunk.results as MapSearchResult[])];
+              // Partial: keep the loading indicator on until the stream ends.
+              setMapsOutcome({
+                status: "streaming",
+                results: acc,
+                forQuery: trimmedQuery,
+              });
+              if (chunk.source === SearchSource.Local) setActiveIndex(0);
+            }
+            // Stream closed: settle to the final result.
+            setMapsOutcome({
+              status: "ok",
+              results: acc,
+              forQuery: trimmedQuery,
+            });
+          } catch (err) {
+            if ((err as Error)?.name === "AbortError") return;
+            setMapsOutcome({ status: "error", forQuery: trimmedQuery });
+          }
+        })();
+      }
     }, DEBOUNCE_MS);
 
     return () => {
       controller.abort();
       clearTimeout(timer);
     };
-  }, [trimmedQuery, region, wantPlayers, wantClans, wantTanks]);
+  }, [trimmedQuery, region, wantPlayers, wantClans, wantTanks, wantMaps]);
 
   // When the input is empty, show the user's recent + favorite items
   // instead of a blank state. The search results take over the moment
@@ -267,18 +312,34 @@ export default function SearchDialog(props: SharedProps) {
         playersSection.visible,
         clansSection.visible,
         tanksSection.visible,
+        mapsSection.visible,
       ),
-    [region, playersSection.visible, clansSection.visible, tanksSection.visible],
+    [
+      region,
+      playersSection.visible,
+      clansSection.visible,
+      tanksSection.visible,
+      mapsSection.visible,
+    ],
   );
   const rows = queryIsEmpty ? historyRows : searchRows;
   const selectable = useMemo(() => selectableRows(rows), [rows]);
 
   const anyLoading =
-    playersSection.isLoading || clansSection.isLoading || tanksSection.isLoading;
+    playersSection.isLoading ||
+    clansSection.isLoading ||
+    tanksSection.isLoading ||
+    mapsSection.isLoading;
   const allErrored =
-    playersSection.isError && clansSection.isError && tanksSection.isError;
+    playersSection.isError &&
+    clansSection.isError &&
+    tanksSection.isError &&
+    mapsSection.isError;
   const allEmpty =
-    playersSection.isEmpty && clansSection.isEmpty && tanksSection.isEmpty;
+    playersSection.isEmpty &&
+    clansSection.isEmpty &&
+    tanksSection.isEmpty &&
+    mapsSection.isEmpty;
   const hasAnyVisible = rows.length > 0;
 
   const showArea = hasAnyVisible || anyLoading || allErrored || allEmpty;
@@ -318,6 +379,7 @@ export default function SearchDialog(props: SharedProps) {
     setPlayersOutcome(null);
     setClansOutcome(null);
     setTanksOutcome(null);
+    setMapsOutcome(null);
   }
 
   function pickRow(row: SelectableRow) {
@@ -328,9 +390,12 @@ export default function SearchDialog(props: SharedProps) {
     } else if (row.type === "clan") {
       addRecent(rowToItem(row));
       router.push(ROUTES.CLAN(row.region, row.clan.tag));
-    } else {
+    } else if (row.type === "tank") {
       addRecent(rowToItem(row));
       router.push(ROUTES.TANK(row.region, row.tank.slug));
+    } else {
+      addRecent(rowToItem(row));
+      router.push(ROUTES.MAP(row.region, row.map.slug));
     }
   }
 
@@ -367,7 +432,7 @@ export default function SearchDialog(props: SharedProps) {
           <SearchDialogHeader>
             <SearchDialogIcon />
             <SearchDialogInput
-              placeholder="Search players, clans or tanks"
+              placeholder="Search players, clans, tanks or maps"
               onKeyDown={onKeyDown}
             />
             <SearchDialogClose />

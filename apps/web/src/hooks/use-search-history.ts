@@ -6,11 +6,13 @@ import STORAGE from "@/constants/storage";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanSearchResult } from "@unicum.gg/shared";
 import type { TankSearchResult } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import type { MapSearchResult } from "@unicum.gg/core/wargaming/wot/maps";
 
 export type SearchHistoryItem =
   | { kind: "player"; region: Region; player: SearchPlayerResult }
   | { kind: "clan"; region: Region; clan: ClanSearchResult }
-  | { kind: "tank"; region: Region; tank: TankSearchResult };
+  | { kind: "tank"; region: Region; tank: TankSearchResult }
+  | { kind: "map"; region: Region; map: MapSearchResult };
 
 type SearchHistory = {
   recent: SearchHistoryItem[];
@@ -30,6 +32,8 @@ function itemKey(item: SearchHistoryItem): string {
       return `c:${item.region}:${item.clan.clan_id}`;
     case "tank":
       return `t:${item.region}:${item.tank.tank_id}`;
+    case "map":
+      return `m:${item.region}:${item.map.arena_id}`;
   }
 }
 

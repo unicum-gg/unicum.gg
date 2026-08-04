@@ -4,6 +4,9 @@ import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
+import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
+import { CAMO_META } from "@/components/maps/meta";
+import { MinimapImage } from "@/components/maps/minimap-image";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
 import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
@@ -14,7 +17,9 @@ import {
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
+import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/shared";
+import { type MapCamouflage, lowResMinimapUrl } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {
@@ -97,6 +102,29 @@ export function TankRow({
         <span className="font-semibold text-brand">{tier}</span>
         <NationFlag nation={tank.nation} region={region} className="h-3" />
         <VehicleTypeIcon type={tank.type} premium={tank.is_premium} className="scale-75" />
+      </span>
+    </>
+  );
+}
+
+export function MapRow({ map }: { map: MapSearchResult }) {
+  const camo = CAMO_META[map.camouflage as MapCamouflage];
+  const CamoIcon = camo.icon;
+  return (
+    <>
+      <span className="flex min-w-0 items-center gap-2">
+        <span className="relative size-6 shrink-0 overflow-hidden rounded-sm bg-fd-muted">
+          <MinimapImage
+            src={map.minimap_url}
+            fallbackSrc={lowResMinimapUrl(map.arena_id)}
+            alt=""
+            sizes="24px"
+          />
+        </span>
+        <span className="truncate font-medium">{map.name}</span>
+      </span>
+      <span className={cn("shrink-0", camo.className)} title={`${camo.label} map`}>
+        <CamoIcon weight="fill" className="size-3.5" />
       </span>
     </>
   );
