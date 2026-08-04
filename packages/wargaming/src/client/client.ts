@@ -15,6 +15,7 @@ import { PortalClansResource } from "../portal/wot/clans";
 import { PortalProfileResource } from "../portal/wot/profile";
 import { StrongholdResource } from "../stronghold/wot";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
+import { SourceArenasResource } from "../source/wot/arenas";
 import { SourceSpecsResource } from "../source/wot/specs";
 import { SourceEquipmentResource } from "../source/wot/equipment";
 import { SourceCrewResource } from "../source/wot/crew";
@@ -83,6 +84,7 @@ class PortalSurface {
 /** Third-party game-data sources (e.g. the wot-src vehicle catalogue). */
 class SourceSurface {
   readonly vehicles: SourceVehiclesResource;
+  readonly arenas: SourceArenasResource;
   readonly specs: SourceSpecsResource;
   readonly equipment: SourceEquipmentResource;
   readonly crew: SourceCrewResource;
@@ -91,6 +93,7 @@ class SourceSurface {
 
   constructor(transport: Transport, region: Region) {
     this.vehicles = new SourceVehiclesResource(transport, region);
+    this.arenas = new SourceArenasResource(transport, region);
     this.specs = new SourceSpecsResource(transport, region);
     this.equipment = new SourceEquipmentResource(transport, region);
     this.crew = new SourceCrewResource(transport, region);

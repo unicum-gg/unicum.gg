@@ -1,4 +1,5 @@
 export * from "./mirror";
+export * from "./arenas";
 export * from "./vehicles";
 export * from "./specs";
 export * from "./equipment";
