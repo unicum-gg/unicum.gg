@@ -31,6 +31,7 @@
     "./wargaming/wot/players/top": "./src/wargaming/wot/players/top/index.ts",
     "./wargaming/wot/players/top/by-tank": "./src/wargaming/wot/players/top/by-tank/index.ts",
     "./wargaming/wot/tanks": "./src/wargaming/wot/tanks/index.ts",
+    "./wargaming/wot/maps": "./src/wargaming/wot/maps/index.ts",
     "./*": "./src/*.ts"
   },
   "dependencies": {
