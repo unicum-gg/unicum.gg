@@ -1,6 +1,9 @@
 import * as z from "zod";
 import {
+  BattleType,
   DEFAULT_RATING_METRIC,
+  MapCamouflage,
+  MapGameMode,
   RATING_METRICS,
   type RatingMetric,
 } from "@unicum.gg/shared";
@@ -43,6 +46,35 @@ export const tankParams = z.object({
   region: regionPath,
   slug: z.string().meta({ description: "Tank slug (e.g. is-7)." }),
 });
+
+export const mapParams = z.object({
+  region: regionPath,
+  slug: z.string().meta({ description: "Map slug (e.g. prokhorovka)." }),
+});
+
+export const mapModeField = z.enum(["standard", "encounter", "assault"]).meta({
+  description: "Random-battle game mode a map supports.",
+});
+
+export const mapCamouflageField = z.enum(["summer", "winter", "desert"]).meta({
+  description: "Vehicle camouflage kind the map is skinned with.",
+});
+
+export const mapBattleTypeField = z
+  .enum([
+    "random",
+    "battle_royale",
+    "frontline",
+    "onslaught",
+    "grand_battle",
+    "clan_wars",
+    "waffentrager",
+    "last_stand",
+    "arcade",
+    "story_mode",
+    "training",
+  ])
+  .meta({ description: "Top-level battle type a map belongs to." });
 
 export const MIN_QUERY_LENGTH = 3;
 
@@ -111,7 +143,10 @@ const _enumGuards: [
   Exact<(typeof periodField.options)[number], `${TopPlayersPeriod}`>,
   Exact<(typeof clanPeriodField.options)[number], `${TopClansPeriod}`>,
   Exact<(typeof metricField.options)[number], `${RatingMetric}`>,
-] = [true, true, true, true];
+  Exact<(typeof mapModeField.options)[number], `${MapGameMode}`>,
+  Exact<(typeof mapCamouflageField.options)[number], `${MapCamouflage}`>,
+  Exact<(typeof mapBattleTypeField.options)[number], `${BattleType}`>,
+] = [true, true, true, true, true, true, true];
 void _enumGuards;
 
 // 2. Runtime: throws when this module loads (dev, `openapi-gen generate`, prod)
@@ -142,6 +177,17 @@ assertEnumInSync(
   "clan period",
 );
 assertEnumInSync(metricField.options, RATING_METRICS, "metric");
+assertEnumInSync(mapModeField.options, Object.values(MapGameMode), "map mode");
+assertEnumInSync(
+  mapCamouflageField.options,
+  Object.values(MapCamouflage),
+  "map camouflage",
+);
+assertEnumInSync(
+  mapBattleTypeField.options,
+  Object.values(BattleType),
+  "map battle type",
+);
 
 // Leaderboard limits live here (the API contract) and are imported by the route
 // handlers, so the doc and the runtime clamp share one source.
