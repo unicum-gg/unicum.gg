@@ -103,6 +103,12 @@ const nextConfig: NextConfig = {
         hostname: "raw.githubusercontent.com",
         pathname: "/unicum-gg/wot.assets/**",
       },
+      // HD battle minimaps from our wot.maps mirror.
+      {
+        protocol: "https",
+        hostname: "raw.githubusercontent.com",
+        pathname: "/unicum-gg/wot.maps/**",
+      },
     ],
     // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
     // SVG sources by default; enabling this allows them through the optimizer

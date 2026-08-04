@@ -80,6 +80,14 @@ const ROUTES = {
       : pathcat("/:region/tanks/:slug", { region, slug }),
   TANKS: (region: Region) =>
     region === Region.EU ? "/tanks" : pathcat("/:region/tanks", { region }),
+
+  // - Maps (per region, with an EU shortcut at /maps/:slug)
+  MAP: (region: Region, slug: string) =>
+    region === Region.EU
+      ? pathcat("/maps/:slug", { slug })
+      : pathcat("/:region/maps/:slug", { region, slug }),
+  MAPS: (region: Region) =>
+    region === Region.EU ? "/maps" : pathcat("/:region/maps", { region }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
     const base =
       region === Region.EU

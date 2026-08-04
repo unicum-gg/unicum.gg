@@ -6,12 +6,13 @@ import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
 import { Region, regionFromPathname } from "@unicum.gg/wargaming";
 
-type Section = "players" | "clans" | "tanks";
+type Section = "players" | "clans" | "tanks" | "maps";
 
 const ROUTE_FOR: Record<Section, (region: Region) => string> = {
   players: ROUTES.PLAYERS,
   clans: ROUTES.CLANS,
   tanks: ROUTES.TANKS,
+  maps: ROUTES.MAPS,
 };
 
 /**

@@ -44,6 +44,10 @@ export async function baseOptions({
               type: "custom",
               children: <NavSectionLink text="Tanks" section="tanks" />,
             },
+            {
+              type: "custom",
+              children: <NavSectionLink text="Maps" section="maps" />,
+            },
             // The region-less surfaces (integrations + API), grouped under one
             // dropdown so the main nav stays three sections.
             {
