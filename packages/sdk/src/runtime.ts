@@ -299,7 +299,7 @@ export function ndjsonSearch<T>(
   region: Region,
   fetchImpl: typeof fetch,
   headers: Record<string, string> | undefined,
-  resource: "players" | "clans" | "tanks",
+  resource: "players" | "clans" | "tanks" | "maps",
   q: string,
   signal?: AbortSignal,
 ): AsyncGenerator<SearchChunk<T>> {
