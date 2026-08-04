@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { notFound, permanentRedirect } from "next/navigation";
 import { TankView } from "@/components/tanks/detail/view";
+import {
+  TankDetailTab,
+  tankDetailTabHref,
+} from "@/components/tanks/detail/tabs";
 import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
@@ -20,14 +24,14 @@ import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
 
 
-// ISR, not dynamic: every tab's content is rendered here and the whole page is
-// cached, so a navigation serves prerendered HTML instead of re-running the
-// heavy tank-view render each time (measured 0.3-4.4s/nav while force-dynamic,
-// vs ~50ms for the static pages). The active tab lives in `?tab=` and is swapped
-// entirely client-side (see tab-bar), so this page reads no searchParams and
-// stays static. On-demand: pages generate on first request (no
-// generateStaticParams for the ~1229 slugs) and revalidate on the tank data's
-// daily cadence. The SDK loopback covers any build-time prerender.
+// ISR, not dynamic: the rendered page is cached, so a navigation serves
+// prerendered HTML instead of re-running the heavy tank-view render each time
+// (measured 0.3-4.4s/nav while force-dynamic, vs ~50ms for the static pages).
+// Each tab is its own route segment, so a render only builds the requested tab
+// (see tabs.ts); this page is the Specifications default and reads no
+// searchParams, so it stays static. On-demand: pages generate on first request
+// (no generateStaticParams for the ~1229 slugs) and revalidate on the tank
+// data's daily cadence. The SDK loopback covers any build-time prerender.
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min
 
@@ -44,26 +48,69 @@ async function loadDetail(region: Region, slug: string) {
   }
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ region: string; slug: string }>;
-}): Promise<Metadata> {
-  const { region, slug } = await params;
+/** Per-tab title and description. Each tab is its own indexable URL, so they get
+ * their own wording rather than three copies of the same one. */
+function tabCopy(
+  tab: TankDetailTab,
+  name: string,
+  regionLabel: string,
+  tier: string,
+  nation: string,
+): { title: string; description: string } {
+  switch (tab) {
+    case TankDetailTab.Performances:
+      return {
+        title: `${name} performances (${regionLabel}), server stats and best players`,
+        description: `${name} (${regionLabel}) World of Tanks performances: server-average winrate, damage and assist, the best players on this tier ${tier} ${nation} tank, plus WN8 and WNX expected values.`,
+      };
+    case TankDetailTab.Marks:
+      return {
+        title: `${name} marks of excellence and mastery (${regionLabel})`,
+        description: `${name} (${regionLabel}) World of Tanks marks of excellence and marks of mastery requirements, with their history on this tier ${tier} ${nation} tank.`,
+      };
+    default:
+      return {
+        title: `${name} World of Tanks stats (${regionLabel}), tier ${tier} ${nation}`,
+        description: `${name} (${regionLabel}) World of Tanks specifications: armour, firepower, mobility, modules, crew and field modifications for this tier ${tier} ${nation} tank.`,
+      };
+  }
+}
+
+export async function tankMetadata(
+  region: string,
+  slug: string,
+  tab: TankDetailTab,
+): Promise<Metadata> {
   if (!isRegion(region)) return {};
   const detail = await loadDetail(region, slug).catch(() => null);
   if (!detail) return {};
   const { meta } = detail;
   const regionLabel = region.toUpperCase();
   const tier = meta.tier ? toRoman(meta.tier) : String(meta.tier);
+  const { title, description } = tabCopy(
+    tab,
+    meta.name,
+    regionLabel,
+    tier,
+    meta.nation.toUpperCase(),
+  );
   return constructMetadata({
-    title: `${meta.name} World of Tanks stats (${regionLabel}), tier ${tier} ${meta.nation.toUpperCase()}`,
-    description: `${meta.name} (${regionLabel}) World of Tanks stats: the best players on this tier ${tier} ${meta.nation.toUpperCase()} tank ranked by WN7, WN8 and WNX, plus expected values.`,
+    title,
+    description,
     // Point at the readable slug so a legacy numeric-id URL doesn't become the
-    // canonical.
-    canonical: ROUTES.TANK(region, detail.slug),
+    // canonical, and at this tab's own segment so the three don't compete.
+    canonical: tankDetailTabHref(ROUTES.TANK(region, detail.slug), tab),
     ogImage: `/api/og/${region}/tanks/${encodeURIComponent(detail.slug)}`,
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ region: string; slug: string }>;
+}): Promise<Metadata> {
+  const { region, slug } = await params;
+  return tankMetadata(region, slug, TankDetailTab.Specifications);
 }
 
 export default async function TankPage({
@@ -73,9 +120,7 @@ export default async function TankPage({
 }) {
   const { region, slug } = await params;
   if (!isRegion(region)) notFound();
-  // The active tab lives in `?tab=` and is read client-side by the tab-bar, so
-  // the server render is tab-agnostic and reads no searchParams (stays static).
-  return renderTankPage(region, slug);
+  return renderTankPage(region, slug, TankDetailTab.Specifications);
 }
 
 // Renders the tank view inline (blocking on the detail fetch) rather than
@@ -83,22 +128,33 @@ export default async function TankPage({
 // page, so the real stats land in the cached HTML. That keeps the `.md` twin and
 // non-JS crawlers complete (a Suspense boundary would leave only the skeleton in
 // `#page-content`). The redirect/notFound run here in the blocking render.
-export function renderTankPage(region: Region, slug: string) {
-  return <TankPageServer region={region} slug={slug} />;
+// `tab` comes from the route segment, so only that tab is rendered.
+export function renderTankPage(
+  region: Region,
+  slug: string,
+  tab: TankDetailTab,
+) {
+  return <TankPageServer region={region} slug={slug} tab={tab} />;
 }
 
 async function TankPageServer({
   region,
   slug,
+  tab,
 }: {
   region: Region;
   slug: string;
+  tab: TankDetailTab;
 }) {
   const detail = await loadDetail(region, slug);
   if (!detail) notFound();
   // Send legacy numeric-id (or wrong-case) URLs to the readable canonical slug
-  // with a 308 so links, history, and search engines settle on one URL.
-  if (slug !== detail.slug) permanentRedirect(ROUTES.TANK(region, detail.slug));
+  // with a 308 so links, history, and search engines settle on one URL. The
+  // active tab is a path segment, so it has to be carried over.
+  if (slug !== detail.slug)
+    permanentRedirect(
+      tankDetailTabHref(ROUTES.TANK(region, detail.slug), tab),
+    );
   const { tankId, meta, slug: canonicalSlug } = detail;
 
   const regionLabel = region.toUpperCase();
@@ -130,6 +186,7 @@ async function TankPageServer({
         region={region}
         tankId={tankId}
         slug={canonicalSlug}
+        tab={tab}
         meta={meta}
         topByMetric={detail.topByMetric}
         serverStats={detail.serverStats}

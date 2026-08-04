@@ -1,7 +1,9 @@
-// Tank detail page tabs. Shared by the server view (which renders each tab's
-// content) and the client tab bar (which reads/writes the active tab in the
-// URL). Single query param: `?tab=performances` / `?tab=marks`; Specifications
-// is the default and omits the param.
+// Tank detail page tabs. Each tab is its own route segment rather than a query
+// param, so the server renders one tab instead of all three: passing every tab
+// as a prop to a client tab bar made React render and serialize all of them into
+// the flight payload, even the ones never mounted (measured 240kB of inline RSC
+// on a 510kB page, and 0.9-3.5s of server render). Specifications is the default
+// and lives at the bare path; the others get `/performances` and `/marks`.
 export enum TankDetailTab {
   Specifications = "specifications",
   Performances = "performances",
@@ -11,23 +13,25 @@ export enum TankDetailTab {
 export const TANK_DETAIL_TABS: {
   id: TankDetailTab;
   label: string;
-  query: string | null;
+  segment: string | null;
 }[] = [
-  { id: TankDetailTab.Specifications, label: "Specifications", query: null },
-  { id: TankDetailTab.Performances, label: "Performances", query: "performances" },
-  { id: TankDetailTab.Marks, label: "Marks", query: "marks" },
+  { id: TankDetailTab.Specifications, label: "Specifications", segment: null },
+  {
+    id: TankDetailTab.Performances,
+    label: "Performances",
+    segment: "performances",
+  },
+  { id: TankDetailTab.Marks, label: "Marks", segment: "marks" },
 ];
 
-export function tankDetailTabFromQuery(
-  query: string | null | undefined,
-): TankDetailTab {
-  return (
-    TANK_DETAIL_TABS.find((t) => t.query === query)?.id ??
-    TankDetailTab.Specifications
-  );
+export function tankDetailTabHref(basePath: string, tab: TankDetailTab): string {
+  const segment = TANK_DETAIL_TABS.find((t) => t.id === tab)?.segment;
+  return segment ? `${basePath}/${segment}` : basePath;
 }
 
-export function tankDetailTabHref(basePath: string, tab: TankDetailTab): string {
-  const query = TANK_DETAIL_TABS.find((t) => t.id === tab)?.query;
-  return query ? `${basePath}?tab=${query}` : basePath;
-}
+/** Legacy `?tab=` values, kept so the old URLs can be redirected to the
+ * equivalent segment instead of 404ing. */
+export const LEGACY_TAB_QUERY: Record<string, TankDetailTab> = {
+  performances: TankDetailTab.Performances,
+  marks: TankDetailTab.Marks,
+};

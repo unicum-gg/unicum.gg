@@ -35,8 +35,10 @@ const PLAYERS_PATTERN = new RegExp(
 // regions, so on a tank detail page we keep the same tank in the new region;
 // on the index we just swap to the new region's index.
 const TANKS_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?tanks(?:/|$)`);
+// Captures the slug and, when present, the tab segment (`/performances`,
+// `/marks`), so switching region keeps the tab the user is on.
 const TANK_SLUG_PATTERN = new RegExp(
-  `^/(?:(?:${REGIONS.join("|")})/)?tanks/([^/?#]+)`,
+  `^/(?:(?:${REGIONS.join("|")})/)?tanks/([^/?#]+)(/[^/?#]+)?`,
 );
 
 function targetForRegion(
@@ -48,10 +50,14 @@ function targetForRegion(
   if (CLANS_PATTERN.test(pathname)) return ROUTES.CLANS(region);
   if (PLAYERS_PATTERN.test(pathname)) return ROUTES.PLAYERS(region);
   if (TANKS_PATTERN.test(pathname)) {
-    // The catalogue is identical across regions, so we keep the same tank (and
-    // its query, e.g. ?tab=performances or the index filters) in the new region.
-    const slug = pathname.match(TANK_SLUG_PATTERN)?.[1];
-    const base = slug ? ROUTES.TANK(region, slug) : ROUTES.TANKS(region);
+    // The catalogue is identical across regions, so we keep the same tank, its
+    // tab segment, and its query (the index filters) in the new region.
+    const match = pathname.match(TANK_SLUG_PATTERN);
+    const slug = match?.[1];
+    const tabSegment = match?.[2] ?? "";
+    const base = slug
+      ? `${ROUTES.TANK(region, slug)}${tabSegment}`
+      : ROUTES.TANKS(region);
     return `${base}${search}`;
   }
   return ROUTES.HOME(region);

@@ -6,27 +6,24 @@ import {
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { Region } from "@unicum.gg/wargaming";
 
-// Mirror the region page: force-static, on-demand. Each tab is its own route
-// segment, so this shortcut reads no searchParams and stays static (the
-// rendered view is cached instead of re-rendering on every hit).
+// EU shortcut: /tanks/:slug/marks mirrors /eu/tanks/:slug/marks.
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min
 
-// EU shortcut: /tanks/:slug renders the same page as /eu/tanks/:slug.
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  return tankMetadata(Region.EU, slug, TankDetailTab.Specifications);
+  return tankMetadata(Region.EU, slug, TankDetailTab.Marks);
 }
 
-export default async function TankPageEU({
+export default async function TankMarksPageEU({
   params,
 }: {
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  return renderTankPage(Region.EU, slug, TankDetailTab.Specifications);
+  return renderTankPage(Region.EU, slug, TankDetailTab.Marks);
 }

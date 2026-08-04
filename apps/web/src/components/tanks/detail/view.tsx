@@ -44,6 +44,7 @@ export function TankView({
   region,
   tankId,
   slug,
+  tab,
   meta,
   topByMetric,
   serverStats,
@@ -66,6 +67,7 @@ export function TankView({
   region: Region;
   tankId: number;
   slug: string;
+  tab: TankDetailTab;
   meta: VehicleMeta & { isWheeled?: boolean; isGift?: boolean };
   serverStats: TankServerStats | null;
   topByMetric: TopTankPlayersByMetric;
@@ -88,6 +90,19 @@ export function TankView({
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
   const classLabel = VEHICLE_CLASS_LABEL_FULL[meta.type] ?? meta.type;
   const roleSfx = roleSuffix(meta.role);
+
+  // Which tabs have something to show for this tank. Computed from the payload
+  // rather than from rendered content, so an unavailable tab costs nothing.
+  const hasSpecifications =
+    Boolean(specs) || researchPath.lineage.length > 0 || modules.length > 0;
+  const hasMarks = Boolean(moe || mom);
+  const available = [
+    ...(hasSpecifications ? [TankDetailTab.Specifications] : []),
+    TankDetailTab.Performances,
+    ...(hasMarks ? [TankDetailTab.Marks] : []),
+  ];
+  // A tank missing the requested tab falls back to the first one it does have.
+  const activeTab = available.includes(tab) ? tab : available[0];
 
   const favoriteItem: SearchHistoryItem = {
     kind: "tank",
@@ -205,79 +220,80 @@ export function TankView({
 
       <TankDetailTabs
         basePath={ROUTES.TANK(region, slug)}
-        content={{
-          [TankDetailTab.Specifications]:
-            specs || researchPath.lineage.length > 0 || modules.length > 0 ? (
-              <>
-                {researchPath.lineage.length > 0 && (
-                  <TankResearchPath
-                    region={region}
-                    lineage={researchPath.lineage}
-                    next={researchPath.next}
-                    currentId={tankId}
-                    tankName={meta.name}
-                  />
-                )}
-                {researchPath.lineage.length > 0 &&
-                  (specs || modules.length > 0) && <PanelSeparator />}
-                {(specs || modules.length > 0) && (
-                  <TankConfigurator
-                    region={region}
-                    meta={meta}
-                    tankName={meta.name}
-                    slug={slug}
-                    stockSpecs={specs}
-                    modules={modules}
-                    configs={configs}
-                    loadout={loadout}
-                    crew={crew}
-                    fieldMods={fieldMods}
-                    skillTree={skillTree}
-                    modes={modes}
-                    nextTanks={researchPath.next}
-                  />
-                )}
-                {specs?.description && (
-                  <>
-                    <PanelSeparator />
-                    <Panel>
-                      <PanelHeader>
-                        <PanelTitle>{meta.name} historical reference</PanelTitle>
-                      </PanelHeader>
-                      <PanelContent className="px-4 py-4">
-                        <p className="max-w-3xl text-sm leading-relaxed text-fd-muted-foreground">
-                          {specs.description}
-                        </p>
-                      </PanelContent>
-                    </Panel>
-                  </>
-                )}
-              </>
-            ) : null,
-          [TankDetailTab.Performances]: (
-            <Performances
-              region={region}
-              tankId={tankId}
-              meta={meta}
-              serverStats={serverStats}
-              topByMetric={topByMetric}
-              wn8Expected={wn8Expected}
-              wnxExpected={wnxExpected}
-            />
-          ),
-          [TankDetailTab.Marks]:
-            moe || mom ? (
-              <TankMarksMastery
-                moe={moe}
-                mom={mom}
-                moeHistory={moeHistory}
-                momHistory={momHistory}
-                serverStats={serverStats}
-                tankName={meta.name}
-              />
-            ) : null,
-        }}
+        active={activeTab}
+        available={available}
       />
+
+      {activeTab === TankDetailTab.Specifications && (
+        <>
+          {researchPath.lineage.length > 0 && (
+            <TankResearchPath
+              region={region}
+              lineage={researchPath.lineage}
+              next={researchPath.next}
+              currentId={tankId}
+              tankName={meta.name}
+            />
+          )}
+          {researchPath.lineage.length > 0 &&
+            (specs || modules.length > 0) && <PanelSeparator />}
+          {(specs || modules.length > 0) && (
+            <TankConfigurator
+              region={region}
+              meta={meta}
+              tankName={meta.name}
+              slug={slug}
+              stockSpecs={specs}
+              modules={modules}
+              configs={configs}
+              loadout={loadout}
+              crew={crew}
+              fieldMods={fieldMods}
+              skillTree={skillTree}
+              modes={modes}
+              nextTanks={researchPath.next}
+            />
+          )}
+          {specs?.description && (
+            <>
+              <PanelSeparator />
+              <Panel>
+                <PanelHeader>
+                  <PanelTitle>{meta.name} historical reference</PanelTitle>
+                </PanelHeader>
+                <PanelContent className="px-4 py-4">
+                  <p className="max-w-3xl text-sm leading-relaxed text-fd-muted-foreground">
+                    {specs.description}
+                  </p>
+                </PanelContent>
+              </Panel>
+            </>
+          )}
+        </>
+      )}
+
+      {activeTab === TankDetailTab.Performances && (
+        <Performances
+          region={region}
+          tankId={tankId}
+          meta={meta}
+          serverStats={serverStats}
+          topByMetric={topByMetric}
+          wn8Expected={wn8Expected}
+          wnxExpected={wnxExpected}
+        />
+      )}
+
+      {activeTab === TankDetailTab.Marks && (moe || mom) && (
+        <TankMarksMastery
+          moe={moe}
+          mom={mom}
+          moeHistory={moeHistory}
+          momHistory={momHistory}
+          serverStats={serverStats}
+          tankName={meta.name}
+        />
+      )}
     </div>
   );
 }
