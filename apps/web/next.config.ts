@@ -172,6 +172,19 @@ const nextConfig: NextConfig = {
       // Map gallery: `?type=frontline` → `/maps/all/frontline`.
       ["/:region(eu|na|asia)/maps", "/:region/maps/all/:type", "type"],
       ["/maps", "/maps/all/:type", "type"],
+      // Clan detail: `?tab=stronghold` → `/eu/clans/FAME/stronghold`, and
+      // `?section=tanks` → `/eu/clans/FAME/tanks`. Two axes, but a mode is only
+      // reachable from Overview, so each state is a single segment.
+      [
+        "/:region(eu|na|asia)/clans/:tag",
+        "/:region/clans/:tag/:tab",
+        "tab",
+      ],
+      [
+        "/:region(eu|na|asia)/clans/:tag",
+        "/:region/clans/:tag/:section",
+        "section",
+      ],
     ].map(([source, destination, key]) => ({
       source,
       has: capture(key, key),
