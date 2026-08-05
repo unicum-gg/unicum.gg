@@ -10,7 +10,7 @@ import {
   XIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { useTheme } from "next-themes";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Region } from "@unicum.gg/wargaming";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";

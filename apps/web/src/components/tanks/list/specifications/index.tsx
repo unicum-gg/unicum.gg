@@ -6,7 +6,7 @@ import {
   SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
 import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";

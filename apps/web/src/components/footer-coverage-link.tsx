@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
 import { styles } from "@/lib/styles";

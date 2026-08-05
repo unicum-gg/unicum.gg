@@ -1,4 +1,4 @@
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { Panel, PanelHeader } from "@/components/panel";
 import {
   TANK_DETAIL_TABS,

@@ -1,7 +1,7 @@
 "use client";
 
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";

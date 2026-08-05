@@ -1,7 +1,7 @@
 "use client";
 
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { useEffect } from "react";
 import { styles } from "@/lib/styles";
 

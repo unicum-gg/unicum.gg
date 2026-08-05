@@ -2,7 +2,7 @@
 
 import { format } from "date-fns";
 import Image from "next/image";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { ClanActionsMenu } from "@/components/clans/detail/actions-menu";

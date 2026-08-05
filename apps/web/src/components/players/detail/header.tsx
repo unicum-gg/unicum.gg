@@ -1,6 +1,6 @@
 import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
 import { StreamerBadge } from "@/components/entity/badges/streamer-badge";

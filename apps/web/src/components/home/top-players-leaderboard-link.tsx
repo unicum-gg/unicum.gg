@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
@@ -23,10 +23,8 @@ export function TopPlayersLeaderboardLink({
   const [storedRegion] = useCookie(STORAGE.COOKIES.REGION, Region.EU);
   const region: Region =
     regionOverride ?? (isRegion(storedRegion) ? storedRegion : Region.EU);
-  // Secondary affordance: warm on intent, not eagerly (its region-cookie
-  // re-render churns the router tree). See HoverPrefetchLink.
   return (
-    <HoverPrefetchLink
+    <Link
       href={ROUTES.PLAYERS(region)}
       className={cn(
         styles.linkHover,
@@ -34,6 +32,6 @@ export function TopPlayersLeaderboardLink({
       )}
     >
       See all →
-    </HoverPrefetchLink>
+    </Link>
   );
 }

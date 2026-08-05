@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { useRegion } from "@/hooks/use-region";
 import { Region, regionFromPathname } from "@unicum.gg/wargaming";
@@ -35,17 +35,15 @@ export function NavSectionLink({
   const segments = pathname.split("/").filter(Boolean);
   const segIdx = regionFromPathname(pathname) === null ? 0 : 1;
   const active = segments[segIdx] === section;
-  // Hover-prefetch: fumadocs renders this item twice (desktop bar + hidden
-  // mobile menu), so eager viewport prefetch double-fetches every section on
-  // load. Warming on intent keeps the desktop nav instant without the mobile
-  // copy ever prefetching. See HoverPrefetchLink.
+  // Note: fumadocs renders this item twice (desktop bar + hidden mobile menu),
+  // so each section is prefetched from both copies.
   return (
-    <HoverPrefetchLink
+    <Link
       href={ROUTE_FOR[section](region)}
       data-active={active}
       className="inline-flex items-center gap-1 p-2 text-sm text-fd-muted-foreground transition-colors hover:text-fd-accent-foreground data-[active=true]:text-fd-primary [&_svg]:size-4"
     >
       {text}
-    </HoverPrefetchLink>
+    </Link>
   );
 }

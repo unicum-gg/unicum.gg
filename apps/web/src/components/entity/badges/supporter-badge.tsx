@@ -1,4 +1,4 @@
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { Crest, CrestKind } from "@/components/entity/badges/crest";
 import {
   Tooltip,

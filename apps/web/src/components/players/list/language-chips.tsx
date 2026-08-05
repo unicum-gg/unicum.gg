@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { cn } from "@/lib/utils";

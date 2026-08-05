@@ -6,7 +6,7 @@ import {
   MagnifyingGlassIcon,
   PlugsConnectedIcon,
 } from "@phosphor-icons/react/dist/ssr";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
 import { JsonLd } from "@/components/json-ld";
 import { CopySnippet } from "@/components/copy-snippet";

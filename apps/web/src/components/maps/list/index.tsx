@@ -14,7 +14,7 @@ import {
   lowResMinimapUrl,
   type MapSummary,
 } from "@unicum.gg/shared";
-import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { Chip, ChipRow } from "@/components/tanks/tank-filter-bar";
@@ -108,7 +108,7 @@ function MapCard({
     ? `${ROUTES.MAP(region, map.slug)}?view=${viewParam}`
     : ROUTES.MAP(region, map.slug);
   return (
-    <HoverPrefetchLink
+    <Link
       href={href}
       className="group flex flex-col overflow-hidden rounded-xl border border-fd-border bg-fd-card transition-colors hover:border-brand"
     >
@@ -155,7 +155,7 @@ function MapCard({
               : null}
         </div>
       </div>
-    </HoverPrefetchLink>
+    </Link>
   );
 }
 

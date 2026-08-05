@@ -1,6 +1,6 @@
 "use client";
 
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "@/lib/auth-client";

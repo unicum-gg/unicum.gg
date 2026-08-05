@@ -1,4 +1,4 @@
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { isFeedbackEnabled } from "@/services/discord/feedback";
 import { FeedbackWidget } from "./feedback/feedback-widget";

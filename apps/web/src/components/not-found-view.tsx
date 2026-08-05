@@ -1,5 +1,5 @@
 import { buttonVariants } from "fumadocs-ui/components/ui/button";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { styles } from "@/lib/styles";
 
 // Shared "page not found" card. Rendered by the root `not-found` (global

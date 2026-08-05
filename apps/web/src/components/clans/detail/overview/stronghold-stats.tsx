@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import { HoverPrefetchLink } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, strongholdWinrateColor, StrongholdTier, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
@@ -237,7 +237,7 @@ export function ClanStrongholdStatsTable(
                 ) : (
                   // The header links to this mode's leaderboard — a contextual
                   // funnel from every indexed clan page to the stronghold boards.
-                  <HoverPrefetchLink
+                  <Link
                     href={ROUTES.STRONGHOLD(props.region, section.tier)}
                     className="group flex items-center gap-1 px-4 py-1 text-xs font-semibold text-muted-foreground uppercase transition-colors hover:text-foreground"
                   >
@@ -246,7 +246,7 @@ export function ClanStrongholdStatsTable(
                       weight="bold"
                       className="size-3 opacity-0 transition-opacity group-hover:opacity-100"
                     />
-                  </HoverPrefetchLink>
+                  </Link>
                 )}
               </TableCell>
             </TableRow>

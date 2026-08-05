@@ -6,7 +6,7 @@ import {
   WarningIcon,
 } from "@phosphor-icons/react";
 import Image from "next/image";
-import { HoverPrefetchLink as Link } from "@/components/hover-prefetch-link";
+import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
