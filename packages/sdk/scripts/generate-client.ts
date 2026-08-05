@@ -593,7 +593,7 @@ ${Object.entries(Region)
 
   const ogGetter = hasOg
     ? `
-  /** OG image cards: unicum.og.eu.players("Rice").url() → /og/eu/players/Rice. */
+  /** OG image cards: unicum.og.eu.players("Animal").url() → /og/eu/players/Animal. */
   get og(): OgClient {
     return new OgClient(this.api, this.baseUrl);
   }
