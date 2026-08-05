@@ -167,8 +167,31 @@ const nextConfig: NextConfig = {
       },
     ]);
 
+    // Same move on the tank index, whose five tabs are now route segments too.
+    // They live under `/all` so they can never collide with a vehicle slug.
+    const tankIndexTabRedirects = [
+      "specifications",
+      "economics",
+      "marks-of-excellence",
+      "marks-of-mastery",
+    ].flatMap((tab) => [
+      {
+        source: "/:region(eu|na|asia)/tanks",
+        has: [{ type: "query" as const, key: "tab", value: tab }],
+        destination: `/:region/tanks/all/${tab}`,
+        permanent: true,
+      },
+      {
+        source: "/tanks",
+        has: [{ type: "query" as const, key: "tab", value: tab }],
+        destination: `/tanks/all/${tab}`,
+        permanent: true,
+      },
+    ]);
+
     return [
       ...tankTabRedirects,
+      ...tankIndexTabRedirects,
       { source: "/favicon.ico", destination: "/icon.svg", permanent: true },
       // Legacy OG image path (the Next `opengraph-image` file convention, whose
       // URL got a route-group hash after the `(site)` move) → the stable
