@@ -36,7 +36,18 @@ export function proxy(req: NextRequest) {
   const isMdSuffix = pathname.endsWith(".md");
   const isApiRoute = pathname.startsWith("/api/");
   const isWellKnown = pathname.startsWith("/.well-known/");
-  if (!isApiRoute && !isWellKnown && (isMdSuffix || accept.includes("text/markdown"))) {
+  // Files already served as plain text (`/llms.txt`, `/robots.txt`,
+  // `/sitemap.xml`) are not pages, so there is no `#page-content` to convert.
+  // Without this, an agent asking for `text/markdown` (exactly the kind of
+  // client that fetches `/llms.txt`) would be rewritten into the converter and
+  // get a 404 instead of the file.
+  const isFile = /\.[^/.]+$/.test(pathname) && !isMdSuffix;
+  if (
+    !isApiRoute &&
+    !isWellKnown &&
+    !isFile &&
+    (isMdSuffix || accept.includes("text/markdown"))
+  ) {
     const clean = isMdSuffix ? pathname.slice(0, -".md".length) : pathname;
     const slug =
       clean === "/" || clean === "" ? "index" : clean.replace(/^\//, "");
