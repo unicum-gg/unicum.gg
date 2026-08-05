@@ -9,30 +9,11 @@ import { openapi } from "@/lib/openapi";
 // `slugs` lowercases + strips the `{param}` braces the operation paths carry so
 // the URLs stay clean (`/docs/clans/get-region-clans-search`) instead of
 // `%7B…%7D`.
+// Tag folders are titled from the spec's `x-displayName`, which `normalizeDoc`
+// pins to the tag name (see `services/openapi/normalize`). Without it fumadocs
+// humanises the tag through `idToTitle`, which splits runs of capitals and
+// turned `MCP` into "M C P" and `OG Images` into "O G Images".
 const staticSource = await openapi.staticSource({ groupBy: "tag", meta: true });
-
-// fumadocs-openapi titles each tag folder with `idToTitle(tag)`, which splits
-// runs of capitals — so the all-caps tag `MCP` renders as "M C P". Reset each
-// folder's meta title to the exact tag name from the spec (matched on the
-// lowercased folder segment).
-{
-  const schemas = await openapi.getSchemas();
-  const bundled = Object.values(schemas)[0]?.bundled as
-    | { tags?: { name?: string }[] }
-    | undefined;
-  const tagByLower = new Map(
-    (bundled?.tags ?? []).map((t) => [(t.name ?? "").toLowerCase(), t.name ?? ""]),
-  );
-  for (const file of (
-    staticSource as { files: { type: string; path: string; data: unknown }[] }
-  ).files) {
-    if (file.type !== "meta") continue;
-    const parts = file.path.split("/");
-    if (parts.length < 2) continue; // root meta (folder ordering) — leave it
-    const proper = tagByLower.get(parts[parts.length - 2].toLowerCase());
-    if (proper) (file.data as { title?: string }).title = proper;
-  }
-}
 
 export const source = loader({
   baseUrl: "/docs",

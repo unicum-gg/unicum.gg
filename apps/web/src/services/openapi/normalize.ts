@@ -13,7 +13,7 @@ type Parameter = { name?: string; example?: unknown; schema?: Schema };
 type Operation = { parameters?: Parameter[]; tags?: string[] };
 export type OpenApiDoc = {
   paths?: Record<string, Record<string, Operation>>;
-  tags?: { name?: string }[];
+  tags?: { name?: string; "x-displayName"?: string }[];
   info?: Record<string, unknown>;
   servers?: unknown;
 } & Record<string, unknown>;
@@ -73,6 +73,14 @@ const tagOfPath = (pathItem: Record<string, Operation>): string => {
 function reorderDoc(doc: OpenApiDoc): void {
   if (Array.isArray(doc.tags)) {
     doc.tags.sort((a, b) => tagWeight(a.name ?? "") - tagWeight(b.name ?? ""));
+    // Pin each tag's display name to the tag itself. Renderers that get no
+    // explicit label fall back to humanising the name, and fumadocs' `idToTitle`
+    // splits runs of capitals, so `OG Images` came out as "O G Images" and `MCP`
+    // as "M C P" in the sidebar. `x-displayName` is the standard OpenAPI
+    // extension for this and is honoured before any such fallback.
+    for (const tag of doc.tags) {
+      if (tag.name && !tag["x-displayName"]) tag["x-displayName"] = tag.name;
+    }
   }
   const paths = doc.paths ?? {};
   const ordered = Object.keys(paths).sort((a, b) => {
