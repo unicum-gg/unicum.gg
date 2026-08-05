@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   DEFAULT_PLAYER_VIEW,
   PlayerMode,
@@ -187,12 +187,7 @@ export function renderPlayerPage(
   view: PlayerView,
 ) {
   return (
-    <PlayerProfileServer
-      region={region}
-      decoded={decoded}
-      section={view.section}
-      mode={view.mode}
-    />
+    <PlayerProfileServer region={region} decoded={decoded} view={view} />
   );
 }
 
@@ -201,19 +196,33 @@ export function renderPlayerPage(
 async function PlayerProfileServer({
   region,
   decoded,
-  section,
-  mode,
+  view,
 }: {
   region: Region;
   decoded: string;
-  section: PlayerSection;
-  mode: PlayerMode;
+  view: PlayerView;
 }) {
+  const { section, mode } = view;
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
     return <AccountLockedView nickname={detail.nickname} region={region} />;
   }
   if (!detail) notFound();
+
+  // Send the visitor to the nickname this account actually goes by. Two cases
+  // land here: a different casing (the lookup is case-insensitive, so
+  // `/players/animal` resolves but would otherwise sit at its own URL), and a
+  // nickname the player has since dropped (the endpoint resolves those through
+  // the rename history instead of 404ing).
+  //
+  // Temporary on purpose. A freed nickname can be claimed by somebody else, and
+  // a permanent redirect would be cached by browsers long after that happened,
+  // stranding the new owner behind the old one's profile.
+  if (detail.player.nickname !== decoded) {
+    redirect(
+      playerViewHref(ROUTES.PLAYER(region, detail.player.nickname), view),
+    );
+  }
 
   // The per-tank list is ~92% of the former detail payload but only the Tanks
   // section renders it, so it lives on its own endpoint and is fetched on

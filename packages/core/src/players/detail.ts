@@ -17,7 +17,10 @@ import {
 } from "@unicum.gg/core/players";
 import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
 import { getAccountTwitchLogin, isAccountVerified } from "@unicum.gg/core/players/badges";
-import { getPlayerNameHistory } from "@unicum.gg/core/players/name-history";
+import {
+  findAccountIdByFormerNickname,
+  getPlayerNameHistory,
+} from "@unicum.gg/core/players/name-history";
 import {
   type PlayerInitialData,
   loadPlayerInitialData,
@@ -333,12 +336,40 @@ export async function loadPlayerDetailLive(
   // Resolve accountId for true first-ever visits.
   let accountId = initial.player?.accountId ?? null;
   let resolvedNickname = initial.player?.nickname ?? null;
+
   if (accountId === null) {
     const found = await findPlayerByNickname(region, nickname).catch(() => null);
-    if (!found) return { status: PlayerDetailLiveStatus.Unknown };
-    accountId = found.account_id;
-    resolvedNickname = found.nickname;
-    initial = await loadPlayerInitialData(region, { accountId });
+    if (found) {
+      accountId = found.account_id;
+      resolvedNickname = found.nickname;
+      initial = await loadPlayerInitialData(region, { accountId });
+    }
+  }
+
+  // Nobody carries this nickname today, so look for who used to: WG only knows
+  // current names, and a link to a since-renamed player would 404 here.
+  //
+  // Deliberately last. Asking WG first is what keeps a *reclaimed* nickname
+  // pointing at its new owner even when that player is not in our database yet
+  // — resolving the history before WG would have sent visitors to the previous
+  // owner instead. It costs no extra WG call, since an unresolved nickname
+  // already went through `account/list` above.
+  //
+  // The caller compares the returned `nickname` with the one it was given to
+  // decide whether to redirect.
+  if (accountId === null) {
+    const formerOwner = await findAccountIdByFormerNickname(
+      region,
+      nickname,
+    ).catch(() => null);
+    if (formerOwner === null) return { status: PlayerDetailLiveStatus.Unknown };
+    const byAccount = await loadPlayerInitialData(region, {
+      accountId: formerOwner,
+    });
+    if (!byAccount.player) return { status: PlayerDetailLiveStatus.Unknown };
+    initial = byAccount;
+    accountId = byAccount.player.accountId;
+    resolvedNickname = byAccount.player.nickname;
   }
 
   if (initial.player && initial.latestSnapshot) {

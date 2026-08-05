@@ -1,4 +1,4 @@
-import { desc, eq } from "drizzle-orm";
+import { desc, eq, sql } from "drizzle-orm";
 import type { Region } from "@unicum.gg/wargaming";
 import { clanNameHistoryByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
@@ -28,4 +28,24 @@ export async function getClanNameHistory(
     .from(table)
     .where(eq(table.clanId, clanId))
     .orderBy(desc(table.recordedAt));
+}
+
+/**
+ * The clan that last went by this tag, so a link to a since-retagged clan
+ * resolves instead of 404ing. Same rule as the player counterpart: the caller
+ * must try the live `clans` table first, because a freed tag can be taken by
+ * another clan and the current holder always wins.
+ */
+export async function findClanIdByFormerTag(
+  region: Region,
+  tag: string,
+): Promise<number | null> {
+  const table = clanNameHistoryByRegion[region];
+  const [row] = await db
+    .select({ clanId: table.clanId })
+    .from(table)
+    .where(sql`LOWER(${table.tag}) = LOWER(${tag})`)
+    .orderBy(desc(table.recordedAt))
+    .limit(1);
+  return row?.clanId ?? null;
 }

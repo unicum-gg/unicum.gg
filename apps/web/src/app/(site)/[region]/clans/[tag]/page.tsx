@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { ClanProfile } from "@/components/clans/detail/view";
 import {
   ClanMode,
@@ -164,14 +164,7 @@ export function renderClanPage(
   decoded: string,
   view: ClanView,
 ) {
-  return (
-    <ClanProfileServer
-      region={region}
-      decoded={decoded}
-      section={view.section}
-      mode={view.mode}
-    />
-  );
+  return <ClanProfileServer region={region} decoded={decoded} view={view} />;
 }
 
 /** The data-dependent half of the page. Its overview + section fetches block the
@@ -179,17 +172,24 @@ export function renderClanPage(
 async function ClanProfileServer({
   region,
   decoded,
-  section,
-  mode,
+  view,
 }: {
   region: Region;
   decoded: string;
-  section: ClanSection;
-  mode: ClanMode;
+  view: ClanView;
 }) {
+  const { section, mode } = view;
   const overview = await loadOverview(region, decoded);
   if (!overview) notFound();
   const { clan, ratings } = overview;
+
+  // Send the visitor to the tag this clan actually carries: a different casing
+  // (the lookup is case-insensitive) or a tag the clan has since dropped, which
+  // the repository resolves through the rename history instead of 404ing.
+  // Temporary, like the player one: a freed tag can be taken by another clan.
+  if (clan.tag !== decoded) {
+    redirect(clanViewHref(ROUTES.CLAN(region, clan.tag), view));
+  }
   const clanApi = unicum.region(region).clans(clan.tag);
 
   // The Overview modes (Random Battles, Stronghold, Clan Wars) are always

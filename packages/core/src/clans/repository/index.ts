@@ -10,6 +10,7 @@ import {
   sanitizeClanDescription,
 } from "@unicum.gg/core/wargaming/wot/clans/info";
 import { findClanIdByTag } from "@unicum.gg/core/wargaming/wot/clans/search";
+import { findClanIdByFormerTag } from "@unicum.gg/core/clans/name-history";
 
 function clanFullInfoFromRow(row: Clan): ClanFullInfo {
   return {
@@ -61,7 +62,27 @@ export async function getClanByTagCached(
   }
 
   const info = await refreshClanByTag(region, tag);
-  return info ? { info, fromDb: false, refreshing: false } : null;
+  if (info) return { info, fromDb: false, refreshing: false };
+
+  // No clan carries this tag today, so look for the one that used to: WG only
+  // resolves current tags, and a link to a since-retagged clan would 404 here.
+  //
+  // Deliberately last, for the same reason as the player counterpart: asking WG
+  // first keeps a tag that another clan has taken over pointing at its new
+  // holder even when that clan is not in our database yet. Callers compare the
+  // returned `tag` with the one they were given to decide whether to redirect.
+  const formerHolder = await findClanIdByFormerTag(region, tag).catch(
+    () => null,
+  );
+  if (formerHolder === null) return null;
+  const [byId] = await db
+    .select()
+    .from(clans)
+    .where(eq(clans.id, formerHolder))
+    .limit(1);
+  return byId
+    ? { info: clanFullInfoFromRow(byId), fromDb: true, refreshing: false }
+    : null;
 }
 
 export async function refreshClanByTag(
