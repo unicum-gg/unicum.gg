@@ -6,6 +6,10 @@ import type { Region } from "@unicum.gg/wargaming";
 import { iconUrl } from "@unicum.gg/shared";
 import type { ReserveOption } from "@/hooks/use-boost-console";
 import { BoostReservesPicker } from "@/components/clans/detail/boost-reserves-picker";
+import {
+  clanViewHref,
+  MANAGE_CLAN_VIEW,
+} from "@/components/clans/detail/tabs";
 import { BoostSchedulePreview } from "@/components/clans/detail/boost-schedule";
 import {
   DAY_LABELS,
@@ -77,7 +81,10 @@ export function BoostConsolePreview({
 }: {
   region: Region;
   tag: string;
-  loggedOut: boolean;
+  /** Undefined while the console is still resolving who is watching: the teaser
+   * shows immediately, and only its closing call to action waits until we know
+   * whether to invite a login or explain the officer requirement. */
+  loggedOut?: boolean;
 }) {
   const uid = useId();
   const tz = browserTz();
@@ -217,12 +224,15 @@ export function BoostConsolePreview({
               Set your hours and reserves once; the boosts fire on time on their
               own, even when nobody is around to press the button.
             </p>
-            {loggedOut ? (
+            {loggedOut === undefined ? null : loggedOut ? (
               <Button asChild>
                 <a
                   href={ROUTES.AUTH_SIGN_IN(
                     region,
-                    `${ROUTES.CLAN(region, tag)}?section=manage`,
+                    clanViewHref(
+                      ROUTES.CLAN(region, tag),
+                      MANAGE_CLAN_VIEW,
+                    ),
                   )}
                 >
                   Log in with Wargaming to set it up

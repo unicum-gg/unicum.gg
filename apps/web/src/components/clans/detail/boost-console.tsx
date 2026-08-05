@@ -44,7 +44,12 @@ export function ClanBoostConsole({
   const { data, mutate } = useBoostConsole(region, tag);
   const [drafts, setDrafts] = useState<number[]>([]);
 
-  if (!data) return null; // brief initial load
+  // Show the teaser straight away rather than an empty tab: almost nobody
+  // landing here is an officer of this clan, and the teaser is what they came
+  // for. Only its closing call to action waits for `data`, since that is the
+  // one part that depends on who is watching.
+  if (!data)
+    return <BoostConsolePreview region={region} tag={tag} />;
   const manageable =
     data.canManage === true && data.clanId === clanId ? data : null;
   if (!manageable) {
