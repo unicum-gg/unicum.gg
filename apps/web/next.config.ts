@@ -79,6 +79,17 @@ const nextConfig: NextConfig = {
   // The 60s default trips on the largest languages (`ru`, `de`, `pl`)
   // when other workers are competing on the same Postgres pool.
   staticPageGenerationTimeout: 300,
+  experimental: {
+    // Collapse the router's per-segment prefetch into one request per link.
+    //
+    // Next 16 splits every prefetch into a request per route segment (the tree,
+    // the head, each layout, the page). Measured on /tanks, whose grid puts
+    // dozens of links in the viewport, that is 97 requests and 6.8 MB of flight
+    // payload on a single page view. Inlining bundles the small segments into
+    // one response, so a link costs one round trip instead of three or four.
+    // Ships default-off in 16.2 and default-on in 16.3.
+    prefetchInlining: true,
+  },
   images: {
     // Wargaming emblems live on regional portal hosts that some user ISPs
     // route badly to. Proxy them through next/image so users always fetch
