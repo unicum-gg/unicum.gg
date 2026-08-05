@@ -17,6 +17,18 @@ import { Suspense, useEffect, useRef, useState } from "react";
 const TRICKLE_CEILING = 90;
 const FAILSAFE_MS = 12_000;
 
+// Programmatic navigations (`router.push` from the search dialog, for instance)
+// are not anchor clicks, and Next only calls `pushState` once the RSC payload
+// has landed, so the history patch below fires at the *end* of the transition.
+// Callers announce those navigations up front with this event instead.
+const START_EVENT = "unicum:navigation-start";
+
+/** Light the global progress bar for a navigation that isn't an anchor click. */
+export function startNavigationProgress() {
+  if (typeof window !== "undefined")
+    window.dispatchEvent(new Event(START_EVENT));
+}
+
 function NavigationProgressInner() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -127,11 +139,13 @@ function NavigationProgressInner() {
 
     document.addEventListener("click", onClick, { capture: true });
     window.addEventListener("popstate", start);
+    window.addEventListener(START_EVENT, start);
 
     return () => {
       clearTimers();
       document.removeEventListener("click", onClick, { capture: true });
       window.removeEventListener("popstate", start);
+      window.removeEventListener(START_EVENT, start);
       history.pushState = origPush;
       history.replaceState = origReplace;
     };
