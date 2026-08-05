@@ -15,7 +15,8 @@ import {
   formatCadence,
 } from "@unicum.gg/shared";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
-import { ChartMode, CoverageAreaChart } from "./coverage-charts";
+import { ChartMode } from "./chart-mode";
+import { CoverageAreaChart } from "./coverage-charts-lazy";
 import { CostBreakdown } from "./cost-breakdown";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });

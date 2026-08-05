@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import {
   Panel,
@@ -10,7 +11,6 @@ import {
 } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
-import { PlayerRatingChart } from "@/components/players/detail/overview/rating-chart";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { styles } from "@/lib/styles";
@@ -20,17 +20,37 @@ import type {
   PeriodStats,
   PlayerClanHistoryFull,
   PlayerDerivedStats,
+  RatingHistoryPoint,
+  RatingMetric,
   Stats,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+
+// recharts is the heaviest dependency in the client bundle (107 KB gzipped,
+// 372 KB parsed) and this chart is the only thing on the profile that draws
+// one, so a static import made every view pay for it: Tanks, Value and the
+// eight stronghold modes download it to render no chart at all. `next/dynamic`
+// moves it to a chunk fetched when the chart actually mounts, which
+// `MountOnVisible` below already defers until it scrolls near the viewport.
+// `ssr: false` is the part that removes it from the initial graph (a
+// server-rendered lazy component still has to download its chunk to hydrate);
+// nothing is lost, since `MountOnVisible` renders a placeholder on the server
+// anyway and a chart carries no indexable text.
+const PlayerRatingChart = dynamic(
+  () =>
+    import("@/components/players/detail/overview/rating-chart").then(
+      (m) => m.PlayerRatingChart,
+    ),
+  { ssr: false, loading: () => <div className="h-56 w-full" /> },
+);
 
 export type OverallData = {
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;
   liftDrag: LiftDrag | null;
-  ratingData: React.ComponentProps<typeof PlayerRatingChart>["data"];
-  metric: React.ComponentProps<typeof PlayerRatingChart>["metric"];
+  ratingData: RatingHistoryPoint[];
+  metric: RatingMetric;
   metricLabel: string;
   clanHistory: PlayerClanHistoryFull;
   nameHistory: NameHistoryEntry[];

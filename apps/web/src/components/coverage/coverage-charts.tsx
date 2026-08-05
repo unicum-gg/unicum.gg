@@ -8,13 +8,9 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { ChartMode } from "@/components/coverage/chart-mode";
 import { cn } from "@/lib/utils";
 import type { DailyPoint } from "@/services/coverage";
-
-enum ChartMode {
-  Daily = "daily",
-  Cumulative = "cumulative",
-}
 
 const dayFmt = new Intl.DateTimeFormat("en-US", {
   month: "short",
@@ -176,5 +172,3 @@ function ModeButton({
     </button>
   );
 }
-
-export { ChartMode };

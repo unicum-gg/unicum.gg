@@ -6,10 +6,8 @@ import type { MoeHistoryPoint } from "@unicum.gg/core/moe/poliroid";
 import type { TankServerStats } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
 import { MOM_COLORS, MoMIcon } from "@/components/tanks/mom-icon";
-import {
-  MarksHistoryChart,
-  type MarksSeries,
-} from "@/components/tanks/detail/marks/mastery/history-chart";
+import { MarksHistoryChart } from "@/components/tanks/detail/marks/mastery/history-chart-lazy";
+import type { MarksSeries } from "@/components/tanks/detail/marks/mastery/history-chart";
 import {
   Panel,
   PanelContent,
