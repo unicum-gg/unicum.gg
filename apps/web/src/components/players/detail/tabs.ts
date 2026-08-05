@@ -1,12 +1,19 @@
-// Pure, framework-free tab definitions shared by the server page (which reads
-// the active section/mode from the URL) and the client nav/view. Kept out of
-// the "use client" `tabs-nav.tsx` so these stay callable from Server Components.
+// Pure, framework-free tab definitions shared by the server page (which renders
+// the active section/mode) and the client nav. Kept out of the "use client"
+// `tabs-nav.tsx` so these stay callable from Server Components.
 //
-// The player profile has two independent nav axes, each with its own query
-// param so they don't clobber each other:
-//   - section (top row): `?section=tanks` (Overview is the default, omitted).
-//   - mode    (bottom row, only under Overview): `?tab=skirmish` (Random
-//     Battles is the default, omitted).
+// The profile has two nav axes, but they don't multiply: a mode is only
+// reachable from Overview, so every reachable state is a single URL segment.
+//
+//   /eu/players/Animal                Overview + Random Battles (the default)
+//   /eu/players/Animal/skirmish       Overview + Skirmish
+//   /eu/players/Animal/cw-x           Overview + Clan Wars X
+//   /eu/players/Animal/tanks          Tanks
+//   /eu/players/Animal/value          Value
+//
+// They used to be `?section=` / `?tab=` query params, which meant one indexable
+// page per player instead of one per mode, and metadata frozen on whatever the
+// page was loaded with (Next never re-renders on a `pushState`).
 export enum PlayerSection {
   Overview = "overview",
   Tanks = "tanks",
@@ -25,70 +32,94 @@ export enum PlayerMode {
   SteelHunter = "steel-hunter",
 }
 
-export const PLAYER_SECTIONS: {
-  id: PlayerSection;
+/** A reachable (section, mode) pair, and the segment that addresses it. The
+ * default pair lives at the bare player path, hence the null segment. */
+export type PlayerView = {
+  section: PlayerSection;
+  mode: PlayerMode;
+  segment: string | null;
   label: string;
-  query: string | null;
-}[] = [
-  { id: PlayerSection.Overview, label: "Overview", query: null },
-  { id: PlayerSection.Tanks, label: "Tanks", query: "tanks" },
-  { id: PlayerSection.Value, label: "Value", query: "value" },
+};
+
+const MODE_VIEWS: PlayerView[] = [
+  [PlayerMode.Overall, null, "Random Battles"],
+  [PlayerMode.Skirmish, "skirmish", "Skirmish"],
+  [PlayerMode.Advances, "advances", "Advances"],
+  [PlayerMode.GrandBattles, "grand", "Grand Battles"],
+  [PlayerMode.RankedBattles, "ranked", "Ranked Battles"],
+  [PlayerMode.ClanWarsX, "cw-x", "Clan Wars X"],
+  [PlayerMode.ClanWarsVIII, "cw-viii", "Clan Wars VIII"],
+  [PlayerMode.ClanWarsVI, "cw-vi", "Clan Wars VI"],
+  [PlayerMode.SteelHunter, "steel-hunter", "Steel Hunter"],
+].map(([mode, segment, label]) => ({
+  section: PlayerSection.Overview,
+  mode: mode as PlayerMode,
+  segment: segment as string | null,
+  label: label as string,
+}));
+
+export const PLAYER_VIEWS: PlayerView[] = [
+  ...MODE_VIEWS,
+  {
+    section: PlayerSection.Tanks,
+    mode: PlayerMode.Overall,
+    segment: "tanks",
+    label: "Tanks",
+  },
+  {
+    section: PlayerSection.Value,
+    mode: PlayerMode.Overall,
+    segment: "value",
+    label: "Value",
+  },
 ];
 
-export const PLAYER_MODES: {
-  id: PlayerMode;
-  label: string;
-  query: string | null;
-}[] = [
-  { id: PlayerMode.Overall, label: "Random Battles", query: null },
-  { id: PlayerMode.Skirmish, label: "Skirmish", query: "skirmish" },
-  { id: PlayerMode.Advances, label: "Advances", query: "advances" },
-  { id: PlayerMode.GrandBattles, label: "Grand Battles", query: "grand" },
-  { id: PlayerMode.RankedBattles, label: "Ranked Battles", query: "ranked" },
-  { id: PlayerMode.ClanWarsX, label: "Clan Wars X", query: "cw-x" },
-  { id: PlayerMode.ClanWarsVIII, label: "Clan Wars VIII", query: "cw-viii" },
-  { id: PlayerMode.ClanWarsVI, label: "Clan Wars VI", query: "cw-vi" },
-  { id: PlayerMode.SteelHunter, label: "Steel Hunter", query: "steel-hunter" },
+/** Sections in top-row order. */
+export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
+  { id: PlayerSection.Overview, label: "Overview" },
+  { id: PlayerSection.Tanks, label: "Tanks" },
+  { id: PlayerSection.Value, label: "Value" },
 ];
 
-export function sectionFromQuery(
-  query: string | null | undefined,
-): PlayerSection {
-  const found = PLAYER_SECTIONS.find((s) => s.query === query);
-  return found ? found.id : PlayerSection.Overview;
+/** Modes in bottom-row order (only shown under Overview). */
+export const PLAYER_MODES = MODE_VIEWS.map((v) => ({
+  id: v.mode,
+  label: v.label,
+}));
+
+/** The view at the bare player path: Overview, Random Battles. */
+export const DEFAULT_PLAYER_VIEW: PlayerView = MODE_VIEWS[0];
+
+function hrefFor(basePath: string, view: PlayerView): string {
+  return view.segment ? `${basePath}/${view.segment}` : basePath;
 }
 
-export function modeFromQuery(query: string | null | undefined): PlayerMode {
-  const found = PLAYER_MODES.find((m) => m.query === query);
-  return found ? found.id : PlayerMode.Overall;
+/** This view's URL, given the player's base path. */
+export function playerViewHref(basePath: string, view: PlayerView): string {
+  return hrefFor(basePath, view);
 }
 
-function buildHref(
-  basePath: string,
-  section: PlayerSection,
-  mode: PlayerMode,
-): string {
-  const params = new URLSearchParams();
-  const sectionQuery = PLAYER_SECTIONS.find((s) => s.id === section)?.query;
-  const modeQuery = PLAYER_MODES.find((m) => m.id === mode)?.query;
-  if (sectionQuery) params.set("section", sectionQuery);
-  if (modeQuery) params.set("tab", modeQuery);
-  const qs = params.toString();
-  return qs ? `${basePath}?${qs}` : basePath;
+/** The view a route segment addresses, or null when it is not one of ours (a
+ * `/vs/` comparison, or a typo). */
+export function playerViewFromSegment(
+  segment: string | undefined,
+): PlayerView | null {
+  return PLAYER_VIEWS.find((v) => v.segment === (segment ?? null)) ?? null;
 }
 
-// Section switch keeps the current mode, so toggling to Tanks and back returns
-// to the mode you were reading.
+/** Switching section lands on that section's default mode: with one segment per
+ * reachable state, Overview always means Random Battles. */
 export function playerSectionHref(
   basePath: string,
   section: PlayerSection,
-  mode: PlayerMode,
 ): string {
-  return buildHref(basePath, section, mode);
+  const view = PLAYER_VIEWS.find((v) => v.section === section);
+  return view ? hrefFor(basePath, view) : basePath;
 }
 
-// A mode is only reachable from the Overview section, so selecting one always
-// lands in Overview.
+/** A mode is only reachable from Overview, so selecting one always lands
+ * there. */
 export function playerModeHref(basePath: string, mode: PlayerMode): string {
-  return buildHref(basePath, PlayerSection.Overview, mode);
+  const view = MODE_VIEWS.find((v) => v.mode === mode);
+  return view ? hrefFor(basePath, view) : basePath;
 }

@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+
 import useSWR from "swr";
 import { Panel, PanelHeader, PanelSeparator } from "@/components/panel";
 import {
@@ -11,10 +11,8 @@ import {
 import {
   PlayerMode,
   PlayerSection,
-  modeFromQuery,
   playerModeHref,
   playerSectionHref,
-  sectionFromQuery,
 } from "@/components/players/detail/tabs";
 import {
   OverallTab,
@@ -85,24 +83,14 @@ export function PlayerTabsView({
   detail,
   initialTanks,
 }: PlayerTabsViewProps) {
-  // `activeSection`/`activeMode` seed the first client render so it matches the
-  // server HTML. A nav click updates local state immediately (instant switch)
-  // and pushes the URL. Back/forward instead moves through history, which Next
-  // reflects in `useSearchParams`; we reconcile both axes during render (no
-  // effect) so the view follows the URL without a server round-trip.
-  const searchParams = useSearchParams();
-  const urlSection = sectionFromQuery(searchParams.get("section"));
-  const urlMode = modeFromQuery(searchParams.get("tab"));
-  const [section, setSection] = useState(activeSection);
-  const [mode, setMode] = useState(activeMode);
-  const [syncedSection, setSyncedSection] = useState(urlSection);
-  const [syncedMode, setSyncedMode] = useState(urlMode);
-  if (urlSection !== syncedSection || urlMode !== syncedMode) {
-    setSyncedSection(urlSection);
-    setSyncedMode(urlMode);
-    setSection(urlSection);
-    setMode(urlMode);
-  }
+  // Each reachable (section, mode) pair is a route of its own, so both come from
+  // the server and change through a real navigation. That is what keeps the
+  // metadata (title, description, canonical) in step with what is on screen; a
+  // `pushState` would leave Next unaware and freeze them on the view the page
+  // was loaded with.
+  const section = activeSection;
+  const mode = activeMode;
+  const router = useRouter();
 
   // The per-tank list lives on its own endpoint and is fetched on demand
   // through the SDK. SWR keys on the URL and only runs when the Tanks section is
@@ -121,13 +109,10 @@ export function PlayerTabsView({
   );
 
   function selectSection(next: PlayerSection) {
-    setSection(next);
-    window.history.pushState(null, "", playerSectionHref(basePath, next, mode));
+    router.push(playerSectionHref(basePath, next));
   }
   function selectMode(next: PlayerMode) {
-    setMode(next);
-    setSection(PlayerSection.Overview);
-    window.history.pushState(null, "", playerModeHref(basePath, next));
+    router.push(playerModeHref(basePath, next));
   }
 
   const overall: OverallData = {
@@ -164,7 +149,6 @@ export function PlayerTabsView({
           <PlayerSectionNav
             basePath={basePath}
             section={section}
-            mode={mode}
             tankCount={detail.tankCount}
             onSelect={selectSection}
           />

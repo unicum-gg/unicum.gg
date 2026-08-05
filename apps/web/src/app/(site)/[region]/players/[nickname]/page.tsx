@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  modeFromQuery,
-  sectionFromQuery,
+  DEFAULT_PLAYER_VIEW,
+  PlayerMode,
   PlayerSection,
+  type PlayerView,
+  playerViewHref,
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
@@ -71,12 +73,45 @@ async function loadDetail(
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ region: string; nickname: string }>;
-}): Promise<Metadata> {
-  const { region, nickname } = await params;
+/** Wording for the view being rendered, so each mode is a page of its own
+ * rather than nine copies of the same title. */
+function viewCopy(
+  view: PlayerView,
+  name: string,
+  regionLabel: string,
+  battles: string,
+  winrate: string,
+  rating: string,
+): { title: string; description: string } {
+  if (view.section === PlayerSection.Tanks) {
+    return {
+      title: `${name} tanks (${regionLabel}), every vehicle played`,
+      description: `Every tank ${name} has played on ${regionLabel}, with battles, win rate, average damage and WN8 per vehicle.`,
+    };
+  }
+  if (view.section === PlayerSection.Value) {
+    return {
+      title: `${name} account value (${regionLabel})`,
+      description: `What ${name}'s World of Tanks account on ${regionLabel} is worth: credits, gold and experience tied up in the garage.`,
+    };
+  }
+  if (view.mode !== PlayerMode.Overall) {
+    return {
+      title: `${name} ${view.label} stats (${regionLabel})`,
+      description: `${name} on ${regionLabel} in ${view.label}: battles, win rate and ratings for this mode, next to their random-battles baseline.`,
+    };
+  }
+  return {
+    title: `${name} World of Tanks stats (${regionLabel}), ${battles} battles, ${winrate}% WR`,
+    description: `${name} on ${regionLabel}: ${battles} battles, ${winrate}% winrate, ${rating} rating. Tank-by-tank breakdown, WN8, WNX and full clans history.`,
+  };
+}
+
+export async function playerMetadata(
+  region: string,
+  nickname: string,
+  view: PlayerView,
+): Promise<Metadata> {
   if (!isRegion(region)) return {};
   const decoded = decodeURIComponent(nickname);
   const regionLabel = region.toUpperCase();
@@ -87,7 +122,7 @@ export async function generateMetadata({
       title: `${result.nickname} World of Tanks account locked (${regionLabel})`,
       description: `${result.nickname} (${regionLabel}) exists but Wargaming has locked this account, so its World of Tanks stats are not available.`,
       ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
-      canonical: ROUTES.PLAYER(region, decoded),
+      canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
     });
   }
 
@@ -99,20 +134,34 @@ export async function generateMetadata({
       title: `${displayName} World of Tanks player stats (${regionLabel})`,
       description: `${displayName} (${regionLabel}) World of Tanks player stats: WN8, WNX ratings, winrate, tank-by-tank breakdown and full clan history.`,
       ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
-      canonical: ROUTES.PLAYER(region, decoded),
+      canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
     });
   }
 
   const { current } = detail;
-  const winrate = pctFmt.format((current.wins / current.battles) * 100);
-  const battles = intFmt.format(current.battles);
-  const rating = current.wtr ?? current.globalRating;
+  const copy = viewCopy(
+    view,
+    displayName,
+    regionLabel,
+    intFmt.format(current.battles),
+    pctFmt.format((current.wins / current.battles) * 100),
+    intFmt.format(current.wtr ?? current.globalRating),
+  );
   return constructMetadata({
-    title: `${displayName} World of Tanks stats (${regionLabel}), ${battles} battles, ${winrate}% WR`,
-    description: `${displayName} on ${regionLabel}: ${battles} battles, ${winrate}% winrate, ${intFmt.format(rating)} rating. Tank-by-tank breakdown, WN8, WNX and full clans history.`,
+    title: copy.title,
+    description: copy.description,
     ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
-    canonical: ROUTES.PLAYER(region, decoded),
+    canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
   });
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ region: string; nickname: string }>;
+}): Promise<Metadata> {
+  const { region, nickname } = await params;
+  return playerMetadata(region, nickname, DEFAULT_PLAYER_VIEW);
 }
 
 export default async function PlayerPage({
@@ -122,25 +171,27 @@ export default async function PlayerPage({
 }) {
   const { region, nickname } = await params;
   if (!isRegion(region)) notFound();
-  const decoded = decodeURIComponent(nickname);
-  // Two independent nav axes (section + mode) live entirely in the URL and are
-  // read client-side by tabs-view; these defaults only seed the skeleton and the
-  // initial props, which the client reconciles from the URL on hydration.
-  // Reading searchParams here would force dynamic rendering.
-  const section = sectionFromQuery(undefined);
-  const mode = modeFromQuery(undefined);
+  return renderPlayerPage(region, decodeURIComponent(nickname), DEFAULT_PLAYER_VIEW);
+}
 
-  // Render the profile inline (blocking on `loadDetail`) rather than streaming it
-  // behind a Suspense skeleton: force-static prerenders the whole page, so the
-  // real stats land in the cached HTML. That keeps the `.md` twin and non-JS
-  // crawlers complete (a Suspense boundary would leave only the skeleton in
-  // `#page-content`, with the stats streamed into a hidden node only JS swaps in).
+// Render the profile inline (blocking on `loadDetail`) rather than streaming it
+// behind a Suspense skeleton: force-static prerenders the whole page, so the
+// real stats land in the cached HTML. That keeps the `.md` twin and non-JS
+// crawlers complete (a Suspense boundary would leave only the skeleton in
+// `#page-content`, with the stats streamed into a hidden node only JS swaps in).
+// `view` comes from the route segment, so only that view renders and its
+// metadata match what is on screen.
+export function renderPlayerPage(
+  region: Region,
+  decoded: string,
+  view: PlayerView,
+) {
   return (
     <PlayerProfileServer
       region={region}
       decoded={decoded}
-      section={section}
-      mode={mode}
+      section={view.section}
+      mode={view.mode}
     />
   );
 }
@@ -155,8 +206,8 @@ async function PlayerProfileServer({
 }: {
   region: Region;
   decoded: string;
-  section: ReturnType<typeof sectionFromQuery>;
-  mode: ReturnType<typeof modeFromQuery>;
+  section: PlayerSection;
+  mode: PlayerMode;
 }) {
   const detail = await loadDetail(region, decoded);
   if (detail && "locked" in detail) {
