@@ -26,13 +26,52 @@
 // contain Buffers, e.g. the RSC stream) round-trip losslessly — plain JSON
 // would turn a Buffer into `{type:"Buffer",...}` and corrupt the page.
 
+const crypto = require("node:crypto");
+const fs = require("node:fs");
+const path = require("node:path");
 const v8 = require("node:v8");
 const Redis = require("ioredis");
 const { PHASE_PRODUCTION_BUILD } = require("next/constants");
 
-// Namespace by deployment so a new build never serves a previous build's
-// prerendered HTML; stale-deploy keys just age out via their TTL.
-const DEPLOY = process.env.DEPLOYMENT_ID || "nover";
+// Namespace by the assets this build actually produced.
+//
+// This used to key off `DEPLOYMENT_ID`, which nothing sets in the deployment, so
+// every build collapsed into a single `nover` namespace and the isolation the
+// scheme promised never existed. Two ways that bites, both observed:
+//   - a fresh deploy serves the previous build's HTML, whose chunk filenames
+//     404 against the new assets (dead page, no hydration);
+//   - a local `next start` shares the namespace outright. It runs with
+//     NODE_ENV=production, and dev's REDIS_URL points at the SHARED prod Redis,
+//     so a developer rendering a page on their machine overwrites the
+//     production entry with HTML referencing chunks that exist only locally.
+// Hashing the build manifest ties the keyspace to the emitted assets instead of
+// to a commit (identical sources with uncommitted edits still differ), so
+// neither case can reach the other's entries. Stale namespaces age out via TTL.
+//
+// The fingerprint is the sorted list of emitted chunk filenames, which are
+// content-hashed: change a component and the names change with it. It is
+// deliberately not `build-manifest.json`, which only lists the framework
+// entries and stayed identical across two builds that differed in app code.
+//
+// No chunk directory means no way to prove which build we are, so Redis stays
+// off rather than risk writing into someone else's keyspace: the in-memory tier
+// below still serves the instance, bounded.
+function buildFingerprint() {
+  const dist = path.resolve(process.cwd(), process.env.NEXT_DIST_DIR || ".next");
+  try {
+    const names = fs.readdirSync(path.join(dist, "static", "chunks")).sort();
+    if (!names.length) return null;
+    return crypto
+      .createHash("sha1")
+      .update(names.join("\n"))
+      .digest("hex")
+      .slice(0, 12);
+  } catch {
+    return null;
+  }
+}
+
+const DEPLOY = buildFingerprint();
 const CACHE_PREFIX = `isr:${DEPLOY}:v:`;
 const TAGS_PREFIX = `isr:${DEPLOY}:tag:`;
 const LRU_INDEX = `isr:${DEPLOY}:lru`;
@@ -53,13 +92,15 @@ function lruSet(key, entry) {
 
 // Redis only at runtime in production: never during `next build`
 // (PHASE_PRODUCTION_BUILD), and never in dev — dev's `REDIS_URL` points at the
-// SHARED prod Redis, which a dev run must not write ISR entries into.
+// SHARED prod Redis, which a dev run must not write ISR entries into. The
+// build fingerprint is the third condition: see `buildFingerprint` above.
 let redis = null;
 let ready = false;
 if (
   process.env.NODE_ENV === "production" &&
   process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD &&
-  process.env.REDIS_URL
+  process.env.REDIS_URL &&
+  DEPLOY
 ) {
   try {
     redis = new Redis(process.env.REDIS_URL, {
