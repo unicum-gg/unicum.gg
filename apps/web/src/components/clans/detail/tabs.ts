@@ -1,19 +1,24 @@
 // Pure, framework-free clan tab definitions shared by the server page (which
-// reads the active section/mode from the URL) and the client nav/view. Kept out
-// of the "use client" `tabs-nav.tsx` so these stay callable from Server
-// Components.
+// renders the active section/mode) and the client nav. Kept out of the
+// "use client" `tabs-nav.tsx` so these stay callable from Server Components.
 //
-// Like the player profile, the clan page has two independent nav axes, each
-// with its own query param so they don't clobber each other:
-//   - section (top row): `?section=tanks` (Overview is the default, omitted).
-//   - mode    (bottom row, only under Overview): `?tab=stronghold` /
-//     `?tab=clan-wars` (Random Battles is the default, omitted). Random Battles
-//     is the members table, whose ratings are random-battles stats.
+// The page has two nav axes, but they don't multiply: a mode is only reachable
+// from Overview, so every reachable state is a single URL segment.
+//
+//   /eu/clans/FAME               Overview + Random Battles (the default)
+//   /eu/clans/FAME/stronghold    Overview + Stronghold
+//   /eu/clans/FAME/clan-wars     Overview + Clan Wars
+//   /eu/clans/FAME/tanks         Tanks
+//   /eu/clans/FAME/manage        Manage (a tool, kept out of the index)
+//
+// They used to be `?section=` / `?tab=` query params, which meant one indexable
+// page per clan instead of one per mode, and metadata frozen on whatever the
+// page was loaded with (Next never re-renders on a `pushState`).
 export enum ClanSection {
   Overview = "overview",
   Tanks = "tanks",
-  // Officer-only: the Stronghold boost console. The tab is shown client-side
-  // only when the logged-in user is an officer of this clan.
+  // The Stronghold boost console. Visitors see a teaser; the controls only
+  // render for officers of this clan, checked client-side.
   Manage = "manage",
 }
 
@@ -23,64 +28,98 @@ export enum ClanMode {
   ClanWars = "clan-wars",
 }
 
-export const CLAN_SECTIONS: {
-  id: ClanSection;
+/** A reachable (section, mode) pair, and the segment that addresses it. The
+ * default pair lives at the bare clan path, hence the null segment. */
+export type ClanView = {
+  section: ClanSection;
+  mode: ClanMode;
+  segment: string | null;
   label: string;
-  query: string | null;
-}[] = [
-  { id: ClanSection.Overview, label: "Overview", query: null },
-  { id: ClanSection.Tanks, label: "Tanks", query: "tanks" },
-  { id: ClanSection.Manage, label: "Manage", query: "manage" },
+};
+
+export const CLAN_VIEWS: ClanView[] = [
+  {
+    section: ClanSection.Overview,
+    mode: ClanMode.RandomBattles,
+    segment: null,
+    label: "Random Battles",
+  },
+  {
+    section: ClanSection.Overview,
+    mode: ClanMode.Stronghold,
+    segment: "stronghold",
+    label: "Stronghold",
+  },
+  {
+    section: ClanSection.Overview,
+    mode: ClanMode.ClanWars,
+    segment: "clan-wars",
+    label: "Clan Wars",
+  },
+  {
+    section: ClanSection.Tanks,
+    mode: ClanMode.RandomBattles,
+    segment: "tanks",
+    label: "Tanks",
+  },
+  {
+    section: ClanSection.Manage,
+    mode: ClanMode.RandomBattles,
+    segment: "manage",
+    label: "Manage",
+  },
 ];
 
-export const CLAN_MODES: {
-  id: ClanMode;
-  label: string;
-  query: string | null;
-}[] = [
-  { id: ClanMode.RandomBattles, label: "Random Battles", query: null },
-  { id: ClanMode.Stronghold, label: "Stronghold", query: "stronghold" },
-  { id: ClanMode.ClanWars, label: "Clan Wars", query: "clan-wars" },
+/** Sections in top-row order, each pointing at the segment that opens it. */
+export const CLAN_SECTIONS: { id: ClanSection; label: string }[] = [
+  { id: ClanSection.Overview, label: "Overview" },
+  { id: ClanSection.Tanks, label: "Tanks" },
+  { id: ClanSection.Manage, label: "Manage" },
 ];
 
-export function sectionFromQuery(
-  query: string | null | undefined,
-): ClanSection {
-  const found = CLAN_SECTIONS.find((s) => s.query === query);
-  return found ? found.id : ClanSection.Overview;
+/** Modes in bottom-row order (only shown under Overview). */
+export const CLAN_MODES = CLAN_VIEWS.filter(
+  (v) => v.section === ClanSection.Overview,
+).map((v) => ({ id: v.mode, label: v.label }));
+
+function hrefFor(basePath: string, view: ClanView): string {
+  return view.segment ? `${basePath}/${view.segment}` : basePath;
 }
 
-export function modeFromQuery(query: string | null | undefined): ClanMode {
-  const found = CLAN_MODES.find((m) => m.query === query);
-  return found ? found.id : ClanMode.RandomBattles;
+/** The view at the bare clan path: Overview, Random Battles. */
+export const DEFAULT_CLAN_VIEW: ClanView = CLAN_VIEWS[0];
+
+/** The Manage view, for callers that link straight to it (the boost teaser's
+ * login round-trip needs it as a return destination). */
+export const MANAGE_CLAN_VIEW: ClanView = CLAN_VIEWS.find(
+  (v) => v.section === ClanSection.Manage,
+) as ClanView;
+
+/** This view's URL, given the clan's base path. */
+export function clanViewHref(basePath: string, view: ClanView): string {
+  return hrefFor(basePath, view);
 }
 
-function buildHref(
-  basePath: string,
-  section: ClanSection,
-  mode: ClanMode,
-): string {
-  const params = new URLSearchParams();
-  const sectionQuery = CLAN_SECTIONS.find((s) => s.id === section)?.query;
-  const modeQuery = CLAN_MODES.find((m) => m.id === mode)?.query;
-  if (sectionQuery) params.set("section", sectionQuery);
-  if (modeQuery) params.set("tab", modeQuery);
-  const qs = params.toString();
-  return qs ? `${basePath}?${qs}` : basePath;
+/** The view a route segment addresses, or null when it is not one of ours (a
+ * `/vs/` comparison, or a typo). */
+export function clanViewFromSegment(
+  segment: string | undefined,
+): ClanView | null {
+  return CLAN_VIEWS.find((v) => v.segment === (segment ?? null)) ?? null;
 }
 
-// Section switch keeps the current mode, so toggling to Tanks and back returns
-// to the mode you were reading.
-export function clanSectionHref(
-  basePath: string,
-  section: ClanSection,
-  mode: ClanMode,
-): string {
-  return buildHref(basePath, section, mode);
+/** Switching section lands on that section's default mode: with one segment per
+ * reachable state, Overview always means Random Battles. */
+export function clanSectionHref(basePath: string, section: ClanSection): string {
+  const view = CLAN_VIEWS.find((v) => v.section === section);
+  return view ? hrefFor(basePath, view) : basePath;
 }
 
-// A mode is only reachable from the Overview section, so selecting one always
-// lands in Overview.
+/** A mode is only reachable from Overview, so selecting one always lands
+ * there. */
 export function clanModeHref(basePath: string, mode: ClanMode): string {
-  return buildHref(basePath, ClanSection.Overview, mode);
+  const view = CLAN_VIEWS.find(
+    (v) => v.section === ClanSection.Overview && v.mode === mode,
+  );
+  return view ? hrefFor(basePath, view) : basePath;
 }

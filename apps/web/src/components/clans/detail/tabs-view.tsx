@@ -1,7 +1,7 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import useSWR from "swr";
 import { ExpandableDescription } from "@/components/clans/detail/description";
 import { ClanModeNav, ClanSectionNav } from "@/components/clans/detail/tabs-nav";
@@ -10,8 +10,6 @@ import {
   ClanSection,
   clanModeHref,
   clanSectionHref,
-  modeFromQuery,
-  sectionFromQuery,
 } from "@/components/clans/detail/tabs";
 import { ClanTanksTab } from "@/components/clans/detail/tanks";
 import { ClanBoostConsole } from "@/components/clans/detail/boost-console";
@@ -85,38 +83,20 @@ export function ClanTabsView({
   initialVehicles,
   liveVersion,
 }: ClanTabsViewProps) {
-  // `activeSection`/`activeMode` seed the first client render so it matches the
-  // server HTML (the page is force-static and can't read searchParams, so the
-  // server always assumes Overview). A nav click updates local state immediately
-  // (instant switch) and pushes the URL. Back/forward instead moves through
-  // history, which Next reflects in `useSearchParams`; we reconcile both axes
-  // during render (no effect) so the view follows the URL without a server
-  // round-trip. The `synced*` trackers seed from the SERVER assumption, not the
-  // URL, so a deep link (`?section=manage`) is reconciled on the very first read
-  // (seeding them from the URL would leave them already "in sync" and never
-  // flip off Overview).
-  const searchParams = useSearchParams();
-  const urlSection = sectionFromQuery(searchParams.get("section"));
-  const urlMode = modeFromQuery(searchParams.get("tab"));
-  const [section, setSection] = useState(activeSection);
-  const [mode, setMode] = useState(activeMode);
-  const [syncedSection, setSyncedSection] = useState(activeSection);
-  const [syncedMode, setSyncedMode] = useState(activeMode);
-  if (urlSection !== syncedSection || urlMode !== syncedMode) {
-    setSyncedSection(urlSection);
-    setSyncedMode(urlMode);
-    setSection(urlSection);
-    setMode(urlMode);
-  }
+  // Each reachable (section, mode) pair is a route of its own, so both come from
+  // the server and change through a real navigation. That is what keeps the
+  // metadata (title, description, canonical) in step with what is on screen; a
+  // `pushState` would leave Next unaware and freeze them on the view the page
+  // was loaded with.
+  const section = activeSection;
+  const mode = activeMode;
+  const router = useRouter();
 
   function selectSection(next: ClanSection) {
-    setSection(next);
-    window.history.pushState(null, "", clanSectionHref(basePath, next, mode));
+    router.push(clanSectionHref(basePath, next));
   }
   function selectMode(next: ClanMode) {
-    setMode(next);
-    setSection(ClanSection.Overview);
-    window.history.pushState(null, "", clanModeHref(basePath, next));
+    router.push(clanModeHref(basePath, next));
   }
 
   // Section content is fetched on demand through the SDK (`@/services/sdk`),
@@ -229,17 +209,17 @@ export function ClanTabsView({
           <ClanSectionNav
             basePath={basePath}
             section={section}
-            mode={mode}
             onSelect={selectSection}
             tankCount={tankCount}
           />
         </PanelHeader>
       </Panel>
 
-      {/* The description is clan-level metadata, so it stays visible on every
-          content section, sitting between the section row and the mode row.
-          Hidden on Manage, which is a tool, not clan content. */}
-      {descriptionHtml && !onManage && (
+      {/* The clan's own blurb (recruitment rules, voice server, palmares) is
+          what Overview is about, so it sits between the section row and the mode
+          row. The other sections are their own subject: it would push the
+          vehicle table down on Tanks, and Manage is a tool, not clan content. */}
+      {descriptionHtml && section === ClanSection.Overview && (
         <>
           <PanelSeparator />
           <Panel>

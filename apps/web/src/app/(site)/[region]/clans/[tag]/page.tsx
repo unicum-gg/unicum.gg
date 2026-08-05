@@ -4,8 +4,9 @@ import { ClanProfile } from "@/components/clans/detail/view";
 import {
   ClanMode,
   ClanSection,
-  modeFromQuery,
-  sectionFromQuery,
+  type ClanView,
+  clanViewHref,
+  DEFAULT_CLAN_VIEW,
 } from "@/components/clans/detail/tabs";
 import type { ClanTabsInitialData } from "@/components/clans/detail/tabs-view";
 import { JsonLd } from "@/components/json-ld";
@@ -56,37 +57,89 @@ async function loadOverview(region: Region, tag: string) {
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min
 
+/** Suffix and wording for the view being rendered, so each mode is a page of
+ * its own rather than three copies of the same title. */
+function viewCopy(
+  view: ClanView,
+  name: string,
+  tag: string,
+  regionLabel: string,
+  members: string,
+): { title: string; description: string } {
+  switch (view.mode === ClanMode.RandomBattles ? view.section : view.mode) {
+    case ClanMode.Stronghold:
+      return {
+        title: `[${tag}] ${name} stronghold stats (${regionLabel})`,
+        description: `${name} [${tag}] stronghold performance on ${regionLabel}: skirmish and advances ratings, battles and win rate for each member.`,
+      };
+    case ClanMode.ClanWars:
+      return {
+        title: `[${tag}] ${name} clan wars stats (${regionLabel})`,
+        description: `${name} [${tag}] clan wars performance on ${regionLabel}: per-member ratings, battles and win rate across the global map campaigns.`,
+      };
+    case ClanSection.Tanks:
+      return {
+        title: `[${tag}] ${name} tanks (${regionLabel}), the clan's vehicles`,
+        description: `Every vehicle played by ${name} [${tag}] on ${regionLabel}, with battles, win rate and average damage aggregated across the clan's members.`,
+      };
+    case ClanSection.Manage:
+      return {
+        title: `[${tag}] ${name} stronghold reserves (${regionLabel})`,
+        description: `Activate and schedule ${name} [${tag}] stronghold reserves. Officers only.`,
+      };
+    default:
+      return {
+        title: `[${tag}] ${name} World of Tanks clan (${regionLabel}), ${members} members`,
+        description: `${name} [${tag}] on ${regionLabel}: ${members} members, full members table with WN8 and WNX ratings, recent join/leave activity and clan history.`,
+      };
+  }
+}
+
+export async function clanMetadata(
+  region: string,
+  tag: string,
+  view: ClanView,
+): Promise<Metadata> {
+  if (!isRegion(region)) return {};
+  const decoded = decodeURIComponent(tag);
+  const regionLabel = region.toUpperCase();
+  // The Manage tab is a tool, not clan content: keep it out of the index.
+  const noIndex = view.section === ClanSection.Manage;
+
+  const overview = await loadOverview(region, decoded).catch(() => null);
+  if (!overview) {
+    const copy = viewCopy(view, "", decoded, regionLabel, "");
+    return constructMetadata({
+      title: copy.title.replace("[" + decoded + "]  ", "[" + decoded + "] "),
+      description: `[${decoded}] World of Tanks clan on ${regionLabel}: members table with WN8/WNX ratings, join/leave activity, recent battles and full clan history.`,
+      ogImage: `/api/og/${region}/clans/${encodeURIComponent(decoded)}`,
+      // Static (ISR) page: pass the canonical explicitly, since generateCanonical()
+      // reads headers() which isn't available during static generation (it would
+      // otherwise fall back to the site root). Points at this view's own segment.
+      canonical: clanViewHref(ROUTES.CLAN(region, decoded), view),
+      noIndex,
+    });
+  }
+  const { clan } = overview;
+  const members = intFmt.format(clan.membersCount);
+  const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members);
+  return constructMetadata({
+    title: copy.title,
+    description: copy.description,
+    ogImage: `/api/og/${region}/clans/${encodeURIComponent(clan.tag)}`,
+    // Static (ISR) page: canonical must be explicit (see the not-found branch).
+    canonical: clanViewHref(ROUTES.CLAN(region, clan.tag), view),
+    noIndex,
+  });
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ region: string; tag: string }>;
 }): Promise<Metadata> {
   const { region, tag } = await params;
-  if (!isRegion(region)) return {};
-  const decoded = decodeURIComponent(tag);
-  const regionLabel = region.toUpperCase();
-
-  const overview = await loadOverview(region, decoded).catch(() => null);
-  if (!overview) {
-    return constructMetadata({
-      title: `[${decoded}] World of Tanks clan (${regionLabel})`,
-      description: `[${decoded}] World of Tanks clan on ${regionLabel}: members table with WN8/WNX ratings, join/leave activity, recent battles and full clan history.`,
-      ogImage: `/api/og/${region}/clans/${encodeURIComponent(decoded)}`,
-      // Static (ISR) page: pass the canonical explicitly, since generateCanonical()
-      // reads headers() which isn't available during static generation (it would
-      // otherwise fall back to the site root).
-      canonical: ROUTES.CLAN(region, decoded),
-    });
-  }
-  const { clan } = overview;
-  const members = intFmt.format(clan.membersCount);
-  return constructMetadata({
-    title: `[${clan.tag}] ${clan.name} World of Tanks clan (${regionLabel}), ${members} members`,
-    description: `${clan.name} [${clan.tag}] on ${regionLabel}: ${members} members, full members table with WN8 and WNX ratings, recent join/leave activity and clan history.`,
-    ogImage: `/api/og/${region}/clans/${encodeURIComponent(clan.tag)}`,
-    // Static (ISR) page: canonical must be explicit (see the not-found branch).
-    canonical: ROUTES.CLAN(region, clan.tag),
-  });
+  return clanMetadata(region, tag, DEFAULT_CLAN_VIEW);
 }
 
 export default async function ClanPage({
@@ -96,26 +149,27 @@ export default async function ClanPage({
 }) {
   const { region, tag } = await params;
   if (!isRegion(region)) notFound();
-  const decoded = decodeURIComponent(tag);
-  // Two independent nav axes (section + mode) live entirely in the URL and are
-  // read client-side by tabs-view; these defaults only seed the skeleton and the
-  // initial props, which the client reconciles from the URL on hydration.
-  // Reading searchParams here would force dynamic rendering.
-  const section = sectionFromQuery(undefined);
-  const mode = modeFromQuery(undefined);
+  return renderClanPage(region, decodeURIComponent(tag), DEFAULT_CLAN_VIEW);
+}
 
-  // Render the profile inline (blocking on the clan fetches) rather than
+// Render the profile inline (blocking on the clan fetches) rather than
   // streaming it behind a Suspense skeleton: force-static prerenders the whole
   // page, so the real stats land in the cached HTML. That keeps the `.md` twin
   // and non-JS crawlers complete (a Suspense boundary would leave only the
   // skeleton in `#page-content`, with the stats streamed into a hidden node only
-  // JS swaps in).
+// JS swaps in). `view` comes from the route segment, so only that view renders
+// and its metadata match what is on screen.
+export function renderClanPage(
+  region: Region,
+  decoded: string,
+  view: ClanView,
+) {
   return (
     <ClanProfileServer
       region={region}
       decoded={decoded}
-      section={section}
-      mode={mode}
+      section={view.section}
+      mode={view.mode}
     />
   );
 }

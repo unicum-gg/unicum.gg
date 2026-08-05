@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -36,7 +37,7 @@ function NavAnchor({
   children: React.ReactNode;
 }) {
   return (
-    <a
+    <Link
       href={href}
       onClick={(event) => {
         if (!isPlainClick(event)) return;
@@ -51,22 +52,21 @@ function NavAnchor({
       )}
     >
       {children}
-    </a>
+    </Link>
   );
 }
 
 // Top row: the profile sections. Clicking the section you're already in is a
-// no-op; switching keeps the current mode (see `clanSectionHref`).
+// no-op. Each section is its own route, so switching lands on that section's
+// default mode rather than carrying the current one over.
 export function ClanSectionNav({
   basePath,
   section,
-  mode,
   onSelect,
   tankCount,
 }: {
   basePath: string;
   section: ClanSection;
-  mode: ClanMode;
   onSelect: (section: ClanSection) => void;
   // Distinct battle-having vehicle count, shown as "Tanks (N)" once loaded
   // (mirrors the player page). Undefined until the vehicles aggregation lands.
@@ -77,7 +77,7 @@ export function ClanSectionNav({
       {CLAN_SECTIONS.map((s) => (
         <NavAnchor
           key={s.id}
-          href={clanSectionHref(basePath, s.id, mode)}
+          href={clanSectionHref(basePath, s.id)}
           active={section === s.id}
           onActivate={() => {
             if (section !== s.id) onSelect(s.id);
