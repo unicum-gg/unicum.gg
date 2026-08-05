@@ -19,26 +19,37 @@ function paramTable(schema: ToolInputSchema): string {
   return `| Parameter | Type | Required | Description |\n|-----------|------|----------|-------------|\n${rows.join("\n")}`;
 }
 
-export function generateSkillMd(): string {
-  const ops = TOOL_DEFS.map(({ name, description, inputSchema, path }) => {
+/**
+ * Every operation of the public API, one `###` block each with its parameter
+ * table. Shared by the Agent Skill and by `llms-full.txt`, which are the same
+ * reference addressed to two different discovery conventions.
+ *
+ * @param headingLevel depth of each operation heading, so a caller can nest the
+ * reference under its own sections.
+ */
+export function renderOperations(headingLevel: number = 3): string {
+  const hashes = "#".repeat(headingLevel);
+  return TOOL_DEFS.map(({ name, description, inputSchema, path }) => {
     const table = paramTable(inputSchema);
     return [
-      `### ${name}`,
+      `${hashes} ${name}`,
       "",
       description,
       "",
       `\`GET /api${path}\``,
       ...(table ? ["", table] : []),
     ].join("\n");
-  });
+  }).join("\n\n");
+}
 
+export function generateSkillMd(): string {
   return [
     "---",
     `name: ${MCP_NAME}`,
     `description: ${APP.DESCRIPTION}`,
     "---",
     "",
-    `# World of Tanks Stats – ${APP.NAME}`,
+    `# World of Tanks Stats, ${APP.NAME}`,
     "",
     "## Overview",
     "",
@@ -53,7 +64,7 @@ export function generateSkillMd(): string {
     "",
     "## Operations",
     "",
-    ops.join("\n\n"),
+    renderOperations(),
     "",
   ].join("\n");
 }
