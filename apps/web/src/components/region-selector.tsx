@@ -68,17 +68,20 @@ export function RegionSelector() {
   const router = useRouter();
   const { region, setRegion } = useRegion();
 
+  function selectRegion(next: Region) {
+    setRegion(next);
+    // `window.location.search` includes the leading "?"; empty string when
+    // there is no query.
+    const search = typeof window !== "undefined" ? window.location.search : "";
+    router.push(targetForRegion(pathname, search, next));
+  }
+
   return (
     <Select
       value={region}
       onValueChange={(v) => {
         if (!isRegion(v)) return;
-        setRegion(v);
-        // `window.location.search` includes the leading "?"; empty string when
-        // there is no query.
-        const search =
-          typeof window !== "undefined" ? window.location.search : "";
-        router.push(targetForRegion(pathname, search, v));
+        selectRegion(v);
       }}
     >
       <SelectTrigger
@@ -91,8 +94,25 @@ export function RegionSelector() {
         </SelectValue>
       </SelectTrigger>
       <SelectContent>
+        {/* `onValueChange` alone is not enough, because the displayed region and
+            the URL can disagree: on a region-less path (`/`, `/coverage`,
+            `/players`) `useRegion` falls back to the cookie, so landing on `/`
+            with an `asia` cookie (a back-navigation out of `/asia`, a link to
+            `/`) shows ASIA in the selector while the URL stays `/`. Picking ASIA
+            there is a no-op for Radix, which only fires on an actual value
+            change, so the user was stuck on `/` — with asia data on screen,
+            since the content follows the cookie. Handling the click as well
+            makes re-picking the current region navigate to its URL. The two
+            paths are disjoint (this only fires when the value is unchanged), so
+            a real switch still navigates once. */}
         {REGIONS.map((r) => (
-          <SelectItem key={r} value={r}>
+          <SelectItem
+            key={r}
+            value={r}
+            onClick={() => {
+              if (r === region) selectRegion(r);
+            }}
+          >
             <RegionItem region={r} />
           </SelectItem>
         ))}
