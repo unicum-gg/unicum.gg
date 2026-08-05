@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -19,7 +18,6 @@ import {
 } from "@/components/ui/select";
 
 export function RatingSelector() {
-  const router = useRouter();
   const [stored, setStored] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -31,13 +29,17 @@ export function RatingSelector() {
   return (
     <Select
       value={metric}
+      // No `router.refresh()`. It used to be here for leaderboards that read
+      // the metric from `cookies()` at render time, but no page does anymore:
+      // every view renders the three variants and gates them on
+      // `html[data-rating-metric]` (see `rating-metric-root`), and the tables
+      // read the cookie through `useCookie`, which broadcasts the change.
+      // The refresh was not free either. Since Next 16 it eagerly re-prefetches
+      // every in-viewport link, one request per route segment, so switching
+      // metric on /tanks fired 42 extra requests for 2 MB of flight payload.
       onValueChange={(v) => {
         if (!isRatingMetric(v)) return;
         setStored(v);
-        // Re-fetch any RSC that reads the cookie (homepage leaderboards
-        // pick the metric from cookies() at render time). Pages that only
-        // rely on CSS data-attributes ignore this no-op.
-        router.refresh();
       }}
     >
       <SelectTrigger

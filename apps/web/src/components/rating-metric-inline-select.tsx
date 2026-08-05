@@ -1,6 +1,5 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -19,7 +18,6 @@ import {
 } from "@/components/ui/select";
 
 export function RatingMetricInlineSelect() {
-  const router = useRouter();
   const [stored, setStored] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -31,10 +29,10 @@ export function RatingMetricInlineSelect() {
   return (
     <Select
       value={metric}
+      // See `rating-selector` for why there is no `router.refresh()` here.
       onValueChange={(v) => {
         if (!isRatingMetric(v)) return;
         setStored(v);
-        router.refresh();
       }}
     >
       <SelectTrigger
