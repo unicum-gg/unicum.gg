@@ -35,6 +35,7 @@ import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { mergeSearchChunks } from "@/lib/search-merge";
+import { startNavigationProgress } from "@/components/navigation-progress";
 import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
 import {
@@ -45,6 +46,16 @@ import {
 
 const DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;
+
+/** Destination of a result row. Shared by the prefetch and the navigation, so
+ * the two can never warm and then open different URLs. */
+function hrefForRow(row: SelectableRow): string {
+  if (row.type === "player")
+    return ROUTES.PLAYER(row.region, row.player.nickname);
+  if (row.type === "clan") return ROUTES.CLAN(row.region, row.clan.tag);
+  if (row.type === "tank") return ROUTES.TANK(row.region, row.tank.slug);
+  return ROUTES.MAP(row.region, row.map.slug);
+}
 
 export default function SearchDialog(props: SharedProps) {
   const router = useRouter();
@@ -325,6 +336,16 @@ export default function SearchDialog(props: SharedProps) {
   const rows = queryIsEmpty ? historyRows : searchRows;
   const selectable = useMemo(() => selectableRows(rows), [rows]);
 
+  // Warm the highlighted result. Result rows are buttons, so they get none of
+  // the automatic <Link> prefetching, and picking one used to pay the full RSC
+  // round-trip on click. The highlight follows both the arrow keys and the
+  // mouse, so this covers either way of choosing a row.
+  const active = selectable[activeIndex];
+  const activeHref = active ? hrefForRow(active) : null;
+  useEffect(() => {
+    if (activeHref) router.prefetch(activeHref);
+  }, [activeHref, router]);
+
   const anyLoading =
     playersSection.isLoading ||
     clansSection.isLoading ||
@@ -384,19 +405,11 @@ export default function SearchDialog(props: SharedProps) {
 
   function pickRow(row: SelectableRow) {
     close();
-    if (row.type === "player") {
-      addRecent(rowToItem(row));
-      router.push(ROUTES.PLAYER(row.region, row.player.nickname));
-    } else if (row.type === "clan") {
-      addRecent(rowToItem(row));
-      router.push(ROUTES.CLAN(row.region, row.clan.tag));
-    } else if (row.type === "tank") {
-      addRecent(rowToItem(row));
-      router.push(ROUTES.TANK(row.region, row.tank.slug));
-    } else {
-      addRecent(rowToItem(row));
-      router.push(ROUTES.MAP(row.region, row.map.slug));
-    }
+    addRecent(rowToItem(row));
+    // Results are buttons, not links, so nothing lights the global progress bar
+    // on its own (Next only calls pushState once the payload has landed).
+    startNavigationProgress();
+    router.push(hrefForRow(row));
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
