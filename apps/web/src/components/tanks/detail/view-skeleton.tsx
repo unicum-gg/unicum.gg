@@ -50,7 +50,9 @@ export function TankViewSkeleton({
 function HeroSkeleton({ region }: { region: Region }) {
   return (
     <Panel className="border-b border-fd-border">
-      <div className="relative min-h-[320px] overflow-hidden sm:min-h-[400px] lg:min-h-[470px]">
+      {/* `dark` for the same reason as the loaded hero: the fades have to
+          darken the hangar photo in both themes. */}
+      <div className="dark relative min-h-[320px] overflow-hidden text-fd-foreground sm:min-h-[400px] lg:min-h-[470px]">
         <Image
           src={hangarBgUrl(region, "webp")}
           alt=""

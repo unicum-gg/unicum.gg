@@ -124,7 +124,17 @@ export function TankView({
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel className="border-b border-fd-border">
-        <div className="relative min-h-[300px] overflow-hidden sm:min-h-0 sm:aspect-[32/15]">
+        {/* The hero is always dark, in both themes. It sits on the hangar
+            photo, which is dark whatever the theme, so the fades below have to
+            darken rather than lighten: in light mode `fd-background` is
+            hsl(0,0%,96%) and the gradient washed the whole thing out in white.
+            Carrying the `dark` class re-resolves every design token inside this
+            subtree to its dark value, so the fades, the spotlight and the text
+            colors move together (a fade-only fix would leave the dark title
+            unreadable). `text-fd-foreground` is needed because `color` is
+            inherited as a computed value from `body`, so it would not pick the
+            re-resolved token on its own. */}
+        <div className="dark relative min-h-[300px] overflow-hidden text-fd-foreground sm:min-h-0 sm:aspect-[32/15]">
           {/* The exact hangar-floor backdrop WG's own tankopedia detail page
               uses (1920x900, matching the render), served from its portal CDN.
               `latest` keeps the URL stable across client version bumps. Rendered
