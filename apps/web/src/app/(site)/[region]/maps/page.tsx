@@ -3,12 +3,18 @@ import { notFound } from "next/navigation";
 import type { MapSummary } from "@unicum.gg/shared";
 import {
   Region,
+  isRegion,
   REGION_EMOJI,
   REGION_LABEL,
-  isRegion,
 } from "@unicum.gg/wargaming";
 import { MapsGallery } from "@/components/maps/list";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
+import { mapsTabCopy } from "@/components/maps/list/copy";
+import {
+  BATTLE_ALL,
+  type BattleTab,
+  mapsTabHref,
+} from "@/components/maps/list/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -24,20 +30,29 @@ export function generateStaticParams() {
   return [{ region: Region.NA }, { region: Region.ASIA }];
 }
 
+export async function mapsIndexMetadata(
+  region: string,
+  tab: BattleTab,
+): Promise<Metadata> {
+  if (!isRegion(region)) return {};
+  const regionLabel = region.toUpperCase();
+  const copy = mapsTabCopy(tab);
+  return constructMetadata({
+    title: copy.title(regionLabel),
+    description: copy.description(regionLabel),
+    ogImage: false,
+    // Points at this tab's own segment so the battle types don't compete.
+    canonical: mapsTabHref(ROUTES.MAPS(region), tab),
+  });
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ region: string }>;
 }): Promise<Metadata> {
   const { region } = await params;
-  if (!isRegion(region)) return {};
-  const regionLabel = region.toUpperCase();
-  return constructMetadata({
-    title: `All World of Tanks maps (${regionLabel}), every battle arena`,
-    description: `Browse every World of Tanks map on ${regionLabel}: minimaps, size, camouflage and supported game modes, with per-mode base flags and spawn points.`,
-    ogImage: false,
-    canonical: ROUTES.MAPS(region),
-  });
+  return mapsIndexMetadata(region, BATTLE_ALL);
 }
 
 export default async function MapsIndexPage({
@@ -50,12 +65,21 @@ export default async function MapsIndexPage({
   return renderMapsIndex(region);
 }
 
-export async function renderMapsIndex(region: Region) {
+export async function renderMapsIndex(
+  region: Region,
+  activeTab: BattleTab = BATTLE_ALL,
+) {
   const { results } = await buildSafe(
     () => unicum.region(region).maps.list(),
     { results: [] as MapSummary[] },
   );
   const maps = results as MapSummary[];
+
+  const copy = mapsTabCopy(activeTab);
+  const shown =
+    activeTab === BATTLE_ALL
+      ? maps.length
+      : maps.filter((m) => m.battleTypes.includes(activeTab)).length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -65,21 +89,23 @@ export async function renderMapsIndex(region: Region) {
             {REGION_EMOJI[region]} {REGION_LABEL[region]}
           </div>
           <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            All <span className="text-brand">maps</span>
+            {copy.heading.lead}{" "}
+            <span className="text-brand">{copy.heading.accent}</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            Every one of the {maps.length} World of Tanks battle arenas. Filter
-            by camouflage and game mode, then open a map for its minimap, size
-            and per-mode base flags and spawn points.
+            {copy.intro(shown, REGION_LABEL[region])}
           </p>
         </PanelContent>
       </Panel>
 
       <PanelSeparator />
 
-      <Panel>
-        <MapsGallery maps={maps} region={region} />
-      </Panel>
+      <MapsGallery
+        maps={maps}
+        region={region}
+        activeTab={activeTab}
+        basePath={ROUTES.MAPS(region)}
+      />
     </div>
   );
 }

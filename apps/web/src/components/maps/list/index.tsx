@@ -2,7 +2,7 @@
 
 import { ArrowsOutCardinalIcon } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
   BATTLE_TYPE_LABEL,
   BattleType,
@@ -15,8 +15,15 @@ import {
   type MapSummary,
 } from "@unicum.gg/shared";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  BATTLE_ALL,
+  type BattleTab,
+  mapsTabHref,
+} from "@/components/maps/list/tabs";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapImage } from "@/components/maps/minimap-image";
+import { Panel, PanelHeader } from "@/components/panel";
 import { Chip, ChipRow } from "@/components/tanks/tank-filter-bar";
 import {
   Tooltip,
@@ -45,17 +52,8 @@ function toggle<T>(set: Set<T>, value: T): Set<T> {
   return next;
 }
 
-// UI-only pseudo battle type: "All" shows every map regardless of type (the
-// default). It is not a `BattleType` member on purpose: `BattleType` describes
-// what a map *is* (and rides the API/SDK), while "All" is only a filter state.
-// It also softens the fact that "Random" is derived from client-script geometry,
-// not WG's live matchmaker rotation, so a few event-only reskins leak into it.
-const BATTLE_ALL = "all" as const;
-type BattleFilter = BattleType | typeof BATTLE_ALL;
-
 // Valid URL values per filter, so a hand-edited query string can't inject a
 // bogus enum member into state.
-const BATTLE_VALUES = new Set<string>(Object.values(BattleType));
 const CAMO_VALUES = new Set<string>(Object.values(MapCamouflage));
 const MODE_VALUES = new Set<string>(Object.values(MapGameMode));
 
@@ -162,16 +160,26 @@ function MapCard({
 export function MapsGallery({
   maps,
   region,
+  activeTab,
+  basePath,
 }: {
   maps: MapSummary[];
   region: Region;
+  activeTab: BattleTab;
+  basePath: string;
 }) {
-  // Filters live in the URL (?type=&q=&camo=&mode=) so a filtered gallery is
-  // shareable, bookmarkable, and survives a reload. State starts at its defaults
-  // and seeds from the query string on mount; changes are written back (merged
-  // with any other params) via replaceState. Read via window.location, not
-  // useSearchParams, so this subtree stays statically prerenderable.
-  const [battleType, setBattleType] = useState<BattleFilter>(BATTLE_ALL);
+  // The battle type is a route segment (`activeTab`); the rest of the filters
+  // live in the query (?q=&camo=&mode=) so a filtered gallery stays shareable
+  // and survives a reload. They start at their defaults and seed from the query
+  // string on mount; changes are written back (merged with any other params)
+  // via replaceState. Read via window.location, not useSearchParams, so this
+  // subtree stays statically prerenderable.
+  // Each battle type is a route of its own, so the active one comes from the
+  // server and changes through a real navigation. That is what keeps the
+  // metadata (title, description, canonical) in step; a `pushState` would leave
+  // Next unaware and freeze them on the type the page was loaded with.
+  const battleType = activeTab;
+  const router = useRouter();
   const [query, setQuery] = useState("");
   const [camoSel, setCamoSel] = useState<Set<MapCamouflage>>(new Set());
   const [modeSel, setModeSel] = useState<Set<MapGameMode>>(new Set());
@@ -180,8 +188,6 @@ export function MapsGallery({
   /* eslint-disable react-hooks/set-state-in-effect -- one-shot hydration from the URL on mount, avoids an SSR mismatch */
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    const type = params.get("type");
-    if (type && BATTLE_VALUES.has(type)) setBattleType(type as BattleType);
     const q = params.get("q");
     if (q) setQuery(q);
     const camo = parseEnumSet<MapCamouflage>(params.get("camo"), CAMO_VALUES);
@@ -204,8 +210,6 @@ export function MapsGallery({
       if (val) params.set(key, val);
       else params.delete(key);
     };
-    // "All" is the default, so it stays out of the URL for a clean base link.
-    setOrDel("type", battleType === BATTLE_ALL ? "" : battleType);
     setOrDel("q", query.trim());
     setOrDel("camo", setStr(camoSel));
     setOrDel("mode", setStr(modeSel));
@@ -215,7 +219,7 @@ export function MapsGallery({
       "",
       qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
     );
-  }, [battleType, query, camoSel, modeSel]);
+  }, [query, camoSel, modeSel]);
 
   // Only offer battle-type pills that actually have maps in this region's
   // catalogue, so a mode WG has retired (Grand Battle currently ships no map)
@@ -250,8 +254,41 @@ export function MapsGallery({
     });
   }, [maps, battleType, query, camoSel, modeSel]);
 
+  // The href carries the battle type alone, so it is what crawlers follow and
+  // what Next prefetches. The click adds the current search and camo/mode
+  // filters (they live in the query string) so switching type keeps them, then
+  // navigates for real.
+  function selectBattleType(
+    e: MouseEvent<HTMLAnchorElement>,
+    next: BattleTab,
+  ) {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+    e.preventDefault();
+    if (next === battleType) return;
+    router.push(`${mapsTabHref(basePath, next)}${window.location.search}`);
+  }
+
   return (
-    <div>
+    <Panel>
+      <PanelHeader className="px-0! py-0!">
+          <nav className="flex items-center overflow-x-auto text-sm">
+            {presentTypes.map((bt) => (
+              <Link
+                key={bt}
+                href={mapsTabHref(basePath, bt)}
+                onClick={(e) => selectBattleType(e, bt)}
+                className={cn(
+                  "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
+                  battleType === bt
+                    ? "bg-fd-secondary/40 text-fd-foreground"
+                    : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
+                )}
+              >
+                {bt === BATTLE_ALL ? "All" : BATTLE_TYPE_LABEL[bt]}
+              </Link>
+            ))}
+          </nav>
+        </PanelHeader>
       <div className="flex flex-wrap items-center gap-x-2 gap-y-2 p-4 text-xs">
         <input
           type="text"
@@ -261,17 +298,6 @@ export function MapsGallery({
           aria-label="Search maps"
           className="h-7 w-52 rounded-md border border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:border-fd-ring focus:outline-none"
         />
-        <ChipRow>
-          {presentTypes.map((bt) => (
-            <Chip
-              key={bt}
-              active={battleType === bt}
-              onClick={() => setBattleType(bt)}
-            >
-              {bt === BATTLE_ALL ? "All" : BATTLE_TYPE_LABEL[bt]}
-            </Chip>
-          ))}
-        </ChipRow>
         <ChipRow>
           <TooltipProvider delayDuration={100}>
             {CAMO_FILTERS.map((camo) => {
@@ -330,6 +356,6 @@ export function MapsGallery({
           </div>
         )}
       </div>
-    </div>
+    </Panel>
   );
 }
