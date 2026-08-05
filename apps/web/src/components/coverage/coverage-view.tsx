@@ -53,6 +53,15 @@ function formatBytes(bytes: number): string {
 export async function CoverageView({ region }: { region: Region }) {
   const stats = await unicum.region(region).coverage();
 
+  // How many tracked players already have at least one snapshot, which is what
+  // `firstSnapshotsDaily` accumulates to. The refresh-policy breakdown already
+  // counts the never-fetched ones per bucket (`due_at = 'epoch'`), so this needs
+  // no extra query, unlike `activity.awaitingFirstSnapshot`, which only covers
+  // the Unfetched bucket.
+  const playersWithSnapshot =
+    stats.players -
+    stats.refreshPolicy.reduce((sum, row) => sum + row.neverSnapped, 0);
+
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel>
@@ -196,24 +205,28 @@ export async function CoverageView({ region }: { region: Region }) {
             data={stats.trends.playersDiscoveredDaily}
             ariaLabel="New players discovered, last 30 days"
             defaultMode={ChartMode.Cumulative}
+            total={stats.players}
           />
           <CoverageAreaChart
             title="New clans discovered"
             data={stats.trends.clansDiscoveredDaily}
             ariaLabel="New clans discovered, last 30 days"
             defaultMode={ChartMode.Cumulative}
+            total={stats.clans}
           />
           <CoverageAreaChart
             title="Player snapshots"
             data={stats.trends.playerSnapshotsDaily}
             ariaLabel="Player snapshots, last 30 days"
             defaultMode={ChartMode.Daily}
+            total={stats.playerSnapshots}
           />
           <CoverageAreaChart
             title="First-time snapshots"
             data={stats.trends.firstSnapshotsDaily}
             ariaLabel="First-ever snapshots per day, last 30 days"
             defaultMode={ChartMode.Daily}
+            total={playersWithSnapshot}
           />
         </PanelContent>
       </Panel>
