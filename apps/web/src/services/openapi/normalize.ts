@@ -9,7 +9,12 @@ type Schema = {
   enum?: unknown[];
   default?: unknown;
 } & Record<string, unknown>;
-type Parameter = { name?: string; example?: unknown; schema?: Schema };
+type Parameter = {
+  name?: string;
+  description?: string;
+  example?: unknown;
+  schema?: Schema;
+};
 type Operation = { parameters?: Parameter[]; tags?: string[] };
 export type OpenApiDoc = {
   paths?: Record<string, Record<string, Operation>>;
@@ -112,14 +117,26 @@ function flattenSingleAllOf(schema?: Schema): void {
   }
 }
 
+// The example a parameter's own description advertises, as in "Map slug (e.g.
+// prokhorovka).". Reading it back from there keeps the example next to the
+// schema that owns it, which is the only way to tell two same-named params
+// apart: `PARAM_EXAMPLES` is keyed by name alone, so `/tanks/{slug}` and
+// `/maps/{slug}` are the same entry and the map endpoint documented `is-7`.
+function exampleFromDescription(description: unknown) {
+  if (typeof description !== "string") return undefined;
+  const match = /\(e\.g\.\s*([^)]+)\)/.exec(description);
+  return match ? match[1].trim() : undefined;
+}
+
 /**
  * Normalizes generated parameters for docs UIs:
  * - flattens single-element `allOf` so enums render as selects;
  * - applies the query defaults from `QUERY_PARAM_DEFAULTS` (next-openapi-gen
  *   doesn't serialize `.default()` on enum params), e.g. `metric` -> `wnx`;
  * - replaces next-openapi-gen's literal `example: "example"` placeholder with
- *   the first enum value (so e.g. `region` prefills `eu`), an entry from
- *   `PARAM_EXAMPLES` (so e.g. `tag` prefills `FAME`), or drops it.
+ *   the value its description advertises (so `/maps/{slug}` prefills
+ *   `prokhorovka`), the first enum value (so `region` prefills `eu`), an entry
+ *   from `PARAM_EXAMPLES` (so `tag` prefills `FAME`), or drops it.
  */
 function normalizeParameters(doc: OpenApiDoc): void {
   for (const pathItem of Object.values(doc.paths ?? {})) {
@@ -138,9 +155,11 @@ function normalizeParameters(doc: OpenApiDoc): void {
           parameter.schema.default = fallback;
         }
 
-        const named = parameter.name
-          ? PARAM_EXAMPLES[parameter.name]
-          : undefined;
+        const named =
+          exampleFromDescription(
+            parameter.description ?? parameter.schema?.description,
+          ) ??
+          (parameter.name ? PARAM_EXAMPLES[parameter.name] : undefined);
         const isPlaceholder = parameter.example === "example";
         if (named !== undefined) {
           // Our curated example always wins for these params: next-openapi-gen

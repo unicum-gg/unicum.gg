@@ -249,10 +249,15 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
 // literal `example: "example"` placeholder instead), so the examples shown in
 // the docs live here and are applied when serving the spec (see
 // `api/openapi.json/route.ts`), keyed by parameter name.
+//
+// Keyed by name means one entry per name across the whole API, so a param whose
+// example depends on the endpoint does not belong here: `slug` did, and every
+// map endpoint documented the tank example `is-7`. Those advertise their example
+// in their own description instead ("Map slug (e.g. prokhorovka).", read back by
+// `exampleFromDescription` in `./normalize`), which wins over this table.
 export const PARAM_EXAMPLES: Record<string, string> = {
   tag: "FAME",
   nickname: "Animal",
-  slug: "is-7",
   q: "uni",
 };
 
