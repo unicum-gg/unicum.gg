@@ -145,53 +145,42 @@ const nextConfig: NextConfig = {
   // App Router `app/icon.svg` convention so that path is a 404. Permanent
   // redirect so caches stop asking.
   async redirects() {
-    // The tank detail tabs moved from `?tab=` to their own route segment (so a
-    // render builds one tab instead of all three). Keep the old URLs working.
+    // Tabs and filters that used to be query params are route segments now (so
+    // a render builds one tab instead of all of them, and each is indexable).
+    // These keep the old URLs working.
+    //
+    // The value is a named capture group, so the segment is carried over
+    // verbatim instead of enumerating every tab here: adding or renaming one is
+    // a change in its own enum, never in this file. An unknown value lands on
+    // the tab route, which only prerenders the real ones and 404s the rest.
+    //
     // Next always forwards the request's query to the destination (there is no
-    // opt-out, and a trailing `?` in the destination does not strip it), so the
-    // landing URL keeps a stale `?tab=`. Harmless: the pages read no
-    // searchParams, and their canonical points at the bare segment, so the two
-    // consolidate.
-    const tankTabRedirects = ["performances", "marks"].flatMap((tab) => [
-      {
-        source: "/:region(eu|na|asia)/tanks/:slug",
-        has: [{ type: "query" as const, key: "tab", value: tab }],
-        destination: `/:region/tanks/:slug/${tab}`,
-        permanent: true,
-      },
-      {
-        source: "/tanks/:slug",
-        has: [{ type: "query" as const, key: "tab", value: tab }],
-        destination: `/tanks/:slug/${tab}`,
-        permanent: true,
-      },
-    ]);
-
-    // Same move on the tank index, whose five tabs are now route segments too.
-    // They live under `/all` so they can never collide with a vehicle slug.
-    const tankIndexTabRedirects = [
-      "specifications",
-      "economics",
-      "marks-of-excellence",
-      "marks-of-mastery",
-    ].flatMap((tab) => [
-      {
-        source: "/:region(eu|na|asia)/tanks",
-        has: [{ type: "query" as const, key: "tab", value: tab }],
-        destination: `/:region/tanks/all/${tab}`,
-        permanent: true,
-      },
-      {
-        source: "/tanks",
-        has: [{ type: "query" as const, key: "tab", value: tab }],
-        destination: `/tanks/all/${tab}`,
-        permanent: true,
-      },
-    ]);
+    // opt-out, and a trailing `?` does not strip it), so the landing URL keeps a
+    // stale param. Harmless: these pages read no searchParams, and their
+    // canonical points at the bare segment, so the two consolidate.
+    const capture = (key: string, name: string) => [
+      { type: "query" as const, key, value: `(?<${name}>.+)` },
+    ];
+    const segmentRedirects = [
+      // Tank detail: `?tab=performances` → `/tanks/is-7/performances`.
+      ["/:region(eu|na|asia)/tanks/:slug", "/:region/tanks/:slug/:tab", "tab"],
+      ["/tanks/:slug", "/tanks/:slug/:tab", "tab"],
+      // Tank index: `?tab=economics` → `/tanks/all/economics`. Under `/all` so a
+      // tab can never collide with a vehicle slug.
+      ["/:region(eu|na|asia)/tanks", "/:region/tanks/all/:tab", "tab"],
+      ["/tanks", "/tanks/all/:tab", "tab"],
+      // Map gallery: `?type=frontline` → `/maps/all/frontline`.
+      ["/:region(eu|na|asia)/maps", "/:region/maps/all/:type", "type"],
+      ["/maps", "/maps/all/:type", "type"],
+    ].map(([source, destination, key]) => ({
+      source,
+      has: capture(key, key),
+      destination,
+      permanent: true,
+    }));
 
     return [
-      ...tankTabRedirects,
-      ...tankIndexTabRedirects,
+      ...segmentRedirects,
       { source: "/favicon.ico", destination: "/icon.svg", permanent: true },
       // Legacy OG image path (the Next `opengraph-image` file convention, whose
       // URL got a route-group hash after the `(site)` move) → the stable
