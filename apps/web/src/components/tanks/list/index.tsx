@@ -1,6 +1,8 @@
 "use client";
 
-import { type MouseEvent, useEffect, useMemo, useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { type MouseEvent, useMemo } from "react";
 import {
   PERF_COLUMNS,
   PerfColumnSelector,
@@ -23,7 +25,6 @@ import { SPEC_COLUMNS } from "@/components/tanks/list/spec-columns";
 import {
   TankTab,
   TANK_TABS,
-  tankTabFromPathname,
   tankTabHref,
 } from "@/components/tanks/list/tabs";
 import {
@@ -31,14 +32,7 @@ import {
   TanksSpecsTable,
 } from "@/components/tanks/list/specifications";
 import { TanksTable } from "@/components/tanks/list/performances";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-} from "@/components/panel";
-import { tankTabCopy } from "@/components/tanks/list/copy";
-import APP from "@/constants/app";
+import { Panel, PanelContent, PanelHeader } from "@/components/panel";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
@@ -47,7 +41,7 @@ import {
   isRatingMetric,
   RatingMetric,
 } from "@unicum.gg/shared";
-import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+import { Region } from "@unicum.gg/wargaming";
 import useSWR from "swr";
 import { TableSkeleton, type SkeletonColumn } from "@/components/table-skeleton";
 import {
@@ -55,8 +49,6 @@ import {
   type TankListItem,
 } from "@/components/tanks/list/build";
 import { groupKey, loadGroup } from "@/components/tanks/list/load-group";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 // The row types + builders live in the framework-free `./build` (shared with the
 // server page); re-exported here so existing importers of these types keep
@@ -123,20 +115,12 @@ export function TanksIndex({
   activeTab: TankTab;
   basePath: string;
 }) {
-  // Tab is client state kept in sync with the URL segment, so switching tabs
-  // preserves the shared filters below without a server round-trip. Read from
-  // the URL on mount/back-forward via window.location instead of usePathname,
-  // so this subtree stays statically prerenderable (the page is force-static):
-  // each tab route embeds its own data group, and the client only re-syncs on
-  // back/forward.
-  const [tab, setTab] = useState(activeTab);
-  useEffect(() => {
-    const sync = () =>
-      setTab(tankTabFromPathname(window.location.pathname, basePath));
-    sync();
-    window.addEventListener("popstate", sync);
-    return () => window.removeEventListener("popstate", sync);
-  }, [basePath]);
+  // Each tab is a route of its own, so the active one comes from the server and
+  // changes through a real navigation. That is what keeps the metadata (title,
+  // description, canonical) in step with the page; a `pushState` would leave
+  // Next unaware and freeze them on the tab the page was loaded with.
+  const tab = activeTab;
+  const router = useRouter();
 
   const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const rangeMetric: RatingMetric = isRatingMetric(storedRating)
@@ -188,55 +172,23 @@ export function TanksIndex({
     RANGE_DEFAULT[activeTab],
   );
 
+  // The href carries the tab alone, so it is what crawlers follow and what Next
+  // prefetches. The click adds the current filters (they live in the query
+  // string) so switching tab keeps them, then navigates for real.
   function selectTab(e: MouseEvent, next: TankTab) {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
     e.preventDefault();
     if (next === tab) return;
-    setTab(next);
-    // The range filter targets the active table's columns, so reset it.
-    filters.resetRange(RANGE_DEFAULT[next]);
-    window.history.pushState(null, "", tankTabHref(basePath, next));
+    const search = window.location.search;
+    router.push(`${tankTabHref(basePath, next)}${search}`);
   }
 
-  // The tab swap never re-runs generateMetadata, so the document title would
-  // keep naming the tab the page was loaded with. Each route still serves its
-  // own title on a fresh load; this only keeps the browser tab honest after a
-  // client-side switch.
-  useEffect(() => {
-    const { title } = tankTabCopy(tab, REGION_LABEL[region]);
-    document.title = `${title} | ${APP.NAME}`;
-  }, [tab, region]);
-
-  // Heading is rendered here, not in the page: switching tab is a client-side
-  // pushState that preserves the filters, so a server-rendered heading would
-  // keep describing the tab the page was loaded with. Same source as the page's
-  // metadata, so the <h1> and the <title> can never drift apart.
-  const copy = tankTabCopy(tab, REGION_LABEL[region]);
-
   return (
-    <div className="mx-auto w-full max-w-7xl">
-      <Panel>
-        <PanelContent className="px-4 py-12 text-center">
-          <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
-            {REGION_EMOJI[region]} {REGION_LABEL[region]}
-          </div>
-          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            {copy.heading.lead}{" "}
-            <span className="text-brand">{copy.heading.accent}</span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            {copy.intro(intFmt.format(tanks.length))}
-          </p>
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader className="px-0! py-0!">
+    <Panel>
+      <PanelHeader className="px-0! py-0!">
         <nav className="flex items-center overflow-x-auto text-sm">
           {TANK_TABS.map((t) => (
-            <a
+            <Link
               key={t.id}
               href={tankTabHref(basePath, t.id)}
               onClick={(e) => selectTab(e, t.id)}
@@ -248,7 +200,7 @@ export function TanksIndex({
               )}
             >
               {t.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </PanelHeader>
@@ -289,8 +241,7 @@ export function TanksIndex({
             )}
           </>
         )}
-        </div>
-      </Panel>
-    </div>
+      </div>
+    </Panel>
   );
 }

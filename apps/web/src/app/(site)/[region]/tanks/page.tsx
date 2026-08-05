@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/list";
 import { tankTabCopy } from "@/components/tanks/list/copy";
 import {
@@ -15,7 +16,14 @@ import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
-import { Region, isRegion } from "@unicum.gg/wargaming";
+import {
+  Region,
+  isRegion,
+  REGION_EMOJI,
+  REGION_LABEL,
+} from "@unicum.gg/wargaming";
+
+const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
 // ISR like the other landings: served as prerendered HTML, revalidated in the
 // background. The active tab and filters are read client-side from the URL
@@ -102,15 +110,33 @@ export async function renderTanksIndex(
     items = buildStatsItems(perf.results as Parameters<typeof buildStatsItems>[0]);
   }
 
-  // The heading lives inside TanksIndex rather than here: switching tab is a
-  // client-side pushState (it preserves the shared filters), so a server-rendered
-  // heading would keep describing the tab the page was loaded with.
+  const copy = tankTabCopy(activeTab, REGION_LABEL[region]);
+
   return (
-    <TanksIndex
-      tanks={items}
-      region={region}
-      activeTab={activeTab}
-      basePath={ROUTES.TANKS(region)}
-    />
+    <div className="mx-auto w-full max-w-7xl">
+      <Panel>
+        <PanelContent className="px-4 py-12 text-center">
+          <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
+            {REGION_EMOJI[region]} {REGION_LABEL[region]}
+          </div>
+          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
+            {copy.heading.lead}{" "}
+            <span className="text-brand">{copy.heading.accent}</span>
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
+            {copy.intro(intFmt.format(items.length))}
+          </p>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <TanksIndex
+        tanks={items}
+        region={region}
+        activeTab={activeTab}
+        basePath={ROUTES.TANKS(region)}
+      />
+    </div>
   );
 }
