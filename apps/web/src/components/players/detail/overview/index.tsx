@@ -12,6 +12,7 @@ import {
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
+import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { styles } from "@/lib/styles";
 import type {
@@ -98,7 +99,7 @@ export function OverallTab({
       <Panel>
         <PanelHeader>
           <PanelTitle>
-            {nickname}&apos;s {metricLabel} progression
+            {nickname}&apos;s <RatingMetricInlineSelect /> progression
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
