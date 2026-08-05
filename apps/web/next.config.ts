@@ -185,6 +185,17 @@ const nextConfig: NextConfig = {
         "/:region/clans/:tag/:section",
         "section",
       ],
+      // Player detail: same two axes, same single-segment states.
+      [
+        "/:region(eu|na|asia)/players/:nickname",
+        "/:region/players/:nickname/:tab",
+        "tab",
+      ],
+      [
+        "/:region(eu|na|asia)/players/:nickname",
+        "/:region/players/:nickname/:section",
+        "section",
+      ],
     ].map(([source, destination, key]) => ({
       source,
       has: capture(key, key),
