@@ -1,4 +1,5 @@
 import { bigint, index, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -20,6 +21,12 @@ export function makePlayerNameHistoryTable(region: string) {
     },
     (t) => [
       index(`${region}_player_name_history_account_id_idx`).on(t.accountId),
+      // Reverse lookup: which account used to carry this nickname. Backs the
+      // redirect from a renamed player's old URL, and every miss on it (any
+      // unknown nickname reaches this path) would otherwise scan the table.
+      index(`${region}_player_name_history_nickname_lower_idx`).on(
+        sql`LOWER(${t.nickname})`,
+      ),
     ],
   );
 }

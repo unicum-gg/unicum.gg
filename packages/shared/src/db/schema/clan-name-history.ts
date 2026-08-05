@@ -1,4 +1,5 @@
 import { bigint, index, pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 import { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -19,7 +20,14 @@ export function makeClanNameHistoryTable(region: string) {
         .notNull()
         .defaultNow(),
     },
-    (t) => [index(`${region}_clan_name_history_clan_id_idx`).on(t.clanId)],
+    (t) => [
+      index(`${region}_clan_name_history_clan_id_idx`).on(t.clanId),
+      // Reverse lookup: which clan used to carry this tag. Same role as the
+      // player-side nickname index.
+      index(`${region}_clan_name_history_tag_lower_idx`).on(
+        sql`LOWER(${t.tag})`,
+      ),
+    ],
   );
 }
 
