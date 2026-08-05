@@ -1,49 +1,31 @@
-"use client";
-
 import Link from "next/link";
-import { type ComponentPropsWithRef, useState } from "react";
+import type { ComponentPropsWithRef } from "react";
 
 /**
- * A `next/link` that does not prefetch on viewport entry, only once the user
- * shows intent (hover or focus). Use it for links that shouldn't eagerly
- * prefetch but should still feel instant on click:
+ * `next/link` with Next's default prefetching, re-exported under the name the
+ * codebase already imports everywhere.
  *
- * - links rendered in more than one place at once (a nav item duplicated across
- *   the desktop bar and the hidden mobile menu), where viewport prefetch fires
- *   from every copy, and
- * - secondary affordances whose region-cookie re-render churns the router tree.
+ * WHY IT IS A PLAIN LINK NOW
+ * Navigation cost is binary: a prefetched route commits in ~40-70ms with no
+ * request at all, an unprefetched one costs 500-1300ms (the RSC payload
+ * round-trip). That holds for every App Router site, nextjs.org included, which
+ * eagerly prefetches ~29 routes on load. So prefetching is the whole game.
  *
- * Both are heavily amplified by the Next 16 prefetch regression
- * (vercel/next.js#85470), which re-fetches a single eager link many times.
- * Starting at `prefetch={false}` suppresses that; the first hover/focus swaps to
- * `prefetch={null}`, which restores Next's default static prefetch (see the
- * "Hover-triggered prefetch" recipe in the Next.js prefetching guide).
+ * This used to start at `prefetch={false}` and swap to `prefetch={null}` on
+ * hover/focus, to spare the origin. It did not work: Next's internal
+ * IntersectionObserver has already handled the link by then, and flipping the
+ * prop afterwards does not re-arm it, so the prefetch never fired (measured:
+ * zero prefetch requests on the tank index). On touch devices there is no hover
+ * at all, so it could not have worked there either.
  *
- * Drop-in for `<Link>`: forwards every prop and composes any passed
- * `onMouseEnter`/`onFocus`.
+ * The cost it was guarding against is now absorbed by the CDN, since the RSC
+ * payloads are cached at the edge (~20ms on a hit). One screen of the tank index
+ * prefetches 8 links for ~127kB total, which is the weight of a single image.
+ *
+ * Kept as a named component rather than deleted so the ~30 call sites keep
+ * working, and so there is one place to reintroduce throttling if the origin
+ * ever needs it again.
  */
-export function HoverPrefetchLink({
-  onMouseEnter,
-  onFocus,
-  ref,
-  ...props
-}: ComponentPropsWithRef<typeof Link>) {
-  const [prefetch, setPrefetch] = useState<false | null>(false);
-  return (
-    <Link
-      {...props}
-      // Forwarded so the link works as a Radix `asChild` slot child (tooltip /
-      // dropdown triggers), which clone the child and pass it a ref.
-      ref={ref}
-      prefetch={prefetch}
-      onMouseEnter={(e) => {
-        setPrefetch(null);
-        onMouseEnter?.(e);
-      }}
-      onFocus={(e) => {
-        setPrefetch(null);
-        onFocus?.(e);
-      }}
-    />
-  );
+export function HoverPrefetchLink(props: ComponentPropsWithRef<typeof Link>) {
+  return <Link {...props} />;
 }
