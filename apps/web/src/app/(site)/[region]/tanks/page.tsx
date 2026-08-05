@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import {
-  Panel,
-  PanelContent,
-  PanelSeparator,
-} from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/list";
+import { tankTabCopy } from "@/components/tanks/list/copy";
 import {
   TankGroup,
   buildMasteryItems,
@@ -15,18 +11,11 @@ import {
   groupForTab,
   type TankListItem,
 } from "@/components/tanks/list/build";
-import { TankTab } from "@/components/tanks/list/tabs";
+import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { buildSafe, unicum } from "@/services/sdk";
-import {
-  Region,
-  isRegion,
-  REGION_EMOJI,
-  REGION_LABEL,
-} from "@unicum.gg/wargaming";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+import { Region, isRegion } from "@unicum.gg/wargaming";
 
 // ISR like the other landings: served as prerendered HTML, revalidated in the
 // background. The active tab and filters are read client-side from the URL
@@ -42,22 +31,30 @@ export function generateStaticParams() {
   return [{ region: Region.NA }, { region: Region.ASIA }];
 }
 
+export async function tanksIndexMetadata(
+  region: string,
+  tab: TankTab,
+): Promise<Metadata> {
+  if (!isRegion(region)) return {};
+  const { title, description } = tankTabCopy(tab, region.toUpperCase());
+  return constructMetadata({
+    title,
+    description,
+    ogImage: false,
+    // Static (ISR) page: canonical must be explicit, since generateCanonical()
+    // reads headers() which isn't available during static generation. Points at
+    // this tab's own segment so the five don't compete.
+    canonical: tankTabHref(ROUTES.TANKS(region), tab),
+  });
+}
+
 export async function generateMetadata({
   params,
 }: {
   params: Promise<{ region: string }>;
 }): Promise<Metadata> {
   const { region } = await params;
-  if (!isRegion(region)) return {};
-  const regionLabel = region.toUpperCase();
-  return constructMetadata({
-    title: `All World of Tanks tanks (${regionLabel}), browse every vehicle`,
-    description: `Browse every World of Tanks tank on ${regionLabel}: filter by tier, nation, class and role, then dive into per-tank stats, top players and expected values.`,
-    ogImage: false,
-    // Static (ISR) page: canonical must be explicit, since generateCanonical()
-    // reads headers() which isn't available during static generation.
-    canonical: ROUTES.TANKS(region),
-  });
+  return tanksIndexMetadata(region, TankTab.Performances);
 }
 
 export default async function TanksIndexPage({
@@ -105,33 +102,15 @@ export async function renderTanksIndex(
     items = buildStatsItems(perf.results as Parameters<typeof buildStatsItems>[0]);
   }
 
+  // The heading lives inside TanksIndex rather than here: switching tab is a
+  // client-side pushState (it preserves the shared filters), so a server-rendered
+  // heading would keep describing the tab the page was loaded with.
   return (
-    <div className="mx-auto w-full max-w-7xl">
-      <Panel>
-        <PanelContent className="px-4 py-12 text-center">
-          <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
-            {REGION_EMOJI[region]} {REGION_LABEL[region]}
-          </div>
-          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
-            All <span className="text-brand">tanks</span>
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            Every one of the {intFmt.format(items.length)} World of Tanks
-            vehicles on {REGION_LABEL[region]}. Filter by tier, nation, class
-            and role, then open a tank for its stats, best players and expected
-            values.
-          </p>
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <TanksIndex
-        tanks={items}
-        region={region}
-        activeTab={activeTab}
-        basePath={ROUTES.TANKS(region)}
-      />
-    </div>
+    <TanksIndex
+      tanks={items}
+      region={region}
+      activeTab={activeTab}
+      basePath={ROUTES.TANKS(region)}
+    />
   );
 }
