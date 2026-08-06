@@ -3,7 +3,6 @@ import ROUTES from "@/constants/routes";
 import { getDocsSections } from "@/lib/docs-source";
 import { MCP_NAME, renderOperations } from "@/services/mcp/skill";
 import { TOOL_DEFS } from "@/services/mcp/tools";
-import { StrongholdTier } from "@unicum.gg/shared";
 import { Region, REGIONS } from "@unicum.gg/wargaming";
 
 /**
@@ -16,9 +15,11 @@ import { Region, REGIONS } from "@unicum.gg/wargaming";
  * an agent the machine-readable surfaces we already serve, in one fetch, instead
  * of letting it scrape stat tables out of HTML.
  *
- * Everything below the prose is derived: the endpoint list comes from the same
- * generated OpenAPI document that feeds the docs, the SDK and the MCP server, so
- * documenting a new route publishes it here too.
+ * Only the prose is written here. The endpoint list comes from the generated
+ * OpenAPI document that also feeds the docs, the SDK and the MCP server, so
+ * documenting a route publishes it here with no second edit. The site's own
+ * pages are not listed at all: `/sitemap.md` is their index, and it is the
+ * Markdown twin of `/sitemap.xml`, so it needs no maintenance either.
  */
 const abs = (path: string): string => `${APP.URL}${path}`;
 
@@ -37,81 +38,6 @@ const SAMPLE = {
   TANK: "is-7",
   MAP: "himmelsdorf",
 };
-
-type SiteSection = { title: string; url: string; blurb: string };
-
-/**
- * The site's own map. Titles and blurbs are editorial, the paths are not: they
- * come from `ROUTES`, so a route rename cannot leave a dead link here.
- */
-function siteSections(): SiteSection[] {
-  const eu = Region.EU;
-  return [
-    {
-      title: "Players",
-      url: md(ROUTES.PLAYERS(eu)),
-      blurb:
-        "Leaderboards, and a profile per account: WN8, WNX, WTR, winrate, average damage, per-tank breakdown, rating history and every clan the player has been in.",
-    },
-    {
-      title: "Player profile",
-      url: md(ROUTES.PLAYER(eu, SAMPLE.PLAYER)),
-      blurb:
-        "Shape of a profile URL. Old nicknames redirect to the current one, so a stale link still resolves.",
-    },
-    {
-      title: "Player comparison",
-      url: md(ROUTES.COMPARE_PLAYERS(eu, [SAMPLE.PLAYER, SAMPLE.OTHER_PLAYER])),
-      blurb: "Two or more accounts side by side on the same metrics.",
-    },
-    {
-      title: "Clans",
-      url: md(ROUTES.CLANS(eu)),
-      blurb:
-        "Clan leaderboards, and a page per clan: roster with each member's rating, average clan ratings, stronghold results and the clan's own rename history.",
-    },
-    {
-      title: "Clan page",
-      url: md(ROUTES.CLAN(eu, SAMPLE.CLAN)),
-      blurb: "Shape of a clan URL. Clans are addressed by tag, case-insensitive.",
-    },
-    {
-      title: "Stronghold leaderboard",
-      // Tier-qualified on purpose: the bare `/clans/stronghold` redirects to
-      // the default tier, and a redirect has no Markdown twin to convert.
-      url: md(ROUTES.STRONGHOLD(eu, StrongholdTier.T10)),
-      blurb: "Clan stronghold standings, per tier.",
-    },
-    {
-      title: "Tanks",
-      url: md(ROUTES.TANKS(eu)),
-      blurb:
-        "The full vehicle catalogue with filters, plus a page per tank: characteristics, crew skills, field modifications, equipment, marks of excellence thresholds and community averages.",
-    },
-    {
-      title: "Tank page",
-      url: md(ROUTES.TANK(eu, SAMPLE.TANK)),
-      blurb: "Shape of a tank URL. Slugs are name-based and stable across regions.",
-    },
-    {
-      title: "Maps",
-      url: md(ROUTES.MAPS(eu)),
-      blurb:
-        "Every map in the random battle rotation, with its minimap, size, battle length, and base and spawn positions per game mode.",
-    },
-    {
-      title: "Coverage",
-      url: md(ROUTES.COVERAGE(eu)),
-      blurb:
-        "How much of each server we track: accounts known, accounts with snapshots, and how the coverage has grown.",
-    },
-    {
-      title: "MCP server",
-      url: md(ROUTES.MCP),
-      blurb: "Setup instructions for Claude, Cursor and other MCP clients.",
-    },
-  ];
-}
 
 function prelude(): string[] {
   const regions = REGIONS.map((r) => `\`${r}\``).join(", ");
@@ -155,10 +81,6 @@ function prelude(): string[] {
     "every entity: the same nickname on two servers is two different players.",
     "Paths without a region are EU shortcuts.",
     "",
-    "## Sections",
-    "",
-    ...siteSections().map((s) => `- [${s.title}](${s.url}): ${s.blurb}`),
-    "",
   ];
 }
 
@@ -166,7 +88,8 @@ function indexes(): string[] {
   return [
     "## Indexes",
     "",
-    `- [Sitemap index](${abs("/sitemap.xml")}): every player, clan, tank and map URL we serve, split per region and paginated.`,
+    `- [Sitemap](${abs("/sitemap.md")}): every section of the site, as Markdown. Each entry links to that section's own sitemap, down to the individual pages, so this is the way to enumerate anything.`,
+    `- [Sitemap index](${abs("/sitemap.xml")}): the same tree in XML, for crawlers.`,
     `- [robots.txt](${abs("/robots.txt")}): crawling and AI content-usage signals. Training and inference on this content are both allowed.`,
     "",
   ];

@@ -1,7 +1,10 @@
 import { encodingForModel } from "js-tiktoken";
-import { parse } from "node-html-parser";
+// Aliased: `HTMLElement` is also a DOM global, and the two are unrelated types.
+import { parse, type HTMLElement as ParsedNode } from "node-html-parser";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
+import { selfOrigin } from "@/lib/self-origin";
+import { isSitemapPath, sitemapToMarkdown } from "@/services/markdown/sitemap";
 
 const turndown = new TurndownService({
   headingStyle: "atx",
@@ -55,11 +58,72 @@ function toMarkdownHref(href: string): string {
 }
 
 /**
+ * The entry points a Markdown reader has and a visitor does not, so they are in
+ * no navbar and get a section of their own. Named after `llms.txt`'s own
+ * `## Indexes`, which lists the same kind of thing.
+ */
+function indexesSection(): string {
+  return [
+    "## Indexes",
+    "",
+    "- [llms.txt](/llms.txt): the API, the MCP server and the other machine-readable surfaces.",
+    "- [llms-full.txt](/llms-full.txt): the same, with every endpoint's parameters inline.",
+    "- [sitemap.md](/sitemap.md): every section of the site, down to the individual pages.",
+  ].join("\n");
+}
+
+/**
+ * The site navigation, appended so a Markdown reader can move around the site
+ * the way a visitor does. Read from the rendered navbar, the same way the page
+ * body is read from `#page-content`, so it is whatever the page actually serves.
+ */
+function navigationSection(document: ParsedNode): string {
+  // `#nd-nav` is the site chrome's navbar, `#nd-subnav` the one `/docs` brings
+  // with its own layout. Both are fumadocs' header for their section.
+  const nav =
+    document.querySelector("#nd-nav") ?? document.querySelector("#nd-subnav");
+
+  const seen = new Set<string>();
+  const links: string[] = [];
+  for (const anchor of nav?.querySelectorAll("a[href]") ?? []) {
+    const href = anchor.getAttribute("href");
+    // The link's accessible name, which is its label rather than everything it
+    // renders: icon-only links (Discord, GitHub) have no text at all, and the
+    // dropdown's cards render a description under their title.
+    const text = anchor.getAttribute("aria-label")?.trim() || anchor.text.trim();
+    if (!href || !text || seen.has(href)) continue;
+    seen.add(href);
+    links.push(`- [${text}](${toMarkdownHref(href)})`);
+  }
+
+  return links.length ? ["## Navigation", "", ...links].join("\n") : "";
+}
+
+function withTokens(markdown: string): Record<string, string> {
+  const headers: Record<string, string> = {
+    "Content-Type": "text/markdown; charset=utf-8",
+    "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
+    // The `.md` twin is a duplicate of the HTML page, meant for AI tools that
+    // fetch it directly (the "Open in ChatGPT/Claude/…" deep links). Keep it out
+    // of the search index so it never competes with the canonical HTML page;
+    // `nofollow` stops crawlers from walking the `.md`→`.md` link tree.
+    "X-Robots-Tag": "noindex, nofollow",
+  };
+  const tokenCount = countTokens(markdown);
+  if (tokenCount !== null) headers["x-markdown-tokens"] = String(tokenCount);
+  return headers;
+}
+
+/**
  * Markdown rendering of any page. Reached via `proxy.ts`, which rewrites a
  * `.md` suffix or an `Accept: text/markdown` request to `/api/md/<path>`.
  *
  * We re-fetch the page over HTTP and convert its `#page-content` container
  * (the layout wraps `{children}` in it) so nav and footer never leak in.
+ *
+ * A `.md` whose path names a sitemap is the twin of the XML rather than of a
+ * page, so `/sitemap.md` reads `/sitemap.xml` and `/eu/tanks/sitemap-0.md`
+ * reads its own file. Same idea, different source format.
  */
 export async function GET(
   request: Request,
@@ -72,17 +136,15 @@ export async function GET(
   // it on the request URL; the self-fetch would otherwise always get defaults.
   const search = new URL(request.url).search;
 
-  // Use localhost so the self-fetch never routes through Cloudflare or any
-  // external network. The public URL hairpins through the CDN and fails in
-  // production (Railway containers cannot reliably reach themselves via the
-  // public hostname). PORT is set by Railway; 3000 is the Next.js default.
-  const port = process.env.PORT ?? 3000;
-  const origin = `http://localhost:${port}`;
+  // Loopback so the self-fetch never routes through the CDN or any external
+  // network (see `selfOrigin`).
+  const origin = selfOrigin();
+  const sitemap = isSitemapPath(`/${path}`);
 
   let response: Response;
   try {
-    response = await fetch(`${origin}/${path}${search}`, {
-      headers: { Accept: "text/html" },
+    response = await fetch(`${origin}/${path}${sitemap ? ".xml" : ""}${search}`, {
+      headers: { Accept: sitemap ? "application/xml" : "text/html" },
       cache: "no-store",
     });
   } catch {
@@ -93,8 +155,18 @@ export async function GET(
     return new Response("Page not found", { status: 404 });
   }
 
+  if (sitemap) {
+    const markdown = await sitemapToMarkdown(
+      await response.text(),
+      origin,
+      `/${path}.xml`,
+    );
+    return new Response(markdown, { headers: withTokens(markdown) });
+  }
+
   const html = await response.text();
-  const content = parse(html).querySelector("#page-content");
+  const document = parse(html);
+  const content = document.querySelector("#page-content");
 
   if (!content) {
     return new Response("Page content not found", { status: 404 });
@@ -113,19 +185,12 @@ export async function GET(
     if (href) anchor.setAttribute("href", toMarkdownHref(href));
   }
 
-  const markdown = turndown.turndown(content.innerHTML);
-
-  const headers: Record<string, string> = {
-    "Content-Type": "text/markdown; charset=utf-8",
-    "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
-    // The `.md` twin is a duplicate of the HTML page, meant for AI tools that
-    // fetch it directly (the "Open in ChatGPT/Claude/…" deep links). Keep it out
-    // of the search index so it never competes with the canonical HTML page;
-    // `nofollow` stops crawlers from walking the `.md`→`.md` link tree.
-    "X-Robots-Tag": "noindex, nofollow",
-  };
-  const tokenCount = countTokens(markdown);
-  if (tokenCount !== null) headers["x-markdown-tokens"] = String(tokenCount);
-
-  return new Response(markdown, { headers });
+  const markdown = [
+    turndown.turndown(content.innerHTML),
+    navigationSection(document),
+    indexesSection(),
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+  return new Response(markdown, { headers: withTokens(markdown) });
 }

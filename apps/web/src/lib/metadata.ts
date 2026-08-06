@@ -6,6 +6,25 @@ const SITE_URL = APP.URL;
 const SITE_NAME = APP.NAME;
 const SITE_DESCRIPTION = APP.DESCRIPTION;
 
+const TITLE_SUFFIX = ` | ${SITE_NAME}`;
+
+/** How every page's `<title>` is built, from its own title and the site name. */
+export function formatTitle(title?: string): string {
+  return title ? `${title}${TITLE_SUFFIX}` : SITE_NAME;
+}
+
+/**
+ * The inverse: a page's own title, given the rendered `<title>`. Lives here so
+ * it cannot drift from `formatTitle`. Used when reading titles back off the
+ * pages (the sitemap's Markdown rendering), where the site name is already the
+ * document's heading and would only repeat on every line.
+ */
+export function stripSiteName(documentTitle: string): string {
+  return documentTitle.endsWith(TITLE_SUFFIX)
+    ? documentTitle.slice(0, -TITLE_SUFFIX.length)
+    : documentTitle;
+}
+
 export function constructMetadata({
   title,
   description = SITE_DESCRIPTION,
@@ -33,7 +52,7 @@ export function constructMetadata({
   canonical: string;
 }): Metadata {
   const canonical = buildCanonical(explicitCanonical);
-  const formattedTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
+  const formattedTitle = formatTitle(title);
   const resolvedOgImage =
     ogImage === false
       ? null
