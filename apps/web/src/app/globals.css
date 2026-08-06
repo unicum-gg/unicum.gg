@@ -167,6 +167,9 @@
   /* Brand orange, the unicum.gg logo mark. Theme-independent, so it's only
      declared here (no `.dark` override). Exposed as the `brand` Tailwind color
      via @theme, so `bg-brand`/`text-brand` replace the scattered `#f25322`. */
+  /* Kept in sync by hand with `BRAND_COLOR` in `@unicum.gg/shared` (CSS cannot
+     import TypeScript). That constant serves the places a custom property can't
+     reach: `next/og` cards and the Discord embeds. */
   --brand: #f25322;
   --destructive-foreground: var(--color-red-700);
   --info: var(--color-blue-500);

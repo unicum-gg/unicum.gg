@@ -1,11 +1,10 @@
-import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import { APP_IDENTITY, BRAND_COLOR_INT, env } from "@unicum.gg/shared";
 
 // Minimal bot-token Discord REST client, usable from the web AND the worker (no
 // discord.js dep — plain fetch). Lets our own bot post boost notifications into
 // a channel the officer picked, and enumerate the servers/channels for that
 // picker, so no per-channel webhooks are needed.
 const API = "https://discord.com/api/v10";
-const BRAND = 0xf25322;
 
 /** Text-like channel types we can post into (text, announcement). */
 const POSTABLE_CHANNEL_TYPES = new Set([0, 5]);
@@ -157,7 +156,7 @@ export async function sendBoostNotification(
     title: "⚡ Stronghold boosts activated",
     url: n.clanUrl,
     description: `**[${n.clanTag}]** · ${n.workflowName || "Boost workflow"}\n${lines.join("\n")}`,
-    color: BRAND,
+    color: BRAND_COLOR_INT,
     footer: { text: `${n.onlineCount} online · ${APP_IDENTITY.NAME}` },
   });
 }
@@ -170,7 +169,7 @@ export async function sendTestNotification(
   return postChannelEmbed(channelId, {
     title: "✅ Boost notifications connected",
     description: `[${clanTag}] Stronghold boost activations will be posted here.`,
-    color: BRAND,
+    color: BRAND_COLOR_INT,
     footer: { text: APP_IDENTITY.NAME },
   });
 }

@@ -1,5 +1,5 @@
 import "server-only";
-import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import { APP_IDENTITY, BRAND_COLOR_INT, env } from "@unicum.gg/shared";
 import { discordBotEnabled, postChannelEmbed } from "@unicum.gg/core/discord";
 import UMAMI from "@/constants/umami";
 import {
@@ -45,7 +45,6 @@ const SENTIMENT_COLOR: Record<FeedbackSentiment, number> = {
   [FeedbackSentiment.Good]: 0x84cc16,
   [FeedbackSentiment.Great]: 0x22c55e,
 };
-const BRAND_COLOR = 0xf25322;
 
 function buildEmbed(payload: FeedbackPayload) {
   const { topic, sentiment, message, page, umamiSessionId, author } = payload;
@@ -82,7 +81,7 @@ function buildEmbed(payload: FeedbackPayload) {
   return {
     title: `New feedback${emoji ? ` ${emoji}` : ""}`,
     description: message.slice(0, 4000),
-    color: sentiment ? SENTIMENT_COLOR[sentiment] : BRAND_COLOR,
+    color: sentiment ? SENTIMENT_COLOR[sentiment] : BRAND_COLOR_INT,
     fields,
     footer: { text: APP_IDENTITY.NAME },
   };

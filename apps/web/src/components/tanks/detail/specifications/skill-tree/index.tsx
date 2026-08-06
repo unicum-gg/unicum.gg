@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import Image from "next/image";
+import { BRAND_COLOR } from "@unicum.gg/shared";
 import type {
   SkillNode,
   TankSkillTree,
@@ -33,7 +34,7 @@ const MECHANICS_COLOR = "#c98bdb";
 function categoryColor(category: string): string {
   return (
     CATEGORY[category]?.color ??
-    (category === "mechanics" ? MECHANICS_COLOR : "#f25322")
+    (category === "mechanics" ? MECHANICS_COLOR : BRAND_COLOR)
   );
 }
 
@@ -164,7 +165,7 @@ export function TankSkillTree({
                   y1={py(e.from.position[1])}
                   x2={px(e.to.position[0])}
                   y2={py(e.to.position[1])}
-                  stroke={e.live ? "#f25322" : "currentColor"}
+                  stroke={e.live ? BRAND_COLOR : "currentColor"}
                   strokeWidth={e.live ? 0.5 : 0.35}
                   className={e.live ? undefined : "text-fd-border"}
                   vectorEffect="non-scaling-stroke"

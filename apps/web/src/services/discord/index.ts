@@ -1,7 +1,7 @@
 import "server-only";
 import { REST } from "@discordjs/rest";
 import { OAuth2Scopes, PermissionFlagsBits } from "discord-api-types/v10";
-import { APP_IDENTITY, env } from "@unicum.gg/shared";
+import { APP_IDENTITY, BRAND_COLOR_INT, env } from "@unicum.gg/shared";
 
 // Discord OAuth2 for the "Add to Discord" install flow. A single authorization
 // requests four scopes so one click does everything:
@@ -227,7 +227,7 @@ function onboardingMessage() {
         description:
           "World of Tanks stats, right in Discord. Try these in your server:",
         url: APP_IDENTITY.URL,
-        color: 0xf25322,
+        color: BRAND_COLOR_INT,
         fields: [
           {
             name: "/player <nickname>",

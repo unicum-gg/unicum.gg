@@ -4,6 +4,7 @@ import { UnicumError } from "@unicum.gg/sdk";
 import {
   APP_IDENTITY,
   BATTLE_TYPE_LABEL,
+  BRAND_COLOR_INT,
   BattleType,
   MAP_CAMOUFLAGE_LABEL,
   MAP_GAME_MODE_LABEL,
@@ -18,7 +19,7 @@ import {
   REGIONS,
 } from "@unicum.gg/wargaming";
 import { editReplyWithShare } from "../lib/ephemeral-share.js";
-import { BRAND_COLOR_INT, mapUrl } from "../lib/format.js";
+import { mapUrl } from "../lib/format.js";
 import { unicum, unicumPublic } from "../lib/sdk.js";
 import { renderTable, type TableRow } from "../lib/table.js";
 

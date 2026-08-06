@@ -17,7 +17,7 @@ import {
   StatCard,
   VehicleTypeGlyph,
 } from "@/components/og";
-import { VEHICLE_CLASS_LABEL_FULL, wnxColor } from "@unicum.gg/shared";
+import { BRAND_COLOR, VEHICLE_CLASS_LABEL_FULL, wnxColor } from "@unicum.gg/shared";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getTopPlayersByTank } from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
 import {
@@ -118,7 +118,7 @@ export async function GET(
               fontWeight: 700,
             }}
           >
-            <span style={{ color: "#f25322" }}>{tierLabel}</span>
+            <span style={{ color: BRAND_COLOR }}>{tierLabel}</span>
             <span style={{ color: "#A1A1AA", fontWeight: 400, fontSize: 28 }}>
               {classLabel}
             </span>

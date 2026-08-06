@@ -1,4 +1,5 @@
 import { useId, type ReactNode } from "react";
+import { BRAND_COLOR } from "@unicum.gg/shared";
 import { cn } from "@/lib/utils";
 
 /**
@@ -22,7 +23,7 @@ const HEX_H = 86.6;
 
 const TINCTURE: Record<CrestKind, { fill: string; edge: string }> = {
   [CrestKind.Verified]: { fill: "#3b9eff", edge: "#1f6fd6" },
-  [CrestKind.Supporter]: { fill: "#f25322", edge: "#b8390f" },
+  [CrestKind.Supporter]: { fill: BRAND_COLOR, edge: "#b8390f" },
   [CrestKind.Streamer]: { fill: "#9147ff", edge: "#6d28d9" },
 };
 
