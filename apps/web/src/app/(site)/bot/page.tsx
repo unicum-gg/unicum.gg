@@ -5,6 +5,7 @@ import {
   DiscordLogoIcon,
   JeepIcon,
   LightningIcon,
+  MapPinIcon,
   ShareNetworkIcon,
   ShieldIcon,
 } from "@phosphor-icons/react/dist/ssr";
@@ -27,14 +28,14 @@ import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 const TITLE = `World of Tanks Discord bot`;
-const DESCRIPTION = `Add the ${APP.NAME} bot to your Discord server for instant World of Tanks stats. The /player, /clan and /tank slash commands return WN8, WNX and winrate for any player, clan or tank across EU, NA and Asia, straight from the site's data.`;
+const DESCRIPTION = `Add the ${APP.NAME} bot to your Discord server for instant World of Tanks stats. The /player, /clan, /tank and /maps slash commands return WN8, WNX, winrate and map details for any player, clan, tank or battle map across EU, NA and Asia, straight from the site's data.`;
 
 export async function generateMetadata(): Promise<Metadata> {
   return constructMetadata({
     title: TITLE,
     description: DESCRIPTION,
     ogTitle: "Discord bot",
-    ogSubtitle: "/player · /clan · /tank",
+    ogSubtitle: "/player · /clan · /tank · /maps",
     canonical: ROUTES.BOT,
   });
 }
@@ -74,6 +75,13 @@ const COMMANDS = [
     summary: "Tank stats",
     description:
       "A vehicle's server-average performance across tracked players, with the current Marks of Excellence and Ace Tanker thresholds.",
+  },
+  {
+    name: "/maps",
+    Icon: MapPinIcon,
+    summary: "Battle maps",
+    description:
+      "A battle map's size, timer, team size and game modes, with its minimap and the battle types it is played in.",
   },
 ];
 
@@ -172,14 +180,15 @@ export default async function BotPage({
           </div>
           <h1 className="mx-auto max-w-4xl font-heading text-4xl font-bold tracking-tight text-balance md:text-5xl">
             <span className="text-fd-primary">/player</span>,{" "}
-            <span className="text-fd-primary">/clan</span> and{" "}
-            <span className="text-fd-primary">/tank</span> stats, right in your
+            <span className="text-fd-primary">/clan</span>,{" "}
+            <span className="text-fd-primary">/tank</span> and{" "}
+            <span className="text-fd-primary">/maps</span> stats, right in your
             Discord
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
             Add the {APP.NAME} bot to your server for instant World of Tanks
-            player, clan and tank stats. Backed by the same data as the site,
-            WN8 and WNX included. Free and open source.
+            player, clan, tank and battle map stats. Backed by the same data as
+            the site, WN8 and WNX included. Free and open source.
           </p>
 
           {status ? (

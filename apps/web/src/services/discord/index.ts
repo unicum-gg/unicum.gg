@@ -241,6 +241,10 @@ function onboardingMessage() {
             name: "/tank <name>",
             value: "Server-average performance and Marks of Excellence.",
           },
+          {
+            name: "/maps <name>",
+            value: "Size, battle timer, team size and game modes, with the minimap.",
+          },
         ],
         footer: { text: APP_IDENTITY.NAME },
       },
