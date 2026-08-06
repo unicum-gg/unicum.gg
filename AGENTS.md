@@ -75,6 +75,17 @@ Crons run in the standalone **`apps/worker`** process (`src/index.ts`), which st
 | `discovery-cron` | `discovery/cron` | Weekly (Sundays 04:00) walk of clan member lists to find new account IDs. |
 | `vehicles-cron` | `discovery/cron` | Daily (07:00) refresh of the vehicle catalogue from the IzeBerg/wot-src mirror. Runs after IzeBerg's typical push window (Tue/Thu 02:30-07:00 UTC, mostly ~04:30) so we never miss a release-day update. |
 | `top-*-cron` | `wargaming/wot/{players,clans}/top/cron` | Nightly leaderboard precompute. |
+| `changelog-cron` | `changelog/cron` | Daily at 18:00 Europe/Paris (`CHANGELOG_CRON` overrides, so weekly is a variable change). Posts the changelog digest to Discord, see [Changelog](#changelog). |
+
+## Changelog
+
+The community Discord's `#changelogs` gets an automatic digest, written from the commit log by a model (`packages/core/src/changelog/`, `@unicum.gg/core/changelog`). The commits are read from the **GitHub API** (`compare/<last published sha>...HEAD`, the repo is public so no token), never from a local `git log`: the worker's container ships the built tree, not the repository. `write.ts` hands the subjects to OpenAI through the AI SDK (`generateText` + `Output.object`, schema `{ added, changed, removed }`) with one job the commit types could never do on their own: decide what was user-visible and say it in a player's words, dropping the refactors and the infrastructure. `message.ts` renders the fixed shape (`> **Update** (@here)`, `+` added / `~` changed / `-` removed, the site link), so the model only ever writes sentences. How far we published is one Redis key (`changelog:last-published-sha`), no table and no migration; a failed post leaves it untouched so the batch survives to the next tick, and a batch the model found nothing to say about is consumed anyway (else every later run re-reads it).
+
+**Nothing here is maintained per feature.** A new page or section reaches the channel because it was committed.
+
+It is also the one cron with a timezone (`scheduleCron`'s `options.timezone`, Europe/Paris): every other job is either paced or runs at an hour nobody reads, whereas this one is when a message appears in a community channel, so it must not drift with the clocks.
+
+The cron only schedules when the bot, `OPENAI_API_KEY` and `DISCORD_CHANGELOG_CHANNEL_ID` are all set, and only in `NODE_ENV=production` (which `pnpm --filter @unicum.gg/worker start` sets, and which is the Coolify start command). That production gate is not cosmetic: `scheduleCron` skips the leader election in development, so a dev machine holding the same credentials (the local `.env.local` does) would publish the update itself. To run it by hand: `pnpm --filter @unicum.gg/worker changelog:dry` writes and prints it without posting or moving the marker, `changelog` (no `:dry`) posts it now. The `@here` only pings if the bot has Mention Everyone in that channel.
 
 ## Wargaming SDK
 
