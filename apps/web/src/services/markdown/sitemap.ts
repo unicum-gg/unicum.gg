@@ -1,5 +1,6 @@
 import { parse } from "node-html-parser";
 import APP from "@/constants/app";
+import { markdownPath } from "@/lib/markdown-url";
 import { stripSiteName } from "@/lib/metadata";
 
 /**
@@ -52,11 +53,6 @@ function locations(xml: string): string[] {
   return [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) =>
     m[1].replace(APP.URL, ""),
   );
-}
-
-/** A page's Markdown twin, mirroring `toMarkdownHref` in the page converter. */
-function asMarkdown(path: string): string {
-  return path === "" || path === "/" ? "/index.md" : `${path}.md`;
 }
 
 async function fetchTitle(origin: string, path: string): Promise<string | null> {
@@ -127,7 +123,7 @@ export async function sitemapToMarkdown(
         ? await titlesOf(origin, paths)
         : paths.map(() => null);
     lines = paths.map(
-      (path, i) => `- [${titles[i] ?? path}](${asMarkdown(path)})`,
+      (path, i) => `- [${titles[i] ?? path}](${markdownPath(path)})`,
     );
   }
 
