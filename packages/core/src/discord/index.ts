@@ -115,6 +115,26 @@ export async function postChannelEmbed(
   return res !== null;
 }
 
+/**
+ * Post a plain-text message to a channel as the bot (the changelog digest, which
+ * reads as a written update rather than a card, so no embed). `@here`/`@everyone`
+ * in the content are allowed through explicitly — Discord still only delivers the
+ * ping if the bot has Mention Everyone in that channel. Best-effort boolean.
+ */
+export async function postChannelMessage(
+  channelId: string,
+  content: string,
+): Promise<boolean> {
+  const res = await botFetch(`/channels/${channelId}/messages`, {
+    method: "POST",
+    body: JSON.stringify({
+      content,
+      allowed_mentions: { parse: ["everyone"] },
+    }),
+  });
+  return res !== null;
+}
+
 export type BoostNotification = {
   clanTag: string;
   clanUrl: string;
