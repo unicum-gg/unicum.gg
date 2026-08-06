@@ -21,6 +21,10 @@ export function scheduleCron(
   name: string,
   schedule: string,
   fn: () => Promise<void>,
+  // The container runs on UTC, which is what every job here wants: they are
+  // paced ("every 10s") or run at an hour nobody reads. Pass a timezone for the
+  // ones whose hour is a human decision, e.g. when a post goes out.
+  options: { timezone?: string } = {},
 ): boolean {
   if (SKIP_CRONS) {
     console.log(`[${name}] SKIP_CRONS=true, not scheduling`);
@@ -43,6 +47,6 @@ export function scheduleCron(
     } finally {
       inFlight = false;
     }
-  });
+  }, options.timezone ? { timezone: options.timezone } : undefined);
   return true;
 }
