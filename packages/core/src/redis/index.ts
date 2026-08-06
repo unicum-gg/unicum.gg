@@ -15,6 +15,13 @@ import { env } from "@unicum.gg/shared";
 
 export type RedisPubSub = { publisher: Redis; subscriber: Redis };
 
+/** Whether this process is `next build` rather than the running app. Next sets
+ * `NEXT_PHASE` itself; compared as a string so core keeps no `next` dependency
+ * (`next/constants` exports the same value). */
+function isProductionBuild(): boolean {
+  return process.env.NEXT_PHASE === "phase-production-build";
+}
+
 declare global {
   // undefined = not resolved yet; null = resolved to "no Redis configured".
   var __redisPubSub: RedisPubSub | null | undefined;
@@ -30,7 +37,18 @@ declare global {
 export function getRedisClient(): Redis | null {
   if (globalThis.__redisClient !== undefined) return globalThis.__redisClient;
 
-  const url = env.REDIS_URL;
+  // `next build` reaches Redis at a different address than the running app.
+  // BuildKit gives every build step its own network sandbox, cut off from the
+  // Docker network the Redis service sits on, so the internal hostname in
+  // `REDIS_URL` does not resolve there (verified: "Name does not resolve" from
+  // an isolated network, while the published endpoint answers). That is not a
+  // cosmetic failure: without Redis the WG rate limiter has no bucket at all
+  // (the in-memory limiter is only installed when `REDIS_URL` is unset), so the
+  // build's parallel workers hit Wargaming unthrottled and get us throttled by
+  // G-Core mid-build. `REDIS_BUILD_URL` is the same instance at its published
+  // address, used only while building.
+  const url =
+    (isProductionBuild() ? env.REDIS_BUILD_URL : undefined) ?? env.REDIS_URL;
   if (!url) {
     globalThis.__redisClient = null;
     return null;

@@ -35,6 +35,12 @@ export const env = createEnv({
     // When set, live pub/sub + the WG cache/rate-limit fan out through Redis so
     // they are shared across processes/instances. Unset = in-process (dev).
     REDIS_URL: z.string().optional(),
+    // The same Redis, reached the way `next build` can reach it. BuildKit runs
+    // each build step in its own network sandbox, cut off from the Docker
+    // network the Redis service lives on, so the internal hostname in
+    // `REDIS_URL` does not resolve while building (see `getRedisClient`).
+    // Unset = use `REDIS_URL` everywhere.
+    REDIS_BUILD_URL: z.string().optional(),
     // Twitch app (Confidential client) for the "top players streaming" feature:
     // an app token polls live status, and users link their channel via OAuth.
     // Optional so the app + worker boot without it (feature degrades to off).
@@ -93,6 +99,7 @@ export const env = createEnv({
     CRON_SECRET: process.env.CRON_SECRET,
     BETTER_AUTH_SECRET: process.env.BETTER_AUTH_SECRET,
     REDIS_URL: process.env.REDIS_URL,
+    REDIS_BUILD_URL: process.env.REDIS_BUILD_URL,
     TWITCH_CLIENT_ID: process.env.TWITCH_CLIENT_ID,
     TWITCH_CLIENT_SECRET: process.env.TWITCH_CLIENT_SECRET,
     DISCORD_APP_ID: process.env.DISCORD_APP_ID,
