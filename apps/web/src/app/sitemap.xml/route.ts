@@ -26,6 +26,9 @@ export async function GET() {
     // Maps section (landing + every map detail, all regions) in one small
     // non-paginated sub-sitemap. See `src/app/(site)/maps/sitemap.xml`.
     "/maps/sitemap.xml",
+    // API reference. Route auto-discovery cannot see it: `/docs/[[...slug]]` is
+    // a catch-all whose tree comes from the OpenAPI document.
+    "/docs/sitemap.xml",
   ];
   try {
     const counts = await getSitemapCounts();
