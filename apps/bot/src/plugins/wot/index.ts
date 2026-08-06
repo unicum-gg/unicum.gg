@@ -1,5 +1,6 @@
 import type { DixtPlugin } from "dixt";
 import { clanCommand } from "./commands/clan.js";
+import { mapsCommand } from "./commands/maps.js";
 import { playerCommand } from "./commands/player.js";
 import { tankCommand } from "./commands/tank.js";
 
@@ -9,7 +10,7 @@ import { tankCommand } from "./commands/tank.js";
  */
 const wotPlugin: DixtPlugin = () => ({
   name: "wot",
-  commands: [playerCommand, clanCommand, tankCommand],
+  commands: [playerCommand, clanCommand, tankCommand, mapsCommand],
 });
 
 export default wotPlugin;
