@@ -1,3 +1,4 @@
+import { APP_IDENTITY } from "@unicum.gg/shared";
 import { env } from "../../env";
 import pkg from "../../package.json";
 
@@ -13,7 +14,7 @@ const APP = {
   },
   EXTERNAL: {
     DISCORD: "https://discord.gg/Hqbfb8YPbU",
-    GITHUB: "https://github.com/unicum-gg/unicum.gg",
+    GITHUB: `https://github.com/${APP_IDENTITY.REPO}`,
   },
 };
 

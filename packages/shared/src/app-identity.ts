@@ -13,6 +13,9 @@ export const APP_IDENTITY = {
   VERSION: pkg.version,
   URL: env.NEXT_PUBLIC_APP_URL,
   CONTACT_EMAIL: "contact@unicum.gg",
+  /** `owner/name` of the public repository. Its commit log is what the
+   * changelog is written from, and the web's GitHub link points at it. */
+  REPO: "unicum-gg/unicum.gg",
 };
 
 export default APP_IDENTITY;
