@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Card, Cards } from "fumadocs-ui/components/card";
@@ -11,6 +12,7 @@ import { OpenAPIPage } from "@/components/api-page";
 import { JsonLd } from "@/components/json-ld";
 import { openapi } from "@/lib/openapi";
 import { getDocsSections, source } from "@/lib/docs-source";
+import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema } from "@/lib/schema-org";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -24,6 +26,52 @@ export async function generateStaticParams() {
     ...sections.map((section) => ({ slug: [section.slug] })),
     ...source.generateParams(),
   ];
+}
+
+/**
+ * Per-page metadata. Without it every endpoint page inherits the layout's title,
+ * so the ~60 of them shipped as identical "API Docs" entries to search engines
+ * and to anything reading the page's own `<title>`. The three shapes below
+ * mirror the three the component renders.
+ */
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug?: string[] }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const page = source.getPage(slug);
+  if (page) {
+    const data = page.data as { title?: string; description?: string };
+    return constructMetadata({
+      title: `${data.title ?? page.url} | API`,
+      description: data.description ?? APP.DESCRIPTION,
+      ogTitle: data.title,
+      ogSubtitle: "API reference",
+      canonical: page.url,
+    });
+  }
+
+  const sections = await getDocsSections();
+  const section = slug?.length === 1 && sections.find((s) => s.slug === slug[0]);
+  if (section) {
+    return constructMetadata({
+      title: `${section.name} API`,
+      description:
+        section.description ??
+        `Every ${section.name.toLowerCase()} endpoint of the ${APP.NAME} public API, with its parameters and response shape.`,
+      ogTitle: section.name,
+      ogSubtitle: "API reference",
+      canonical: `${ROUTES.DOCS}/${section.slug}`,
+    });
+  }
+
+  return constructMetadata({
+    title: "API reference",
+    description: `Interactive reference for the ${APP.NAME} public API: player, clan and tank search, leaderboards and live updates across EU, NA and Asia.`,
+    ogTitle: "API reference",
+    canonical: ROUTES.DOCS,
+  });
 }
 
 type Crumb = { name: string; href: string };
