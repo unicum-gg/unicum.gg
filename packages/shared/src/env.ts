@@ -56,6 +56,16 @@ export const env = createEnv({
     // without it and the feature degrades off when unset (the top-bar "Feedback"
     // button hides and `POST /api/feedback` 404s).
     DISCORD_FEEDBACK_CHANNEL_ID: z.string().optional(),
+    // Channel id the changelog digest is posted to, by the same bot. Worker-only
+    // (the cron writes it). Optional: unset means the cron doesn't schedule, so
+    // a local `pnpm dev` never posts to Discord.
+    DISCORD_CHANGELOG_CHANNEL_ID: z.string().optional(),
+    // OpenAI key for the changelog writer (AI SDK). Optional, same reason:
+    // no key, no cron. Worker-only.
+    OPENAI_API_KEY: z.string().optional(),
+    // Cron expression for the changelog digest, so the cadence can move (daily
+    // now, Thursdays later) without a deploy. Unset = the daily default.
+    CHANGELOG_CRON: z.string().optional(),
     // Role id granted to active supporters who claim it (via the bot) in our
     // guild. Web-only. Optional so the app/worker boot without it; the claim
     // button hides and the routes 404 when unset. The bot must have Manage Roles
@@ -90,6 +100,9 @@ export const env = createEnv({
     DISCORD_BOT_TOKEN: process.env.DISCORD_BOT_TOKEN,
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     DISCORD_FEEDBACK_CHANNEL_ID: process.env.DISCORD_FEEDBACK_CHANNEL_ID,
+    DISCORD_CHANGELOG_CHANNEL_ID: process.env.DISCORD_CHANGELOG_CHANNEL_ID,
+    OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    CHANGELOG_CRON: process.env.CHANGELOG_CRON,
     DISCORD_SUPPORTER_ROLE_ID: process.env.DISCORD_SUPPORTER_ROLE_ID,
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,

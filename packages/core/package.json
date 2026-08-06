@@ -20,6 +20,8 @@
     "./players": "./src/players/index.ts",
     "./discovery": "./src/discovery/index.ts",
     "./discord": "./src/discord/index.ts",
+    "./changelog": "./src/changelog/index.ts",
+    "./changelog/cron": "./src/changelog/cron.ts",
     "./twitch": "./src/twitch/index.ts",
     "./clans/boost-workflow": "./src/clans/boost-workflow/index.ts",
     "./clans/boost-workflow/cron": "./src/clans/boost-workflow/cron.ts",
@@ -35,9 +37,11 @@
     "./*": "./src/*.ts"
   },
   "dependencies": {
+    "@ai-sdk/openai": "^4.0.32",
     "@t3-oss/env-core": "^0.13.11",
     "@unicum.gg/shared": "workspace:*",
     "@unicum.gg/wargaming": "workspace:*",
+    "ai": "^7.0.55",
     "better-auth": "^1.6.23",
     "drizzle-orm": "^0.45.2",
     "ioredis": "^5.11.1",

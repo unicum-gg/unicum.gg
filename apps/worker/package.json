@@ -4,8 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "start": "tsx src/index.ts",
-    "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts"
+    "start": "NODE_ENV=production tsx src/index.ts",
+    "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts",
+    "changelog": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/changelog.ts",
+    "changelog:dry": "pnpm changelog --dry"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

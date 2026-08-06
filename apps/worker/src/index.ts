@@ -75,6 +75,9 @@ async function main(): Promise<void> {
   );
   startLiveStreamersPoller();
 
+  const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
+  startChangelogCron();
+
   const { startTankWarmCron } = await import(
     "@unicum.gg/core/wargaming/wot/tanks/warm-cron"
   );
