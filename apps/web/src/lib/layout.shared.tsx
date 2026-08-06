@@ -8,6 +8,7 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
+import { NavMoreMenu } from "@/components/nav-more-menu";
 import { NavSectionLink } from "@/components/nav-section-link";
 import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
@@ -49,36 +50,43 @@ export async function baseOptions({
               children: <NavSectionLink text="Maps" section="maps" />,
             },
             // The region-less surfaces (integrations + API), grouped under one
-            // dropdown so the main nav stays three sections.
+            // dropdown so the main nav stays three sections. `custom` rather
+            // than fumadocs' `menu`, so the panel can be force-mounted and its
+            // links stay in the server HTML (see `NavMoreMenu`).
             {
-              type: "menu",
-              text: "More",
-              items: [
-                {
-                  text: "Discord bot",
-                  description: "Player, clan and tank stats as slash commands",
-                  url: ROUTES.BOT,
-                  icon: <RobotIcon />,
-                },
-                {
-                  text: "MCP server",
-                  description: "Connect Claude, ChatGPT or any MCP client",
-                  url: ROUTES.MCP,
-                  icon: <PlugsConnectedIcon />,
-                },
-                {
-                  text: "API",
-                  description: "Free public REST API, no key required",
-                  url: ROUTES.DOCS,
-                  icon: <FileCodeIcon />,
-                },
-                {
-                  text: "Support us",
-                  description: `Keep ${APP.NAME} free, open and ad-free`,
-                  url: ROUTES.SUPPORT,
-                  icon: <HeartIcon />,
-                },
-              ],
+              type: "custom",
+              children: (
+                <NavMoreMenu
+                  text="More"
+                  items={[
+                    {
+                      text: "Discord bot",
+                      description:
+                        "Player, clan and tank stats as slash commands",
+                      url: ROUTES.BOT,
+                      icon: <RobotIcon />,
+                    },
+                    {
+                      text: "MCP server",
+                      description: "Connect Claude, ChatGPT or any MCP client",
+                      url: ROUTES.MCP,
+                      icon: <PlugsConnectedIcon />,
+                    },
+                    {
+                      text: "API",
+                      description: "Free public REST API, no key required",
+                      url: ROUTES.DOCS,
+                      icon: <FileCodeIcon />,
+                    },
+                    {
+                      text: "Support us",
+                      description: `Keep ${APP.NAME} free, open and ad-free`,
+                      url: ROUTES.SUPPORT,
+                      icon: <HeartIcon />,
+                    },
+                  ]}
+                />
+              ),
             },
           ] satisfies BaseLayoutProps["links"])
         : []),
