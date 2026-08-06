@@ -3,6 +3,9 @@ import { encodingForModel } from "js-tiktoken";
 import { parse, type HTMLElement as ParsedNode } from "node-html-parser";
 import TurndownService from "turndown";
 import { gfm } from "turndown-plugin-gfm";
+import { AGENT_DISCOVERY_LINK } from "@/constants/agent-discovery";
+import APP from "@/constants/app";
+import { markdownPath } from "@/lib/markdown-url";
 import { selfOrigin } from "@/lib/self-origin";
 import { isSitemapPath, sitemapToMarkdown } from "@/services/markdown/sitemap";
 
@@ -48,13 +51,11 @@ function toMarkdownHref(href: string): string {
   const pathPart = splitAt === -1 ? href : href.slice(0, splitAt);
   const suffix = splitAt === -1 ? "" : href.slice(splitAt);
 
-  if (pathPart === "/") return `/index.md${suffix}`;
-
   const clean = pathPart.endsWith("/") ? pathPart.slice(0, -1) : pathPart;
   const lastSegment = clean.slice(clean.lastIndexOf("/") + 1);
   if (lastSegment.includes(".")) return href;
 
-  return `${clean}.md${suffix}`;
+  return `${markdownPath(pathPart)}${suffix}`;
 }
 
 /**
@@ -99,15 +100,36 @@ function navigationSection(document: ParsedNode): string {
   return links.length ? ["## Navigation", "", ...links].join("\n") : "";
 }
 
-function withTokens(markdown: string): Record<string, string> {
+/**
+ * Headers for a Markdown response, given the HTML page it is the twin of (null
+ * for a sitemap, which is nobody's duplicate).
+ *
+ * The duplicate is declared with a canonical `Link` header, the mechanism Google
+ * documents for non-HTML documents, and NOT with `noindex`. That was the first
+ * approach here and it was the wrong tool: `noindex` blocks a document from
+ * being used at all, AI crawlers included, so it took the Markdown twins out of
+ * exactly the hands they were written for. Google says as much: "We don't
+ * recommend using noindex to prevent selection of a canonical page within a
+ * single site, because it will completely block the page from Search."
+ *
+ * The canonical says the honest thing instead: read this, index the HTML.
+ */
+function markdownHeaders(
+  markdown: string,
+  canonicalPath: string | null,
+): Record<string, string> {
   const headers: Record<string, string> = {
     "Content-Type": "text/markdown; charset=utf-8",
     "Cache-Control": "s-maxage=3600, stale-while-revalidate=86400",
-    // The `.md` twin is a duplicate of the HTML page, meant for AI tools that
-    // fetch it directly (the "Open in ChatGPT/Claude/…" deep links). Keep it out
-    // of the search index so it never competes with the canonical HTML page;
-    // `nofollow` stops crawlers from walking the `.md`→`.md` link tree.
-    "X-Robots-Tag": "noindex, nofollow",
+    // Setting `Link` here replaces the one `next.config.ts` puts on every route,
+    // so the discovery targets are appended rather than inherited (the config's
+    // rule excludes these paths for that reason).
+    Link: [
+      canonicalPath && `<${APP.URL}${canonicalPath}>; rel="canonical"`,
+      AGENT_DISCOVERY_LINK,
+    ]
+      .filter(Boolean)
+      .join(", "),
   };
   const tokenCount = countTokens(markdown);
   if (tokenCount !== null) headers["x-markdown-tokens"] = String(tokenCount);
@@ -161,7 +183,9 @@ export async function GET(
       origin,
       `/${path}.xml`,
     );
-    return new Response(markdown, { headers: withTokens(markdown) });
+    // No canonical: a sitemap's Markdown rendering duplicates an XML file, not
+    // a page, and nothing else says what it says.
+    return new Response(markdown, { headers: markdownHeaders(markdown, null) });
   }
 
   const html = await response.text();
@@ -192,5 +216,9 @@ export async function GET(
   ]
     .filter(Boolean)
     .join("\n\n");
-  return new Response(markdown, { headers: withTokens(markdown) });
+  // The page this is a rendering of, without the query string, so it matches the
+  // `canonical` its own metadata declares.
+  return new Response(markdown, {
+    headers: markdownHeaders(markdown, `/${path}`),
+  });
 }

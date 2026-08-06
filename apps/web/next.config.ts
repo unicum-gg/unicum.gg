@@ -2,6 +2,7 @@ import { execSync } from "node:child_process";
 import type { NextConfig } from "next";
 
 import "./env";
+import { AGENT_DISCOVERY_LINK } from "./src/constants/agent-discovery";
 
 // Stable build identifier across container restarts of the same git revision.
 // Used by both `generateBuildId` (asset path namespace) and `deploymentId`
@@ -23,14 +24,6 @@ function gitRevision(): string | undefined {
 }
 
 const BUILD_ID = gitRevision();
-
-// Advertise agent-discovery resources on the homepages via a Link header
-// (RFC 8288 / RFC 9727 section 3). Relative URIs resolve against the request,
-// so no domain is hard-coded.
-const AGENT_DISCOVERY_LINK =
-  '</.well-known/api-catalog>; rel="api-catalog", ' +
-  '</api/openapi.json>; rel="service-desc", ' +
-  '</docs>; rel="service-doc"';
 
 const nextConfig: NextConfig = {
   // ISR / server cache handler. The default handler writes every generated page
@@ -241,9 +234,12 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       // Advertise discovery on every page (and route), not just the homepage.
-      // Excludes Next internals/assets under `_next/`.
+      // Excludes Next internals/assets under `_next/`, and the Markdown twins:
+      // a header set here REPLACES the handler's own `Link`, and theirs carries
+      // the canonical pointing back at the HTML page. They re-advertise
+      // discovery themselves, from the same constant (`agentDiscoveryLink`).
       {
-        source: "/((?!_next/).*)",
+        source: "/((?!_next/|api/md/)(?!.*\\.md$).*)",
         headers: [{ key: "Link", value: AGENT_DISCOVERY_LINK }],
       },
     ];

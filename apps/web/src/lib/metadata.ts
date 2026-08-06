@@ -1,6 +1,7 @@
 import "server-only";
 import type { Metadata } from "next";
 import APP from "@/constants/app";
+import { markdownPath } from "@/lib/markdown-url";
 
 const SITE_URL = APP.URL;
 const SITE_NAME = APP.NAME;
@@ -53,6 +54,10 @@ export function constructMetadata({
 }): Metadata {
   const canonical = buildCanonical(explicitCanonical);
   const formattedTitle = formatTitle(title);
+  // Advertise the page's Markdown twin. Without it the `.md` documents are only
+  // reachable through `llms.txt` and the Markdown sitemap: an agent landing on
+  // the HTML page has no way to learn that a Markdown rendering exists.
+  const markdown = markdownPath(cleanPathname(explicitCanonical));
   const resolvedOgImage =
     ogImage === false
       ? null
@@ -62,7 +67,7 @@ export function constructMetadata({
     title: formattedTitle,
     description,
     metadataBase: new URL(SITE_URL),
-    alternates: { canonical },
+    alternates: { canonical, types: { "text/markdown": markdown } },
     openGraph: {
       type: ogType,
       url: canonical,
@@ -99,7 +104,12 @@ function buildOgImageUrl(title?: string, subtitle?: string): string {
   return qs ? `/api/og?${qs}` : "/api/og";
 }
 
+/** The page's own path: no query string, no trailing slash. */
+function cleanPathname(pathname: string): string {
+  return (pathname.split("?")[0] || "/").replace(/\/+$/, "") || "/";
+}
+
 function buildCanonical(pathname: string): string {
-  const cleaned = (pathname.split("?")[0] || "/").replace(/\/+$/, "") || "/";
+  const cleaned = cleanPathname(pathname);
   return cleaned === "/" ? SITE_URL : `${SITE_URL}${cleaned}`;
 }

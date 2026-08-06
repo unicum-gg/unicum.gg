@@ -1,6 +1,7 @@
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { getDocsSections } from "@/lib/docs-source";
+import { markdownPath } from "@/lib/markdown-url";
 import { MCP_NAME, renderOperations } from "@/services/mcp/skill";
 import { TOOL_DEFS } from "@/services/mcp/tools";
 import { Region, REGIONS } from "@unicum.gg/wargaming";
@@ -24,7 +25,7 @@ import { Region, REGIONS } from "@unicum.gg/wargaming";
 const abs = (path: string): string => `${APP.URL}${path}`;
 
 /** A page's Markdown twin (see `proxy.ts` and `app/api/md`). */
-const md = (path: string): string => abs(path === "/" ? "/index.md" : `${path}.md`);
+const md = (path: string): string => abs(markdownPath(path));
 
 /**
  * Sample entities used to show the URL shape rather than describe it. They only
@@ -55,7 +56,9 @@ function prelude(): string[] {
     "",
     "Every page has a Markdown twin. Append `.md` to its URL, or send",
     "`Accept: text/markdown`. The response carries an `x-markdown-tokens` header,",
-    "so the cost of a page is known before its body is read.",
+    "so the cost of a page is known before its body is read. Each page also",
+    "declares its twin as `<link rel=\"alternate\" type=\"text/markdown\">`, and the",
+    "twin points back with a canonical `Link` header, so neither has to be guessed.",
     "",
     `- ${md(ROUTES.PLAYER(Region.EU, SAMPLE.PLAYER))}`,
     `- ${md(ROUTES.CLAN(Region.EU, SAMPLE.CLAN))}`,
