@@ -77,7 +77,9 @@ export function getRedisClient(): Redis | null {
  */
 export async function cachedInRedis<T>(
   key: string,
-  ttlSeconds: number,
+  // A function when the result decides its own lifetime: a fetch that fell open
+  // on an empty value is worth keeping for minutes, a real one for hours.
+  ttlSeconds: number | ((value: T) => number),
   compute: () => Promise<T>,
 ): Promise<T> {
   const redis = getRedisClient();
@@ -90,7 +92,9 @@ export async function cachedInRedis<T>(
   }
   const value = await compute();
   try {
-    await redis.set(key, JSON.stringify(value), "EX", ttlSeconds);
+    const ttl =
+      typeof ttlSeconds === "function" ? ttlSeconds(value) : ttlSeconds;
+    await redis.set(key, JSON.stringify(value), "EX", ttl);
   } catch {
     // Best-effort write; a failed set just means the next read recomputes.
   }
