@@ -56,10 +56,21 @@ const { PHASE_PRODUCTION_BUILD } = require("next/constants");
 // No chunk directory means no way to prove which build we are, so Redis stays
 // off rather than risk writing into someone else's keyspace: the in-memory tier
 // below still serves the instance, bounded.
+// `turbopackIgnore` on both filesystem calls: they are resolved at RUNTIME
+// against the running container's own output directory, but Turbopack reads
+// them statically while tracing, cannot narrow `process.cwd()` or the env var,
+// and so pulls the entire project (11k files) into the middleware's file trace.
+// Nothing here needs bundling — this module is loaded by `next start` from disk,
+// outside the bundle — so telling the tracer to skip it is exactly right.
 function buildFingerprint() {
-  const dist = path.resolve(process.cwd(), process.env.NEXT_DIST_DIR || ".next");
+  const dist = path.resolve(
+    /*turbopackIgnore: true*/ process.cwd(),
+    process.env.NEXT_DIST_DIR || ".next",
+  );
   try {
-    const names = fs.readdirSync(path.join(dist, "static", "chunks")).sort();
+    const names = fs
+      .readdirSync(/*turbopackIgnore: true*/ path.join(dist, "static", "chunks"))
+      .sort();
     if (!names.length) return null;
     return crypto
       .createHash("sha1")
