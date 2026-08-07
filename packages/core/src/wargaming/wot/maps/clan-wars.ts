@@ -1,4 +1,5 @@
 import type { Region } from "@unicum.gg/wargaming";
+import { cachedInRedis } from "@unicum.gg/core/redis";
 import { wg } from "../../client";
 
 // The Clan Wars map pool is the set of arenas the current Global Map season is
@@ -7,6 +8,13 @@ import { wg } from "../../client";
 // `arena_id` they are played on, and the distinct set across all provinces is
 // the pool. It changes only when a season starts/ends, so a coarse per-region
 // memo keeps the catalogue routes off the network.
+//
+// Two tiers, because this is by far the most expensive WG call the maps section
+// makes (a fronts call, then up to 20 pages of provinces per active front, per
+// region). The in-process memo below keeps a warm process off Redis entirely;
+// Redis keeps the whole fleet off Wargaming. Without the second tier every
+// process paid the walk on its own: `next build` runs 7 workers, so a build
+// made it seven times over and regularly timed out on `globalmap/provinces`.
 const CACHE_TTL_MS = 6 * 60 * 60 * 1000;
 // An empty result (a WG failure fell open, or a genuine off-season with no active
 // Front) is cached only briefly, so a transient blip can't hide the Clan Wars
@@ -37,7 +45,7 @@ async function frontArenaIds(region: Region, frontId: string): Promise<string[]>
   return ids;
 }
 
-async function fetchClanWarsArenaIds(region: Region): Promise<Set<string>> {
+async function walkClanWarsArenaIds(region: Region): Promise<string[]> {
   const fronts = await wg
     .region(region)
     .api.wot.globalMap.fronts({ fields: ["front_id", "is_active"] });
@@ -45,7 +53,18 @@ async function fetchClanWarsArenaIds(region: Region): Promise<Set<string>> {
   const perFront = await Promise.all(
     active.map((frontId) => frontArenaIds(region, frontId)),
   );
-  return new Set(perFront.flat());
+  return [...new Set(perFront.flat())];
+}
+
+/** The walk, shared across every process through Redis. An array rather than a
+ * Set because the cache round-trips through JSON. */
+function fetchClanWarsArenaIds(region: Region): Promise<Set<string>> {
+  return cachedInRedis(
+    `wg:clan-wars-pool:${region}`,
+    (ids: string[]) =>
+      (ids.length > 0 ? CACHE_TTL_MS : EMPTY_CACHE_TTL_MS) / 1000,
+    () => walkClanWarsArenaIds(region),
+  ).then((ids) => new Set(ids));
 }
 
 /** The arena ids in the current Global Map (Clan Wars) map pool for a region.
