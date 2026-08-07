@@ -73,19 +73,21 @@ const ROUTES = {
   CLANS: (region: Region) =>
     region === Region.EU ? "/clans" : pathcat("/:region/clans", { region }),
 
-  // - Tanks (per region, with an EU shortcut at /tanks/:slug)
+  // - Tanks. The catalogue keeps its short URL (one page per region, and its
+  //   tab segments hang off this path), but an individual vehicle always
+  //   carries its region — like a player or a clan. A tank's numbers are
+  //   per-region (server averages, MoE thresholds, top players), so `/tanks/is-7`
+  //   silently meant "the EU one" and served a second URL for the same page.
+  //   `proxy.ts` redirects the region-less form onto the visitor's region.
   TANK: (region: Region, slug: string) =>
-    region === Region.EU
-      ? pathcat("/tanks/:slug", { slug })
-      : pathcat("/:region/tanks/:slug", { region, slug }),
+    pathcat("/:region/tanks/:slug", { region, slug }),
   TANKS: (region: Region) =>
     region === Region.EU ? "/tanks" : pathcat("/:region/tanks", { region }),
 
-  // - Maps (per region, with an EU shortcut at /maps/:slug)
+  // - Maps. Same split as tanks: catalogue short, item regional. A map's
+  //   geometry is worldwide, but the Clan Wars pool it belongs to is not.
   MAP: (region: Region, slug: string) =>
-    region === Region.EU
-      ? pathcat("/maps/:slug", { slug })
-      : pathcat("/:region/maps/:slug", { region, slug }),
+    pathcat("/:region/maps/:slug", { region, slug }),
   MAPS: (region: Region) =>
     region === Region.EU ? "/maps" : pathcat("/:region/maps", { region }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
