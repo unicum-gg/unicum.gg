@@ -1,28 +1,49 @@
 import { NextResponse, type NextRequest } from "next/server";
 import STORAGE from "@/constants/storage";
+import { matchesAnyRoute } from "@/lib/route-match";
+import {
+  REGIONAL_PAGES,
+  REGIONLESS_HANDLERS,
+  REGIONLESS_PAGES,
+} from "@/proxy-routes.generated";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 
 const PATHNAME_HEADER = "x-pathname";
 
+/**
+ * Where a region-less URL stands, given the pages that actually exist. Both
+ * lists are derived from the filesystem by `scripts/generate-page-routes.ts`,
+ * so a section added or a shortcut removed changes this behaviour by existing.
+ * Nothing below enumerates a path by hand.
+ */
+function regionlessKind(pathname: string): "served" | "needs-region" | "other" {
+  // A sitemap or a text file is not a page: leave it where it is, even when a
+  // sibling `[slug]` pattern would match it (`/maps/sitemap.xml`).
+  if (matchesAnyRoute(pathname, REGIONLESS_HANDLERS)) return "other";
+  if (!matchesAnyRoute(pathname, REGIONAL_PAGES)) return "other";
+  // A catalogue (`/tanks`, `/players`) has a page of its own AND a regional
+  // twin; an item (`/tanks/is-7`, `/players/Straik`) only has the twin.
+  return matchesAnyRoute(pathname, REGIONLESS_PAGES) ? "served" : "needs-region";
+}
+
 export function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const stored = req.cookies.get(STORAGE.COOKIES.REGION)?.value;
+  const region = stored && isRegion(stored) ? stored : Region.EU;
 
-  if (
-    (pathname === "/" ||
-      pathname === "/coverage" ||
-      pathname === "/clans" ||
-      pathname.startsWith("/clans/") ||
-      pathname === "/players" ||
-      pathname.startsWith("/players/")) &&
-    !pathname.endsWith("/sitemap.xml")
-  ) {
-    if (stored && isRegion(stored) && stored !== Region.EU) {
-      const url = req.nextUrl.clone();
-      if (pathname === "/") url.pathname = `/${stored}`;
-      else url.pathname = `/${stored}${pathname}`;
-      return NextResponse.redirect(url);
-    }
+  const kind = regionlessKind(pathname);
+  // Send a region-less URL to its regional page when it has no page of its own
+  // (an item: `/tanks/is-7`, `/players/Straik`, guessed constantly and a 404
+  // until now), or when the visitor is not on EU and a regional twin exists (a
+  // catalogue: `/tanks` for someone browsing NA).
+  //
+  // Temporary (307) on purpose: the destination follows the region cookie, so a
+  // permanent redirect would let a browser pin a visitor to one region for good
+  // after they switch.
+  if (kind === "needs-region" || (kind === "served" && region !== Region.EU)) {
+    const url = req.nextUrl.clone();
+    url.pathname = pathname === "/" ? `/${region}` : `/${region}${pathname}`;
+    return NextResponse.redirect(url);
   }
 
   // Serve a Markdown rendering of any page through two triggers: a `.md`
