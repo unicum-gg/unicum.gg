@@ -38,11 +38,15 @@ export const STRONGHOLD_SORT_LABEL: Record<StrongholdSort, string> = {
   [StrongholdSort.Winrate]: "Win rate",
 };
 
-// Eligibility floor to appear on the leaderboard. Advances (15v15) demands
-// more history to rank than skirmish (7v7). Single source of truth shared
+// Eligibility floor to appear on the leaderboard. Single source of truth shared
 // by the query filter and the on-page description.
+//
+// Advances sits far below skirmish, against the intuition that a 15v15 mode
+// should demand more history: it is only played during a Global Map advances
+// window, so clans accumulate battles in bursts a few weeks a year rather than
+// continuously. A skirmish-sized floor ranked almost nobody.
 export const STRONGHOLD_MIN_BATTLES: Record<StrongholdTier, number> = {
-  [StrongholdTier.Advances]: 100,
+  [StrongholdTier.Advances]: 10,
   [StrongholdTier.T10]: 50,
   [StrongholdTier.T8]: 50,
   [StrongholdTier.T6]: 50,
