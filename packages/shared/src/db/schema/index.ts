@@ -10,6 +10,7 @@ export * from "./clan-ratings";
 export * from "./stronghold-ratings";
 export * from "./cron-leader";
 export * from "./players";
+export * from "./player-achievements";
 export * from "./player-ratings";
 export * from "./player-clan-history";
 export * from "./player-name-history";
