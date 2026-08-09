@@ -40,3 +40,28 @@ export const getAccountWTR = (region: Region, accountId: number) =>
 
 export const getAccountsWTRBatch = (region: Region, accountIds: number[]) =>
   wg.region(region).api.wot.accounts.wtrBatch({ accountIds });
+
+/**
+ * Medal counts for a set of accounts, keyed by achievement id.
+ *
+ * Batched 100 per request, the same granularity as `account/info`, which is
+ * what makes storing achievements affordable at all: one request per hundred
+ * players rather than one per player. `fields` is narrowed to `achievements`
+ * because the endpoint also returns `frags` and `max_series`, neither of which
+ * we keep, and they are the bulk of the payload.
+ */
+export const getAccountsAchievementsBatch = (
+  region: Region,
+  accountIds: number[],
+) =>
+  wg
+    .region(region)
+    .api.wot.accounts.achievementsBatch({
+      accountIds,
+      fields: ["achievements"] as const,
+    })
+    .then((m) => {
+      const out = new Map<number, Record<string, number>>();
+      for (const [id, entry] of m) out.set(id, entry.achievements ?? {});
+      return out;
+    });
