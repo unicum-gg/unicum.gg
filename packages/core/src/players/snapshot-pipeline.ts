@@ -3,7 +3,9 @@ import { tryAcquireLease } from "@unicum.gg/core/cron/lease";
 import { db } from "@unicum.gg/core/db";
 import { type Player, playersByRegion } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
+import { recordAchievements } from "@unicum.gg/core/players/achievements";
 import {
+  getAccountsAchievementsBatch,
   getAccountsWTRBatch,
   getPlayersInfoBatch,
   type PlayerInfo,
@@ -346,7 +348,11 @@ async function processRegionBatch(
   const changedIds = toProcess
     .filter((p) => infosByAccount.has(p.accountId))
     .map((p) => p.accountId);
-  const [tanksByAccount, wtrByAccount] = await Promise.all([
+  // `account/achievements` batches 100 per request like `account/info`, so it
+  // rides along as ONE extra request per chunk rather than one per player —
+  // which is the whole reason the medal cabinet can live in Postgres instead of
+  // being fetched live on every profile view.
+  const [tanksByAccount, wtrByAccount, achievementsByAccount] = await Promise.all([
     changedIds.length
       ? getTanksStatsBatch(region, changedIds).catch((err) => {
           console.error(`[snapshot-pipeline-${region}] tanks/stats batch failed:`, err);
@@ -359,6 +365,15 @@ async function processRegionBatch(
           return new Map<number, number>();
         })
       : new Map<number, number>(),
+    changedIds.length
+      ? getAccountsAchievementsBatch(region, changedIds).catch((err) => {
+          console.error(
+            `[snapshot-pipeline-${region}] achievements batch failed:`,
+            err,
+          );
+          return new Map<number, Record<string, number>>();
+        })
+      : new Map<number, Record<string, number>>(),
   ]);
   const fetchMs = Date.now() - tFetch0;
 
@@ -397,6 +412,12 @@ async function processRegionBatch(
       // portal budget per player — that serialises snapshot writes and starves
       // on-time freshness. Marks are carried forward and refreshed on-demand.
       await recordCurrentSnapshot(region, info, wtr, tanks, false);
+      // Medal cabinet. Written on the same pass as the snapshot, from the
+      // batched fetch above, so it costs no extra request per player. Absent
+      // from the map means the batch failed for this account: leave the
+      // previous row alone rather than overwrite it with nothing.
+      const medals = achievementsByAccount.get(player.accountId);
+      if (medals) await recordAchievements(region, player.id, medals);
       succeeded += 1;
       // Successful fetch wipes the soft-delete state. Necessary so a
       // previously-flagged account that came back can rejoin the rotation
