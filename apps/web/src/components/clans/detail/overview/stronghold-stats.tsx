@@ -229,17 +229,27 @@ export function ClanStrongholdStatsTable(
         {SECTIONS.map((section) => (
           <Fragment key={section.title}>
             <TableRow>
-              <TableCell colSpan={5} className="bg-muted/40 p-0!">
+              {/* The cell owns the padding and the typography, so the title
+                  lines up with the rows it heads and reads the same whether or
+                  not it is a link (loading state, and the plain headers on the
+                  clan-wars table). The link used to carry `px-4 py-1` on top of
+                  the cell's own `pl-4`, which indented the title 32px against
+                  the rows' 16px and made the band taller. */}
+              <TableCell
+                colSpan={5}
+                className="bg-muted/40 text-xs font-semibold text-muted-foreground uppercase"
+              >
                 {loading ? (
-                  <span className="block px-4 py-1 text-xs font-semibold text-muted-foreground uppercase">
-                    {section.title}
-                  </span>
+                  section.title
                 ) : (
                   // The header links to this mode's leaderboard — a contextual
                   // funnel from every indexed clan page to the stronghold boards.
+                  // `inline-flex` so the caret's reserved width (opacity-0 keeps
+                  // it in flow) stays inside the link instead of stretching the
+                  // header across the table.
                   <Link
                     href={ROUTES.STRONGHOLD(props.region, section.tier)}
-                    className="group flex items-center gap-1 px-4 py-1 text-xs font-semibold text-muted-foreground uppercase transition-colors hover:text-foreground"
+                    className="group inline-flex items-center gap-1 transition-colors hover:text-foreground"
                   >
                     {section.title}
                     <CaretRightIcon
