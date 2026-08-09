@@ -17,6 +17,7 @@ import {
   DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
   isRatingMetric,
+  type PlayerAchievements,
   type PlayerDetailData,
   type PlayerTankRow,
   inferPlayerLanguages,
@@ -39,6 +40,7 @@ export function PlayerProfile({
   activeMode,
   initialData,
   initialTanks,
+  initialAchievements,
 }: {
   region: Region;
   nickname: string;
@@ -51,6 +53,9 @@ export function PlayerProfile({
   // Present only when Tanks is the section the server rendered (so its rows are
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
   initialTanks: PlayerTankRow[] | null;
+  // Present only when Achievements is the section the server rendered, same
+  // deal as `initialTanks`.
+  initialAchievements: PlayerAchievements | null;
 }) {
   // The active metric is client state (the cookie), not a server prop: the page
   // is statically cached and metric-agnostic (the payload carries all three
@@ -154,6 +159,7 @@ export function PlayerProfile({
         nowMs={nowMs}
         detail={detail}
         initialTanks={initialTanks}
+        initialAchievements={initialAchievements}
       />
     </>
   );

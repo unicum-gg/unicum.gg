@@ -9,6 +9,7 @@
 //   /eu/players/Animal/skirmish       Overview + Skirmish
 //   /eu/players/Animal/cw-x           Overview + Clan Wars X
 //   /eu/players/Animal/tanks          Tanks
+//   /eu/players/Animal/achievements   Achievements
 //   /eu/players/Animal/value          Value
 //
 // They used to be `?section=` / `?tab=` query params, which meant one indexable
@@ -18,6 +19,7 @@ export enum PlayerSection {
   Overview = "overview",
   Tanks = "tanks",
   Value = "value",
+  Achievements = "achievements",
 }
 
 export enum PlayerMode {
@@ -67,6 +69,12 @@ export const PLAYER_VIEWS: PlayerView[] = [
     label: "Tanks",
   },
   {
+    section: PlayerSection.Achievements,
+    mode: PlayerMode.Overall,
+    segment: "achievements",
+    label: "Achievements",
+  },
+  {
     section: PlayerSection.Value,
     mode: PlayerMode.Overall,
     segment: "value",
@@ -78,6 +86,7 @@ export const PLAYER_VIEWS: PlayerView[] = [
 export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
   { id: PlayerSection.Overview, label: "Overview" },
   { id: PlayerSection.Tanks, label: "Tanks" },
+  { id: PlayerSection.Achievements, label: "Achievements" },
   { id: PlayerSection.Value, label: "Value" },
 ];
 

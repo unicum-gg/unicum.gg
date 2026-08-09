@@ -18,6 +18,7 @@ import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
+  type PlayerAchievements,
   type PlayerDetailData,
   type PlayerTankRow,
 } from "@unicum.gg/shared";
@@ -82,11 +83,18 @@ function viewCopy(
   battles: string,
   winrate: string,
   rating: string,
+  medals: string,
 ): { title: string; description: string } {
   if (view.section === PlayerSection.Tanks) {
     return {
       title: `${name} tanks (${regionLabel}), every vehicle played`,
       description: `Every tank ${name} has played on ${regionLabel}, with battles, win rate, average damage and WN8 per vehicle.`,
+    };
+  }
+  if (view.section === PlayerSection.Achievements) {
+    return {
+      title: `${name} achievements (${regionLabel}), ${medals} medals earned`,
+      description: `The ${medals} World of Tanks medals ${name} has earned on ${regionLabel}, from Kolobanov's and Pool's to the honorary ranks and epic medals, plus every one still left to earn.`,
     };
   }
   if (view.section === PlayerSection.Value) {
@@ -138,6 +146,21 @@ export async function playerMetadata(
     });
   }
 
+  // The medal cabinet is kept out of the index. Not because it is a tab —
+  // Tanks and Value are indexed and should be — but because of what is
+  // actually on it: ~126 of the player's own counts against 510 catalogue
+  // entries whose names, descriptions and conditions are byte-identical on
+  // every player's page. Indexed across 2M profiles that is ~250 KB of the
+  // same Wargaming boilerplate repeated two million times, competing for crawl
+  // budget with the pages that do rank, and answering a query nobody types
+  // (people search the nickname, which the profile already serves).
+  //
+  // `constructMetadata` pairs noindex with nofollow. That costs nothing here:
+  // every link on this page (the tab nav, the clan, the Twitch profile) also
+  // sits on the profile itself, which is indexed and followed, so no link is
+  // stranded by not being crawled from this one.
+  const noIndex = view.section === PlayerSection.Achievements;
+
   const { current } = detail;
   const copy = viewCopy(
     view,
@@ -146,12 +169,14 @@ export async function playerMetadata(
     intFmt.format(current.battles),
     pctFmt.format((current.wins / current.battles) * 100),
     intFmt.format(current.wtr ?? current.globalRating),
+    intFmt.format(detail.achievementCount),
   );
   return constructMetadata({
     title: copy.title,
     description: copy.description,
     ogImage: `/api/og/${region}/players/${encodeURIComponent(decoded)}`,
     canonical: playerViewHref(ROUTES.PLAYER(region, decoded), view),
+    noIndex,
   });
 }
 
@@ -234,6 +259,17 @@ async function PlayerProfileServer({
       ? ((await unicum.region(region).players(decoded).tanks())
           .tanks as unknown as PlayerTankRow[])
       : null;
+  // Same treatment for the medal cabinet: server-rendered when the visitor
+  // landed straight on `/achievements`, so a crawler (and the first paint) get
+  // the grid rather than a placeholder. Null on every other section, and the
+  // client fetches it when the tab is first opened.
+  const initialAchievements: PlayerAchievements | null =
+    section === PlayerSection.Achievements
+      ? ((await unicum
+          .region(region)
+          .players(decoded)
+          .achievements()) as unknown as PlayerAchievements)
+      : null;
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
 
@@ -274,6 +310,7 @@ async function PlayerProfileServer({
         activeMode={mode}
         initialData={detail}
         initialTanks={initialTanks}
+        initialAchievements={initialAchievements}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

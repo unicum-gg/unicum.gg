@@ -22,10 +22,12 @@ import {
   StrongholdTab,
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
+import { AchievementsTab } from "@/components/players/detail/achievements";
 import { TanksTab } from "@/components/players/detail/tanks";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
 import type {
+  PlayerAchievements,
   PlayerDetailData,
   PlayerTankRow,
   RatingMetric,
@@ -69,6 +71,9 @@ export type PlayerTabsViewProps = {
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
   initialTanks: PlayerTankRow[] | null;
+  // Server-rendered cabinet for a direct `/achievements` landing; null
+  // otherwise, so the tab fetches on demand.
+  initialAchievements: PlayerAchievements | null;
 };
 
 export function PlayerTabsView({
@@ -82,6 +87,7 @@ export function PlayerTabsView({
   nowMs,
   detail,
   initialTanks,
+  initialAchievements,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -105,6 +111,22 @@ export function PlayerTabsView({
     {
       fallbackData: initialTanks ?? undefined,
       revalidateOnMount: !seededTanks,
+    },
+  );
+
+  // Same shape as the tank list: a 510-entry payload only this tab renders, so
+  // it is never fetched until the tab is opened (null key = no request), and a
+  // visitor who landed straight on `/achievements` gets it server-rendered
+  // (`initialAchievements` seeds the cache, so no on-mount revalidation).
+  const achievementsReq = () =>
+    unicum.region(region).players(nickname).achievements();
+  const seededAchievements = initialAchievements != null;
+  const { data: achievements } = useSWR(
+    section === PlayerSection.Achievements ? achievementsReq().url() : null,
+    () => achievementsReq().then((r) => r as unknown as PlayerAchievements),
+    {
+      fallbackData: initialAchievements ?? undefined,
+      revalidateOnMount: !seededAchievements,
     },
   );
 
@@ -140,7 +162,8 @@ export function PlayerTabsView({
   };
   const onTanks = section === PlayerSection.Tanks;
   const onValue = section === PlayerSection.Value;
-  const showModes = !onTanks && !onValue;
+  const onAchievements = section === PlayerSection.Achievements;
+  const showModes = !onTanks && !onValue && !onAchievements;
 
   return (
     <>
@@ -150,6 +173,7 @@ export function PlayerTabsView({
             basePath={basePath}
             section={section}
             tankCount={detail.tankCount}
+            achievementCount={detail.achievementCount}
             onSelect={selectSection}
           />
         </PanelHeader>
@@ -172,7 +196,13 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onValue ? (
+      {onAchievements ? (
+        <AchievementsTab
+          nickname={nickname}
+          data={achievements ?? null}
+          loading={!achievements}
+        />
+      ) : onValue ? (
         <ValueTab
           region={region}
           nickname={nickname}

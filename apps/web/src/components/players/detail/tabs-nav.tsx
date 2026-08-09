@@ -63,6 +63,7 @@ export function PlayerSectionNav({
   basePath,
   section,
   tankCount,
+  achievementCount,
   onSelect,
 }: {
   basePath: string;
@@ -70,8 +71,21 @@ export function PlayerSectionNav({
   // Battle-having tank count, shown as "Tanks (N)". Comes from the detail
   // payload (a single number), not the on-demand /tanks list.
   tankCount: number;
+  // Distinct medals earned, shown as "Achievements (N)". Same deal: it rides in
+  // the detail payload so the label is right on every section, not only once
+  // the (heavy) achievements list has been fetched.
+  achievementCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
+  // One count per section rather than a chain of ternaries in the JSX, so a
+  // third counted section is a line here instead of another special case.
+  const counts: Partial<Record<PlayerSection, number>> = {
+    [PlayerSection.Tanks]: tankCount,
+    [PlayerSection.Achievements]: achievementCount,
+  };
+  // Sections still being shaped. Same idea as `counts`: adding or removing a
+  // beta flag is one entry, and deleting the entry is the whole rollout step.
+  const beta = new Set<PlayerSection>([PlayerSection.Value]);
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
       {PLAYER_SECTIONS.map((s) => (
@@ -83,9 +97,14 @@ export function PlayerSectionNav({
             if (section !== s.id) onSelect(s.id);
           }}
         >
-          {s.id === PlayerSection.Tanks
-            ? `${s.label} (${tankCount.toLocaleString("en-US")})`
+          {counts[s.id] !== undefined
+            ? `${s.label} (${counts[s.id]!.toLocaleString("en-US")})`
             : s.label}
+          {beta.has(s.id) && (
+            <span className="ml-1.5 rounded-sm bg-fd-secondary px-1 py-0.5 align-middle text-[10px] font-semibold tracking-wide text-fd-muted-foreground uppercase">
+              beta
+            </span>
+          )}
         </NavAnchor>
       ))}
     </nav>
