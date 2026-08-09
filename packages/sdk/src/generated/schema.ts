@@ -119,6 +119,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/achievements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player achievements
+         * @description The full Wargaming medal catalogue with the number of times this player earned each one (0 when never), grouped into Wargaming's own sections and ordered the way the in-game cabinet is. Includes retired event medals, flagged as outdated, so the client can offer them as a filter rather than decide for the reader. 404 when the nickname is unknown in this region.
+         */
+        get: operations["get-{region}-players-{nickname}-achievements"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/clan": {
         parameters: {
             query?: never;
@@ -1143,6 +1163,21 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        achievement: {
+            id: string;
+            name: string;
+            description: string;
+            condition: string;
+            image: string;
+            section: string;
+            sectionName: string;
+            sectionOrder: number;
+            order: number;
+            type: string;
+            outdated: boolean;
+            tiers: components["schemas"]["tier"][];
+            count: number;
+        };
         ClanActivityResponse: {
             events: components["schemas"]["ClanEvent"][];
         };
@@ -1883,6 +1918,12 @@ export interface components {
             d7: number | null;
             d30: number | null;
         };
+        PlayerAchievementsResponse: {
+            achievements: components["schemas"]["achievement"][];
+            sections: components["schemas"]["section"][];
+            earned: number;
+            total: number;
+        };
         /** @description A player's current clan, from cached data only (no live Wargaming call). `clan` is null when the player is not in a clan or is not yet cached. */
         PlayerClan: {
             clan: components["schemas"]["PlayerClanTag"] | null;
@@ -1944,6 +1985,7 @@ export interface components {
             };
             derived: components["schemas"]["PlayerDerivedStats"];
             tankCount: number;
+            achievementCount: number;
             /** @description Estimated account worth: market resale value (modelled from grey-market listings, driven mostly by the WG global rating and battle count, with the garage as a small floor) and the store rebuild cost. */
             valuation: {
                 market: {
@@ -2150,6 +2192,13 @@ export interface components {
             meta: components["schemas"]["VehicleMeta"];
             researchXp: number | null;
             buyCredits: number | null;
+        };
+        section: {
+            id: string;
+            name: string;
+            order: number;
+            earned: number;
+            total: number;
         };
         skillNode: {
             id: number;
@@ -2610,6 +2659,10 @@ export interface components {
             team1: components["schemas"]["mapMarker"][];
             team2: components["schemas"]["mapMarker"][];
         };
+        tier: {
+            name: string;
+            image: string;
+        };
         tierContribution: {
             tier: number;
             count: number;
@@ -2839,6 +2892,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-achievements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerAchievementsResponse"];
                 };
             };
         };
@@ -4013,7 +4094,7 @@ export interface operations {
                 region: "eu" | "na" | "asia";
                 /**
                  * @description Map slug (e.g. prokhorovka).
-                 * @example is-7
+                 * @example prokhorovka
                  */
                 slug: string;
             };
@@ -4069,7 +4150,7 @@ export interface operations {
                 region: "eu" | "na" | "asia";
                 /**
                  * @description Map slug (e.g. prokhorovka).
-                 * @example is-7
+                 * @example prokhorovka
                  */
                 slug: string;
             };

@@ -44,6 +44,15 @@ class PlayerClient {
     );
   }
 
+  /** Player achievements */
+  achievements() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/achievements", path),
+      () => this.api.GET("/{region}/players/{nickname}/achievements", { params: { path } }),
+    );
+  }
+
   /** Player current clan */
   clan() {
     const path = { region: this.region, nickname: this.nickname };
