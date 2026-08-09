@@ -41,6 +41,7 @@ import {
 } from "@unicum.gg/core/wargaming/wot/accounts";
 import { getTanksStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import type { Region } from "@unicum.gg/wargaming";
+import { countEarnedAchievements } from "@unicum.gg/core/players/achievements";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import {
@@ -83,6 +84,7 @@ export async function buildPlayerDetail(args: {
     nameHistory,
     isVerified,
     twitchLogin,
+    achievementCount,
   ] = await Promise.all([
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
@@ -93,6 +95,11 @@ export async function buildPlayerDetail(args: {
     getPlayerNameHistory(region, accountId),
     isAccountVerified(region, accountId),
     getAccountTwitchLogin(region, accountId),
+    // Distinct medals earned, for the "Achievements (N)" tab label. Reads the
+    // denormalised column rather than counting the jsonb map, so it is a
+    // primary-key lookup on a table with one row per player, and it rides in
+    // the parallel batch the detail already makes.
+    countEarnedAchievements(region, player.id),
   ]);
   // Public supporter badge: active, and not opted out via podium anonymity.
   const isSupporter = supporterSub
@@ -211,6 +218,7 @@ export async function buildPlayerDetail(args: {
     periods,
     derived,
     tankCount: vehicles.length,
+    achievementCount,
     valuation: computePlayerValuation(
       vehicles,
       current.globalRating,

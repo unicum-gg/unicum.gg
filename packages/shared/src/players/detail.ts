@@ -71,6 +71,8 @@ export type PlayerDetailData = {
   // tab can show "Tanks (N)" without shipping the (heavy) per-tank list, which
   // lives on its own `/tanks` endpoint and loads on demand.
   tankCount: number;
+  /** Distinct medals earned, for the "Achievements (N)" tab label. */
+  achievementCount: number;
   // Estimated account worth (market resale + store rebuild cost), computed from
   // the garage. See `./valuation`.
   valuation: PlayerValuation;

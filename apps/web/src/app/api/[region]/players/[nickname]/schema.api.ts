@@ -246,6 +246,7 @@ export const PlayerDetailResponse = z.object({
   }),
   derived: playerDerivedStats,
   tankCount: z.number(),
+  achievementCount: z.number(),
   valuation: z
     .object({
       market: z.object({
