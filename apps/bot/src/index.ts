@@ -12,10 +12,14 @@
 // `dixt` is imported FIRST on purpose: importing it runs dotenv-flow, loading
 // the .env* files before our env modules validate `process.env`.
 import dixt, { dixtDefaults } from "dixt";
-import { GatewayIntentBits } from "discord.js";
+import { Events, GatewayIntentBits } from "discord.js";
 import { APP_IDENTITY } from "@unicum.gg/shared/app-identity";
 import { env } from "./env.js";
 import wotPlugin from "./plugins/wot/index.js";
+import {
+  handleFeedbackModalSubmit,
+  isFeedbackModal,
+} from "./plugins/wot/commands/feedback.js";
 import { bindPresenceClient } from "./lib/presence.js";
 
 async function main(): Promise<void> {
@@ -40,6 +44,16 @@ async function main(): Promise<void> {
 
   // Give the presence entries access to the client for the server-count line.
   bindPresenceClient(bot.client);
+
+  // dixt routes chat-command + autocomplete interactions but not modal
+  // submissions, so /feedback's modal is handled here on the raw client. The
+  // listener is additive (dixt keeps its own), and it ignores anything that is
+  // not this command's modal.
+  bot.client.on(Events.InteractionCreate, (interaction) => {
+    if (interaction.isModalSubmit() && isFeedbackModal(interaction.customId)) {
+      void handleFeedbackModalSubmit(interaction);
+    }
+  });
 
   await bot.start();
   console.log(`[bot] ${APP_IDENTITY.NAME} Discord bot running`);
