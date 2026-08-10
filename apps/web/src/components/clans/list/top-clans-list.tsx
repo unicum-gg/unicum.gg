@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -29,10 +30,17 @@ export function TopClansList({
   region,
   results,
   metric,
+  omitBoard,
 }: {
   region: Region;
   results: TopClanByLanguageResult[];
   metric: RatingMetric;
+  /** Board this table is itself ranking, whose badge is dropped from the rows:
+   * on the global WNX board, a "#1 WNX" crest beside row 1 only repeats the
+   * rank column. The other boards' crests still show, and on a language board
+   * nothing is dropped because being first in English is not being first
+   * overall. */
+  omitBoard?: ClanBoard;
 }) {
   if (results.length === 0) {
     return (
@@ -77,23 +85,30 @@ export function TopClansList({
                 )}
               </TableCell>
               <TableCell>
-                <Link
-                  href={ROUTES.CLAN(region, r.tag)}
-                  className="flex items-center gap-3 hover:underline"
-                >
-                  {r.emblem ? (
-                    <Image
-                      src={r.emblem}
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="size-6 shrink-0 rounded"
-                    />
-                  ) : (
-                    <span className="size-6 shrink-0 rounded bg-muted" />
-                  )}
-                  <span className="flex min-w-0 flex-1 items-center gap-2">
-                    <span className="min-w-0 flex-1 truncate">
+                {/* The badges are siblings of the row link, not children of it:
+                    each crest links to its own board, and an anchor inside an
+                    anchor is invalid. */}
+                <span className="flex items-center gap-2">
+                  {/* No `flex-1` on the link: it would eat the free width and
+                      push the crests to the far edge of the cell, away from the
+                      name they belong to. It shrinks (min-w-0 + truncate) only
+                      when the name is too long. */}
+                  <Link
+                    href={ROUTES.CLAN(region, r.tag)}
+                    className="flex min-w-0 items-center gap-3 hover:underline"
+                  >
+                    {r.emblem ? (
+                      <Image
+                        src={r.emblem}
+                        alt=""
+                        width={24}
+                        height={24}
+                        className="size-6 shrink-0 rounded"
+                      />
+                    ) : (
+                      <span className="size-6 shrink-0 rounded bg-muted" />
+                    )}
+                    <span className="min-w-0 truncate">
                       <ClanTag
                         tag={r.tag}
                         color={r.color}
@@ -101,19 +116,28 @@ export function TopClansList({
                       />{" "}
                       <span className="text-muted-foreground">{r.name}</span>
                     </span>
-                    {r.languages.length > 0 && (
-                      <span className="hidden h-4 shrink-0 sm:inline-flex">
-                        <LanguageFlags
-                          languages={r.languages}
-                          source="declared"
-                          size="s"
-                          region={region}
-                          link={false}
-                        />
-                      </span>
-                    )}
-                  </span>
-                </Link>
+                  </Link>
+                  <ClanBadges
+                    badges={
+                      omitBoard
+                        ? r.badges?.filter((b) => b.board !== omitBoard)
+                        : r.badges
+                    }
+                    region={region}
+                    size={14}
+                  />
+                  {r.languages.length > 0 && (
+                    <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                      <LanguageFlags
+                        languages={r.languages}
+                        source="declared"
+                        size="s"
+                        region={region}
+                        link={false}
+                      />
+                    </span>
+                  )}
+                </span>
               </TableCell>
               <TableCell className="text-center text-muted-foreground tabular-nums">
                 {intFmt.format(r.members_count)}

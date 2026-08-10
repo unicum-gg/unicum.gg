@@ -8,6 +8,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { LanguageFlags } from "@/components/language-flags";
@@ -42,7 +43,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
+import { CLAN_BOARD_BY_STRONGHOLD_TIER, StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import { type Period, usePeriod, isPeriod } from "@/hooks/use-period";
@@ -320,9 +321,14 @@ export function StrongholdLeaderboardView({
                           )}
                         </TableCell>
                         <TableCell>
+                          {/* Badges are siblings of the row link (each crest
+                              links to its own board) and the link does not take
+                              `flex-1`, so they stay next to the name instead of
+                              drifting to the edge of the cell. */}
+                          <span className="flex items-center gap-2">
                           <Link
                             href={ROUTES.CLAN(region, entry.tag)}
-                            className="flex items-center gap-3 hover:underline"
+                            className="flex min-w-0 items-center gap-3 hover:underline"
                           >
                             {entry.emblem ? (
                               <Image
@@ -335,8 +341,8 @@ export function StrongholdLeaderboardView({
                             ) : (
                               <span className="size-6 shrink-0 rounded bg-muted" />
                             )}
-                            <span className="flex min-w-0 flex-1 items-center gap-2">
-                              <span className="min-w-0 flex-1 truncate">
+                            <span className="flex min-w-0 items-center gap-2">
+                              <span className="min-w-0 truncate">
                                 <ClanTag
                                   tag={entry.tag}
                                   color={entry.color}
@@ -366,19 +372,27 @@ export function StrongholdLeaderboardView({
                                     </TooltipContent>
                                   </Tooltip>
                                 )}
-                              {entry.languages.length > 0 && (
-                                <span className="hidden h-4 shrink-0 sm:inline-flex">
-                                  <LanguageFlags
-                                    languages={entry.languages}
-                                    source="declared"
-                                    size="s"
-                                    region={region}
-                                    link={false}
-                                  />
-                                </span>
-                              )}
                             </span>
                           </Link>
+                          <ClanBadges
+                            badges={entry.badges?.filter(
+                              (b) => b.board !== CLAN_BOARD_BY_STRONGHOLD_TIER[tier],
+                            )}
+                            region={region}
+                            size={14}
+                          />
+                          {entry.languages.length > 0 && (
+                            <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                              <LanguageFlags
+                                languages={entry.languages}
+                                source="declared"
+                                size="s"
+                                region={region}
+                                link={false}
+                              />
+                            </span>
+                          )}
+                          </span>
                         </TableCell>
                         <TableCell className="text-center text-muted-foreground tabular-nums">
                           {intFmt.format(entry.membersCount)}

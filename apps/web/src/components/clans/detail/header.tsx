@@ -4,6 +4,8 @@ import { format } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
+import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
 import { AutoFitText } from "@/components/auto-fit-text";
 import { ClanActionsMenu } from "@/components/clans/detail/actions-menu";
 import { CompareWithButton } from "@/components/clans/detail/compare-with-button";
@@ -97,6 +99,9 @@ export function ClanHeader(
         clan: ClanFullInfo;
         members: ClanMemberStats[];
         ratings: ClanRatings;
+        /** Podium positions from the overview payload; empty for nearly every
+         * clan, so the cluster usually renders nothing. */
+        badges: ClanRankBadgeData[];
       },
 ) {
   const loading = "loading" in props;
@@ -133,7 +138,7 @@ export function ClanHeader(
         )}
         <div className="flex min-w-0 flex-1 flex-col">
           <div className="flex min-h-16 min-w-0 flex-1 items-center gap-3 px-4 py-2 sm:h-16 sm:flex-none sm:py-0">
-            <h1 className="min-w-0 flex-1 font-heading font-bold tracking-tight">
+            <h1 className="min-w-0 font-heading font-bold tracking-tight">
               <AutoFitText maxPx={36} minPx={18} allowWrap className="w-full">
                 <ClanTag
                   tag={clan.tag}
@@ -143,18 +148,29 @@ export function ClanHeader(
                 />
               </AutoFitText>
             </h1>
-            <CompareWithButton region={region} current={clan.tag} />
-            <ClanActionsMenu
-              region={region}
-              clan={{
-                id: clan.id,
-                tag: clan.tag,
-                name: clan.name,
-                color: clan.color,
-                membersCount: clan.membersCount,
-                emblem: clan.emblem,
-              }}
-            />
+            {/* Outside the `AutoFitText`: it scales its contents to fill the
+                width, which would stretch the crests along with the tag. Size
+                24 matches the player header's identity crests.
+
+                The `h1` deliberately has no `flex-1`: growing it to fill the bar
+                would strand the crests next to the buttons instead of the name.
+                It keeps `min-w-0` so a long clan name still shrinks it, which is
+                what `AutoFitText` measures to scale the title down. */}
+            <ClanBadges badges={props.badges} region={region} size={24} />
+            <span className="ml-auto flex shrink-0 items-center gap-3">
+              <CompareWithButton region={region} current={clan.tag} />
+              <ClanActionsMenu
+                region={region}
+                clan={{
+                  id: clan.id,
+                  tag: clan.tag,
+                  name: clan.name,
+                  color: clan.color,
+                  membersCount: clan.membersCount,
+                  emblem: clan.emblem,
+                }}
+              />
+            </span>
           </div>
           <InfoRow
             region={region}

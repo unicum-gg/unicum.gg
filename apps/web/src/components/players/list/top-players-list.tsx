@@ -79,35 +79,26 @@ export function TopPlayersList({
               </TableCell>
               <TableCell>
                 <span className="flex items-center gap-1.5">
+                  {/* No `flex-1` on the link: it would eat the free width and
+                      push the badges to the far edge of the cell, away from the
+                      nickname they belong to. It shrinks (min-w-0 + truncate)
+                      only when the name is too long. */}
                   <Link
                     href={ROUTES.PLAYER(region, r.nickname)}
-                    className="flex min-w-0 flex-1 items-center gap-3 hover:underline"
+                    className="flex min-w-0 items-center gap-3 hover:underline"
                   >
-                    <span className="flex min-w-0 flex-1 items-center gap-2">
-                      <span className="min-w-0 flex-1 truncate">
-                        <span className="font-medium">{r.nickname}</span>
-                        {r.clan_tag ? (
-                          <>
-                            {" "}
-                            <ClanTag
-                              tag={r.clan_tag}
-                              color={r.clan_color}
-                              className="font-mono text-xs"
-                            />
-                          </>
-                        ) : null}
-                      </span>
-                      {r.languages.length > 0 && (
-                        <span className="hidden h-4 shrink-0 sm:inline-flex">
-                          <LanguageFlags
-                            languages={r.languages}
-                            source="inferred"
-                            size="s"
-                            region={region}
-                            link={false}
+                    <span className="min-w-0 truncate">
+                      <span className="font-medium">{r.nickname}</span>
+                      {r.clan_tag ? (
+                        <>
+                          {" "}
+                          <ClanTag
+                            tag={r.clan_tag}
+                            color={r.clan_color}
+                            className="font-mono text-xs"
                           />
-                        </span>
-                      )}
+                        </>
+                      ) : null}
                     </span>
                   </Link>
                   <PlayerBadges
@@ -117,6 +108,19 @@ export function TopPlayersList({
                     supporter={r.is_supporter}
                     twitchLogin={r.twitch_login}
                   />
+                  {/* Lifted out of the link so the badges can sit next to the
+                      nickname; `ml-auto` keeps the flags on the right edge. */}
+                  {r.languages.length > 0 && (
+                    <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                      <LanguageFlags
+                        languages={r.languages}
+                        source="inferred"
+                        size="s"
+                        region={region}
+                        link={false}
+                      />
+                    </span>
+                  )}
                 </span>
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">

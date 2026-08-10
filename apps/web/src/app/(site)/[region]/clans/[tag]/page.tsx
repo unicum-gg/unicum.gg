@@ -16,7 +16,11 @@ import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, clanSchema } from "@/lib/schema-org";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
-import type { ClanRatings, ClanVehicleRow } from "@unicum.gg/shared";
+import type {
+  ClanRankBadge as ClanRankBadgeData,
+  ClanRatings,
+  ClanVehicleRow,
+} from "@unicum.gg/shared";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
@@ -30,7 +34,7 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 // endpoint owns the cold-cache path (resolve tag on WG + fetch live).
 async function loadOverview(region: Region, tag: string) {
   try {
-    const { clan, ratings, nameHistory, vehiclesCount } = await unicum
+    const { clan, ratings, nameHistory, vehiclesCount, badges } = await unicum
       .region(region)
       .clans(tag)
       .overview();
@@ -39,6 +43,7 @@ async function loadOverview(region: Region, tag: string) {
       ratings: ratings as unknown as ClanRatings,
       nameHistory: nameHistory as unknown as ClanNameHistoryEntry[],
       vehiclesCount: vehiclesCount ?? null,
+      badges: (badges ?? []) as unknown as ClanRankBadgeData[],
     };
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -257,6 +262,7 @@ async function ClanProfileServer({
         initialData={initialData}
         initialVehicles={initialVehicles}
         initialVehiclesCount={overview.vehiclesCount ?? null}
+        initialBadges={overview.badges}
         initialNameHistory={
           overview.nameHistory as unknown as ClanNameHistoryEntry[]
         }

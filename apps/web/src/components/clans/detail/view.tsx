@@ -20,6 +20,7 @@ import type {
   ClanRatings,
   ClanVehicleRow,
 } from "@unicum.gg/shared";
+import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 /**
@@ -42,6 +43,7 @@ export function ClanProfile({
   initialClan,
   initialRatings,
   initialData,
+  initialBadges,
   initialVehicles,
   initialVehiclesCount,
   initialNameHistory,
@@ -59,6 +61,7 @@ export function ClanProfile({
   initialVehicles: ClanVehicleRow[] | null;
   initialVehiclesCount: number | null;
   initialNameHistory: ClanNameHistoryEntry[];
+  initialBadges: ClanRankBadgeData[];
 }) {
   const overviewReq = () => unicum.region(region).clans(tag).overview();
   const { data: overview, mutate: mutateOverview } = useSWR(
@@ -69,6 +72,7 @@ export function ClanProfile({
           ratings: r.ratings as unknown as ClanRatings,
           nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
           vehiclesCount: r.vehiclesCount ?? null,
+          badges: (r.badges ?? []) as unknown as ClanRankBadgeData[],
         })),
     {
       fallbackData: {
@@ -76,6 +80,7 @@ export function ClanProfile({
         ratings: initialRatings,
         nameHistory: initialNameHistory,
         vehiclesCount: initialVehiclesCount,
+        badges: initialBadges,
       },
       revalidateOnMount: false,
     },
@@ -84,6 +89,7 @@ export function ClanProfile({
   const ratings = overview?.ratings ?? initialRatings;
   const nameHistory = overview?.nameHistory ?? initialNameHistory;
   const vehiclesCount = overview?.vehiclesCount ?? initialVehiclesCount;
+  const badges = overview?.badges ?? initialBadges;
 
   // Incremented on each live tick; the tabs view refetches its sections when it
   // changes (see ClanTabsView's effect on `liveVersion`).
@@ -113,6 +119,7 @@ export function ClanProfile({
             clan={clan}
             members={initialData.members as ClanMemberStats[]}
             ratings={ratings}
+            badges={badges}
           />
         </PanelContent>
       </Panel>
