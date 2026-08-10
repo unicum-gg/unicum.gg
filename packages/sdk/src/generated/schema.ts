@@ -1295,7 +1295,7 @@ export interface components {
             /** @description Distinct battle-having vehicle count for the clan, materialized from the last /vehicles load. Null until the vehicles tab has been opened at least once. */
             vehiclesCount: number | null;
             /** @description Podium positions the clan currently holds, best rank first. Only the top three of each leaderboard qualify, so this is empty for almost every clan. */
-            badges: components["schemas"]["clanRankBadge"][];
+            badges: components["schemas"]["ClanRankBadge"][];
         };
         /**
          * @description Clan leaderboard time window.
@@ -1306,8 +1306,12 @@ export interface components {
         ClanPreviousClansResponse: {
             previousClans: components["schemas"]["PreviousClan"][];
         };
-        clanRankBadge: {
-            /** @enum {string} */
+        /** @description A podium position (rank 1 to 3) the clan currently holds on one leaderboard. */
+        ClanRankBadge: {
+            /**
+             * @description The leaderboard this placing is on.
+             * @enum {string}
+             */
             board: "wn7" | "wn8" | "wnx" | "advances" | "t10" | "t8" | "t6";
             rank: number;
         };
@@ -1405,6 +1409,7 @@ export interface components {
             clan_id: number;
             tag: string;
             name: string;
+            badges?: components["schemas"]["ClanRankBadge"][];
         };
         /** @description A tank the clan has played, with battle-weighted averages and WN7/WN8/WNX ratings across all members. */
         ClanVehicle: {
@@ -2259,6 +2264,8 @@ export interface components {
             boostRatio: number | null;
             /** @description Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period. */
             sr: number | null;
+            /** @description Leaderboard placings the clan currently holds, best rank first. */
+            badges?: components["schemas"]["ClanRankBadge"][];
         };
         /** @description One game mode's totals plus 24h/7d/30d period diffs. */
         StrongholdMode: {
