@@ -1,11 +1,17 @@
-import {
-  BattleType,
-  ClanBoard,
-  MapCamouflage,
-  MapGameMode,
-  RatingMetric,
-} from "@unicum.gg/shared";
-import { Region } from "@unicum.gg/wargaming";
+// Imported from deep, env-free module paths rather than the package barrels on
+// purpose: `scripts/inject-openapi-enums.ts` loads this module during the build
+// chain (incl. `postinstall`, which may run with no env), and the barrels
+// re-export `env.ts` whose t3-env validation would throw when the WG app ids are
+// absent. Each enum file below imports nothing that reaches env, so this stays a
+// pure, env-free value source. (The app-side `schemas.ts` still imports these
+// enums from the barrels, the usual convention — only this build-tooling module
+// takes the deep-path exception.)
+import { RatingMetric } from "@unicum.gg/shared/constants/rating";
+import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
+import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
+import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
+import { ClanBoard } from "@unicum.gg/shared/clans/badges";
+import { Region } from "@unicum.gg/wargaming/region";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
 
