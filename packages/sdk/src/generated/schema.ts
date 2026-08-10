@@ -1294,6 +1294,8 @@ export interface components {
             }[];
             /** @description Distinct battle-having vehicle count for the clan, materialized from the last /vehicles load. Null until the vehicles tab has been opened at least once. */
             vehiclesCount: number | null;
+            /** @description Podium positions the clan currently holds, best rank first. Only the top three of each leaderboard qualify, so this is empty for almost every clan. */
+            badges: components["schemas"]["clanRankBadge"][];
         };
         /**
          * @description Clan leaderboard time window.
@@ -1303,6 +1305,11 @@ export interface components {
         clanPeriodField: "overall" | "30d";
         ClanPreviousClansResponse: {
             previousClans: components["schemas"]["PreviousClan"][];
+        };
+        clanRankBadge: {
+            /** @enum {string} */
+            board: "wn7" | "wn8" | "wnx" | "advances" | "t10" | "t8" | "t6";
+            rank: number;
         };
         /** @description The clan's battle-weighted aggregate ratings: lifetime and 30-day WN7/WN8/WNX (weighted by lifetime and recent battles), plus the lifetime average win rate. */
         ClanRatings: {
