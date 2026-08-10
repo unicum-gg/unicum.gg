@@ -4,6 +4,7 @@ import { db } from "@unicum.gg/core/db";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { getClanNameHistory } from "@unicum.gg/core/clans/name-history";
+import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanOverviewResponse } from "./schema.api";
@@ -34,7 +35,7 @@ export async function GET(
   }
 
   const clans = clansByRegion[region];
-  const [cached, nameHistory, countRow] = await Promise.all([
+  const [cached, nameHistory, countRow, badges] = await Promise.all([
     getClanMembersCached(region, clanCached.info.id).catch(() => null),
     getClanNameHistory(region, clanCached.info.id),
     db
@@ -44,6 +45,10 @@ export async function GET(
       .limit(1)
       .then((rows) => rows[0] ?? null)
       .catch(() => null),
+    // Podium positions, read from the ranks the hourly cron materialised. Two
+    // indexed lookups, so this rides in the batch rather than costing a round
+    // trip of its own.
+    resolveClanBadges(region, [clanCached.info.id]).catch(() => new Map()),
   ]);
   const ratings = computeClanRatings(cached?.members ?? []);
   return jsonResponse(ClanOverviewResponse, {
@@ -51,5 +56,6 @@ export async function GET(
     ratings,
     nameHistory,
     vehiclesCount: countRow?.vehiclesCount ?? null,
+    badges: badges.get(clanCached.info.id) ?? [],
   });
 }

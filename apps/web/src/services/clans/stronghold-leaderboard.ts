@@ -4,6 +4,7 @@ import {
   StrongholdSort,
   StrongholdTier,
   strongholdRatingsByRegion,
+  type ClanRankBadge,
   type ClanStrongholdSr,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
@@ -28,6 +29,9 @@ export type StrongholdLeaderboardEntry = {
   boostRatio: number | null;
   /** Composite skirmish rating for the period: roster x win rate x volume x maturity. */
   sr: number | null;
+  /** Leaderboard placings, attached by the route (this query ranks one board,
+   * the badges span all of them). */
+  badges?: ClanRankBadge[];
 };
 
 // Column each sort orders by. Battles/wins/sr in the row are already the

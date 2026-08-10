@@ -1,5 +1,6 @@
 // Co-located response schema (`.api.ts` suffix is load-bearing for the generator).
 import { z } from "zod";
+import { clanRankBadge } from "@/services/openapi/schemas";
 
 const strongholdLeaderboardEntry = z
   .object({
@@ -29,6 +30,10 @@ const strongholdLeaderboardEntry = z
     sr: z.number().nullable().meta({
       description:
         "Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period.",
+    }),
+    badges: z.array(clanRankBadge).optional().meta({
+      description:
+        "Leaderboard placings the clan currently holds, best rank first.",
     }),
   })
   .meta({

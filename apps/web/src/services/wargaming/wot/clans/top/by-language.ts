@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { clanRatingsByRegion } from "@unicum.gg/shared";
+import { type ClanRankBadge, clanRatingsByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { type Region } from "@unicum.gg/wargaming";
 import { VALID_METRIC_COLUMNS } from "@unicum.gg/core/wargaming/wot/clans/top";
@@ -14,6 +14,8 @@ export type TopClanByLanguageResult = {
   members_count: number;
   rated_members_count: number;
   avg_value: number;
+  /** Podium positions, attached by the route (see `TopClanResult`). */
+  badges?: ClanRankBadge[];
 };
 
 // Higher floor on the global leaderboard so the headline list reads as

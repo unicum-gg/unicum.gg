@@ -1,6 +1,7 @@
 import * as z from "zod";
 import {
   BattleType,
+  ClanBoard,
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
@@ -278,11 +279,38 @@ export const playerSummary = z
     description: "Player row (additional fields may be present).",
   });
 
+/**
+ * A podium position on one of the clan leaderboards. Shared rather than
+ * co-located because it rides along with a clan wherever one is returned: the
+ * detail payload, the leaderboard rows, search.
+ *
+ * The board list is inlined as literals: `next-openapi-gen` cannot read an
+ * imported array or a native enum, and `assertEnumInSync` below locks it to
+ * `ClanBoard` so a new board is a build error rather than a silent omission.
+ */
+export const clanRankBadge = z
+  .object({
+    board: z.enum(["wn7", "wn8", "wnx", "advances", "t10", "t8", "t6"]),
+    rank: z.number().int(),
+  })
+  .meta({
+    id: "ClanRankBadge",
+    description:
+      "A podium position (rank 1 to 3) the clan currently holds on one leaderboard.",
+  });
+
+assertEnumInSync(
+  clanRankBadge.shape.board.options,
+  Object.values(ClanBoard),
+  "clan board",
+);
+
 export const clanSummary = z
   .object({
     clan_id: z.number(),
     tag: z.string(),
     name: z.string(),
+    badges: z.array(clanRankBadge).optional(),
   })
   .loose()
   .meta({

@@ -134,6 +134,20 @@ const clanRatings = z
  * ratings). The heavy per-category data (members, previous clans, activity,
  * stronghold, clan wars, vehicles) lives on the dedicated sub-endpoints.
  */
+/** A podium position on one of the clan leaderboards. */
+const clanRankBadge = z.object({
+  board: z.enum([
+    "wn7",
+    "wn8",
+    "wnx",
+    "advances",
+    "t10",
+    "t8",
+    "t6",
+  ]),
+  rank: z.number().int(),
+});
+
 export const ClanOverviewResponse = z.object({
   clan: clanInfo,
   ratings: clanRatings,
@@ -156,4 +170,8 @@ export const ClanOverviewResponse = z.object({
       description:
         "Distinct battle-having vehicle count for the clan, materialized from the last /vehicles load. Null until the vehicles tab has been opened at least once.",
     }),
+  badges: z.array(clanRankBadge).meta({
+    description:
+      "Podium positions the clan currently holds, best rank first. Only the top three of each leaderboard qualify, so this is empty for almost every clan.",
+  }),
 });

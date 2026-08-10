@@ -1,5 +1,5 @@
 import { and, asc, eq, sql } from "drizzle-orm";
-import { RATING_METRICS, RatingMetric, clanMembersByRegion, playersByRegion, topClansByRegion } from "@unicum.gg/shared";
+import { RATING_METRICS, RatingMetric, type ClanRankBadge, clanMembersByRegion, playersByRegion, topClansByRegion } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import { getClansBriefInfo } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import {
@@ -21,6 +21,9 @@ export type TopClanResult = {
   members_count: number;
   rated_members_count: number;
   avg_wnx: number;
+  /** Podium positions, attached by the route rather than by this query: the
+   * leaderboard SQL ranks one board, the badges span all of them. */
+  badges?: ClanRankBadge[];
 };
 
 const MIN_MEMBERS = 50;

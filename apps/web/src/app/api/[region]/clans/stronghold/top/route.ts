@@ -1,4 +1,5 @@
 import { isRegion } from "@unicum.gg/wargaming";
+import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
 import {
   StrongholdPeriod,
   StrongholdSort,
@@ -52,5 +53,16 @@ export async function GET(
     period,
     LIMIT,
   );
-  return jsonResponse(StrongholdTopResponse, { results });
+  // One batched pair of indexed reads for the whole page, so every row can
+  // carry the placings it holds on the other boards.
+  const byClan = await resolveClanBadges(
+    region,
+    results.map((r) => r.clanId),
+  );
+  return jsonResponse(StrongholdTopResponse, {
+    results: results.map((r) => {
+      const badges = byClan.get(r.clanId);
+      return badges?.length ? { ...r, badges } : r;
+    }),
+  });
 }

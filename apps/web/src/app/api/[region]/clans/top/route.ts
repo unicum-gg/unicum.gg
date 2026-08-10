@@ -6,8 +6,30 @@ import {
   TopClansPeriod,
 } from "@unicum.gg/core/wargaming/wot/clans/top";
 import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-language";
-import { isRegion } from "@unicum.gg/wargaming";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
+import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
 import { TopClansResponse } from "./schema.api";
+
+/**
+ * Attach each row's podium positions. One batched pair of indexed reads for the
+ * whole page (~30 ms for 100 clans), so it is cheap enough to run on every
+ * board rather than only the headline one. Rows with no podium simply keep no
+ * `badges` key.
+ */
+async function withBadges<T extends { clan_id: number }>(
+  region: Region,
+  rows: T[],
+): Promise<T[]> {
+  if (rows.length === 0) return rows;
+  const byClan = await resolveClanBadges(
+    region,
+    rows.map((r) => r.clan_id),
+  );
+  return rows.map((r) => {
+    const badges = byClan.get(r.clan_id);
+    return badges?.length ? { ...r, badges } : r;
+  });
+}
 
 /**
  * Top clans
@@ -59,7 +81,10 @@ export async function GET(
         limit,
         strict,
       );
-      return jsonResponse(TopClansResponse, { results, computed_at: null });
+      return jsonResponse(TopClansResponse, {
+        results: await withBadges(region, results),
+        computed_at: null,
+      });
     }
     const { results, computedAt } = await getTopClansByMetric(
       region,
@@ -68,7 +93,7 @@ export async function GET(
       limit,
     );
     return jsonResponse(TopClansResponse, {
-      results,
+      results: await withBadges(region, results),
       computed_at: computedAt?.toISOString() ?? null,
     });
   } catch (err) {
