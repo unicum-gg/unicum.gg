@@ -16,4 +16,5 @@ export * from "./db";
 export * from "./clans";
 export * from "./players";
 export * from "./twitch";
+export * from "./feedback";
 export * from "./wot";
