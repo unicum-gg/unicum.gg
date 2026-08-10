@@ -52,21 +52,34 @@ const CHARGE: Record<CrestKind, ReactNode> = {
   [CrestKind.Streamer]: <path d="M40 27 L67 43 L40 59 Z" fill="#fff" />,
 };
 
-export function Crest({
-  kind,
-  size = 16,
-  muted = false,
-  className,
-}: {
-  kind: CrestKind;
+type Tincture = { fill: string; edge: string };
+
+type CrestProps = {
   /** Height in px; the width follows the hexagon's aspect. */
   size?: number;
   /** Slate crest for owner-only supporter states (hidden / invite). */
   muted?: boolean;
   className?: string;
-}) {
+} & (
+  | { kind: CrestKind; tincture?: never; charge?: ReactNode }
+  // Colour and device both supplied: the clan leaderboard crests, where the
+  // hue is the board and the charge is the rank digit, neither of which is a
+  // fixed identity this enum could name.
+  | { kind?: never; tincture: Tincture; charge: ReactNode }
+);
+
+export function Crest({
+  kind,
+  size = 16,
+  muted = false,
+  tincture,
+  charge,
+  className,
+}: CrestProps) {
   const gradientId = useId();
-  const { fill, edge } = muted ? MUTED : TINCTURE[kind];
+  const { fill, edge } = muted
+    ? MUTED
+    : (tincture ?? TINCTURE[kind as CrestKind]);
   return (
     <svg
       width={Math.round((size * HEX_W) / HEX_H)}
@@ -92,7 +105,7 @@ export function Crest({
       />
       {/* Top-edge highlight for the struck-metal crest feel. */}
       <path d="M26 3 H74" stroke="rgba(255,255,255,.35)" strokeWidth="3" fill="none" />
-      {CHARGE[kind]}
+      {charge ?? (kind ? CHARGE[kind] : null)}
     </svg>
   );
 }
