@@ -1,0 +1,39 @@
+import {
+  BattleType,
+  ClanBoard,
+  MapCamouflage,
+  MapGameMode,
+  RatingMetric,
+} from "@unicum.gg/shared";
+import { Region } from "@unicum.gg/wargaming";
+import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
+import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
+
+/**
+ * The single source for every enum param/field in the public API doc.
+ *
+ * next-openapi-gen's static AST reader can only pull an enum's values from an
+ * inline literal or a same-file const (never an imported array or a native
+ * enum), so `z.enum(SomeEnum)` in `schemas.ts` produces a param with no `enum`
+ * in the generated spec. Rather than re-typing every value as a guarded literal,
+ * each such schema carries an `x-enum-source` marker naming a key here, and
+ * `scripts/inject-openapi-enums.ts` fills the values from these domain enums
+ * after generation. So the domain enum is the one source: add a value there and
+ * it flows to Zod validation (via `z.enum`) and to the doc/SDK (via injection),
+ * with no literal to keep in sync.
+ */
+export const OPENAPI_ENUM_SOURCES = {
+  REGION: Object.values(Region),
+  METRIC: Object.values(RatingMetric),
+  PLAYER_PERIOD: Object.values(TopPlayersPeriod),
+  CLAN_PERIOD: Object.values(TopClansPeriod),
+  MAP_MODE: Object.values(MapGameMode),
+  MAP_CAMOUFLAGE: Object.values(MapCamouflage),
+  MAP_BATTLE_TYPE: Object.values(BattleType),
+  CLAN_BOARD: Object.values(ClanBoard),
+} satisfies Record<string, readonly string[]>;
+
+/** Marker value a schema's `x-enum-source` may name. A typo is a compile error
+ * where the marker is written, and the injection script throws on an unknown
+ * one, so a source can never silently go unfilled. */
+export type EnumSourceKey = keyof typeof OPENAPI_ENUM_SOURCES;
