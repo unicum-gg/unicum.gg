@@ -3,7 +3,7 @@ import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import {
   getTopPlayersByMetric,
-  type TopPlayersPeriod,
+  TopPlayersPeriod,
 } from "@unicum.gg/core/wargaming/wot/players/top";
 import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by-language";
 import { attachPlayerBadges } from "@/services/players/attach-badges";
@@ -32,8 +32,8 @@ export async function GET(
   // `periodField` enum values match `TopPlayersPeriod`; `.catch` mirrors the
   // old `parsePeriod` (unknown/missing -> overall).
   const period = S.periodField
-    .catch("overall")
-    .parse(url.searchParams.get("period")) as TopPlayersPeriod;
+    .catch(TopPlayersPeriod.Overall)
+    .parse(url.searchParams.get("period"));
   const limit = Math.max(
     1,
     Math.min(

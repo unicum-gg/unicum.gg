@@ -53,8 +53,8 @@ export async function GET(
   // `clanPeriodField` enum values match `TopClansPeriod`; unknown/missing falls
   // back to the lifetime ranking.
   const period = S.clanPeriodField
-    .catch("overall")
-    .parse(url.searchParams.get("period")) as TopClansPeriod;
+    .catch(TopClansPeriod.Overall)
+    .parse(url.searchParams.get("period"));
   const limitParam = url.searchParams.get("limit");
   const limit = Math.max(
     1,

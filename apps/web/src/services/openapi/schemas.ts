@@ -5,29 +5,39 @@ import {
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
-  RATING_METRICS,
-  type RatingMetric,
+  RatingMetric,
 } from "@unicum.gg/shared";
-import { REGIONS, type Region } from "@unicum.gg/wargaming";
+import { Region } from "@unicum.gg/wargaming";
 // Imported from the dependency-free `period` modules (not the DB-heavy index)
 // so loading these schemas never pulls in the leaderboard logic.
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
+import type { EnumSourceKey } from "./enum-sources";
 
 // Single source of truth for the public API surface. These Zod schemas are
 // consumed by the route handlers (runtime validation) and by the OpenAPI
 // document builder, so the spec can never drift from the code.
 //
-// Enum values must be passed to `z.enum([...])` as literals: next-openapi-gen
-// reads them via static AST analysis and can't resolve an imported array or a
-// native enum. To stop those literals from silently drifting, each is locked to
-// its source enum by the `Exact<>` guard below (a compile error if they
-// diverge). The type-only imports above keep this at zero runtime cost.
-type Exact<A, B> = [A] extends [B] ? ([B] extends [A] ? true : never) : never;
+// Enum fields pass their native source enum straight to `z.enum(...)`, so the
+// domain enum is the one source of the allowed values (Zod validates against it
+// at runtime). next-openapi-gen can't read a native enum, though, so it emits
+// the param with no `enum` in the spec; each enum field therefore carries an
+// `x-enum-source` marker (a key of `OPENAPI_ENUM_SOURCES`) that
+// `scripts/inject-openapi-enums.ts` fills with the values after generation.
+//
+// Two hard constraints on the marker, both from next-openapi-gen's static AST
+// reader: (1) the `.meta` MUST be an inline object literal — a helper call or a
+// spread makes it silently drop the whole `.meta`; (2) the cast is `as EnumMeta`
+// (not a checked object type) because Zod's meta type rejects custom `x-*` keys.
+// So the marker's key is validated at build time by the injection script (it
+// throws on an unknown one), not by tsc. `example` is inlined for the same AST
+// reason.
+type EnumMeta = z.core.GlobalMeta & { "x-enum-source": EnumSourceKey };
 
-export const regionPath = z.enum(["eu", "na", "asia"]).meta({
+export const regionPath = z.enum(Region).meta({
   description: "Game server region.",
-});
+  "x-enum-source": "REGION",
+} as EnumMeta);
 
 export const regionParams = z.object({ region: regionPath });
 
@@ -53,29 +63,20 @@ export const mapParams = z.object({
   slug: z.string().meta({ description: "Map slug (e.g. prokhorovka)." }),
 });
 
-export const mapModeField = z.enum(["standard", "encounter", "assault"]).meta({
+export const mapModeField = z.enum(MapGameMode).meta({
   description: "Random-battle game mode a map supports.",
-});
+  "x-enum-source": "MAP_MODE",
+} as EnumMeta);
 
-export const mapCamouflageField = z.enum(["summer", "winter", "desert"]).meta({
+export const mapCamouflageField = z.enum(MapCamouflage).meta({
   description: "Vehicle camouflage kind the map is skinned with.",
-});
+  "x-enum-source": "MAP_CAMOUFLAGE",
+} as EnumMeta);
 
-export const mapBattleTypeField = z
-  .enum([
-    "random",
-    "battle_royale",
-    "frontline",
-    "onslaught",
-    "grand_battle",
-    "clan_wars",
-    "waffentrager",
-    "last_stand",
-    "arcade",
-    "story_mode",
-    "training",
-  ])
-  .meta({ description: "Top-level battle type a map belongs to." });
+export const mapBattleTypeField = z.enum(BattleType).meta({
+  description: "Top-level battle type a map belongs to.",
+  "x-enum-source": "MAP_BATTLE_TYPE",
+} as EnumMeta);
 
 export const MIN_QUERY_LENGTH = 3;
 
@@ -118,77 +119,24 @@ export const compareTagsQuery = z.object({
   }),
 });
 
-export const periodField = z.enum(["24h", "7d", "30d", "overall"]).meta({
+export const periodField = z.enum(TopPlayersPeriod).meta({
   description: "Leaderboard time window.",
   example: "overall",
-});
+  "x-enum-source": "PLAYER_PERIOD",
+} as EnumMeta);
 
 // Clans expose only the lifetime and 30-day rankings (no 24h/7d), so their
 // period param is a narrower enum than the player one.
-export const clanPeriodField = z.enum(["overall", "30d"]).meta({
+export const clanPeriodField = z.enum(TopClansPeriod).meta({
   description: "Clan leaderboard time window.",
   example: "overall",
-});
+  "x-enum-source": "CLAN_PERIOD",
+} as EnumMeta);
 
-export const metricField = z.enum(["wn7", "wn8", "wnx"]).meta({
+export const metricField = z.enum(RatingMetric).meta({
   description: "Rating metric the leaderboard is ranked by.",
-});
-
-// The enum literals above are required by next-openapi-gen (static AST), but
-// they must mirror their source enums. Two guards keep them honest:
-//
-// 1. Compile-time: `tsc` errors if a literal diverges from the source enum's
-//    value union (catches it at build).
-const _enumGuards: [
-  Exact<(typeof regionPath.options)[number], `${Region}`>,
-  Exact<(typeof periodField.options)[number], `${TopPlayersPeriod}`>,
-  Exact<(typeof clanPeriodField.options)[number], `${TopClansPeriod}`>,
-  Exact<(typeof metricField.options)[number], `${RatingMetric}`>,
-  Exact<(typeof mapModeField.options)[number], `${MapGameMode}`>,
-  Exact<(typeof mapCamouflageField.options)[number], `${MapCamouflage}`>,
-  Exact<(typeof mapBattleTypeField.options)[number], `${BattleType}`>,
-] = [true, true, true, true, true, true, true];
-void _enumGuards;
-
-// 2. Runtime: throws when this module loads (dev, `openapi-gen generate`, prod)
-//    if a value was added to the source enum without updating the literal.
-function assertEnumInSync(
-  literal: readonly string[],
-  source: readonly string[],
-  name: string,
-): void {
-  const inLiteral = new Set(literal);
-  const inSource = new Set(source);
-  const missing = source.filter((v) => !inLiteral.has(v));
-  const unknown = literal.filter((v) => !inSource.has(v));
-  if (missing.length || unknown.length) {
-    throw new Error(
-      `OpenAPI enum "${name}" is out of sync with its source enum` +
-        (missing.length ? `, missing [${missing.join(", ")}]` : "") +
-        (unknown.length ? `, unknown [${unknown.join(", ")}]` : ""),
-    );
-  }
-}
-
-assertEnumInSync(regionPath.options, REGIONS, "region");
-assertEnumInSync(periodField.options, Object.values(TopPlayersPeriod), "period");
-assertEnumInSync(
-  clanPeriodField.options,
-  Object.values(TopClansPeriod),
-  "clan period",
-);
-assertEnumInSync(metricField.options, RATING_METRICS, "metric");
-assertEnumInSync(mapModeField.options, Object.values(MapGameMode), "map mode");
-assertEnumInSync(
-  mapCamouflageField.options,
-  Object.values(MapCamouflage),
-  "map camouflage",
-);
-assertEnumInSync(
-  mapBattleTypeField.options,
-  Object.values(BattleType),
-  "map battle type",
-);
+  "x-enum-source": "METRIC",
+} as EnumMeta);
 
 // Leaderboard limits live here (the API contract) and are imported by the route
 // handlers, so the doc and the runtime clamp share one source.
@@ -283,14 +231,13 @@ export const playerSummary = z
  * A podium position on one of the clan leaderboards. Shared rather than
  * co-located because it rides along with a clan wherever one is returned: the
  * detail payload, the leaderboard rows, search.
- *
- * The board list is inlined as literals: `next-openapi-gen` cannot read an
- * imported array or a native enum, and `assertEnumInSync` below locks it to
- * `ClanBoard` so a new board is a build error rather than a silent omission.
  */
 export const clanRankBadge = z
   .object({
-    board: z.enum(["wn7", "wn8", "wnx", "advances", "t10", "t8", "t6"]),
+    board: z.enum(ClanBoard).meta({
+      description: "The leaderboard this placing is on.",
+      "x-enum-source": "CLAN_BOARD",
+    } as EnumMeta),
     rank: z.number().int(),
   })
   .meta({
@@ -298,12 +245,6 @@ export const clanRankBadge = z
     description:
       "A podium position (rank 1 to 3) the clan currently holds on one leaderboard.",
   });
-
-assertEnumInSync(
-  clanRankBadge.shape.board.options,
-  Object.values(ClanBoard),
-  "clan board",
-);
 
 export const clanSummary = z
   .object({
