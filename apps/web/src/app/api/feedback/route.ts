@@ -55,11 +55,15 @@ export async function POST(request: Request): Promise<Response> {
   if (!parsed.success) {
     return NextResponse.json({ error: "invalid_body" }, { status: 400 });
   }
-  const { topic, sentiment, message, page, umamiSessionId } = parsed.data;
+  const { topic, sentiment, message, page, umamiSessionId, discordAuthor } =
+    parsed.data;
 
   const session = await auth.api.getSession({ headers: hdrs });
   const wg = wgIdentityFromEmail(session?.user?.email);
   const nickname = session?.user?.name;
+  // A signed-in WG identity wins; the bot's Discord handle is the fallback for
+  // `/feedback` (no web session). Neither is trusted from the client body: the
+  // WG one comes from the session, the Discord one is labelled as unverified.
   const author =
     wg && nickname
       ? {
@@ -67,7 +71,9 @@ export async function POST(request: Request): Promise<Response> {
           region: wg.region,
           profileUrl: `${APP_IDENTITY.URL}${ROUTES.PLAYER(wg.region, nickname)}`,
         }
-      : {};
+      : discordAuthor
+        ? { discord: discordAuthor }
+        : {};
 
   const ok = await sendFeedbackToDiscord({
     topic,

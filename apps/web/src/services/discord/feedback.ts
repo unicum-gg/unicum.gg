@@ -17,7 +17,8 @@ export function isFeedbackEnabled(): boolean {
   return discordBotEnabled() && !!env.DISCORD_FEEDBACK_CHANNEL_ID;
 }
 
-/** Who sent it, derived server-side from the session (never from the client). */
+/** Who sent it: the WG identity from the session (site), or a Discord handle
+ * (bot). Both are set server-side; the Discord handle is an unverified label. */
 type FeedbackAuthor = {
   /** WG nickname, when signed in. */
   nickname?: string;
@@ -25,6 +26,9 @@ type FeedbackAuthor = {
   region?: string;
   /** Absolute link to the sender's profile, when signed in. */
   profileUrl?: string;
+  /** The submitter's Discord identity, when the feedback came from the bot's
+   * `/feedback` command rather than a signed-in web session. */
+  discord?: { id: string; username: string };
 };
 
 type FeedbackPayload = {
@@ -65,7 +69,11 @@ function buildEmbed(payload: FeedbackPayload) {
       ? author.profileUrl
         ? `[${author.nickname}](${author.profileUrl})${author.region ? ` (${author.region.toUpperCase()})` : ""}`
         : author.nickname
-      : "Anonymous",
+      : author.discord
+        ? // A Discord mention renders as the user (clickable, no ping in an
+          // embed); the trailing tag makes the unverified source explicit.
+          `<@${author.discord.id}> (\`@${author.discord.username}\` · via Discord)`
+        : "Anonymous",
     inline: true,
   });
   if (page) {
