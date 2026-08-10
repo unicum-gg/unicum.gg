@@ -238,8 +238,32 @@ export async function recomputeStrongholdRatings(
   for (const tier of TIERS) {
     for (const period of PERIODS) {
       const rows = await computeStrongholdRows(region, tier, period);
+
+      // Rank within this (tier, period) board, computed here so the read side
+      // never re-sorts. Two things this must not get wrong:
+      //  - `computeStrongholdRows` drops the board's ORDER BY on purpose (it
+      //    materialises the whole slice, see its note), so the rows arrive in
+      //    whatever order Postgres produced them. They have to be sorted here.
+      //  - only active clans are ranked. The board hides the rest, so a dormant
+      //    clan would otherwise badge a position it no longer occupies.
+      const ranked = new Map<string, number>();
+      const active = rows
+        .filter((r) => r.is_active && r.sr !== null)
+        .sort((a, b) => Number(b.sr) - Number(a.sr));
+      let rank = 0;
+      let previousSr: number | null = null;
+      active.forEach((r, i) => {
+        const sr = Number(r.sr);
+        if (sr !== previousSr) {
+          rank = i + 1;
+          previousSr = sr;
+        }
+        ranked.set(String(r.clan_id), rank);
+      });
+
       for (const r of rows) {
         values.push({
+          rank: ranked.get(String(r.clan_id)) ?? null,
           tier,
           period,
           clanId: Number(r.clan_id),

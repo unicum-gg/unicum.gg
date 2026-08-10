@@ -15,6 +15,13 @@ import { type Region } from "@unicum.gg/wargaming";
 // 50) while staying lean — no point storing dormant 3-member clans.
 const MIN_RATED = 25;
 
+// Floor the badge rank is computed over: the global board's own eligibility
+// (`MIN_MEMBERS_GLOBAL` in `top/by-language`, applied to both member counts).
+// A badge has to mean "first on the leaderboard you can go and look at", so the
+// two have to be the same population. Kept in sync by hand rather than imported
+// because that module lives in `apps/web` and core cannot depend on it.
+const MIN_BADGE_MEMBERS = 50;
+
 // Postgres caps a statement at 65535 bind params; ~11 cols/row means we stay
 // well under with 2000-row insert chunks.
 const INSERT_CHUNK = 2000;
@@ -106,6 +113,38 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
         avgValue: value.toString(),
       });
     }
+  }
+
+  // Rank per metric, assigned here rather than at read time: this is the one
+  // place the whole board is in hand and already comparable, so it costs a sort
+  // of what we hold instead of a sort of the table on every badge lookup.
+  // Descending, so #1 is the best average. Ties share the lower rank, matching
+  // how the board itself displays them.
+  //
+  // Ranked over `MIN_BADGE_MEMBERS`, not over everything the table holds. The
+  // table materializes down to `MIN_RATED` (25) so the language boards, which
+  // drop to that floor, have rows to read; the global board a visitor actually
+  // sees requires 50. Ranking the whole table would put clans nobody can find
+  // on the podium and leave every clan on the real board at rank 4 or worse, so
+  // the badge would be simultaneously wrong and invisible. Rows below the floor
+  // keep a null rank, which renders no badge.
+  for (const metric of METRIC_KEYS) {
+    const board = values.filter(
+      (v) =>
+        v.metric === metric &&
+        v.membersCount >= MIN_BADGE_MEMBERS &&
+        v.ratedMembersCount >= MIN_BADGE_MEMBERS,
+    );
+    board.sort((a, b) => Number(b.avgValue) - Number(a.avgValue));
+    let rank = 0;
+    let previous: string | null = null;
+    board.forEach((row, i) => {
+      if (row.avgValue !== previous) {
+        rank = i + 1;
+        previous = row.avgValue;
+      }
+      row.rank = rank;
+    });
   }
 
   await db.transaction(async (tx) => {
