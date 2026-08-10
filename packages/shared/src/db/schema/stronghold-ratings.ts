@@ -50,6 +50,9 @@ export function makeStrongholdRatingsTable(region: string) {
       boostRatio: numeric("boost_ratio"),
       // Composite skirmish rating (roster x win rate x volume x maturity).
       sr: numeric("sr"),
+      // Position on this (tier, period) board by SR, written by the cron. Same
+      // reason as `clan_ratings.rank`: ranking at read time is a full sort.
+      rank: integer("rank"),
       // True when the clan has a positive 30-day battle diff on this tier. The
       // board filters on it (only rank active clans); the clan page ignores it.
       isActive: boolean("is_active").notNull().default(true),

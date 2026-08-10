@@ -36,6 +36,11 @@ export function makeClanRatingsTable(region: string) {
       // is battle-weighted over). Boards floor this to reject dormant/troll clans.
       ratedMembersCount: integer("rated_members_count").notNull(),
       avgValue: numeric("avg_value").notNull(),
+      // Position on this metric's board, written by the cron that already knows
+      // the ordering. Ranking at read time costs a full sort of the board
+      // (measured 410 ms for one clan on EU), which the badges would pay again
+      // for every row of a leaderboard. Null until the next cron run.
+      rank: integer("rank"),
       computedAt: timestamp("computed_at", { withTimezone: true })
         .notNull()
         .defaultNow(),
