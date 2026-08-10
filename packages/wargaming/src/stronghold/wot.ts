@@ -4,10 +4,16 @@ import { RateLimit } from "../client/rate-limiter";
 
 // Stronghold data lives on a dedicated game_api host, distinct from the public
 // API and the clan portal.
+// The `wgsh-*` host is keyed on Wargaming's INTERNAL realm codes, not the
+// public region codes: NA is "us" and Asia is "sg" (Singapore), so `wotna` /
+// `wotasia` do not resolve at all (DNS NXDOMAIN). Only EU matches its public
+// code. Getting this wrong fails silently -- the transport swallows the
+// connection error, `clan()` returns null, and no snapshot is ever written --
+// which is why NA/Asia had zero stronghold data.
 const WGSH_HOST: Record<Region, string> = {
   [Region.EU]: "wgsh-woteu.wargaming.net",
-  [Region.NA]: "wgsh-wotna.wargaming.net",
-  [Region.ASIA]: "wgsh-wotasia.wargaming.net",
+  [Region.NA]: "wgsh-wotus.wargaming.net",
+  [Region.ASIA]: "wgsh-wotsg.wargaming.net",
 };
 
 type TierStats = {
