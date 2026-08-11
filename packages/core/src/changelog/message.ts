@@ -16,7 +16,16 @@ const HEADER = "> **Update** (@here)";
 const FOOTER = `→ <${APP_IDENTITY.URL}/>`;
 
 /** `+` added, `~` changed, `-` removed: the marker carries the category, so no
- * entry needs a heading above it. */
+ * entry needs a heading above it.
+ *
+ * `-` is escaped because Discord reads a leading `- ` as a bullet: the removed
+ * entries rendered as an indented list with a `•`, which broke the column the
+ * other two markers line up in and made "removed" look like a different kind of
+ * section rather than a third category. `+` and `~` start no list, so only this
+ * one needs it, and `\-` renders as a plain `-` so the three read identically.
+ */
+const MARKER = { added: "+", changed: "~", removed: "\\-" };
+
 function group(marker: string, entries: string[]): string[] {
   return entries.map((entry) => `${marker} ${entry}`);
 }
@@ -36,9 +45,9 @@ function assemble(lines: string[], dropped: number): string {
  */
 export function renderChangelogMessage(draft: ChangelogDraft): string {
   const groups = [
-    group("+", draft.added),
-    group("~", draft.changed),
-    group("-", draft.removed),
+    group(MARKER.added, draft.added),
+    group(MARKER.changed, draft.changed),
+    group(MARKER.removed, draft.removed),
   ].filter((g) => g.length > 0);
 
   // Blank line between groups, as the entries are only told apart by a marker.
