@@ -699,6 +699,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/{slug}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank videos
+         * @description Community-suggested gameplay videos for one tank, newest approved first. Each entry is a battle rather than a whole video: it carries the second it starts at, so a three-hour stream VOD can be linked at the minute this tank is played. The map, mode and result are declared by the submitter and checked in moderation; the spawn direction is derived from the map's own geometry. Region-independent, the same list is served on every region. Suggesting one is a write, and lives on `/videos/suggest`.
+         */
+        get: operations["get-{region}-tanks-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/videos/suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Suggest a tank video
+         * @description Queue a YouTube link for moderation. Requires a signed-in Wargaming account, so a suggestion always carries who made it. The link must be a YouTube video we can embed, and its timestamp is what marks the battle. The map and mode are validated against the catalogue, so a battle cannot be filed under a map that never runs that mode. Nothing is published here: a moderator approves it first. 401 when signed out, 404 when submissions are unconfigured, 409 when that exact battle was already submitted.
+         */
+        post: operations["post-{region}-tanks-{slug}-videos-suggest"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/{slug}/specifications": {
         parameters: {
             query?: never;
@@ -853,6 +893,26 @@ export interface paths {
         get: operations["get-{region}-coverage"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Send feedback
+         * @description Forward a message to the team's private Discord channel. Open to everyone, no key and no account: the sender's Wargaming identity is attached from the session when signed in, otherwise the feedback is anonymous. Rate limited per client. 404 when the feature is unconfigured, 400 on a bad body, 429 when rate limited, 502 when it could not be delivered.
+         */
+        post: operations["post-feedback"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1178,6 +1238,11 @@ export interface components {
             tiers: components["schemas"]["tier"][];
             count: number;
         };
+        /**
+         * @description How the battle ended, as declared by the submitter.
+         * @enum {string}
+         */
+        battleResultField: "victory" | "defeat" | "draw";
         ClanActivityResponse: {
             events: components["schemas"]["ClanEvent"][];
         };
@@ -1615,6 +1680,32 @@ export interface components {
             /** @description True for the swappable role slot. */
             role: boolean;
             roleOptions?: string[];
+        };
+        FeedbackBody: {
+            /**
+             * @description What the feedback is about.
+             * @enum {string}
+             */
+            topic: "bug" | "idea" | "data" | "other";
+            /**
+             * @description Optional one-tap sentiment.
+             * @enum {string}
+             */
+            sentiment?: "awful" | "bad" | "good" | "great";
+            /** @description The feedback itself. */
+            message: string;
+            /** @description Page it was sent from, for context. */
+            page?: string;
+            /** @description Analytics session id, when the sender's browser captured one. */
+            umamiSessionId?: string;
+            /** @description Set by the Discord bot instead of a web session. Shown as an unverified handle: the endpoint is public, so this is a self-reported label rather than a trusted identity. */
+            discordAuthor?: {
+                id: string;
+                username: string;
+            };
+        };
+        FeedbackResponse: {
+            ok: boolean;
         };
         fieldModItem: {
             key: string;
@@ -2239,6 +2330,11 @@ export interface components {
             unlockStrategyAny: boolean;
         };
         /**
+         * @description Side of the map a team starts from.
+         * @enum {string}
+         */
+        spawnDirectionField: "north" | "south" | "east" | "west";
+        /**
          * @description With `language`: only count clans that declare exactly this one language.
          * @enum {string}
          */
@@ -2668,6 +2764,42 @@ export interface components {
             tier: number;
             nation: string;
             type: string;
+        };
+        /** @description A community-suggested battle, as a deep link into a video at the minute this tank is played. */
+        TankVideo: {
+            id: number;
+            videoId: string;
+            /** @description Where the battle starts in the video, in seconds. */
+            startSeconds: number;
+            title: string;
+            channelName: string;
+            mapName: string | null;
+            mode: components["schemas"]["mapModeField"] | null;
+            /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
+            direction: components["schemas"]["spawnDirectionField"] | null;
+            directionLabel: string | null;
+            result: components["schemas"]["battleResultField"] | null;
+            /** @description Client version at the time the video was approved. */
+            gameVersion: string | null;
+        };
+        TankVideosResponse: {
+            videos: components["schemas"]["TankVideo"][];
+        };
+        TankVideoSuggestBody: {
+            /** @description YouTube link, timestamp included. */
+            url: string;
+            startSeconds?: number;
+            arenaId: string;
+            mode: components["schemas"]["mapModeField"];
+            spawnTeam: number;
+            result: components["schemas"]["battleResultField"];
+        };
+        TankVideoSuggestResponse: {
+            /**
+             * @description The suggestion reached the moderation queue.
+             * @enum {string}
+             */
+            outcome: "queued";
         };
         teamMarkers: {
             team1: components["schemas"]["mapMarker"][];
@@ -3683,6 +3815,66 @@ export interface operations {
             };
         };
     };
+    "get-{region}-tanks-{slug}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankVideosResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-tanks-{slug}-videos-suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["TankVideoSuggestBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankVideoSuggestResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-tanks-{slug}-specifications": {
         parameters: {
             query?: never;
@@ -3857,6 +4049,30 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Coverage"];
+                };
+            };
+        };
+    };
+    "post-feedback": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["FeedbackBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FeedbackResponse"];
                 };
             };
         };

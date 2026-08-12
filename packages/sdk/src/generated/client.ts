@@ -5,10 +5,12 @@ import createClient from "openapi-fetch";
 import type { paths } from "./schema";
 import {
   type ApiClient,
+  type BodyOf,
   type Data,
   type LiveStreamer,
   type LiveUpdate,
   ndjsonSearch,
+  type PostData,
   type QueryOf,
   type RequestHandle,
   type SearchChunk,
@@ -233,6 +235,24 @@ class TankClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/tanks/{slug}/specifications", path),
       () => this.api.GET("/{region}/tanks/{slug}/specifications", { params: { path } }),
+    );
+  }
+
+  /** Tank videos */
+  videos() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos", path),
+      () => this.api.GET("/{region}/tanks/{slug}/videos", { params: { path } }),
+    );
+  }
+
+  /** Suggest a tank video */
+  videosSuggest(body: BodyOf<"/{region}/tanks/{slug}/videos/suggest">) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos/suggest", path),
+      () => this.api.POST("/{region}/tanks/{slug}/videos/suggest", { params: { path }, body }),
     );
   }
 }
@@ -720,6 +740,14 @@ export class Unicum {
   /** The ASIA region. */
   get asia(): RegionClient {
     return this.region(Region.ASIA);
+  }
+
+  /** Send feedback */
+  feedback(body: BodyOf<"/feedback">) {
+    return handle(
+      buildUrl(this.baseUrl, "/feedback"),
+      () => this.api.POST("/feedback", { body }),
+    );
   }
 
   /** Health check */

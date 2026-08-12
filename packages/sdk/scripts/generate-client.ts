@@ -43,6 +43,12 @@ type Resource = {
   searchStream?: boolean;
 };
 
+/** Conventional name for a namespace's own listing: `tanks.list()`, and by the
+ * same rule `streamers.list()`. */
+const NAMESPACE_LIST = "list";
+/** Name the SSE subscription takes on whatever declares one. */
+const LIVE_METHOD = "live";
+
 const RESOURCES: Resource[] = [
   {
     name: "players",
@@ -65,7 +71,7 @@ const RESOURCES: Resource[] = [
     key: "slug",
     client: "TankClient",
     root: "performance",
-    namespaceRoot: "list",
+    namespaceRoot: NAMESPACE_LIST,
     searchStream: true,
   },
   {
@@ -73,13 +79,12 @@ const RESOURCES: Resource[] = [
     key: "slug",
     client: "MapClient",
     root: "detail",
-    namespaceRoot: "list",
+    namespaceRoot: NAMESPACE_LIST,
     searchStream: true,
   },
 ];
 
 const GLOBALS = [{ name: "streamers", live: true }, { name: "support" }] as const;
-const RENAME: Record<string, string> = { "/streamers/live": "list" };
 /** Region-scoped view prefixes (before `{region}`): `/og/{region}/…`. */
 const PREFIXES = ["og"] as const;
 /** Explicit manual exclusions (logged): the generic `/og` (no region to nest)
@@ -87,7 +92,6 @@ const PREFIXES = ["og"] as const;
 const MANUAL_EXCLUDE = new Set<string>(["/og", "/mcp"]);
 
 const byName = new Map(RESOURCES.map((r) => [r.name, r]));
-const globalNames = new Set(GLOBALS.map((g) => g.name));
 const prefixNames = new Set<string>(PREFIXES);
 
 function autoExcluded(path: string): "sse" | "ndjson" | null {
@@ -101,6 +105,10 @@ type Endpoint = {
   path: string;
   method: "GET" | "POST";
   query: QueryParam[];
+  /** The endpoint takes a JSON request body, so the method needs a parameter
+   * for it. Without this the emitted method compiled and sent nothing, which is
+   * worse than not existing: a caller reaching for the SDK got an empty POST. */
+  hasBody: boolean;
   doc: string | null;
 };
 
@@ -111,6 +119,7 @@ type Spec = {
       string,
       | {
           parameters?: { in: string; name: string; required?: boolean }[];
+          requestBody?: unknown;
           summary?: string;
           description?: string;
         }
@@ -165,7 +174,13 @@ async function loadEndpoints(): Promise<Endpoint[]> {
         .filter((p) => p.in === "query")
         .map((p) => ({ name: p.name, required: p.required === true }));
       const doc = (op.summary ?? op.description ?? "").split("\n")[0].trim() || null;
-      out.push({ path, method: method.toUpperCase() as "GET" | "POST", query, doc });
+      out.push({
+        path,
+        method: method.toUpperCase() as "GET" | "POST",
+        query,
+        hasBody: Boolean(op.requestBody),
+        doc,
+      });
     }
   }
   return out;
@@ -210,70 +225,117 @@ function docComment(ep: Endpoint): string {
   return ep.doc ? `  /** ${ep.doc} */\n` : "";
 }
 
+/**
+ * The body half of a method's shape. Empty for every GET, and for a POST that
+ * takes none, so the emitters can splice these in unconditionally.
+ *
+ * A body is always the last parameter and always required: an endpoint that
+ * declares one does not work without it, which is exactly the bug this fixes.
+ */
+type BSig = { typed: string; arg: string; call: string };
+
+function bsig(ep: Endpoint): BSig {
+  if (!ep.hasBody) return { typed: "", arg: "", call: "" };
+  return {
+    typed: `body: BodyOf<"${ep.path}">`,
+    arg: "body",
+    call: ", body",
+  };
+}
+
+/** Parameter list for a declaration, body appended after the query. */
+function params(q: QSig, b: BSig): string {
+  return [q.typed, b.typed].filter(Boolean).join(", ");
+}
+
+/** The response type: `Data<>` reads a path's GET, so a POST needs its own. */
+function resultOf(ep: Endpoint): string {
+  return ep.method === "POST"
+    ? `PostData<"${ep.path}">`
+    : `Data<"${ep.path}">`;
+}
+
 // ── main-tree emitters ───────────────────────────────────────────────────────
 
 function emitInstance(ep: Endpoint, r: Resource, method: string): string {
   const q = qsig(ep);
+  const b = bsig(ep);
   const path = `{ region: this.region, ${r.key}: this.${r.key} }`;
-  return `${docComment(ep)}  ${method}(${q.typed}) {
+  return `${docComment(ep)}  ${method}(${params(q, b)}) {
     const path = ${path};
     return handle(
       buildUrl(this.baseUrl, "${ep.path}", path${q.urlArg}),
-      () => this.api.${ep.method}("${ep.path}", { params: { path${q.callQuery} } }),
+      () => this.api.${ep.method}("${ep.path}", { params: { path${q.callQuery} }${b.call} }),
     );
   }`;
 }
 
 function emitRoot(ep: Endpoint, method: string): string {
   const q = qsig(ep);
-  const params = q.callQuery ? `{ params: {${q.callQuery.slice(1)} } }` : "{}";
-  return `${docComment(ep)}  ${method}(${q.typed}) {
+  const b = bsig(ep);
+  const opts = q.callQuery
+    ? `{ params: {${q.callQuery.slice(1)} }${b.call} }`
+    : b.call
+      ? `{${b.call.slice(1)} }`
+      : "{}";
+  return `${docComment(ep)}  ${method}(${params(q, b)}) {
     return handle(
       buildUrl(this.baseUrl, "${ep.path}"${q.urlArg}),
-      () => this.api.${ep.method}("${ep.path}", ${params}),
+      () => this.api.${ep.method}("${ep.path}", ${opts}),
     );
   }`;
 }
 
 function emitRegion(ep: Endpoint, method: string): string {
   const q = qsig(ep);
-  return `${docComment(ep)}  ${method}(${q.typed}) {
+  const b = bsig(ep);
+  return `${docComment(ep)}  ${method}(${params(q, b)}) {
     return handle(
       buildUrl(this.baseUrl, "${ep.path}", { region: this.region }${q.urlArg}),
-      () => this.api.${ep.method}("${ep.path}", { params: { path: { region: this.region }${q.callQuery} } }),
+      () => this.api.${ep.method}("${ep.path}", { params: { path: { region: this.region }${q.callQuery} }${b.call} }),
     );
   }`;
 }
 
 function emitNamespaceMember(ep: Endpoint, method: string): string {
   const q = qsig(ep);
-  return `${docComment(ep)}  ${method}(${q.typed}): RequestHandle<Data<"${ep.path}">>;`;
+  const b = bsig(ep);
+  return `${docComment(ep)}  ${method}(${params(q, b)}): RequestHandle<${resultOf(ep)}>;`;
 }
 
 function emitNamespaceAssign(ep: Endpoint, method: string, region = "this.region"): string {
   const q = qsig(ep);
-  return `    ns.${method} = (${q.arg}) =>
+  const b = bsig(ep);
+  const args = [q.arg, b.arg].filter(Boolean).join(", ");
+  return `    ns.${method} = (${args}) =>
       handle(
         buildUrl(this.baseUrl, "${ep.path}", { region: ${region} }${q.urlArg}),
         () =>
           this.api.${ep.method}("${ep.path}", {
-            params: { path: { region: ${region} }${q.callQuery} },
+            params: { path: { region: ${region} }${q.callQuery} }${b.call},
           }),
       );`;
 }
 
 function emitGlobalMember(ep: Endpoint, method: string): string {
   const q = qsig(ep);
-  return `${docComment(ep)}  ${method}(${q.typed}): RequestHandle<Data<"${ep.path}">>;`;
+  const b = bsig(ep);
+  return `${docComment(ep)}  ${method}(${params(q, b)}): RequestHandle<${resultOf(ep)}>;`;
 }
 
 function emitGlobalAssign(ep: Endpoint, method: string): string {
   const q = qsig(ep);
+  const b = bsig(ep);
   const pathArg = q.urlArg ? `, undefined${q.urlArg}` : "";
-  const params = q.callQuery ? `{ params: {${q.callQuery.slice(1)} } }` : "{}";
-  return `    ns.${method} = (${q.arg}) =>
+  const opts = q.callQuery
+    ? `{ params: {${q.callQuery.slice(1)} }${b.call} }`
+    : b.call
+      ? `{${b.call.slice(1)} }`
+      : "{}";
+  const args = [q.arg, b.arg].filter(Boolean).join(", ");
+  return `    ns.${method} = (${args}) =>
       handle(buildUrl(this.baseUrl, "${ep.path}"${pathArg}), () =>
-        this.api.${ep.method}("${ep.path}", ${params}),
+        this.api.${ep.method}("${ep.path}", ${opts}),
       );`;
 }
 
@@ -316,11 +378,17 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     }
 
     const segs = segmentsOf(ep.path);
-    const rename = RENAME[ep.path];
 
     // Global namespace (streamers/support).
-    if (globalNames.has(segs[0])) {
-      const method = rename ?? camel(segs.slice(1));
+    const global = GLOBALS.find((g) => g.name === segs[0]);
+    if (global) {
+      // `/streamers/live` derives to `live`, which the SSE subscription below
+      // already owns on a namespace declaring one. The JSON endpoint behind it
+      // is that namespace's listing, so it takes the listing name every other
+      // namespace uses (`tanks.list()`) rather than a hand-kept alias.
+      const derived = camel(segs.slice(1));
+      const reserved = "live" in global && global.live && derived === LIVE_METHOD;
+      const method = reserved ? NAMESPACE_LIST : derived;
       push(b.nsMember, segs[0], emitGlobalMember(ep, method));
       push(b.nsAssign, segs[0], emitGlobalAssign(ep, method));
       continue;
@@ -334,9 +402,13 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     }
 
     if (!isParam(segs[0])) {
-      // Top-level GET (e.g. /health) → a Unicum method; anything else is loud.
-      if (segs.length === 1 && ep.method === "GET") {
-        b.root.push(emitRoot(ep, rename ?? camel(segs)));
+      // A single-segment path with no parameters becomes a method on `Unicum`
+      // itself: `/health` reads, `/feedback` writes, and both are the whole
+      // resource. The verb used to be part of the rule, which left a documented
+      // POST unmapped for no reason other than not having been thought of.
+      // Anything deeper without a region is still loud.
+      if (segs.length === 1) {
+        b.root.push(emitRoot(ep, camel(segs)));
       } else {
         b.unmapped.push(ep.path);
       }
@@ -346,7 +418,7 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     const rest = segs.slice(1);
     const resource = byName.get(rest[0]);
     if (!resource) {
-      if (rest.length === 1) b.region.push(emitRegion(ep, rename ?? camel(rest)));
+      if (rest.length === 1) b.region.push(emitRegion(ep, camel(rest)));
       else b.unmapped.push(ep.path);
       continue;
     }
@@ -354,7 +426,7 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     const afterRes = rest.slice(1);
     if (afterRes.length === 0) {
       if (resource.namespaceRoot) {
-        const m = rename ?? resource.namespaceRoot;
+        const m = resource.namespaceRoot;
         push(b.nsMember, resource.name, emitNamespaceMember(ep, m));
         push(b.nsAssign, resource.name, emitNamespaceAssign(ep, m));
       } else {
@@ -362,10 +434,10 @@ function bucketize(endpoints: Endpoint[]): Buckets {
       }
     } else if (isParam(afterRes[0])) {
       const sub = afterRes.slice(1);
-      const m = sub.length === 0 ? resource.root : rename ?? camel(sub);
+      const m = sub.length === 0 ? resource.root : camel(sub);
       push(b.instance, resource.name, emitInstance(ep, resource, m));
     } else {
-      const m = rename ?? camel(afterRes);
+      const m = camel(afterRes);
       push(b.nsMember, resource.name, emitNamespaceMember(ep, m));
       push(b.nsAssign, resource.name, emitNamespaceAssign(ep, m));
     }
@@ -514,7 +586,7 @@ function renderGlobalType(g: (typeof GLOBALS)[number], b: Buckets): string {
   const live =
     "live" in g && g.live
       ? `  /** Currently-live tracked streamers across all regions, over SSE. Browser-only. */
-  live(
+  ${LIVE_METHOD}(
     onData: (streamers: LiveStreamer[]) => void,
     onError?: (error: Event) => void,
   ): Unsubscribe;`
@@ -526,7 +598,7 @@ function renderGlobalType(g: (typeof GLOBALS)[number], b: Buckets): string {
 function renderGlobalGetter(g: (typeof GLOBALS)[number], b: Buckets): string {
   const live =
     "live" in g && g.live
-      ? `    ns.live = (onData, onError) =>
+      ? `    ns.${LIVE_METHOD} = (onData, onError) =>
       subscribeStreamersLive(this.baseUrl, onData, onError);`
       : "";
   const assigns = nonEmpty(get(b.nsAssign, g.name, "\n"), live).join("\n");
@@ -607,10 +679,12 @@ import createClient from "openapi-fetch";
 import type { paths } from "./schema";
 import {
   type ApiClient,
+  type BodyOf,
   type Data,
   type LiveStreamer,
   type LiveUpdate,
   ndjsonSearch,
+  type PostData,
   type QueryOf,
   type RequestHandle,
   type SearchChunk,
