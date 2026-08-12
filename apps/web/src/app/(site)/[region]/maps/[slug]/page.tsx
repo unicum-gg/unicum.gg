@@ -6,7 +6,8 @@ import { UnicumError } from "@unicum.gg/sdk";
 import { MapView } from "@/components/maps/detail/view";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
-import { unicum } from "@/services/sdk";
+import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import { buildSafe, unicum } from "@/services/sdk";
 
 // ISR, not dynamic: the whole page is rendered and cached, so a navigation
 // serves prerendered HTML. Pages generate on first request (no
@@ -65,5 +66,20 @@ export async function renderMapPage(region: Region, slug: string) {
   // one, so the canonical and OG always point at a single URL.
   if (detail.slug !== slug) permanentRedirect(ROUTES.MAP(region, detail.slug));
 
-  return <MapView detail={detail} region={region} />;
+  // Rendered here rather than fetched by the browser: the tactics belong in the
+  // HTML, which is what the `.md` twin converts and what a crawler reads. An
+  // approved tactic drops this page from the cache (`revalidatePath`), so
+  // rendering it server-side costs no freshness.
+  const videos = await buildSafe(
+    () => unicum.region(region).maps(detail.slug).videos(),
+    { videos: [] },
+  );
+
+  return (
+    <MapView
+      detail={detail}
+      region={region}
+      videos={videos.videos as unknown as TankVideoCardData[]}
+    />
+  );
 }

@@ -12,6 +12,8 @@ import { MapActionsMenu } from "@/components/maps/detail/actions-menu";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapViewer } from "@/components/maps/detail/minimap-viewer";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
+import { MapVideosPanel } from "@/components/maps/detail/videos";
+import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { TEAM_SIZE_BATTLE_TYPES, type MapDetail } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -46,9 +48,13 @@ function Stat({
 export function MapView({
   detail,
   region,
+  videos,
 }: {
   detail: MapDetail;
   region: Region;
+  /** Rendered by the server, so the tactics are in the HTML rather than
+   * fetched once the browser has caught up. */
+  videos: TankVideoCardData[];
 }) {
   const camo = CAMO_META[detail.camouflage];
   const CamoIcon = camo.icon;
@@ -172,6 +178,12 @@ export function MapView({
           </div>
         </PanelContent>
       </Panel>
+
+      <PanelSeparator />
+
+      {/* Under the minimap, never over it: the geometry above is what makes a
+          tactic readable, and the video explains it rather than replacing it. */}
+      <MapVideosPanel region={region} map={detail} initialVideos={videos} />
     </div>
   );
 }
