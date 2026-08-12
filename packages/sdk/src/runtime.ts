@@ -61,6 +61,37 @@ export type QueryOf<P extends keyof paths> = Get<P> extends {
   ? Q
   : undefined;
 
+type Post<P extends keyof paths> = paths[P] extends { post: infer T }
+  ? T
+  : never;
+
+/**
+ * JSON body a POST endpoint takes, from the generated spec types.
+ *
+ * `requestBody` is emitted as an OPTIONAL property by openapi-typescript, even
+ * on an operation that requires one, so matching it as required infers nothing
+ * and the method ends up taking `never`. Hence the two steps: pull the property
+ * out through its optional form, then strip the `undefined` it carries.
+ */
+type RequestBodyOf<P extends keyof paths> = Post<P> extends {
+  requestBody?: infer R;
+}
+  ? NonNullable<R>
+  : never;
+
+export type BodyOf<P extends keyof paths> = RequestBodyOf<P> extends {
+  content: { "application/json": infer B };
+}
+  ? B
+  : never;
+
+/** Response of a POST endpoint, since `Data<>` reads the GET of a path. */
+export type PostData<P extends keyof paths> = Post<P> extends {
+  responses: { 200: { content: { "application/json": infer D } } };
+}
+  ? D
+  : unknown;
+
 const ISO_DATE_TIME =
   /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})?$/;
 
