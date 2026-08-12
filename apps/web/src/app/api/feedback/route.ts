@@ -32,11 +32,12 @@ function rateLimited(key: string): boolean {
 }
 
 /**
- * Receive a site feedback submission and forward it to the private Discord
- * channel. Open to everyone: the sender's WG identity is attached from the
- * session when signed in, otherwise the feedback is anonymous. 404 when the
- * feature is unconfigured (no bot/channel), 400 on a bad body, 429 when rate
- * limited, 502 if the bot can't post it.
+ * Send feedback
+ * @description Forward a message to the team's private Discord channel. Open to everyone, no key and no account: the sender's Wargaming identity is attached from the session when signed in, otherwise the feedback is anonymous. Rate limited per client. 404 when the feature is unconfigured, 400 on a bad body, 429 when rate limited, 502 when it could not be delivered.
+ * @body FeedbackBody
+ * @response FeedbackResponse
+ * @tag System
+ * @openapi
  */
 export async function POST(request: Request): Promise<Response> {
   if (!isFeedbackEnabled()) {
