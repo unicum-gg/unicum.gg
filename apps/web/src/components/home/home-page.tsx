@@ -16,6 +16,7 @@ import { LiveSection } from "@/components/home/live-section";
 import { TopPlayers } from "@/components/home/top-players";
 import { TopPlayersOverallPanel } from "@/components/home/top-players-overall-panel";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
+import { Kbd } from "@/components/ui/kbd";
 import {
   Panel,
   PanelContent,
@@ -307,10 +308,8 @@ export async function HomePage({
             <HomeCard>
               <CardTitle>🔍 Search players or clans</CardTitle>
               <CardDescription>
-                Press{" "}
-                <code className="text-fd-foreground">⌘ K</code> /{" "}
-                <code className="text-fd-foreground">Ctrl K</code> to open the
-                search, then type a nickname or clan tag.
+                Press <Kbd>⌘</Kbd> <Kbd>K</Kbd> / <Kbd>Ctrl</Kbd> <Kbd>K</Kbd>{" "}
+                to open the search, then type a nickname or clan tag.
               </CardDescription>
             </HomeCard>
             <HomeCard>
