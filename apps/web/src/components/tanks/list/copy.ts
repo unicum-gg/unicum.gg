@@ -36,6 +36,16 @@ export function tankTabCopy(tab: TankTab, regionLabel: string): TankTabCopy {
         title: `World of Tanks tank economics (${regionLabel}), credits and XP costs`,
         description: `Credit and XP costs, repair and shell prices for every World of Tanks tank on ${regionLabel}, sortable and filterable by tier, nation, class and role.`,
       };
+    case TankTab.Videos:
+      return {
+        heading: { lead: "Gameplay", accent: "videos" },
+        // The count is battles, not vehicles, so the wording says so: this is
+        // the one tab whose rows are not tanks.
+        intro: (count) =>
+          `${count} battles the community has linked on ${regionLabel}, each opening at the second it starts. Suggested from the tank pages, and checked before they show up here.`,
+        title: `World of Tanks gameplay videos (${regionLabel})`,
+        description: `Community-suggested World of Tanks battles on ${regionLabel}, each opening at the second it starts: the tank played, the map, the side of it and how the battle ended.`,
+      };
     case TankTab.MarksOfExcellence:
       return {
         heading: { lead: "Marks of", accent: "excellence" },

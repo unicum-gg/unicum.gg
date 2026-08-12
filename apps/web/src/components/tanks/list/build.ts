@@ -68,6 +68,9 @@ export enum TankGroup {
 
 export function groupForTab(tab: TankTab): TankGroup {
   switch (tab) {
+    // Videos read no tank group at all, but the signature is total and the
+    // caller never asks for one on that tab.
+    case TankTab.Videos:
     case TankTab.Performances:
       return TankGroup.Stats;
     case TankTab.Specifications:

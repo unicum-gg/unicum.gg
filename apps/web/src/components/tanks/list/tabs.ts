@@ -17,6 +17,7 @@ export enum TankTab {
   Economics = "economics",
   MarksOfExcellence = "marks-of-excellence",
   MarksOfMastery = "marks-of-mastery",
+  Videos = "videos",
 }
 
 export const TANK_TABS: {
@@ -41,6 +42,9 @@ export const TANK_TABS: {
     label: "Marks of Mastery",
     segment: "marks-of-mastery",
   },
+  // Not a view of the tank table like the others: a list of what the community
+  // has linked, which is why it carries its own panel rather than a column set.
+  { id: TankTab.Videos, label: "Videos", segment: "videos" },
 ];
 
 /** Parent segment of the non-default tabs, keeping them out of the slug space. */

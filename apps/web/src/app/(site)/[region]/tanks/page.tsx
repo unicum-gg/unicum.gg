@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { TanksIndex } from "@/components/tanks/list";
+import { TanksVideosTab } from "@/components/tanks/list/videos";
+import { toCommunityBattles } from "@/components/tanks/list/videos/row";
 import { tankTabCopy } from "@/components/tanks/list/copy";
 import {
   TankGroup,
@@ -79,6 +81,30 @@ export async function renderTanksIndex(
   region: Region,
   activeTab: TankTab = TankTab.Performances,
 ) {
+  // Videos are not a view of the tank table: they read their own endpoint and
+  // render their own panel, so they leave the group loading below untouched.
+  if (activeTab === TankTab.Videos) {
+    const { videos } = await buildSafe(() => unicum.region(region).videos(), {
+      videos: [],
+    });
+    const list = toCommunityBattles(
+      videos as unknown as Parameters<typeof toCommunityBattles>[0],
+    );
+    return (
+      <TanksIndexShell
+        region={region}
+        tab={activeTab}
+        count={intFmt.format(list.length)}
+      >
+        <TanksVideosTab
+          region={region}
+          battles={list}
+          basePath={ROUTES.TANKS(region)}
+        />
+      </TanksIndexShell>
+    );
+  }
+
   // Only the active tab's data group is fetched + embedded here; the client lazy-
   // loads the other tabs on demand (see components/tanks/list/load-group). This
   // keeps the initial payload to one group instead of all five (~5x smaller) and
@@ -110,8 +136,35 @@ export async function renderTanksIndex(
     items = buildStatsItems(perf.results as Parameters<typeof buildStatsItems>[0]);
   }
 
-  const copy = tankTabCopy(activeTab, REGION_LABEL[region]);
+  return (
+    <TanksIndexShell
+      region={region}
+      tab={activeTab}
+      count={intFmt.format(items.length)}
+    >
+      <TanksIndex
+        tanks={items}
+        region={region}
+        activeTab={activeTab}
+        basePath={ROUTES.TANKS(region)}
+      />
+    </TanksIndexShell>
+  );
+}
 
+/** The index's heading and region line, above whichever tab is showing. */
+function TanksIndexShell({
+  region,
+  tab,
+  count,
+  children,
+}: {
+  region: Region;
+  tab: TankTab;
+  count: string;
+  children: React.ReactNode;
+}) {
+  const copy = tankTabCopy(tab, REGION_LABEL[region]);
   return (
     <div className="mx-auto w-full max-w-7xl">
       <Panel>
@@ -124,19 +177,14 @@ export async function renderTanksIndex(
             <span className="text-brand">{copy.heading.accent}</span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
-            {copy.intro(intFmt.format(items.length))}
+            {copy.intro(count)}
           </p>
         </PanelContent>
       </Panel>
 
       <PanelSeparator />
 
-      <TanksIndex
-        tanks={items}
-        region={region}
-        activeTab={activeTab}
-        basePath={ROUTES.TANKS(region)}
-      />
+      {children}
     </div>
   );
 }

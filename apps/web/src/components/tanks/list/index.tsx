@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { type MouseEvent, useMemo } from "react";
+import { useMemo } from "react";
 import {
   PERF_COLUMNS,
   PerfColumnSelector,
@@ -22,20 +20,16 @@ import {
   TanksMoeTable,
 } from "@/components/tanks/list/marks-of-excellence";
 import { SPEC_COLUMNS } from "@/components/tanks/list/spec-columns";
-import {
-  TankTab,
-  TANK_TABS,
-  tankTabHref,
-} from "@/components/tanks/list/tabs";
+import { TankTab } from "@/components/tanks/list/tabs";
+import { TanksTabNav } from "@/components/tanks/list/tab-nav";
 import {
   SpecColumnSelector,
   TanksSpecsTable,
 } from "@/components/tanks/list/specifications";
 import { TanksTable } from "@/components/tanks/list/performances";
-import { Panel, PanelContent, PanelHeader } from "@/components/panel";
+import { Panel, PanelContent } from "@/components/panel";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
-import { cn } from "@/lib/utils";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
@@ -84,6 +78,8 @@ const RANGE_DEFAULT: Record<TankTab, string> = {
   [TankTab.Economics]: "buyCredits",
   [TankTab.MarksOfExcellence]: "mark3",
   [TankTab.MarksOfMastery]: "ace",
+  // Unused: the videos tab has its own panel and never mounts the filter bar.
+  [TankTab.Videos]: "battles",
 };
 
 // Stable empty reference for a not-yet-loaded tab (keeps useTankFilters memo
@@ -120,7 +116,6 @@ export function TanksIndex({
   // description, canonical) in step with the page; a `pushState` would leave
   // Next unaware and freeze them on the tab the page was loaded with.
   const tab = activeTab;
-  const router = useRouter();
 
   const [storedRating] = useCookie(STORAGE.COOKIES.RATING, DEFAULT_RATING_METRIC);
   const rangeMetric: RatingMetric = isRatingMetric(storedRating)
@@ -175,35 +170,9 @@ export function TanksIndex({
   // The href carries the tab alone, so it is what crawlers follow and what Next
   // prefetches. The click adds the current filters (they live in the query
   // string) so switching tab keeps them, then navigates for real.
-  function selectTab(e: MouseEvent, next: TankTab) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-    e.preventDefault();
-    if (next === tab) return;
-    const search = window.location.search;
-    router.push(`${tankTabHref(basePath, next)}${search}`);
-  }
-
   return (
     <Panel>
-      <PanelHeader className="px-0! py-0!">
-        <nav className="flex items-center overflow-x-auto text-sm">
-          {TANK_TABS.map((t) => (
-            <Link
-              key={t.id}
-              href={tankTabHref(basePath, t.id)}
-              onClick={(e) => selectTab(e, t.id)}
-              className={cn(
-                "border-r border-fd-border px-4 py-3 font-medium whitespace-nowrap transition-colors",
-                tab === t.id
-                  ? "bg-fd-secondary/40 text-fd-foreground"
-                  : "text-fd-muted-foreground hover:bg-fd-secondary/20 hover:text-fd-foreground",
-              )}
-            >
-              {t.label}
-            </Link>
-          ))}
-        </nav>
-      </PanelHeader>
+      <TanksTabNav active={tab} basePath={basePath} />
       <PanelContent className="space-y-4 p-4">
         <TankFilterBar
           filters={filters}
