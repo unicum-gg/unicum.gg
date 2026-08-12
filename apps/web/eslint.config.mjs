@@ -16,6 +16,13 @@ const eslintConfig = defineConfig([
     // transpiled bundle), so it legitimately uses `require`/`module.exports`.
     "cache-handler.js",
   ]),
+  // The OG image pipeline. These files are not rendered by a browser: satori
+  // turns them into a PNG, and it supports `img` and nothing else, so the
+  // `next/image` advice has nothing to point at here.
+  {
+    files: ["src/app/api/og/**/*.tsx", "src/components/og.tsx"],
+    rules: { "@next/next/no-img-element": "off" },
+  },
 ]);
 
 export default eslintConfig;
