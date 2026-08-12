@@ -49,6 +49,7 @@
     "linkify-it": "^6.1.0",
     "node-cron": "^4.2.1",
     "postgres": "^3.4.9",
+    "roman-numerals": "^0.3.2",
     "sanitize-html": "^2.17.4",
     "stripe": "^22.3.2",
     "undici": "^7.24.0",
@@ -56,6 +57,7 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.5",
+    "@types/roman-numerals": "^0.3.2",
     "@types/sanitize-html": "^2.16.1"
   }
 }
