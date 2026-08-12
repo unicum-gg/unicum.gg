@@ -43,6 +43,19 @@ export enum BattleResult {
   Draw = "draw",
 }
 
+/**
+ * What a reader sees, next to the values a column holds.
+ *
+ * Written out rather than left to a `capitalize` class, because a select clones
+ * the chosen option's content into its trigger and not its styling, so the CSS
+ * silently stopped applying there and the field read "victory".
+ */
+export const BATTLE_RESULT_LABEL: Record<BattleResult, string> = {
+  [BattleResult.Victory]: "Victory",
+  [BattleResult.Defeat]: "Defeat",
+  [BattleResult.Draw]: "Draw",
+};
+
 export const tankVideos = pgTable(
   "tank_videos",
   {
@@ -72,6 +85,12 @@ export const tankVideos = pgTable(
     spawnTeam: smallint("spawn_team"),
     /** `BattleResult` value. */
     result: text("result"),
+    /** Damage dealt plus assisted, as the game's own after-battle screen adds
+     * them up. Declared like the rest of the battle context and just as
+     * unverifiable, so it is what a moderator checks against the video's last
+     * seconds. Null when the submitter left it out: a good battle is worth
+     * linking whether or not anyone remembers the number. */
+    combinedDamage: integer("combined_damage"),
     /** Game version at approval time, stamped from the client scripts mirror.
      * Balance moves between patches, so a reader can see a video is two patches
      * old without us asking the submitter for something they would guess. */
