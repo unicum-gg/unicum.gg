@@ -14,7 +14,7 @@
   "outputDir": "./src/services/openapi",
   "docsUrl": "docs",
   "includeOpenApiRoutes": true,
-  "ignoreRoutes": [],
+  "ignoreRoutes": ["/internal/*"],
   "excludeSchemas": ["*Params", "*Query", "regionPath", "periodField", "metricField"],
   "debug": false
 }
