@@ -11,6 +11,12 @@ import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
 import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
 import { ClanBoard } from "@unicum.gg/shared/clans/badges";
+import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
+import { BattleResult } from "@unicum.gg/shared/db/schema/tank-videos";
+import {
+  FeedbackSentiment,
+  FeedbackTopic,
+} from "@unicum.gg/shared/feedback/index";
 import { Region } from "@unicum.gg/wargaming/region";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
@@ -37,6 +43,10 @@ export const OPENAPI_ENUM_SOURCES = {
   MAP_CAMOUFLAGE: Object.values(MapCamouflage),
   MAP_BATTLE_TYPE: Object.values(BattleType),
   CLAN_BOARD: Object.values(ClanBoard),
+  BATTLE_RESULT: Object.values(BattleResult),
+  SPAWN_DIRECTION: Object.values(SpawnDirection),
+  FEEDBACK_TOPIC: Object.values(FeedbackTopic),
+  FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),
 } satisfies Record<string, readonly string[]>;
 
 /** Marker value a schema's `x-enum-source` may name. A typo is a compile error

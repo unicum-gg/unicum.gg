@@ -1,11 +1,13 @@
 import * as z from "zod";
 import {
+  BattleResult,
   BattleType,
   ClanBoard,
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
   RatingMetric,
+  SpawnDirection,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 // Imported from the dependency-free `period` modules (not the DB-heavy index)
@@ -32,7 +34,9 @@ import type { EnumSourceKey } from "./enum-sources";
 // So the marker's key is validated at build time by the injection script (it
 // throws on an unknown one), not by tsc. `example` is inlined for the same AST
 // reason.
-type EnumMeta = z.core.GlobalMeta & { "x-enum-source": EnumSourceKey };
+// Exported so a co-located `schema.api.ts` can carry the marker on a field that
+// belongs to its own endpoint, instead of hardcoding the values back.
+export type EnumMeta = z.core.GlobalMeta & { "x-enum-source": EnumSourceKey };
 
 export const regionPath = z.enum(Region).meta({
   description: "Game server region.",
@@ -76,6 +80,16 @@ export const mapCamouflageField = z.enum(MapCamouflage).meta({
 export const mapBattleTypeField = z.enum(BattleType).meta({
   description: "Top-level battle type a map belongs to.",
   "x-enum-source": "MAP_BATTLE_TYPE",
+} as EnumMeta);
+
+export const battleResultField = z.enum(BattleResult).meta({
+  description: "How the battle ended, as declared by the submitter.",
+  "x-enum-source": "BATTLE_RESULT",
+} as EnumMeta);
+
+export const spawnDirectionField = z.enum(SpawnDirection).meta({
+  description: "Side of the map a team starts from.",
+  "x-enum-source": "SPAWN_DIRECTION",
 } as EnumMeta);
 
 export const MIN_QUERY_LENGTH = 3;
