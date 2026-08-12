@@ -2,26 +2,22 @@
 
 import Image from "next/image";
 import {
-  BATTLE_RESULT_LABEL,
-  formatTimestamp,
-  MAP_GAME_MODE_LABEL,
   youtubeThumbnailUrl,
   youtubeWatchUrl,
+  type BattleFormat,
   type BattleResult,
   type MapGameMode,
+  type SpawnDirection,
 } from "@unicum.gg/shared";
-import { MapPinIcon, PlayIcon } from "@phosphor-icons/react";
+import { PlayIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import type { Region } from "@unicum.gg/wargaming";
+import { ClanTag } from "@/components/entity/clan-tag";
 import ROUTES from "@/constants/routes";
 import type { TankVideoGroup } from "./group";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { BattleRow, Thumbnail } from "./card-parts";
+import { PublishedDate } from "./published-date";
 import { useTankVideoPlayer } from "./player";
 import { BATTLE_PARAM } from "./battle-param";
 import {
@@ -39,29 +35,47 @@ export type TankVideoCardData = {
   channelName: string;
   mapName: string | null;
   mode: MapGameMode | null;
+  /** The compass side, derived from the map's own geometry, and its label. The
+   * raw value is what a filter matches on; the label is what a row reads. */
+  direction?: SpawnDirection | null;
   directionLabel: string | null;
   result: BattleResult | null;
   combinedDamage: number | null;
+  /** When the video went up on YouTube. Null when the page did not answer at
+   * submission time. */
+  publishedAt?: Date | string | null;
   gameVersion: string | null;
+  /** The map's own page, where a tactic is looked up. */
+  mapSlug?: string | null;
+  /** What was being played. Everything but `random` makes this a tactic: the
+   * video is about the ground and the side rather than about a vehicle. */
+  format?: BattleFormat;
+  /** Players per team and the tier the battle was fought at, which is not the
+   * vehicle's tier below: a skirmish is fought at a tier of its own. */
+  teamSize?: number | null;
+  tier?: number | null;
+  /** The clan it was played for, when one was credited. */
+  clan?: {
+    region: string;
+    id: number;
+    tag: string;
+    name: string;
+    color: string | null;
+    emblem: string | null;
+  } | null;
   /** The tank a battle was played in. Absent on that tank's own page, where
    * every row is the same vehicle and saying so would be noise, and present on
    * the community index, which crosses tanks. */
-  tankName?: string;
-  tankSlug?: string;
-  tankShortName?: string;
-  tankTag?: string;
-  tier?: number;
-  nation?: string;
-  type?: string;
+  tankName?: string | null;
+  tankSlug?: string | null;
+  tankShortName?: string | null;
+  tankTag?: string | null;
+  vehicleTier?: number | null;
+  nation?: string | null;
+  type?: string | null;
   isPremium?: boolean;
   /** Set on the submitter's own rows that a moderator has not settled yet. */
   pending?: boolean;
-};
-
-const RESULT_CLASS: Record<string, string> = {
-  victory: "text-emerald-500",
-  defeat: "text-red-500",
-  draw: "text-fd-muted-foreground",
 };
 
 /**
@@ -96,19 +110,24 @@ export function TankVideoCard({
   const publishedCount = group.battles.filter((b) => !b.pending).length;
 
   // Where a battle is watched when this card has no player above it: the Videos
-  // tab of the tank it was played in, opened on that battle. A pending row is a
-  // receipt rather than a link, so it leads nowhere: it is only on screen for
-  // the person who submitted it, and it is not published yet.
+  // tab of the tank it was played in, opened on that battle. Queued rows lead
+  // there too: the row is only on screen for the person who submitted it, and
+  // watching it is how they check the second they picked.
   function watchHref(battle: TankVideoCardData): string | null {
-    if (battle.pending || !battle.tankSlug) return null;
-    return `${tankDetailTabHref(
-      ROUTES.TANK(region, battle.tankSlug),
-      TankDetailTab.Videos,
-    )}?${BATTLE_PARAM}=${battle.id}`;
+    if (battle.tankSlug) {
+      return `${tankDetailTabHref(
+        ROUTES.TANK(region, battle.tankSlug),
+        TankDetailTab.Videos,
+      )}?${BATTLE_PARAM}=${battle.id}`;
+    }
+    // A tactic has no vehicle, so it belongs to the ground it was fought on.
+    if (battle.mapSlug) {
+      return `${ROUTES.MAP(region, battle.mapSlug)}?${BATTLE_PARAM}=${battle.id}`;
+    }
+    return null;
   }
 
   function play(battle: TankVideoCardData) {
-    if (battle.pending) return;
     player?.play(battle);
   }
 
@@ -155,7 +174,7 @@ export function TankVideoCard({
         {/* Only on the community index: a tank's own page knows which tank it
             is, and repeating it on every card would be noise. Links rather
             than text, since this is the way back to where the battle belongs. */}
-        {group.tanks.length > 0 && (
+        {(group.tanks.length > 0 || group.clans.length > 0) && (
           <div className="flex flex-wrap items-center gap-x-1.5 text-sm">
             {group.tanks.map((tank, i) => (
               <span key={tank.slug} className="flex items-center gap-1.5">
@@ -168,12 +187,46 @@ export function TankVideoCard({
                 </Link>
               </span>
             ))}
+            {/* The clans that played it, where a random battle names vehicles.
+                Both can appear on one card: a VOD can hold a stronghold evening
+                and the random games either side of it. */}
+            {group.clans.map((clan, i) => (
+              <span key={clan.tag} className="flex items-center gap-1.5">
+                {(i > 0 || group.tanks.length > 0) && (
+                  <span className="text-fd-border">·</span>
+                )}
+                <Link
+                  href={ROUTES.CLAN(region, clan.tag)}
+                  className="flex items-center gap-1.5 font-medium hover:underline"
+                >
+                  {clan.emblem && (
+                    <Image
+                      src={clan.emblem}
+                      alt=""
+                      width={16}
+                      height={16}
+                      className="size-4 shrink-0 rounded"
+                    />
+                  )}
+                  <ClanTag tag={clan.tag} color={clan.color} />
+                </Link>
+              </span>
+            ))}
           </div>
         )}
         <div className="flex flex-wrap items-center gap-x-2 text-xs text-fd-muted-foreground">
           {/* The channel first: a suggestion exists because someone made the
               video, and the tab is meant to be worth being listed in. */}
           <span className="font-medium">{group.channelName}</span>
+          {group.publishedAt && (
+            <>
+              <span className="text-fd-border">·</span>
+              {/* When it went up, not when it was suggested here: a tactic from
+                  last season is a tactic from last season whatever day someone
+                  got round to linking it. */}
+              <PublishedDate date={group.publishedAt} />
+            </>
+          )}
           {group.gameVersion && (
             <>
               <span className="text-fd-border">·</span>
@@ -211,141 +264,5 @@ export function TankVideoCard({
         </ul>
       </div>
     </div>
-  );
-}
-
-/**
- * The video's own picture, and what a click on it does.
- *
- * A button beside a hero that can play it, a link everywhere else, and neither
- * when the only battle it holds is still in review. The three share their
- * inside, so the picture is written once.
- */
-function Thumbnail({
-  title,
-  onPlay,
-  href,
-  children,
-}: {
-  title: string;
-  onPlay?: () => void;
-  href: string | null;
-  children: React.ReactNode;
-}) {
-  const className = "group relative block size-full";
-  if (onPlay)
-    return (
-      <button
-        type="button"
-        onClick={onPlay}
-        aria-label={`Play ${title}`}
-        className={cn(className, "cursor-pointer")}
-      >
-        {children}
-      </button>
-    );
-  if (href)
-    return (
-      <Link href={href} aria-label={`Watch ${title}`} className={className}>
-        {children}
-      </Link>
-    );
-  return <span className={className}>{children}</span>;
-}
-
-/** One battle inside a video: where it was played and when it starts. */
-function BattleRow({
-  battle,
-  showTank,
-  active,
-  onPlay,
-  href,
-}: {
-  battle: TankVideoCardData;
-  showTank: boolean;
-  active: boolean;
-  /** Given where a hero can play the battle in place. Without it the row is a
-   * link to the tank's page, which is where it can be watched. */
-  onPlay?: () => void;
-  href: string | null;
-}) {
-  // The map first, since it is what anyone scans for, then how the battle was
-  // played, then which side of it they started from.
-  const facts = [
-    showTank ? battle.tankName : null,
-    battle.mapName,
-    battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null,
-    battle.directionLabel,
-  ].filter(Boolean);
-
-  const className = cn(
-    "flex w-full items-center gap-1.5 rounded-md px-1.5 py-1 text-left text-xs transition-colors",
-    battle.pending
-      ? "cursor-default text-fd-muted-foreground/50"
-      : active
-        ? "cursor-pointer bg-brand/10 text-fd-foreground"
-        : "cursor-pointer text-fd-muted-foreground hover:bg-fd-muted hover:text-fd-foreground",
-  );
-
-  const inside = (
-    <>
-      <MapPinIcon className={cn("size-3.5 shrink-0", active && "text-brand")} />
-      <span className="flex min-w-0 flex-wrap items-center gap-x-1.5">
-        {facts.map((fact, i) => (
-          <span key={fact} className="flex items-center gap-1.5">
-            {i > 0 && <span className="text-fd-border">|</span>}
-            {fact}
-          </span>
-        ))}
-        {battle.result && (
-          <span className={RESULT_CLASS[battle.result]}>
-            {BATTLE_RESULT_LABEL[battle.result]}
-          </span>
-        )}
-        {battle.combinedDamage !== null && (
-          <span className="tabular-nums">
-            {battle.combinedDamage.toLocaleString("en-US")}
-            <span className="text-fd-border"> dmg</span>
-          </span>
-        )}
-      </span>
-      <span className="ml-auto shrink-0 font-mono tabular-nums">
-        {formatTimestamp(battle.startSeconds)}
-      </span>
-    </>
-  );
-
-  const row = onPlay ? (
-    <button
-      type="button"
-      onClick={onPlay}
-      // `aria-disabled`, not `disabled`: a disabled button swallows pointer
-      // events, and the tooltip below is the only thing that says why the row
-      // is greyed. The click is refused where it is handled instead.
-      aria-disabled={battle.pending}
-      className={className}
-    >
-      {inside}
-    </button>
-  ) : href ? (
-    <Link href={href} className={className}>
-      {inside}
-    </Link>
-  ) : (
-    // Nowhere to go and nothing to play: a queued row, which only its submitter
-    // sees and which the tooltip below explains.
-    <span className={className}>{inside}</span>
-  );
-
-  if (!battle.pending) return row;
-  return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>{row}</TooltipTrigger>
-        <TooltipContent>
-          Waiting on a moderator. Only you can see it.
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
   );
 }

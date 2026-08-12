@@ -1,14 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { mutate } from "swr";
-import {
-  BattleResult,
-  formatTimestamp,
-  MapGameMode,
-  parseTimestampInput,
-  parseYoutubeUrl,
-} from "@unicum.gg/shared";
+import { BattleFormat, BattleResult, MapGameMode } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,7 +25,11 @@ import {
   type BattleContext,
 } from "./battle-fields";
 import { ownVideosKey, type TankVideoSuggestion } from "./player";
-import { VideoScrubber } from "./scrubber";
+import {
+  useVideoSource,
+  VideoSourceFields,
+  VIDEO_FORM_INPUT,
+} from "./source-fields";
 
 /**
  * Suggest a video for this tank.
@@ -61,41 +59,18 @@ export function SubmitVideoDialog({
 }) {
   const { data: session } = useSession();
   const [open, setOpen] = useState(Boolean(initial));
-  const [url, setUrl] = useState(initial?.url ?? "");
-  // Kept apart from the URL and shown as its own field. A link copied with
-  // "start at current time" carries `?t=`, and most links are not: without a
-  // field for it, forgetting silently files a three-hour VOD at second 0, which
-  // is the one thing this feature exists to avoid.
-  const [start, setStart] = useState(
-    initial ? formatTimestamp(initial.startSeconds) : "",
-  );
-  const [startTouched, setStartTouched] = useState(Boolean(initial));
+  const source = useVideoSource(initial);
   const [battle, setBattle] = useState<BattleContext>(EMPTY_BATTLE);
   const [damage, setDamage] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
 
-  // The same parser the endpoint uses, so a bad link is caught before a round
-  // trip. The server still validates: a client is not a gate.
-  const ref = useMemo(() => (url.trim() ? parseYoutubeUrl(url) : null), [url]);
-  // What the start field shows: whatever was typed, else the link's own `?t=`.
-  const startValue =
-    startTouched || !ref?.startSeconds
-      ? start
-      : formatTimestamp(ref.startSeconds);
-  const startSeconds = parseTimestampInput(startValue);
-  const startInvalid = startValue.trim() !== "" && startSeconds === null;
-  // Not a blocker, a warning: a short review of the tank legitimately starts at
-  // the beginning, so this says what will happen rather than refusing.
-  const startMissing = Boolean(ref) && !startInvalid && !startSeconds;
-
   // The battle context is required, the combined damage included, so the button
   // says so by staying disabled rather than letting the endpoint reject a form
   // that looked complete. Only the start time is exempt, for the video that
   // opens on the battle.
-  const complete =
-    Boolean(ref) && !startInvalid && isBattleComplete(battle) && Boolean(damage);
+  const complete = source.ok && isBattleComplete(battle) && Boolean(damage);
 
   if (!session?.user) {
     return (
@@ -111,22 +86,24 @@ export function SubmitVideoDialog({
     setSending(true);
     setError(null);
     try {
-      await unicum
-        .region(region)
-        .tanks(slug)
-        .videosSuggest({
-          url: url.trim(),
-          startSeconds: startSeconds ?? 0,
-          arenaId: battle.arenaId,
-          mode: battle.mode as MapGameMode,
-          spawnTeam: Number(battle.spawnTeam),
-          result: battle.result as BattleResult,
-          combinedDamage: Number(damage),
-        });
+      await unicum.region(region).videosSuggest({
+        url: source.url.trim(),
+        startSeconds: source.seconds ?? 0,
+        arenaId: battle.arenaId,
+        mode: battle.mode as MapGameMode,
+        spawnTeam: Number(battle.spawnTeam),
+        result: battle.result as BattleResult,
+        // This dialog is the tank page's, so it files random battles: the
+        // vehicle is the page it was opened from, and the damage is what makes
+        // two of them comparable.
+        format: BattleFormat.Random,
+        tankSlug: slug,
+        combinedDamage: Number(damage),
+      });
       setDone(true);
       // The queued row is the receipt: it belongs in the list under the video
       // immediately, and on the player's seek bar, rather than after a reload.
-      void mutate(ownVideosKey(region, slug));
+      void mutate(ownVideosKey(region));
     } catch (err) {
       // The SDK throws `UnicumError` on a non-2xx, carrying the status, so the
       // two cases worth naming are still distinguishable.
@@ -158,9 +135,7 @@ export function SubmitVideoDialog({
    * pre-filled with the first would be refused as a duplicate.
    */
   function reset() {
-    setUrl("");
-    setStart("");
-    setStartTouched(false);
+    source.reset();
     setBattle(EMPTY_BATTLE);
     setDamage("");
     setError(null);
@@ -204,70 +179,10 @@ export function SubmitVideoDialog({
 
         {done ? null : (
           <div className="flex flex-col gap-3">
-            <label className="flex flex-col gap-1 text-sm">
-              <span className="font-medium">YouTube link</span>
-              <input
-                type="url"
-                value={url}
-                onChange={(e) => setUrl(e.target.value)}
-                placeholder="https://www.youtube.com/watch?v=…&t=1h05m30s"
-                className="h-9 rounded-md border border-fd-border bg-transparent px-3 text-sm focus:border-fd-ring focus:outline-none"
-              />
-              {url.trim() && !ref && (
-                <span className="text-xs text-red-500">
-                  That is not a YouTube video link.
-                </span>
-              )}
-            </label>
-
-            {/* The preview is the timestamp field: scrub to where the battle
-                starts instead of going back to YouTube to read the clock. The
-                text input stays, for pasting a time someone already has. */}
-            {ref && (
-              <VideoScrubber
-                videoId={ref.videoId}
-                seconds={startSeconds ?? 0}
-                onChange={(s) => {
-                  setStartTouched(true);
-                  setStart(formatTimestamp(s));
-                }}
-              />
-            )}
-
-            <div className="grid grid-cols-2 gap-3">
-              <label className="flex flex-col gap-1 text-sm">
-                <span className="font-medium">
-                  Battle starts at{" "}
-                  <span className="font-normal text-fd-muted-foreground">
-                    (optional)
-                  </span>
-                </span>
-                <input
-                  type="text"
-                  value={startValue}
-                  onChange={(e) => {
-                    setStartTouched(true);
-                    setStart(e.target.value);
-                  }}
-                  placeholder="1:05:30"
-                  inputMode="numeric"
-                  className="h-9 rounded-md border border-fd-border bg-transparent px-3 text-sm focus:border-fd-ring focus:outline-none"
-                />
-                {startInvalid ? (
-                  <span className="text-xs text-red-500">
-                    Use a time like 1:05:30, or leave it empty.
-                  </span>
-                ) : startMissing ? (
-                  <span className="text-xs text-amber-500">
-                    Your link has no timestamp. Scrub the preview above to the
-                    battle, or leave it if the video starts on it.
-                  </span>
-                ) : null}
-              </label>
-
-              {/* Beside the start time rather than with the battle context below:
-                both are numbers read off the same after-battle screen, and both
-                are the submitter's own account of it. */}
+            <VideoSourceFields source={source}>
+              {/* Beside the start time rather than with the battle context
+                  below: both are numbers read off the same after-battle screen,
+                  and both are the submitter's own account of it. */}
               <label className="flex flex-col gap-1 text-sm">
                 <span className="font-medium">Combined damage</span>
                 <input
@@ -278,13 +193,13 @@ export function SubmitVideoDialog({
                   }
                   placeholder="3450"
                   inputMode="numeric"
-                  className="h-9 rounded-md border border-fd-border bg-transparent px-3 text-sm focus:border-fd-ring focus:outline-none"
+                  className={VIDEO_FORM_INPUT}
                 />
                 <span className="text-xs text-fd-muted-foreground">
                   Damage dealt plus assisted.
                 </span>
               </label>
-            </div>
+            </VideoSourceFields>
 
             <BattleFields
               region={region}

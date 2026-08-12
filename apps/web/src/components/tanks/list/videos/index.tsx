@@ -5,6 +5,8 @@ import type { Region } from "@unicum.gg/wargaming";
 import { Panel, PanelContent } from "@/components/panel";
 import { TankVideoCard } from "@/components/tanks/detail/videos/card";
 import { groupBattlesByVideo } from "@/components/tanks/detail/videos/group";
+import { BattleFilterBar } from "@/components/tanks/detail/videos/battle-filter-bar";
+import { useBattleFilters } from "@/components/tanks/detail/videos/battle-filters";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { TankTab } from "@/components/tanks/list/tabs";
 import { TanksTabNav } from "@/components/tanks/list/tab-nav";
@@ -48,8 +50,16 @@ export function TanksVideosTab({
 }) {
   const [view, setView] = useVideosView();
 
+  // Two filter bars, because the rows have two halves. The tank list's own
+  // covers the vehicle (tier, nation, class), and the battle one covers what
+  // was played: a tactic has no vehicle at all, so without the second it could
+  // only ever be found by scrolling.
   const { filtered, filters } = useTankFilters(battles, RANGE_COLS, "damage");
-  const groups = useMemo(() => groupBattlesByVideo(filtered), [filtered]);
+  const battleState = useBattleFilters(filtered);
+  const groups = useMemo(
+    () => groupBattlesByVideo(battleState.filtered),
+    [battleState.filtered],
+  );
 
   return (
     <Panel>
@@ -60,19 +70,24 @@ export function TanksVideosTab({
           searchNoun="videos"
           extra={<VideosViewToggle view={view} onChange={setView} />}
         />
+        <BattleFilterBar {...battleState} />
       </PanelContent>
 
-      {filtered.length === 0 ? (
+      {battleState.filtered.length === 0 ? (
         <div className="border-t border-fd-border">
           <p className="py-12 text-center text-sm text-fd-muted-foreground">
             {battles.length === 0
-              ? "No video yet. They arrive from the tank pages: open one, find a battle worth watching, and suggest it."
+              ? "No video yet. They arrive from the pages they belong to: a battle from its tank's page, a tactic from the map it was fought on."
               : "No battle matches these filters."}
           </p>
         </div>
       ) : view === VideosView.Table ? (
         <div className="border-t border-fd-border">
-          <VideosTable region={region} battles={filtered} showTank />
+          <VideosTable
+            region={region}
+            battles={battleState.filtered}
+            showTank
+          />
         </div>
       ) : (
         <PanelContent className="p-4 pt-0">

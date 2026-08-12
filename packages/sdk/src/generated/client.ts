@@ -169,6 +169,15 @@ class ClanClient {
     );
   }
 
+  /** Clan videos */
+  videos() {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/videos", path),
+      () => this.api.GET("/{region}/clans/{tag}/videos", { params: { path } }),
+    );
+  }
+
   /** Subscribe to live updates for this clan (SSE). Browser-only. */
   live(onUpdate: (event: LiveUpdate) => void, onError?: (error: Event) => void): Unsubscribe {
     return subscribeClanLive(this.baseUrl, this.region, this.tag, onUpdate, onError);
@@ -246,24 +255,6 @@ class TankClient {
       () => this.api.GET("/{region}/tanks/{slug}/videos", { params: { path } }),
     );
   }
-
-  /** My queued videos */
-  videosMine() {
-    const path = { region: this.region, slug: this.slug };
-    return handle(
-      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos/mine", path),
-      () => this.api.GET("/{region}/tanks/{slug}/videos/mine", { params: { path } }),
-    );
-  }
-
-  /** Suggest a tank video */
-  videosSuggest(body: BodyOf<"/{region}/tanks/{slug}/videos/suggest">) {
-    const path = { region: this.region, slug: this.slug };
-    return handle(
-      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos/suggest", path),
-      () => this.api.POST("/{region}/tanks/{slug}/videos/suggest", { params: { path }, body }),
-    );
-  }
 }
 
 /** A single map: unicum.eu.maps("..."). */
@@ -281,6 +272,15 @@ class MapClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/maps/{slug}", path),
       () => this.api.GET("/{region}/maps/{slug}", { params: { path } }),
+    );
+  }
+
+  /** Map videos */
+  videos() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/videos", path),
+      () => this.api.GET("/{region}/maps/{slug}/videos", { params: { path } }),
     );
   }
 }
@@ -578,10 +578,26 @@ class RegionClient {
   }
 
   /** Community videos */
-  videos() {
+  videos(videoId?: NonNullable<QueryOf<"/{region}/videos">>["videoId"]) {
     return handle(
-      buildUrl(this.baseUrl, "/{region}/videos", { region: this.region }),
-      () => this.api.GET("/{region}/videos", { params: { path: { region: this.region } } }),
+      buildUrl(this.baseUrl, "/{region}/videos", { region: this.region }, { videoId }),
+      () => this.api.GET("/{region}/videos", { params: { path: { region: this.region }, query: { videoId } } }),
+    );
+  }
+
+  /** My queued videos */
+  videosMine() {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/videos/mine", { region: this.region }),
+      () => this.api.GET("/{region}/videos/mine", { params: { path: { region: this.region } } }),
+    );
+  }
+
+  /** Suggest a video */
+  videosSuggest(body: BodyOf<"/{region}/videos/suggest">) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/videos/suggest", { region: this.region }),
+      () => this.api.POST("/{region}/videos/suggest", { params: { path: { region: this.region } }, body }),
     );
   }
 

@@ -418,7 +418,17 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     const rest = segs.slice(1);
     const resource = byName.get(rest[0]);
     if (!resource) {
-      if (rest.length === 1) b.region.push(emitRegion(ep, camel(rest)));
+      // A region path carrying no key parameter is a plain method on the region
+      // client, however deep: `/{region}/videos` reads and
+      // `/{region}/videos/suggest` writes, and neither names an entity. The
+      // depth used to be capped at one segment, which left the second unmapped
+      // for the same reason the root branch above once dropped a documented
+      // POST: nobody had written a path shaped like that yet.
+      //
+      // A parameter deeper in is a different thing entirely, an entity with its
+      // own sub-resources, and belongs in RESOURCES where it gets a client of
+      // its own. That stays loud rather than being guessed at.
+      if (!rest.some(isParam)) b.region.push(emitRegion(ep, camel(rest)));
       else b.unmapped.push(ep.path);
       continue;
     }

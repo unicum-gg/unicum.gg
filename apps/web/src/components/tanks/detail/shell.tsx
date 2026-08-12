@@ -83,7 +83,12 @@ export function TankShell({
   return (
     // The provider spans the hero and the tab below it: a video card is what
     // you click, the hero is where it plays.
-    <TankVideoPlayerProvider region={region} slug={slug} videos={videos}>
+    <TankVideoPlayerProvider
+      region={region}
+      videos={videos}
+      // This tank's own queued rows, out of the reader's whole queue.
+      ownTankSlug={slug}
+    >
       <div className="mx-auto w-full max-w-7xl">
         <Panel className="border-b border-fd-border">
           {/* The hero is always dark, in both themes. It sits on the hangar

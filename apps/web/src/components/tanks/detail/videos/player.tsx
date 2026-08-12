@@ -5,38 +5,31 @@ import {
   useSyncExternalStore,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import dynamic from "next/dynamic";
-import { PlusIcon, XIcon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import type { RefObject } from "react";
 import type { MediaPlayerInstance } from "@vidstack/react";
-import { MAP_GAME_MODE_LABEL, youtubeWatchUrl } from "@unicum.gg/shared";
+import { youtubeWatchUrl } from "@unicum.gg/shared";
 import useSWR from "swr";
 import type { Region } from "@unicum.gg/wargaming";
 import { useSession } from "@/lib/auth-client";
 import { unicum } from "@/services/sdk";
 import type { TankVideoCardData } from "./card";
-import { ActiveBattleTracker } from "./active-battle-tracker";
+import { VideoPlayerSurface } from "./surface";
 import {
   readBattleParam,
   subscribeToBattleParam,
   writeBattleParam,
 } from "./battle-param";
 
-/** The player library is only worth downloading once someone plays something,
- * and it drives an embed, so there is nothing for the server to render. */
-const PlyrPlayer = dynamic(() => import("./plyr-player"), { ssr: false });
-
 /** SWR key for the reader's own queued battles. Exported so the form can drop
  * it after a submission: the row it just created belongs in the list right
  * away, not on the next reload. */
-export function ownVideosKey(region: Region, slug: string): string {
-  return `videos:mine:${region}:${slug}`;
+export function ownVideosKey(region: Region): string {
+  return `videos:mine:${region}`;
 }
 
 /** The hero the player takes over, so a card can scroll it back into view when
@@ -44,7 +37,7 @@ export function ownVideosKey(region: Region, slug: string): string {
 const TANK_HERO_ID = "tank-hero";
 
 /** A button floated over the video, readable on any frame. */
-const CHROME_BUTTON =
+export const CHROME_BUTTON =
   "flex cursor-pointer items-center gap-1.5 rounded-md bg-black/60 px-2 py-1 text-sm text-white/80 backdrop-blur-sm transition-colors hover:bg-black/80 hover:text-white";
 
 /** A moment handed from the hero to the suggestion form: the video being
@@ -90,15 +83,31 @@ export function useTankVideoPlayer(): TankVideoPlayer | null {
  */
 export function TankVideoPlayerProvider({
   region,
-  slug,
   videos: published,
+  ownTankSlug,
+  ownMapSlug,
+  anchorId = TANK_HERO_ID,
   children,
 }: {
   region: Region;
-  slug: string;
   /** The page's published battles, so a `?battle=` link can be opened on
    * arrival. */
   videos: TankVideoCardData[];
+  /**
+   * Which of the reader's queued battles belong on this page. The queue is
+   * fetched whole, because someone waiting on a review is waiting on all of
+   * them, and each page keeps the rows it is about: a tank page its vehicle's,
+   * a map page the ones fought on its ground.
+   *
+   * Two slugs rather than the predicate this started as: the tank page mounts
+   * this from its layout, which is a server component, and a function cannot
+   * cross that boundary.
+   */
+  ownTankSlug?: string;
+  ownMapSlug?: string;
+  /** The element a battle plays in, scrolled to when one opens. The tank page's
+   * hero by default, since that is where this started. */
+  anchorId?: string;
   children: React.ReactNode;
 }) {
   // The reader's own queued battles, fetched here rather than in the list.
@@ -107,21 +116,23 @@ export function TankVideoPlayerProvider({
   // where in the video their suggestion sits.
   const { data: session } = useSession();
   const { data: mine } = useSWR(
-    session?.user ? ownVideosKey(region, slug) : null,
+    session?.user ? ownVideosKey(region) : null,
     () =>
       unicum
         .region(region)
-        .tanks(slug)
         .videosMine()
         .then((r) => r.videos as unknown as TankVideoCardData[]),
   );
-  const videos = useMemo(
-    () =>
-      mine?.length
-        ? [...published, ...mine.map((v) => ({ ...v, pending: true }))]
-        : published,
-    [published, mine],
-  );
+  const videos = useMemo(() => {
+    const queued = (mine ?? []).filter(
+      (v) =>
+        (!ownTankSlug || v.tankSlug === ownTankSlug) &&
+        (!ownMapSlug || v.mapSlug === ownMapSlug),
+    );
+    return queued.length
+      ? [...published, ...queued.map((v) => ({ ...v, pending: true }))]
+      : published;
+  }, [published, mine, ownTankSlug, ownMapSlug]);
   /**
    * Which battle is playing, read from the URL rather than held beside it.
    *
@@ -140,32 +151,58 @@ export function TankVideoPlayerProvider({
     () => null,
   );
   const current = useMemo(
-    // Published only: a queued battle is not live, so a link cannot open one.
-    () => videos.find((v) => v.id === currentId && !v.pending) ?? null,
+    // Queued rows included. They are only ever in this list for the person who
+    // submitted them, so nobody else can open one: the row a stranger's `?battle=`
+    // would name simply is not there. And the submitter has the best reason of
+    // anyone to play it, which is to check the second they picked is right.
+    () => videos.find((v) => v.id === currentId) ?? null,
     [videos, currentId],
   );
   // Every battle marked in the video being played, for the seek-bar markers and
-  // for the row the lists light up. Sorted by timestamp, the order they happen
-  // in: the endpoint returns newest-approved first, and both readers walk the
-  // list expecting the playhead to move through it.
-  const siblings = useMemo(
+  // for the row the lists light up.
+  //
+  // Fetched whole rather than filtered out of the page, because the page only
+  // holds its own slice: a map page knows the battles fought on its ground, and
+  // a competitive evening runs through a rotation, so the seek bar would mark
+  // one battle out of five and say nothing about where the next map starts.
+  // The page's own rows answer in the meantime, so the markers appear at once
+  // and grow when the fetch lands.
+  const { data: allBattles } = useSWR(
+    current ? `video-battles:${region}:${current.videoId}` : null,
     () =>
-      current
-        ? videos
-            .filter((v) => v.videoId === current.videoId)
-            .sort((a, b) => a.startSeconds - b.startSeconds)
-        : [],
-    [videos, current],
+      unicum
+        .region(region)
+        .videos(current!.videoId)
+        .then((r) => r.videos as unknown as TankVideoCardData[]),
   );
+  const siblings = useMemo(() => {
+    if (!current) return [];
+    const published =
+      allBattles ?? videos.filter((v) => v.videoId === current.videoId && !v.pending);
+    // The reader's own queued rows are theirs alone, so they are never in the
+    // published answer: someone waiting on a review wants to see where in the
+    // video their suggestion sits.
+    //
+    // Read from the whole queue rather than from the page's list, for the same
+    // reason the published half is fetched whole: the page's list is scoped to
+    // its own ground, so a battle queued on another map of the same recording
+    // would be missing from the timeline it belongs to.
+    const queued = (mine ?? [])
+      .filter((v) => v.videoId === current.videoId)
+      .map((v) => ({ ...v, pending: true }));
+    return [...published, ...queued].sort(
+      (a, b) => a.startSeconds - b.startSeconds,
+    );
+  }, [videos, current, allBattles, mine]);
   // Held here rather than in the hero, so the cards can read the playhead too.
   const playerRef = useRef<MediaPlayerInstance>(null);
   const [activeId, setActiveId] = useState<number | null>(null);
 
   const play = useCallback((video: TankVideoCardData) => {
     writeBattleParam(video.id);
-    // The videos tab sits well below the fold, so playing in the hero would
+    // The list sits well below the fold, so playing in the player would
     // otherwise start a video off-screen.
-    const hero = document.getElementById(TANK_HERO_ID);
+    const hero = document.getElementById(anchorId);
     if (!hero) return;
     // Not `scrollIntoView`, which aligns the hero with the viewport top and so
     // tucks its first rows under the sticky header. Measured rather than a
@@ -177,7 +214,7 @@ export function TankVideoPlayerProvider({
         : 0;
     const top = hero.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
-  }, []);
+  }, [anchorId]);
 
   const stop = useCallback(() => writeBattleParam(null), []);
 
@@ -267,119 +304,18 @@ export function TankHero({
 }
 
 /**
- * The player itself, covering the hero while a battle is playing.
+ * The player, covering the hero while a battle is playing.
  *
- * Sits on black rather than stretching to the hero's wider box: a battle
- * recording is 16:9 and cropping it would cut the part of the screen the
- * suggestion is about. Nothing else is drawn over it.
+ * A pixel short of the bottom, like the hero's other full-bleed layers: an
+ * opaque layer flush with the edge takes most of the device row the panel's
+ * bottom border falls in, and thins it out.
  */
 export function TankVideoHeroPlayer() {
   const player = useTankVideoPlayer();
-  // Signed out the form renders a log-in link instead of a dialog, so the
-  // shortcut would hand a moment to nothing.
-  const { data: session } = useSession();
-  const video = player?.current ?? null;
-  const stop = player?.stop;
-  const [attached, setAttached] = useState(false);
-  const siblings = player?.siblings;
-  const playerRef = player?.playerRef;
-
-  // A tick per battle on the seek bar, the way a chaptered video shows its
-  // parts: a recording usually holds several, and they were only listed under
-  // the card, so nothing said where the next one was while watching this one.
-  const markers = useMemo(
-    () =>
-      (siblings ?? []).map((battle) => ({
-        time: battle.startSeconds,
-        label: [
-          battle.mapName,
-          battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null,
-          battle.directionLabel,
-          battle.pending ? "in review" : null,
-        ]
-          .filter(Boolean)
-          .join(" · "),
-      })),
-    [siblings],
-  );
-
-  useEffect(() => {
-    if (!video || !stop) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") stop();
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [video, stop]);
-
-  if (!video) return null;
-
+  if (!player?.current) return null;
   return (
-    // A pixel short of the bottom, like the hero's other full-bleed layers: an
-    // opaque layer flush with the edge takes most of the device row the panel's
-    // bottom border falls in, and thins it out.
-    <div className="absolute inset-x-0 top-0 bottom-px z-30 bg-black">
-      {/* Fills the hero, which `TankHero` has already reshaped to 16:9, so the
-          video is full width with nothing cropped. */}
-      <PlyrPlayer
-        // Keyed on the battle so picking another card remounts the player at
-        // its own timestamp, instead of it keeping the first video.
-        key={`${video.videoId}-${video.startSeconds}`}
-        videoId={video.videoId}
-        title={video.title}
-        startSeconds={video.startSeconds}
-        playerRef={playerRef}
-        markers={markers}
-        autoPlay
-        onCanPlay={() => setAttached(true)}
-        toolbar={
-          session?.user ? (
-            // Dropped into the player's own control bar rather than floated
-            // over the video: it acts on the playhead, like the controls it
-            // sits between. Plyr's classes give it their hover state and
-            // tooltip, so it does not read as a foreign button.
-            <button
-              type="button"
-              onClick={() =>
-                player?.suggest(Math.floor(playerRef?.current?.currentTime ?? 0))
-              }
-              className="plyr__controls__item plyr__control"
-            >
-              <PlusIcon className="size-4" weight="bold" />
-              <span className="plyr__tooltip">Suggest this moment</span>
-            </button>
-          ) : undefined
-        }
-      />
-      {playerRef && siblings && (
-        <ActiveBattleTracker
-          // Keyed on the player it watches, not just on "has one appeared":
-          // picking another battle remounts the player, and a subscription
-          // taken on the previous instance keeps reporting its dead clock. The
-          // `attached` half covers the first mount, which happens a commit late
-          // because the player is imported on demand.
-          key={`${attached}-${video.videoId}-${video.startSeconds}`}
-          playerRef={playerRef}
-          battles={siblings}
-          onActive={player?.setActiveId}
-        />
-      )}
-      {/* The only chrome over the video: the card the click came from already
-          carries the title, the channel and the battle, so repeating them here
-          would just be a band of text under it. */}
-      <button
-        type="button"
-        onClick={stop}
-        aria-label="Close the video"
-        // Above `.vds-blocker`, the layer the player puts over the embed to
-        // catch clicks. It is `z-index: 1` in this same stacking context, so an
-        // unpositioned button sits under it and every click on Close was
-        // reaching the player as a play/pause toggle instead.
-        className={cn("absolute right-3 top-3 z-10", CHROME_BUTTON)}
-      >
-        <XIcon className="size-4" />
-        Close
-      </button>
+    <div className="absolute inset-x-0 top-0 bottom-px z-30">
+      <VideoPlayerSurface />
     </div>
   );
 }

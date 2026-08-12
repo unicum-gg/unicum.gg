@@ -10,9 +10,16 @@ export type TankVideoGroup = {
   title: string;
   channelName: string;
   gameVersion: string | null;
+  /** When the recording went up on YouTube, carried on the video like the
+   * version: every battle in it shares one. */
+  publishedAt: Date | string | null;
   /** The tanks this video covers, in the order they appear. Empty on a tank's
-   * own page, where every battle is that tank and saying so would be noise. */
+   * own page, where every battle is that tank and saying so would be noise, and
+   * on a video holding only tactics, which are about no vehicle. */
   tanks: { name: string; slug: string }[];
+  /** The clans it credits, same rule. A tactic's card names the clan where a
+   * random battle's names the vehicle: it is what the video is about. */
+  clans: { tag: string; color: string | null; emblem: string | null }[];
   battles: TankVideoCardData[];
 };
 
@@ -45,7 +52,9 @@ export function groupBattlesByVideo(
       // Carried on the video rather than the row: it is when the recording was
       // published, so every battle in it shares one.
       gameVersion: battle.gameVersion,
+      publishedAt: battle.publishedAt ?? null,
       tanks: [],
+      clans: [],
       battles: [battle],
     });
   }
@@ -58,6 +67,16 @@ export function groupBattlesByVideo(
       }
       seen.add(battle.tankSlug);
       group.tanks.push({ name: battle.tankName, slug: battle.tankSlug });
+    }
+    const seenClans = new Set<string>();
+    for (const battle of group.battles) {
+      if (!battle.clan || seenClans.has(battle.clan.tag)) continue;
+      seenClans.add(battle.clan.tag);
+      group.clans.push({
+        tag: battle.clan.tag,
+        color: battle.clan.color,
+        emblem: battle.clan.emblem,
+      });
     }
   }
   return [...groups.values()];

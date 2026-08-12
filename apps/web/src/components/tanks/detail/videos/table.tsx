@@ -1,52 +1,25 @@
 "use client";
 
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { toRoman } from "roman-numerals";
-import { PlayIcon } from "@phosphor-icons/react";
-import {
-  BATTLE_RESULT_LABEL,
-  formatTimestamp,
-  MAP_GAME_MODE_LABEL,
-} from "@unicum.gg/shared";
+import { BATTLE_FORMAT_LABEL, MAP_GAME_MODE_LABEL } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { BATTLE_PARAM } from "@/components/tanks/detail/videos/battle-param";
 import {
   TankDetailTab,
   tankDetailTabHref,
 } from "@/components/tanks/detail/tabs";
-import { NationFlag } from "@/components/tanks/nation-flag";
-import { TankIcon } from "@/components/tanks/tank-icon";
-import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   SortDirection,
   SortHead,
   type SortState,
 } from "@/components/tanks/list/sorting";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Table, TableBody, TableHeader, TableRow } from "@/components/ui/table";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
-import { cn } from "@/lib/utils";
 import type { TankVideoCardData } from "./card";
+import { VideoTableRow, type VideoColumns } from "./table-row";
 import { useTankVideoPlayer } from "./player";
-
-const RESULT_CLASS: Record<string, string> = {
-  victory: "text-emerald-500",
-  defeat: "text-red-500",
-  draw: "text-fd-muted-foreground",
-};
 
 function sortValue(
   battle: TankVideoCardData,
@@ -58,11 +31,15 @@ function sortValue(
     case "type":
       return battle.type ?? null;
     case "tier":
-      return battle.tier ?? null;
+      return battle.vehicleTier ?? null;
     case "tank":
-      return battle.tankShortName || battle.tankName || null;
+      return (
+        battle.tankShortName || battle.tankName || battle.clan?.tag || null
+      );
     case "map":
       return battle.mapName;
+    case "format":
+      return battle.format ? BATTLE_FORMAT_LABEL[battle.format] : null;
     case "mode":
       return battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null;
     case "spawn":
@@ -71,6 +48,8 @@ function sortValue(
       return battle.result;
     case "channel":
       return battle.channelName;
+    case "published":
+      return battle.publishedAt ? new Date(battle.publishedAt).getTime() : null;
     default:
       return battle.combinedDamage;
   }
@@ -94,6 +73,7 @@ export function VideosTable({
   region,
   battles,
   showTank,
+  showMap = true,
   onPlay,
 }: {
   region: Region;
@@ -101,6 +81,9 @@ export function VideosTable({
   /** Whether the rows cross tanks. On one tank's own page they do not, and four
    * columns repeating the same vehicle are four columns of nothing. */
   showTank: boolean;
+  /** Whether the rows cross maps. On one map's own page they do not, for the
+   * same reason. */
+  showMap?: boolean;
   /** Given on a tank's own page, where the hero can play the battle in place.
    * Without it the row links to the tank's page instead, which is the only way
    * to watch it from the community index. */
@@ -110,9 +93,57 @@ export function VideosTable({
   // player rather than from the click, so it follows the playhead into the next
   // battle of the same video, exactly like the cards.
   const activeId = useTankVideoPlayer()?.activeId ?? null;
+  const router = useRouter();
+
+  // A column is drawn where at least one row has something to put in it. The
+  // same table serves the community index, a tank's page and a map's two lists,
+  // and each of those leaves a different set of columns empty: a tactic has no
+  // vehicle and no damage, a tank page has nothing but its own vehicle. A
+  // column of dashes is a column that says nothing.
+  const showClan = battles.some((b) => b.clan);
+  const hasTanks = battles.some((b) => b.tankSlug);
+  const showVehicle = showTank && hasTanks;
+  const showIdentity = showTank && battles.some((b) => b.tankSlug || b.clan);
+  const showDamage = battles.some((b) => b.combinedDamage != null);
+  const showPublished = battles.some((b) => b.publishedAt);
+
+  /** Where a row is watched when this table has no player beside it: the page
+   * the battle belongs to, opened on it. A tactic has no vehicle, so it goes to
+   * the ground it was fought on rather than to a tank URL with an empty slug. */
+  function watchHref(battle: TankVideoCardData): string | null {
+    if (battle.tankSlug) {
+      return `${tankDetailTabHref(
+        ROUTES.TANK(region, battle.tankSlug),
+        TankDetailTab.Videos,
+      )}?${BATTLE_PARAM}=${battle.id}`;
+    }
+    if (battle.mapSlug) {
+      return `${ROUTES.MAP(region, battle.mapSlug)}?${BATTLE_PARAM}=${battle.id}`;
+    }
+    return null;
+  }
+
+  /** What a click on a row does: hand the battle to the player beside it where
+   * there is one, and otherwise go to the page that has one. */
+  function open(battle: TankVideoCardData) {
+    if (onPlay) return onPlay(battle);
+    const href = watchHref(battle);
+    if (href) router.push(href);
+  }
+
+  // Decided once, and handed to every row.
+  const columns: VideoColumns = {
+    vehicle: showVehicle,
+    identity: showIdentity,
+    map: showMap,
+    damage: showDamage,
+    published: showPublished,
+  };
 
   const [sort, setSort] = useState<SortState>({
-    key: "damage",
+    // Damage where there is any, and what was played otherwise: a tactics table
+    // has no numbers to rank by.
+    key: showDamage ? "damage" : "format",
     direction: SortDirection.Desc,
   });
 
@@ -157,7 +188,7 @@ export function VideosTable({
         <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-4!">
           <TableHeader>
             <TableRow>
-              {showTank && (
+              {showVehicle && (
                 <>
                   <SortHead
                     sort={sort}
@@ -183,13 +214,31 @@ export function VideosTable({
                   >
                     Tier
                   </SortHead>
-                  <SortHead sort={sort} col="tank" onToggle={toggle}>
-                    Tank
-                  </SortHead>
                 </>
               )}
-              <SortHead sort={sort} col="map" onToggle={toggle}>
-                Map
+              {showIdentity && (
+                <SortHead sort={sort} col="tank" onToggle={toggle}>
+                  {/* One column for both, because a row is one or the other: a
+                      random battle is about the vehicle it was played in, a
+                      tactic about the clan that played it, and neither ever
+                      wants the other's name in a column of its own. The heading
+                      names what is actually in it, so a tactics table says
+                      "Clan" rather than offering a word for something none of
+                      its rows have. */}
+                  {hasTanks && showClan
+                    ? "Tank / Clan"
+                    : showClan
+                      ? "Clan"
+                      : "Tank"}
+                </SortHead>
+              )}
+              {showMap && (
+                <SortHead sort={sort} col="map" onToggle={toggle}>
+                  Map
+                </SortHead>
+              )}
+              <SortHead sort={sort} col="format" onToggle={toggle}>
+                Format
               </SortHead>
               <SortHead sort={sort} col="mode" onToggle={toggle}>
                 Mode
@@ -200,143 +249,37 @@ export function VideosTable({
               <SortHead sort={sort} col="result" onToggle={toggle}>
                 Result
               </SortHead>
-              <SortHead
-                sort={sort}
-                col="damage"
-                onToggle={toggle}
-                align="end"
-                tip="Damage dealt plus assisted, as declared by the submitter."
-              >
-                Combined
-              </SortHead>
+              {showDamage && (
+                <SortHead
+                  sort={sort}
+                  col="damage"
+                  onToggle={toggle}
+                  align="end"
+                  tip="Damage dealt plus assisted, as declared by the submitter."
+                >
+                  Combined
+                </SortHead>
+              )}
               <SortHead sort={sort} col="channel" onToggle={toggle}>
                 Channel
               </SortHead>
-              <TableHead className="w-10" />
+              {showPublished && (
+                <SortHead sort={sort} col="published" onToggle={toggle}>
+                  Published
+                </SortHead>
+              )}
             </TableRow>
           </TableHeader>
           <TableBody>
             {rows.map((battle) => (
-              <TableRow
+              <VideoTableRow
                 key={battle.id}
-                className={cn(
-                  battle.pending && "text-fd-muted-foreground/50",
-                  battle.id === activeId && "bg-brand/10 text-fd-foreground",
-                )}
-              >
-                {showTank && (
-                  <>
-                    <TableCell className="text-center">
-                      <NationFlag nation={battle.nation ?? ""} region={region} />
-                    </TableCell>
-                    <TableCell className="text-center">
-                      <VehicleTypeIcon
-                        type={battle.type ?? ""}
-                        premium={battle.isPremium}
-                      />
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "text-center font-medium tabular-nums",
-                        battle.isPremium && "text-[#FAB81B]",
-                      )}
-                    >
-                      {battle.tier ? toRoman(battle.tier) : "—"}
-                    </TableCell>
-                    <TableCell
-                      className={cn(
-                        "font-medium",
-                        battle.isPremium && "text-[#FAB81B]",
-                      )}
-                    >
-                      {/* Carries the battle too: someone clicking the tank still
-                          wants this video, they just want the tank's page rather
-                          than its videos tab, and the hero plays it there too. */}
-                      <Link
-                        href={`${ROUTES.TANK(region, battle.tankSlug ?? "")}?${BATTLE_PARAM}=${battle.id}`}
-                        className="flex items-center gap-2 hover:underline"
-                      >
-                        <TankIcon
-                          region={region}
-                          tag={battle.tankTag ?? ""}
-                          type={battle.type ?? ""}
-                          className="h-3.5 w-auto shrink-0 object-contain"
-                        />
-                        <span className="min-w-0 truncate">
-                          {battle.tankShortName || battle.tankName}
-                        </span>
-                      </Link>
-                    </TableCell>
-                  </>
-                )}
-                <TableCell>{battle.mapName ?? "—"}</TableCell>
-                <TableCell>
-                  {battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : "—"}
-                </TableCell>
-                <TableCell>{battle.directionLabel ?? "—"}</TableCell>
-                <TableCell
-                  className={cn(battle.result && RESULT_CLASS[battle.result])}
-                >
-                  {battle.result ? BATTLE_RESULT_LABEL[battle.result] : "—"}
-                </TableCell>
-                <TableCell className="text-right tabular-nums">
-                  {battle.combinedDamage?.toLocaleString("en-US") ?? "—"}
-                </TableCell>
-                <TableCell className="text-fd-muted-foreground">
-                  {battle.channelName}
-                </TableCell>
-                <TableCell className="text-right">
-                  {/* To the tank's own page rather than to YouTube: it opens on
-                      this battle, in the hero, next to the other battles of the
-                      same video and to the tank it was played in. */}
-                  {battle.pending ? (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <span className="inline-flex text-fd-muted-foreground/40">
-                          <PlayIcon weight="fill" className="size-4" />
-                        </span>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        Waiting on a moderator. Only you can see it.
-                      </TooltipContent>
-                    </Tooltip>
-                  ) : onPlay ? (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <button
-                          type="button"
-                          onClick={() => onPlay(battle)}
-                          aria-label={`Watch at ${formatTimestamp(battle.startSeconds)}`}
-                          className="inline-flex cursor-pointer text-fd-muted-foreground transition-colors hover:text-brand"
-                        >
-                          <PlayIcon weight="fill" className="size-4" />
-                        </button>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        Opens at {formatTimestamp(battle.startSeconds)}
-                      </TooltipContent>
-                    </Tooltip>
-                  ) : (
-                    <Tooltip>
-                      <TooltipTrigger asChild>
-                        <Link
-                          href={`${tankDetailTabHref(
-                            ROUTES.TANK(region, battle.tankSlug ?? ""),
-                            TankDetailTab.Videos,
-                          )}?${BATTLE_PARAM}=${battle.id}`}
-                          aria-label={`Watch at ${formatTimestamp(battle.startSeconds)}`}
-                          className="inline-flex text-fd-muted-foreground transition-colors hover:text-brand"
-                        >
-                          <PlayIcon weight="fill" className="size-4" />
-                        </Link>
-                      </TooltipTrigger>
-                      <TooltipContent>
-                        Opens at {formatTimestamp(battle.startSeconds)}
-                      </TooltipContent>
-                    </Tooltip>
-                  )}
-                </TableCell>
-              </TableRow>
+                battle={battle}
+                region={region}
+                columns={columns}
+                active={battle.id === activeId}
+                onOpen={() => open(battle)}
+              />
             ))}
           </TableBody>
         </Table>

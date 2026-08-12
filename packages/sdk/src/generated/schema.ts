@@ -359,6 +359,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/{tag}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan videos
+         * @description Every published battle this clan is credited on, newest approved first: the tactics it called and the maps it called them on. A submitter names the clan when suggesting a competitive battle, and it is stored as an id rather than a tag, so a rename never strands the credit. Empty for a clan nobody has credited yet.
+         */
+        get: operations["get-{region}-clans-{tag}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/clans/{tag}/members": {
         parameters: {
             query?: never;
@@ -599,6 +619,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/videos/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My queued videos
+         * @description The signed-in user's own suggestions that are still waiting on a moderator, wherever they were filed. Their own only: an unreviewed row is shown to the person waiting on it and to nobody else, which is also why this answers with an empty list rather than an error when signed out. Uncached for the same reason, unlike the published lists beside it. Not scoped to one tank or map: the page that renders it keeps the rows it is about.
+         */
+        get: operations["get-{region}-videos-mine"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos/suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Suggest a video
+         * @description Queue a YouTube link for moderation. Requires a signed-in Wargaming account, so a suggestion always carries who made it. The link must be a YouTube video we can embed, and its timestamp is what marks the battle. A submission is filed under the map it was fought on, which is checked against the catalogue along with the mode, so a battle cannot be filed under a map that never runs it. A random battle also names the vehicle and the damage; a competitive battle names neither, since a tactic belongs to the ground and the side rather than to one player's game. Nothing is published here: a moderator approves it first. 401 when signed out, 404 when submissions are unconfigured, 409 when that exact battle was already submitted.
+         */
+        post: operations["post-{region}-videos-suggest"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/specifications": {
         parameters: {
             query?: never;
@@ -733,46 +793,6 @@ export interface paths {
         get: operations["get-{region}-tanks-{slug}-videos"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/tanks/{slug}/videos/mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * My queued videos
-         * @description The signed-in user's own suggestions for this tank that are still waiting on a moderator. Their own only: an unreviewed row is shown to the person waiting on it and to nobody else, which is also why this answers with an empty list rather than an error when signed out. Uncached for the same reason, unlike the published list beside it.
-         */
-        get: operations["get-{region}-tanks-{slug}-videos-mine"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/tanks/{slug}/videos/suggest": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Suggest a tank video
-         * @description Queue a YouTube link for moderation. Requires a signed-in Wargaming account, so a suggestion always carries who made it. The link must be a YouTube video we can embed, and its timestamp is what marks the battle. The map and mode are validated against the catalogue, so a battle cannot be filed under a map that never runs that mode. Nothing is published here: a moderator approves it first. 401 when signed out, 404 when submissions are unconfigured, 409 when that exact battle was already submitted.
-         */
-        post: operations["post-{region}-tanks-{slug}-videos-suggest"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1179,6 +1199,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/{slug}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map videos
+         * @description Every published battle the community has linked on this map, newest approved first, whatever format it was played in and whatever it was played in. This is the read behind a tactic library: a Clan Wars or Advances battle is filed under the ground it was fought on and the side it was fought from, not under a vehicle, so the map is the only page it can be looked up from. Random battles come back alongside them, carrying the tank they were played in, and the page filters by format.
+         */
+        get: operations["get-{region}-maps-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/og/{region}/clans/{tag}": {
         parameters: {
             query?: never;
@@ -1278,6 +1318,11 @@ export interface components {
             tiers: components["schemas"]["tier"][];
             count: number;
         };
+        /**
+         * @description Format the battle was played in.
+         * @enum {string}
+         */
+        battleFormatField: "random" | "clan_wars" | "advances" | "skirmish" | "maneuvers" | "onslaught" | "tournament";
         /**
          * @description How the battle ended, as declared by the submitter.
          * @enum {string}
@@ -1537,6 +1582,9 @@ export interface components {
         ClanVehiclesResponse: {
             vehicles: components["schemas"]["ClanVehicle"][];
         };
+        ClanVideosResponse: {
+            videos: components["schemas"]["videoBattleWithTank"][];
+        };
         ClanWarsResponse: {
             latest: components["schemas"]["ClanGlobalMapStats"] | null;
             periods: {
@@ -1545,38 +1593,8 @@ export interface components {
                 d30: components["schemas"]["ClanGlobalMapStats"] | null;
             };
         };
-        /** @description A community-suggested battle, with the tank it was played in. */
-        CommunityVideo: {
-            id: number;
-            videoId: string;
-            /** @description Where the battle starts in the video, in seconds. */
-            startSeconds: number;
-            title: string;
-            channelName: string;
-            tankId: number;
-            tankName: string;
-            tankSlug: string;
-            tankShortName: string;
-            tankTag: string;
-            tier: number;
-            nation: string;
-            type: string;
-            role: string | null;
-            isPremium: boolean;
-            isReward: boolean;
-            mapName: string | null;
-            mode: components["schemas"]["mapModeField"] | null;
-            /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
-            direction: components["schemas"]["spawnDirectionField"] | null;
-            directionLabel: string | null;
-            result: components["schemas"]["battleResultField"] | null;
-            /** @description Damage dealt plus assisted, as declared by the submitter. */
-            combinedDamage: number | null;
-            /** @description Client version at the time the video was approved. */
-            gameVersion: string | null;
-        };
         CommunityVideosResponse: {
-            videos: components["schemas"]["CommunityVideo"][];
+            videos: components["schemas"]["videoBattleWithTank"][];
         };
         compareSlot: {
             /** @description The nickname as requested. */
@@ -2031,6 +2049,9 @@ export interface components {
             /** @description Standard-mode base positions, for the gallery thumbnail. */
             bases: components["schemas"]["teamMarkers"];
         };
+        MapVideosResponse: {
+            videos: components["schemas"]["videoBattleWithTank"][];
+        };
         /** @description A JSON-RPC 2.0 response from the MCP endpoint (carries a method-specific `result` or a JSON-RPC `error`). */
         McpResponse: {
             jsonrpc: string;
@@ -2085,7 +2106,9 @@ export interface components {
             type: string;
             tag: string;
         };
-        MyTankVideosResponse: components["schemas"]["TankVideosResponse"];
+        MyVideosResponse: {
+            videos: components["schemas"]["videoBattleWithTank"][];
+        };
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
         /** @description One derived value per column: lifetime, 24h, 7d, 30d. */
@@ -2839,8 +2862,7 @@ export interface components {
             nation: string;
             type: string;
         };
-        /** @description A community-suggested battle, as a deep link into a video at the minute this tank is played. */
-        TankVideo: {
+        tankVideo: {
             id: number;
             videoId: string;
             /** @description Where the battle starts in the video, in seconds. */
@@ -2848,32 +2870,44 @@ export interface components {
             title: string;
             channelName: string;
             mapName: string | null;
+            mapSlug: string | null;
             mode: components["schemas"]["mapModeField"] | null;
             /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
             direction: components["schemas"]["spawnDirectionField"] | null;
             directionLabel: string | null;
             result: components["schemas"]["battleResultField"] | null;
-            /** @description Damage dealt plus assisted, as declared by the submitter. */
+            format: components["schemas"]["battleFormatField"];
+            /** @description Players per team, from the format where it fixes one and from the submitter otherwise. */
+            teamSize: number | null;
+            /** @description Tier the battle was fought at, on the same rule as team size. */
+            tier: number | null;
+            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
+            clan: {
+                /**
+                 * @description Game server region.
+                 * @enum {string}
+                 */
+                region: "eu" | "na" | "asia";
+                id: number;
+                tag: string;
+                name: string;
+                /** @description The clan's own colour, which its tag is rendered in. */
+                color: string | null;
+                /** @description The clan's emblem, drawn beside its tag. */
+                emblem: string | null;
+            } | null;
+            /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
+            /**
+             * Format: date-time
+             * @description When YouTube says the video went up, read once at submission time.
+             */
+            publishedAt: Date | null;
             /** @description Client version at the time the video was approved. */
             gameVersion: string | null;
         };
         TankVideosResponse: {
-            videos: components["schemas"]["TankVideo"][];
-        };
-        TankVideoSuggestBody: {
-            /** @description YouTube link, timestamp included. */
-            url: string;
-            startSeconds?: number;
-            arenaId: string;
-            mode: components["schemas"]["mapModeField"];
-            spawnTeam: number;
-            result: components["schemas"]["battleResultField"];
-            /** @description Damage dealt plus assisted, as declared by the submitter. */
-            combinedDamage: number;
-        };
-        TankVideoSuggestResponse: {
-            ok: boolean;
+            videos: components["schemas"]["tankVideo"][];
         };
         teamMarkers: {
             team1: components["schemas"]["mapMarker"][];
@@ -2935,6 +2969,127 @@ export interface components {
             }[];
             depression: number | null;
             elevation: number | null;
+        };
+        videoBattle: {
+            id: number;
+            videoId: string;
+            /** @description Where the battle starts in the video, in seconds. */
+            startSeconds: number;
+            title: string;
+            channelName: string;
+            mapName: string | null;
+            mapSlug: string | null;
+            mode: components["schemas"]["mapModeField"] | null;
+            /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
+            direction: components["schemas"]["spawnDirectionField"] | null;
+            directionLabel: string | null;
+            result: components["schemas"]["battleResultField"] | null;
+            format: components["schemas"]["battleFormatField"];
+            /** @description Players per team, from the format where it fixes one and from the submitter otherwise. */
+            teamSize: number | null;
+            /** @description Tier the battle was fought at, on the same rule as team size. */
+            tier: number | null;
+            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
+            clan: {
+                /**
+                 * @description Game server region.
+                 * @enum {string}
+                 */
+                region: "eu" | "na" | "asia";
+                id: number;
+                tag: string;
+                name: string;
+                /** @description The clan's own colour, which its tag is rendered in. */
+                color: string | null;
+                /** @description The clan's emblem, drawn beside its tag. */
+                emblem: string | null;
+            } | null;
+            /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
+            combinedDamage: number | null;
+            /**
+             * Format: date-time
+             * @description When YouTube says the video went up, read once at submission time.
+             */
+            publishedAt: Date | null;
+            /** @description Client version at the time the video was approved. */
+            gameVersion: string | null;
+        };
+        videoBattleWithTank: {
+            id: number;
+            videoId: string;
+            /** @description Where the battle starts in the video, in seconds. */
+            startSeconds: number;
+            title: string;
+            channelName: string;
+            mapName: string | null;
+            mapSlug: string | null;
+            mode: components["schemas"]["mapModeField"] | null;
+            /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
+            direction: components["schemas"]["spawnDirectionField"] | null;
+            directionLabel: string | null;
+            result: components["schemas"]["battleResultField"] | null;
+            format: components["schemas"]["battleFormatField"];
+            /** @description Players per team, from the format where it fixes one and from the submitter otherwise. */
+            teamSize: number | null;
+            /** @description Tier the battle was fought at, on the same rule as team size. */
+            tier: number | null;
+            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
+            clan: {
+                /**
+                 * @description Game server region.
+                 * @enum {string}
+                 */
+                region: "eu" | "na" | "asia";
+                id: number;
+                tag: string;
+                name: string;
+                /** @description The clan's own colour, which its tag is rendered in. */
+                color: string | null;
+                /** @description The clan's emblem, drawn beside its tag. */
+                emblem: string | null;
+            } | null;
+            /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
+            combinedDamage: number | null;
+            /**
+             * Format: date-time
+             * @description When YouTube says the video went up, read once at submission time.
+             */
+            publishedAt: Date | null;
+            /** @description Client version at the time the video was approved. */
+            gameVersion: string | null;
+            tankId: number | null;
+            tankName: string | null;
+            tankSlug: string | null;
+            tankShortName: string | null;
+            tankTag: string | null;
+            /** @description The vehicle's tier, as opposed to the battle's. */
+            vehicleTier: number | null;
+            nation: string | null;
+            type: string | null;
+            role: string | null;
+            isPremium: boolean;
+            isReward: boolean;
+        };
+        VideoSuggestBody: {
+            /** @description YouTube link, timestamp included. */
+            url: string;
+            startSeconds?: number;
+            arenaId: string;
+            mode: components["schemas"]["mapModeField"];
+            spawnTeam: number;
+            result: components["schemas"]["battleResultField"];
+            format: components["schemas"]["battleFormatField"];
+            /** @description Vehicle the battle was played in, for a random battle. */
+            tankSlug?: string;
+            /** @description Damage dealt plus assisted, on a random battle. */
+            combinedDamage?: number;
+            teamSize?: number;
+            tier?: number;
+            /** @description Tag of the clan the battle was played for. */
+            clanTag?: string;
+        };
+        VideoSuggestResponse: {
+            ok: boolean;
         };
         /**
          * @description Return the lifetime by-language board (each row carries its inferred languages) without filtering to one language.
@@ -3444,6 +3599,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-clans-{tag}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanVideosResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-clans-{tag}-members": {
         parameters: {
             query?: never;
@@ -3743,7 +3926,10 @@ export interface operations {
     };
     "get-{region}-videos": {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description Narrow to one video's battles, ordered by timestamp. */
+                videoId?: string;
+            };
             header?: never;
             path: {
                 /** @example eu */
@@ -3760,6 +3946,56 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["CommunityVideosResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-videos-mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyVideosResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-videos-suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["VideoSuggestBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VideoSuggestResponse"];
                 };
             };
         };
@@ -3936,66 +4172,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankVideosResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-videos-mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example eu */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example is-7
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MyTankVideosResponse"];
-                };
-            };
-        };
-    };
-    "post-{region}-tanks-{slug}-videos-suggest": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example eu */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example is-7
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["TankVideoSuggestBody"];
-            };
-        };
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankVideoSuggestResponse"];
                 };
             };
         };
@@ -4464,6 +4640,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapVideosResponse"];
                 };
             };
         };
