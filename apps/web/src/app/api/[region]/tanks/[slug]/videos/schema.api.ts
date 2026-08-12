@@ -25,6 +25,9 @@ const tankVideo = z
     }),
     directionLabel: z.string().nullable(),
     result: battleResultField.nullable(),
+    combinedDamage: z.number().int().nullable().meta({
+      description: "Damage dealt plus assisted, as declared by the submitter.",
+    }),
     gameVersion: z.string().nullable().meta({
       description: "Client version at the time the video was approved.",
     }),

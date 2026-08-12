@@ -25,6 +25,13 @@ export const TankVideoSuggestBody = z.object({
   mode: mapModeField,
   spawnTeam: z.number().int().min(1).max(2),
   result: battleResultField,
+  /** Damage dealt plus assisted. Required like the rest of the battle context:
+   * it is read off the same after-battle screen a moderator checks the video
+   * against, and it is what makes one battle comparable to another. The ceiling
+   * only rules out a typo, not a record. */
+  combinedDamage: z.number().int().min(0).max(50000).meta({
+    description: "Damage dealt plus assisted, as declared by the submitter.",
+  }),
 });
 
 /** Response of `POST /{region}/tanks/{slug}/videos/suggest`.

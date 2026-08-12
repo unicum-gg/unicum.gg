@@ -63,6 +63,7 @@ export async function POST(
     mode: parsed.data.mode,
     spawnTeam: parsed.data.spawnTeam as 1 | 2,
     result: parsed.data.result,
+    combinedDamage: parsed.data.combinedDamage,
     userId: session.user.id,
     submitterName: session.user.name ?? "unknown",
   });
