@@ -13,6 +13,8 @@ import {
 } from "@/components/clans/detail/tabs";
 import { ClanTanksTab } from "@/components/clans/detail/tanks";
 import { ClanBoostConsole } from "@/components/clans/detail/boost-console";
+import { ClanVideosTab } from "@/components/clans/detail/videos";
+import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { RandomBattlesTab } from "@/components/clans/detail/overview";
 import { StrongholdTab } from "@/components/clans/detail/overview/stronghold";
 import { ClanWarsTab } from "@/components/clans/detail/overview/clan-wars";
@@ -63,6 +65,7 @@ export type ClanTabsViewProps = {
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
   initialVehicles: ClanVehicleRow[] | null;
+  initialVideos: TankVideoCardData[];
   // Bumped by the parent (ClanProfile) on each LiveSync tick; watched below to
   // refetch every section. The single LiveSync subscription lives in the parent
   // so the header stays in sync too.
@@ -81,6 +84,7 @@ export function ClanTabsView({
   descriptionHtml,
   initialData,
   initialVehicles,
+  initialVideos,
   liveVersion,
 }: ClanTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
@@ -122,6 +126,20 @@ export function ClanTabsView({
       // the section from another one actually fetches.
       revalidateOnMount: !seededVehicles,
     },
+  );
+
+  // Fetched whatever the section, because the nav needs the count to decide
+  // whether to offer the tab at all: a clan nobody has credited has nothing to
+  // show there, and an empty tab is a promise the page cannot keep. It is one
+  // small request, cached by SWR, and it is the same one the section renders
+  // from.
+  // Seeded by the server render, so the tactics are in the HTML and the tab
+  // knows its count on the first paint. SWR still revalidates, which is what
+  // picks up a tactic approved since the page was cached.
+  const { data: videos } = useSWR(
+    `clan-videos:${region}:${tag}`,
+    () => clanApi.videos().then((r) => r.videos as unknown as TankVideoCardData[]),
+    { fallbackData: initialVideos },
   );
 
   // The section content (members, activity, snapshots) lives behind SWR so a
@@ -198,6 +216,7 @@ export function ClanTabsView({
   // officers of this clan, so no officer check is needed here.
   const onTanks = section === ClanSection.Tanks;
   const onManage = section === ClanSection.Manage;
+  const onVideos = section === ClanSection.Videos;
   // Live length once the tanks aggregation has loaded, otherwise the
   // materialized count from the overview (so "(N)" shows without opening Tanks).
   const tankCount = vehicles?.length ?? vehiclesCount ?? undefined;
@@ -211,6 +230,7 @@ export function ClanTabsView({
             section={section}
             onSelect={selectSection}
             tankCount={tankCount}
+            videoCount={videos?.length}
           />
         </PanelHeader>
       </Panel>
@@ -245,6 +265,8 @@ export function ClanTabsView({
 
       {onManage ? (
         <ClanBoostConsole region={region} tag={tag} clanId={clanId} />
+      ) : onVideos ? (
+        <ClanVideosTab region={region} tag={tag} videos={videos} />
       ) : onTanks ? (
         <ClanTanksTab tag={tag} color={color} vehicles={vehicles} />
       ) : mode === ClanMode.RandomBattles ? (

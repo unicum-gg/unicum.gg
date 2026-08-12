@@ -17,6 +17,8 @@
 export enum ClanSection {
   Overview = "overview",
   Tanks = "tanks",
+  /** The tactics this clan is credited on, filed from the map pages. */
+  Videos = "videos",
   // The Stronghold boost console. Visitors see a teaser; the controls only
   // render for officers of this clan, checked client-side.
   Manage = "manage",
@@ -63,6 +65,12 @@ export const CLAN_VIEWS: ClanView[] = [
     label: "Tanks",
   },
   {
+    section: ClanSection.Videos,
+    mode: ClanMode.RandomBattles,
+    segment: "videos",
+    label: "Videos",
+  },
+  {
     section: ClanSection.Manage,
     mode: ClanMode.RandomBattles,
     segment: "manage",
@@ -74,6 +82,7 @@ export const CLAN_VIEWS: ClanView[] = [
 export const CLAN_SECTIONS: { id: ClanSection; label: string }[] = [
   { id: ClanSection.Overview, label: "Overview" },
   { id: ClanSection.Tanks, label: "Tanks" },
+  { id: ClanSection.Videos, label: "Videos" },
   { id: ClanSection.Manage, label: "Manage" },
 ];
 

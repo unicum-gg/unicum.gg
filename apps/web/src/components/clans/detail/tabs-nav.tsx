@@ -64,6 +64,7 @@ export function ClanSectionNav({
   section,
   onSelect,
   tankCount,
+  videoCount,
 }: {
   basePath: string;
   section: ClanSection;
@@ -71,10 +72,24 @@ export function ClanSectionNav({
   // Distinct battle-having vehicle count, shown as "Tanks (N)" once loaded
   // (mirrors the player page). Undefined until the vehicles aggregation lands.
   tankCount?: number;
+  // Published battles this clan is credited on. Undefined until the fetch
+  // lands, which is why the tab is hidden rather than shown empty in the
+  // meantime: appearing and then vanishing reads worse than appearing late.
+  videoCount?: number;
 }) {
+  // Nothing to show is not a tab. The exception is being on it already, from a
+  // link or a reload: dropping the section you are looking at would leave the
+  // nav with no active entry and no way back.
+  const sections = CLAN_SECTIONS.filter(
+    (s) =>
+      s.id !== ClanSection.Videos ||
+      section === ClanSection.Videos ||
+      (videoCount ?? 0) > 0,
+  );
+
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
-      {CLAN_SECTIONS.map((s) => (
+      {sections.map((s) => (
         <NavAnchor
           key={s.id}
           href={clanSectionHref(basePath, s.id)}
@@ -85,7 +100,9 @@ export function ClanSectionNav({
         >
           {s.id === ClanSection.Tanks && tankCount !== undefined
             ? `${s.label} (${tankCount.toLocaleString("en-US")})`
-            : s.label}
+            : s.id === ClanSection.Videos && videoCount !== undefined
+              ? `${s.label} (${videoCount.toLocaleString("en-US")})`
+              : s.label}
         </NavAnchor>
       ))}
     </nav>

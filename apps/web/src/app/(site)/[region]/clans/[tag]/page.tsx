@@ -11,6 +11,7 @@ import {
 import type { ClanTabsInitialData } from "@/components/clans/detail/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
+import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, clanSchema } from "@/lib/schema-org";
@@ -203,15 +204,27 @@ async function ClanProfileServer({
   // Tanks is the heavy aggregation, fetched only when it is the section
   // being rendered (deep links / SEO); otherwise the client loads it on
   // demand through SWR.
-  const [members, previousClans, activity, stronghold, clanWars, vehicles] =
-    await Promise.all([
-      clanApi.members(),
-      clanApi.previousClans(),
-      clanApi.activity(),
-      clanApi.stronghold(),
-      clanApi.clanWars(),
-      section === ClanSection.Tanks ? clanApi.vehicles() : Promise.resolve(null),
-    ]);
+  const [
+    members,
+    previousClans,
+    activity,
+    stronghold,
+    clanWars,
+    vehicles,
+    videos,
+  ] = await Promise.all([
+    clanApi.members(),
+    clanApi.previousClans(),
+    clanApi.activity(),
+    clanApi.stronghold(),
+    clanApi.clanWars(),
+    section === ClanSection.Tanks ? clanApi.vehicles() : Promise.resolve(null),
+    // Always, whatever the section: the nav needs the count to decide whether
+    // to offer the tab, and it is a small read. Rendered here rather than
+    // fetched by the browser so the tactics are in the HTML, which is what the
+    // `.md` twin converts and what a crawler reads.
+    clanApi.videos(),
+  ]);
 
   const initialData = {
     members: members.members,
@@ -223,6 +236,7 @@ async function ClanProfileServer({
   const initialVehicles = vehicles
     ? (vehicles.vehicles as unknown as ClanVehicleRow[])
     : null;
+  const initialVideos = videos.videos as unknown as TankVideoCardData[];
 
   const basePath = ROUTES.CLAN(region, clan.tag);
 
@@ -262,6 +276,7 @@ async function ClanProfileServer({
         initialData={initialData}
         initialVehicles={initialVehicles}
         initialVehiclesCount={overview.vehiclesCount ?? null}
+        initialVideos={initialVideos}
         initialBadges={overview.badges}
         initialNameHistory={
           overview.nameHistory as unknown as ClanNameHistoryEntry[]
