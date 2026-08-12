@@ -20,6 +20,10 @@ import {
   handleFeedbackModalSubmit,
   isFeedbackModal,
 } from "./plugins/wot/commands/feedback.js";
+import {
+  handleVideoReview,
+  isVideoReviewButton,
+} from "./plugins/wot/moderation/videos.js";
 import { bindPresenceClient } from "./lib/presence.js";
 
 async function main(): Promise<void> {
@@ -45,13 +49,20 @@ async function main(): Promise<void> {
   // Give the presence entries access to the client for the server-count line.
   bindPresenceClient(bot.client);
 
-  // dixt routes chat-command + autocomplete interactions but not modal
-  // submissions, so /feedback's modal is handled here on the raw client. The
-  // listener is additive (dixt keeps its own), and it ignores anything that is
-  // not this command's modal.
+  // dixt routes chat-command + autocomplete interactions, but neither modal
+  // submissions nor button presses, so those are handled here on the raw
+  // client. The listener is additive (dixt keeps its own) and each branch
+  // ignores anything that is not its own `custom_id`.
   bot.client.on(Events.InteractionCreate, (interaction) => {
     if (interaction.isModalSubmit() && isFeedbackModal(interaction.customId)) {
       void handleFeedbackModalSubmit(interaction);
+      return;
+    }
+    // The video moderation cards. Routed by `custom_id` rather than by a
+    // component collector so the buttons survive a redeploy: a collector's
+    // state is in memory, and a card posted before a restart would go dead.
+    if (interaction.isButton() && isVideoReviewButton(interaction.customId)) {
+      void handleVideoReview(interaction);
     }
   });
 
