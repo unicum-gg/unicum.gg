@@ -86,6 +86,13 @@ export function youtubeEmbedUrl(videoId: string, startSeconds: number): string {
   return `https://www.youtube-nocookie.com/embed/${videoId}${start}`;
 }
 
+/** The player address itself, with none of our playback intent attached. What
+ * structured data means by `embedUrl`: where the video can be played, not how
+ * we happen to open it. */
+export function youtubeEmbedBaseUrl(videoId: string): string {
+  return `https://www.youtube-nocookie.com/embed/${videoId}`;
+}
+
 /** The canonical link out, for the "watch on YouTube" affordance. */
 export function youtubeWatchUrl(videoId: string, startSeconds: number): string {
   const t = startSeconds > 0 ? `&t=${startSeconds}` : "";

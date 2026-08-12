@@ -4,6 +4,7 @@ import type {
   Person,
   Product,
   SportsTeam,
+  VideoObject,
   WebSite,
   WithContext,
 } from "schema-dts";
@@ -127,5 +128,47 @@ export function clanSchema(args: {
       value: args.membersCount,
     },
     ...(args.logo && { logo: args.logo }),
+  };
+}
+
+/**
+ * A community-suggested video and the battles marked in it.
+ *
+ * Deliberately without `uploadDate`. It is one of the three properties Google
+ * requires for the video rich result, and the only source for it is the
+ * YouTube Data API, which this feature does not call: oEmbed, which it does
+ * call, returns the title, the channel and the thumbnail and nothing else.
+ * Dating it from our own submission timestamp would be a false statement in
+ * structured data, which is worth less than no statement at all. So this is
+ * honest page semantics rather than a bid for a rich result, and it becomes one
+ * the day a real publication date is stored.
+ *
+ * The clips point at YouTube rather than at our own page: `url` must reach the
+ * start of the segment, and the timestamped watch link is the only address that
+ * does today.
+ */
+export function tankVideoSchema(args: {
+  videoId: string;
+  name: string;
+  thumbnailUrl: string;
+  embedUrl: string;
+  description: string;
+  channelName: string;
+  clips: { name: string; startSeconds: number; url: string }[];
+}): WithContext<VideoObject> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: args.name,
+    description: args.description,
+    thumbnailUrl: args.thumbnailUrl,
+    embedUrl: args.embedUrl,
+    creator: { "@type": "Person", name: args.channelName },
+    hasPart: args.clips.map((clip) => ({
+      "@type": "Clip" as const,
+      name: clip.name,
+      startOffset: clip.startSeconds,
+      url: clip.url,
+    })),
   };
 }
