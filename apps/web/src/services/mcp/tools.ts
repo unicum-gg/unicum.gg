@@ -34,7 +34,9 @@ function deriveToolName(operationId: string): string {
 
 function flattenAllOf(schema: OpenApiSchema): OpenApiSchema {
   if (Array.isArray(schema.allOf) && schema.allOf.length === 1) {
-    const { allOf: _, ...rest } = schema;
+    // The wrapper's own keys win over the branch's, minus the wrapper itself.
+    const rest = { ...schema };
+    delete rest.allOf;
     return { ...schema.allOf[0], ...rest };
   }
   return schema;
