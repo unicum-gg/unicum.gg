@@ -66,6 +66,11 @@ export const env = createEnv({
     // (the cron writes it). Optional: unset means the cron doesn't schedule, so
     // a local `pnpm dev` never posts to Discord.
     DISCORD_CHANGELOG_CHANNEL_ID: z.string().optional(),
+    // Private channel the suggested tank videos queue up in, for moderation.
+    // Read by the web (which posts the card) and the bot (which handles the
+    // buttons). Optional: unset turns submissions off entirely rather than
+    // accepting videos nobody would ever see to approve them.
+    DISCORD_VIDEO_CHANNEL_ID: z.string().optional(),
     // OpenAI key for the changelog writer (AI SDK). Optional, same reason:
     // no key, no cron. Worker-only.
     OPENAI_API_KEY: z.string().optional(),
@@ -108,6 +113,7 @@ export const env = createEnv({
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     DISCORD_FEEDBACK_CHANNEL_ID: process.env.DISCORD_FEEDBACK_CHANNEL_ID,
     DISCORD_CHANGELOG_CHANNEL_ID: process.env.DISCORD_CHANGELOG_CHANNEL_ID,
+    DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
     CHANGELOG_CRON: process.env.CHANGELOG_CRON,
     DISCORD_SUPPORTER_ROLE_ID: process.env.DISCORD_SUPPORTER_ROLE_ID,
