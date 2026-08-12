@@ -12,7 +12,10 @@ import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
 import { ClanBoard } from "@unicum.gg/shared/clans/badges";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
-import { BattleResult } from "@unicum.gg/shared/db/schema/tank-videos";
+import {
+  BattleFormat,
+  BattleResult,
+} from "@unicum.gg/shared/db/schema/tank-videos";
 import {
   FeedbackSentiment,
   FeedbackTopic,
@@ -44,6 +47,7 @@ export const OPENAPI_ENUM_SOURCES = {
   MAP_BATTLE_TYPE: Object.values(BattleType),
   CLAN_BOARD: Object.values(ClanBoard),
   BATTLE_RESULT: Object.values(BattleResult),
+  BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),

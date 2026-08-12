@@ -1,5 +1,5 @@
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { listTankVideos } from "@unicum.gg/core/tanks/videos";
+import { listTankVideos } from "@unicum.gg/core/tanks/videos-read";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { TankVideosResponse } from "./schema.api";
@@ -29,6 +29,15 @@ export async function GET(
   return jsonResponse(
     TankVideosResponse,
     { videos },
-    { headers: { "cache-control": "public, max-age=300" } },
+    {
+      // Cached by a CDN, revalidated by the browser. A held browser copy is
+      // actively wrong here: the submitter of a queued row watches it turn
+      // from "waiting on a moderator" into a published one, and their own
+      // queue is uncached, so a stale list makes the row vanish at the exact
+      // moment it goes live. `s-maxage` keeps the shared cache doing its job.
+      headers: {
+        "cache-control": "public, max-age=0, s-maxage=300, stale-while-revalidate=60",
+      },
+    },
   );
 }

@@ -2,6 +2,7 @@ import { revalidatePath } from "next/cache";
 import { env } from "@unicum.gg/shared";
 import { reviewTankVideo } from "@unicum.gg/core/tanks/videos";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
 import { REGIONS } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 
@@ -46,15 +47,25 @@ export async function POST(
   }
 
   if (body.approved) {
-    // The tank page is cached, so an approved video would otherwise wait out the
-    // revalidation window. The tank is the same vehicle on every region and the
-    // videos are global, so all three pages carry it and all three are dropped.
-    const slug = await getTankSlug(REGIONS[0], reviewed.tankId).catch(() => null);
-    if (slug) {
-      for (const region of REGIONS) {
-        revalidatePath(ROUTES.TANK(region, slug));
-        revalidatePath(`${ROUTES.TANK(region, slug)}/videos`);
+    // The pages are cached, so an approved video would otherwise wait out the
+    // revalidation window. Tanks and maps are the same on every region and the
+    // videos are global, so all three regions carry it and all three are
+    // dropped.
+    const tankSlug =
+      reviewed.tankId === null
+        ? null
+        : await getTankSlug(REGIONS[0], reviewed.tankId).catch(() => null);
+    // A tactic has no tank page to drop, which is the whole reason the map page
+    // exists for it.
+    const map = reviewed.arenaId
+      ? await getMapDetailBySlug(REGIONS[0], reviewed.arenaId).catch(() => null)
+      : null;
+    for (const region of REGIONS) {
+      if (tankSlug) {
+        revalidatePath(ROUTES.TANK(region, tankSlug));
+        revalidatePath(`${ROUTES.TANK(region, tankSlug)}/videos`);
       }
+      if (map) revalidatePath(ROUTES.MAP(region, map.slug));
     }
   }
 

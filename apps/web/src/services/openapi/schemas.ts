@@ -1,5 +1,6 @@
 import * as z from "zod";
 import {
+  BattleFormat,
   BattleResult,
   BattleType,
   ClanBoard,
@@ -87,10 +88,109 @@ export const battleResultField = z.enum(BattleResult).meta({
   "x-enum-source": "BATTLE_RESULT",
 } as EnumMeta);
 
+export const battleFormatField = z.enum(BattleFormat).meta({
+  description: "Format the battle was played in.",
+  "x-enum-source": "BATTLE_FORMAT",
+} as EnumMeta);
+
 export const spawnDirectionField = z.enum(SpawnDirection).meta({
   description: "Side of the map a team starts from.",
   "x-enum-source": "SPAWN_DIRECTION",
 } as EnumMeta);
+
+/**
+ * One community-suggested battle, marked in a video.
+ *
+ * Shared because four endpoints answer with it (a tank's list, a submitter's
+ * own queue, a map's list, the community index) and they differ by which rows
+ * they return, never by what a row is.
+ */
+export const videoBattle = z.object({
+  id: z.number().int(),
+  /** YouTube id, never a URL: the client builds the embed from it. */
+  videoId: z.string(),
+  startSeconds: z.number().int().meta({
+    description: "Where the battle starts in the video, in seconds.",
+  }),
+  title: z.string(),
+  channelName: z.string(),
+  mapName: z.string().nullable(),
+  mapSlug: z.string().nullable(),
+  mode: mapModeField.nullable(),
+  direction: spawnDirectionField.nullable().meta({
+    description:
+      "Side the player spawned from, derived from the map's own geometry rather than declared.",
+  }),
+  directionLabel: z.string().nullable(),
+  result: battleResultField.nullable(),
+  format: battleFormatField,
+  teamSize: z.number().int().nullable().meta({
+    description:
+      "Players per team, from the format where it fixes one and from the submitter otherwise.",
+  }),
+  tier: z.number().int().nullable().meta({
+    description: "Tier the battle was fought at, on the same rule as team size.",
+  }),
+  clan: z
+    .object({
+      region: regionPath,
+      id: z.number().int(),
+      tag: z.string(),
+      name: z.string(),
+      color: z.string().nullable().meta({
+        description: "The clan's own colour, which its tag is rendered in.",
+      }),
+      emblem: z.string().nullable().meta({
+        description: "The clan's emblem, drawn beside its tag.",
+      }),
+    })
+    .nullable()
+    .meta({
+      description:
+        "Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit.",
+    }),
+  combinedDamage: z.number().int().nullable().meta({
+    description:
+      "Damage dealt plus assisted, as declared. Only ever set on a random battle.",
+  }),
+  publishedAt: z.coerce.date().nullable().meta({
+    description:
+      "When YouTube says the video went up, read once at submission time.",
+  }),
+  gameVersion: z.string().nullable().meta({
+    description: "Client version at the time the video was approved.",
+  }),
+});
+
+/**
+ * The same battle, named with the vehicle it was played in.
+ *
+ * Every tank field is nullable: a competitive tactic has no vehicle to name, it
+ * is filed under the ground it was fought on. The lists that cross tanks (the
+ * community index, a map's own page) carry both kinds, so the shape has to
+ * admit both.
+ */
+export const videoBattleWithTank = videoBattle
+  .extend({
+    tankId: z.number().int().nullable(),
+    tankName: z.string().nullable(),
+    tankSlug: z.string().nullable(),
+    tankShortName: z.string().nullable(),
+    tankTag: z.string().nullable(),
+    vehicleTier: z.number().int().nullable().meta({
+      description: "The vehicle's tier, as opposed to the battle's.",
+    }),
+    nation: z.string().nullable(),
+    type: z.string().nullable(),
+    role: z.string().nullable(),
+    isPremium: z.boolean(),
+    isReward: z.boolean(),
+  })
+  .meta({
+    id: "CommunityVideo",
+    description:
+      "A community-suggested battle, with the vehicle it was played in when it was about one.",
+  });
 
 export const MIN_QUERY_LENGTH = 3;
 
