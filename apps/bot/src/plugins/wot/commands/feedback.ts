@@ -18,7 +18,7 @@ import {
   SENTIMENT_ORDER,
   TOPIC_LABELS,
 } from "@unicum.gg/shared";
-import { env } from "../../../env.js";
+import { unicum } from "../lib/sdk.js";
 
 // The command carries topic + sentiment as real Discord choice options because
 // a modal can only hold text inputs (no selects), so the modal itself is just
@@ -30,11 +30,6 @@ const isTopic = (v: string): v is FeedbackTopic =>
   (Object.values(FeedbackTopic) as string[]).includes(v);
 const isSentiment = (v: string): v is FeedbackSentiment =>
   (Object.values(FeedbackSentiment) as string[]).includes(v);
-
-/** Where the bot POSTs feedback: the same `/api/feedback` the site widget uses
- * (a plain fetch, not the SDK — the endpoint is not modelled there). Mirrors the
- * SDK's base resolution: the internal container in prod, the public URL in dev. */
-const apiBase = env.UNICUM_API_URL ?? `${APP_IDENTITY.URL}/api`;
 
 /**
  * `/feedback [topic] [sentiment]` — sends feedback to unicum.gg's private
@@ -113,25 +108,18 @@ export async function handleFeedbackModalSubmit(
   await interaction.deferReply({ flags: MessageFlags.Ephemeral });
 
   try {
-    const res = await fetch(`${apiBase}/feedback`, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        topic,
-        sentiment,
-        message,
-        // The submitter is Discord-authenticated at this point, so this is a
-        // trustworthy handle (the endpoint still labels it as Discord-sourced).
-        discordAuthor: {
-          id: interaction.user.id,
-          username: interaction.user.username,
-        },
-      }),
+    await unicum.feedback({
+      topic,
+      sentiment,
+      message,
+      // The submitter is Discord-authenticated at this point, so this is a
+      // trustworthy handle (the endpoint still labels it as Discord-sourced).
+      discordAuthor: {
+        id: interaction.user.id,
+        username: interaction.user.username,
+      },
     });
-    if (!res.ok) throw new Error(`feedback endpoint returned ${res.status}`);
-    await interaction.editReply(
-      "Thanks — your feedback reached the team. 🙏",
-    );
+    await interaction.editReply("Thanks, your feedback reached the team. 🙏");
   } catch (err) {
     console.error("[bot] /feedback delivery failed:", err);
     await interaction.editReply(
