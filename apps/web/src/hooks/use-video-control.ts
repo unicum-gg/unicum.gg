@@ -1,5 +1,11 @@
-import { useRef, useState, useEffect, useCallback } from 'react';
-import { useLocalStorage, useIsMounted } from 'usehooks-ts';
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from 'react';
+import { useLocalStorage } from 'usehooks-ts';
 
 interface UseVideoControlOptions {
   storageKey?: string;
@@ -11,28 +17,37 @@ export function useVideoControl({
   defaultPlaying = true,
 }: UseVideoControlOptions = {}) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isMounted = useIsMounted();
-  
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  // False on the server and on the hydration render, true after. `useIsMounted`
+  // reads a ref, which no render is watching, so the value that revealed the
+  // mount used to be the setState in the effect below. This is the same signal
+  // without the extra state.
+  const hydrated = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
+
+  // Null until the element has reported something, so the stored preference
+  // answers for it in the meantime. Mirroring that preference into state from
+  // an effect was the same value held twice, and it made the first paint after
+  // mount a second render.
+  const [reportedPlaying, setReportedPlaying] = useState<boolean | null>(null);
   const [isVideoVisible, setIsVideoVisible] = useState(false);
   const [savedPlayingState, setSavedPlayingState] = useLocalStorage(storageKey, defaultPlaying);
+
+  const isPlaying = reportedPlaying ?? savedPlayingState;
+  // Loading is exactly "the browser has not run yet": localStorage is only
+  // readable there, so before mount there is no preference to honour.
+  const isLoading = !hydrated;
+
   useEffect(() => {
-    const mounted = isMounted();
-    if (!mounted) return;
-    
-    setIsPlaying(savedPlayingState);
-    setIsLoading(false);
-  }, [isMounted, savedPlayingState]);
-  useEffect(() => {
-    const mounted = isMounted();
-    if (!mounted || isLoading) return;
-    
+    if (isLoading) return;
+
     const video = videoRef.current;
     if (!video) return;
 
     const handlePlay = () => {
-      setIsPlaying(true);
+      setReportedPlaying(true);
       setIsVideoVisible(true);
       if (!document.hidden) {
         setSavedPlayingState(true);
@@ -40,7 +55,7 @@ export function useVideoControl({
     };
     
     const handlePause = () => {
-      setIsPlaying(false);
+      setReportedPlaying(false);
       if (!document.hidden) {
         setSavedPlayingState(false);
       }
@@ -52,7 +67,7 @@ export function useVideoControl({
           await video.play();
         } catch (error) {
           console.warn('Autoplay prevented by browser:', error);
-          setIsPlaying(false);
+          setReportedPlaying(false);
           if (!document.hidden) {
             setSavedPlayingState(false);
           }
@@ -69,7 +84,7 @@ export function useVideoControl({
     const handleVisibilityChange = () => {
       if (!document.hidden) {
         const actuallyPlaying = !video.paused;
-        setIsPlaying(actuallyPlaying);
+        setReportedPlaying(actuallyPlaying);
         setSavedPlayingState(actuallyPlaying);
       }
     };
@@ -91,7 +106,7 @@ export function useVideoControl({
       video.removeEventListener('canplaythrough', handleCanPlayThrough);
       document.removeEventListener('visibilitychange', handleVisibilityChange);
     };
-  }, [isMounted, isLoading, isPlaying, setSavedPlayingState]);
+  }, [isLoading, isPlaying, setSavedPlayingState]);
 
   const play = useCallback(() => {
     if (videoRef.current) {
@@ -115,13 +130,11 @@ export function useVideoControl({
     }
   }, [play, pause]);
 
-  const mounted = isMounted();
-  
   return {
     videoRef,
-    isPlaying: mounted ? isPlaying : false,
-    isLoading: !mounted || isLoading,
-    isVideoVisible: mounted ? isVideoVisible : false,
+    isPlaying: hydrated && isPlaying,
+    isLoading,
+    isVideoVisible: hydrated && isVideoVisible,
     play,
     pause,
     toggle,
