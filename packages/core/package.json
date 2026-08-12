@@ -43,6 +43,7 @@
     "@unicum.gg/wargaming": "workspace:*",
     "ai": "^7.0.55",
     "better-auth": "^1.6.23",
+    "discord-api-types": "^0.38.49",
     "drizzle-orm": "^0.45.2",
     "ioredis": "^5.11.1",
     "linkify-it": "^6.1.0",

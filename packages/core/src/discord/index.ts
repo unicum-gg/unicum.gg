@@ -1,4 +1,14 @@
 import { APP_IDENTITY, BRAND_COLOR_INT, env } from "@unicum.gg/shared";
+// Type-only, so nothing is pulled in at runtime: this stays a plain-fetch
+// client with no discord.js. `object` said nothing about what Discord accepts,
+// and these are the shapes its REST API actually documents, so a malformed
+// embed or a button missing its `custom_id` is a compile error rather than a
+// 400 discovered in the channel.
+import type {
+  APIActionRowComponent,
+  APIComponentInMessageActionRow,
+  APIEmbed,
+} from "discord-api-types/v10";
 
 // Minimal bot-token Discord REST client, usable from the web AND the worker (no
 // discord.js dep — plain fetch). Lets our own bot post boost notifications into
@@ -105,11 +115,33 @@ export async function removeGuildRole(
  * `false` if the bot can't post (removed, missing permission, unknown channel). */
 export async function postChannelEmbed(
   channelId: string,
-  embed: object,
+  embed: APIEmbed,
 ): Promise<boolean> {
   const res = await botFetch(`/channels/${channelId}/messages`, {
     method: "POST",
     body: JSON.stringify({ embeds: [embed] }),
+  });
+  return res !== null;
+}
+
+/**
+ * Post an embed carrying interactive components (the video moderation card and
+ * its Approve / Reject buttons).
+ *
+ * Separate from `postChannelEmbed` rather than an optional argument on it,
+ * because a message with components is only half a feature: something has to be
+ * listening for the presses. That listener is the gateway process (`apps/bot`),
+ * not this REST client, so a caller reaching for this one is signing up for a
+ * handler on the other side.
+ */
+export async function postChannelEmbedWithComponents(
+  channelId: string,
+  embed: APIEmbed,
+  components: APIActionRowComponent<APIComponentInMessageActionRow>[],
+): Promise<boolean> {
+  const res = await botFetch(`/channels/${channelId}/messages`, {
+    method: "POST",
+    body: JSON.stringify({ embeds: [embed], components }),
   });
   return res !== null;
 }
