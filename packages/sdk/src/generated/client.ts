@@ -247,6 +247,15 @@ class TankClient {
     );
   }
 
+  /** My queued videos */
+  videosMine() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos/mine", path),
+      () => this.api.GET("/{region}/tanks/{slug}/videos/mine", { params: { path } }),
+    );
+  }
+
   /** Suggest a tank video */
   videosSuggest(body: BodyOf<"/{region}/tanks/{slug}/videos/suggest">) {
     const path = { region: this.region, slug: this.slug };
@@ -565,6 +574,14 @@ class RegionClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/coverage", { region: this.region }),
       () => this.api.GET("/{region}/coverage", { params: { path: { region: this.region } } }),
+    );
+  }
+
+  /** Community videos */
+  videos() {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/videos", { region: this.region }),
+      () => this.api.GET("/{region}/videos", { params: { path: { region: this.region } } }),
     );
   }
 

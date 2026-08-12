@@ -579,6 +579,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Community videos
+         * @description Every published battle the community has suggested, newest approved first, whatever the tank. Each entry is a battle rather than a whole video, carrying the second it starts at, so one recording appears once per battle marked in it. The per-tank endpoint returns the same rows filtered to one tank; this one is what shows a video whole, with every tank it covers. Region-independent, the same list is served on every region.
+         */
+        get: operations["get-{region}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/specifications": {
         parameters: {
             query?: never;
@@ -711,6 +731,26 @@ export interface paths {
          * @description Community-suggested gameplay videos for one tank, newest approved first. Each entry is a battle rather than a whole video: it carries the second it starts at, so a three-hour stream VOD can be linked at the minute this tank is played. The map, mode and result are declared by the submitter and checked in moderation; the spawn direction is derived from the map's own geometry. Region-independent, the same list is served on every region. Suggesting one is a write, and lives on `/videos/suggest`.
          */
         get: operations["get-{region}-tanks-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/videos/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My queued videos
+         * @description The signed-in user's own suggestions for this tank that are still waiting on a moderator. Their own only: an unreviewed row is shown to the person waiting on it and to nobody else, which is also why this answers with an empty list rather than an error when signed out. Uncached for the same reason, unlike the published list beside it.
+         */
+        get: operations["get-{region}-tanks-{slug}-videos-mine"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1505,6 +1545,39 @@ export interface components {
                 d30: components["schemas"]["ClanGlobalMapStats"] | null;
             };
         };
+        /** @description A community-suggested battle, with the tank it was played in. */
+        CommunityVideo: {
+            id: number;
+            videoId: string;
+            /** @description Where the battle starts in the video, in seconds. */
+            startSeconds: number;
+            title: string;
+            channelName: string;
+            tankId: number;
+            tankName: string;
+            tankSlug: string;
+            tankShortName: string;
+            tankTag: string;
+            tier: number;
+            nation: string;
+            type: string;
+            role: string | null;
+            isPremium: boolean;
+            isReward: boolean;
+            mapName: string | null;
+            mode: components["schemas"]["mapModeField"] | null;
+            /** @description Side the player spawned from, derived from the map's own geometry rather than declared. */
+            direction: components["schemas"]["spawnDirectionField"] | null;
+            directionLabel: string | null;
+            result: components["schemas"]["battleResultField"] | null;
+            /** @description Damage dealt plus assisted, as declared by the submitter. */
+            combinedDamage: number | null;
+            /** @description Client version at the time the video was approved. */
+            gameVersion: string | null;
+        };
+        CommunityVideosResponse: {
+            videos: components["schemas"]["CommunityVideo"][];
+        };
         compareSlot: {
             /** @description The nickname as requested. */
             requested: string;
@@ -2012,6 +2085,7 @@ export interface components {
             type: string;
             tag: string;
         };
+        MyTankVideosResponse: components["schemas"]["TankVideosResponse"];
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
         /** @description One derived value per column: lifetime, 24h, 7d, 30d. */
@@ -2779,6 +2853,8 @@ export interface components {
             direction: components["schemas"]["spawnDirectionField"] | null;
             directionLabel: string | null;
             result: components["schemas"]["battleResultField"] | null;
+            /** @description Damage dealt plus assisted, as declared by the submitter. */
+            combinedDamage: number | null;
             /** @description Client version at the time the video was approved. */
             gameVersion: string | null;
         };
@@ -2793,13 +2869,11 @@ export interface components {
             mode: components["schemas"]["mapModeField"];
             spawnTeam: number;
             result: components["schemas"]["battleResultField"];
+            /** @description Damage dealt plus assisted, as declared by the submitter. */
+            combinedDamage: number;
         };
         TankVideoSuggestResponse: {
-            /**
-             * @description The suggestion reached the moderation queue.
-             * @enum {string}
-             */
-            outcome: "queued";
+            ok: boolean;
         };
         teamMarkers: {
             team1: components["schemas"]["mapMarker"][];
@@ -3667,6 +3741,29 @@ export interface operations {
             };
         };
     };
+    "get-{region}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommunityVideosResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-tanks-specifications": {
         parameters: {
             query?: never;
@@ -3839,6 +3936,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankVideosResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-videos-mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyTankVideosResponse"];
                 };
             };
         };
