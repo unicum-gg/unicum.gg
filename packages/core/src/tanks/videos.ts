@@ -1,14 +1,26 @@
-import { and, asc, desc, eq, sql } from "drizzle-orm";
+import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
+// Default-imported, not destructured at the import: the package is CommonJS,
+// and Node's ESM loader finds no named export on it. A bundler papers over
+// that, `tsx` does not, so the named form would break the day anything run
+// directly (the worker, a script) imported this module.
+import romanNumerals from "roman-numerals";
+
+const { toRoman } = romanNumerals as { toRoman: (n: number) => string };
 import {
   APP_IDENTITY,
+  BATTLE_FORMAT_LABEL,
   BATTLE_RESULT_LABEL,
+  BattleFormat,
   BattleResult,
+  FORMAT_TEAM_SIZE,
+  FORMAT_TIER,
   BRAND_COLOR_INT,
   env,
   MAP_GAME_MODE_LABEL,
   parseYoutubeUrl,
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
+  clansByRegion,
   tankVideos,
   TankVideoStatus,
   youtubeThumbnailUrl,
@@ -16,13 +28,17 @@ import {
   type MapGameMode,
   type SpawnDirection,
 } from "@unicum.gg/shared";
-import type { Region } from "@unicum.gg/wargaming";
+import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
 import {
   discordBotEnabled,
   postChannelEmbedWithComponents,
 } from "@unicum.gg/core/discord";
 import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
+import {
+  postModerationCard,
+  VIDEO_REVIEW_PREFIX,
+} from "@unicum.gg/core/tanks/video-moderation-card";
 import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { wg } from "@unicum.gg/core/wargaming/client";
 
@@ -41,10 +57,17 @@ import { wg } from "@unicum.gg/core/wargaming/client";
 
 /** Every board the moderation card needs to identify a submission. */
 export type VideoSubmission = {
-  tankId: number;
+  /** The vehicle, when the battle is about one. Null on a competitive tactic,
+   * which is about a map and a side: a shot-caller looks it up by the ground it
+   * is fought on, not by what the camera happened to be sitting in. */
+  tankId: number | null;
   /** For the moderation card and the link back to the page it came from. */
-  tankName: string;
-  tankSlug: string;
+  tankName: string | null;
+  tankSlug: string | null;
+  /** The map, for the same reasons, and always known: it is the axis a tactic is
+   * filed under, and the only page a tank-less video can live on. */
+  mapName: string;
+  mapSlug: string;
   region: Region;
   url: string;
   /** Overrides the link's own `?t=`, which is absent whenever the link was
@@ -59,13 +82,33 @@ export type VideoSubmission = {
   mode: MapGameMode;
   spawnTeam: 1 | 2;
   result: BattleResult;
-  /** Damage dealt plus assisted, read off the after-battle screen. */
-  combinedDamage: number;
+  /** What was being played. Everything but `Random` makes this a tactic: the
+   * video belongs to the map, the vehicle becomes optional, and the numbers a
+   * single player scored stop being the point. */
+  format: BattleFormat;
+  /** Damage dealt plus assisted, read off the after-battle screen. Asked for on
+   * a random battle, where it is what makes two of them comparable, and left
+   * out of a tactic, where nobody is looking up one player's game. */
+  combinedDamage: number | null;
+  /** Players per team and the tier fought at, only where the format does not
+   * fix them: Clan Wars and Advances are tier X fifteens, Onslaught a tier X
+   * seven, and asking would be asking someone to retype a rule. */
+  teamSize?: number | null;
+  tier?: number | null;
+  /** The clan the battle was played for, credited on its own page. Optional: an
+   * independent caller has a tactic worth publishing too. */
+  clanRegion?: Region | null;
+  clanId?: number | null;
+  /** For the moderation card only. What is stored is the id, since tags get
+   * renamed and the credit has to survive it. */
+  clanTag?: string | null;
   /** Better Auth user id. Sign-in is required to submit. */
   userId: string;
   /** WG nickname, shown on the card so a moderator knows who is asking. */
   submitterName: string;
 };
+
+export { VIDEO_REVIEW_PREFIX };
 
 export enum SubmitVideoOutcome {
   Queued = "queued",
@@ -89,7 +132,8 @@ export function videoSubmissionsEnabled(): boolean {
   return discordBotEnabled() && Boolean(env.DISCORD_VIDEO_CHANNEL_ID);
 }
 
-type Oembed = { title: string; author_name: string };
+/** What oEmbed answers with, for the card that shows it. */
+export type Oembed = { title: string; author_name: string };
 
 /**
  * What YouTube says a video is. oEmbed needs no API key and no quota, and it
@@ -106,6 +150,35 @@ async function fetchOembed(videoId: string): Promise<Oembed | null> {
   if (!res?.ok) return null;
   const data = (await res.json().catch(() => null)) as Oembed | null;
   return data?.title ? data : null;
+}
+
+/**
+ * When YouTube says the video went up.
+ *
+ * Read off the watch page rather than from the Data API, which would mean a key
+ * and a quota for one field. The page carries it twice, in the player config
+ * and in the `datePublished` microdata, and both are the same value; the
+ * microdata is the one with a stable name, so that is what is matched.
+ *
+ * Fetched once, at submission, and stored: it never changes, and a page that
+ * lists twenty videos should not be asking YouTube twenty times. Null when the
+ * page does not answer or the shape moves, which costs a column on a card and
+ * nothing else.
+ */
+async function fetchPublishedAt(videoId: string): Promise<Date | null> {
+  const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
+    headers: { "accept-language": "en" },
+    signal: AbortSignal.timeout(8000),
+  }).catch(() => null);
+  if (!res?.ok) return null;
+  const html = await res.text().catch(() => null);
+  const match = html?.match(
+    /itemprop="datePublished"\s+content="([^"]+)"|"publishDate":"([^"]+)"/,
+  );
+  const raw = match?.[1] ?? match?.[2];
+  if (!raw) return null;
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? null : date;
 }
 
 /**
@@ -190,7 +263,15 @@ export async function submitTankVideo(
       mode: submission.mode,
       spawnTeam: submission.spawnTeam,
       result: submission.result,
+      format: submission.format,
       combinedDamage: submission.combinedDamage,
+      // Stored only where the format leaves them open, so a Clan Wars row never
+      // depends on someone having typed 15 and X correctly.
+      teamSize: FORMAT_TEAM_SIZE[submission.format] ? null : submission.teamSize,
+      tier: FORMAT_TIER[submission.format] ? null : submission.tier,
+      clanRegion: submission.clanRegion ?? null,
+      clanId: submission.clanId ?? null,
+      publishedAt: await fetchPublishedAt(ref.videoId),
       gameVersion: await currentGameVersion(submission.region),
       status: TankVideoStatus.Pending,
       submittedBy: submission.userId,
@@ -212,289 +293,11 @@ export async function submitTankVideo(
   return { outcome: SubmitVideoOutcome.Queued, videoId: ref.videoId };
 }
 
-/** `video:approve:<id>` / `video:reject:<id>`, read back by the bot. The row id
- * rides in the button rather than in memory so the buttons keep working across
- * a redeploy, which a component collector would not. */
-export const VIDEO_REVIEW_PREFIX = "video";
-
-async function postModerationCard(
-  id: number,
-  ref: { videoId: string; startSeconds: number },
-  oembed: Oembed,
-  s: VideoSubmission,
-): Promise<void> {
-  const fields: { name: string; value: string; inline: boolean }[] = [
-    { name: "Tank", value: s.tankName, inline: true },
-    { name: "Channel", value: oembed.author_name, inline: true },
-    { name: "Submitted by", value: s.submitterName, inline: true },
-  ];
-  if (s.arenaId) {
-    fields.push({ name: "Map", value: s.arenaId, inline: true });
-  }
-  if (s.mode) {
-    fields.push({
-      name: "Mode",
-      value: MAP_GAME_MODE_LABEL[s.mode] ?? s.mode,
-      inline: true,
-    });
-  }
-  if (s.result) {
-    fields.push({
-      name: "Result",
-      value: BATTLE_RESULT_LABEL[s.result],
-      inline: true,
-    });
-  }
-  if (s.combinedDamage != null) {
-    fields.push({
-      name: "Combined",
-      value: s.combinedDamage.toLocaleString("en-US"),
-      inline: true,
-    });
-  }
-
-  await postChannelEmbedWithComponents(
-    env.DISCORD_VIDEO_CHANNEL_ID!,
-    {
-      title: oembed.title,
-      url: youtubeWatchUrl(ref.videoId, ref.startSeconds),
-      description: `Opens at the battle. Everything below the channel is declared by the submitter.`,
-      color: BRAND_COLOR_INT,
-      thumbnail: { url: youtubeThumbnailUrl(ref.videoId) },
-      fields,
-      footer: { text: `${APP_IDENTITY.NAME} · /${s.region}/tanks/${s.tankSlug}` },
-    },
-    [
-      {
-        type: 1,
-        components: [
-          {
-            type: 2,
-            style: 3,
-            label: "Approve",
-            custom_id: `${VIDEO_REVIEW_PREFIX}:approve:${id}`,
-          },
-          {
-            type: 2,
-            style: 4,
-            label: "Reject",
-            custom_id: `${VIDEO_REVIEW_PREFIX}:reject:${id}`,
-          },
-        ],
-      },
-    ],
-  );
-}
-
-/** A video as the tank page renders it. */
-export type TankVideo = {
-  id: number;
-  videoId: string;
-  startSeconds: number;
-  title: string;
-  channelName: string;
-  mapName: string | null;
-  mode: MapGameMode | null;
-  /** Derived from the map's spawn geometry, never declared. */
-  direction: SpawnDirection | null;
-  directionLabel: string | null;
-  result: BattleResult | null;
-  /** Damage dealt plus assisted, as declared. */
-  combinedDamage: number | null;
-  gameVersion: string | null;
-};
-
-/**
- * This tank's published videos, newest first.
- *
- * The direction is worked out here rather than stored: the submitter tells us
- * which side they spawned on, and the map's own geometry says what that side is
- * called. Deriving it means the label can never contradict the map, and the
- * catalogue behind it is memoized per region for a day, so this costs no
- * network call.
- */
-export async function listTankVideos(
-  region: Region,
-  tankId: number,
-): Promise<TankVideo[]> {
-  const rows = await db
-    .select()
-    .from(tankVideos)
-    .where(
-      and(
-        eq(tankVideos.tankId, tankId),
-        eq(tankVideos.status, TankVideoStatus.Approved),
-      ),
-    )
-    .orderBy(desc(tankVideos.reviewedAt), asc(tankVideos.id));
-
-  return decorateVideos(region, rows);
-}
-
-/**
- * A submitter's own queued battles for one tank, newest first.
- *
- * Only ever their own: a pending row is unreviewed, so it is shown to the
- * person waiting on it and to nobody else. It exists because a suggestion
- * disappears into a queue otherwise, and there is no way to tell "not sent"
- * from "not looked at yet" without asking a moderator.
- */
-export async function listPendingVideosFor(
-  region: Region,
-  tankId: number,
-  userId: string,
-): Promise<TankVideo[]> {
-  const rows = await db
-    .select()
-    .from(tankVideos)
-    .where(
-      and(
-        eq(tankVideos.tankId, tankId),
-        eq(tankVideos.status, TankVideoStatus.Pending),
-        eq(tankVideos.submittedBy, userId),
-      ),
-    )
-    .orderBy(desc(tankVideos.submittedAt));
-
-  return decorateVideos(region, rows);
-}
-
-/** A published battle on the global index, which crosses tanks: the same video
- * legitimately carries battles of several. */
-export type CommunityVideo = TankVideo & {
-  tankId: number;
-  tankName: string;
-  tankSlug: string;
-  /** The tank's own catalogue fields, carried so the index can present and
-   * filter a battle the way the tank list presents and filters a vehicle:
-   * by tier, nation, class and role. */
-  tankShortName: string;
-  tankTag: string;
-  tier: number;
-  nation: string;
-  type: string;
-  role: string | null;
-  isPremium: boolean;
-  isReward: boolean;
-};
-
-/**
- * Every published battle, newest first, whatever the tank.
- *
- * The per-tank pages each show their own slice of a video, so this is the only
- * place a recording is seen whole, with every tank it covers. Capped rather
- * than paginated: it is a shop window, and the tank pages are where a video is
- * looked up on purpose.
- */
-export async function listRecentVideos(
-  region: Region,
-  limit = 90,
-): Promise<CommunityVideo[]> {
-  const rows = await db
-    .select()
-    .from(tankVideos)
-    .where(eq(tankVideos.status, TankVideoStatus.Approved))
-    .orderBy(desc(tankVideos.reviewedAt), asc(tankVideos.id))
-    .limit(limit);
-
-  const [videos, tanks] = await Promise.all([
-    decorateVideos(region, rows),
-    listTanks(region),
-  ]);
-  const byId = new Map(tanks.map((t) => [t.tankId, t]));
-
-  const out: CommunityVideo[] = [];
-  videos.forEach((video, i) => {
-    const tank = byId.get(rows[i].tankId);
-    // A battle whose tank left the catalogue is dropped rather than shown
-    // nameless: the row exists to send someone to that tank's page.
-    if (!tank) return;
-    out.push({
-      ...video,
-      tankId: tank.tankId,
-      tankName: tank.meta.name,
-      tankSlug: tank.slug,
-      tankShortName: tank.meta.shortName,
-      tankTag: tank.meta.tag,
-      tier: tank.meta.tier,
-      nation: tank.meta.nation,
-      type: tank.meta.type,
-      role: tank.meta.role ?? null,
-      isPremium: tank.meta.isPremium,
-      isReward: tank.meta.isReward,
-    });
-  });
-  return out;
-}
-
-/**
- * Turns stored rows into what a page reads, in the same order.
- *
- * The direction is worked out here rather than stored: the submitter tells us
- * which side they spawned on, and the map's own geometry says what that side is
- * called. Deriving it means the label can never contradict the map, and the
- * catalogue behind it is memoized per region for a day, so this costs no
- * network call.
- */
-async function decorateVideos(
-  region: Region,
-  rows: (typeof tankVideos.$inferSelect)[],
-): Promise<TankVideo[]> {
-  const maps = new Map<string, Awaited<ReturnType<typeof getMapDetailBySlug>>>();
-  const out: TankVideo[] = [];
-  for (const row of rows) {
-    let direction: SpawnDirection | null = null;
-    let mapName: string | null = null;
-    if (row.arenaId) {
-      if (!maps.has(row.arenaId)) {
-        maps.set(
-          row.arenaId,
-          await getMapDetailBySlug(region, row.arenaId).catch(() => null),
-        );
-      }
-      const detail = maps.get(row.arenaId) ?? null;
-      mapName = detail?.name ?? null;
-      const geometry = detail?.geometry.find((g) => g.mode === row.mode);
-      if (geometry && (row.spawnTeam === 1 || row.spawnTeam === 2)) {
-        direction = spawnDirection(geometry, row.spawnTeam);
-      }
-    }
-    out.push({
-      id: row.id,
-      videoId: row.videoId,
-      startSeconds: row.startSeconds,
-      title: row.title,
-      channelName: row.channelName,
-      mapName,
-      mode: (row.mode as MapGameMode | null) ?? null,
-      direction,
-      directionLabel: direction ? SPAWN_DIRECTION_LABEL[direction] : null,
-      result: (row.result as BattleResult | null) ?? null,
-      combinedDamage: row.combinedDamage,
-      gameVersion: row.gameVersion,
-    });
-  }
-  return out;
-}
-
-/** How many published videos a tank has, for the "Videos (N)" tab label. Reads
- * the count alone, so the tab label costs nothing on tabs that never render the
- * list. */
-export async function countTankVideos(tankId: number): Promise<number> {
-  const [row] = await db
-    .select({ n: sql<number>`COUNT(*)::int` })
-    .from(tankVideos)
-    .where(
-      and(
-        eq(tankVideos.tankId, tankId),
-        eq(tankVideos.status, TankVideoStatus.Approved),
-      ),
-    );
-  return row?.n ?? 0;
-}
-
 export type ReviewedVideo = {
-  tankId: number;
+  /** Null on a tactic, which has no tank page to drop from the cache. */
+  tankId: number | null;
+  /** The map it was fought on, whose page carries it either way. */
+  arenaId: string | null;
   title: string;
   status: TankVideoStatus;
 };
@@ -522,6 +325,10 @@ export async function reviewTankVideo(
         eq(tankVideos.status, TankVideoStatus.Pending),
       ),
     )
-    .returning({ tankId: tankVideos.tankId, title: tankVideos.title });
+    .returning({
+      tankId: tankVideos.tankId,
+      arenaId: tankVideos.arenaId,
+      title: tankVideos.title,
+    });
   return row ? { ...row, status } : null;
 }
