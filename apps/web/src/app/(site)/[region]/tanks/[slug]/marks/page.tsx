@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  renderTankPage,
+  loadTankTab,
   tankMetadata,
 } from "@/app/(site)/[region]/tanks/[slug]/page";
+import { TankMarksMastery } from "@/components/tanks/detail/marks/mastery";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
 
@@ -28,5 +29,15 @@ export default async function TankMarksPage({
 }) {
   const { region, slug } = await params;
   if (!isRegion(region)) notFound();
-  return renderTankPage(region, slug, TankDetailTab.Marks);
+  const detail = await loadTankTab(region, slug, TankDetailTab.Marks);
+  return (
+    <TankMarksMastery
+      moe={detail.moe}
+      mom={detail.mom}
+      moeHistory={detail.moeHistory}
+      momHistory={detail.momHistory}
+      serverStats={detail.serverStats}
+      tankName={detail.meta.name}
+    />
+  );
 }

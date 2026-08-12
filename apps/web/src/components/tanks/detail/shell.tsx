@@ -2,133 +2,67 @@ import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import type { SearchHistoryItem } from "@/hooks/use-search-history";
+import { TankActionsMenu } from "@/components/tanks/detail/actions-menu";
 import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { TankRender } from "@/components/tanks/detail/render";
-import { TankActionsMenu } from "@/components/tanks/detail/actions-menu";
-import { TankResearchPath } from "@/components/tanks/detail/specifications/research-path";
-import ROUTES from "@/constants/routes";
-import { TankConfigurator } from "@/components/tanks/detail/specifications/configurator";
-import { TankMarksMastery } from "@/components/tanks/detail/marks/mastery";
-import {
-  TankVideosPreview,
-  TankVideosTab,
-} from "@/components/tanks/detail/videos";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
   TankHero,
   TankVideoHeroPlayer,
   TankVideoPlayerProvider,
 } from "@/components/tanks/detail/videos/player";
-import { Performances } from "./performances";
-import type { MomValues } from "@unicum.gg/core/mom";
-import type { MomHistoryPoint } from "@unicum.gg/core/mom/poliroid";
-import type { MoeValues } from "@unicum.gg/core/moe";
-import type { MoeHistoryPoint } from "@unicum.gg/core/moe/poliroid";
+import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
+import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
+import { Panel, PanelSeparator } from "@/components/panel";
+import ROUTES from "@/constants/routes";
 import {
   type TankSpec,
   type VehicleMeta,
-  type VehicleMode,
-  type WN8Expected,
-  type WNXExpected,
   VEHICLE_CLASS_LABEL_FULL,
   VEHICLE_ROLE_LABEL,
   roleSuffix,
 } from "@unicum.gg/shared";
-import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
-import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-  PanelTitle,
-} from "@/components/panel";
-import type {
-  TankServerStats,
-  TopTankPlayersByMetric,
-} from "@unicum.gg/core/wargaming/wot/players/top/by-tank";
-import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
-import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
-import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
-import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
-import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
-import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
-import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import { Region, REGION_LABEL, hangarBgUrl } from "@unicum.gg/wargaming";
 
-export function TankView({
+/**
+ * Everything a tank page keeps while you move around it: the hero, the tab bar
+ * and the video player behind them.
+ *
+ * It lives in the segment's layout rather than in each tab, which is what makes
+ * a video survive a tab change. Next only re-renders the segment below a shared
+ * layout, so the player keeps its iframe, its playhead and its sound while the
+ * panel underneath is replaced. Rendered per tab, the same markup would tear the
+ * player down and start the video over, which is the one thing someone watching
+ * a battle notices.
+ */
+export function TankShell({
   region,
-  tankId,
   slug,
-  tab,
+  tankId,
   meta,
-  topByMetric,
-  serverStats,
-  wn8Expected,
-  wnxExpected,
   specs,
-  moe,
-  mom,
-  researchPath,
-  modules,
-  configs,
-  loadout,
-  crew,
-  fieldMods,
-  skillTree,
-  modes,
-  moeHistory,
-  momHistory,
   videos,
+  available,
+  children,
 }: {
   region: Region;
-  tankId: number;
   slug: string;
-  tab: TankDetailTab;
-  meta: VehicleMeta & { isWheeled?: boolean; isGift?: boolean };
-  serverStats: TankServerStats | null;
-  topByMetric: TopTankPlayersByMetric;
-  wn8Expected: WN8Expected | null;
-  wnxExpected: WNXExpected | null;
+  tankId: number;
+  meta: VehicleMeta;
+  /** For the price badge in the hero corner. */
   specs: TankSpec | null;
-  moe: MoeValues | null;
-  mom: MomValues | null;
-  researchPath: ResearchBranch;
-  modules: TankModuleNode[];
-  configs: TankConfig[];
-  loadout: TankLoadout | null;
-  crew: TankCrew | null;
-  fieldMods: TankFieldMods | null;
-  skillTree: TankSkillTree | null;
-  modes: VehicleMode[];
-  moeHistory: MoeHistoryPoint[];
-  momHistory: MomHistoryPoint[];
-  /** Approved community videos. Loaded for Specifications (the two-video
-   * preview) and Videos (the full grid), empty elsewhere. */
+  /** Approved community videos, plus the reader's own queued ones once the
+   * provider has fetched them. The player resolves `?battle=` against this. */
   videos: TankVideoCardData[];
+  /** The tabs that have something to show for this tank. */
+  available: TankDetailTab[];
+  children: React.ReactNode;
 }) {
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
   const classLabel = VEHICLE_CLASS_LABEL_FULL[meta.type] ?? meta.type;
   const roleSfx = roleSuffix(meta.role);
-
-  // Which tabs have something to show for this tank. Computed from the payload
-  // rather than from rendered content, so an unavailable tab costs nothing.
-  const hasSpecifications =
-    Boolean(specs) || researchPath.lineage.length > 0 || modules.length > 0;
-  const hasMarks = Boolean(moe || mom);
-  const available = [
-    ...(hasSpecifications ? [TankDetailTab.Specifications] : []),
-    TankDetailTab.Performances,
-    ...(hasMarks ? [TankDetailTab.Marks] : []),
-    // Always offered, unlike the others, which hide when the payload has
-    // nothing for them. An empty Videos tab is where the suggestion form lives,
-    // so hiding it would make the first submission for a tank impossible.
-    TankDetailTab.Videos,
-  ];
-  // A tank missing the requested tab falls back to the first one it does have.
-  const activeTab = available.includes(tab) ? tab : available[0];
 
   const favoriteItem: SearchHistoryItem = {
     kind: "tank",
@@ -147,7 +81,7 @@ export function TankView({
   };
 
   return (
-    // The provider spans the hero and the lists below it: a video card is what
+    // The provider spans the hero and the tab below it: a video card is what
     // you click, the hero is where it plays.
     <TankVideoPlayerProvider region={region} slug={slug} videos={videos}>
       <div className="mx-auto w-full max-w-7xl">
@@ -276,102 +210,10 @@ export function TankView({
 
         <TankDetailTabs
           basePath={ROUTES.TANK(region, slug)}
-          active={activeTab}
           available={available}
         />
 
-        {activeTab === TankDetailTab.Specifications && (
-          <>
-            {researchPath.lineage.length > 0 && (
-              <TankResearchPath
-                region={region}
-                lineage={researchPath.lineage}
-                next={researchPath.next}
-                currentId={tankId}
-                tankName={meta.name}
-              />
-            )}
-            {researchPath.lineage.length > 0 &&
-              (specs || modules.length > 0) && <PanelSeparator />}
-            {(specs || modules.length > 0) && (
-              <TankConfigurator
-                region={region}
-                meta={meta}
-                tankName={meta.name}
-                slug={slug}
-                stockSpecs={specs}
-                modules={modules}
-                configs={configs}
-                loadout={loadout}
-                crew={crew}
-                fieldMods={fieldMods}
-                skillTree={skillTree}
-                modes={modes}
-                nextTanks={researchPath.next}
-              />
-            )}
-            {specs?.description && (
-              <>
-                <PanelSeparator />
-                <Panel>
-                  <PanelHeader>
-                    <PanelTitle>{meta.name} historical reference</PanelTitle>
-                  </PanelHeader>
-                  <PanelContent className="px-4 py-4">
-                    <p className="max-w-3xl text-sm leading-relaxed text-fd-muted-foreground">
-                      {specs.description}
-                    </p>
-                  </PanelContent>
-                </Panel>
-              </>
-            )}
-            {/* The tab is the full list; this is what makes anyone discover it.
-              Most of a tank page is read here, and a section nobody sees
-              collects no suggestions, which is what the feature runs on. */}
-            {videos.length > 0 && (
-              <>
-                <PanelSeparator />
-                <TankVideosPreview
-                  region={region}
-                  slug={slug}
-                  videos={videos}
-                />
-              </>
-            )}
-          </>
-        )}
-
-        {activeTab === TankDetailTab.Performances && (
-          <Performances
-            region={region}
-            tankId={tankId}
-            meta={meta}
-            serverStats={serverStats}
-            topByMetric={topByMetric}
-            wn8Expected={wn8Expected}
-            wnxExpected={wnxExpected}
-          />
-        )}
-
-        {activeTab === TankDetailTab.Marks && (moe || mom) && (
-          <TankMarksMastery
-            moe={moe}
-            mom={mom}
-            moeHistory={moeHistory}
-            momHistory={momHistory}
-            serverStats={serverStats}
-            tankName={meta.name}
-          />
-        )}
-
-        {activeTab === TankDetailTab.Videos && (
-          <TankVideosTab
-            region={region}
-            slug={slug}
-            tankName={meta.name}
-            videos={videos}
-            />
-        )}
+        {children}
       </div>
     </TankVideoPlayerProvider>
   );

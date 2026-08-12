@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import {
-  renderTankPage,
+  loadTankTab,
   tankMetadata,
+  TankVideosJsonLd,
 } from "@/app/(site)/[region]/tanks/[slug]/page";
+import { loadTankVideos } from "@/app/(site)/[region]/tanks/[slug]/detail";
+import { TankVideosTab } from "@/components/tanks/detail/videos";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";
 
@@ -30,5 +33,17 @@ export default async function TankVideosPage({
 }) {
   const { region, slug } = await params;
   if (!isRegion(region)) notFound();
-  return renderTankPage(region, slug, TankDetailTab.Videos);
+  const detail = await loadTankTab(region, slug, TankDetailTab.Videos);
+  const videos = await loadTankVideos(region, detail.slug);
+  return (
+    <>
+      <TankVideosJsonLd tankName={detail.meta.name} videos={videos} />
+      <TankVideosTab
+        region={region}
+        slug={detail.slug}
+        tankName={detail.meta.name}
+        videos={videos}
+      />
+    </>
+  );
 }
