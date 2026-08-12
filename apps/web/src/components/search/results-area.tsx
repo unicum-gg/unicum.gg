@@ -310,7 +310,14 @@ export function ResultsArea({
   }, [activeIndex]);
 
   if (rows.length > 0) {
-    let selectableIndex = -1;
+    // Numbered up front rather than counted inside the map: the headers are
+    // rows too but cannot be selected, so the keyboard index only advances on
+    // the ones that can, and a counter mutated from inside a render callback is
+    // a closure the compiler has to assume runs later.
+    const selectable = new Map<string, number>();
+    for (const row of rows) {
+      if (row.type !== "header") selectable.set(row.key, selectable.size);
+    }
     return (
       <ul
         ref={listRef}
@@ -326,8 +333,7 @@ export function ResultsArea({
               </li>
             );
           }
-          selectableIndex += 1;
-          const idx = selectableIndex;
+          const idx = selectable.get(row.key) ?? -1;
           const isActive = idx === activeIndex;
           // Players, clans, and tanks can all be favorited / kept in recent.
           const historyRow: HistoryRow = row;
