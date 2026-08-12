@@ -10,6 +10,8 @@ const STORAGE = {
     REGION: "unicum.region",
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
+    // Cards or table on the tank index's Videos tab.
+    VIDEO_VIEW: "unicum.video-view",
     // CSRF nonce for the Discord "Add to Discord" OAuth flow (/api/discord/*).
     DISCORD_OAUTH_STATE: "unicum.discord-oauth-state",
     // Signed context {nonce, region, tag} for the boost-notification connect

@@ -7,7 +7,11 @@ import {
 } from "@/components/tanks/detail/tabs";
 import { JsonLd } from "@/components/json-ld";
 import { constructMetadata } from "@/lib/metadata";
-import { breadcrumbSchema, tankSchema } from "@/lib/schema-org";
+import {
+  breadcrumbSchema,
+  tankSchema,
+  tankVideoSchema,
+} from "@/lib/schema-org";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
@@ -19,10 +23,21 @@ import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
 import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
-import type { TankSpec, VehicleMode } from "@unicum.gg/shared";
+import {
+  MAP_GAME_MODE_LABEL,
+  youtubeEmbedBaseUrl,
+  youtubeThumbnailUrl,
+  youtubeWatchUrl,
+  type TankSpec,
+  type VehicleMode,
+} from "@unicum.gg/shared";
+import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import {
+  groupBattlesByVideo,
+  PREVIEW_VIDEO_COUNT,
+} from "@/components/tanks/detail/videos/group";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
 import { toRoman } from "roman-numerals";
-
 
 // ISR, not dynamic: the rendered page is cached, so a navigation serves
 // prerendered HTML instead of re-running the heavy tank-view render each time
@@ -67,6 +82,11 @@ function tabCopy(
       return {
         title: `${name} marks of excellence and mastery (${regionLabel})`,
         description: `${name} (${regionLabel}) World of Tanks marks of excellence and marks of mastery requirements, with their history on this tier ${tier} ${nation} tank.`,
+      };
+    case TankDetailTab.Videos:
+      return {
+        title: `${name} gameplay videos (${regionLabel})`,
+        description: `Watch the ${name} in action: community-suggested battles on this tier ${tier} ${nation} tank, each opening at the moment it is played, with the map and result they happened on.`,
       };
     default:
       return {
@@ -152,14 +172,38 @@ async function TankPageServer({
   // with a 308 so links, history, and search engines settle on one URL. The
   // active tab is a path segment, so it has to be carried over.
   if (slug !== detail.slug)
-    permanentRedirect(
-      tankDetailTabHref(ROUTES.TANK(region, detail.slug), tab),
-    );
+    permanentRedirect(tankDetailTabHref(ROUTES.TANK(region, detail.slug), tab));
   const { tankId, meta, slug: canonicalSlug } = detail;
+
+  // Videos are wanted on two tabs: in full on their own, and as the two most
+  // recent at the bottom of Specifications, which is where anyone finds out the
+  // tab exists at all. The map catalogue the submission form needs is not
+  // fetched here: the form pulls it itself when it opens, so no tank page
+  // carries 23 KB of maps for a dialog almost nobody opens.
+  const wantsVideos =
+    tab === TankDetailTab.Videos || tab === TankDetailTab.Specifications;
+  const videos = wantsVideos
+    ? await unicum
+        .region(region)
+        .tanks(canonicalSlug)
+        .videos()
+        .then((r) => r.videos as unknown as TankVideoCardData[])
+        .catch(() => [])
+    : [];
 
   const regionLabel = region.toUpperCase();
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
   const tankUrl = `${APP.URL}${ROUTES.TANK(region, canonicalSlug)}`;
+
+  // The videos this page actually shows: all of them on the Videos tab, the
+  // preview's first few on Specifications, none elsewhere.
+  const videoGroups = groupBattlesByVideo(videos);
+  const markedUpVideos =
+    tab === TankDetailTab.Videos
+      ? videoGroups
+      : tab === TankDetailTab.Specifications
+        ? videoGroups.slice(0, PREVIEW_VIDEO_COUNT)
+        : [];
 
   return (
     <>
@@ -175,6 +219,38 @@ async function TankPageServer({
           isPremium: meta.isPremium,
         })}
       />
+      {/* Exactly what the page renders, no more: the markup has to sit on a
+          page where the video can be watched, and both tabs that carry videos
+          play them in the hero. Specifications shows a preview of the first
+          few, so it declares those. Each battle becomes a `Clip`, the part of
+          this we can state completely. */}
+      {markedUpVideos.map((group) => (
+        <JsonLd
+          key={group.videoId}
+          data={tankVideoSchema({
+            videoId: group.videoId,
+            name: group.title,
+            thumbnailUrl: youtubeThumbnailUrl(group.videoId),
+            embedUrl: youtubeEmbedBaseUrl(group.videoId),
+            channelName: group.channelName,
+            description: `${meta.name} battles marked in this video: ${group.battles
+              .map((b) => b.mapName)
+              .filter(Boolean)
+              .join(", ")}.`,
+            clips: group.battles.map((battle) => ({
+              name: [
+                battle.mapName,
+                battle.mode ? MAP_GAME_MODE_LABEL[battle.mode] : null,
+                battle.directionLabel,
+              ]
+                .filter(Boolean)
+                .join(" · "),
+              startSeconds: battle.startSeconds,
+              url: youtubeWatchUrl(group.videoId, battle.startSeconds),
+            })),
+          })}
+        />
+      ))}
       <JsonLd
         data={breadcrumbSchema([
           { name: APP.NAME, url: `${APP.URL}${ROUTES.HOME(region)}` },
@@ -205,6 +281,7 @@ async function TankPageServer({
         modes={(detail.modes ?? []) as unknown as VehicleMode[]}
         moeHistory={detail.moeHistory}
         momHistory={detail.momHistory}
+        videos={videos}
       />
     </>
   );

@@ -131,6 +131,15 @@ const nextConfig: NextConfig = {
         hostname: "raw.githubusercontent.com",
         pathname: "/unicum-gg/wot.maps/**",
       },
+      // YouTube thumbnails for the community video suggestions. Only the
+      // thumbnail host, and only its `/vi/` path: the video ids are parsed and
+      // validated before they are stored, so nothing else should ever be built
+      // from user input.
+      {
+        protocol: "https",
+        hostname: "i.ytimg.com",
+        pathname: "/vi/**",
+      },
     ],
     // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
     // SVG sources by default; enabling this allows them through the optimizer

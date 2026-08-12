@@ -8,6 +8,7 @@ export enum TankDetailTab {
   Specifications = "specifications",
   Performances = "performances",
   Marks = "marks",
+  Videos = "videos",
 }
 
 export const TANK_DETAIL_TABS: {
@@ -22,6 +23,7 @@ export const TANK_DETAIL_TABS: {
     segment: "performances",
   },
   { id: TankDetailTab.Marks, label: "Marks", segment: "marks" },
+  { id: TankDetailTab.Videos, label: "Videos", segment: "videos" },
 ];
 
 export function tankDetailTabHref(basePath: string, tab: TankDetailTab): string {

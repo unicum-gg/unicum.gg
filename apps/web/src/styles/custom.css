@@ -72,3 +72,43 @@
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, Menlo, Monaco, Consolas, monospace;
 }
+/* The video player's seek-bar markers, one per battle in the video.
+   Vidstack's Plyr layout paints the marker label `#fff` inside a tooltip whose
+   background is also white, so the label was invisible and only the part that
+   overflowed the box, onto the dark video, could be read. The colour comes from
+   the tooltip itself, and the box is allowed to wrap so a long label stays in
+   it instead of spilling out. */
+.tank-video-player .plyr__progress .plyr__tooltip {
+  max-width: 16rem;
+  white-space: normal;
+  text-align: center;
+}
+
+.tank-video-player .plyr__progress__marker-label {
+  color: inherit;
+  font-weight: 500;
+}
+
+/* The tick is 3px by 5px, which is the right size to look at and the wrong one
+   to hit: the tooltip showed the time alone because the pointer almost never
+   landed on it, and the label only exists while a marker is entered. This grows
+   the target without growing the mark. Kept narrow horizontally, since the same
+   pixels are how you seek to that spot. */
+.tank-video-player .plyr__progress__marker::after {
+  content: "";
+  position: absolute;
+  inset: -9px -4px;
+}
+
+/* The player's own centre play button.
+   YouTube draws its own as soon as the video is paused, inside the iframe and
+   so out of reach: `controls=0` removes its control bar, not that button. Ours
+   sat on top of it, and two play buttons in the same place is one too many, so
+   ours goes. Nothing is lost: a click anywhere on the video toggles playback
+   (the player's own layer catches it, which is how it was paused), and the
+   control bar has a play button of its own.
+   Scoped past `.plyr.plyr--video`, the rule that shows it: a two-class selector
+   would lose to it. */
+.tank-video-player .plyr.plyr--video .plyr__control--overlaid {
+  display: none;
+}
