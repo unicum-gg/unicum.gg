@@ -5,6 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import {
   BASE_CAPTURE_RADIUS_M,
   lowResMinimapUrl,
+  SPAWN_DIRECTION_LABEL,
+  spawnDirection,
   type MapDetail,
 } from "@unicum.gg/shared";
 import { MinimapImage } from "@/components/maps/minimap-image";
@@ -19,6 +21,13 @@ import {
   type ViewGeometry,
 } from "@/components/maps/detail/minimap-overlay";
 import { cn } from "@/lib/utils";
+
+/** The side a team starts from on this view, e.g. "South". Null when the mode
+ * declares neither spawns nor bases, where the legend just names the team. */
+function teamSide(view: ViewGeometry, team: 1 | 2): string | null {
+  const direction = spawnDirection(view, team);
+  return direction ? SPAWN_DIRECTION_LABEL[direction] : null;
+}
 
 // A selectable minimap view: one battle-context (a random mode, or Onslaught)
 // with its own minimap image + play-area bounds on top of the shared geometry.
@@ -186,10 +195,18 @@ export function MinimapViewer({
               Base
             </span>
           )}
+          {/* Named per team, with the side each starts from. "Team 1" is the
+              game's own numbering and means nothing on its own: a player knows
+              they spawned at the bottom of the minimap, not that they were
+              team 1. The side is read off the geometry already drawn above, so
+              the legend cannot disagree with the markers. */}
           <span className="flex items-center gap-2">
             <Image src={spawnUrl("team1", 0)} alt="" width={26} height={26} />
+            Team 1{teamSide(view, 1) ? ` · ${teamSide(view, 1)}` : ""}
+          </span>
+          <span className="flex items-center gap-2">
             <Image src={spawnUrl("team2", 0)} alt="" width={26} height={26} />
-            Spawn
+            Team 2{teamSide(view, 2) ? ` · ${teamSide(view, 2)}` : ""}
           </span>
           {view.controlPoint && (
             <span className="flex items-center gap-2">
