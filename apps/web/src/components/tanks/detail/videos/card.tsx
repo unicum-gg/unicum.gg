@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
 import {
   BATTLE_RESULT_LABEL,
   formatTimestamp,
   MAP_GAME_MODE_LABEL,
-  youtubeEmbedUrl,
   youtubeThumbnailUrl,
   youtubeWatchUrl,
   type BattleResult,
@@ -25,6 +23,11 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useTankVideoPlayer } from "./player";
+import { BATTLE_PARAM } from "./battle-param";
+import {
+  TankDetailTab,
+  tankDetailTabHref,
+} from "@/components/tanks/detail/tabs";
 
 /** One published battle. Shaped like what the endpoint returns rather than
  * importing the server type, so this stays a client component. */
@@ -64,15 +67,17 @@ const RESULT_CLASS: Record<string, string> = {
 /**
  * A video and the battles marked in it, each opening at its own second.
  *
- * A click hands the battle to the page's player, so it plays in the hero at the
- * size a battle is worth watching at rather than in a third of a grid row. The
- * card keeps its own inline player for when there is no provider above it,
- * which is what makes it usable outside the tank page.
+ * On a tank's own page a click hands the battle to the hero, which plays it at
+ * the size a battle is worth watching at rather than in a third of a grid row.
+ * Anywhere else, where there is no hero to hand it to, the card is a link to
+ * that tank's page, opening on the battle clicked.
  *
- * Either way the iframe only mounts on a click: the thumbnail is a facade, so a
- * page carrying a dozen of these costs a dozen images rather than a dozen
- * embedded players. That is the same reasoning as the lazy chart boundaries, and
- * it matters more here because the count grows with the community.
+ * It never embeds a player of its own. A card is a shop window: it belongs on
+ * pages carrying a dozen of them, where a dozen iframes would be a dozen
+ * players' worth of script for a video nobody has asked for yet, and it would
+ * send someone watching a battle away from everything the battle is about.
+ * The thumbnail is an image until the click, and the click goes where the video
+ * can be watched properly.
  */
 export function TankVideoCard({
   group,
@@ -83,7 +88,6 @@ export function TankVideoCard({
   region: Region;
 }) {
   const player = useTankVideoPlayer();
-  const [inline, setInline] = useState<TankVideoCardData | null>(null);
   // Which row is lit follows the playhead, not the last click: the player
   // publishes it, since only something mounted beside it can watch its clock.
   const isCurrent = player?.current?.videoId === group.videoId;
@@ -91,12 +95,21 @@ export function TankVideoCard({
 
   const publishedCount = group.battles.filter((b) => !b.pending).length;
 
+  // Where a battle is watched when this card has no player above it: the Videos
+  // tab of the tank it was played in, opened on that battle. A pending row is a
+  // receipt rather than a link, so it leads nowhere: it is only on screen for
+  // the person who submitted it, and it is not published yet.
+  function watchHref(battle: TankVideoCardData): string | null {
+    if (battle.pending || !battle.tankSlug) return null;
+    return `${tankDetailTabHref(
+      ROUTES.TANK(region, battle.tankSlug),
+      TankDetailTab.Videos,
+    )}?${BATTLE_PARAM}=${battle.id}`;
+  }
+
   function play(battle: TankVideoCardData) {
-    // A pending row is a receipt, not a link: it is only on screen for the
-    // person who submitted it, and it is not published until it is reviewed.
     if (battle.pending) return;
-    if (player) player.play(battle);
-    else setInline(battle);
+    player?.play(battle);
   }
 
   return (
@@ -107,43 +120,32 @@ export function TankVideoCard({
       )}
     >
       <div className="relative aspect-video w-full bg-black">
-        {inline ? (
-          <iframe
-            src={youtubeEmbedUrl(inline.videoId, inline.startSeconds)}
-            title={group.title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="size-full"
+        <Thumbnail
+          title={group.title}
+          onPlay={player ? () => play(group.battles[0]) : undefined}
+          href={watchHref(group.battles[0])}
+        >
+          <Image
+            src={youtubeThumbnailUrl(group.videoId)}
+            alt=""
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
           />
-        ) : (
-          <button
-            type="button"
-            onClick={() => play(group.battles[0])}
-            aria-label={`Play ${group.title}`}
-            className="group relative size-full cursor-pointer"
-          >
-            <Image
-              src={youtubeThumbnailUrl(group.videoId)}
-              alt=""
-              fill
-              sizes="(max-width: 768px) 100vw, 33vw"
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
+          <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
+            <PlayIcon
+              weight="fill"
+              className="size-12 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]"
             />
-            <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/10">
-              <PlayIcon
-                weight="fill"
-                className="size-12 text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]"
-              />
-            </span>
-            {/* What the video is worth to someone scanning the tab: how many
+          </span>
+          {/* What the video is worth to someone scanning the tab: how many
                 battles of this tank are in it. Published ones only: a row still
                 in review is a receipt for its submitter, not something the
                 video offers yet. */}
-            <span className="absolute right-2 bottom-2 rounded-sm bg-black/80 px-1.5 py-0.5 text-xs text-white">
-              {publishedCount} {publishedCount > 1 ? "battles" : "battle"}
-            </span>
-          </button>
-        )}
+          <span className="absolute right-2 bottom-2 rounded-sm bg-black/80 px-1.5 py-0.5 text-xs text-white">
+            {publishedCount} {publishedCount > 1 ? "battles" : "battle"}
+          </span>
+        </Thumbnail>
       </div>
 
       <div className="flex flex-1 flex-col gap-2 p-3">
@@ -201,7 +203,8 @@ export function TankVideoCard({
                 // tank the header already says it.
                 showTank={group.tanks.length > 1}
                 active={battle.id === playingId}
-                onPlay={() => play(battle)}
+                onPlay={player ? () => play(battle) : undefined}
+                href={watchHref(battle)}
               />
             </li>
           ))}
@@ -211,17 +214,60 @@ export function TankVideoCard({
   );
 }
 
+/**
+ * The video's own picture, and what a click on it does.
+ *
+ * A button beside a hero that can play it, a link everywhere else, and neither
+ * when the only battle it holds is still in review. The three share their
+ * inside, so the picture is written once.
+ */
+function Thumbnail({
+  title,
+  onPlay,
+  href,
+  children,
+}: {
+  title: string;
+  onPlay?: () => void;
+  href: string | null;
+  children: React.ReactNode;
+}) {
+  const className = "group relative block size-full";
+  if (onPlay)
+    return (
+      <button
+        type="button"
+        onClick={onPlay}
+        aria-label={`Play ${title}`}
+        className={cn(className, "cursor-pointer")}
+      >
+        {children}
+      </button>
+    );
+  if (href)
+    return (
+      <Link href={href} aria-label={`Watch ${title}`} className={className}>
+        {children}
+      </Link>
+    );
+  return <span className={className}>{children}</span>;
+}
+
 /** One battle inside a video: where it was played and when it starts. */
 function BattleRow({
   battle,
   showTank,
   active,
   onPlay,
+  href,
 }: {
   battle: TankVideoCardData;
   showTank: boolean;
   active: boolean;
-  onPlay: () => void;
+  /** Given where a hero can play the battle in place. Without it the row is a
+   * link to the tank's page, which is where it can be watched. */
+  onPlay?: () => void;
+  href: string | null;
 }) {
   // The map first, since it is what anyone scans for, then how the battle was
   // played, then which side of it they started from.
@@ -232,23 +278,17 @@ function BattleRow({
     battle.directionLabel,
   ].filter(Boolean);
 
-  const row = (
-    <button
-      type="button"
-      onClick={onPlay}
-      // `aria-disabled`, not `disabled`: a disabled button swallows pointer
-      // events, and the tooltip below is the only thing that says why the row
-      // is greyed. The click is refused where it is handled instead.
-      aria-disabled={battle.pending}
-      className={cn(
-        "flex w-full items-center gap-1.5 rounded-md px-1.5 py-1 text-left text-xs transition-colors",
-        battle.pending
-          ? "cursor-default text-fd-muted-foreground/50"
-          : active
-            ? "cursor-pointer bg-brand/10 text-fd-foreground"
-            : "cursor-pointer text-fd-muted-foreground hover:bg-fd-muted hover:text-fd-foreground",
-      )}
-    >
+  const className = cn(
+    "flex w-full items-center gap-1.5 rounded-md px-1.5 py-1 text-left text-xs transition-colors",
+    battle.pending
+      ? "cursor-default text-fd-muted-foreground/50"
+      : active
+        ? "cursor-pointer bg-brand/10 text-fd-foreground"
+        : "cursor-pointer text-fd-muted-foreground hover:bg-fd-muted hover:text-fd-foreground",
+  );
+
+  const inside = (
+    <>
       <MapPinIcon className={cn("size-3.5 shrink-0", active && "text-brand")} />
       <span className="flex min-w-0 flex-wrap items-center gap-x-1.5">
         {facts.map((fact, i) => (
@@ -272,7 +312,29 @@ function BattleRow({
       <span className="ml-auto shrink-0 font-mono tabular-nums">
         {formatTimestamp(battle.startSeconds)}
       </span>
+    </>
+  );
+
+  const row = onPlay ? (
+    <button
+      type="button"
+      onClick={onPlay}
+      // `aria-disabled`, not `disabled`: a disabled button swallows pointer
+      // events, and the tooltip below is the only thing that says why the row
+      // is greyed. The click is refused where it is handled instead.
+      aria-disabled={battle.pending}
+      className={className}
+    >
+      {inside}
     </button>
+  ) : href ? (
+    <Link href={href} className={className}>
+      {inside}
+    </Link>
+  ) : (
+    // Nowhere to go and nothing to play: a queued row, which only its submitter
+    // sees and which the tooltip below explains.
+    <span className={className}>{inside}</span>
   );
 
   if (!battle.pending) return row;
