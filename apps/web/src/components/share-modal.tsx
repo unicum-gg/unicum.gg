@@ -11,7 +11,7 @@ import {
   RedditLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 import {
   Dialog,
@@ -56,12 +56,13 @@ export function ShareModal({
   setupLabel?: string;
 }) {
   const [copied, setCopied] = useState(false);
-  const [ogLoaded, setOgLoaded] = useState(false);
+  // The preview that has finished loading, rather than a "loaded" flag: the
+  // flag had to be cleared from an effect every time the image changed, and it
+  // showed the previous card underneath for the length of that extra render.
+  const [loadedOg, setLoadedOg] = useState<string | null>(null);
   const [withSetup, setWithSetup] = useState(true);
 
-  useEffect(() => {
-    setOgLoaded(false);
-  }, [ogImage]);
+  const ogLoaded = loadedOg === ogImage;
 
   // The link actually shared: the clean URL, plus the current configurator setup
   // when the box is ticked and there is a setup to carry.
@@ -177,7 +178,7 @@ export function ShareModal({
                 alt="Share preview"
                 width={1200}
                 height={630}
-                onLoad={() => setOgLoaded(true)}
+                onLoad={() => setLoadedOg(ogImage)}
                 className={cn(
                   "block size-full object-cover transition-opacity duration-200",
                   ogLoaded ? "opacity-100" : "opacity-0",
