@@ -62,7 +62,7 @@ export function OverallTab({
   slots: ClanCompareSlot[];
 }) {
   const { rows, headerWinners } = useMemo(() => {
-    function buildRow<T>(
+    function buildRow(
       label: string,
       kind: "higher" | "lower",
       build: (slot: ClanCompareSlot) => MetricCell,
@@ -204,7 +204,7 @@ export function OverallTab({
       rows: allRows,
       headerWinners: bestIndex(wn8Cells, "higher"),
     };
-  }, [slots]);
+  }, [slots, region]);
 
   return (
     <ComparisonTable slots={slots} rows={rows} headerWinners={headerWinners} />
