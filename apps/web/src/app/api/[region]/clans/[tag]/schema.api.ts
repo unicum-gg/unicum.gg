@@ -1,6 +1,7 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it). Client-
 // safe (only zod): the clan page parses the response with it to revive Dates.
 import { z } from "zod";
+import { clanRankBadge } from "@/services/openapi/schemas";
 
 // --- Clan detail (GET /api/{region}/clans/{tag}) ---
 //
@@ -134,19 +135,10 @@ const clanRatings = z
  * ratings). The heavy per-category data (members, previous clans, activity,
  * stronghold, clan wars, vehicles) lives on the dedicated sub-endpoints.
  */
-/** A podium position on one of the clan leaderboards. */
-const clanRankBadge = z.object({
-  board: z.enum([
-    "wn7",
-    "wn8",
-    "wnx",
-    "advances",
-    "t10",
-    "t8",
-    "t6",
-  ]),
-  rank: z.number().int(),
-});
+// `clanRankBadge` is the shared one from `services/openapi/schemas`: it rides
+// along with a clan wherever one is returned, and it carries the enum marker, so
+// the board list lives in `ClanBoard` alone. This file had its own copy of the
+// literals, which is the drift the marker exists to prevent.
 
 export const ClanOverviewResponse = z.object({
   clan: clanInfo,
