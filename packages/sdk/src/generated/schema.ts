@@ -2419,6 +2419,8 @@ export interface components {
             maxFrags: number | null;
             /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
             ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
+            /** @description Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet. */
+            awards: components["schemas"]["TankAward"][] | null;
         };
         /** @description One player's record on one vehicle. */
         PlayerTankDetailResponse: {
@@ -2474,6 +2476,8 @@ export interface components {
             maxFrags: number | null;
             /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
             ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
+            /** @description Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet. */
+            awards: components["schemas"]["TankAward"][] | null;
         };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];
@@ -2665,6 +2669,25 @@ export interface components {
             monthlyPledgedCents: number;
             /** @description Total amount received from supporters since launch, in EUR cents (aggregate only, for the cumulative funding bar). */
             receivedCents: number;
+        };
+        /** @description One medal earned on this vehicle. For a tiered medal the count is the tier reached, not a number of awards. */
+        TankAward: {
+            id: string;
+            name: string;
+            description: string;
+            condition: string;
+            image: string;
+            section: string;
+            sectionName: string;
+            sectionOrder: number;
+            order: number;
+            type: string;
+            outdated: boolean;
+            tiers: {
+                name: string;
+                image: string;
+            }[];
+            count: number;
         };
         tankConfig: {
             /** @description The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class). */

@@ -104,8 +104,9 @@ async function fetchCatalog(region: Region): Promise<Catalog> {
   return { entries, sections };
 }
 
-/** The medal catalogue for a region, shared across every player. */
-function getCatalog(region: Region): Promise<Catalog> {
+/** The medal catalogue for a region, shared across every player, and across
+ * the profile's cabinet and one vehicle's Awards. */
+export function getCatalog(region: Region): Promise<Catalog> {
   return cachedInRedis<Catalog>(
     `wg:achievements:catalog:${region}`,
     (c) => (c.entries.length > 0 ? CATALOG_TTL_S : EMPTY_TTL_S),
@@ -306,7 +307,22 @@ export async function loadPlayerAchievements(
     getPlayerCounts(region, row.id, row.accountId),
   ]);
 
-  const achievements: PlayerAchievement[] = catalog.entries
+  return joinCatalog(catalog.entries, counts);
+}
+
+/**
+ * The catalogue joined with what was earned, in Wargaming's own order, plus the
+ * per-section tallies the grid's filter reads.
+ *
+ * Shared by the profile's cabinet and by one vehicle's, which differ only in
+ * where the counts came from: the account for one, `tanks/achievements` for the
+ * other. The catalogue, the sort and the sectioning are the same both times.
+ */
+export function joinCatalog(
+  entries: Omit<PlayerAchievement, "count">[],
+  counts: Record<string, number>,
+): PlayerAchievements {
+  const achievements: PlayerAchievement[] = entries
     .map((e) => ({ ...e, count: counts[e.id] ?? 0 }))
     .sort(
       (a, b) =>

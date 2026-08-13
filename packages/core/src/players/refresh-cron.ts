@@ -16,6 +16,7 @@ import {
   storePlayerClanHistory,
 } from "./clan-history";
 import { recordCurrentSnapshot } from ".";
+import { refreshStoredTankAchievements } from "./tank-achievements";
 import { dequeuePlayerRefresh } from "./refresh-queue";
 import {
   RefreshSubject,
@@ -107,6 +108,19 @@ async function refreshOne(entry: QueueEntry): Promise<boolean> {
     if (history) {
       await storePlayerClanHistory(region, accountId, history);
     }
+    // Per-vehicle medals, but only for players who already have them stored,
+    // i.e. someone has opened a vehicle panel on them. `tanks/achievements` is
+    // single-account like `tanks/stats`, so refreshing the whole playerbase
+    // here would double the queue's Wargaming cost to keep medals fresh for
+    // accounts nobody looks at. Never fails the refresh: the snapshot is what
+    // the queue exists for.
+    await refreshStoredTankAchievements(region, entry.playerId, accountId).catch(
+      (err) =>
+        console.warn(
+          `[player-cron-${region}] tank achievements for ${entry.nickname}:`,
+          err instanceof Error ? err.message : err,
+        ),
+    );
     return true;
   } catch (err) {
     console.error(

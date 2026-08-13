@@ -92,6 +92,7 @@ export function TanksTab({
                   region={region}
                   detail={tankDetail}
                   ratingHistory={tankDetail.ratingHistory}
+                  awards={tankDetail.awards}
                 />
               </Panel>
             </div>

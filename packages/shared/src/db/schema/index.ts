@@ -12,6 +12,7 @@ export * from "./cron-leader";
 export * from "./changelog-state";
 export * from "./players";
 export * from "./player-achievements";
+export * from "./player-tank-achievements";
 export * from "./player-ratings";
 export * from "./player-clan-history";
 export * from "./player-name-history";

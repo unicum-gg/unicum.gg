@@ -10,6 +10,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { getRatingHistory } from "@unicum.gg/core/players/rating-history";
+import { getTankAwards } from "@unicum.gg/core/players/tank-achievements";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import {
   getWN8ExpectedValues,
@@ -18,6 +19,7 @@ import {
 
 type RawRow = {
   pid: number;
+  acct: number;
   taken_at: string | Date;
   battles: number;
   wins: number;
@@ -69,7 +71,9 @@ export async function getPlayerTankDetail(
   const players = playersByRegion[region];
   const snapshots = tankSnapshotsByRegion[region];
   const rows = (await db.execute(sql`
-    SELECT *, (SELECT id FROM ${players} WHERE LOWER(nickname) = LOWER(${nickname})) AS pid
+    SELECT *,
+      (SELECT id FROM ${players} WHERE LOWER(nickname) = LOWER(${nickname})) AS pid,
+      (SELECT account_id FROM ${players} WHERE LOWER(nickname) = LOWER(${nickname})) AS acct
     FROM ${snapshots}
     WHERE player_id = (
       SELECT id FROM ${players} WHERE LOWER(nickname) = LOWER(${nickname})
@@ -115,14 +119,29 @@ export async function getPlayerTankDetail(
     },
   };
 
-  const [encyclopedia, wn8Expected, wnxExpected, history] = await Promise.all([
-    getVehicleEncyclopedia(region),
-    getWN8ExpectedValues(),
-    getWNXExpectedValues(),
-    // The same two curves the profile draws, narrowed to this vehicle. Same
-    // window as the profile's, so the two read as one story.
-    getRatingHistory(region, Number(row.pid), 90, identity.tankId),
-  ]);
+  const [encyclopedia, wn8Expected, wnxExpected, history, awards] =
+    await Promise.all([
+      getVehicleEncyclopedia(region),
+      getWN8ExpectedValues(),
+      getWNXExpectedValues(),
+      // The same two curves the profile draws, narrowed to this vehicle. Same
+      // window as the profile's, so the two read as one story.
+      getRatingHistory(region, Number(row.pid), 90, identity.tankId),
+      // Read here rather than fetched by the panel, so the medals are part of
+      // the server-rendered record instead of a second round trip that arrives
+      // after it.
+      getTankAwards(
+        region,
+        Number(row.pid),
+        Number(row.acct),
+        identity.tankId,
+      ).catch((err) => {
+        // The record is worth serving without its medals; the reverse is not
+        // true, so a Wargaming or catalogue failure must not 502 the panel.
+        console.error(`[tank-detail] awards failed (${region}/${slug}):`, err);
+        return null;
+      }),
+    ]);
 
   const detail = buildPlayerTankDetail(
     tank,
@@ -133,5 +152,5 @@ export async function getPlayerTankDetail(
     wn8Expected,
     wnxExpected,
   );
-  return detail && { ...detail, ratingHistory: history.points };
+  return detail && { ...detail, ratingHistory: history.points, awards };
 }

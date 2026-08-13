@@ -1,3 +1,4 @@
+import type { PlayerAchievement } from "./achievements";
 import type { RatingHistoryPoint } from "./rating-history";
 import type { TankStats } from "../wot/tank-stats";
 import type { VehicleMeta } from "../wot/tanks/meta";
@@ -176,11 +177,15 @@ export function buildPlayerTankDetail(
 }
 
 /**
- * The record as the vehicle panel serves it: the snapshot above, plus the
- * series charted beside it. One payload, so the panel arrives complete rather
- * than filling in from a second round trip.
+ * The record as the vehicle panel serves it: the snapshot above, plus the two
+ * things rendered beside it. One payload, so the panel arrives complete rather
+ * than filling in from three round trips.
  */
 export type PlayerTankRecord = PlayerTankDetail & {
   /** Both curves for this vehicle, over the same 90 days as the profile's. */
   ratingHistory: RatingHistoryPoint[];
+  /** The medals earned on it, in the game's cabinet order. Earned only, and
+   * null when they are not known yet (a player nothing has been fetched for),
+   * which renders as no section rather than as an empty one. */
+  awards: PlayerAchievement[] | null;
 };

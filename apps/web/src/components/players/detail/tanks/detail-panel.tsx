@@ -7,11 +7,13 @@ import {
   DEFAULT_RATING_METRIC,
   RATING_METRIC_LABEL,
   isRatingMetric,
+  type PlayerAchievement,
   type PlayerTankDetail,
   type RatingHistoryPoint,
 } from "@unicum.gg/shared";
 import { MountOnVisible } from "@/components/mount-on-visible";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
+import { TankAwards } from "./awards";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import type { Region } from "@unicum.gg/wargaming";
@@ -55,11 +57,15 @@ export function PlayerTankDetailPanel({
   region,
   detail,
   ratingHistory,
+  awards,
 }: {
   region: Region;
   detail: PlayerTankDetail;
   /** The two curves for this vehicle, over the same 90 days as the profile's. */
   ratingHistory: RatingHistoryPoint[];
+  /** The medals earned on it, already trimmed to what was earned. Null when we
+   * do not know them yet, which shows no section rather than an empty one. */
+  awards: PlayerAchievement[] | null;
 }) {
   const name = detail.shortName || detail.name || `#${detail.tankId}`;
   const [storedMetric] = useCookie(
@@ -164,6 +170,11 @@ export function PlayerTankDetailPanel({
             </p>
           )}
         </div>
+
+        {/* Last, the way the game orders its own vehicle record. Rendered
+            straight from the payload: the medals come stored, so there is
+            nothing to wait for and nothing to defer. */}
+        {awards ? <TankAwards awards={awards} /> : null}
 
         <p className={`text-xs ${styles.mutedText}`}>
           Updated <RelativeTime date={new Date(detail.updatedAt)} />

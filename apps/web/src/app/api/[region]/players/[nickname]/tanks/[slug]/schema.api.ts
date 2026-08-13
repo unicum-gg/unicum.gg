@@ -23,6 +23,32 @@ const tankRatingHistoryPoint = z
       "Daily rating sample for one player on one vehicle: the value carried by every battle fought on it, and the value of the battles fought that day.",
   });
 
+// The medals earned on this vehicle: the game's "Awards" tab. Same shape as the
+// profile's cabinet, spelled out again because the generator only expands a
+// schema it parsed in this file, and trimmed to what was earned rather than the
+// whole 505-entry catalogue.
+const tankAward = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    description: z.string(),
+    condition: z.string(),
+    image: z.string(),
+    section: z.string(),
+    sectionName: z.string(),
+    sectionOrder: z.number().int(),
+    order: z.number().int(),
+    type: z.string(),
+    outdated: z.boolean(),
+    tiers: z.array(z.object({ name: z.string(), image: z.string() })),
+    count: z.number().int(),
+  })
+  .meta({
+    id: "TankAward",
+    description:
+      "One medal earned on this vehicle. For a tiered medal the count is the tier reached, not a number of awards.",
+  });
+
 /**
  * Response of `GET /{region}/players/{nickname}/tanks/{slug}`.
  *
@@ -103,6 +129,14 @@ export const PlayerTankDetailResponse = z
     ratingHistory: z.array(tankRatingHistoryPoint).meta({
       description: "Daily rating series for this player on this vehicle, over the last 90 days.",
     }),
+
+    awards: z
+      .array(tankAward)
+      .nullable()
+      .meta({
+        description:
+          "Medals earned on this vehicle, in the game's own cabinet order. Earned only, and null when they are not known for this player yet.",
+      }),
   })
   .meta({
     id: "PlayerTankDetail",
