@@ -11,6 +11,7 @@ import {
   RedditLogoIcon,
   XLogoIcon,
 } from "@phosphor-icons/react";
+import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 import {
@@ -22,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Skeleton } from "@/components/ui/skeleton";
+import { ogImagePath } from "@/lib/og-image";
 import { cn } from "@/lib/utils";
 
 type ShareTarget = {
@@ -172,12 +174,20 @@ export function ShareModal({
               {!ogLoaded && (
                 <Skeleton className="absolute inset-0 rounded-none" />
               )}
-              {/* eslint-disable-next-line @next/next/no-img-element -- dynamic OG route, Next/Image optimizer adds overhead */}
-              <img
-                src={ogImage}
+              {/* `unoptimized`, deliberately. Optimizing would save real bytes
+                  (59kB raw against 17kB) but write a resized copy of every card
+                  anyone opens this modal on into the server's image cache,
+                  which has no bound over players, clans and tanks, and which
+                  nothing else will ever read: the `og:image` meta points at
+                  `/api/og/…`, so an embed never asks for the optimized one.
+                  Fetching the card as-is also warms the CDN entry the embed
+                  will hit, where the optimizer's server-side fetch does not. */}
+              <Image
+                src={ogImagePath(ogImage)}
                 alt="Share preview"
                 width={1200}
                 height={630}
+                unoptimized
                 onLoad={() => setLoadedOg(ogImage)}
                 className={cn(
                   "block size-full object-cover transition-opacity duration-200",
