@@ -8,5 +8,6 @@ export * from "./lift-drag";
 export * from "./rating-history";
 export * from "./stats";
 export * from "./stronghold-stats";
+export * from "./tank-detail";
 export * from "./tanks";
 export * from "./valuation";

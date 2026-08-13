@@ -82,6 +82,15 @@ class PlayerClient {
     );
   }
 
+  /** Player vehicle record */
+  tank(slug: string) {
+    const path = { region: this.region, nickname: this.nickname, slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks/{slug}", path),
+      () => this.api.GET("/{region}/players/{nickname}/tanks/{slug}", { params: { path } }),
+    );
+  }
+
   /** Subscribe to live updates for this player (SSE). Browser-only. */
   live(onUpdate: (event: LiveUpdate) => void, onError?: (error: Event) => void): Unsubscribe {
     return subscribePlayerLive(this.baseUrl, this.region, this.nickname, onUpdate, onError);

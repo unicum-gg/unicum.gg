@@ -179,6 +179,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/tanks/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player vehicle record
+         * @description One player's record on one vehicle, in the shape of the game's own Service Record: the general parameters (win rate, survival, hit rate, damage and destruction ratios, armour use) and the per-battle averages, plus the WN7/WN8/WNX the player earned on that tank and their marks. Reads the newest stored snapshot for the pair, so every number carries the same `updated_at`. 404 when we do not track the player, the slug is not a vehicle, or the player has never played it.
+         */
+        get: operations["get-{region}-players-{nickname}-tanks-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/enqueue": {
         parameters: {
             query?: never;
@@ -2345,6 +2365,116 @@ export interface components {
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
+        /** @description One player's record on one vehicle. */
+        PlayerTankDetail: {
+            tankId: number;
+            slug: string | null;
+            name: string;
+            shortName: string | null;
+            tier: number | null;
+            nation: string | null;
+            type: string | null;
+            role: string | null;
+            isPremium: boolean;
+            isReward: boolean;
+            /**
+             * Format: date-time
+             * @description When the snapshot these numbers come from was taken.
+             */
+            updatedAt: Date;
+            battles: number;
+            /** @description Mark of Mastery, 0-4. */
+            mom: number | null;
+            /** @description Marks of Excellence on the gun, 0-3. */
+            moe: number | null;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            /** @description Ratio in 0..1, not a percentage. */
+            winrate: number;
+            survivalRate: number | null;
+            hitRate: number | null;
+            /** @description Damage dealt over damage taken. */
+            damageRatio: number | null;
+            /** @description Frags over deaths. Null on a tank never lost. */
+            destructionRatio: number | null;
+            /** @description Wargaming's own armour use factor. */
+            armorUseEfficiency: number | null;
+            stuns: number | null;
+            avgXp: number | null;
+            avgDamage: number;
+            avgDamageReceived: number | null;
+            avgAssist: number;
+            avgAssistRadio: number;
+            avgAssistTrack: number;
+            avgAssistStun: number | null;
+            avgBlocked: number | null;
+            avgSpotted: number;
+            avgFrags: number;
+            avgCapture: number | null;
+            avgDefense: number;
+            avgStuns: number | null;
+            /** @description Best single battle on the vehicle: the game's Record Score. */
+            maxXp: number | null;
+            maxFrags: number | null;
+            /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
+            ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
+        };
+        /** @description One player's record on one vehicle. */
+        PlayerTankDetailResponse: {
+            tankId: number;
+            slug: string | null;
+            name: string;
+            shortName: string | null;
+            tier: number | null;
+            nation: string | null;
+            type: string | null;
+            role: string | null;
+            isPremium: boolean;
+            isReward: boolean;
+            /**
+             * Format: date-time
+             * @description When the snapshot these numbers come from was taken.
+             */
+            updatedAt: Date;
+            battles: number;
+            /** @description Mark of Mastery, 0-4. */
+            mom: number | null;
+            /** @description Marks of Excellence on the gun, 0-3. */
+            moe: number | null;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+            /** @description Ratio in 0..1, not a percentage. */
+            winrate: number;
+            survivalRate: number | null;
+            hitRate: number | null;
+            /** @description Damage dealt over damage taken. */
+            damageRatio: number | null;
+            /** @description Frags over deaths. Null on a tank never lost. */
+            destructionRatio: number | null;
+            /** @description Wargaming's own armour use factor. */
+            armorUseEfficiency: number | null;
+            stuns: number | null;
+            avgXp: number | null;
+            avgDamage: number;
+            avgDamageReceived: number | null;
+            avgAssist: number;
+            avgAssistRadio: number;
+            avgAssistTrack: number;
+            avgAssistStun: number | null;
+            avgBlocked: number | null;
+            avgSpotted: number;
+            avgFrags: number;
+            avgCapture: number | null;
+            avgDefense: number;
+            avgStuns: number | null;
+            /** @description Best single battle on the vehicle: the game's Record Score. */
+            maxXp: number | null;
+            maxFrags: number | null;
+            /** @description Daily rating series for this player on this vehicle, over the last 90 days. */
+            ratingHistory: components["schemas"]["TankRatingHistoryPoint"][];
+        };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];
         };
@@ -2796,6 +2926,12 @@ export interface components {
         TankPerfRow: {
             identity: components["schemas"]["TankIdentity"];
             stats: components["schemas"]["TankServerStats"] | null;
+        };
+        /** @description Daily rating sample for one player on one vehicle: the value carried by every battle fought on it, and the value of the battles fought that day. */
+        TankRatingHistoryPoint: {
+            day: string;
+            lifetime: components["schemas"]["ratingMetricValues"];
+            session: components["schemas"]["ratingMetricValues"];
         };
         /** @description Vehicle row (additional fields may be present). */
         TankResolved: {
@@ -3395,6 +3531,39 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerTanksResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tanks-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTankDetail"];
                 };
             };
         };

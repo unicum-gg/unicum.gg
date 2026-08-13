@@ -257,11 +257,23 @@ function resultOf(ep: Endpoint): string {
 
 // ── main-tree emitters ───────────────────────────────────────────────────────
 
-function emitInstance(ep: Endpoint, r: Resource, method: string): string {
+function emitInstance(
+  ep: Endpoint,
+  r: Resource,
+  method: string,
+  /** Trailing path parameter of a keyed sub-resource, e.g. the `slug` of
+   * `/players/{nickname}/tanks/{slug}`. Taken as the method's first argument. */
+  subKey?: string,
+): string {
   const q = qsig(ep);
   const b = bsig(ep);
-  const path = `{ region: this.region, ${r.key}: this.${r.key} }`;
-  return `${docComment(ep)}  ${method}(${params(q, b)}) {
+  const path = subKey
+    ? `{ region: this.region, ${r.key}: this.${r.key}, ${subKey} }`
+    : `{ region: this.region, ${r.key}: this.${r.key} }`;
+  const args = [subKey ? `${subKey}: string` : "", params(q, b)]
+    .filter(Boolean)
+    .join(", ");
+  return `${docComment(ep)}  ${method}(${args}) {
     const path = ${path};
     return handle(
       buildUrl(this.baseUrl, "${ep.path}", path${q.urlArg}),
@@ -444,8 +456,35 @@ function bucketize(endpoints: Endpoint[]): Buckets {
       }
     } else if (isParam(afterRes[0])) {
       const sub = afterRes.slice(1);
-      const m = sub.length === 0 ? resource.root : camel(sub);
-      push(b.instance, resource.name, emitInstance(ep, resource, m));
+      // A sub-resource of the entity, keyed by a second path parameter:
+      // `/players/{nickname}/tanks/{slug}`, and anything hanging off that key.
+      // It stays a method on the entity, named after the thing addressed
+      // (singular, since one is returned) plus whatever follows the key, and
+      // taking that key as its first argument:
+      // `players("Animal").tank("is-7")`, and a `.../{slug}/videos` would
+      // likewise be `players("Animal").tankVideos("is-7")`.
+      //
+      // Only one key is placed. Two of them in the same tail has no obvious
+      // signature, so it falls through to UNMAPPED rather than being pasted
+      // into an identifier.
+      const keyAt = sub.findIndex(isParam);
+      const oneKey = keyAt >= 0 && sub.filter(isParam).length === 1;
+      if (oneKey) {
+        const m = camel([
+          singular(camel(sub.slice(0, keyAt))),
+          ...sub.slice(keyAt + 1),
+        ]);
+        push(
+          b.instance,
+          resource.name,
+          emitInstance(ep, resource, m, sub[keyAt].slice(1, -1)),
+        );
+      } else if (sub.some(isParam)) {
+        b.unmapped.push(ep.path);
+      } else {
+        const m = sub.length === 0 ? resource.root : camel(sub);
+        push(b.instance, resource.name, emitInstance(ep, resource, m));
+      }
     } else {
       const m = camel(afterRes);
       push(b.nsMember, resource.name, emitNamespaceMember(ep, m));

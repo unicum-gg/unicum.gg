@@ -19,6 +19,7 @@ import {
   isRatingMetric,
   type PlayerAchievements,
   type PlayerDetailData,
+  type PlayerTankRecord,
   type PlayerTankRow,
   inferPlayerLanguages,
 } from "@unicum.gg/shared";
@@ -40,6 +41,7 @@ export function PlayerProfile({
   activeMode,
   initialData,
   initialTanks,
+  tankDetail,
   initialAchievements,
 }: {
   region: Region;
@@ -53,6 +55,8 @@ export function PlayerProfile({
   // Present only when Tanks is the section the server rendered (so its rows are
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
   initialTanks: PlayerTankRow[] | null;
+  /** The vehicle record the URL names, rendered beside the tank table. */
+  tankDetail: PlayerTankRecord | null;
   // Present only when Achievements is the section the server rendered, same
   // deal as `initialTanks`.
   initialAchievements: PlayerAchievements | null;
@@ -159,6 +163,7 @@ export function PlayerProfile({
         nowMs={nowMs}
         detail={detail}
         initialTanks={initialTanks}
+        tankDetail={tankDetail}
         initialAchievements={initialAchievements}
       />
     </>

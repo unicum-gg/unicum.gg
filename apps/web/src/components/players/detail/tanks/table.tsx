@@ -6,7 +6,8 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import ROUTES from "@/constants/routes";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RatingMetric, type PlayerTankRow } from "@unicum.gg/shared";
@@ -26,6 +27,7 @@ import {
   PLAYER_COLUMN_BY_KEY,
   PlayerColumnSelector,
   ratingForMetric,
+  COMPACT_COLUMN_KEYS,
   usePlayerColumns,
 } from "@/components/players/detail/tanks/vehicle-columns";
 import { TankIcon } from "@/components/tanks/tank-icon";
@@ -160,11 +162,18 @@ function SortableHead({
 
 export function PlayerTanksTable({
   region,
+  nickname,
   vehicles,
+  selectedSlug,
 }: {
   region: Region;
+  nickname: string;
   vehicles: PlayerTankRow[];
+  /** The vehicle whose record is open beside the table, highlighted here so the
+   * two halves agree on what is being read. */
+  selectedSlug?: string | null;
 }) {
+  const router = useRouter();
   const [storedRating] = useCookie(
     STORAGE.COOKIES.RATING,
     DEFAULT_RATING_METRIC,
@@ -205,9 +214,42 @@ export function PlayerTanksTable({
     [filtered, sort, metric],
   );
   const { paged, pager } = usePagination(sorted);
+
+  // Bring the open record's row to the reader rather than making them hunt for
+  // it. Two steps, because the list is paginated: the tank someone shared a
+  // link to is often not on page 1 at all.
+  const selectedIndex = useMemo(
+    () =>
+      selectedSlug ? sorted.findIndex((r) => r.slug === selectedSlug) : -1,
+    [sorted, selectedSlug],
+  );
+  // Only when the selection itself changes, so paging away from the open
+  // record afterwards is not undone on the next render.
+  const [pagedFor, setPagedFor] = useState<string | null>(null);
+  if (selectedSlug && selectedSlug !== pagedFor) {
+    setPagedFor(selectedSlug);
+    if (selectedIndex >= 0 && pager.pageSize !== "all") {
+      const wanted = Math.floor(selectedIndex / pager.pageSize) + 1;
+      if (wanted !== pager.page) pager.setPage(wanted);
+    }
+  }
+
+  const selectedRowRef = useRef<HTMLTableRowElement>(null);
+  useEffect(() => {
+    // `nearest`: a row already on screen (the one just clicked) does not move,
+    // and one arrived at by link is scrolled just far enough to be read.
+    selectedRowRef.current?.scrollIntoView({ block: "nearest" });
+  }, [selectedSlug, pager.page]);
+  // Beside an open record the list has a third less width, so it shows the
+  // game's own columns and lets the record carry the rest.
   const visibleColumns = useMemo(
-    () => PLAYER_COLUMNS.filter((c) => visibleKeys.has(c.key)),
-    [visibleKeys],
+    () =>
+      PLAYER_COLUMNS.filter(
+        (c) =>
+          visibleKeys.has(c.key) &&
+          (!selectedSlug || COMPACT_COLUMN_KEYS.has(c.key)),
+      ),
+    [visibleKeys, selectedSlug],
   );
 
   function toggleSort(key: string) {
@@ -231,7 +273,9 @@ export function PlayerTanksTable({
         <TankFilterBar
           filters={filters}
           searchNoun="tanks"
-          extra={<PlayerColumnSelector />}
+          // Hidden while a record is open: the columns are imposed then, and a
+          // picker that answers "7 of 7" over a four-column table is a lie.
+          extra={selectedSlug ? undefined : <PlayerColumnSelector />}
         />
       </div>
       <div className="border-t border-fd-border">
@@ -302,8 +346,35 @@ export function PlayerTanksTable({
                 const hasIcon = !!(r.tag && r.type);
                 const name = r.shortName || r.name || `#${r.tankId}`;
                 const isPremium = r.isPremium;
+                const selected = selectedSlug != null && r.slug === selectedSlug;
                 return (
-                  <TableRow key={r.tankId}>
+                  <TableRow
+                    key={r.tankId}
+                    ref={selected ? selectedRowRef : undefined}
+                    // The row opens this player's record on the tank, which is
+                    // a URL of its own; the name inside still goes to the
+                    // vehicle's own page, so both destinations stay reachable.
+                    onClick={() => {
+                      if (r.slug) {
+                        // `scroll: false`: the reader is picking a row half way
+                        // down 157 of them, and the record opens beside it.
+                        // Jumping to the top of the page would take both the
+                        // row and the record they just asked for off screen.
+                        router.push(
+                          ROUTES.PLAYER_TANK(region, nickname, r.slug),
+                          { scroll: false },
+                        );
+                      }
+                    }}
+                    className={cn(
+                      r.slug && "cursor-pointer",
+                      // A left edge rather than a row tint: the rating columns
+                      // paint their own cells, so a background would show
+                      // through on some columns and not others.
+                      selected &&
+                        "bg-fd-secondary/40 [&>td:first-child]:border-l-2 [&>td:first-child]:border-l-brand",
+                    )}
+                  >
                     <TableCell className="hidden text-center sm:table-cell">
                       {r.nation ? (
                         <NationFlag nation={r.nation} region={region} />
@@ -328,7 +399,10 @@ export function PlayerTanksTable({
                     </TableCell>
                     <TableCell
                       className={cn(
-                        "font-medium max-sm:pl-4!",
+                        // Never wrapped: a name folding onto three lines is
+                        // what makes a narrowed table look broken, and the
+                        // container scrolls when it has to.
+                        "font-medium whitespace-nowrap max-sm:pl-4!",
                         isPremium && "text-[#FAB81B]",
                       )}
                     >

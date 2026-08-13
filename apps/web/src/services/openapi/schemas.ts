@@ -53,6 +53,13 @@ export const playerLiveParams = z.object({
   nickname: z.string().meta({ description: "Player nickname." }),
 });
 
+/** A player and one of their vehicles: the Service Record of that pair. */
+export const playerTankParams = z.object({
+  region: regionPath,
+  nickname: z.string().meta({ description: "Player nickname." }),
+  slug: z.string().meta({ description: "Tank slug (e.g. is-7)." }),
+});
+
 export const clanLiveParams = z.object({
   region: regionPath,
   tag: z.string().meta({ description: "Clan tag." }),

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import type { MouseEvent } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -77,6 +78,7 @@ export function PlayerSectionNav({
   achievementCount: number;
   onSelect: (section: PlayerSection) => void;
 }) {
+  const pathname = usePathname();
   // One count per section rather than a chain of ternaries in the JSX, so a
   // third counted section is a line here instead of another special case.
   const counts: Partial<Record<PlayerSection, number>> = {
@@ -94,7 +96,11 @@ export function PlayerSectionNav({
           href={playerSectionHref(basePath, s.id)}
           active={section === s.id}
           onActivate={() => {
-            if (section !== s.id) onSelect(s.id);
+            // Compared on the URL, not on the section: a vehicle record lives
+            // under Tanks at a deeper path (`/tanks/is-7`), so "already on this
+            // section" would swallow the one click that closes it and leave no
+            // way back to the plain list.
+            if (pathname !== playerSectionHref(basePath, s.id)) onSelect(s.id);
           }}
         >
           {counts[s.id] !== undefined

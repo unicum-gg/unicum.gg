@@ -20,6 +20,7 @@ import { UnicumError } from "@unicum.gg/sdk";
 import {
   type PlayerAchievements,
   type PlayerDetailData,
+  type PlayerTankRecord,
   type PlayerTankRow,
 } from "@unicum.gg/shared";
 import { type Region, isRegion } from "@unicum.gg/wargaming";
@@ -210,9 +211,17 @@ export function renderPlayerPage(
   region: Region,
   decoded: string,
   view: PlayerView,
+  /** A vehicle slug, when the URL names one: `/players/Animal/tanks/is-7`
+   * opens the Tanks view with that record beside the table. */
+  tankSlug?: string,
 ) {
   return (
-    <PlayerProfileServer region={region} decoded={decoded} view={view} />
+    <PlayerProfileServer
+      region={region}
+      decoded={decoded}
+      view={view}
+      tankSlug={tankSlug}
+    />
   );
 }
 
@@ -222,10 +231,12 @@ async function PlayerProfileServer({
   region,
   decoded,
   view,
+  tankSlug,
 }: {
   region: Region;
   decoded: string;
   view: PlayerView;
+  tankSlug?: string;
 }) {
   const { section, mode } = view;
   const detail = await loadDetail(region, decoded);
@@ -270,6 +281,21 @@ async function PlayerProfileServer({
           .players(decoded)
           .achievements()) as unknown as PlayerAchievements)
       : null;
+  // The open vehicle record, rendered on the server like the list beside it: it
+  // is the subject of its own URL, so it belongs in the HTML a crawler and the
+  // `.md` twin read, not in a fetch after hydration. `buildSafe` is not wanted
+  // here: a slug the player has never played is a 404, not an empty shell.
+  const tankDetail: PlayerTankRecord | null = tankSlug
+    ? await unicum
+        .region(region)
+        .players(decoded)
+        .tank(tankSlug)
+        .then((d) => d as unknown as PlayerTankRecord)
+        .catch((err) => {
+          if (err instanceof UnicumError && err.status === 404) notFound();
+          throw err;
+        })
+    : null;
   const { current, clanHistory } = detail;
   const displayName = detail.player.nickname;
 
@@ -310,6 +336,7 @@ async function PlayerProfileServer({
         activeMode={mode}
         initialData={detail}
         initialTanks={initialTanks}
+        tankDetail={tankDetail}
         initialAchievements={initialAchievements}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side

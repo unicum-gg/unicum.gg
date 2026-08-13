@@ -1,4 +1,4 @@
-import { asc, eq } from "drizzle-orm";
+import { and, asc, eq } from "drizzle-orm";
 import { RatingMetric, tankSnapshotsByRegion, computeAvgTier, type WN8Expected, type WNXExpected, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type RatingHistory, type RatingHistoryPoint, type RatingHistoryMetricValues } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import type { Region } from "@unicum.gg/wargaming";
@@ -43,6 +43,10 @@ export async function getRatingHistory(
   region: Region,
   playerId: number,
   lookbackDays = DEFAULT_LOOKBACK_DAYS,
+  /** Narrow the series to one vehicle: the same two curves, read as "how did
+   * this player get on with this tank". Cheaper than the whole player, since
+   * `(player_id, tank_id)` is the primary key's prefix. */
+  tankId?: number,
 ): Promise<RatingHistory> {
   const tankSnapshots = tankSnapshotsByRegion[region];
 
@@ -60,7 +64,14 @@ export async function getRatingHistory(
       trackAssistedDamage: tankSnapshots.trackAssistedDamage,
     })
     .from(tankSnapshots)
-    .where(eq(tankSnapshots.playerId, playerId))
+    .where(
+      tankId === undefined
+        ? eq(tankSnapshots.playerId, playerId)
+        : and(
+            eq(tankSnapshots.playerId, playerId),
+            eq(tankSnapshots.tankId, tankId),
+          ),
+    )
     // Same-`taken_at` tie-break on battles (monotonic per tank), so a chunk
     // written under one `now()` still replays in the order it happened.
     .orderBy(asc(tankSnapshots.takenAt), asc(tankSnapshots.battles));

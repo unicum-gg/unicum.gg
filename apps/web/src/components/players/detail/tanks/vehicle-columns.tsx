@@ -159,6 +159,25 @@ const DEFAULT_KEYS = PLAYER_COLUMNS.filter((c) => c.defaultVisible).map(
   (c) => c.key,
 );
 
+/**
+ * What the table keeps when a vehicle record is open beside it.
+ *
+ * The list loses about a third of its width to the record, and thirteen columns
+ * in what is left wraps every second tank name onto three lines. So it falls
+ * back to the game's own list: what the tank is, how much it was played, and
+ * how well. Nothing is lost, because the columns dropped here (mastery, marks,
+ * average XP) are all spelled out in the record itself.
+ *
+ * A display-time filter, never a write: the reader's chosen columns are in a
+ * cookie and come back untouched the moment the record is closed.
+ */
+export const COMPACT_COLUMN_KEYS = new Set([
+  "battles",
+  "avgDamage",
+  "winrate",
+  "rating",
+]);
+
 // Cookie-backed set of visible column keys, shared between the selector (in the
 // filter bar) and the table via useCookie's broadcast.
 export function usePlayerColumns(): [Set<string>, (key: string) => void] {

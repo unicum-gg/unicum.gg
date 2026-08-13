@@ -29,6 +29,7 @@ import { unicum } from "@/services/sdk";
 import type {
   PlayerAchievements,
   PlayerDetailData,
+  PlayerTankRecord,
   PlayerTankRow,
   RatingMetric,
 } from "@unicum.gg/shared";
@@ -71,6 +72,8 @@ export type PlayerTabsViewProps = {
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
   initialTanks: PlayerTankRow[] | null;
+  /** The vehicle record the URL names, server-rendered beside the table. */
+  tankDetail: PlayerTankRecord | null;
   // Server-rendered cabinet for a direct `/achievements` landing; null
   // otherwise, so the tab fetches on demand.
   initialAchievements: PlayerAchievements | null;
@@ -87,6 +90,7 @@ export function PlayerTabsView({
   nowMs,
   detail,
   initialTanks,
+  tankDetail,
   initialAchievements,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
@@ -214,6 +218,7 @@ export function PlayerTabsView({
           nickname={nickname}
           vehicles={tanks ?? []}
           loading={onTanks && !tanks}
+          tankDetail={tankDetail}
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />

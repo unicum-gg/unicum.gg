@@ -54,6 +54,14 @@ const ROUTES = {
   },
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
+  // One player's record on one vehicle, the game's Service Record. A URL of its
+  // own rather than a panel state, so it can be linked, shared and reopened.
+  PLAYER_TANK: (region: Region, nickname: string, slug: string) =>
+    pathcat("/:region/players/:nickname/tanks/:slug", {
+      region,
+      nickname,
+      slug,
+    }),
   COMPARE_PLAYERS: (region: Region, [first, ...rest]: string[]) =>
     pathcat("/:region/players/:first/vs/:rest", {
       region,
