@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { ReserveOption } from "@/hooks/use-boost-console";
 import { clockTime } from "@/components/clans/detail/boost-time";
 import { Label } from "@/components/ui/label";
@@ -80,12 +81,12 @@ export function BoostReservesPicker({
                 htmlFor={boxId}
                 className="min-w-0 flex-1 cursor-pointer items-center gap-2.5"
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={r.icon}
                   alt=""
+                  width={36}
+                  height={36}
                   className="size-9 shrink-0"
-                  loading="lazy"
                 />
                 <span className="flex min-w-0 flex-col gap-0.5">
                   <span className="truncate text-sm font-medium text-fd-foreground">

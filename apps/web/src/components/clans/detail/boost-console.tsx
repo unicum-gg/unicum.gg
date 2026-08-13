@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { PlusIcon, UsersIcon } from "@phosphor-icons/react";
 import type { Region } from "@unicum.gg/wargaming";
@@ -169,12 +170,12 @@ export function ClanBoostConsole({
                     <TableRow key={a.id}>
                       <TableCell>
                         <span className="flex items-center gap-2">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
+                          <Image
                             src={reserveIconUrl(a.reserveType)}
                             alt=""
+                            width={24}
+                            height={24}
                             className="size-6 shrink-0"
-                            loading="lazy"
                           />
                           <span className="font-medium">{a.reserveName}</span>
                           <span className="text-fd-muted-foreground">

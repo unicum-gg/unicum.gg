@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { UsersIcon } from "@phosphor-icons/react";
 import { reserveIconUrl } from "@unicum.gg/shared";
 
@@ -70,12 +71,12 @@ export function BoostSimResult({ sim }: { sim: SimResult }) {
       <ul className="flex flex-col gap-0.5 text-fd-muted-foreground">
         {sim.reserves.map((r) => (
           <li key={r.type} className="flex items-center gap-2">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={reserveIconUrl(r.type)}
               alt=""
+              width={20}
+              height={20}
               className="size-5 shrink-0"
-              loading="lazy"
             />
             <span className="text-fd-foreground">{r.name}</span>
             <span>
