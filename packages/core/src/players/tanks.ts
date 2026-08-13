@@ -39,6 +39,14 @@ function tankSnapshotFromStats(playerId: number, t: TankStats): NewTankSnapshot 
       a.avg_damage_blocked != null
         ? Math.round(a.avg_damage_blocked * a.battles)
         : null,
+    damageReceived: a.damage_received ?? null,
+    capturePoints: a.capture_points ?? null,
+    stunNumber: a.stun_number ?? null,
+    stunAssistedDamage: a.stun_assisted_damage ?? null,
+    // A ratio, not a counter: stored as WG reports it (see the schema).
+    tankingFactor: a.tanking_factor ?? null,
+    maxXp: t.max_xp ?? null,
+    maxFrags: t.max_frags ?? null,
   };
 }
 
@@ -76,6 +84,13 @@ export async function bulkInsertTankSnapshots(
           shots: sql`EXCLUDED.shots`,
           piercings: sql`EXCLUDED.piercings`,
           damageBlocked: sql`EXCLUDED.damage_blocked`,
+          damageReceived: sql`EXCLUDED.damage_received`,
+          capturePoints: sql`EXCLUDED.capture_points`,
+          stunNumber: sql`EXCLUDED.stun_number`,
+          stunAssistedDamage: sql`EXCLUDED.stun_assisted_damage`,
+          tankingFactor: sql`EXCLUDED.tanking_factor`,
+          maxXp: sql`EXCLUDED.max_xp`,
+          maxFrags: sql`EXCLUDED.max_frags`,
         },
       });
   }
@@ -142,6 +157,13 @@ export async function getLatestTankSnapshotsByAccounts(
       shots: null,
       piercings: null,
       damageBlocked: null,
+      damageReceived: null,
+      capturePoints: null,
+      stunNumber: null,
+      stunAssistedDamage: null,
+      tankingFactor: null,
+      maxXp: null,
+      maxFrags: null,
     });
     out.set(accountId, arr);
   }
@@ -218,6 +240,13 @@ export async function getTankSnapshotsByAccountsBefore(
       shots: null,
       piercings: null,
       damageBlocked: null,
+      damageReceived: null,
+      capturePoints: null,
+      stunNumber: null,
+      stunAssistedDamage: null,
+      tankingFactor: null,
+      maxXp: null,
+      maxFrags: null,
     });
     out.set(accountId, arr);
   }

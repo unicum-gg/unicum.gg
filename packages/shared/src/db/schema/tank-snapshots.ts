@@ -4,6 +4,7 @@ import {
   integer,
   pgTable,
   primaryKey,
+  real,
   timestamp,
 } from "drizzle-orm/pg-core";
 import { Region } from "@unicum.gg/wargaming";
@@ -54,6 +55,27 @@ export function makeTankSnapshotsTable(
       shots: integer("shots"),
       piercings: integer("piercings"),
       damageBlocked: bigint("damage_blocked", { mode: "number" }),
+      // The rest of the in-game vehicle record (Service Record → Statistics),
+      // so a player's page can show what the game shows for that tank. Same
+      // deal as above: nullable, organically backfilled, and free to fetch
+      // since they ride the `tanks/stats` call we already make.
+      damageReceived: bigint("damage_received", { mode: "number" }),
+      capturePoints: integer("capture_points"),
+      stunNumber: integer("stun_number"),
+      stunAssistedDamage: bigint("stun_assisted_damage", { mode: "number" }),
+      // Wargaming's "armor use efficiency", the one value here that is a ratio
+      // rather than a counter: it cannot be summed across tanks or diffed
+      // between two snapshots, only read as-is for the tank it belongs to.
+      // Kept from the API rather than derived from blocked/received so the
+      // number on the page is the number in the client.
+      tankingFactor: real("tanking_factor"),
+      // The game's "Record Score": the best single battle on this tank. Maxima,
+      // so like `tanking_factor` they must never be diffed between snapshots;
+      // unlike it they do survive an aggregate, as a max of maxima. Wargaming
+      // exposes no per-tank maximum damage, so that line of the game's block
+      // has no column here.
+      maxXp: integer("max_xp"),
+      maxFrags: integer("max_frags"),
     },
     (t) => [
       index(`${region}_tank_snapshots_player_taken_idx`).on(

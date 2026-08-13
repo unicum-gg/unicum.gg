@@ -7,10 +7,24 @@ import { wg } from "../../client";
 // (alongside the fetchers) keeps working.
 export type { TankStats } from "@unicum.gg/shared";
 
-/** The per-tank fields this app surfaces (WN8/WNX inputs + mastery). */
+/**
+ * The per-tank fields this app surfaces: the WN8/WNX inputs, mastery, and the
+ * rest of the in-game vehicle record (Service Record → Statistics).
+ *
+ * Asking for more costs nothing beyond a slightly larger response: it is the
+ * same call, and `tanks/stats` is the expensive one (it does not batch, so it
+ * is already one request per account).
+ */
 const TANK_STATS_FIELDS = [
   "tank_id",
   "mark_of_mastery",
+  // Top level, beside `tank_id`: the docs put the vehicle's personal bests
+  // outside the per-mode blocks, and `all.max_xp` is rejected outright. The
+  // mode sections carry a `max_damage` the top level has no equivalent for,
+  // but they answer 0 for every tank of every account tried, so the game's
+  // third record line has no source here.
+  "max_xp",
+  "max_frags",
   "all.battles",
   "all.damage_dealt",
   "all.spotted",
@@ -25,6 +39,11 @@ const TANK_STATS_FIELDS = [
   "all.shots",
   "all.piercings",
   "all.avg_damage_blocked",
+  "all.damage_received",
+  "all.capture_points",
+  "all.stun_number",
+  "all.stun_assisted_damage",
+  "all.tanking_factor",
 ] as const;
 
 export const getTanksStats = (region: Region, accountId: number): Promise<TankStats[]> =>

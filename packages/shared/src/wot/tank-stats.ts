@@ -7,6 +7,10 @@ export type TankStats = {
   // Marks of Excellence on the gun (0-3). Not part of the WG public API — merged
   // in from the WoT portal, so it is optional/absent on the raw API shape.
   marks_on_gun?: number | null;
+  /** Personal bests on the vehicle, the game's "Record Score". Top level in
+   * Wargaming's response, not inside a battle-mode block. */
+  max_xp?: number;
+  max_frags?: number;
   all: {
     battles: number;
     damage_dealt: number;
@@ -25,5 +29,14 @@ export type TankStats = {
     shots?: number;
     piercings?: number;
     avg_damage_blocked?: number;
+    // The rest of the in-game vehicle record. Optional for the same reason as
+    // the block above: a tank with no random battles reports none of them.
+    damage_received?: number;
+    capture_points?: number;
+    stun_number?: number;
+    stun_assisted_damage?: number;
+    /** Wargaming's armor use efficiency. A ratio, so it neither sums across
+     * tanks nor diffs between snapshots. */
+    tanking_factor?: number;
   };
 };

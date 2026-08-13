@@ -362,6 +362,13 @@ function tankSnapshotFromRaw(r: RawTankSnapshot): TankSnapshot {
     shots: null,
     piercings: null,
     damageBlocked: null,
+    damageReceived: null,
+    capturePoints: null,
+    stunNumber: null,
+    stunAssistedDamage: null,
+    tankingFactor: null,
+    maxXp: null,
+    maxFrags: null,
   };
 }
 
