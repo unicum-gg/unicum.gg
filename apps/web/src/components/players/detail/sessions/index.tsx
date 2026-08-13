@@ -7,6 +7,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { SegmentedControl } from "@/components/segmented-control";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { SESSIONS_SKELETON_COLUMNS } from "./skeleton-columns";
 import {
@@ -22,7 +23,7 @@ import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import { PlayerSessionsTable } from "./table";
 
-const GRANULARITIES: { id: SessionGranularity; label: string }[] = [
+const GRANULARITIES = [
   { id: SessionGranularity.Daily, label: "Daily" },
   { id: SessionGranularity.Weekly, label: "Weekly" },
   { id: SessionGranularity.Monthly, label: "Monthly" },
@@ -100,24 +101,14 @@ export function SessionsTab({
             {loading ? "" : ` (${sessions.length})`}
           </PanelTitle>
           {/* Three ways to read the same battles, not three datasets: a week is
-              recomputed from its own totals, never averaged from its days. */}
-          <div className="flex items-center gap-1">
-            {GRANULARITIES.map((g) => (
-              <button
-                key={g.id}
-                type="button"
-                onClick={() => onGranularity(g.id)}
-                className={cn(
-                  "rounded-md px-2 py-1 text-xs font-medium transition-colors",
-                  g.id === granularity
-                    ? "bg-fd-primary/10 text-fd-primary"
-                    : "text-fd-muted-foreground hover:text-fd-foreground",
-                )}
-              >
-                {g.label}
-              </button>
-            ))}
-          </div>
+              recomputed from its own totals, never averaged from its days. The
+              site's segmented switch, the same one the language boards use for
+              Any/Strict. */}
+          <SegmentedControl
+            segments={GRANULARITIES}
+            active={granularity}
+            onSelect={onGranularity}
+          />
         </PanelHeader>
         <PanelContent className="p-0">
           {loading ? (
