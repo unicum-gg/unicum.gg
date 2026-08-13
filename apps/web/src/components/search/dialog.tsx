@@ -106,7 +106,16 @@ export default function SearchDialog(props: SharedProps) {
     removeRecent,
     toggleFavorite,
     isFavorite,
+    refresh: refreshHistory,
   } = useSearchHistory();
+
+  // The saved entries store the row they were pinned from, which ages: a
+  // favorited player changes clan, a clan renames. Ask for the current rows
+  // whenever the dialog opens, before the reader has read the list. Throttled
+  // inside the hook, so reopening it five times costs one call.
+  useEffect(() => {
+    if (props.open) void refreshHistory();
+  }, [props.open, refreshHistory]);
 
   const trimmedQuery = query.trim();
   const wantPlayers =
