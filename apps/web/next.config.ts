@@ -3,6 +3,13 @@ import type { NextConfig } from "next";
 
 import "./env";
 import { AGENT_DISCOVERY_LINK } from "./src/constants/agent-discovery";
+// The tab definitions themselves, so the legacy-query redirects below list the
+// segments that exist rather than a copy of them that can drift.
+import { BattleType } from "@unicum.gg/shared";
+import { CLAN_VIEWS } from "./src/components/clans/detail/tabs";
+import { PLAYER_VIEWS } from "./src/components/players/detail/tabs";
+import { TANK_DETAIL_TABS } from "./src/components/tanks/detail/tabs";
+import { TANK_TABS } from "./src/components/tanks/list/tabs";
 
 // Stable build identifier across container restarts of the same git revision.
 // Used by both `generateBuildId` (asset path namespace) and `deploymentId`
@@ -180,59 +187,136 @@ const nextConfig: NextConfig = {
     // a render builds one tab instead of all of them, and each is indexable).
     // These keep the old URLs working.
     //
-    // The value is a named capture group, so the segment is carried over
-    // verbatim instead of enumerating every tab here: adding or renaming one is
-    // a change in its own enum, never in this file. An unknown value lands on
-    // the tab route, which only prerenders the real ones and 404s the rest.
+    // Only the values that actually became a segment are matched, read from the
+    // tab definitions themselves so a renamed tab is a change in its own enum
+    // and never in this file. The first version of these rules captured any
+    // value at all (`(?<tab>.+)`) and pasted it on as a segment, which meant
+    // every URL the enums had moved on from stopped being a page: `?tab=vehicles`
+    // (the Tanks section's name until June 2026) landed on `/clans/FAME/vehicles`
+    // and 404ed, and so did the values naming a default view (`?tab=overview`,
+    // `?tab=overall`, `?tab=specifications`), which have no segment to go to at
+    // all. Anything unmatched now falls through to the page it was already
+    // asking for, which renders, ignores the stale param, and points its
+    // canonical at itself.
     //
     // Next always forwards the request's query to the destination (there is no
     // opt-out, and a trailing `?` does not strip it), so the landing URL keeps a
-    // stale param. Harmless: these pages read no searchParams, and their
-    // canonical points at the bare segment, so the two consolidate.
-    const capture = (key: string, name: string) => [
-      { type: "query" as const, key, value: `(?<${name}>.+)` },
-    ];
+    // stale param. Harmless for the same reason, and it is also why a value can
+    // never be redirected to the bare path: the param would survive the hop and
+    // match the rule again, forever.
+    //
+    // A tab's legacy query value is the segment it became, so the table is the
+    // list of segments a page has. Renames are the exception and are the reason
+    // this is a map rather than a list: the clan Tanks section was labelled
+    // Vehicles until June 2026, and `?tab=vehicles` is what a good part of the
+    // clan pages are still indexed under.
+    const segmentsOf = (
+      tabs: { segment: string | null }[],
+      renamed: Record<string, string> = {},
+    ): Record<string, string> => ({
+      ...Object.fromEntries(
+        tabs.flatMap((t) => (t.segment ? [[t.segment, t.segment]] : [])),
+      ),
+      ...renamed,
+    });
+
+    const legacyQueryRedirects = (
+      source: string,
+      keys: string[],
+      // `:segment` in the destination, e.g. `/:region/clans/:tag/:segment`.
+      destination: string,
+      segments: Record<string, string>,
+    ) => {
+      const entries = Object.entries(segments);
+      // A value that still names its own segment rides a named capture, so the
+      // common case is one rule per key rather than one per tab.
+      const verbatim = entries.filter(([value, s]) => value === s);
+      const renamed = entries.filter(([value, s]) => value !== s);
+      return keys.flatMap((key) => [
+        ...(verbatim.length > 0
+          ? [
+              {
+                source,
+                has: [
+                  {
+                    type: "query" as const,
+                    key,
+                    // Next anchors this (`^…$`), so the alternation is exact.
+                    value: `(?<segment>${verbatim.map(([v]) => v).join("|")})`,
+                  },
+                ],
+                destination,
+                permanent: true,
+              },
+            ]
+          : []),
+        ...renamed.map(([value, segment]) => ({
+          source,
+          has: [{ type: "query" as const, key, value }],
+          destination: destination.replace(":segment", segment),
+          permanent: true,
+        })),
+      ]);
+    };
+
     const segmentRedirects = [
       // Tank detail: `?tab=performances` → `/tanks/is-7/performances`.
-      ["/:region(eu|na|asia)/tanks/:slug", "/:region/tanks/:slug/:tab", "tab"],
-      ["/tanks/:slug", "/tanks/:slug/:tab", "tab"],
+      ...legacyQueryRedirects(
+        "/:region(eu|na|asia)/tanks/:slug",
+        ["tab"],
+        "/:region/tanks/:slug/:segment",
+        segmentsOf(TANK_DETAIL_TABS),
+      ),
+      ...legacyQueryRedirects(
+        "/tanks/:slug",
+        ["tab"],
+        "/tanks/:slug/:segment",
+        segmentsOf(TANK_DETAIL_TABS),
+      ),
       // Tank index: `?tab=economics` → `/tanks/all/economics`. Under `/all` so a
       // tab can never collide with a vehicle slug.
-      ["/:region(eu|na|asia)/tanks", "/:region/tanks/all/:tab", "tab"],
-      ["/tanks", "/tanks/all/:tab", "tab"],
+      ...legacyQueryRedirects(
+        "/:region(eu|na|asia)/tanks",
+        ["tab"],
+        "/:region/tanks/all/:segment",
+        segmentsOf(TANK_TABS),
+      ),
+      ...legacyQueryRedirects(
+        "/tanks",
+        ["tab"],
+        "/tanks/all/:segment",
+        segmentsOf(TANK_TABS),
+      ),
       // Map gallery: `?type=frontline` → `/maps/all/frontline`.
-      ["/:region(eu|na|asia)/maps", "/:region/maps/all/:type", "type"],
-      ["/maps", "/maps/all/:type", "type"],
+      ...legacyQueryRedirects(
+        "/:region(eu|na|asia)/maps",
+        ["type"],
+        "/:region/maps/all/:segment",
+        segmentsOf(Object.values(BattleType).map((t) => ({ segment: t }))),
+      ),
+      ...legacyQueryRedirects(
+        "/maps",
+        ["type"],
+        "/maps/all/:segment",
+        segmentsOf(Object.values(BattleType).map((t) => ({ segment: t }))),
+      ),
       // Clan detail: `?tab=stronghold` → `/eu/clans/FAME/stronghold`, and
       // `?section=tanks` → `/eu/clans/FAME/tanks`. Two axes, but a mode is only
       // reachable from Overview, so each state is a single segment.
-      [
+      ...legacyQueryRedirects(
         "/:region(eu|na|asia)/clans/:tag",
-        "/:region/clans/:tag/:tab",
-        "tab",
-      ],
-      [
-        "/:region(eu|na|asia)/clans/:tag",
-        "/:region/clans/:tag/:section",
-        "section",
-      ],
+        ["tab", "section"],
+        "/:region/clans/:tag/:segment",
+        segmentsOf(CLAN_VIEWS, { vehicles: "tanks" }),
+      ),
       // Player detail: same two axes, same single-segment states.
-      [
+      ...legacyQueryRedirects(
         "/:region(eu|na|asia)/players/:nickname",
-        "/:region/players/:nickname/:tab",
-        "tab",
-      ],
-      [
-        "/:region(eu|na|asia)/players/:nickname",
-        "/:region/players/:nickname/:section",
-        "section",
-      ],
-    ].map(([source, destination, key]) => ({
-      source,
-      has: capture(key, key),
-      destination,
-      permanent: true,
-    }));
+        ["tab", "section"],
+        "/:region/players/:nickname/:segment",
+        segmentsOf(PLAYER_VIEWS),
+      ),
+    ];
 
     return [
       ...segmentRedirects,
