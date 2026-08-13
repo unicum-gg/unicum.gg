@@ -120,6 +120,8 @@ Two tiers, both in `src/components/script/index.tsx`:
 
 The `CookieConsent` context in `src/contexts/cookie-consent.tsx` writes the consent state to `localStorage` under the `unicum.*` namespace and broadcasts via synthetic `StorageEvent` so every subscribed component reacts on the same tab.
 
+There is **no ad network and no third-party CMP**. AdSense (which pulled in Google's own Funding Choices CMP, a Consent Mode v2 default block and `public/ads.txt`) was wired behind a `USE_GOOGLE_CMP` switch and removed on 2026-08-13: the site serves no ads, so it was carrying a consent manager and a third-party ad script for nothing, and the second CMP left our own banner unmounted for nothing.
+
 ## Region-prefixed routes
 
 Public routes live under `src/app/[region]/...`. The region is part of the path, never a query param. The home page `src/app/page.tsx` and a couple of region-less routes (e.g. `/coverage`) read the region from a cookie (`STORAGE.COOKIES.REGION`) and either redirect or render region-aware content client-side.

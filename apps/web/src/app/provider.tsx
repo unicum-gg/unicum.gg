@@ -10,11 +10,6 @@ import { CookieConsentProvider } from "@/contexts/cookie-consent";
 import STORAGE from "@/constants/storage";
 import { swrConfig } from "@/services/swr";
 
-// Single switch: pick which CMP drives consent.
-//   true  → Google CMP (Funding Choices, configured in AdSense).
-//   false → our own CookieConsent banner + provider.
-const USE_GOOGLE_CMP = true;
-
 const SearchDialog = dynamic(
   () => import("@/components/search/dialog"),
 );
@@ -35,18 +30,11 @@ export function Provider({ children }: { children: ReactNode }) {
   return (
     <SWRConfig value={swrConfig}>
       <RootProvider search={{ SearchDialog }}>
-        {USE_GOOGLE_CMP ? (
-          <>
-            {children}
-            <Script useGoogleCMP />
-          </>
-        ) : (
-          <CookieConsentProvider>
-            {children}
-            <CookieConsent />
-            <Script useGoogleCMP={false} />
-          </CookieConsentProvider>
-        )}
+        <CookieConsentProvider>
+          {children}
+          <CookieConsent />
+          <Script />
+        </CookieConsentProvider>
       </RootProvider>
     </SWRConfig>
   );
