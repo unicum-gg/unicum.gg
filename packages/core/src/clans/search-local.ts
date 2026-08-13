@@ -1,4 +1,4 @@
-import { desc, sql } from "drizzle-orm";
+import { desc, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -43,12 +43,55 @@ export async function searchClansLocal(
     .orderBy(desc(clans.membersCount))
     .limit(limit);
 
-  return rows.map((r) => ({
-    clan_id: Number(r.id),
-    tag: r.tag,
-    name: r.name,
-    color: r.color,
-    members_count: r.membersCount,
-    emblem: r.emblem,
-  }));
+  return rows.map(toLocalClanResult);
+}
+
+/**
+ * The same rows, addressed by clan id instead of by tag prefix. Backs the search
+ * dialog's saved entries, which keep the id and ask for the current row rather
+ * than storing a copy of it: a clan renames, and a stored copy keeps showing the
+ * tag it carried the day it was pinned.
+ *
+ * Ids we no longer have a row for are dropped, and the caller keeps its own copy
+ * for those, so a dropped id is a stale row rather than a missing one.
+ */
+export async function getClansByIds(
+  region: Region,
+  clanIds: number[],
+): Promise<LocalClanResult[]> {
+  if (clanIds.length === 0) return [];
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({
+      id: clans.id,
+      tag: clans.tag,
+      name: clans.name,
+      color: clans.color,
+      membersCount: clans.membersCount,
+      emblem: clans.emblem,
+    })
+    .from(clans)
+    .where(inArray(clans.id, clanIds));
+
+  return rows.map(toLocalClanResult);
+}
+
+/** One mapping for both lookups, so a prefix hit and a resolved entry are the
+ * same row. */
+function toLocalClanResult(row: {
+  id: number | string | bigint;
+  tag: string;
+  name: string;
+  color: string;
+  membersCount: number;
+  emblem: string | null;
+}): LocalClanResult {
+  return {
+    clan_id: Number(row.id),
+    tag: row.tag,
+    name: row.name,
+    color: row.color,
+    members_count: row.membersCount,
+    emblem: row.emblem,
+  };
 }

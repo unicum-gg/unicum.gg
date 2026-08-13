@@ -53,3 +53,29 @@ export async function searchMaps(
   );
   return scored.slice(0, limit).map((s) => s.entry);
 }
+
+/**
+ * The same rows, addressed by arena id instead of by name. Backs the search
+ * dialog's saved entries, which keep the id and ask for the current row rather
+ * than storing a copy of it.
+ *
+ * Unknown ids are dropped: a map can leave the rotation, and the caller has its
+ * own copy for that case.
+ */
+export async function getMapsByIds(
+  region: Region,
+  arenaIds: string[],
+): Promise<MapSearchResult[]> {
+  if (arenaIds.length === 0) return [];
+  const wanted = new Set(arenaIds);
+  const summaries = await listMapSummaries(region);
+  return summaries
+    .filter((m) => wanted.has(m.arenaId))
+    .map((m) => ({
+      arena_id: m.arenaId,
+      slug: m.slug,
+      name: m.name,
+      camouflage: m.camouflage,
+      minimap_url: m.minimapUrl,
+    }));
+}

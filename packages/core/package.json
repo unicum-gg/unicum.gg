@@ -18,6 +18,7 @@
     "./moe": "./src/moe/index.ts",
     "./moe/refresh-cron": "./src/moe/refresh-cron.ts",
     "./players": "./src/players/index.ts",
+    "./search": "./src/search/index.ts",
     "./discovery": "./src/discovery/index.ts",
     "./discord": "./src/discord/index.ts",
     "./changelog": "./src/changelog/index.ts",

@@ -144,6 +144,42 @@ export async function searchTanks(
 }
 
 /**
+ * The same rows, addressed by tank id instead of by name. Backs the search
+ * dialog's saved entries, which keep the id and ask for the current row rather
+ * than storing a copy of it.
+ *
+ * Unknown ids are dropped: a vehicle can leave the catalogue, and the caller has
+ * its own copy for that case.
+ */
+export async function getTanksByIds(
+  region: Region,
+  tankIds: number[],
+): Promise<TankSearchResult[]> {
+  if (tankIds.length === 0) return [];
+  const [index, encyclopedia] = await Promise.all([
+    getSlugIndex(region),
+    getVehicleEncyclopedia(region),
+  ]);
+  const out: TankSearchResult[] = [];
+  for (const tankId of new Set(tankIds)) {
+    const meta = encyclopedia[String(tankId)];
+    if (!meta) continue;
+    out.push({
+      tank_id: tankId,
+      slug: index.idToSlug.get(tankId) ?? String(tankId),
+      name: meta.name,
+      short_name: meta.shortName,
+      tag: meta.tag,
+      tier: meta.tier,
+      nation: meta.nation,
+      type: meta.type,
+      is_premium: meta.isPremium,
+    });
+  }
+  return out;
+}
+
+/**
  * Every tank in the catalogue with its slug and metadata. Backs
  * generateStaticParams and the sitemap. The catalogue is region-scoped but
  * essentially identical across regions (~1200 tanks incl. removed/event ones).
