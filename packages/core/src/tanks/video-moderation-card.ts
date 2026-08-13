@@ -1,4 +1,9 @@
-import { toRoman } from "roman-numerals";
+// Default-imported, not destructured at the import: the package is CommonJS
+// and Node's ESM loader finds no named export on it, so the named form throws
+// the moment anything run directly (the worker, a script) reaches this module,
+// even transitively. The bundler papers over it, `tsx` does not. Same treatment
+// as `videos.ts`, which importing this file used to defeat.
+import romanNumerals from "roman-numerals";
 import {
   APP_IDENTITY,
   BATTLE_FORMAT_LABEL,
@@ -13,6 +18,8 @@ import {
 } from "@unicum.gg/shared";
 import { postChannelEmbedWithComponents } from "@unicum.gg/core/discord";
 import type { Oembed, VideoSubmission } from "@unicum.gg/core/tanks/videos";
+
+const { toRoman } = romanNumerals as { toRoman: (n: number) => string };
 
 /**
  * What a moderator is shown, and the two buttons they answer with.
