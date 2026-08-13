@@ -118,9 +118,9 @@ Two tiers, both in `src/components/script/index.tsx`:
 - Umami loads unconditionally in production. Cookieless, EU-hosted, treated as legitimate-interest internal analytics.
 - GA4 only loads after the user accepts via the cookie banner.
 
-The `CookieConsent` context in `src/contexts/cookie-consent.tsx` writes the consent state to `localStorage` under the `unicum.*` namespace and broadcasts via synthetic `StorageEvent` so every subscribed component reacts on the same tab.
+The `CookieConsent` context in `src/contexts/cookie-consent.tsx` writes the consent state to `localStorage` under the `unicum.*` namespace and broadcasts via synthetic `StorageEvent` so every subscribed component reacts on the same tab. The banner hides itself for good once answered, so the footer's "Manage cookies" reopens it by dispatching a `reopen-cookie-consent` window event (`lib/cookie-preferences.ts`), which the banner listens for.
 
-There is **no ad network and no third-party CMP**. AdSense (which pulled in Google's own Funding Choices CMP, a Consent Mode v2 default block and `public/ads.txt`) was wired behind a `USE_GOOGLE_CMP` switch and removed on 2026-08-13: the site serves no ads, so it was carrying a consent manager and a third-party ad script for nothing, and the second CMP left our own banner unmounted for nothing.
+There is **no ad network and no third-party CMP**. AdSense (which pulled in Google's own Funding Choices CMP, a Consent Mode v2 default block and `public/ads.txt`) was wired behind a `USE_GOOGLE_CMP` switch and removed on 2026-08-13: the site serves no ads, so it was carrying a consent manager and a third-party ad script for nothing, and the second CMP left our own banner unmounted, which is what made the footer's "Manage cookies" do nothing.
 
 ## Region-prefixed routes
 
