@@ -10,6 +10,7 @@ import {
 import { VideoSection } from "@/components/tanks/detail/videos/section";
 import { VideoPlayerSurface } from "@/components/tanks/detail/videos/surface";
 import { useVideosView } from "@/components/tanks/detail/videos/view-toggle";
+import { ClanTacticDialogSlot } from "./submit-dialog-slot";
 
 /** The element the player takes over, scrolled back into view when a card
  * further down the page is clicked. */
@@ -24,9 +25,13 @@ const CLAN_PLAYER_ID = "clan-video-player";
  * fought"; this answers "how does this clan fight", which is what someone
  * scouting an opponent, or a recruit reading a clan's page, is actually after.
  *
- * Nothing is submitted from here: a battle is filed under the map it was fought
- * on, and the clan is a field of that submission. So this is a record, not a
- * desk, and it renders nothing at all when the clan has none.
+ * A battle is still filed under the map it was fought on, the clan being a
+ * field of that submission, but it can be suggested from here: someone watching
+ * a clan's evening and spotting the moment worth linking should not have to
+ * work out which map page to open first. The form seeds itself with the map of
+ * the battle playing and lets the submitter move it, exactly as on a map page.
+ *
+ * Renders nothing at all when the clan has none.
  */
 export function ClanVideosTab({
   region,
@@ -103,6 +108,7 @@ function ClanVideos({
           // called on is the first thing worth reading here.
           showMap
           emptyText=""
+          action={<ClanTacticDialogSlot region={region} />}
         />
       </Panel>
     </>

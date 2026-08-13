@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import useSWR, { mutate } from "swr";
 import {
@@ -11,7 +12,6 @@ import {
   FORMAT_TIER,
   isCompetitiveFormat,
   MapGameMode,
-  type MapDetail,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { UnicumError } from "@unicum.gg/sdk";
@@ -74,7 +74,11 @@ export function SubmitTacticDialog({
   initial,
 }: {
   region: Region;
-  map: MapDetail;
+  /** The map the form starts on, and the one it names when a suggestion lands
+   * somewhere else. Only these three fields, so a page holding no map detail
+   * of its own (a clan's videos) can seed it from the catalogue: a `MapDetail`
+   * satisfies it as it is. */
+  map: { arenaId: string; slug: string; name: string };
   /**
    * A moment picked in the player, which opens the form on it.
    *
@@ -87,6 +91,12 @@ export function SubmitTacticDialog({
   initial?: TankVideoSuggestion;
 }) {
   const { data: session } = useSession();
+  // Back to where the form was opened, which is not always this map's page: the
+  // clan tab mounts it too, and bouncing someone to a map they never asked for
+  // after a login is a strange way to answer "log in to suggest".
+  const pathname = usePathname();
+  const search = useSearchParams().toString();
+  const backTo = search ? `${pathname}?${search}` : pathname;
   const [open, setOpen] = useState(Boolean(initial));
   const source = useVideoSource(initial);
   // Seeded with the page's map, not fixed to it. A competitive VOD runs through
@@ -178,7 +188,7 @@ export function SubmitTacticDialog({
   if (!session?.user) {
     return (
       <Button asChild variant="outline" size="sm">
-        <a href={ROUTES.AUTH_SIGN_IN(region, ROUTES.MAP(region, map.slug))}>
+        <a href={ROUTES.AUTH_SIGN_IN(region, backTo)}>
           Log in to suggest a tactic
         </a>
       </Button>
@@ -226,7 +236,7 @@ export function SubmitTacticDialog({
                 page in the meantime.
               </>
             ) : (
-              `A competitive battle, opening at the second it starts. The map starts on ${map.name}, the page you opened this from, and moves with the video: a clan evening runs through a rotation. The side it was played from is the part a shot-caller looks it up by, so it is asked for rather than guessed.`
+              `A competitive battle, opening at the second it starts. The map starts on ${map.name} and moves with the video: a clan evening runs through a rotation. The side it was played from is the part a shot-caller looks it up by, so it is asked for rather than guessed.`
             )}
           </DialogDescription>
         </DialogHeader>

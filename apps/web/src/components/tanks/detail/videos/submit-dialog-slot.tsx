@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import type { Region } from "@unicum.gg/wargaming";
 import { useTankVideoPlayer } from "./player";
 import { SubmitVideoDialog } from "./submit-dialog";
@@ -24,6 +25,11 @@ export function SubmitVideoDialogSlot({
 }) {
   const player = useTankVideoPlayer();
   const suggestion = player?.suggestion ?? null;
+
+  // Registers with the player, which only offers "Suggest this moment" where
+  // something is listening for it.
+  const register = player?.registerForm;
+  useEffect(() => register?.(), [register]);
 
   return (
     <SubmitVideoDialog

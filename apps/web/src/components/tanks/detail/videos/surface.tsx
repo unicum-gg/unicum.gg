@@ -79,7 +79,7 @@ export function VideoPlayerSurface() {
         autoPlay
         onCanPlay={() => setAttached(true)}
         toolbar={
-          session?.user ? (
+          session?.user && player?.canSuggest ? (
             // Dropped into the player's own control bar rather than floated
             // over the video: it acts on the playhead, like the controls it
             // sits between. Plyr's classes give it their hover state and

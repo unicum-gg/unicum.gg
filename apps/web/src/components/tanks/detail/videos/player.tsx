@@ -64,6 +64,15 @@ type TankVideoPlayer = {
   setActiveId: (id: number | null) => void;
   suggestion: TankVideoSuggestion | null;
   suggest: (startSeconds: number) => void;
+  /** Whether a suggestion form is mounted under this provider. False on a
+   * surface that only plays what others filed (a clan's tab), where the button
+   * would set a moment nothing reads. */
+  canSuggest: boolean;
+  /** Called by a form on mount; the returned function unregisters it. This is
+   * derived rather than declared per page, so a page that grows a form lights
+   * the button up on its own, and one that loses it stops offering a dead
+   * click. */
+  registerForm: () => () => void;
 };
 
 const PlayerContext = createContext<TankVideoPlayer | null>(null);
@@ -219,6 +228,13 @@ export function TankVideoPlayerProvider({
   const stop = useCallback(() => writeBattleParam(null), []);
 
   const [suggestion, setSuggestion] = useState<TankVideoSuggestion | null>(null);
+  // Counted, not a boolean: the tank page mounts the form twice, once per
+  // layout, and the second unmount must not turn the button off for the first.
+  const [forms, setForms] = useState(0);
+  const registerForm = useCallback(() => {
+    setForms((n) => n + 1);
+    return () => setForms((n) => n - 1);
+  }, []);
 
   /**
    * Hand the moment being watched to the suggestion form.
@@ -261,8 +277,21 @@ export function TankVideoPlayerProvider({
       stop,
       suggestion,
       suggest,
+      canSuggest: forms > 0,
+      registerForm,
     }),
-    [videos, current, siblings, activeId, play, stop, suggestion, suggest],
+    [
+      videos,
+      current,
+      siblings,
+      activeId,
+      play,
+      stop,
+      suggestion,
+      suggest,
+      forms,
+      registerForm,
+    ],
   );
 
   return (
