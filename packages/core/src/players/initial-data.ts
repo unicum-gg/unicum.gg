@@ -395,16 +395,22 @@ export async function loadPlayerInitialData(
   // Baseline snapshot for a period diff. Normally the newest snapshot older than
   // `interval` (so "last 7d" = now minus ~7 days ago). When the player has been
   // tracked for less than that window, no such snapshot exists, so we fall back
-  // to the oldest snapshot other than the current one — otherwise a player with
-  // only a few days of history would show a blank column instead of the games
-  // they actually played. Excluding the current snapshot (via latest_snap) keeps
-  // a single-snapshot player empty rather than showing a false zero.
+  // to the oldest snapshot we hold — otherwise a player with only a few days of
+  // history would show a blank column instead of the games they actually played.
+  //
+  // The fallback includes the current snapshot (`<=`), which reads as a zero
+  // diff, because the alternative is a column that contradicts its neighbours.
+  // A player whose only snapshot is 19 days old already gets that zero on the
+  // 24h and 7d columns, since a snapshot older than those cutoffs is picked as
+  // its own baseline by the clause above; only the 30d column had no candidate
+  // at all and rendered a dash next to three zeroes. Every column now says the
+  // same thing: nothing moved between the oldest reading we hold and the newest.
   const playerPeriodCte = (interval: string) => sql`
       SELECT * FROM ${playerSnapshots}
       WHERE player_id = (SELECT id FROM p)
         AND (
           taken_at < NOW() - ${interval}::interval
-          OR taken_at < (SELECT taken_at FROM latest_snap)
+          OR taken_at <= (SELECT taken_at FROM latest_snap)
         )
       ORDER BY
         (taken_at < NOW() - ${interval}::interval) DESC,
@@ -419,7 +425,7 @@ export async function loadPlayerInitialData(
       WHERE player_id = (SELECT id FROM p)
         AND (
           taken_at < NOW() - ${interval}::interval
-          OR taken_at < (SELECT lt.taken_at FROM latest_tanks lt WHERE lt.tank_id = ts.tank_id)
+          OR taken_at <= (SELECT lt.taken_at FROM latest_tanks lt WHERE lt.tank_id = ts.tank_id)
         )
       ORDER BY tank_id,
         (taken_at < NOW() - ${interval}::interval) DESC,
