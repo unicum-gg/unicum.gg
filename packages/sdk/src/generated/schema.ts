@@ -159,6 +159,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/{nickname}/sessions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player sessions
+         * @description What a player played, session by session: battles, average tier, the vehicles taken out, and the per-battle averages and ratings of that stretch alone. The game keeps no session log and Wargaming exposes none, so each bucket is the difference between two consecutive snapshots of the player's vehicles, attributed to when it was observed. Bucketed by day, week or month; newest first. 404 when the player is unknown.
+         */
+        get: operations["get-{region}-players-{nickname}-sessions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/tanks": {
         parameters: {
             query?: never;
@@ -2339,6 +2359,42 @@ export interface components {
         PlayerSearchResponse: {
             results: components["schemas"]["PlayerSearchHit"][];
         };
+        /** @description One bucket of play: what an account did over that day, week or month. */
+        PlayerSession: {
+            /** @description ISO date of the bucket's first day. */
+            period: string;
+            /** @description Distinct vehicles taken into battle. */
+            tanks: number;
+            avgTier: number | null;
+            vehicles: components["schemas"]["SessionVehicle"][];
+            battles: number;
+            /** @description Ratio in 0..1, not a percentage. */
+            winrate: number;
+            avgDamage: number;
+            avgFrags: number;
+            avgSpotted: number;
+            avgDefense: number;
+            avgAssist: number;
+            avgXp: number | null;
+            survivalRate: number | null;
+            /** @description Frags over deaths. Null when nothing died. */
+            kd: number | null;
+            /** @description Damage dealt over damage taken. Null on sessions whose snapshots predate that counter. */
+            damageRatio: number | null;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
+        };
+        /** @description One player's play sessions, newest first. */
+        PlayerSessions: {
+            granularity: string;
+            sessions: components["schemas"]["PlayerSession"][];
+        };
+        /** @description One player's play sessions, newest first. */
+        PlayerSessionsResponse: {
+            granularity: string;
+            sessions: components["schemas"]["PlayerSession"][];
+        };
         /** @description Random-battles totals (or a period diff of them) from a snapshot. */
         PlayerStats: {
             battles: number;
@@ -2567,6 +2623,35 @@ export interface components {
             order: number;
             earned: number;
             total: number;
+        };
+        /** @description One vehicle's share of a session. */
+        SessionVehicle: {
+            tankId: number;
+            slug: string | null;
+            name: string;
+            shortName: string | null;
+            tier: number | null;
+            nation: string | null;
+            type: string | null;
+            isPremium: boolean;
+            isReward: boolean;
+            battles: number;
+            /** @description Ratio in 0..1, not a percentage. */
+            winrate: number;
+            avgDamage: number;
+            avgFrags: number;
+            avgSpotted: number;
+            avgDefense: number;
+            avgAssist: number;
+            avgXp: number | null;
+            survivalRate: number | null;
+            /** @description Frags over deaths. Null when nothing died. */
+            kd: number | null;
+            /** @description Damage dealt over damage taken. Null on sessions whose snapshots predate that counter. */
+            damageRatio: number | null;
+            wn7: number | null;
+            wn8: number | null;
+            wnx: number | null;
         };
         skillNode: {
             id: number;
@@ -3526,6 +3611,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerClan"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-sessions": {
+        parameters: {
+            query: {
+                /** @description Bucket size for the sessions. */
+                granularity: "daily" | "weekly" | "monthly";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerSessions"];
                 };
             };
         };

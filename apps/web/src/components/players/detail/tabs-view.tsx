@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import useSWR from "swr";
 import { Panel, PanelHeader, PanelSeparator } from "@/components/panel";
@@ -23,12 +24,15 @@ import {
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
 import { AchievementsTab } from "@/components/players/detail/achievements";
+import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
+import { SessionGranularity } from "@unicum.gg/shared";
 import type {
   PlayerAchievements,
   PlayerDetailData,
+  PlayerSession,
   PlayerTankRecord,
   PlayerTankRow,
   RatingMetric,
@@ -74,6 +78,9 @@ export type PlayerTabsViewProps = {
   initialTanks: PlayerTankRow[] | null;
   /** The vehicle record the URL names, server-rendered beside the table. */
   tankDetail: PlayerTankRecord | null;
+  /** Daily sessions, server-rendered when the visitor landed on `/sessions`;
+   * null otherwise, and null again as soon as another bucket size is picked. */
+  initialSessions: PlayerSession[] | null;
   // Server-rendered cabinet for a direct `/achievements` landing; null
   // otherwise, so the tab fetches on demand.
   initialAchievements: PlayerAchievements | null;
@@ -91,6 +98,7 @@ export function PlayerTabsView({
   detail,
   initialTanks,
   tankDetail,
+  initialSessions,
   initialAchievements,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
@@ -134,6 +142,24 @@ export function PlayerTabsView({
     },
   );
 
+  // Same on-demand shape as the two above, plus a bucket size the reader picks.
+  // Only the default one is ever server-rendered, so switching to Weekly is a
+  // fetch and switching back is a cache hit.
+  const [granularity, setGranularity] = useState(SessionGranularity.Daily);
+  const sessionsReq = () =>
+    unicum.region(region).players(nickname).sessions(granularity);
+  const seededSessions =
+    initialSessions != null && granularity === SessionGranularity.Daily;
+  const { data: sessions } = useSWR(
+    section === PlayerSection.Sessions ? sessionsReq().url() : null,
+    () =>
+      sessionsReq().then((r) => r.sessions as unknown as PlayerSession[]),
+    {
+      fallbackData: seededSessions ? (initialSessions ?? undefined) : undefined,
+      revalidateOnMount: !seededSessions,
+    },
+  );
+
   function selectSection(next: PlayerSection) {
     router.push(playerSectionHref(basePath, next));
   }
@@ -167,7 +193,8 @@ export function PlayerTabsView({
   const onTanks = section === PlayerSection.Tanks;
   const onValue = section === PlayerSection.Value;
   const onAchievements = section === PlayerSection.Achievements;
-  const showModes = !onTanks && !onValue && !onAchievements;
+  const onSessions = section === PlayerSection.Sessions;
+  const showModes = !onTanks && !onValue && !onAchievements && !onSessions;
 
   return (
     <>
@@ -200,7 +227,16 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onAchievements ? (
+      {onSessions ? (
+        <SessionsTab
+          region={region}
+          nickname={nickname}
+          sessions={sessions ?? []}
+          loading={!sessions}
+          granularity={granularity}
+          onGranularity={setGranularity}
+        />
+      ) : onAchievements ? (
         <AchievementsTab
           nickname={nickname}
           data={achievements ?? null}

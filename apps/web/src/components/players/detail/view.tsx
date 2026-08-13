@@ -19,6 +19,7 @@ import {
   isRatingMetric,
   type PlayerAchievements,
   type PlayerDetailData,
+  type PlayerSession,
   type PlayerTankRecord,
   type PlayerTankRow,
   inferPlayerLanguages,
@@ -42,6 +43,7 @@ export function PlayerProfile({
   initialData,
   initialTanks,
   tankDetail,
+  initialSessions,
   initialAchievements,
 }: {
   region: Region;
@@ -57,6 +59,9 @@ export function PlayerProfile({
   initialTanks: PlayerTankRow[] | null;
   /** The vehicle record the URL names, rendered beside the tank table. */
   tankDetail: PlayerTankRecord | null;
+  /** Daily sessions, present only when Sessions is the section the server
+   * rendered; null otherwise, so the tab fetches on demand. */
+  initialSessions: PlayerSession[] | null;
   // Present only when Achievements is the section the server rendered, same
   // deal as `initialTanks`.
   initialAchievements: PlayerAchievements | null;
@@ -164,6 +169,7 @@ export function PlayerProfile({
         detail={detail}
         initialTanks={initialTanks}
         tankDetail={tankDetail}
+        initialSessions={initialSessions}
         initialAchievements={initialAchievements}
       />
     </>

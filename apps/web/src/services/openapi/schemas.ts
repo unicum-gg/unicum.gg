@@ -8,6 +8,7 @@ import {
   MapCamouflage,
   MapGameMode,
   RatingMetric,
+  SessionGranularity,
   SpawnDirection,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
@@ -51,6 +52,17 @@ export const regionParams = z.object({ region: regionPath });
 export const playerLiveParams = z.object({
   region: regionPath,
   nickname: z.string().meta({ description: "Player nickname." }),
+});
+
+/** How a player's sessions are bucketed. */
+export const playerSessionsQuery = z.object({
+  granularity: z
+    .enum(SessionGranularity)
+    .default(SessionGranularity.Daily)
+    .meta({
+      description: "Bucket size for the sessions.",
+      "x-enum-source": "SESSION_GRANULARITY",
+    } as EnumMeta),
 });
 
 /** A player and one of their vehicles: the Service Record of that pair. */
@@ -313,6 +325,7 @@ export const clansTopQuery = z.object({
 export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   period: TopPlayersPeriod.Overall,
   metric: DEFAULT_RATING_METRIC,
+  granularity: SessionGranularity.Daily,
 };
 
 // next-openapi-gen drops `.meta({ example })` on path/query params (it injects a

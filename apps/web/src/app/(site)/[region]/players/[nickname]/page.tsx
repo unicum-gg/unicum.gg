@@ -18,8 +18,10 @@ import { styles } from "@/lib/styles";
 import { unicum } from "@/services/sdk";
 import { UnicumError } from "@unicum.gg/sdk";
 import {
+  SessionGranularity,
   type PlayerAchievements,
   type PlayerDetailData,
+  type PlayerSession,
   type PlayerTankRecord,
   type PlayerTankRow,
 } from "@unicum.gg/shared";
@@ -285,6 +287,18 @@ async function PlayerProfileServer({
   // is the subject of its own URL, so it belongs in the HTML a crawler and the
   // `.md` twin read, not in a fetch after hydration. `buildSafe` is not wanted
   // here: a slug the player has never played is a 404, not an empty shell.
+  // Same treatment again for the sessions list: server-rendered on a direct
+  // landing so a crawler and the `.md` twin read the table rather than its
+  // skeleton, and only in the bucket size the tab opens on.
+  const initialSessions: PlayerSession[] | null =
+    section === PlayerSection.Sessions
+      ? ((
+          await unicum
+            .region(region)
+            .players(decoded)
+            .sessions(SessionGranularity.Daily)
+        ).sessions as unknown as PlayerSession[])
+      : null;
   const tankDetail: PlayerTankRecord | null = tankSlug
     ? await unicum
         .region(region)
@@ -337,6 +351,7 @@ async function PlayerProfileServer({
         initialData={detail}
         initialTanks={initialTanks}
         tankDetail={tankDetail}
+        initialSessions={initialSessions}
         initialAchievements={initialAchievements}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side

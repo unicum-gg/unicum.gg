@@ -9,6 +9,7 @@
 //   /eu/players/Animal/skirmish       Overview + Skirmish
 //   /eu/players/Animal/cw-x           Overview + Clan Wars X
 //   /eu/players/Animal/tanks          Tanks
+//   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
 //   /eu/players/Animal/value          Value
 //
@@ -18,6 +19,7 @@
 export enum PlayerSection {
   Overview = "overview",
   Tanks = "tanks",
+  Sessions = "sessions",
   Value = "value",
   Achievements = "achievements",
 }
@@ -69,6 +71,12 @@ export const PLAYER_VIEWS: PlayerView[] = [
     label: "Tanks",
   },
   {
+    section: PlayerSection.Sessions,
+    mode: PlayerMode.Overall,
+    segment: "sessions",
+    label: "Sessions",
+  },
+  {
     section: PlayerSection.Achievements,
     mode: PlayerMode.Overall,
     segment: "achievements",
@@ -86,6 +94,7 @@ export const PLAYER_VIEWS: PlayerView[] = [
 export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
   { id: PlayerSection.Overview, label: "Overview" },
   { id: PlayerSection.Tanks, label: "Tanks" },
+  { id: PlayerSection.Sessions, label: "Sessions" },
   { id: PlayerSection.Achievements, label: "Achievements" },
   { id: PlayerSection.Value, label: "Value" },
 ];

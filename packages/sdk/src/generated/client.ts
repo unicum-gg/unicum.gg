@@ -73,6 +73,15 @@ class PlayerClient {
     );
   }
 
+  /** Player sessions */
+  sessions(granularity: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/sessions", path, { granularity }),
+      () => this.api.GET("/{region}/players/{nickname}/sessions", { params: { path, query: { granularity } } }),
+    );
+  }
+
   /** Player tanks */
   tanks() {
     const path = { region: this.region, nickname: this.nickname };

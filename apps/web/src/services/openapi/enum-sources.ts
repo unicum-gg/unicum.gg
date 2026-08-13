@@ -11,6 +11,7 @@ import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
 import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
 import { ClanBoard } from "@unicum.gg/shared/clans/badges";
+import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import {
   BattleFormat,
@@ -49,6 +50,7 @@ export const OPENAPI_ENUM_SOURCES = {
   BATTLE_RESULT: Object.values(BattleResult),
   BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),
+  SESSION_GRANULARITY: Object.values(SessionGranularity),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),
 } satisfies Record<string, readonly string[]>;
