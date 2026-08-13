@@ -66,6 +66,10 @@ export const CoverageResponse = z
         })
         .nullable(),
       totalBattlesTracked: z.number(),
+      discordServers: z.number().nullable().meta({
+        description:
+          "Discord servers our bot is in. Global, not per region. Null when Discord could not be reached.",
+      }),
     }),
     trends: z.object({
       playersDiscoveredDaily: z.array(dailyPoint),

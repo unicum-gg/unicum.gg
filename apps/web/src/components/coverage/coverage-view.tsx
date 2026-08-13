@@ -327,7 +327,7 @@ export async function CoverageView({ region }: { region: Region }) {
         <PanelHeader>
           <PanelTitle>Fun facts</PanelTitle>
         </PanelHeader>
-        <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-3">
+        <PanelContent className="grid grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
           <StatCell
             label="Tracking since"
             value={formatYear(stats.funFacts.oldestPlayerSnapshotAt)}
@@ -349,6 +349,14 @@ export async function CoverageView({ region }: { region: Region }) {
           <StatCell
             label="Battles tracked"
             value={intFmt.format(stats.funFacts.totalBattlesTracked)}
+          />
+          <StatCell
+            label="Discord servers"
+            value={
+              stats.funFacts.discordServers === null
+                ? "n/a"
+                : intFmt.format(stats.funFacts.discordServers)
+            }
           />
         </PanelContent>
       </Panel>

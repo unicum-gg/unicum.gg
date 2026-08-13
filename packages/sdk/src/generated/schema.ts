@@ -1702,6 +1702,8 @@ export interface components {
                     membersCount: number;
                 } | null;
                 totalBattlesTracked: number;
+                /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
+                discordServers: number | null;
             };
             trends: {
                 playersDiscoveredDaily: components["schemas"]["dailyPoint"][];
@@ -1761,6 +1763,8 @@ export interface components {
                     membersCount: number;
                 } | null;
                 totalBattlesTracked: number;
+                /** @description Discord servers our bot is in. Global, not per region. Null when Discord could not be reached. */
+                discordServers: number | null;
             };
             trends: {
                 playersDiscoveredDaily: components["schemas"]["dailyPoint"][];

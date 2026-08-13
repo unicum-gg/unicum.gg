@@ -51,6 +51,27 @@ export async function listBotGuilds(): Promise<DiscordGuild[]> {
   return guilds ?? [];
 }
 
+/**
+ * How many servers our bot is in, or `null` when we could not ask: no token
+ * configured, or Discord did not answer. Zero is a real answer and must not be
+ * read as "we don't know", which is why `listBotGuilds`'s empty-array fallback
+ * is no good here.
+ *
+ * Same uncounted tail as the picker above: one page, so a bot in more than 200
+ * servers would report 200. Worth paginating the day that stops being absurd.
+ */
+export async function countBotGuilds(): Promise<number | null> {
+  const guilds = await botFetch<DiscordGuild[]>("/users/@me/guilds?limit=200", {
+    // The caller is a page, not a job: better a missing figure than a coverage
+    // request held open by a silent Discord. Generous, because the deadline is
+    // measured against a server that may be busy answering the rest of that
+    // same page (the coverage scans run for tens of seconds on a cold cache),
+    // and a deadline missed for our own load would read as Discord being down.
+    signal: AbortSignal.timeout(10_000),
+  });
+  return Array.isArray(guilds) ? guilds.length : null;
+}
+
 /** The postable text channels of a guild, ordered as Discord shows them. */
 export async function listGuildChannels(
   guildId: string,
