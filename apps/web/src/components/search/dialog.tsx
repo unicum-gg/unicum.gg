@@ -367,9 +367,15 @@ export default function SearchDialog(props: SharedProps) {
 
   // Freeze content during the close animation so the dialog doesn't flash empty
   // before unmounting: keep the last-painted rows + status and refresh them
-  // while the area is shown. Uses React's "value from a previous render"
-  // pattern (conditional set-state during render) rather than a ref read during
-  // render or a state update from an effect.
+  // while it is open. Uses React's "value from a previous render" pattern
+  // (conditional set-state during render) rather than a ref read during render
+  // or a state update from an effect.
+  //
+  // Keyed on the dialog being open, not on there being something to show. Those
+  // came apart when the list legitimately emptied under an open dialog (removing
+  // the last favorite): `showArea` went false, the frozen copy took over, and
+  // the removed row stayed in the DOM, invisible only because the area collapses
+  // to nothing, yet still focusable and still openable with the keyboard.
   const liveStatus: ResultsStatus = {
     anyLoading,
     allErrored,
@@ -381,7 +387,7 @@ export default function SearchDialog(props: SharedProps) {
     status: liveStatus,
   });
   if (
-    showArea &&
+    props.open &&
     (frozen.rows !== rows ||
       frozen.status.anyLoading !== anyLoading ||
       frozen.status.allErrored !== allErrored ||
@@ -391,8 +397,8 @@ export default function SearchDialog(props: SharedProps) {
     setFrozen({ rows, status: liveStatus });
   }
 
-  const renderRows = showArea ? rows : frozen.rows;
-  const renderStatus: ResultsStatus = showArea ? liveStatus : frozen.status;
+  const renderRows = props.open ? rows : frozen.rows;
+  const renderStatus: ResultsStatus = props.open ? liveStatus : frozen.status;
 
   function close() {
     props.onOpenChange?.(false);
