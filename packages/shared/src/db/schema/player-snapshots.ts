@@ -26,6 +26,11 @@ export function makePlayerSnapshotsTable(
         .notNull()
         .defaultNow(),
 
+      // The account's last battle at the moment of the sample, so a stretch of
+      // play can be dated by when it was fought rather than by when we looked.
+      // Wargaming's own `last_battle_time`, which the pipeline already reads as
+      // its change detector. Null on snapshots taken before this column.
+      lastBattleAt: timestamp("last_battle_at", { withTimezone: true }),
       battles: integer("battles").notNull(),
       wins: integer("wins").notNull(),
       losses: integer("losses").notNull(),

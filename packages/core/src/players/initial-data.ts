@@ -44,6 +44,7 @@ type RawPlayerSnapshot = {
   id: number;
   player_id: number;
   taken_at: string;
+  last_battle_at: string | null;
   battles: number;
   wins: number;
   losses: number;
@@ -230,6 +231,7 @@ function snapshotFromRaw(r: RawPlayerSnapshot): PlayerSnapshot {
     id: Number(r.id),
     playerId: Number(r.player_id),
     takenAt: new Date(r.taken_at),
+    lastBattleAt: r.last_battle_at ? new Date(r.last_battle_at) : null,
     battles: Number(r.battles),
     wins: Number(r.wins),
     losses: Number(r.losses),

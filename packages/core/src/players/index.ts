@@ -255,6 +255,7 @@ function snapshotFromInfo(
   const cwm = info.statistics.globalmap_middle;
   return {
     playerId,
+    lastBattleAt: new Date(info.last_battle_time * 1000),
     battles: s.battles,
     wins: s.wins,
     losses: s.losses,
@@ -897,6 +898,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
     id: number;
     player_id: number;
     taken_at: Date;
+    last_battle_at: Date | null;
     battles: number;
     wins: number;
     losses: number;
@@ -1019,6 +1021,7 @@ export async function getLatestPlayerSnapshotsByAccounts(
       id: Number(row.id),
       playerId: Number(row.player_id),
       takenAt: row.taken_at instanceof Date ? row.taken_at : new Date(row.taken_at),
+      lastBattleAt: row.last_battle_at ? new Date(row.last_battle_at) : null,
       battles: Number(row.battles),
       wins: Number(row.wins),
       losses: Number(row.losses),
