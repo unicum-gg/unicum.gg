@@ -14,7 +14,7 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Standalone CommonJS module loaded by the Next server runtime (outside the
     // transpiled bundle), so it legitimately uses `require`/`module.exports`.
-    "cache-handler.js",
+    "config/cache-handler.js",
   ]),
   // The OG image pipeline. These files are not rendered by a browser: satori
   // turns them into a PNG, and it supports `img` and nothing else, so the
