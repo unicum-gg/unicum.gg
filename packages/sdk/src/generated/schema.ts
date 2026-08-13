@@ -959,6 +959,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/search/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Resolve saved search entries
+         * @description Current rows for a set of entries the caller has saved by id (the search dialog's favorites and recents), in the same shapes the four search endpoints return. Each list is optional and comma separated. Entries that no longer resolve are absent from the response rather than reported, so a caller can keep its own copy for those. Reads cached data only, with no live Wargaming call.
+         */
+        get: operations["get-{region}-search-resolve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/feedback": {
         parameters: {
             query?: never;
@@ -2020,6 +2040,14 @@ export interface components {
                 type: number;
             }[];
         };
+        /** @description Map row (additional fields may be present). */
+        MapResolved: {
+            arena_id: string;
+            slug: string;
+            name: string;
+            camouflage: string;
+            minimap_url: string;
+        };
         MapSearchChunk: unknown;
         MapSearchResponse: {
             results: components["schemas"]["MapSearchRow"][];
@@ -2393,6 +2421,12 @@ export interface components {
             researchXp: number | null;
             buyCredits: number | null;
         };
+        SearchResolveResponse: {
+            players: components["schemas"]["PlayerSearchHit"][];
+            clans: components["schemas"]["ClanSummary"][];
+            tanks: components["schemas"]["TankResolved"][];
+            maps: components["schemas"]["MapResolved"][];
+        };
         section: {
             id: string;
             name: string;
@@ -2762,6 +2796,16 @@ export interface components {
         TankPerfRow: {
             identity: components["schemas"]["TankIdentity"];
             stats: components["schemas"]["TankServerStats"] | null;
+        };
+        /** @description Vehicle row (additional fields may be present). */
+        TankResolved: {
+            tank_id: number;
+            slug: string;
+            name: string;
+            short_name: string;
+            tier: number;
+            nation: string;
+            type: string;
         };
         TankSearchChunk: unknown;
         TankSearchResponse: {
@@ -4350,6 +4394,38 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Coverage"];
+                };
+            };
+        };
+    };
+    "get-{region}-search-resolve": {
+        parameters: {
+            query?: {
+                /** @description Account ids, comma separated. */
+                players?: string;
+                /** @description Clan ids, comma separated. */
+                clans?: string;
+                /** @description Vehicle ids, comma separated. */
+                tanks?: string;
+                /** @description Arena ids, comma separated. */
+                maps?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResolveResponse"];
                 };
             };
         };

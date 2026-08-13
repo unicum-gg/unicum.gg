@@ -577,6 +577,14 @@ class RegionClient {
     );
   }
 
+  /** Resolve saved search entries */
+  searchResolve(query?: QueryOf<"/{region}/search/resolve">) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/search/resolve", { region: this.region }, query),
+      () => this.api.GET("/{region}/search/resolve", { params: { path: { region: this.region }, query } }),
+    );
+  }
+
   /** Community videos */
   videos(videoId?: NonNullable<QueryOf<"/{region}/videos">>["videoId"]) {
     return handle(
