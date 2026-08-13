@@ -6,6 +6,14 @@ const STORAGE = {
     SEARCH_HISTORY: "unicum.search-history",
     HIDE_STREAMS: "unicum.hide-streams",
   },
+  // BroadcastChannel names. Same `unicum.*` namespace as the rest: a channel
+  // name is shared with every other script on the origin exactly like a storage
+  // key is.
+  CHANNELS: {
+    STREAMERS_LIVE: "unicum.streamers-live",
+    // One per region, since the counter is measured per server.
+    SERVER_ONLINE: (region: string) => `unicum.server-online.${region}`,
+  },
   COOKIES: {
     REGION: "unicum.region",
     RATING: "unicum.rating",

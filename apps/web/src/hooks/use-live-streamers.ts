@@ -3,40 +3,19 @@
 import { useSyncExternalStore } from "react";
 import type { LiveStreamer } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
+import { createSharedStream } from "@/lib/shared-stream";
+import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
 
-// One shared SSE connection for the whole page: the home rail and every 🔴 badge
-// read the same live snapshot, so there is a single stream no matter how many
-// are on screen (ref-counted via the listener set; closed when the last consumer
-// unmounts). Replaces the old per-page SWR poll with a server push, subscribed
-// through the SDK (which parses each payload and auto-reconnects on errors).
-let unsubscribe: (() => void) | null = null;
-let snapshot: LiveStreamer[] | null = null;
-const listeners = new Set<() => void>();
-
-function openConnection(): void {
-  if (unsubscribe || typeof window === "undefined") return;
-  unsubscribe = unicum.streamers.live((streamers) => {
-    snapshot = streamers;
-    listeners.forEach((notify) => notify());
-  });
-}
-
-function subscribe(notify: () => void): () => void {
-  listeners.add(notify);
-  openConnection();
-  return () => {
-    listeners.delete(notify);
-    if (listeners.size === 0 && unsubscribe) {
-      unsubscribe();
-      unsubscribe = null;
-    }
-  };
-}
-
-function getSnapshot(): LiveStreamer[] | null {
-  return snapshot;
-}
+// One connection for the whole browser, not just the whole page: the home rail
+// and every 🔴 badge read the same snapshot, and so does every other open tab
+// (see `createSharedStream` for why that matters). Replaces the old per-page
+// SWR poll with a server push, subscribed through the SDK, which parses each
+// payload and auto-reconnects on errors.
+const stream = createSharedStream<LiveStreamer[]>(
+  STORAGE.CHANNELS.STREAMERS_LIVE,
+  (emit) => unicum.streamers.live(emit),
+);
 
 /**
  * Currently-live tracked streamers, pushed over SSE. `fallbackData` seeds the
@@ -44,7 +23,11 @@ function getSnapshot(): LiveStreamer[] | null {
  * the first server push lands.
  */
 export function useLiveStreamers(fallbackData?: LiveStreamer[]): LiveStreamer[] {
-  const data = useSyncExternalStore(subscribe, getSnapshot, () => null);
+  const data = useSyncExternalStore(
+    stream.subscribe,
+    stream.get,
+    () => null,
+  );
   return data ?? fallbackData ?? [];
 }
 
