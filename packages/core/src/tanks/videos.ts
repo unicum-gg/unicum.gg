@@ -153,35 +153,6 @@ async function fetchOembed(videoId: string): Promise<Oembed | null> {
 }
 
 /**
- * When YouTube says the video went up.
- *
- * Read off the watch page rather than from the Data API, which would mean a key
- * and a quota for one field. The page carries it twice, in the player config
- * and in the `datePublished` microdata, and both are the same value; the
- * microdata is the one with a stable name, so that is what is matched.
- *
- * Fetched once, at submission, and stored: it never changes, and a page that
- * lists twenty videos should not be asking YouTube twenty times. Null when the
- * page does not answer or the shape moves, which costs a column on a card and
- * nothing else.
- */
-async function fetchPublishedAt(videoId: string): Promise<Date | null> {
-  const res = await fetch(`https://www.youtube.com/watch?v=${videoId}`, {
-    headers: { "accept-language": "en" },
-    signal: AbortSignal.timeout(8000),
-  }).catch(() => null);
-  if (!res?.ok) return null;
-  const html = await res.text().catch(() => null);
-  const match = html?.match(
-    /itemprop="datePublished"\s+content="([^"]+)"|"publishDate":"([^"]+)"/,
-  );
-  const raw = match?.[1] ?? match?.[2];
-  if (!raw) return null;
-  const date = new Date(raw);
-  return Number.isNaN(date.getTime()) ? null : date;
-}
-
-/**
  * The client version in play, stamped at submission rather than asked for.
  *
  * Balance moves between patches, so a reader wants to know a video is two
@@ -271,7 +242,6 @@ export async function submitTankVideo(
       tier: FORMAT_TIER[submission.format] ? null : submission.tier,
       clanRegion: submission.clanRegion ?? null,
       clanId: submission.clanId ?? null,
-      publishedAt: await fetchPublishedAt(ref.videoId),
       gameVersion: await currentGameVersion(submission.region),
       status: TankVideoStatus.Pending,
       submittedBy: submission.userId,

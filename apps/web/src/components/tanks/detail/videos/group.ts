@@ -10,9 +10,6 @@ export type TankVideoGroup = {
   title: string;
   channelName: string;
   gameVersion: string | null;
-  /** When the recording went up on YouTube, carried on the video like the
-   * version: every battle in it shares one. */
-  publishedAt: Date | string | null;
   /** The tanks this video covers, in the order they appear. Empty on a tank's
    * own page, where every battle is that tank and saying so would be noise, and
    * on a video holding only tactics, which are about no vehicle. */
@@ -49,10 +46,9 @@ export function groupBattlesByVideo(
       videoId: battle.videoId,
       title: battle.title,
       channelName: battle.channelName,
-      // Carried on the video rather than the row: it is when the recording was
-      // published, so every battle in it shares one.
+      // Carried on the video rather than the row: every battle in it shares
+      // the version it was recorded on.
       gameVersion: battle.gameVersion,
-      publishedAt: battle.publishedAt ?? null,
       tanks: [],
       clans: [],
       battles: [battle],

@@ -3186,11 +3186,6 @@ export interface components {
             } | null;
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /**
-             * Format: date-time
-             * @description When YouTube says the video went up, read once at submission time.
-             */
-            publishedAt: Date | null;
             /** @description Client version at the time the video was approved. */
             gameVersion: string | null;
         };
@@ -3294,11 +3289,6 @@ export interface components {
             } | null;
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /**
-             * Format: date-time
-             * @description When YouTube says the video went up, read once at submission time.
-             */
-            publishedAt: Date | null;
             /** @description Client version at the time the video was approved. */
             gameVersion: string | null;
         };
@@ -3338,11 +3328,6 @@ export interface components {
             } | null;
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
-            /**
-             * Format: date-time
-             * @description When YouTube says the video went up, read once at submission time.
-             */
-            publishedAt: Date | null;
             /** @description Client version at the time the video was approved. */
             gameVersion: string | null;
             tankId: number | null;

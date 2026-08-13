@@ -48,8 +48,6 @@ function sortValue(
       return battle.result;
     case "channel":
       return battle.channelName;
-    case "published":
-      return battle.publishedAt ? new Date(battle.publishedAt).getTime() : null;
     default:
       return battle.combinedDamage;
   }
@@ -105,7 +103,6 @@ export function VideosTable({
   const showVehicle = showTank && hasTanks;
   const showIdentity = showTank && battles.some((b) => b.tankSlug || b.clan);
   const showDamage = battles.some((b) => b.combinedDamage != null);
-  const showPublished = battles.some((b) => b.publishedAt);
 
   /** Where a row is watched when this table has no player beside it: the page
    * the battle belongs to, opened on it. A tactic has no vehicle, so it goes to
@@ -137,7 +134,6 @@ export function VideosTable({
     identity: showIdentity,
     map: showMap,
     damage: showDamage,
-    published: showPublished,
   };
 
   const [sort, setSort] = useState<SortState>({
@@ -263,11 +259,6 @@ export function VideosTable({
               <SortHead sort={sort} col="channel" onToggle={toggle}>
                 Channel
               </SortHead>
-              {showPublished && (
-                <SortHead sort={sort} col="published" onToggle={toggle}>
-                  Published
-                </SortHead>
-              )}
             </TableRow>
           </TableHeader>
           <TableBody>

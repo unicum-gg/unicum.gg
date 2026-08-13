@@ -1,0 +1,17 @@
+-- Drops the video publication date, added in 0069 and abandoned.
+--
+-- It was read off the YouTube watch page at submission, since the Data API
+-- would have meant a key and a quota for one field. The page is 1.25 MB and
+-- carries the date at 56% of the way in, so every submission downloaded well
+-- over a megabyte for one timestamp, and it only answered at all when the
+-- request pretended to be a browser. The first six battles submitted from
+-- production got no date at all, which is what surfaced the whole thing.
+--
+-- A megabyte and a bot-detection workaround for a line on a card is not a
+-- trade worth making, and the field was never load-bearing: nothing sorts,
+-- filters or groups by it.
+--
+-- Written by hand: `drizzle-kit` cannot see tables built by a
+-- `makeXxxTable(region)` factory (see AGENTS.md). `tank_videos` is global, but
+-- the file stays hand-written like its neighbours.
+ALTER TABLE "tank_videos" DROP COLUMN IF EXISTS "published_at";

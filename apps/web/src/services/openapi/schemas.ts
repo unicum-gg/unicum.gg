@@ -172,10 +172,6 @@ export const videoBattle = z.object({
     description:
       "Damage dealt plus assisted, as declared. Only ever set on a random battle.",
   }),
-  publishedAt: z.coerce.date().nullable().meta({
-    description:
-      "When YouTube says the video went up, read once at submission time.",
-  }),
   gameVersion: z.string().nullable().meta({
     description: "Client version at the time the video was approved.",
   }),

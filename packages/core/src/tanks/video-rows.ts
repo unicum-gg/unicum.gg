@@ -139,7 +139,6 @@ export async function decorateVideos(
       tier: FORMAT_TIER[format] ?? row.tier,
       clan: clans.get(clanKey(row.clanRegion, row.clanId)) ?? null,
       combinedDamage: row.combinedDamage,
-      publishedAt: row.publishedAt,
       gameVersion: row.gameVersion,
     });
   }
@@ -175,9 +174,6 @@ export type TankVideo = {
   result: BattleResult | null;
   /** Damage dealt plus assisted, as declared. */
   combinedDamage: number | null;
-  /** When YouTube says the video went up, read off the watch page at submission
-   * time. Null when the page did not answer. */
-  publishedAt: Date | null;
   gameVersion: string | null;
 };
 

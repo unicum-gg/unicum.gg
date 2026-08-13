@@ -17,7 +17,6 @@ import { ClanTag } from "@/components/entity/clan-tag";
 import ROUTES from "@/constants/routes";
 import type { TankVideoGroup } from "./group";
 import { BattleRow, Thumbnail } from "./card-parts";
-import { PublishedDate } from "./published-date";
 import { useTankVideoPlayer } from "./player";
 import { BATTLE_PARAM } from "./battle-param";
 import {
@@ -43,7 +42,6 @@ export type TankVideoCardData = {
   combinedDamage: number | null;
   /** When the video went up on YouTube. Null when the page did not answer at
    * submission time. */
-  publishedAt?: Date | string | null;
   gameVersion: string | null;
   /** The map's own page, where a tactic is looked up. */
   mapSlug?: string | null;
@@ -218,15 +216,6 @@ export function TankVideoCard({
           {/* The channel first: a suggestion exists because someone made the
               video, and the tab is meant to be worth being listed in. */}
           <span className="font-medium">{group.channelName}</span>
-          {group.publishedAt && (
-            <>
-              <span className="text-fd-border">·</span>
-              {/* When it went up, not when it was suggested here: a tactic from
-                  last season is a tactic from last season whatever day someone
-                  got round to linking it. */}
-              <PublishedDate date={group.publishedAt} />
-            </>
-          )}
           {group.gameVersion && (
             <>
               <span className="text-fd-border">·</span>

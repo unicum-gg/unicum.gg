@@ -169,10 +169,6 @@ export const tankVideos = pgTable(
      * seconds. Null when the submitter left it out: a good battle is worth
      * linking whether or not anyone remembers the number. */
     combinedDamage: integer("combined_damage"),
-    /** When YouTube says the video went up, read off the watch page at
-     * submission and stored: it never changes, and it is what tells a reader a
-     * tactic is from last season. Null when the page did not answer. */
-    publishedAt: timestamp("published_at", { withTimezone: true }),
     /** Game version at approval time, stamped from the client scripts mirror.
      * Balance moves between patches, so a reader can see a video is two patches
      * old without us asking the submitter for something they would guess. */

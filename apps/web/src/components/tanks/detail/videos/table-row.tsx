@@ -24,7 +24,6 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import { BATTLE_PARAM } from "./battle-param";
 import type { TankVideoCardData } from "./card";
-import { PublishedDate } from "./published-date";
 
 const RESULT_CLASS: Record<string, string> = {
   victory: "text-emerald-500",
@@ -40,7 +39,6 @@ export type VideoColumns = {
   identity: boolean;
   map: boolean;
   damage: boolean;
-  published: boolean;
 };
 
 /**
@@ -172,15 +170,6 @@ export function VideoTableRow({
       <TableCell className="text-fd-muted-foreground">
         {battle.channelName}
       </TableCell>
-      {columns.published && (
-        <TableCell className="whitespace-nowrap text-fd-muted-foreground">
-          {battle.publishedAt ? (
-            <PublishedDate date={battle.publishedAt} />
-          ) : (
-            "—"
-          )}
-        </TableCell>
-      )}
     </TableRow>
   );
 
