@@ -21,6 +21,9 @@ import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetri
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useRegion } from "@/hooks/use-region";
+import { TablePager, usePagination } from "@/components/table-pager";
+import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
+import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import { cn } from "@/lib/utils";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -174,10 +177,36 @@ export function ClanVehiclesTable({
     () => vehicles.map((v) => ({ ...v, rating: ratingForMetric(v, metric) })),
     [vehicles, metric],
   );
-  const sorted = useMemo(
-    () => [...rows].sort((a, b) => compareRows(a, b, sort)),
-    [rows, sort],
+
+  // The numeric columns the min/max filter can target: this table's own, so
+  // member count is offered here and nowhere else. The rating one follows the
+  // selected metric, like the column it filters.
+  const rangeCols: RangeColumn<Row>[] = useMemo(
+    () => [
+      { key: "members", label: "Members", value: (r) => r.memberCount },
+      { key: "battles", label: "Battles", value: (r) => r.battles },
+      { key: "avgDamage", label: "Avg damage", value: (r) => r.avgDamage },
+      { key: "avgXp", label: "Avg XP", value: (r) => r.avgXp },
+      {
+        key: "winrate",
+        label: "WR %",
+        value: (r) => (r.winrate != null ? r.winrate * 100 : null),
+      },
+      {
+        key: "rating",
+        label: RATING_METRIC_LABEL[metric],
+        value: (r) => r.rating,
+      },
+    ],
+    [metric],
   );
+
+  const { filtered, filters } = useTankFilters(rows, rangeCols, "battles");
+  const sorted = useMemo(
+    () => [...filtered].sort((a, b) => compareRows(a, b, sort)),
+    [filtered, sort],
+  );
+  const { paged, pager } = usePagination(sorted);
 
   function toggleSort(column: SortColumn) {
     setSort((prev) => {
@@ -208,167 +237,186 @@ export function ClanVehiclesTable({
   const metricLabel = RATING_METRIC_LABEL[metric];
 
   return (
-    <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
-      <TableHeader>
-        <TableRow>
-          <SortableHead
-            column={SortColumn.Nation}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-          >
-            Nation
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Type}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-          >
-            Type
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Tier}
-            state={sort}
-            onToggle={toggleSort}
-            align="center"
-            hideOnMobile
-            headClassName="w-px"
-          >
-            Tier
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Name}
-            state={sort}
-            onToggle={toggleSort}
-          >
-            Name
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Members}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            Members
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Battles}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            Battles
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.AvgDamage}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            Avg damage
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.AvgXp}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-            hideOnMobile
-          >
-            Avg XP
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.WinRate}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            WR
-          </SortableHead>
-          <SortableHead
-            column={SortColumn.Rating}
-            state={sort}
-            onToggle={toggleSort}
-            align="end"
-          >
-            {metricLabel}
-          </SortableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {sorted.map((r) => {
-          const isPremium = r.isPremium;
-          return (
-            <TableRow key={r.tankId}>
-              <TableCell className="hidden text-center sm:table-cell">
-                {r.nation ? (
-                  <NationFlag nation={r.nation} region={region} />
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </TableCell>
-              <TableCell className="hidden text-center sm:table-cell">
-                {r.type ? (
-                  <VehicleTypeIcon type={r.type} premium={isPremium} />
-                ) : (
-                  <span className="text-muted-foreground">—</span>
-                )}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "hidden text-center font-medium sm:table-cell",
-                  isPremium && "text-[#FAB81B]",
-                )}
-              >
-                {r.tier ? toRoman(r.tier) : "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "font-medium max-sm:pl-4!",
-                  isPremium && "text-[#FAB81B]",
-                )}
-              >
-                {r.shortName || r.name || `#${r.tankId}`}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.memberCount)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {intFmt.format(r.battles)}
-              </TableCell>
-              <TableCell className="text-right tabular-nums">
-                {r.avgDamage !== null ? intFmt.format(r.avgDamage) : "—"}
-              </TableCell>
-              <TableCell className="hidden text-right tabular-nums sm:table-cell">
-                {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "text-right tabular-nums",
-                  r.winrate !== null &&
-                    RATING_COLOR_CLASS[winrateColor(r.winrate)],
-                )}
-              >
-                {r.winrate !== null
-                  ? `${pctFmt.format(r.winrate * 100)}%`
-                  : "—"}
-              </TableCell>
-              <TableCell
-                className={cn(
-                  "text-right tabular-nums",
-                  r.rating !== null && RATING_COLOR_CLASS[ratingColor(r.rating)],
-                )}
-              >
-                {r.rating !== null ? decFmt.format(r.rating) : "—"}
-              </TableCell>
-            </TableRow>
-          );
-        })}
-      </TableBody>
-    </Table>
+    <>
+      <div className="p-4">
+        <TankFilterBar filters={filters} searchNoun="tanks" />
+      </div>
+      <div className="border-t border-fd-border">
+        {sorted.length === 0 ? (
+          <p className="p-4 text-sm text-muted-foreground">
+            No tanks match these filters.
+          </p>
+        ) : (
+          <>
+            <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
+              <TableHeader>
+                <TableRow>
+                  <SortableHead
+                    column={SortColumn.Nation}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="center"
+                    hideOnMobile
+                    headClassName="w-px"
+                  >
+                    Nation
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Type}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="center"
+                    hideOnMobile
+                    headClassName="w-px"
+                  >
+                    Type
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Tier}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="center"
+                    hideOnMobile
+                    headClassName="w-px"
+                  >
+                    Tier
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Name}
+                    state={sort}
+                    onToggle={toggleSort}
+                  >
+                    Name
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Members}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    Members
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Battles}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    Battles
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.AvgDamage}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    Avg damage
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.AvgXp}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                    hideOnMobile
+                  >
+                    Avg XP
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.WinRate}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    WR
+                  </SortableHead>
+                  <SortableHead
+                    column={SortColumn.Rating}
+                    state={sort}
+                    onToggle={toggleSort}
+                    align="end"
+                  >
+                    {metricLabel}
+                  </SortableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {paged.map((r) => {
+                  const isPremium = r.isPremium;
+                  return (
+                    <TableRow key={r.tankId}>
+                      <TableCell className="hidden text-center sm:table-cell">
+                        {r.nation ? (
+                          <NationFlag nation={r.nation} region={region} />
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )}
+                      </TableCell>
+                      <TableCell className="hidden text-center sm:table-cell">
+                        {r.type ? (
+                          <VehicleTypeIcon type={r.type} premium={isPremium} />
+                        ) : (
+                          <span className="text-muted-foreground">—</span>
+                        )}
+                      </TableCell>
+                      <TableCell
+                        className={cn(
+                          "hidden text-center font-medium sm:table-cell",
+                          isPremium && "text-[#FAB81B]",
+                        )}
+                      >
+                        {r.tier ? toRoman(r.tier) : "—"}
+                      </TableCell>
+                      <TableCell
+                        className={cn(
+                          "font-medium max-sm:pl-4!",
+                          isPremium && "text-[#FAB81B]",
+                        )}
+                      >
+                        {r.shortName || r.name || `#${r.tankId}`}
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {intFmt.format(r.memberCount)}
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {intFmt.format(r.battles)}
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {r.avgDamage !== null
+                          ? intFmt.format(r.avgDamage)
+                          : "—"}
+                      </TableCell>
+                      <TableCell className="hidden text-right tabular-nums sm:table-cell">
+                        {r.avgXp !== null ? intFmt.format(r.avgXp) : "—"}
+                      </TableCell>
+                      <TableCell
+                        className={cn(
+                          "text-right tabular-nums",
+                          r.winrate !== null &&
+                            RATING_COLOR_CLASS[winrateColor(r.winrate)],
+                        )}
+                      >
+                        {r.winrate !== null
+                          ? `${pctFmt.format(r.winrate * 100)}%`
+                          : "—"}
+                      </TableCell>
+                      <TableCell
+                        className={cn(
+                          "text-right tabular-nums",
+                          r.rating !== null &&
+                            RATING_COLOR_CLASS[ratingColor(r.rating)],
+                        )}
+                      >
+                        {r.rating !== null ? decFmt.format(r.rating) : "—"}
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+            <TablePager pager={pager} />
+          </>
+        )}
+      </div>
+    </>
   );
 }

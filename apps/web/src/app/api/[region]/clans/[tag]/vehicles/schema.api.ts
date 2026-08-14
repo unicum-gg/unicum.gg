@@ -16,6 +16,8 @@ const clanVehicle = z
     nation: z.string().nullable(),
     type: z.string().nullable(),
     isPremium: z.boolean(),
+    role: z.string().nullable(),
+    isReward: z.boolean(),
     memberCount: z.number(),
     battles: z.number(),
     avgDamage: z.number().nullable(),

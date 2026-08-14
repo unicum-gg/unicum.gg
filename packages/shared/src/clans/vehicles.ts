@@ -24,6 +24,10 @@ export type ClanVehicleRow = {
   nation: string | null;
   type: string | null;
   isPremium: boolean;
+  // Carried for the same reason the player rows carry them: the shared tank
+  // filter bar narrows on role and on the standard/premium/reward category.
+  role: string | null;
+  isReward: boolean;
   memberCount: number;
   battles: number;
   avgDamage: number | null;
@@ -72,6 +76,8 @@ export function buildClanVehicleRows(
       nation: meta?.nation ?? null,
       type: meta?.type ?? null,
       isPremium: meta?.isPremium ?? false,
+      role: meta?.role ?? null,
+      isReward: meta?.isReward ?? false,
       memberCount: agg.memberCount,
       battles: agg.battles,
       avgDamage,

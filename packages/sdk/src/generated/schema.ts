@@ -1630,6 +1630,8 @@ export interface components {
             nation: string | null;
             type: string | null;
             isPremium: boolean;
+            role: string | null;
+            isReward: boolean;
             memberCount: number;
             battles: number;
             avgDamage: number | null;
