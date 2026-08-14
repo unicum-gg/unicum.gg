@@ -8,7 +8,12 @@ import {
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { winrateColor, RATING_COLOR_CLASS, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+import { computeHR, hrColor, winrateColor, RATING_COLOR_CLASS, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+
+// The Wins row colors its win rate with the mode's own scale. Defaults to the
+// random-battle 50%-anchored one; Steel Hunter passes its lower-baseline scale
+// (top-5 placement, ~41% median) via the table's `winrateColorFn` prop.
+export type WinrateColorFn = (wr: number) => RatingColor;
 
 const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const decimalFmt = new Intl.NumberFormat("en-US", {
@@ -33,12 +38,31 @@ function avgOrDash(n: number, d: number): string {
   return d <= 0 ? "—" : decimalFmt.format(n / d);
 }
 
-type RowDef = {
+export type RowDef = {
   label: string;
   render: (s: StrongholdStats) => Cell;
 };
 
-const ROW_DEFS: RowDef[] = [
+// Steel Hunter only: the HR rating, colored like the leaderboard. Appended as a
+// trailing row for the fallout mode (see StrongholdTab), so the other seven
+// stronghold-style modes keep their shared row set untouched. `computeHR`
+// returns null with no battles, which renders the em-dash placeholder.
+export const HR_ROW: RowDef = {
+  label: "HR",
+  render: (s) => {
+    const hr = computeHR({
+      battles: s.battles,
+      wins: s.wins,
+      avgXp: s.battleAvgXp,
+    });
+    return hr === null
+      ? EMPTY_CELL
+      : { primary: integerFmt.format(hr), color: hrColor(hr) };
+  },
+};
+
+function buildRowDefs(wrColor: WinrateColorFn): RowDef[] {
+  return [
   {
     label: "Battles",
     render: (s) => ({ primary: integerFmt.format(s.battles) }),
@@ -48,7 +72,7 @@ const ROW_DEFS: RowDef[] = [
     render: (s) => ({
       primary: integerFmt.format(s.wins),
       secondary: pctOrDash(s.wins, s.battles),
-      color: s.battles > 0 ? winrateColor(s.wins / s.battles) : undefined,
+      color: s.battles > 0 ? wrColor(s.wins / s.battles) : undefined,
     }),
   },
   {
@@ -118,7 +142,8 @@ const ROW_DEFS: RowDef[] = [
       primary: s.battles > 0 ? decimalFmt.format(s.battleAvgXp) : "—",
     }),
   },
-];
+  ];
+}
 
 function PeriodCells({
   cell,
@@ -187,10 +212,22 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
  * cells (one `ROW_DEFS`, so the skeleton can't drift from the real table). */
 export function StrongholdStatsTable(
   props:
-    | { loading: true }
-    | { current: StrongholdStats; periods: StrongholdPeriods },
+    | { loading: true; trailingRows?: RowDef[]; winrateColorFn?: WinrateColorFn }
+    | {
+        current: StrongholdStats;
+        periods: StrongholdPeriods;
+        trailingRows?: RowDef[];
+        winrateColorFn?: WinrateColorFn;
+      },
 ) {
   const loading = "loading" in props;
+  // Mode-specific rows (e.g. the Steel Hunter HR) appended to the shared set,
+  // so the skeleton and the real table always render the same labels. The win
+  // rate scale is the mode's (Steel Hunter passes its own baseline).
+  const rows = [
+    ...buildRowDefs(props.winrateColorFn ?? winrateColor),
+    ...(props.trailingRows ?? []),
+  ];
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
       <colgroup>
@@ -222,7 +259,7 @@ export function StrongholdStatsTable(
         </TableRow>
       </TableHeader>
       <TableBody>
-        {ROW_DEFS.map((row) => {
+        {rows.map((row) => {
           const cells = loading
             ? null
             : {

@@ -5,6 +5,7 @@ import {
   numeric,
   pgTable,
   primaryKey,
+  real,
   text,
   timestamp,
 } from "drizzle-orm/pg-core";
@@ -36,6 +37,10 @@ export function makeClanRatingsTable(region: string) {
       // is battle-weighted over). Boards floor this to reject dormant/troll clans.
       ratedMembersCount: integer("rated_members_count").notNull(),
       avgValue: numeric("avg_value").notNull(),
+      // Battle-weighted mean lifetime win rate (0..1) of the roster, carried so
+      // the board can show a WR column without a re-aggregation. Same row per
+      // metric, so it repeats across a clan's three rows.
+      winrate: real("winrate"),
       // Position on this metric's board, written by the cron that already knows
       // the ordering. Ranking at read time costs a full sort of the board
       // (measured 410 ms for one clan on EU), which the badges would pay again

@@ -310,6 +310,8 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
   /** Search players */
   search(q: NonNullable<QueryOf<"/{region}/players/search">>["q"]): RequestHandle<Data<"/{region}/players/search">>;
+  /** Steel Hunter leaderboard */
+  steelHunter(query?: QueryOf<"/{region}/players/steel-hunter">): RequestHandle<Data<"/{region}/players/steel-hunter">>;
   /** Top players */
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
   /** Streamed player search: NDJSON chunks (local DB first, then Wargaming). */
@@ -412,6 +414,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/search", {
             params: { path: { region: this.region }, query: { q } },
+          }),
+      );
+    ns.steelHunter = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/steel-hunter", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/players/steel-hunter", {
+            params: { path: { region: this.region }, query },
           }),
       );
     ns.top = (query) =>

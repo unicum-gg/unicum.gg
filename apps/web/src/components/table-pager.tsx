@@ -27,10 +27,13 @@ export type PagerState = {
 
 // Client-side pagination over an already-sorted/filtered list. Resets to page 1
 // whenever the list identity or page size changes (so a new filter/sort lands on
-// the first page).
+// the first page). `syncUrl` (default on) mirrors page/size to `?page=&ps=`;
+// pass `false` when several pagers coexist on one page (they would otherwise
+// clobber each other's shared URL params).
 export function usePagination<T>(
   items: T[],
   initialSize: PageSize = 50,
+  syncUrl: boolean = true,
 ): { paged: T[]; pager: PagerState } {
   // Page + page size live in the URL (?page=&ps=) alongside the filters, so a
   // paginated view is shareable and survives a reload. Written back merged with
@@ -38,12 +41,14 @@ export function usePagination<T>(
   // omitted to keep the URL clean.
   const searchParams = useSearchParams();
   const [pageSize, setPageSize] = useState<PageSize>(() => {
+    if (!syncUrl) return initialSize;
     const raw = searchParams.get("ps");
     if (raw === "all") return "all";
     const n = Number(raw);
     return Number.isFinite(n) && n > 0 ? n : initialSize;
   });
   const [page, setPage] = useState(() => {
+    if (!syncUrl) return 1;
     const n = Number(searchParams.get("page"));
     return Number.isFinite(n) && n > 0 ? n : 1;
   });
@@ -64,6 +69,7 @@ export function usePagination<T>(
   const paged = pageSize === "all" ? items : items.slice(startIdx, startIdx + size);
 
   useEffect(() => {
+    if (!syncUrl) return;
     const params = new URLSearchParams(window.location.search);
     const setOrDel = (key: string, val: string) => {
       if (val) params.set(key, val);
@@ -77,7 +83,7 @@ export function usePagination<T>(
       "",
       qs ? `${window.location.pathname}?${qs}` : window.location.pathname,
     );
-  }, [current, pageSize, initialSize]);
+  }, [current, pageSize, initialSize, syncUrl]);
 
   return {
     paged,

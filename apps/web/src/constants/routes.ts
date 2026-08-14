@@ -41,6 +41,10 @@ const ROUTES = {
   // - Players
   PLAYERS: (region: Region) =>
     region === Region.EU ? "/players" : pathcat("/:region/players", { region }),
+  PLAYERS_STEEL_HUNTER: (region: Region) =>
+    region === Region.EU
+      ? "/players/steel-hunter"
+      : pathcat("/:region/players/steel-hunter", { region }),
   PLAYERS_BY_LANGUAGE: (
     region: Region,
     language: string,
@@ -54,6 +58,10 @@ const ROUTES = {
   },
   PLAYER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname", { region, nickname }),
+  // A player's Steel Hunter tab, so the SH leaderboard links straight to the
+  // matching mode instead of the overview.
+  PLAYER_STEEL_HUNTER: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
   // One player's record on one vehicle, the game's Service Record. A URL of its
   // own rather than a panel state, so it can be linked, shared and reopened.
   PLAYER_TANK: (region: Region, nickname: string, slug: string) =>
@@ -72,6 +80,12 @@ const ROUTES = {
   // - Clans
   CLAN: (region: Region, tag: string) =>
     pathcat("/:region/clans/:tag", { region, tag }),
+  // A clan's Stronghold mode page, optionally anchored to one tier's section, so
+  // the stronghold boards link straight to the matching tier on the clan page.
+  CLAN_STRONGHOLD: (region: Region, tag: string, tier?: StrongholdTier) => {
+    const base = pathcat("/:region/clans/:tag/stronghold", { region, tag });
+    return tier ? `${base}#${tier}` : base;
+  },
   COMPARE_CLANS: (region: Region, [first, ...rest]: string[]) =>
     pathcat("/:region/clans/:first/vs/:rest", {
       region,

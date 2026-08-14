@@ -345,3 +345,175 @@ export function computeWNX(
   const result = raw * (raw / 1000) ** 0.45 * 1.65;
   return Number.isFinite(result) ? result : null;
 }
+
+// HR, the Steel Hunter (battle-royale) performance rating. It is built on just
+// two axes: the game's average XP per battle (the single effectiveness signal,
+// since the XP formula already integrates damage, frags, spotting, survival time
+// and placement) and the win rate (the outcome, i.e. how consistently you reach
+// the top), each normalised to the EU population median at >= HR_MIN_BATTLES SH
+// battles, equally weighted, times a volume-confidence discount so a tiny sample
+// cannot top the board. Using XP instead of separate damage/frags/survival axes
+// removes the double-counting those baked into the XP anyway. A median SH player
+// lands ~942 (= Average on `hrColor`), the same way WN8/WNX anchor average at
+// Average. Steel Hunter stats come from WG's (repurposed) `statistics.fallout`
+// block; see `falloutStatsFromSnapshot`.
+export type HRInputs = {
+  battles: number;
+  wins: number;
+  avgXp: number;
+};
+
+// Leaderboard gate: only rank players with at least this many SH battles. The
+// value is stored on the players row regardless; the top query applies the gate.
+export const HR_MIN_BATTLES = 100;
+
+const HR_SCALE = 1500;
+const HR_VOLUME_K = 100; // half volume-credit at 100 SH battles
+// Axis baselines = EU population medians at >= 100 SH battles.
+const HR_WR_BASE = 0.41;
+const HR_XP_BASE = 1034;
+// Axis weights: effectiveness (XP) and outcome (win rate) count equally.
+const HR_W_XP = 0.5;
+const HR_W_WIN = 0.5;
+
+/** Steel Hunter HR rating. Null when the player has no Steel Hunter battles. */
+export function computeHR(s: HRInputs): number | null {
+  const b = s.battles;
+  if (!b || b <= 0) return null;
+  const rXp = s.avgXp / HR_XP_BASE;
+  const rWin = s.wins / b / HR_WR_BASE;
+  const score = HR_W_XP * rXp + HR_W_WIN * rWin;
+  const vol = b / (b + HR_VOLUME_K);
+  const hr = HR_SCALE * score * vol;
+  return Number.isFinite(hr) ? Math.round(hr) : null;
+}
+
+// Thresholds calibrated on the EU HR value distribution at >= 100 SH battles
+// (n~3.3k; p50 ~942, p85 ~1301, p95 ~1503, p98 ~1620, p99 ~1721, max ~2096).
+// The XP-based scale is tighter than the old damage-based one, so buckets are set
+// by population percentile to match the community rarity of each tier: the top
+// (super unicum) is ~top 1%, Excellent ~1%, Super ~3%. Same 9 RatingColor
+// buckets as the other scales.
+export function hrColor(value: number): RatingColor {
+  if (value < 550) return RatingColor.VeryBad;
+  if (value < 680) return RatingColor.Bad;
+  if (value < 820) return RatingColor.BelowAvg;
+  if (value < 1070) return RatingColor.Average;
+  if (value < 1300) return RatingColor.Good;
+  if (value < 1500) return RatingColor.VeryGood;
+  if (value < 1620) return RatingColor.Super;
+  if (value < 1720) return RatingColor.Excellent;
+  return RatingColor.Top;
+}
+
+// HRB, the "battles-based" Hunter Rating. Same effectiveness score as HR (XP +
+// win rate), but battle volume REWARDS instead of discounting: winning is very
+// hard in battle royale, so winning AND playing a lot is the real feat. The
+// volume brake `battles/(battles+K)` is replaced by a growing `ln(1+battles/50)`
+// term, and the whole thing rescaled (×635) so the median lands ~943 like HR,
+// keeping the two columns comparable. Computed in SQL for the leaderboard (see
+// getTopSteelHunter): HRB = 635 · (0.5·XP/1034 + 0.5·WR/0.41) · ln(1+battles/50).
+// Thresholds calibrated on the EU HRB distribution at >= 100 SH battles (n~3.3k;
+// p50 ~943, p85 ~1516, p95 ~1995, p99 ~2504, max ~3538) by population percentile,
+// matching each tier's community rarity (top ~1%). Wider than HR, hence its own
+// scale rather than reusing hrColor.
+export function hrbColor(value: number): RatingColor {
+  if (value < 520) return RatingColor.VeryBad;
+  if (value < 645) return RatingColor.Bad;
+  if (value < 795) return RatingColor.BelowAvg;
+  if (value < 1120) return RatingColor.Average;
+  if (value < 1520) return RatingColor.Good;
+  if (value < 2000) return RatingColor.VeryGood;
+  if (value < 2350) return RatingColor.Super;
+  if (value < 2500) return RatingColor.Excellent;
+  return RatingColor.Top;
+}
+
+// Steel Hunter win rate is a top-5 finish in battle royale, so its baseline
+// (HR_WR_BASE ≈ 0.41) sits well below a random-battle 50%. Anchoring the tiers
+// to that baseline (rather than reusing the random `winrateColor`) keeps the
+// median SH player at Average instead of painting the whole board "very bad".
+export function steelHunterWinrateColor(wr: number): RatingColor {
+  const b = HR_WR_BASE;
+  if (wr < b - 0.06) return RatingColor.VeryBad;
+  if (wr < b - 0.04) return RatingColor.Bad;
+  if (wr < b - 0.02) return RatingColor.BelowAvg;
+  if (wr < b + 0.02) return RatingColor.Average;
+  if (wr < b + 0.05) return RatingColor.Good;
+  if (wr < b + 0.08) return RatingColor.VeryGood;
+  if (wr < b + 0.12) return RatingColor.Super;
+  if (wr < b + 0.17) return RatingColor.Excellent;
+  return RatingColor.Top;
+}
+
+// Stronghold Rating (SR) and its battles-based sibling (SRB) each use ONE
+// absolute scale across all tiers, like WNX: a given value always means the same
+// clan quality (SR is roster strength x win-rate, tier-independent by
+// construction; SRB is that same SR bumped by battle volume), so a purple clan
+// genuinely dominates the mode whatever the tier, and the count in each tier
+// reflects reality rather than a fixed percentile quota. SR is anchored to win
+// rate: Top (>=5000) ~ a 60%+ WR roster that wins clearly, Average (~1500) ~ a
+// break-even clan. SRB sits higher (it is >= SR) and rewards proven volume, so
+// the continuously-played tiers (T10) legitimately field more high-SRB clans.
+const RATING_COLOR_ORDER: readonly RatingColor[] = [
+  RatingColor.VeryBad,
+  RatingColor.Bad,
+  RatingColor.BelowAvg,
+  RatingColor.Average,
+  RatingColor.Good,
+  RatingColor.VeryGood,
+  RatingColor.Super,
+  RatingColor.Excellent,
+];
+
+function tierColor(value: number, thresholds: readonly number[]): RatingColor {
+  for (let i = 0; i < thresholds.length; i++) {
+    if (value < thresholds[i]) return RATING_COLOR_ORDER[i];
+  }
+  return RatingColor.Top;
+}
+
+// One absolute scale each, every tier. The 8 ascending bucket boundaries. SRB
+// sits ~2.5x higher than SR because it multiplies SR by the (>=1) volume bonus.
+const SR_THRESHOLDS: readonly number[] = [
+  250, 600, 1200, 2000, 2500, 3000, 4000, 5000,
+];
+
+const SRB_THRESHOLDS: readonly number[] = [
+  500, 1200, 2400, 4000, 5500, 7500, 10000, 13000,
+];
+
+/** Color for a clan's Stronghold Rating (one absolute scale, all tiers). */
+export function strongholdRatingColor(sr: number): RatingColor {
+  return tierColor(sr, SR_THRESHOLDS);
+}
+
+/** Color for a clan's battles-based Stronghold Rating (one absolute scale). */
+export function strongholdRatingBattlesColor(srb: number): RatingColor {
+  return tierColor(srb, SRB_THRESHOLDS);
+}
+
+// Human-readable ranges for the stronghold Rating scale legend, derived from the
+// threshold tables so the legend can never drift from the color functions. Both
+// SR and SRB are one absolute scale for every tier.
+export function strongholdScaleRanges(): {
+  color: RatingColor;
+  sr: string;
+  srb: string;
+}[] {
+  const fmt = (thr: readonly number[]): string[] => {
+    const out: string[] = [];
+    for (let i = 0; i <= thr.length; i++) {
+      if (i === 0) out.push(`<${thr[0]}`);
+      else if (i === thr.length) out.push(`≥${thr[thr.length - 1]}`);
+      else out.push(`${thr[i - 1]}-${thr[i] - 1}`);
+    }
+    return out;
+  };
+  const sr = fmt(SR_THRESHOLDS);
+  const srb = fmt(SRB_THRESHOLDS);
+  // Highest tier first (Top), to read top-down like the other scales.
+  return RATING_COLOR_ORDER.concat(RatingColor.Top)
+    .map((color, i) => ({ color, sr: sr[i], srb: srb[i] }))
+    .reverse();
+}

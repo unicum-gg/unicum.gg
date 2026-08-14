@@ -36,6 +36,13 @@ type RawPlayer = {
   battles_24h: number | null;
   battles_7d: number | null;
   winrate: number | null;
+  hr: number | null;
+  sh_battles: number | null;
+  sh_wins: number | null;
+  sh_survived: number | null;
+  sh_damage: number | string | null;
+  sh_frags: number | null;
+  sh_avg_xp: number | null;
   null_count: number;
   soft_deleted_at: string | null;
 };
@@ -221,6 +228,13 @@ function playerFromRaw(r: RawPlayer): Player {
     battles24h: r.battles_24h,
     battles7d: r.battles_7d,
     winrate: r.winrate,
+    hr: r.hr,
+    shBattles: r.sh_battles,
+    shWins: r.sh_wins,
+    shSurvived: r.sh_survived,
+    shDamage: r.sh_damage === null ? null : Number(r.sh_damage),
+    shFrags: r.sh_frags,
+    shAvgXp: r.sh_avg_xp,
     nullCount: r.null_count,
     softDeletedAt: r.soft_deleted_at ? new Date(r.soft_deleted_at) : null,
   };

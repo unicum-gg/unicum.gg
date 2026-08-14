@@ -99,6 +99,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/steel-hunter": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Steel Hunter leaderboard
+         * @description The Steel Hunter (battle-royale) player leaderboard for a region,
+         */
+        get: operations["get-{region}-players-steel-hunter"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}": {
         parameters: {
             query?: never;
@@ -1599,6 +1619,12 @@ export interface components {
                 t8: number | null;
                 t6: number | null;
             } | null;
+            sr30d: {
+                advances: number | null;
+                t10: number | null;
+                t8: number | null;
+                t6: number | null;
+            } | null;
         };
         /** @description A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10). */
         ClanStrongholdStats: {
@@ -1619,6 +1645,7 @@ export interface components {
             clan_id: number;
             tag: string;
             name: string;
+            winrate?: number | null;
             badges?: components["schemas"]["ClanRankBadge"][];
         };
         /** @description A tank the clan has played, with battle-weighted averages and WN7/WN8/WNX ratings across all members. */
@@ -2423,6 +2450,7 @@ export interface components {
         PlayerSummary: {
             account_id: number;
             nickname: string;
+            winrate?: number | null;
             is_verified?: boolean;
             is_supporter?: boolean;
             twitch_login?: string | null;
@@ -2690,6 +2718,23 @@ export interface components {
          * @enum {string}
          */
         spawnDirectionField: "north" | "south" | "east" | "west";
+        SteelHunterResponse: {
+            results: components["schemas"]["SteelHunterSummary"][];
+        };
+        /** @description Steel Hunter leaderboard row (ranked by HR). */
+        SteelHunterSummary: {
+            account_id: number;
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            hr: number;
+            hrb: number;
+            battles: number;
+            wins: number;
+            survived: number;
+            damage: number;
+            frags: number;
+        };
         /**
          * @description With `language`: only count clans that declare exactly this one language.
          * @enum {string}
@@ -2716,6 +2761,8 @@ export interface components {
             boostRatio: number | null;
             /** @description Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period. */
             sr: number | null;
+            /** @description Battles-based Stronghold Rating: SR reweighted so battle volume rewards instead of only gating it (per-tier calibration). */
+            srb: number | null;
             /** @description Leaderboard placings the clan currently holds, best rank first. */
             badges?: components["schemas"]["ClanRankBadge"][];
         };
@@ -3522,6 +3569,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-players-steel-hunter": {
+        parameters: {
+            query?: {
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                /** @description Ranking column (default hr). */
+                sort?: "hr" | "hrb" | "battles" | "winrate" | "survival" | "damage";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SteelHunterResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-players-{nickname}": {
         parameters: {
             query?: never;
@@ -3810,7 +3885,7 @@ export interface operations {
                 /** @description Stronghold mode/tier (default t10). */
                 tier?: "advances" | "t10" | "t8" | "t6";
                 /** @description Ranking column (default sr). */
-                sort?: "sr" | "elo" | "battles" | "winrate";
+                sort?: "sr" | "srb" | "elo" | "battles" | "winrate";
                 /** @description Window the stats are computed over: all-time or the last 30 days (default overall). */
                 period?: "overall" | "30d";
             };

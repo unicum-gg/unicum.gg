@@ -23,12 +23,13 @@ import {
   StrongholdTab,
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
+import { HR_ROW } from "@/components/players/detail/overview/stronghold-stats-table";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
-import { SessionGranularity } from "@unicum.gg/shared";
+import { SessionGranularity, steelHunterWinrateColor } from "@unicum.gg/shared";
 import type {
   PlayerAchievements,
   PlayerDetailData,
@@ -263,6 +264,10 @@ export function PlayerTabsView({
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}
+          trailingRows={mode === PlayerMode.SteelHunter ? [HR_ROW] : undefined}
+          winrateColorFn={
+            mode === PlayerMode.SteelHunter ? steelHunterWinrateColor : undefined
+          }
         />
       )}
     </>

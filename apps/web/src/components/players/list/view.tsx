@@ -1,8 +1,10 @@
 import Image from "next/image";
+import { RatingScale } from "@/components/home/rating-scale";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
+import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { PlayerLanguageChips } from "@/components/players/list/language-chips";
 import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
-import { TopPlayersList } from "@/components/players/list/top-players-list";
+import { TopPlayersBoard } from "@/components/players/list/top-players-board";
 import {
   Panel,
   PanelContent,
@@ -20,7 +22,8 @@ import {
   REGION_LABEL,
 } from "@unicum.gg/wargaming";
 
-const LIMIT = 100;
+// The full ranking is fetched once and paginated client-side (TablePager).
+const LIMIT = 1000;
 const LANGUAGE_NAMES = new Intl.DisplayNames(["en"], { type: "language" });
 
 function languageDisplayName(code: string): string {
@@ -85,7 +88,6 @@ export async function PlayersLandingView({
   const filterCounts = language ? stats.find((s) => s.code === language) : null;
   const langName = language ? languageDisplayName(language) : null;
   const langCountry = language ? languageToCountryCode(language, region) : null;
-  const totalCount = wnxResults.length;
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -153,6 +155,12 @@ export async function PlayersLandingView({
         </PanelContent>
       </Panel>
 
+      {/* Game-mode boards (Overall WNX vs Steel Hunter HR), on every player
+          landing including the per-language pages, mirroring the clan landing's
+          stronghold tabs. */}
+      <PanelSeparator />
+      <PlayersModeTabs region={region} active="overall" />
+
       <PanelSeparator />
 
       <Panel>
@@ -179,9 +187,9 @@ export async function PlayersLandingView({
           <PanelTitle>
             {language
               ? strict
-                ? `Top ${totalCount} strictly ${langName} players`
-                : `Top ${totalCount} ${langName} players`
-              : `Top ${totalCount} players`}
+                ? `Top strictly ${langName} players`
+                : `Top ${langName} players`
+              : "Top players"}
           </PanelTitle>
           {language && filterCounts && (
             <PlayerStrictModeToggle
@@ -195,26 +203,37 @@ export async function PlayersLandingView({
         </PanelHeader>
         <PanelContent className="p-0">
           <div data-rating-col="wn7">
-            <TopPlayersList
+            <TopPlayersBoard
               region={region}
-              results={wn7Results}
               metric={RatingMetric.Wn7}
+              results={wn7Results}
             />
           </div>
           <div data-rating-col="wn8">
-            <TopPlayersList
+            <TopPlayersBoard
               region={region}
-              results={wn8Results}
               metric={RatingMetric.Wn8}
+              results={wn8Results}
             />
           </div>
           <div data-rating-col="wnx">
-            <TopPlayersList
+            <TopPlayersBoard
               region={region}
-              results={wnxResults}
               metric={RatingMetric.Wnx}
+              results={wnxResults}
             />
           </div>
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Rating scale</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <RatingScale />
         </PanelContent>
       </Panel>
     </div>

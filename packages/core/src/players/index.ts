@@ -1,6 +1,6 @@
 import { and, asc, between, desc, eq, inArray, isNotNull, lt, or, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, type Stats, type StrongholdStats } from "@unicum.gg/shared";
+import { type NewPlayerSnapshot, type Player, type PlayerSnapshot, playerSnapshotsByRegion, playersByRegion, tankSnapshotsByRegion, computeAvgTier, buildWN8Fallback, computeWN7, computeWN8, computeWNX, computeHR, type Stats, type StrongholdStats } from "@unicum.gg/shared";
 import { discoverClansBackground } from "@unicum.gg/core/discovery/clans";
 import { discoverFromClanHistoryBackground } from "@unicum.gg/core/discovery/player-history";
 import { playerChannel, publish } from "@unicum.gg/core/live/pubsub";
@@ -692,6 +692,21 @@ async function updatePlayerRatings(
   const wn8 = computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
   const wnx = computeWNX(tanks, wnxExpected);
 
+  // Steel Hunter (battle royale) leaderboard cache: the HR rating + the raw
+  // SH totals, from WG's `statistics.fallout` block (Steel Hunter reuses that
+  // slot). Kept on the row so the board ranks by a cached column; null when the
+  // account has no Steel Hunter battles.
+  const fa = info.statistics.fallout;
+  const shBattles = fa?.battles ?? null;
+  const shAvgXp = fa?.battle_avg_xp ?? null;
+  // Gate hr on a known avg XP too: HR is XP-driven, so without it the score
+  // would be understated. Keeping the two in lockstep also lets the leaderboard
+  // treat `hr NOT NULL` as "sh_avg_xp present" (HRB divides by it).
+  const hr =
+    shBattles && shBattles > 0 && shAvgXp != null
+      ? computeHR({ battles: shBattles, wins: fa?.wins ?? 0, avgXp: shAvgXp })
+      : null;
+
   // Recent-window ratings for each leaderboard period (24h / 7d / 30d). Per
   // tank we take the newest snapshot older than the cutoff, or (for players
   // tracked less than the window) the oldest snapshot other than the current
@@ -831,6 +846,13 @@ async function updatePlayerRatings(
       battles7d: p7d.battles,
       battles: overall.battles,
       winrate: overall.battles > 0 ? overall.wins / overall.battles : null,
+      hr,
+      shBattles,
+      shWins: fa?.wins ?? null,
+      shSurvived: fa?.survived_battles ?? null,
+      shDamage: fa?.damage_dealt ?? null,
+      shFrags: fa?.frags ?? null,
+      shAvgXp,
     })
     .where(eq(players.id, playerId));
 }

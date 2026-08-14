@@ -26,6 +26,7 @@ type MaterializedRow = {
   account_id: string | number;
   nickname: string;
   battles: number;
+  winrate: number | null;
   wn7: number | null;
   wn8: number | null;
   wnx: number | null;
@@ -54,7 +55,7 @@ export async function recomputePlayerRatings(region: Region): Promise<number> {
 
   const candFor = (col: string) =>
     sql`(
-      SELECT p.account_id, p.nickname, p.clan_id, p.battles,
+      SELECT p.account_id, p.nickname, p.clan_id, p.battles, p.winrate,
         p."wn7" AS wn7, p."wn8" AS wn8, p."wnx" AS wnx
       FROM ${players} p
       WHERE p.${sql.raw(`"${col}"`)} IS NOT NULL
@@ -71,7 +72,7 @@ export async function recomputePlayerRatings(region: Region): Promise<number> {
     return tx.execute(sql`
       WITH cands AS (
         SELECT DISTINCT ON (account_id)
-          account_id, nickname, clan_id, battles, wn7, wn8, wnx
+          account_id, nickname, clan_id, battles, winrate, wn7, wn8, wnx
         FROM (
           ${candFor("wnx")}
           UNION ALL
@@ -127,7 +128,7 @@ export async function recomputePlayerRatings(region: Region): Promise<number> {
         FROM survivors
         GROUP BY account_id
       )
-      SELECT c.account_id, c.nickname, c.battles, c.wn7, c.wn8, c.wnx,
+      SELECT c.account_id, c.nickname, c.battles, c.winrate, c.wn7, c.wn8, c.wnx,
         l.languages,
         cl.tag AS clan_tag, cl.color AS clan_color
       FROM cands c
@@ -142,6 +143,7 @@ export async function recomputePlayerRatings(region: Region): Promise<number> {
       accountId: Number(r.account_id),
       nickname: r.nickname,
       battles: r.battles,
+      winrate: r.winrate,
       wn7: r.wn7,
       wn8: r.wn8,
       wnx: r.wnx,

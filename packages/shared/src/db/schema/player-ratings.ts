@@ -23,6 +23,9 @@ export function makePlayerRatingsTable(region: string) {
       accountId: bigint("account_id", { mode: "number" }).primaryKey(),
       nickname: text("nickname").notNull(),
       battles: integer("battles").notNull(),
+      // Lifetime win rate (0..1), carried so the by-language board can show a
+      // win-rate column without a join back to the players table.
+      winrate: real("winrate"),
       wn7: real("wn7"),
       wn8: real("wn8"),
       wnx: real("wnx"),

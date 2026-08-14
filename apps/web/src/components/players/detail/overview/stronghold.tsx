@@ -8,8 +8,10 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import {
+  type RowDef,
   StrongholdStatsTable,
   type StrongholdPeriods,
+  type WinrateColorFn,
 } from "@/components/players/detail/overview/stronghold-stats-table";
 import { styles } from "@/lib/styles";
 import type { StrongholdStats } from "@unicum.gg/shared";
@@ -20,15 +22,20 @@ export type StrongholdData = {
 };
 
 /** The Overview section under any of the eight stronghold-style modes: a single
- * stronghold stats table, or a "no data yet" fallback. */
+ * stronghold stats table, or a "no data yet" fallback. `trailingRows` appends
+ * mode-specific rows (the Steel Hunter HR) after the shared set. */
 export function StrongholdTab({
   nickname,
   label,
   data,
+  trailingRows,
+  winrateColorFn,
 }: {
   nickname: string;
   label: string;
   data: StrongholdData;
+  trailingRows?: RowDef[];
+  winrateColorFn?: WinrateColorFn;
 }) {
   return (
     <>
@@ -44,6 +51,8 @@ export function StrongholdTab({
             <StrongholdStatsTable
               current={data.current}
               periods={data.periods}
+              trailingRows={trailingRows}
+              winrateColorFn={winrateColorFn}
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>

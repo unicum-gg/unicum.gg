@@ -268,9 +268,11 @@ export const metricField = z.enum(RatingMetric).meta({
 } as EnumMeta);
 
 // Leaderboard limits live here (the API contract) and are imported by the route
-// handlers, so the doc and the runtime clamp share one source.
+// handlers, so the doc and the runtime clamp share one source. The player boards
+// pull the whole ranking (up to 1000) in one request and paginate client-side,
+// like every other table on the site (TablePager / usePagination).
 export const TOP_DEFAULT_LIMIT = 10;
-export const PLAYERS_TOP_MAX_LIMIT = 30;
+export const PLAYERS_TOP_MAX_LIMIT = 1000;
 export const CLANS_TOP_MAX_LIMIT = 200;
 
 export function limitField(max: number) {
@@ -315,6 +317,17 @@ export const clansTopQuery = z.object({
   languages: withLanguagesField.optional(),
 });
 
+// The Steel Hunter board is a single lifetime ranking, sortable by column.
+// Inline literals: locked to `SteelHunterSort` in
+// `@unicum.gg/shared/constants/steel-hunter`.
+export const steelHunterQuery = z.object({
+  limit: limitField(PLAYERS_TOP_MAX_LIMIT).optional(),
+  sort: z
+    .enum(["hr", "hrb", "battles", "winrate", "survival", "damage"])
+    .optional()
+    .meta({ description: "Ranking column (default hr)." }),
+});
+
 // next-openapi-gen doesn't serialize `.default()` on enum params, so the doc
 // defaults are applied when serving the spec (see `api/openapi.json/route.ts`),
 // keyed by query-param name. Sourced from the app constants so they can't drift.
@@ -344,6 +357,8 @@ export const playerSummary = z
   .object({
     account_id: z.number(),
     nickname: z.string(),
+    // Lifetime win rate (0..1). Present on the top-players leaderboard rows.
+    winrate: z.number().nullable().optional(),
     // Public badges (present on leaderboard/list rows): the owner connected this
     // account on the site, is an active non-anonymous supporter, and/or has a
     // linked Twitch channel.
@@ -381,6 +396,8 @@ export const clanSummary = z
     clan_id: z.number(),
     tag: z.string(),
     name: z.string(),
+    // Battle-weighted mean lifetime win rate (0..1) of the roster.
+    winrate: z.number().nullable().optional(),
     badges: z.array(clanRankBadge).optional(),
   })
   .loose()

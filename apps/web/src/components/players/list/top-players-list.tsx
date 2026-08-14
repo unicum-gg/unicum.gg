@@ -3,7 +3,7 @@ import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -18,6 +18,11 @@ import type { Region } from "@unicum.gg/wargaming";
 import type { TopPlayerByLanguageResult } from "@/services/wargaming/wot/players/top/by-language";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const pctFmt = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
@@ -29,10 +34,14 @@ export function TopPlayersList({
   region,
   results,
   metric,
+  rankOffset = 0,
 }: {
   region: Region;
   results: TopPlayerByLanguageResult[];
   metric: RatingMetric;
+  // Global rank of the first row (the page offset), so paginated pages keep the
+  // true leaderboard rank instead of restarting at 1.
+  rankOffset?: number;
 }) {
   if (results.length === 0) {
     return (
@@ -60,6 +69,9 @@ export function TopPlayersList({
           <TableHead className="w-24 text-right! tabular-nums">
             Battles
           </TableHead>
+          <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
+            WR
+          </TableHead>
           <TableHead className="w-24 text-right!">
             {RATING_METRIC_LABEL[metric]}
           </TableHead>
@@ -67,7 +79,7 @@ export function TopPlayersList({
       </TableHeader>
       <TableBody>
         {results.map((r, i) => {
-          const rank = i + 1;
+          const rank = rankOffset + i + 1;
           return (
             <TableRow key={r.account_id}>
               <TableCell className="text-center text-muted-foreground tabular-nums">
@@ -125,6 +137,14 @@ export function TopPlayersList({
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
                 {intFmt.format(r.battles)}
+              </TableCell>
+              <TableCell
+                className={cn(
+                  "hidden text-right font-semibold tabular-nums sm:table-cell",
+                  r.winrate != null && RATING_COLOR_CLASS[winrateColor(r.winrate)],
+                )}
+              >
+                {r.winrate != null ? pctFmt.format(r.winrate) : "—"}
               </TableCell>
               <TableCell
                 className={cn(

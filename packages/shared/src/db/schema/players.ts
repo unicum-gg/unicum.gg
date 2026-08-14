@@ -80,6 +80,24 @@ export function makePlayersTable(region: string) {
       // wins/battles at every snapshot-cron tick. Powers the "Player WR" column
       // of the per-tank server-average table (average driver account WR).
       winrate: real("winrate"),
+      // Steel Hunter (battle royale) leaderboard, kept in lockstep by the
+      // snapshot-cron from the latest `fallout_*` snapshot (WG's repurposed
+      // Steel Hunter block). `hr` is the computed rating (see computeHR);
+      // the raw totals ride along so the board renders winrate/survival/avg
+      // damage without a snapshots join, exactly like the wnx columns above let
+      // the main top-players board rank by a cached column. Only players with
+      // `sh_battles >= HR_MIN_BATTLES` are ranked (the query gates, the
+      // partial index below serves it).
+      hr: real("hr"),
+      shBattles: integer("sh_battles"),
+      shWins: integer("sh_wins"),
+      shSurvived: integer("sh_survived"),
+      shDamage: bigint("sh_damage", { mode: "number" }),
+      shFrags: integer("sh_frags"),
+      // Average XP per Steel Hunter battle. The XP formula already integrates
+      // damage, frags, spotting and placement, so `hr` weighs it as the single
+      // effectiveness axis alongside win rate (see computeHR).
+      shAvgXp: real("sh_avg_xp"),
       // Hidden/purged-account guard. WG sometimes returns null for an
       // account from /wot/account/info/. Causes: (a) GDPR purge for accounts
       // dormant 10+ years, (b) admin restriction, (c) transient cache miss
@@ -122,6 +140,14 @@ export function makePlayersTable(region: string) {
       // find the (usually small) due set, then the mode's ORDER BY sorts that
       // subset via the two indexes above.
       index(`${region}_players_due_at_idx`).on(sql`${t.dueAt} ASC`),
+      // Serves the Steel Hunter (HR) leaderboard:
+      // `WHERE sh_battles >= 100 ORDER BY hr DESC LIMIT 100`. Partial (only
+      // ranked SH players, a small fraction of the ~2M rows) + DESC so Postgres
+      // walks it in board order instead of sorting the whole table. The 100
+      // matches HR_MIN_BATTLES.
+      index(`${region}_players_hr_idx`)
+        .on(sql`${t.hr} DESC NULLS LAST`)
+        .where(sql`${t.shBattles} >= 100`),
     ],
   );
 }

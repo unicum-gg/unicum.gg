@@ -9,6 +9,7 @@ export type TopPlayerByLanguageResult = {
   clan_tag: string | null;
   clan_color: string | null;
   battles: number;
+  winrate: number | null;
   wnx: number;
   languages: string[];
 } & PlayerBadgeFlags;
@@ -37,7 +38,7 @@ async function getTopPlayersGlobal(
   const metricCol = sql.raw(`p."${col}"`);
   const rows = (await db.execute(sql`
     SELECT
-      p.account_id, p.nickname, p.battles, ${metricCol} AS value,
+      p.account_id, p.nickname, p.battles, p.winrate, ${metricCol} AS value,
       c.tag AS clan_tag, c.color AS clan_color
     FROM ${players} p
     LEFT JOIN ${clans} c ON c.id = p.clan_id
@@ -50,6 +51,7 @@ async function getTopPlayersGlobal(
     account_id: number | string;
     nickname: string;
     battles: number;
+    winrate: number | null;
     value: number | string;
     clan_tag: string | null;
     clan_color: string | null;
@@ -60,6 +62,7 @@ async function getTopPlayersGlobal(
     clan_tag: r.clan_tag,
     clan_color: r.clan_color,
     battles: r.battles,
+    winrate: r.winrate,
     wnx: Number(r.value),
     languages: [],
   }));
@@ -95,7 +98,7 @@ export async function getTopPlayersByLanguage(
     : sql`AND ${language} = ANY(languages)`;
   const rows = (await db.execute(sql`
     SELECT
-      account_id, nickname, battles, ${metricCol} AS value,
+      account_id, nickname, battles, winrate, ${metricCol} AS value,
       clan_tag, clan_color, languages
     FROM ${table}
     WHERE ${metricCol} IS NOT NULL
@@ -107,6 +110,7 @@ export async function getTopPlayersByLanguage(
     account_id: number | string;
     nickname: string;
     battles: number;
+    winrate: number | null;
     value: number | string;
     clan_tag: string | null;
     clan_color: string | null;
@@ -118,6 +122,7 @@ export async function getTopPlayersByLanguage(
     clan_tag: r.clan_tag,
     clan_color: r.clan_color,
     battles: r.battles,
+    winrate: r.winrate,
     wnx: Number(r.value),
     languages: r.languages ?? [],
   }));

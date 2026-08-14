@@ -34,6 +34,7 @@ type RatingRow = {
   wn8_avg: number | null;
   wnx_rated: number;
   wnx_avg: number | null;
+  winrate_avg: number | null;
   tag: string;
   name: string;
   color: string;
@@ -77,7 +78,8 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
         cm.clan_id,
         COUNT(p."wn7")::int AS wn7_rated, ${avg("wn7")} AS wn7_avg,
         COUNT(p."wn8")::int AS wn8_rated, ${avg("wn8")} AS wn8_avg,
-        COUNT(p."wnx")::int AS wnx_rated, ${avg("wnx")} AS wnx_avg
+        COUNT(p."wnx")::int AS wnx_rated, ${avg("wnx")} AS wnx_avg,
+        ${avg("winrate")} AS winrate_avg
       FROM ${clanMembers} cm
       INNER JOIN ${players} p ON p.account_id = cm.account_id
       GROUP BY cm.clan_id
@@ -87,6 +89,7 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
       cs.wn7_rated, cs.wn7_avg,
       cs.wn8_rated, cs.wn8_avg,
       cs.wnx_rated, cs.wnx_avg,
+      cs.winrate_avg,
       c.tag, c.name, c.color, c.emblem, c.languages, c.members_count
     FROM clan_stats cs
     INNER JOIN ${clans} c ON c.id = cs.clan_id
@@ -111,6 +114,7 @@ export async function recomputeClanRatings(region: Region): Promise<number> {
         membersCount: r.members_count,
         ratedMembersCount: rated,
         avgValue: value.toString(),
+        winrate: r.winrate_avg,
       });
     }
   }

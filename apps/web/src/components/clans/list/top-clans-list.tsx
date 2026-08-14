@@ -4,7 +4,7 @@ import { ClanTag } from "@/components/entity/clan-tag";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
-import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import {
   Table,
@@ -19,6 +19,11 @@ import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
+const pctFmt = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
 
 const COLOR_FOR_METRIC: Record<RatingMetric, (v: number) => string> = {
   [RatingMetric.Wn7]: (v) => RATING_COLOR_CLASS[wn7Color(v)],
@@ -67,6 +72,9 @@ export function TopClansList({
           <TableHead className="w-12 text-center!">#</TableHead>
           <TableHead>Clan</TableHead>
           <TableHead className="w-24 text-center!">Members</TableHead>
+          <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
+            WR
+          </TableHead>
           <TableHead className="w-24 text-right!">
             {RATING_METRIC_LABEL[metric]}
           </TableHead>
@@ -141,6 +149,14 @@ export function TopClansList({
               </TableCell>
               <TableCell className="text-center text-muted-foreground tabular-nums">
                 {intFmt.format(r.members_count)}
+              </TableCell>
+              <TableCell
+                className={cn(
+                  "hidden text-right font-semibold tabular-nums sm:table-cell",
+                  r.winrate != null && RATING_COLOR_CLASS[winrateColor(r.winrate)],
+                )}
+              >
+                {r.winrate != null ? pctFmt.format(r.winrate) : "—"}
               </TableCell>
               <TableCell
                 className={cn(

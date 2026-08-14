@@ -14,6 +14,8 @@ export type TopClanByLanguageResult = {
   members_count: number;
   rated_members_count: number;
   avg_value: number;
+  /** Battle-weighted mean lifetime win rate (0..1) of the roster. */
+  winrate: number | null;
   /** Podium positions, attached by the route (see `TopClanResult`). */
   badges?: ClanRankBadge[];
 };
@@ -58,7 +60,7 @@ export async function getTopClansByLanguage(
   const rows = (await db.execute(sql`
     SELECT
       clan_id, tag, name, color, emblem, languages,
-      members_count, rated_members_count, avg_value
+      members_count, rated_members_count, avg_value, winrate
     FROM ${table}
     WHERE metric = ${metric}
       AND members_count >= ${minMembers}
@@ -76,6 +78,7 @@ export async function getTopClansByLanguage(
     members_count: number;
     rated_members_count: number;
     avg_value: number | string;
+    winrate: number | null;
   }>;
   return rows.map((r) => ({
     clan_id: Number(r.clan_id),
@@ -87,5 +90,6 @@ export async function getTopClansByLanguage(
     members_count: r.members_count,
     rated_members_count: r.rated_members_count,
     avg_value: Number(r.avg_value),
+    winrate: r.winrate,
   }));
 }
