@@ -1,5 +1,7 @@
 import { sql } from "drizzle-orm";
 import {
+  SRB_VOLUME_K,
+  STRONGHOLD_MIN_BATTLES,
   StrongholdPeriod,
   StrongholdSort,
   StrongholdTier,
@@ -29,10 +31,19 @@ export type StrongholdLeaderboardEntry = {
   boostRatio: number | null;
   /** Composite skirmish rating for the period: roster x win rate x volume x maturity. */
   sr: number | null;
+  /** Battles-based SR: the same rating with battle volume rewarded, not just gated. */
+  srb: number | null;
   /** Leaderboard placings, attached by the route (this query ranks one board,
    * the badges span all of them). */
   badges?: ClanRankBadge[];
 };
+
+// SRB is SR bumped by a volume bonus that only ever adds (>= SR), on a single
+// absolute scale across tiers (see SRB_VOLUME_K in shared). Computed inline from
+// the materialized sr + battles.
+function srbSql() {
+  return sql`round(sr::float * (1 + ln(1 + battles::float / ${SRB_VOLUME_K})))`;
+}
 
 // Column each sort orders by. Battles/wins/sr in the row are already the
 // period's values, so the sort is a plain column (win rate is derived from the
@@ -45,6 +56,8 @@ function orderExpr(sort: StrongholdSort) {
       return sql`battles DESC NULLS LAST`;
     case StrongholdSort.Winrate:
       return sql`CASE WHEN battles > 0 THEN wins::float / battles ELSE NULL END DESC NULLS LAST`;
+    case StrongholdSort.RatingBattles:
+      return sql`${srbSql()} DESC NULLS LAST`;
     case StrongholdSort.Rating:
       return sql`sr DESC NULLS LAST`;
   }
@@ -66,12 +79,22 @@ export async function getStrongholdLeaderboard(
   limit: number,
 ): Promise<StrongholdLeaderboardEntry[]> {
   const table = strongholdRatingsByRegion[region];
+  // Min-battles floor: SR has no volume brake, so a floor keeps a tiny lucky
+  // sample off the board. `battles` is the period's count, so the 30-day board
+  // uses a lighter floor (a third) than the all-time one, or a bursty Advances
+  // 30d board would go near-empty.
+  const minBattles =
+    period === StrongholdPeriod.Overall
+      ? STRONGHOLD_MIN_BATTLES[tier]
+      : Math.ceil(STRONGHOLD_MIN_BATTLES[tier] / 3);
   const rows = (await db.execute(sql`
     SELECT
       clan_id, tag, name, color, COALESCE(emblem, '') AS emblem, languages,
-      members_count, elo, battles, wins, personal_rating, boost_ratio, sr
+      members_count, elo, battles, wins, personal_rating, boost_ratio, sr,
+      ${srbSql()} AS srb
     FROM ${table}
     WHERE tier = ${tier} AND period = ${period} AND is_active
+      AND battles >= ${minBattles}
     ORDER BY ${orderExpr(sort)}
     LIMIT ${sql.raw(String(limit))}
   `)) as unknown as Array<{
@@ -88,6 +111,7 @@ export async function getStrongholdLeaderboard(
     personal_rating: number | null;
     boost_ratio: number | string | null;
     sr: number | string | null;
+    srb: number | string | null;
   }>;
 
   return rows.map((r) => ({
@@ -105,6 +129,7 @@ export async function getStrongholdLeaderboard(
       r.personal_rating === null ? null : Number(r.personal_rating),
     boostRatio: r.boost_ratio === null ? null : Number(r.boost_ratio),
     sr: r.sr === null ? null : Number(r.sr),
+    srb: r.srb === null ? null : Number(r.srb),
   }));
 }
 
@@ -117,20 +142,32 @@ export async function getStrongholdLeaderboard(
 export async function getClanStrongholdSr(
   region: Region,
   clanId: number,
-): Promise<ClanStrongholdSr> {
+): Promise<{ overall: ClanStrongholdSr; d30: ClanStrongholdSr }> {
   const table = strongholdRatingsByRegion[region];
   const rows = (await db.execute(sql`
-    SELECT tier, sr
+    SELECT tier, period, sr
     FROM ${table}
-    WHERE clan_id = ${clanId} AND period = ${StrongholdPeriod.Overall}
-  `)) as unknown as Array<{ tier: string; sr: number | string | null }>;
-  const byTier = new Map(
-    rows.map((r) => [r.tier, r.sr === null ? null : Number(r.sr)]),
-  );
+    WHERE clan_id = ${clanId}
+  `)) as unknown as Array<{
+    tier: string;
+    period: string;
+    sr: number | string | null;
+  }>;
+  const build = (period: StrongholdPeriod): ClanStrongholdSr => {
+    const byTier = new Map(
+      rows
+        .filter((r) => r.period === period)
+        .map((r) => [r.tier, r.sr === null ? null : Number(r.sr)]),
+    );
+    return {
+      advances: byTier.get(StrongholdTier.Advances) ?? null,
+      t10: byTier.get(StrongholdTier.T10) ?? null,
+      t8: byTier.get(StrongholdTier.T8) ?? null,
+      t6: byTier.get(StrongholdTier.T6) ?? null,
+    };
+  };
   return {
-    advances: byTier.get(StrongholdTier.Advances) ?? null,
-    t10: byTier.get(StrongholdTier.T10) ?? null,
-    t8: byTier.get(StrongholdTier.T8) ?? null,
-    t6: byTier.get(StrongholdTier.T6) ?? null,
+    overall: build(StrongholdPeriod.Overall),
+    d30: build(StrongholdPeriod.Month),
   };
 }

@@ -139,16 +139,26 @@ export type ClanStrongholdView = {
     d7: ClanStrongholdStats | null;
     d30: ClanStrongholdStats | null;
   };
+  // Skirmish Rating per tier, overall and over the last 30 days. SR only exists
+  // at these two granularities (no 24h/7d window), so the table fills Total +
+  // Last 30d and dashes 24h/7d.
   sr: ClanStrongholdSr | null;
+  sr30d: ClanStrongholdSr | null;
 };
 
 export function clanStrongholdView(
   latest: ClanSnapshot | null,
   periods: ClanSnapshotPeriods,
   sr: ClanStrongholdSr | null = null,
+  sr30d: ClanStrongholdSr | null = null,
 ): ClanStrongholdView {
   if (!latest) {
-    return { latest: null, periods: { h24: null, d7: null, d30: null }, sr };
+    return {
+      latest: null,
+      periods: { h24: null, d7: null, d30: null },
+      sr,
+      sr30d,
+    };
   }
   const current = strongholdStatsFromClanSnapshot(latest);
   const diff = (s: ClanSnapshot | null) =>
@@ -161,6 +171,7 @@ export function clanStrongholdView(
       d30: diff(periods.d30),
     },
     sr,
+    sr30d,
   };
 }
 

@@ -1,18 +1,16 @@
 "use client";
 
-import {
-  CaretDownIcon,
-  CaretUpDownIcon,
-  WarningIcon,
-} from "@phosphor-icons/react";
+import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
+import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import useSWR from "swr";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
+import { StrongholdRatingScale } from "@/components/clans/list/stronghold/rating-scale";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
 import {
   Panel,
@@ -43,16 +41,12 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
-import { CLAN_BOARD_BY_STRONGHOLD_TIER, StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdWinrateColor } from "@unicum.gg/shared";
+import { CLAN_BOARD_BY_STRONGHOLD_TIER, StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdRatingBattlesColor, strongholdRatingColor, strongholdWinrateColor } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import { type Period, usePeriod, isPeriod } from "@/hooks/use-period";
 import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
-
-// Only flag rosters where boost accounts are a real share, not the handful
-// every clan carries.
-const BOOST_BADGE_MIN = 0.15;
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const pctFmt = new Intl.NumberFormat("en-US", {
@@ -269,15 +263,6 @@ export function StrongholdLeaderboardView({
                     <TableHead>Clan</TableHead>
                     <TableHead className="w-24 text-center!">Members</TableHead>
                     <SortableHead
-                      sortKey={StrongholdSort.Rating}
-                      active={sort === StrongholdSort.Rating}
-                      onSort={setSort}
-                      className="w-24"
-                      tooltip="Skirmish Rating. Win rate and battle volume weighted by the roster's average WG Personal Rating (rewards winning with a strong roster, discounts farming with weak accounts)."
-                    >
-                      SR
-                    </SortableHead>
-                    <SortableHead
                       sortKey={StrongholdSort.Elo}
                       active={sort === StrongholdSort.Elo}
                       onSort={setSort}
@@ -301,6 +286,24 @@ export function StrongholdLeaderboardView({
                       tooltip="Win rate"
                     >
                       WR
+                    </SortableHead>
+                    <SortableHead
+                      sortKey={StrongholdSort.Rating}
+                      active={sort === StrongholdSort.Rating}
+                      onSort={setSort}
+                      className="w-24"
+                      tooltip="Skirmish Rating. Win rate and battle volume weighted by the roster's average WG Personal Rating (rewards winning with a strong roster, discounts farming with weak accounts)."
+                    >
+                      SR
+                    </SortableHead>
+                    <SortableHead
+                      sortKey={StrongholdSort.RatingBattles}
+                      active={sort === StrongholdSort.RatingBattles}
+                      onSort={setSort}
+                      className="w-24"
+                      tooltip="Battles-based Stronghold Rating: the same SR with battle volume rewarded instead of only gated, so clans that have proven it over many battles rank higher."
+                    >
+                      SRB
                     </SortableHead>
                   </TableRow>
                 </TableHeader>
@@ -327,7 +330,7 @@ export function StrongholdLeaderboardView({
                               drifting to the edge of the cell. */}
                           <span className="flex items-center gap-2">
                           <Link
-                            href={ROUTES.CLAN(region, entry.tag)}
+                            href={ROUTES.CLAN_STRONGHOLD(region, entry.tag, tier)}
                             className="flex min-w-0 items-center gap-3 hover:underline"
                           >
                             {entry.emblem ? (
@@ -352,26 +355,7 @@ export function StrongholdLeaderboardView({
                                   {entry.name}
                                 </span>
                               </span>
-                              {entry.boostRatio !== null &&
-                                entry.boostRatio >= BOOST_BADGE_MIN && (
-                                  <Tooltip>
-                                    <TooltipTrigger asChild>
-                                      <span className="inline-flex shrink-0 items-center gap-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-xs font-medium text-amber-600 dark:text-amber-500">
-                                        <WarningIcon
-                                          weight="fill"
-                                          className="size-3"
-                                        />
-                                        {Math.round(entry.boostRatio * 100)}%
-                                      </span>
-                                    </TooltipTrigger>
-                                    <TooltipContent>
-                                      {Math.round(entry.boostRatio * 100)}% of
-                                      this roster read as boost accounts (very
-                                      few random battles, used to inflate
-                                      stronghold results). This discounts the SR.
-                                    </TooltipContent>
-                                  </Tooltip>
-                                )}
+                              <RosterBoostBadge boostRatio={entry.boostRatio} />
                             </span>
                           </Link>
                           <ClanBadges
@@ -397,9 +381,6 @@ export function StrongholdLeaderboardView({
                         <TableCell className="text-center text-muted-foreground tabular-nums">
                           {intFmt.format(entry.membersCount)}
                         </TableCell>
-                        <TableCell className="text-right font-bold tabular-nums">
-                          {entry.sr !== null ? intFmt.format(entry.sr) : "—"}
-                        </TableCell>
                         <TableCell className="text-right font-semibold tabular-nums">
                           {entry.elo !== null ? intFmt.format(entry.elo) : "—"}
                         </TableCell>
@@ -417,6 +398,28 @@ export function StrongholdLeaderboardView({
                         >
                           {winrate !== null ? pctFmt.format(winrate) : "—"}
                         </TableCell>
+                        <TableCell
+                          className={cn(
+                            "text-right font-bold tabular-nums",
+                            entry.sr !== null &&
+                              RATING_COLOR_CLASS[
+                                strongholdRatingColor(entry.sr)
+                              ],
+                          )}
+                        >
+                          {entry.sr !== null ? intFmt.format(entry.sr) : "—"}
+                        </TableCell>
+                        <TableCell
+                          className={cn(
+                            "text-right font-bold tabular-nums",
+                            entry.srb !== null &&
+                              RATING_COLOR_CLASS[
+                                strongholdRatingBattlesColor(entry.srb)
+                              ],
+                          )}
+                        >
+                          {entry.srb !== null ? intFmt.format(entry.srb) : "—"}
+                        </TableCell>
                       </TableRow>
                     );
                   })}
@@ -424,6 +427,17 @@ export function StrongholdLeaderboardView({
               </Table>
             </TooltipProvider>
           )}
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Rating scale</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <StrongholdRatingScale />
         </PanelContent>
       </Panel>
     </div>

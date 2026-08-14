@@ -27,9 +27,14 @@ export async function GET(
   if (!detail) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-  const sr = await getClanStrongholdSr(region, detail.clan.id);
+  const { overall, d30 } = await getClanStrongholdSr(region, detail.clan.id);
   return jsonResponse(
     ClanStrongholdResponse,
-    clanStrongholdView(detail.snapshotLatest, detail.snapshotPeriods, sr),
+    clanStrongholdView(
+      detail.snapshotLatest,
+      detail.snapshotPeriods,
+      overall,
+      d30,
+    ),
   );
 }

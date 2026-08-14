@@ -7,6 +7,7 @@ import { ClanTag } from "@/components/entity/clan-tag";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
 import { AutoFitText } from "@/components/auto-fit-text";
+import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
 import { ClanActionsMenu } from "@/components/clans/detail/actions-menu";
 import { CompareWithButton } from "@/components/clans/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
@@ -29,6 +30,7 @@ import {
 import {
   RATING_COLOR_CLASS,
   type RatingColor,
+  rosterBoostRatio,
   winrateColor,
   wn7Color,
   wn8Color,
@@ -122,6 +124,9 @@ export function ClanHeader(
 
   const { region, clan, members, ratings } = props;
   const metrics = computeMetrics(ratings);
+  // Same roster-level boost share the stronghold boards flag, computed from the
+  // current members so the clan page carries the warning too.
+  const boostRatio = rosterBoostRatio(members);
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
       <div className="flex items-stretch sm:contents">
@@ -157,6 +162,7 @@ export function ClanHeader(
                 It keeps `min-w-0` so a long clan name still shrinks it, which is
                 what `AutoFitText` measures to scale the title down. */}
             <ClanBadges badges={props.badges} region={region} size={24} />
+            <RosterBoostBadge boostRatio={boostRatio} />
             <span className="ml-auto flex shrink-0 items-center gap-3">
               <CompareWithButton region={region} current={clan.tag} />
               <ClanActionsMenu

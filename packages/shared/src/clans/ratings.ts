@@ -27,6 +27,34 @@ export type ClanMemberStats = PortalClanMember &
     twitchLogin?: string | null;
   };
 
+// Boost detection. A member reads as a "boost account" (an account with very
+// few random battles, farmed only in stronghold to inflate a clan's results) by
+// a soft weight that approaches 1 as its lifetime random battles approach 0.
+// `SR_BOOST_SCALE` sets how fast that weight decays with battle count; the SR
+// materialization uses the same constant in SQL, so it lives here as the single
+// source. `BOOST_BADGE_MIN` is the roster share above which the warning badge
+// shows (below it every clan carries a handful, not worth flagging).
+export const SR_BOOST_SCALE = 2000;
+export const BOOST_BADGE_MIN = 0.15;
+
+/**
+ * Share of a clan's roster (0..1) that reads as boost accounts: the mean
+ * per-member boost weight `1 / (1 + (battles / SR_BOOST_SCALE)^2)` over members
+ * whose lifetime battle count is known. Mirrors the SQL in the SR materialization
+ * so the clan page and the leaderboard agree. Null when no member has stats.
+ */
+export function rosterBoostRatio(members: ClanMemberStats[]): number | null {
+  let sum = 0;
+  let n = 0;
+  for (const m of members) {
+    const battles = m.overall?.battles;
+    if (battles == null) continue;
+    sum += 1 / (1 + Math.pow(battles / SR_BOOST_SCALE, 2));
+    n++;
+  }
+  return n > 0 ? sum / n : null;
+}
+
 /**
  * Build battle-weighted points for clan-aggregate ratings derived from a
  * member's lifetime stats (overall WNX, lifetime winrate). Weight is the

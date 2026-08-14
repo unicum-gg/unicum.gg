@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import {
+  SR_BOOST_SCALE,
   STRONGHOLD_MIN_BATTLES,
   StrongholdPeriod,
   StrongholdTier,
@@ -67,7 +68,10 @@ function periodExprs(
   return { battles: `latest.${cols.battles}`, wins: `latest.${cols.wins}` };
 }
 
-// SR = roster strength x win-rate factor x volume confidence x roster maturity.
+// SR = roster strength x win-rate factor x roster maturity. A pure *skill*
+// rating, independent of how much a clan has played (that is SRB's job, which
+// rewards volume on top of this). The min-battles gate below keeps a tiny lucky
+// sample off the board without a volume brake inside the rating itself.
 //   - Roster strength is the *median* WG Personal Rating *above a competitive
 //     baseline* (`SR_PR_FLOOR`): a ~4.5k PR is a roughly average player, while
 //     competitive rosters sit at 7k+, so crediting PR from zero barely separates
@@ -75,19 +79,14 @@ function periodExprs(
 //     quality the dominant axis. The median (not the mean) shrugs off the low
 //     tail of reroll/alt accounts and the high tail of a couple of carries.
 //   - Win factor is neutral at 50% WR, super-linear so dominance is rewarded.
-//   - Volume saturates (a confidence discount for tiny samples, not a reward for
-//     grinding). `k` is the half-credit point: all-time counts run to the
-//     thousands, a 30-day window only to the tens/hundreds, so the window uses a
-//     much smaller k so a mid-roster clan cannot climb on battle count alone.
 //   - Roster maturity discounts boosting: strongholds (esp. Advances 15v15) get
 //     farmed with "boost" accounts, small accounts with almost no random battles
 //     that exist only to play stronghold. Their lack of a random-battle history
 //     can't be faked, so `SR_BOOST_SCALE` weighs each member toward boost as its
 //     random-battle count drops, and a boost-heavy roster is scaled down.
 const SR_PR_FLOOR = 4500;
-const SR_BOOST_SCALE = 2000;
 
-function srExpr(p: { battles: string; wins: string }, k: number): string {
+function srExpr(p: { battles: string; wins: string }): string {
   // `greatest(wins, 0)` clamps the win-rate base to >= 0: a 30-day window can
   // have a negative win diff (a snapshot correction), and `power()` throws on a
   // negative base raised to a fractional exponent. Maturity is floored at 0.05
@@ -95,15 +94,9 @@ function srExpr(p: { battles: string; wins: string }, k: number): string {
   return `CASE WHEN ${p.battles} > 0 THEN round(
     greatest(roster.median_pr - ${SR_PR_FLOOR}, 50)
     * power(greatest(${p.wins}::float, 0) / ${p.battles} / 0.5, 1.5)
-    * (${p.battles}::float / (${p.battles} + ${k}))
     * power(greatest(1 - coalesce(roster.boost_ratio, 0), 0.05), 1.5)
   ) ELSE NULL END`;
 }
-
-const SR_VOLUME_K: Record<StrongholdPeriod, number> = {
-  [StrongholdPeriod.Overall]: 300,
-  [StrongholdPeriod.Month]: 30,
-};
 
 const TIERS: StrongholdTier[] = [
   StrongholdTier.Advances,
@@ -155,7 +148,7 @@ async function computeStrongholdRows(
   const eloCol = cols.elo ? sql.raw(cols.elo) : null;
   const battlesRaw = sql.raw(p.battles);
   const winsRaw = sql.raw(p.wins);
-  const srRaw = sql.raw(srExpr(p, SR_VOLUME_K[period]));
+  const srRaw = sql.raw(srExpr(p));
   const minBattlesRaw = sql.raw(String(STRONGHOLD_MIN_BATTLES[tier]));
 
   return (await db.execute(sql`

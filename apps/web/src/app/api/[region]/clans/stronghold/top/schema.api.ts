@@ -31,6 +31,10 @@ const strongholdLeaderboardEntry = z
       description:
         "Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period.",
     }),
+    srb: z.number().nullable().meta({
+      description:
+        "Battles-based Stronghold Rating: SR bumped by battle volume (SR times 1 + ln(1 + battles/1000)), one absolute scale across tiers.",
+    }),
     badges: z.array(clanRankBadge).optional().meta({
       description:
         "Leaderboard placings the clan currently holds, best rank first.",
@@ -47,7 +51,7 @@ export const strongholdTopQuery = z.object({
   tier: z.enum(["advances", "t10", "t8", "t6"]).optional().meta({
     description: "Stronghold mode/tier (default t10).",
   }),
-  sort: z.enum(["sr", "elo", "battles", "winrate"]).optional().meta({
+  sort: z.enum(["sr", "srb", "elo", "battles", "winrate"]).optional().meta({
     description: "Ranking column (default sr).",
   }),
   period: z.enum(["overall", "30d"]).optional().meta({

@@ -7,10 +7,20 @@ export enum StrongholdTier {
 
 export enum StrongholdSort {
   Rating = "sr",
+  RatingBattles = "srb",
   Elo = "elo",
   Battles = "battles",
   Winrate = "winrate",
 }
+
+// SRB (battles-based Stronghold Rating): SR reweighted so battle volume rewards
+// instead of only gating it, the same idea as HRB vs HR. Computed inline from
+// the materialized `sr` + `battles` as `SR · (1 + ln(1 + battles / B0))`, so it
+// is always >= SR (volume only adds) and stays on the same absolute scale. A
+// single B0 across tiers on purpose: the tiers that are played continuously
+// (Skirmish T10) rack up far more battles than the bursty Advances window, so
+// they legitimately earn a bigger volume bonus. See `strongholdRatingBattlesColor`.
+export const SRB_VOLUME_K = 1000;
 
 // The Overall / last-30-days window the whole leaderboard is computed over
 // (SR, battles, win rate all follow it), mirroring the home page's toggle.
@@ -33,27 +43,31 @@ export const STRONGHOLD_TIER_LABEL: Record<StrongholdTier, string> = {
 
 export const STRONGHOLD_SORT_LABEL: Record<StrongholdSort, string> = {
   [StrongholdSort.Rating]: "SR",
+  [StrongholdSort.RatingBattles]: "SRB",
   [StrongholdSort.Elo]: "ELO",
   [StrongholdSort.Battles]: "Battles",
   [StrongholdSort.Winrate]: "Win rate",
 };
 
 // Eligibility floor to appear on the leaderboard. Single source of truth shared
-// by the query filter and the on-page description.
+// by the materialization, the board read filter and the on-page description.
 //
-// Advances sits far below skirmish, against the intuition that a 15v15 mode
-// should demand more history: it is only played during a Global Map advances
-// window, so clans accumulate battles in bursts a few weeks a year rather than
-// continuously. A skirmish-sized floor ranked almost nobody.
+// SR is a pure skill rating with no volume brake inside it (that is SRB's job),
+// so this floor is what stops a tiny lucky sample from topping the board on an
+// elite roster alone. Advances still sits below skirmish: it is only played
+// during a Global Map advances window, so clans accumulate battles in bursts a
+// few weeks a year rather than continuously, and a skirmish-sized floor ranked
+// almost nobody.
 export const STRONGHOLD_MIN_BATTLES: Record<StrongholdTier, number> = {
-  [StrongholdTier.Advances]: 10,
-  [StrongholdTier.T10]: 50,
-  [StrongholdTier.T8]: 50,
-  [StrongholdTier.T6]: 50,
+  [StrongholdTier.Advances]: 30,
+  [StrongholdTier.T10]: 100,
+  [StrongholdTier.T8]: 100,
+  [StrongholdTier.T6]: 100,
 };
 
 const DEFAULT_SORT_OPTIONS: StrongholdSort[] = [
   StrongholdSort.Rating,
+  StrongholdSort.RatingBattles,
   StrongholdSort.Elo,
   StrongholdSort.Battles,
   StrongholdSort.Winrate,

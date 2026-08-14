@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import { RATING_COLOR_CLASS, strongholdWinrateColor, StrongholdTier, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
+import { RATING_COLOR_CLASS, strongholdRatingColor, strongholdWinrateColor, StrongholdTier, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -95,9 +95,10 @@ type ProjectionRow = {
   current: (s: ClanStrongholdStats) => Cell;
   delta: (s: ClanStrongholdStats) => Cell;
 };
-// SR is a current absolute rating (not a per-period diff) and the materialized
-// table only holds the overall value, so an SR row fills the "Total" column and
-// dashes 24h/7d/30d. Keyed by the tiers of `ClanStrongholdView["sr"]`.
+// SR is a current absolute rating (not a per-period diff). The materialized
+// table holds it at two granularities (overall + last 30 days) but no 24h/7d
+// window, so an SR row fills the "Total" (overall) and "Last 30d" columns and
+// dashes 24h/7d. Keyed by the tiers of `ClanStrongholdView["sr"]`.
 type SrRow = { label: string; sr: keyof NonNullable<ClanStrongholdView["sr"]> };
 type SectionRow = ProjectionRow | SrRow;
 
@@ -192,7 +193,10 @@ const SECTIONS: { title: string; tier: StrongholdTier; rows: SectionRow[] }[] = 
 
 function srCell(v: number | null): Cell {
   if (v === null) return DASH;
-  return { primary: intFmt.format(v), className: "font-bold" };
+  return {
+    primary: intFmt.format(v),
+    className: cn("font-bold", RATING_COLOR_CLASS[strongholdRatingColor(v)]),
+  };
 }
 
 export function ClanStrongholdStatsTable(
@@ -203,6 +207,7 @@ export function ClanStrongholdStatsTable(
         latest: ClanStrongholdStats;
         periods: ClanStrongholdView["periods"];
         sr: ClanStrongholdView["sr"];
+        sr30d: ClanStrongholdView["sr30d"];
       },
 ) {
   const loading = "loading" in props;
@@ -228,7 +233,11 @@ export function ClanStrongholdStatsTable(
       <TableBody>
         {SECTIONS.map((section) => (
           <Fragment key={section.title}>
-            <TableRow>
+            {/* Anchor per tier so the stronghold boards can deep-link straight to
+                a clan's row on that tier (`.../stronghold#advances`). The scroll
+                margin keeps the section clear of the sticky nav. */}
+            <TableRow id={section.tier} className="scroll-mt-24">
+
               {/* The cell owns the padding and the typography, so the title
                   lines up with the rows it heads and reads the same whether or
                   not it is a link (loading state, and the plain headers on the
@@ -279,7 +288,9 @@ export function ClanStrongholdStatsTable(
                     />
                     <PeriodCell cell={DASH} hideOnMobile />
                     <PeriodCell cell={DASH} hideOnMobile />
-                    <PeriodCell cell={DASH} />
+                    <PeriodCell
+                      cell={srCell(props.sr30d ? props.sr30d[row.sr] : null)}
+                    />
                   </>
                 ) : (
                   <>
