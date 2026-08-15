@@ -551,7 +551,14 @@ function TankConfiguratorInner({
         <div
           className={cn(
             "screen-line-before screen-line-after",
-            leftCol && rightCol && "grid grid-cols-2 items-stretch",
+            // One column on narrow screens so Crew Skills stacks below the left
+            // block instead of being cramped beside it; side by side from `lg`.
+            // Stacked, a horizontal rule separates the two (matching the left
+            // block's own `divide-y`); at `lg` the vertical column frame takes
+            // over, so the rule is dropped.
+            leftCol &&
+              rightCol &&
+              "grid grid-cols-1 items-stretch divide-y divide-fd-border lg:grid-cols-2 lg:divide-y-0",
           )}
         >
           {leftCol && (
