@@ -104,7 +104,12 @@ export function SpecificationsTab({
       {videos.length > 0 && (
         <>
           <PanelSeparator />
-          <TankVideosPreview region={region} slug={slug} videos={videos} />
+          <TankVideosPreview
+            region={region}
+            slug={slug}
+            tankName={meta.name}
+            videos={videos}
+          />
         </>
       )}
     </>

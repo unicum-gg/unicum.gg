@@ -96,10 +96,12 @@ export function TankVideosTab({
 export function TankVideosPreview({
   region,
   slug,
+  tankName,
   videos,
 }: {
   region: Region;
   slug: string;
+  tankName: string;
   videos: TankVideoCardData[];
 }) {
   // Read from the provider like the tab does, so the preview picks up a video
@@ -112,7 +114,7 @@ export function TankVideosPreview({
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">
-        <PanelTitle>Videos</PanelTitle>
+        <PanelTitle>{tankName} videos</PanelTitle>
         {/* The form lives here too, not only on the tab: a video plays in the
             hero from this page as well, and the player's "suggest this moment"
             needs something to hand the moment to. */}
