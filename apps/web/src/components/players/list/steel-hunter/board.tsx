@@ -2,10 +2,22 @@
 
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
 import Link from "next/link";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import {
+  type ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
+import {
+  type RangeColumn,
+  useLeaderboardFilter,
+} from "@/hooks/use-leaderboard-filter";
 import {
   Panel,
   PanelContent,
@@ -113,7 +125,44 @@ export function SteelHunterBoard({
   const [sort, setSort] = useState<SteelHunterSort>(DEFAULT_STEEL_HUNTER_SORT);
   const [results, setResults] = useState(initialResults);
   const [loading, setLoading] = useState(false);
-  const { paged, pager } = usePagination(results, INITIAL_PAGE_SIZE);
+
+  // Client-side filter over the loaded ranking (search by name/clan + a min/max
+  // range on any metric). It narrows the current top-N, it does not re-rank.
+  const searchFields = useCallback(
+    (r: SteelHunterRow) => [r.nickname, r.clan_tag],
+    [],
+  );
+  const rangeCols = useMemo<RangeColumn<SteelHunterRow>[]>(
+    () => [
+      { key: "hr", label: "HR", value: (r) => r.hr },
+      { key: "hrb", label: "HRB", value: (r) => r.hrb },
+      { key: "battles", label: "Battles", value: (r) => r.battles },
+      {
+        key: "winrate",
+        label: "WR %",
+        value: (r) => (r.battles > 0 ? (r.wins / r.battles) * 100 : null),
+      },
+      {
+        key: "survival",
+        label: "Survival %",
+        value: (r) => (r.battles > 0 ? (r.survived / r.battles) * 100 : null),
+      },
+      {
+        key: "damage",
+        label: "Avg damage",
+        value: (r) => (r.battles > 0 ? r.damage / r.battles : null),
+      },
+    ],
+    [],
+  );
+  const { filtered, filters } = useLeaderboardFilter(results, {
+    searchFields,
+    rangeCols,
+    initialRangeCol: "hr",
+    syncUrl: true,
+  });
+
+  const { paged, pager } = usePagination(filtered, INITIAL_PAGE_SIZE);
 
   const fetchAll = (s: SteelHunterSort) =>
     unicum
@@ -168,9 +217,18 @@ export function SteelHunterBoard({
         <PanelTitle>Top {results.length} Steel Hunter players</PanelTitle>
       </PanelHeader>
       <PanelContent className="p-0">
+        {results.length > 0 && (
+          <div className="border-b border-fd-border px-4 py-2.5">
+            <LeaderboardFilterBar filters={filters} searchNoun="players" />
+          </div>
+        )}
         {results.length === 0 ? (
           <div className="px-4 py-12 text-center text-sm text-muted-foreground">
             No ranked Steel Hunter players yet.
+          </div>
+        ) : filtered.length === 0 ? (
+          <div className="px-4 py-12 text-center text-sm text-muted-foreground">
+            No player matches the current filters.
           </div>
         ) : (
           <Table

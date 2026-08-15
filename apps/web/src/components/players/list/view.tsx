@@ -2,7 +2,7 @@ import Image from "next/image";
 import { RatingScale } from "@/components/home/rating-scale";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
-import { PlayerLanguageChips } from "@/components/players/list/language-chips";
+import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
 import { TopPlayersBoard } from "@/components/players/list/top-players-board";
 import {
@@ -164,42 +164,36 @@ export async function PlayersLandingView({
       <PanelSeparator />
 
       <Panel>
-        <PanelHeader>
-          <PanelTitle>Filter by language</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <PlayerLanguageChips
-            available={stats.map((s) => ({
-              code: s.code,
-              playersCount: s.total,
-            }))}
-            active={language}
-            region={region}
-            strict={strict}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader className="flex items-center justify-between gap-3">
+        <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
           <PanelTitle>
+            Top {wnxResults.length.toLocaleString("en-US")}{" "}
             {language
               ? strict
-                ? `Top strictly ${langName} players`
-                : `Top ${langName} players`
-              : "Top players"}
+                ? `strictly ${langName} players`
+                : `${langName} players`
+              : "players"}{" "}
+            by <MetricInline />
           </PanelTitle>
-          {language && filterCounts && (
-            <PlayerStrictModeToggle
+          <div className="flex flex-wrap items-center gap-2">
+            <PlayerLanguageSelect
+              available={stats.map((s) => ({
+                code: s.code,
+                playersCount: s.total,
+              }))}
+              active={language}
               region={region}
-              language={language}
               strict={strict}
-              total={filterCounts.total}
-              strictCount={filterCounts.strict}
             />
-          )}
+            {language && filterCounts && (
+              <PlayerStrictModeToggle
+                region={region}
+                language={language}
+                strict={strict}
+                total={filterCounts.total}
+                strictCount={filterCounts.strict}
+              />
+            )}
+          </div>
         </PanelHeader>
         <PanelContent className="p-0">
           <div data-rating-col="wn7">
