@@ -18,6 +18,11 @@ const STORAGE = {
     REGION: "unicum.region",
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
+    // Free-XP pricing prefs shared across the tank page + economics table: the
+    // tier you free-XP from, and the XP-to-gold conversion rate (25 normally,
+    // 40 during a promo, editable).
+    FREE_XP_TIER: "unicum.free-xp-tier",
+    XP_RATE: "unicum.xp-rate",
     // Cards or table on the tank index's Videos tab.
     VIDEO_VIEW: "unicum.video-view",
     // CSRF nonce for the Discord "Add to Discord" OAuth flow (/api/discord/*).

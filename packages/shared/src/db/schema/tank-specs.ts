@@ -1,6 +1,7 @@
 import {
   bigint,
   integer,
+  jsonb,
   pgTable,
   real,
   text,
@@ -105,6 +106,12 @@ export const tankSpecs = pgTable("tank_specs", {
   previousTanks: integer("previous_tanks").array(),
   nextTanks: integer("next_tanks").array(),
   totalFreeXp: real("total_free_xp"),
+  // Cumulative XP to research this tank along the same cheapest path, keyed by
+  // each ANCESTOR's tier (`{ "2": 1200, "3": 4800, ... }`). Lets the UI price a
+  // free-XP "from tier N" = `totalFreeXp - freeXpByTier[N]` (you already own the
+  // tier-N tank on the path, so you skip everything up to it). Ancestors only,
+  // so the keys run tier 1 .. this tank's tier - 1.
+  freeXpByTier: jsonb("free_xp_by_tier").$type<Record<number, number>>(),
 
   // The tank's Tankopedia historical description (WG encyclopedia, English).
   description: text("description"),

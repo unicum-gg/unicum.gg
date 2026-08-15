@@ -3074,6 +3074,9 @@ export interface components {
             ammoCost: number | null;
             researchXp: number | null;
             totalFreeXp: number | null;
+            freeXpByTier: {
+                [key: string]: number;
+            } | null;
         };
         TankEconomicsResponse: {
             results: components["schemas"]["TankEconRow"][];

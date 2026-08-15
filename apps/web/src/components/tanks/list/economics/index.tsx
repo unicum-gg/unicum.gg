@@ -13,6 +13,11 @@ import { TankIcon } from "@/components/tanks/tank-icon";
 import { TankopediaHeaderIcon } from "@/components/tanks/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { ColumnSelector } from "@/components/tanks/list/column-visibility";
+import {
+  FreeXpTierSelect,
+  XpRateInput,
+} from "@/components/tanks/free-xp-controls";
+import { useFreeXpSettings } from "@/hooks/use-free-xp";
 import type { TankListItem } from "@/components/tanks/list";
 import {
   Select,
@@ -85,11 +90,16 @@ export function TanksEconTable({
     direction: SortDirection.Desc,
   });
 
+  const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const [selected] = useEconColumns();
   const columns = useMemo(
-    () => buildEconColumns(region).filter((c) => selected.has(c.key)),
-    [region, selected],
+    () =>
+      buildEconColumns(region, tier, rate).filter((c) => selected.has(c.key)),
+    [region, selected, tier, rate],
   );
+  // The free-XP controls only matter when a free-XP column is on screen.
+  const showFreeXpControls =
+    selected.has("totalFreeXp") || selected.has("freeXpMoney");
 
   const sorted = useMemo(() => {
     const mul = sort.direction === SortDirection.Asc ? 1 : -1;
@@ -222,24 +232,35 @@ export function TanksEconTable({
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-t border-fd-border px-4 py-3 text-xs text-fd-muted-foreground">
-        <div className="flex items-center gap-2">
-          <span>Rows per page</span>
-          <Select
-            value={String(pageSize)}
-            onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
-          >
-            <SelectTrigger className="h-7 w-18.5" size="sm">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {PAGE_SIZES.map((n) => (
-                <SelectItem key={n} value={String(n)}>
-                  {n}
-                </SelectItem>
-              ))}
-              <SelectItem value="all">All</SelectItem>
-            </SelectContent>
-          </Select>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="flex items-center gap-2">
+            <span>Rows per page</span>
+            <Select
+              value={String(pageSize)}
+              onValueChange={(v) => setPageSize(v === "all" ? "all" : Number(v))}
+            >
+              <SelectTrigger className="h-7 w-18.5" size="sm">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {PAGE_SIZES.map((n) => (
+                  <SelectItem key={n} value={String(n)}>
+                    {n}
+                  </SelectItem>
+                ))}
+                <SelectItem value="all">All</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          {showFreeXpControls && (
+            <div className="flex items-center gap-2">
+              <span>Free XP from</span>
+              <FreeXpTierSelect value={tier} onChange={setTier} maxTier={10} />
+              <span className="ml-1">at</span>
+              <XpRateInput value={rateInput} onChange={setRate} />
+              <span>XP = 1 gold</span>
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <span className="tabular-nums">

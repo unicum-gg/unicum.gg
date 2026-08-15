@@ -49,6 +49,9 @@ export function invalidateTankSpecsCache(): void {
 const SPEC_INSERT_CHUNK = 500;
 
 type ResearchNode = {
+  // The tank's tier (WG encyclopedia `tier`), used to key the per-tier free-XP
+  // breakdown. Null when WG omits it.
+  tier: number | null;
   // Cheapest XP to unlock this tank from a direct parent (null = tier-1/premium).
   researchXp: number | null;
   // Per-parent unlock XP (`prices_xp`), so path costs use the actual edge.
@@ -131,6 +134,7 @@ async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
     let page: Record<
       string,
       {
+        tier: number | null;
         prices_xp: Record<string, number> | null;
         next_tanks: Record<string, number> | null;
         modules_tree: Record<string, ModuleTreeNode> | null;
@@ -139,7 +143,7 @@ async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
     >;
     try {
       page = await wg.region(Region.EU).api.wot.encyclopedia.vehicles({
-        fields: ["prices_xp", "next_tanks", "modules_tree", "description"],
+        fields: ["tier", "prices_xp", "next_tanks", "modules_tree", "description"],
         limit: 100,
         pageNo,
       });
@@ -174,6 +178,7 @@ async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
               .filter(Number.isFinite)
           : [];
       out.set(Number(id), {
+        tier: Number.isFinite(Number(v.tier)) ? Number(v.tier) : null,
         researchXp,
         pricesXp,
         previousTanks,
@@ -198,33 +203,67 @@ async function fetchResearchGraph(): Promise<Map<number, ResearchNode>> {
  * from tier 1". Memoized; a `visiting` set guards against any accidental cycle
  * in WG's data.
  */
-function computeTotalFreeXp(
-  graph: Map<number, ResearchNode>,
-): Map<number, number> {
+type FreeXp = {
+  // Cumulative XP from a tier-1 starter over the cheapest path.
+  total: number;
+  // Cumulative XP to reach each ANCESTOR on that same path, keyed by the
+  // ancestor's tier (`{ 2: 1200, 3: 4800, ... }`, tiers 1..this-1). Owning a
+  // tier-N tank on the path means the free-XP cost is `total - byTier[N]`.
+  byTier: Record<number, number>;
+};
+
+function computeFreeXp(graph: Map<number, ResearchNode>): Map<number, FreeXp> {
   const memo = new Map<number, number>();
+  const bestParent = new Map<number, number | null>();
   const visiting = new Set<number>();
 
   function total(id: number): number {
     const cached = memo.get(id);
     if (cached !== undefined) return cached;
     const node = graph.get(id);
-    if (!node || node.previousTanks.length === 0) return 0;
+    if (!node || node.previousTanks.length === 0) {
+      memo.set(id, 0);
+      bestParent.set(id, null);
+      return 0;
+    }
     if (visiting.has(id)) return 0;
     visiting.add(id);
     let best = Number.POSITIVE_INFINITY;
+    let chosen: number | null = null;
     for (const p of node.previousTanks) {
       const edgeXp = node.pricesXp.get(p) ?? node.researchXp ?? 0;
       const moduleXp = graph.get(p)?.moduleUnlockXp.get(id) ?? 0;
-      best = Math.min(best, total(p) + edgeXp + moduleXp);
+      const cand = total(p) + edgeXp + moduleXp;
+      if (cand < best) {
+        best = cand;
+        chosen = p;
+      }
     }
     visiting.delete(id);
     const sum = Number.isFinite(best) ? best : (node.researchXp ?? 0);
     memo.set(id, sum);
+    bestParent.set(id, chosen);
     return sum;
   }
 
-  const out = new Map<number, number>();
-  for (const id of graph.keys()) out.set(id, total(id));
+  const out = new Map<number, FreeXp>();
+  for (const id of graph.keys()) {
+    const t = total(id);
+    // Walk back up the chosen (cheapest) parents, recording each ancestor's
+    // cumulative XP under its tier. A guard breaks any accidental cycle.
+    const byTier: Record<number, number> = {};
+    const seen = new Set<number>();
+    for (
+      let cur = bestParent.get(id) ?? null;
+      cur != null && !seen.has(cur);
+      cur = bestParent.get(cur) ?? null
+    ) {
+      seen.add(cur);
+      const tier = graph.get(cur)?.tier;
+      if (tier != null) byTier[tier] = memo.get(cur) ?? 0;
+    }
+    out.set(id, { total: t, byTier });
+  }
   return out;
 }
 
@@ -240,17 +279,22 @@ export async function refreshTankSpecs(): Promise<number> {
     wg.region(Region.EU).source.specs.catalog(),
     fetchResearchGraph(),
   ]);
-  const totalFreeXp = computeTotalFreeXp(graph);
+  const freeXp = computeFreeXp(graph);
   const rows: NewTankSpec[] = catalog.map(
     ({ tag: _tag, shellStats: _ss, ...spec }) => {
     const node = graph.get(spec.tankId);
-    const total = totalFreeXp.get(spec.tankId) ?? 0;
+    const fx = freeXp.get(spec.tankId);
+    const total = fx?.total ?? 0;
     return {
       ...spec,
       researchXp: node?.researchXp ?? null,
       previousTanks: node?.previousTanks.length ? node.previousTanks : null,
       nextTanks: node?.nextTanks.length ? node.nextTanks : null,
       totalFreeXp: total > 0 ? total : null,
+      freeXpByTier:
+        total > 0 && fx && Object.keys(fx.byTier).length > 0
+          ? fx.byTier
+          : null,
       description: node?.description ?? null,
       updatedAt: new Date(),
     };

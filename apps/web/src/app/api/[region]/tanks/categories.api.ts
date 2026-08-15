@@ -105,6 +105,9 @@ export const tankEconomics = z
     ammoCost: n(),
     researchXp: n(),
     totalFreeXp: n(),
+    // Cumulative XP to reach each ancestor tier on the cheapest path, so the UI
+    // can price a free-XP "from tier N" (`totalFreeXp - freeXpByTier[N]`).
+    freeXpByTier: z.record(z.string(), z.number()).nullable(),
   })
   .meta({
     id: "TankEconomics",

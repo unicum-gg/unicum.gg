@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import {
   CREDITS_PER_GOLD,
-  XP_PER_GOLD,
+  freeXpFromTier,
   goldToMoney,
   moneyFmt,
 } from "@unicum.gg/shared";
@@ -43,18 +43,37 @@ function moneyChip(
   );
 }
 
-// Real money to research this tank's line: the cheapest total XP from tier 1
-// (modules included) priced as free XP. Region store currency.
-function freeXpMoney(t: TankListItem, region: Region): number | null {
-  const xp = t.specs?.totalFreeXp;
-  return xp ? (goldToMoney(region, xp / XP_PER_GOLD)?.amount ?? null) : null;
+// Free XP to research this tank from the chosen starting tier (modules
+// included). Tier 1 = the full cheapest-path total; a higher tier subtracts the
+// XP you'd already have sunk into the ancestors you own.
+function freeXp(t: TankListItem, tier: number): number | null {
+  return freeXpFromTier(t.specs?.totalFreeXp, t.specs?.freeXpByTier, tier);
+}
+
+// Real money to free-XP this tank's line, at the chosen rate. Region currency.
+function freeXpMoney(
+  t: TankListItem,
+  region: Region,
+  tier: number,
+  rate: number,
+): number | null {
+  const xp = freeXp(t, tier);
+  return xp != null && xp > 0
+    ? (goldToMoney(region, xp / rate)?.amount ?? null)
+    : xp === 0
+      ? 0
+      : null;
 }
 
 // Real money to acquire this tank the normal way: research XP + credits price
 // converted to gold and priced (or the gold price directly for premiums). Each
 // component is priced then summed, matching the tank page's Total cost (the
 // bundle estimate is non-linear, so summing golds first would misprice).
-function acquireMoney(t: TankListItem, region: Region): number | null {
+function acquireMoney(
+  t: TankListItem,
+  region: Region,
+  rate: number,
+): number | null {
   const s = t.specs;
   if (!s) return null;
   // Reward tanks aren't store-purchasable (their `buyGold` in WG's data is a
@@ -66,7 +85,7 @@ function acquireMoney(t: TankListItem, region: Region): number | null {
     if (m != null) parts.push(m);
   }
   if (s.researchXp) {
-    const m = goldToMoney(region, s.researchXp / XP_PER_GOLD)?.amount;
+    const m = goldToMoney(region, s.researchXp / rate)?.amount;
     if (m != null) parts.push(m);
   }
   if (s.buyCredits) {
@@ -76,7 +95,11 @@ function acquireMoney(t: TankListItem, region: Region): number | null {
   return parts.length ? parts.reduce((a, b) => a + b, 0) : null;
 }
 
-export function buildEconColumns(region: Region): EconColumn[] {
+export function buildEconColumns(
+  region: Region,
+  tier: number,
+  rate: number,
+): EconColumn[] {
   const fmt = moneyFmt(region);
   const cur = fmt?.resolvedOptions().currency ?? "";
   const base: EconColumn[] = [
@@ -106,13 +129,13 @@ export function buildEconColumns(region: Region): EconColumn[] {
     },
     {
       key: "totalFreeXp",
-      label: "Free XP (T1)",
-      tip: "Cumulative XP to research from tier 1, prerequisite modules included",
-      render: (t) =>
-        t.specs?.totalFreeXp != null
-          ? intFmt.format(t.specs.totalFreeXp)
-          : DASH,
-      sortValue: (t) => t.specs?.totalFreeXp ?? null,
+      label: `Free XP (T${tier})`,
+      tip: `Cumulative XP to research from tier ${tier}, prerequisite modules included`,
+      render: (t) => {
+        const xp = freeXp(t, tier);
+        return xp != null ? intFmt.format(xp) : DASH;
+      },
+      sortValue: (t) => freeXp(t, tier),
     },
     {
       key: "shellCost",
@@ -135,15 +158,15 @@ export function buildEconColumns(region: Region): EconColumn[] {
       key: "acquireMoney",
       label: `Buy cost (${cur})`,
       tip: `Estimated real money to acquire the tank (research + purchase), in ${cur}`,
-      render: (t) => moneyChip(fmt, acquireMoney(t, region)),
-      sortValue: (t) => acquireMoney(t, region),
+      render: (t) => moneyChip(fmt, acquireMoney(t, region, rate)),
+      sortValue: (t) => acquireMoney(t, region, rate),
     },
     {
       key: "freeXpMoney",
       label: `Free XP (${cur})`,
-      tip: `Estimated real money to free-XP the tank from tier 1, in ${cur}`,
-      render: (t) => moneyChip(fmt, freeXpMoney(t, region)),
-      sortValue: (t) => freeXpMoney(t, region),
+      tip: `Estimated real money to free-XP the tank from tier ${tier}, in ${cur}`,
+      render: (t) => moneyChip(fmt, freeXpMoney(t, region, tier, rate)),
+      sortValue: (t) => freeXpMoney(t, region, tier, rate),
     },
   ];
   return [...base, ...money];
@@ -155,7 +178,7 @@ export const ECON_COLUMN_META = [
   { key: "buyCredits", label: "Cost (credits)" },
   { key: "buyGold", label: "Cost (gold)" },
   { key: "researchXp", label: "Research XP" },
-  { key: "totalFreeXp", label: "Free XP (T1)" },
+  { key: "totalFreeXp", label: "Free XP" },
   { key: "shellCost", label: "Shell cost" },
   { key: "ammoCost", label: "Full ammo cost" },
   { key: "acquireMoney", label: "Buy cost (money)" },

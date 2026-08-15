@@ -54,6 +54,8 @@ export type TankSpecRow = {
   buyGold: number | null;
   researchXp: number | null;
   totalFreeXp: number | null;
+  // Cumulative XP per ancestor tier (`freeXpFromTier` prices "from tier N").
+  freeXpByTier?: Record<string, number> | null;
   shellCost: number | null;
   ammoCost: number | null;
 };

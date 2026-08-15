@@ -19,8 +19,30 @@ export type RegionGoldPricing = {
 };
 
 // WoT exchange rates (identical across regions): 25 XP → 1 gold, 400 credits → 1 gold.
+// XP_PER_GOLD is the standard rate and the UI default; WG runs periodic promos
+// (e.g. 40 XP → 1 gold) the user can enter to reprice, so treat it as a default.
 export const XP_PER_GOLD = 25;
 export const CREDITS_PER_GOLD = 400;
+
+/**
+ * Free XP to research a tank when you already own one at `fromTier` on its
+ * cheapest research path. `total` = the from-tier-1 cumulative (`totalFreeXp`),
+ * `byTier` = the per-ancestor-tier cumulative (`freeXpByTier`). Returns null when
+ * the tank isn't researchable; `fromTier <= 1` is the full cost; a tier at or
+ * above the tank's own tier costs 0 (you already have it).
+ */
+export function freeXpFromTier(
+  total: number | null | undefined,
+  byTier: Record<string, number> | null | undefined,
+  fromTier: number,
+): number | null {
+  if (total == null || total <= 0) return null;
+  if (fromTier <= 1) return total;
+  const cum = byTier?.[String(fromTier)];
+  if (cum != null) return Math.max(0, total - cum);
+  // No ancestor at this tier: the tank is at or below it, so it's already owned.
+  return 0;
+}
 
 // EU store (EUR), captured 2026-07-16 and re-verified against the live shop GraphQL.
 const EU_BUNDLES: RegionGoldPricing["bundles"] = [

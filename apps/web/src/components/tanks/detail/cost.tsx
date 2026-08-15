@@ -4,6 +4,11 @@ import type { TankSpec } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { CurrencyIcon, type Currency } from "@/components/tanks/currency-icon";
 import {
+  FreeXpTierSelect,
+  XpRateInput,
+} from "@/components/tanks/free-xp-controls";
+import { useFreeXpSettings } from "@/hooks/use-free-xp";
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -11,7 +16,7 @@ import {
 } from "@/components/ui/tooltip";
 import {
   CREDITS_PER_GOLD,
-  XP_PER_GOLD,
+  freeXpFromTier,
   goldToMoney,
   moneyFmt,
 } from "@unicum.gg/shared";
@@ -29,11 +34,12 @@ type CostRow = {
 };
 
 // Estimated real-money cost of unlocking + buying a tank, à la gunmarks: each
-// WoT value is priced by converting it to gold (25 XP or 400 credits per gold)
-// and running that through the region's store-bundle estimate. Premium tanks are
-// priced in gold directly. The money estimate only shows for regions we have a
-// bundle table for (EU today); elsewhere the gold figures stand alone. Renders
-// nothing when we have no economics for the tank.
+// WoT value is priced by converting it to gold (XP or 400 credits per gold) and
+// running that through the region's store-bundle estimate. The XP-to-gold rate
+// and the free-XP starting tier are user-set (shared with the economics table);
+// premium tanks are priced in gold directly. The money estimate only shows for
+// regions we have a bundle table for (EU today). Renders nothing when we have no
+// economics for the tank.
 export function TankCost({
   specs,
   region,
@@ -43,6 +49,7 @@ export function TankCost({
   region: Region;
   isReward: boolean;
 }) {
+  const { tier, setTier, rate, rateInput, setRate } = useFreeXpSettings();
   const fmt = moneyFmt(region);
   const price = (gold: number) => goldToMoney(region, gold)?.amount ?? null;
   const money = (n: number | null) =>
@@ -50,7 +57,7 @@ export function TankCost({
   const rows: CostRow[] = [];
 
   if (specs.researchXp && specs.researchXp > 0) {
-    const gold = specs.researchXp / XP_PER_GOLD;
+    const gold = specs.researchXp / rate;
     rows.push({
       label: "XP cost",
       unit: "XP",
@@ -58,7 +65,7 @@ export function TankCost({
       gold,
       money: price(gold),
       icon: "xp",
-      rate: `${XP_PER_GOLD} XP = 1 gold`,
+      rate: `${intFmt.format(rate)} XP = 1 gold`,
     });
   }
   if (specs.buyCredits && specs.buyCredits > 0) {
@@ -92,11 +99,19 @@ export function TankCost({
     fmt && rows.every((r) => r.money != null)
       ? rows.reduce((sum, r) => sum + (r.money ?? 0), 0)
       : null;
-  const freeXpGold =
-    specs.totalFreeXp != null && specs.totalFreeXp > 0
-      ? specs.totalFreeXp / XP_PER_GOLD
-      : null;
-  const freeXpMoney = freeXpGold != null ? price(freeXpGold) : null;
+
+  // Free XP priced from the chosen tier: `totalFreeXp` is the from-tier-1
+  // cumulative; the tank's own tier is one above its highest ancestor, so the
+  // picker is capped there and the global tier clamps to this tank's range.
+  const byTier = specs.freeXpByTier as Record<string, number> | null;
+  const maxTier = byTier
+    ? Math.max(...Object.keys(byTier).map(Number))
+    : 1;
+  const effectiveTier = Math.min(tier, maxTier);
+  const freeXp = freeXpFromTier(specs.totalFreeXp, byTier, effectiveTier);
+  const freeXpGold = freeXp != null && freeXp > 0 ? freeXp / rate : freeXp;
+  const freeXpMoney =
+    freeXpGold != null && freeXpGold > 0 ? price(freeXpGold) : null;
 
   return (
     <TooltipProvider delayDuration={100}>
@@ -159,14 +174,22 @@ export function TankCost({
             </Tooltip>
           </div>
         )}
-        {specs.totalFreeXp != null && specs.totalFreeXp > 0 && (
-          <div className="flex items-end justify-between gap-1 whitespace-nowrap">
-            <span className="text-sm opacity-80">Free XP from T1</span>
-            <span className="mx-2 mb-1 flex-1 border-b border-dotted border-white/40" />
+        {freeXp != null && (
+          <div className="flex items-center justify-between gap-1 whitespace-nowrap">
+            <span className="flex items-center gap-1 text-sm opacity-80">
+              Free XP
+              <FreeXpTierSelect
+                value={effectiveTier}
+                onChange={setTier}
+                maxTier={maxTier}
+                triggerClassName="h-5! gap-0.5 px-1! border-white/25 bg-transparent text-white hover:bg-white/10 dark:bg-transparent dark:hover:bg-white/10"
+              />
+            </span>
+            <span className="mx-1 mb-1 flex-1 self-end border-b border-dotted border-white/40" />
             <Tooltip>
               <TooltipTrigger asChild>
                 <span className="flex cursor-help items-center gap-1.5 text-sm font-bold tabular-nums">
-                  {intFmt.format(specs.totalFreeXp)}
+                  {intFmt.format(freeXp)}
                   {money(freeXpMoney) && (
                     <span className="text-white/60">({money(freeXpMoney)})</span>
                   )}
@@ -176,19 +199,34 @@ export function TankCost({
               <TooltipContent>
                 <div className="text-center">
                   <p>
-                    {intFmt.format(specs.totalFreeXp)} XP ={" "}
-                    {intFmt.format(specs.totalFreeXp / XP_PER_GOLD)} gold
+                    {intFmt.format(freeXp)} XP ={" "}
+                    {intFmt.format(Math.round((freeXpGold ?? 0)))} gold
                     {money(freeXpMoney) ? ` = ${money(freeXpMoney)}` : ""}
                   </p>
                   <p className="mt-1 text-xs opacity-70">
-                    Cumulative XP to research from tier 1, prerequisite
-                    modules included · 25 XP = 1 gold
+                    Cumulative XP to research from tier {effectiveTier},
+                    prerequisite modules included · {intFmt.format(rate)} XP = 1
+                    gold
                   </p>
                 </div>
               </TooltipContent>
             </Tooltip>
           </div>
         )}
+        {rows.some((r) => r.unit === "XP") || freeXp != null ? (
+          <div className="mt-1 flex items-center gap-1 border-t border-white/10 pt-1.5 text-xs text-white/50">
+            <span>Rate</span>
+            <span className="mx-1 mb-1 flex-1 self-end border-b border-dotted border-white/25" />
+            <span className="flex items-center gap-1.5 whitespace-nowrap text-white/70">
+              <XpRateInput
+                value={rateInput}
+                onChange={setRate}
+                className="h-5! border-white/25 text-white hover:border-white/40"
+              />
+              XP = 1 gold
+            </span>
+          </div>
+        ) : null}
       </div>
     </TooltipProvider>
   );
