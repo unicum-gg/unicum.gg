@@ -74,8 +74,11 @@ export function Performances({
             <PanelContent className="space-y-3 p-4">
               <p className="text-sm text-fd-muted-foreground">
                 How the average tracked {REGION_LABEL[region]} player performs on
-                the {meta.shortName} ({intFmt.format(serverStats.players)}{" "}
-                players, min. 100 battles each).
+                the {meta.shortName} ({intFmt.format(serverStats.players)} players
+                {serverStats.total_battles !== null
+                  ? `, ${intFmt.format(serverStats.total_battles)} battles, min. 100 each`
+                  : ", min. 100 battles each"}
+                ).
               </p>
               <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
                 <Stat
