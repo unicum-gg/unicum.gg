@@ -284,6 +284,8 @@ export const GROUPS: Group[] = [
       { header: true, label: "Camouflage" },
       { key: "camoStill", label: "… stationary", unit: "%", digits: 1, scale: 100, sub: true },
       { key: "camoMoving", label: "… moving", unit: "%", digits: 1, scale: 100, sub: true },
+      { key: "camoStillFiring", label: "… stationary, after firing", unit: "%", digits: 1, scale: 100, sub: true },
+      { key: "camoMovingFiring", label: "… moving, after firing", unit: "%", digits: 1, scale: 100, sub: true },
       { key: "weight", label: "Weight", unit: "t", digits: 1, scale: 0.001, lowerBetter: true },
     ],
   },
