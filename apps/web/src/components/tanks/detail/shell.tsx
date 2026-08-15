@@ -11,8 +11,8 @@ import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
   TankHero,
   TankVideoHeroPlayer,
-  TankVideoPlayerProvider,
 } from "@/components/tanks/detail/videos/player";
+import { TankVideosLiveProvider } from "@/components/tanks/detail/videos/live-provider";
 import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Panel, PanelSeparator } from "@/components/panel";
@@ -82,13 +82,11 @@ export function TankShell({
 
   return (
     // The provider spans the hero and the tab below it: a video card is what
-    // you click, the hero is where it plays.
-    <TankVideoPlayerProvider
-      region={region}
-      videos={videos}
-      // This tank's own queued rows, out of the reader's whole queue.
-      ownTankSlug={slug}
-    >
+    // you click, the hero is where it plays. The Live wrapper revalidates the
+    // published list from the browser, so an approved video shows without
+    // waiting out the cached shell (see live-provider). It sets `ownTankSlug`
+    // itself to fold in the reader's own queued rows.
+    <TankVideosLiveProvider region={region} slug={slug} initialVideos={videos}>
       <div className="mx-auto w-full max-w-7xl">
         <Panel className="border-b border-fd-border">
           {/* The hero is always dark, in both themes. It sits on the hangar
@@ -220,6 +218,6 @@ export function TankShell({
 
         {children}
       </div>
-    </TankVideoPlayerProvider>
+    </TankVideosLiveProvider>
   );
 }

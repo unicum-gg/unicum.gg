@@ -102,8 +102,13 @@ export function TankVideosPreview({
   slug: string;
   videos: TankVideoCardData[];
 }) {
-  if (videos.length === 0) return null;
-  const groups = groupBattlesByVideo(videos);
+  // Read from the provider like the tab does, so the preview picks up a video
+  // approved since the shell was cached (the shell's Live wrapper revalidates
+  // the list). The prop is the server render, kept as the fallback.
+  const player = useTankVideoPlayer();
+  const all = player?.videos ?? videos;
+  if (all.length === 0) return null;
+  const groups = groupBattlesByVideo(all);
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">

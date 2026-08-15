@@ -44,7 +44,9 @@ import {
 // (see tabs.ts); this page is the Specifications default and reads no
 // searchParams, so it stays static. On-demand: pages generate on first request
 // (no generateStaticParams for the ~1229 slugs) and revalidate on the tank
-// data's daily cadence. The SDK loopback covers any build-time prerender.
+// data's cadence. The video preview it shows is revalidated in the browser (the
+// shell's `TankVideosLiveProvider`), so an approval is not gated on this window.
+// The SDK loopback covers any build-time prerender.
 export const dynamic = "force-static";
 export const revalidate = 1800; // 30 min
 
