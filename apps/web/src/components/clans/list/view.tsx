@@ -1,9 +1,10 @@
 import Image from "next/image";
-import { LanguageChips } from "@/components/clans/list/language-chips";
+import { ClanLanguageSelect } from "@/components/clans/list/language-select";
 import { StrictModeToggle } from "@/components/clans/list/strict-mode-toggle";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
-import { TopClansList } from "@/components/clans/list/top-clans-list";
+import { TopClansBoard } from "@/components/clans/list/top-clans-board";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
+import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import {
   Panel,
   PanelContent,
@@ -170,46 +171,41 @@ export async function ClansLandingView({
       <PanelSeparator />
 
       <Panel>
-        <PanelHeader>
-          <PanelTitle>Filter by language</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <LanguageChips
-            available={stats.map((s) => ({
-              code: s.code,
-              clansCount: s.total,
-            }))}
-            active={language}
-            region={region}
-            strict={strict}
-          />
-        </PanelContent>
-      </Panel>
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader className="flex items-center justify-between gap-3">
+        <PanelHeader className="flex flex-wrap items-center justify-between gap-3">
           <PanelTitle>
+            Top {totalCount.toLocaleString("en-US")}{" "}
             {language
               ? strict
-                ? `Top ${totalCount} strictly ${langName} clans`
-                : `Top ${totalCount} ${langName} clans`
-              : `Top ${totalCount} clans`}
+                ? `strictly ${langName} clans`
+                : `${langName} clans`
+              : "clans"}{" "}
+            by{" "}
+            <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
           </PanelTitle>
-          {language && filterCounts && (
-            <StrictModeToggle
+          <div className="flex flex-wrap items-center gap-2">
+            <ClanLanguageSelect
+              available={stats.map((s) => ({
+                code: s.code,
+                clansCount: s.total,
+              }))}
+              active={language}
               region={region}
-              language={language}
               strict={strict}
-              total={filterCounts.total}
-              strictCount={filterCounts.strict}
             />
-          )}
+            {language && filterCounts && (
+              <StrictModeToggle
+                region={region}
+                language={language}
+                strict={strict}
+                total={filterCounts.total}
+                strictCount={filterCounts.strict}
+              />
+            )}
+          </div>
         </PanelHeader>
         <PanelContent className="p-0">
           <div data-rating-col="wn7">
-            <TopClansList
+            <TopClansBoard
               region={region}
               results={wn7Results}
               metric={RatingMetric.Wn7}
@@ -217,7 +213,7 @@ export async function ClansLandingView({
             />
           </div>
           <div data-rating-col="wn8">
-            <TopClansList
+            <TopClansBoard
               region={region}
               results={wn8Results}
               metric={RatingMetric.Wn8}
@@ -225,7 +221,7 @@ export async function ClansLandingView({
             />
           </div>
           <div data-rating-col="wnx">
-            <TopClansList
+            <TopClansBoard
               region={region}
               results={wnxResults}
               metric={RatingMetric.Wnx}

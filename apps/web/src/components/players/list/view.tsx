@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { RatingScale } from "@/components/home/rating-scale";
 import { LeaderboardTabs } from "@/components/leaderboard-tabs";
+import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { PlayerLanguageSelect } from "@/components/players/list/language-select";
 import { PlayerStrictModeToggle } from "@/components/players/list/strict-mode-toggle";
@@ -172,7 +173,8 @@ export async function PlayersLandingView({
                 ? `strictly ${langName} players`
                 : `${langName} players`
               : "players"}{" "}
-            by <MetricInline />
+            by{" "}
+            <RatingMetricInlineSelect className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4" />
           </PanelTitle>
           <div className="flex flex-wrap items-center gap-2">
             <PlayerLanguageSelect

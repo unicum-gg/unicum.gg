@@ -36,6 +36,7 @@ export function TopClansList({
   results,
   metric,
   omitBoard,
+  rankOffset = 0,
 }: {
   region: Region;
   results: TopClanByLanguageResult[];
@@ -46,6 +47,9 @@ export function TopClansList({
    * nothing is dropped because being first in English is not being first
    * overall. */
   omitBoard?: ClanBoard;
+  // Global rank of the first row (the page offset), so paginated pages keep the
+  // true leaderboard rank instead of restarting at 1.
+  rankOffset?: number;
 }) {
   if (results.length === 0) {
     return (
@@ -82,7 +86,7 @@ export function TopClansList({
       </TableHeader>
       <TableBody>
         {results.map((r, i) => {
-          const rank = i + 1;
+          const rank = rankOffset + i + 1;
           return (
             <TableRow key={r.clan_id}>
               <TableCell className="text-center text-muted-foreground tabular-nums">
