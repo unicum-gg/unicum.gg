@@ -6,4 +6,5 @@ export * from "./equipment";
 export * from "./crew";
 export * from "./post-progression";
 export * from "./skill-tree";
+export * from "./comp7";
 export * from "./nations";

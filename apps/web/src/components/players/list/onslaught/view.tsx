@@ -1,0 +1,114 @@
+import {
+  OnslaughtBoard,
+  type OnslaughtRow,
+} from "@/components/players/list/onslaught/board";
+import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
+import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
+import {
+  Panel,
+  PanelContent,
+  PanelHeader,
+  PanelSeparator,
+  PanelTitle,
+} from "@/components/panel";
+import { buildSafe, unicum } from "@/services/sdk";
+import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+
+// The full standings are fetched once and paginated client-side (TablePager).
+// Onslaught's board is the whole ranked population (a few thousand, down to the
+// Master cutoff), not a top-N, so we pull it all; the API caps at its own max.
+const LIMIT = 60000;
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+// Shared body for /players/onslaught (EU default) and
+// /<region>/players/onslaught: the Onslaught (Competitive 7) ranked leaderboard,
+// mirrored from the in-game source into our database. Consumes its own public
+// API through the SDK. `season` picks a past season (default the current one);
+// the page reads it from `?season=`, so it is force-dynamic (caching stays in
+// the endpoint).
+export async function OnslaughtView({
+  region,
+  season: seasonParam,
+}: {
+  region: Region;
+  season?: string;
+}) {
+  const { season, seasons, results } = await buildSafe(
+    () =>
+      unicum
+        .region(region)
+        .players.onslaught({ limit: LIMIT, season: seasonParam }),
+    { season: null, seasons: [], results: [] },
+  );
+
+  const seasonLine = season
+    ? [
+        season.codename ?? season.name,
+        season.startDate && season.endDate
+          ? `${dateFmt.format(new Date(season.startDate))} to ${dateFmt.format(new Date(season.endDate))}`
+          : null,
+        season.ended ? "final standings" : "live season",
+      ]
+        .filter(Boolean)
+        .join(" · ")
+    : null;
+
+  return (
+    <div className="mx-auto w-full max-w-7xl">
+      <Panel>
+        <PanelContent className="px-4 py-12 text-center">
+          <div className="mb-2 text-sm uppercase tracking-wide text-fd-muted-foreground">
+            {REGION_EMOJI[region]} {REGION_LABEL[region]}
+          </div>
+          <h1 className="font-heading text-4xl font-bold tracking-tight md:text-5xl">
+            Top <span className="text-brand">Onslaught</span> players
+          </h1>
+          <p className="mx-auto mt-4 max-w-2xl text-fd-muted-foreground">
+            Onslaught is World of Tanks&apos; competitive 7v7 ranked mode on tier
+            X. The {REGION_LABEL[region]}{" "}
+            leaderboard, straight from the game&apos;s own standings.
+          </p>
+          {seasonLine ? (
+            <p className="mt-3 text-sm text-fd-muted-foreground">{seasonLine}</p>
+          ) : null}
+        </PanelContent>
+      </Panel>
+
+      <PanelSeparator />
+
+      <PlayersModeTabs region={region} active="onslaught" />
+
+      <PanelSeparator />
+
+      <OnslaughtBoard
+        region={region}
+        results={results as OnslaughtRow[]}
+        elitePosition={season?.elitePosition ?? null}
+        masterPosition={season?.masterPosition ?? null}
+        seasonOrdinal={season?.seasonOrdinal ?? null}
+        assetsRef={season?.assetsRef ?? null}
+        seasons={seasons}
+        currentSeasonId={season?.eventId ?? null}
+      />
+
+      <PanelSeparator />
+
+      <Panel>
+        <PanelHeader>
+          <PanelTitle>Ranks</PanelTitle>
+        </PanelHeader>
+        <PanelContent className="p-0">
+          <OnslaughtRankScale
+            seasonOrdinal={season?.seasonOrdinal ?? null}
+            assetsRef={season?.assetsRef ?? null}
+          />
+        </PanelContent>
+      </Panel>
+    </div>
+  );
+}

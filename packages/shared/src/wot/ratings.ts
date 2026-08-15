@@ -1,3 +1,4 @@
+import { iconUrl } from "./assets";
 import type { VehicleMeta } from "./tanks/meta";
 import type { TankStats } from "./tank-stats";
 
@@ -39,6 +40,76 @@ export const RATING_COLOR_CLASS: Record<RatingColor, string> = {
   [RatingColor.Excellent]: "bg-[#83579D]! text-white",
   [RatingColor.Top]: "bg-[#5A3175]! text-white",
 };
+
+// Onslaught (Competitive 7) leaderboard tiers, using the game's own rank names.
+// The client's `leaderboard_page.py` tags each row `Legend` (rank/sixth) when its
+// position is within the elite cutoff, else `Champion` (rank/fifth): the top
+// `elitePosition` ranks are Legend, the rest of the ranked population (down to
+// `masterPosition`, as far as the public board reaches) are Champion. The
+// `elite`/`master` in the source thresholds are the rating milestones behind
+// those positions, not the displayed tier names. Position-based, so the tier
+// means the same across regions even though the raw rating scale differs wildly.
+export enum OnslaughtTier {
+  Legend = "legend",
+  Champion = "champion",
+}
+
+export const ONSLAUGHT_TIER_LABEL: Record<OnslaughtTier, string> = {
+  [OnslaughtTier.Legend]: "Legend",
+  [OnslaughtTier.Champion]: "Champion",
+};
+
+export const ONSLAUGHT_TIER_COLOR: Record<OnslaughtTier, RatingColor> = {
+  [OnslaughtTier.Legend]: RatingColor.Top,
+  [OnslaughtTier.Champion]: RatingColor.Super,
+};
+
+export function onslaughtTier(
+  rank: number,
+  thresholds: {
+    elitePosition: number | null;
+    masterPosition: number | null;
+  },
+): OnslaughtTier | null {
+  const { elitePosition, masterPosition } = thresholds;
+  if (elitePosition != null && rank <= elitePosition)
+    return OnslaughtTier.Legend;
+  if (masterPosition != null && rank <= masterPosition)
+    return OnslaughtTier.Champion;
+  return null;
+}
+
+// The rank ladder's ordinal filename each tier's icon lives under in the client
+// GUI (Iron/Bronze/Silver/Gold/Champion/Legend = first..sixth); the leaderboard
+// only ever shows Champion (fifth) and Legend (sixth).
+const ONSLAUGHT_RANK_ORDINAL: Record<OnslaughtTier, string> = {
+  [OnslaughtTier.Legend]: "sixth",
+  [OnslaughtTier.Champion]: "fifth",
+};
+
+// The available icon sizes (px) under the client's comp7 rank-icon folder.
+export const ONSLAUGHT_RANK_ICON_SIZES = [
+  22, 40, 48, 64, 84, 110, 150, 200, 260, 320, 420, 600,
+] as const;
+
+/** URL of a rank's icon from the wot.assets mirror. `seasonOrdinal` selects that
+ * season's themed art (the plain default is used when it is null); `assetsRef`
+ * pins the art to a mirror commit (a past season's art as it was while live),
+ * defaulting to the live branch. `size` is one of `ONSLAUGHT_RANK_ICON_SIZES`. */
+export function onslaughtRankIcon(
+  tier: OnslaughtTier,
+  seasonOrdinal: string | null,
+  assetsRef: string | null,
+  size: (typeof ONSLAUGHT_RANK_ICON_SIZES)[number] = 84,
+): string {
+  const base = seasonOrdinal
+    ? `comp7/ranks/${seasonOrdinal}`
+    : "comp7/ranks";
+  return iconUrl(
+    `${base}/${size}/${ONSLAUGHT_RANK_ORDINAL[tier]}.png`,
+    assetsRef ?? undefined,
+  );
+}
 
 export function winrateColor(wr: number): RatingColor {
   if (wr < 0.45) return RatingColor.VeryBad;

@@ -6,16 +6,18 @@
 export const ASSETS_REPO = "unicum-gg/wot.assets";
 export const ASSETS_BRANCH = "WG";
 
-/** Raw-content URL for `path` on the wot.assets mirror. */
-export function assetUrl(path: string): string {
-  return `https://raw.githubusercontent.com/${ASSETS_REPO}/${ASSETS_BRANCH}/${path}`;
+/** Raw-content URL for `path` on the wot.assets mirror. `ref` (a branch or a
+ * commit SHA) defaults to the live branch; pass a commit SHA to pin the asset to
+ * a past state (e.g. a season's art as it was while that season was live). */
+export function assetUrl(path: string, ref: string = ASSETS_BRANCH): string {
+  return `https://raw.githubusercontent.com/${ASSETS_REPO}/${ref}/${path}`;
 }
 
 /** Raw-content URL under `gui/maps/icons/<path>`, the icon subtree every one of
  * our references lives in (crew skills, ammo panel, perks, post-progression,
- * equipment overlays). */
-export function iconUrl(path: string): string {
-  return assetUrl(`gui/maps/icons/${path}`);
+ * equipment overlays). `ref` pins to a commit (see `assetUrl`). */
+export function iconUrl(path: string, ref?: string): string {
+  return assetUrl(`gui/maps/icons/${path}`, ref);
 }
 
 /** The largest in-client vehicle render on the mirror (420x307), keyed by the

@@ -99,6 +99,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/onslaught": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Onslaught leaderboard
+         * @description The Onslaught (Competitive 7) ranked leaderboard for a region,
+         */
+        get: operations["get-{region}-players-onslaught"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/steel-hunter": {
         parameters: {
             query?: never;
@@ -2212,6 +2232,61 @@ export interface components {
         };
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
+        OnslaughtResponse: {
+            season: components["schemas"]["OnslaughtSeason"] | null;
+            seasons: components["schemas"]["OnslaughtSeasonRef"][];
+            results: components["schemas"]["OnslaughtSummary"][];
+        };
+        /** @description Onslaught season metadata. */
+        OnslaughtSeason: {
+            eventId: string;
+            name: string;
+            /** @description Season codename ('Season of the Jade Dragon'), from the client; null if unavailable. */
+            codename: string | null;
+            /** @description Season ordinal word ('third' for Jade), selecting its themed rank art. */
+            seasonOrdinal: string | null;
+            /** @description Mirror commit to build rank-art URLs from (null = live branch); pins a past season's art to when it was live. */
+            assetsRef: string | null;
+            startDate: string | null;
+            endDate: string | null;
+            /** @description True once the season has ended (standings are final). */
+            ended: boolean;
+            /** @description Top N ranks that are Elite tier. */
+            elitePosition: number | null;
+            /** @description Top N ranks that are at least Master (as far as the board reaches). */
+            masterPosition: number | null;
+            /** @description Unix seconds of the source's last leaderboard recompute. */
+            lastRecalculationTs: number | null;
+        };
+        /** @description A season selector entry. */
+        OnslaughtSeasonRef: {
+            /** @description Stable list key. */
+            key: string;
+            /** @description Display label ('Season of the Jade Dragon' or 'Year of the Griffin'). */
+            label: string;
+            /** @description True when we hold standings for this season (selectable). */
+            available: boolean;
+            /** @description Season id to navigate to (available seasons only). */
+            eventId: string | null;
+        };
+        /** @description Onslaught leaderboard row (ranked by score). */
+        OnslaughtSummary: {
+            /** @description Leaderboard position (1-based), from the game source. */
+            rank: number;
+            account_id: number;
+            /** @description Current nickname, resolved by account_id. */
+            nickname: string;
+            clan_tag: string | null;
+            clan_color: string | null;
+            /** @description Nickname as recorded on the leaderboard when ranked. */
+            recordedNickname: string;
+            recordedClanTag: string | null;
+            recordedClanColor: string | null;
+            /** @description Season score / rating points (the ranking metric). */
+            rating: number;
+            /** @description Battles played in the mode over the season. */
+            battles: number;
+        };
         /** @description One derived value per column: lifetime, 24h, 7d, 30d. */
         PeriodValues: {
             total: number | null;
@@ -2761,7 +2836,7 @@ export interface components {
             boostRatio: number | null;
             /** @description Composite skirmish rating: roster strength (median Personal Rating) weighted by win rate, battle volume and roster maturity over the selected period. */
             sr: number | null;
-            /** @description Battles-based Stronghold Rating: SR reweighted so battle volume rewards instead of only gating it (per-tier calibration). */
+            /** @description Battles-based Stronghold Rating: SR bumped by battle volume (SR times 1 + ln(1 + battles/1000)), one absolute scale across tiers. */
             srb: number | null;
             /** @description Leaderboard placings the clan currently holds, best rank first. */
             badges?: components["schemas"]["ClanRankBadge"][];
@@ -3565,6 +3640,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PlayerLanguagesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-onslaught": {
+        parameters: {
+            query?: {
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                /** @description Season event id to load (default the current season). From the seasons list in the response. */
+                season?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnslaughtResponse"];
                 };
             };
         };

@@ -45,6 +45,10 @@ const ROUTES = {
     region === Region.EU
       ? "/players/steel-hunter"
       : pathcat("/:region/players/steel-hunter", { region }),
+  PLAYERS_ONSLAUGHT: (region: Region) =>
+    region === Region.EU
+      ? "/players/onslaught"
+      : pathcat("/:region/players/onslaught", { region }),
   PLAYERS_BY_LANGUAGE: (
     region: Region,
     language: string,

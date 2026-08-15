@@ -308,6 +308,8 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
   /** Player languages */
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
+  /** Onslaught leaderboard */
+  onslaught(query?: QueryOf<"/{region}/players/onslaught">): RequestHandle<Data<"/{region}/players/onslaught">>;
   /** Search players */
   search(q: NonNullable<QueryOf<"/{region}/players/search">>["q"]): RequestHandle<Data<"/{region}/players/search">>;
   /** Steel Hunter leaderboard */
@@ -406,6 +408,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/languages", {
             params: { path: { region: this.region } },
+          }),
+      );
+    ns.onslaught = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/onslaught", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/players/onslaught", {
+            params: { path: { region: this.region }, query },
           }),
       );
     ns.search = (q) =>

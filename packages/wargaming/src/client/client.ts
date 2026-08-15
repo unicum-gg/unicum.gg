@@ -21,6 +21,7 @@ import { SourceEquipmentResource } from "../source/wot/equipment";
 import { SourceCrewResource } from "../source/wot/crew";
 import { SourcePostProgressionResource } from "../source/wot/post-progression";
 import { SourceSkillTreeResource } from "../source/wot/skill-tree";
+import { SourceComp7Resource } from "../source/wot/comp7";
 
 /** World of Tanks endpoints (`/wot/*`). */
 class WotApiSurface {
@@ -90,6 +91,7 @@ class SourceSurface {
   readonly crew: SourceCrewResource;
   readonly postProgression: SourcePostProgressionResource;
   readonly skillTree: SourceSkillTreeResource;
+  readonly comp7: SourceComp7Resource;
 
   constructor(transport: Transport, region: Region) {
     this.vehicles = new SourceVehiclesResource(transport, region);
@@ -99,6 +101,7 @@ class SourceSurface {
     this.crew = new SourceCrewResource(transport, region);
     this.postProgression = new SourcePostProgressionResource(transport, region);
     this.skillTree = new SourceSkillTreeResource(transport, region);
+    this.comp7 = new SourceComp7Resource(transport, region);
   }
 }
 

@@ -328,6 +328,21 @@ export const steelHunterQuery = z.object({
     .meta({ description: "Ranking column (default hr)." }),
 });
 
+// The Onslaught board is the game's own full ranked standings (every player down
+// to the Master cutoff, a few thousand), not a top-N of a huge population, so it
+// gets a much higher cap than the WNX/SH boards.
+export const ONSLAUGHT_MAX_LIMIT = 60000;
+
+// The Onslaught board is the game's own ranking, served in that fixed rank
+// order. `limit` caps the rows; `season` picks a past season (default current).
+export const onslaughtQuery = z.object({
+  limit: limitField(ONSLAUGHT_MAX_LIMIT).optional(),
+  season: z.string().optional().meta({
+    description:
+      "Season event id to load (default the current season). From the seasons list in the response.",
+  }),
+});
+
 // next-openapi-gen doesn't serialize `.default()` on enum params, so the doc
 // defaults are applied when serving the spec (see `api/openapi.json/route.ts`),
 // keyed by query-param name. Sourced from the app constants so they can't drift.

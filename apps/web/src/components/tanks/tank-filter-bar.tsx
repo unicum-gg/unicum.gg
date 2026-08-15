@@ -173,9 +173,20 @@ export function TankFilterBar<T>({
   );
 }
 
-export function ChipRow({ children }: { children: ReactNode }) {
+export function ChipRow({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
   return (
-    <div className="flex w-fit max-w-full overflow-x-auto rounded-md border border-fd-border">
+    <div
+      className={cn(
+        "flex w-fit max-w-full overflow-x-auto rounded-md border border-fd-border",
+        className,
+      )}
+    >
       {children}
     </div>
   );

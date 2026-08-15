@@ -22,7 +22,7 @@ export function PlayersModeTabs({
   active,
 }: {
   region: Region;
-  active: "overall" | "steel-hunter";
+  active: "overall" | "steel-hunter" | "onslaught";
 }) {
   return (
     <Panel>
@@ -39,6 +39,12 @@ export function PlayersModeTabs({
             className={tabClass(active === "steel-hunter")}
           >
             Steel Hunter
+          </Link>
+          <Link
+            href={ROUTES.PLAYERS_ONSLAUGHT(region)}
+            className={tabClass(active === "onslaught")}
+          >
+            Onslaught
           </Link>
         </nav>
       </PanelHeader>
