@@ -2286,6 +2286,9 @@ export interface components {
             rating: number;
             /** @description Battles played in the mode over the season. */
             battles: number;
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
         };
         /** @description One derived value per column: lifetime, 24h, 7d, 30d. */
         PeriodValues: {
@@ -2809,6 +2812,9 @@ export interface components {
             survived: number;
             damage: number;
             frags: number;
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
         };
         /**
          * @description With `language`: only count clans that declare exactly this one language.

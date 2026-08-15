@@ -1,5 +1,6 @@
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
+import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { getOnslaughtLeaderboard } from "@unicum.gg/core/wargaming/wot/players/onslaught";
 import { isRegion } from "@unicum.gg/wargaming";
 import { OnslaughtResponse } from "./schema.api";
@@ -41,7 +42,7 @@ export async function GET(
     return jsonResponse(OnslaughtResponse, {
       season: current,
       seasons,
-      results,
+      results: await attachPlayerBadges(region, results),
     });
   } catch (err) {
     console.error(`[api/${region}/players/onslaught] failed:`, err);

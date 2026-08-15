@@ -27,6 +27,9 @@ export const onslaughtSummary = z
     battles: z.number().meta({
       description: "Battles played in the mode over the season.",
     }),
+    is_verified: z.boolean().optional(),
+    is_supporter: z.boolean().optional(),
+    twitch_login: z.string().nullable().optional(),
   })
   .meta({
     id: "OnslaughtSummary",

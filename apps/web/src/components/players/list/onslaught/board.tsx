@@ -16,6 +16,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import {
   OnslaughtSeasonSelect,
@@ -124,6 +125,9 @@ export type OnslaughtRow = {
   recordedClanColor: string | null;
   rating: number;
   battles: number;
+  is_verified: boolean;
+  is_supporter: boolean;
+  twitch_login: string | null;
 };
 
 export function OnslaughtBoard({
@@ -381,6 +385,13 @@ export function OnslaughtBoard({
                             </>
                           ) : null}
                         </Link>
+                        <PlayerBadges
+                          region={region}
+                          accountId={r.account_id}
+                          verified={r.is_verified}
+                          supporter={r.is_supporter}
+                          twitchLogin={r.twitch_login}
+                        />
                         {r.recordedNickname !== r.nickname ||
                         r.recordedClanTag !== r.clan_tag ? (
                           <span className="shrink-0 text-xs text-muted-foreground">

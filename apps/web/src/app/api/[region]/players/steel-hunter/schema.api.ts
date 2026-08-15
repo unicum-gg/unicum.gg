@@ -20,6 +20,9 @@ export const steelHunterSummary = z
     survived: z.number(),
     damage: z.number(),
     frags: z.number(),
+    is_verified: z.boolean().optional(),
+    is_supporter: z.boolean().optional(),
+    twitch_login: z.string().nullable().optional(),
   })
   .meta({
     id: "SteelHunterSummary",

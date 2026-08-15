@@ -1,5 +1,6 @@
 import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
+import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { getTopSteelHunter } from "@unicum.gg/core/wargaming/wot/players/steel-hunter";
 import { DEFAULT_STEEL_HUNTER_SORT, isSteelHunterSort } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
@@ -40,7 +41,9 @@ export async function GET(
 
   try {
     const results = await getTopSteelHunter(region, limit, sort);
-    return jsonResponse(SteelHunterResponse, { results });
+    return jsonResponse(SteelHunterResponse, {
+      results: await attachPlayerBadges(region, results),
+    });
   } catch (err) {
     console.error(`[api/${region}/players/steel-hunter] failed:`, err);
     return Response.json({ error: "upstream_failure" }, { status: 502 });

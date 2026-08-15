@@ -11,6 +11,7 @@ import {
   useState,
 } from "react";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
@@ -70,6 +71,9 @@ export type SteelHunterRow = {
   survived: number;
   damage: number;
   frags: number;
+  is_verified: boolean;
+  is_supporter: boolean;
+  twitch_login: string | null;
 };
 
 // The board is ranked server-side, always descending (best first), so a header
@@ -309,24 +313,33 @@ export function SteelHunterBoard({
                       )}
                     </TableCell>
                     <TableCell>
-                      <Link
-                        href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
-                        className="flex min-w-0 items-center gap-3 hover:underline"
-                      >
-                        <span className="min-w-0 truncate">
-                          <span className="font-medium">{r.nickname}</span>
-                          {r.clan_tag ? (
-                            <>
-                              {" "}
-                              <ClanTag
-                                tag={r.clan_tag}
-                                color={r.clan_color}
-                                className="font-mono text-xs"
-                              />
-                            </>
-                          ) : null}
-                        </span>
-                      </Link>
+                      <span className="flex items-center gap-1.5">
+                        <Link
+                          href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
+                          className="flex min-w-0 items-center gap-3 hover:underline"
+                        >
+                          <span className="min-w-0 truncate">
+                            <span className="font-medium">{r.nickname}</span>
+                            {r.clan_tag ? (
+                              <>
+                                {" "}
+                                <ClanTag
+                                  tag={r.clan_tag}
+                                  color={r.clan_color}
+                                  className="font-mono text-xs"
+                                />
+                              </>
+                            ) : null}
+                          </span>
+                        </Link>
+                        <PlayerBadges
+                          region={region}
+                          accountId={r.account_id}
+                          verified={r.is_verified}
+                          supporter={r.is_supporter}
+                          twitchLogin={r.twitch_login}
+                        />
+                      </span>
                     </TableCell>
                     <TableCell className="text-right text-muted-foreground tabular-nums">
                       {intFmt.format(r.battles)}
