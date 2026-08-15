@@ -77,10 +77,19 @@ export async function handleVideoReview(
     }
     if (!res.ok) throw new Error(`review endpoint returned ${res.status}`);
 
+    // The endpoint hands back a public link to where the video now shows (tank
+    // videos page, or the map page for a tactic), so the confirmation can point
+    // right at it. It may be null if the slug could not be resolved.
+    const data = (await res.json().catch(() => null)) as {
+      url?: string | null;
+    } | null;
+
     const label = approved ? "Approved" : "Rejected";
     await interaction.editReply(
       approved
-        ? "Approved. It is live on the tank page."
+        ? data?.url
+          ? `Approved. It is live: ${data.url}`
+          : "Approved. It is live on the tank page."
         : "Rejected. It stays out, and the same battle cannot be submitted again.",
     );
     await interaction.message.edit({

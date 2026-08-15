@@ -1,5 +1,5 @@
 import { revalidatePath } from "next/cache";
-import { env } from "@unicum.gg/shared";
+import { APP_IDENTITY, env } from "@unicum.gg/shared";
 import { reviewTankVideo } from "@unicum.gg/core/tanks/videos";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
@@ -46,6 +46,9 @@ export async function POST(
     return Response.json({ error: "already_reviewed" }, { status: 409 });
   }
 
+  // A public link back to where the video now shows, handed to the bot so its
+  // approval reply can point straight at it.
+  let url: string | null = null;
   if (body.approved) {
     // The pages are cached, so an approved video would otherwise wait out the
     // revalidation window. Tanks and maps are the same on every region and the
@@ -67,7 +70,15 @@ export async function POST(
       }
       if (map) revalidatePath(ROUTES.MAP(region, map.slug));
     }
+    // A random battle on a known tank lives on the tank page; a tactic only has
+    // the map page. EU stands in for the canonical origin, the pages being
+    // identical across regions.
+    if (tankSlug) {
+      url = `${APP_IDENTITY.URL}${ROUTES.TANK(REGIONS[0], tankSlug)}/videos`;
+    } else if (map) {
+      url = `${APP_IDENTITY.URL}${ROUTES.MAP(REGIONS[0], map.slug)}`;
+    }
   }
 
-  return Response.json({ status: reviewed.status, title: reviewed.title });
+  return Response.json({ status: reviewed.status, title: reviewed.title, url });
 }
