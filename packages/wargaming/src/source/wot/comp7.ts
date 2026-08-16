@@ -45,9 +45,9 @@ export interface Comp7Taxonomy {
 }
 
 /**
- * Onslaught (Competitive 7) taxonomy from the wot-src mirror. The wgelen event
- * board only exposes the mode name ("Competitive 7") + a season's dates, never
- * the season codename ("Season of the Jade Dragon"); that lives in the client
+ * Onslaught (Competitive 7) taxonomy from the wot-src mirror. The event board
+ * only exposes the mode name ("Competitive 7") + a season's dates, never the
+ * season codename ("Season of the Jade Dragon"); that lives in the client
  * localization (`comp7.comp7_ext.po`): the current year's name + its season
  * names, keyed by ordinal in release order. Read once per region branch,
  * memoized by the shared `.po` loader.
