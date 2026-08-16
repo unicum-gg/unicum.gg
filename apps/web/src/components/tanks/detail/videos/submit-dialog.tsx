@@ -62,6 +62,7 @@ export function SubmitVideoDialog({
   const source = useVideoSource(initial);
   const [battle, setBattle] = useState<BattleContext>(EMPTY_BATTLE);
   const [damage, setDamage] = useState("");
+  const [assists, setAssists] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
@@ -98,7 +99,10 @@ export function SubmitVideoDialog({
         // two of them comparable.
         format: BattleFormat.Random,
         tankSlug: slug,
-        combinedDamage: Number(damage),
+        // Two figures on the after-battle screen, one number in the row: the
+        // card and the filters compare a single combined value, so the split is
+        // summed back here. Assists left blank counts as none.
+        combinedDamage: Number(damage) + (assists ? Number(assists) : 0),
       });
       setDone(true);
       // The queued row is the receipt: it belongs in the list under the video
@@ -138,6 +142,7 @@ export function SubmitVideoDialog({
     source.reset();
     setBattle(EMPTY_BATTLE);
     setDamage("");
+    setAssists("");
     setError(null);
     setDone(false);
   }
@@ -181,24 +186,43 @@ export function SubmitVideoDialog({
           <div className="flex flex-col gap-3">
             <VideoSourceFields source={source}>
               {/* Beside the start time rather than with the battle context
-                  below: both are numbers read off the same after-battle screen,
-                  and both are the submitter's own account of it. */}
-              <label className="flex flex-col gap-1 text-sm">
-                <span className="font-medium">Combined damage</span>
-                <input
-                  type="text"
-                  value={damage}
-                  onChange={(e) =>
-                    setDamage(e.target.value.replace(/[^0-9]/g, ""))
-                  }
-                  placeholder="3450"
-                  inputMode="numeric"
-                  className={VIDEO_FORM_INPUT}
-                />
-                <span className="text-xs text-fd-muted-foreground">
-                  Damage dealt plus assisted.
-                </span>
-              </label>
+                  below: all three are numbers read off the same after-battle
+                  screen, and the submitter's own account of it. Split into the
+                  two figures that screen shows, summed into the row's one
+                  combined value at submit. */}
+              <div className="grid grid-cols-2 gap-2">
+                <label className="flex flex-col gap-1 text-sm">
+                  <span className="font-medium">Damage</span>
+                  <input
+                    type="text"
+                    value={damage}
+                    onChange={(e) =>
+                      setDamage(e.target.value.replace(/[^0-9]/g, ""))
+                    }
+                    placeholder="3450"
+                    inputMode="numeric"
+                    className={VIDEO_FORM_INPUT}
+                  />
+                </label>
+                <label className="flex flex-col gap-1 text-sm">
+                  <span className="font-medium">
+                    Assists{" "}
+                    <span className="font-normal text-fd-muted-foreground">
+                      (optional)
+                    </span>
+                  </span>
+                  <input
+                    type="text"
+                    value={assists}
+                    onChange={(e) =>
+                      setAssists(e.target.value.replace(/[^0-9]/g, ""))
+                    }
+                    placeholder="1200"
+                    inputMode="numeric"
+                    className={VIDEO_FORM_INPUT}
+                  />
+                </label>
+              </div>
             </VideoSourceFields>
 
             <BattleFields
