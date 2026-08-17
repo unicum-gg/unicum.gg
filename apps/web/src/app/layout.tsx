@@ -1,6 +1,5 @@
-// Installs the in-process SDK loopback (side-effect import, server graph only):
-// server-side SDK calls dispatch straight to this build's route handlers instead
-// of self-fetching over HTTP, at build (prerender) and at runtime (SSR/ISR).
+// Installs the build-time SDK loopback (side-effect import, server graph only:
+// prerendered pages resolve SDK calls against this build's own route handlers).
 import "@/services/sdk/loopback";
 import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
