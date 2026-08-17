@@ -1,14 +1,7 @@
-import {
-  BattleType,
-  BATTLE_TYPE_LABEL,
-  STRONGHOLD_TIER_LABEL,
-  StrongholdTier,
-} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
-import { mapsTabHref } from "@/components/maps/list/tabs";
+import { navSections } from "@/components/nav-sections";
 
 export type FooterLink = {
   label: string;
@@ -26,74 +19,34 @@ export type FooterColumn = {
 /**
  * The footer's columns, built for the region the reader is browsing.
  *
- * A function rather than a constant because every catalogue link is regional:
- * a tank's numbers are per-region, and so is a clan's ladder, so a footer that
- * always said EU sent a reader on NA to another server's leaderboard. The one
- * link that was already region-aware had to carry its own client component to
- * get there; now the whole footer does.
+ * The catalogue columns are derived from `navSections`, the same source the
+ * navbar dropdowns read, so a board or tab added there shows in both. The
+ * "Leaderboards" column recombines the player and clan sub-links the navbar
+ * keeps apart, which is why it is composed here rather than being a fifth
+ * section: it is a footer-only grouping.
  */
 export function footerColumns(region: Region): FooterColumn[] {
-  const tanks = ROUTES.TANKS(region);
-  const maps = ROUTES.MAPS(region);
+  const sections = navSections(region);
+  const players = sections.find((s) => s.id === "players")!;
+  const clans = sections.find((s) => s.id === "clans")!;
+  const tanks = sections.find((s) => s.id === "tanks")!;
+  const maps = sections.find((s) => s.id === "maps")!;
 
   return [
     {
       title: "Leaderboards",
       links: [
-        { label: "Top players", href: ROUTES.PLAYERS(region) },
-        { label: "Top clans", href: ROUTES.CLANS(region) },
-        { label: "Top tanks", href: tanks },
-        // The two stronghold boards worth their own entry: skirmishes are the
-        // ladder people compare on, Advances is a different mode entirely
-        // (15v15) with its own ranking, and it is buried a tab deep otherwise.
-        {
-          label: "Stronghold",
-          href: ROUTES.STRONGHOLD(region, StrongholdTier.T10),
-        },
-        {
-          label: STRONGHOLD_TIER_LABEL[StrongholdTier.Advances],
-          href: ROUTES.STRONGHOLD(region, StrongholdTier.Advances),
-        },
+        // The three landings first, then the mode-specific boards, so the
+        // column reads "the tops" then "the rest" rather than by section.
+        players.links[0], // Top players
+        clans.links[0], // Top clans
+        { label: "Top tanks", href: ROUTES.TANKS(region) },
+        ...clans.links.slice(1), // Stronghold, Advances
+        ...players.links.slice(1), // Onslaught, Steel Hunter
       ],
     },
-    {
-      title: "Tanks",
-      links: [
-        {
-          label: "Specifications",
-          href: tankTabHref(tanks, TankTab.Specifications),
-        },
-        { label: "Economics", href: tankTabHref(tanks, TankTab.Economics) },
-        {
-          label: "Marks of Excellence",
-          href: tankTabHref(tanks, TankTab.MarksOfExcellence),
-        },
-        {
-          label: "Marks of Mastery",
-          href: tankTabHref(tanks, TankTab.MarksOfMastery),
-        },
-        { label: "Videos", href: tankTabHref(tanks, TankTab.Videos) },
-      ],
-    },
-    {
-      title: "Maps",
-      links: [
-        { label: "All maps", href: maps },
-        // The battle types a map belongs to are real pages of their own, and
-        // "frontline maps" is a query people type, so they are worth a link
-        // rather than a filter buried in the gallery.
-        ...[
-          BattleType.Random,
-          BattleType.Frontline,
-          BattleType.Onslaught,
-          BattleType.GrandBattle,
-          BattleType.ClanWars,
-        ].map((type) => ({
-          label: BATTLE_TYPE_LABEL[type],
-          href: mapsTabHref(maps, type),
-        })),
-      ],
-    },
+    { title: "Tanks", links: tanks.links },
+    { title: "Maps", links: maps.links },
     {
       // The three ways to read our data without opening the site.
       title: "Integrations",
