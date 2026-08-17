@@ -100,18 +100,15 @@ export function SpecificationsTab({
       )}
       {/* The tab is the full list; this is what makes anyone discover it. Most
           of a tank page is read here, and a section nobody sees collects no
-          suggestions, which is what the feature runs on. */}
-      {videos.length > 0 && (
-        <>
-          <PanelSeparator />
-          <TankVideosPreview
-            region={region}
-            slug={slug}
-            tankName={meta.name}
-            videos={videos}
-          />
-        </>
-      )}
+          suggestions, which is what the feature runs on, so it shows even with
+          nothing in it: the empty state is the invitation to add the first. */}
+      <PanelSeparator />
+      <TankVideosPreview
+        region={region}
+        slug={slug}
+        tankName={meta.name}
+        videos={videos}
+      />
     </>
   );
 }

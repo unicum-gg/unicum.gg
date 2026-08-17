@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Video } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   Panel,
@@ -8,6 +9,14 @@ import {
   PanelHeader,
   PanelTitle,
 } from "@/components/panel";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import {
   TankDetailTab,
   tankDetailTabHref,
@@ -19,6 +28,39 @@ import { useTankVideoPlayer } from "./player";
 import { SubmitVideoDialogSlot } from "./submit-dialog-slot";
 import { VideosTable } from "./table";
 import { useVideosView, VideosView, VideosViewToggle } from "./view-toggle";
+
+/**
+ * The empty state both video sections share: an invitation to seed the first
+ * video, not a dead end. The suggestion form is the whole point, so it sits in
+ * the middle of it rather than only in the header.
+ */
+function NoVideosEmpty({
+  region,
+  slug,
+  tankName,
+}: {
+  region: Region;
+  slug: string;
+  tankName: string;
+}) {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <Video />
+        </EmptyMedia>
+        <EmptyTitle>No videos yet</EmptyTitle>
+        <EmptyDescription>
+          No community video for the {tankName} yet. Suggest one and it shows up
+          here once a moderator has looked at it.
+        </EmptyDescription>
+      </EmptyHeader>
+      <EmptyContent>
+        <SubmitVideoDialogSlot region={region} slug={slug} />
+      </EmptyContent>
+    </Empty>
+  );
+}
 
 /**
  * The Videos tab: battles the community linked, each opening at the minute this
@@ -49,20 +91,15 @@ export function TankVideosTab({
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">
         <PanelTitle>{tankName} videos</PanelTitle>
-        <span className="ml-auto flex items-center gap-3">
-          {all.length > 0 && (
+        {all.length > 0 && (
+          <span className="ml-auto flex items-center gap-3">
             <VideosViewToggle view={view} onChange={setView} />
-          )}
-          <SubmitVideoDialogSlot region={region} slug={slug} />
-        </span>
+            <SubmitVideoDialogSlot region={region} slug={slug} />
+          </span>
+        )}
       </PanelHeader>
       {all.length === 0 ? (
-        <PanelContent>
-          <p className="py-8 text-center text-sm text-fd-muted-foreground">
-            No video yet for the {tankName}. Suggest one and it shows up here
-            once a moderator has looked at it.
-          </p>
-        </PanelContent>
+        <NoVideosEmpty region={region} slug={slug} tankName={tankName} />
       ) : view === VideosView.Table ? (
         // Outside PanelContent so the table runs edge to edge, like the other
         // tabs' tables. No tank columns: every row is this page's vehicle, and
@@ -109,35 +146,45 @@ export function TankVideosPreview({
   // the list). The prop is the server render, kept as the fallback.
   const player = useTankVideoPlayer();
   const all = player?.videos ?? videos;
-  if (all.length === 0) return null;
-  const groups = groupBattlesByVideo(all);
+  // Rendered even with nothing in it, like the tab (see TankVideosTab): the
+  // preview is what a reader on Specifications sees, and a section that hides
+  // when empty is the one that never gets a tank its first suggestion.
+  const groups = all.length > 0 ? groupBattlesByVideo(all) : [];
   return (
     <Panel>
       <PanelHeader className="flex flex-wrap items-center gap-3">
         <PanelTitle>{tankName} videos</PanelTitle>
-        {/* The form lives here too, not only on the tab: a video plays in the
-            hero from this page as well, and the player's "suggest this moment"
-            needs something to hand the moment to. */}
-        <SubmitVideoDialogSlot region={region} slug={slug} />
-        <Link
-          href={tankDetailTabHref(
-            ROUTES.TANK(region, slug),
-            TankDetailTab.Videos,
-          )}
-          className="ml-auto text-sm text-fd-muted-foreground hover:text-fd-foreground hover:underline"
-        >
-          {/* Counts videos, like the cards below, not battles: the two differ
-              as soon as one recording holds several. */}
-          See all{groups.length > PREVIEW_VIDEO_COUNT ? ` (${groups.length})` : ""} →
-        </Link>
+        {groups.length > 0 && (
+          <>
+            {/* The form lives here too, not only on the tab: a video plays in
+                the hero from this page as well, and the player's "suggest this
+                moment" needs something to hand the moment to. */}
+            <SubmitVideoDialogSlot region={region} slug={slug} />
+            <Link
+              href={tankDetailTabHref(
+                ROUTES.TANK(region, slug),
+                TankDetailTab.Videos,
+              )}
+              className="ml-auto text-sm text-fd-muted-foreground hover:text-fd-foreground hover:underline"
+            >
+              {/* Counts videos, like the cards below, not battles: the two
+                  differ as soon as one recording holds several. */}
+              See all{groups.length > PREVIEW_VIDEO_COUNT ? ` (${groups.length})` : ""} →
+            </Link>
+          </>
+        )}
       </PanelHeader>
-      <PanelContent>
-        <div className="grid items-start gap-4 sm:grid-cols-2">
-          {groups.slice(0, PREVIEW_VIDEO_COUNT).map((g) => (
-            <TankVideoCard key={g.videoId} group={g} region={region} />
-          ))}
-        </div>
-      </PanelContent>
+      {groups.length === 0 ? (
+        <NoVideosEmpty region={region} slug={slug} tankName={tankName} />
+      ) : (
+        <PanelContent>
+          <div className="grid items-start gap-4 sm:grid-cols-2">
+            {groups.slice(0, PREVIEW_VIDEO_COUNT).map((g) => (
+              <TankVideoCard key={g.videoId} group={g} region={region} />
+            ))}
+          </div>
+        </PanelContent>
+      )}
     </Panel>
   );
 }
