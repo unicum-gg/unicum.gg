@@ -17,6 +17,10 @@ import { type Region } from "@unicum.gg/wargaming";
 // well under with 2000-row insert chunks.
 const INSERT_CHUNK = 2000;
 
+// The transaction executor `db.transaction` hands its callback. Slices run
+// through it so they share the session-scoped `_sh_roster` temp table.
+type Tx = Parameters<Parameters<(typeof db)["transaction"]>[0]>[0];
+
 // Which snapshot columns back each tier. Advances (15v15) shares the Skirmish
 // T10 ELO rating in WG's data, but has its own battle/win counters.
 function tierColumns(tier: StrongholdTier): {
@@ -133,13 +137,13 @@ type InsertValue = StrongholdRatingsTable["$inferInsert"];
 // minus the ORDER BY / LIMIT, so the materialized table holds the full slice and
 // the endpoint applies the sort + top-100 at read time.
 async function computeStrongholdRows(
+  tx: Tx,
   region: Region,
   tier: StrongholdTier,
   period: StrongholdPeriod,
 ): Promise<RawRow[]> {
   const snapshots = clanSnapshotsByRegion[region];
   const clans = clansByRegion[region];
-  const members = clanMembersByRegion[region];
   const cols = tierColumns(tier);
   const p = periodExprs(cols, period);
 
@@ -151,7 +155,7 @@ async function computeStrongholdRows(
   const srRaw = sql.raw(srExpr(p));
   const minBattlesRaw = sql.raw(String(STRONGHOLD_MIN_BATTLES[tier]));
 
-  return (await db.execute(sql`
+  return (await tx.execute(sql`
     WITH latest AS (
       SELECT DISTINCT ON (clan_id) *
       FROM ${snapshots}
@@ -172,21 +176,11 @@ async function computeStrongholdRows(
         (s.taken_at <= now() - interval '30 days') DESC,
         CASE WHEN s.taken_at <= now() - interval '30 days' THEN s.taken_at END DESC,
         s.taken_at ASC
-    ),
-    roster AS (
-      -- Roster strength + boost signal from the clan's current members:
-      --  * median_pr   = median WG Personal Rating (typical real player, robust
-      --                  to boost-account lows and carry highs)
-      --  * boost_ratio = mean per-member boost weight (soft, by random-battle
-      --                  count); high = a roster padded with boost accounts.
-      SELECT clan_id,
-        percentile_cont(0.5) WITHIN GROUP (ORDER BY personal_rating)
-          FILTER (WHERE personal_rating IS NOT NULL) AS median_pr,
-        avg(1.0 / (1.0 + power(overall_battles::float / ${sql.raw(String(SR_BOOST_SCALE))}, 2)))
-          FILTER (WHERE overall_battles IS NOT NULL) AS boost_ratio
-      FROM ${members}
-      GROUP BY clan_id
     )
+    -- roster (median PR + boost signal) is tier- and period-independent, so it
+    -- is built once per region into the _sh_roster temp table by the caller and
+    -- joined here, instead of the ~10s percentile scan being recomputed in every
+    -- one of the 8 (tier x period) slices.
     SELECT
       c.id AS clan_id,
       c.tag,
@@ -210,7 +204,7 @@ async function computeStrongholdRows(
     FROM latest
     JOIN ${clans} c ON c.id = latest.clan_id
     LEFT JOIN baseline_30d b30 ON b30.clan_id = latest.clan_id
-    LEFT JOIN roster ON roster.clan_id = latest.clan_id
+    LEFT JOIN _sh_roster roster ON roster.clan_id = latest.clan_id
     WHERE c.is_disbanded = false
   `)) as unknown as RawRow[];
 }
@@ -226,60 +220,80 @@ export async function recomputeStrongholdRatings(
   region: Region,
 ): Promise<number> {
   const table = strongholdRatingsByRegion[region];
+  const members = clanMembersByRegion[region];
   const values: InsertValue[] = [];
 
-  for (const tier of TIERS) {
-    for (const period of PERIODS) {
-      const rows = await computeStrongholdRows(region, tier, period);
+  await db.transaction(async (tx) => {
+    // `roster` (median PR + boost signal per clan) is tier- and period-
+    // independent, but the slice query used to recompute it — a ~10s percentile
+    // scan over ~1.5M members — inside every one of the 8 (tier x period)
+    // slices. Build it once here into a temp table the slices join, cutting a
+    // region's stronghold recompute from ~90s to ~18s. ON COMMIT DROP so it
+    // never outlives this transaction; JIT off matches the by-language service
+    // (compile overhead dwarfs a single execution of these one-shot shapes).
+    await tx.execute(sql`SET LOCAL jit = off`);
+    await tx.execute(sql`
+      CREATE TEMP TABLE _sh_roster ON COMMIT DROP AS
+      SELECT clan_id,
+        percentile_cont(0.5) WITHIN GROUP (ORDER BY personal_rating)
+          FILTER (WHERE personal_rating IS NOT NULL) AS median_pr,
+        avg(1.0 / (1.0 + power(overall_battles::float / ${sql.raw(String(SR_BOOST_SCALE))}, 2)))
+          FILTER (WHERE overall_battles IS NOT NULL) AS boost_ratio
+      FROM ${members}
+      GROUP BY clan_id
+    `);
 
-      // Rank within this (tier, period) board, computed here so the read side
-      // never re-sorts. Two things this must not get wrong:
-      //  - `computeStrongholdRows` drops the board's ORDER BY on purpose (it
-      //    materialises the whole slice, see its note), so the rows arrive in
-      //    whatever order Postgres produced them. They have to be sorted here.
-      //  - only active clans are ranked. The board hides the rest, so a dormant
-      //    clan would otherwise badge a position it no longer occupies.
-      const ranked = new Map<string, number>();
-      const active = rows
-        .filter((r) => r.is_active && r.sr !== null)
-        .sort((a, b) => Number(b.sr) - Number(a.sr));
-      let rank = 0;
-      let previousSr: number | null = null;
-      active.forEach((r, i) => {
-        const sr = Number(r.sr);
-        if (sr !== previousSr) {
-          rank = i + 1;
-          previousSr = sr;
-        }
-        ranked.set(String(r.clan_id), rank);
-      });
+    for (const tier of TIERS) {
+      for (const period of PERIODS) {
+        const rows = await computeStrongholdRows(tx, region, tier, period);
 
-      for (const r of rows) {
-        values.push({
-          rank: ranked.get(String(r.clan_id)) ?? null,
-          tier,
-          period,
-          clanId: Number(r.clan_id),
-          tag: r.tag,
-          name: r.name,
-          color: r.color,
-          emblem: r.emblem,
-          languages: r.languages ?? [],
-          membersCount: Number(r.members_count),
-          elo: r.elo === null ? null : Number(r.elo),
-          battles: Number(r.battles),
-          wins: Number(r.wins),
-          personalRating:
-            r.personal_rating === null ? null : Number(r.personal_rating),
-          boostRatio: r.boost_ratio === null ? null : String(r.boost_ratio),
-          sr: r.sr === null ? null : String(r.sr),
-          isActive: r.is_active,
+        // Rank within this (tier, period) board, computed here so the read side
+        // never re-sorts. Two things this must not get wrong:
+        //  - `computeStrongholdRows` drops the board's ORDER BY on purpose (it
+        //    materialises the whole slice, see its note), so the rows arrive in
+        //    whatever order Postgres produced them. They have to be sorted here.
+        //  - only active clans are ranked. The board hides the rest, so a dormant
+        //    clan would otherwise badge a position it no longer occupies.
+        const ranked = new Map<string, number>();
+        const active = rows
+          .filter((r) => r.is_active && r.sr !== null)
+          .sort((a, b) => Number(b.sr) - Number(a.sr));
+        let rank = 0;
+        let previousSr: number | null = null;
+        active.forEach((r, i) => {
+          const sr = Number(r.sr);
+          if (sr !== previousSr) {
+            rank = i + 1;
+            previousSr = sr;
+          }
+          ranked.set(String(r.clan_id), rank);
         });
+
+        for (const r of rows) {
+          values.push({
+            rank: ranked.get(String(r.clan_id)) ?? null,
+            tier,
+            period,
+            clanId: Number(r.clan_id),
+            tag: r.tag,
+            name: r.name,
+            color: r.color,
+            emblem: r.emblem,
+            languages: r.languages ?? [],
+            membersCount: Number(r.members_count),
+            elo: r.elo === null ? null : Number(r.elo),
+            battles: Number(r.battles),
+            wins: Number(r.wins),
+            personalRating:
+              r.personal_rating === null ? null : Number(r.personal_rating),
+            boostRatio: r.boost_ratio === null ? null : String(r.boost_ratio),
+            sr: r.sr === null ? null : String(r.sr),
+            isActive: r.is_active,
+          });
+        }
       }
     }
-  }
 
-  await db.transaction(async (tx) => {
     await tx.delete(table);
     for (let i = 0; i < values.length; i += INSERT_CHUNK) {
       await tx.insert(table).values(values.slice(i, i + INSERT_CHUNK));
