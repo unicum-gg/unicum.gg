@@ -14,35 +14,37 @@ export type MoreMenuItem = {
 };
 
 /**
- * The nav's "More" dropdown, built by hand instead of through fumadocs'
- * `type: "menu"` link, for one reason: `forceMount`.
+ * A nav dropdown: an icon + title + description card per destination, matching
+ * what fumadocs renders for a `menu` link. Shared by the "More" menu and, via
+ * `NavSectionMenu`, by every section, so they look and behave identically.
  *
- * A Radix navigation menu mounts its content when it opens, so with the stock
- * link these items existed only after a click. They were absent from the server
- * HTML entirely, which means no crawler ever saw a link to the bot, the MCP
- * server, the API or the support page from any page of the site: four
- * destinations with no internal links pointing at them. `forceMount` keeps the
- * panel in the DOM and lets Radix hide it with `data-state`, so the links are
- * crawlable while the menu still behaves exactly as before.
- *
- * The markup mirrors what fumadocs renders for a `menu` item (icon banner,
- * title, description), so nothing changes on screen.
+ * Not force-mounted. It once was, to keep the links in the served HTML for
+ * crawlers, but a force-mounted Radix content loses its `data-state` the moment
+ * any menu opens, so several of them stop hiding and stack on screen. The
+ * crawlability that bought is now covered by the footer, which links every one
+ * of these destinations, so the panel can mount on open the plain Radix way and
+ * only the hovered menu ever shows.
  */
 export function NavMoreMenu({
   text,
   items,
+  active = false,
 }: {
   text: string;
   items: MoreMenuItem[];
+  /** Highlights the trigger for the section the reader is on, like the plain
+   * section link did. Always false for the "More" menu, which is no section. */
+  active?: boolean;
 }) {
   return (
     <NavbarMenu>
-      <NavbarMenuTrigger>{text}</NavbarMenuTrigger>
-      {/* `forceMount` alone leaves the panel on screen, since Radix normally
-          hides it by unmounting. It still marks the state, so hide it while
-          closed. `hidden` keeps the links in the served HTML, which is the
-          whole point: a crawler reads the source, it does not open menus. */}
-      <NavbarMenuContent forceMount className="data-[state=closed]:hidden">
+      <NavbarMenuTrigger
+        data-active={active}
+        className="data-[active=true]:text-fd-primary"
+      >
+        {text}
+      </NavbarMenuTrigger>
+      <NavbarMenuContent>
         {items.map((item) => (
           <NavbarMenuLink key={item.url} href={item.url} aria-label={item.text}>
             <div className="w-fit rounded-md border bg-fd-muted p-1 [&_svg]:size-4">

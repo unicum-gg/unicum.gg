@@ -9,7 +9,7 @@ import {
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
 import { NavMoreMenu } from "@/components/nav-more-menu";
-import { NavSectionLink } from "@/components/nav-section-link";
+import { NavSectionMenu } from "@/components/nav-section-menu";
 import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
@@ -35,19 +35,19 @@ export async function baseOptions({
         ? ([
             {
               type: "custom",
-              children: <NavSectionLink text="Players" section="players" />,
+              children: <NavSectionMenu section="players" />,
             },
             {
               type: "custom",
-              children: <NavSectionLink text="Clans" section="clans" />,
+              children: <NavSectionMenu section="clans" />,
             },
             {
               type: "custom",
-              children: <NavSectionLink text="Tanks" section="tanks" />,
+              children: <NavSectionMenu section="tanks" />,
             },
             {
               type: "custom",
-              children: <NavSectionLink text="Maps" section="maps" />,
+              children: <NavSectionMenu section="maps" />,
             },
             // The region-less surfaces (integrations + API), grouped under one
             // dropdown so the main nav stays three sections. `custom` rather
