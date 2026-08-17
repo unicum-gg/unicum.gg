@@ -6,9 +6,11 @@ import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { isRegion, Region, REGION_LABEL } from "@unicum.gg/wargaming";
 
-// Force-dynamic because the season selector reads `?season=` (caching stays in
-// the endpoint). The default (current season) is the common path.
-export const dynamic = "force-dynamic";
+// ISR like the other leaderboards: renders the current season, cached. The
+// season selector's `?season=` is read client-side (OnslaughtBoardLive), so it
+// no longer forces per-request rendering of the whole ~4k-row board.
+export const dynamic = "force-static";
+export const revalidate = 1800; // 30 min, matches the other boards
 
 export async function generateMetadata({
   params,
@@ -29,14 +31,11 @@ export async function generateMetadata({
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: Promise<{ region: string }>;
-  searchParams: Promise<{ season?: string }>;
 }) {
   const { region } = await params;
   if (!isRegion(region)) notFound();
   if (region === Region.EU) redirect(ROUTES.PLAYERS_ONSLAUGHT(Region.EU));
-  const { season } = await searchParams;
-  return <OnslaughtView region={region} season={season} />;
+  return <OnslaughtView region={region} />;
 }

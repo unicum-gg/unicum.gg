@@ -1,16 +1,6 @@
-import {
-  OnslaughtBoard,
-  type OnslaughtRow,
-} from "@/components/players/list/onslaught/board";
-import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
+import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
-import {
-  Panel,
-  PanelContent,
-  PanelHeader,
-  PanelSeparator,
-  PanelTitle,
-} from "@/components/panel";
+import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
 import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 
@@ -27,25 +17,20 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 
 // Shared body for /players/onslaught (EU default) and
 // /<region>/players/onslaught: the Onslaught (Competitive 7) ranked leaderboard,
-// mirrored from the in-game source into our database. Consumes its own public
-// API through the SDK. `season` picks a past season (default the current one);
-// the page reads it from `?season=`, so it is force-dynamic (caching stays in
-// the endpoint).
-export async function OnslaughtView({
-  region,
-  season: seasonParam,
-}: {
-  region: Region;
-  season?: string;
-}) {
-  const { season, seasons, results } = await buildSafe(
-    () =>
-      unicum
-        .region(region)
-        .players.onslaught({ limit: LIMIT, season: seasonParam }),
+// mirrored from the in-game source into our database.
+//
+// The page renders the CURRENT season and is ISR-cached (`force-static` +
+// revalidate), like the other leaderboards, so the common case is a cheap cached
+// read rather than a per-request render of the whole ~4k-row board. Past seasons
+// are picked with `?season=`, which a static page ignores, so `OnslaughtBoardLive`
+// reads it client-side and refetches that season through the SDK.
+export async function OnslaughtView({ region }: { region: Region }) {
+  const initial = await buildSafe(
+    () => unicum.region(region).players.onslaught({ limit: LIMIT }),
     { season: null, seasons: [], results: [] },
   );
 
+  const { season } = initial;
   const seasonLine = season
     ? [
         season.codename ?? season.name,
@@ -85,30 +70,7 @@ export async function OnslaughtView({
 
       <PanelSeparator />
 
-      <OnslaughtBoard
-        region={region}
-        results={results as OnslaughtRow[]}
-        elitePosition={season?.elitePosition ?? null}
-        masterPosition={season?.masterPosition ?? null}
-        seasonOrdinal={season?.seasonOrdinal ?? null}
-        assetsRef={season?.assetsRef ?? null}
-        seasons={seasons}
-        currentSeasonId={season?.eventId ?? null}
-      />
-
-      <PanelSeparator />
-
-      <Panel>
-        <PanelHeader>
-          <PanelTitle>Ranks</PanelTitle>
-        </PanelHeader>
-        <PanelContent className="p-0">
-          <OnslaughtRankScale
-            seasonOrdinal={season?.seasonOrdinal ?? null}
-            assetsRef={season?.assetsRef ?? null}
-          />
-        </PanelContent>
-      </Panel>
+      <OnslaughtBoardLive region={region} initial={initial} />
     </div>
   );
 }
