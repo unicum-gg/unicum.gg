@@ -101,6 +101,12 @@ export async function tankMetadata(
     tier,
     meta.nation.toUpperCase(),
   );
+  // The Videos tab is shown even empty, since the suggestion form lives there,
+  // but an empty one is thin content: keep it out of the index until it has a
+  // video. The other tabs, and this one once populated, index as before.
+  const noIndex =
+    tab === TankDetailTab.Videos &&
+    (await loadTankVideos(region, detail.slug).catch(() => [])).length === 0;
   return constructMetadata({
     title,
     description,
@@ -108,6 +114,7 @@ export async function tankMetadata(
     // canonical, and at this tab's own segment so the four don't compete.
     canonical: tankDetailTabHref(ROUTES.TANK(region, detail.slug), tab),
     ogImage: `/api/og/${region}/tanks/${encodeURIComponent(detail.slug)}`,
+    noIndex,
   });
 }
 

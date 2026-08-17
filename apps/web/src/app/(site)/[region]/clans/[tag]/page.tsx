@@ -110,7 +110,7 @@ export async function clanMetadata(
   const decoded = decodeURIComponent(tag);
   const regionLabel = region.toUpperCase();
   // The Manage tab is a tool, not clan content: keep it out of the index.
-  const noIndex = view.section === ClanSection.Manage;
+  let noIndex = view.section === ClanSection.Manage;
 
   const overview = await loadOverview(region, decoded).catch(() => null);
   if (!overview) {
@@ -127,6 +127,17 @@ export async function clanMetadata(
     });
   }
   const { clan } = overview;
+  // The Videos tab is shown even empty (it invites the clan's first tactic),
+  // but an empty one is thin content: keep it out of the index until it holds a
+  // tactic. Same fetch the page makes, so it is deduped within this render.
+  if (view.section === ClanSection.Videos && !noIndex) {
+    const { videos } = await unicum
+      .region(region)
+      .clans(clan.tag)
+      .videos()
+      .catch(() => ({ videos: [] as unknown[] }));
+    noIndex = videos.length === 0;
+  }
   const members = intFmt.format(clan.membersCount);
   const copy = viewCopy(view, clan.name, clan.tag, regionLabel, members);
   return constructMetadata({
