@@ -174,22 +174,80 @@ const getDiscordServerCount = unstable_cache(
   { revalidate: 3600, tags: ["coverage"] },
 );
 
+// The three player_snapshots aggregates with no cheap `players`-table proxy: a
+// rolling 24h row count and the two daily-growth histograms (the per-player
+// MIN(taken_at) CTE is the heaviest, ~24s). All full seq-scans of a 10M+ row
+// table, so they get their own 1h cache rather than running on every 60s
+// coverage revalidation (x4 regions) — the growth curves move slowly and a
+// slightly stale last point is fine, whereas paying these once a minute is what
+// hogged the DB connection pool. JSON-safe (numbers + {day,count}), so the
+// unstable_cache round-trip needs no re-hydration.
+async function getSnapshotTrendsUncached(region: Region): Promise<{
+  playerSnapshotsLast24h: number;
+  playerSnapshotsDaily: DailyPoint[];
+  firstSnapshotsDaily: DailyPoint[];
+}> {
+  const t = playerSnapshotsByRegion[region];
+  const [last24h, dailyRows, firstsRows] = await Promise.all([
+    db
+      .execute<{ count: string }>(
+        sql`SELECT COUNT(*)::text AS count FROM ${t} WHERE taken_at > NOW() - INTERVAL '24 hours'`,
+      )
+      .then((r) => Number(r[0]?.count ?? 0)),
+    db.execute<{ day: string; count: string }>(
+      sql`SELECT date_trunc('day', taken_at)::text AS day, COUNT(*)::text AS count
+          FROM ${t}
+          WHERE taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          GROUP BY day
+          ORDER BY day`,
+    ),
+    db.execute<{ day: string; count: string }>(
+      sql`WITH firsts AS (
+            SELECT player_id, MIN(taken_at) AS first_at
+            FROM ${t}
+            GROUP BY player_id
+          )
+          SELECT date_trunc('day', first_at)::text AS day, COUNT(*)::text AS count
+          FROM firsts
+          WHERE first_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
+          GROUP BY day
+          ORDER BY day`,
+    ),
+  ]);
+  return {
+    playerSnapshotsLast24h: last24h,
+    playerSnapshotsDaily: buildDaySeries(dailyRows, DAYS_WINDOW),
+    firstSnapshotsDaily: buildDaySeries(firstsRows, DAYS_WINDOW),
+  };
+}
+
+const getSnapshotTrends = unstable_cache(
+  getSnapshotTrendsUncached,
+  ["coverage-snapshot-trends"],
+  { revalidate: 3600, tags: ["coverage"] },
+);
+
 async function getCoverageStatsUncached(
   region: Region,
 ): Promise<CoverageStats> {
   const playersTable = playersByRegion[region];
-  const playerSnapshotsTable = playerSnapshotsByRegion[region];
   const clansTable = clansByRegion[region];
   const clanMembersTable = clanMembersByRegion[region];
   const clanRecentEventsTable = clanRecentEventsByRegion[region];
   const clanRefreshQueueTable = clanRefreshQueueByRegion[region];
   const playerRefreshQueueTable = playerRefreshQueueByRegion[region];
 
-  // Oldest + newest snapshot in a single scan. player_snapshots has no index on
-  // `taken_at`, so MIN and MAX each seq-scan the whole table; sharing one query
-  // (awaited twice below) pays for a single scan instead of two.
+  // Oldest + newest snapshot, read from the `players` table (~2M rows, ~20ms)
+  // instead of the `player_snapshots` table (10M+ rows, no `taken_at` index),
+  // where MIN/MAX each seq-scanned the whole thing for 20-40s and — run on the
+  // 60s coverage revalidation, x4 regions — hogged the DB connection pool,
+  // starving every other request-path query. A snapshot row is written when a
+  // refresh finds a change, so `MAX(last_seen_at)` (indexed) tracks the same
+  // live "still collecting" heartbeat (advances every pipeline tick), and
+  // `MIN(first_seen_at)` is when the oldest tracked player first entered — i.e.
+  // when our data begins. Both stay fresh at 60s at a fraction of the cost.
   const snapshotBounds = db.execute<{ oldest: string | null; newest: string | null }>(
-    sql`SELECT MIN(taken_at)::text AS oldest, MAX(taken_at)::text AS newest FROM ${playerSnapshotsTable}`,
+    sql`SELECT MIN(first_seen_at)::text AS oldest, MAX(last_seen_at)::text AS newest FROM ${playersTable}`,
   );
 
   const [
@@ -204,15 +262,13 @@ async function getCoverageStatsUncached(
     snapshotBacklog,
     lastPlayerSnapshot,
     lastClanRefresh,
-    snapshotsLast24h,
+    snapshotTrends,
     clansRefreshedLast24h,
     oldestSnapshot,
     biggestClan,
     totalBattles,
     playersDiscoveredRows,
     clansDiscoveredRows,
-    snapshotsDailyRows,
-    firstSnapshotsDailyRows,
     refreshPolicyReport,
     databaseBytes,
     tableSizeRows,
@@ -277,13 +333,9 @@ async function getCoverageStatsUncached(
         sql`SELECT MAX(last_refreshed_at)::text AS at FROM ${clansTable}`,
       )
       .then((r) => (r[0]?.at ? new Date(r[0].at) : null)),
-    db
-      .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count
-            FROM ${playerSnapshotsTable}
-            WHERE taken_at > NOW() - INTERVAL '24 hours'`,
-      )
-      .then((r) => Number(r[0]?.count ?? 0)),
+    // Rolling 24h snapshot count + the two daily-growth histograms, on their own
+    // 1h cache (they are the remaining player_snapshots seq-scans; see above).
+    getSnapshotTrends(region),
     db
       .execute<{ count: string }>(
         sql`SELECT COUNT(*)::text AS count
@@ -329,29 +381,6 @@ async function getCoverageStatsUncached(
       sql`SELECT date_trunc('day', first_seen_at)::text AS day, COUNT(*)::text AS count
           FROM ${clansTable}
           WHERE first_seen_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
-          GROUP BY day
-          ORDER BY day`,
-    ),
-    db.execute<{ day: string; count: string }>(
-      sql`SELECT date_trunc('day', taken_at)::text AS day, COUNT(*)::text AS count
-          FROM ${playerSnapshotsTable}
-          WHERE taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
-          GROUP BY day
-          ORDER BY day`,
-    ),
-    db.execute<{ day: string; count: string }>(
-      // First-time snapshots per day: bucket each player by their oldest
-      // taken_at, then count per day. Reads pair with playersDiscoveredDaily
-      // to show the discovery -> first-snapshot pipeline (are we keeping up
-      // with new account onboarding or piling up?).
-      sql`WITH firsts AS (
-            SELECT player_id, MIN(taken_at) AS first_at
-            FROM ${playerSnapshotsTable}
-            GROUP BY player_id
-          )
-          SELECT date_trunc('day', first_at)::text AS day, COUNT(*)::text AS count
-          FROM firsts
-          WHERE first_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
           GROUP BY day
           ORDER BY day`,
     ),
@@ -454,7 +483,7 @@ async function getCoverageStatsUncached(
     activity: {
       lastPlayerSnapshotAt: lastPlayerSnapshot,
       lastClanRefreshAt: lastClanRefresh,
-      playerSnapshotsLast24h: snapshotsLast24h,
+      playerSnapshotsLast24h: snapshotTrends.playerSnapshotsLast24h,
       clansRefreshedLast24h: clansRefreshedLast24h,
       snapshotFreshness: refreshPolicyReport.freshness,
       awaitingFirstSnapshot: refreshPolicyReport.awaitingFirstSnapshot,
@@ -469,8 +498,8 @@ async function getCoverageStatsUncached(
     trends: {
       playersDiscoveredDaily: buildDaySeries(playersDiscoveredRows, DAYS_WINDOW),
       clansDiscoveredDaily: buildDaySeries(clansDiscoveredRows, DAYS_WINDOW),
-      playerSnapshotsDaily: buildDaySeries(snapshotsDailyRows, DAYS_WINDOW),
-      firstSnapshotsDaily: buildDaySeries(firstSnapshotsDailyRows, DAYS_WINDOW),
+      playerSnapshotsDaily: snapshotTrends.playerSnapshotsDaily,
+      firstSnapshotsDaily: snapshotTrends.firstSnapshotsDaily,
     },
     infrastructure: {
       databaseBytes,
@@ -517,10 +546,13 @@ async function getCoverageStatsUncached(
 const getCoverageStatsCached = unstable_cache(
   getCoverageStatsUncached,
   ["coverage-stats"],
-  // 60s: the live-monitoring figures (last-24h counts, last-snapshot time,
-  // backlog) must stay fresh, so we keep the short window. It's affordable now
-  // that the per-player 100s+ scans are gone — the remaining player_snapshots
-  // scans are single-digit seconds and only run on a background revalidation.
+  // 60s: the live-monitoring figures (queue depths, last-snapshot time, backlog)
+  // stay fresh. This is now cheap because every query on this path reads a small
+  // indexed/`players` table — the newest/oldest snapshot come from `players`
+  // (~20ms) and the only remaining player_snapshots seq-scans (24h count + the
+  // two growth histograms) sit behind their own 1h `getSnapshotTrends` cache, so
+  // the 20-40s scans that used to run four-per-minute-per-region no longer touch
+  // this window.
   { revalidate: 60, tags: ["coverage"] },
 );
 
