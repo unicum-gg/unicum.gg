@@ -79,11 +79,15 @@ const sqDist = (a: number[], b: number[]) =>
 /**
  * Every selectable module combination for a tank, each with its full derived
  * characteristics, so the tank page's configurator can re-render the specs from
- * the modules the user picks. The combinations and their stats come from the
- * wot-src client XML (`wg.source.specs.configs`); each combination is tagged
- * with the WG module ids the tree renders, by matching per-slot signatures.
- * Returns an empty array when either source has nothing for the tank (the page
- * then shows the static stock specs, unchanged).
+ * the modules the user picks. The combinations and their stats (including the
+ * per-shell ammo) come from the wot-src client XML (`wg.source.specs.configs`);
+ * each combination is tagged with the WG module ids the tree renders, by
+ * matching per-slot signatures. When WG's encyclopedia has no module tree for
+ * the tank (special/reward tanks it omits, e.g. the WT auf E 100 T), the wot-src
+ * configs are still returned with null module ids: no selectable modules, but
+ * the characteristics and ammunition render from wot-src all the same. Returns
+ * an empty array only when wot-src itself has nothing (the page then shows the
+ * static stock specs, unchanged).
  */
 export function getTankConfigs(
   region: Region,
@@ -101,10 +105,13 @@ async function computeTankConfigs(
   modules?: TankModuleNode[],
 ): Promise<TankConfig[]> {
   const nodes = modules ?? (await getTankModules(region, tankId));
-  if (nodes.length === 0) return [];
 
   const src = await wg.region(region).source.specs.configs(tankId);
   if (!src || src.configs.length === 0) return [];
+  // No WG module tree (a tank its encyclopedia omits): keep going with the
+  // wot-src configs. `bySlot` stays empty below, so `matchModule` returns null
+  // for every slot and the combination carries no selectable module ids, but
+  // its characteristics and ammo still render.
 
   const bySlot: Record<Slot, TankModuleNode[]> = {
     gun: [],

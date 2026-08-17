@@ -98,6 +98,24 @@ export function useAmmo(
   const ammoShells: AmmoShell[] = useMemo(() => {
     const shells = gunShells(active?.modules.gun);
     const stats = active?.specs.shellStats ?? [];
+    // No WG gun module (a tank WG's encyclopedia omits, so `modules` is empty):
+    // build the shell list straight from the wot-src per-shell stats, which
+    // carry the type, damage and penetration too, not just the enrichment.
+    if (shells.length === 0) {
+      return stats.map((st) => ({
+        type: st.type,
+        damage: st.damage ?? 0,
+        penetration: st.pen ?? 0,
+        velocity: st.velocity,
+        splash: st.splash,
+        pen500: st.pen500,
+        icon: st.icon,
+        cost: st.cost,
+        shortName: st.shortName,
+        kindName: st.kindName,
+        name: st.name,
+      }));
+    }
     return shells.map((s) => {
       // Match this WG shell to its wot-src stats: same kind, then the closest
       // (damage, penetration). A gun can carry two shells of one kind (standard
