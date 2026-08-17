@@ -1,7 +1,16 @@
 "use client";
 
+import { Swords } from "lucide-react";
 import type { Region } from "@unicum.gg/wargaming";
-import { Panel, PanelContent } from "@/components/panel";
+import { Panel } from "@/components/panel";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
   TankVideoPlayerProvider,
@@ -46,18 +55,31 @@ export function ClanVideosTab({
 }) {
   if (!videos) return null;
 
-  // Reachable from a link or a reload even though the nav hides the tab for a
-  // clan with none, so it says what it would show rather than nothing at all.
+  // Always reachable now, not only from a deep link: the nav keeps the tab even
+  // at zero, so the empty state is an invitation rather than a dead end. A
+  // tactic is filed under the ground it was fought on, so the way in is a map.
   if (videos.length === 0) {
     return (
-      <Panel>
-        <PanelContent>
-          <p className="py-12 text-center text-sm text-fd-muted-foreground">
-            Nobody has credited [{tag}] on a tactic yet. They are suggested from
-            the map pages: open the map a battle was fought on, link the video,
-            and name the clan that played it.
-          </p>
-        </PanelContent>
+      // The section nav above already draws the boundary line (its
+      // `screen-line-after`), so this panel keeps only its own bottom line:
+      // both together stack into a 2px double border above the empty state.
+      <Panel screenLines={false} className="screen-line-after">
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia variant="icon">
+              <Swords />
+            </EmptyMedia>
+            <EmptyTitle>No tactics yet</EmptyTitle>
+            <EmptyDescription>
+              Nobody has credited [{tag}] on a tactic yet. Suggest one and pick
+              the map it was played on. It shows up here once a moderator has
+              looked at it.
+            </EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <ClanTacticDialogSlot region={region} />
+          </EmptyContent>
+        </Empty>
       </Panel>
     );
   }

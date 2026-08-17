@@ -77,15 +77,10 @@ export function ClanSectionNav({
   // meantime: appearing and then vanishing reads worse than appearing late.
   videoCount?: number;
 }) {
-  // Nothing to show is not a tab. The exception is being on it already, from a
-  // link or a reload: dropping the section you are looking at would leave the
-  // nav with no active entry and no way back.
-  const sections = CLAN_SECTIONS.filter(
-    (s) =>
-      s.id !== ClanSection.Videos ||
-      section === ClanSection.Videos ||
-      (videoCount ?? 0) > 0,
-  );
+  // Videos is shown even at zero, unlike the count-gated Tanks tab: an empty
+  // video tab is an invitation for a clan's first tactic, not a dead end, and
+  // the empty page is noindexed so it never competes as thin content.
+  const sections = CLAN_SECTIONS;
 
   return (
     <nav className="flex items-center overflow-x-auto text-sm">
@@ -100,7 +95,7 @@ export function ClanSectionNav({
         >
           {s.id === ClanSection.Tanks && tankCount !== undefined
             ? `${s.label} (${tankCount.toLocaleString("en-US")})`
-            : s.id === ClanSection.Videos && videoCount !== undefined
+            : s.id === ClanSection.Videos && videoCount
               ? `${s.label} (${videoCount.toLocaleString("en-US")})`
               : s.label}
         </NavAnchor>

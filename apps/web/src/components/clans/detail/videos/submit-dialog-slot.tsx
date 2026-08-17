@@ -22,9 +22,11 @@ type MapSeed = { arenaId: string; slug: string; name: string };
  * runs through a rotation, so the moment two battles later is on other ground.
  *
  * The seed comes from the map catalogue, read under the key the form itself
- * uses, so it costs no request of its own. Until it lands there is nothing to
- * seed with, and the form stays out of the page rather than opening on the
- * wrong map.
+ * uses, so it costs no request of its own. It falls back to the first map when
+ * nothing is playing, so the form is offered on an empty clan page too, where
+ * there is no battle to seed from; the map is a field inside the form, changed
+ * from there exactly as on a map page. Only while the catalogue is still
+ * loading is there nothing to seed with, and the button stays out until then.
  */
 export function ClanTacticDialogSlot({ region }: { region: Region }) {
   const player = useTankVideoPlayer();
@@ -38,7 +40,11 @@ export function ClanTacticDialogSlot({ region }: { region: Region }) {
   // The battle being watched, or the first of the list before one is opened:
   // either way the map most likely to be the right one.
   const watching = player?.current ?? player?.videos[0] ?? null;
-  const seed = maps?.find((m) => m.slug === watching?.mapSlug) ?? null;
+  // Falls back to the first map so the form is offered even with nothing
+  // playing (an empty clan page has no battle to seed from). The map is a field
+  // inside the form, so the submitter moves it from there regardless.
+  const seed =
+    maps?.find((m) => m.slug === watching?.mapSlug) ?? maps?.[0] ?? null;
 
   // Registered only while the form is actually on the page, so the player's
   // "Suggest this moment" never offers a click that lands nowhere.
