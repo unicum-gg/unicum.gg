@@ -65,11 +65,13 @@ const SKILL_ICON_BASE = iconUrl("tankmen/skills/big");
 const skillIcon = (key: string): string => `${SKILL_ICON_BASE}/${key}.png`;
 
 /**
- * A tank's crew composition (from WG `vehicles.crew`) and the crew-skill
- * catalogue: the localized name/icon/description (WG `crewskills`) and owning
- * role (WG `crewroles`) bridged to the per-level effects (wot-src `tankmen.xml`)
- * by the shared `skill` string key. Fully derived, no hand-maintained mapping.
- * Returns null when WG has no crew for the vehicle.
+ * A tank's crew composition (from the wot-src client XML `<crew>`) and the
+ * crew-skill catalogue: the localized name/icon/description (WG `crewskills`)
+ * and owning role (WG `crewroles`) bridged to the per-level effects (wot-src
+ * `tankmen.xml`) by the shared `skill` string key. Fully derived, no
+ * hand-maintained mapping. The composition comes from wot-src so tanks WG's
+ * encyclopedia omits still have a crew; the skill catalogue is a global WG read.
+ * Returns null when wot-src has no crew for the vehicle.
  */
 export function getTankCrew(
   region: Region,
@@ -85,19 +87,18 @@ async function computeTankCrew(
   tankId: number,
 ): Promise<TankCrew | null> {
   const r = wg.region(region);
-  const [vehicles, roles, skillsApi, skillDefs] = await Promise.all([
-    r.api.wot.encyclopedia.vehicles({
-      tankId: [tankId],
-      fields: ["crew", "nation"] as const,
-    }),
+  const [composition, roles, skillsApi, skillDefs] = await Promise.all([
+    // Composition + nation from the wot-src client XML, so tanks WG's
+    // encyclopedia omits (special/reward) still show their crew. The skill
+    // catalogue below stays WG (`crewroles`/`crewskills`): it is global, not
+    // per-vehicle, so it resolves for every tank regardless.
+    r.source.specs.crew(tankId),
     r.api.wot.encyclopedia.crewroles({}),
     r.api.wot.encyclopedia.crewskills({}),
     r.source.crew.skills(),
   ]);
 
-  const vehicle = vehicles[String(tankId)];
-  if (!vehicle || !Array.isArray(vehicle.crew) || vehicle.crew.length === 0)
-    return null;
+  if (!composition || composition.members.length === 0) return null;
 
   // Each skill's spec-affecting effects (non-situational, mapping a displayed
   // characteristic), keyed by the skill string id.
@@ -160,9 +161,8 @@ async function computeTankCrew(
     });
   }
 
-  const nation = vehicle.nation ?? "";
-  const members: CrewMember[] = vehicle.crew.map((m, i) => {
-    const memberRoles = Object.keys(m.roles);
+  const { nation, members: composed } = composition;
+  const members: CrewMember[] = composed.map((memberRoles, i) => {
     const keys: string[] = [];
     const added = new Set<string>();
     for (const role of memberRoles) {
@@ -174,7 +174,9 @@ async function computeTankCrew(
       }
     }
     return {
-      memberId: m.member_id,
+      // wot-src carries no member id, so key by primary role + slot position,
+      // which is stable and unique within a crew.
+      memberId: `${memberRoles[0] ?? "crew"}-${i}`,
       roles: memberRoles,
       image: nation ? crewFaceUrl(region, nation, i) : null,
       roleBadge: memberRoles[0] ? crewRoleBadgeUrl(region, memberRoles[0]) : null,

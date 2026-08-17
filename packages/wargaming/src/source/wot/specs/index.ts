@@ -430,4 +430,66 @@ export class SourceSpecsResource {
     }
     return { tankId, tag: match.tag, configs };
   }
+
+  /**
+   * The vehicle's crew composition from its client XML `<crew>`, plus its nation
+   * (for the portraits). One entry per physical crew member, each the roles it
+   * fills: the element name is the primary role, and its text lists the extra
+   * roles the same member covers (a Swedish TD's driver also gunning, encoded
+   * `<driver>gunner</driver>`). Several members of one role (two loaders) parse
+   * as an array under that element, so each becomes its own member. Null when
+   * the tank resolves to no vehicle file, or the file carries no crew.
+   */
+  async crew(
+    tankId: number,
+  ): Promise<{ nation: string; members: string[][] } | null> {
+    const branch = BRANCH_BY_REGION[this.region];
+    const nations = await fetchNations(this.t, branch);
+    const nationIdx = (tankId >> 4) & 0xf;
+    const localId = tankId >> 8;
+    const nation = nations[nationIdx];
+    if (!nation) return null;
+
+    const parser = new XMLParser({
+      ignoreAttributes: true,
+      parseTagValue: false,
+      trimValues: true,
+      ignoreDeclaration: true,
+    });
+    const base = `sources/res/scripts/item_defs/vehicles/${nation}`;
+    const list = this.#root(
+      parser,
+      await this.#text(rawUrl(branch, `${base}/list.xml`)),
+    );
+    let tag: string | null = null;
+    for (const [t, entry] of Object.entries(list)) {
+      if (t === "ids" || !isObject(entry)) continue;
+      if (Number.parseInt(String(entry.id ?? "").trim(), 10) === localId) {
+        tag = t;
+        break;
+      }
+    }
+    if (!tag) return null;
+
+    const root = this.#root(
+      parser,
+      await this.#text(rawUrl(branch, `${base}/${tag}.xml`)),
+    );
+    const crewNode = isObject(root.crew) ? root.crew : null;
+    if (!crewNode) return null;
+
+    const members: string[][] = [];
+    for (const [role, value] of Object.entries(crewNode)) {
+      // Same-role members (two loaders) parse as an array; a single one is the
+      // bare value. Self-closing (`<commander/>`) carries no text, so no extra
+      // role; text (`gunner`) names the further roles that member also fills.
+      const items = Array.isArray(value) ? value : [value];
+      for (const item of items) {
+        const extra =
+          typeof item === "string" ? item.split(/\s+/).filter(Boolean) : [];
+        members.push([role, ...extra]);
+      }
+    }
+    return members.length > 0 ? { nation, members } : null;
+  }
 }
