@@ -5,6 +5,12 @@ declare global {
 
 export async function register() {
   if (process.env.NEXT_RUNTIME !== "nodejs") return;
+  // Observe event-loop stalls on every node instance (before the RUN_CRONS
+  // early-return, so RUN_CRONS=0 web instances are covered too). Diagnostic
+  // only: it logs the worst stall per window, no behaviour change. See the
+  // module for why this is caught in prod rather than fixed blind.
+  const { startEventLoopLagMonitor } = await import("@/lib/event-loop-lag");
+  startEventLoopLagMonitor();
   // A dedicated cron worker runs the loops; web instances set RUN_CRONS=0 so
   // they never do cron work on the request-serving thread (the crons still hold
   // a DB lease, so at most one instance ever executes them). Leaving it unset
