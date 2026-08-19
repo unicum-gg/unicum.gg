@@ -52,6 +52,10 @@ export interface TankConfigs {
 export type WotSrcSpec = {
   tankId: number;
   tag: string;
+  // Tier-XI special-ability parameters from the top gun's `<mechanics>` block,
+  // keyed by path (`propellantAfterburnerGun/chargingPerSec`). Empty for the vast
+  // majority of vehicles, which have no mechanic.
+  mechanics: Record<string, number>;
   // firepower
   damage: number | null;
   moduleDamage: number | null;

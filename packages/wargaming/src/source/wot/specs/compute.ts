@@ -1,6 +1,34 @@
 import { num, numList, tokens, isObject } from "./index";
 import type { XmlNode, WotSrcSpec } from "./index";
 
+/**
+ * Collect every numeric leaf under a node into a flat map keyed by its path
+ * (`propellantAfterburnerGun/chargingPerSec`, repeated siblings get `[i]`). Used
+ * to lift a tier-XI vehicle's `<mechanics>` ability parameters (afterburner
+ * charge, penalties, ...) out of the client XML generically, whatever the
+ * mechanic is, so they can be diffed across versions with no per-ability code.
+ * Non-numeric leaves (flags, shell refs) are skipped.
+ */
+function collectNumericLeaves(
+  node: unknown,
+  prefix: string,
+  out: Record<string, number>,
+): void {
+  if (node == null) return;
+  if (Array.isArray(node)) {
+    node.forEach((v, i) => collectNumericLeaves(v, `${prefix}[${i}]`, out));
+    return;
+  }
+  if (isObject(node)) {
+    for (const [k, v] of Object.entries(node)) {
+      collectNumericLeaves(v, prefix ? `${prefix}/${k}` : k, out);
+    }
+    return;
+  }
+  const n = num(node);
+  if (n != null) out[prefix] = n;
+}
+
 /** The full derived stat block from an already-resolved set of modules (one
  * per slot). Shared by the top-config `#derive` and the per-config
  * enumeration below, so both produce identical numbers. */
@@ -278,9 +306,18 @@ export function computeSpec(
   const camoStillFiring = camoStill != null ? camoStill * (1 - firePenalty) : null;
   const camoMovingFiring = camoMoving != null ? camoMoving * (1 - firePenalty) : null;
 
+  // Tier-XI ability parameters: the `<mechanics>` block on the top gun holds the
+  // vehicle's special-ability parameters (the afterburner charge/penalties on the
+  // Fauteur, and each other tier-XI vehicle's own mechanic). Lifted generically as
+  // a path->number map; empty `{}` for the vast majority of vehicles, which have
+  // no mechanic.
+  const mechanics: Record<string, number> = {};
+  if (isObject(G.mechanics)) collectNumericLeaves(G.mechanics, "", mechanics);
+
   return {
     tankId,
     tag,
+    mechanics,
     damage,
     moduleDamage,
     splashRadius,
