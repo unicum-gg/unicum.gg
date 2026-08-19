@@ -3,6 +3,7 @@ import { db } from "@unicum.gg/core/db";
 import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
+import { recordSpecChanges } from "@unicum.gg/core/wargaming/wot/tanks/spec-history";
 
 // Module-level cache for the global tank-specs catalogue. `tank_specs` is a
 // static-between-patches table (refreshed once a day by vehicles-cron), yet
@@ -281,7 +282,7 @@ export async function refreshTankSpecs(): Promise<number> {
   ]);
   const freeXp = computeFreeXp(graph);
   const rows: NewTankSpec[] = catalog.map(
-    ({ tag: _tag, shellStats: _ss, ...spec }) => {
+    ({ tag: _tag, shellStats: _ss, mechanics: _mech, ...spec }) => {
     const node = graph.get(spec.tankId);
     const fx = freeXp.get(spec.tankId);
     const total = fx?.total ?? 0;
@@ -319,5 +320,22 @@ export async function refreshTankSpecs(): Promise<number> {
   // Fresh catalogue written: drop the cache so this process serves it at once
   // (other processes pick it up within the TTL).
   invalidateTankSpecsCache();
+
+  // Record what changed since the last game version (the tank changes history),
+  // from the same rows just written. Fails soft: a history hiccup must not break
+  // the daily catalogue refresh, which is the source the whole site reads.
+  try {
+    // Pass the catalog (not the DB rows): it carries the `mechanics` ability
+    // params the tank_specs table has no column for, so the history tracks them.
+    const { version, snapshots, changes } = await recordSpecChanges(catalog);
+    if (changes > 0 || snapshots > 0) {
+      console.log(
+        `[tank-specs] history ${version}: ${changes} changes, ${snapshots} snapshots`,
+      );
+    }
+  } catch (err) {
+    console.error("[tank-specs] failed to record spec changes:", err);
+  }
+
   return rows.length;
 }
