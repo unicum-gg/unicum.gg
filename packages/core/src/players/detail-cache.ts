@@ -30,6 +30,10 @@ export async function getCachedPlayerDetailJson(
   region: Region,
   nickname: string,
 ): Promise<string | null> {
+  // Dev-only escape hatch for the endpoint speed bench: force a miss so the
+  // handler actually assembles the payload (measuring its real cost with the
+  // sub-caches still warm), instead of returning a cache hit. Never set in prod.
+  if (process.env.PERF_BYPASS_PAYLOAD_CACHE === "1") return null;
   const redis = getRedisClient();
   if (!redis) return null;
   try {

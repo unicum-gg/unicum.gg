@@ -35,6 +35,9 @@ export async function getCachedTankDetailJson(
   region: Region,
   slug: string,
 ): Promise<string | null> {
+  // Dev-only escape hatch for the endpoint speed bench: force a miss so the
+  // handler actually assembles the payload (with warm sub-caches), never a hit.
+  if (process.env.PERF_BYPASS_PAYLOAD_CACHE === "1") return null;
   const redis = getRedisClient();
   if (!redis) return null;
   try {

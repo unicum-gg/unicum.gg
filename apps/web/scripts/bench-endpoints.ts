@@ -9,12 +9,19 @@
  * (`cpu`), not just wall time. That is the number that decides throughput and
  * the one to optimise first.
  *
- * Usage:
- *   BENCH_BASE_URL=http://localhost:3000/api pnpm --filter @unicum.gg/web exec \
- *     node --env-file=.env.local --import tsx scripts/bench-endpoints.ts
+ * Run it against a LOCAL PRODUCTION BUILD (routes precompiled, no dev-compile
+ * noise) with Redis ON so the sub-caches (wot-src, encyclopedia, WN-expected)
+ * are warm like prod, and PERF_BYPASS_PAYLOAD_CACHE=1 so the per-entity payload
+ * caches (player/tank detail) MISS and the handler actually assembles. That is
+ * the representative "cache-miss with warm sub-caches" cost. Running with Redis
+ * off instead over-penalises endpoints whose heavy work is Redis-cached (a cold
+ * wot-src re-parse can read as ~20x its real prod cpu).
  *
- * Point BENCH_BASE_URL at a local dev server (ideally with a cold/local Redis)
- * for a true cold-compute reading; the default is localhost.
+ * Usage (from apps/web, after `pnpm build`):
+ *   ( cd .next/standalone/apps/web && HOSTNAME=127.0.0.1 PORT=3000 \
+ *     PERF_BYPASS_PAYLOAD_CACHE=1 RUN_CRONS=0 \
+ *     node --env-file=../../../.env.local server.js & )
+ *   BENCH_BASE_URL=http://localhost:3000/api node --import tsx scripts/bench-endpoints.ts
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
