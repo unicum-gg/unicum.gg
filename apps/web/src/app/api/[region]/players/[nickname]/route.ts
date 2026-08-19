@@ -8,7 +8,7 @@ import {
 } from "@unicum.gg/core/players/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
-import { traced } from "@unicum.gg/core/lib/perf-trace";
+import { traced, tracedSync } from "@unicum.gg/core/lib/perf-trace";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
 
@@ -64,7 +64,7 @@ export async function GET(
       }
       // Response.json serializes identically; stringify once to both cache and
       // return, keeping jsonResponse's dev-only schema-drift check on the miss.
-      const json = JSON.stringify(result.detail);
+      const json = tracedSync("serialize", () => JSON.stringify(result.detail));
       void setCachedPlayerDetailJson(region, decoded, json);
       if (process.env.NODE_ENV !== "production") {
         jsonResponse(PlayerDetailResponse, result.detail);

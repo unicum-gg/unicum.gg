@@ -58,6 +58,16 @@ export class PerfTrace {
     this.maybeFlush();
   }
 
+  /** Record a span for a synchronous section (main-thread CPU); `startMs` is a
+   * `performance.now()` captured before the work. See `tracedSync`. */
+  recordSync(name: string, startMs: number): void {
+    this.spans.push({
+      name,
+      startMs: startMs - this.start,
+      durationMs: performance.now() - startMs,
+    });
+  }
+
   /** Wall-clock duration since the trace started. */
   totalMs(): number {
     return performance.now() - this.start;
@@ -152,4 +162,18 @@ export async function traced<T>(
   const trace = currentTrace();
   if (!trace) return fn();
   return trace.span(name, fn);
+}
+
+/** Time a synchronous section and record it as a span (a no-op outside a trace
+ * scope). Use for CPU-bound work (transforms, serialization) where wall time
+ * equals main-thread CPU. */
+export function tracedSync<T>(name: string, fn: () => T): T {
+  const trace = currentTrace();
+  if (!trace) return fn();
+  const t0 = performance.now();
+  try {
+    return fn();
+  } finally {
+    trace.recordSync(name, t0);
+  }
 }

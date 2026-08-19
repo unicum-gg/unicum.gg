@@ -15,6 +15,7 @@ import {
   type Stats,
   type StrongholdStats,
 } from "@unicum.gg/core/players";
+import { tracedSync } from "@unicum.gg/core/lib/perf-trace";
 import { getAccountSubscription, isActiveStatus } from "@unicum.gg/core/subscription";
 import { getAccountTwitchLogin, isAccountVerified } from "@unicum.gg/core/players/badges";
 import {
@@ -185,21 +186,25 @@ export async function buildPlayerDetail(args: {
     };
   }
 
-  const derived = buildPlayerDerivedStats(
-    current,
-    periods,
-    tanks,
-    periodTanks,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
+  const derived = tracedSync("derivedStats", () =>
+    buildPlayerDerivedStats(
+      current,
+      periods,
+      tanks,
+      periodTanks,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
+    ),
   );
-  const vehicles = buildPlayerTankRows(
-    tanks,
-    encyclopedia,
-    wn8Expected,
-    wnxExpected,
-    economics,
+  const vehicles = tracedSync("tankRows", () =>
+    buildPlayerTankRows(
+      tanks,
+      encyclopedia,
+      wn8Expected,
+      wnxExpected,
+      economics,
+    ),
   );
 
   return {
@@ -225,11 +230,11 @@ export async function buildPlayerDetail(args: {
       current.battles,
       region,
     ),
-    liftDrag: {
+    liftDrag: tracedSync("liftDrag", () => ({
       wn7: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn7),
       wn8: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn8),
       wnx: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wnx),
-    },
+    })),
     ratingHistory: ratingHistory.points,
     clanHistory,
     strongholds: {
@@ -397,7 +402,9 @@ export async function loadPlayerDetailLive(
         accountId,
         player: initial.player,
         latest: initial.latestSnapshot,
-        tanks: tankSnapshotsToTankStats(initial.latestTankSnapshots),
+        tanks: tracedSync("toTankStats", () =>
+          tankSnapshotsToTankStats(initial.latestTankSnapshots),
+        ),
         clanHistory: initial.clanHistory?.data ?? EMPTY_CLAN_HISTORY,
         initial,
       }),
