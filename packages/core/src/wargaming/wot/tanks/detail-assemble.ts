@@ -20,6 +20,7 @@ import { getTankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
 import { getTankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import { getTankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
 import { getTankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
+import { getTankHasHistory } from "@unicum.gg/core/wargaming/wot/tanks/spec-history";
 import { getTankVehicleModes } from "@unicum.gg/core/wargaming/wot/tanks/vehicle-modes";
 import type { VehicleMode } from "@unicum.gg/shared";
 import {
@@ -77,6 +78,7 @@ export async function assembleTankDetail(region: Region, slug: string) {
     modes,
     moeHistory,
     momHistory,
+    hasHistory,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -95,6 +97,7 @@ export async function assembleTankDetail(region: Region, slug: string) {
     safe(() => getTankVehicleModes(region, tankId), [] as VehicleMode[]),
     safe(() => fetchMoeHistoryFromPoliroid(region, tankId), [] as MoeHistoryPoint[]),
     safe(() => fetchMomHistoryFromPoliroid(region, tankId), [] as MomHistoryPoint[]),
+    safe(() => getTankHasHistory(tankId), false),
   ]);
 
   return {
@@ -118,5 +121,6 @@ export async function assembleTankDetail(region: Region, slug: string) {
     modes,
     moeHistory,
     momHistory,
+    hasHistory,
   };
 }

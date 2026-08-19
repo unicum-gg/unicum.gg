@@ -238,6 +238,15 @@ class TankClient {
     );
   }
 
+  /** Tank changes history */
+  history() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/history", path),
+      () => this.api.GET("/{region}/tanks/{slug}/history", { params: { path } }),
+    );
+  }
+
   /** Tank Marks of Excellence */
   marksOfExcellence() {
     const path = { region: this.region, slug: this.slug };
@@ -344,6 +353,8 @@ type ClansNamespace = ((tag: string) => ClanClient) & {
 type TanksNamespace = ((slug: string) => TankClient) & {
   /** Tanks performance */
   list(): RequestHandle<Data<"/{region}/tanks">>;
+  /** Tank changes feed */
+  changes(): RequestHandle<Data<"/{region}/tanks/changes">>;
   /** Tanks economics */
   economics(): RequestHandle<Data<"/{region}/tanks/economics">>;
   /** Tanks Marks of Excellence */
@@ -519,6 +530,14 @@ class RegionClient {
         buildUrl(this.baseUrl, "/{region}/tanks", { region: this.region }),
         () =>
           this.api.GET("/{region}/tanks", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.changes = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tanks/changes", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/tanks/changes", {
             params: { path: { region: this.region } },
           }),
       );

@@ -348,6 +348,9 @@ const crewSkill = z.object({
   key: z.string(),
   name: z.string(),
   image: z.string().nullable(),
+  // Kept non-null on purpose: every skill has a description in the client loc
+  // (`shortDescription` or `alt/description`), so a null here is a resolution bug
+  // worth the dev-time jsonResponse warning, not a valid state to wave through.
   description: z.string(),
   isPerk: z.boolean(),
   role: z.string().meta({
@@ -495,6 +498,10 @@ export const TankDetailResponse = z
         ace: z.number(),
       }),
     ),
+    hasHistory: z.boolean().meta({
+      description:
+        "Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility.",
+    }),
   })
   .meta({
     id: "TankDetail",

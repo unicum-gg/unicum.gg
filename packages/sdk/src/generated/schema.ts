@@ -679,6 +679,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank changes feed
+         * @description The global tank-rebalance feed for a region: recent characteristic changes across every tank, grouped by game version (newest first) and then by tank (heaviest-hit first). Firepower, gun handling, mobility, survivability and concealment buffs and nerfs, as Wargaming ships them. Identity comes from the region's own catalogue, so a tank absent from a server is left out of that server's feed. Values are raw stored values; apply each field's scale to display.
+         */
+        get: operations["get-{region}-tanks-changes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/videos": {
         parameters: {
             query?: never;
@@ -851,6 +871,26 @@ export interface paths {
          * @description Everything the tank page renders in one payload: identity, top players per rating metric (WN7/WN8/WNX), server-average performance, WN8/WNX expected values, combat specifications, current Marks of Excellence/Mastery with their daily history, and the cheapest research path. `slug` in the response is the canonical slug; callers that reached the tank through a legacy numeric id should redirect to it. Dates are ISO 8601 strings.
          */
         get: operations["get-{region}-tanks-{slug}-detail"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank changes history
+         * @description The characteristic changes a tank has gone through across game versions (buffs and nerfs to firepower, gun handling, mobility, survivability and concealment), grouped by version, newest first. Built forward from the moment tracking started, since Wargaming publishes no archive of past client versions. Values are raw stored values; apply each field's scale to display. 404 when the slug maps to no tank on the region.
+         */
+        get: operations["get-{region}-tanks-{slug}-history"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1428,6 +1468,11 @@ export interface components {
          * @enum {string}
          */
         battleResultField: "victory" | "defeat" | "draw";
+        /** @description A tank's identity and the spec changes a game version made to it. */
+        ChangedTank: {
+            identity: components["schemas"]["TankIdentity"];
+            changes: components["schemas"]["TankSpecChange"][];
+        };
         ClanActivityResponse: {
             events: components["schemas"]["ClanEvent"][];
         };
@@ -2908,6 +2953,16 @@ export interface components {
             }[];
             count: number;
         };
+        TankChangesResponse: {
+            versions: components["schemas"]["TankChangesVersion"][];
+        };
+        /** @description Every tank a game version rebalanced, newest first, heaviest-hit tank first. */
+        TankChangesVersion: {
+            gameVersion: string;
+            /** Format: date-time */
+            capturedAt: Date;
+            tanks: components["schemas"]["ChangedTank"][];
+        };
         tankConfig: {
             /** @description The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class). */
             modules: {
@@ -2994,6 +3049,8 @@ export interface components {
                 class1: number;
                 ace: number;
             }[];
+            /** @description Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility. */
+            hasHistory: boolean;
         };
         /** @description Everything the tank page renders: identity, best players per rating metric, server averages, WN8/WNX expected values, combat specs, Marks of Excellence/Mastery (current and history) and the research path. */
         TankDetailResponse: {
@@ -3065,6 +3122,8 @@ export interface components {
                 class1: number;
                 ace: number;
             }[];
+            /** @description Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility. */
+            hasHistory: boolean;
         };
         /** @description A tank's economics: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1 (cheapest path, prerequisite modules included). */
         TankEconomics: {
@@ -3090,6 +3149,26 @@ export interface components {
             /** @description The post-progression tree: the vehicle's role or its own special tree. */
             treeKey: string;
             steps: components["schemas"]["fieldModStep"][];
+        };
+        TankHistoryResponse: {
+            tankId: number;
+            slug: string;
+            versions: components["schemas"]["TankHistoryVersion"][];
+            /** @description The game version the tank first appeared as a dev stub (placeholder stats, before balancing), or null when it predates our version tracking. */
+            devVersion: string | null;
+            /** Format: date-time */
+            devAt: Date | null;
+            /** @description The game version the tank was released in (its first real spec), or null when it predates our version tracking. */
+            releasedVersion: string | null;
+            /** Format: date-time */
+            releasedAt: Date | null;
+        };
+        /** @description The characteristic changes a game version made to a tank, with when they were recorded. */
+        TankHistoryVersion: {
+            gameVersion: string;
+            /** Format: date-time */
+            capturedAt: Date;
+            changes: components["schemas"]["TankSpecChange"][];
         };
         /** @description A vehicle's identity: tier, class, nation, names, tag, premium/reward flags, role and icon URLs. */
         TankIdentity: {
@@ -3221,6 +3300,12 @@ export interface components {
         tankSkillTree: {
             rootStep: number;
             nodes: components["schemas"]["skillNode"][];
+        };
+        /** @description A change to one spec field (the tank_specs column name) between two game versions, with the raw before/after values. */
+        TankSpecChange: {
+            field: string;
+            previous: number | null;
+            next: number | null;
         };
         /** @description A tank's top-configuration combat specifications: firepower, gun handling, mobility, survivability, concealment and recon. Region-agnostic values. */
         TankSpecifications: {
@@ -4454,6 +4539,29 @@ export interface operations {
             };
         };
     };
+    "get-{region}-tanks-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankChangesResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-videos": {
         parameters: {
             query?: {
@@ -4674,6 +4782,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankDetail"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankHistoryResponse"];
                 };
             };
         };
