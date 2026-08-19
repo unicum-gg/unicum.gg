@@ -1,4 +1,4 @@
-import { getStoredPlayerClanHistoryByNickname } from "@unicum.gg/core/players/clan-history";
+import { getPlayerCurrentClanByNickname } from "@unicum.gg/core/players/clan-history";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { PlayerClanResponse } from "./schema.api";
@@ -27,11 +27,10 @@ async function GET__perf(
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  const stored = await getStoredPlayerClanHistoryByNickname(
+  const clan = await getPlayerCurrentClanByNickname(
     region,
     decodeURIComponent(nickname),
   );
-  const clan = stored?.data.currentStint?.clan ?? null;
   return jsonResponse(PlayerClanResponse, {
     clan: clan ? { tag: clan.tag, name: clan.name, color: clan.color } : null,
   });

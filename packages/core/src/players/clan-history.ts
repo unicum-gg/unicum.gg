@@ -129,6 +129,38 @@ export async function getStoredPlayerClanHistoryByNickname(
   };
 }
 
+/**
+ * The player's CURRENT clan only (tag/name/color), for the nav-bar companion
+ * endpoint. Extracts just `data->'currentStint'->'clan'` in Postgres, so the
+ * driver transfers and parses that small object instead of the whole clan-history
+ * blob (currentStint + every past stint) only to read three fields. That JSONB
+ * parse of the full blob was this endpoint's dominant CPU cost. `null` when the
+ * player is untracked or not in a clan.
+ */
+export async function getPlayerCurrentClanByNickname(
+  region: Region,
+  nickname: string,
+): Promise<{ tag: string; name: string; color: string } | null> {
+  const players = playersByRegion[region];
+  const playerClanHistory = playerClanHistoryByRegion[region];
+  const [row] = await db
+    .select({
+      clan: sql<
+        { tag: string; name: string; color: string } | null
+      >`${playerClanHistory.data} -> 'currentStint' -> 'clan'`,
+    })
+    .from(players)
+    .innerJoin(
+      playerClanHistory,
+      eq(playerClanHistory.accountId, players.accountId),
+    )
+    .where(sql`LOWER(${players.nickname}) = LOWER(${nickname})`)
+    .limit(1);
+  const clan = row?.clan ?? null;
+  if (!clan) return null;
+  return { tag: clan.tag, name: clan.name, color: clan.color };
+}
+
 async function resolveClanRefs(
   region: Region,
   clanIds: number[],
