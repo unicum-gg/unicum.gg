@@ -34,7 +34,12 @@ module.exports = {
       instances,
       env: {
         PORT: process.env.PORT || "3000",
-        HOSTNAME: process.env.HOSTNAME || "0.0.0.0",
+        // Force 0.0.0.0: the Next standalone server binds to `process.env.HOSTNAME`,
+        // and Docker sets HOSTNAME to the container id — so inheriting it would bind
+        // the server to that one interface and Coolify's localhost healthcheck could
+        // never reach it (the container is marked unhealthy and rolled back). `next
+        // start` avoided this by binding via HOST instead.
+        HOSTNAME: "0.0.0.0",
         DB_POOL_MAX: String(dbPoolMax),
       },
       // Safety nets: replace a worker that leaks past the limit, and give the
