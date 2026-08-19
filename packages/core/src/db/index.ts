@@ -68,7 +68,13 @@ function resolveClient(): ReturnType<typeof postgres> {
     // `max_connections=100`, with room for a second replica.
     return (globalForDb.__pgBackground ??= createClient(30));
   }
-  return (globalForDb.__pgRequest ??= createClient(14));
+  // Request pool, per process. Under PM2 cluster the web runs N worker processes,
+  // each with its own pool, so this must be sized as `~max_connections / N` (minus
+  // the worker service's background pool + headroom) to stay under postgres's
+  // `max_connections`. `DB_POOL_MAX` lets the PM2 ecosystem set it per instance;
+  // 14 is the single-process default (unchanged when not clustered).
+  const requestMax = Number(process.env.DB_POOL_MAX) || 14;
+  return (globalForDb.__pgRequest ??= createClient(requestMax));
 }
 
 const client = resolveClient();

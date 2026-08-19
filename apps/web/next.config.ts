@@ -1,3 +1,4 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 import "./env";
@@ -18,6 +19,12 @@ const nextConfig: NextConfig = {
   // cache.
   cacheHandler: require.resolve("./config/cache-handler.js"),
   cacheMaxMemorySize: 0,
+  // Self-contained server bundle so we can run N worker processes across all
+  // cores (PM2 cluster) instead of one `next start` pinned to a single core.
+  // `outputFileTracingRoot` points at the pnpm workspace root so the traced
+  // bundle includes the transpiled `@unicum.gg/*` packages and hoisted deps.
+  output: "standalone",
+  outputFileTracingRoot: path.join(__dirname, "../../"),
   // Allow a separate build output dir (e.g. running a prod `next start` on one
   // port while `next dev` uses the default `.next` on another). Defaults to
   // `.next`; override with NEXT_DIST_DIR for a side-by-side prod instance.
