@@ -113,7 +113,15 @@ export class SourceCrewResource {
       out.push({
         key,
         name: perks.get(`${key}/name`) ?? null,
-        description: perks.get(`${key}/shortDescription`) ?? null,
+        // Prefer `alt/description`: it is fuller and more accurate than the terse
+        // `shortDescription` (which is empty for the newer role perks, and even
+        // wrong for a few skills where WG copy-pasted the wrong text, e.g.
+        // armorPatching). Fall back to `shortDescription` for the rare skill that
+        // has only that.
+        description:
+          perks.get(`${key}/alt/description`) ??
+          perks.get(`${key}/shortDescription`) ??
+          null,
         effects,
         crewLevelIncrease: Number.isFinite(crewLevelIncrease)
           ? crewLevelIncrease

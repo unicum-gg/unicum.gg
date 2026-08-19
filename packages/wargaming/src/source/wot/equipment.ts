@@ -549,7 +549,14 @@ export class SourceEquipmentResource {
       ref.startsWith("#artefacts:")
         ? (artefacts.get(ref.slice("#artefacts:".length)) ?? "")
         : "";
-    for (const e of equipment) e.description = descr(e.description);
+    // Experimental equipment ships no real description: WG's `short_special` (and
+    // `long_special`) loc keys just repeat the device name. Blank that redundant
+    // text so the UI shows nothing rather than the name twice, and falls back to
+    // the numeric effects, which are the only real information for these devices.
+    for (const e of equipment) {
+      const resolved = descr(e.description);
+      e.description = resolved === descr(e.userString) ? "" : resolved;
+    }
     for (const c of consumables) c.description = descr(c.description);
     for (const dir of directives) dir.description = descr(dir.description);
     // A bond/special variant (its own name, e.g. "Venting System") often has an
