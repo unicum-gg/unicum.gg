@@ -10,6 +10,7 @@ import {
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { ClansCompareResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 const MAX_CLANS = 4;
 
@@ -38,7 +39,10 @@ async function loadClanForCompare(region: Region, tag: string) {
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/compare", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

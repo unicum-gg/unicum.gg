@@ -7,6 +7,7 @@ import {
   searchClansLocalPart,
   searchClansRemotePart,
 } from "./shared";
+import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,10 @@ export const dynamic = "force-dynamic";
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/search", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

@@ -4,6 +4,7 @@ import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { getOnslaughtLeaderboard } from "@unicum.gg/core/wargaming/wot/players/onslaught";
 import { isRegion } from "@unicum.gg/wargaming";
 import { OnslaughtResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Onslaught leaderboard
@@ -17,7 +18,10 @@ import { OnslaughtResponse } from "./schema.api";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/onslaught", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

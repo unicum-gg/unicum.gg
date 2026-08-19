@@ -11,6 +11,7 @@ import {
   getWN8ExpectedValues,
   getWNXExpectedValues,
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
+import { measured } from "@/services/perf";
 
 /**
  * Clan vehicles
@@ -20,7 +21,10 @@ import {
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/{tag}/vehicles", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string; tag: string }> },
 ) {

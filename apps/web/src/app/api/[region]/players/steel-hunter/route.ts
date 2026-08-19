@@ -5,6 +5,7 @@ import { getTopSteelHunter } from "@unicum.gg/core/wargaming/wot/players/steel-h
 import { DEFAULT_STEEL_HUNTER_SORT, isSteelHunterSort } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
 import { SteelHunterResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Steel Hunter leaderboard
@@ -17,7 +18,10 @@ import { SteelHunterResponse } from "./schema.api";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/steel-hunter", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

@@ -2,6 +2,7 @@ import { resolveSearchEntries } from "@unicum.gg/core/search";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { SearchResolveResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
 
@@ -31,7 +32,10 @@ function numericIds(raw: string | null): number[] {
  * @tag System
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/search/resolve", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

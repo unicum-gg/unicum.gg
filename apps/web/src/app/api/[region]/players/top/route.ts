@@ -9,6 +9,7 @@ import { getTopPlayersByLanguage } from "@/services/wargaming/wot/players/top/by
 import { attachPlayerBadges } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
 import { TopPlayersResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Top players
@@ -19,7 +20,10 @@ import { TopPlayersResponse } from "./schema.api";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/top", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

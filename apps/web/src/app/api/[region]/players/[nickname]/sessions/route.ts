@@ -3,6 +3,7 @@ import { SessionGranularity } from "@unicum.gg/shared";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { PlayerSessionsResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
 
@@ -23,7 +24,10 @@ function granularityOf(value: string | null): SessionGranularity {
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/{nickname}/sessions", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {

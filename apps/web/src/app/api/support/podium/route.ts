@@ -5,6 +5,7 @@ import {
 } from "@unicum.gg/core/subscription";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { SupportersPodiumResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 // Reads live subscription state per-request.
 export const dynamic = "force-dynamic";
@@ -16,7 +17,10 @@ export const dynamic = "force-dynamic";
  * @tag System
  * @openapi
  */
-export async function GET() {
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /support/podium", () => GET__perf(...args));
+}
+async function GET__perf() {
   const [supporters, monthlyPledgedCents, receivedCents] = await Promise.all([
     getSupportersPodium(),
     getMonthlyPledgeCents(),

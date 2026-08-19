@@ -2,6 +2,7 @@ import { isRegion } from "@unicum.gg/wargaming";
 import { getLanguageStats } from "@/services/clans/available-languages";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { ClanLanguagesResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Clan languages
@@ -11,7 +12,10 @@ import { ClanLanguagesResponse } from "./schema.api";
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/languages", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

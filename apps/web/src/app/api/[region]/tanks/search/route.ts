@@ -6,6 +6,7 @@ import { jsonResponse } from "@/services/openapi/json-response";
 import * as S from "@/services/openapi/schemas";
 import { isRegion } from "@unicum.gg/wargaming";
 import { TankSearchResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,10 @@ export type { TankSearchResult };
  * @tag Tanks
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/tanks/search", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

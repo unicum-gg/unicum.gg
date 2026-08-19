@@ -2,6 +2,7 @@ import { loadPlayerTanks } from "@unicum.gg/core/players/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerTanksResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Player tanks
@@ -11,7 +12,10 @@ import { PlayerTanksResponse } from "./schema.api";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/{nickname}/tanks", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {

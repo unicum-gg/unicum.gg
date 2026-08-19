@@ -3,6 +3,7 @@ import { getMonthlyInfraCostUsd } from "@/services/coverage";
 import { fundingProgress, USD_PER_EUR } from "@/lib/funding";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { FundingSummaryResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 // Cheap per-request read (one DB sum + a constant-derived cost), so the top-bar
 // mini bar can poll it on every page.
@@ -15,7 +16,10 @@ export const dynamic = "force-dynamic";
  * @tag System
  * @openapi
  */
-export async function GET() {
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /support/funding", () => GET__perf(...args));
+}
+async function GET__perf() {
   const monthlyCostUsd = getMonthlyInfraCostUsd();
   const receivedCents = await getTotalReceivedCents();
   const receivedUsd = (receivedCents / 100) * USD_PER_EUR;

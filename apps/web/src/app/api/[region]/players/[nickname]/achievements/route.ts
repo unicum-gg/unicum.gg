@@ -5,6 +5,7 @@ import {
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { PlayerAchievementsResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Player achievements
@@ -14,7 +15,10 @@ import { PlayerAchievementsResponse } from "./schema.api";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/{nickname}/achievements", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {

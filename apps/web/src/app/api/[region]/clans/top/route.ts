@@ -9,6 +9,7 @@ import { getTopClansByLanguage } from "@/services/wargaming/wot/clans/top/by-lan
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
 import { TopClansResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Attach each row's podium positions. One batched pair of indexed reads for the
@@ -40,7 +41,10 @@ async function withBadges<T extends { clan_id: number }>(
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/top", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

@@ -2,6 +2,7 @@ import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { getCoverageStats } from "@/services/coverage";
 import { CoverageResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 /**
  * Coverage
@@ -11,7 +12,10 @@ import { CoverageResponse } from "./schema.api";
  * @openapi
  * @tag System
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/coverage", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

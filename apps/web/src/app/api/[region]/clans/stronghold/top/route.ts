@@ -8,6 +8,7 @@ import {
 import { getStrongholdLeaderboard } from "@/services/clans/stronghold-leaderboard";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { StrongholdTopResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 const LIMIT = 100;
 
@@ -24,7 +25,10 @@ const PERIODS = new Set<string>(Object.values(StrongholdPeriod));
  * @tag Clans
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/clans/stronghold/top", () => GET__perf(...args));
+}
+async function GET__perf(
   req: Request,
   { params }: { params: Promise<{ region: string }> },
 ) {

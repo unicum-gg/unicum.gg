@@ -2,6 +2,7 @@ import { getStoredPlayerClanHistoryByNickname } from "@unicum.gg/core/players/cl
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { PlayerClanResponse } from "./schema.api";
+import { measured } from "@/services/perf";
 
 // Cached clan read per request; cheap (DB only, no Wargaming), so callers like
 // the top-bar login widget can hit it on every page.
@@ -15,7 +16,10 @@ export const dynamic = "force-dynamic";
  * @tag Players
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/players/{nickname}/clan", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {

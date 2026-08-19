@@ -2,6 +2,7 @@ import { getTankRow } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { tankEconRow, tankEconomics } from "../../categories.api";
+import { measured } from "@/services/perf";
 
 export const dynamic = "force-dynamic";
 
@@ -13,7 +14,10 @@ export const dynamic = "force-dynamic";
  * @tag Tanks
  * @openapi
  */
-export async function GET(
+export async function GET(...args: Parameters<typeof GET__perf>) {
+  return measured("GET /{region}/tanks/{slug}/economics", () => GET__perf(...args));
+}
+async function GET__perf(
   _req: Request,
   { params }: { params: Promise<{ region: string; slug: string }> },
 ) {
