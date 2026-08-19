@@ -1,12 +1,12 @@
-import { and, desc, gte, isNotNull, sql, type SQL } from "drizzle-orm";
+import { and, desc, eq, gte, isNotNull, sql, type SQL } from "drizzle-orm";
 import {
+  clansByRegion,
   DEFAULT_STEEL_HUNTER_SORT,
   HR_MIN_BATTLES,
   playersByRegion,
   SteelHunterSort,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
-import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { type Region } from "@unicum.gg/wargaming";
 
 // One row of the Steel Hunter (battle-royale) leaderboard. The raw SH totals
@@ -71,6 +71,11 @@ export async function getTopSteelHunter(
   sort: SteelHunterSort = DEFAULT_STEEL_HUNTER_SORT,
 ): Promise<TopSteelHunterResult[]> {
   const players = playersByRegion[region];
+  const clans = clansByRegion[region];
+  // Resolve the shown rows' clan tag/color from our own clans table (LEFT JOIN on
+  // players.clan_id), the same way the materialized top-players path does, rather
+  // than a live WG `clans/accountinfo` batch. That live fetch was this endpoint's
+  // entire cost: 0.8-13s on the request path, the single slowest thing we served.
   const rows = await db
     .select({
       accountId: players.accountId,
@@ -82,8 +87,11 @@ export async function getTopSteelHunter(
       survived: players.shSurvived,
       damage: players.shDamage,
       frags: players.shFrags,
+      clanTag: clans.tag,
+      clanColor: clans.color,
     })
     .from(players)
+    .leftJoin(clans, eq(clans.id, players.clanId))
     .where(
       and(
         gte(players.shBattles, HR_MIN_BATTLES),
@@ -97,11 +105,11 @@ export async function getTopSteelHunter(
     .orderBy(orderExpr(sort, players))
     .limit(limit);
 
-  const results: TopSteelHunterResult[] = rows.map((r) => ({
+  return rows.map((r) => ({
     account_id: Number(r.accountId),
     nickname: r.nickname,
-    clan_tag: null,
-    clan_color: null,
+    clan_tag: r.clanTag ?? null,
+    clan_color: r.clanColor ?? null,
     hr: Math.round(Number(r.hr)),
     hrb: Math.round(Number(r.hrb)),
     battles: r.battles ?? 0,
@@ -110,20 +118,4 @@ export async function getTopSteelHunter(
     damage: Number(r.damage ?? 0),
     frags: r.frags ?? 0,
   }));
-
-  if (results.length > 0) {
-    const clansByAccount = await getPlayerClansBatch(
-      region,
-      results.map((r) => r.account_id),
-    );
-    for (const r of results) {
-      const clan = clansByAccount.get(r.account_id);
-      if (clan) {
-        r.clan_tag = clan.tag;
-        r.clan_color = clan.color;
-      }
-    }
-  }
-
-  return results;
 }
