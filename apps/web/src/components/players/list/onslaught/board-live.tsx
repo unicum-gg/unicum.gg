@@ -44,41 +44,51 @@ export function OnslaughtBoardLive({
   const seasonParam = params.get("season");
   const currentId = initial.season?.eventId ?? null;
 
-  const [data, setData] = useState<OnslaughtData>(initial);
-  const [pending, setPending] = useState(false);
+  // A past season is requested when `?season=` names something other than the
+  // one the page already rendered; no param (or the current season) just shows
+  // the server data.
+  const isPast = Boolean(seasonParam && seasonParam !== currentId);
+
+  // The last settled past-season fetch (success carries its data, failure a
+  // null). Only the fetched season lives in state; the current season is the
+  // server `initial`, derived below rather than copied in via setState (which
+  // would be a synchronous cascading render on every navigation). Every setState
+  // here fires from an async callback, never synchronously in the effect body.
+  const [settled, setSettled] = useState<{
+    id: string;
+    data: OnslaughtData | null;
+  } | null>(null);
 
   useEffect(() => {
-    // No param, or it points at the season the page already rendered → nothing
-    // to fetch; snap back to the server data (also covers navigating home).
-    if (!seasonParam || seasonParam === currentId) {
-      setData(initial);
-      setPending(false);
-      return;
-    }
+    if (!isPast || !seasonParam) return;
     let cancelled = false;
-    setPending(true);
     unicum
       .region(region)
       .players.onslaught({ limit: LIMIT, season: seasonParam })
       .then((res) => {
-        if (!cancelled) setData(res);
+        if (!cancelled) setSettled({ id: seasonParam, data: res });
       })
       .catch(() => {
-        if (!cancelled) setData(initial);
-      })
-      .finally(() => {
-        if (!cancelled) setPending(false);
+        if (!cancelled) setSettled({ id: seasonParam, data: null });
       });
     return () => {
       cancelled = true;
     };
-  }, [seasonParam, currentId, region, initial]);
+  }, [isPast, seasonParam, region]);
 
+  // Show the fetched standings once they match the requested season; otherwise
+  // (current season, or a past one still loading, or a failed fetch) the server
+  // data. Pending is derived: a requested past season with no matching settle yet.
+  const resolved = isPast && settled?.id === seasonParam ? settled : null;
+  const data = resolved?.data ?? initial;
+  const showPending = isPast && settled?.id !== seasonParam;
   const season = data.season;
 
   return (
     <div
-      className={pending ? "opacity-60 transition-opacity" : "transition-opacity"}
+      className={
+        showPending ? "opacity-60 transition-opacity" : "transition-opacity"
+      }
     >
       <OnslaughtBoard
         region={region}
