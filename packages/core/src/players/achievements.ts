@@ -298,7 +298,10 @@ export async function loadPlayerAchievements(
   const [row] = await db
     .select({ id: players.id, accountId: players.accountId })
     .from(players)
-    .where(eq(players.nickname, nickname))
+    // Case-insensitive match so this hits `*_players_lower_nickname_idx`; a plain
+    // `nickname = $1` matches no index (both are on `lower(nickname)`) and seq-
+    // scanned the 2M-row table (~700ms), which was this endpoint's real cost.
+    .where(sql`LOWER(${players.nickname}) = LOWER(${nickname})`)
     .limit(1);
   if (!row) return PlayerAchievementsError.PlayerUnknown;
 
