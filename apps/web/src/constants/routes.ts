@@ -109,6 +109,10 @@ const ROUTES = {
     pathcat("/:region/tanks/:slug", { region, slug }),
   TANKS: (region: Region) =>
     region === Region.EU ? "/tanks" : pathcat("/:region/tanks", { region }),
+  TANKS_CHANGES: (region: Region) =>
+    region === Region.EU
+      ? "/tanks/changes"
+      : pathcat("/:region/tanks/changes", { region }),
 
   // - Maps. Same split as tanks: catalogue short, item regional. A map's
   //   geometry is worldwide, but the Clan Wars pool it belongs to is not.

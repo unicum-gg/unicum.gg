@@ -70,6 +70,11 @@ function tabCopy(
         title: `${name} marks of excellence and mastery (${regionLabel})`,
         description: `${name} (${regionLabel}) World of Tanks marks of excellence and marks of mastery requirements, with their history on this tier ${tier} ${nation} tank.`,
       };
+    case TankDetailTab.History:
+      return {
+        title: `${name} changes history (${regionLabel}), buffs and nerfs`,
+        description: `Every characteristic change to the ${name} across World of Tanks updates: the firepower, mobility, survivability and concealment buffs and nerfs Wargaming shipped to this tier ${tier} ${nation} tank, version by version.`,
+      };
     case TankDetailTab.Videos:
       return {
         title: `${name} gameplay videos (${regionLabel})`,

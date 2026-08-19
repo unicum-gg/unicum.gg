@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import type { VehicleMeta } from "@unicum.gg/shared";
+import { SHELL_LABEL, type VehicleMeta } from "@unicum.gg/shared";
 import type {
   ModuleStats,
   TankModuleNode,
@@ -32,13 +32,6 @@ const nameListFmt = new Intl.ListFormat("en-GB", {
   style: "long",
   type: "conjunction",
 });
-
-const SHELL_LABEL: Record<string, string> = {
-  ARMOR_PIERCING: "AP",
-  ARMOR_PIERCING_CR: "APCR",
-  HIGH_EXPLOSIVE: "HE",
-  HOLLOW_CHARGE: "HEAT",
-};
 
 const n1 = (v: number) => v.toFixed(1);
 const n0 = (v: number) => Math.round(v).toString();

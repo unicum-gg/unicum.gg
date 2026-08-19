@@ -115,6 +115,12 @@ export function navSections(region: Region): NavSection[] {
           description: "Mastery badge thresholds",
         },
         {
+          id: "tank-changes",
+          label: "Changes",
+          href: ROUTES.TANKS_CHANGES(region),
+          description: "Buffs and nerfs by update",
+        },
+        {
           id: "tank-videos",
           label: "Videos",
           href: tankTabHref(tanks, TankTab.Videos),
