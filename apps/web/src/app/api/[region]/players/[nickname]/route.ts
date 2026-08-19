@@ -7,6 +7,8 @@ import {
   setCachedPlayerDetailJson,
 } from "@unicum.gg/core/players/detail-cache";
 import { jsonResponse } from "@/services/openapi/json-response";
+import { measured } from "@/services/perf";
+import { traced } from "@unicum.gg/core/lib/perf-trace";
 import { isRegion } from "@unicum.gg/wargaming";
 import { PlayerDetailResponse } from "./schema.api";
 
@@ -24,47 +26,53 @@ export async function GET(
   req: Request,
   { params }: { params: Promise<{ region: string; nickname: string }> },
 ) {
-  const { region, nickname } = await params;
-  if (!isRegion(region)) {
-    return Response.json({ error: "invalid_region" }, { status: 400 });
-  }
-  const decoded = decodeURIComponent(nickname);
-
-  // The payload is metric-agnostic (liftDrag + ratingHistory carry all three
-  // metrics; the client picks the active one), so the cache key is per-player,
-  // not per-metric. Short-TTL cache of the serialized payload; a completed
-  // refresh busts the key (recordCurrentSnapshot), so it is never staler than
-  // the DB.
-  const cached = await getCachedPlayerDetailJson(region, decoded);
-  if (cached) return new Response(cached, { headers: JSON_HEADERS });
-
-  try {
-    // Dates serialize to ISO strings here and are revived client-side by
-    // parsing with the shared `PlayerDetailResponse` schema (z.coerce.date).
-    const result = await loadPlayerDetailLive(region, decoded);
-    if (result.status === PlayerDetailLiveStatus.Unknown) {
-      return Response.json({ error: "not_found" }, { status: 404 });
+  return measured("GET /api/{region}/players/{nickname}", async () => {
+    const { region, nickname } = await params;
+    if (!isRegion(region)) {
+      return Response.json({ error: "invalid_region" }, { status: 400 });
     }
-    if (result.status === PlayerDetailLiveStatus.Locked) {
-      return Response.json(
-        {
-          error: "account_locked",
-          nickname: result.nickname,
-          accountId: result.accountId,
-        },
-        { status: 403 },
+    const decoded = decodeURIComponent(nickname);
+
+    // The payload is metric-agnostic (liftDrag + ratingHistory carry all three
+    // metrics; the client picks the active one), so the cache key is per-player,
+    // not per-metric. Short-TTL cache of the serialized payload; a completed
+    // refresh busts the key (recordCurrentSnapshot), so it is never staler than
+    // the DB.
+    const cached = await getCachedPlayerDetailJson(region, decoded);
+    if (cached) return new Response(cached, { headers: JSON_HEADERS });
+
+    try {
+      // Dates serialize to ISO strings here and are revived client-side by
+      // parsing with the shared `PlayerDetailResponse` schema (z.coerce.date).
+      // Traced so the Server-Timing header separates the assembly (a cache miss)
+      // from a bare cache hit.
+      const result = await traced("loadPlayerDetailLive", () =>
+        loadPlayerDetailLive(region, decoded),
       );
+      if (result.status === PlayerDetailLiveStatus.Unknown) {
+        return Response.json({ error: "not_found" }, { status: 404 });
+      }
+      if (result.status === PlayerDetailLiveStatus.Locked) {
+        return Response.json(
+          {
+            error: "account_locked",
+            nickname: result.nickname,
+            accountId: result.accountId,
+          },
+          { status: 403 },
+        );
+      }
+      // Response.json serializes identically; stringify once to both cache and
+      // return, keeping jsonResponse's dev-only schema-drift check on the miss.
+      const json = JSON.stringify(result.detail);
+      void setCachedPlayerDetailJson(region, decoded, json);
+      if (process.env.NODE_ENV !== "production") {
+        jsonResponse(PlayerDetailResponse, result.detail);
+      }
+      return new Response(json, { headers: JSON_HEADERS });
+    } catch (err) {
+      console.error(`[api/${region}/players/${decoded}] failed:`, err);
+      return Response.json({ error: "upstream_failure" }, { status: 502 });
     }
-    // Response.json serializes identically; stringify once to both cache and
-    // return, keeping jsonResponse's dev-only schema-drift check on the miss.
-    const json = JSON.stringify(result.detail);
-    void setCachedPlayerDetailJson(region, decoded, json);
-    if (process.env.NODE_ENV !== "production") {
-      jsonResponse(PlayerDetailResponse, result.detail);
-    }
-    return new Response(json, { headers: JSON_HEADERS });
-  } catch (err) {
-    console.error(`[api/${region}/players/${decoded}] failed:`, err);
-    return Response.json({ error: "upstream_failure" }, { status: 502 });
-  }
+  });
 }
