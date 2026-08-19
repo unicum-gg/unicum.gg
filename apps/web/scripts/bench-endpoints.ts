@@ -34,6 +34,26 @@ const SPEC_PATH = join(
   "src/services/openapi/openapi.generated.json",
 );
 const TIMEOUT_MS = Number(process.env.BENCH_TIMEOUT_MS ?? 30000);
+// Idle gap left between requests so the server drains its fire-and-forget work
+// (background refresh enqueues, setCached writes, GC) before the next request is
+// measured. Without it, that async CPU runs during the NEXT handler's window and
+// — since Server-Timing's `cpu` is process-wide — is mis-attributed to it,
+// inflating light endpoints that happen to follow a heavy one. 0 disables it.
+const SETTLE_MS = Number(process.env.BENCH_SETTLE_MS ?? 300);
+// Warm samples taken per endpoint; the reported cpu/wall is the MEDIAN, because a
+// single `process.cpuUsage` reading swings widely with GC and V8 JIT. Median of a
+// handful is stable enough to rank by. Combined with SETTLE_MS this makes the cpu
+// column trustworthy for light endpoints too, not just heavy ones.
+const WARM_SAMPLES = Math.max(1, Number(process.env.BENCH_SAMPLES ?? 5));
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+function median(xs: number[]): number {
+  const s = [...xs].sort((a, b) => a - b);
+  return s[Math.floor(s.length / 2)];
+}
 
 // Sample values for path/query params, keyed by param name. `slug` is
 // context-sensitive (a tank slug vs a map slug), so it is resolved per path.
@@ -170,15 +190,28 @@ async function main(): Promise<void> {
       continue;
     }
     const cold = await hit(url);
-    const warm = await hit(url);
+    if (SETTLE_MS) await sleep(SETTLE_MS); // let the cold hit's async work drain
+
+    // Take WARM_SAMPLES readings (settling between each so the previous request's
+    // fire-and-forget work does not bleed into this one's process-wide cpu), then
+    // report the sample whose cpu is the median.
+    const warmHits: Array<{ ms: number; timing: Timing }> = [];
+    for (let i = 0; i < WARM_SAMPLES; i++) {
+      const w = await hit(url);
+      warmHits.push({ ms: w.ms, timing: parseServerTiming(w.header) });
+      if (SETTLE_MS) await sleep(SETTLE_MS);
+    }
+    const medCpu = median(warmHits.map((w) => w.timing.cpu ?? -1));
+    const rep =
+      warmHits.find((w) => (w.timing.cpu ?? -1) === medCpu) ?? warmHits[0];
     const r: Result = {
       path: ep.path,
       url,
       status: cold.status,
       coldMs: Math.round(cold.ms),
-      warmMs: Math.round(warm.ms),
+      warmMs: Math.round(median(warmHits.map((w) => w.ms))),
       timing: parseServerTiming(cold.header),
-      timingWarm: parseServerTiming(warm.header),
+      timingWarm: rep.timing,
     };
     results.push(r);
     const cpu = r.timingWarm.cpu !== undefined ? `${r.timingWarm.cpu.toFixed(0)}ms cpu` : "no cpu";
