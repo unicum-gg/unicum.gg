@@ -4,14 +4,20 @@ import {
   computeWN7,
   computeWN8,
   computeWNX,
+  wn7AccAdd,
+  wn7AccZero,
+  wn7Finalize,
+  wn8AccAdd,
+  wn8AccZero,
+  wn8Finalize,
+  wnxAccAdd,
+  wnxAccZero,
+  wnxFinalize,
   type WN8Expected,
   type WNXExpected,
 } from "../wot/ratings";
 import type { TankStats } from "../wot/tank-stats";
-import {
-  computeAvgTier,
-  type VehicleMeta,
-} from "../wot/tanks/meta";
+import type { VehicleMeta } from "../wot/tanks/meta";
 
 // Below this you can't tell if a player is actually that good on the
 // tank or just got lucky on a few games. Same threshold as the period
@@ -85,50 +91,59 @@ function computePerTankRating(
   return computeWNX([tank], wnxExpected);
 }
 
-function computeAggregateRating(
-  tanks: TankStats[],
+/**
+ * A metric's aggregate rating expressed as an additive accumulator: `add` folds
+ * one tank in, `finalize` turns the sums into the rating. Because every metric's
+ * aggregate is `formula(Σ per-tank terms)`, the roster-minus-one-tank aggregate
+ * the lift/drag scan needs is just `finalize(total - thisTank)`, an O(1)
+ * subtraction of one tank's accumulator from the pre-summed total, instead of
+ * re-summing the whole roster per candidate (the old O(N^2) hot loop). Output is
+ * identical to a fresh sum up to floating-point associativity.
+ */
+type MetricAgg = {
+  zero: () => Record<string, number>;
+  add: (acc: Record<string, number>, tank: TankStats) => void;
+  finalize: (acc: Record<string, number>) => number | null;
+};
+
+function makeMetricAgg(
   metric: RatingMetric,
   wn8Expected: Map<number, WN8Expected>,
   wnxExpected: Map<number, WNXExpected>,
   wn8Fallback: Map<string, WN8Expected>,
   encyclopedia: Record<string, VehicleMeta>,
-): number | null {
-  if (tanks.length === 0) return null;
+): MetricAgg {
   if (metric === RatingMetric.Wn8) {
-    return computeWN8(tanks, wn8Expected, encyclopedia, wn8Fallback);
+    return {
+      zero: () => wn8AccZero() as unknown as Record<string, number>,
+      add: (acc, tank) =>
+        wn8AccAdd(acc as never, tank, wn8Expected, encyclopedia, wn8Fallback),
+      finalize: (acc) => wn8Finalize(acc as never),
+    };
   }
   if (metric === RatingMetric.Wnx) {
-    return computeWNX(tanks, wnxExpected);
+    return {
+      zero: () => wnxAccZero() as unknown as Record<string, number>,
+      add: (acc, tank) => wnxAccAdd(acc as never, tank, wnxExpected),
+      finalize: (acc) => wnxFinalize(acc as never),
+    };
   }
-  let battles = 0;
-  let wins = 0;
-  let frags = 0;
-  let damage = 0;
-  let spotted = 0;
-  let droppedCap = 0;
-  for (const tank of tanks) {
-    const b = tank.all.battles;
-    if (b <= 0) continue;
-    battles += b;
-    wins += tank.all.wins;
-    frags += tank.all.frags;
-    damage += tank.all.damage_dealt;
-    spotted += tank.all.spotted;
-    droppedCap += tank.all.dropped_capture_points;
-  }
-  if (battles === 0) return null;
-  const avgTier = computeAvgTier(tanks, encyclopedia);
-  return computeWN7(
-    {
-      battles,
-      wins,
-      frags,
-      damageDealt: damage,
-      spotted,
-      droppedCapturePoints: droppedCap,
-    },
-    avgTier,
-  );
+  return {
+    zero: () => wn7AccZero() as unknown as Record<string, number>,
+    add: (acc, tank) => wn7AccAdd(acc as never, tank, encyclopedia),
+    finalize: (acc) => wn7Finalize(acc as never),
+  };
+}
+
+// Field-wise `a - b` over two accumulators of the same shape (all-number flat
+// records), giving the total with one tank's contribution removed.
+function subAcc(
+  a: Record<string, number>,
+  b: Record<string, number>,
+): Record<string, number> {
+  const out: Record<string, number> = {};
+  for (const key in a) out[key] = a[key] - (b[key] ?? 0);
+  return out;
 }
 
 /**
@@ -145,14 +160,19 @@ export function buildLiftDrag(
   metric: RatingMetric,
 ): LiftDrag | null {
   const wn8Fallback = buildWN8Fallback(wn8Expected, encyclopedia);
-  const overall = computeAggregateRating(
-    tanks,
+  const agg = makeMetricAgg(
     metric,
     wn8Expected,
     wnxExpected,
     wn8Fallback,
     encyclopedia,
   );
+
+  // Sum the whole roster once; every "without tank i" aggregate is then a single
+  // subtraction from this total (O(1)), not a re-sum (O(N)).
+  const total = agg.zero();
+  for (const tank of tanks) agg.add(total, tank);
+  const overall = agg.finalize(total);
   if (overall === null) return null;
 
   const scored: LiftDragRow[] = [];
@@ -171,15 +191,9 @@ export function buildLiftDrag(
     );
     if (rating === null || !Number.isFinite(rating)) continue;
 
-    const tanksWithout = tanks.filter((t) => t.tank_id !== tank.tank_id);
-    const overallWithout = computeAggregateRating(
-      tanksWithout,
-      metric,
-      wn8Expected,
-      wnxExpected,
-      wn8Fallback,
-      encyclopedia,
-    );
+    const thisTank = agg.zero();
+    agg.add(thisTank, tank);
+    const overallWithout = agg.finalize(subAcc(total, thisTank));
     if (overallWithout === null) continue;
     const removalDelta = overallWithout - overall;
     if (!Number.isFinite(removalDelta) || removalDelta === 0) continue;

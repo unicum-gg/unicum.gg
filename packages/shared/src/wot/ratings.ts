@@ -186,6 +186,68 @@ export type WN7Inputs = {
   droppedCapturePoints: number;
 };
 
+/**
+ * Battle-weighted WN7 accumulator. Same split rationale as {@link WN8Acc}. WN7
+ * needs the roster's average tier, so it tracks `tierWeighted`/`metaBattles`
+ * SEPARATELY from `battles`: the raw stat sums include tanks with no
+ * encyclopedia meta (battles still count toward damage/frags/…), but the average
+ * tier is only defined over tanks we have a tier for, exactly how the old
+ * `computeAvgTier(tanks)` denominator differed from the WN7 battle sum.
+ */
+export type WN7Acc = {
+  battles: number;
+  wins: number;
+  frags: number;
+  damage: number;
+  spotted: number;
+  droppedCap: number;
+  tierWeighted: number;
+  metaBattles: number;
+};
+
+export function wn7AccZero(): WN7Acc {
+  return {
+    battles: 0, wins: 0, frags: 0, damage: 0, spotted: 0, droppedCap: 0,
+    tierWeighted: 0, metaBattles: 0,
+  };
+}
+
+export function wn7AccAdd(
+  acc: WN7Acc,
+  tank: TankStats,
+  encyclopedia: Record<string, VehicleMeta>,
+): void {
+  const b = tank.all?.battles ?? 0;
+  if (b <= 0) return;
+  acc.battles += b;
+  acc.wins += tank.all.wins;
+  acc.frags += tank.all.frags;
+  acc.damage += tank.all.damage_dealt;
+  acc.spotted += tank.all.spotted;
+  acc.droppedCap += tank.all.dropped_capture_points;
+  const meta = encyclopedia[String(tank.tank_id)];
+  if (meta) {
+    acc.tierWeighted += meta.tier * b;
+    acc.metaBattles += b;
+  }
+}
+
+export function wn7Finalize(acc: WN7Acc): number | null {
+  if (acc.battles === 0) return null;
+  const avgTier = acc.metaBattles > 0 ? acc.tierWeighted / acc.metaBattles : null;
+  return computeWN7(
+    {
+      battles: acc.battles,
+      wins: acc.wins,
+      frags: acc.frags,
+      damageDealt: acc.damage,
+      spotted: acc.spotted,
+      droppedCapturePoints: acc.droppedCap,
+    },
+    avgTier,
+  );
+}
+
 export function computeWN7(s: WN7Inputs, avgTier: number | null): number | null {
   if (avgTier === null || s.battles <= 0) return null;
   const tier = avgTier;
@@ -273,58 +335,76 @@ export function buildWN8Fallback(
   return fallback;
 }
 
-export function computeWN8(
-  tanks: TankStats[],
+/**
+ * A battle-weighted WN8 accumulator: the additive sums the rating formula runs
+ * on. Split out from `computeWN8` so a caller can add each tank once, then get
+ * the aggregate with any subset removed in O(1) (subtract that tank's sums)
+ * instead of re-summing the whole roster (see the lift/drag scan). `computeWN8`
+ * itself is just accumulate-all + finalize, so the numbers are unchanged.
+ */
+export type WN8Acc = {
+  expDmg: number;
+  expSpot: number;
+  expFrag: number;
+  expDef: number;
+  expWin: number;
+  dmg: number;
+  spot: number;
+  frag: number;
+  def: number;
+  wins: number;
+  battles: number;
+};
+
+export function wn8AccZero(): WN8Acc {
+  return {
+    expDmg: 0, expSpot: 0, expFrag: 0, expDef: 0, expWin: 0,
+    dmg: 0, spot: 0, frag: 0, def: 0, wins: 0, battles: 0,
+  };
+}
+
+/** Add one tank's contribution into `acc`. A no-op for a tank with no battles or
+ * no expected values (a recent premium/event/Tier 11 without even a (tier,type)
+ * fallback), exactly like `computeWN8`'s `continue`s, so such a tank leaves the
+ * aggregate untouched, which keeps the O(1) removal exact. */
+export function wn8AccAdd(
+  acc: WN8Acc,
+  tank: TankStats,
   expected: Map<number, WN8Expected>,
   encyclopedia: Record<string, VehicleMeta>,
   fallback: Map<string, WN8Expected>,
-): number | null {
-  let expDmg = 0;
-  let expSpot = 0;
-  let expFrag = 0;
-  let expDef = 0;
-  let expWin = 0;
-  let dmg = 0;
-  let spot = 0;
-  let frag = 0;
-  let def = 0;
-  let wins = 0;
-  let battles = 0;
-
-  for (const tank of tanks) {
-    const tb = tank.all?.battles ?? 0;
-    if (tb <= 0) continue;
-    let exp = expected.get(tank.tank_id);
-    if (!exp) {
-      // Tank missing from modxvm dataset (typically a recent premium, event
-      // tank or a Tier 11) — fall back to the mean of same (tier, type) per
-      // the WN8 paper's prescription.
-      const meta = encyclopedia[String(tank.tank_id)];
-      if (meta) exp = fallback.get(`${meta.tier}-${meta.type}`);
-    }
-    if (!exp) continue;
-
-    expDmg += exp.expDamage * tb;
-    expSpot += exp.expSpot * tb;
-    expFrag += exp.expFrag * tb;
-    expDef += exp.expDef * tb;
-    expWin += exp.expWinRate * tb;
-
-    dmg += tank.all.damage_dealt;
-    spot += tank.all.spotted;
-    frag += tank.all.frags;
-    def += tank.all.dropped_capture_points;
-    wins += tank.all.wins;
-    battles += tb;
+): void {
+  const tb = tank.all?.battles ?? 0;
+  if (tb <= 0) return;
+  let exp = expected.get(tank.tank_id);
+  if (!exp) {
+    const meta = encyclopedia[String(tank.tank_id)];
+    if (meta) exp = fallback.get(`${meta.tier}-${meta.type}`);
   }
+  if (!exp) return;
 
-  if (battles === 0 || expDmg === 0) return null;
+  acc.expDmg += exp.expDamage * tb;
+  acc.expSpot += exp.expSpot * tb;
+  acc.expFrag += exp.expFrag * tb;
+  acc.expDef += exp.expDef * tb;
+  acc.expWin += exp.expWinRate * tb;
 
-  const rDamage = dmg / expDmg;
-  const rSpot = spot / expSpot;
-  const rFrag = frag / expFrag;
-  const rDef = def / expDef;
-  const rWin = (wins * 100) / expWin;
+  acc.dmg += tank.all.damage_dealt;
+  acc.spot += tank.all.spotted;
+  acc.frag += tank.all.frags;
+  acc.def += tank.all.dropped_capture_points;
+  acc.wins += tank.all.wins;
+  acc.battles += tb;
+}
+
+export function wn8Finalize(a: WN8Acc): number | null {
+  if (a.battles === 0 || a.expDmg === 0) return null;
+
+  const rDamage = a.dmg / a.expDmg;
+  const rSpot = a.spot / a.expSpot;
+  const rFrag = a.frag / a.expFrag;
+  const rDef = a.def / a.expDef;
+  const rWin = (a.wins * 100) / a.expWin;
 
   const rWINc = Math.max(0, (rWin - 0.71) / (1 - 0.71));
   const rDAMAGEc = Math.max(0, (rDamage - 0.22) / (1 - 0.22));
@@ -350,6 +430,19 @@ export function computeWN8(
   return Number.isFinite(result) ? result : null;
 }
 
+export function computeWN8(
+  tanks: TankStats[],
+  expected: Map<number, WN8Expected>,
+  encyclopedia: Record<string, VehicleMeta>,
+  fallback: Map<string, WN8Expected>,
+): number | null {
+  const acc = wn8AccZero();
+  for (const tank of tanks) {
+    wn8AccAdd(acc, tank, expected, encyclopedia, fallback);
+  }
+  return wn8Finalize(acc);
+}
+
 export type WNXExpected = {
   damage: number;
   frags: number;
@@ -357,37 +450,54 @@ export type WNXExpected = {
   assist: number;
 };
 
-export function computeWNX(
-  tanks: TankStats[],
+/** Battle-weighted WNX accumulator. Same split rationale as {@link WN8Acc}: add
+ * each tank once, remove any subset in O(1). */
+export type WNXAcc = {
+  wExpDmg: number;
+  wExpSpot: number;
+  wExpFrag: number;
+  wExpAssist: number;
+  wDmg: number;
+  wSpot: number;
+  wFrag: number;
+  wAssist: number;
+};
+
+export function wnxAccZero(): WNXAcc {
+  return {
+    wExpDmg: 0, wExpSpot: 0, wExpFrag: 0, wExpAssist: 0,
+    wDmg: 0, wSpot: 0, wFrag: 0, wAssist: 0,
+  };
+}
+
+/** Add one tank into `acc`; a no-op for a tank with no battles or no expected
+ * values, matching `computeWNX`'s `continue` (so removal stays exact). */
+export function wnxAccAdd(
+  acc: WNXAcc,
+  t: TankStats,
   expected: Map<number, WNXExpected>,
-): number | null {
-  let wExpDmg = 0;
-  let wExpSpot = 0;
-  let wExpFrag = 0;
-  let wExpAssist = 0;
-  let wDmg = 0;
-  let wSpot = 0;
-  let wFrag = 0;
-  let wAssist = 0;
+): void {
+  const exp = expected.get(t.tank_id);
+  const b = t.all?.battles ?? 0;
+  if (!exp || b <= 0) return;
 
-  for (const t of tanks) {
-    const exp = expected.get(t.tank_id);
-    const b = t.all?.battles ?? 0;
-    if (!exp || b <= 0) continue;
+  acc.wExpDmg += b * exp.damage;
+  acc.wExpSpot += b * exp.spots;
+  acc.wExpFrag += b * exp.frags;
+  acc.wExpAssist += b * exp.assist;
 
-    wExpDmg += b * exp.damage;
-    wExpSpot += b * exp.spots;
-    wExpFrag += b * exp.frags;
-    wExpAssist += b * exp.assist;
+  acc.wDmg += t.all.damage_dealt;
+  acc.wSpot += t.all.spotted;
+  acc.wFrag += t.all.frags;
+  acc.wAssist +=
+    (t.all.radio_assisted_damage ?? 0) +
+    (t.all.track_assisted_damage ?? 0);
+}
 
-    wDmg += t.all.damage_dealt;
-    wSpot += t.all.spotted;
-    wFrag += t.all.frags;
-    wAssist +=
-      (t.all.radio_assisted_damage ?? 0) +
-      (t.all.track_assisted_damage ?? 0);
-  }
-
+export function wnxFinalize(acc: WNXAcc): number | null {
+  const {
+    wExpDmg, wExpSpot, wExpFrag, wExpAssist, wDmg, wSpot, wFrag, wAssist,
+  } = acc;
   if (wExpDmg <= 0) return null;
 
   const adjustedAssist = wAssist * 0.67;
@@ -415,6 +525,15 @@ export function computeWNX(
   const raw = 750 * rDmgC + 200 * rFragsC + 50 * rSpotsC;
   const result = raw * (raw / 1000) ** 0.45 * 1.65;
   return Number.isFinite(result) ? result : null;
+}
+
+export function computeWNX(
+  tanks: TankStats[],
+  expected: Map<number, WNXExpected>,
+): number | null {
+  const acc = wnxAccZero();
+  for (const t of tanks) wnxAccAdd(acc, t, expected);
+  return wnxFinalize(acc);
 }
 
 // HR, the Steel Hunter (battle-royale) performance rating. It is built on just
