@@ -1,9 +1,10 @@
 "use client";
 
 import { TwitchLogoIcon } from "@phosphor-icons/react/dist/ssr";
-import { useEffect, useState, useSyncExternalStore } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
+import { useHydrated } from "@/hooks/use-hydrated";
 import { useRegion } from "@/hooks/use-region";
 import { authClient, useSession } from "@/lib/auth-client";
 
@@ -21,15 +22,10 @@ export function AddChannelCta() {
 
   // The session can already be resolved on the very first client render (read
   // synchronously from the auth client cache), while the server rendered with no
-  // session. Gate on a hydration flag (`null`/`false` on the server and first
-  // client render, `true` after) so the first client render matches the server
-  // (nothing) and the auth-dependent output only appears after hydration,
-  // avoiding a mismatch with the sibling controls in the streamers header.
-  const hydrated = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
+  // session. Gate on hydration so the first client render matches the server
+  // (nothing) and the auth-dependent output only appears after it, avoiding a
+  // mismatch with the sibling controls in the streamers header.
+  const hydrated = useHydrated();
 
   // Whether the logged-in account already has a Twitch account linked.
   const [twitchLinked, setTwitchLinked] = useState<boolean | null>(null);
