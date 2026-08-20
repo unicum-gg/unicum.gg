@@ -41,7 +41,14 @@ export default async function CoveragePage({
 // matches the coverage stats' own 60s cache (live-monitoring figures must stay
 // fresh) rather than relying on that cache to implicitly lower the segment.
 export const dynamic = "force-static";
-export const revalidate = 60;
+// 1h, not 60s. This page's queries are full seq-scans of the 10M+ row snapshot
+// table (~24s each). At revalidate=60 every minute paid that scan, and a cold
+// cache (post-deploy) let the PM2 cluster regenerate it concurrently, storming
+// the DB into a spiral that starved every other endpoint. The coverage figures
+// move on a daily cadence, so a 60s window bought nothing; 1h keeps the scan
+// rare. (The real fix is to precompute these via a cron like the materialized
+// leaderboards, rather than scan on the request path.)
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   return [Region.NA, Region.ASIA].map((region) => ({ region }));

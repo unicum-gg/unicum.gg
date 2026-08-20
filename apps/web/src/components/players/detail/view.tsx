@@ -80,16 +80,18 @@ export function PlayerProfile({
   const [nowMs] = useState(() => Date.now());
 
   // The payload is the same for every metric, so a single SWR entry keyed on the
-  // request URL. `revalidateOnMount` is on so the client always refetches the
-  // live payload on mount: the page HTML is CF-cached for a day (revalidate=24h)
-  // for fast navigation, and this refetch keeps the visible stats current under
-  // that long cache (the seeded `initialData` paints instantly, fresh data swaps
-  // in ~a request later). LiveSync still patches live ticks on top.
+  // request URL. `revalidateOnMount` is OFF: firing a fresh `/api/detail` on
+  // every page view turned every cached navigation into a server request, and
+  // at EU peak that flood of detail queries contended the DB into the ground
+  // (each detail touches the big snapshot tables). Under the 24h page cache the
+  // seeded HTML can lag, but LiveSync still hot-swaps live ticks, so the visible
+  // stats stay current without the per-view refetch. (Freshness under long cache
+  // wants on-demand revalidation on snapshot change, not a client refetch storm.)
   const detailReq = () => unicum.region(region).players(nickname).detail();
   const { data: liveData, mutate: mutateData } = useSWR(
     detailReq().url(),
     () => detailReq().then((r) => r as unknown as PlayerDetailData),
-    { fallbackData: initialData, revalidateOnMount: true },
+    { fallbackData: initialData, revalidateOnMount: false },
   );
   const detail = liveData ?? initialData;
 

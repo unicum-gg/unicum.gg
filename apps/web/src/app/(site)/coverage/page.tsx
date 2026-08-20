@@ -26,4 +26,7 @@ export default async function Page() {
 // matches the coverage stats' own 60s cache (live-monitoring figures must stay
 // fresh) rather than relying on that cache to implicitly lower the segment.
 export const dynamic = "force-static";
-export const revalidate = 60;
+// 1h, not 60s: the queries are ~24s full seq-scans of the 10M+ row snapshot
+// table, so a 60s window paid that scan every minute (and stormed the DB from a
+// cold cache). Coverage figures move daily; see the region page for the detail.
+export const revalidate = 3600;
