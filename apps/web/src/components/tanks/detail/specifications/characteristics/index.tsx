@@ -1,5 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from "lucide-react";
 import type { TankSpec } from "@unicum.gg/shared";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { Panel, PanelContent, PanelHeader, PanelTitle } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
@@ -7,6 +8,15 @@ import { ResetButton } from "@/components/tanks/detail/specifications/reset-butt
 import { GROUPS, type Group } from "./rows";
 import { deltaColor, formatSpecValue as format, specValue } from "./format";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
+
+/** The label of the row a sub-row is indented under, walking back up the list
+ * the way the display nests them. */
+function parentOf(group: Group, index: number): string | undefined {
+  for (let i = index - 1; i >= 0; i -= 1) {
+    if (!group.rows[i].sub) return group.rows[i].label.replace(/^…\s*/, "");
+  }
+  return undefined;
+}
 
 function SpecGroup({
   group,
@@ -41,13 +51,19 @@ function SpecGroup({
       <dl className="space-y-1.5">
         {group.rows.map((row, index) => {
           if (hidden.has(index)) return null;
+          // What the glossary is asked about: the row's own wording, without
+          // the ellipsis a sub-row is indented with, and the row it hangs off
+          // when nothing defines that variant on its own. Computed after the
+          // discards above, so a hidden row never pays for the parent walk.
+          const ownLabel = row.label.replace(/^…\s*/, "");
+          const parentLabel = row.sub ? parentOf(group, index) : undefined;
           if (row.header) {
             return (
               <div
                 key={index}
                 className="pt-1 text-sm font-medium text-fd-foreground"
               >
-                {row.label}
+                <GlossaryLabel label={ownLabel}>{row.label}</GlossaryLabel>
               </div>
             );
           }
@@ -79,7 +95,13 @@ function SpecGroup({
                   row.sub && "text-fd-muted-foreground/75",
                 )}
               >
-                {row.label}
+                <GlossaryLabel
+                  specKey={row.key}
+                  label={ownLabel}
+                  fallbackLabel={parentLabel}
+                >
+                  {row.label}
+                </GlossaryLabel>
               </dt>
               <span
                 aria-hidden

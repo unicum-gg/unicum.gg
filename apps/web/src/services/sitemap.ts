@@ -76,6 +76,10 @@ export const sitemapConfig: Pick<
     "/[region]/clans/[tag]",
     "/[region]/players/[nickname]",
     "/[region]/tanks/[slug]",
+    // Covered by /glossary/sitemap.xml
+    "/glossary",
+    "/glossary/[slug]",
+    "/glossary/category/[category]",
   ],
   debug: process.env.NODE_ENV !== "production",
 };

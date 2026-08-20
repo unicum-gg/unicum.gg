@@ -29,6 +29,9 @@ export async function GET() {
     // API reference. Route auto-discovery cannot see it: `/docs/[[...slug]]` is
     // a catch-all whose tree comes from the OpenAPI document.
     "/docs/sitemap.xml",
+    // Glossary: index, section hubs and every term. Region-less, so it is one
+    // small file rather than three. See `src/app/(site)/glossary/sitemap.xml`.
+    "/glossary/sitemap.xml",
   ];
   try {
     const counts = await getSitemapCounts();

@@ -38,6 +38,13 @@ const ROUTES = {
   // - Support (region-less)
   SUPPORT: "/support",
 
+  // - Glossary (region-less by design: a definition reads the same on every
+  //   server, so one URL per term rather than three of the same page).
+  GLOSSARY: "/glossary",
+  GLOSSARY_TERM: (slug: string) => pathcat("/glossary/:slug", { slug }),
+  GLOSSARY_CATEGORY: (category: string) =>
+    pathcat("/glossary/category/:category", { category }),
+
   // - Players
   PLAYERS: (region: Region) =>
     region === Region.EU ? "/players" : pathcat("/:region/players", { region }),

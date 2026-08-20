@@ -1,4 +1,5 @@
 import {
+  BookOpenIcon,
   DiscordLogoIcon,
   FileCodeIcon,
   GithubLogoIcon,
@@ -77,6 +78,12 @@ export async function baseOptions({
                       description: "Free public REST API, no key required",
                       url: ROUTES.DOCS,
                       icon: <FileCodeIcon />,
+                    },
+                    {
+                      text: "Glossary",
+                      description: "Every World of Tanks term, explained",
+                      url: ROUTES.GLOSSARY,
+                      icon: <BookOpenIcon />,
                     },
                     {
                       text: "Support us",

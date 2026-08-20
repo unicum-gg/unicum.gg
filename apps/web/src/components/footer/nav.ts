@@ -61,6 +61,7 @@ export function footerColumns(region: Region): FooterColumn[] {
       // we track, who pays for it, where the code lives.
       title: "Project",
       links: [
+        { label: "Glossary", href: ROUTES.GLOSSARY },
         { label: "Coverage", href: ROUTES.COVERAGE(region) },
         { label: "Support us", href: ROUTES.SUPPORT },
         { label: "Source code", href: APP.EXTERNAL.GITHUB, external: true },

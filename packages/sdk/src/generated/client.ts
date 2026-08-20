@@ -348,6 +348,24 @@ class MapClient {
   }
 }
 
+/** A single glossary entry: unicum.glossary("..."). */
+class GlossaryTermClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly slug: string,
+  ) {}
+
+  /** Glossary term */
+  detail() {
+    const path = { slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/glossary/{slug}", path),
+      () => this.api.GET("/glossary/{slug}", { params: { path } }),
+    );
+  }
+}
+
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
@@ -850,6 +868,13 @@ type SupportNamespace = {
   podium(): RequestHandle<Data<"/support/podium">>;
 };
 
+type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
+  /** Glossary */
+  list(category?: NonNullable<QueryOf<"/glossary">>["category"]): RequestHandle<Data<"/glossary">>;
+  /** Glossary anchors */
+  anchors(): RequestHandle<Data<"/glossary/anchors">>;
+};
+
 /**
  * A fluent, typed client for the unicum.gg public API.
  *
@@ -937,6 +962,21 @@ export class Unicum {
     ns.podium = () =>
       handle(buildUrl(this.baseUrl, "/support/podium"), () =>
         this.api.GET("/support/podium", {}),
+      );
+    return ns;
+  }
+
+  /** Global (not region-scoped) glossary. */
+  get glossary(): GlossaryNamespace {
+    const ns = ((slug: string) =>
+      new GlossaryTermClient(this.api, this.baseUrl, slug)) as GlossaryNamespace;
+    ns.list = (category) =>
+      handle(buildUrl(this.baseUrl, "/glossary", undefined, { category }), () =>
+        this.api.GET("/glossary", { params: { query: { category } } }),
+      );
+    ns.anchors = () =>
+      handle(buildUrl(this.baseUrl, "/glossary/anchors"), () =>
+        this.api.GET("/glossary/anchors", {}),
       );
     return ns;
   }

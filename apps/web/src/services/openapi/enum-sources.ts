@@ -7,6 +7,8 @@
 // enums from the barrels, the usual convention — only this build-tooling module
 // takes the deep-path exception.)
 import { RatingMetric } from "@unicum.gg/shared/constants/rating";
+import { GlossaryCategory } from "@unicum.gg/shared/glossary/category";
+import { GlossaryLinkTarget } from "@unicum.gg/shared/glossary/links";
 import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
 import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
@@ -69,6 +71,8 @@ export const OPENAPI_ENUM_SOURCES = {
   SESSION_GRANULARITY: Object.values(SessionGranularity),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),
+  GLOSSARY_CATEGORY: Object.values(GlossaryCategory),
+  GLOSSARY_LINK_TARGET: Object.values(GlossaryLinkTarget),
 } satisfies Record<string, readonly string[]>;
 
 /** Marker value a schema's `x-enum-source` may name. A typo is a compile error

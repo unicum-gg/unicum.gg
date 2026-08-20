@@ -17,4 +17,5 @@ export * from "./clans";
 export * from "./players";
 export * from "./twitch";
 export * from "./feedback";
+export * from "./glossary";
 export * from "./wot";

@@ -52,6 +52,8 @@ next-env.d.ts
 apps/web/src/services/openapi/openapi.generated.json
 apps/web/src/services/sdk/local-routes.generated.ts
 apps/web/src/proxy-routes.generated.ts
+# glossary markdown compiled for core (source of truth is entries/<category>/*.md)
+apps/web/src/services/glossary/entries.generated.ts
 apps/web/.openapi-gen/
 
 # temp / scratch working dir (tool outputs, not tracked)

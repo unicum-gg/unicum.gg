@@ -10,6 +10,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useGlossaryAnchor } from "@/components/glossary/anchor-context";
 import { cn } from "@/lib/utils";
 
 /** Sort direction and the active sort state (which column, which way), shared by
@@ -43,6 +44,16 @@ export function SortHead({
   headClassName?: string;
   children: ReactNode;
 }) {
+  // The column's own definition when the glossary has one, so a header that
+  // already explained itself in three words now explains itself properly. The
+  // tooltip stays text: it hangs off a sort button, and a link inside one
+  // cannot be clicked before the tooltip closes.
+  //
+  // Matched on the heading the reader sees, not on `tip`: the tip is a sentence
+  // about this column ("View range (m)"), never the term's name, so looking it
+  // up by tip missed every column whose definition is anchored by label.
+  const heading = typeof children === "string" ? children : undefined;
+  const term = useGlossaryAnchor()({ specKey: col, label: heading });
   const active = sort.key === col;
   const Icon = active
     ? sort.direction === SortDirection.Asc
@@ -69,10 +80,23 @@ export function SortHead({
   );
   return (
     <TableHead className={cn("p-0", headClassName)}>
-      {tip ? (
+      {tip || term ? (
         <Tooltip>
           <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tip}</TooltipContent>
+          <TooltipContent className="max-w-xs">
+            {/* Both, when both exist: the tip says which column this is
+                ("Front hull armor"), the definition says what the thing is.
+                Dropping the tip made two columns sharing a term hover
+                identically. */}
+            {tip ? <span className="block">{tip}</span> : null}
+            {term ? (
+              <span className={tip ? "mt-1 block opacity-80" : undefined}>
+                <span className="font-medium">{term.term}</span>
+                {": "}
+                {term.short}
+              </span>
+            ) : null}
+          </TooltipContent>
         </Tooltip>
       ) : (
         button

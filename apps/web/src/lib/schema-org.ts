@@ -1,6 +1,8 @@
 import type {
   AggregateRating,
   BreadcrumbList,
+  DefinedTerm,
+  DefinedTermSet,
   ItemList,
   Organization,
   Person,
@@ -247,6 +249,74 @@ export function breadcrumbSchema(
       position: index + 1,
       name: item.name,
       item: item.url,
+    })),
+  };
+}
+
+/**
+ * One glossary entry as a `DefinedTerm`.
+ *
+ * Every node carries an `@id`: without one, the set named here and the set
+ * emitted on `/glossary` are two anonymous nodes a consumer cannot tell apart,
+ * and the markup claims a relationship it never expresses. With it, the term
+ * pages and the index describe one reference work.
+ */
+export function definedTermSchema(args: {
+  term: string;
+  slug: string;
+  description: string;
+  url: string;
+  /** The category hub's URL. `additionalType` takes a URI, not a display name,
+   * so pointing it at the hub is both valid and the thing that clusters the
+   * section. */
+  categoryUrl: string;
+  setUrl: string;
+}): WithContext<DefinedTerm> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTerm",
+    "@id": args.url,
+    name: args.term,
+    description: args.description,
+    url: args.url,
+    termCode: args.slug,
+    inDefinedTermSet: {
+      "@type": "DefinedTermSet",
+      "@id": args.setUrl,
+      name: `${SITE_NAME} World of Tanks glossary`,
+      url: args.setUrl,
+    },
+    ...(args.categoryUrl && { additionalType: args.categoryUrl }),
+  };
+}
+
+/**
+ * The glossary as a whole, for the index and the category hubs.
+ *
+ * The members are references, not copies: each one is the `@id` of a page that
+ * carries the full `DefinedTerm`, so the description is stated once where it
+ * belongs instead of being repeated here. On the index that is the difference
+ * between a 43 KB block of JSON-LD and a listing a crawler can walk.
+ */
+export function definedTermSetSchema(args: {
+  name: string;
+  description: string;
+  url: string;
+  terms: { term: string; url: string }[];
+}): WithContext<DefinedTermSet> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "DefinedTermSet",
+    "@id": args.url,
+    name: args.name,
+    description: args.description,
+    url: args.url,
+    inLanguage: "en",
+    hasDefinedTerm: args.terms.map((t) => ({
+      "@type": "DefinedTerm",
+      "@id": t.url,
+      name: t.term,
+      url: t.url,
     })),
   };
 }

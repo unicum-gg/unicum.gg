@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
@@ -67,13 +68,15 @@ export function TopPlayersList({
           <TableHead className="w-12 text-center!">#</TableHead>
           <TableHead>Player</TableHead>
           <TableHead className="w-24 text-right! tabular-nums">
-            Battles
+            <GlossaryLabel>Battles</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            WR
+            <GlossaryLabel>WR</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
-            {RATING_METRIC_LABEL[metric]}
+            <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
+              {RATING_METRIC_LABEL[metric]}
+            </GlossaryLabel>
           </TableHead>
         </TableRow>
       </TableHeader>

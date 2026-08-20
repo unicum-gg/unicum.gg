@@ -84,7 +84,34 @@ const RESOURCES: Resource[] = [
   },
 ];
 
-const GLOBALS = [{ name: "streamers", live: true }, { name: "support" }] as const;
+/**
+ * A resource that is not region-scoped. Most are a flat namespace
+ * (`unicum.streamers.list()`); one that addresses a single entity declares a
+ * `key`, and then it also becomes callable: `unicum.glossary("wn8").detail()`,
+ * the same shape a region resource has, minus the region.
+ */
+type Global = {
+  name: string;
+  /** Wire the SSE subscription this namespace owns. */
+  live?: boolean;
+  /** Path parameter addressing one entity: `/glossary/{slug}`. */
+  key?: string;
+  /** Class name for that entity's client. Required with `key`. */
+  client?: string;
+  /** Fluent method for the bare `/{name}/{key}` endpoint. */
+  root?: string;
+};
+
+const GLOBALS: Global[] = [
+  { name: "streamers", live: true },
+  { name: "support" },
+  {
+    name: "glossary",
+    key: "slug",
+    client: "GlossaryTermClient",
+    root: "detail",
+  },
+];
 /** Region-scoped view prefixes (before `{region}`): `/og/{region}/…`. */
 const PREFIXES = ["og"] as const;
 /** Explicit manual exclusions (logged): the generic `/og` (no region to nest)
@@ -257,9 +284,17 @@ function resultOf(ep: Endpoint): string {
 
 // ── main-tree emitters ───────────────────────────────────────────────────────
 
-function emitInstance(
+/**
+ * A method on an entity client, reading its key off `this`.
+ *
+ * `path` is the object literal that addresses the entity, which is the only
+ * thing that differs between a region resource (`{ region, tag }`) and a global
+ * one (`{ slug }`). Everything else, the signature, the URL, the call, has to
+ * stay identical across the two, so it is written once.
+ */
+function emitEntityMember(
   ep: Endpoint,
-  r: Resource,
+  path: string,
   method: string,
   /** Trailing path parameter of a keyed sub-resource, e.g. the `slug` of
    * `/players/{nickname}/tanks/{slug}`. Taken as the method's first argument. */
@@ -267,9 +302,6 @@ function emitInstance(
 ): string {
   const q = qsig(ep);
   const b = bsig(ep);
-  const path = subKey
-    ? `{ region: this.region, ${r.key}: this.${r.key}, ${subKey} }`
-    : `{ region: this.region, ${r.key}: this.${r.key} }`;
   const args = [subKey ? `${subKey}: string` : "", params(q, b)]
     .filter(Boolean)
     .join(", ");
@@ -280,6 +312,18 @@ function emitInstance(
       () => this.api.${ep.method}("${ep.path}", { params: { path${q.callQuery} }${b.call} }),
     );
   }`;
+}
+
+function emitInstance(
+  ep: Endpoint,
+  r: Resource,
+  method: string,
+  subKey?: string,
+): string {
+  const path = subKey
+    ? `{ region: this.region, ${r.key}: this.${r.key}, ${subKey} }`
+    : `{ region: this.region, ${r.key}: this.${r.key} }`;
+  return emitEntityMember(ep, path, method, subKey);
 }
 
 function emitRoot(ep: Endpoint, method: string): string {
@@ -327,6 +371,10 @@ function emitNamespaceAssign(ep: Endpoint, method: string, region = "this.region
             params: { path: { region: ${region} }${q.callQuery} }${b.call},
           }),
       );`;
+}
+
+function emitGlobalInstance(ep: Endpoint, g: Global, method: string): string {
+  return emitEntityMember(ep, `{ ${g.key}: this.${g.key} }`, method);
 }
 
 function emitGlobalMember(ep: Endpoint, method: string): string {
@@ -393,13 +441,36 @@ function bucketize(endpoints: Endpoint[]): Buckets {
 
     // Global namespace (streamers/support).
     const global = GLOBALS.find((g) => g.name === segs[0]);
+    if (global?.key) {
+      const rest = segs.slice(1);
+      if (rest.length === 0) {
+        // `/glossary` is the namespace's own listing, like every other one.
+        push(b.nsMember, global.name, emitGlobalMember(ep, NAMESPACE_LIST));
+        push(b.nsAssign, global.name, emitGlobalAssign(ep, NAMESPACE_LIST));
+      } else if (isParam(rest[0])) {
+        // `/glossary/{slug}` and anything hanging off it, on the entity client.
+        const sub = rest.slice(1);
+        if (sub.some(isParam)) b.unmapped.push(ep.path);
+        else {
+          const m = sub.length === 0 ? (global.root ?? "detail") : camel(sub);
+          push(b.instance, global.name, emitGlobalInstance(ep, global, m));
+        }
+      } else if (!rest.some(isParam)) {
+        // A sibling of the listing that names no entity: a namespace method.
+        push(b.nsMember, global.name, emitGlobalMember(ep, camel(rest)));
+        push(b.nsAssign, global.name, emitGlobalAssign(ep, camel(rest)));
+      } else {
+        b.unmapped.push(ep.path);
+      }
+      continue;
+    }
     if (global) {
       // `/streamers/live` derives to `live`, which the SSE subscription below
       // already owns on a namespace declaring one. The JSON endpoint behind it
       // is that namespace's listing, so it takes the listing name every other
       // namespace uses (`tanks.list()`) rather than a hand-kept alias.
       const derived = camel(segs.slice(1));
-      const reserved = "live" in global && global.live && derived === LIVE_METHOD;
+      const reserved = global.live && derived === LIVE_METHOD;
       const method = reserved ? NAMESPACE_LIST : derived;
       push(b.nsMember, segs[0], emitGlobalMember(ep, method));
       push(b.nsAssign, segs[0], emitGlobalAssign(ep, method));
@@ -631,9 +702,21 @@ ${assigns}
   }`;
 }
 
-function renderGlobalType(g: (typeof GLOBALS)[number], b: Buckets): string {
-  const live =
-    "live" in g && g.live
+function renderGlobalInstanceClass(g: Global, b: Buckets): string {
+  return `/** A single ${singular(g.name)} entry: unicum.${g.name}("..."). */
+class ${g.client} {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly ${g.key}: string,
+  ) {}
+
+${get(b.instance, g.name)}
+}`;
+}
+
+function renderGlobalType(g: Global, b: Buckets): string {
+  const live = g.live
       ? `  /** Currently-live tracked streamers across all regions, over SSE. Browser-only. */
   ${LIVE_METHOD}(
     onData: (streamers: LiveStreamer[]) => void,
@@ -641,19 +724,25 @@ function renderGlobalType(g: (typeof GLOBALS)[number], b: Buckets): string {
   ): Unsubscribe;`
       : "";
   const members = nonEmpty(get(b.nsMember, g.name, "\n"), live).join("\n");
-  return `type ${cap(g.name)}Namespace = {\n${members}\n};`;
+  const shape = `{\n${members}\n}`;
+  return g.key
+    ? `type ${cap(g.name)}Namespace = ((${g.key}: string) => ${g.client}) & ${shape};`
+    : `type ${cap(g.name)}Namespace = ${shape};`;
 }
 
 function renderGlobalGetter(g: (typeof GLOBALS)[number], b: Buckets): string {
-  const live =
-    "live" in g && g.live
+  const live = g.live
       ? `    ns.${LIVE_METHOD} = (onData, onError) =>
       subscribeStreamersLive(this.baseUrl, onData, onError);`
       : "";
   const assigns = nonEmpty(get(b.nsAssign, g.name, "\n"), live).join("\n");
+  const seed = g.key
+    ? `((${g.key}: string) =>
+      new ${g.client}(this.api, this.baseUrl, ${g.key})) as ${cap(g.name)}Namespace`
+    : `{} as ${cap(g.name)}Namespace`;
   return `  /** Global (not region-scoped) ${g.name}. */
   get ${g.name}(): ${cap(g.name)}Namespace {
-    const ns = {} as ${cap(g.name)}Namespace;
+    const ns = ${seed};
 ${assigns}
     return ns;
   }`;
@@ -674,7 +763,10 @@ function render(b: Buckets): string {
   const ogRes = ogResources(b);
   const hasOg = ogRes.length > 0;
 
-  const instanceClasses = RESOURCES.map((r) => renderInstanceClass(r, b)).join("\n\n");
+  const instanceClasses = [
+    ...RESOURCES.map((r) => renderInstanceClass(r, b)),
+    ...GLOBALS.filter((g) => g.key).map((g) => renderGlobalInstanceClass(g, b)),
+  ].join("\n\n");
   const namespaceTypes = RESOURCES.map((r) => renderNamespaceType(r, b)).join("\n\n");
   const namespaceGetters = RESOURCES.map((r) => renderNamespaceGetter(r, b)).join("\n\n");
   const globalTypes = GLOBALS.map((g) => renderGlobalType(g, b)).join("\n\n");
