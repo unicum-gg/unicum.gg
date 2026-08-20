@@ -7,6 +7,7 @@ import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { TankRender } from "@/components/tanks/detail/render";
+import { CommunityHeroBadge } from "@/components/tanks/detail/community/hero-badge";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
   TankHero,
@@ -45,6 +46,7 @@ export function TankShell({
   specs,
   videos,
   available,
+  rating,
   children,
 }: {
   region: Region;
@@ -58,6 +60,10 @@ export function TankShell({
   videos: TankVideoCardData[];
   /** The tabs that have something to show for this tank. */
   available: TankDetailTab[];
+  /** The community's verdict, for the badge under the title. Only the two
+   * figures the badge draws, not the whole summary: the hero renders on every
+   * tab and has no use for thirty reviews. */
+  rating: { overall: number | null; votes: number };
   children: React.ReactNode;
 }) {
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
@@ -202,6 +208,12 @@ export function TankShell({
                 {tierLabel} {meta.nation.toUpperCase()}{" "}
                 {classLabel.toLowerCase()} {meta.name}.
               </p>
+              <CommunityHeroBadge
+                region={region}
+                slug={slug}
+                overall={rating.overall}
+                votes={rating.votes}
+              />
             </div>
             {/* Covers everything above while a battle is playing, so the hero
               doubles as the player instead of the page growing a second one. */}

@@ -1,8 +1,9 @@
 import { UnicumError } from "@unicum.gg/sdk";
+import type { TankRatingSummary } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
-import { unicum } from "@/services/sdk";
+import { buildSafe, unicum } from "@/services/sdk";
 
 // The page consumes its own public API through the SDK: one composite
 // `GET /{region}/tanks/{slug}/detail` payload carries everything the layout and
@@ -71,6 +72,58 @@ export async function loadTankVideos(
 }
 
 /**
+ * The community's verdict on a tank, for the Community tab.
+ *
+ * Fetched on its own segment like the videos and the history, so a tank nobody
+ * has rated costs the other tabs nothing. The hero badge does not use this: it
+ * reads the three figures the detail payload already carries.
+ *
+ * `buildSafe`, not a bare catch. A catch here would swallow a runtime failure
+ * too, and this page is ISR: one timed-out revalidation would bake "nobody has
+ * rated this tank" into the cache for half an hour on a vehicle with four
+ * hundred votes, and drop its aggregateRating out of the markup Googlebot
+ * reads. Failing instead keeps the last good page, which is the whole reason
+ * `buildSafe` only silences the build.
+ */
+export async function loadTankRatings(
+  region: Region,
+  slug: string,
+): Promise<TankRatingSummary> {
+  return buildSafe(
+    () =>
+      unicum
+        .region(region)
+        .tanks(slug)
+        .ratings()
+        .then((r) => r as unknown as TankRatingSummary),
+    EMPTY_RATING_SUMMARY,
+  );
+}
+
+const EMPTY_RATING_SUMMARY: TankRatingSummary = {
+  tankId: 0,
+  votes: 0,
+  overall: null,
+  fun: null,
+  overallBayes: null,
+  funBayes: null,
+  overallStddev: null,
+  consensus: null,
+  overallDistribution: [],
+  funDistribution: [],
+  brackets: [],
+  regions: [],
+  axes: [],
+  axisVotes: 0,
+  avgVoterBattles: null,
+  hype: null,
+  perceivedPercentile: null,
+  measuredPercentile: null,
+  reviews: [],
+  reviewCount: 0,
+};
+
+/**
  * Which tabs have something to show for this tank, read from the payload rather
  * than from rendered content, so an unavailable tab costs nothing.
  *
@@ -93,5 +146,8 @@ export function availableTabs(detail: TankDetail): TankDetailTab[] {
     // nothing for them. An empty Videos tab is where the suggestion form lives,
     // so hiding it would make the first submission for a tank impossible.
     TankDetailTab.Videos,
+    // Same rule, same reason: an unrated tank is exactly the one whose page has
+    // to offer the form, or no vehicle could ever get its first vote.
+    TankDetailTab.Community,
   ];
 }

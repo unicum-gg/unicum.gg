@@ -41,6 +41,14 @@ export default async function TankLayout({
   if (!detail) notFound();
 
   const videos = await loadTankVideos(region, detail.slug);
+  // Read off the detail payload rather than fetched. The badge needs a score
+  // and a count, and this layout renders on every tab of every vehicle: asking
+  // the ratings endpoint here was a second SSR self-fetch per render, pulling
+  // back two histograms and thirty review bodies to print two numbers.
+  // Defaulted rather than assumed. The detail payload is cached for a day and
+  // is served by an API that can be one deploy behind this render, so a field
+  // this young has to be allowed to be missing.
+  const rating = detail.rating ?? { overall: null, votes: 0, reviewCount: 0 };
   const { meta } = detail;
   const tierLabel = meta.tier ? toRoman(meta.tier) : String(meta.tier);
   const tankUrl = `${APP.URL}${ROUTES.TANK(region, detail.slug)}`;
@@ -57,6 +65,14 @@ export default async function TankLayout({
           nation: meta.nation,
           type: meta.type,
           isPremium: meta.isPremium,
+          // Only ever the plain mean and the real counts: `aggregateRating` is
+          // a claim about what this page says, and the shrunk mean is a sort
+          // key that appears nowhere on it.
+          rating: {
+            average: rating.overall,
+            votes: rating.votes,
+            reviews: rating.reviewCount,
+          },
         })}
       />
       <JsonLd
@@ -74,6 +90,7 @@ export default async function TankLayout({
         specs={detail.specs as unknown as TankSpec | null}
         videos={videos}
         available={availableTabs(detail)}
+        rating={{ overall: rating.overall, votes: rating.votes }}
       >
         {children}
       </TankShell>

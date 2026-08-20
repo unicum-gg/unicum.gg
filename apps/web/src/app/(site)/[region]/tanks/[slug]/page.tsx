@@ -33,6 +33,7 @@ import { tankVideoSchema } from "@/lib/schema-org";
 import {
   availableTabs,
   loadTankDetail,
+  loadTankRatings,
   loadTankVideos,
   type TankDetail,
 } from "@/app/(site)/[region]/tanks/[slug]/detail";
@@ -80,6 +81,11 @@ function tabCopy(
         title: `${name} gameplay videos (${regionLabel})`,
         description: `Watch the ${name} in action: community-suggested battles on this tier ${tier} ${nation} tank, each opening at the moment it is played, with the map and result they happened on.`,
       };
+    case TankDetailTab.Community:
+      return {
+        title: `${name} player reviews and community rating (${regionLabel})`,
+        description: `What players think of the ${name}: the community's rating out of five, split by how well the voters play, set against how this tier ${tier} ${nation} tank actually performs, plus written reviews from accounts that have the battles in it.`,
+      };
     default:
       return {
         title: `${name} World of Tanks stats (${regionLabel}), tier ${tier} ${nation}`,
@@ -110,8 +116,13 @@ export async function tankMetadata(
   // but an empty one is thin content: keep it out of the index until it has a
   // video. The other tabs, and this one once populated, index as before.
   const noIndex =
-    tab === TankDetailTab.Videos &&
-    (await loadTankVideos(region, detail.slug).catch(() => [])).length === 0;
+    (tab === TankDetailTab.Videos &&
+      (await loadTankVideos(region, detail.slug).catch(() => [])).length === 0) ||
+    // Same rule for the Community tab, and the same reason: it is shown even
+    // unrated, because that is where the rating form lives, but a page whose
+    // only content is an empty form is not a page worth indexing.
+    (tab === TankDetailTab.Community &&
+      (await loadTankRatings(region, detail.slug)).votes === 0);
   return constructMetadata({
     title,
     description,
