@@ -1,0 +1,4 @@
+{
+  "setup": ["./.superset/setup.sh"],
+  "run": ["RUN_CRONS=0 pnpm dev"]
+}

@@ -52,6 +52,15 @@ pnpm dev
 
 `pnpm dev` starts the Next.js app (from `apps/web`) and, in local dev, the cron loop via its `src/instrumentation.ts`. In production the crons run in `apps/worker` instead.
 
+## Superset workspaces (optional)
+
+If you use [Superset](https://docs.superset.sh) to spin up isolated git-worktree workspaces, `.superset/config.json` wires the lifecycle for you:
+
+- **setup** (`.superset/setup.sh`, on workspace create): `pnpm install --frozen-lockfile`, then copies `apps/web/.env.local` and `apps/bot/.env.local` from the root checkout (`$SUPERSET_ROOT_PATH`).
+- **run** (Run button): `RUN_CRONS=0 pnpm dev`, the web dev server without a second cron loop, since the DB and Redis are shared.
+
+The env copy only works if the root checkout already holds the secrets. On a fresh clone those files are absent, so setup logs `skip ... absent from root checkout` and you fall back to `pnpm env:init` as above. This is entirely optional and unrelated to the standard `pnpm install` / `pnpm dev` flow.
+
 ## Database
 
 Apply migrations manually:
