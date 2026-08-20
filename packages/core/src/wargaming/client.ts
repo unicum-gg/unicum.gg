@@ -18,11 +18,16 @@ import { RedisRateLimiter } from "./redis-rate-limiter";
 const redis = getRedisClient();
 const cache: CacheOptions | undefined = redis ? { store: new RedisCacheStore(redis) } : undefined;
 
-// Fraction of each per-egress WG budget carved out for interactive calls; the
-// rest goes to the background pipeline. `iv + bg = rps`, so the total rate to WG
-// is unchanged (never above the per-IP G-Core budget) — we only split the
-// existing budget into lanes, we never add to it.
-const INTERACTIVE_RPS_FRACTION = 1 / 3;
+// Per-egress budget reserved for interactive calls; the background pipeline gets
+// the rest (`bg = rps - iv`), so `iv + bg = rps` and the total rate to WG is
+// unchanged (never above the per-IP G-Core budget) — we only split the existing
+// budget into lanes, we never add to it. A fixed reserve rather than a fraction
+// of `rps`: `rps` is the region's G-Core per-IP ceiling, not its interactive
+// demand, so a fraction would over-reserve the higher-ceiling regions (NA/Asia
+// at 8 rps have less traffic than EU at 6). A constant lane keeps interactive
+// responsive everywhere while `bg` grows with the region's ceiling (EU 4, NA/Asia
+// 6). Clamped so `bg` keeps at least 1.
+const INTERACTIVE_RESERVE_RPS = 2;
 
 // True in the worker (its bootstrap sets `__dbContext = "background"`), false in
 // the web (requests stay "request"). Read live, not at setup: it decides which
@@ -55,7 +60,7 @@ const rateLimit: { factory: RateLimiterFactory } | undefined = redis
             rps,
           );
         }
-        const ivRps = Math.max(1, Math.round(rps * INTERACTIVE_RPS_FRACTION));
+        const ivRps = Math.min(INTERACTIVE_RESERVE_RPS, rps - 1);
         const bgRps = rps - ivRps;
         const bg = new RedisRateLimiter(
           redis,
