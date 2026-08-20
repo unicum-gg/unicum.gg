@@ -96,6 +96,22 @@ const TTL_SECONDS = Number(process.env.NEXT_ISR_CACHE_TTL_SECONDS) || 172_800;
 const MAX_REDIS_KEYS = Number(process.env.NEXT_ISR_CACHE_MAX_KEYS) || 10_000;
 const TIMEOUT_MS = 1_000;
 
+// Prefer a DEDICATED Redis for the ISR cache, falling back to the shared one.
+//
+// The shared instance runs `allkeys-lru` at its memory ceiling, mixing this
+// cache with the WG response cache, the live pub/sub and sessions. A leaderboard
+// page is read from the ORIGIN only when its edge (CF) copy expires — every
+// ~30-60 min — while the WG cache is touched every second, so under LRU the
+// leaderboard HTML is always the "least recently used" and gets evicted first.
+// The next visitor then eats a full synchronous regeneration (2-7s), and with no
+// `loading.tsx` the App Router freezes on the previous page until the RSC lands.
+//
+// On an instance holding ONLY ISR entries, the same leaderboards are among the
+// MOST recently accessed (the one-shot entity long tail is older), so they
+// survive and the origin serves stale instantly. Point `NEXT_ISR_REDIS_URL` at
+// that instance; unset, it degrades to the shared Redis exactly as before.
+const ISR_REDIS_URL = process.env.NEXT_ISR_REDIS_URL || process.env.REDIS_URL;
+
 // In-memory hot tier + fallback. Also the sole store in dev / when Redis is
 // down. Small, per-instance; holds the parsed entry objects directly.
 const LRU_MAX_SIZE = 256;
@@ -107,7 +123,7 @@ function lruSet(key, entry) {
 }
 
 // Redis only at runtime in production: never during `next build`
-// (PHASE_PRODUCTION_BUILD), and never in dev — dev's `REDIS_URL` points at the
+// (PHASE_PRODUCTION_BUILD), and never in dev — dev's Redis URL points at the
 // SHARED prod Redis, which a dev run must not write ISR entries into. The
 // build fingerprint is the third condition: see `buildFingerprint` above.
 let redis = null;
@@ -115,11 +131,11 @@ let ready = false;
 if (
   process.env.NODE_ENV === "production" &&
   process.env.NEXT_PHASE !== PHASE_PRODUCTION_BUILD &&
-  process.env.REDIS_URL &&
+  ISR_REDIS_URL &&
   DEPLOY
 ) {
   try {
-    redis = new Redis(process.env.REDIS_URL, {
+    redis = new Redis(ISR_REDIS_URL, {
       family: 0, // dual-stack DNS (some managed Redis hosts resolve via IPv6)
       lazyConnect: true,
       maxRetriesPerRequest: 2,

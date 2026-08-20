@@ -11,7 +11,7 @@ import { Region, REGION_LABEL } from "@unicum.gg/wargaming";
 // The SDK calls fail-soft to an empty shell at build time (a build must not
 // depend on a running API); the first revalidation after deploy fills it in.
 export const dynamic = "force-static";
-export const revalidate = 1800; // 30 min, matches the detail pages (board data is materialized hourly)
+export const revalidate = 3600; // 1h: matches the hourly-materialized board data (1800 regenerated twice per data cycle for nothing)
 
 export async function generateMetadata(): Promise<Metadata> {
   const label = REGION_LABEL[Region.EU];
