@@ -92,8 +92,9 @@ export function CookieConsent() {
                   <div>
                     <p className="text-xs font-medium">Audience measurement</p>
                     <p className="text-xs text-muted-foreground">
-                      Umami, Google Analytics. Help us understand how the site
-                      is used.
+                      Google Analytics, which sets cookies to help us understand
+                      how the site is used. Anonymous, cookieless analytics
+                      (Umami) stay on either way.
                     </p>
                   </div>
                   <Switch
