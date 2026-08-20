@@ -139,7 +139,14 @@ if (
       family: 0, // dual-stack DNS (some managed Redis hosts resolve via IPv6)
       lazyConnect: true,
       maxRetriesPerRequest: 2,
-      retryStrategy: (times) => (times > 5 ? null : Math.min(times * 500, 5_000)),
+      // Reconnect FOREVER (capped backoff), never `null`: returning null makes
+      // ioredis give up permanently, so a Redis blip longer than the old ~7.5s
+      // window (e.g. the dedicated cache Redis restarting) severed the ISR cache
+      // until the next web deploy, silently dropping every page to the in-memory
+      // tier. Individual commands still fail-open fast (maxRetriesPerRequest +
+      // withTimeout, and every op is gated on `ready`), so retrying the socket
+      // forever never blocks a request; it just lets the cache heal on its own.
+      retryStrategy: (times) => Math.min(times * 200, 2_000),
     });
     redis.on("ready", () => {
       ready = true;
