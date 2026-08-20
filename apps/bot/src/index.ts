@@ -24,6 +24,10 @@ import {
   handleVideoReview,
   isVideoReviewButton,
 } from "./plugins/wot/moderation/videos.js";
+import {
+  handleRatingReview,
+  isRatingReviewButton,
+} from "./plugins/wot/moderation/reviews.js";
 import { bindPresenceClient } from "./lib/presence.js";
 
 async function main(): Promise<void> {
@@ -63,6 +67,12 @@ async function main(): Promise<void> {
     // state is in memory, and a card posted before a restart would go dead.
     if (interaction.isButton() && isVideoReviewButton(interaction.customId)) {
       void handleVideoReview(interaction);
+      return;
+    }
+    // The written opinions attached to a tank rating. Same routing rule and the
+    // same reason for it; only the prose is on trial, the stars already count.
+    if (interaction.isButton() && isRatingReviewButton(interaction.customId)) {
+      void handleRatingReview(interaction);
     }
   });
 
