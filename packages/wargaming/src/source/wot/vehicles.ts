@@ -2,6 +2,7 @@ import { XMLParser } from "fast-xml-parser";
 import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
+import { parsePo } from "./localization";
 import { fetchNations } from "./nations";
 import {
   BRANCH_BY_REGION,
@@ -46,16 +47,6 @@ type RawTankEntry = {
 };
 type RawListXml = { root?: Record<string, RawTankEntry> };
 
-function unescapePo(s: string): string {
-  return s.replace(/\\n/g, "\n").replace(/\\"/g, '"').replace(/\\\\/g, "\\");
-}
-function parsePo(text: string): Map<string, string> {
-  const map = new Map<string, string>();
-  const re = /^msgid\s+"((?:[^"\\]|\\.)*)"\s*\n\s*msgstr\s+"((?:[^"\\]|\\.)*)"/gm;
-  let m: RegExpExecArray | null;
-  while ((m = re.exec(text)) !== null) map.set(unescapePo(m[1]), unescapePo(m[2]));
-  return map;
-}
 function extractI18nKey(userString: string | undefined): string {
   if (!userString) return "";
   const i = userString.indexOf(":");
