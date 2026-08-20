@@ -6,6 +6,7 @@ export * from "./vehicle-modes";
 export * from "./crew";
 export * from "./ratings";
 export * from "./server-online";
+export * from "./tank-ratings";
 export * from "./tank-stats";
 export * from "./tank-spec-fields";
 export * from "./tanks";

@@ -21,6 +21,7 @@ export * from "./clan-name-history";
 export * from "./player-refresh-queue";
 export * from "./player-snapshots";
 export * from "./tank-mom";
+export * from "./tank-ratings";
 export * from "./tank-videos";
 export * from "./tank-moe";
 export * from "./tank-snapshots";
