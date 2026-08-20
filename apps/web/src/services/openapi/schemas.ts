@@ -285,6 +285,12 @@ export const compareTagsQuery = z.object({
   }),
 });
 
+export const compareSlugsQuery = z.object({
+  slugs: z.array(z.string()).meta({
+    description: "Vehicle slugs to compare (2 to 4).",
+  }),
+});
+
 export const periodField = z.enum(TopPlayersPeriod).meta({
   description: "Leaderboard time window.",
   example: "overall",

@@ -36,6 +36,20 @@
   background-color: rgb(255 255 255 / 0.1);
 }
 
+/* `screen-line-after` paints its rule at z-index -1, behind the content, so any
+   opaque background above it hides it. A table whose first column is sticky
+   needs exactly such a background (to hide the columns scrolling under it), and
+   it swallowed the panel's closing line on the label column. Put this on the
+   table and the last row's own first cell draws that line instead, in the same
+   colour. */
+.screen-line-after-cell > tbody:last-of-type > tr:last-child > :first-child {
+  box-shadow: inset 0 -1px 0 rgb(0 0 0 / 0.1);
+}
+
+.dark .screen-line-after-cell > tbody:last-of-type > tr:last-child > :first-child {
+  box-shadow: inset 0 -1px 0 rgb(255 255 255 / 0.1);
+}
+
 /* Pattern utilities */
 .dot-pattern {
   background-image: radial-gradient(rgb(0 0 0 / 0.05) 1px, transparent 0);

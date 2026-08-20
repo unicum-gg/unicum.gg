@@ -719,6 +719,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Compare tanks
+         * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. Duplicate slugs collapse; a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
+         */
+        get: operations["get-{region}-tanks-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/ratings": {
         parameters: {
             query?: never;
@@ -1471,6 +1491,26 @@ export interface paths {
          * @description A side-by-side comparison card (up to 4 players, WNX each) as a 1200×630 PNG.
          */
         get: operations["get-og-{region}-players-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tanks/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tanks comparison OG card
+         * @description A side-by-side comparison card (up to 4 vehicles) as a 1200×630 PNG: each vehicle's render over the hangar floor, its tier and class, and its overall catalogue score.
+         */
+        get: operations["get-og-{region}-tanks-compare"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3161,6 +3201,10 @@ export interface components {
          * @enum {string}
          */
         spawnDirectionField: "north" | "south" | "east" | "west";
+        specRange: {
+            low: number;
+            high: number;
+        };
         starBar: {
             /** @description 1 to 5. */
             stars: number;
@@ -3290,6 +3334,65 @@ export interface components {
             /** Format: date-time */
             capturedAt: Date;
             tanks: components["schemas"]["ChangedTank"][];
+        };
+        /** @description The mountable catalogues shared by the compared vehicles, described once: every device, directive, consumable and crew skill any of them can mount. Each vehicle references them by key. */
+        TankCompareCatalog: {
+            equipment: components["schemas"]["loadoutEquipment"][];
+            directives: components["schemas"]["loadoutDirective"][];
+            consumables: components["schemas"]["loadoutConsumable"][];
+            crewSkills: components["schemas"]["crewSkill"][];
+        };
+        /** @description One column of a comparison: a vehicle's identity, what it is made of, what it can mount, and its server-average performance. */
+        TankCompareVehicle: {
+            tankId: number;
+            /** @description Canonical slug. Callers that reached a vehicle through a legacy id or wrong-case slug should redirect to it. */
+            slug: string;
+            meta: components["schemas"]["VehicleMeta"];
+            /** @description The vehicle's top-configuration combat specification, same shape as the `/specifications` endpoints. */
+            specs: string | null;
+            modules: components["schemas"]["tankModuleNode"][];
+            /** @description Every selectable module combination with its derived specs, so a column re-renders its characteristics from the modules picked on it. */
+            configs: components["schemas"]["tankConfig"][];
+            modes: components["schemas"]["vehicleMode"][];
+            /** @description The vehicle's equipment slots plus the catalogue keys it can mount, resolved against `catalog`. Null when the wot-src catalogue has nothing for it. */
+            loadout: {
+                slots: components["schemas"]["equipmentSlot"][];
+                equipmentKeys: string[];
+                directiveKeys: string[];
+                consumableKeys: string[];
+            } | null;
+            /** @description The vehicle's crew composition plus the skill keys its members can train, resolved against `catalog.crewSkills`. */
+            crew: {
+                members: components["schemas"]["crewMember"][];
+                skillKeys: string[];
+            } | null;
+            fieldMods: components["schemas"]["tankFieldMods"] | null;
+            skillTree: components["schemas"]["tankSkillTree"] | null;
+            stats: components["schemas"]["TankServerStats"] | null;
+            moe: {
+                mark1: number;
+                mark2: number;
+                mark3: number;
+            } | null;
+            mastery: {
+                class3: number;
+                class2: number;
+                class1: number;
+                ace: number;
+            } | null;
+            wn8Expected: {
+                expDamage: number;
+                expSpot: number;
+                expFrag: number;
+                expDef: number;
+                expWinRate: number;
+            } | null;
+            wnxExpected: {
+                damage: number;
+                frags: number;
+                spots: number;
+                assist: number;
+            } | null;
         };
         tankConfig: {
             /** @description The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class). */
@@ -3756,21 +3859,41 @@ export interface components {
          * @enum {string}
          */
         tankReviewStatusField: "none" | "pending" | "approved" | "rejected";
+        /** @description Everything a side-by-side vehicle comparison renders: each vehicle's configurable data, the mountable catalogues they share, and the catalogue-wide spread of every characteristic. */
+        TanksCompare: {
+            /** @description The compared vehicles, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. */
+            vehicles: components["schemas"]["TankCompareVehicle"][];
+            catalog: components["schemas"]["TankCompareCatalog"];
+            /** @description Where each specification sits across the whole vehicle catalogue, as its 5th (`low`) and 95th (`high`) percentile, keyed by specification field. Percentiles rather than min/max so a single outlier vehicle doesn't flatten the scale. Lets a client read a value as a position in the catalogue (and score a vehicle per category) rather than as a bare number. */
+            ranges: {
+                [key: string]: components["schemas"]["specRange"];
+            };
+        };
+        /** @description Everything a side-by-side vehicle comparison renders: each vehicle's configurable data, the mountable catalogues they share, and the catalogue-wide spread of every characteristic. */
+        TanksCompareResponse: {
+            /** @description The compared vehicles, in the requested order. A slug the catalogue doesn't know is dropped rather than failing the request, so the array can be shorter than the query. */
+            vehicles: components["schemas"]["TankCompareVehicle"][];
+            catalog: components["schemas"]["TankCompareCatalog"];
+            /** @description Where each specification sits across the whole vehicle catalogue, as its 5th (`low`) and 95th (`high`) percentile, keyed by specification field. Percentiles rather than min/max so a single outlier vehicle doesn't flatten the scale. Lets a client read a value as a position in the catalogue (and score a vehicle per category) rather than as a bare number. */
+            ranges: {
+                [key: string]: components["schemas"]["specRange"];
+            };
+        };
         TankSearchChunk: unknown;
         TankSearchResponse: {
             results: components["schemas"]["TankSummary"][];
         };
-        /** @description Server-average performance across tracked players. */
+        /** @description Server-wide performance for a tank, averaged over tracked players. moeN/momN are holder counts among tracked players; null until the by-tank cron has coverage. */
         TankServerStats: {
             players: number;
             avg_battles: number;
             total_battles: number | null;
             avg_damage: number;
             winrate: number;
+            player_wr: number | null;
             wn7: number | null;
             wn8: number | null;
             wnx: number | null;
-            player_wr: number | null;
             avg_spots: number | null;
             avg_assist: number | null;
             kdr: number | null;
@@ -5093,6 +5216,32 @@ export interface operations {
             };
         };
     };
+    "get-{region}-tanks-compare": {
+        parameters: {
+            query: {
+                /** @description Vehicle slugs to compare (2 to 4). */
+                slugs: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TanksCompare"];
+                };
+            };
+        };
+    };
     "get-{region}-tanks-ratings": {
         parameters: {
             query?: never;
@@ -6005,6 +6154,32 @@ export interface operations {
             query: {
                 /** @description Player nicknames to compare (2 to 4). */
                 names: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tanks-compare": {
+        parameters: {
+            query: {
+                /** @description Vehicle slugs to compare (2 to 4). */
+                slugs: string[];
             };
             header?: never;
             path: {

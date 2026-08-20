@@ -1,4 +1,4 @@
-import type { TankConfig, TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
+import type { TankConfigModules } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import { VehicleModeKind } from "@unicum.gg/shared";
 
 /** The module slots, in the order they are encoded in the URL. */
@@ -54,7 +54,11 @@ export interface DecodedConfig {
 export interface EncodeInput {
   shell: number;
   modules: (number | null)[];
-  stockModules: (number | null)[];
+  /** The modules the build opened on, which the URL leaves unwritten. It is the
+   * stock configuration on a tank page and the top one in a comparison (see
+   * `useTankBuild`), so an untouched vehicle produces no token at all in either
+   * place, rather than a link full of module ids nobody chose. */
+  defaultModules: (number | null)[];
   equipment: (string | null)[];
   roleCats: (string | null)[];
   slots: { role?: boolean }[];
@@ -101,7 +105,7 @@ function buildSetupString(input: EncodeInput): string {
   if (input.shell > 0) add(K.shell, String(input.shell));
 
   const modulesChanged = input.modules.some(
-    (id, i) => id !== input.stockModules[i],
+    (id, i) => id !== input.defaultModules[i],
   );
   if (modulesChanged) add(K.modules, csv(input.modules));
 
@@ -226,29 +230,30 @@ export function decodeSetup(token: string | null | undefined): DecodedConfig {
   }
 }
 
-/** Find the config index that mounts the requested module ids (every specified
- * slot must match), falling back to the stock index for an unknown combination. */
-export function resolveModuleIdx(
-  configs: TankConfig[],
-  ids: (number | null)[] | undefined,
-  stockIdx: number,
-): number {
-  if (!ids) return stockIdx;
-  let best = -1;
-  let bestScore = -1;
-  configs.forEach((c, i) => {
-    let score = 0;
-    let ok = true;
-    MODULE_SLOTS.forEach((slot, si) => {
-      const want = ids[si];
-      if (want == null) return;
-      if (c.modules[slot] === want) score += 1;
-      else ok = false;
-    });
-    if (ok && score > bestScore) {
-      bestScore = score;
-      best = i;
-    }
-  });
-  return best >= 0 ? best : stockIdx;
+// A comparison carries one build per column in the same `setup` param, comma
+// separated and index-aligned with the compared vehicles (an empty slot is a
+// pristine column). Base64url never produces a comma, so the tokens can't be
+// confused with the separator, and a single-vehicle page reads the first
+// position as its own token unchanged.
+
+/** Join per-column tokens into the shared `setup` value, or null when every
+ * column is pristine (so the caller drops the param entirely). */
+export function encodeSetups(tokens: (string | null)[]): string | null {
+  if (!tokens.some(Boolean)) return null;
+  // Trailing empty columns carry no information, so they're dropped.
+  const last = tokens.reduce((n, t, i) => (t ? i : n), -1);
+  return tokens
+    .slice(0, last + 1)
+    .map((t) => t ?? "")
+    .join(",");
+}
+
+/** Split the shared `setup` value into one token per column, padded to `count`
+ * so every column reads a defined slot. */
+export function decodeSetups(
+  value: string | null | undefined,
+  count: number,
+): (string | null)[] {
+  const parts = value ? value.split(",") : [];
+  return Array.from({ length: count }, (_, i) => parts[i] || null);
 }

@@ -409,6 +409,8 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   list(): RequestHandle<Data<"/{region}/tanks">>;
   /** Tank changes feed */
   changes(): RequestHandle<Data<"/{region}/tanks/changes">>;
+  /** Compare tanks */
+  compare(slugs: NonNullable<QueryOf<"/{region}/tanks/compare">>["slugs"]): RequestHandle<Data<"/{region}/tanks/compare">>;
   /** Tanks economics */
   economics(): RequestHandle<Data<"/{region}/tanks/economics">>;
   /** Tanks Marks of Excellence */
@@ -597,6 +599,14 @@ class RegionClient {
             params: { path: { region: this.region } },
           }),
       );
+    ns.compare = (slugs) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tanks/compare", { region: this.region }, { slugs }),
+        () =>
+          this.api.GET("/{region}/tanks/compare", {
+            params: { path: { region: this.region }, query: { slugs } },
+          }),
+      );
     ns.economics = () =>
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks/economics", { region: this.region }),
@@ -757,7 +767,9 @@ type OgPlayers = ((nickname: string) => RequestHandle<unknown>) & {
   compare(names: NonNullable<QueryOf<"/og/{region}/players/compare">>["names"]): RequestHandle<unknown>;
 };
 
-type OgTanks = (slug: string) => RequestHandle<unknown>;
+type OgTanks = ((slug: string) => RequestHandle<unknown>) & {
+  compare(slugs: NonNullable<QueryOf<"/og/{region}/tanks/compare">>["slugs"]): RequestHandle<unknown>;
+};
 
 /** The `/og/{region}/…` image cards, mirroring the entity paths: their `.url()`
  * is the stable PNG URL (used for og:image / embeds; not meant to be awaited). */
@@ -820,14 +832,23 @@ class OgRegionClient {
   }
 
   get tanks(): OgTanks {
-    return (slug: string) =>
+    const ns = ((slug: string) =>
       handle(
         buildUrl(this.baseUrl, "/og/{region}/tanks/{slug}", { region: this.region, slug }),
         () =>
           this.api.GET("/og/{region}/tanks/{slug}", {
             params: { path: { region: this.region, slug } },
           }),
+      )) as OgTanks;
+    ns.compare = (slugs) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/tanks/compare", { region: this.region }, { slugs }),
+        () =>
+          this.api.GET("/og/{region}/tanks/compare", {
+            params: { path: { region: this.region }, query: { slugs } },
+          }),
       );
+    return ns;
   }
 }
 

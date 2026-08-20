@@ -114,6 +114,15 @@ const ROUTES = {
   //   `proxy.ts` redirects the region-less form onto the visitor's region.
   TANK: (region: Region, slug: string) =>
     pathcat("/:region/tanks/:slug", { region, slug }),
+  // Vehicles side by side, the game's Compare Vehicles screen. Same shape as the
+  // player and clan comparisons: the first vehicle owns the path, the rest hang
+  // off `/vs`. Each column's build rides in the `setup` query param.
+  COMPARE_TANKS: (region: Region, [first, ...rest]: string[]) =>
+    pathcat("/:region/tanks/:first/vs/:rest", {
+      region,
+      first,
+      rest: rest.map(encodeURIComponent).join("/"),
+    }),
   TANKS: (region: Region) =>
     region === Region.EU ? "/tanks" : pathcat("/:region/tanks", { region }),
   TANKS_CHANGES: (region: Region) =>
