@@ -38,6 +38,11 @@ import {
 import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import {
+  TankCompareCell,
+  TankCompareHead,
+} from "@/components/tanks/list/compare-cell";
+import type { TankSelection } from "@/hooks/use-compare-selection";
 import ROUTES from "@/constants/routes";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
@@ -94,9 +99,12 @@ export function useSpecColumns(): [Set<string>, (key: string) => void] {
 export function TanksSpecsTable({
   region,
   rows,
+  selection,
 }: {
   region: Region;
   rows: TankListItem[];
+  /** When set, each row offers a comparison checkbox. */
+  selection?: TankSelection;
 }) {
   const [selected] = useSpecColumns();
   // Keep the canonical (grouped) order regardless of toggle order.
@@ -171,6 +179,7 @@ export function TanksSpecsTable({
         <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_thead_th:first-child>button]:pl-4!">
           <TableHeader>
             <TableRow>
+              <TankCompareHead selection={selection} />
               <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
@@ -195,6 +204,11 @@ export function TanksSpecsTable({
           <TableBody>
             {paged.map((t) => (
               <TableRow key={t.tankId}>
+                <TankCompareCell
+                  selection={selection}
+                  slug={t.slug}
+                  name={t.shortName || t.name}
+                />
                 <TableCell className="text-center">
                   <NationFlag nation={t.nation} region={region} />
                 </TableCell>

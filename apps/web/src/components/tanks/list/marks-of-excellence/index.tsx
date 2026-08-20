@@ -34,6 +34,11 @@ import {
 import {
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import {
+  TankCompareCell,
+  TankCompareHead,
+} from "@/components/tanks/list/compare-cell";
+import type { TankSelection } from "@/hooks/use-compare-selection";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -141,9 +146,12 @@ function sortValue(
 export function TanksMoeTable({
   region,
   rows,
+  selection,
 }: {
   region: Region;
   rows: TankListItem[];
+  /** When set, each row offers a comparison checkbox. */
+  selection?: TankSelection;
 }) {
   const [sort, setSort] = useState<SortState>({
     key: "mark3",
@@ -219,6 +227,7 @@ export function TanksMoeTable({
         <Table className="my-0! [&_td]:py-1.5! [&_th]:whitespace-nowrap [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-4!">
           <TableHeader>
             <TableRow>
+              <TankCompareHead selection={selection} />
               <SortHead sort={sort} col="nation" onToggle={toggleSort} align="center" tip="Nation" headClassName="w-[72px] min-w-[72px]">
                 <TankopediaHeaderIcon name="nation" />
               </SortHead>
@@ -243,6 +252,11 @@ export function TanksMoeTable({
           <TableBody>
             {paged.map((t) => (
               <TableRow key={t.tankId}>
+                <TankCompareCell
+                  selection={selection}
+                  slug={t.slug}
+                  name={t.shortName || t.name}
+                />
                 <TableCell className="text-center">
                   <NationFlag nation={t.nation} region={region} />
                 </TableCell>

@@ -28,6 +28,8 @@ import {
 } from "@/components/tanks/list/specifications";
 import { TanksTable } from "@/components/tanks/list/performances";
 import { Panel, PanelContent } from "@/components/panel";
+import { TankCompareBar } from "@/components/tanks/list/compare-bar";
+import { useTankSelection } from "@/hooks/use-compare-selection";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -167,6 +169,22 @@ export function TanksIndex({
     RANGE_DEFAULT[activeTab],
   );
 
+  // Vehicles picked out of the list on their way to a comparison. Held in the
+  // query string (see the hook), which is what the tab bar carries across, so a
+  // pick made while reading the damage per minute is still there after switching
+  // to the mark thresholds.
+  const selection = useTankSelection();
+  // Chip labels. A slug picked on another tab may not be in this tab's rows yet
+  // (its group loads on first open), so the bar falls back to the slug itself
+  // rather than dropping the pick.
+  const selectedNames = useMemo(() => {
+    const wanted = new Set(selection.slugs);
+    const names = new Map<string, string>();
+    for (const t of rows)
+      if (wanted.has(t.slug)) names.set(t.slug, t.shortName || t.name);
+    return names;
+  }, [rows, selection.slugs]);
+
   // The href carries the tab alone, so it is what crawlers follow and what Next
   // prefetches. The click adds the current filters (they live in the query
   // string) so switching tab keeps them, then navigates for real.
@@ -194,23 +212,48 @@ export function TanksIndex({
         ) : (
           <>
             {tab === TankTab.Performances && (
-              <TanksTable region={region} rows={filtered} />
+              <TanksTable
+                region={region}
+                rows={filtered}
+                selection={selection}
+              />
             )}
             {tab === TankTab.Specifications && (
-              <TanksSpecsTable region={region} rows={filtered} />
+              <TanksSpecsTable
+                region={region}
+                rows={filtered}
+                selection={selection}
+              />
             )}
             {tab === TankTab.Economics && (
-              <TanksEconTable region={region} rows={filtered} />
+              <TanksEconTable
+                region={region}
+                rows={filtered}
+                selection={selection}
+              />
             )}
             {tab === TankTab.MarksOfMastery && (
-              <TanksMasteryTable region={region} rows={filtered} />
+              <TanksMasteryTable
+                region={region}
+                rows={filtered}
+                selection={selection}
+              />
             )}
             {tab === TankTab.MarksOfExcellence && (
-              <TanksMoeTable region={region} rows={filtered} />
+              <TanksMoeTable
+                region={region}
+                rows={filtered}
+                selection={selection}
+              />
             )}
           </>
         )}
       </div>
+      <TankCompareBar
+        region={region}
+        selection={selection}
+        names={selectedNames}
+      />
     </Panel>
   );
 }
