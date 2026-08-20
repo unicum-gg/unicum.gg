@@ -18,17 +18,59 @@ import { RedisRateLimiter } from "./redis-rate-limiter";
 const redis = getRedisClient();
 const cache: CacheOptions | undefined = redis ? { store: new RedisCacheStore(redis) } : undefined;
 
+// Fraction of each per-egress WG budget carved out for interactive calls; the
+// rest goes to the background pipeline. `iv + bg = rps`, so the total rate to WG
+// is unchanged (never above the per-IP G-Core budget) — we only split the
+// existing budget into lanes, we never add to it.
+const INTERACTIVE_RPS_FRACTION = 1 / 3;
+
+// True in the worker (its bootstrap sets `__dbContext = "background"`), false in
+// the web (requests stay "request"). Read live, not at setup: it decides which
+// lane a call draws from, and it is stable per process in production (the web
+// runs no crons: RUN_CRONS=0). Read defensively so this module needs no global
+// type wiring.
+const isBackground = (): boolean =>
+  (globalThis as { __dbContext?: string }).__dbContext === "background";
+
 // The rate-limit key includes the egress IP when multi-egress is on, so each
 // source IP keeps its own G-Core per-IP budget (see wargaming DEFAULT_WG_RPS).
+//
+// Two lanes per egress so the background snapshot pipeline (the heavy, steady
+// consumer, in the worker) can never starve interactive calls (search,
+// players-online, on-demand player detail, in the web). Both processes share one
+// Redis, so a single FIFO token bucket let the pipeline's workers drive it deep
+// negative under a backlog, and every interactive call inherited the same wait
+// (observed ~43s: search and the online counter timing out). Each lane is its
+// own bucket; the pipeline can saturate `bg` without touching `iv`. Portal
+// (1 rps/region) is too small to split, so it keeps one shared bucket.
 const rateLimit: { factory: RateLimiterFactory } | undefined = redis
   ? {
-      factory: ({ region, kind, rps, egress }) =>
-        new RedisRateLimiter(
+      factory: ({ region, kind, rps, egress }) => {
+        const suffix = egress ? `:${egress}` : "";
+        if (rps < 2) {
+          return new RedisRateLimiter(
+            redis,
+            `wg:rl:${kind}:${region}${suffix}`,
+            rps,
+            rps,
+          );
+        }
+        const ivRps = Math.max(1, Math.round(rps * INTERACTIVE_RPS_FRACTION));
+        const bgRps = rps - ivRps;
+        const bg = new RedisRateLimiter(
           redis,
-          `wg:rl:${kind}:${region}${egress ? `:${egress}` : ""}`,
-          rps,
-          rps,
-        ),
+          `wg:rl:${kind}:${region}:bg${suffix}`,
+          bgRps,
+          bgRps,
+        );
+        const iv = new RedisRateLimiter(
+          redis,
+          `wg:rl:${kind}:${region}:iv${suffix}`,
+          ivRps,
+          ivRps,
+        );
+        return { acquire: () => (isBackground() ? bg : iv).acquire() };
+      },
     }
   : undefined;
 
