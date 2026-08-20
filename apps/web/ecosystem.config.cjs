@@ -11,12 +11,21 @@ const instances = process.env.WEB_CLUSTER_INSTANCES
   : Math.max(2, os.cpus().length - 3);
 
 // Each worker is its own process with its own postgres pool, so the per-worker
-// pool must be sized as ~(connection budget / instances) to stay under postgres's
-// max_connections=100 (leaving ~30 for the worker service's background pool +
-// headroom). See DB_POOL_MAX in packages/core/src/db.
+// pool must be sized as ~(web budget / instances). The server runs
+// max_connections=200 (set in the Coolify custom postgres config, see AGENTS.md):
+// 60 here, 40 for the worker service's background pool, and the ~100 left over
+// absorb everything else that reaches this same server, because there is no dev
+// database: the on-host `next build` (4 SSG workers x 3), an open PR's preview
+// deployment, every `pnpm dev` worktree (16 each), psql, drizzle-studio and the
+// backups. A pool holds its historical peak concurrency rather than shrinking on
+// idle under steady traffic, so treat these as standing costs, not as burst
+// headroom. See DB_POOL_MAX / DB_BACKGROUND_POOL_MAX in packages/core/src/db.
+//
+// The 4 floor wins over the division past 15 instances; a host that big needs
+// the budget revisited rather than this arithmetic trusted.
 const dbPoolMax = process.env.DB_POOL_MAX
   ? Number(process.env.DB_POOL_MAX)
-  : Math.max(4, Math.floor(50 / instances));
+  : Math.max(4, Math.floor(60 / instances));
 
 // PM2 loads this at runtime and reads plain CJS (not TS/tsx), so it stays .cjs;
 // the JSDoc gives editor type-checking of the config shape without a runtime dep.
@@ -41,9 +50,16 @@ module.exports = {
         // start` avoided this by binding via HOST instead.
         HOSTNAME: "0.0.0.0",
         DB_POOL_MAX: String(dbPoolMax),
+        // Pin the cron gate here rather than trusting the Coolify UI value.
+        // `instrumentation.ts` boots the crons unless this is exactly "0" or
+        // "false", and each of the N cluster workers that did would open its own
+        // 40-connection background pool: 5 x (40 + 12) = 260 against a 200
+        // connection server. The dedicated worker service owns the crons.
+        RUN_CRONS: process.env.RUN_CRONS || "0",
       },
-      // Safety nets: replace a worker that leaks past the limit, and give the
-      // SIGTERM drain (closeDbPools waits up to 5s) time before a hard kill.
+      // Safety nets: replace a worker that leaks past the limit, and give Next's
+      // own SIGTERM cleanup (it closes the HTTP server and lets in-flight
+      // requests finish before exiting) time before a hard kill.
       // Sized so instances x cap stays under the container's 8g memory limit
       // (the default 5 workers x 1200M ~= 6g, headroom for the master + spikes).
       max_memory_restart: process.env.WEB_MAX_MEMORY_RESTART || "1200M",
