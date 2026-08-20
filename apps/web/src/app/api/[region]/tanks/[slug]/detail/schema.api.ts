@@ -502,6 +502,18 @@ export const TankDetailResponse = z
       description:
         "Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility.",
     }),
+    rating: z
+      .object({
+        overall: z.number().nullable().meta({
+          description: "Plain mean of the community's Overall stars, 1 to 5.",
+        }),
+        votes: z.number().int(),
+        reviewCount: z.number().int(),
+      })
+      .meta({
+        description:
+          "The community's verdict in three figures, for the hero badge and the page's structured data. The full breakdown is on `/ratings`.",
+      }),
   })
   .meta({
     id: "TankDetail",

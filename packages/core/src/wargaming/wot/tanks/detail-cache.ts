@@ -26,8 +26,21 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  */
 export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
 
+/**
+ * Generation of the payload shape, in the key.
+ *
+ * Entries outlive a deploy by up to 26 hours, so a field added to the payload
+ * is a field absent from every warm entry until the TTL turns over: the code
+ * expects it, the cache does not have it, and the page crashes on a hit and
+ * works on a miss. Bumping this on any change to the assembled shape retires
+ * the old generation instead of shipping that window.
+ *
+ * v2: the community rating headline joined the payload.
+ */
+const SHAPE_VERSION = 2;
+
 function key(region: Region, slug: string): string {
-  return `tankdetail:${region}:${slug.toLowerCase()}`;
+  return `tankdetail:v${SHAPE_VERSION}:${region}:${slug.toLowerCase()}`;
 }
 
 /** Cached JSON body for this (region, slug), or null on miss / no Redis. */

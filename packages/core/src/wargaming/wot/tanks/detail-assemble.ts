@@ -32,6 +32,7 @@ import {
   type MoeHistoryPoint,
 } from "@unicum.gg/core/moe/poliroid";
 import type { Region } from "@unicum.gg/wargaming";
+import { getTankRatingHeadline } from "@unicum.gg/core/tanks/ratings-read";
 
 const TOP_LIMIT = 25;
 
@@ -79,6 +80,7 @@ export async function assembleTankDetail(region: Region, slug: string) {
     moeHistory,
     momHistory,
     hasHistory,
+    rating,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -98,6 +100,14 @@ export async function assembleTankDetail(region: Region, slug: string) {
     safe(() => fetchMoeHistoryFromPoliroid(region, tankId), [] as MoeHistoryPoint[]),
     safe(() => fetchMomHistoryFromPoliroid(region, tankId), [] as MomHistoryPoint[]),
     safe(() => getTankHasHistory(tankId), false),
+    // Three numbers for the hero badge and the page's Product markup. Folded in
+    // here rather than fetched by the layout, which would have been a second
+    // SSR self-fetch on every tab of every vehicle.
+    safe(() => getTankRatingHeadline(tankId), {
+      overall: null,
+      votes: 0,
+      reviewCount: 0,
+    }),
   ]);
 
   return {
@@ -122,5 +132,6 @@ export async function assembleTankDetail(region: Region, slug: string) {
     moeHistory,
     momHistory,
     hasHistory,
+    rating,
   };
 }
