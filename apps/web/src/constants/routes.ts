@@ -113,6 +113,13 @@ const ROUTES = {
     region === Region.EU
       ? "/tanks/changes"
       : pathcat("/:region/tanks/changes", { region }),
+  // The community board. Sits directly under /tanks rather than under the
+  // /tanks/all tab root, because it is not a view of the stats table: it is a
+  // page about what players say, and its own landing.
+  TANKS_COMMUNITY: (region: Region) =>
+    region === Region.EU
+      ? "/tanks/community"
+      : pathcat("/:region/tanks/community", { region }),
 
   // - Maps. Same split as tanks: catalogue short, item regional. A map's
   //   geometry is worldwide, but the Clan Wars pool it belongs to is not.

@@ -9,6 +9,7 @@ import {
 } from "@/components/panel";
 import { PlayerTankDetailPanel } from "@/components/players/detail/tanks/detail-panel";
 import { PlayerTanksTable } from "@/components/players/detail/tanks/table";
+import { RateYourTanksPrompt } from "@/components/players/detail/tanks/rate-prompt";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { TANKS_SKELETON_COLUMNS } from "@/components/players/detail/tanks/skeleton-columns";
 import type {
@@ -56,6 +57,16 @@ export function TanksTab({
             </PanelTitle>
           </PanelHeader>
           <PanelContent className="p-0">
+            {/* Only ever drawn on the reader's own garage, and only for tanks
+              they have the battles for and have not judged yet. It renders
+              nothing otherwise, so it costs a signed-out visitor a null. */}
+            {loading ? null : (
+              <RateYourTanksPrompt
+                region={region}
+                nickname={nickname}
+                vehicles={vehicles}
+              />
+            )}
             {loading ? (
               <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
             ) : (

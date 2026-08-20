@@ -121,6 +121,12 @@ export function navSections(region: Region): NavSection[] {
           description: "Buffs and nerfs by update",
         },
         {
+          id: "tank-community",
+          label: "Community ratings",
+          href: ROUTES.TANKS_COMMUNITY(region),
+          description: "Rated by players who own them",
+        },
+        {
           id: "tank-videos",
           label: "Videos",
           href: tankTabHref(tanks, TankTab.Videos),
