@@ -87,7 +87,12 @@ const CACHE_PREFIX = `isr:${DEPLOY}:v:`;
 const TAGS_PREFIX = `isr:${DEPLOY}:tag:`;
 const LRU_INDEX = `isr:${DEPLOY}:lru`;
 
-const TTL_SECONDS = Number(process.env.NEXT_ISR_CACHE_TTL_SECONDS) || 7_200;
+// Must stay ABOVE the longest page `revalidate` (currently 24h on the entity
+// pages) so the entry survives in Redis for the whole cache window: if it aged
+// out first, the next hit would be a full cold regen at the origin even though
+// the edge still wants the page. 2 days gives the 24h pages headroom for their
+// background revalidation.
+const TTL_SECONDS = Number(process.env.NEXT_ISR_CACHE_TTL_SECONDS) || 172_800;
 const MAX_REDIS_KEYS = Number(process.env.NEXT_ISR_CACHE_MAX_KEYS) || 10_000;
 const TIMEOUT_MS = 1_000;
 

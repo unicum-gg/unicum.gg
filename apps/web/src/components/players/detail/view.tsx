@@ -51,8 +51,9 @@ export function PlayerProfile({
   basePath: string;
   activeSection: PlayerSection;
   activeMode: PlayerMode;
-  // Server-rendered detail (the page fetches it inside a Suspense boundary and
-  // seeds it here), so this SWR only revalidates on a LiveSync tick.
+  // Server-rendered detail, seeded so the profile paints instantly from the
+  // CF-cached HTML; SWR then revalidates it on mount to refresh the (possibly
+  // day-old) cached stats, and again on every LiveSync tick.
   initialData: PlayerDetailData;
   // Present only when Tanks is the section the server rendered (so its rows are
   // in the initial HTML); null otherwise, so the tabs view fetches on demand.
@@ -79,12 +80,16 @@ export function PlayerProfile({
   const [nowMs] = useState(() => Date.now());
 
   // The payload is the same for every metric, so a single SWR entry keyed on the
-  // request URL; a LiveSync tick revalidates it.
+  // request URL. `revalidateOnMount` is on so the client always refetches the
+  // live payload on mount: the page HTML is CF-cached for a day (revalidate=24h)
+  // for fast navigation, and this refetch keeps the visible stats current under
+  // that long cache (the seeded `initialData` paints instantly, fresh data swaps
+  // in ~a request later). LiveSync still patches live ticks on top.
   const detailReq = () => unicum.region(region).players(nickname).detail();
   const { data: liveData, mutate: mutateData } = useSWR(
     detailReq().url(),
     () => detailReq().then((r) => r as unknown as PlayerDetailData),
-    { fallbackData: initialData, revalidateOnMount: false },
+    { fallbackData: initialData, revalidateOnMount: true },
   );
   const detail = liveData ?? initialData;
 

@@ -15,7 +15,7 @@ import { isRegion } from "@unicum.gg/wargaming";
 //
 // `/vs/[...rest]` is a static sibling, so it keeps winning over this route.
 export const dynamic = "force-static";
-export const revalidate = 1800; // 30 min, matches the base player page
+export const revalidate = 86400; // 24h, matches the base player page
 
 export async function generateMetadata({
   params,

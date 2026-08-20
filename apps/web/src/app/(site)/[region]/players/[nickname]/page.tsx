@@ -75,7 +75,16 @@ async function loadDetail(
 // per-page-hit refreshes are enqueued by the endpoint. On-demand generation (no
 // generateStaticParams); the SDK loopback covers any build-time prerender.
 export const dynamic = "force-static";
-export const revalidate = 1800; // 30 min
+// 24h, not 30 min. Cloudflare honors the origin `s-maxage` (verified: pages
+// expire at their own s-maxage), so a short window meant every first hit per
+// entity per 30 min paid a full origin regen (measured 0.7-11s) while the huge
+// entity space kept CF cache coverage thin. A day-long window keeps a visited
+// profile a CF HIT (~55ms) far longer, so regens are rare. Freshness is not lost
+// to the long cache: `PlayerProfile` refetches the live payload on mount
+// (`revalidateOnMount`) and LiveSync patches ticks, so the visible stats are
+// current even when the cached HTML shell is up to a day old (which only the OG
+// image and title lag by, and that is fine for a stats tracker's SEO).
+export const revalidate = 86400; // 24h
 
 /** Wording for the view being rendered, so each mode is a page of its own
  * rather than nine copies of the same title. */
