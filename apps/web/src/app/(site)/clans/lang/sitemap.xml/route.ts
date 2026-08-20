@@ -1,6 +1,7 @@
 import { generateSitemapXml } from "@onruntime/next-sitemap";
 import ROUTES from "@/constants/routes";
 import { getLanguageStats } from "@/services/clans/available-languages";
+import { buildSafe } from "@/services/sdk";
 import { createSitemapEntry } from "@/services/sitemap";
 import { REGIONS } from "@unicum.gg/wargaming";
 
@@ -17,11 +18,19 @@ export const revalidate = 3600;
  * no pagination needed.
  */
 export async function GET() {
-  const perRegion = await Promise.all(
-    REGIONS.map(async (region) => ({
-      region,
-      languages: await getLanguageStats(region),
-    })),
+// Wrapped in `buildSafe` like every other prerendered route: these are
+// `force-static`, so a database hiccup during `next build` fails the whole
+// build rather than the one file. Degrading here yields an empty sitemap that
+// the first revalidation refills, and at runtime the error still propagates.
+  const perRegion = await buildSafe(
+    () =>
+      Promise.all(
+        REGIONS.map(async (region) => ({
+          region,
+          languages: await getLanguageStats(region),
+        })),
+      ),
+    [] as { region: (typeof REGIONS)[number]; languages: { code: string }[] }[],
   );
 
   const entries = perRegion.flatMap(({ region, languages }) =>

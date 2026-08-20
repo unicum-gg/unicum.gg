@@ -1,6 +1,7 @@
 import { generateSitemapXml } from "@onruntime/next-sitemap";
 import { asc } from "drizzle-orm";
 import ROUTES from "@/constants/routes";
+import { buildSafe } from "@/services/sdk";
 import { db } from "@unicum.gg/core/db";
 import { playersByRegion } from "@unicum.gg/shared";
 import {
@@ -26,15 +27,23 @@ export async function GET(
   }
 
   const players = playersByRegion[region];
-  const rows = await db
-    .select({
-      nickname: players.nickname,
-      lastSeenAt: players.lastSeenAt,
-    })
-    .from(players)
-    .orderBy(asc(players.id))
-    .offset(sitemapId * URLS_PER_SITEMAP)
-    .limit(URLS_PER_SITEMAP);
+  // Wrapped in `buildSafe` like every other prerendered route: these are
+  // `force-static`, so a database hiccup during `next build` fails the whole
+  // build rather than the one file. Degrading here yields a 404 for one
+  // revalidation window, and at runtime the error still propagates.
+  const rows = await buildSafe(
+    () =>
+      db
+        .select({
+          nickname: players.nickname,
+          lastSeenAt: players.lastSeenAt,
+        })
+        .from(players)
+        .orderBy(asc(players.id))
+        .offset(sitemapId * URLS_PER_SITEMAP)
+        .limit(URLS_PER_SITEMAP),
+    [],
+  );
 
   if (rows.length === 0) {
     return new Response("Sitemap not found", { status: 404 });
