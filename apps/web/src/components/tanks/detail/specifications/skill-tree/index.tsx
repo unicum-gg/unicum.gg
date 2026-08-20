@@ -92,6 +92,7 @@ export function TankSkillTree({
   onToggle,
   dirty = false,
   onReset,
+  screenLines = true,
 }: {
   skillTree: TankSkillTree;
   tankName: string;
@@ -102,6 +103,9 @@ export function TankSkillTree({
   dirty?: boolean;
   /** Reset the section to its default (every node re-locked). */
   onReset?: () => void;
+  /** The page-wide rules around the panel, drawn with viewport-width pseudo
+   * elements. Off inside a dialog, where they would overflow it sideways. */
+  screenLines?: boolean;
 }) {
   const { nodes } = skillTree;
   const byId = useMemo(
@@ -142,8 +146,11 @@ export function TankSkillTree({
 
   return (
     <TooltipProvider delayDuration={100}>
-      <Panel>
-        <PanelHeader className="flex items-center justify-between gap-4">
+      <Panel screenLines={screenLines}>
+        <PanelHeader
+          screenLines={screenLines}
+          className="flex items-center justify-between gap-4"
+        >
           <PanelTitle>{tankName} upgrades</PanelTitle>
           {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
         </PanelHeader>

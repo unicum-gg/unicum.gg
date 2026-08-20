@@ -6,7 +6,13 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { ResetButton } from "@/components/tanks/detail/specifications/reset-button";
 import { GROUPS, type Group } from "./rows";
-import { deltaColor, formatSpecValue as format, specValue } from "./format";
+import {
+  deltaColor,
+  formatSpecValue as format,
+  hiddenRowIndexes,
+  rowDelta,
+  specValue,
+} from "./format";
 import { CurrencyIcon } from "@/components/tanks/currency-icon";
 
 /** The label of the row a sub-row is indented under, walking back up the list
@@ -29,20 +35,8 @@ function SpecGroup({
 }) {
   // Hide a sub-heading and its indented rows when every one of them is empty
   // (e.g. "Turret armor" on a turretless casemate would otherwise be all "—").
-  const hidden = new Set<number>();
-  group.rows.forEach((row, i) => {
-    if (!row.header) return;
-    const subs: number[] = [];
-    for (let j = i + 1; j < group.rows.length && group.rows[j].sub; j += 1)
-      subs.push(j);
-    if (
-      subs.length > 0 &&
-      subs.every((k) => specValue(specs, group.rows[k], baseline) == null)
-    ) {
-      hidden.add(i);
-      subs.forEach((k) => hidden.add(k));
-    }
-  });
+  // Shared with the comparison grid, which does the same over several columns.
+  const hidden = hiddenRowIndexes(group, [{ specs, baseline }]);
   return (
     <div>
       <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-fd-muted-foreground">
@@ -76,11 +70,7 @@ function SpecGroup({
             value != null ? deltaColor(value, base, row) : undefined;
           // Signed change vs the stock baseline, shown before the value like
           // tomato.gg ("-0.97 ↓"); null when unchanged at display precision.
-          let delta: number | null = null;
-          if (value != null && base != null && !row.neutral) {
-            const diff = Number((value - base).toFixed(row.digits ?? 0));
-            if (diff !== 0) delta = diff;
-          }
+          const delta = rowDelta(value, base, row);
           return (
             <div
               key={index}

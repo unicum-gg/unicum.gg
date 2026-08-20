@@ -93,6 +93,7 @@ export function TankModules({
   onSelectModule,
   dirty = false,
   onReset,
+  screenLines = true,
 }: {
   region: Region;
   meta: VehicleMeta;
@@ -106,11 +107,17 @@ export function TankModules({
   dirty?: boolean;
   /** Reset the modules to the stock configuration. */
   onReset?: () => void;
+  /** The page-wide rules around the panel, drawn with viewport-width pseudo
+   * elements. Off inside a dialog, where they would overflow it sideways. */
+  screenLines?: boolean;
 }) {
   if (nodes.length === 0) return null;
   return (
-    <Panel>
-      <PanelHeader className="flex items-center justify-between gap-4">
+    <Panel screenLines={screenLines}>
+      <PanelHeader
+        screenLines={screenLines}
+        className="flex items-center justify-between gap-4"
+      >
         <PanelTitle>{meta.name} modules</PanelTitle>
         {dirty && onReset ? <ResetButton onReset={onReset} /> : null}
       </PanelHeader>
