@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import {
   loadTankTab,
   tankMetadata,
-} from "@/app/(site)/[region]/tanks/[slug]/page";
+} from "@/app/(site)/[region]/tanks/[slug]/(detail)/page";
 import { TankMarksMastery } from "@/components/tanks/detail/marks/mastery";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";

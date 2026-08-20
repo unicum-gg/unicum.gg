@@ -4,7 +4,7 @@ import {
   loadTankTab,
   tankMetadata,
   TankVideosJsonLd,
-} from "@/app/(site)/[region]/tanks/[slug]/page";
+} from "@/app/(site)/[region]/tanks/[slug]/(detail)/page";
 import { loadTankVideos } from "@/app/(site)/[region]/tanks/[slug]/detail";
 import { TankVideosTab } from "@/components/tanks/detail/videos";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";

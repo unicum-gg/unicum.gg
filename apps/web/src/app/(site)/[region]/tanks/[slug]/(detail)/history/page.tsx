@@ -4,7 +4,7 @@ import { loadTankHistory } from "@/app/(site)/[region]/tanks/[slug]/detail";
 import {
   loadTankTab,
   tankMetadata,
-} from "@/app/(site)/[region]/tanks/[slug]/page";
+} from "@/app/(site)/[region]/tanks/[slug]/(detail)/page";
 import { TankChangesHistory } from "@/components/tanks/detail/history";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { isRegion } from "@unicum.gg/wargaming";

@@ -24,6 +24,12 @@ import {
  *
  * The identity markup sits here for the same reason it is drawn here: the tank
  * and its breadcrumb are the same on all four tabs, so they are stated once.
+ *
+ * It lives inside the `(detail)` route group so that it covers the tabs and
+ * nothing else. `/{region}/tanks/{slug}/vs/...` is a sibling of the group, not a
+ * tab of this vehicle: a comparison of four tanks under one of their heroes
+ * would read as that tank's page, and it would pay for a second full detail
+ * payload to draw it. The group changes no URL.
  */
 export default async function TankLayout({
   params,
