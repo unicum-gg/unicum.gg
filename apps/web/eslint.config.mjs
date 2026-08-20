@@ -12,9 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
-    // Standalone CommonJS module loaded by the Next server runtime (outside the
-    // transpiled bundle), so it legitimately uses `require`/`module.exports`.
+    // Standalone CommonJS modules loaded outside the transpiled bundle (by the
+    // Next server runtime and by PM2), so they legitimately use
+    // `require`/`module.exports`.
     "config/cache-handler.js",
+    "ecosystem.config.cjs",
   ]),
   // The OG image pipeline. These files are not rendered by a browser: satori
   // turns them into a PNG, and it supports `img` and nothing else, so the

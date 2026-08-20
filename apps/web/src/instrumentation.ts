@@ -15,6 +15,18 @@ export async function register() {
   // they never do cron work on the request-serving thread (the crons still hold
   // a DB lease, so at most one instance ever executes them). Leaving it unset
   // keeps the legacy single-process behaviour where crons run here.
+  //
+  // `installShutdownHandler` (below) is deliberately NOT hoisted above this
+  // return, even though that means a RUN_CRONS=0 web never drains its pools on
+  // SIGTERM. It was tried and measured: Next's own signal handler
+  // (`server/lib/start-server.js`) races ours and calls `process.exit(143)` as
+  // soon as it has closed the HTTP server, so the async `closeDbPools()` never
+  // finishes, and the only way to win that race is `NEXT_MANUAL_SIG_HANDLE`,
+  // which would hand us a shutdown with no access to the HTTP server to close.
+  // It buys nothing anyway: exiting closes the sockets, so Postgres reaps those
+  // backends at once (verified on a killed standalone server, zero backends
+  // left behind). The drain still matters in `apps/worker`, which owns its own
+  // process and where it does run to completion.
   if (process.env.RUN_CRONS === "0" || process.env.RUN_CRONS === "false") return;
   if (globalThis.__cronStarted) return;
   globalThis.__cronStarted = true;

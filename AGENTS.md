@@ -62,6 +62,16 @@ The correct workflow for any schema change:
 
 `packages/core/src/db/schema/*.ts` exports `makeXxxTable(region)` factories rather than top-level `pgTable(...)` calls. Every domain table physically exists three times (`eu_*`, `na_*`, `asia_*`). Consumers index into a `Record<Region, Table>` map (e.g. `playersByRegion[region]`). See the migration section above for the consequences.
 
+## Connection budget
+
+The Postgres server runs **`max_connections = 200`** (raised from the 100 default on 2026-08-20, when it ran full at 99 backends). It is **not a Coolify-managed database resource**, so the setting lives in the custom config in two places that must stay in sync: the `postgres_conf` column of `standalone_postgresqls` in `coolify-db` (the source of truth, rewritten into the file on deploy) and the mounted `/data/coolify/databases/<uuid>/custom-postgres.conf`. Applying a change needs a full container restart, a reload will not do.
+
+The budget: **web 60** (`ecosystem.config.cjs` divides it across the PM2 cluster into `DB_POOL_MAX`), **worker 40** (`DB_BACKGROUND_POOL_MAX`, set explicitly on the Coolify service so a missing `NODE_ENV` cannot silently downgrade it), and the rest absorbs everything else pointed at this same server, because there is no dev database: the on-host `next build`, PR previews, every `pnpm dev` worktree, psql, drizzle-studio, backups.
+
+Two things make reading `pg_stat_activity` misleading here. Connections arriving through the public port are SNATed by the Coolify proxy container, so every external client (all your dev instances, your psql) collapses into one `client_addr` and looks like a container: map the rest with `docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}} {{.GlobalIPv6Address}}{{end}}'`. And one process shows up under both its IPv4 and IPv6 address, so sum them.
+
+`idle_timeout` (`packages/core/src/db/index.ts`) bounds the waste but does not shrink a busy pool: postgres.js round-robins FIFO over the open connections and restarts each one's idle timer on release, so a connection only expires when the pool is bigger than `requests/s x timeout`. Under steady traffic a pool sits at its historical peak concurrency. Size `max` accordingly. If 200 stops being enough, PgBouncer in transaction mode is the next step and the code is already compatible: `prepare: false`, no `LISTEN`/`NOTIFY`, no advisory locks (the cron lease is a table row).
+
 ## Cron loop
 
 Crons run in the standalone **`apps/worker`** process (`src/index.ts`), which starts the seven groups below on boot. The web's `src/instrumentation.ts` keeps the same start sequence behind a `RUN_CRONS` gate (`RUN_CRONS=0` on the web service in prod → it skips them) plus a `globalThis.__cronStarted` HMR guard, so local `pnpm dev` can still run them in-process. A single `cron_leader` DB lease means **at most one instance ever executes a job** regardless of how many have it scheduled, so the worker and an un-gated web coexist safely (whoever holds the lease runs it). Every job is scheduled per region rather than globally, so a slow region cannot starve the others (EU's G-Core throttling used to cascade into NA/Asia skipping their ticks). The cron modules live in `packages/core/src/*` (paths below are the `@unicum.gg/core/...` subpaths).

@@ -289,7 +289,21 @@ export async function recomputeTopPlayersByTank(
       }
     });
   } finally {
-    conn.release();
+    // Undo the planner hints before handing the connection back. postgres.js's
+    // `release()` issues no DISCARD/RESET, so without this the connection
+    // returns to the shared background pool with both scan types still off for
+    // the rest of its life, and every later cron query that round-robins onto
+    // it (the pool is FIFO) gets a forced index plan. The heavy clan/stronghold
+    // aggregations pick catastrophic plans under that.
+    try {
+      await conn`RESET enable_seqscan`;
+      await conn`RESET enable_bitmapscan`;
+    } catch {
+      // A connection that died mid-cursor cannot be reset, and it is discarded
+      // anyway. Swallow it so it never masks the real error from the cursor.
+    } finally {
+      conn.release();
+    }
   }
   if (pending) process(pending);
 
