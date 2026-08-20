@@ -47,12 +47,23 @@ async function GET__perf(
   }
   const query = parsed.data.q;
 
+  // Never let a slow/rate-limited WG call hold the whole search hostage: race the
+  // remote part against a short timeout and fall back to the DB hits. Under WG
+  // budget pressure the interactive lane can queue for tens of seconds, and the
+  // WG hits are a bonus (deduped extras), never a blocker for the local results.
+  const REMOTE_TIMEOUT_MS = 1500;
+  const remote: Promise<SearchPlayerResult[]> = Promise.race([
+    searchPlayersRemotePart(region, query),
+    new Promise<SearchPlayerResult[]>((resolve) =>
+      setTimeout(() => resolve([]), REMOTE_TIMEOUT_MS),
+    ),
+  ]).catch((err) => {
+    console.error(`[api/${region}/players/search] remote failed:`, err);
+    return [] as SearchPlayerResult[];
+  });
   const [local, remoteRaw] = await Promise.all([
     searchPlayersLocalPart(region, query),
-    searchPlayersRemotePart(region, query).catch((err) => {
-      console.error(`[api/${region}/players/search] remote failed:`, err);
-      return [] as SearchPlayerResult[];
-    }),
+    remote,
   ]);
   const seen = new Set(local.map((r) => r.account_id));
   const results = [...local, ...remoteRaw.filter((r) => !seen.has(r.account_id))];

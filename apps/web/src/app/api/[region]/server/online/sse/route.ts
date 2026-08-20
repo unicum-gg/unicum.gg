@@ -26,14 +26,26 @@ globalThis.__wotOnlineIntervals = {};
 
 function ensurePolling(region: Region): void {
   if (globalThis.__wotOnlineIntervals[region]) return;
+  // Skip a tick while the previous poll is still in flight. `setInterval` fires
+  // every POLL_MS regardless, so when a poll's WG call is slow (e.g. queued
+  // behind the interactive rate-limit lane under budget pressure), un-guarded
+  // ticks pile up unbounded acquires and spiral the lane deeper negative. The
+  // guard bounds it to one in-flight poll per worker.
+  let inFlight = false;
   const poll = async () => {
-    const payload = await fetchPlayersOnline(region);
-    // A failed WG tick returns null. Keep the last good value instead of
-    // propagating the hole, so connected clients (and any that connect during
-    // the outage) never see the count blink out.
-    if (!payload) return;
-    globalThis.__wotOnlineCache[region] = payload;
-    globalThis.__wotOnlineListeners[region]?.forEach((cb) => cb(payload));
+    if (inFlight) return;
+    inFlight = true;
+    try {
+      const payload = await fetchPlayersOnline(region);
+      // A failed WG tick returns null. Keep the last good value instead of
+      // propagating the hole, so connected clients (and any that connect during
+      // the outage) never see the count blink out.
+      if (!payload) return;
+      globalThis.__wotOnlineCache[region] = payload;
+      globalThis.__wotOnlineListeners[region]?.forEach((cb) => cb(payload));
+    } finally {
+      inFlight = false;
+    }
   };
   void poll();
   globalThis.__wotOnlineIntervals[region] = setInterval(poll, POLL_MS);
