@@ -88,6 +88,11 @@ export async function register() {
       "@unicum.gg/core/twitch/live-poller"
     );
     startLiveStreamersPoller();
+
+    const { startTankRatingsCron } = await import(
+      "@unicum.gg/core/tanks/ratings-aggregate"
+    );
+    startTankRatingsCron();
   } finally {
     globalThis.__dbContext = "request";
   }
