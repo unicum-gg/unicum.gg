@@ -18,6 +18,16 @@ import {
   BattleResult,
 } from "@unicum.gg/shared/db/schema/tank-videos";
 import {
+  ReviewOutcome,
+  TankRatingAxis,
+  TankReviewStatus,
+  VoterBracket,
+} from "@unicum.gg/shared/db/schema/tank-ratings";
+import {
+  RatingBlock,
+  RatingConsensus,
+} from "@unicum.gg/shared/wot/tank-ratings";
+import {
   FeedbackSentiment,
   FeedbackTopic,
 } from "@unicum.gg/shared/feedback/index";
@@ -50,6 +60,12 @@ export const OPENAPI_ENUM_SOURCES = {
   BATTLE_RESULT: Object.values(BattleResult),
   BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),
+  VOTER_BRACKET: Object.values(VoterBracket),
+  TANK_RATING_AXIS: Object.values(TankRatingAxis),
+  TANK_REVIEW_STATUS: Object.values(TankReviewStatus),
+  RATING_CONSENSUS: Object.values(RatingConsensus),
+  RATING_BLOCK: Object.values(RatingBlock),
+  REVIEW_OUTCOME: Object.values(ReviewOutcome),
   SESSION_GRANULARITY: Object.values(SessionGranularity),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),

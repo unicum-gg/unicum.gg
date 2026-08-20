@@ -7,9 +7,15 @@ import {
   DEFAULT_RATING_METRIC,
   MapCamouflage,
   MapGameMode,
+  RatingBlock,
+  RatingConsensus,
   RatingMetric,
+  ReviewOutcome,
   SessionGranularity,
   SpawnDirection,
+  TankRatingAxis,
+  TankReviewStatus,
+  VoterBracket,
 } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 // Imported from the dependency-free `period` modules (not the DB-heavy index)
@@ -115,6 +121,37 @@ export const battleFormatField = z.enum(BattleFormat).meta({
 export const spawnDirectionField = z.enum(SpawnDirection).meta({
   description: "Side of the map a team starts from.",
   "x-enum-source": "SPAWN_DIRECTION",
+} as EnumMeta);
+
+export const voterBracketField = z.enum(VoterBracket).meta({
+  description:
+    "How well the voter plays, cut on account WN8 at the same boundaries the site paints its ratings with.",
+  "x-enum-source": "VOTER_BRACKET",
+} as EnumMeta);
+
+export const tankRatingAxisField = z.enum(TankRatingAxis).meta({
+  description: "An axis a vehicle is rated on.",
+  "x-enum-source": "TANK_RATING_AXIS",
+} as EnumMeta);
+
+export const tankReviewStatusField = z.enum(TankReviewStatus).meta({
+  description: "Where a written opinion stands in moderation.",
+  "x-enum-source": "TANK_REVIEW_STATUS",
+} as EnumMeta);
+
+export const ratingBlockField = z.enum(RatingBlock).meta({
+  description: "Why a signed-in account may not rate this tank yet.",
+  "x-enum-source": "RATING_BLOCK",
+} as EnumMeta);
+
+export const reviewOutcomeField = z.enum(ReviewOutcome).meta({
+  description: "What became of a written opinion attached to a rating.",
+  "x-enum-source": "REVIEW_OUTCOME",
+} as EnumMeta);
+
+export const ratingConsensusField = z.enum(RatingConsensus).meta({
+  description: "How far apart the voters sit, read off the spread.",
+  "x-enum-source": "RATING_CONSENSUS",
 } as EnumMeta);
 
 /**

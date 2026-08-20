@@ -265,6 +265,24 @@ class TankClient {
     );
   }
 
+  /** Rate a tank */
+  rate(body: BodyOf<"/{region}/tanks/{slug}/rate">) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/rate", path),
+      () => this.api.POST("/{region}/tanks/{slug}/rate", { params: { path }, body }),
+    );
+  }
+
+  /** Tank community rating */
+  ratings() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/ratings", path),
+      () => this.api.GET("/{region}/tanks/{slug}/ratings", { params: { path } }),
+    );
+  }
+
   /** Tank specifications */
   specifications() {
     const path = { region: this.region, slug: this.slug };
@@ -280,6 +298,24 @@ class TankClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/tanks/{slug}/videos", path),
       () => this.api.GET("/{region}/tanks/{slug}/videos", { params: { path } }),
+    );
+  }
+
+  /** Withdraw my rating */
+  rateWithdraw() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/rate/withdraw", path),
+      () => this.api.POST("/{region}/tanks/{slug}/rate/withdraw", { params: { path } }),
+    );
+  }
+
+  /** My rating of this tank */
+  ratingsMe() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/ratings/me", path),
+      () => this.api.GET("/{region}/tanks/{slug}/ratings/me", { params: { path } }),
     );
   }
 }
@@ -361,6 +397,8 @@ type TanksNamespace = ((slug: string) => TankClient) & {
   marksOfExcellence(): RequestHandle<Data<"/{region}/tanks/marks-of-excellence">>;
   /** Tanks Marks of Mastery */
   marksOfMastery(): RequestHandle<Data<"/{region}/tanks/marks-of-mastery">>;
+  /** Community ratings board */
+  ratings(): RequestHandle<Data<"/{region}/tanks/ratings">>;
   /** Search tanks */
   search(q: NonNullable<QueryOf<"/{region}/tanks/search">>["q"]): RequestHandle<Data<"/{region}/tanks/search">>;
   /** Tanks specifications */
@@ -565,6 +603,14 @@ class RegionClient {
             params: { path: { region: this.region } },
           }),
       );
+    ns.ratings = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tanks/ratings", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/tanks/ratings", {
+            params: { path: { region: this.region } },
+          }),
+      );
     ns.search = (q) =>
       handle(
         buildUrl(this.baseUrl, "/{region}/tanks/search", { region: this.region }, { q }),
@@ -647,6 +693,14 @@ class RegionClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/videos", { region: this.region }, { videoId }),
       () => this.api.GET("/{region}/videos", { params: { path: { region: this.region }, query: { videoId } } }),
+    );
+  }
+
+  /** My ratings */
+  ratingsMine() {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/ratings/mine", { region: this.region }),
+      () => this.api.GET("/{region}/ratings/mine", { params: { path: { region: this.region } } }),
     );
   }
 
