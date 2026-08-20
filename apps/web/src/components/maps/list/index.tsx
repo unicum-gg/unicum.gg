@@ -24,7 +24,7 @@ import {
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { Panel, PanelHeader } from "@/components/panel";
-import { Chip, ChipRow } from "@/components/tanks/tank-filter-bar";
+import { Chip, ChipRow } from "@/components/ui/chip";
 import {
   Tooltip,
   TooltipContent,

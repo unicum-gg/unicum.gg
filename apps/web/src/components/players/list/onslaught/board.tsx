@@ -22,7 +22,7 @@ import {
   OnslaughtSeasonSelect,
   type OnslaughtSeasonRef,
 } from "@/components/players/list/onslaught/season-select";
-import { Chip, ChipRow } from "@/components/tanks/tank-filter-bar";
+import { Chip, ChipRow } from "@/components/ui/chip";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
 import {

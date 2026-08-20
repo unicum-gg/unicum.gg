@@ -10,7 +10,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Chip, ChipRow } from "@/components/tanks/tank-filter-bar";
+import { Chip, ChipRow } from "@/components/ui/chip";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Medal } from "./medal";
 

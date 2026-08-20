@@ -1,7 +1,7 @@
 "use client";
 
 import { StarIcon } from "@phosphor-icons/react";
-import { forwardRef, type ReactNode } from "react";
+import { type ReactNode } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag, nationLabel } from "@/components/tanks/nation-flag";
 import { useRegion } from "@/hooks/use-region";
@@ -20,6 +20,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Chip, ChipRow } from "@/components/ui/chip";
 import { cn } from "@/lib/utils";
 import {
   VEHICLE_CLASS_LABEL_FULL,
@@ -173,42 +174,3 @@ export function TankFilterBar<T>({
   );
 }
 
-export function ChipRow({
-  children,
-  className,
-}: {
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "flex w-fit max-w-full overflow-x-auto rounded-md border border-fd-border",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-}
-
-export const Chip = forwardRef<
-  HTMLButtonElement,
-  { active: boolean } & React.ComponentProps<"button">
->(({ active, className, children, ...props }, ref) => (
-  <button
-    ref={ref}
-    type="button"
-    {...props}
-    className={cn(
-      "cursor-pointer whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
-      active
-        ? "bg-fd-secondary/50 text-fd-foreground"
-        : "text-fd-muted-foreground hover:bg-fd-secondary/25 hover:text-fd-foreground",
-      className,
-    )}
-  >
-    {children}
-  </button>
-));
-Chip.displayName = "Chip";
