@@ -16,6 +16,15 @@ const stripTags = (s: string): string => s.replace(/\{[a-zA-Z_]+\}/g, "");
  * Parse a gettext `.po` file into a `msgid -> msgstr` map. Handles the multi-line
  * form (`msgstr ""` followed by continuation `"..."` lines), so long strings
  * like perk / feature descriptions come through whole, not truncated to `""`.
+ *
+ * The header entry is dropped. Every `.po` opens with `msgid ""` whose `msgstr`
+ * is the file's own metadata block (`Project-Id-Version: ...`), which is not a
+ * translation of anything. Kept, it makes `get("")` return a long, truthy
+ * string, and every caller here reaches this map through an optional key that
+ * is `""` when the client XML omits the field. A `??` chain then reads the
+ * header as a real translation and never falls back. That is exactly how ~185
+ * vehicles per region (the ones whose short name equals their full name: IS-7,
+ * T-34, Type 59, ...) ended up slugged from the metadata block.
  */
 export function parsePo(text: string): Map<string, string> {
   const out = new Map<string, string>();
@@ -23,7 +32,8 @@ export function parsePo(text: string): Map<string, string> {
   let value = "";
   let field: "id" | "str" | null = null;
   const flush = () => {
-    if (id !== null) out.set(id, stripTags(value));
+    // `id !== ""` drops the header; see above.
+    if (id !== null && id !== "") out.set(id, stripTags(value));
     id = null;
     value = "";
     field = null;

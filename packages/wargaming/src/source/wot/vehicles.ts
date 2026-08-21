@@ -123,7 +123,17 @@ export class SourceVehiclesResource {
       const nameKey = extractI18nKey(fields.userString);
       const shortKey = extractI18nKey(fields.shortUserString);
       const name = translations.get(nameKey) ?? nameKey;
-      const shortName = translations.get(shortKey) ?? translations.get(nameKey) ?? nameKey;
+      // `shortUserString` is absent on every vehicle whose short name equals its
+      // full name, so `shortKey` is routinely `""`. Looking that up asks the
+      // translation map a question about no key at all, and whatever it answers
+      // satisfies the `??` chain and suppresses the fallback. Guarded here as
+      // well as in `parsePo` because the two are independent mistakes: one is a
+      // map that should not hold the header, this one is a lookup that should
+      // not happen.
+      const shortName =
+        (shortKey ? translations.get(shortKey) : undefined) ??
+        translations.get(nameKey) ??
+        nameKey;
       const priceField = fields.price;
       const isPremium =
         priceField !== undefined && typeof priceField === "object" && "gold" in priceField;
