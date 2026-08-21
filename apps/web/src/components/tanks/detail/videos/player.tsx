@@ -65,8 +65,8 @@ type TankVideoPlayer = {
   suggestion: TankVideoSuggestion | null;
   suggest: (startSeconds: number) => void;
   /** Whether a suggestion form is mounted under this provider. False on a
-   * surface that only plays what others filed (a clan's tab), where the button
-   * would set a moment nothing reads. */
+   * surface that only plays what others filed, where the button would set a
+   * moment nothing reads. */
   canSuggest: boolean;
   /** Called by a form on mount; the returned function unregisters it. This is
    * derived rather than declared per page, so a page that grows a form lights
@@ -95,6 +95,7 @@ export function TankVideoPlayerProvider({
   videos: published,
   ownTankSlug,
   ownMapSlug,
+  ownClanId,
   anchorId = TANK_HERO_ID,
   children,
 }: {
@@ -108,12 +109,21 @@ export function TankVideoPlayerProvider({
    * them, and each page keeps the rows it is about: a tank page its vehicle's,
    * a map page the ones fought on its ground.
    *
-   * Two slugs rather than the predicate this started as: the tank page mounts
-   * this from its layout, which is a server component, and a function cannot
-   * cross that boundary.
+   * Plain fields rather than the predicate this started as: the tank page
+   * mounts this from its layout, which is a server component, and a function
+   * cannot cross that boundary.
    */
   ownTankSlug?: string;
   ownMapSlug?: string;
+  /**
+   * The same, for a clan's tab: the queued rows crediting this clan.
+   *
+   * An id rather than a tag, like the stored credit itself, so a rename cannot
+   * strand it. Without it a clan page showed the reader their whole queue,
+   * every random battle on every tank included, filed under a clan that has
+   * nothing to do with them.
+   */
+  ownClanId?: number;
   /** The element a battle plays in, scrolled to when one opens. The tank page's
    * hero by default, since that is where this started. */
   anchorId?: string;
@@ -136,12 +146,17 @@ export function TankVideoPlayerProvider({
     const queued = (mine ?? []).filter(
       (v) =>
         (!ownTankSlug || v.tankSlug === ownTankSlug) &&
-        (!ownMapSlug || v.mapSlug === ownMapSlug),
+        (!ownMapSlug || v.mapSlug === ownMapSlug) &&
+        // Region included: clan ids are region-scoped, and the queue is not
+        // (one table, and a submission takes its region from the page it was
+        // sent from), so an id alone can name two different clans.
+        (!ownClanId ||
+          (v.clan?.id === ownClanId && v.clan?.region === region)),
     );
     return queued.length
       ? [...published, ...queued.map((v) => ({ ...v, pending: true }))]
       : published;
-  }, [published, mine, ownTankSlug, ownMapSlug]);
+  }, [published, mine, ownTankSlug, ownMapSlug, ownClanId, region]);
   /**
    * Which battle is playing, read from the URL rather than held beside it.
    *

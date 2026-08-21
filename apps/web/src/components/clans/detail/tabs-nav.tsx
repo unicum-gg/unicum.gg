@@ -73,8 +73,8 @@ export function ClanSectionNav({
   // (mirrors the player page). Undefined until the vehicles aggregation lands.
   tankCount?: number;
   // Published battles this clan is credited on. Undefined until the fetch
-  // lands, which is why the tab is hidden rather than shown empty in the
-  // meantime: appearing and then vanishing reads worse than appearing late.
+  // lands, and the label is the only thing that waits on it: the tab is offered
+  // either way, so nothing appears and then vanishes.
   videoCount?: number;
 }) {
   // Videos is shown even at zero, unlike the count-gated Tanks tab: an empty

@@ -5,7 +5,6 @@ import type { Region } from "@unicum.gg/wargaming";
 import { Panel } from "@/components/panel";
 import {
   Empty,
-  EmptyContent,
   EmptyDescription,
   EmptyHeader,
   EmptyMedia,
@@ -38,56 +37,33 @@ const CLAN_PLAYER_ID = "clan-video-player";
  * field of that submission, but it can be suggested from here: someone watching
  * a clan's evening and spotting the moment worth linking should not have to
  * work out which map page to open first. The form seeds itself with the map of
- * the battle playing and lets the submitter move it, exactly as on a map page.
- *
- * Renders nothing at all when the clan has none.
+ * the battle playing, and with this clan, and lets the submitter move both.
  */
 export function ClanVideosTab({
   region,
   tag,
+  clanId,
   videos,
 }: {
   region: Region;
   tag: string;
+  /** Which queued rows are this clan's, out of the reader's whole queue. */
+  clanId: number;
   /** Fetched by the page, which needs the count for the nav anyway. Undefined
    * while it is in flight. */
   videos: TankVideoCardData[] | undefined;
 }) {
   if (!videos) return null;
 
-  // Always reachable now, not only from a deep link: the nav keeps the tab even
-  // at zero, so the empty state is an invitation rather than a dead end. A
-  // tactic is filed under the ground it was fought on, so the way in is a map.
-  if (videos.length === 0) {
-    return (
-      // The section nav above already draws the boundary line (its
-      // `screen-line-after`), so this panel keeps only its own bottom line:
-      // both together stack into a 2px double border above the empty state.
-      <Panel screenLines={false} className="screen-line-after">
-        <Empty>
-          <EmptyHeader>
-            <EmptyMedia variant="icon">
-              <Swords />
-            </EmptyMedia>
-            <EmptyTitle>No tactics yet</EmptyTitle>
-            <EmptyDescription>
-              Nobody has credited [{tag}] on a tactic yet. Suggest one and pick
-              the map it was played on. It shows up here once a moderator has
-              looked at it.
-            </EmptyDescription>
-          </EmptyHeader>
-          <EmptyContent>
-            <ClanTacticDialogSlot region={region} />
-          </EmptyContent>
-        </Empty>
-      </Panel>
-    );
-  }
-
+  // Mounted even with nothing published, which is what puts the reader's own
+  // queued rows on screen: a clan nobody has credited yet is exactly the clan
+  // whose first tactic is waiting on a moderator, and the person waiting on it
+  // was being shown the empty state instead of their own submission.
   return (
     <TankVideoPlayerProvider
       region={region}
       videos={videos}
+      ownClanId={clanId}
       anchorId={CLAN_PLAYER_ID}
     >
       <ClanVideos videos={videos} region={region} tag={tag} />
@@ -96,7 +72,7 @@ export function ClanVideosTab({
 }
 
 function ClanVideos({
-  videos,
+  videos: published,
   region,
   tag,
 }: {
@@ -106,6 +82,9 @@ function ClanVideos({
 }) {
   const player = useTankVideoPlayer();
   const [view, setView] = useVideosView();
+  // The provider merges in the reader's own queued rows for this clan, so the
+  // lists and the player's seek bar show the same set.
+  const all = player?.videos ?? published;
 
   return (
     <>
@@ -119,20 +98,47 @@ function ClanVideos({
         <div id={CLAN_PLAYER_ID} />
       )}
 
+      {/* One section whether or not the clan has anything, rather than an empty
+          state beside it: the submit button lives in this header, and the row
+          someone queues here turns the list non-empty the moment it lands. A
+          branch around the section would tear the dialog out from under them at
+          exactly that moment, receipt and all. */}
       <Panel>
         <VideoSection
           region={region}
           title={`[${tag}] videos`}
-          battles={player?.videos ?? videos}
+          battles={all}
           view={view}
           onViewChange={setView}
           // Crossing maps, unlike a map's own lists: which ground a tactic was
           // called on is the first thing worth reading here.
           showMap
           emptyText=""
-          action={<ClanTacticDialogSlot region={region} />}
+          empty={<ClanVideosEmpty tag={tag} />}
+          action={<ClanTacticDialogSlot region={region} tag={tag} />}
         />
       </Panel>
     </>
+  );
+}
+
+/** The zero state: an invitation, not a dead end. The nav keeps the tab even at
+ * zero, so this is reachable by anyone reading the clan's page, and the way in
+ * is the button in the section header above it. */
+function ClanVideosEmpty({ tag }: { tag: string }) {
+  return (
+    <Empty>
+      <EmptyHeader>
+        <EmptyMedia variant="icon">
+          <Swords />
+        </EmptyMedia>
+        <EmptyTitle>No tactics yet</EmptyTitle>
+        <EmptyDescription>
+          Nobody has credited [{tag}] on a tactic yet. Suggest one and pick the
+          map it was played on. It shows up here once a moderator has looked at
+          it.
+        </EmptyDescription>
+      </EmptyHeader>
+    </Empty>
   );
 }

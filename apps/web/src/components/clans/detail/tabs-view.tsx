@@ -128,11 +128,10 @@ export function ClanTabsView({
     },
   );
 
-  // Fetched whatever the section, because the nav needs the count to decide
-  // whether to offer the tab at all: a clan nobody has credited has nothing to
-  // show there, and an empty tab is a promise the page cannot keep. It is one
-  // small request, cached by SWR, and it is the same one the section renders
-  // from.
+  // Fetched whatever the section, because the nav labels the tab with the
+  // count. The tab itself is always offered, at zero included: an empty video
+  // tab is an invitation for a clan's first tactic. It is one small request,
+  // cached by SWR, and it is the same one the section renders from.
   // Seeded by the server render, so the tactics are in the HTML and the tab
   // knows its count on the first paint. SWR still revalidates, which is what
   // picks up a tactic approved since the page was cached.
@@ -266,7 +265,12 @@ export function ClanTabsView({
       {onManage ? (
         <ClanBoostConsole region={region} tag={tag} clanId={clanId} />
       ) : onVideos ? (
-        <ClanVideosTab region={region} tag={tag} videos={videos} />
+        <ClanVideosTab
+          region={region}
+          tag={tag}
+          clanId={clanId}
+          videos={videos}
+        />
       ) : onTanks ? (
         <ClanTanksTab tag={tag} color={color} vehicles={vehicles} />
       ) : mode === ClanMode.RandomBattles ? (

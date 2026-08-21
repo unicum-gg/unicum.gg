@@ -31,6 +31,7 @@ export function VideoSection({
   view,
   onViewChange,
   emptyText,
+  empty,
   action,
   showMap = false,
 }: {
@@ -42,6 +43,16 @@ export function VideoSection({
    * preference, so only one of them draws it. */
   onViewChange?: (view: VideosView) => void;
   emptyText: string;
+  /**
+   * Rendered instead of `emptyText` when the list is empty, for a section whose
+   * zero state is a whole invitation rather than a sentence.
+   *
+   * A slot rather than a branch at the caller, and that is the point: the first
+   * queued row turns an empty list non-empty, so a caller branching around this
+   * section would swap the tree under the submitter and unmount the dialog
+   * still showing them their receipt.
+   */
+  empty?: React.ReactNode;
   /** The submit button, on the section that accepts submissions. */
   action?: React.ReactNode;
   /** Whether the rows cross maps. A map's own lists do not; a clan's record
@@ -84,9 +95,15 @@ export function VideoSection({
 
       {state.filtered.length === 0 ? (
         <PanelContent className={belowFilters}>
-          <p className="py-8 text-center text-sm text-fd-muted-foreground">
-            {battles.length === 0 ? emptyText : "No battle matches these filters."}
-          </p>
+          {battles.length === 0 && empty ? (
+            empty
+          ) : (
+            <p className="py-8 text-center text-sm text-fd-muted-foreground">
+              {battles.length === 0
+                ? emptyText
+                : "No battle matches these filters."}
+            </p>
+          )}
         </PanelContent>
       ) : view === VideosView.Table ? (
         // Edge to edge, like the other tables on the site. The play button
