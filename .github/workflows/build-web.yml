@@ -41,7 +41,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # `network=host` on the driver itself, not just on the build.
+      #
+      # The default docker-container driver runs BuildKit inside its own
+      # container, so `network: host` on the build only joins the RUN steps to
+      # THAT container's stack, where 127.0.0.1 is the buildkit container and the
+      # tunnel is nowhere to be found. Putting the driver on the host network
+      # makes the two localhosts the same one.
       - uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
 
       - uses: docker/login-action@v3
         with:
