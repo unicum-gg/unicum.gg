@@ -5,7 +5,7 @@ import { loadTankRatings } from "@/app/(site)/[region]/tanks/[slug]/detail";
 import {
   loadTankTab,
   tankMetadata,
-} from "@/app/(site)/[region]/tanks/[slug]/page";
+} from "@/app/(site)/[region]/tanks/[slug]/(detail)/page";
 import { JsonLd } from "@/components/json-ld";
 import { CommunityTab } from "@/components/tanks/detail/community";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
