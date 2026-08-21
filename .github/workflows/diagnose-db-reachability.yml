@@ -1,0 +1,41 @@
+# Throwaway diagnostic: can a GitHub runner open a TCP connection to the
+# production Postgres at all?
+#
+# The web image build reaches the database to prerender pages with real data. It
+# fails with postgres.js CONNECT_TIMEOUT after 30s, while the same host answers
+# instantly from a laptop. Thirty seconds is not latency, so this isolates the
+# network question from everything the build does around it.
+#
+# Delete once the answer is known.
+name: Diagnose db reachability
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Egress address of this runner
+        run: curl -s --max-time 20 https://api.ipify.org; echo
+
+      - name: TCP connect to postgres
+        env:
+          # Host only. The credential stays out of this workflow: reachability
+          # is answered by the handshake, not by logging in.
+          PGHOST: 51.255.193.62
+          PGPORT: "5432"
+        run: |
+          echo "--- nc, 10s budget ---"
+          time nc -z -w 10 "$PGHOST" "$PGPORT" && echo "TCP OPEN" || echo "TCP BLOCKED/TIMEOUT"
+          echo "--- again, 30s budget ---"
+          time nc -z -w 30 "$PGHOST" "$PGPORT" && echo "TCP OPEN" || echo "TCP BLOCKED/TIMEOUT"
+          echo "--- route ---"
+          traceroute -m 12 -w 2 "$PGHOST" 2>&1 | tail -8 || true
+
+      - name: Control, a port known to answer
+        run: |
+          # 443 on the same machine goes through the same path. If this one opens
+          # and 5432 does not, the filtering is per-port rather than per-host.
+          time nc -z -w 10 51.255.193.62 443 && echo "443 OPEN" || echo "443 BLOCKED"
