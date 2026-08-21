@@ -49,6 +49,35 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # The build prerenders pages against the live database, and a runner cannot
+      # open 5432 on the host: something upstream of the machine drops it, with
+      # tcpdump seeing no SYN arrive at all, while 22, 80 and 443 answer in
+      # milliseconds. So Postgres is reached through SSH rather than exposed on
+      # another port.
+      #
+      # The key is restricted on the server side to exactly this and nothing more
+      # (`restrict,permitopen="127.0.0.1:5432",command="/bin/false"`): it cannot
+      # open a shell, and it cannot forward anywhere except Postgres. That makes
+      # this stricter than the public port it replaces, not looser.
+      - name: Tunnel to postgres
+        env:
+          CI_TUNNEL_KEY: ${{ secrets.CI_TUNNEL_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$CI_TUNNEL_KEY" > ~/.ssh/ci_tunnel
+          chmod 600 ~/.ssh/ci_tunnel
+          ssh-keyscan -H 51.255.193.62 >> ~/.ssh/known_hosts 2>/dev/null
+          # ExitOnForwardFailure so a refused forward fails here, loudly, instead
+          # of surfacing 20 minutes later as a build that cannot resolve its data.
+          ssh -i ~/.ssh/ci_tunnel -o IdentitiesOnly=yes -o BatchMode=yes \
+              -o ExitOnForwardFailure=yes -o ServerAliveInterval=30 \
+              -f -N -L 5432:127.0.0.1:5432 root@51.255.193.62
+          for i in $(seq 1 10); do
+            nc -z 127.0.0.1 5432 && echo "tunnel up" && exit 0
+            sleep 1
+          done
+          echo "tunnel did not come up"; exit 1
+
       # Written to a file rather than passed inline through `secrets:`, which
       # parses its entries one per line and so keeps only the first line of a
       # multi-line value. That silently handed the build an env with one variable
@@ -90,6 +119,10 @@ jobs:
           cache-to: type=gha,mode=max
           platforms: linux/amd64
           provenance: false
+          # BuildKit sandboxes each RUN on its own network, where the tunnel's
+          # 127.0.0.1:5432 does not exist. Host networking puts the build on the
+          # runner's stack, which is where the forward is listening.
+          network: host
 
       - name: Report image
         run: |
