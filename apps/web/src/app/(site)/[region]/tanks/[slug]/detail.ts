@@ -89,15 +89,23 @@ export async function loadTankRatings(
   region: Region,
   slug: string,
 ): Promise<TankRatingSummary> {
-  return buildSafe(
-    () =>
-      unicum
-        .region(region)
-        .tanks(slug)
-        .ratings()
-        .then((r) => r as unknown as TankRatingSummary),
-    EMPTY_RATING_SUMMARY,
-  );
+  return buildSafe(async () => {
+    try {
+      const summary = await unicum.region(region).tanks(slug).ratings();
+      return summary as unknown as TankRatingSummary;
+    } catch (error) {
+      // A slug the catalogue does not know is not a ratings failure. The tab
+      // resolves the vehicle through `loadTankTab`, and that is what calls
+      // `notFound()`. Both run inside one `Promise.all`, so letting the 404
+      // out of here means it rejects the pair before the resolve can answer,
+      // and a missing tank renders as a 500 on the Community tab while every
+      // other tab correctly 404s.
+      if (error instanceof UnicumError && error.status === 404) {
+        return EMPTY_RATING_SUMMARY;
+      }
+      throw error;
+    }
+  }, EMPTY_RATING_SUMMARY);
 }
 
 const EMPTY_RATING_SUMMARY: TankRatingSummary = {
