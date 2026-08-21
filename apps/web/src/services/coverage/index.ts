@@ -8,9 +8,9 @@ import {
   clanRecentEventsByRegion,
   clanRefreshQueueByRegion,
   clansByRegion,
+  coverageTrendsByRegion,
   env,
   playerRefreshQueueByRegion,
-  playerSnapshotsByRegion,
   playersByRegion,
 } from "@unicum.gg/shared";
 import {
@@ -174,50 +174,37 @@ const getDiscordServerCount = unstable_cache(
   { revalidate: 3600, tags: ["coverage"] },
 );
 
-// The three player_snapshots aggregates with no cheap `players`-table proxy: a
-// rolling 24h row count and the two daily-growth histograms (the per-player
-// MIN(taken_at) CTE is the heaviest, ~24s). All full seq-scans of a 10M+ row
-// table, so they get their own 1h cache rather than running on every 60s
-// coverage revalidation (x4 regions) — the growth curves move slowly and a
-// slightly stale last point is fine, whereas paying these once a minute is what
-// hogged the DB connection pool. JSON-safe (numbers + {day,count}), so the
-// unstable_cache round-trip needs no re-hydration.
+// The three player_snapshots aggregates with no cheap `players`-table proxy (a
+// rolling 24h count and two 30-day daily histograms, the per-player MIN(taken_at)
+// CTE being the ~24s heaviest) are full seq-scans of a 10M+ row table. Rather
+// than run them here — where a cold cache let a thundering herd fire several
+// concurrent scans and saturate the shared host's CPU/IO — they are precomputed
+// hourly by the coverage-trends cron (@unicum.gg/core/coverage/trends-aggregate)
+// into the singleton `${region}_coverage_trends` row, and this reads that one
+// cheap row. It deliberately does NOT fall back to the scan when the row is
+// missing (that would reinstate the very herd this removes); the cron's
+// boot-time seed keeps the cold window short. `buildDaySeries` still runs here so
+// the dense 30-day window re-anchors to the current UTC day, keeping the output
+// byte-for-byte identical.
 async function getSnapshotTrendsUncached(region: Region): Promise<{
   playerSnapshotsLast24h: number;
   playerSnapshotsDaily: DailyPoint[];
   firstSnapshotsDaily: DailyPoint[];
 }> {
-  const t = playerSnapshotsByRegion[region];
-  const [last24h, dailyRows, firstsRows] = await Promise.all([
-    db
-      .execute<{ count: string }>(
-        sql`SELECT COUNT(*)::text AS count FROM ${t} WHERE taken_at > NOW() - INTERVAL '24 hours'`,
-      )
-      .then((r) => Number(r[0]?.count ?? 0)),
-    db.execute<{ day: string; count: string }>(
-      sql`SELECT date_trunc('day', taken_at)::text AS day, COUNT(*)::text AS count
-          FROM ${t}
-          WHERE taken_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
-          GROUP BY day
-          ORDER BY day`,
-    ),
-    db.execute<{ day: string; count: string }>(
-      sql`WITH firsts AS (
-            SELECT player_id, MIN(taken_at) AS first_at
-            FROM ${t}
-            GROUP BY player_id
-          )
-          SELECT date_trunc('day', first_at)::text AS day, COUNT(*)::text AS count
-          FROM firsts
-          WHERE first_at > NOW() - (${DAYS_WINDOW} || ' days')::interval
-          GROUP BY day
-          ORDER BY day`,
-    ),
-  ]);
+  const row = (
+    await db.select().from(coverageTrendsByRegion[region]).limit(1)
+  )[0];
+  if (!row) {
+    return {
+      playerSnapshotsLast24h: 0,
+      playerSnapshotsDaily: buildDaySeries([], DAYS_WINDOW),
+      firstSnapshotsDaily: buildDaySeries([], DAYS_WINDOW),
+    };
+  }
   return {
-    playerSnapshotsLast24h: last24h,
-    playerSnapshotsDaily: buildDaySeries(dailyRows, DAYS_WINDOW),
-    firstSnapshotsDaily: buildDaySeries(firstsRows, DAYS_WINDOW),
+    playerSnapshotsLast24h: Number(row.playerSnapshotsLast24h),
+    playerSnapshotsDaily: buildDaySeries(row.playerSnapshotsDaily, DAYS_WINDOW),
+    firstSnapshotsDaily: buildDaySeries(row.firstSnapshotsDaily, DAYS_WINDOW),
   };
 }
 

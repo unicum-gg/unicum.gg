@@ -7,6 +7,7 @@ export * from "./clan-boost-log";
 export * from "./clan-boost-discord";
 export * from "./clans";
 export * from "./clan-ratings";
+export * from "./coverage-trends";
 export * from "./stronghold-ratings";
 export * from "./onslaught-ratings";
 export * from "./cron-leader";

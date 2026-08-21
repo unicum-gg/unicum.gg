@@ -105,6 +105,11 @@ export async function register() {
       "@unicum.gg/core/tanks/ratings-aggregate"
     );
     startTankRatingsCron();
+
+    const { startCoverageTrendsCron } = await import(
+      "@unicum.gg/core/coverage/trends-aggregate"
+    );
+    startCoverageTrendsCron();
   } finally {
     globalThis.__dbContext = "request";
   }

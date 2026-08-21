@@ -88,6 +88,11 @@ async function main(): Promise<void> {
   );
   startTankRatingsCron();
 
+  const { startCoverageTrendsCron } = await import(
+    "@unicum.gg/core/coverage/trends-aggregate"
+  );
+  startCoverageTrendsCron();
+
   // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
   // real per-region req/s (all consumers, vs the rate-limit budget) is only
   // observable here, at the transport. Log it every 60s as requests/second.
