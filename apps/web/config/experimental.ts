@@ -29,7 +29,13 @@ export const experimental: NextConfig["experimental"] = {
   // ~6 GiB. It lives on `build` rather than in the deploy environment on
   // purpose: a `NODE_OPTIONS` in Coolify would reach `start` too and cap the
   // PM2 runtime workers, which already sit near 1 GiB each.
-  cpus: 4,
+  //
+  // Overridable because the right number depends on where the build runs, and
+  // that is no longer only this host. In CI the constraint is not memory but the
+  // SSH tunnel the build reaches Postgres through: four workers times their
+  // pools saturated the single SSH channel and the resets came back as pages
+  // prerendered empty. Fewer workers, fewer concurrent streams through it.
+  cpus: Number(process.env.NEXT_BUILD_CPUS) || 4,
   // Collapse the router's per-segment prefetch into one request per link.
   //
   // Next 16 splits every prefetch into a request per route segment (the tree,

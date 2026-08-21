@@ -83,6 +83,14 @@ RUN pnpm --filter @unicum.gg/web exec react-flagpack
 # whatever optional integration is configured) and it changes as features land,
 # so enumerating them here would mean editing this file every time. `set -a`
 # exports them for the duration of the command only.
+#
+# Two static-generation workers rather than the four this host uses. Here the
+# database is on the far end of an SSH tunnel, and four workers times their
+# pools pushed enough concurrent streams through that single channel to get
+# connections reset mid-read, which `buildSafe` then turned into pages
+# prerendered empty. Halving the concurrency halves the streams. Not a secret,
+# so it is a plain ENV.
+ENV NEXT_BUILD_CPUS=2
 RUN --mount=type=secret,id=build_env,required=true \
     set -a && . /run/secrets/build_env && set +a \
     && pnpm --filter @unicum.gg/web build
