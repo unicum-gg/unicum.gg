@@ -3,7 +3,8 @@ import { APP_IDENTITY, env } from "@unicum.gg/shared";
 import { reviewTankVideo } from "@unicum.gg/core/tanks/videos";
 import { getTankSlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
-import { REGIONS } from "@unicum.gg/wargaming";
+import { getClanTagById } from "@unicum.gg/core/clans/repository";
+import { isRegion, REGIONS } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 
 export const dynamic = "force-dynamic";
@@ -69,6 +70,21 @@ export async function POST(
         revalidatePath(`${ROUTES.TANK(region, tankSlug)}/videos`);
       }
       if (map) revalidatePath(ROUTES.MAP(region, map.slug));
+    }
+    // The clan credited, on its own region alone: unlike a tank or a map, a
+    // clan exists on one region only, and the tag is resolved from the stored
+    // id so a rename since the submission drops the page it is on today.
+    const clanRegion = reviewed.clanRegion;
+    if (clanRegion && isRegion(clanRegion) && reviewed.clanId !== null) {
+      const clanTag = await getClanTagById(clanRegion, reviewed.clanId).catch(
+        () => null,
+      );
+      if (clanTag) {
+        // Both, like the tank above: the tab renders the list, and the profile
+        // it hangs off seeds the "Videos (N)" the nav reads on first paint.
+        revalidatePath(ROUTES.CLAN(clanRegion, clanTag));
+        revalidatePath(`${ROUTES.CLAN(clanRegion, clanTag)}/videos`);
+      }
     }
     // A random battle on a known tank lives on the tank page; a tactic only has
     // the map page. EU stands in for the canonical origin, the pages being

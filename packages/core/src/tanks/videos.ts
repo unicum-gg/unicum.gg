@@ -268,6 +268,11 @@ export type ReviewedVideo = {
   tankId: number | null;
   /** The map it was fought on, whose page carries it either way. */
   arenaId: string | null;
+  /** The clan credited, whose own videos tab carries it too. Returned for the
+   * same reason as the other two: that page is cached, so an approval it is not
+   * told about leaves the tactic out of it for half an hour. */
+  clanRegion: string | null;
+  clanId: number | null;
   title: string;
   status: TankVideoStatus;
 };
@@ -298,6 +303,8 @@ export async function reviewTankVideo(
     .returning({
       tankId: tankVideos.tankId,
       arenaId: tankVideos.arenaId,
+      clanRegion: tankVideos.clanRegion,
+      clanId: tankVideos.clanId,
       title: tankVideos.title,
     });
   return row ? { ...row, status } : null;

@@ -85,6 +85,27 @@ export async function getClanByTagCached(
     : null;
 }
 
+/**
+ * The tag a clan id carries today, for a caller holding a stored credit.
+ *
+ * Credits are stored as ids, so anything that has to name the clan's page (a
+ * link, a path to revalidate) turns one back into a tag here. Reads our own
+ * table only: an id we have never tracked has no page to point at, so it
+ * answers null rather than asking WG for a clan nobody can open.
+ */
+export async function getClanTagById(
+  region: Region,
+  id: number,
+): Promise<string | null> {
+  const clans = clansByRegion[region];
+  const [row] = await db
+    .select({ tag: clans.tag })
+    .from(clans)
+    .where(eq(clans.id, id))
+    .limit(1);
+  return row?.tag ?? null;
+}
+
 export async function refreshClanByTag(
   region: Region,
   tag: string,
