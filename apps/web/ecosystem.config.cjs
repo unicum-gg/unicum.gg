@@ -54,6 +54,13 @@ const dbPoolMax = process.env.DB_POOL_MAX
 // entirely: native buffers, sockets, stacks, compiled code. The rest of the
 // slice is the allowance for that.
 //
+// 550 rather than the ~400 actually observed. Production ran three hours at a
+// 900 MiB ceiling holding 1139 to 1296 MiB RSS, so the real overhead is about
+// 396. But sizing to the measurement leaves no room for V8 to overshoot its
+// ceiling before a major GC catches up, and being wrong here is not a slow
+// worker, it is the kill loop this arithmetic exists to prevent. The slack is
+// the point.
+//
 // Keep any Coolify `NODE_OPTIONS` off the runtime (buildtime only, or unset).
 // It reaches `start` too, and a heap ceiling set there is invisible from this
 // arithmetic, which is exactly how the two drifted apart.
@@ -65,7 +72,7 @@ const dbPoolMax = process.env.DB_POOL_MAX
 // above, that is the signal to revisit the budget for a host that size rather
 // than to trust these numbers.
 const memoryBudgetMb = Number(process.env.WEB_MEMORY_BUDGET_MB || 8192);
-const NON_HEAP_MB = 450;
+const NON_HEAP_MB = 550;
 const heapCapMb = Math.max(
   512,
   Math.floor((memoryBudgetMb * 0.85) / instances) - NON_HEAP_MB,
