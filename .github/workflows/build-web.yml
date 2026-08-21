@@ -8,20 +8,30 @@
 # with a pull.
 name: Build web image
 
+# Manual only, until the last problem is solved.
+#
+# WHERE THIS STANDS
+# The image builds: dependencies install, the app compiles and typechecks, and
+# most pages prerender with real data. What does not hold is the long queries.
+# `/coverage` and the `clans/top` leaderboards run for minutes (the build
+# deliberately disables Postgres parallel workers, which roughly doubles them),
+# and those connections come back ECONNRESET across the tunnel while short ones
+# are fine. `buildSafe` catches it and prerenders empty shells, so the image
+# would ship with holes in it. That is worse than a slow build, hence no
+# automatic trigger yet.
+#
+# Not the cause, ruled out by measurement: concurrency (four workers and two give
+# 37 and 35 resets), volume (four concurrent bulk streams over the direct port
+# are fine), Postgres (logs no connection error at all), and the nginx fronting
+# 5432 (1024 connections, 3600s timeout).
+#
+# Next thing to try: keep the parallel workers enabled in CI. The reason they are
+# off is /dev/shm pressure from ~24 concurrent prerenders on the deploy host, and
+# with two workers here that pressure is not the same problem.
+#
+# Restore the push trigger below once a build comes out with zero
+# "prerendering empty" in its log.
 on:
-  push:
-    branches: [main]
-    # Mirrors the watch paths configured on the Coolify application, so a commit
-    # that cannot change the image does not rebuild it.
-    paths:
-      - "apps/web/**"
-      - "packages/**"
-      - "package.json"
-      - "pnpm-lock.yaml"
-      - "pnpm-workspace.yaml"
-      - ".github/workflows/build-web.yml"
-  # Kept so a build can be re-run without an empty commit, e.g. after rotating a
-  # credential in WEB_BUILD_ENV.
   workflow_dispatch:
 
 env:
