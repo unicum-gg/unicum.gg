@@ -15,6 +15,7 @@ const APP = {
   EXTERNAL: {
     DISCORD: "https://discord.gg/Hqbfb8YPbU",
     GITHUB: `https://github.com/${APP_IDENTITY.REPO}`,
+    STATUS: "https://status.unicum.gg/",
   },
 };
 

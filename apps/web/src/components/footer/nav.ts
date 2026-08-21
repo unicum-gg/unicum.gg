@@ -58,13 +58,14 @@ export function footerColumns(region: Region): FooterColumn[] {
     },
     {
       // What the site is rather than what it shows: how much of the playerbase
-      // we track, who pays for it, where the code lives.
+      // we track, who pays for it, where the code lives, whether it is up.
       title: "Project",
       links: [
         { label: "Glossary", href: ROUTES.GLOSSARY },
         { label: "Coverage", href: ROUTES.COVERAGE(region) },
         { label: "Support us", href: ROUTES.SUPPORT },
         { label: "Source code", href: APP.EXTERNAL.GITHUB, external: true },
+        { label: "Status", href: APP.EXTERNAL.STATUS, external: true },
         { label: "Discord", href: APP.EXTERNAL.DISCORD, external: true },
       ],
     },
