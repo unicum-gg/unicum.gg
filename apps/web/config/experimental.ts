@@ -18,6 +18,17 @@ export const experimental: NextConfig["experimental"] = {
   // static-generation phase. Note this is the only knob that works:
   // `staticGenerationMinPagesPerWorker` exists in the config schema but is
   // never read in 16.2.6 (verified: setting it left the pool untouched).
+  //
+  // Capping the pool was not enough on its own. The glossary roughly doubled
+  // the prerendered page count, and on 2026-08-21 the build was SIGKILLed
+  // (exit 137, `cannot allocate memory`) during page-data collection with 4
+  // workers. The count is only half the problem: what makes a worker grow is
+  // the 4 GiB ceiling it inherits, because V8 pages against that number and
+  // not against the free memory of the machine. So the build script also sets
+  // `--max-old-space-size=1536`, which is what actually bounds the pool at
+  // ~6 GiB. It lives on `build` rather than in the deploy environment on
+  // purpose: a `NODE_OPTIONS` in Coolify would reach `start` too and cap the
+  // PM2 runtime workers, which already sit near 1 GiB each.
   cpus: 4,
   // Collapse the router's per-segment prefetch into one request per link.
   //

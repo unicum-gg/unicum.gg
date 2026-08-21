@@ -8,7 +8,7 @@
     "prebuild": "tsx scripts/generate-glossary.ts && openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts && tsx scripts/generate-local-routes.ts && tsx scripts/generate-page-routes.ts && pnpm --filter @unicum.gg/sdk generate:client",
     "openapi:generate": "openapi-gen generate && tsx scripts/inject-openapi-enums.ts && tsx scripts/heal-openapi-refs.ts",
     "openapi:watch": "openapi-gen generate --watch",
-    "build": "next build",
+    "build": "NODE_OPTIONS=--max-old-space-size=1536 next build",
     "postbuild": "tsx scripts/copy-standalone-assets.ts",
     "start": "pm2-runtime start ecosystem.config.cjs",
     "start:single": "next start",
