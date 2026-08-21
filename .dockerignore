@@ -1,0 +1,31 @@
+# Build context for apps/web/Dockerfile, whose context is this repo root.
+#
+# node_modules is the load-bearing entry. The Dockerfile installs dependencies in
+# their own cached stage and copies them forward, so a context carrying the local
+# ones would both send gigabytes to the daemon and overwrite the installed tree
+# with whatever the developer's machine happens to hold.
+node_modules
+
+# Build output, regenerated inside the image. A local .next also carries absolute
+# paths from the machine that produced it.
+.next
+out
+dist
+
+# Never ship credentials into a build context whose image is published publicly.
+.env
+.env.*
+!.env.example
+
+.git
+.github
+
+# Local noise with no meaning inside the image.
+.DS_Store
+*.log
+coverage
+.turbo
+.vercel
+.idea
+.vscode
+.superset
