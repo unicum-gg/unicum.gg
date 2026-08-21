@@ -49,6 +49,24 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      # Written to a file rather than passed inline through `secrets:`, which
+      # parses its entries one per line and so keeps only the first line of a
+      # multi-line value. That silently handed the build an env with one variable
+      # in it, and `next build` failed on the rest being undefined.
+      #
+      # RUNNER_TEMP sits outside the build context, so the file is never sent to
+      # the daemon or captured in a layer, and the runner is destroyed with it.
+      - name: Materialise build env
+        env:
+          WEB_BUILD_ENV: ${{ secrets.WEB_BUILD_ENV }}
+        run: |
+          printf '%s\n' "$WEB_BUILD_ENV" > "${RUNNER_TEMP}/build.env"
+          # Names only. A count of zero here means the secret is missing or empty,
+          # which is otherwise indistinguishable from a build that simply fails
+          # later on for its own reasons.
+          echo "variables provided: $(grep -c '=' "${RUNNER_TEMP}/build.env")"
+          cut -d= -f1 "${RUNNER_TEMP}/build.env" | sort | tr '\n' ' '
+
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
@@ -63,8 +81,8 @@ jobs:
           # as one dotenv secret rather than a list of build args: args persist in
           # the image history, and this image is public. One secret also means a
           # new variable is a secret edit, not a workflow edit.
-          secrets: |
-            build_env=${{ secrets.WEB_BUILD_ENV }}
+          secret-files: |
+            build_env=${{ runner.temp }}/build.env
           # Layer cache lives with the Actions cache, so a commit that touches
           # only application code reuses the dependency install instead of
           # redoing it, which is what the host never did (`Build Cache: 0B`).
