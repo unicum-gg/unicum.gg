@@ -58,6 +58,23 @@ import { unicum } from "@/services/sdk";
 const TACTIC_FORMATS = Object.values(BattleFormat).filter(isCompetitiveFormat);
 
 /**
+ * The endpoint's own name for what went wrong, out of the body it answers with.
+ *
+ * Read rather than inferred from the status: the suggest endpoint answers 404
+ * for four different things (submissions unconfigured, an unknown map, an
+ * unknown tank, an unknown clan tag), and the clan field is filled by default
+ * on a clan's page, so guessing from the status told a submitter standing on
+ * [FAME]'s page that we do not track [FAME].
+ */
+function errorCode(err: unknown): string | null {
+  if (!(err instanceof UnicumError)) return null;
+  const body = err.body;
+  if (typeof body !== "object" || body === null) return null;
+  const code = (body as { error?: unknown }).error;
+  return typeof code === "string" ? code : null;
+}
+
+/**
  * Suggest a tactic for this map.
  *
  * The mirror of the tank page's form: there the vehicle is implied and the map
@@ -71,6 +88,7 @@ const TACTIC_FORMATS = Object.values(BattleFormat).filter(isCompetitiveFormat);
 export function SubmitTacticDialog({
   region,
   map,
+  clanTag: creditedClan,
   initial,
 }: {
   region: Region;
@@ -79,6 +97,14 @@ export function SubmitTacticDialog({
    * of its own (a clan's videos) can seed it from the catalogue: a `MapDetail`
    * satisfies it as it is. */
   map: { arenaId: string; slug: string; name: string };
+  /**
+   * The clan the credit starts on, when the form was opened from one: a tactic
+   * suggested from a clan's page is about that clan, and leaving the field
+   * blank filed it under nobody, so it never reached the page it was suggested
+   * from. A seed, not a lock, exactly like the map above: the field stays
+   * editable, since the clan on screen is not always the one that played.
+   */
+  clanTag?: string;
   /**
    * A moment picked in the player, which opens the form on it.
    *
@@ -107,7 +133,7 @@ export function SubmitTacticDialog({
     arenaId: map.arenaId,
   }));
   const [format, setFormat] = useState<string>("");
-  const [clanTag, setClanTag] = useState("");
+  const [clanTag, setClanTag] = useState(creditedClan ?? "");
   const [teamSize, setTeamSize] = useState("");
   const [tier, setTier] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -142,7 +168,7 @@ export function SubmitTacticDialog({
     source.reset();
     setBattle({ ...EMPTY_BATTLE, arenaId: map.arenaId });
     setFormat("");
-    setClanTag("");
+    setClanTag(creditedClan ?? "");
     setTeamSize("");
     setTier("");
     setError(null);
@@ -175,7 +201,7 @@ export function SubmitTacticDialog({
         setError("That battle has already been suggested.");
       } else if (status === 422) {
         setError("YouTube won't show that video (private, deleted or blocked).");
-      } else if (status === 404 && clanTag.trim()) {
+      } else if (errorCode(err) === "clan_not_found") {
         setError(`We don't track a clan tagged [${clanTag.trim()}] on ${region.toUpperCase()}.`);
       } else {
         setError("Something went wrong. Try again in a moment.");

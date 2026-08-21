@@ -28,7 +28,15 @@ type MapSeed = { arenaId: string; slug: string; name: string };
  * from there exactly as on a map page. Only while the catalogue is still
  * loading is there nothing to seed with, and the button stays out until then.
  */
-export function ClanTacticDialogSlot({ region }: { region: Region }) {
+export function ClanTacticDialogSlot({
+  region,
+  tag,
+}: {
+  region: Region;
+  /** Seeds the credit, so a tactic suggested from a clan's page lands on that
+   * clan's page. The field stays editable, like the map beside it. */
+  tag: string;
+}) {
   const player = useTankVideoPlayer();
   const { data: maps } = useSWR(`maps:${region}`, () =>
     unicum
@@ -58,10 +66,18 @@ export function ClanTacticDialogSlot({ region }: { region: Region }) {
   return (
     <SubmitTacticDialog
       // Remounted on each moment picked in the player, so the form opens
-      // already filled in rather than an effect racing its own fields.
-      key={suggestion ? `${suggestion.url}@${suggestion.startSeconds}` : "blank"}
+      // already filled in rather than an effect racing its own fields. The tag
+      // is in the key for the same reason: both seeds are read at mount, so a
+      // clan changing under a live form (a rename arriving on a LiveSync tick)
+      // would otherwise leave it crediting the previous one.
+      key={
+        suggestion
+          ? `${tag}:${suggestion.url}@${suggestion.startSeconds}`
+          : `${tag}:blank`
+      }
       region={region}
       map={seed}
+      clanTag={tag}
       initial={suggestion ?? undefined}
     />
   );
