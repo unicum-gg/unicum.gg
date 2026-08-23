@@ -25,7 +25,11 @@ export function TankCompareHead({
 }) {
   if (!selection) return null;
   return (
-    <TableHead className="w-10 min-w-10 text-center">
+    // Both halves force the same inline start padding the list tables give
+    // their first column, so the icon sits over the checkboxes rather than
+    // against the table edge. `text-center!` is what beats the table's own
+    // `[&_th]:text-left`.
+    <TableHead className="w-10 min-w-10 ps-4! text-center!">
       <Tooltip>
         <TooltipTrigger asChild>
           <span className="inline-flex">
@@ -55,7 +59,7 @@ export function TankCompareCell({
   if (!selection) return null;
   const checked = selection.has(slug);
   return (
-    <TableCell className="text-center">
+    <TableCell className="ps-4! text-center">
       <Checkbox
         checked={checked}
         // A full selection greys out what it can't take, rather than letting a
