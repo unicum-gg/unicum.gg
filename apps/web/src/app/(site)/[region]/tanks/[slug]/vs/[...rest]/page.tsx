@@ -18,6 +18,11 @@ import {
   MIN_COMPARE_TANKS,
 } from "@/constants/compare";
 import { SETUP_PARAM } from "@/components/tanks/detail/specifications/config-url";
+import { formatTankRef, parseTankRef } from "@unicum.gg/shared";
+import {
+  vehicleLabel,
+  vehicleRef,
+} from "@/components/tanks/compare/column-ref";
 import { unicum } from "@/services/sdk";
 
 // Dynamic on purpose: the page consumes our own API through the SDK, and its
@@ -31,22 +36,38 @@ type RouteParams = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-function dedupePreservingOrder(slugs: string[]): string[] {
+/** A path segment as it was written. Next hands them over percent-encoded, and
+ * the client separator is one of the characters that gets encoded (`@` becomes
+ * `%40`), so a column reference has to be decoded before it can be read. A
+ * malformed escape is left alone rather than throwing: it comes from a URL. */
+function decodeSegment(raw: string): string {
+  try {
+    return decodeURIComponent(raw);
+  } catch {
+    return raw;
+  }
+}
+
+function dedupePreservingOrder(refs: string[]): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const s of slugs) {
-    const key = s.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(key);
+  for (const raw of refs) {
+    const ref = formatTankRef(parseTankRef(decodeSegment(raw)));
+    if (seen.has(ref)) continue;
+    seen.add(ref);
+    out.push(ref);
   }
   return out;
 }
 
-/** The vehicles a path asks for: already decoded by Next, deduped before the
- * ceiling applies (so a repeated slug costs itself its slot, never a distinct
- * vehicle further down the path), and null below the two it takes to compare. */
-function resolveSlugs(raw: string[]): string[] | null {
+/** The columns a path asks for: already decoded by Next, deduped before the
+ * ceiling applies (so a repeated column costs itself its slot, never a distinct
+ * vehicle further down the path), and null below the two it takes to compare.
+ *
+ * A column is a vehicle on a client, so the whole reference is what dedupes:
+ * `amx-13-90/vs/amx-13-90@ct` is a vehicle against its Common Test version, two
+ * columns, where the bare slug twice is still one. */
+function resolveRefs(raw: string[]): string[] | null {
   const cleaned = raw.map((s) => s.trim()).filter((s) => s.length > 0);
   if (cleaned.length < MIN_COMPARE_TANKS) return null;
   const unique = dedupePreservingOrder(cleaned);
@@ -81,27 +102,24 @@ export async function generateMetadata({
 }: RouteParams): Promise<Metadata> {
   const { region, slug, rest } = await params;
   if (!isRegion(region)) return {};
-  const slugs = resolveSlugs([slug, ...(rest ?? [])]);
-  if (!slugs) return {};
-  const data = await loadCompare(region, slugs.join(","));
+  const refs = resolveRefs([slug, ...(rest ?? [])]);
+  if (!refs) return {};
+  const data = await loadCompare(region, refs.join(","));
   if (!data || data.vehicles.length < MIN_COMPARE_TANKS) return {};
 
-  const names = data.vehicles.map((v) => v.meta.name);
+  const names = data.vehicles.map(vehicleLabel);
   const list = names.join(" vs ");
   const tiers = [...new Set(data.vehicles.map((v) => toRoman(v.meta.tier)))];
   const tierPart =
     tiers.length === 1 ? `tier ${tiers[0]} ` : "";
   const ogImage = `/api/og/${region}/tanks/compare?slugs=${data.vehicles
-    .map((v) => encodeURIComponent(v.slug))
+    .map((v) => encodeURIComponent(vehicleRef(v)))
     .join(",")}`;
   return constructMetadata({
     title: `${list} compared on World of Tanks (${region.toUpperCase()})`,
     description: `Side-by-side comparison of the ${tierPart}${list}: firepower, mobility, survivability and concealment with your own equipment and crew, plus server-average winrate, damage and marks. ${APP.NAME}.`,
     ogImage,
-    canonical: ROUTES.COMPARE_TANKS(
-      region,
-      data.vehicles.map((v) => v.slug),
-    ),
+    canonical: ROUTES.COMPARE_TANKS(region, data.vehicles.map(vehicleRef)),
   });
 }
 
@@ -112,10 +130,10 @@ export default async function CompareTanksPage({
   const { region, slug, rest } = await params;
   if (!isRegion(region)) notFound();
 
-  const slugs = resolveSlugs([slug, ...(rest ?? [])]);
-  if (!slugs) notFound();
+  const refs = resolveRefs([slug, ...(rest ?? [])]);
+  if (!refs) notFound();
 
-  const data = await loadCompare(region, slugs.join(","));
+  const data = await loadCompare(region, refs.join(","));
   if (!data || data.vehicles.length < MIN_COMPARE_TANKS) notFound();
 
   // The setups the URL opened on. Read here to key the board, and carried
@@ -129,12 +147,20 @@ export default async function CompareTanksPage({
   // The endpoint answers with canonical slugs and drops what the catalogue
   // doesn't know, so a legacy id, a wrong-case slug, a duplicate or a dead
   // vehicle in the path lands on the URL this comparison actually is.
-  const canonical = ROUTES.COMPARE_TANKS(
-    region,
-    data.vehicles.map((v) => v.slug),
-  );
-  const requested = `/${region}/tanks/${slug}/vs/${(rest ?? []).join("/")}`;
-  if (canonical !== requested) {
+  //
+  // Compared as column lists, not as URL strings. The two strings are built by
+  // different means (one from the raw path, one through `pathcat`) and a column
+  // reference carries a character that percent-encodes, so comparing them
+  // spelled out made a CT column in first position differ from itself and
+  // redirect forever.
+  //
+  // The path side is decoded but otherwise left as written, so what the URL got
+  // wrong still shows up as a difference: a legacy id, the wrong case, a
+  // repeated column, a vehicle the catalogue dropped.
+  const canonicalRefs = data.vehicles.map(vehicleRef);
+  const canonical = ROUTES.COMPARE_TANKS(region, canonicalRefs);
+  const requestedRefs = [slug, ...(rest ?? [])].map(decodeSegment);
+  if (canonicalRefs.join(",") !== requestedRefs.join(",")) {
     redirect(
       setupKey
         ? `${canonical}?${SETUP_PARAM}=${encodeURIComponent(setupKey)}`
@@ -156,7 +182,7 @@ export default async function CompareTanksPage({
           column") remount the board rather than sliding a removed column's
           setup onto its neighbour (see `useCompareBuilds`). */}
       <TankCompareView
-        key={`${vehicles.map((v) => v.slug).join(",")}|${setupKey}`}
+        key={`${vehicles.map(vehicleRef).join(",")}|${setupKey}`}
         region={region}
         vehicles={vehicles}
         catalog={catalog}

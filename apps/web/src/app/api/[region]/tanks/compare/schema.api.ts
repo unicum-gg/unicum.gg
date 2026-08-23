@@ -2,6 +2,8 @@
 // next-openapi-gen only scans `route.ts` plus `.ts` files whose name contains
 // "api", so a plain `schema.ts` would be found by name but built empty.
 import { z } from "zod";
+import { TankClient } from "@unicum.gg/shared";
+import type { EnumMeta } from "@/services/openapi/schemas";
 import {
   crewMember,
   crewSkill,
@@ -36,7 +38,16 @@ const compareVehicle = z
     tankId: z.number(),
     slug: z.string().meta({
       description:
-        "Canonical slug. Callers that reached a vehicle through a legacy id or wrong-case slug should redirect to it.",
+        "Canonical slug. Callers that reached a vehicle through a legacy id or wrong-case slug should redirect to it. It carries no client suffix: `client` below says which one this column is.",
+    }),
+    client: z.enum(TankClient).meta({
+      description:
+        "The game client this column was read on. `ct` when the query asked for it, and always for a vehicle that exists only on the test client.",
+      "x-enum-source": "TANK_CLIENT",
+    } as EnumMeta),
+    testVersion: z.string().nullable().meta({
+      description:
+        "The Common Test build available for this vehicle, e.g. `2.4.0.5415`. Null when no test is running or when it leaves the vehicle alone.",
     }),
     meta: vehicleMeta,
     specs: z.looseObject({}).nullable().meta({

@@ -33,6 +33,10 @@ import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
 import { unicumPublic } from "@/services/sdk";
 import { MAX_COMPARE_TANKS } from "@/constants/compare";
+import {
+  vehicleLabel,
+  vehicleRef,
+} from "@/components/tanks/compare/column-ref";
 import { useCompareBuilds } from "@/hooks/use-compare-builds";
 import { cn } from "@/lib/utils";
 
@@ -147,15 +151,14 @@ export function TankCompareView({
    * state from there, so the way to re-seed them all is to land on a URL that
    * says so (the page remounts the board on the setup it was given). */
   function onApplyToAll(setupToken: string) {
-    const href = ROUTES.COMPARE_TANKS(
-      region,
-      vehicles.map((v) => v.slug),
-    );
+    const href = ROUTES.COMPARE_TANKS(region, vehicles.map(vehicleRef));
     const all = encodeSetups(vehicles.map(() => setupToken));
     router.push(all ? `${href}?${SETUP_PARAM}=${all}` : href);
   }
 
-  const names = vehicles.map((v) => v.meta.name);
+  // A comparison can hold one vehicle twice, once per game client, so the name
+  // alone does not identify a column here either.
+  const names = vehicles.map(vehicleLabel);
   const canAddMore = vehicles.length < MAX_COMPARE_TANKS;
   const columns = builds.map((b) => ({
     specs: b.finalSpecs,
@@ -169,7 +172,7 @@ export function TankCompareView({
 
   const headers = vehicles.map((vehicle, i) => (
     <TankCompareColumnHeader
-      key={vehicle.slug}
+      key={vehicleRef(vehicle)}
       region={region}
       vehicle={vehicle}
       data={data[i]}

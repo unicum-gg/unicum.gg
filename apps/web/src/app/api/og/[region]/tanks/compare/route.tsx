@@ -15,6 +15,11 @@ import {
 } from "@unicum.gg/shared";
 import { getTankDataset } from "@unicum.gg/core/wargaming/wot/tanks/dataset";
 import { getSpecRanges } from "@unicum.gg/core/wargaming/wot/tanks/spec-ranges";
+import {
+  applyTestChanges,
+  getTestChanges,
+} from "@unicum.gg/core/wargaming/wot/tanks/test-changes";
+import { formatTankRef, parseTankRef, TankClient } from "@unicum.gg/shared";
 import { BrandHeaderCell, RegionHeaderCell, StatCard } from "@/components/og";
 import { overallScore } from "@/components/tanks/compare/score";
 import APP from "@/constants/app";
@@ -31,6 +36,8 @@ import {
 export const runtime = "nodejs";
 
 type Slot = {
+  /** The column as the path writes it: `is-7`, or `is-7@ct`. */
+  ref: string;
   slug: string;
   name: string;
   /** "Tier X USSR heavy tank", as on a tank's own card. */
@@ -41,14 +48,17 @@ type Slot = {
   score: number | null;
 };
 
-function dedupePreservingOrder(slugs: string[]): string[] {
+/** The columns a card is asked for. A column is a vehicle on a game client
+ * (`amx-13-90@ct`), so the whole reference is what dedupes, exactly as the page
+ * and the comparison endpoint read it. */
+function dedupePreservingOrder(refs: string[]): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
-  for (const s of slugs) {
-    const key = s.toLowerCase();
-    if (seen.has(key)) continue;
-    seen.add(key);
-    out.push(key);
+  for (const raw of refs) {
+    const ref = formatTankRef(parseTankRef(raw));
+    if (seen.has(ref)) continue;
+    seen.add(ref);
+    out.push(ref);
   }
   return out;
 }
@@ -91,9 +101,10 @@ export async function GET(
     hangarBgDataUrl(isRegion(region) ? region : Region.EU),
   ]);
 
-  let slots: Slot[] = slugs.map((slug) => ({
-    slug,
-    name: slug,
+  let slots: Slot[] = slugs.map((ref) => ({
+    ref,
+    slug: ref,
+    name: ref,
     subtitle: "",
     tierLabel: "—",
     render: null,
@@ -110,12 +121,16 @@ export async function GET(
     ]);
     const bySlug = new Map(dataset.map((r) => [r.identity.slug, r]));
     slots = await Promise.all(
-      slugs.map(async (slug): Promise<Slot> => {
+      slugs.map(async (ref): Promise<Slot> => {
+        // The client rides on the reference, the catalogue is keyed by vehicle.
+        const { slug, client } = parseTankRef(ref);
+        const onTest = client === TankClient.CommonTest;
         const row = bySlug.get(slug) ?? null;
         if (!row) {
           return {
+            ref,
             slug,
-            name: slug,
+            name: ref,
             subtitle: "",
             tierLabel: "—",
             render: null,
@@ -134,15 +149,28 @@ export async function GET(
           )) ??
           (identity.bigIcon ? await fetchImageDataUrl(identity.bigIcon) : null) ??
           (await fetchImageDataUrl(defaultVehicleRenderUrl(region)));
+        // A test column is scored on what the test build makes of the vehicle,
+        // or the card would print the live standing under a Common Test
+        // heading. The recorded diff is where those values come from, rather
+        // than a second read of the client data for a preview image.
+        const base = row.specs
+          ? onTest
+            ? applyTestChanges(
+                row.specs as Record<string, unknown>,
+                (await getTestChanges(row.identity.tankId)).changes,
+              )
+            : row.specs
+          : null;
         // Scored on the no-camouflage-skill baseline, which is what the page
         // shows on an untouched comparison (the stored camo is the fully
         // trained value).
-        const specs = row.specs
-          ? applyCamouflage(row.specs as TankSpec, 0)
-          : null;
+        const specs = base ? applyCamouflage(base as TankSpec, 0) : null;
         return {
+          ref,
           slug,
-          name: identity.name,
+          // Told apart from its twin when a card holds a vehicle and its test
+          // version, which otherwise print the same name twice.
+          name: onTest ? `${identity.name} (Common Test)` : identity.name,
           subtitle: `Tier ${tierLabel} ${identity.nation.toUpperCase()} ${classLabel.toLowerCase()}`,
           tierLabel,
           render,
@@ -329,10 +357,10 @@ export async function GET(
           }}
         >
           <span>
-            {APP.NAME}/{region}/tanks/{slots[0]?.slug ?? ""}/vs/
+            {APP.NAME}/{region}/tanks/{slots[0]?.ref ?? ""}/vs/
             {slots
               .slice(1)
-              .map((s) => s.slug)
+              .map((s) => s.ref)
               .join("/")}
           </span>
         </div>

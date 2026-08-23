@@ -36,6 +36,10 @@ import { TankModules } from "@/components/tanks/detail/specifications/modules";
 import { TankSkillTree } from "@/components/tanks/detail/specifications/skill-tree";
 import { VehicleModeToggle } from "@/components/tanks/detail/specifications/vehicle-mode";
 import type { TankBuildData, TankBuild } from "@/hooks/use-tank-build";
+import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
+import { CLIENT_PARAM } from "@/components/tanks/detail/specifications/config-url";
+import { isTestColumn } from "@/components/tanks/compare/column-ref";
+import { TankClient } from "@unicum.gg/shared";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 
@@ -116,6 +120,7 @@ export function TankCompareColumnHeader({
 }) {
   const [open, setOpen] = useState(false);
   const { meta } = vehicle;
+  const onTest = isTestColumn(vehicle);
 
   return (
     <div className={cn("flex h-full flex-col gap-1.5 p-3", pinned && "bg-fd-secondary/20")}>
@@ -156,11 +161,22 @@ export function TankCompareColumnHeader({
 
       <div className="flex items-baseline gap-1.5">
         <Link
-          href={ROUTES.TANK(region, vehicle.slug)}
+          // A test column links through to the same build, not to the live
+          // vehicle it is being compared against.
+          href={
+            onTest
+              ? `${ROUTES.TANK(region, vehicle.slug)}?${CLIENT_PARAM}=${TankClient.CommonTest}`
+              : ROUTES.TANK(region, vehicle.slug)
+          }
           className="text-sm leading-tight font-semibold hover:underline"
         >
           {meta.name}
         </Link>
+        {/* What tells the two columns apart when a comparison holds a vehicle
+            and its test version: they carry the same name. */}
+        {onTest && (
+          <CommonTestBadge size={13} version={vehicle.testVersion ?? undefined} />
+        )}
         {/* The comparison's answer to "so which one is better", marked on the
             name the way the player and clan comparisons mark their best rating. */}
         {isBest && (

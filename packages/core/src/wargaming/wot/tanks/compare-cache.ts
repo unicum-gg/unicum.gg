@@ -20,8 +20,21 @@ import { getRedisClient } from "@unicum.gg/core/redis";
  */
 export const TANK_COMPARE_TTL_SECONDS = 60 * 60;
 
+/**
+ * Generation of the payload shape, in the key, for the same reason `detail-cache`
+ * carries one: an entry outlives a deploy by up to an hour, so a field added to
+ * the payload is a field absent from every warm entry until the TTL turns over.
+ * The response schema declares them, the cache does not have them, and a caller
+ * that trusts the contract reads `undefined` on a hit and a value on a miss.
+ *
+ * v1: the pre-versioned key, retired here.
+ * v2: each column carries the game client it was read on, and the test build.
+ */
+const SHAPE_VERSION = 2;
+
 function key(region: Region, slugs: string[]): string {
-  return `tankcompare:${region}:${slugs.map((s) => s.toLowerCase()).join(",")}`;
+  const columns = slugs.map((s) => s.toLowerCase()).join(",");
+  return `tankcompare:v${SHAPE_VERSION}:${region}:${columns}`;
 }
 
 /** Cached JSON body for this comparison, or null on miss / no Redis. */

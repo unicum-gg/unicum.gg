@@ -8,20 +8,26 @@ import { jsonResponse } from "@/services/openapi/json-response";
 import { measured } from "@/services/perf";
 import { MAX_COMPARE_TANKS, MIN_COMPARE_TANKS } from "@/constants/compare";
 import { TanksCompareResponse } from "./schema.api";
+import { formatTankRef, parseTankRef } from "@unicum.gg/shared";
 
 const JSON_HEADERS = { "content-type": "application/json" } as const;
 
 /** The vehicles a query asks for: deduped before the ceiling applies, so a
- * repeated slug costs itself its slot rather than a distinct vehicle further
- * along. Already URL-decoded by `searchParams`. */
-function resolveSlugs(raw: string | null): string[] {
+ * repeated column costs itself its slot rather than a distinct vehicle further
+ * along. Already URL-decoded by `searchParams`.
+ *
+ * A column is a vehicle on a client (`amx-13-90@ct`), and that whole reference
+ * is what dedupes: one vehicle on the live and the test build is two columns,
+ * while asking twice for the same pair still collapses.
+ */
+function resolveRefs(raw: string | null): string[] {
   const seen = new Set<string>();
   const out: string[] = [];
   for (const part of (raw ?? "").split(",")) {
-    const slug = part.trim().toLowerCase();
-    if (!slug || seen.has(slug)) continue;
-    seen.add(slug);
-    out.push(slug);
+    const ref = formatTankRef(parseTankRef(part));
+    if (!ref || seen.has(ref)) continue;
+    seen.add(ref);
+    out.push(ref);
     if (out.length === MAX_COMPARE_TANKS) break;
   }
   return out;
@@ -29,7 +35,7 @@ function resolveSlugs(raw: string | null): string[] {
 
 /**
  * Compare tanks
- * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. Duplicate slugs collapse; a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
+ * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. A slug may suffix the game client to read the vehicle on (`?slugs=amx-13-90,amx-13-90@ct`), which is how a vehicle is compared against what the running Common Test makes of it, and every column carries back the `client` it was read on. Duplicate columns collapse, and a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
  * @pathParams regionParams
  * @queryParams compareSlugsQuery
  * @response TanksCompareResponse
@@ -47,7 +53,7 @@ async function GET__perf(
   if (!isRegion(region)) {
     return Response.json({ error: "invalid_region" }, { status: 400 });
   }
-  const slugs = resolveSlugs(new URL(req.url).searchParams.get("slugs"));
+  const slugs = resolveRefs(new URL(req.url).searchParams.get("slugs"));
   if (slugs.length < MIN_COMPARE_TANKS) {
     return Response.json({ error: "missing_slugs" }, { status: 400 });
   }
