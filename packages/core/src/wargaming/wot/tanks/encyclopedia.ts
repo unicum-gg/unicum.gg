@@ -2,7 +2,10 @@ import { sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewVehicle, vehiclesByRegion, type VehicleMeta } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
-import { fetchVehicleCatalog } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
+import {
+  fetchCommonTestVehicles,
+  fetchVehicleCatalog,
+} from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
 
 // Module-level in-memory cache. Lives for the lifetime of the Node process
 // (cleared on deploy/restart) and is shared across all callers — both inside
@@ -41,6 +44,7 @@ async function loadVehicles(
       tag: table.tag,
       isPremium: table.isPremium,
       isReward: table.isReward,
+      isCommonTest: table.isCommonTest,
       role: table.role,
       contourIcon: table.contourIcon,
       bigIcon: table.bigIcon,
@@ -65,6 +69,7 @@ async function loadVehicles(
       tag: r.tag,
       isPremium: r.isPremium,
       isReward: r.isReward,
+      isCommonTest: r.isCommonTest,
       role: r.role,
       contourIcon: httpsUrl(r.contourIcon),
       bigIcon: httpsUrl(r.bigIcon),
@@ -110,8 +115,14 @@ export async function getVehicleEncyclopedia(
  */
 export async function refreshVehicles(region: Region): Promise<number> {
   const table = vehiclesByRegion[region];
-  const catalog = await fetchVehicleCatalog(region);
-  const rows: NewVehicle[] = catalog.map((v) => ({
+  const [catalog, commonTest] = await Promise.all([
+    fetchVehicleCatalog(region),
+    fetchCommonTestVehicles(region),
+  ]);
+  // Test vehicles join the same catalogue rather than a table of their own:
+  // everything downstream (slugs, detail, search) then works on them for free,
+  // and the flag is what the few places that must exclude them read.
+  const rows: NewVehicle[] = [...catalog, ...commonTest.values()].map((v) => ({
     tankId: v.tankId,
     tier: v.tier,
     type: v.type,
@@ -124,6 +135,7 @@ export async function refreshVehicles(region: Region): Promise<number> {
     isGift: v.isGift,
     isReward: v.isReward,
     role: v.role,
+    isCommonTest: commonTest.has(v.tankId),
     smallIcon: null,
     contourIcon: null,
     bigIcon: null,
@@ -150,6 +162,9 @@ export async function refreshVehicles(region: Region): Promise<number> {
         isGift: sql`excluded.is_gift`,
         isReward: sql`excluded.is_reward`,
         role: sql`excluded.role`,
+        // A vehicle leaves the test build by shipping, so this must be able to
+        // go back to false, not just be set once.
+        isCommonTest: sql`excluded.is_common_test`,
         updatedAt: new Date(),
       },
     });

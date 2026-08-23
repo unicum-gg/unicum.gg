@@ -13,6 +13,8 @@ export type VehicleMeta = {
   tag: string;
   isPremium: boolean;
   isReward: boolean;
+  /** Only on the Common Test client: unreleased, and not in any player's stats. */
+  isCommonTest: boolean;
   role: string | null;
   contourIcon: string | null;
   bigIcon: string | null;

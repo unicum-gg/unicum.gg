@@ -32,6 +32,23 @@ async function currentGameVersion(): Promise<string | null> {
     .catch(() => null);
 }
 
+/**
+ * The vehicles seen on the test client and never yet on a live one, by id.
+ *
+ * A test sighting already leaves a snapshot behind, so the run after the vehicle
+ * ships finds a baseline and would treat its release as an ordinary version
+ * bump. This is what lets that run tell the two apart.
+ */
+async function loadUnreleasedDevSightings(): Promise<Set<number>> {
+  const rows = await db
+    .select({ tankId: tankIntroductions.tankId })
+    .from(tankIntroductions)
+    .where(
+      sql`${tankIntroductions.devVersion} is not null and ${tankIntroductions.releasedVersion} is null`,
+    );
+  return new Set(rows.map((r) => r.tankId));
+}
+
 /** Project any spec-shaped object onto the tracked numeric fields (raw stored
  * scale). Works on a `NewTankSpec` (forward) or a wot-src `WotSrcSpec` (backfill),
  * since both carry the tracked fields under the same camelCase keys. */
@@ -209,12 +226,23 @@ async function insertChunked<T>(
  */
 export async function recordSpecChanges(
   specs: Array<{ tankId: number } & Record<string, unknown>>,
+  /**
+   * Vehicles that exist only on the Common Test client. They are recorded as a
+   * pre-release sighting rather than a release: the version we can read is the
+   * live one, so calling this an introduction would date the tank to a build it
+   * does not appear in. The release line is written when it ships and the
+   * catalogue stops flagging it.
+   */
+  commonTest: ReadonlySet<number> = new Set(),
 ): Promise<{ version: string | null; snapshots: number; changes: number }> {
   const version = await currentGameVersion();
   if (!version || specs.length === 0)
     return { version, snapshots: 0, changes: 0 };
 
-  const latest = await loadLatestSnapshots();
+  const [latest, awaitingRelease] = await Promise.all([
+    loadLatestSnapshots(),
+    loadUnreleasedDevSightings(),
+  ]);
   const snapshots: NewTankSpecSnapshot[] = [];
   const changes: NewTankChange[] = [];
   const intros: NewTankIntroduction[] = [];
@@ -234,8 +262,13 @@ export async function recordSpecChanges(
     if (!isReleasedSpec(data)) continue;
 
     if (!prev) {
-      // First sighting of a tank we've never snapshotted = its release.
-      intros.push({ tankId, releasedVersion: version, releasedAt: capturedAt });
+      // First sighting of a tank we've never snapshotted = its release, unless
+      // it is only on the test client, which is a sighting and not a release.
+      intros.push(
+        commonTest.has(tankId)
+          ? { tankId, devVersion: version, devAt: capturedAt }
+          : { tankId, releasedVersion: version, releasedAt: capturedAt },
+      );
       snapshots.push({ tankId, gameVersion: version, tag, data, capturedAt });
       continue;
     }
@@ -247,6 +280,17 @@ export async function recordSpecChanges(
       // The slot's tag changed at a version bump: WG reused this id for a
       // different vehicle. That is the new tank's release, not a change; seed a
       // fresh baseline and record the introduction (never diff across vehicles).
+      intros.push({ tankId, releasedVersion: version, releasedAt: capturedAt });
+      snapshots.push({ tankId, gameVersion: version, tag, data, capturedAt });
+      continue;
+    }
+    if (awaitingRelease.has(tankId) && !commonTest.has(tankId)) {
+      // Seen on the test client before, in the live catalogue now: this is the
+      // release the pre-release sighting was waiting for. Recorded as one rather
+      // than diffed, because the baseline it would be diffed against is the test
+      // build's, and what a test build changed on its way to shipping never
+      // happened on a live server. Re-baselined on the released values so the
+      // next patch diffs against what players actually got.
       intros.push({ tankId, releasedVersion: version, releasedAt: capturedAt });
       snapshots.push({ tankId, gameVersion: version, tag, data, capturedAt });
       continue;

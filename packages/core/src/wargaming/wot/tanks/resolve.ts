@@ -73,6 +73,7 @@ export type TankSearchResult = {
   nation: string;
   type: string;
   is_premium: boolean;
+  is_common_test: boolean;
 };
 
 /**
@@ -136,6 +137,7 @@ export async function searchTanks(
         nation: meta.nation,
         type: meta.type,
         is_premium: meta.isPremium,
+      is_common_test: meta.isCommonTest,
       },
     });
   }
@@ -174,6 +176,7 @@ export async function getTanksByIds(
       nation: meta.nation,
       type: meta.type,
       is_premium: meta.isPremium,
+      is_common_test: meta.isCommonTest,
     });
   }
   return out;

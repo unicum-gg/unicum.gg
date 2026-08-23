@@ -1,7 +1,13 @@
 import { getTableColumns, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { type NewTankSpec, type TankSpec, tankSpecs } from "@unicum.gg/shared";
-import { Region } from "@unicum.gg/wargaming";
+import {
+  BRANCH_BY_REGION,
+  compareBuildVersions,
+  Region,
+  WotSrcBranch,
+} from "@unicum.gg/wargaming";
+import { clearTestChanges, recordTestChanges } from "./test-changes";
 import { wg } from "../../client";
 import { recordSpecChanges } from "@unicum.gg/core/wargaming/wot/tanks/spec-history";
 
@@ -276,10 +282,56 @@ function computeFreeXp(graph: Map<number, ResearchNode>): Map<number, FreeXp> {
  * Returns the number of tanks written.
  */
 export async function refreshTankSpecs(): Promise<number> {
-  const [catalog, graph] = await Promise.all([
-    wg.region(Region.EU).source.specs.catalog(),
+  const eu = wg.region(Region.EU);
+  const [live, test, liveVersion, testVersion, graph] = await Promise.all([
+    eu.source.specs.catalog(),
+    // Unreleased vehicles have specifications on the test branch and nowhere
+    // else, and those are the whole point of showing them: a player wants to
+    // read the gun and the armour before the tank ships. Failing to read the
+    // branch (no test running) simply leaves the live catalogue as it was.
+    eu.source.specs.catalog(WotSrcBranch.CT).catch(() => []),
+    eu.source.specs.branchVersion(BRANCH_BY_REGION[Region.EU]).catch(() => null),
+    eu.source.specs.branchVersion(WotSrcBranch.CT).catch(() => null),
     fetchResearchGraph(),
   ]);
+
+  // A test branch is only a test build while it is ahead of the live one. It is
+  // not always: the mirror's CT branch has been left sitting on a finished test,
+  // matching live exactly, and read blindly that inverts everything downstream.
+  // The diff would report what the last update shipped as pending changes with
+  // the buff and nerf arrows backwards, and vehicles that update introduced
+  // would re-enter the catalogue as unreleased. Proven ahead or not used.
+  const testIsAhead =
+    liveVersion !== null &&
+    testVersion !== null &&
+    compareBuildVersions(testVersion, liveVersion) > 0;
+  if (test.length > 0 && !testIsAhead) {
+    console.warn(
+      `[tank-specs] ignoring the test branch: ${testVersion ?? "unknown"} is not ahead of live ${liveVersion ?? "unknown"}`,
+    );
+  }
+  const usableTest = testIsAhead ? test : [];
+
+  const known = new Set(live.map((v) => v.tankId));
+  const testOnly = usableTest.filter((v) => !known.has(v.tankId));
+  const catalog = [...live, ...testOnly];
+  const commonTest = new Set(testOnly.map((v) => v.tankId));
+
+  // What the test build changes about vehicles that already exist. Fails soft:
+  // the rebalance list is a bonus, the catalogue is what the site runs on.
+  try {
+    if (usableTest.length > 0) {
+      const n = await recordTestChanges(live, usableTest, testVersion ?? "unknown");
+      console.log(`[tank-specs] common test ${testVersion}: ${n} rebalanced fields`);
+    } else if (test.length > 0) {
+      // The branch was readable and is not ahead, so whatever it used to say is
+      // pending has shipped or was never real. An unreadable branch reaches
+      // neither arm and leaves the table as it was.
+      await clearTestChanges();
+    }
+  } catch (err) {
+    console.warn("[tank-specs] test-change diff failed:", err);
+  }
   const freeXp = computeFreeXp(graph);
   const rows: NewTankSpec[] = catalog.map(
     ({ tag: _tag, shellStats: _ss, mechanics: _mech, ...spec }) => {
@@ -327,7 +379,7 @@ export async function refreshTankSpecs(): Promise<number> {
   try {
     // Pass the catalog (not the DB rows): it carries the `mechanics` ability
     // params the tank_specs table has no column for, so the history tracks them.
-    const { version, snapshots, changes } = await recordSpecChanges(catalog);
+    const { version, snapshots, changes } = await recordSpecChanges(catalog, commonTest);
     if (changes > 0 || snapshots > 0) {
       console.log(
         `[tank-specs] history ${version}: ${changes} changes, ${snapshots} snapshots`,

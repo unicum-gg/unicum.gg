@@ -5,10 +5,15 @@ import type { Region } from "@unicum.gg/wargaming";
 import { getAllTankStats, type TankServerStats } from "../players/top/by-tank";
 import { listTanks } from "./resolve";
 import { getAllTankSpecs } from "./specs";
+import { getTestChangeCounts } from "./test-changes";
 
 /** A vehicle's identity: `tankId`/`slug` plus its full `VehicleMeta`, spread so
  * every meta field flows through automatically (no field can be forgotten). */
-export type TankRowIdentity = { tankId: number; slug: string } & VehicleMeta;
+export type TankRowIdentity = { tankId: number; slug: string } & VehicleMeta & {
+  /** How many characteristics the current Common Test build changes on this
+   * vehicle, 0 when none (or when no test is running). */
+  testChanges: number;
+};
 
 /**
  * One row of the per-region tank dataset: identity joined to server performance,
@@ -30,19 +35,25 @@ export type TankDatasetRow = {
 export async function getTankDataset(
   region: Region,
 ): Promise<TankDatasetRow[]> {
-  const [tanks, statsByTank, specsByTank, momByTank, moeByTank] =
+  const [tanks, statsByTank, specsByTank, momByTank, moeByTank, testByTank] =
     await Promise.all([
       listTanks(region),
       getAllTankStats(region),
       getAllTankSpecs(),
       getTankMomByRegion(region),
       getTankMoeByRegion(region),
+      getTestChangeCounts(),
     ]);
   return tanks
     // Only real tiers 1-10(11); drop catalogue entries with no meaningful tier.
     .filter((t) => t.meta.tier > 0 && t.meta.name.length > 0)
     .map((t) => ({
-      identity: { tankId: t.tankId, slug: t.slug, ...t.meta },
+      identity: {
+        tankId: t.tankId,
+        slug: t.slug,
+        ...t.meta,
+        testChanges: testByTank.get(t.tankId) ?? 0,
+      },
       stats: statsByTank.get(t.tankId) ?? null,
       specs: specsByTank.get(t.tankId) ?? null,
       mastery: momByTank.get(t.tankId) ?? null,

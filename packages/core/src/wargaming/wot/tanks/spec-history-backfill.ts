@@ -26,7 +26,7 @@ import {
 /**
  * Historical backfill of the tank changes history from the wot-src mirror's git
  * history. Wargaming publishes no archive of past client versions, but our
- * `unicum-gg/wot-src` mirror is a git repo fast-forwarded over time, so every
+ * `unicum-gg/wot.src` mirror is a git repo fast-forwarded over time, so every
  * past game version's client scripts still live at a commit. This re-derives the
  * specs at each version (by pointing the same wot-src parser at the commit's raw
  * files) and diffs them in cascade, producing the real buff/nerf history the
@@ -35,7 +35,7 @@ import {
  * See `spec-history.ts` (the forward pipeline these tables also feed).
  */
 
-const REPO = "unicum-gg/wot-src";
+const REPO = "unicum-gg/wot.src";
 const GITHUB_API = "https://api.github.com";
 const INSERT_CHUNK = 1000;
 

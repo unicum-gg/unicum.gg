@@ -5,10 +5,10 @@ import { refreshTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { discoverTopClanPlayers } from ".";
 
 const DISCOVERY_SCHEDULE = "0 4 * * 0"; // Sundays at 04:00 server time
-// IzeBerg's wot-src mirror gets pushed almost exclusively on Tuesday or
-// Thursday between 02:30 and 07:00 UTC (concentrated 04:30-05:00). Running
-// at 07:00 keeps us safely after that window so we never miss the day of a
-// fresh release.
+// Our own wot-src mirror builds daily at 05:00 UTC, so 07:00 leaves it two
+// hours to publish. Daily rather than weekly on purpose: this is also what
+// picks up a Common Test build, which appears between patches and is what a
+// player wants to read before the vehicle ships.
 const VEHICLES_SCHEDULE = "0 7 * * *"; // Every day at 07:00 server time
 const TOP_N = 500;
 
