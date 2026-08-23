@@ -4,7 +4,7 @@ import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { fetchNations } from "./nations";
 import { loadPo } from "./localization";
-import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS } from "./mirror";
+import { branchFor, rawUrl, WOTSRC_CACHE_TTL_MS , WotSrcBranch} from "./mirror";
 
 type XmlNode = Record<string, unknown>;
 
@@ -186,8 +186,8 @@ export class SourcePostProgressionResource {
 
   /** The localized display strings from `artefacts.po` (msgid -> msgstr); a
    * modification's name lives under `<locName>/name`. */
-  async names(): Promise<Record<string, string>> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async names(branchOverride?: WotSrcBranch): Promise<Record<string, string>> {
+    const branch = branchFor(this.region, branchOverride);
     const po = await this.#text(
       rawUrl(branch, "sources/res/text/lc_messages/artefacts.po"),
     );
@@ -227,10 +227,10 @@ export class SourcePostProgressionResource {
    * tier-XI skill-tree stat node (e.g. `f136_mechanic_0` -> "Improved Loading
    * Mechanism"), so neither is labelled by a hand-kept map.
    */
-  async nodeTitles(): Promise<
+  async nodeTitles(branchOverride?: WotSrcBranch): Promise<
     Record<string, { name: string; description: string }>
   > {
-    const branch = BRANCH_BY_REGION[this.region];
+    const branch = branchFor(this.region, branchOverride);
     const po = await loadPo(branch, "veh_skill_tree", (url) => this.#text(url));
     const out: Record<string, { name: string; description: string }> = {};
     for (const [id, str] of po) {
@@ -243,8 +243,8 @@ export class SourcePostProgressionResource {
     return out;
   }
 
-  async postProgression(tankId: number): Promise<TankPostProgression | null> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async postProgression(tankId: number, branchOverride?: WotSrcBranch): Promise<TankPostProgression | null> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
     const localId = tankId >> 8;

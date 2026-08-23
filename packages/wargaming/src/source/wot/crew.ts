@@ -3,7 +3,7 @@ import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { loadPo } from "./localization";
-import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS } from "./mirror";
+import { branchFor, rawUrl, WOTSRC_CACHE_TTL_MS , WotSrcBranch} from "./mirror";
 
 type XmlNode = Record<string, unknown>;
 
@@ -72,8 +72,8 @@ export class SourceCrewResource {
     });
   }
 
-  async skills(): Promise<CrewSkillDef[]> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async skills(branchOverride?: WotSrcBranch): Promise<CrewSkillDef[]> {
+    const branch = branchFor(this.region, branchOverride);
     const parser = new XMLParser({
       ignoreAttributes: false,
       parseTagValue: false,
@@ -139,8 +139,8 @@ export class SourceCrewResource {
    * that are not trainable skills, so the directive facade resolves names here.
    * Same memoized `.po` fetch as `skills()`, so it costs nothing extra.
    */
-  async perkNames(): Promise<Map<string, string>> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async perkNames(branchOverride?: WotSrcBranch): Promise<Map<string, string>> {
+    const branch = branchFor(this.region, branchOverride);
     const perks = await loadPo(branch, "crew_perks", (url) => this.#text(url));
     const names = new Map<string, string>();
     for (const [id, str] of perks) {

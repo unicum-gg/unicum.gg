@@ -4,7 +4,8 @@ import type { Transport } from "../../../client/transport";
 import { RateLimit } from "../../../client/rate-limiter";
 import { fetchNations } from "../nations";
 import {
-  BRANCH_BY_REGION,
+  branchFor,
+  fetchBranchVersion,
   computeTankId,
   rawUrl,
   VEHICLE_TYPES,
@@ -256,8 +257,13 @@ export class SourceSpecsResource {
     private readonly region: Region,
   ) {}
 
-  async catalog(): Promise<WotSrcSpec[]> {
-    const branch = BRANCH_BY_REGION[this.region];
+  /** The client build a mirror branch was extracted from, e.g. `2.4.0.5415`. */
+  branchVersion(branch: WotSrcBranch): Promise<string | null> {
+    return fetchBranchVersion(branch, (url) => this.#text(url));
+  }
+
+  async catalog(branchOverride?: WotSrcBranch): Promise<WotSrcSpec[]> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const parser = new XMLParser({
       ignoreAttributes: true,
@@ -358,8 +364,11 @@ export class SourceSpecsResource {
     return null;
   }
 
-  async configs(tankId: number): Promise<TankConfigs | null> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async configs(
+    tankId: number,
+    branchOverride?: WotSrcBranch,
+  ): Promise<TankConfigs | null> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
     const localId = tankId >> 8;
@@ -446,8 +455,9 @@ export class SourceSpecsResource {
    */
   async crew(
     tankId: number,
+    branchOverride?: WotSrcBranch,
   ): Promise<{ nation: string; members: string[][] } | null> {
-    const branch = BRANCH_BY_REGION[this.region];
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
     const localId = tankId >> 8;

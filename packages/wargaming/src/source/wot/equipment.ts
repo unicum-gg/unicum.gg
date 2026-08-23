@@ -4,7 +4,7 @@ import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { fetchNations } from "./nations";
 import { loadPo } from "./localization";
-import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS, WotSrcBranch } from "./mirror";
+import { branchFor, rawUrl, WOTSRC_CACHE_TTL_MS, WotSrcBranch } from "./mirror";
 
 type XmlNode = Record<string, unknown>;
 
@@ -428,8 +428,8 @@ export class SourceEquipmentResource {
     return slots;
   }
 
-  async loadout(tankId: number): Promise<TankLoadout | null> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async loadout(tankId: number, branchOverride?: WotSrcBranch): Promise<TankLoadout | null> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
     const localId = tankId >> 8;

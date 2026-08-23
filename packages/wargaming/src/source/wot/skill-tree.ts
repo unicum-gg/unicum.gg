@@ -3,7 +3,7 @@ import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { fetchNations } from "./nations";
-import { BRANCH_BY_REGION, rawUrl, WOTSRC_CACHE_TTL_MS } from "./mirror";
+import { branchFor, rawUrl, WOTSRC_CACHE_TTL_MS , WotSrcBranch} from "./mirror";
 
 type XmlNode = Record<string, unknown>;
 
@@ -144,8 +144,8 @@ export class SourceSkillTreeResource {
     return out;
   }
 
-  async skillTree(tankId: number): Promise<TankSkillTree | null> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async skillTree(tankId: number, branchOverride?: WotSrcBranch): Promise<TankSkillTree | null> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const nationIdx = (tankId >> 4) & 0xf;
     const localId = tankId >> 8;

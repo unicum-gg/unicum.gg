@@ -1,4 +1,4 @@
-import { rawUrl, WotSrcBranch } from "./mirror";
+import { localizationBranchFor, rawUrl, WotSrcBranch } from "./mirror";
 
 const unquote = (line: string): string =>
   line
@@ -61,9 +61,9 @@ export function parsePo(text: string): Map<string, string> {
 // per (branch, file) and reuse across every tank.
 const cache = new Map<string, Promise<Map<string, string>>>();
 
-/** A `.po` file's `msgid -> msgstr` map, fetched and parsed once (memoized).
- * Fails open to an empty map so a localization hiccup just drops the strings. */
-export function loadPo(
+/** One branch's copy of a `.po`, fetched and parsed once (memoized). Fails open
+ * to an empty map so a localization hiccup just drops the strings. */
+function loadBranchPo(
   branch: WotSrcBranch,
   file: string,
   fetchText: (url: string) => Promise<string>,
@@ -76,6 +76,41 @@ export function loadPo(
     )
       .then(parsePo)
       .catch(() => new Map<string, string>());
+    cache.set(key, pending);
+  }
+  return pending;
+}
+
+/**
+ * A `.po` file's `msgid -> msgstr` map for a branch, in the site's language.
+ *
+ * Strings come from the branch's language source (`localizationBranchFor`),
+ * which for a branch extracted from a non-English client is a different one than
+ * the data. Its own copy is read too and fills in only the keys the language
+ * source has never heard of: a test build's vocabulary is the live one plus
+ * whatever the update introduces, so this is what keeps a brand-new vehicle
+ * named at all, while everything that already exists stays in English.
+ */
+export function loadPo(
+  branch: WotSrcBranch,
+  file: string,
+  fetchText: (url: string) => Promise<string>,
+): Promise<Map<string, string>> {
+  const source = localizationBranchFor(branch);
+  if (source === branch) return loadBranchPo(branch, file, fetchText);
+  const key = `${branch}:${file}:via:${source}`;
+  let pending = cache.get(key);
+  if (!pending) {
+    pending = Promise.all([
+      loadBranchPo(source, file, fetchText),
+      loadBranchPo(branch, file, fetchText),
+    ]).then(([translated, own]) => {
+      // Start from the branch's own strings so its new keys are present, then
+      // let the language source win every key it knows.
+      const out = new Map(own);
+      for (const [id, str] of translated) out.set(id, str);
+      return out;
+    });
     cache.set(key, pending);
   }
   return pending;

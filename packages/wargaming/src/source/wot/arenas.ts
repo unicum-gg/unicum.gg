@@ -4,7 +4,7 @@ import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
 import { loadPo } from "./localization";
 import {
-  BRANCH_BY_REGION,
+  branchFor,
   rawUrl,
   WOTSRC_CACHE_TTL_MS,
   WotSrcBranch,
@@ -214,8 +214,8 @@ export class SourceArenasResource {
     private readonly region: Region,
   ) {}
 
-  async catalog(): Promise<WotSrcArena[]> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async catalog(branchOverride?: WotSrcBranch): Promise<WotSrcArena[]> {
+    const branch = branchFor(this.region, branchOverride);
     const [translations, listXml] = await Promise.all([
       loadPo(branch, "arenas", (url) => this.#text(url)),
       this.#text(

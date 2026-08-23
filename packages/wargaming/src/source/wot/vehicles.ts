@@ -2,10 +2,10 @@ import { XMLParser } from "fast-xml-parser";
 import { Region } from "../../region";
 import type { Transport } from "../../client/transport";
 import { RateLimit } from "../../client/rate-limiter";
-import { parsePo } from "./localization";
+import { loadPo } from "./localization";
 import { fetchNations } from "./nations";
 import {
-  BRANCH_BY_REGION,
+  branchFor,
   computeTankId,
   rawUrl,
   VEHICLE_TYPES,
@@ -14,8 +14,10 @@ import {
 } from "./mirror";
 
 // UK's .po file doesn't match its dir name (historical artifact).
+/** The localization file a nation's vehicle names live in, without the `.po`
+ * (that is `loadPo`'s to add). The client keeps Britain's under `gb`. */
 function poFilename(nation: string): string {
-  return nation === "uk" ? "gb_vehicles.po" : `${nation}_vehicles.po`;
+  return nation === "uk" ? "gb_vehicles" : `${nation}_vehicles`;
 }
 
 export type WotSrcVehicle = {
@@ -74,8 +76,8 @@ export class SourceVehiclesResource {
     private readonly region: Region,
   ) {}
 
-  async catalog(): Promise<WotSrcVehicle[]> {
-    const branch = BRANCH_BY_REGION[this.region];
+  async catalog(branchOverride?: WotSrcBranch): Promise<WotSrcVehicle[]> {
+    const branch = branchFor(this.region, branchOverride);
     const nations = await fetchNations(this.t, branch);
     const parser = new XMLParser({
       ignoreAttributes: true,
@@ -107,11 +109,14 @@ export class SourceVehiclesResource {
     nationIdx: number,
     parser: XMLParser,
   ): Promise<WotSrcVehicle[]> {
-    const [xmlText, poText] = await Promise.all([
+    const [xmlText, translations] = await Promise.all([
       this.#text(rawUrl(branch, `sources/res/scripts/item_defs/vehicles/${nation}/list.xml`)),
-      this.#text(rawUrl(branch, `sources/res/text/lc_messages/${poFilename(nation)}`)),
+      // Through `loadPo`, like every other source resource, so a vehicle only
+      // the test client has is still named in the site's language: that branch
+      // is extracted from a Russian build, and read raw it put `Объект 430У`
+      // and `ИС-7` in the catalogue, the tank list, search and the page title.
+      loadPo(branch, poFilename(nation), (url) => this.#text(url)),
     ]);
-    const translations = parsePo(poText);
     const parsed = parser.parse(xmlText) as RawListXml;
     const out: WotSrcVehicle[] = [];
     for (const [tag, fields] of Object.entries(parsed.root ?? {})) {

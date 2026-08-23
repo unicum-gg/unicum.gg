@@ -2,17 +2,58 @@ import { Region } from "../../region";
 
 // Our own mirror of IzeBerg/wot-src (the WoT client scripts). We point at our
 // fork rather than upstream so the catalogue depends only on infrastructure we
-// control: the `unicum-gg/wot-src` branches are kept fast-forwarded to upstream
+// control: the `unicum-gg/wot.src` branches are kept fast-forwarded to upstream
 // by a scheduled sync, and if upstream ever goes private we keep serving the
 // last synced state instead of breaking.
-export const REPO = "unicum-gg/wot-src";
+export const REPO = "unicum-gg/wot.src";
 
-// The mirror branches we read: one per region client build. The mirror carries
-// more branches (CT, RU, ...) but the catalogue only ever fetches these three.
+// The mirror branches we read. Three track a live regional client; `CT` is the
+// Common Test build, which is where a vehicle appears weeks before release. The
+// mirror carries more branches (RU, PT_RU, CN) that the catalogue never fetches.
 export enum WotSrcBranch {
   EU = "EU",
   NA = "NA",
   ASIA = "ASIA",
+  CT = "CT",
+}
+
+/**
+ * The client build a branch of the mirror was extracted from, e.g. `2.4.0.5415`.
+ *
+ * The build stamps it into `.version_name` at the branch root, which is the only
+ * place the human-readable version appears: the client's own files carry an
+ * internal number instead. Null when the branch has never been built.
+ */
+export async function fetchBranchVersion(
+  branch: WotSrcBranch,
+  getText: (url: string) => Promise<string>,
+): Promise<string | null> {
+  try {
+    const raw = await getText(rawUrl(branch, ".version_name"));
+    const version = raw.trim();
+    return version.length > 0 ? version : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Order two client build versions (`2.4.0.5415`), component by component, as a
+ * comparator: negative when `a` is older, positive when newer, zero when equal.
+ *
+ * Numeric per component rather than lexicographic, or `2.10` would sort before
+ * `2.9`. A component that is not a number counts as 0, and a shorter version is
+ * padded, so `2.4` and `2.4.0.0` are the same build.
+ */
+export function compareBuildVersions(a: string, b: string): number {
+  const pa = a.split(".");
+  const pb = b.split(".");
+  for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+    const na = Number.parseInt(pa[i] ?? "0", 10) || 0;
+    const nb = Number.parseInt(pb[i] ?? "0", 10) || 0;
+    if (na !== nb) return na - nb;
+  }
+  return 0;
 }
 
 /** Raw-content URL for `path` on `branch` of the wot-src mirror. */
@@ -32,6 +73,33 @@ export const BRANCH_BY_REGION: Record<Region, WotSrcBranch> = {
   [Region.NA]: WotSrcBranch.NA,
   [Region.ASIA]: WotSrcBranch.ASIA,
 };
+
+/**
+ * Which branch to read for one region, optionally overridden.
+ *
+ * Every source resource resolves its branch through here rather than indexing
+ * `BRANCH_BY_REGION` directly, so a caller holding a Common Test vehicle can
+ * ask for its data without the region having to lie about which client it is.
+ */
+export const branchFor = (region: Region, override?: WotSrcBranch) =>
+  override ?? BRANCH_BY_REGION[region];
+
+/**
+ * Which branch to read a branch's *strings* from.
+ *
+ * A `.po` file is not per-client data, it is per-language, and the mirror's
+ * branches are not all the same language: the Common Test one is extracted from
+ * a Russian build, so every string on it (`Бронебойный` for AP, `Ремонт` for
+ * Repairs) comes back in Russian while the numbers beside it are fine. Reading
+ * strings from a live English branch instead keeps the site in one language,
+ * whichever branch the characteristics came from.
+ *
+ * The test branch is still consulted for keys the live one does not have, which
+ * is exactly the vocabulary a test build introduces (see `loadPo`). So a new
+ * vehicle's name survives, in Russian, rather than disappearing.
+ */
+export const localizationBranchFor = (branch: WotSrcBranch): WotSrcBranch =>
+  branch === WotSrcBranch.CT ? WotSrcBranch.EU : branch;
 
 // The five playable vehicle classes, keyed by their raw WoT client tag. The tag
 // is what appears in a vehicle's tag list, so the enum values are load-bearing,
