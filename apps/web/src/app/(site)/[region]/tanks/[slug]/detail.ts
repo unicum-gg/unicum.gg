@@ -35,6 +35,8 @@ export async function loadTankHistory(region: Region, slug: string) {
     .history()
     .then((r) => ({
       versions: r.versions,
+      testVersion: r.testVersion,
+      testChanges: r.testChanges,
       devVersion: r.devVersion,
       devAt: r.devAt,
       releasedVersion: r.releasedVersion,
@@ -42,6 +44,8 @@ export async function loadTankHistory(region: Region, slug: string) {
     }))
     .catch(() => ({
       versions: [],
+      testVersion: null,
+      testChanges: [],
       devVersion: null,
       devAt: null as Date | null,
       releasedVersion: null,

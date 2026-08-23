@@ -37,6 +37,8 @@ export default async function TankHistoryPage({
   return (
     <TankChangesHistory
       versions={history.versions}
+      testVersion={history.testVersion ?? null}
+      testChanges={history.testChanges ?? []}
       devVersion={history.devVersion}
       devAt={history.devAt}
       releasedVersion={history.releasedVersion}

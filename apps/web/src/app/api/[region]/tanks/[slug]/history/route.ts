@@ -1,4 +1,5 @@
 import { getTankSpecHistory } from "@unicum.gg/core/wargaming/wot/tanks/spec-history-read";
+import { getTestChanges } from "@unicum.gg/core/wargaming/wot/tanks/test-changes";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { TankHistoryResponse } from "./schema.api";
@@ -29,12 +30,15 @@ async function GET__perf(
   if (!history) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
+  const test = await getTestChanges(history.tankId);
   return jsonResponse(
     TankHistoryResponse,
     {
       tankId: history.tankId,
       slug: history.slug,
       versions: history.versions,
+      testVersion: test.version,
+      testChanges: test.changes,
       devVersion: history.devVersion,
       devAt: history.devAt,
       releasedVersion: history.releasedVersion,

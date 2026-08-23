@@ -8,6 +8,18 @@ export const TankHistoryResponse = z.object({
   tankId: z.number(),
   slug: z.string(),
   versions: z.array(tankHistoryVersion),
+  /** What the running Common Test changes about this tank, if anything. Not
+   * history: it has not shipped, and may still be rebalanced or dropped. */
+  testVersion: z.string().nullable().meta({
+    description: "The Common Test build these pending changes were read from.",
+  }),
+  testChanges: z.array(
+    z.object({
+      field: z.string(),
+      previous: z.number().nullable(),
+      next: z.number().nullable(),
+    }),
+  ),
   devVersion: z.string().nullable().meta({
     description:
       "The game version the tank first appeared as a dev stub (placeholder stats, before balancing), or null when it predates our version tracking.",
