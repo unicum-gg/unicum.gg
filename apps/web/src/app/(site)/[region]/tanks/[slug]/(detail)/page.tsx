@@ -205,6 +205,10 @@ export default async function TankPage({
         modes={(detail.modes ?? []) as unknown as VehicleMode[]}
         researchPath={detail.researchPath as unknown as ResearchBranch}
         videos={videos}
+        // Defaulted rather than assumed: the detail payload is cached for a day
+        // and served by an API that can be one deploy behind this render, so a
+        // field this young has to be allowed to be missing.
+        testVersion={detail.testVersion ?? null}
       />
     </>
   );

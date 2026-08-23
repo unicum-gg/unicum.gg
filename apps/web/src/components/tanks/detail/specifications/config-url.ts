@@ -15,6 +15,12 @@ export const MODULE_SLOTS: (keyof TankConfigModules)[] = [
  * (`?setup=<token>`) instead of carrying a dozen readable params. */
 export const SETUP_PARAM = "setup";
 
+/** The other param the configurator owns: which game client the characteristics
+ * are read from. Readable rather than folded into the setup token, because it
+ * says what the whole page is showing and a link to a vehicle's Common Test
+ * version should be legible as one (`?client=ct`). Absent means live. */
+export const CLIENT_PARAM = "client";
+
 // URL-safe base64 of the compact inner query string. The token is opaque in the
 // URL but fully client-decodable (no server storage): base64url so it needs no
 // percent-encoding and survives copy/paste.

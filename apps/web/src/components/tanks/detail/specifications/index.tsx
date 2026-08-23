@@ -36,6 +36,7 @@ export function SpecificationsTab({
   modes,
   researchPath,
   videos,
+  testVersion,
 }: {
   region: Region;
   slug: string;
@@ -51,6 +52,8 @@ export function SpecificationsTab({
   modes: VehicleMode[];
   researchPath: ResearchBranch;
   videos: TankVideoCardData[];
+  /** The Common Test build that rebalances this vehicle, null when none does. */
+  testVersion: string | null;
 }) {
   return (
     <>
@@ -81,6 +84,7 @@ export function SpecificationsTab({
           skillTree={skillTree}
           modes={modes}
           nextTanks={researchPath.next}
+          testVersion={testVersion}
         />
       )}
       {specs?.description && (

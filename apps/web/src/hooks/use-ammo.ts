@@ -129,6 +129,14 @@ export function useAmmo(
             );
       return {
         ...s,
+        // wot-src wins on the two numbers WG also has. They agree on the live
+        // client, and where they do not it is because the build being shown is
+        // not the one WG's encyclopedia describes: on a Common Test vehicle the
+        // WG shell still carries the live damage and penetration, and taking it
+        // would put live firepower back on the page the moment a shell is
+        // picked (`applyShell` writes both onto the spec).
+        damage: st?.damage ?? s.damage,
+        penetration: st?.pen ?? s.penetration,
         velocity: st?.velocity ?? null,
         splash: st?.splash ?? null,
         pen500: st?.pen500 ?? null,

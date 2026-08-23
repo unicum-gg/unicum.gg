@@ -1,9 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Region } from "@unicum.gg/wargaming";
-import type { VehicleMeta, VehicleMode, TankSpec } from "@unicum.gg/shared";
+import {
+  TankClient,
+  toTankClient,
+  type VehicleMeta,
+  type VehicleMode,
+  type TankSpec,
+} from "@unicum.gg/shared";
 import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { TankLoadout } from "@unicum.gg/core/wargaming/wot/tanks/loadout";
@@ -24,9 +30,13 @@ import { VehicleModeToggle } from "@/components/tanks/detail/specifications/vehi
 import { PanelSeparator } from "@/components/panel";
 import { useTankBuild } from "@/hooks/use-tank-build";
 import {
+  CLIENT_PARAM,
   decodeSetup,
   SETUP_PARAM,
 } from "@/components/tanks/detail/specifications/config-url";
+import { TankClientSwitch } from "@/components/tanks/detail/specifications/common-test";
+import { CompareClients } from "@/components/tanks/detail/specifications/common-test/compare-clients";
+import { useTestBuild } from "@/components/tanks/detail/specifications/common-test/use-test-build";
 import { BuildShare } from "@/components/tanks/detail/specifications/build-share";
 import { CompareWithTank } from "@/components/tanks/detail/specifications/compare-with-tank";
 import { CopyToTank } from "@/components/tanks/detail/specifications/copy-to-tank";
@@ -51,6 +61,9 @@ type TankConfiguratorProps = {
   skillTree: TankSkillTreeData | null;
   modes: VehicleMode[];
   nextTanks: ResearchPathItem[];
+  /** The Common Test build that rebalances this vehicle, null when none does.
+   * Its presence is what offers the reader the test client's numbers. */
+  testVersion: string | null;
 };
 
 // The stateful configurator can't be threaded with a `loading` flag (its hooks
@@ -60,7 +73,104 @@ export function TankConfigurator(
   props: { loading: true } | TankConfiguratorProps,
 ) {
   if ("loading" in props) return <TankConfiguratorSkeleton />;
-  return <TankConfiguratorInner {...props} />;
+  return <TankConfiguratorClient {...props} />;
+}
+
+/**
+ * Which game client the vehicle below is built from.
+ *
+ * The page is served on the live one and the test build is fetched only if
+ * someone asks for it, so this layer owns that choice: the switch, the fetch,
+ * and the `?client=ct` in the URL that makes the choice shareable.
+ *
+ * Switching remounts the configurator, which is what makes the swap clean: every
+ * section reseeds from the new client's data instead of holding indices into the
+ * previous one. The setup survives it because it is carried across as the same
+ * token a shared link uses, and that token names modules by id, so it lands on
+ * the right configuration even if the test build changed the module list.
+ */
+function TankConfiguratorClient(props: TankConfiguratorProps) {
+  const { region, slug, meta, testVersion } = props;
+  const searchParams = useSearchParams();
+  // A vehicle that exists only on the test client is already being served from
+  // it, and has no live version to switch to.
+  const switchable = Boolean(testVersion) && !meta.isCommonTest;
+  const [client, setClient] = useState<TankClient>(() =>
+    switchable ? toTankClient(searchParams.get(CLIENT_PARAM)) : TankClient.Live,
+  );
+  const wanted = client === TankClient.CommonTest;
+  const { data: testBuild, pending, failed, retry } = useTestBuild(
+    region,
+    slug,
+    wanted,
+  );
+
+  // Until the test payload lands, the live one stays on screen, and a fetch that
+  // failed leaves the reader on it rather than on a vehicle that is neither. So
+  // what is shown is derived from the data in hand, never from the intent alone.
+  const showing = wanted && testBuild ? testBuild : null;
+  const effectiveClient = showing ? TankClient.CommonTest : TankClient.Live;
+
+  // The setup the reader has assembled, mirrored out of the configurator so it
+  // can be handed back to the remounted one.
+  const setupRef = useRef<string | null>(null);
+  const [seed, setSeed] = useState<string | null>(null);
+  const select = useCallback(
+    (next: TankClient) => {
+      if (next === client) {
+        // Re-picking the client already asked for only means one thing: the
+        // fetch failed and the reader is asking again.
+        if (failed) retry();
+        return;
+      }
+      setSeed(setupRef.current);
+      setClient(next);
+    },
+    [client, failed, retry],
+  );
+  const onSetupTokenChange = useCallback((token: string | null) => {
+    setupRef.current = token;
+  }, []);
+
+  // Live leaves the URL clean; the test client writes itself into it so the link
+  // opens on the same vehicle. Keyed on what is actually on screen, so the URL
+  // never advertises a build the page failed to load. `replaceState`, like the
+  // setup token, so a switch is not a navigation and does not stack history.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    params.delete(CLIENT_PARAM);
+    if (effectiveClient === TankClient.CommonTest)
+      params.set(CLIENT_PARAM, effectiveClient);
+    const qs = params.toString();
+    const url = qs
+      ? `${window.location.pathname}?${qs}`
+      : window.location.pathname;
+    if (url !== `${window.location.pathname}${window.location.search}`)
+      window.history.replaceState(null, "", url);
+  }, [effectiveClient]);
+
+  return (
+    <TankConfiguratorInner
+      {...props}
+      {...(showing ?? {})}
+      // Remount on the client actually being shown, not the one asked for, so
+      // the swap happens when the data does.
+      key={effectiveClient}
+      initialSetup={seed}
+      onSetupTokenChange={onSetupTokenChange}
+      clientSwitch={
+        switchable ? (
+          <TankClientSwitch
+            client={effectiveClient}
+            testVersion={testVersion}
+            pending={pending}
+            onSelect={select}
+          />
+        ) : null
+      }
+    />
+  );
 }
 
 function TankConfiguratorInner({
@@ -77,13 +187,23 @@ function TankConfiguratorInner({
   skillTree,
   modes,
   nextTanks,
-}: TankConfiguratorProps) {
+  testVersion,
+  initialSetup,
+  onSetupTokenChange,
+  clientSwitch,
+}: TankConfiguratorProps & {
+  /** Setup to open on, winning over the URL. Set when the game client was
+   * switched, so the build carries across the remount. */
+  initialSetup?: string | null;
+  onSetupTokenChange?: (token: string | null) => void;
+  clientSwitch?: React.ReactNode;
+}) {
   // A shared setup rides in the query string: decode it once (SSR and client see
   // the same params, so the initial render matches), seed every section from it,
   // and mirror later edits back into the URL so the link stays shareable.
   const searchParams = useSearchParams();
   const [initialConfig] = useState(() =>
-    decodeSetup(searchParams.get(SETUP_PARAM)),
+    decodeSetup(initialSetup ?? searchParams.get(SETUP_PARAM)),
   );
 
   const build = useTankBuild(
@@ -112,6 +232,12 @@ function TankConfiguratorInner({
     if (url !== current) window.history.replaceState(null, "", url);
   }, [setupToken]);
 
+  // Reported up so a switch of game client can hand the same setup to the
+  // configurator it remounts.
+  useEffect(() => {
+    onSetupTokenChange?.(setupToken);
+  }, [setupToken, onSetupTokenChange]);
+
   const sections = loadoutSections(build, loadout, crew, fieldMods);
   const hasPanels = sections.left || sections.right;
 
@@ -126,11 +252,14 @@ function TankConfiguratorInner({
             canResetAll={build.canResetAll}
             onResetAll={build.resetAll}
             titleControl={
-              <VehicleModeToggle
-                modes={modes}
-                active={build.mode.active}
-                onToggle={build.mode.toggle}
-              />
+              <>
+                {clientSwitch}
+                <VehicleModeToggle
+                  modes={modes}
+                  active={build.mode.active}
+                  onToggle={build.mode.toggle}
+                />
+              </>
             }
             actions={
               <div className="flex items-center gap-1.5">
@@ -149,6 +278,15 @@ function TankConfiguratorInner({
                     />
                   </>
                 )}
+                {/* Only while a test is running, and next to the general
+                    comparison for the same reason it exists: the most useful
+                    thing to read this vehicle against, right now, is itself. */}
+                <CompareClients
+                  region={region}
+                  slug={slug}
+                  testVersion={testVersion}
+                  setupToken={build.portableSetupToken}
+                />
                 {/* Always offered, setup or not: comparing this vehicle against
                     another is what the page is read for as often as building it,
                     and the current build rides along when there is one. */}

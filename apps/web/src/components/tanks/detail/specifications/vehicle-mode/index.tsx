@@ -7,13 +7,11 @@ import {
   SteeringWheelIcon,
 } from "@phosphor-icons/react";
 import { VehicleModeKind, type VehicleMode } from "@unicum.gg/shared";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
+  Segment,
+  SegmentedControl,
+} from "@/components/tanks/detail/specifications/segmented-control";
 import {
   effectLabel,
   fmtEffect,
@@ -70,46 +68,6 @@ function ModeTooltip({ mode }: { mode: VehicleMode }) {
   );
 }
 
-function Segment({
-  label,
-  icon,
-  active,
-  onClick,
-  tooltip,
-}: {
-  label: string;
-  icon: ReactNode;
-  active: boolean;
-  onClick: () => void;
-  tooltip?: React.ReactNode;
-}) {
-  const button = (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={cn(
-        "inline-flex cursor-pointer items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
-        active
-          ? "bg-brand/10 text-brand ring-1 ring-brand/60"
-          : "text-fd-muted-foreground hover:bg-fd-secondary/30",
-      )}
-    >
-      {icon}
-      {label}
-    </button>
-  );
-  if (!tooltip) return button;
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>{button}</TooltipTrigger>
-      <TooltipContent side="top" className="max-w-none">
-        {tooltip}
-      </TooltipContent>
-    </Tooltip>
-  );
-}
-
 /**
  * The vehicle's alternate driving mode (siege deploy for Swedish TDs, rapid
  * switch for wheeled vehicles) as a compact segmented toggle, sat next to the
@@ -129,7 +87,7 @@ export function VehicleModeToggle({
   if (modes.length === 0) return null;
   return (
     <TooltipProvider delayDuration={100}>
-      <div className="inline-flex items-center gap-1 rounded-lg border border-fd-border p-0.5">
+      <SegmentedControl>
         <Segment
           label="Travel"
           icon={TRAVEL_ICON}
@@ -147,7 +105,7 @@ export function VehicleModeToggle({
             tooltip={<ModeTooltip mode={mode} />}
           />
         ))}
-      </div>
+      </SegmentedControl>
     </TooltipProvider>
   );
 }
