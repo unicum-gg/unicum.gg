@@ -2,6 +2,8 @@
 // next-openapi-gen only scans `route.ts` plus `.ts` files whose name contains
 // "api", so a plain `schema.ts` would be found by name but built empty.
 import { z } from "zod";
+import { TankClient } from "@unicum.gg/shared";
+import type { EnumMeta } from "@/services/openapi/schemas";
 import {
   tankConfig,
   tankCrew,
@@ -17,6 +19,22 @@ import {
 // whichever the generator visits last, and the SDK would document one endpoint
 // with the other's shape.
 import { tankServerStats } from "../../categories.api";
+
+/** Query of `GET /{region}/tanks/{slug}/detail`. */
+export const tankDetailQuery = z.object({
+  // Optional, not `.default()`: next-openapi-gen serializes a defaulted param
+  // as required, which would make the SDK's argument mandatory on an endpoint
+  // every caller reads without one. The doc default comes from
+  // `QUERY_PARAM_DEFAULTS` instead, like every other defaulted query param.
+  client: z
+    .enum(TankClient)
+    .optional()
+    .meta({
+      description:
+        "Which game client to read the vehicle's characteristics from. `ct` serves what the running Common Test build makes of it, so a tank can be inspected and configured the way the next update would ship it. Falls back to live when no test is running or when it leaves this vehicle alone.",
+      "x-enum-source": "TANK_CLIENT",
+    } as EnumMeta),
+});
 
 const topTankPlayer = z.object({
   account_id: z.number(),
@@ -139,6 +157,15 @@ export const TankDetailResponse = z
     hasHistory: z.boolean().meta({
       description:
         "Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility.",
+    }),
+    client: z.enum(TankClient).meta({
+      description:
+        "Which game client these characteristics were read from. Only the vehicle's own data follows it: server stats, marks and best players always come from the region's live client, since a test server has no players to measure.",
+      "x-enum-source": "TANK_CLIENT",
+    } as EnumMeta),
+    testVersion: z.string().nullable().meta({
+      description:
+        "The Common Test build that rebalances this tank, e.g. `2.4.0.5415`. Null when no test is running or when this one leaves the vehicle alone. Present whichever client the payload is for, so a caller can offer the other one.",
     }),
     rating: z
       .object({

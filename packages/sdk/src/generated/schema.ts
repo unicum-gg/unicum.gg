@@ -728,7 +728,7 @@ export interface paths {
         };
         /**
          * Compare tanks
-         * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. Duplicate slugs collapse; a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
+         * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. A slug may suffix the game client to read the vehicle on (`?slugs=amx-13-90,amx-13-90@ct`), which is how a vehicle is compared against what the running Common Test makes of it, and every column carries back the `client` it was read on. Duplicate columns collapse, and a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
          */
         get: operations["get-{region}-tanks-compare"];
         put?: never;
@@ -3345,8 +3345,15 @@ export interface components {
         /** @description One column of a comparison: a vehicle's identity, what it is made of, what it can mount, and its server-average performance. */
         TankCompareVehicle: {
             tankId: number;
-            /** @description Canonical slug. Callers that reached a vehicle through a legacy id or wrong-case slug should redirect to it. */
+            /** @description Canonical slug. Callers that reached a vehicle through a legacy id or wrong-case slug should redirect to it. It carries no client suffix: `client` below says which one this column is. */
             slug: string;
+            /**
+             * @description The game client this column was read on. `ct` when the query asked for it, and always for a vehicle that exists only on the test client.
+             * @enum {string}
+             */
+            client: "live" | "ct";
+            /** @description The Common Test build available for this vehicle, e.g. `2.4.0.5415`. Null when no test is running or when it leaves the vehicle alone. */
+            testVersion: string | null;
             meta: components["schemas"]["VehicleMeta"];
             /** @description The vehicle's top-configuration combat specification, same shape as the `/specifications` endpoints. */
             specs: string | null;
@@ -3482,6 +3489,13 @@ export interface components {
             }[];
             /** @description Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility. */
             hasHistory: boolean;
+            /**
+             * @description Which game client these characteristics were read from. Only the vehicle's own data follows it: server stats, marks and best players always come from the region's live client, since a test server has no players to measure.
+             * @enum {string}
+             */
+            client: "live" | "ct";
+            /** @description The Common Test build that rebalances this tank, e.g. `2.4.0.5415`. Null when no test is running or when this one leaves the vehicle alone. Present whichever client the payload is for, so a caller can offer the other one. */
+            testVersion: string | null;
             /** @description The community's verdict in three figures, for the hero badge and the page's structured data. The full breakdown is on `/ratings`. */
             rating: {
                 /** @description Plain mean of the community's Overall stars, 1 to 5. */
@@ -3562,6 +3576,13 @@ export interface components {
             }[];
             /** @description Whether the tank has anything on its History tab: a recorded characteristic change, or a known lifecycle event (release / dev). Drives the History tab's visibility. */
             hasHistory: boolean;
+            /**
+             * @description Which game client these characteristics were read from. Only the vehicle's own data follows it: server stats, marks and best players always come from the region's live client, since a test server has no players to measure.
+             * @enum {string}
+             */
+            client: "live" | "ct";
+            /** @description The Common Test build that rebalances this tank, e.g. `2.4.0.5415`. Null when no test is running or when this one leaves the vehicle alone. Present whichever client the payload is for, so a caller can offer the other one. */
+            testVersion: string | null;
             /** @description The community's verdict in three figures, for the hero badge and the page's structured data. The full breakdown is on `/ratings`. */
             rating: {
                 /** @description Plain mean of the community's Overall stars, 1 to 5. */
@@ -3599,6 +3620,13 @@ export interface components {
             tankId: number;
             slug: string;
             versions: components["schemas"]["TankHistoryVersion"][];
+            /** @description The Common Test build these pending changes were read from. */
+            testVersion: string | null;
+            testChanges: {
+                field: string;
+                previous: number | null;
+                next: number | null;
+            }[];
             /** @description The game version the tank first appeared as a dev stub (placeholder stats, before balancing), or null when it predates our version tracking. */
             devVersion: string | null;
             /** Format: date-time */
@@ -3627,6 +3655,10 @@ export interface components {
             tag: string;
             isPremium: boolean;
             isReward: boolean;
+            /** @description Only on the Common Test client, not yet released. */
+            isCommonTest: boolean;
+            /** @description How many characteristics the current Common Test build changes on this vehicle; 0 when none. */
+            testChanges?: number;
             role: string | null;
             contourIcon: string | null;
             bigIcon: string | null;
@@ -4069,6 +4101,8 @@ export interface components {
             tag: string;
             isPremium: boolean;
             isReward: boolean;
+            /** @description Only on the Common Test client, not yet released. */
+            isCommonTest: boolean;
             role: string | null;
             contourIcon: string | null;
             bigIcon: string | null;
@@ -5463,7 +5497,10 @@ export interface operations {
     };
     "get-{region}-tanks-{slug}-detail": {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description Which game client to read the vehicle's characteristics from. `ct` serves what the running Common Test build makes of it, so a tank can be inspected and configured the way the next update would ship it. Falls back to live when no test is running or when it leaves this vehicle alone. */
+                client?: "live" | "ct";
+            };
             header?: never;
             path: {
                 /** @example eu */

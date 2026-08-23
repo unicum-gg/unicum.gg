@@ -17,6 +17,9 @@ export const vehicleMeta = z
     tag: z.string(),
     isPremium: z.boolean(),
     isReward: z.boolean(),
+    isCommonTest: z
+      .boolean()
+      .meta({ description: "Only on the Common Test client, not yet released." }),
     role: z.string().nullable(),
     contourIcon: z.string().nullable(),
     bigIcon: z.string().nullable(),

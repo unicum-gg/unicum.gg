@@ -15,6 +15,15 @@ export const tankIdentity = z
     tag: z.string(),
     isPremium: z.boolean(),
     isReward: z.boolean(),
+    isCommonTest: z
+      .boolean()
+      .meta({ description: "Only on the Common Test client, not yet released." }),
+    // Optional: the dataset endpoints carry it, the changes feed (which is
+    // about what already shipped) has no use for it.
+    testChanges: z.number().optional().meta({
+      description:
+        "How many characteristics the current Common Test build changes on this vehicle; 0 when none.",
+    }),
     role: z.string().nullable(),
     contourIcon: z.string().nullable(),
     bigIcon: z.string().nullable(),

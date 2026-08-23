@@ -13,6 +13,7 @@ import {
   ReviewOutcome,
   SessionGranularity,
   SpawnDirection,
+  TankClient,
   TankRatingAxis,
   TankReviewStatus,
   VoterBracket,
@@ -393,6 +394,7 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   period: TopPlayersPeriod.Overall,
   metric: DEFAULT_RATING_METRIC,
   granularity: SessionGranularity.Daily,
+  client: TankClient.Live,
 };
 
 // next-openapi-gen drops `.meta({ example })` on path/query params (it injects a

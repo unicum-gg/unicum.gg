@@ -221,11 +221,11 @@ class TankClient {
   }
 
   /** Tank detail */
-  detail() {
+  detail(client?: NonNullable<QueryOf<"/{region}/tanks/{slug}/detail">>["client"]) {
     const path = { region: this.region, slug: this.slug };
     return handle(
-      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/detail", path),
-      () => this.api.GET("/{region}/tanks/{slug}/detail", { params: { path } }),
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/detail", path, { client }),
+      () => this.api.GET("/{region}/tanks/{slug}/detail", { params: { path, query: { client } } }),
     );
   }
 
