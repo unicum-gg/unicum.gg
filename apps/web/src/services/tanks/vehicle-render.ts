@@ -48,10 +48,11 @@ const ALPHA_FLOOR = 30;
  */
 export async function normalizeVehicleRender(
   tag: string,
+  ref?: string,
 ): Promise<Buffer | null> {
   let buf: Buffer;
   try {
-    const res = await fetch(vehicleRenderUrl(tag));
+    const res = await fetch(vehicleRenderUrl(tag, ref));
     if (!res.ok) return null; // no mirror for this tag -> caller falls back
     buf = Buffer.from(await res.arrayBuffer());
   } catch {

@@ -13,6 +13,7 @@ export enum CrestKind {
   Verified = "verified",
   Supporter = "supporter",
   Streamer = "streamer",
+  CommonTest = "common-test",
 }
 
 // Flat-top regular hexagon in a 100×86.6 box: flat top/bottom edges (x 25–75),
@@ -25,6 +26,7 @@ const TINCTURE: Record<CrestKind, { fill: string; edge: string }> = {
   [CrestKind.Verified]: { fill: "#3b9eff", edge: "#1f6fd6" },
   [CrestKind.Supporter]: { fill: BRAND_COLOR, edge: "#b8390f" },
   [CrestKind.Streamer]: { fill: "#9147ff", edge: "#6d28d9" },
+  [CrestKind.CommonTest]: { fill: BRAND_COLOR, edge: "#b8390f" },
 };
 
 // Muted tincture for the owner-only supporter states (hidden / invite): a slate
@@ -50,6 +52,23 @@ const CHARGE: Record<CrestKind, ReactNode> = {
     />
   ),
   [CrestKind.Streamer]: <path d="M40 27 L67 43 L40 59 Z" fill="#fff" />,
+  // Lettered rather than a device: "CT" is what the community calls it, and no
+  // pictogram reads as "test build" at 16px.
+  [CrestKind.CommonTest]: (
+    <text
+      x="50"
+      y="43.3"
+      textAnchor="middle"
+      dominantBaseline="central"
+      fill="#fff"
+      fontSize="42"
+      fontWeight="700"
+      fontFamily="system-ui, sans-serif"
+      letterSpacing="-2"
+    >
+      CT
+    </text>
+  ),
 };
 
 type Tincture = { fill: string; edge: string };
@@ -87,7 +106,9 @@ export function Crest({
       viewBox={`0 0 ${HEX_W} ${HEX_H}`}
       role="img"
       aria-hidden
-      className={cn("inline-block shrink-0 align-middle", className)}
+      // A crest is a mark, not a control: keep the arrow rather than the text
+      // caret an inline SVG would otherwise inherit.
+      className={cn("inline-block shrink-0 cursor-default align-middle", className)}
       style={{ filter: "drop-shadow(0 1px 1.5px rgba(0,0,0,.28))" }}
     >
       <defs>

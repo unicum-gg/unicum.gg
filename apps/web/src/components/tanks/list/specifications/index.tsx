@@ -6,11 +6,10 @@ import {
   SlidersHorizontalIcon,
 } from "@phosphor-icons/react";
 import { SortDirection, type SortState, PAGE_SIZES, type PageSize, SortHead } from "../sorting";
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toRoman } from "roman-numerals";
 import { NationFlag } from "@/components/tanks/nation-flag";
-import { TankIcon } from "@/components/tanks/tank-icon";
+import { TankRowName } from "@/components/tanks/list/row-name";
 import { TankopediaHeaderIcon } from "@/components/tanks/tankopedia-header-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
@@ -43,7 +42,6 @@ import {
   TankCompareHead,
 } from "@/components/tanks/list/compare-cell";
 import type { TankSelection } from "@/hooks/use-compare-selection";
-import ROUTES from "@/constants/routes";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -226,20 +224,7 @@ export function TanksSpecsTable({
                 <TableCell
                   className={cn("font-medium", t.isPremium && "text-[#FAB81B]")}
                 >
-                  <Link
-                    href={ROUTES.TANK(region, t.slug)}
-                    className="flex items-center gap-2 hover:underline"
-                  >
-                    <TankIcon
-                      region={region}
-                      tag={t.tag}
-                      type={t.type}
-                      className="h-3.5 w-auto shrink-0 object-contain"
-                    />
-                    <span className="min-w-0 truncate">
-                      {t.shortName || t.name}
-                    </span>
-                  </Link>
+                  <TankRowName region={region} tank={t} />
                 </TableCell>
                 {visible.map((c) => (
                   <TableCell key={c.key} className="text-right tabular-nums">

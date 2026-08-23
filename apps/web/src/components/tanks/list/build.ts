@@ -50,6 +50,10 @@ export type TankListItem = {
   role: string | null;
   isPremium: boolean;
   isReward: boolean;
+  /** Only on the Common Test client: shown with a badge, and has no stats. */
+  isCommonTest: boolean;
+  /** How many characteristics the Common Test build changes on this vehicle. */
+  testChanges: number;
   stats: TankStatsRow | null;
   specs: TankSpecRow | null;
   mastery: MasteryRow | null;
@@ -96,6 +100,8 @@ type RawIdentity = {
   role: string | null;
   isPremium: boolean;
   isReward: boolean;
+  isCommonTest: boolean;
+  testChanges?: number;
 };
 
 function base(i: RawIdentity): TankListItem {
@@ -111,6 +117,8 @@ function base(i: RawIdentity): TankListItem {
     role: i.role,
     isPremium: i.isPremium,
     isReward: i.isReward,
+    isCommonTest: i.isCommonTest,
+    testChanges: i.testChanges ?? 0,
     stats: null,
     specs: null,
     mastery: null,

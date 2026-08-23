@@ -1,5 +1,6 @@
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { isRegion } from "@unicum.gg/wargaming";
+import { ASSETS_BRANCH_CT } from "@unicum.gg/shared";
 import { normalizeVehicleRender } from "@/services/tanks/vehicle-render";
 
 // The tank hero's vehicle render, co-located with the page's `opengraph-image`
@@ -22,7 +23,12 @@ export async function GET(
   const tank = await getTankBySlug(region, slug);
   if (!tank) return new Response(null, { status: 404 });
 
-  const png = await normalizeVehicleRender(tank.meta.tag);
+  // An unreleased vehicle is only on the test client, so its render is on the
+  // mirror's CT branch; the live one will not carry it until it ships.
+  const png = await normalizeVehicleRender(
+    tank.meta.tag,
+    tank.meta.isCommonTest ? ASSETS_BRANCH_CT : undefined,
+  );
   if (!png) return new Response(null, { status: 404 }); // caller falls back
 
   return new Response(new Uint8Array(png), {

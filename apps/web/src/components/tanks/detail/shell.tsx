@@ -15,6 +15,7 @@ import {
 } from "@/components/tanks/detail/videos/player";
 import { TankVideosLiveProvider } from "@/components/tanks/detail/videos/live-provider";
 import { VehicleRoleIcon } from "@/components/tanks/vehicle-role-icon";
+import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Panel, PanelSeparator } from "@/components/panel";
 import ROUTES from "@/constants/routes";
@@ -78,6 +79,7 @@ export function TankShell({
       slug,
       name: meta.name,
       short_name: meta.shortName,
+      is_common_test: meta.isCommonTest,
       tag: meta.tag,
       tier: meta.tier,
       nation: meta.nation,
@@ -199,6 +201,7 @@ export function TankShell({
                 ) : meta.isPremium ? (
                   <span className="text-[#FAB81B]">Premium</span>
                 ) : null}
+                {meta.isCommonTest && <CommonTestBadge size={15} />}
               </div>
               <h1 className="max-w-sm font-heading text-4xl font-bold tracking-tight md:text-5xl">
                 {meta.name}

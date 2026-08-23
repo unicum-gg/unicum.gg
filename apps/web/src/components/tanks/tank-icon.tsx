@@ -2,20 +2,35 @@
 
 import Image from "next/image";
 import { useState } from "react";
-import { type Region, defaultTankIconUrl, tankIconUrl } from "@unicum.gg/wargaming";
+import {
+  type Region,
+  defaultTankIconUrl,
+  mirrorContourIconUrl,
+  tankIconUrl,
+} from "@unicum.gg/wargaming";
 
 export function TankIcon({
   region,
   tag,
   type,
+  nation,
+  isCommonTest = false,
   className,
 }: {
   region: Region;
   tag: string;
   type: string;
+  /** Needed only to key the mirror icon of an unreleased vehicle. */
+  nation?: string;
+  isCommonTest?: boolean;
   className?: string;
 }) {
-  const primary = tankIconUrl(region, tag);
+  // WG's CDN only serves released vehicles, so a test one has to come from the
+  // client's own icon, which our mirror publishes.
+  const primary =
+    isCommonTest && nation
+      ? mirrorContourIconUrl(nation, tag)
+      : tankIconUrl(region, tag);
   const fallback = defaultTankIconUrl(region, type);
   // Track which `primary` URL we last got an error for. When the row's
   // identity changes (sort / filter / different tank), `primary` changes and

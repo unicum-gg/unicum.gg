@@ -136,6 +136,25 @@ export function TankFilterBar<T>({
               <TooltipContent>{o.label}</TooltipContent>
             </Tooltip>
           ))}
+          {/* Only while a test is running: it filters on a state that does not
+              otherwise exist, so an always-present chip would read as broken. */}
+          {filters.hasTestChanges && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Chip
+                  active={filters.testOnly}
+                  onClick={() => filters.setTestOnly(!filters.testOnly)}
+                >
+                  <span className="text-[11px] font-bold tracking-wide text-brand">
+                    CT
+                  </span>
+                </Chip>
+              </TooltipTrigger>
+              <TooltipContent>
+                Changed by the Common Test: new vehicles and rebalanced ones
+              </TooltipContent>
+            </Tooltip>
+          )}
         </TooltipProvider>
       </ChipRow>
       <div className="flex h-7 items-center overflow-hidden rounded-md border border-fd-border">

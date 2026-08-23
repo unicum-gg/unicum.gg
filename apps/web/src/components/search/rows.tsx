@@ -88,6 +88,8 @@ export function TankRow({
           region={region}
           tag={tank.tag}
           type={tank.type}
+          nation={tank.nation}
+          isCommonTest={tank.is_common_test}
           className="h-4 w-8 shrink-0 object-contain"
         />
         <span

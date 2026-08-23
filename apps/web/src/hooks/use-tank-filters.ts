@@ -17,6 +17,10 @@ export type FilterableTank = {
   role: string | null;
   isPremium: boolean;
   isReward: boolean;
+  /** On the test client only, not released yet. */
+  isCommonTest?: boolean;
+  /** How many characteristics the test build changes on this vehicle. */
+  testChanges?: number;
   name: string;
   shortName: string | null;
 };
@@ -53,6 +57,11 @@ export type TankFilters<T> = {
   toggleRole: (r: string) => void;
   categorySel: Set<string>;
   toggleCategory: (c: string) => void;
+  /** Keep only what the current Common Test adds or rebalances. */
+  testOnly: boolean;
+  setTestOnly: (v: boolean) => void;
+  /** Whether a test is running at all, so the control can hide itself. */
+  hasTestChanges: boolean;
   rangeCol: string;
   setRangeCol: (k: string) => void;
   minVal: string;
@@ -108,6 +117,14 @@ export function useTankFilters<T extends FilterableTank>(
   // "standard" | "premium" | "reward" — reward (earned/special) is checked
   // before premium since reward tanks also carry a gold price.
   const [categorySel, setCategorySel] = useState<Set<string>>(() => new Set());
+  // Kept out of `categorySel` on purpose: a test vehicle is still standard,
+  // premium or reward, so this is a second axis rather than a fourth category.
+  const [testOnly, setTestOnly] = useState(false);
+  // No test running (or nothing changed): the control has nothing to filter.
+  const hasTestChanges = useMemo(
+    () => items.some((t) => t.isCommonTest || (t.testChanges ?? 0) > 0),
+    [items],
+  );
 
   // Seed filter state from the URL once, on mount (client-side only). A
   // deep-linked filter view applies right after hydration.
@@ -132,6 +149,7 @@ export function useTankFilters<T extends FilterableTank>(
     if (role.size) setRolesSel(role);
     const cat = parseSet(params.get("cat"));
     if (cat.size) setCategorySel(cat);
+    if (params.get("test") === "1") setTestOnly(true);
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -154,6 +172,10 @@ export function useTankFilters<T extends FilterableTank>(
     setOrDel("class", setStr(classesSel));
     setOrDel("role", setStr(rolesSel));
     setOrDel("cat", setStr(categorySel));
+    // A flag, not a set, so it is written as its own presence rather than
+    // through `setStr`. Without it the Common Test chip was the one filter a
+    // link could not carry.
+    setOrDel("test", testOnly ? "1" : "");
     // The range column is only meaningful with a bound, so only persist the
     // trio together.
     const hasRange = minVal.trim() !== "" || maxVal.trim() !== "";
@@ -173,6 +195,7 @@ export function useTankFilters<T extends FilterableTank>(
     classesSel,
     rolesSel,
     categorySel,
+    testOnly,
     rangeCol,
     minVal,
     maxVal,
@@ -230,6 +253,8 @@ export function useTankFilters<T extends FilterableTank>(
         const cat = t.isReward ? "reward" : t.isPremium ? "premium" : "standard";
         if (!categorySel.has(cat)) return false;
       }
+      // Either side of a Common Test: a vehicle it adds, or one it rebalances.
+      if (testOnly && !t.isCommonTest && !(t.testChanges ?? 0)) return false;
       if (
         activeRangeCol &&
         ((min != null && !Number.isNaN(min)) ||
@@ -265,6 +290,7 @@ export function useTankFilters<T extends FilterableTank>(
     classesSel,
     rolesSel,
     categorySel,
+    testOnly,
   ]);
 
   return {
@@ -282,6 +308,9 @@ export function useTankFilters<T extends FilterableTank>(
       toggleRole: (r) => toggleSet(setRolesSel, r),
       categorySel,
       toggleCategory: (c) => toggleSet(setCategorySel, c),
+      testOnly,
+      setTestOnly,
+      hasTestChanges,
       rangeCol,
       setRangeCol,
       minVal,
