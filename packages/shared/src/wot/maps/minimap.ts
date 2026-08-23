@@ -1,3 +1,5 @@
+import { iconUrl } from "@unicum.gg/wargaming";
+
 // Our own mirror of the game's top-down minimaps, extracted from the client at
 // full 2048² (see the `unicum-gg/wot.maps` repo). Keyed by the exact arena id,
 // so no filename healing is needed — every catalogue map has a file.
@@ -19,12 +21,12 @@ export function onslaughtMinimapUrl(arenaId: string): string {
 // Low-res fallback minimap: the client's own baked GUI icon on the wot.assets
 // mirror. Used for legacy event/arcade maps that have no HD `mmap.dds` in their
 // package (so the HD wot.maps extraction skips them) but still ship a GUI icon.
-const WOT_ASSETS_REPO = "unicum-gg/wot.assets";
-const WOT_ASSETS_BRANCH = "WG";
+// Built through `iconUrl` rather than spelling the mirror out again: that repo
+// and branch have one definition, in `wargaming`'s `assets-mirror.ts`.
 
 /** Low-res client minimap icon (`gui/maps/icons/map/<id>.png`). */
 export function lowResMinimapUrl(arenaId: string): string {
-  return `https://raw.githubusercontent.com/${WOT_ASSETS_REPO}/${WOT_ASSETS_BRANCH}/gui/maps/icons/map/${arenaId}.png`;
+  return iconUrl(`map/${arenaId}.png`);
 }
 
 /** The game's own minimap entry markers, extracted from the client battle atlas

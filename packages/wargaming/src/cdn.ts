@@ -1,3 +1,4 @@
+import { ASSETS_BRANCH_CT, iconUrl } from "./assets-mirror";
 import { Region } from "./region";
 
 // Per-region wgcdn portal hosts. EU and NA follow `<region>-wotp`; ASIA is
@@ -10,6 +11,17 @@ const HOST: Record<Region, string> = {
 
 export function wgCdnHost(region: Region): string {
   return HOST[region];
+}
+
+/**
+ * Contour icon for a vehicle Wargaming's CDN does not serve.
+ *
+ * The public CDN only carries released vehicles, so a Common Test tank 404s
+ * there. The client ships its own, and the assets mirror publishes them from
+ * the test build. Keyed `<nation>-<tag>.png`, the client's own naming.
+ */
+export function mirrorContourIconUrl(nation: string, tag: string): string {
+  return iconUrl(`vehicle/contour/${nation}-${tag}.png`, ASSETS_BRANCH_CT);
 }
 
 export function tankIconUrl(region: Region, tag: string): string {
