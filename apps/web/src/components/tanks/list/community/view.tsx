@@ -83,12 +83,7 @@ export async function TankCommunityView({ region }: { region: Region }) {
         </PanelContent>
       </Panel>
 
-      {rows.length > 0 ? (
-        <>
-          <PanelSeparator />
-          <Extremes region={region} rows={rows} />
-        </>
-      ) : null}
+      {rows.length > 0 ? <Extremes region={region} rows={rows} /> : null}
 
       <PanelSeparator />
 

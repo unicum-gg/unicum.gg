@@ -8,6 +8,7 @@ import {
   Panel,
   PanelContent,
   PanelHeader,
+  PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
 import ROUTES from "@/constants/routes";
@@ -56,31 +57,37 @@ export function Extremes({
 
   if (overrated.length === 0 && underrated.length === 0) return null;
 
+  // The separator belongs to this block rather than to the caller: the panel
+  // drops out whenever no tank is far enough out of line, and a separator left
+  // behind stacks onto the next one as a double band.
   return (
-    <Panel>
-      <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
-        <PanelTitle>Reputation against results</PanelTitle>
-        <span className="text-xs text-fd-muted-foreground">
-          Where the community and the win rate disagree most
-        </span>
-      </PanelHeader>
-      <PanelContent className="grid gap-8 sm:grid-cols-2">
-        <ExtremeList
-          title="Overrated"
-          subtitle="Loved far more than they win"
-          region={region}
-          rows={overrated}
-          tone="#D77900"
-        />
-        <ExtremeList
-          title="Underrated"
-          subtitle="Win far more than anyone admits"
-          region={region}
-          rows={underrated}
-          tone="#6D9521"
-        />
-      </PanelContent>
-    </Panel>
+    <>
+      <PanelSeparator />
+      <Panel>
+        <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <PanelTitle>Reputation against results</PanelTitle>
+          <span className="text-xs text-fd-muted-foreground">
+            Where the community and the win rate disagree most
+          </span>
+        </PanelHeader>
+        <PanelContent className="grid gap-8 sm:grid-cols-2">
+          <ExtremeList
+            title="Overrated"
+            subtitle="Loved far more than they win"
+            region={region}
+            rows={overrated}
+            tone="#D77900"
+          />
+          <ExtremeList
+            title="Underrated"
+            subtitle="Win far more than anyone admits"
+            region={region}
+            rows={underrated}
+            tone="#6D9521"
+          />
+        </PanelContent>
+      </Panel>
+    </>
   );
 }
 
