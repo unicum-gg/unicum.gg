@@ -1,5 +1,5 @@
-import { Region, type SkillNodeModifier } from "@unicum.gg/wargaming";
-import { fieldModAffectsSpec, iconUrl } from "@unicum.gg/shared";
+import { Region, type SkillNodeModifier, WotSrcBranch } from "@unicum.gg/wargaming";
+import { assetsRefFor, fieldModAffectsSpec, iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
 import { cachedInRedis } from "../../../redis";
 
@@ -45,11 +45,15 @@ export interface TankSkillTree {
 
 // The client's per-node perk icons live under the node's own type folder, keyed
 // by its `imgName` (a stat/mechanic node) or the camelCased feature key.
-const SKILL_ICON = iconUrl("skillTree/tree/perks");
+// Resolved per branch, not once at module load: a node's icon can be keyed by
+// the vehicle (`s41_mechanic_0.png`), and an unreleased vehicle's icons exist
+// only on the test branch of the assets mirror.
+const skillIconBase = (branch?: WotSrcBranch) =>
+  iconUrl("skillTree/tree/perks", assetsRefFor(branch));
 const camel = (k: string): string =>
   k.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
-const skillIcon = (type: string, img: string): string | null =>
-  img ? `${SKILL_ICON}/${type}/skills/large/${img}.png` : null;
+const skillIcon = (base: string, type: string, img: string): string | null =>
+  img ? `${base}/${type}/skills/large/${img}.png` : null;
 
 /**
  * A tank's vehicle skill tree ("upgrades", tier XI only): the node graph with
@@ -60,23 +64,26 @@ const skillIcon = (type: string, img: string): string | null =>
 export function getTankSkillTree(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankSkillTree | null> {
-  return cachedInRedis(`wotsrc:skill-tree:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankSkillTree(region, tankId),
+  return cachedInRedis(`wotsrc:skill-tree:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankSkillTree(region, tankId, branch),
   );
 }
 
 async function computeTankSkillTree(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankSkillTree | null> {
   const r = wg.region(region);
-  const st = await r.source.skillTree.skillTree(tankId);
+  const st = await r.source.skillTree.skillTree(tankId, branch);
   if (!st || st.nodes.length === 0) return null;
   // Every node's name + description comes from the client localization
   // (`veh_skill_tree.po`), keyed by feature key or stat-node loc name, so nothing
   // is labelled by a hand-kept map or a humanized key.
-  const titles = await r.source.postProgression.nodeTitles();
+  const titles = await r.source.postProgression.nodeTitles(branch);
+  const iconBase = skillIconBase(branch);
 
   const nodes: SkillNode[] = st.nodes.map((n) => {
     if (n.action === "feature") {
@@ -87,7 +94,7 @@ async function computeTankSkillTree(
         isFeature: true,
         name: titles[n.value]?.name ?? n.value,
         description: titles[n.value]?.description || null,
-        image: skillIcon(n.type, camel(n.value)),
+        image: skillIcon(iconBase, n.type, camel(n.value)),
         effects: [],
         position: n.position,
         unlocks: n.unlocks,
@@ -103,7 +110,7 @@ async function computeTankSkillTree(
       isFeature: false,
       name: titles[loc]?.name ?? loc,
       description: titles[loc]?.description || null,
-      image: skillIcon(n.type, mod?.imgName ?? ""),
+      image: skillIcon(iconBase, n.type, mod?.imgName ?? ""),
       // Only effects that move a displayed characteristic; a vehicle-mechanic
       // node's exotic ability parameters are explained by its description, not
       // shown as raw rows.

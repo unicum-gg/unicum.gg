@@ -1,4 +1,4 @@
-import type { Region } from "@unicum.gg/wargaming";
+import { WotSrcBranch, type Region } from "@unicum.gg/wargaming";
 import {
   VehicleModeKind,
   type AppliedFieldMod,
@@ -46,15 +46,22 @@ function ratio(
 export function getTankVehicleModes(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<VehicleMode[]> {
-  return cachedInRedis(`wg:vehicle-modes:${region}:${tankId}`, TTL_SECONDS, () =>
-    computeTankVehicleModes(region, tankId),
+  return cachedInRedis(`wg:vehicle-modes:${region}${branch ? `:${branch}` : ""}:${tankId}`, TTL_SECONDS, () =>
+    computeTankVehicleModes(region, tankId, branch),
   );
 }
 
+// `branch` reaches this far to key the cache, not to change the read: WG runs no
+// encyclopedia for the test server, so `vehicleprofile` only ever describes the
+// live client. A test-only vehicle therefore has no modes at all (WG has never
+// heard of it), and a rebalanced one shows its live siege/rapid ratios. Kept as
+// a parameter so those two answers do not share one entry.
 async function computeTankVehicleModes(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<VehicleMode[]> {
   const profile = await wg.region(region).api.wot.encyclopedia.vehicleprofile({
     tankId,

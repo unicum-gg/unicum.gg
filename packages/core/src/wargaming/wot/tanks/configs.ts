@@ -1,4 +1,10 @@
-import { ModuleType, Region, type WotSrcSpec } from "@unicum.gg/wargaming";
+import {
+  branchFor,
+  ModuleType,
+  Region,
+  type WotSrcSpec,
+  WotSrcBranch,
+} from "@unicum.gg/wargaming";
 import { wg } from "../../client";
 import { cachedInRedis } from "../../../redis";
 
@@ -26,6 +32,8 @@ export type TankConfigModules = {
 export type TankConfig = { modules: TankConfigModules; specs: WotSrcSpec };
 
 type Slot = keyof TankConfigModules;
+
+const SLOTS: Slot[] = ["gun", "turret", "engine", "chassis", "radio"];
 
 const SLOT_BY_TYPE: Partial<Record<ModuleType, Slot>> = {
   [ModuleType.Gun]: "gun",
@@ -93,9 +101,14 @@ export function getTankConfigs(
   region: Region,
   tankId: number,
   modules?: TankModuleNode[],
+  branch?: WotSrcBranch,
 ): Promise<TankConfig[]> {
-  return cachedInRedis(`wotsrc:configs:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankConfigs(region, tankId, modules),
+  // The region stays in the key alongside the branch, never instead of it: what
+  // is cached here is region-scoped (module ids from that region's encyclopedia,
+  // its CDN asset hosts), so a key naming only the branch would answer an EU
+  // request with whichever region warmed it first.
+  return cachedInRedis(`wotsrc:configs:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankConfigs(region, tankId, modules, branch),
   );
 }
 
@@ -103,10 +116,11 @@ async function computeTankConfigs(
   region: Region,
   tankId: number,
   modules?: TankModuleNode[],
+  branch?: WotSrcBranch,
 ): Promise<TankConfig[]> {
   const nodes = modules ?? (await getTankModules(region, tankId));
 
-  const src = await wg.region(region).source.specs.configs(tankId);
+  const src = await wg.region(region).source.specs.configs(tankId, branch);
   if (!src || src.configs.length === 0) return [];
   // No WG module tree (a tank its encyclopedia omits): keep going with the
   // wot-src configs. `bySlot` stays empty below, so `matchModule` returns null
@@ -144,14 +158,71 @@ async function computeTankConfigs(
     return best;
   };
 
+  // Matching by signature only works while the numbers being matched are the
+  // ones WG's module tree was built from. They are not on a test build: it moves
+  // them, and a nearest-value match then lands two configurations on the same
+  // module the moment a rebalance pushes one slot's value onto another's live
+  // one. (Observed: the AMX 13 90's test suspensions traverse at 36 and 38 where
+  // WG lists 38 and 40, so both claimed the stock chassis and the upgraded one
+  // became unreachable.)
+  //
+  // So when the configurations come from another client than the module tree,
+  // the *identity* of a module is resolved on the live branch, where the
+  // signatures still agree with WG, and only its *characteristics* come from the
+  // test build. wot-src keys a module by name, and a rebalance does not rename
+  // it, which is what makes the two sides line up.
+  const byKey =
+    branch && branch !== branchFor(region)
+      ? await liveModuleIdsByKey(region, tankId, matchModule)
+      : null;
+
+  const moduleId = (slot: Slot, c: (typeof src.configs)[number]): number | null =>
+    // Falls back to the signature match for a module the live branch has never
+    // seen, which is the one the test actually introduces.
+    byKey?.[slot].get(c.keys[slot]) ?? matchModule(slot, c.spec);
+
   return src.configs.map((c) => ({
     modules: {
-      gun: matchModule("gun", c.spec),
-      turret: matchModule("turret", c.spec),
-      engine: matchModule("engine", c.spec),
-      chassis: matchModule("chassis", c.spec),
-      radio: matchModule("radio", c.spec),
+      gun: moduleId("gun", c),
+      turret: moduleId("turret", c),
+      engine: moduleId("engine", c),
+      chassis: moduleId("chassis", c),
+      radio: moduleId("radio", c),
     },
     specs: c.spec,
   }));
+}
+
+/**
+ * The WG module id behind each wot-src module key, resolved on the region's live
+ * branch where the signatures still match WG's own numbers.
+ *
+ * Empty on any failure: the caller then matches by signature as before, which is
+ * the behaviour this replaces rather than a broken state.
+ */
+async function liveModuleIdsByKey(
+  region: Region,
+  tankId: number,
+  match: (slot: Slot, spec: WotSrcSpec) => number | null,
+): Promise<Record<Slot, Map<string, number>>> {
+  const out = {
+    gun: new Map<string, number>(),
+    turret: new Map<string, number>(),
+    engine: new Map<string, number>(),
+    chassis: new Map<string, number>(),
+    radio: new Map<string, number>(),
+  };
+  const live = await wg
+    .region(region)
+    .source.specs.configs(tankId)
+    .catch(() => null);
+  for (const c of live?.configs ?? []) {
+    for (const slot of SLOTS) {
+      const key = c.keys[slot];
+      if (!key || out[slot].has(key)) continue;
+      const id = match(slot, c.spec);
+      if (id !== null) out[slot].set(key, id);
+    }
+  }
+  return out;
 }

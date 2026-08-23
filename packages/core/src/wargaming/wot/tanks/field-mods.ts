@@ -2,8 +2,9 @@ import {
   PostProgressionAction,
   Region,
   type PostProgressionModification,
+  WotSrcBranch,
 } from "@unicum.gg/wargaming";
-import { iconUrl } from "@unicum.gg/shared";
+import { assetsRefFor, iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
 import { cachedInRedis } from "../../../redis";
 
@@ -51,13 +52,17 @@ export interface TankFieldMods {
   steps: FieldModStep[];
 }
 
-const ASSETS = iconUrl("vehPostProgression/actionItems");
+// Per branch for the same reason as the skill tree: a post-progression icon can
+// be keyed by the vehicle, and an unreleased one has icons only the test branch
+// of the assets mirror carries.
+const assetsBase = (branch?: WotSrcBranch) =>
+  iconUrl("vehPostProgression/actionItems", assetsRefFor(branch));
 
 // The QoL features' icons live under `modificationWithFeature` by camelCase key
 // (their display names come from the client localization, see `featureNames`).
-const featureImage = (key: string): string => {
+const featureImage = (base: string, key: string): string => {
   const camel = key.replace(/_([a-z])/g, (_, c: string) => c.toUpperCase());
-  return `${ASSETS}/modificationWithFeature/120x80/${camel}.png`;
+  return `${base}/modificationWithFeature/120x80/${camel}.png`;
 };
 
 /**
@@ -69,30 +74,34 @@ const featureImage = (key: string): string => {
 export function getTankFieldMods(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankFieldMods | null> {
-  return cachedInRedis(`wotsrc:field-mods:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankFieldMods(region, tankId),
+  return cachedInRedis(`wotsrc:field-mods:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankFieldMods(region, tankId, branch),
   );
 }
 
 async function computeTankFieldMods(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankFieldMods | null> {
   const src = wg.region(region).source.postProgression;
-  const pp = await src.postProgression(tankId);
+  // A test vehicle's tree lives on the CT branch alongside the vehicle itself.
+  const pp = await src.postProgression(tankId, branch);
   if (!pp || pp.steps.length === 0) return null;
   const [names, titles] = await Promise.all([
     src.names(),
-    src.nodeTitles(),
+    src.nodeTitles(branch),
   ]);
+  const assets = assetsBase(branch);
 
   const item = (m: PostProgressionModification): FieldModItem => ({
     key: m.key,
     name: names[`${m.locName}/name`] ?? m.locName,
     // Only pair sides have a client icon (base steps render as level chevrons).
     image: m.imgName
-      ? `${ASSETS}/pairModifications/80x80/${m.imgName}.png`
+      ? `${assets}/pairModifications/80x80/${m.imgName}.png`
       : null,
     effects: m.modifiers,
   });
@@ -107,7 +116,7 @@ async function computeTankFieldMods(
           key: step.value,
           name: titles[step.value]?.name ?? step.value,
           description: titles[step.value]?.description || null,
-          image: featureImage(step.value),
+          image: featureImage(assets, step.value),
         },
         modification: null,
         pair: null,

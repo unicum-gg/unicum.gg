@@ -1,3 +1,4 @@
+import { TankClient } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { getRedisClient } from "@unicum.gg/core/redis";
 
@@ -36,17 +37,24 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  * the old generation instead of shipping that window.
  *
  * v2: the community rating headline joined the payload.
+ * v3: the client the characteristics were read from, and the test build offered.
  */
-const SHAPE_VERSION = 2;
+const SHAPE_VERSION = 3;
 
-function key(region: Region, slug: string): string {
-  return `tankdetail:v${SHAPE_VERSION}:${region}:${slug.toLowerCase()}`;
+// The client is part of the key, not a second cache: the same tank on the test
+// build is a different payload under the same slug, and the two must never
+// answer for each other. Live keeps the bare key it has always had, so the
+// entries the warm cron writes are the ones the common path reads.
+function key(region: Region, slug: string, client: TankClient): string {
+  const suffix = client === TankClient.CommonTest ? `:${TankClient.CommonTest}` : "";
+  return `tankdetail:v${SHAPE_VERSION}:${region}:${slug.toLowerCase()}${suffix}`;
 }
 
 /** Cached JSON body for this (region, slug), or null on miss / no Redis. */
 export async function getCachedTankDetailJson(
   region: Region,
   slug: string,
+  client: TankClient = TankClient.Live,
 ): Promise<string | null> {
   // Dev-only escape hatch for the endpoint speed bench: force a miss so the
   // handler actually assembles the payload (with warm sub-caches), never a hit.
@@ -54,7 +62,7 @@ export async function getCachedTankDetailJson(
   const redis = getRedisClient();
   if (!redis) return null;
   try {
-    return await redis.get(key(region, slug));
+    return await redis.get(key(region, slug, client));
   } catch {
     return null; // fail open: a Redis blip degrades to "no cache", never an error
   }
@@ -65,11 +73,12 @@ export async function setCachedTankDetailJson(
   region: Region,
   slug: string,
   json: string,
+  client: TankClient = TankClient.Live,
 ): Promise<void> {
   const redis = getRedisClient();
   if (!redis) return;
   try {
-    await redis.set(key(region, slug), json, "EX", TANK_DETAIL_TTL_SECONDS);
+    await redis.set(key(region, slug, client), json, "EX", TANK_DETAIL_TTL_SECONDS);
   } catch {
     // ignore — caching is best-effort
   }

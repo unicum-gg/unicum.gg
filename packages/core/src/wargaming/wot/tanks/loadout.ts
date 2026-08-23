@@ -4,8 +4,10 @@ import {
   type EquipmentEffect,
   type EquipmentGrade,
   type EquipmentSlot,
+  WotSrcBranch,
 } from "@unicum.gg/wargaming";
 import {
+  assetsRefFor,
   crewSkillAffectsSpec,
   directiveAffectsSpec,
   iconUrl,
@@ -20,7 +22,10 @@ const WOTSRC_TTL_SECONDS = 24 * 60 * 60;
 
 // Crew-skill icons live on the wot.assets mirror by skill key (WG's are dead),
 // same source the crew section uses.
-const SKILL_ICON_BASE = iconUrl("tankmen/skills/big");
+// Per branch, like every other icon base here: a crew directive names a skill
+// read from the branch, so its icon has to be looked for on the same one.
+const skillIconBase = (branch?: WotSrcBranch) =>
+  iconUrl("tankmen/skills/big", assetsRefFor(branch));
 
 /** A readable name for a crew skill key when WG's `crewskills` has none (e.g.
  * `fireFighting`, `radioman_lastEffort`): strip the role prefix and split the
@@ -117,18 +122,20 @@ function httpsUrl(url: string | null | undefined): string | null {
 export function getTankLoadout(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankLoadout | null> {
-  return cachedInRedis(`wotsrc:loadout:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankLoadout(region, tankId),
+  return cachedInRedis(`wotsrc:loadout:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankLoadout(region, tankId, branch),
   );
 }
 
 async function computeTankLoadout(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankLoadout | null> {
   const r = wg.region(region);
-  const src = await r.source.equipment.loadout(tankId);
+  const src = await r.source.equipment.loadout(tankId, branch);
   if (!src || src.equipment.length === 0) return null;
 
   // Crew directives boost a crew skill, so their name/icon/effects come from the
@@ -200,7 +207,7 @@ async function computeTankLoadout(
         equipmentIcon: "",
         name: perkNames.get(d.skillName) ?? p?.name ?? humanizeSkillKey(d.skillName),
         description: d.description,
-        image: `${SKILL_ICON_BASE}/${d.skillName}.png`,
+        image: `${skillIconBase(branch)}/${d.skillName}.png`,
         attribute: "",
         type: "mul",
         value: 0,

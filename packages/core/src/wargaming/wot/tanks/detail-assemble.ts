@@ -22,7 +22,7 @@ import { getTankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods
 import { getTankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import { getTankHasHistory } from "@unicum.gg/core/wargaming/wot/tanks/spec-history";
 import { getTankVehicleModes } from "@unicum.gg/core/wargaming/wot/tanks/vehicle-modes";
-import type { VehicleMode } from "@unicum.gg/shared";
+import { TankClient, type VehicleMode } from "@unicum.gg/shared";
 import {
   fetchMomHistoryFromPoliroid,
   type MomHistoryPoint,
@@ -31,7 +31,8 @@ import {
   fetchMoeHistoryFromPoliroid,
   type MoeHistoryPoint,
 } from "@unicum.gg/core/moe/poliroid";
-import type { Region } from "@unicum.gg/wargaming";
+import { getTestVersion } from "@unicum.gg/core/wargaming/wot/tanks/test-changes";
+import { WotSrcBranch, type Region } from "@unicum.gg/wargaming";
 import { getTankRatingHeadline } from "@unicum.gg/core/tanks/ratings-read";
 
 const TOP_LIMIT = 25;
@@ -55,11 +56,26 @@ async function safe<T>(fn: () => Promise<T>, fallback: T): Promise<T> {
  * `tank-warm` cron (proactive daily refresh), so both produce the exact same
  * shape with no drift. Returns `null` when the slug resolves to no tank (404);
  * `slug` in the payload is the canonical slug (callers redirect legacy ids to it).
+ *
+ * `client` picks which game client the characteristics are read from. Only the
+ * vehicle's own data moves with it (its modules, ammunition, crew, field mods
+ * and the specs derived from them): server stats, marks and top players stay on
+ * the region's live client, because a test server has no players to measure.
  */
-export async function assembleTankDetail(region: Region, slug: string) {
+export async function assembleTankDetail(
+  region: Region,
+  slug: string,
+  client: TankClient = TankClient.Live,
+) {
   const tank = await getTankBySlug(region, slug);
   if (!tank) return null;
   const { tankId, meta, slug: canonicalSlug } = tank;
+  // Which client the characteristics are read from. An unreleased vehicle only
+  // exists on the test one, so it has no say in the matter; a released one is
+  // read from the test client when the caller asks for it, which is what lets a
+  // player configure a tank the way the next update will ship it.
+  const onTest = meta.isCommonTest || client === TankClient.CommonTest;
+  const branch = onTest ? WotSrcBranch.CT : undefined;
 
   const [
     topByMetric,
@@ -80,6 +96,7 @@ export async function assembleTankDetail(region: Region, slug: string) {
     moeHistory,
     momHistory,
     hasHistory,
+    testVersion,
     rating,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
@@ -91,15 +108,19 @@ export async function assembleTankDetail(region: Region, slug: string) {
     getTankMomByRegion(region),
     getResearchPath(region, tankId),
     getTankModules(region, tankId),
-    safe(() => getTankConfigs(region, tankId), [] as TankConfig[]),
-    safe(() => getTankLoadout(region, tankId), null),
-    safe(() => getTankCrew(region, tankId), null),
-    safe(() => getTankFieldMods(region, tankId), null),
-    safe(() => getTankSkillTree(region, tankId), null),
-    safe(() => getTankVehicleModes(region, tankId), [] as VehicleMode[]),
+    safe(() => getTankConfigs(region, tankId, undefined, branch), [] as TankConfig[]),
+    safe(() => getTankLoadout(region, tankId, branch), null),
+    safe(() => getTankCrew(region, tankId, branch), null),
+    safe(() => getTankFieldMods(region, tankId, branch), null),
+    safe(() => getTankSkillTree(region, tankId, branch), null),
+    safe(() => getTankVehicleModes(region, tankId, branch), [] as VehicleMode[]),
     safe(() => fetchMoeHistoryFromPoliroid(region, tankId), [] as MoeHistoryPoint[]),
     safe(() => fetchMomHistoryFromPoliroid(region, tankId), [] as MomHistoryPoint[]),
     safe(() => getTankHasHistory(tankId), false),
+    // Whether a Common Test rebalances this tank, and which build does. Drives
+    // the switch that offers the test client's numbers, so it is read on every
+    // tank rather than only on the tab that lists the changes.
+    safe(() => getTestVersion(tankId), null),
     // Three numbers for the hero badge and the page's Product markup. Folded in
     // here rather than fetched by the layout, which would have been a second
     // SSR self-fetch on every tab of every vehicle.
@@ -132,6 +153,11 @@ export async function assembleTankDetail(region: Region, slug: string) {
     moeHistory,
     momHistory,
     hasHistory,
+    // Which client these characteristics came from, and the test build that is
+    // available for this tank (null when none is). The page needs both: one to
+    // label what it is showing, the other to know whether to offer the switch.
+    client: onTest ? TankClient.CommonTest : TankClient.Live,
+    testVersion,
     rating,
   };
 }

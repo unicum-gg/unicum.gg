@@ -1,5 +1,5 @@
-import { crewFaceUrl, crewRoleBadgeUrl, Region } from "@unicum.gg/wargaming";
-import { crewSkillAffectsSpec, iconUrl } from "@unicum.gg/shared";
+import { crewFaceUrl, crewRoleBadgeUrl, Region, WotSrcBranch } from "@unicum.gg/wargaming";
+import { assetsRefFor, crewSkillAffectsSpec, iconUrl } from "@unicum.gg/shared";
 import { wg } from "../../client";
 import { cachedInRedis } from "../../../redis";
 
@@ -61,8 +61,12 @@ export interface TankCrew {
 // WG's own `crewskills` image_url points at a stale static path that 404s since
 // the crew rework, so the skill icon is taken from the wot.assets mirror by the
 // skill key (its filename), keeping the icon source generated (no per-skill map).
-const SKILL_ICON_BASE = iconUrl("tankmen/skills/big");
-const skillIcon = (key: string): string => `${SKILL_ICON_BASE}/${key}.png`;
+// Per branch, like every other icon base here: the skill set is read from the
+// branch, so a skill the test build introduces would be asked of a live branch
+// that has never heard of it.
+const skillIconBase = (branch?: WotSrcBranch) =>
+  iconUrl("tankmen/skills/big", assetsRefFor(branch));
+const skillIcon = (base: string, key: string): string => `${base}/${key}.png`;
 
 /**
  * A tank's crew composition (from the wot-src client XML `<crew>`) and the
@@ -76,15 +80,17 @@ const skillIcon = (key: string): string => `${SKILL_ICON_BASE}/${key}.png`;
 export function getTankCrew(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankCrew | null> {
-  return cachedInRedis(`wotsrc:crew:${region}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
-    computeTankCrew(region, tankId),
+  return cachedInRedis(`wotsrc:crew:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+    computeTankCrew(region, tankId, branch),
   );
 }
 
 async function computeTankCrew(
   region: Region,
   tankId: number,
+  branch?: WotSrcBranch,
 ): Promise<TankCrew | null> {
   const r = wg.region(region);
   const [composition, roles, skillsApi, skillDefs] = await Promise.all([
@@ -92,10 +98,10 @@ async function computeTankCrew(
     // encyclopedia omits (special/reward) still show their crew. The skill
     // catalogue below stays WG (`crewroles`/`crewskills`): it is global, not
     // per-vehicle, so it resolves for every tank regardless.
-    r.source.specs.crew(tankId),
+    r.source.specs.crew(tankId, branch),
     r.api.wot.encyclopedia.crewroles({}),
     r.api.wot.encyclopedia.crewskills({}),
-    r.source.crew.skills(),
+    r.source.crew.skills(branch),
   ]);
 
   if (!composition || composition.members.length === 0) return null;
@@ -143,6 +149,7 @@ async function computeTankCrew(
     }
   }
 
+  const iconBase = skillIconBase(branch);
   const skills: CrewSkill[] = [];
   const known = new Set<string>();
   for (const [key, s] of Object.entries(skillsApi)) {
@@ -151,7 +158,7 @@ async function computeTankCrew(
     skills.push({
       key,
       name: nameByKey.get(key) ?? s.name,
-      image: skillIcon(key),
+      image: skillIcon(iconBase, key),
       description: descByKey.get(key) ?? s.description,
       isPerk: s.is_perk,
       role: roleOfSkill.get(key) ?? "common",
