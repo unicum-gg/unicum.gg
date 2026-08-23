@@ -87,6 +87,37 @@ export const tankChanges = pgTable(
 );
 
 /**
+ * What the Common Test client changes about a vehicle the live one already has,
+ * global and keyed by tank_id: `previous` is the live value, `next` the test
+ * one. This is what the test build is for from a player's point of view, and it
+ * exists nowhere in Wargaming's API.
+ *
+ * Rewritten wholesale on every catalogue refresh rather than appended to: a
+ * test build is a moving target that gets rebalanced mid-test and vanishes when
+ * it ships, so only its current state is meaningful. `tank_changes` is the
+ * opposite, an append-only record of what actually shipped.
+ */
+export const tankTestChanges = pgTable(
+  "tank_test_changes",
+  {
+    id: serial("id").primaryKey(),
+    tankId: bigint("tank_id", { mode: "number" }).notNull(),
+    /** The test build these values were read from, e.g. `2.4.0.5415`. */
+    testVersion: text("test_version").notNull(),
+    field: text("field").notNull(),
+    previous: real("previous"),
+    next: real("next"),
+    capturedAt: timestamp("captured_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (t) => [index("tank_test_changes_tank_idx").on(t.tankId)],
+);
+
+export type TankTestChange = typeof tankTestChanges.$inferSelect;
+export type NewTankTestChange = typeof tankTestChanges.$inferInsert;
+
+/**
  * Per-tank lifecycle, global, keyed by tank_id. `releasedVersion`/`releasedAt`
  * is when the tank first appeared as a real (non-bot) vehicle; null when that
  * predates our tracking window. Populated by the spec-history backfill and

@@ -29,6 +29,10 @@ export function makeVehiclesTable(region: string) {
     isReward: boolean("is_reward").notNull().default(false),
     // Raw WoT role token, e.g. `role_HT_assault`. Null for SPGs / roleless tanks.
     role: text("role"),
+    // Present on the Common Test client but not on this region's live one: a
+    // vehicle players can already inspect here weeks before it ships. Its
+    // details are read from the CT branch of the mirror, not the region's.
+    isCommonTest: boolean("is_common_test").notNull().default(false),
     smallIcon: text("small_icon"),
     contourIcon: text("contour_icon"),
     bigIcon: text("big_icon"),
