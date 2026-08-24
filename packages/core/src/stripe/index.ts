@@ -6,6 +6,7 @@ import {
   recordPayment,
   recordRefund,
   upsertSubscription,
+  userExists,
 } from "@unicum.gg/core/subscription";
 import { reconcileSupporterRole } from "@unicum.gg/core/discord/supporter-role";
 
@@ -31,26 +32,34 @@ function requireStripe(): Stripe {
 }
 
 /**
- * Whether a stored customer id still resolves under the *active* Stripe key. A
- * customer created in one mode (e.g. a local test run) does not exist under a
- * live key, and reusing its id makes Stripe reject the call with
- * `resource_missing`; the same happens if the customer was deleted. Returns
- * false in those cases so callers recreate instead of failing. Any other error
- * (network, auth) propagates.
+ * A stored customer as it stands under the *active* Stripe key, or null when it
+ * no longer resolves. A customer created in one mode (e.g. a local test run)
+ * does not exist under a live key, and reusing its id makes Stripe reject the
+ * call with `resource_missing`; the same happens if the customer was deleted.
+ * Returns null in those cases so callers recreate instead of failing. Any other
+ * error (network, auth) propagates.
  */
-async function customerExists(s: Stripe, customerId: string): Promise<boolean> {
+async function retrieveCustomer(
+  s: Stripe,
+  customerId: string,
+): Promise<Stripe.Customer | null> {
   try {
     const customer = await s.customers.retrieve(customerId);
-    return !("deleted" in customer && customer.deleted);
+    return "deleted" in customer && customer.deleted ? null : (customer as Stripe.Customer);
   } catch (err) {
     if (
       err instanceof Stripe.errors.StripeError &&
       err.code === "resource_missing"
     ) {
-      return false;
+      return null;
     }
     throw err;
   }
+}
+
+/** Whether a stored customer id still resolves under the active Stripe key. */
+async function customerExists(s: Stripe, customerId: string): Promise<boolean> {
+  return !!(await retrieveCustomer(s, customerId));
 }
 
 // Pay-what-you-want bounds (EUR cents): €3 floor, €1000 sanity cap.
@@ -163,11 +172,37 @@ function chargeCustomerId(charge: Stripe.Charge): string | undefined {
 }
 
 /**
+ * The user a charge belongs to, or null when the customer is not one of ours.
+ *
+ * The stored subscription is the normal path, but it cannot be the only one: on
+ * a supporter's very first charge it does not exist yet. Checkout collects the
+ * money before it creates the subscription, so Stripe emits `charge.succeeded`
+ * seconds ahead of `customer.subscription.created`, and the row is written by
+ * that second event. Resolving through the subscription alone therefore dropped
+ * every first payment, silently and for good. The Stripe customer exists before
+ * Checkout even opens and carries the same `userId` in its metadata, so it
+ * answers the question at any point in the sequence.
+ */
+async function chargeUserId(
+  s: Stripe,
+  customerId: string,
+): Promise<string | null> {
+  const sub = await getSubscriptionByCustomer(customerId);
+  if (sub) return sub.userId;
+  const customer = await retrieveCustomer(s, customerId);
+  const userId = customer?.metadata?.userId;
+  if (!userId) return null;
+  // Unlike the subscription path, this id comes from Stripe rather than from a
+  // row we own, so it is checked before it lands in the ledger's foreign key.
+  return (await userExists(userId)) ? userId : null;
+}
+
+/**
  * Record a successful charge into the support ledger (called from the webhook),
  * keyed by the charge id so a refund on the same charge can be matched later.
  * The recent Stripe API dropped the invoice<->charge link from event payloads,
  * so the ledger is charge-based: the user is resolved from the charge's customer
- * via their subscription. Ignores charges from customers with no support sub.
+ * (see `chargeUserId`). Ignores charges from customers that are not supporters.
  */
 export async function recordChargePayment(charge: Stripe.Charge): Promise<void> {
   if (!charge.id || !charge.paid) return;
@@ -175,11 +210,11 @@ export async function recordChargePayment(charge: Stripe.Charge): Promise<void> 
   if (amountCents <= 0) return;
   const customerId = chargeCustomerId(charge);
   if (!customerId) return;
-  const sub = await getSubscriptionByCustomer(customerId);
-  if (!sub) return; // not one of our support customers
+  const userId = await chargeUserId(requireStripe(), customerId);
+  if (!userId) return; // not one of our support customers
   await recordPayment({
     chargeId: charge.id,
-    userId: sub.userId,
+    userId,
     amountCents,
     currency: charge.currency,
   });

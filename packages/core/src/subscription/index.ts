@@ -102,6 +102,21 @@ export async function getSubscriptionByCustomer(
   return row ?? null;
 }
 
+/**
+ * Whether a user id still matches a row. Guards ids that reach us from Stripe
+ * (a customer's `userId` metadata) before they are written into a foreign key:
+ * an id whose user is gone would turn the webhook into a 500 that Stripe then
+ * redelivers for days, where skipping the charge simply loses one ledger line.
+ */
+export async function userExists(userId: string): Promise<boolean> {
+  const [row] = await db
+    .select({ id: user.id })
+    .from(user)
+    .where(eq(user.id, userId))
+    .limit(1);
+  return !!row;
+}
+
 /** Record a successful support payment (idempotent on the Stripe charge id). */
 export async function recordPayment(input: {
   chargeId: string;
