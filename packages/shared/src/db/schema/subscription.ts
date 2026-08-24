@@ -45,14 +45,15 @@ export const subscription = pgTable(
 );
 
 /**
- * Ledger of every successful support payment (one row per paid Stripe invoice,
- * keyed by the invoice id so webhook retries are idempotent). Summed to get the
- * total amount received since launch, which the funding bar measures against the
- * cumulative infrastructure cost. Unlike `subscription` (current monthly amount),
- * this is append-only history.
+ * Ledger of every successful support payment (one row per successful Stripe
+ * charge, keyed by the charge id so webhook retries are idempotent). Summed to
+ * get the total amount received since launch, which the funding bar measures
+ * against the cumulative infrastructure cost. Unlike `subscription` (current
+ * monthly amount), this is append-only history.
  */
 export const supportPayment = pgTable("support_payment", {
-  // Stripe invoice id, so a redelivered webhook cannot double-count.
+  // Stripe charge id, so a redelivered webhook cannot double-count, and a refund
+  // on that charge finds the row it has to write down.
   id: text("id").primaryKey(),
   userId: text("user_id")
     .notNull()
