@@ -19,10 +19,24 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
  * is structurally gone, not just cached over.
  */
 
-// Its own free minute, out of the way of the :00 leaderboard recompute and the
-// :30 tank-ratings rollup. This project has already had the shared DB fall over
-// under an hourly recompute burst, so DB-only recomputes deliberately stagger.
-const COVERAGE_TRENDS_SCHEDULE = "15 * * * *";
+// Daily, not hourly, and 04:15 is both a free minute and a quiet hour.
+//
+// Hourly did not hold. The three reads below are full seq-scans, and on
+// 2026-08-23 the tick measured **156 seconds** for the three regions (`eu
+// recomputed in 130415ms`). While it ran, Postgres was monopolised,
+// `loadPlayerInitialData` went from 0.5s to 20s+, the web workers queued behind
+// it and the site answered 503. Once per hour meant that window opened 24 times
+// a day.
+//
+// The real fix is not this cadence, it is that the work is mostly wasted: a
+// player's FIRST snapshot never changes once written, and 29 of the 30 daily
+// buckets are closed for good. Only the current day still moves. Maintaining
+// those incrementally (a `first_snapshot_at` column filled once on insert, a
+// per-day rollup row frozen when the day ends) would make this cheap enough to
+// run on request, which is what the /coverage page actually wants: it is a live
+// dashboard, and a daily refresh degrades it to yesterday's photo. Until that
+// exists, daily is the cadence that keeps the site up.
+const COVERAGE_TRENDS_SCHEDULE = "15 4 * * *";
 
 // Must match the read path's `buildDaySeries` window in the coverage service:
 // the cron fetches this many days of raw buckets, the reader renders the same
