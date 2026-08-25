@@ -32,11 +32,17 @@ function catalogFromArenas(arenas: WotSrcArena[]): MapCatalog {
   };
 }
 
-// Resolve each arena's display name in place, disambiguating event/mode variants
-// against their base map ("14_siegfried_line_wt" -> "Siegfried Line
-// (Waffenträger)", "120_graf_zeppelin_ls26_2" -> "Nordskar (Last Stand)"). A
-// variant borrows its base's name, so the resolver is recursive + memoized.
-function resolveNames(raw: WotSrcArena[]): void {
+/**
+ * Resolve each arena's display name in place, disambiguating event/mode variants
+ * against their base map ("14_siegfried_line_wt" -> "Siegfried Line
+ * (Waffenträger)", "120_graf_zeppelin_ls26_2" -> "Nordskar (Last Stand)"). A
+ * variant borrows its base's name, so the resolver is recursive + memoized.
+ *
+ * Exported because the history pipeline resolves the names of a past version's
+ * arenas the same way: a map's name is how it is told apart from the different
+ * map that later re-used its arena id.
+ */
+export function resolveArenaNames(raw: WotSrcArena[]): void {
   const rawById = new Map(raw.map((a) => [a.arenaId, a]));
   const poName = (id: string) => rawById.get(id)?.name;
   const nameCache = new Map<string, string>();
@@ -91,7 +97,7 @@ export async function getMapCatalog(region: Region): Promise<MapCatalog> {
   }
 
   const raw = await wg.region(region).source.arenas.catalog();
-  resolveNames(raw);
+  resolveArenaNames(raw);
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
   const value = catalogFromArenas(arenas);
   cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });

@@ -2,6 +2,7 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS } from "@unicum.gg/wargaming";
 import { refreshVehicles } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
 import { refreshTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
+import { refreshMapHistory } from "@unicum.gg/core/wargaming/wot/maps/refresh";
 import { discoverTopClanPlayers } from ".";
 
 const DISCOVERY_SCHEDULE = "0 4 * * 0"; // Sundays at 04:00 server time
@@ -59,5 +60,16 @@ async function refreshVehiclesCatalogue(): Promise<void> {
     console.log(`[vehicles-cron] tank specs refreshed (${count} tanks)`);
   } catch (err) {
     console.error("[vehicles-cron] tank specs refresh failed:", err);
+  }
+  // The maps come from the same mirror build as the specs, so they are recorded
+  // on the same tick rather than on a schedule of their own.
+  try {
+    const { version, changes, testVersion, testChanges } = await refreshMapHistory();
+    console.log(
+      `[vehicles-cron] maps recorded @ ${version ?? "unknown"} (${changes} changes)` +
+        (testVersion ? `, common test ${testVersion}: ${testChanges} changes` : ""),
+    );
+  } catch (err) {
+    console.error("[vehicles-cron] map history refresh failed:", err);
   }
 }
