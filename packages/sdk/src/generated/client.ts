@@ -338,6 +338,15 @@ class MapClient {
     );
   }
 
+  /** Map changes history */
+  history() {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/maps/{slug}/history", path),
+      () => this.api.GET("/{region}/maps/{slug}/history", { params: { path } }),
+    );
+  }
+
   /** Map videos */
   videos() {
     const path = { region: this.region, slug: this.slug };
@@ -433,6 +442,8 @@ type TanksNamespace = ((slug: string) => TankClient) & {
 type MapsNamespace = ((slug: string) => MapClient) & {
   /** Maps */
   list(): RequestHandle<Data<"/{region}/maps">>;
+  /** Map changes feed */
+  changes(): RequestHandle<Data<"/{region}/maps/changes">>;
   /** Search maps */
   search(q: NonNullable<QueryOf<"/{region}/maps/search">>["q"]): RequestHandle<Data<"/{region}/maps/search">>;
   /** Streamed map search: NDJSON chunks (local DB first, then Wargaming). */
@@ -676,6 +687,14 @@ class RegionClient {
         buildUrl(this.baseUrl, "/{region}/maps", { region: this.region }),
         () =>
           this.api.GET("/{region}/maps", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.changes = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/maps/changes", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/maps/changes", {
             params: { path: { region: this.region } },
           }),
       );

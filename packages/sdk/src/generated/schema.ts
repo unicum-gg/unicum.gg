@@ -1399,6 +1399,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map changes feed
+         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first. Play areas resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
+         */
+        get: operations["get-{region}-maps-changes"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/glossary": {
         parameters: {
             query?: never;
@@ -1531,6 +1551,26 @@ export interface paths {
          * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `slug` in the response is the canonical slug.
          */
         get: operations["get-{region}-maps-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map changes history
+         * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
+         */
+        get: operations["get-{region}-maps-{slug}-history"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1704,6 +1744,14 @@ export interface components {
             fun: number | null;
             /** @description Mean battles these voters have on the tank, which is what makes the slice credible or not. */
             avgBattles: number | null;
+        };
+        /** @description A map and the changes a game version made to it. */
+        ChangedMap: {
+            arenaId: string;
+            slug: string;
+            name: string;
+            minimapUrl: string;
+            changes: components["schemas"]["MapChange"][];
         };
         /** @description A tank's identity and the spec changes a game version made to it. */
         ChangedTank: {
@@ -2433,6 +2481,22 @@ export interface components {
          * @enum {string}
          */
         mapCamouflageField: "summer" | "winter" | "desert";
+        /** @description A change to one map property between two game versions, with the before/after values. `field` is a tracked scalar (roundLength, widthMeters, heightMeters, maxPlayersInTeam, camouflage), a mode or battle type the map gained or lost (mode:standard, battleType:onslaught), a mode's play area (playArea:comp7), a marker group (geometry:ctf:bases:team1, whose value is a JSON array of [x, z] positions in metres from the play area's bottom-left corner), or the map entering or leaving the client (presence). Either side is null when the property did not exist then. */
+        MapChange: {
+            field: string;
+            previous: string | null;
+            next: string | null;
+        };
+        MapChangesResponse: {
+            versions: components["schemas"]["MapChangesVersion"][];
+        };
+        /** @description Every map a game version changed, newest version first, most-changed map first. */
+        MapChangesVersion: {
+            gameVersion: string;
+            /** Format: date-time */
+            capturedAt: Date;
+            maps: components["schemas"]["ChangedMap"][];
+        };
         /** @description A battle map's gallery summary. */
         MapDetailResponse: {
             arenaId: string;
@@ -2454,6 +2518,34 @@ export interface components {
             heightMeters: number;
             geometry: components["schemas"]["MapModeGeometry"][];
             onslaught: components["schemas"]["MapOnslaught"] | null;
+        };
+        MapHistoryResponse: {
+            arenaId: string;
+            slug: string;
+            name: string;
+            versions: components["schemas"]["MapHistoryVersion"][];
+            /** @description The game version the map entered the client in, or null when it predates our version tracking (in which case it was there before the first tracked update). */
+            addedVersion: string | null;
+            /** Format: date-time */
+            addedAt: Date | null;
+            /** @description The game version that pulled the map from the client, when it is currently gone. Seasonal maps come back, so this is a state rather than an end. */
+            removedVersion: string | null;
+            /** Format: date-time */
+            removedAt: Date | null;
+            /** @description Whether the client currently ships the map. */
+            present: boolean;
+            /** @description Whether the map has ever been recorded. False for the arenas the client names but does not define, which have no geometry to compare and no knowable introduction. */
+            tracked: boolean;
+            /** @description The Common Test build these pending changes were read from. */
+            testVersion: string | null;
+            testChanges: components["schemas"]["MapChange"][];
+        };
+        /** @description The changes a game version made to a map, with when they were recorded. */
+        MapHistoryVersion: {
+            gameVersion: string;
+            /** Format: date-time */
+            capturedAt: Date;
+            changes: components["schemas"]["MapChange"][];
         };
         mapMarker: {
             left: number;
@@ -6093,6 +6185,29 @@ export interface operations {
             };
         };
     };
+    "get-{region}-maps-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapChangesResponse"];
+                };
+            };
+        };
+    };
     "get-glossary": {
         parameters: {
             query?: {
@@ -6262,6 +6377,34 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapHistoryResponse"];
                 };
             };
         };
