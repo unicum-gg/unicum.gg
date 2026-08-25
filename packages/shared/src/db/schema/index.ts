@@ -28,6 +28,7 @@ export * from "./tank-moe";
 export * from "./tank-snapshots";
 export * from "./tank-specs";
 export * from "./tank-spec-history";
+export * from "./map-history";
 export * from "./tank-stats";
 export * from "./top-clans";
 export * from "./top-players";
