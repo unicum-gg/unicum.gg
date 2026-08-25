@@ -74,7 +74,7 @@ export function TankChangesHistory({
       {/* Ahead of the shipped history, and visibly apart from it: these are the
           only changes on this page that have not happened yet. */}
       {pending.length > 0 ? (
-        <Panel className="border-brand/40">
+        <Panel className="border border-brand/40" screenLines={false}>
           <PanelHeader className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
             <PanelTitle>
               <span className="text-brand">Common Test</span>
