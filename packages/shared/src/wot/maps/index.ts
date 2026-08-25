@@ -7,3 +7,6 @@ export * from "./name";
 export * from "./map";
 export * from "./slug";
 export * from "./build";
+export * from "./history-snapshot";
+export * from "./history-fields";
+export * from "./history-diff";
