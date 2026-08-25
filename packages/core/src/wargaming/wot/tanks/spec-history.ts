@@ -15,22 +15,9 @@ import {
   tankIntroductions,
   tankSpecSnapshots,
 } from "@unicum.gg/shared";
-import { Region } from "@unicum.gg/wargaming";
-import { wg } from "../../client";
+import { currentGameVersion } from "@unicum.gg/core/wargaming/wot/game-version";
 
 const INSERT_CHUNK = 500;
-
-/** The live client version, to stamp a spec snapshot with the patch it belongs
- * to. WG balances vehicles identically across servers, so any region answers;
- * EU matches the branch specs are parsed from. Null when WG does not answer, in
- * which case we skip recording rather than stamp a guess. */
-async function currentGameVersion(): Promise<string | null> {
-  return wg
-    .region(Region.EU)
-    .api.wot.encyclopedia.info({ fields: ["game_version"] })
-    .then((info) => info.game_version ?? null)
-    .catch(() => null);
-}
 
 /**
  * The vehicles seen on the test client and never yet on a live one, by id.

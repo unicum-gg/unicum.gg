@@ -8,6 +8,7 @@ export * from "./ratings";
 export * from "./server-online";
 export * from "./tank-ratings";
 export * from "./tank-stats";
+export * from "./mirror-tracking";
 export * from "./tank-spec-fields";
 export * from "./tanks";
 export * from "./maps";

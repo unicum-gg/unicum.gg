@@ -1,16 +1,13 @@
 import type { TankSpec } from "../db/schema/tank-specs";
+import { MIRROR_TRACKING_START } from "./mirror-tracking";
 
 /**
- * The oldest game version the spec-history backfill covers (the first wot-src
- * mirror commit, ~July 2021). A tank already present at this version predates our
- * tracking, so its real introduction date is unknown: all we can say is it was
- * introduced *before* this update. The UI uses this to label such tanks instead
- * of showing an empty History tab.
+ * The oldest game version the spec-history backfill covers. A tank already
+ * present then predates our tracking, so its real introduction date is unknown:
+ * all we can say is it was introduced *before* that update. The UI uses this to
+ * label such tanks instead of showing an empty History tab.
  */
-export const TANK_HISTORY_TRACKING_START = {
-  version: "1.13.0",
-  date: "2021-07-12",
-} as const;
+export const TANK_HISTORY_TRACKING_START = MIRROR_TRACKING_START;
 
 /**
  * Whether a higher value is better for a spec, so a change can be coloured a
