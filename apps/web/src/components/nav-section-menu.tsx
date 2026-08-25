@@ -13,6 +13,7 @@ import {
   LightningIcon,
   MapTrifoldIcon,
   MedalIcon,
+  PencilRulerIcon,
   ScalesIcon,
   ShieldIcon,
   ShuffleIcon,
@@ -48,6 +49,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   "maps-onslaught": <SwordIcon />,
   "maps-grand-battle": <LightningIcon />,
   "maps-clan-wars": <ShieldIcon />,
+  "map-changes": <PencilRulerIcon />,
 };
 
 /**
