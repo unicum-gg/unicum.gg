@@ -19,7 +19,7 @@ import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { cn } from "@/lib/utils";
 import type { ClanSearchResult } from "@unicum.gg/shared";
-import { type MapCamouflage, lowResMinimapUrl } from "@unicum.gg/shared";
+import { type MapCamouflage } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {
@@ -118,7 +118,7 @@ export function MapRow({ map }: { map: MapSearchResult }) {
         <span className="relative size-6 shrink-0 overflow-hidden rounded-sm bg-fd-muted">
           <MinimapImage
             src={map.minimap_url}
-            fallbackSrc={lowResMinimapUrl(map.arena_id)}
+            arenaId={map.arena_id}
             alt=""
             sizes="24px"
           />

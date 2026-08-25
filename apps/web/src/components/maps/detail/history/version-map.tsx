@@ -5,7 +5,6 @@ import {
   MapChangeArea,
   MARKER_MOVE_THRESHOLD_M,
   matchMarkers,
-  minimapUrl,
   ONSLAUGHT_MODE,
   type MapDetail,
   type MapHistoryPoint,
@@ -186,7 +185,7 @@ export function VersionMinimap({
     <div className="relative aspect-square w-full overflow-hidden">
       <MinimapImage
         src={onslaught?.minimapUrl ?? detail.minimapUrl}
-        fallbackSrc={minimapUrl(detail.arenaId)}
+        arenaId={detail.arenaId}
         alt={`${detail.name} minimap`}
         sizes="(max-width: 1024px) 100vw, 20rem"
         className="opacity-70"

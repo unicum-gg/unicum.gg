@@ -2,7 +2,6 @@
 
 import { useMemo } from "react";
 import Link from "next/link";
-import { minimapUrl } from "@unicum.gg/shared";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
 import { Panel, PanelContent } from "@/components/panel";
@@ -116,7 +115,7 @@ function MapBlock({ region, map }: { region: Region; map: FeedMap }) {
         <span className="relative size-12 shrink-0 overflow-hidden rounded border border-fd-border">
           <MinimapImage
             src={map.minimapUrl}
-            fallbackSrc={minimapUrl(map.arenaId)}
+            arenaId={map.arenaId}
             alt=""
             sizes="48px"
           />

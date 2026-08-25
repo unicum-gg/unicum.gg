@@ -11,7 +11,6 @@ import {
   MAP_GAME_MODE_LABEL,
   MapGameMode,
   markerUrl,
-  lowResMinimapUrl,
   type MapSummary,
 } from "@unicum.gg/shared";
 import Link from "next/link";
@@ -113,7 +112,7 @@ function MapCard({
       <div className="relative aspect-square w-full overflow-hidden bg-fd-muted">
         <MinimapImage
           src={map.minimapUrl}
-          fallbackSrc={lowResMinimapUrl(map.arenaId)}
+          arenaId={map.arenaId}
           alt={`${map.name} minimap`}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="transition-transform duration-300 group-hover:scale-105"

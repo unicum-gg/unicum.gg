@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   BASE_CAPTURE_RADIUS_M,
-  lowResMinimapUrl,
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
@@ -169,7 +168,7 @@ export function MinimapViewer({
         <MinimapImage
           key={view?.minimapUrl ?? detail.minimapUrl}
           src={view?.minimapUrl ?? detail.minimapUrl}
-          fallbackSrc={lowResMinimapUrl(detail.arenaId)}
+          arenaId={detail.arenaId}
           alt={`${detail.name} minimap`}
           sizes="(max-width: 1024px) 100vw, 640px"
           priority
