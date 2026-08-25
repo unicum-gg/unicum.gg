@@ -54,6 +54,11 @@ export type WotSrcArena = {
   maxPlayersInTeam: number;
   /** Parsed gameplay types with their base/spawn geometry. */
   gameplay: ArenaGameplay[];
+  /** Whether the client ships an `arena_defs/<id>.xml` for this arena. False for
+   * the arenas known only to the localization (legacy event/arcade maps kept as
+   * a minimap-only card), which is why an empty `gameplay` alone does not tell a
+   * non-combat space from a map whose definition is simply missing. */
+  hasDefinition: boolean;
 };
 
 const COORD_RE = /^\s*(-?\d+(?:\.\d+)?)\s+(-?\d+(?:\.\d+)?)/;
@@ -171,6 +176,7 @@ export function parseArena(
     maxPlayersInTeam:
       Number.parseInt(String(root.maxPlayersInTeam ?? "15"), 10) || 15,
     gameplay,
+    hasDefinition: true,
   };
 }
 
@@ -190,6 +196,7 @@ function minimalArena(
     camouflage: "summer",
     maxPlayersInTeam: 0,
     gameplay: [],
+    hasDefinition: false,
   };
 }
 
@@ -231,17 +238,13 @@ export class SourceArenasResource {
       .filter((k) => k.endsWith("/name"))
       .map((k) => k.slice(0, -"/name".length));
     const ids = [...new Set([...parseArenaList(listXml), ...poIds])].filter(
-      // Drop non-map ids: metadata (`_default_`, `_list_`), the `type/*` gameplay
-      // definitions the `.po` also names ("Standard Battle", "Steel Hunt"), the
-      // invalid placeholder, and the degenerate spaces that ship no real minimap.
-      // The `hangar*` (garage) and `h33*` families carry only the shared "Dummy"
-      // placeholder texture (or none at all), never a real top-down minimap.
+      // Drop the ids that name no arena at all: metadata (`_default_`, `_list_`),
+      // the `type/*` gameplay definitions the `.po` also names ("Standard
+      // Battle", "Steel Hunt") and the invalid placeholder. The non-combat spaces
+      // are dropped further down, from what their definition says rather than
+      // from their id.
       (id) =>
-        !id.startsWith("_") &&
-        !id.startsWith("type/") &&
-        !id.startsWith("hangar") &&
-        !id.startsWith("h33") &&
-        id !== "invalid_map",
+        !id.startsWith("_") && !id.startsWith("type/") && id !== "invalid_map",
     );
 
     const parser = new XMLParser({
@@ -266,7 +269,14 @@ export class SourceArenasResource {
           .catch(() => minimalArena(id, translations)),
       ),
     );
-    return arenas.filter((a): a is WotSrcArena => a !== null);
+    // Keep the battle arenas. A definition with no gameplay type is a space
+    // nobody fights in: the garages (`hangar_v4`, and the seasonal `h33_*`/
+    // `h42_*` ones the client ships as separate arenas) declare a
+    // `SubHangarModule` and no `gameplayTypes`, which is what tells them apart
+    // from a map, rather than an id prefix that has to be extended every time
+    // Wargaming names a new one. An arena with no definition at all keeps its
+    // minimap-only card.
+    return arenas.filter((a) => !a.hasDefinition || a.gameplay.length > 0);
   }
 
   #text(url: string): Promise<string> {
