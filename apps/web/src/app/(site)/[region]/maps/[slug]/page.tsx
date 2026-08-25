@@ -70,16 +70,22 @@ export async function renderMapPage(region: Region, slug: string) {
   // HTML, which is what the `.md` twin converts and what a crawler reads. An
   // approved tactic drops this page from the cache (`revalidatePath`), so
   // rendering it server-side costs no freshness.
-  const videos = await buildSafe(
-    () => unicum.region(region).maps(detail.slug).videos(),
-    { videos: [] },
-  );
+  const [videos, history] = await Promise.all([
+    buildSafe(() => unicum.region(region).maps(detail.slug).videos(), {
+      videos: [],
+    }),
+    // Rendered server-side for the same reason as the tactics: what an update
+    // changed about a map is content, and it belongs in the HTML a crawler and
+    // the `.md` twin read. Degrades to no panel rather than no page.
+    buildSafe(() => unicum.region(region).maps(detail.slug).history(), null),
+  ]);
 
   return (
     <MapView
       detail={detail}
       region={region}
       videos={videos.videos as unknown as TankVideoCardData[]}
+      history={history}
     />
   );
 }

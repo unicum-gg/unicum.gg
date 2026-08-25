@@ -143,6 +143,10 @@ const ROUTES = {
     pathcat("/:region/maps/:slug", { region, slug }),
   MAPS: (region: Region) =>
     region === Region.EU ? "/maps" : pathcat("/:region/maps", { region }),
+  MAPS_CHANGES: (region: Region) =>
+    region === Region.EU
+      ? "/maps/changes"
+      : pathcat("/:region/maps/changes", { region }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
     const base =
       region === Region.EU

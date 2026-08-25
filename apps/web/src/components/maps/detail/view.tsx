@@ -13,6 +13,10 @@ import { CAMO_META } from "@/components/maps/meta";
 import { MinimapViewer } from "@/components/maps/detail/minimap-viewer";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapVideosPanel } from "@/components/maps/detail/videos";
+import {
+  MapChangesHistory,
+  type MapHistoryVersion,
+} from "@/components/maps/detail/history";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { TEAM_SIZE_BATTLE_TYPES, type MapDetail } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -45,16 +49,32 @@ function Stat({
   );
 }
 
+/** What the history endpoint returns, as the page hands it down. Null when the
+ * endpoint could not be read at render time. */
+export type MapHistoryData = {
+  versions: MapHistoryVersion[];
+  addedVersion: string | null;
+  addedAt: string | Date | null;
+  removedVersion: string | null;
+  removedAt: string | Date | null;
+  present: boolean;
+  tracked: boolean;
+  testVersion: string | null;
+  testChanges: { field: string; previous: string | null; next: string | null }[];
+} | null;
+
 export function MapView({
   detail,
   region,
   videos,
+  history,
 }: {
   detail: MapDetail;
   region: Region;
   /** Rendered by the server, so the tactics are in the HTML rather than
    * fetched once the browser has caught up. */
   videos: TankVideoCardData[];
+  history: MapHistoryData;
 }) {
   const camo = CAMO_META[detail.camouflage];
   const CamoIcon = camo.icon;
@@ -184,6 +204,23 @@ export function MapView({
       {/* Under the minimap, never over it: the geometry above is what makes a
           tactic readable, and the video explains it rather than replacing it. */}
       <MapVideosPanel region={region} map={detail} initialVideos={videos} />
+
+      {history?.tracked ? (
+        <>
+          <PanelSeparator />
+          <MapChangesHistory
+            detail={detail}
+            versions={history.versions}
+            testVersion={history.testVersion}
+            testChanges={history.testChanges}
+            addedVersion={history.addedVersion}
+            addedAt={history.addedAt}
+            removedVersion={history.removedVersion}
+            removedAt={history.removedAt}
+            present={history.present}
+          />
+        </>
+      ) : null}
     </div>
   );
 }

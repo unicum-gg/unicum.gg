@@ -8,10 +8,10 @@ export const dynamic = "force-static";
 export const revalidate = 3600;
 
 /**
- * One-shot sitemap for the maps section: the per-region landing plus every
- * `/<region>/maps/<slug>` detail URL. The catalogue is small (~50 maps × 3
- * regions) and static between game patches, so a single non-paginated file
- * rebuilt hourly is plenty.
+ * One-shot sitemap for the maps section: the per-region landing, the changes
+ * feed, plus every `/<region>/maps/<slug>` detail URL. The catalogue is small
+ * (~50 maps × 3 regions) and static between game patches, so a single
+ * non-paginated file rebuilt hourly is plenty.
  */
 export async function GET() {
   const perRegion = await Promise.all(
@@ -23,6 +23,7 @@ export async function GET() {
 
   const entries = perRegion.flatMap(({ region, maps }) => [
     createSitemapEntry(ROUTES.MAPS(region)),
+    createSitemapEntry(ROUTES.MAPS_CHANGES(region)),
     ...maps.map(({ slug }) => createSitemapEntry(ROUTES.MAP(region, slug))),
   ]);
 

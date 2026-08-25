@@ -38,10 +38,16 @@ function PanelHeader({
 
 function PanelTitle({
   className,
+  as: Tag = "h2",
   ...props
-}: React.ComponentProps<"h2">) {
+}: React.ComponentProps<"h2"> & {
+  /** The heading level. A panel is a section of the page, so `h2` is the
+   * default; pass `h3` when the panel is itself one entry of a section that
+   * already carries an `h2`, so the outline says which section it belongs to. */
+  as?: "h2" | "h3" | "h4";
+}) {
   return (
-    <h2
+    <Tag
       className={cn("text-xl font-semibold", className)}
       {...props}
     />

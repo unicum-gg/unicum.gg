@@ -156,6 +156,12 @@ export function navSections(region: Region): NavSection[] {
           href: mapsTabHref(maps, type),
           description: `${BATTLE_TYPE_LABEL[type]} maps`,
         })),
+        {
+          id: "map-changes",
+          label: "Changes",
+          href: ROUTES.MAPS_CHANGES(region),
+          description: "Map reworks by update",
+        },
       ],
     },
   ];
