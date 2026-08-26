@@ -1,16 +1,13 @@
 "use client";
 
-import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import Image from "next/image";
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
-import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import useSWR from "swr";
-import { LanguageFlags } from "@/components/language-flags";
-import { RankMedal } from "@/components/rank-medal";
+import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { StrongholdRatingScale } from "@/components/clans/list/stronghold/rating-scale";
+import {
+  type RankedStrongholdEntry,
+  StrongholdTable,
+} from "@/components/clans/list/stronghold/table";
 import { StrongholdTierTabs } from "@/components/clans/list/stronghold/tier-tabs";
 import {
   Panel,
@@ -20,14 +17,6 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -35,75 +24,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { cn } from "@/lib/utils";
-import { CLAN_BOARD_BY_STRONGHOLD_TIER, StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS, RATING_COLOR_CLASS, strongholdRatingBattlesColor, strongholdRatingColor, strongholdWinrateColor } from "@unicum.gg/shared";
+  type RangeColumn,
+  useLeaderboardFilter,
+} from "@/hooks/use-leaderboard-filter";
+import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
 import { type Period, usePeriod, isPeriod } from "@/hooks/use-period";
-import ROUTES from "@/constants/routes";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
-
-const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-const pctFmt = new Intl.NumberFormat("en-US", {
-  style: "percent",
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
-
-// The leaderboard is ranked server-side, always descending (best first), so a
-// header click just re-fetches that sort's top 100 (a different set of clans,
-// not a reorder). The caret marks the active column rather than toggling
-// asc/desc.
-function SortableHead({
-  sortKey,
-  active,
-  onSort,
-  className,
-  tooltip,
-  children,
-}: {
-  sortKey: StrongholdSort;
-  active: boolean;
-  onSort: (s: StrongholdSort) => void;
-  className?: string;
-  tooltip?: string;
-  children: ReactNode;
-}) {
-  const Icon = active ? CaretDownIcon : CaretUpDownIcon;
-  const button = (
-    <button
-      type="button"
-      onClick={() => onSort(sortKey)}
-      className={cn(
-        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
-        active ? "text-foreground" : "",
-      )}
-    >
-      {children}
-      <Icon
-        weight="bold"
-        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-      />
-    </button>
-  );
-  return (
-    <TableHead className={cn("text-right!", className)}>
-      {tooltip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tooltip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
-    </TableHead>
-  );
-}
 
 export function StrongholdLeaderboardView({
   region,
@@ -142,14 +70,52 @@ export function StrongholdLeaderboardView({
   );
   const results = data ?? initialResults;
 
+  // Rank the server ordering once, before any narrowing, so the # column keeps
+  // each clan's true standing when the filter bar hides the rows above it.
+  const ranked = useMemo<RankedStrongholdEntry[]>(
+    () => results.map((entry, i) => ({ ...entry, rank: i + 1 })),
+    [results],
+  );
+  const searchFields = useCallback(
+    (r: RankedStrongholdEntry) => [r.tag, r.name],
+    [],
+  );
+  const rangeCols = useMemo<RangeColumn<RankedStrongholdEntry>[]>(
+    () => [
+      { key: "sr", label: "SR", value: (r) => r.sr },
+      { key: "srb", label: "SRB", value: (r) => r.srb },
+      { key: "elo", label: "ELO", value: (r) => r.elo },
+      { key: "battles", label: "Battles", value: (r) => r.battles },
+      {
+        key: "winrate",
+        label: "WR %",
+        value: (r) => (r.battles > 0 ? (r.wins / r.battles) * 100 : null),
+      },
+      { key: "members", label: "Members", value: (r) => r.membersCount },
+    ],
+    [],
+  );
+  // The board is a single table (unlike the three metric boards on /clans), so
+  // the filter can own `?q=&rc=&min=&max=` without fighting a sibling over them.
+  const { filtered, filters } = useLeaderboardFilter(ranked, {
+    searchFields,
+    rangeCols,
+    initialRangeCol: "sr",
+    syncUrl: true,
+  });
+
   // Reflect sort/period in the URL without a Next navigation (a plain
   // `history.replaceState`, so no RSC round-trip), keeping the Overall/SR URL
   // clean. This preserves shareable deep links, which the mount effect re-reads.
   function syncUrl(nextSort: StrongholdSort, nextPeriod: StrongholdPeriod) {
-    const params = new URLSearchParams();
+    // Read the live params rather than starting empty: the filter bar writes its
+    // own keys there, and a fresh set would drop them on the next sort click.
+    const params = new URLSearchParams(window.location.search);
     if (nextSort !== StrongholdSort.Rating) params.set("sort", nextSort);
+    else params.delete("sort");
     if (nextPeriod !== StrongholdPeriod.Overall)
       params.set("period", nextPeriod);
+    else params.delete("period");
     const qs = params.toString();
     window.history.replaceState(
       null,
@@ -248,184 +214,18 @@ export function StrongholdLeaderboardView({
               No data yet. Check back once clans have been refreshed.
             </p>
           ) : (
-            <TooltipProvider delayDuration={150}>
-              <Table
-                className={cn(
-                  "my-0! table-fixed",
-                  "[&_td]:min-w-0 [&_td]:py-2!",
-                  "[&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4!",
-                  "[&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!",
-                )}
-              >
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-12 text-center!">#</TableHead>
-                    <TableHead>Clan</TableHead>
-                    <TableHead className="w-24 text-center!">Members</TableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.Elo}
-                      active={sort === StrongholdSort.Elo}
-                      onSort={setSort}
-                      className="w-24"
-                    >
-                      ELO
-                    </SortableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.Battles}
-                      active={sort === StrongholdSort.Battles}
-                      onSort={setSort}
-                      className="w-24"
-                    >
-                      Battles
-                    </SortableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.Winrate}
-                      active={sort === StrongholdSort.Winrate}
-                      onSort={setSort}
-                      className="w-28"
-                      tooltip="Win rate"
-                    >
-                      WR
-                    </SortableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.Rating}
-                      active={sort === StrongholdSort.Rating}
-                      onSort={setSort}
-                      className="w-24"
-                      tooltip="Skirmish Rating. Win rate and battle volume weighted by the roster's average WG Personal Rating (rewards winning with a strong roster, discounts farming with weak accounts)."
-                    >
-                      SR
-                    </SortableHead>
-                    <SortableHead
-                      sortKey={StrongholdSort.RatingBattles}
-                      active={sort === StrongholdSort.RatingBattles}
-                      onSort={setSort}
-                      className="w-24"
-                      tooltip="Battles-based Stronghold Rating: the same SR with battle volume rewarded instead of only gated, so clans that have proven it over many battles rank higher."
-                    >
-                      SRB
-                    </SortableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {results.map((entry, i) => {
-                    const winrate =
-                      entry.battles > 0 ? entry.wins / entry.battles : null;
-                    return (
-                      <TableRow key={entry.clanId}>
-                        <TableCell className="text-center text-muted-foreground tabular-nums">
-                          {i < 3 ? (
-                            <RankMedal
-                              rank={(i + 1) as 1 | 2 | 3}
-                              className="mx-auto"
-                            />
-                          ) : (
-                            i + 1
-                          )}
-                        </TableCell>
-                        <TableCell>
-                          {/* Badges are siblings of the row link (each crest
-                              links to its own board) and the link does not take
-                              `flex-1`, so they stay next to the name instead of
-                              drifting to the edge of the cell. */}
-                          <span className="flex items-center gap-2">
-                          <Link
-                            href={ROUTES.CLAN_STRONGHOLD(region, entry.tag, tier)}
-                            className="flex min-w-0 items-center gap-3 hover:underline"
-                          >
-                            {entry.emblem ? (
-                              <Image
-                                src={entry.emblem}
-                                alt=""
-                                width={24}
-                                height={24}
-                                className="size-6 shrink-0 rounded"
-                              />
-                            ) : (
-                              <span className="size-6 shrink-0 rounded bg-muted" />
-                            )}
-                            <span className="flex min-w-0 items-center gap-2">
-                              <span className="min-w-0 truncate">
-                                <ClanTag
-                                  tag={entry.tag}
-                                  color={entry.color}
-                                  className="font-mono font-semibold"
-                                />{" "}
-                                <span className="text-muted-foreground">
-                                  {entry.name}
-                                </span>
-                              </span>
-                              <RosterBoostBadge boostRatio={entry.boostRatio} />
-                            </span>
-                          </Link>
-                          <ClanBadges
-                            badges={entry.badges?.filter(
-                              (b) => b.board !== CLAN_BOARD_BY_STRONGHOLD_TIER[tier],
-                            )}
-                            region={region}
-                            size={14}
-                          />
-                          {entry.languages.length > 0 && (
-                            <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
-                              <LanguageFlags
-                                languages={entry.languages}
-                                source="declared"
-                                size="s"
-                                region={region}
-                                link={false}
-                              />
-                            </span>
-                          )}
-                          </span>
-                        </TableCell>
-                        <TableCell className="text-center text-muted-foreground tabular-nums">
-                          {intFmt.format(entry.membersCount)}
-                        </TableCell>
-                        <TableCell className="text-right font-semibold tabular-nums">
-                          {entry.elo !== null ? intFmt.format(entry.elo) : "—"}
-                        </TableCell>
-                        <TableCell className="text-right font-semibold tabular-nums">
-                          {intFmt.format(entry.battles)}
-                        </TableCell>
-                        <TableCell
-                          className={cn(
-                            "text-right font-semibold tabular-nums",
-                            winrate !== null &&
-                              RATING_COLOR_CLASS[
-                                strongholdWinrateColor(winrate)
-                              ],
-                          )}
-                        >
-                          {winrate !== null ? pctFmt.format(winrate) : "—"}
-                        </TableCell>
-                        <TableCell
-                          className={cn(
-                            "text-right font-bold tabular-nums",
-                            entry.sr !== null &&
-                              RATING_COLOR_CLASS[
-                                strongholdRatingColor(entry.sr)
-                              ],
-                          )}
-                        >
-                          {entry.sr !== null ? intFmt.format(entry.sr) : "—"}
-                        </TableCell>
-                        <TableCell
-                          className={cn(
-                            "text-right font-bold tabular-nums",
-                            entry.srb !== null &&
-                              RATING_COLOR_CLASS[
-                                strongholdRatingBattlesColor(entry.srb)
-                              ],
-                          )}
-                        >
-                          {entry.srb !== null ? intFmt.format(entry.srb) : "—"}
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })}
-                </TableBody>
-              </Table>
-            </TooltipProvider>
+            <>
+              <div className="border-b border-fd-border px-4 py-2.5">
+                <LeaderboardFilterBar filters={filters} searchNoun="clans" />
+              </div>
+              <StrongholdTable
+                region={region}
+                tier={tier}
+                sort={sort}
+                onSort={setSort}
+                rows={filtered}
+              />
+            </>
           )}
         </PanelContent>
       </Panel>
