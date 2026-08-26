@@ -1408,7 +1408,7 @@ export interface paths {
         };
         /**
          * Map changes feed
-         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first. Play areas resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
+         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
          */
         get: operations["get-{region}-maps-changes"];
         put?: never;
@@ -2488,6 +2488,9 @@ export interface components {
             next: string | null;
         };
         MapChangesResponse: {
+            /** @description The Common Test build the pending changes were read from, null when no test is running. */
+            testVersion: string | null;
+            testMaps: components["schemas"]["ChangedMap"][];
             versions: components["schemas"]["MapChangesVersion"][];
         };
         /** @description Every map a game version changed, newest version first, most-changed map first. */

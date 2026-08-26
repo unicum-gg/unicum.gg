@@ -4,6 +4,7 @@ import {
   MAP_PRESENCE_FIELD,
   mapChanges,
   mapSnapshots,
+  mapTestChanges,
   type MapChange,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -239,4 +240,64 @@ export async function getRecentMapChanges(
         .sort((a, b) => b.changes.length - a.changes.length),
     }))
     .sort((a, b) => b.capturedAt.getTime() - a.capturedAt.getTime());
+}
+
+/** What the running Common Test is about to change, per map. `version` is null
+ * when no test is running (or the branch is not ahead of live), in which case
+ * `maps` is empty. */
+export type PendingMapChanges = {
+  version: string | null;
+  maps: ChangedMap[];
+};
+
+/**
+ * What the running Common Test build changes about the game's maps, for the
+ * global feed.
+ *
+ * The pending half of `getRecentMapChanges`, read from a different table because
+ * it is a different kind of thing: `map_changes` is what shipped and is
+ * append-only, `map_test_changes` is replaced at every run and disappears when
+ * the test does. It is presented as one block rather than as a version in the
+ * feed for the same reason.
+ *
+ * Filtered to the catalogue like the shipped feed: the test build's new arenas
+ * are mostly mode variants (the Onslaught night ones) with no metadata and no
+ * page to link to, and a line the reader cannot follow is worse than no line.
+ */
+export async function getPendingMapChanges(
+  region: Region,
+): Promise<PendingMapChanges> {
+  const [summaries, rows] = await Promise.all([
+    listMapSummaries(region),
+    db.select().from(mapTestChanges).orderBy(mapTestChanges.arenaId),
+  ]);
+  if (rows.length === 0) return { version: null, maps: [] };
+
+  const byId = new Map(summaries.map((m) => [m.arenaId, m]));
+  const byArena = new Map<string, MapChangeEntryRow[]>();
+  for (const row of rows) {
+    if (!byId.has(row.arenaId)) continue;
+    const entries = byArena.get(row.arenaId) ?? [];
+    entries.push({ field: row.field, previous: row.previous, next: row.next });
+    byArena.set(row.arenaId, entries);
+  }
+
+  return {
+    // The build is read from the rows themselves rather than from the catalogue
+    // filter, so a test that only touches uncatalogued arenas is still reported
+    // as running instead of looking like no test at all.
+    version: rows[0]?.testVersion ?? null,
+    maps: [...byArena]
+      .map(([arenaId, changes]) => {
+        const map = byId.get(arenaId);
+        return {
+          arenaId,
+          slug: map?.slug ?? arenaId,
+          name: map?.name ?? arenaId,
+          minimapUrl: map?.minimapUrl ?? "",
+          changes,
+        };
+      })
+      .sort((a, b) => b.changes.length - a.changes.length),
+  };
 }
