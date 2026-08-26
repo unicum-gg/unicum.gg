@@ -40,6 +40,29 @@ export const images: NextConfig["images"] = {
       pathname: "/vi/**",
     },
   ],
+  // Keep an optimized variant for 30 days instead of the 4h default.
+  //
+  // This is a floor, not a hint: the optimizer computes
+  // `Math.max(upstreamRevalidate, minimumCacheTTL)`, so it overrides whatever
+  // the source host asked for. At 4h every variant expired six times a day and
+  // Cloudflare came back to revalidate, on an origin whose CPU is already spent
+  // on crawler traffic. Almost everything above is immutable in practice (our
+  // own versioned mirrors, encyclopedia renders), so re-deriving them on a
+  // clock served no one. It is 30 days and not a year only because clan
+  // emblems can legitimately change, and that is the one source here that
+  // should eventually catch up on its own. Twitch stream thumbnails, the one
+  // genuinely volatile source, render `unoptimized` and never reach this cache.
+  minimumCacheTTL: 2592000,
+  // Bound the on-disk variant cache. Left unset, Next sizes the LRU at HALF of
+  // the free disk, which on this host is how the ISR cache once filled the
+  // volume and took the database down with it. The longer TTL above makes the
+  // working set grow (one entry per source image, width and quality), so the
+  // ceiling has to be explicit rather than inherited from free space. Note the
+  // LRU is per process and the PM2 workers share one directory: each reads the
+  // existing entries at boot but not the others' later writes, so treat this as
+  // a per-worker budget that the cluster can drift above, not a hard cap.
+  maximumDiskCacheSize: 1024 * 1024 * 1024,
+
   // Tank icons are SVGs served from the trusted WG CDN. Next/Image refuses
   // SVG sources by default; enabling this allows them through the optimizer
   // (so they get proxied via our origin like everything else). The strict
