@@ -75,7 +75,14 @@ function loadBranchPo(
       rawUrl(branch, `sources/res/text/lc_messages/${file}.po`),
     )
       .then(parsePo)
-      .catch(() => new Map<string, string>());
+      // Fail open, but do not remember having done so: memoizing the empty map
+      // would turn one bad response into a process that never sees that file
+      // again, and this cache lives for the lifetime of a long-running worker.
+      // Dropping the entry lets the next caller retry.
+      .catch(() => {
+        cache.delete(key);
+        return new Map<string, string>();
+      });
     cache.set(key, pending);
   }
   return pending;
