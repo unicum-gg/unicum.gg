@@ -1,15 +1,15 @@
-import APP from "@/constants/app";
-import { PROJECT_START, fundingProgress } from "@/lib/funding";
+"use client";
 
-const usdFmt = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
+import { fundingProgress, PROJECT_START } from "@unicum.gg/shared";
+import type { InfraCosts } from "@/components/coverage/cost-breakdown";
+import APP from "@/constants/app";
+import { useMoney } from "@/hooks/use-money";
+
 const dateFmt = new Intl.DateTimeFormat("en-US", {
   month: "long",
   day: "numeric",
   year: "numeric",
+  timeZone: "UTC",
 });
 
 function Stat({
@@ -44,32 +44,39 @@ function Stat({
 
 /**
  * The funding block. The bar is cumulative: it measures the total received from
- * supporters against the total infrastructure spend since launch (a target that
- * grows every day), so it answers "how much of what we have already paid out of
- * pocket has the community covered". A secondary line shows the monthly run-rate.
- * Server-rendered, so the "now"-based figures are computed fresh per request.
+ * supporters against the total spend since launch (every charge that has
+ * actually been taken, plus every one-off), so it answers "how much of what we
+ * have already paid out of pocket has the community covered". It steps up on
+ * each billing date rather than creeping daily, because that is when the money
+ * leaves. A secondary line shows the monthly run-rate.
+ *
+ * Everything here is euros: that is what OVH invoices and what supporters pay,
+ * so the whole computation stays in one currency and only the rendering
+ * converts. `nowMs` comes from the server parent so the client renders the same
+ * figures the prerendered HTML did.
  */
 export function FundingBar({
-  monthlyCostUsd,
-  monthlyPledgedUsd,
-  receivedUsd,
+  costs,
+  monthlyPledgedEur,
+  receivedEur,
   supporterCount,
+  nowMs,
 }: {
-  monthlyCostUsd: number;
-  monthlyPledgedUsd: number;
-  receivedUsd: number;
+  costs: InfraCosts;
+  monthlyPledgedEur: number;
+  receivedEur: number;
   supporterCount: number;
+  nowMs: number;
 }) {
-  // Cumulative spend since launch (`goalUsd`) is the bar's target.
-  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per request; a fresh "now" is intended so the figures advance over time
-  const nowMs = Date.now();
+  const money = useMoney();
   const {
     daysRunning,
-    goalUsd: spentSoFarUsd,
+    goalEur: spentSoFarEur,
     pct,
-  } = fundingProgress(monthlyCostUsd, receivedUsd, nowMs);
-  const gapUsd = Math.max(0, spentSoFarUsd - receivedUsd);
-  const monthlyGapUsd = Math.max(0, monthlyCostUsd - monthlyPledgedUsd);
+  } = fundingProgress(costs, receivedEur, nowMs);
+  const monthlyCostEur = costs.totalAnnualEur / 12;
+  const gapEur = Math.max(0, spentSoFarEur - receivedEur);
+  const monthlyGapEur = Math.max(0, monthlyCostEur - monthlyPledgedEur);
   const supporters = `${supporterCount} supporter${supporterCount === 1 ? "" : "s"}`;
 
   return (
@@ -77,12 +84,12 @@ export function FundingBar({
       <div className="grid grid-cols-3 divide-x divide-fd-border rounded-lg border border-fd-border">
         <Stat
           label="Raised"
-          value={usdFmt.format(receivedUsd)}
+          value={money.format(receivedEur)}
           sub={`from ${supporters}`}
         />
         <Stat
           label="Spent since launch"
-          value={usdFmt.format(spentSoFarUsd)}
+          value={money.format(spentSoFarEur)}
           sub={`${daysRunning} days, out of pocket`}
         />
         <Stat label="Covered" value={`${pct}%`} sub="of that total" accent />
@@ -96,8 +103,8 @@ export function FundingBar({
           />
         </div>
         <div className="mt-1 flex justify-between text-[11px] tabular-nums text-fd-muted-foreground">
-          <span>{usdFmt.format(receivedUsd)} raised</span>
-          <span>goal {usdFmt.format(spentSoFarUsd)}</span>
+          <span>{money.format(receivedEur)} raised</span>
+          <span>goal {money.format(spentSoFarEur)}</span>
         </div>
       </div>
 
@@ -105,23 +112,23 @@ export function FundingBar({
         {APP.NAME} has run at a loss since {dateFmt.format(PROJECT_START)}.
         Supporters have covered{" "}
         <span className="font-semibold text-fd-foreground">
-          {usdFmt.format(receivedUsd)}
+          {money.format(receivedEur)}
         </span>{" "}
         of the{" "}
         <span className="font-semibold text-fd-foreground">
-          {usdFmt.format(spentSoFarUsd)}
+          {money.format(spentSoFarEur)}
         </span>{" "}
         spent so far.{" "}
-        {gapUsd > 0
-          ? `${usdFmt.format(gapUsd)} to fully catch up.`
+        {gapEur > 0
+          ? `${money.format(gapEur)} to fully catch up.`
           : "Fully caught up, thank you. Everything extra goes into more throughput and new features."}
       </p>
 
       <p className="text-xs text-fd-muted-foreground">
-        Monthly run-rate: {usdFmt.format(monthlyPledgedUsd)}/mo pledged vs{" "}
-        {usdFmt.format(monthlyCostUsd)}/mo to run.
-        {monthlyGapUsd > 0
-          ? ` ${usdFmt.format(monthlyGapUsd)}/mo more stops the gap from growing.`
+        Monthly run-rate: {money.format(monthlyPledgedEur)}/mo pledged vs{" "}
+        {money.format(monthlyCostEur)}/mo to run.
+        {monthlyGapEur > 0
+          ? ` ${money.format(monthlyGapEur)}/mo more stops the gap from growing.`
           : " Pledges now cover the monthly bill."}
       </p>
     </div>

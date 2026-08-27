@@ -96,6 +96,10 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string().optional(),
     STRIPE_WEBHOOK_SECRET: z.string().optional(),
     STRIPE_PRODUCT_ID: z.string().optional(),
+    // UniRateAPI key for the live EUR exchange rates the money figures are
+    // displayed with. Web-only. Optional so the worker/bot boot without it and
+    // the conversion degrades to showing euros rather than to a stale rate.
+    UNIRATE_API_KEY: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
@@ -128,6 +132,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
+    UNIRATE_API_KEY: process.env.UNIRATE_API_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   emptyStringAsUndefined: true,

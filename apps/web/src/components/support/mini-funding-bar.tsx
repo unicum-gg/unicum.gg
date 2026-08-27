@@ -3,6 +3,7 @@
 import Link from "next/link";
 import useSWR from "swr";
 import ROUTES from "@/constants/routes";
+import { useMoney } from "@/hooks/use-money";
 import { unicum } from "@/services/sdk";
 import {
   Tooltip,
@@ -11,20 +12,15 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const usdFmt = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-  maximumFractionDigits: 0,
-});
-
 /**
  * Compact funding progress for the top bar: a thin bar plus "X% funded",
- * measuring what supporters have covered against the cumulative infrastructure
- * spend since launch. Hovering shows the amounts; the whole thing links to
+ * measuring what supporters have covered against the cumulative spend since
+ * launch. Hovering shows the amounts; the whole thing links to
  * /support. Client-side so the server render of every page stays free of the
  * funding fetch.
  */
 export function MiniFundingBar() {
+  const money = useMoney();
   const { data } = useSWR("support-funding", () => unicum.support.funding(), {
     revalidateOnFocus: false,
     dedupingInterval: 60_000,
@@ -55,7 +51,7 @@ export function MiniFundingBar() {
         </TooltipTrigger>
         <TooltipContent>
           {data
-            ? `${usdFmt.format(data.receivedUsd)} of ${usdFmt.format(data.goalUsd)} covered by supporters since launch`
+            ? `${money.format(data.receivedEur)} of ${money.format(data.goalEur)} covered by supporters since launch`
             : "Community-funded, ad-free"}
         </TooltipContent>
       </Tooltip>

@@ -975,6 +975,14 @@ export class Unicum {
     );
   }
 
+  /** Exchange rates */
+  rates() {
+    return handle(
+      buildUrl(this.baseUrl, "/rates"),
+      () => this.api.GET("/rates", {}),
+    );
+  }
+
   /** OG image cards: unicum.og.eu.players("Animal").url() → /og/eu/players/Animal. */
   get og(): OgClient {
     return new OgClient(this.api, this.baseUrl);

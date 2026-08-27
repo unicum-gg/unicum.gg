@@ -8,15 +8,15 @@ export const FundingSummaryResponse = z
       description:
         "Share of the cumulative infrastructure spend since launch that supporters have covered, 0-100.",
     }),
-    receivedUsd: z.number().meta({
-      description: "Total received from supporters since launch, in USD.",
+    receivedEur: z.number().meta({
+      description: "Total received from supporters since launch, in EUR.",
     }),
-    goalUsd: z.number().meta({
-      description: "Cumulative infrastructure spend since launch, in USD.",
+    goalEur: z.number().meta({
+      description: "Cumulative spend since launch, in EUR.",
     }),
   })
   .meta({
     id: "FundingSummary",
     description:
-      "Compact funding progress for the top-bar bar: how much of what has been spent since launch the community has covered. Amounts are aggregate only.",
+      "Compact funding progress for the top-bar bar: how much of what has been spent since launch the community has covered. Amounts are aggregate only, and in EUR (what we are billed and what supporters pay) — convert them for display with `GET /rates`.",
   });

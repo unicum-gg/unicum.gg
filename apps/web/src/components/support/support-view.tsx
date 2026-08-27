@@ -2,7 +2,6 @@ import { CostBreakdown } from "@/components/coverage/cost-breakdown";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { USD_PER_EUR } from "@/lib/funding";
 import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import { Region } from "@unicum.gg/wargaming";
@@ -23,9 +22,13 @@ export async function SupportView() {
     unicum.support.podium(),
   ]);
   const { supporters, monthlyPledgedCents, receivedCents } = podium;
-  const monthlyCostUsd = coverage.infrastructure.costs.totalAnnualUsd / 12;
-  const monthlyPledgedUsd = (monthlyPledgedCents / 100) * USD_PER_EUR;
-  const receivedUsd = (receivedCents / 100) * USD_PER_EUR;
+  // Stripe collects in EUR and the bills are in EUR, so nothing is converted
+  // here: the funding bar renders the conversion at the live rate.
+  const costs = coverage.infrastructure.costs;
+  const monthlyPledgedEur = monthlyPledgedCents / 100;
+  const receivedEur = receivedCents / 100;
+  // eslint-disable-next-line react-hooks/purity -- server component, evaluated once per render; passed down so the client bar computes the same figures the prerendered HTML did
+  const nowMs = Date.now();
   const top = supporters.slice(0, 3);
   const rest = supporters.slice(3);
 
@@ -59,18 +62,20 @@ export async function SupportView() {
                 entirely by the people who use it.
               </p>
               <p className="text-sm text-fd-muted-foreground">
-                It runs on a single OVH VPS, and every euro goes straight to
-                infrastructure: the server, the database, and the
+                It runs on a single OVH VPS, and every euro goes back into
+                the project: the server, the database, the
                 Wargaming-whitelisted egress IPs that let us refresh more
-                players. Supporters cover the monthly bill; anything extra goes
+                players, and the occasional push to get it in front of more
+                people. Supporters cover the monthly bill; anything extra goes
                 into more throughput and new features.
               </p>
             </div>
             <FundingBar
-              monthlyCostUsd={monthlyCostUsd}
-              monthlyPledgedUsd={monthlyPledgedUsd}
-              receivedUsd={receivedUsd}
+              costs={costs}
+              monthlyPledgedEur={monthlyPledgedEur}
+              receivedEur={receivedEur}
               supporterCount={supporters.length}
+              nowMs={nowMs}
             />
           </section>
           <section className="space-y-6 p-6">
@@ -94,7 +99,7 @@ export async function SupportView() {
         <PanelContent className="grid grid-cols-1 p-0 md:grid-cols-2 md:divide-x md:divide-fd-border">
           <section className="space-y-4 p-4">
             <h2 className="text-xl font-semibold">Where your money goes</h2>
-            <CostBreakdown costs={coverage.infrastructure.costs} />
+            <CostBreakdown costs={costs} />
             <p className="text-xs text-fd-muted-foreground">
               The exact same numbers as the{" "}
               <a

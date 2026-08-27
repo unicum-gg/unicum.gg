@@ -12,6 +12,7 @@
     "./stripe": "./src/stripe/index.ts",
     "./db": "./src/db/index.ts",
     "./db/schema": "./src/db/schema/index.ts",
+    "./finance": "./src/finance/index.ts",
     "./redis": "./src/redis/index.ts",
     "./mom": "./src/mom/index.ts",
     "./mom/refresh-cron": "./src/mom/refresh-cron.ts",
