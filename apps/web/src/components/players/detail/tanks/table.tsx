@@ -351,9 +351,10 @@ export function PlayerTanksTable({
                   <TableRow
                     key={r.tankId}
                     ref={selected ? selectedRowRef : undefined}
-                    // The row opens this player's record on the tank, which is
-                    // a URL of its own; the name inside still goes to the
-                    // vehicle's own page, so both destinations stay reachable.
+                    // The row opens this player's record on the tank, which
+                    // is a URL of its own. The name inside is a real link to
+                    // the same place, so the destination does not depend on
+                    // where in the row the reader clicked.
                     onClick={() => {
                       if (r.slug) {
                         // `scroll: false`: the reader is picking a row half way
@@ -417,7 +418,15 @@ export function PlayerTanksTable({
                         ) : null}
                         {r.slug ? (
                           <Link
-                            href={ROUTES.TANK(region, r.slug)}
+                            // Same destination as the row around it. Sending
+                            // the name to the vehicle's own page instead made
+                            // one row answer two ways depending on where it
+                            // was clicked, which reads as a broken link rather
+                            // than a second destination. The vehicle's page
+                            // stays one click away, from the heading of the
+                            // record this opens.
+                            href={ROUTES.PLAYER_TANK(region, nickname, r.slug)}
+                            scroll={false}
                             className="hover:underline"
                           >
                             {name}
