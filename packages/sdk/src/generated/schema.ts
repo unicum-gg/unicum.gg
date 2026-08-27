@@ -3822,6 +3822,10 @@ export interface components {
             isReward: boolean;
             /** @description Only on the Common Test client, not yet released. */
             isCommonTest: boolean;
+            /** @description Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue. */
+            isHidden: boolean;
+            /** @description The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with ("IGR" for the retired cybercafe reissues). Null for a normal vehicle. */
+            variant: string | null;
             /** @description How many characteristics the current Common Test build changes on this vehicle; 0 when none. */
             testChanges?: number;
             role: string | null;
@@ -4268,6 +4272,10 @@ export interface components {
             isReward: boolean;
             /** @description Only on the Common Test client, not yet released. */
             isCommonTest: boolean;
+            /** @description Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue. */
+            isHidden: boolean;
+            /** @description The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with ("IGR" for the retired cybercafe reissues). Null for a normal vehicle. */
+            variant: string | null;
             role: string | null;
             contourIcon: string | null;
             bigIcon: string | null;

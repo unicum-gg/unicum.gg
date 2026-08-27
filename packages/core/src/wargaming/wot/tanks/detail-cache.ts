@@ -38,8 +38,13 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *
  * v2: the community rating headline joined the payload.
  * v3: the client the characteristics were read from, and the test build offered.
+ * v4: `isHidden` on the vehicle meta. It also retires the entries written for
+ * vehicles that are hidden from now on: the cache answers before the slug is
+ * resolved, so without this they would keep serving a page that no longer has
+ * a catalogue entry behind it.
+ * v5: `variant` on the vehicle meta.
  */
-const SHAPE_VERSION = 3;
+const SHAPE_VERSION = 5;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

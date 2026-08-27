@@ -3,6 +3,7 @@ import { db } from "@unicum.gg/core/db";
 import { type NewVehicle, vehiclesByRegion, type VehicleMeta } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 import {
+  catalogueNaming,
   fetchCommonTestVehicles,
   fetchVehicleCatalog,
 } from "@unicum.gg/core/wargaming/wot/tanks/wotsrc";
@@ -45,6 +46,8 @@ async function loadVehicles(
       isPremium: table.isPremium,
       isReward: table.isReward,
       isCommonTest: table.isCommonTest,
+      isHidden: table.isHidden,
+      variant: table.variant,
       role: table.role,
       contourIcon: table.contourIcon,
       bigIcon: table.bigIcon,
@@ -70,6 +73,8 @@ async function loadVehicles(
       isPremium: r.isPremium,
       isReward: r.isReward,
       isCommonTest: r.isCommonTest,
+      isHidden: r.isHidden,
+      variant: r.variant,
       role: r.role,
       contourIcon: httpsUrl(r.contourIcon),
       bigIcon: httpsUrl(r.bigIcon),
@@ -127,8 +132,7 @@ export async function refreshVehicles(region: Region): Promise<number> {
     tier: v.tier,
     type: v.type,
     nation: v.nation,
-    name: v.name,
-    shortName: v.shortName,
+    ...catalogueNaming(v),
     tag: v.tag,
     isPremium: v.isPremium,
     isWheeled: v.isWheeled,
@@ -154,6 +158,9 @@ export async function refreshVehicles(region: Region): Promise<number> {
         tier: sql`excluded.tier`,
         type: sql`excluded.type`,
         nation: sql`excluded.nation`,
+        // Both carry the variant suffix `catalogueNaming` adds, so a vehicle
+        // that changes catalogue file is renamed here rather than keeping the
+        // name it was first written with.
         name: sql`excluded.name`,
         shortName: sql`excluded.short_name`,
         tag: sql`excluded.tag`,
@@ -165,6 +172,10 @@ export async function refreshVehicles(region: Region): Promise<number> {
         // A vehicle leaves the test build by shipping, so this must be able to
         // go back to false, not just be set once.
         isCommonTest: sql`excluded.is_common_test`,
+        // A vehicle can stop being hidden the same way: the client moves its
+        // name into the nation catalogue and it becomes an ownable tank.
+        isHidden: sql`excluded.is_hidden`,
+        variant: sql`excluded.variant`,
         updatedAt: new Date(),
       },
     });

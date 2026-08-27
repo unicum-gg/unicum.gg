@@ -29,8 +29,11 @@ export const TANK_COMPARE_TTL_SECONDS = 60 * 60;
  *
  * v1: the pre-versioned key, retired here.
  * v2: each column carries the game client it was read on, and the test build.
+ * v3: `isHidden` and `variant` on each column's vehicle meta. The comparison
+ * nests the same `vehicleMeta` schema the detail payload does, so a field added
+ * there has to be retired here too, not only in `detail-cache`.
  */
-const SHAPE_VERSION = 2;
+const SHAPE_VERSION = 3;
 
 function key(region: Region, slugs: string[]): string {
   const columns = slugs.map((s) => s.toLowerCase()).join(",");

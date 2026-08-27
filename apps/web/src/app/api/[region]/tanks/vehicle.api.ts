@@ -20,6 +20,14 @@ export const vehicleMeta = z
     isCommonTest: z
       .boolean()
       .meta({ description: "Only on the Common Test client, not yet released." }),
+    isHidden: z.boolean().meta({
+      description:
+        "Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue.",
+    }),
+    variant: z.string().nullable().meta({
+      description:
+        "The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with (\"IGR\" for the retired cybercafe reissues). Null for a normal vehicle.",
+    }),
     role: z.string().nullable(),
     contourIcon: z.string().nullable(),
     bigIcon: z.string().nullable(),
