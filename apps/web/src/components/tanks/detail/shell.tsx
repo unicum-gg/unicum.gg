@@ -7,6 +7,7 @@ import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { TankRender } from "@/components/tanks/detail/render";
+import { VehicleName } from "@/components/tanks/detail/vehicle-name";
 import { CommunityHeroBadge } from "@/components/tanks/detail/community/hero-badge";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
@@ -204,7 +205,7 @@ export function TankShell({
                 {meta.isCommonTest && <CommonTestBadge size={15} />}
               </div>
               <h1 className="max-w-sm font-heading text-4xl font-bold tracking-tight md:text-5xl">
-                {meta.name}
+                <VehicleName name={meta.name} variant={meta.variant} />
               </h1>
               <p className="max-w-sm text-sm text-fd-muted-foreground">
                 World of Tanks {REGION_LABEL[region]} statistics for the{" "}
