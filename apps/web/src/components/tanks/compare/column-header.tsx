@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/tooltip";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { MAX_SCORE } from "@/components/tanks/compare/score";
-import { TankIcon } from "@/components/tanks/tank-icon";
+import { HangarBackdrop } from "@/components/tanks/hangar-backdrop";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
   LoadoutLayout,
@@ -123,14 +123,59 @@ export function TankCompareColumnHeader({
   const onTest = isTestColumn(vehicle);
 
   return (
-    <div className={cn("flex h-full flex-col gap-1.5 p-3", pinned && "bg-fd-secondary/20")}>
-      <div className="flex items-start justify-between gap-1">
-        <TankIcon
-          region={region}
-          tag={meta.tag}
-          type={meta.type}
-          className="h-6 w-auto shrink-0"
-        />
+    <div
+      className={
+        // `dark`, like the tank page's hero: the vehicle behind this is lit on
+        // a dark hangar floor whatever the reader's theme, so every token
+        // resolved inside has to be the dark one to stay legible over it.
+        // `text-fd-foreground` alongside it, and for a reason `dark` alone does
+        // not cover: the class re-resolves the tokens, it does not repaint text
+        // that inherits its colour from an ancestor. In a light theme the name
+        // and the score inherited the table's near-black and went invisible
+        // against the render. The hero states the same pair for the same cause.
+        // Opaque too (`bg-fd-background` under the backdrop): this cell is the
+        // sticky header, and a translucent one lets the rows scroll through it.
+        "dark relative isolate flex h-full flex-col gap-1.5 overflow-hidden bg-fd-background p-3 text-fd-foreground"
+      }
+    >
+      {/* The vehicle itself, as the header's background rather than a band above
+          it. The header is sticky for the length of a 51-row table, so it cannot
+          grow: the render fills the space the text already occupies. The column
+          is roughly the render's own proportions, so the crop is slight. */}
+      <HangarBackdrop
+        region={region}
+        tag={meta.tag}
+        slug={vehicle.slug}
+        name={meta.name}
+        sizes="(min-width: 1024px) 25vw, 50vw"
+      />
+      {/* The hero's fade, not a flat veil: it runs left to right, because that
+          is where the text is, and it clears before the middle so the vehicle
+          stays lit. A veil over the whole cell darkened the tank along with the
+          background and left a column with nothing to look at. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-r from-black/80 from-0% via-black/25 via-38% to-transparent to-72%"
+      />
+      {/* A second, gentler one from the foot, for the score and the controls
+          that sit over the brighter half. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-t from-black/60 from-0% via-black/12 via-28% to-transparent to-55%"
+      />
+      {/* And a short one from the top. The two fades above clear the top-right
+          corner, which is exactly where the pin and remove controls sit: over a
+          light-hulled vehicle they had no scrim at all under them. */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-black/55 from-0% via-black/15 via-16% to-transparent to-34%"
+      />
+      {/* The reference column keeps its tint, drawn over the render so it reads
+          the same as it did over a flat background. */}
+      {pinned && (
+        <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 bg-fd-secondary/25" />
+      )}
+      <div className="flex items-start justify-end gap-1">
         <div className="flex items-center gap-0.5">
           <button
             type="button"
