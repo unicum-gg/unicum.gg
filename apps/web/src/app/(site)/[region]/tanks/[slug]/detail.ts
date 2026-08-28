@@ -2,6 +2,7 @@ import { UnicumError } from "@unicum.gg/sdk";
 import type { TankRatingSummary } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
+import type { SimilarTankRow } from "@/app/api/[region]/tanks/[slug]/similar/schema.api";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { buildSafe, unicum } from "@/services/sdk";
 
@@ -73,6 +74,35 @@ export async function loadTankVideos(
     .videos()
     .then((r) => r.videos as unknown as TankVideoCardData[])
     .catch(() => []);
+}
+
+/**
+ * The vehicles that play like this one, for the foot of the Specifications tab.
+ *
+ * Its own request rather than a field of the detail payload: that payload is
+ * cached under a shape version, and these are wanted on one tab out of six, by
+ * the tank list and by anything else that later asks.
+ *
+ * `buildSafe`, not a bare catch, for the reason spelled out on the ratings
+ * loader below: this page is ISR, so one timed-out revalidation swallowed here
+ * would bake a Specifications tab with no Similar section, and none of the six
+ * internal links it carries, into the cache for half an hour and serve it to
+ * crawlers. Silencing belongs to the build, where there may be no API to ask;
+ * at runtime a failure has to propagate so the last good page is kept.
+ */
+export async function loadSimilarTanks(
+  region: Region,
+  slug: string,
+): Promise<SimilarTankRow[]> {
+  return buildSafe(
+    () =>
+      unicum
+        .region(region)
+        .tanks(slug)
+        .similar()
+        .then((r) => r.results as unknown as SimilarTankRow[]),
+    [],
+  );
 }
 
 /**
