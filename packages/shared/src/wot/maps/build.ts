@@ -4,6 +4,7 @@ import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw, MAP_GAME_MODE_LABEL, MapGameMode } from "./game-modes";
 import { projectPoint, type MapPoint } from "./geometry";
 import { minimapUrl, onslaughtMinimapUrl } from "./minimap";
+import { buildRandomEvents, hasRandomEventLayers } from "./random-events";
 import type {
   MapDetail,
   MapModeGeometry,
@@ -107,6 +108,58 @@ function dimensions(arena: WotSrcArena) {
   return { width, height, size: Math.max(width, height) };
 }
 
+function allBattleTypes(
+  arena: WotSrcArena,
+  extraBattleTypes: BattleType[],
+): BattleType[] {
+  return [
+    ...battleTypesForArena(
+      arena.arenaId,
+      arena.gameplay.map((g) => g.mode),
+      arena.maxPlayersInTeam,
+    ),
+    ...extraBattleTypes,
+  ];
+}
+
+// Random events are a Random Battle feature, so they are only read off a map
+// that is played there. The scripted demolitions a Story Mode chapter ships as
+// the same kind of minimap layer are part of its scenario, not an event that may
+// or may not fire, and calling them one would misread the map.
+function runsRandomEvents(
+  arena: WotSrcArena,
+  battleTypes: BattleType[],
+): boolean {
+  return (
+    battleTypes.includes(BattleType.Random) &&
+    hasRandomEventLayers(arena.minimapLayers)
+  );
+}
+
+// The summary, once its battle types and event flag are known. Both are derived
+// twice otherwise, since the detail needs the battle types for its own events
+// and then spreads the summary on top.
+function summaryOf(
+  arena: WotSrcArena,
+  slug: string,
+  battleTypes: BattleType[],
+  hasRandomEvents: boolean,
+): MapSummary {
+  const { size } = dimensions(arena);
+  return {
+    arenaId: arena.arenaId,
+    slug,
+    name: arena.name,
+    camouflage: mapCamouflage(arena.camouflage),
+    sizeMeters: size,
+    modes: distinctModes(arena.gameplay),
+    battleTypes,
+    minimapUrl: minimapUrl(arena.arenaId),
+    bases: primaryBases(arena),
+    hasRandomEvents,
+  };
+}
+
 // The map's display name (with any variant disambiguation, e.g. "Steppes
 // (Waffenträger)") is resolved by the catalogue layer onto `arena.name` before
 // building. `extraBattleTypes` carries the dynamic types the static scripts
@@ -118,26 +171,13 @@ export function buildMapSummary(
   slug: string,
   extraBattleTypes: BattleType[] = [],
 ): MapSummary {
-  const { size } = dimensions(arena);
-  const modes = distinctModes(arena.gameplay);
-  return {
-    arenaId: arena.arenaId,
+  const battleTypes = allBattleTypes(arena, extraBattleTypes);
+  return summaryOf(
+    arena,
     slug,
-    name: arena.name,
-    camouflage: mapCamouflage(arena.camouflage),
-    sizeMeters: size,
-    modes,
-    battleTypes: [
-      ...battleTypesForArena(
-        arena.arenaId,
-        arena.gameplay.map((g) => g.mode),
-        arena.maxPlayersInTeam,
-      ),
-      ...extraBattleTypes,
-    ],
-    minimapUrl: minimapUrl(arena.arenaId),
-    bases: primaryBases(arena),
-  };
+    battleTypes,
+    runsRandomEvents(arena, battleTypes),
+  );
 }
 
 export function buildMapDetail(
@@ -146,8 +186,12 @@ export function buildMapDetail(
   extraBattleTypes: BattleType[] = [],
 ): MapDetail {
   const { width, height } = dimensions(arena);
+  const battleTypes = allBattleTypes(arena, extraBattleTypes);
+  const randomEvents = runsRandomEvents(arena, battleTypes)
+    ? buildRandomEvents(arena.arenaId, arena.minimapLayers)
+    : [];
   return {
-    ...buildMapSummary(arena, slug, extraBattleTypes),
+    ...summaryOf(arena, slug, battleTypes, randomEvents.length > 0),
     description: arena.description,
     roundLength: arena.roundLength,
     maxPlayersInTeam: arena.maxPlayersInTeam,
@@ -155,5 +199,6 @@ export function buildMapDetail(
     heightMeters: height,
     geometry: buildGeometry(arena),
     onslaught: buildOnslaught(arena),
+    randomEvents,
   };
 }

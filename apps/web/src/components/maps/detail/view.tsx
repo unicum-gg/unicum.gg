@@ -7,10 +7,14 @@ import {
   ClockIcon,
   CompassIcon,
   UsersIcon,
+  WarningIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { MapActionsMenu } from "@/components/maps/detail/actions-menu";
 import { CAMO_META } from "@/components/maps/meta";
-import { MinimapViewer } from "@/components/maps/detail/minimap-viewer";
+import {
+  MinimapViewer,
+  ONSLAUGHT_VIEW,
+} from "@/components/maps/detail/minimap-viewer";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapVideosPanel } from "@/components/maps/detail/videos";
 import {
@@ -107,10 +111,17 @@ export function MapView({
     (Boolean(onslaught) ||
       detail.battleTypes.some((bt) => TEAM_SIZE_BATTLE_TYPES.has(bt)));
   const hasModes = Boolean(onslaught) || modeNames.length > 0;
-  const hasAnyStat = hasSize || hasTime || hasTeam || hasModes;
+  // Events do not fire in Onslaught, which is played on its own reduced area, so
+  // the line goes away with the rest of the view-synced stats when it is picked.
+  const events = detail.randomEvents;
+  const showEvents = events.length > 0 && activeKey !== ONSLAUGHT_VIEW;
+  const hasAnyStat = hasSize || hasTime || hasTeam || hasModes || showEvents;
   const metaParts = [
     `${camo.label} camouflage`,
     hasSize ? `${detail.widthMeters} × ${detail.heightMeters} m` : null,
+    events.length > 0
+      ? `${events.length} random event${events.length > 1 ? "s" : ""}`
+      : null,
   ].filter((v): v is string => Boolean(v));
 
   return (
@@ -183,6 +194,13 @@ export function MapView({
                   )}
                   {hasModes && (
                     <Stat icon={CompassIcon} label="Mode" value={modesValue} />
+                  )}
+                  {showEvents && (
+                    <Stat
+                      icon={WarningIcon}
+                      label="Random events"
+                      value={events.map((e) => e.name).join(", ")}
+                    />
                   )}
                 </div>
               )}

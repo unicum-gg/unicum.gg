@@ -388,7 +388,7 @@ export interface paths {
         };
         /**
          * Maps
-         * @description Every World of Tanks battle map on a region: display name, minimap image, camouflage kind (summer/winter/desert), square size in metres, and the random-battle modes it supports (Standard/Encounter/Assault). Derived from the game client scripts, so removed or event-reskin maps are included. One entry per distinct map, name-sorted.
+         * @description Every World of Tanks battle map on a region: display name, minimap image, camouflage kind (summer/winter/desert), square size in metres, the random-battle modes it supports (Standard/Encounter/Assault), and whether random events might fire on it mid-battle. Derived from the game client scripts, so removed or event-reskin maps are included. One entry per distinct map, name-sorted.
          */
         get: operations["get-{region}-maps"];
         put?: never;
@@ -408,7 +408,7 @@ export interface paths {
         };
         /**
          * Map detail
-         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `slug` in the response is the canonical slug.
+         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `randomEvents` carries the events that might fire on the map mid-battle, each with the minimap art of its danger area and of the ground it leaves behind. `slug` in the response is the canonical slug.
          */
         get: operations["get-{region}-maps-{slug}"];
         put?: never;
@@ -2583,6 +2583,8 @@ export interface components {
             minimapUrl: string;
             /** @description Standard-mode base positions, for the gallery thumbnail. */
             bases: components["schemas"]["teamMarkers"];
+            /** @description Whether random events might fire on the map mid-battle. */
+            hasRandomEvents: boolean;
             description: string;
             /** @description Battle timer in seconds. */
             roundLength: number;
@@ -2591,6 +2593,7 @@ export interface components {
             heightMeters: number;
             geometry: components["schemas"]["MapModeGeometry"][];
             onslaught: components["schemas"]["MapOnslaught"] | null;
+            randomEvents: components["schemas"]["MapRandomEvent"][];
         };
         MapHistoryResponse: {
             arenaId: string;
@@ -2649,6 +2652,15 @@ export interface components {
                 type: number;
             }[];
         };
+        /** @description An event that might fire on the map mid-battle, with the minimap art of its danger area and of its aftermath. */
+        MapRandomEvent: {
+            id: string;
+            name: string;
+            /** @description Minimap overlays marking where the event strikes, as the game marks it before it happens. */
+            zoneUrls: string[];
+            /** @description Minimap overlays redrawing the ground the event leaves behind. */
+            afterUrls: string[];
+        };
         /** @description Map row (additional fields may be present). */
         MapResolved: {
             arena_id: string;
@@ -2685,6 +2697,8 @@ export interface components {
             minimapUrl: string;
             /** @description Standard-mode base positions, for the gallery thumbnail. */
             bases: components["schemas"]["teamMarkers"];
+            /** @description Whether random events might fire on the map mid-battle. */
+            hasRandomEvents: boolean;
         };
         MapVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];

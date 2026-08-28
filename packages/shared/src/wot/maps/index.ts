@@ -5,6 +5,7 @@ export * from "./geometry";
 export * from "./minimap";
 export * from "./name";
 export * from "./map";
+export * from "./random-events";
 export * from "./slug";
 export * from "./build";
 export * from "./history-snapshot";

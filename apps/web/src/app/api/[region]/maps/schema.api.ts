@@ -28,6 +28,9 @@ export const mapSummary = z
     bases: teamMarkers.meta({
       description: "Standard-mode base positions, for the gallery thumbnail.",
     }),
+    hasRandomEvents: z.boolean().meta({
+      description: "Whether random events might fire on the map mid-battle.",
+    }),
   })
   .meta({ id: "MapSummary", description: "A battle map's gallery summary." });
 

@@ -19,7 +19,11 @@ export type MapCatalog = {
 // network on every hit.
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const REDIS_TTL_SECONDS = 24 * 60 * 60;
-const redisKey = (region: Region) => `mapcatalog:${region}`;
+// Bumped whenever a new field is read off the cached arenas: the value is the
+// serialized `WotSrcArena[]`, so a payload written by the previous deploy is a
+// day of `undefined` on any field that shipped with this one.
+const SHAPE_VERSION = 2;
+const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 
 // The whole catalogue rebuilds deterministically from the sorted+deduped arena

@@ -2,6 +2,7 @@ import type { BattleType } from "./battle-types";
 import type { MapCamouflage } from "./camouflage";
 import type { MapGameMode } from "./game-modes";
 import type { MapMarker } from "./geometry";
+import type { MapRandomEvent } from "./random-events";
 
 export type MapModeGeometry = {
   mode: MapGameMode;
@@ -25,6 +26,9 @@ export type MapSummary = {
   /** Base positions of the primary (Standard) mode, so the gallery thumbnail can
    * show where the bases are without loading the full per-mode geometry. */
   bases: { team1: MapMarker[]; team2: MapMarker[] };
+  /** Whether random events might fire on the map mid-battle, so the gallery can
+   * flag it without carrying the events themselves. */
+  hasRandomEvents: boolean;
 };
 
 // An Onslaught capturable point of interest, projected onto the minimap. `type`
@@ -54,4 +58,7 @@ export type MapDetail = MapSummary & {
   /** Onslaught-specific minimap + geometry, or null when the map has no
    * Onslaught configuration. */
   onslaught: MapOnslaught | null;
+  /** The random events that might fire on the map mid-battle; empty on the maps
+   * that have none. */
+  randomEvents: MapRandomEvent[];
 };

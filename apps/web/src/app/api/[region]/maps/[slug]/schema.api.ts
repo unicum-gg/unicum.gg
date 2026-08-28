@@ -32,6 +32,25 @@ const mapOnslaught = z
     description: "Onslaught (comp7) minimap, reduced play area and geometry.",
   });
 
+const mapRandomEvent = z
+  .object({
+    id: z.string(),
+    name: z.string(),
+    zoneUrls: z.array(z.string()).meta({
+      description:
+        "Minimap overlays marking where the event strikes, as the game marks it before it happens.",
+    }),
+    afterUrls: z.array(z.string()).meta({
+      description:
+        "Minimap overlays redrawing the ground the event leaves behind.",
+    }),
+  })
+  .meta({
+    id: "MapRandomEvent",
+    description:
+      "An event that might fire on the map mid-battle, with the minimap art of its danger area and of its aftermath.",
+  });
+
 /** Response of `GET /{region}/maps/{slug}` (a single map with its geometry). */
 export const MapDetailResponse = mapSummary
   .extend({
@@ -42,5 +61,6 @@ export const MapDetailResponse = mapSummary
     heightMeters: z.number(),
     geometry: z.array(mapModeGeometry),
     onslaught: mapOnslaught.nullable(),
+    randomEvents: z.array(mapRandomEvent),
   })
   .meta({ id: "MapDetail", description: "A battle map with its full geometry." });
