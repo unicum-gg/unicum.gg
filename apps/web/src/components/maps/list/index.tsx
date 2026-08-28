@@ -1,6 +1,9 @@
 "use client";
 
-import { ArrowsOutCardinalIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  ArrowsOutCardinalIcon,
+  WarningIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import { type MouseEvent, useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -21,6 +24,7 @@ import {
   mapsTabHref,
 } from "@/components/maps/list/tabs";
 import { CAMO_META } from "@/components/maps/meta";
+import { ONSLAUGHT_VIEW } from "@/components/maps/detail/minimap-viewer";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { Panel, PanelHeader } from "@/components/panel";
 import { Chip, ChipRow } from "@/components/ui/chip";
@@ -118,15 +122,35 @@ function MapCard({
           className="transition-transform duration-300 group-hover:scale-105"
         />
         <ThumbBases bases={map.bases} />
-        <span
-          className={cn(
-            "absolute right-2 top-2 rounded-full bg-black/55 p-1.5 backdrop-blur-sm",
-            camo.className,
-          )}
-          title={`${camo.label} map`}
-        >
-          <CamoIcon weight="fill" className="size-3.5" />
-        </span>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <span
+              aria-label={`${camo.label} map`}
+              className={cn(
+                "absolute right-2 top-2 rounded-full bg-black/55 p-1.5 backdrop-blur-sm",
+                camo.className,
+              )}
+            >
+              <CamoIcon weight="fill" className="size-3.5" />
+            </span>
+          </TooltipTrigger>
+          <TooltipContent>{camo.label} map</TooltipContent>
+        </Tooltip>
+        {map.hasRandomEvents && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <span
+                aria-label="Random events might change this map mid-battle"
+                className="absolute left-2 top-2 rounded-full bg-black/55 p-1.5 text-[#e8955a] backdrop-blur-sm"
+              >
+                <WarningIcon weight="fill" className="size-3.5" />
+              </span>
+            </TooltipTrigger>
+            <TooltipContent>
+              Random events might change this map mid-battle
+            </TooltipContent>
+          </Tooltip>
+        )}
       </div>
       <div className="flex flex-1 flex-col gap-1 p-3">
         <div className="font-heading font-semibold leading-tight text-fd-foreground group-hover:text-brand">
@@ -341,18 +365,22 @@ export function MapsGallery({
             No maps match your filters.
           </p>
         ) : (
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {filtered.map((map) => (
-              <MapCard
-                key={map.arenaId}
-                map={map}
-                region={region}
-                viewParam={
-                  battleType === BattleType.Onslaught ? "onslaught" : undefined
-                }
-              />
-            ))}
-          </div>
+          <TooltipProvider delayDuration={100}>
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {filtered.map((map) => (
+                <MapCard
+                  key={map.arenaId}
+                  map={map}
+                  region={region}
+                  viewParam={
+                    battleType === BattleType.Onslaught
+                      ? ONSLAUGHT_VIEW
+                      : undefined
+                  }
+                />
+              ))}
+            </div>
+          </TooltipProvider>
         )}
       </div>
     </Panel>
