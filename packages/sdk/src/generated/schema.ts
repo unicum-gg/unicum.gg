@@ -1619,6 +1619,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tanks/{slug}/similar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Similar tanks
+         * @description The vehicles that play most like this one, best match first. Similarity is the distance between where each vehicle stands among the vehicles of its own tier, read on six aspects (firepower, gun handling, mobility, survivability, concealment, and how the server actually plays it), so a tier VIII and a tier X can be compared. Answers come from within one tier of this vehicle, and from the live game only. 404 if the region's catalogue has no vehicle with this slug.
+         */
+        get: operations["get-{region}-tanks-{slug}-similar"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tanks/{slug}/specifications": {
         parameters: {
             query?: never;
@@ -3349,6 +3369,20 @@ export interface components {
             wn8: number | null;
             wnx: number | null;
         };
+        /** @description A vehicle that plays like the one being read, with how alike they are and on which aspects. */
+        SimilarTank: {
+            identity: components["schemas"]["TankIdentity"];
+            /** @description How alike the two vehicles are, 0 to 100, as the distance between where each one stands among the vehicles of its own tier. */
+            score: number;
+            /** @description The axes the two are closest on, nearest first. */
+            closest: components["schemas"]["tankAxisField"][];
+            /** @description The axis they are furthest apart on. */
+            furthest: components["schemas"]["tankAxisField"] | null;
+        };
+        /** @description The vehicles that play most like this one, best match first. Empty when the vehicle is too little known to be placed. */
+        SimilarTanks: {
+            results: components["schemas"]["SimilarTank"][];
+        };
         skillNode: {
             id: number;
             /** @description Importance/size tier: common | major | final, or special (feature node). */
@@ -3504,6 +3538,11 @@ export interface components {
             }[];
             count: number;
         };
+        /**
+         * @description An aspect a vehicle is read along. Five come from its characteristics; playstyle comes from how the server actually plays it.
+         * @enum {string}
+         */
+        tankAxisField: "firepower" | "gun-handling" | "mobility" | "survivability" | "concealment" | "playstyle";
         TankChangesResponse: {
             versions: components["schemas"]["TankChangesVersion"][];
         };
@@ -6524,6 +6563,37 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TankRatingsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-similar": {
+        parameters: {
+            query?: {
+                /** @description How many matches to return. Out-of-range values are clamped. */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example slug
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SimilarTanks"];
                 };
             };
         };

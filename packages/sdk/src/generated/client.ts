@@ -283,6 +283,15 @@ class TankClient {
     );
   }
 
+  /** Similar tanks */
+  similar(limit?: NonNullable<QueryOf<"/{region}/tanks/{slug}/similar">>["limit"]) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/similar", path, { limit }),
+      () => this.api.GET("/{region}/tanks/{slug}/similar", { params: { path, query: { limit } } }),
+    );
+  }
+
   /** Tank specifications */
   specifications() {
     const path = { region: this.region, slug: this.slug };

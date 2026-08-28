@@ -16,6 +16,7 @@ import { ClanBoard } from "@unicum.gg/shared/clans/badges";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import { TankClient } from "@unicum.gg/shared/wot/tanks/common-test";
+import { TankAxis } from "@unicum.gg/shared/wot/tank-spec-fields";
 import {
   BattleFormat,
   BattleResult,
@@ -64,6 +65,7 @@ export const OPENAPI_ENUM_SOURCES = {
   BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),
   TANK_CLIENT: Object.values(TankClient),
+  TANK_AXIS: Object.values(TankAxis),
   VOTER_BRACKET: Object.values(VoterBracket),
   TANK_RATING_AXIS: Object.values(TankRatingAxis),
   TANK_REVIEW_STATUS: Object.values(TankReviewStatus),
