@@ -40,6 +40,10 @@ function presenceSummary(label: string, kind: MapChangeKind, gained: boolean) {
       return gained ? `${label} mode added` : `${label} mode removed`;
     case MapChangeKind.BattleType:
       return gained ? `Now played in ${label}` : `No longer played in ${label}`;
+    case MapChangeKind.RandomEvent:
+      return gained
+        ? `${label} can now happen mid-battle`
+        : `${label} no longer happens`;
     default:
       return gained ? `${label} added` : `${label} removed`;
   }
@@ -90,7 +94,8 @@ export function formatMapChange(
   if (
     (meta.kind === MapChangeKind.Presence ||
       meta.kind === MapChangeKind.Mode ||
-      meta.kind === MapChangeKind.BattleType) &&
+      meta.kind === MapChangeKind.BattleType ||
+      meta.kind === MapChangeKind.RandomEvent) &&
     isPresence
   ) {
     return {

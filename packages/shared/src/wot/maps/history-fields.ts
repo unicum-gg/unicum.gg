@@ -11,6 +11,8 @@ export enum MapChangeKind {
   Mode = "mode",
   /** A battle type the map entered or left. */
   BattleType = "battleType",
+  /** A random event the map gained or lost. */
+  RandomEvent = "randomEvent",
   /** Markers that moved, appeared or disappeared, drawn on the minimap. */
   Geometry = "geometry",
   /** The map itself entering or leaving the client. */
@@ -47,6 +49,8 @@ export const MAP_GEOMETRY_PREFIX = "geometry:";
 export const MAP_MODE_PREFIX = "mode:";
 /** Marks a battle type the map entered or left. */
 export const MAP_BATTLE_TYPE_PREFIX = "battleType:";
+/** Marks a random event the map gained or lost, keyed by the event's name. */
+export const MAP_RANDOM_EVENT_PREFIX = "randomEvent:";
 /** Marks the play area of a mode that has one of its own (Onslaught is fought on
  * a reduced part of the map). */
 export const MAP_PLAY_AREA_PREFIX = "playArea:";
@@ -168,6 +172,12 @@ export function resolveMapChangeField(key: string): MapFieldDescriptor {
     return {
       label: battleTypeLabel(key.slice(MAP_BATTLE_TYPE_PREFIX.length)),
       kind: MapChangeKind.BattleType,
+    };
+  }
+  if (key.startsWith(MAP_RANDOM_EVENT_PREFIX)) {
+    return {
+      label: key.slice(MAP_RANDOM_EVENT_PREFIX.length),
+      kind: MapChangeKind.RandomEvent,
     };
   }
   if (key.startsWith(MAP_PLAY_AREA_PREFIX)) {

@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Map changes feed
- * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
+ * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, random events added to or dropped from a map, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
  * @pathParams regionParams
  * @response MapChangesResponse
  * @tag Maps

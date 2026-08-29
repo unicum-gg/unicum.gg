@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Map changes history
- * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
+ * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
  * @pathParams mapParams
  * @response MapHistoryResponse
  * @tag Maps

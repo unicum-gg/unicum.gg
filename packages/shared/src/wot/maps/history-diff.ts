@@ -3,6 +3,7 @@ import {
   MAP_GEOMETRY_PREFIX,
   MAP_MODE_PREFIX,
   MAP_PLAY_AREA_PREFIX,
+  MAP_RANDOM_EVENT_PREFIX,
   TRACKED_MAP_FIELDS,
 } from "./history-fields";
 import type { MapHistoryPoint, MapSnapshotData } from "./history-snapshot";
@@ -295,6 +296,19 @@ export function diffMapSnapshots(
   out.push(
     ...diffPresence(MAP_BATTLE_TYPE_PREFIX, prev.battleTypes, next.battleTypes),
   );
+  // Only once both sides know their events. A snapshot taken before they were
+  // tracked carries no field at all, and reading that as "the map had none"
+  // would report every event of every map as added on the day of the upgrade,
+  // rather than on the patch that introduced it.
+  if (prev.randomEvents && next.randomEvents) {
+    out.push(
+      ...diffPresence(
+        MAP_RANDOM_EVENT_PREFIX,
+        prev.randomEvents,
+        next.randomEvents,
+      ),
+    );
+  }
   out.push(...diffPlayAreas(prev.boxes ?? {}, next.boxes ?? {}));
   out.push(...diffGeometry(prev.geometry, next.geometry));
   return out;

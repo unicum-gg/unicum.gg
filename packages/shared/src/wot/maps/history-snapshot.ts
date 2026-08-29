@@ -3,6 +3,7 @@ import { BattleType, battleTypesForArena } from "./battle-types";
 import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw } from "./game-modes";
 import type { MapPoint } from "./geometry";
+import { buildRandomEvents } from "./random-events";
 import { MIRROR_TRACKING_START } from "../mirror-tracking";
 
 /**
@@ -52,6 +53,16 @@ export type MapSnapshotData = {
   modes: string[];
   /** Battle types the map belongs to (`random`, `onslaught`, ...), sorted. */
   battleTypes: string[];
+  /** Names of the random events the map can run mid-battle, sorted. Names rather
+   * than ids because they are what a reader sees and they are already unique
+   * within a map (the builder numbers two events that would read alike), so the
+   * feed needs no context to tell "Airship Crash 1" from "Airship Crash 2".
+   *
+   * Optional on purpose: the snapshots taken before events were tracked do not
+   * carry the field, and an absent field means "not known" rather than "none".
+   * Diffing the two the same way would announce every event on every map as
+   * newly added the day this shipped. */
+  randomEvents?: string[];
   /** Whether the client shipped an `arena_defs` file for the map at that
    * version. A map known only from the localization has no geometry, no modes
    * and no play area, and the difference between that and a real definition is
@@ -162,6 +173,13 @@ export function buildMapSnapshotData(arena: WotSrcArena): MapSnapshotData {
       // on its own: it is added and removed with Random, and reporting both says
       // the same thing twice.
       .filter((t) => t !== BattleType.Training)
+      .sort(),
+    // Read off the arena rather than off the catalogue's `randomEvents`, which
+    // is gated on the map being played in Random Battles: here the layers are
+    // the record, and a map that stops being a random map is already reported by
+    // its battle types.
+    randomEvents: buildRandomEvents(arena.arenaId, arena.minimapLayers)
+      .map((e) => e.name)
       .sort(),
     boxes,
     geometry,

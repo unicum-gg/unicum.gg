@@ -428,7 +428,7 @@ export interface paths {
         };
         /**
          * Map changes feed
-         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
+         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, random events added to or dropped from a map, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
          */
         get: operations["get-{region}-maps-changes"];
         put?: never;
@@ -468,7 +468,7 @@ export interface paths {
         };
         /**
          * Map changes history
-         * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
+         * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
          */
         get: operations["get-{region}-maps-{slug}-history"];
         put?: never;
