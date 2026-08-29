@@ -4,5 +4,6 @@ export * from "./ratings";
 export * from "./ref";
 export * from "./search-result";
 export * from "./snapshot-stats";
+export * from "./stronghold-policy";
 export * from "./tank-aggregate";
 export * from "./vehicles";

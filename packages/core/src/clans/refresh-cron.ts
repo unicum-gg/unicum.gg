@@ -3,7 +3,7 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { clanRefreshQueueByRegion } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
-import { recordClanSnapshot } from "./snapshots";
+import { recordClanGlobalMapSnapshot, recordClanSnapshot } from "./snapshots";
 import { dequeueClanRefresh } from "./refresh-queue";
 import {
   RefreshSubject,
@@ -16,7 +16,7 @@ import { refreshClanMembers } from "./repository/members";
 import { fetchClanStronghold } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 import { fetchClanGlobalMap } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
 
-// 10s tick — fast enough for user-initiated page visits to feel live, loose
+// 10s tick, fast enough for user-initiated page visits to feel live, loose
 // enough to coalesce bursts on the same clan into a single drain.
 const SCHEDULE = "* * * * * *";
 const BATCH_SIZE_PER_REGION = 5;
@@ -63,7 +63,7 @@ export async function drainClanRefreshQueueForRegion(
   let ok = 0;
   let failed = 0;
 
-  // 1. Batched info upsert — single WG roundtrip + publish per clan.
+  // 1. Batched info upsert, single WG roundtrip + publish per clan.
   const infos = await refreshClansByIdsBatch(region, clanIds).catch((err) => {
     console.error(`[clan-refresh-cron-${region}] batch info failed:`, err);
     return new Map<number, unknown>();
@@ -81,7 +81,7 @@ export async function drainClanRefreshQueueForRegion(
   for (const clanId of clanIds) {
     const info = infos.get(clanId);
     if (!info) {
-      // Ghost clan or batch failure — drop from queue so we don't loop.
+      // Ghost clan or batch failure, drop from queue so we don't loop.
       failed += 1;
       await dequeueClanRefresh(region, clanId);
       continue;
@@ -101,13 +101,28 @@ export async function drainClanRefreshQueueForRegion(
             err,
           ),
         ),
+        // A real visitor is waiting on this one, so both halves are fetched now
+        // rather than left to their crons. `recordClanSnapshot` reschedules the
+        // clan's next cadence sample, so this does not cause a double fetch.
+        //
+        // The two WRITES are sequential even though the fetches are not. Each one
+        // inserts a row carrying the other half forward from the latest row it
+        // reads, so running them concurrently makes them read the same baseline
+        // and race: whichever commits last wins `ORDER BY taken_at DESC`, and if
+        // that is the Global Map write it buries the Stronghold sample under the
+        // stale values it copied. The visitor who triggered the refresh would see
+        // nothing change until the next cadence tick.
         Promise.all([
           fetchClanStronghold(region, clanId),
           fetchClanGlobalMap(region, clanId),
-        ]).then(([sh, gm]) => sh && recordClanSnapshot(region, clanId, sh, gm))
+        ])
+          .then(async ([sh, gm]) => {
+            await recordClanSnapshot(region, clanId, sh);
+            if (gm) await recordClanGlobalMapSnapshot(region, clanId, gm);
+          })
           .catch((err) =>
             console.error(
-              `[clan-refresh-cron-${region}] stronghold ${clanId} failed:`,
+              `[clan-refresh-cron-${region}] snapshot ${clanId} failed:`,
               err,
             ),
           ),

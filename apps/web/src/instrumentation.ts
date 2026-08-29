@@ -65,6 +65,11 @@ export async function register() {
     );
     startClanBackfillCron();
 
+    const { startClanStrongholdCron } = await import(
+      "@unicum.gg/core/clans/stronghold-cron"
+    );
+    startClanStrongholdCron();
+
     const { startBoostWorkflowCron } = await import(
       "@unicum.gg/core/clans/boost-workflow/cron"
     );
