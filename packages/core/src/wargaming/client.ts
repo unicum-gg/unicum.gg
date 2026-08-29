@@ -1,8 +1,10 @@
 import {
+  RateLimit,
   WargamingClient,
   type CacheOptions,
   type EgressConfig,
   type RateLimiterFactory,
+  type RateLimiterKind,
   Region,
 } from "@unicum.gg/wargaming";
 import { Agent, ProxyAgent, type Dispatcher, fetch as undiciFetch } from "undici";
@@ -20,7 +22,7 @@ const cache: CacheOptions | undefined = redis ? { store: new RedisCacheStore(red
 
 // Per-egress budget reserved for interactive calls; the background pipeline gets
 // the rest (`bg = rps - iv`), so `iv + bg = rps` and the total rate to WG is
-// unchanged (never above the per-IP G-Core budget) — we only split the existing
+// unchanged (never above the per-IP G-Core budget), we only split the existing
 // budget into lanes, we never add to it. A fixed reserve rather than a fraction
 // of `rps`: `rps` is the region's G-Core per-IP ceiling, not its interactive
 // demand, so a fraction would over-reserve the higher-ceiling regions (NA/Asia
@@ -37,22 +39,30 @@ const INTERACTIVE_RESERVE_RPS = 2;
 const isBackground = (): boolean =>
   (globalThis as { __dbContext?: string }).__dbContext === "background";
 
-// The rate-limit key includes the egress IP when multi-egress is on, so each
-// source IP keeps its own G-Core per-IP budget (see wargaming DEFAULT_WG_RPS).
+// The pools split into two lanes per egress, so the background snapshot pipeline
+// (the heavy, steady consumer, in the worker) can never starve interactive calls
+// (search, players-online, on-demand player detail, in the web). Both processes
+// share one Redis, so a single FIFO token bucket let the pipeline's workers drive
+// it deep negative under a backlog and every interactive call inherited the same
+// wait (observed ~43s: search and the online counter timing out). Each lane is
+// its own bucket; the pipeline can saturate `bg` without touching `iv`.
 //
-// Two lanes per egress so the background snapshot pipeline (the heavy, steady
-// consumer, in the worker) can never starve interactive calls (search,
-// players-online, on-demand player detail, in the web). Both processes share one
-// Redis, so a single FIFO token bucket let the pipeline's workers drive it deep
-// negative under a backlog, and every interactive call inherited the same wait
-// (observed ~43s: search and the online counter timing out). Each lane is its
-// own bucket; the pipeline can saturate `bg` without touching `iv`. Portal
-// (1 rps/region) is too small to split, so it keeps one shared bucket.
+// Only the public API pool qualifies, because it is the only one a user request
+// can actually land on. The portal pool is 1 rps, too small to divide. The
+// stronghold pool has no interactive consumer at all, both its callers are
+// worker crons, so it always draws from the background lane, and splitting it
+// would idle 40% of the budget (5 rps advertised, 3 usable) against a lane
+// nothing ever queues on.
+const SPLIT_POOLS: ReadonlySet<RateLimiterKind> = new Set([RateLimit.Wg]);
+
 const rateLimit: { factory: RateLimiterFactory } | undefined = redis
   ? {
+      // The rate-limit key includes the egress IP when multi-egress is on, so
+      // each source IP keeps its own G-Core per-IP budget (see DEFAULT_WG_RPS).
       factory: ({ region, kind, rps, egress }) => {
         const suffix = egress ? `:${egress}` : "";
-        if (rps < 2) {
+        const ivRps = Math.min(INTERACTIVE_RESERVE_RPS, rps - 1);
+        if (!SPLIT_POOLS.has(kind) || ivRps < 1) {
           return new RedisRateLimiter(
             redis,
             `wg:rl:${kind}:${region}${suffix}`,
@@ -60,7 +70,6 @@ const rateLimit: { factory: RateLimiterFactory } | undefined = redis
             rps,
           );
         }
-        const ivRps = Math.min(INTERACTIVE_RESERVE_RPS, rps - 1);
         const bgRps = rps - ivRps;
         const bg = new RedisRateLimiter(
           redis,
@@ -123,7 +132,7 @@ const egress: EgressConfig | undefined = Object.values(egressTargets).some((v) =
   : undefined;
 
 /**
- * The single Wargaming client for this app — configured with our WG
+ * The single Wargaming client for this app, configured with our WG
  * application ids, our identified-bot User-Agent, and our perf tracing.
  * Navigate `wg.<region>.<surface>.<resource>.<method>(...)`, e.g.
  * `wg.eu.api.wot.accounts.info({ accountId })` or `wg.region(region).portal.clans.members({ clanId })`.

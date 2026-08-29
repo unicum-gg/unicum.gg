@@ -9,6 +9,7 @@ export type WgRateLimiter = {
 export enum RateLimit {
   Wg = "wg",
   Portal = "portal",
+  Stronghold = "stronghold",
   None = "none",
 }
 
@@ -33,7 +34,7 @@ export type RateLimiterFactory = (ctx: {
 }) => WgRateLimiter;
 
 /**
- * Token bucket — refills at `refillPerSec`, caps at `capacity`. `acquire()`
+ * Token bucket, refills at `refillPerSec`, caps at `capacity`. `acquire()`
  * returns immediately if a token is available, else queues (FIFO) until one is.
  */
 export class RateLimiter implements WgRateLimiter {
@@ -109,7 +110,7 @@ export type RegionRps = Record<Region, number>;
 //
 // The counter being per-IP is the key lever: two whitelisted egress IPs measured
 // ~2x the throughput (each gets its own budget). So raise throughput by adding
-// whitelisted source IPs, NOT by bumping these values — a higher *sustained*
+// whitelisted source IPs, NOT by bumping these values, a higher *sustained*
 // per-IP rate just earns the per-IP ban (a short burst won't show it).
 // Overridable via client options.
 export const DEFAULT_WG_RPS: RegionRps = {
@@ -126,6 +127,37 @@ export const DEFAULT_PORTAL_RPS: RegionRps = {
   [Region.NA]: 1,
   [Region.ASIA]: 1,
 };
+
+// The stronghold game_api host (`wgsh-*`) is NOT geo-routed through G-Core: it
+// resolves straight to Wargaming (`wgsh-woteu.wargaming.net` -> 150.107.125.243,
+// where `api.worldoftanks.eu` lands on `*.fe.core.pw`). So the WAF ceiling that
+// caps DEFAULT_WG_RPS does not apply here, and this pool is deliberately its own
+// budget rather than sharing the API one.
+//
+// It is still limited, not unbounded: this host used to be called with
+// `RateLimit.None`, which meant no bucket AND no egress lane, so the calls left
+// on the container's default IP at whatever rate the caller managed. A modest
+// ceiling keeps a catch-up sweep from turning into a sustained hammer on an
+// endpoint whose own limits are unpublished. Well above what the steady-state
+// cadence needs (~0.4 rps for EU), so it only ever binds during a backlog drain.
+//
+// This is a HOST ceiling, not a per-IP one, so `regionLanes` divides it across
+// the configured egress targets instead of giving each its own full budget. The
+// division is what the WG API pool deliberately does not do: there, each
+// whitelisted IP really does carry its own G-Core allowance, so N lanes mean N
+// times the throughput. Here the limit (whatever it is) belongs to the endpoint,
+// and multiplying by the number of proxies would just be a bigger hammer.
+export const DEFAULT_STRONGHOLD_RPS: RegionRps = {
+  [Region.EU]: 5,
+  [Region.NA]: 5,
+  [Region.ASIA]: 5,
+};
+
+/** Pools whose ceiling belongs to the endpoint rather than to each source IP,
+ * so it is split across egress lanes rather than replicated per lane. */
+const HOST_WIDE_POOLS: ReadonlySet<RateLimiterKind> = new Set([
+  RateLimit.Stronghold,
+]);
 
 /**
  * One limiter per region, keyed off the given RPS map (burst = rps). Uses
@@ -188,19 +220,22 @@ export function regionLanes(
   factory?: RateLimiterFactory,
   egress?: EgressConfig,
 ): Record<Region, Lane[]> {
-  const bucket = (region: Region, ip?: string): WgRateLimiter =>
-    factory
-      ? factory({ region, kind, rps: rps[region], egress: ip })
-      : new RateLimiter(rps[region], rps[region]);
+  const bucket = (region: Region, lanes: number, ip?: string): WgRateLimiter => {
+    // A host-wide ceiling is shared out; a per-IP one is granted to each lane.
+    const share = HOST_WIDE_POOLS.has(kind) ? rps[region] / lanes : rps[region];
+    return factory
+      ? factory({ region, kind, rps: share, egress: ip })
+      : new RateLimiter(share, share);
+  };
   const make = (region: Region): Lane[] => {
     const ips = egress?.ips?.[region]?.filter(Boolean);
     if (ips && ips.length > 0) {
       return ips.map((ip) => ({
-        limiter: bucket(region, ip),
+        limiter: bucket(region, ips.length, ip),
         dispatcher: egress!.dispatcherFor(ip),
       }));
     }
-    return [{ limiter: bucket(region) }];
+    return [{ limiter: bucket(region, 1) }];
   };
   return {
     [Region.EU]: make(Region.EU),
