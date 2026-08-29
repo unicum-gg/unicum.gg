@@ -308,7 +308,7 @@ export interface paths {
         };
         /**
          * Stronghold clan leaderboard
-         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over all-time or the last 30 days. Top 100; cached ~10 min server-side.
+         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over the last 24 hours, 7 days, 30 days, or all-time. Top 100; cached ~10 min server-side.
          */
         get: operations["get-{region}-clans-stronghold-top"];
         put?: never;
