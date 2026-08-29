@@ -23,6 +23,10 @@ const clanStrongholdStats = z
       "A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10).",
   });
 
+const strongholdSr = z
+  .object({ advances: n(), t10: n(), t8: n(), t6: n() })
+  .nullable();
+
 /** Response of `GET /{region}/clans/{tag}/stronghold` (latest + period diffs). */
 export const ClanStrongholdResponse = z.object({
   latest: clanStrongholdStats.nullable(),
@@ -31,13 +35,14 @@ export const ClanStrongholdResponse = z.object({
     d7: clanStrongholdStats.nullable(),
     d30: clanStrongholdStats.nullable(),
   }),
-  // Skirmish Rating per mode/tier, from the materialized leaderboard. `sr` is
-  // the overall (lifetime) value, `sr30d` the last-30-days one. Null (or a null
-  // tier) when the clan isn't ranked. SR has no 24h/7d granularity.
-  sr: z
-    .object({ advances: n(), t10: n(), t8: n(), t6: n() })
-    .nullable(),
-  sr30d: z
-    .object({ advances: n(), t10: n(), t8: n(), t6: n() })
-    .nullable(),
+  // Skirmish Rating per mode/tier, from the materialized leaderboard, one entry
+  // per window. A null tier means the clan played nothing there in that window.
+  // Keys mirror `StrongholdPeriod`; they are spelled out rather than generated
+  // because next-openapi-gen reads this file statically.
+  sr: z.object({
+    "24h": strongholdSr,
+    "7d": strongholdSr,
+    "30d": strongholdSr,
+    overall: strongholdSr,
+  }),
 });

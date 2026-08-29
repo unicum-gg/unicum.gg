@@ -12,7 +12,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
-import { RATING_COLOR_CLASS, strongholdRatingColor, strongholdWinrateColor, StrongholdTier, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
+import { RATING_COLOR_CLASS, strongholdRatingColor, strongholdWinrateColor, StrongholdPeriod, StrongholdTier, type ClanStrongholdSr, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -95,11 +95,10 @@ type ProjectionRow = {
   current: (s: ClanStrongholdStats) => Cell;
   delta: (s: ClanStrongholdStats) => Cell;
 };
-// SR is a current absolute rating (not a per-period diff). The materialized
-// table holds it at two granularities (overall + last 30 days) but no 24h/7d
-// window, so an SR row fills the "Total" (overall) and "Last 30d" columns and
-// dashes 24h/7d. Keyed by the tiers of `ClanStrongholdView["sr"]`.
-type SrRow = { label: string; sr: keyof NonNullable<ClanStrongholdView["sr"]> };
+// SR is an absolute rating per window, not a diff, so an SR row reads its value
+// straight out of the materialized table for each column's period instead of
+// subtracting two snapshots. Keyed by tier.
+type SrRow = { label: string; sr: keyof ClanStrongholdSr };
 type SectionRow = ProjectionRow | SrRow;
 
 // One section per stronghold mode, mirroring the leaderboards, so each mode keeps
@@ -191,6 +190,15 @@ const SECTIONS: { title: string; tier: StrongholdTier; rows: SectionRow[] }[] = 
   },
 ];
 
+// The window each column shows, in the table's column order. The delta rows read
+// `periods.h24/d7/d30`; the SR rows read the same windows out of `sr`.
+const COLUMN_PERIODS = [
+  StrongholdPeriod.Overall,
+  StrongholdPeriod.Day,
+  StrongholdPeriod.Week,
+  StrongholdPeriod.Month,
+] as const;
+
 function srCell(v: number | null): Cell {
   if (v === null) return DASH;
   return {
@@ -207,7 +215,6 @@ export function ClanStrongholdStatsTable(
         latest: ClanStrongholdStats;
         periods: ClanStrongholdView["periods"];
         sr: ClanStrongholdView["sr"];
-        sr30d: ClanStrongholdView["sr30d"];
       },
 ) {
   const loading = "loading" in props;
@@ -251,7 +258,7 @@ export function ClanStrongholdStatsTable(
                 {loading ? (
                   section.title
                 ) : (
-                  // The header links to this mode's leaderboard — a contextual
+                  // The header links to this mode's leaderboard, a contextual
                   // funnel from every indexed clan page to the stronghold boards.
                   // `inline-flex` so the caret's reserved width (opacity-0 keeps
                   // it in flow) stays inside the link instead of stretching the
@@ -283,14 +290,13 @@ export function ClanStrongholdStatsTable(
                   </>
                 ) : "sr" in row ? (
                   <>
-                    <PeriodCell
-                      cell={srCell(props.sr ? props.sr[row.sr] : null)}
-                    />
-                    <PeriodCell cell={DASH} hideOnMobile />
-                    <PeriodCell cell={DASH} hideOnMobile />
-                    <PeriodCell
-                      cell={srCell(props.sr30d ? props.sr30d[row.sr] : null)}
-                    />
+                    {COLUMN_PERIODS.map((period, i) => (
+                      <PeriodCell
+                        key={period}
+                        cell={srCell(props.sr[period]?.[row.sr] ?? null)}
+                        hideOnMobile={i === 1 || i === 2}
+                      />
+                    ))}
                   </>
                 ) : (
                   <>

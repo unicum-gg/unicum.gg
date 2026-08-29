@@ -46,7 +46,6 @@ export function StrongholdTab({
               latest={stronghold.latest}
               periods={stronghold.periods}
               sr={stronghold.sr}
-              sr30d={stronghold.sr30d}
             />
           ) : (
             <div className={`p-4 ${styles.mutedDescription}`}>

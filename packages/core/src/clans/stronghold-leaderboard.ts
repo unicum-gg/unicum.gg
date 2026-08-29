@@ -2,6 +2,7 @@ import { sql } from "drizzle-orm";
 import {
   SR_BOOST_SCALE,
   STRONGHOLD_MIN_BATTLES,
+  STRONGHOLD_PERIOD_DAYS,
   StrongholdPeriod,
   StrongholdTier,
   type StrongholdRatingsTable,
@@ -57,19 +58,20 @@ function tierColumns(tier: StrongholdTier): {
 }
 
 // Battles / wins over the selected period: all-time totals, or the diff against
-// the ~30-day baseline snapshot. Both windows share the same 30-day-active
-// filter, so the diff is always defined and positive.
+// that window's baseline snapshot.
 function periodExprs(
   cols: ReturnType<typeof tierColumns>,
   period: StrongholdPeriod,
 ): { battles: string; wins: string } {
-  if (period === StrongholdPeriod.Month) {
-    return {
-      battles: `(latest.${cols.battles} - b30.battles)`,
-      wins: `(latest.${cols.wins} - b30.wins)`,
-    };
+  // Overall reads the running totals; every other period is a diff against that
+  // window's baseline snapshot.
+  if (period === StrongholdPeriod.Overall) {
+    return { battles: `latest.${cols.battles}`, wins: `latest.${cols.wins}` };
   }
-  return { battles: `latest.${cols.battles}`, wins: `latest.${cols.wins}` };
+  return {
+    battles: `(latest.${cols.battles} - base.battles)`,
+    wins: `(latest.${cols.wins} - base.wins)`,
+  };
 }
 
 // SR = roster strength x win-rate factor x roster maturity. A pure *skill*
@@ -111,6 +113,8 @@ const TIERS: StrongholdTier[] = [
 const PERIODS: StrongholdPeriod[] = [
   StrongholdPeriod.Overall,
   StrongholdPeriod.Month,
+  StrongholdPeriod.Week,
+  StrongholdPeriod.Day,
 ];
 
 type RawRow = {
@@ -153,7 +157,63 @@ async function computeStrongholdRows(
   const battlesRaw = sql.raw(p.battles);
   const winsRaw = sql.raw(p.wins);
   const srRaw = sql.raw(srExpr(p));
-  const minBattlesRaw = sql.raw(String(STRONGHOLD_MIN_BATTLES[tier]));
+  // The materialize gate is a LIFETIME floor: has this clan ever played the tier
+  // enough to be worth a row at all. The per-period floors gate the board at read
+  // time, exactly like the player boards, so a clan's own page can still show a
+  // short-window rating it would not be ranked on.
+  const minBattlesRaw = sql.raw(
+    String(STRONGHOLD_MIN_BATTLES[tier][StrongholdPeriod.Overall]),
+  );
+
+  /**
+   * Newest snapshot at or before `now - days`, else the oldest one before the
+   * latest, per clan. The fallback is for clans tracked for less than the window:
+   * Advances history is only weeks deep and season-sparse, so a strict cutoff
+   * leaves it empty for nearly every clan.
+   *
+   * Bounded at twice the window, like the clan page's own baseline: the diff
+   * spans [baseline, latest], so a baseline far behind the cutoff measures a clan
+   * over a much longer window than the label. On a LEADERBOARD that is worse than
+   * imprecise, clans get ranked against each other over windows of different
+   * lengths, and whoever happened to be sampled least often accumulates the most
+   * battles. Out of bounds means a null baseline, hence a null SR, hence not
+   * ranked: the honest answer for a clan we have no recent measurement of.
+   */
+  const baselineCte = (days: number) => {
+    const cutoff = sql.raw(`now() - interval '${days} days'`);
+    const bound = sql.raw(`now() - interval '${days * 2} days'`);
+    return sql`
+      SELECT DISTINCT ON (s.clan_id) s.clan_id, s.${battlesCol} AS battles, s.${winsCol} AS wins
+      FROM ${snapshots} s
+      JOIN latest l ON l.clan_id = s.clan_id
+      WHERE s.taken_at < l.taken_at AND s.taken_at >= ${bound}
+        -- A row can carry one half of the snapshot and NULLs for the other (the
+        -- Global Map cron writes a row before the clan has ever been sampled for
+        -- Stronghold). Picking such a row as the baseline nulls the whole diff,
+        -- which nulls SR, which silently unranks a clan that plays. The "latest"
+        -- CTE filters on this column already; the baseline has to match.
+        AND s.${battlesCol} IS NOT NULL
+      ORDER BY s.clan_id,
+        (s.taken_at <= ${cutoff}) DESC,
+        CASE WHEN s.taken_at <= ${cutoff} THEN s.taken_at END DESC,
+        s.taken_at ASC`;
+  };
+
+  const periodDays = STRONGHOLD_PERIOD_DAYS[period];
+  // `is_active` is a 30-day notion in every slice ("is this clan playing at
+  // all"), so the 30-day baseline is always computed even when the slice measures
+  // a different window. When the slice IS the 30-day one, `base` just reads it
+  // back rather than running the same scan twice.
+  const baseCte =
+    periodDays === null
+      ? sql``
+      : periodDays === 30
+        ? sql`, base AS (SELECT * FROM baseline_30d)`
+        : sql`, base AS (${baselineCte(periodDays)})`;
+  const baseJoin =
+    periodDays === null
+      ? sql``
+      : sql`LEFT JOIN base ON base.clan_id = latest.clan_id`;
 
   return (await tx.execute(sql`
     WITH latest AS (
@@ -162,25 +222,11 @@ async function computeStrongholdRows(
       WHERE ${battlesCol} IS NOT NULL AND ${battlesCol} >= ${minBattlesRaw}
       ORDER BY clan_id, taken_at DESC
     ),
-    baseline_30d AS (
-      -- Mirror the clan page's baseline (getClanSnapshotPeriods.periodBaseline):
-      -- per clan, the newest snapshot at or before J-30, else the oldest one
-      -- before the latest. Advances history is only weeks deep and season-
-      -- sparse, so a strict ">30d old" cutoff leaves it empty for nearly every
-      -- clan; this fallback keeps the 30d window consistent with the clan page.
-      SELECT DISTINCT ON (s.clan_id) s.clan_id, s.${battlesCol} AS battles, s.${winsCol} AS wins
-      FROM ${snapshots} s
-      JOIN latest l ON l.clan_id = s.clan_id
-      WHERE s.taken_at < l.taken_at
-      ORDER BY s.clan_id,
-        (s.taken_at <= now() - interval '30 days') DESC,
-        CASE WHEN s.taken_at <= now() - interval '30 days' THEN s.taken_at END DESC,
-        s.taken_at ASC
-    )
+    baseline_30d AS (${baselineCte(30)})${baseCte}
     -- roster (median PR + boost signal) is tier- and period-independent, so it
     -- is built once per region into the _sh_roster temp table by the caller and
     -- joined here, instead of the ~10s percentile scan being recomputed in every
-    -- one of the 8 (tier x period) slices.
+    -- one of the (tier x period) slices.
     SELECT
       c.id AS clan_id,
       c.tag,
@@ -204,6 +250,7 @@ async function computeStrongholdRows(
     FROM latest
     JOIN ${clans} c ON c.id = latest.clan_id
     LEFT JOIN baseline_30d b30 ON b30.clan_id = latest.clan_id
+    ${baseJoin}
     LEFT JOIN _sh_roster roster ON roster.clan_id = latest.clan_id
     WHERE c.is_disbanded = false
   `)) as unknown as RawRow[];
@@ -225,8 +272,8 @@ export async function recomputeStrongholdRatings(
 
   await db.transaction(async (tx) => {
     // `roster` (median PR + boost signal per clan) is tier- and period-
-    // independent, but the slice query used to recompute it — a ~10s percentile
-    // scan over ~1.5M members — inside every one of the 8 (tier x period)
+    // independent, but the slice query used to recompute it, a ~10s percentile
+    // scan over ~1.5M members, inside every one of the 8 (tier x period)
     // slices. Build it once here into a temp table the slices join, cutting a
     // region's stronghold recompute from ~90s to ~18s. ON COMMIT DROP so it
     // never outlives this transaction; JIT off matches the by-language service

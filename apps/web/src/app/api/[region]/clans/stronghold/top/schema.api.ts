@@ -1,6 +1,11 @@
 // Co-located response schema (`.api.ts` suffix is load-bearing for the generator).
 import { z } from "zod";
-import { clanRankBadge } from "@/services/openapi/schemas";
+import { type EnumMeta, clanRankBadge } from "@/services/openapi/schemas";
+import {
+  StrongholdPeriod,
+  StrongholdSort,
+  StrongholdTier,
+} from "@unicum.gg/shared";
 
 const strongholdLeaderboardEntry = z
   .object({
@@ -45,19 +50,26 @@ const strongholdLeaderboardEntry = z
     description: "One clan on the stronghold leaderboard.",
   });
 
-// Inline literals: locked to `StrongholdTier` / `StrongholdSort` in
-// `@unicum.gg/shared/constants/stronghold`.
+// The domain enums are passed straight to `z.enum`, and the spec's values are
+// filled after generation from the `x-enum-source` markers (see
+// `services/openapi/enum-sources`). These were hand-typed literals, which is how
+// the `period` param stayed at "overall | 30d" after two windows were added to
+// `StrongholdPeriod`, the SDK's generated type contradicted the enum and only
+// tsc at the call site caught it.
 export const strongholdTopQuery = z.object({
-  tier: z.enum(["advances", "t10", "t8", "t6"]).optional().meta({
+  tier: z.enum(StrongholdTier).optional().meta({
     description: "Stronghold mode/tier (default t10).",
-  }),
-  sort: z.enum(["sr", "srb", "elo", "battles", "winrate"]).optional().meta({
+    "x-enum-source": "STRONGHOLD_TIER",
+  } as EnumMeta),
+  sort: z.enum(StrongholdSort).optional().meta({
     description: "Ranking column (default sr).",
-  }),
-  period: z.enum(["overall", "30d"]).optional().meta({
+    "x-enum-source": "STRONGHOLD_SORT",
+  } as EnumMeta),
+  period: z.enum(StrongholdPeriod).optional().meta({
     description:
-      "Window the stats are computed over: all-time or the last 30 days (default overall).",
-  }),
+      "Window the stats are computed over: the last 24 hours, 7 days, 30 days, or all-time (default overall).",
+    "x-enum-source": "STRONGHOLD_PERIOD",
+  } as EnumMeta),
 });
 
 /** Response of `GET /{region}/clans/stronghold/top`. */

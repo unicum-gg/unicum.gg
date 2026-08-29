@@ -30,7 +30,7 @@ import {
 import { StrongholdPeriod, StrongholdSort, StrongholdTier, STRONGHOLD_MIN_BATTLES, STRONGHOLD_PERIOD_LABEL, STRONGHOLD_SORT_LABEL, STRONGHOLD_TIER_LABEL, TIER_SORT_OPTIONS } from "@unicum.gg/shared";
 import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-leaderboard";
 import { unicum } from "@/services/sdk";
-import { type Period, usePeriod, isPeriod } from "@/hooks/use-period";
+import { isStrongholdPeriod, useStrongholdPeriod } from "@/hooks/use-period";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 
 export function StrongholdLeaderboardView({
@@ -44,15 +44,15 @@ export function StrongholdLeaderboardView({
 }) {
   // Sort is per-tier local state (not shared); period IS the shared
   // `unicum.period` cookie (same one the home leaderboards use), so picking it
-  // here carries back to them and vice versa. `Period` and `StrongholdPeriod`
-  // are distinct enums with identical values, so the casts are runtime no-ops.
+  // here carries back to them and vice versa. Read through the stronghold-aware
+  // hook, not `usePeriod`: these boards rank on four windows and that one knows
+  // only the two the home panels share, so it would clamp 24h/7d to Overall.
   const [sort, setSortState] = useState<StrongholdSort>(StrongholdSort.Rating);
-  const [periodCookie, setPeriodCookie] = usePeriod();
-  const period = periodCookie as unknown as StrongholdPeriod;
+  const [period, setPeriodCookie] = useStrongholdPeriod();
 
   // The page is prerendered (ISR) at the canonical view (SR + Overall), seeded
   // here as `initialResults`. Sort/period are then swapped client-side by
-  // re-fetching that variant's top 100 through the SDK — no route navigation, so
+  // re-fetching that variant's top 100 through the SDK, no route navigation, so
   // switching stays a single cheap hit onto the materialized endpoint. The
   // cookie hydrating to `30d` after mount flips the key and refetches on its own.
   const { data } = useSWR(
@@ -130,7 +130,7 @@ export function StrongholdLeaderboardView({
   }
 
   function setPeriod(p: StrongholdPeriod) {
-    setPeriodCookie(p as unknown as Period);
+    setPeriodCookie(p);
     syncUrl(sort, p);
   }
 
@@ -146,7 +146,7 @@ export function StrongholdLeaderboardView({
     // eslint-disable-next-line react-hooks/set-state-in-effect -- deep link is only readable client-side after mount (the page is static)
     if (nextSort) setSortState(nextSort);
     const rawPeriod = sp.get("period");
-    if (rawPeriod && isPeriod(rawPeriod)) setPeriodCookie(rawPeriod);
+    if (rawPeriod && isStrongholdPeriod(rawPeriod)) setPeriodCookie(rawPeriod);
   }, [tier, setPeriodCookie]);
 
   return (
@@ -169,10 +169,10 @@ export function StrongholdLeaderboardView({
             {tier === StrongholdTier.Advances
               ? " in Advances (15v15)"
               : ` in ${STRONGHOLD_TIER_LABEL[tier]} (7v7)`}
-            {period === StrongholdPeriod.Month
-              ? " over the past 30 days"
-              : ""}{" "}
-            (minimum {STRONGHOLD_MIN_BATTLES[tier]} battles).
+            {period === StrongholdPeriod.Overall
+              ? ""
+              : ` over the ${STRONGHOLD_PERIOD_LABEL[period].replace(/^Past /, "past ")}`}{" "}
+            (minimum {STRONGHOLD_MIN_BATTLES[tier][period]} battles).
           </p>
         </PanelContent>
       </Panel>

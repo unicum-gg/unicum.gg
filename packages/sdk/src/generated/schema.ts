@@ -2004,17 +2004,11 @@ export interface components {
                 d30: components["schemas"]["ClanStrongholdStats"] | null;
             };
             sr: {
-                advances: number | null;
-                t10: number | null;
-                t8: number | null;
-                t6: number | null;
-            } | null;
-            sr30d: {
-                advances: number | null;
-                t10: number | null;
-                t8: number | null;
-                t6: number | null;
-            } | null;
+                "24h": components["schemas"]["strongholdSr"];
+                "7d": components["schemas"]["strongholdSr"];
+                "30d": components["schemas"]["strongholdSr"];
+                overall: components["schemas"]["strongholdSr"];
+            };
         };
         /** @description A clan's Stronghold Elo and skirmish/advances battles and wins per tier (6/8/10). */
         ClanStrongholdStats: {
@@ -3486,6 +3480,12 @@ export interface components {
                 d30: components["schemas"]["StrongholdStats"] | null;
             };
         };
+        strongholdSr: {
+            advances: number | null;
+            t10: number | null;
+            t8: number | null;
+            t6: number | null;
+        } | null;
         /** @description Totals for one non-random game mode. */
         StrongholdStats: {
             battles: number;
@@ -4902,8 +4902,8 @@ export interface operations {
                 tier?: "advances" | "t10" | "t8" | "t6";
                 /** @description Ranking column (default sr). */
                 sort?: "sr" | "srb" | "elo" | "battles" | "winrate";
-                /** @description Window the stats are computed over: all-time or the last 30 days (default overall). */
-                period?: "overall" | "30d";
+                /** @description Window the stats are computed over: the last 24 hours, 7 days, 30 days, or all-time (default overall). */
+                period?: "24h" | "7d" | "30d" | "overall";
             };
             header?: never;
             path: {

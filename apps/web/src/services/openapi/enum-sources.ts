@@ -4,7 +4,7 @@
 // re-export `env.ts` whose t3-env validation would throw when the WG app ids are
 // absent. Each enum file below imports nothing that reaches env, so this stays a
 // pure, env-free value source. (The app-side `schemas.ts` still imports these
-// enums from the barrels, the usual convention — only this build-tooling module
+// enums from the barrels, the usual convention, only this build-tooling module
 // takes the deep-path exception.)
 import { RatingMetric } from "@unicum.gg/shared/constants/rating";
 import { GlossaryCategory } from "@unicum.gg/shared/glossary/category";
@@ -13,6 +13,11 @@ import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
 import { MapCamouflage } from "@unicum.gg/shared/wot/maps/camouflage";
 import { BattleType } from "@unicum.gg/shared/wot/maps/battle-types";
 import { ClanBoard } from "@unicum.gg/shared/clans/badges";
+import {
+  StrongholdPeriod,
+  StrongholdSort,
+  StrongholdTier,
+} from "@unicum.gg/shared/constants/stronghold";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import { TankClient } from "@unicum.gg/shared/wot/tanks/common-test";
@@ -61,6 +66,9 @@ export const OPENAPI_ENUM_SOURCES = {
   MAP_CAMOUFLAGE: Object.values(MapCamouflage),
   MAP_BATTLE_TYPE: Object.values(BattleType),
   CLAN_BOARD: Object.values(ClanBoard),
+  STRONGHOLD_PERIOD: Object.values(StrongholdPeriod),
+  STRONGHOLD_TIER: Object.values(StrongholdTier),
+  STRONGHOLD_SORT: Object.values(StrongholdSort),
   BATTLE_RESULT: Object.values(BattleResult),
   BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),

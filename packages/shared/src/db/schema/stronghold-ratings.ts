@@ -26,7 +26,7 @@ export function makeStrongholdRatingsTable(region: string) {
     {
       // 'advances' | 't10' | 't8' | 't6' (StrongholdTier).
       tier: text("tier").notNull(),
-      // 'overall' | '30d' (StrongholdPeriod). Battles/wins/sr are already the
+      // StrongholdPeriod: '24h' | '7d' | '30d' | 'overall'. Battles/wins/sr are already the
       // period's values (all-time totals, or the 30-day diff).
       period: text("period").notNull(),
       clanId: bigint("clan_id", { mode: "number" }).notNull(),
