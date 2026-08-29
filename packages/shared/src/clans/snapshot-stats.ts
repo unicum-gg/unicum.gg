@@ -1,3 +1,4 @@
+import { StrongholdPeriod } from "../constants/stronghold";
 import type { ClanSnapshot } from "../db/schema";
 
 // Pure, db-free projections and diffs over a clan snapshot row. Kept apart from
@@ -32,10 +33,26 @@ export type ClanGlobalMapStats = {
   gmProvinces: number | null;
 };
 
+/**
+ * The snapshot a period column diffs against, plus whether that diff can honestly
+ * carry the column's label.
+ *
+ * `attributable` is false when the baseline predates the period's cutoff by more
+ * than the period itself, so the measured span is over twice the label and any
+ * activity in the overhang would be counted into the wrong column. A ZERO delta
+ * is still exact in that case and is reported as such, battles and wins only
+ * ever go up, so a total that did not move across the wider span cannot have
+ * moved inside it either.
+ */
+export type ClanPeriodBaseline = {
+  snapshot: ClanSnapshot;
+  attributable: boolean;
+};
+
 export type ClanSnapshotPeriods = {
-  h24: ClanSnapshot | null;
-  d7: ClanSnapshot | null;
-  d30: ClanSnapshot | null;
+  h24: ClanPeriodBaseline | null;
+  d7: ClanPeriodBaseline | null;
+  d30: ClanPeriodBaseline | null;
 };
 
 export function strongholdStatsFromClanSnapshot(
@@ -76,42 +93,95 @@ export function globalMapStatsFromClanSnapshot(
 export function diffClanGlobalMapStats(
   curr: ClanGlobalMapStats,
   prev: ClanGlobalMapStats,
+  attributable = true,
 ): ClanGlobalMapStats {
-  function diff(a: number | null, b: number | null): number | null {
-    return a !== null && b !== null ? a - b : null;
-  }
+  const diff = makeDiff(attributable);
+  const rating = makeRatingDiff(attributable);
+  const b10 = diff(curr.gmBattlesT10, prev.gmBattlesT10);
+  const b8 = diff(curr.gmBattlesT8, prev.gmBattlesT8);
+  const b6 = diff(curr.gmBattlesT6, prev.gmBattlesT6);
   return {
-    gmEloT10: diff(curr.gmEloT10, prev.gmEloT10),
-    gmBattlesT10: diff(curr.gmBattlesT10, prev.gmBattlesT10),
+    gmEloT10: rating(curr.gmEloT10, prev.gmEloT10, b10),
+    gmBattlesT10: b10,
     gmWinsT10: diff(curr.gmWinsT10, prev.gmWinsT10),
-    gmEloT8: diff(curr.gmEloT8, prev.gmEloT8),
-    gmBattlesT8: diff(curr.gmBattlesT8, prev.gmBattlesT8),
+    gmEloT8: rating(curr.gmEloT8, prev.gmEloT8, b8),
+    gmBattlesT8: b8,
     gmWinsT8: diff(curr.gmWinsT8, prev.gmWinsT8),
-    gmEloT6: diff(curr.gmEloT6, prev.gmEloT6),
-    gmBattlesT6: diff(curr.gmBattlesT6, prev.gmBattlesT6),
+    gmEloT6: rating(curr.gmEloT6, prev.gmEloT6, b6),
+    gmBattlesT6: b6,
     gmWinsT6: diff(curr.gmWinsT6, prev.gmWinsT6),
     gmProvinces: diff(curr.gmProvinces, prev.gmProvinces),
+  };
+}
+
+/**
+ * Field-wise delta on a MONOTONIC counter (battles, wins, provinces), dropping
+ * the ones the period cannot account for.
+ *
+ * When the baseline sits too far before the cutoff (`attributable` false), a
+ * non-zero delta belongs to some wider, unknown span, so it is reported as null
+ * and the table shows a dash rather than a number under a label it does not
+ * match. Zero survives regardless, and that is exact rather than approximate:
+ * a counter that only goes up and did not move across the wider span cannot have
+ * moved inside it, so an idle clan keeps reading "0" instead of going blank.
+ */
+function makeDiff(attributable: boolean) {
+  return (a: number | null, b: number | null): number | null => {
+    if (a === null || b === null) return null;
+    const delta = a - b;
+    return delta === 0 || attributable ? delta : null;
+  };
+}
+
+/**
+ * Delta on a RATING (Elo), which moves in both directions and therefore gets no
+ * free pass on zero: a rating that climbed and fell back over a span we cannot
+ * attribute reads as "+0", asserting stillness we have not measured.
+ *
+ * The one case where zero is still provable is when the tier played nothing over
+ * the span: no battles, no rating movement. So the gate is the tier's own battle
+ * delta, not the rating's. `battlesMoved` is null when even that is unknown.
+ */
+function makeRatingDiff(attributable: boolean) {
+  return (
+    a: number | null,
+    b: number | null,
+    battlesMoved: number | null,
+  ): number | null => {
+    if (a === null || b === null) return null;
+    if (attributable || battlesMoved === 0) return a - b;
+    return null;
   };
 }
 
 export function diffClanStrongholdStats(
   curr: ClanStrongholdStats,
   prev: ClanStrongholdStats,
+  attributable = true,
 ): ClanStrongholdStats {
-  function diff(a: number | null, b: number | null): number | null {
-    return a !== null && b !== null ? a - b : null;
-  }
+  const diff = makeDiff(attributable);
+  const rating = makeRatingDiff(attributable);
+  const battlesT6 = diff(curr.skirmishBattlesT6, prev.skirmishBattlesT6);
+  const battlesT8 = diff(curr.skirmishBattlesT8, prev.skirmishBattlesT8);
+  const skirmishT10 = diff(curr.skirmishBattlesT10, prev.skirmishBattlesT10);
+  const advancesT10 = diff(curr.advancesBattlesT10, prev.advancesBattlesT10);
+  // WG gives Advances and Skirmish T10 the same Elo, so tier 10's rating can be
+  // moved by either mode: it only stands still when BOTH did.
+  const battlesT10 =
+    skirmishT10 === null || advancesT10 === null
+      ? null
+      : skirmishT10 + advancesT10;
   return {
-    eloT6: diff(curr.eloT6, prev.eloT6),
-    skirmishBattlesT6: diff(curr.skirmishBattlesT6, prev.skirmishBattlesT6),
+    eloT6: rating(curr.eloT6, prev.eloT6, battlesT6),
+    skirmishBattlesT6: battlesT6,
     skirmishWinsT6: diff(curr.skirmishWinsT6, prev.skirmishWinsT6),
-    eloT8: diff(curr.eloT8, prev.eloT8),
-    skirmishBattlesT8: diff(curr.skirmishBattlesT8, prev.skirmishBattlesT8),
+    eloT8: rating(curr.eloT8, prev.eloT8, battlesT8),
+    skirmishBattlesT8: battlesT8,
     skirmishWinsT8: diff(curr.skirmishWinsT8, prev.skirmishWinsT8),
-    eloT10: diff(curr.eloT10, prev.eloT10),
-    skirmishBattlesT10: diff(curr.skirmishBattlesT10, prev.skirmishBattlesT10),
+    eloT10: rating(curr.eloT10, prev.eloT10, battlesT10),
+    skirmishBattlesT10: skirmishT10,
     skirmishWinsT10: diff(curr.skirmishWinsT10, prev.skirmishWinsT10),
-    advancesBattlesT10: diff(curr.advancesBattlesT10, prev.advancesBattlesT10),
+    advancesBattlesT10: advancesT10,
     advancesWinsT10: diff(curr.advancesWinsT10, prev.advancesWinsT10),
   };
 }
@@ -132,6 +202,21 @@ export type ClanStrongholdSr = {
   t6: number | null;
 };
 
+/** SR per tier for every window the boards rank on. Keyed by period so adding a
+ * window is a value on `StrongholdPeriod`, not another field to thread through
+ * the view, the response schema and the table. */
+export type ClanStrongholdSrByPeriod = Record<
+  StrongholdPeriod,
+  ClanStrongholdSr | null
+>;
+
+export const EMPTY_STRONGHOLD_SR: ClanStrongholdSrByPeriod = {
+  [StrongholdPeriod.Day]: null,
+  [StrongholdPeriod.Week]: null,
+  [StrongholdPeriod.Month]: null,
+  [StrongholdPeriod.Overall]: null,
+};
+
 export type ClanStrongholdView = {
   latest: ClanStrongholdStats | null;
   periods: {
@@ -139,30 +224,31 @@ export type ClanStrongholdView = {
     d7: ClanStrongholdStats | null;
     d30: ClanStrongholdStats | null;
   };
-  // Skirmish Rating per tier, overall and over the last 30 days. SR only exists
-  // at these two granularities (no 24h/7d window), so the table fills Total +
-  // Last 30d and dashes 24h/7d.
-  sr: ClanStrongholdSr | null;
-  sr30d: ClanStrongholdSr | null;
+  sr: ClanStrongholdSrByPeriod;
 };
 
 export function clanStrongholdView(
   latest: ClanSnapshot | null,
   periods: ClanSnapshotPeriods,
-  sr: ClanStrongholdSr | null = null,
-  sr30d: ClanStrongholdSr | null = null,
+  sr: ClanStrongholdSrByPeriod = EMPTY_STRONGHOLD_SR,
 ): ClanStrongholdView {
-  if (!latest) {
-    return {
-      latest: null,
-      periods: { h24: null, d7: null, d30: null },
-      sr,
-      sr30d,
-    };
+  const current = latest ? strongholdStatsFromClanSnapshot(latest) : null;
+  // A snapshot row holds Stronghold AND Global Map, and either half may be
+  // written alone: a Global-Map-only row leaves every Stronghold column null.
+  // Reading that as "we have data" turns the clan page's honest "no stronghold
+  // data yet" message into a full table of dashes, so an empty projection counts
+  // as no projection.
+  if (!current || Object.values(current).every((v) => v === null)) {
+    return { latest: null, periods: { h24: null, d7: null, d30: null }, sr };
   }
-  const current = strongholdStatsFromClanSnapshot(latest);
-  const diff = (s: ClanSnapshot | null) =>
-    s ? diffClanStrongholdStats(current, strongholdStatsFromClanSnapshot(s)) : null;
+  const diff = (b: ClanPeriodBaseline | null) =>
+    b
+      ? diffClanStrongholdStats(
+          current,
+          strongholdStatsFromClanSnapshot(b.snapshot),
+          b.attributable,
+        )
+      : null;
   return {
     latest: current,
     periods: {
@@ -171,7 +257,6 @@ export function clanStrongholdView(
       d30: diff(periods.d30),
     },
     sr,
-    sr30d,
   };
 }
 
@@ -192,8 +277,14 @@ export function clanGlobalMapView(
     return { latest: null, periods: { h24: null, d7: null, d30: null } };
   }
   const current = globalMapStatsFromClanSnapshot(latest);
-  const diff = (s: ClanSnapshot | null) =>
-    s ? diffClanGlobalMapStats(current, globalMapStatsFromClanSnapshot(s)) : null;
+  const diff = (b: ClanPeriodBaseline | null) =>
+    b
+      ? diffClanGlobalMapStats(
+          current,
+          globalMapStatsFromClanSnapshot(b.snapshot),
+          b.attributable,
+        )
+      : null;
   return {
     latest: current,
     periods: {
