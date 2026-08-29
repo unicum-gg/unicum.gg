@@ -146,6 +146,53 @@ function groupLayers(arenaId: string, layers: ArenaMinimapLayer[]): Group[] {
   return groups;
 }
 
+/** The event's subject, ordinals dropped: what two layers agree on when only an
+ * index tells them apart. */
+function subjectOf(words: string[]): string {
+  return words
+    .filter((w) => !/^\d+$/.test(w))
+    .sort()
+    .join(" ");
+}
+
+/**
+ * Reunite an event the client split across two ordinals.
+ *
+ * A group carrying only danger areas and a group of the same subject carrying
+ * only aftermath art are the two halves of one event: Himmelsdorf shipped its
+ * derailment as `crash02` zones beside a `crash01` aftermath until 1.24.1
+ * renamed the file, and reading that as one event ending and another starting
+ * would put a change in the history where the game had none.
+ *
+ * It cannot swallow two genuinely separate events: those each carry both halves
+ * (Redshire crashes an airship twice, `airshipCrash_01` and `_02`, both with a
+ * zone and an aftermath), and a complete group never merges.
+ */
+function mergeHalves(groups: Group[]): Group[] {
+  const out: Group[] = [];
+  for (const group of groups) {
+    const complete = group.zoneUrls.length > 0 && group.afterUrls.length > 0;
+    const other = complete
+      ? undefined
+      : out.find(
+          (o) =>
+            subjectOf(o.words) === subjectOf(group.words) &&
+            (o.zoneUrls.length === 0) !== (group.zoneUrls.length === 0) &&
+            (o.afterUrls.length === 0) !== (group.afterUrls.length === 0),
+        );
+    if (!other) {
+      out.push(group);
+      continue;
+    }
+    // The half that marks the zone names the event: it is the one the game shows
+    // before anything happens.
+    if (group.zoneUrls.length > 0) other.words = group.words;
+    other.zoneUrls.push(...group.zoneUrls);
+    other.afterUrls.push(...group.afterUrls);
+  }
+  return out;
+}
+
 /** Fill in display names, numbering only the events a map would otherwise show
  * twice (Redshire crashes an airship in two different places). */
 function nameEvents(groups: Group[]): { name: string; id: string }[] {
@@ -192,7 +239,7 @@ export function buildRandomEvents(
   arenaId: string,
   layers: ArenaMinimapLayer[] | undefined,
 ): MapRandomEvent[] {
-  const groups = groupLayers(arenaId, layers ?? []);
+  const groups = mergeHalves(groupLayers(arenaId, layers ?? []));
   const names = nameEvents(groups);
   return groups.map((g, i) => ({
     id: names[i].id,
