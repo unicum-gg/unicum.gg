@@ -70,7 +70,7 @@ export async function getClanEventsCached(
   const clanRecentEvents = clanRecentEventsByRegion[region];
 
   const [clanRow] = await db
-    .select({ lastRefreshedAt: clans.lastRefreshedAt })
+    .select({ eventsRefreshedAt: clans.eventsRefreshedAt })
     .from(clans)
     .where(eq(clans.id, clanId))
     .limit(1);
@@ -83,7 +83,7 @@ export async function getClanEventsCached(
     .limit(limit);
 
   if (rows.length > 0 || clanRow) {
-    const stale = !clanRow || isStale(clanRow.lastRefreshedAt);
+    const stale = !clanRow || isStale(clanRow.eventsRefreshedAt);
     if (stale) refreshClanEventsInBackground(region, clanId, limit);
     return {
       events: await withCurrentNicknames(region, rows.map(eventFromRow)),
@@ -126,9 +126,16 @@ export async function refreshClanEvents(
       )
       .onConflictDoNothing();
   }
+  // Stamps the events column ONLY. It used to stamp `last_refreshed_at`, the
+  // column the backfill scan uses to decide a clan needs a full refresh, and
+  // this function is fired in the background by every clan page hit, so any
+  // crawler kept resetting that clock without a single one of the other
+  // refreshes having run. Measured on EU before the split: 42,452 clans claimed
+  // a refresh inside 24h while 5,891 of them carried Stronghold data over a week
+  // old, because the backfill never considered them due.
   await db
     .update(clans)
-    .set({ lastRefreshedAt: sql`GREATEST(${clans.lastRefreshedAt}, NOW())` })
+    .set({ eventsRefreshedAt: sql`NOW()` })
     .where(eq(clans.id, clanId));
   discoverPlayersBackground(
     region,
