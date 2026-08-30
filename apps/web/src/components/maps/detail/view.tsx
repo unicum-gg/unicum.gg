@@ -10,14 +10,14 @@ import {
   WarningIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { MapActionsMenu } from "@/components/maps/detail/actions-menu";
-import { NightCommonTestBadge } from "@/components/maps/night-badge";
+import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
 import { CAMO_META } from "@/components/maps/meta";
+import { MinimapViewer } from "@/components/maps/detail/minimap-viewer";
 import {
-  MinimapViewer,
   ONSLAUGHT_VIEW,
   variantForKey,
   variantViewKey,
-} from "@/components/maps/detail/minimap-viewer";
+} from "@/components/maps/detail/views";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapVideosPanel } from "@/components/maps/detail/videos";
 import {
@@ -168,7 +168,7 @@ export function MapView({
               </h1>
               {/* The whole map is on the test client alone, not just a layout of
                 * it, so the crest belongs beside its name. */}
-              {detail.commonTest && <NightCommonTestBadge size={18} />}
+              {detail.commonTest && <MapCommonTestBadge size={18} />}
               <MapActionsMenu
                 region={region}
                 slug={detail.slug}
