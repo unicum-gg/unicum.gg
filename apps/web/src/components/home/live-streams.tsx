@@ -11,7 +11,6 @@ import {
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
-import { useTheme } from "next-themes";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
@@ -47,6 +46,7 @@ import { useCookie } from "@/hooks/use-cookie";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import { cn } from "@/lib/utils";
+import { StreamChat } from "./stream-chat";
 import type { Region } from "@unicum.gg/wargaming";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
@@ -93,7 +93,6 @@ export function LiveStreams({
   // video-with-chat layout cannot start collapsed, so the chat is a separate
   // embed iframe we toggle ourselves).
   const [chatOpen, setChatOpen] = useState(false);
-  const { resolvedTheme } = useTheme();
   // Twitch's embed requires the exact host serving the page as `parent`, only
   // known client-side (covers unicum.gg and the 127.0.0.1 loopback in dev).
   // `useSyncExternalStore` reads it without a hydration mismatch: `null` on the
@@ -152,20 +151,6 @@ export function LiveStreams({
       </TableBody>
     </Table>
   );
-  // The 1px bottom padding keeps the panel's screen line visible: it is
-  // painted at z-index -1 on the panel's last pixel row, so an opaque iframe
-  // reaching the very edge would cover it (the table shows it through its
-  // transparent background).
-  const chatFrame = parent ? (
-    <div className="h-96 w-full pb-0.5 lg:h-full">
-      <iframe
-        src={`https://www.twitch.tv/embed/${encodeURIComponent(active.twitchLogin)}/chat?parent=${parent}${resolvedTheme === "dark" ? "&darkpopout" : ""}`}
-        title={`${active.nickname} Twitch chat`}
-        className="size-full"
-      />
-    </div>
-  ) : null;
-
   return (
     <>
       <h1 className="sr-only">
@@ -313,34 +298,53 @@ export function LiveStreams({
                 stream's Twitch chat when toggled (official standalone chat
                 embed; switching streams swaps the iframe src). Theater: the
                 full-width band below the player fits both, table on the left
-                and chat on the right. */}
+                and chat on the right.
+
+                The table and the chat hold the SAME slots in the tree in both
+                layouts, and only their classes change. React remounts a node it
+                finds in a new position, and remounting an iframe reloads it, so
+                rendering the chat in a per-layout branch made entering theater
+                mode wipe the chat history the reader was following. */}
             <div
               className={cn(
                 "border-t border-fd-border",
-                !theater && "lg:relative lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
+                theater
+                  ? "flex flex-col lg:flex-row"
+                  : "lg:relative lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
               )}
             >
-              {theater ? (
-                <div className="flex flex-col lg:flex-row">
-                  <div className="min-w-0 flex-1">{streamersTable}</div>
-                  {chatOpen && chatFrame ? (
-                    <div className="border-t border-fd-border lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l">
-                      {chatFrame}
-                    </div>
-                  ) : null}
-                </div>
-              ) : chatOpen && chatFrame ? (
-                chatFrame
-              ) : (
-                /* Absolutely positioned (desktop) so a long streamer list can
-                   never stretch the panel past the player column: the panel
-                   height is the video's, and the list scrolls inside. It also
-                   keeps the height identical whether the table or the chat is
-                   shown. */
-                <div className="lg:absolute lg:inset-0 lg:overflow-y-auto">
-                  {streamersTable}
-                </div>
-              )}
+              {/* Absolutely positioned (desktop, normal layout) so a long
+                  streamer list can never stretch the panel past the player
+                  column: the panel height is the video's, and the list scrolls
+                  inside. It also keeps the height identical whether the table or
+                  the chat is shown. */}
+              <div
+                className={cn(
+                  theater
+                    ? "min-w-0 flex-1"
+                    : "lg:absolute lg:inset-0 lg:overflow-y-auto",
+                  !theater && chatOpen && "hidden",
+                )}
+              >
+                {streamersTable}
+              </div>
+              <div
+                className={cn(
+                  theater &&
+                    "border-t border-fd-border lg:w-80 lg:shrink-0 lg:border-t-0 lg:border-l",
+                  !theater && "lg:h-full",
+                  !chatOpen && "hidden",
+                )}
+              >
+                {parent ? (
+                  <StreamChat
+                    login={active.twitchLogin}
+                    nickname={active.nickname}
+                    parent={parent}
+                    open={chatOpen}
+                  />
+                ) : null}
+              </div>
             </div>
           </div>
         </PanelContent>
