@@ -64,6 +64,11 @@ export function ownOnslaught(detail: MapDetail): MapOnslaught | null {
   return detail.onslaught.find((o) => o.arenaId === detail.arenaId) ?? null;
 }
 
+/** The layout of the map's night version, or null when it has none. */
+export function nightOnslaught(detail: MapDetail): MapOnslaught | null {
+  return detail.onslaught.find((o) => o.arenaId !== detail.arenaId) ?? null;
+}
+
 /** The Onslaught layout a view key selects, or null when the key names a random
  * battle mode instead. */
 export function onslaughtForKey(

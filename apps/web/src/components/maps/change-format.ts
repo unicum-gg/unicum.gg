@@ -1,5 +1,6 @@
 import {
   displayMapValue,
+  MAP_NIGHT_PREFIX,
   MAP_PRESENT,
   MapChangeKind,
   parseMarkers,
@@ -32,9 +33,19 @@ export type FormattedMapChange = {
 };
 
 /** "gained"/"lost" phrasing for the properties that are simply there or not. */
-function presenceSummary(label: string, kind: MapChangeKind, gained: boolean) {
+function presenceSummary(
+  label: string,
+  kind: MapChangeKind,
+  gained: boolean,
+  field: string,
+) {
   switch (kind) {
     case MapChangeKind.Presence:
+      // The night arena arriving is the map gaining a version of itself, so it
+      // says so rather than claiming the map entered the game.
+      if (field.startsWith(MAP_NIGHT_PREFIX)) {
+        return gained ? `${label} added` : `${label} removed`;
+      }
       return gained ? "Added to the game" : "Removed from the game";
     case MapChangeKind.Mode:
       return gained ? `${label} mode added` : `${label} mode removed`;
@@ -103,7 +114,7 @@ export function formatMapChange(
       before: null,
       after: null,
       markers: null,
-      summary: presenceSummary(meta.label, meta.kind, next !== null),
+      summary: presenceSummary(meta.label, meta.kind, next !== null, field),
     };
   }
 

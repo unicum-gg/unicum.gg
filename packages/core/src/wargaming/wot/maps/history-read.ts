@@ -1,10 +1,12 @@
 import { and, desc, inArray, sql } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import {
+  foldedMapChangeField,
   MAP_PRESENCE_FIELD,
   mapChanges,
   mapSnapshots,
   mapTestChanges,
+  variantOf,
   type MapChange,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -81,12 +83,18 @@ function groupByVersion(rows: MapChange[]): MapVersionChanges[] {
  * changes that belongs to a previous occupant is left behind rather than
  * presented as this map's past.
  */
-export async function getMapHistory(arenaId: string): Promise<MapHistory> {
+export async function getMapHistory(
+  arenaId: string,
+  /** The map's night arena, whose changes belong on this page: it is folded onto
+   * this map and has no page of its own. */
+  nightArenaId?: string | null,
+): Promise<MapHistory> {
+  const ids = nightArenaId ? [arenaId, nightArenaId] : [arenaId];
   const [rows, names] = await Promise.all([
     db
       .select()
       .from(mapChanges)
-      .where(sql`${mapChanges.arenaId} = ${arenaId}`)
+      .where(inArray(mapChanges.arenaId, ids))
       .orderBy(desc(mapChanges.capturedAt)),
     db
       .select({
@@ -110,10 +118,19 @@ export async function getMapHistory(arenaId: string): Promise<MapHistory> {
     if (snapshot.name !== current) break;
     since = snapshot.capturedAt;
   }
-  const mine = since
+  const inWindow = since
     ? rows.filter((r) => r.capturedAt.getTime() >= since.getTime())
     : rows;
+  // The night arena's rows read as this map's, under the field that says which
+  // of the two they describe.
+  const mine = inWindow.map((r) =>
+    r.arenaId === arenaId
+      ? r
+      : { ...r, arenaId, field: foldedMapChangeField(r.field) },
+  );
 
+  // Presence is the map's own: the night arena arriving is a change to this map,
+  // not the map entering the game.
   const presence = mine.filter((r) => r.field === MAP_PRESENCE_FIELD);
   const lastPresence = presence[0] ?? null;
   const firstAdded = presence.filter((r) => r.next !== null).at(-1) ?? null;
@@ -168,6 +185,27 @@ export type MapFeedVersion = {
  * at. That also quietly drops the housekeeping the client does to maps it
  * retired years ago.
  */
+/**
+ * The map a recorded change belongs to on the site, and the field it reads as
+ * there. An arena of its own answers for itself; a night arena answers for the
+ * map it was folded onto, since that is the only page it has.
+ *
+ * Returns null for an arena the catalogue does not list at all, which is what
+ * keeps the client's long tail of retired event arenas out of the feed.
+ */
+function attachChange(
+  arenaId: string,
+  field: string,
+  listed: (id: string) => boolean,
+): { arenaId: string; field: string } | null {
+  if (listed(arenaId)) return { arenaId, field };
+  const variant = variantOf(arenaId);
+  if (variant?.foldedIntoBase && listed(variant.baseId)) {
+    return { arenaId: variant.baseId, field: foldedMapChangeField(field) };
+  }
+  return null;
+}
+
 export async function getRecentMapChanges(
   region: Region,
   { versionLimit = 12 }: { versionLimit?: number } = {},
@@ -175,6 +213,13 @@ export async function getRecentMapChanges(
   const summaries = await listMapSummaries(region);
   const byId = new Map(summaries.map((m) => [m.arenaId, m]));
   if (byId.size === 0) return [];
+  // The night arenas are read too, since their changes belong to the map they
+  // are folded onto. They are not in `byId`, which stays the set of maps that
+  // have a page.
+  const tracked = [
+    ...byId.keys(),
+    ...summaries.flatMap((m) => (m.night ? [m.night.arenaId] : [])),
+  ];
 
   // The versions to show, before their contents: the feed keeps the most recent
   // handful, and the table grows by a patch's worth of rows at every update, so
@@ -185,7 +230,7 @@ export async function getRecentMapChanges(
       capturedAt: sql<Date>`min(${mapChanges.capturedAt})`,
     })
     .from(mapChanges)
-    .where(inArray(mapChanges.arenaId, [...byId.keys()]))
+    .where(inArray(mapChanges.arenaId, tracked))
     .groupBy(mapChanges.gameVersion)
     .orderBy(desc(sql`min(${mapChanges.capturedAt})`))
     .limit(versionLimit);
@@ -196,7 +241,7 @@ export async function getRecentMapChanges(
     .from(mapChanges)
     .where(
       and(
-        inArray(mapChanges.arenaId, [...byId.keys()]),
+        inArray(mapChanges.arenaId, tracked),
         inArray(
           mapChanges.gameVersion,
           versionRows.map((v) => v.gameVersion),
@@ -210,16 +255,17 @@ export async function getRecentMapChanges(
     { capturedAt: Date; maps: Map<string, MapChangeEntryRow[]> }
   >();
   for (const row of rows) {
-    if (!byId.has(row.arenaId)) continue;
+    const on = attachChange(row.arenaId, row.field, (id) => byId.has(id));
+    if (!on) continue;
     let group = byVersion.get(row.gameVersion);
     if (!group) {
       group = { capturedAt: row.capturedAt, maps: new Map() };
       byVersion.set(row.gameVersion, group);
     }
     if (row.capturedAt < group.capturedAt) group.capturedAt = row.capturedAt;
-    const entries = group.maps.get(row.arenaId) ?? [];
-    entries.push({ field: row.field, previous: row.previous, next: row.next });
-    group.maps.set(row.arenaId, entries);
+    const entries = group.maps.get(on.arenaId) ?? [];
+    entries.push({ field: on.field, previous: row.previous, next: row.next });
+    group.maps.set(on.arenaId, entries);
   }
 
   return [...byVersion]
@@ -276,10 +322,11 @@ export async function getPendingMapChanges(
   const byId = new Map(summaries.map((m) => [m.arenaId, m]));
   const byArena = new Map<string, MapChangeEntryRow[]>();
   for (const row of rows) {
-    if (!byId.has(row.arenaId)) continue;
-    const entries = byArena.get(row.arenaId) ?? [];
-    entries.push({ field: row.field, previous: row.previous, next: row.next });
-    byArena.set(row.arenaId, entries);
+    const on = attachChange(row.arenaId, row.field, (id) => byId.has(id));
+    if (!on) continue;
+    const entries = byArena.get(on.arenaId) ?? [];
+    entries.push({ field: on.field, previous: row.previous, next: row.next });
+    byArena.set(on.arenaId, entries);
   }
 
   return {

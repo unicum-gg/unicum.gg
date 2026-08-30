@@ -2,18 +2,22 @@
 
 import { useId } from "react";
 import {
+  MAP_NIGHT_PREFIX,
+  mapChangeArea,
   MapChangeArea,
   MapPoiType,
   MARKER_MOVE_THRESHOLD_M,
   matchMarkers,
-  ONSLAUGHT_MODE,
   type MapDetail,
   type MapHistoryPoint,
 } from "@unicum.gg/shared";
 import Image from "next/image";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { buildArrows } from "@/components/maps/detail/history/arrows";
-import { ownOnslaught } from "@/components/maps/detail/minimap-viewer";
+import {
+  nightOnslaught,
+  ownOnslaught,
+} from "@/components/maps/detail/minimap-viewer";
 import {
   BASE,
   CONTROL_POINT,
@@ -23,11 +27,14 @@ import {
 import type { FormattedMapChange } from "@/components/maps/change-format";
 
 /** The gameplay token a geometry field belongs to (`geometry:comp7:spawns:team1`). */
-const modeOf = (field: string) => field.split(":")[1] ?? "";
+// A change recorded on the night arena carries a `night:` prefix, which sits in
+// front of the key these read, so it comes off first.
+const stripNight = (field: string) =>
+  field.startsWith(MAP_NIGHT_PREFIX) ? field.slice(MAP_NIGHT_PREFIX.length) : field;
 
 /** The marker family a geometry field describes (`bases:team1`, `controlPoint`,
  * `pointsOfInterest:recon`, ...). */
-const familyOf = (field: string) => field.split(":").slice(2).join(":");
+const familyOf = (field: string) => stripNight(field).split(":").slice(2).join(":");
 
 /**
  * The game's own minimap icon for a marker family.
@@ -102,17 +109,22 @@ function plan(
   changes: FormattedMapChange[],
   area: MapChangeArea,
 ) {
+  // The area a change belongs to is what the shared vocabulary says, so the
+  // three of them (the map, Onslaught, and the night arena) are told apart the
+  // same way here as in the rows beside this minimap.
   const geometry = changes.filter(
-    (c) =>
-      c.markers &&
-      (modeOf(c.field) === ONSLAUGHT_MODE) === (area === MapChangeArea.Onslaught),
+    (c) => c.markers && mapChangeArea(c.field) === area,
   );
   if (geometry.length === 0) return null;
-  // The map's own Onslaught layout, which is the one the history is recorded
-  // against (a night arena's layout is a different arena, with its own history).
+  // Each area draws on its own space: the map's, its Onslaught layout's, or the
+  // night arena's, which is a different space again.
   const onslaught =
-    area === MapChangeArea.Onslaught ? ownOnslaught(detail) : null;
-  if (area === MapChangeArea.Onslaught && !onslaught) return null;
+    area === MapChangeArea.Onslaught
+      ? ownOnslaught(detail)
+      : area === MapChangeArea.OnslaughtNight
+        ? nightOnslaught(detail)
+        : null;
+  if (area !== MapChangeArea.Map && !onslaught) return null;
   const width = onslaught?.widthMeters ?? detail.widthMeters;
   const height = onslaught?.heightMeters ?? detail.heightMeters;
   if (width <= 0 || height <= 0) return null;
@@ -194,7 +206,7 @@ export function VersionMinimap({
     <div className="relative aspect-square w-full overflow-hidden">
       <MinimapImage
         src={onslaught?.minimapUrl ?? detail.minimapUrl}
-        arenaId={detail.arenaId}
+        arenaId={onslaught?.arenaId ?? detail.arenaId}
         alt={`${detail.name} minimap`}
         sizes="(max-width: 1024px) 100vw, 20rem"
         className="opacity-70"

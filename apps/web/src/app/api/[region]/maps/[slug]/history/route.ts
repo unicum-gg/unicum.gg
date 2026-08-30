@@ -32,7 +32,7 @@ async function GET__perf(
     return Response.json({ error: "not_found" }, { status: 404 });
   }
   const [history, test] = await Promise.all([
-    getMapHistory(map.arenaId),
+    getMapHistory(map.arenaId, map.night?.arenaId ?? null),
     getMapTestChanges(map.arenaId),
   ]);
   return jsonResponse(

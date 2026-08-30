@@ -17,6 +17,8 @@ import {
 } from "@/components/maps/detail/history/version-map";
 import {
   MAP_HISTORY_TRACKING_START,
+  BATTLE_TYPE_LABEL,
+  BattleType,
   MapChangeArea,
   mapChangeArea,
   type MapDetail,
@@ -73,7 +75,11 @@ function VersionChanges({
   detail: MapDetail;
   changes: FormattedMapChange[];
 }) {
-  const areas = [MapChangeArea.Map, MapChangeArea.Onslaught]
+  const areas = [
+    MapChangeArea.Map,
+    MapChangeArea.Onslaught,
+    MapChangeArea.OnslaughtNight,
+  ]
     .map((area) => ({
       area,
       rows: changes.filter((c) => mapChangeArea(c.field) === area),
@@ -84,9 +90,11 @@ function VersionChanges({
     <>
       {areas.map(({ area, rows }, i) => (
         <div key={area} className={i > 0 ? "border-t border-fd-border" : undefined}>
-          {areas.length > 1 && area === MapChangeArea.Onslaught ? (
+          {areas.length > 1 && area !== MapChangeArea.Map ? (
             <div className="border-b border-fd-border px-4 py-2 text-xs uppercase tracking-wide text-fd-muted-foreground">
-              Onslaught
+              {area === MapChangeArea.OnslaughtNight
+                ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
+                : BATTLE_TYPE_LABEL[BattleType.Onslaught]}
             </div>
           ) : null}
           <div className="grid sm:grid-cols-[minmax(0,1fr)_16rem]">

@@ -60,6 +60,26 @@ export const MAP_PLAY_AREA_PREFIX = "playArea:";
 export const ONSLAUGHT_MODE = "comp7";
 
 /**
+ * Marks a change recorded on a map's night arena, which the reader shows on the
+ * base map's page.
+ *
+ * A night version is its own arena in the client, so its changes are recorded
+ * against it and keyed exactly like any other map's. The base map is where a
+ * reader looks for them, though, and there they have to say which of the two
+ * they describe: without this, a moved Observation Post would read as a change
+ * to the Onslaught everyone already plays, and the arena's own arrival would
+ * read as the map itself being added to the game.
+ */
+export const MAP_NIGHT_PREFIX = "night:";
+
+/** Re-key a change recorded on a folded night arena for display on its base
+ * map. Applied at read time: what was recorded stays a fact about the arena it
+ * happened to. */
+export function foldedMapChangeField(field: string): string {
+  return `${MAP_NIGHT_PREFIX}${field}`;
+}
+
+/**
  * Which of a map's two play areas a change belongs to.
  *
  * Onslaught is not played on the map the other modes are: it has its own reduced
@@ -71,10 +91,13 @@ export enum MapChangeArea {
   Map = "map",
   /** Onslaught's reduced area. */
   Onslaught = "onslaught",
+  /** The night arena's own area, which is a different space again. */
+  OnslaughtNight = "onslaught_night",
 }
 
 /** The play area a recorded change describes. */
 export function mapChangeArea(key: string): MapChangeArea {
+  if (key.startsWith(MAP_NIGHT_PREFIX)) return MapChangeArea.OnslaughtNight;
   const onslaught =
     key === `${MAP_BATTLE_TYPE_PREFIX}${BattleType.Onslaught}` ||
     key.startsWith(`${MAP_PLAY_AREA_PREFIX}${ONSLAUGHT_MODE}`) ||
@@ -157,6 +180,25 @@ function battleTypeLabel(value: string): string {
  * reader can never disagree about what a key means.
  */
 export function resolveMapChangeField(key: string): MapFieldDescriptor {
+  if (key.startsWith(MAP_NIGHT_PREFIX)) {
+    const inner = key.slice(MAP_NIGHT_PREFIX.length);
+    // The arena arriving is the map gaining a night version, not the map
+    // arriving: said the other way it would be plainly false.
+    if (inner === MAP_PRESENCE_FIELD) {
+      return { label: "Night version", kind: MapChangeKind.Presence };
+    }
+    const base = resolveMapChangeField(inner);
+    const day = `(${BATTLE_TYPE_LABEL[BattleType.Onslaught]})`;
+    const night = `(${BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]})`;
+    // A geometry or play-area label already names its mode, so the night arena
+    // renames it rather than trailing a second parenthesis behind it.
+    return {
+      ...base,
+      label: base.label.includes(day)
+        ? base.label.replace(day, night)
+        : `${base.label} ${night}`,
+    };
+  }
   const scalar = BY_KEY.get(key);
   if (scalar) return scalar;
   if (key === MAP_PRESENCE_FIELD) {
