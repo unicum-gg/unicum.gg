@@ -559,22 +559,31 @@ export const HR_MIN_BATTLES = 100;
 
 const HR_SCALE = 1500;
 const HR_VOLUME_K = 100; // half volume-credit at 100 SH battles
-// Axis baselines = EU population medians at >= 100 SH battles.
-const HR_WR_BASE = 0.41;
-const HR_XP_BASE = 1034;
+// Axis baselines = EU population medians at >= 100 SH battles. Exported because
+// the leaderboard computes HRB in SQL over the cached sh_* totals (see
+// `hrbSql`), so both sides read the same numbers rather than each keeping a
+// copy of the formula.
+export const HR_WR_BASE = 0.41;
+export const HR_XP_BASE = 1034;
 // Axis weights: effectiveness (XP) and outcome (win rate) count equally.
-const HR_W_XP = 0.5;
-const HR_W_WIN = 0.5;
+export const HR_W_XP = 0.5;
+export const HR_W_WIN = 0.5;
+
+// The effectiveness score both Hunter ratings are built on: average XP and win
+// rate, each read against the population median and weighted equally. HR and
+// HRB differ only in what they then do with the battle count.
+function hunterScore(s: HRInputs): number {
+  const rXp = s.avgXp / HR_XP_BASE;
+  const rWin = s.wins / s.battles / HR_WR_BASE;
+  return HR_W_XP * rXp + HR_W_WIN * rWin;
+}
 
 /** Steel Hunter HR rating. Null when the player has no Steel Hunter battles. */
 export function computeHR(s: HRInputs): number | null {
   const b = s.battles;
   if (!b || b <= 0) return null;
-  const rXp = s.avgXp / HR_XP_BASE;
-  const rWin = s.wins / b / HR_WR_BASE;
-  const score = HR_W_XP * rXp + HR_W_WIN * rWin;
   const vol = b / (b + HR_VOLUME_K);
-  const hr = HR_SCALE * score * vol;
+  const hr = HR_SCALE * hunterScore(s) * vol;
   return Number.isFinite(hr) ? Math.round(hr) : null;
 }
 
@@ -601,8 +610,22 @@ export function hrColor(value: number): RatingColor {
 // hard in battle royale, so winning AND playing a lot is the real feat. The
 // volume brake `battles/(battles+K)` is replaced by a growing `ln(1+battles/50)`
 // term, and the whole thing rescaled (×635) so the median lands ~943 like HR,
-// keeping the two columns comparable. Computed in SQL for the leaderboard (see
-// getTopSteelHunter): HRB = 635 · (0.5·XP/1034 + 0.5·WR/0.41) · ln(1+battles/50).
+// keeping the two columns comparable: HRB = 635 · (0.5·XP/1034 + 0.5·WR/0.41) ·
+// ln(1+battles/50). The leaderboard evaluates that same expression in SQL over
+// the cached sh_* totals (see `hrbSql`) rather than calling this, since it ranks
+// the whole population, so the two share the constants below.
+export const HRB_SCALE = 635;
+export const HRB_VOLUME_K = 50; // the volume term reaches 1 around 85 battles
+
+/** Steel Hunter HRB rating. Null when the player has no Steel Hunter battles. */
+export function computeHRB(s: HRInputs): number | null {
+  const b = s.battles;
+  if (!b || b <= 0) return null;
+  const vol = Math.log(1 + b / HRB_VOLUME_K);
+  const hrb = HRB_SCALE * hunterScore(s) * vol;
+  return Number.isFinite(hrb) ? Math.round(hrb) : null;
+}
+
 // Thresholds calibrated on the EU HRB distribution at >= 100 SH battles (n~3.3k;
 // p50 ~943, p85 ~1516, p95 ~1995, p99 ~2504, max ~3538) by population percentile,
 // matching each tier's community rarity (top ~1%). Wider than HR, hence its own
