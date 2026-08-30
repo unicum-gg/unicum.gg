@@ -24,6 +24,7 @@ export function GlossaryLabel({
   specKey,
   label,
   fallbackLabel,
+  tip,
   className,
   children,
 }: {
@@ -35,6 +36,11 @@ export function GlossaryLabel({
   /** Tried when nothing defines `label`: a row that shows a variant of the one
    * above it ("… on soft ground") is the same term, measured differently. */
   fallbackLabel?: string;
+  /** This column's own sentence, when it says something the definition cannot:
+   * which of two columns sharing a term this one is, or over what window it is
+   * measured. Shown above the definition, and on its own when nothing defines
+   * the label. */
+  tip?: ReactNode;
   className?: string;
   children: ReactNode;
 }) {
@@ -43,7 +49,25 @@ export function GlossaryLabel({
   const term =
     lookup({ specKey, label: text }) ??
     (fallbackLabel ? lookup({ label: fallbackLabel }) : null);
-  if (!term) return <>{children}</>;
+  if (!term) {
+    if (!tip) return <>{children}</>;
+    // A column with a tip and no definition still explains itself, and reads
+    // like every other explained heading rather than like a dead link.
+    //
+    // `tabIndex` because the trigger is a span: the defined case is a link and
+    // is reachable by keyboard on its own, and without this the readers who
+    // most need the sentence would be the ones who never get it.
+    return (
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span tabIndex={0} className={cn("cursor-help", className)}>
+            {children}
+          </span>
+        </TooltipTrigger>
+        <TooltipContent className="max-w-xs">{tip}</TooltipContent>
+      </Tooltip>
+    );
+  }
 
   return (
     <Tooltip>
@@ -59,10 +83,13 @@ export function GlossaryLabel({
         </Link>
       </TooltipTrigger>
       <TooltipContent className="max-w-xs">
-        <span>
-          <span className="font-medium">{term.term}</span>
-          {": "}
-          {term.short}
+        <span className="block">
+          {tip ? <span className="block">{tip}</span> : null}
+          <span className={tip ? "mt-1 block opacity-80" : undefined}>
+            <span className="font-medium">{term.term}</span>
+            {": "}
+            {term.short}
+          </span>
         </span>
       </TooltipContent>
     </Tooltip>

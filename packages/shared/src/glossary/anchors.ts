@@ -22,3 +22,27 @@ export type GlossaryAnchorPayload = {
   /** Lowercased interface label to the slug that defines it. */
   byLabel: Record<string, string>;
 };
+
+/**
+ * The same term, seen through a window or an average: "30d WN8", "Avg frags",
+ * "Avg WN8 · 30d". A table qualifies its columns constantly, and every entry
+ * would otherwise have to list one label per period it is ever shown over.
+ *
+ * Only consulted after the whole label failed to match, so a term whose own
+ * name starts with a qualifier ("Avg damage" is damage per game, "Average
+ * tier" is its own statistic) still resolves to itself. Returns null when the
+ * label carries no qualifier, so a caller can skip the second lookup.
+ *
+ * Here rather than in the browser's lookup because the coverage report reads it
+ * too: a report that normalized labels differently from the page would call a
+ * label undefined that a reader resolves on hover, which is the one thing it
+ * exists to tell the truth about.
+ */
+export function unqualifyGlossaryLabel(label: string): string | null {
+  const trimmed = label.trim();
+  const stripped = trimmed
+    .replace(/\s*[·(]\s*(?:24h|7d|30d|60d|90d)\s*\)?$/i, "")
+    .replace(/^(?:avg|average|24h|7d|30d|last\s+(?:24h|7d|30d))\s+/i, "")
+    .trim();
+  return stripped.length > 1 && stripped !== trimmed ? stripped : null;
+}
