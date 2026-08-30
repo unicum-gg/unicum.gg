@@ -28,10 +28,11 @@ function extraBattleTypes(
 /** Every battle map on a region as a lightweight gallery summary, name-sorted.
  * The catalogue is region-scoped but essentially identical across regions. */
 export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
-  const [{ arenas, index, onslaughtArenas }, clanWars] = await Promise.all([
-    getMapCatalog(region),
-    getClanWarsArenaIds(region),
-  ]);
+  const [{ arenas, index, onslaughtArenas, testOnlyArenas }, clanWars] =
+    await Promise.all([
+      getMapCatalog(region),
+      getClanWarsArenaIds(region),
+    ]);
   const out: MapSummary[] = [];
   for (const arena of arenas.values()) {
     const slug = index.idToSlug.get(arena.arenaId);
@@ -43,6 +44,7 @@ export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
           slug,
           extraBattleTypes(arena.arenaId, clanWars, night.length > 0),
           night,
+          testOnlyArenas,
         ),
       );
     }
@@ -57,7 +59,8 @@ export async function getMapDetailBySlug(
   region: Region,
   slug: string,
 ): Promise<MapDetail | null> {
-  const { arenas, index, onslaughtArenas } = await getMapCatalog(region);
+  const { arenas, index, onslaughtArenas, testOnlyArenas } =
+    await getMapCatalog(region);
   const arenaId =
     index.slugToId.get(slug.toLowerCase()) ??
     (arenas.has(slug) ? slug : undefined);
@@ -71,6 +74,7 @@ export async function getMapDetailBySlug(
     index.idToSlug.get(arenaId) ?? slug,
     extraBattleTypes(arenaId, clanWars, night.length > 0),
     night,
+    testOnlyArenas,
   );
 }
 

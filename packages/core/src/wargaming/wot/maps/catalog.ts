@@ -2,6 +2,7 @@ import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
 import {
   buildMapSlugIndex,
   mapDisplayName,
+  minimapUrl,
   variantOf,
   type MapSlugIndex,
 } from "@unicum.gg/shared";
@@ -16,6 +17,9 @@ export type MapCatalog = {
    * deliberately absent from `arenas`: they are that map played in Onslaught
    * after dark, not a map to list beside it. */
   onslaughtArenas: Map<string, WotSrcArena[]>;
+  /** Of those, the ones the live client only declares: it ships no space for
+   * them, so they can only be played on the Common Test. */
+  testOnlyArenas: Set<string>;
 };
 
 // The catalogue derives from static client scripts (only a game patch changes
@@ -24,13 +28,13 @@ export type MapCatalog = {
 // network on every hit.
 const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const REDIS_TTL_SECONDS = 24 * 60 * 60;
-// Bumped whenever a new field is read off the cached arenas: the value is the
-// serialized `WotSrcArena[]`, so a payload written by the previous deploy is a
-// day of `undefined` on any field that shipped with this one. Bumped too when
-// name resolution changes, since the names are resolved before the array is
+// Bumped whenever a new field is read off the cached arenas or the payload's own
+// shape changes: a payload written by the previous deploy is otherwise a day of
+// `undefined` on anything that shipped with this one. Bumped too when name
+// resolution changes, since the names are resolved before the array is
 // serialized and a stale payload would keep serving the previous spelling (and
 // therefore the previous slugs) for a day.
-const SHAPE_VERSION = 3;
+const SHAPE_VERSION = 4;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 
@@ -39,7 +43,14 @@ const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 // that array is the only thing we serialize to share across workers. It holds
 // every arena, folded ones included, since which of them is a map of its own is
 // what this rebuilds.
-function catalogFromArenas(all: WotSrcArena[]): MapCatalog {
+type CatalogPayload = {
+  arenas: WotSrcArena[];
+  /** Arena ids the live client declares without shipping their space. */
+  testOnly: string[];
+};
+
+function catalogFromArenas(payload: CatalogPayload): MapCatalog {
+  const all = payload.arenas;
   const onslaughtArenas = new Map<string, WotSrcArena[]>();
   const folded: [WotSrcArena, string][] = [];
   const maps: WotSrcArena[] = [];
@@ -67,15 +78,48 @@ function catalogFromArenas(all: WotSrcArena[]): MapCatalog {
   // The caller hands the arenas over name-sorted and both the id map and the
   // slug index inherit that order, so an orphan appended above has to be sorted
   // back in rather than left at the end (the sitemap reads this order).
-  if (orphans) {
-    maps.sort((a, b) => a.name.localeCompare(b.name));
-    return {
-      arenas: new Map(maps.map((a) => [a.arenaId, a])),
-      index: buildMapSlugIndex(maps),
-      onslaughtArenas,
-    };
-  }
-  return { arenas: byId, index: buildMapSlugIndex(maps), onslaughtArenas };
+  if (orphans) maps.sort((a, b) => a.name.localeCompare(b.name));
+  const listed = orphans ? new Map(maps.map((a) => [a.arenaId, a])) : byId;
+  return {
+    arenas: listed,
+    index: buildMapSlugIndex(maps),
+    onslaughtArenas,
+    testOnlyArenas: new Set(payload.testOnly),
+  };
+}
+
+// Long enough for a mirror round trip, short enough that a slow one cannot hold
+// the catalogue build hostage.
+const MINIMAP_PROBE_TIMEOUT_MS = 5000;
+
+/**
+ * The folded arenas the live client only declares, read off the minimap mirror.
+ *
+ * The mirror is extracted from the client's own packages, so it publishes an
+ * image for every space the live client ships and none for a space it does not:
+ * a 404 on the live branch is an arena the client names without carrying, which
+ * is exactly the state the 2.4 night versions are in (their packages are on the
+ * Common Test alone). Derived rather than listed, so an arena stops being
+ * flagged the day its package ships, and the probe is only paid for the handful
+ * of folded arenas rather than for the whole catalogue.
+ *
+ * Fails towards "shipped": a mirror blip must not label a live map as test-only.
+ */
+async function findTestOnlyArenas(ids: string[]): Promise<string[]> {
+  const checked = await Promise.all(
+    ids.map(async (arenaId) => {
+      try {
+        const res = await fetch(minimapUrl(arenaId), {
+          method: "HEAD",
+          signal: AbortSignal.timeout(MINIMAP_PROBE_TIMEOUT_MS),
+        });
+        return res.ok ? null : arenaId;
+      } catch {
+        return null;
+      }
+    }),
+  );
+  return checked.filter((id) => id !== null);
 }
 
 /**
@@ -133,7 +177,7 @@ export async function getMapCatalog(region: Region): Promise<MapCatalog> {
     try {
       const raw = await redis.get(redisKey(region));
       if (raw) {
-        const value = catalogFromArenas(JSON.parse(raw) as WotSrcArena[]);
+        const value = catalogFromArenas(JSON.parse(raw) as CatalogPayload);
         cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });
         return value;
       }
@@ -145,13 +189,20 @@ export async function getMapCatalog(region: Region): Promise<MapCatalog> {
   const raw = await wg.region(region).source.arenas.catalog();
   resolveArenaNames(raw);
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
-  const value = catalogFromArenas(arenas);
+  const folded = arenas
+    .filter((a) => variantOf(a.arenaId)?.foldedIntoBase)
+    .map((a) => a.arenaId);
+  const payload: CatalogPayload = {
+    arenas,
+    testOnly: await findTestOnlyArenas(folded),
+  };
+  const value = catalogFromArenas(payload);
   cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });
   if (redis) {
     try {
       await redis.set(
         redisKey(region),
-        JSON.stringify(arenas),
+        JSON.stringify(payload),
         "EX",
         REDIS_TTL_SECONDS,
       );

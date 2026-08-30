@@ -24,7 +24,7 @@ const BATTLE_TYPE_BLURB: Record<BattleType, string> = {
   [BattleType.Frontline]: "the 30v30 large-scale mode",
   [BattleType.Onslaught]: "the ranked 7v7 mode",
   [BattleType.OnslaughtNight]:
-    "the ranked 7v7 mode after dark, on shorter view range",
+    "the ranked 7v7 mode after dark, on shorter view range, currently playable on the Common Test",
   [BattleType.GrandBattle]: "the 30v30 tier X mode",
   [BattleType.ClanWars]: "clan wars and advances",
   [BattleType.Waffentrager]: "the Waffenträger event",

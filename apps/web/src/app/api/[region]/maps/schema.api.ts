@@ -32,7 +32,14 @@ export const mapSummary = z
       description: "Whether random events might fire on the map mid-battle.",
     }),
     night: z
-      .object({ arenaId: z.string(), minimapUrl: z.string() })
+      .object({
+        arenaId: z.string(),
+        minimapUrl: z.string(),
+        commonTest: z.boolean().meta({
+          description:
+            "Whether only the Common Test client ships this version, so it cannot be played on the live server yet.",
+        }),
+      })
       .nullable()
       .meta({
         description:

@@ -169,11 +169,18 @@ function summaryOf(
 // read as "the night version, if there is one". Its minimap comes from the built
 // layout rather than from the id, so the gallery card and the page's night view
 // can never resolve to different images.
-function nightOf(onslaughtArenas: WotSrcArena[]): MapSummary["night"] {
+function nightOf(
+  onslaughtArenas: WotSrcArena[],
+  testOnly: ReadonlySet<string>,
+): MapSummary["night"] {
   const arena = onslaughtArenas[0];
   const layout = arena ? buildOnslaught(arena) : null;
   return layout && arena
-    ? { arenaId: arena.arenaId, minimapUrl: layout.minimapUrl }
+    ? {
+        arenaId: arena.arenaId,
+        minimapUrl: layout.minimapUrl,
+        commonTest: testOnly.has(arena.arenaId),
+      }
     : null;
 }
 
@@ -188,6 +195,7 @@ export function buildMapSummary(
   slug: string,
   extraBattleTypes: BattleType[] = [],
   onslaughtArenas: WotSrcArena[] = [],
+  testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapSummary {
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
   return summaryOf(
@@ -195,7 +203,7 @@ export function buildMapSummary(
     slug,
     battleTypes,
     runsRandomEvents(arena, battleTypes),
-    nightOf(onslaughtArenas),
+    nightOf(onslaughtArenas, testOnlyArenas),
   );
 }
 
@@ -210,6 +218,7 @@ export function buildMapDetail(
   slug: string,
   extraBattleTypes: BattleType[] = [],
   onslaughtArenas: WotSrcArena[] = [],
+  testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapDetail {
   const { width, height } = dimensions(arena);
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
@@ -222,7 +231,7 @@ export function buildMapDetail(
       slug,
       battleTypes,
       randomEvents.length > 0,
-      nightOf(onslaughtArenas),
+      nightOf(onslaughtArenas, testOnlyArenas),
     ),
     description: arena.description,
     roundLength: arena.roundLength,

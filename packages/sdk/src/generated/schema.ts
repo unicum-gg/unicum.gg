@@ -2603,6 +2603,8 @@ export interface components {
             night: {
                 arenaId: string;
                 minimapUrl: string;
+                /** @description Whether only the Common Test client ships this version, so it cannot be played on the live server yet. */
+                commonTest: boolean;
             } | null;
             description: string;
             /** @description Battle timer in seconds. */
@@ -2726,6 +2728,8 @@ export interface components {
             night: {
                 arenaId: string;
                 minimapUrl: string;
+                /** @description Whether only the Common Test client ships this version, so it cannot be played on the live server yet. */
+                commonTest: boolean;
             } | null;
         };
         MapVideosResponse: {

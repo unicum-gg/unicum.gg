@@ -33,7 +33,14 @@ export type MapSummary = {
    * its own, so the gallery links straight to its view and draws the minimap the
    * layout itself resolved rather than guessing it from the id. Null on every
    * map without one. */
-  night: { arenaId: string; minimapUrl: string } | null;
+  night: {
+    arenaId: string;
+    minimapUrl: string;
+    /** Whether only the Common Test client ships this version: the live client
+     * declares the arena but carries no space for it, so it cannot be played
+     * there yet. */
+    commonTest: boolean;
+  } | null;
 };
 
 // An Onslaught capturable point of interest, projected onto the minimap. `type`

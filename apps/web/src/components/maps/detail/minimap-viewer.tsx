@@ -12,6 +12,8 @@ import {
   type MapDetail,
   type MapOnslaught,
 } from "@unicum.gg/shared";
+import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
+import { cn } from "@/lib/utils";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { MinimapLayers } from "@/components/maps/detail/minimap-layers";
@@ -91,6 +93,9 @@ type MapView = ViewGeometry & {
    * more: a night layout is keyed by its own arena, so a `=== ONSLAUGHT_VIEW`
    * test would read it as a random-battle view. */
   onslaught: boolean;
+  /** Whether the layout is one only the test client ships, which the pill says
+   * so a reader never takes it for something they can queue for today. */
+  commonTest: boolean;
   /** The arena the view's minimap belongs to, which is the map itself except on
    * a dedicated Onslaught arena's view: it is a different space, so its image
    * must not fall back to the map's own. */
@@ -105,6 +110,7 @@ function buildViews(detail: MapDetail): MapView[] {
     key: g.mode,
     label: g.label,
     onslaught: false,
+    commonTest: false,
     arenaId: detail.arenaId,
     minimapUrl: detail.minimapUrl,
     widthMeters: detail.widthMeters,
@@ -126,6 +132,7 @@ function buildViews(detail: MapDetail): MapView[] {
         ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
         : BATTLE_TYPE_LABEL[BattleType.Onslaught],
       onslaught: true,
+      commonTest: night && (detail.night?.commonTest ?? false),
       arenaId: onslaught.arenaId,
       minimapUrl: onslaught.minimapUrl,
       widthMeters: onslaught.widthMeters,
@@ -266,9 +273,10 @@ export function MinimapViewer({
               type="button"
               onClick={() => setViewIndex(i)}
               data-active={i === viewIndex}
-              className={pill}
+              className={cn(pill, v.commonTest && "gap-1.5")}
             >
               {v.label}
+              {v.commonTest && <CommonTestBadge size={14} />}
             </button>
           ))}
         <div className="ml-auto flex flex-wrap items-center gap-2">
