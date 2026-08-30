@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { regionFromPathname } from "@unicum.gg/wargaming";
 import {
+  ChartLineUpIcon,
   ChatsCircleIcon,
   CoinsIcon,
   CrosshairIcon,
@@ -37,6 +38,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   "top-clans": <UsersThreeIcon />,
   stronghold: <ShieldIcon />,
   advances: <FlagBannerIcon />,
+  "tank-performances": <ChartLineUpIcon />,
   "tank-specs": <GaugeIcon />,
   "tank-economics": <CoinsIcon />,
   "tank-moe": <MedalIcon />,

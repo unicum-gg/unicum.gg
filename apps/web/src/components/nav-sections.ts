@@ -91,6 +91,12 @@ export function navSections(region: Region): NavSection[] {
       label: "Tanks",
       links: [
         {
+          id: "tank-performances",
+          label: "Performances",
+          href: tankTabHref(tanks, TankTab.Performances),
+          description: "Winrate and damage per tank",
+        },
+        {
           id: "tank-specs",
           label: "Specifications",
           href: tankTabHref(tanks, TankTab.Specifications),
