@@ -93,9 +93,13 @@ type MapView = ViewGeometry & {
    * more: a night layout is keyed by its own arena, so a `=== ONSLAUGHT_VIEW`
    * test would read it as a random-battle view. */
   onslaught: boolean;
-  /** Whether the layout is one only the test client ships, which the pill says
-   * so a reader never takes it for something they can queue for today. */
+  /** Whether the view's own space is only on the test client, which decides
+   * which branch of the mirror its image comes from. */
   commonTest: boolean;
+  /** Whether this is the night layout. The pill wears the crest only here: on a
+   * map that is wholly test-only the title already says it, and repeating it on
+   * every pill would be noise. */
+  night: boolean;
   /** The arena the view's minimap belongs to, which is the map itself except on
    * a dedicated Onslaught arena's view: it is a different space, so its image
    * must not fall back to the map's own. */
@@ -110,7 +114,8 @@ function buildViews(detail: MapDetail): MapView[] {
     key: g.mode,
     label: g.label,
     onslaught: false,
-    commonTest: false,
+    commonTest: detail.commonTest,
+    night: false,
     arenaId: detail.arenaId,
     minimapUrl: detail.minimapUrl,
     widthMeters: detail.widthMeters,
@@ -132,7 +137,10 @@ function buildViews(detail: MapDetail): MapView[] {
         ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
         : BATTLE_TYPE_LABEL[BattleType.Onslaught],
       onslaught: true,
-      commonTest: night && (detail.night?.commonTest ?? false),
+      commonTest: night
+        ? (detail.night?.commonTest ?? false)
+        : detail.commonTest,
+      night,
       arenaId: onslaught.arenaId,
       minimapUrl: onslaught.minimapUrl,
       widthMeters: onslaught.widthMeters,
@@ -278,11 +286,11 @@ export function MinimapViewer({
               // on the text's baseline instead of beside it.
               className={cn(
                 pill,
-                v.commonTest && "inline-flex items-center gap-1.5",
+                v.night && v.commonTest && "inline-flex items-center gap-1.5",
               )}
             >
               {v.label}
-              {v.commonTest && <NightCommonTestBadge />}
+              {v.night && v.commonTest && <NightCommonTestBadge />}
             </button>
           ))}
         <div className="ml-auto flex flex-wrap items-center gap-2">
@@ -324,6 +332,7 @@ export function MinimapViewer({
           key={view?.minimapUrl ?? detail.minimapUrl}
           src={view?.minimapUrl ?? detail.minimapUrl}
           arenaId={view?.arenaId ?? detail.arenaId}
+          commonTest={view?.commonTest ?? detail.commonTest}
           alt={`${detail.name} minimap`}
           sizes="(max-width: 1024px) 100vw, 640px"
           priority

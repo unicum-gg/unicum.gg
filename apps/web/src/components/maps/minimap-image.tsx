@@ -23,6 +23,7 @@ import { cn } from "@/lib/utils";
 export function MinimapImage({
   src,
   arenaId,
+  commonTest,
   alt,
   sizes,
   priority,
@@ -33,6 +34,9 @@ export function MinimapImage({
   src: string;
   /** The arena the minimap belongs to, the fallback chain is built from it. */
   arenaId: string;
+  /** Whether the arena's space is only on the test client, in which case its
+   * image is only on that branch of the mirror too. */
+  commonTest?: boolean;
   alt: string;
   sizes?: string;
   priority?: boolean;
@@ -42,10 +46,12 @@ export function MinimapImage({
   // The test branch of the same mirror, for an arena the live client declares
   // but does not ship the space of yet: it has no live image at all, so without
   // this the card is a placeholder until the map's package reaches the live
-  // client. Only the folded arenas are probed there: every other arena either
-  // has its live image or has none anywhere, and a blind probe would cost every
-  // one of them a second failing optimizer round-trip.
-  const test = variantOf(arenaId)?.foldedIntoBase
+  // client. Read from the catalogue's own probe when the caller has it, and from
+  // the fold rule otherwise (the changes feed draws arenas it has no summary
+  // for). Every other arena either has its live image or has none anywhere, so a
+  // blind probe would cost each of them a second failing optimizer round-trip.
+  const onTestBranch = commonTest ?? variantOf(arenaId)?.foldedIntoBase ?? false;
+  const test = onTestBranch
     ? [ctMinimapUrl(src), ctMinimapUrl(minimapUrl(arenaId))]
     : [];
   const candidates = [

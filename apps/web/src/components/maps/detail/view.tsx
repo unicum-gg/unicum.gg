@@ -10,6 +10,7 @@ import {
   WarningIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { MapActionsMenu } from "@/components/maps/detail/actions-menu";
+import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { CAMO_META } from "@/components/maps/meta";
 import {
   MinimapViewer,
@@ -144,6 +145,9 @@ export function MapView({
               <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight sm:text-4xl">
                 {detail.name}
               </h1>
+              {/* The whole map is on the test client alone, not just a layout of
+                * it, so the crest belongs beside its name. */}
+              {detail.commonTest && <NightCommonTestBadge size={18} />}
               <MapActionsMenu
                 region={region}
                 slug={detail.slug}

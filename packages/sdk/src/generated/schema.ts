@@ -2601,6 +2601,8 @@ export interface components {
             bases: components["schemas"]["teamMarkers"];
             /** @description Whether random events might fire on the map mid-battle. */
             hasRandomEvents: boolean;
+            /** @description Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet. */
+            commonTest: boolean;
             /** @description This map's night version for Onslaught (its own arena and minimap), null when it has none. */
             night: {
                 arenaId: string;
@@ -2726,6 +2728,8 @@ export interface components {
             bases: components["schemas"]["teamMarkers"];
             /** @description Whether random events might fire on the map mid-battle. */
             hasRandomEvents: boolean;
+            /** @description Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet. */
+            commonTest: boolean;
             /** @description This map's night version for Onslaught (its own arena and minimap), null when it has none. */
             night: {
                 arenaId: string;

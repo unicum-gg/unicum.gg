@@ -1,6 +1,7 @@
 import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
 import {
   buildMapSlugIndex,
+  ctMinimapUrl,
   mapDisplayName,
   minimapUrl,
   variantOf,
@@ -17,8 +18,8 @@ export type MapCatalog = {
    * deliberately absent from `arenas`: they are that map played in Onslaught
    * after dark, not a map to list beside it. */
   onslaughtArenas: Map<string, WotSrcArena[]>;
-  /** Of those, the ones the live client only declares: it ships no space for
-   * them, so they can only be played on the Common Test. */
+  /** The arenas the live client only declares: it ships no space for them, so
+   * they can only be played on the Common Test. */
   testOnlyArenas: Set<string>;
 };
 
@@ -93,30 +94,40 @@ function catalogFromArenas(payload: CatalogPayload): MapCatalog {
 const MINIMAP_PROBE_TIMEOUT_MS = 5000;
 
 /**
- * The folded arenas the live client only declares, read off the minimap mirror.
+ * The arenas the live client only declares, read off the minimap mirror.
  *
  * The mirror is extracted from the client's own packages, so it publishes an
- * image for every space the live client ships and none for a space it does not:
- * a 404 on the live branch is an arena the client names without carrying, which
- * is exactly the state the 2.4 night versions are in (their packages are on the
- * Common Test alone). Derived rather than listed, so an arena stops being
- * flagged the day its package ships, and the probe is only paid for the handful
- * of folded arenas rather than for the whole catalogue.
+ * image for every space the live client ships and none for a space it does not.
+ * An arena missing from the live branch but present on the test one is therefore
+ * an arena the live client names without carrying, which is the state update
+ * 2.4 left ten of them in (four night versions, three Waffenträger reskins and
+ * the three arcade minigames): declared everywhere, playable only on the test.
+ *
+ * Both halves are needed. A live 404 alone would also catch the legacy event
+ * arenas that have no HD image anywhere, and calling those Common Test would be
+ * plainly wrong. Derived rather than listed, so an arena stops being flagged the
+ * day its package ships.
  *
  * Fails towards "shipped": a mirror blip must not label a live map as test-only.
  */
 async function findTestOnlyArenas(ids: string[]): Promise<string[]> {
+  const exists = async (url: string | null): Promise<boolean> => {
+    if (url === null) return false;
+    try {
+      const res = await fetch(url, {
+        method: "HEAD",
+        signal: AbortSignal.timeout(MINIMAP_PROBE_TIMEOUT_MS),
+      });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  };
   const checked = await Promise.all(
     ids.map(async (arenaId) => {
-      try {
-        const res = await fetch(minimapUrl(arenaId), {
-          method: "HEAD",
-          signal: AbortSignal.timeout(MINIMAP_PROBE_TIMEOUT_MS),
-        });
-        return res.ok ? null : arenaId;
-      } catch {
-        return null;
-      }
+      const live = minimapUrl(arenaId);
+      if (await exists(live)) return null;
+      return (await exists(ctMinimapUrl(live))) ? arenaId : null;
     }),
   );
   return checked.filter((id) => id !== null);
@@ -189,12 +200,9 @@ export async function getMapCatalog(region: Region): Promise<MapCatalog> {
   const raw = await wg.region(region).source.arenas.catalog();
   resolveArenaNames(raw);
   const arenas = dedupeByName(raw).sort((a, b) => a.name.localeCompare(b.name));
-  const folded = arenas
-    .filter((a) => variantOf(a.arenaId)?.foldedIntoBase)
-    .map((a) => a.arenaId);
   const payload: CatalogPayload = {
     arenas,
-    testOnly: await findTestOnlyArenas(folded),
+    testOnly: await findTestOnlyArenas(arenas.map((a) => a.arenaId)),
   };
   const value = catalogFromArenas(payload);
   cache.set(region, { value, expiresAt: Date.now() + CACHE_TTL_MS });

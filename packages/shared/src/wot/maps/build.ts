@@ -148,6 +148,7 @@ function summaryOf(
   battleTypes: BattleType[],
   hasRandomEvents: boolean,
   night: MapSummary["night"],
+  commonTest: boolean,
 ): MapSummary {
   const { size } = dimensions(arena);
   return {
@@ -161,6 +162,7 @@ function summaryOf(
     minimapUrl: minimapUrl(arena.arenaId),
     bases: primaryBases(arena),
     hasRandomEvents,
+    commonTest,
     night,
   };
 }
@@ -204,6 +206,7 @@ export function buildMapSummary(
     battleTypes,
     runsRandomEvents(arena, battleTypes),
     nightOf(onslaughtArenas, testOnlyArenas),
+    testOnlyArenas.has(arena.arenaId),
   );
 }
 
@@ -232,6 +235,7 @@ export function buildMapDetail(
       battleTypes,
       randomEvents.length > 0,
       nightOf(onslaughtArenas, testOnlyArenas),
+      testOnlyArenas.has(arena.arenaId),
     ),
     description: arena.description,
     roundLength: arena.roundLength,

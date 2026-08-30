@@ -31,6 +31,10 @@ export const mapSummary = z
     hasRandomEvents: z.boolean().meta({
       description: "Whether random events might fire on the map mid-battle.",
     }),
+    commonTest: z.boolean().meta({
+      description:
+        "Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet.",
+    }),
     night: z
       .object({
         arenaId: z.string(),

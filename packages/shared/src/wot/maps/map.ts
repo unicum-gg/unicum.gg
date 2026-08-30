@@ -29,6 +29,11 @@ export type MapSummary = {
   /** Whether random events might fire on the map mid-battle, so the gallery can
    * flag it without carrying the events themselves. */
   hasRandomEvents: boolean;
+  /** Whether only the Common Test client ships this map's space: the live client
+   * declares the arena but carries nothing to load, so it cannot be played there
+   * yet. Its minimap comes from the test branch of the mirror for the same
+   * reason. */
+  commonTest: boolean;
   /** This map's night version for Onslaught, when it has one. It is an arena of
    * its own, so the gallery links straight to its view and draws the minimap the
    * layout itself resolved rather than guessing it from the id. Null on every
