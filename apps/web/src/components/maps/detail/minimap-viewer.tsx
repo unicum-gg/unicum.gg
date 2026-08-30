@@ -273,7 +273,13 @@ export function MinimapViewer({
               type="button"
               onClick={() => setViewIndex(i)}
               data-active={i === viewIndex}
-              className={cn(pill, v.commonTest && "gap-1.5")}
+              // The pill is a plain text button, so the badge needs it to become
+              // a flex row: without that the gap does nothing and the crest sits
+              // on the text's baseline instead of beside it.
+              className={cn(
+                pill,
+                v.commonTest && "inline-flex items-center gap-1.5",
+              )}
             >
               {v.label}
               {v.commonTest && <CommonTestBadge size={14} />}
