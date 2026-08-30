@@ -39,6 +39,12 @@ const REDIS_TTL_SECONDS = 24 * 60 * 60;
 const SHAPE_VERSION = 4;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
+// One build per region at a time, like the Clan Wars pool next door. The memo
+// is only written once the build resolves, so without this every request that
+// arrives during a cold build starts its own: the whole wot-src fetch and the
+// probe sweep below, N times over, which is the shape of the cold-start herd
+// that has taken pages down here before.
+const inflight = new Map<Region, Promise<MapCatalog>>();
 
 // The whole catalogue rebuilds deterministically from the sorted+deduped arena
 // array (the id map, the slug index and the fold below all derive from it), so
@@ -93,6 +99,10 @@ function catalogFromArenas(payload: CatalogPayload): MapCatalog {
 // Long enough for a mirror round trip, short enough that a slow one cannot hold
 // the catalogue build hostage.
 const MINIMAP_PROBE_TIMEOUT_MS = 5000;
+// How many minimap probes are in flight at once. The sweep runs once a day per
+// region behind the caches, so its wall time barely matters, and the mirror is
+// a shared GitHub host.
+const PROBE_CONCURRENCY = 8;
 
 /**
  * The arenas the live client only declares, read off the minimap mirror.
@@ -124,14 +134,25 @@ async function findTestOnlyArenas(ids: string[]): Promise<string[]> {
       return false;
     }
   };
-  const checked = await Promise.all(
-    ids.map(async (arenaId) => {
+  const testOnly: string[] = [];
+  const queue = [...ids];
+  // A worker pool rather than one request per arena at once: this is a hundred
+  // odd arenas, and firing every HEAD simultaneously at a mirror we do not own
+  // is how a burst gets throttled. A 429 on the live probe followed by an
+  // answer on the test one is the one combination that would mislabel a live
+  // map, so the sweep stays deliberately unhurried.
+  const worker = async () => {
+    while (queue.length > 0) {
+      const arenaId = queue.pop()!;
       const live = minimapUrl(arenaId);
-      if (await exists(live)) return null;
-      return (await exists(ctMinimapUrl(live))) ? arenaId : null;
-    }),
+      if (await exists(live)) continue;
+      if (await exists(ctMinimapUrl(live))) testOnly.push(arenaId);
+    }
+  };
+  await Promise.all(
+    Array.from({ length: Math.min(PROBE_CONCURRENCY, ids.length) }, worker),
   );
-  return checked.filter((id) => id !== null);
+  return testOnly;
 }
 
 /**
@@ -179,6 +200,14 @@ export async function getMapCatalog(region: Region): Promise<MapCatalog> {
   const cached = cache.get(region);
   if (cached && cached.expiresAt > Date.now()) return cached.value;
 
+  const existing = inflight.get(region);
+  if (existing) return existing;
+  const promise = buildMapCatalog(region).finally(() => inflight.delete(region));
+  inflight.set(region, promise);
+  return promise;
+}
+
+async function buildMapCatalog(region: Region): Promise<MapCatalog> {
   // Shared Redis layer between the per-process memo and the (~600ms) build: the
   // in-memory cache lives per worker, so under the PM2 cluster every worker used
   // to rebuild the catalogue independently (and again per TTL). Reading a built
