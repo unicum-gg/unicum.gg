@@ -88,6 +88,7 @@ Crons run in the standalone **`apps/worker`** process (`src/index.ts`), which st
 | `top-*-cron` | `wargaming/wot/{players,clans}/top/cron` | Nightly leaderboard precompute. |
 | `changelog-cron` | `changelog/cron` | Daily at 18:00 Europe/Paris (`CHANGELOG_CRON` overrides, so weekly is a variable change). Posts the changelog digest to Discord, see [Changelog](#changelog). |
 | `tank-ratings-cron` | `tanks/ratings-aggregate` | Half past the hour. Rolls the community votes into `tank_rating_aggregates` (shrunk means, spread, and the reputation-vs-results gap) and refreshes the voter brackets. Everything it does compares tanks to each other, which is the part a per-tank read cannot do; the tank pages themselves read live. |
+| `streamer-reconcile-cron` | `twitch/reconcile-cron` | Daily (05:20). Realigns every `streamers.twitch_login` on the channel's immutable `twitch_user_id`, backfilling that id for rows seeded by channel name. The whole live path is keyed by login (Helix `user_login`, the badge href, the chat embed), and Twitch lets a streamer rename, so an unattended login either goes quiet (Helix returns nothing, the card just stops appearing) or starts lying (a freed login can be reclaimed by someone else, and we would show a stranger's stream under our player's name). `pnpm --filter @unicum.gg/worker reconcile-streamers` runs it by hand, which is worth doing right after seeding a batch so a typo surfaces instead of silently never rendering. |
 
 ## Changelog
 

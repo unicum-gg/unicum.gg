@@ -106,6 +106,11 @@ export async function register() {
     );
     startLiveStreamersPoller();
 
+    const { startStreamerReconcileCron } = await import(
+      "@unicum.gg/core/twitch/reconcile-cron"
+    );
+    startStreamerReconcileCron();
+
     const { startTankRatingsCron } = await import(
       "@unicum.gg/core/tanks/ratings-aggregate"
     );

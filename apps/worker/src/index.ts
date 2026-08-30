@@ -80,6 +80,11 @@ async function main(): Promise<void> {
   );
   startLiveStreamersPoller();
 
+  const { startStreamerReconcileCron } = await import(
+    "@unicum.gg/core/twitch/reconcile-cron"
+  );
+  startStreamerReconcileCron();
+
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 

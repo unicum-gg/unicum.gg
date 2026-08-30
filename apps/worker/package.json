@@ -8,7 +8,8 @@
     "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts",
     "changelog": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/changelog.ts",
     "changelog:dry": "pnpm changelog --dry",
-    "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts"
+    "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts",
+    "reconcile-streamers": "tsx --env-file-if-exists=../web/.env.local src/scripts/reconcile-streamers.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",
