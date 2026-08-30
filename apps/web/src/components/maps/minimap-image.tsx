@@ -46,11 +46,16 @@ export function MinimapImage({
   // The test branch of the same mirror, for an arena the live client declares
   // but does not ship the space of yet: it has no live image at all, so without
   // this the card is a placeholder until the map's package reaches the live
-  // client. Read from the catalogue's own probe when the caller has it, and from
-  // the fold rule otherwise (the changes feed draws arenas it has no summary
-  // for). Every other arena either has its live image or has none anywhere, so a
-  // blind probe would cost each of them a second failing optimizer round-trip.
-  const onTestBranch = commonTest ?? variantOf(arenaId)?.foldedIntoBase ?? false;
+  // client. Every other arena either has its live image or has none anywhere, so
+  // a blind probe would cost each of them a second failing round-trip.
+  //
+  // Two signals, and either is enough. The catalogue's probe knows about the
+  // maps a summary was read for, and it fails towards "shipped", so a mirror
+  // blip during a cold build writes `false` into a payload cached for a day.
+  // The fold rule knows nothing about the mirror but is always right about the
+  // night arenas, and it covers the callers that have no summary at all.
+  const onTestBranch =
+    commonTest === true || variantOf(arenaId)?.foldedIntoBase === true;
   const test = onTestBranch
     ? [ctMinimapUrl(src), ctMinimapUrl(minimapUrl(arenaId))]
     : [];

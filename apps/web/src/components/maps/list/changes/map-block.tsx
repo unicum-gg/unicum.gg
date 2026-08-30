@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { GlossaryLabel } from "@/components/glossary/label";
+import { MapCommonTestBadge } from "@/components/maps/common-test-badge";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
 import ROUTES from "@/constants/routes";
@@ -18,6 +19,9 @@ export type FeedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
+  /** Whether the live client ships no space for the map itself. */
+  commonTest: boolean;
+  /** Whether it ships none for one of the map's variants. */
   variantCommonTest: boolean;
   changes: MapChangeRow[];
 };
@@ -54,9 +58,13 @@ export function MapBlock({
         className="group flex shrink-0 items-start gap-3 px-4 py-3 sm:w-52"
       >
         <span className="relative size-12 shrink-0 overflow-hidden rounded border border-fd-border">
+          {/* The mirror publishes no live image for a space the live client
+              does not ship, so without this the rows the pending block exists
+              to show would all be placeholders. */}
           <MinimapImage
             src={map.minimapUrl}
             arenaId={map.arenaId}
+            commonTest={map.commonTest}
             alt=""
             sizes="48px"
           />
@@ -64,6 +72,12 @@ export function MapBlock({
         <div className="min-w-0">
           <div className="truncate text-sm font-medium group-hover:text-brand">
             {map.name}
+            {map.commonTest || map.variantCommonTest ? (
+              <>
+                {" "}
+                <MapCommonTestBadge size={12} />
+              </>
+            ) : null}
           </div>
           <div className="mt-0.5 text-xs text-fd-muted-foreground tabular-nums">
             {changes.length} change{changes.length === 1 ? "" : "s"}

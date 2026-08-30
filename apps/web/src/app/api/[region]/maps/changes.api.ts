@@ -38,6 +38,10 @@ export const changedMap = z
     slug: z.string(),
     name: z.string(),
     minimapUrl: z.string(),
+    commonTest: z.boolean().meta({
+      description:
+        "Whether the live client ships no space for this map, so it can only be played on the Common Test and its minimap comes from the test branch of the mirror.",
+    }),
     variantCommonTest: z.boolean().meta({
       description:
         "Whether one of this map's variants is only on the Common Test, so a change to it is not playable on the live server yet.",

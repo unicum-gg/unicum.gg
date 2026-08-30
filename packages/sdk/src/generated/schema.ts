@@ -1791,6 +1791,8 @@ export interface components {
             slug: string;
             name: string;
             minimapUrl: string;
+            /** @description Whether the live client ships no space for this map, so it can only be played on the Common Test and its minimap comes from the test branch of the mirror. */
+            commonTest: boolean;
             /** @description Whether one of this map's variants is only on the Common Test, so a change to it is not playable on the live server yet. */
             variantCommonTest: boolean;
             changes: components["schemas"]["MapChange"][];
