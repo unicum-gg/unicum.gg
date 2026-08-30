@@ -6,21 +6,30 @@
 // Reach for it to backfill the ids the first time (before the next 05:20 tick)
 // or right after seeding a batch of curated streamers, so a typo in a channel
 // name surfaces immediately instead of as a card that never shows up.
-import { reconcileStreamerChannels } from "@unicum.gg/core/twitch/reconcile-cron";
+import { isTwitchEnabled } from "@unicum.gg/core/twitch";
+import {
+  reconcileStreamerChannels,
+  reportProblems,
+} from "@unicum.gg/core/twitch/reconcile-cron";
 
 async function main(): Promise<void> {
+  // Refuses rather than reporting an empty run: the whole point of running this
+  // by hand is to trust the output, and without credentials a typo'd channel
+  // would go unchecked behind a line that reads like success.
+  if (!isTwitchEnabled()) {
+    console.error(
+      "reconcile-streamers: TWITCH_CLIENT_ID / TWITCH_CLIENT_SECRET are not set, nothing was checked",
+    );
+    process.exit(1);
+  }
   const start = Date.now();
-  const { backfilled, renamed, unresolved, vanished } =
-    await reconcileStreamerChannels();
+  const r = await reconcileStreamerChannels();
+  // Row counts, not channel counts: one streamer can hold several WoT accounts,
+  // and each of their rows is written.
   console.log(
-    `reconcile-streamers: ${backfilled} id(s) backfilled, ${renamed} login(s) realigned in ${Date.now() - start}ms`,
+    `reconcile-streamers: ${r.backfilled} row(s) backfilled, ${r.renamed} renamed, ${r.normalised} normalised in ${Date.now() - start}ms`,
   );
-  if (unresolved.length > 0) {
-    console.warn(`  unknown to Twitch: ${unresolved.join(", ")}`);
-  }
-  if (vanished.length > 0) {
-    console.warn(`  channel gone: ${vanished.join(", ")}`);
-  }
+  reportProblems(r);
   process.exit(0);
 }
 

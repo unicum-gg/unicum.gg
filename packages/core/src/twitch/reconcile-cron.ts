@@ -35,58 +35,75 @@ import {
 // not by load. 05:20 is a quiet hour with no other job on it.
 const SCHEDULE = "20 5 * * *";
 
+/** Twitch user ids are numeric strings; anything else never came from Helix. */
+const TWITCH_ID = /^\d+$/;
+
 export type StreamerReconciliation = {
   /** Rows that had no `twitch_user_id` and just got one. */
   backfilled: number;
   /** Rows whose channel was renamed, now realigned on the stored id. */
   renamed: number;
+  /** Rows whose login only differed from Twitch's by letter case. */
+  normalised: number;
   /** Logins Helix does not know and that carry no id to recover from. */
   unresolved: string[];
   /** Channels whose stored id Helix no longer returns, as `login (id)`. */
   vanished: string[];
+  /** Stored ids that are not Twitch ids at all, as `login (value)`. */
+  malformed: string[];
 };
 
 /**
  * Resolve missing ids, then realign every login on its id. Returns what moved
  * so the caller (cron log, or a manual run) can see it. Safe to run at any
- * time: it only ever writes rows whose channel actually changed.
+ * time: it only ever writes rows whose stored login differs from Twitch's.
  */
 export async function reconcileStreamerChannels(): Promise<StreamerReconciliation> {
   const result: StreamerReconciliation = {
     backfilled: 0,
     renamed: 0,
+    normalised: 0,
     unresolved: [],
     vanished: [],
+    malformed: [],
   };
   if (!isTwitchEnabled()) return result;
 
-  // Lowercased on read: Helix answers in lowercase and `getLiveStreamers`
-  // matches on it, so a row seeded with the display casing would otherwise miss
-  // every lookup here and be reported as an unknown channel.
-  const rows = (
-    await db
-      .select({
-        twitchLogin: streamers.twitchLogin,
-        twitchUserId: streamers.twitchUserId,
-      })
-      .from(streamers)
-  ).map((row) => ({
-    login: row.twitchLogin.toLowerCase(),
-    userId: row.twitchUserId || null,
-  }));
+  const rows = await db
+    .select({
+      twitchLogin: streamers.twitchLogin,
+      twitchUserId: streamers.twitchUserId,
+    })
+    .from(streamers);
   if (rows.length === 0) return result;
 
+  // Lowercased only to LOOK UP: Helix answers in lowercase and
+  // `getLiveStreamers` matches on it. The stored spelling is kept as-is so step
+  // 2 can tell "already canonical" from "same channel, wrong case".
   await backfillIds(
-    [...new Set(rows.filter((r) => !r.userId).map((r) => r.login))],
+    [
+      ...new Set(
+        rows
+          .filter((r) => !r.twitchUserId)
+          .map((r) => r.twitchLogin.toLowerCase()),
+      ),
+    ],
     result,
   );
 
   // Only rows that ALREADY had an id are worth a second lookup. A row just
   // backfilled got its id by submitting its login, so asking what that id is
   // called can only echo the login we sent.
-  const tracked = new Map<string, string>();
+  //
+  // Every stored spelling for an id is collected, not just the first one seen:
+  // several rows can share an id with different spellings, and which one the
+  // SELECT happened to return first must not decide whether they get healed.
+  const tracked = new Map<string, Set<string>>();
   for (const row of rows) {
-    if (row.userId && !tracked.has(row.userId)) tracked.set(row.userId, row.login);
+    if (!row.twitchUserId) continue;
+    const logins = tracked.get(row.twitchUserId) ?? new Set<string>();
+    logins.add(row.twitchLogin);
+    tracked.set(row.twitchUserId, logins);
   }
   if (tracked.size > 0) await adoptRenames(tracked, result);
 
@@ -133,6 +150,7 @@ async function backfillIds(
         ),
       )
       .returning({ id: streamers.id });
+    if (written.length === 0) continue;
     result.backfilled += written.length;
     // Logged per channel, not just counted: this is the step that decides which
     // Twitch account a curated name refers to, and it can only ever be as right
@@ -145,35 +163,68 @@ async function backfillIds(
 
 /** Rewrite the login of every channel Helix now reports under another name. */
 async function adoptRenames(
-  tracked: Map<string, string>,
+  tracked: Map<string, Set<string>>,
   result: StreamerReconciliation,
 ): Promise<void> {
-  const byId = new Map(
-    (await getTwitchUsersById([...tracked.keys()])).map((u) => [u.id, u]),
-  );
-  const holderByLogin = new Map(
-    [...tracked].map(([userId, login]) => [login, userId]),
-  );
-  for (const [userId, login] of tracked) {
+  // A non-numeric id never came from Helix (a pasted URL fragment, a display
+  // name, a truncated value). Reported on its own rather than sent: it would
+  // come back as "not found", which reads as a deleted channel and calls for
+  // the opposite response, and it would cost a bisection to isolate.
+  const lookups: string[] = [];
+  for (const [userId, logins] of tracked) {
+    if (TWITCH_ID.test(userId)) lookups.push(userId);
+    else result.malformed.push(`${[...logins][0]} (${userId})`);
+  }
+  if (lookups.length === 0) return;
+
+  let users;
+  try {
+    users = await getTwitchUsersById(lookups);
+  } catch (err) {
+    // Reported rather than thrown, so a blip here does not discard the backfill
+    // work already committed and the unresolved names already collected.
+    console.error("[streamer-reconcile] rename check failed:", err);
+    return;
+  }
+  const byId = new Map(users.map((u) => [u.id, u]));
+
+  // Collisions are read off the TARGET logins, not the stored ones: two live
+  // ids answering to one login is the real conflict, and it cannot go stale
+  // mid-run the way a snapshot of the old names would.
+  const holders = new Map<string, string[]>();
+  for (const userId of lookups) {
+    const user = byId.get(userId);
+    if (!user) continue;
+    holders.set(user.login, [...(holders.get(user.login) ?? []), userId]);
+  }
+
+  for (const userId of lookups) {
+    const stored = tracked.get(userId) ?? new Set<string>();
     const user = byId.get(userId);
     if (!user) {
       // The id is immutable, so this is the channel itself being gone. Left in
       // place rather than deleted: a ban can be lifted, and a curated row is a
       // human decision to undo by hand. Reported with the id because a vanished
       // channel is precisely one whose name no longer looks anything up.
-      result.vanished.push(`${login} (${userId})`);
+      result.vanished.push(`${[...stored][0]} (${userId})`);
       continue;
     }
-    if (user.login === login) continue;
-    const holder = holderByLogin.get(user.login);
-    if (holder && holder !== userId) {
+    // Compared against the STORED spelling, so a row that only differs by case
+    // is repaired too. It resolves fine here but matches nothing on the live
+    // path, so left alone it would stay invisible while every run reported a
+    // clean pass.
+    if ([...stored].every((login) => login === user.login)) continue;
+    const isRename = [...stored].some(
+      (login) => login.toLowerCase() !== user.login,
+    );
+    if ((holders.get(user.login) ?? []).length > 1) {
       // Two ids under one login is the one state the live path cannot express:
-      // it queries Helix per login and keys the answer by it, so the two rows
-      // would collapse into a single card credited to whichever account has
-      // more battles. Twitch is still the authority on the name, so the rename
-      // is applied, but this needs a human to split.
+      // it queries Helix per login and keys the answer by it, so the rows would
+      // collapse into a single card credited to whichever account has more
+      // battles. Twitch is still the authority on the name, so the rename is
+      // applied, but this needs a human to split.
       console.warn(
-        `[streamer-reconcile] ${userId} renamed to ${user.login}, a login twitch id ${holder} already holds`,
+        `[streamer-reconcile] twitch id ${userId} shares login ${user.login} with ${(holders.get(user.login) ?? []).filter((id) => id !== userId).join(", ")}`,
       );
     }
     const written = await db
@@ -181,9 +232,11 @@ async function adoptRenames(
       .set({ twitchLogin: user.login })
       .where(eq(streamers.twitchUserId, userId))
       .returning({ id: streamers.id });
-    result.renamed += written.length;
+    if (written.length === 0) continue;
+    if (isRename) result.renamed += written.length;
+    else result.normalised += written.length;
     console.log(
-      `[streamer-reconcile] ${login} renamed to ${user.login} (${written.length} row(s))`,
+      `[streamer-reconcile] ${[...stored].join(", ")} ${isRename ? "renamed" : "normalised"} to ${user.login} (${written.length} row(s))`,
     );
   }
 }
@@ -195,20 +248,29 @@ export function startStreamerReconcileCron(): void {
     return;
   }
   scheduleCron("streamer-reconcile-cron", SCHEDULE, async () => {
-    const { backfilled, renamed, unresolved, vanished } =
-      await reconcileStreamerChannels();
-    if (unresolved.length > 0) {
-      console.warn(
-        `[streamer-reconcile] ${unresolved.length} login(s) unknown to Twitch and unrecoverable: ${unresolved.join(", ")}`,
-      );
-    }
-    if (vanished.length > 0) {
-      console.warn(
-        `[streamer-reconcile] ${vanished.length} channel(s) no longer exist: ${vanished.join(", ")}`,
-      );
-    }
+    const r = await reconcileStreamerChannels();
+    reportProblems(r);
     console.log(
-      `[streamer-reconcile] ${backfilled} row(s) backfilled, ${renamed} row(s) realigned`,
+      `[streamer-reconcile] ${r.backfilled} row(s) backfilled, ${r.renamed} renamed, ${r.normalised} normalised`,
     );
   });
+}
+
+/** Warn about every channel a human has to look at. Shared with the CLI. */
+export function reportProblems(r: StreamerReconciliation): void {
+  if (r.unresolved.length > 0) {
+    console.warn(
+      `[streamer-reconcile] ${r.unresolved.length} login(s) unknown to Twitch and unrecoverable: ${r.unresolved.join(", ")}`,
+    );
+  }
+  if (r.vanished.length > 0) {
+    console.warn(
+      `[streamer-reconcile] ${r.vanished.length} channel(s) no longer exist: ${r.vanished.join(", ")}`,
+    );
+  }
+  if (r.malformed.length > 0) {
+    console.warn(
+      `[streamer-reconcile] ${r.malformed.length} row(s) hold something that is not a twitch id: ${r.malformed.join(", ")}`,
+    );
+  }
 }
