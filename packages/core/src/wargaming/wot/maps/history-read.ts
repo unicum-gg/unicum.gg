@@ -5,7 +5,6 @@ import {
   MAP_PRESENCE_FIELD,
   mapChanges,
   mapSnapshots,
-  mapTestChanges,
   variantOf,
   type MapChange,
   type MapSummary,
@@ -189,8 +188,12 @@ export type ChangedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
-  /** Whether one of this map's variants is only on the test client, so a row
-   * about it can say so rather than reading as something playable today. */
+  /** Whether the live client ships no space for this map at all, so its
+   * minimap has to be read from the test branch of the mirror and a row about
+   * it is not something anyone can go and play. */
+  commonTest: boolean;
+  /** The same, of one of the map's variants: a row folded onto the map can say
+   * so rather than reading as something playable today. */
   variantCommonTest: boolean;
   changes: MapChangeEntryRow[];
 };
@@ -220,7 +223,7 @@ export type MapFeedVersion = {
  * Returns null for an arena the catalogue does not list at all, which is what
  * keeps the client's long tail of retired event arenas out of the feed.
  */
-function attachChange(
+export function attachChange(
   arenaId: string,
   field: string,
   listed: (id: string) => boolean,
@@ -320,6 +323,7 @@ export async function getRecentMapChanges(
             slug: map?.slug ?? arenaId,
             name: map?.name ?? arenaId,
             minimapUrl: map?.minimapUrl ?? "",
+            commonTest: map?.commonTest ?? false,
             variantCommonTest:
               map?.variants.some((v) => v.commonTest) ?? false,
             changes,
@@ -339,7 +343,7 @@ export async function getRecentMapChanges(
  * minigames) have come and gone for years, and those past arrivals were real:
  * they shipped, were played, and left. Only the latest one is waiting.
  */
-function currentBuildRows<T extends { arenaId: string; gameVersion: string }>(
+export function currentBuildRows<T extends { arenaId: string; gameVersion: string }>(
   rows: T[],
 ): T[] {
   const newest = new Map<string, string>();
@@ -351,7 +355,7 @@ function currentBuildRows<T extends { arenaId: string; gameVersion: string }>(
 
 /** The arenas a catalogue's maps hold whose space only the test client ships,
  * the map's own and its night version's alike. */
-function testOnlyArenas(summaries: MapSummary[]): Set<string> {
+export function testOnlyArenas(summaries: MapSummary[]): Set<string> {
   const out = new Set<string>();
   for (const m of summaries) {
     if (m.commonTest) out.add(m.arenaId);
@@ -360,81 +364,3 @@ function testOnlyArenas(summaries: MapSummary[]): Set<string> {
   return out;
 }
 
-/** What the running Common Test is about to change, per map. `version` is null
- * when no test is running (or the branch is not ahead of live), in which case
- * `maps` is empty. */
-export type PendingMapChanges = {
-  version: string | null;
-  maps: ChangedMap[];
-};
-
-/**
- * What the running Common Test build changes about the game's maps, for the
- * global feed.
- *
- * The pending half of `getRecentMapChanges`, read from a different table because
- * it is a different kind of thing: `map_changes` is what shipped and is
- * append-only, `map_test_changes` is replaced at every run and disappears when
- * the test does. It is presented as one block rather than as a version in the
- * feed for the same reason.
- *
- * Filtered to the catalogue like the shipped feed: the test build's new arenas
- * are mostly mode variants (the Onslaught night ones) with no metadata and no
- * page to link to, and a line the reader cannot follow is worse than no line.
- */
-export async function getPendingMapChanges(
-  region: Region,
-): Promise<PendingMapChanges> {
-  const [summaries, rows, unshipped] = await Promise.all([
-    listMapSummaries(region),
-    db.select().from(mapTestChanges).orderBy(mapTestChanges.arenaId),
-    // The recorded changes of the arenas the live client declares but does not
-    // ship. They are in `map_changes` (the client did change), yet nothing about
-    // them has reached a live server, so they read as pending beside whatever
-    // the running test is about to do.
-    db.select().from(mapChanges).orderBy(desc(mapChanges.capturedAt)),
-  ]);
-
-  const byId = new Map(summaries.map((m) => [m.arenaId, m]));
-  const testOnly = testOnlyArenas(summaries);
-  const pendingRows = [
-    ...rows.map((r) => ({ arenaId: r.arenaId, field: r.field, previous: r.previous, next: r.next })),
-    ...currentBuildRows(
-      unshipped.filter((r) => testOnly.has(r.arenaId)),
-    ).map((r) => ({
-      arenaId: r.arenaId,
-      field: r.field,
-      previous: r.previous,
-      next: r.next,
-    })),
-  ];
-  if (pendingRows.length === 0) return { version: null, maps: [] };
-  const byArena = new Map<string, MapChangeEntryRow[]>();
-  for (const row of pendingRows) {
-    const on = attachChange(row.arenaId, row.field, (id) => byId.has(id));
-    if (!on) continue;
-    const entries = byArena.get(on.arenaId) ?? [];
-    entries.push({ field: on.field, previous: row.previous, next: row.next });
-    byArena.set(on.arenaId, entries);
-  }
-
-  return {
-    // The build is read from the rows themselves rather than from the catalogue
-    // filter, so a test that only touches uncatalogued arenas is still reported
-    // as running instead of looking like no test at all.
-    version: rows[0]?.testVersion ?? null,
-    maps: [...byArena]
-      .map(([arenaId, changes]) => {
-        const map = byId.get(arenaId);
-        return {
-          arenaId,
-          slug: map?.slug ?? arenaId,
-          name: map?.name ?? arenaId,
-          minimapUrl: map?.minimapUrl ?? "",
-          variantCommonTest: map?.variants.some((v) => v.commonTest) ?? false,
-          changes,
-        };
-      })
-      .sort((a, b) => b.changes.length - a.changes.length),
-  };
-}

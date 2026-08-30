@@ -1,7 +1,5 @@
-import {
-  getPendingMapChanges,
-  getRecentMapChanges,
-} from "@unicum.gg/core/wargaming/wot/maps/history-read";
+import { getRecentMapChanges } from "@unicum.gg/core/wargaming/wot/maps/history-read";
+import { getPendingMapChanges } from "@unicum.gg/core/wargaming/wot/maps/pending-read";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { isRegion } from "@unicum.gg/wargaming";
 import { MapChangesResponse } from "./schema.api";

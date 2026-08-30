@@ -61,7 +61,15 @@ async function GET__perf(
       present: history.present,
       tracked: history.tracked,
       testVersion: test.version,
-      testChanges: [...test.changes, ...history.pending],
+      // The running test wins on a field both sides carry: they are two
+      // statements about the same property of the same arena, the test build's
+      // is the newer one, and the page keys its rows by field.
+      testChanges: [
+        ...test.changes,
+        ...history.pending.filter(
+          (row) => !test.changes.some((c) => c.field === row.field),
+        ),
+      ],
     },
     { headers: { "cache-control": "public, max-age=600" } },
   );
