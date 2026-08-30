@@ -14,10 +14,11 @@ export type MapCatalog = {
   /** Deduped arenas keyed by arena id. */
   arenas: Map<string, WotSrcArena>;
   index: MapSlugIndex;
-  /** Night Onslaught arenas, keyed by the map they are a version of. They are
-   * deliberately absent from `arenas`: they are that map played in Onslaught
-   * after dark, not a map to list beside it. */
-  onslaughtArenas: Map<string, WotSrcArena[]>;
+  /** The variant arenas of each map, keyed by the map they belong to: the
+   * Waffenträger and Last Stand reskins, the Story Mode chapters, the Onslaught
+   * night versions. They are deliberately absent from `arenas`: each is that map
+   * played somewhere else, not a map to list beside it. */
+  variantArenas: Map<string, WotSrcArena[]>;
   /** The arenas the live client only declares: it ships no space for them, so
    * they can only be played on the Common Test. */
   testOnlyArenas: Set<string>;
@@ -52,7 +53,7 @@ type CatalogPayload = {
 
 function catalogFromArenas(payload: CatalogPayload): MapCatalog {
   const all = payload.arenas;
-  const onslaughtArenas = new Map<string, WotSrcArena[]>();
+  const variantArenas = new Map<string, WotSrcArena[]>();
   const folded: [WotSrcArena, string][] = [];
   const maps: WotSrcArena[] = [];
   for (const arena of all) {
@@ -72,9 +73,9 @@ function catalogFromArenas(payload: CatalogPayload): MapCatalog {
       orphans = true;
       continue;
     }
-    const list = onslaughtArenas.get(baseId);
+    const list = variantArenas.get(baseId);
     if (list) list.push(arena);
-    else onslaughtArenas.set(baseId, [arena]);
+    else variantArenas.set(baseId, [arena]);
   }
   // The caller hands the arenas over name-sorted and both the id map and the
   // slug index inherit that order, so an orphan appended above has to be sorted
@@ -84,7 +85,7 @@ function catalogFromArenas(payload: CatalogPayload): MapCatalog {
   return {
     arenas: listed,
     index: buildMapSlugIndex(maps),
-    onslaughtArenas,
+    variantArenas,
     testOnlyArenas: new Set(payload.testOnly),
   };
 }

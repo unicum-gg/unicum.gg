@@ -60,23 +60,43 @@ export const MAP_PLAY_AREA_PREFIX = "playArea:";
 export const ONSLAUGHT_MODE = "comp7";
 
 /**
- * Marks a change recorded on a map's night arena, which the reader shows on the
- * base map's page.
+ * Marks a change recorded on one of a map's variant arenas, which the reader
+ * shows on the base map's page.
  *
- * A night version is its own arena in the client, so its changes are recorded
- * against it and keyed exactly like any other map's. The base map is where a
- * reader looks for them, though, and there they have to say which of the two
- * they describe: without this, a moved Observation Post would read as a change
- * to the Onslaught everyone already plays, and the arena's own arrival would
- * read as the map itself being added to the game.
+ * A variant is its own arena in the client, so its changes are recorded against
+ * it and keyed exactly like any other map's. The base map is where a reader
+ * looks for them, though, and there they have to say which of the two they
+ * describe: without this, a moved Observation Post would read as a change to the
+ * Onslaught everyone already plays, and the arena's own arrival would read as
+ * the map itself being added to the game.
+ *
+ * The battle type rides in the key, so one prefix serves every variant and the
+ * reader can name it ("Waffenträger", "Onslaught Night") without a second lookup.
  */
-export const MAP_NIGHT_PREFIX = "night:";
+export const MAP_VARIANT_PREFIX = "variant:";
 
-/** Re-key a change recorded on a folded night arena for display on its base
+/** Re-key a change recorded on a folded variant arena for display on its base
  * map. Applied at read time: what was recorded stays a fact about the arena it
  * happened to. */
-export function foldedMapChangeField(field: string): string {
-  return `${MAP_NIGHT_PREFIX}${field}`;
+export function foldedMapChangeField(
+  battleType: BattleType,
+  field: string,
+): string {
+  return `${MAP_VARIANT_PREFIX}${battleType}:${field}`;
+}
+
+/** The battle type a re-keyed field belongs to, and the key underneath it. */
+export function splitVariantField(
+  key: string,
+): { battleType: BattleType; field: string } | null {
+  if (!key.startsWith(MAP_VARIANT_PREFIX)) return null;
+  const rest = key.slice(MAP_VARIANT_PREFIX.length);
+  const sep = rest.indexOf(":");
+  if (sep === -1) return null;
+  const battleType = rest.slice(0, sep);
+  return battleType in BATTLE_TYPE_LABEL
+    ? { battleType: battleType as BattleType, field: rest.slice(sep + 1) }
+    : null;
 }
 
 /**
@@ -86,23 +106,36 @@ export function foldedMapChangeField(field: string): string {
  * area, drawn from its own minimap image. A position that means one thing on one
  * of them means nothing on the other, so the reader has to keep them apart.
  */
-export enum MapChangeArea {
-  /** The map as the random modes are played on it. */
-  Map = "map",
-  /** Onslaught's reduced area. */
-  Onslaught = "onslaught",
-  /** The night arena's own area, which is a different space again. */
-  OnslaughtNight = "onslaught_night",
-}
+/**
+ * Which space a recorded change describes, as a key the reader groups by.
+ *
+ * A map has more than one: the ground the random modes are played on, the
+ * reduced area Onslaught uses, and one per variant arena, each a different space
+ * again. A position that means one thing on one of them means nothing on
+ * another, so the reader has to keep them apart and draw each on its own image.
+ *
+ * Not an enum, because the variant areas are as open-ended as the battle types
+ * are: a new kind of variant must not need a new member here.
+ */
+export type MapChangeArea = string;
+
+/** The map itself, as the random modes are played on it. */
+export const MAP_AREA_MAP: MapChangeArea = "map";
+/** Onslaught's reduced area on the map's own arena. */
+export const MAP_AREA_ONSLAUGHT: MapChangeArea = "onslaught";
+/** One variant arena's own area. */
+export const variantArea = (battleType: BattleType): MapChangeArea =>
+  `${MAP_VARIANT_PREFIX}${battleType}`;
 
 /** The play area a recorded change describes. */
 export function mapChangeArea(key: string): MapChangeArea {
-  if (key.startsWith(MAP_NIGHT_PREFIX)) return MapChangeArea.OnslaughtNight;
+  const variant = splitVariantField(key);
+  if (variant) return variantArea(variant.battleType);
   const onslaught =
     key === `${MAP_BATTLE_TYPE_PREFIX}${BattleType.Onslaught}` ||
     key.startsWith(`${MAP_PLAY_AREA_PREFIX}${ONSLAUGHT_MODE}`) ||
     key.startsWith(`${MAP_GEOMETRY_PREFIX}${ONSLAUGHT_MODE}:`);
-  return onslaught ? MapChangeArea.Onslaught : MapChangeArea.Map;
+  return onslaught ? MAP_AREA_ONSLAUGHT : MAP_AREA_MAP;
 }
 
 /**
@@ -180,23 +213,23 @@ function battleTypeLabel(value: string): string {
  * reader can never disagree about what a key means.
  */
 export function resolveMapChangeField(key: string): MapFieldDescriptor {
-  if (key.startsWith(MAP_NIGHT_PREFIX)) {
-    const inner = key.slice(MAP_NIGHT_PREFIX.length);
-    // The arena arriving is the map gaining a night version, not the map
+  const variant = splitVariantField(key);
+  if (variant) {
+    const name = BATTLE_TYPE_LABEL[variant.battleType];
+    // The arena arriving is the map gaining a version of itself, not the map
     // arriving: said the other way it would be plainly false.
-    if (inner === MAP_PRESENCE_FIELD) {
-      return { label: "Night version", kind: MapChangeKind.Presence };
+    if (variant.field === MAP_PRESENCE_FIELD) {
+      return { label: `${name} version`, kind: MapChangeKind.Presence };
     }
-    const base = resolveMapChangeField(inner);
-    const day = `(${BATTLE_TYPE_LABEL[BattleType.Onslaught]})`;
-    const night = `(${BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]})`;
-    // A geometry or play-area label already names its mode, so the night arena
-    // renames it rather than trailing a second parenthesis behind it.
+    const base = resolveMapChangeField(variant.field);
+    // A geometry or play-area label already names the mode it belongs to, so
+    // the variant renames it rather than trailing a second parenthesis.
+    const mode = base.label.match(/\(([^)]+)\)$/);
     return {
       ...base,
-      label: base.label.includes(day)
-        ? base.label.replace(day, night)
-        : `${base.label} ${night}`,
+      label: mode
+        ? base.label.replace(`(${mode[1]})`, `(${name})`)
+        : `${base.label} (${name})`,
     };
   }
   const scalar = BY_KEY.get(key);

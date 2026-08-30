@@ -1,5 +1,5 @@
 import type { ArenaGameplay, ArenaPoint, WotSrcArena } from "@unicum.gg/wargaming";
-import { BattleType, battleTypesForArena } from "./battle-types";
+import { BattleType, battleTypesForArena, variantOf } from "./battle-types";
 import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw, MAP_GAME_MODE_LABEL, MapGameMode } from "./game-modes";
 import { projectPoint, type MapPoint } from "./geometry";
@@ -10,6 +10,8 @@ import type {
   MapModeGeometry,
   MapOnslaught,
   MapSummary,
+  MapVariantLayout,
+  MapVariantSummary,
 } from "./map";
 
 type BoundingBox = { bottomLeft: MapPoint; upperRight: MapPoint };
@@ -147,7 +149,7 @@ function summaryOf(
   slug: string,
   battleTypes: BattleType[],
   hasRandomEvents: boolean,
-  night: MapSummary["night"],
+  variants: MapVariantSummary[],
   commonTest: boolean,
 ): MapSummary {
   const { size } = dimensions(arena);
@@ -163,27 +165,56 @@ function summaryOf(
     bases: primaryBases(arena),
     hasRandomEvents,
     commonTest,
-    night,
+    variants,
   };
 }
 
-// A map has at most one night arena, so the list the catalogue hands over is
-// read as "the night version, if there is one". Its minimap comes from the built
-// layout rather than from the id, so the gallery card and the page's night view
-// can never resolve to different images.
-function nightOf(
-  onslaughtArenas: WotSrcArena[],
+// A variant is a whole arena, so its minimap is the one its own layout resolved:
+// its Onslaught image when that is what it is played on (the night versions),
+// its standard one otherwise. Reading it here rather than deriving it from the
+// id is what keeps the gallery card and the page's view on the same image.
+function variantSummary(
+  arena: WotSrcArena,
   testOnly: ReadonlySet<string>,
-): MapSummary["night"] {
-  const arena = onslaughtArenas[0];
-  const layout = arena ? buildOnslaught(arena) : null;
-  return layout && arena
-    ? {
-        arenaId: arena.arenaId,
-        minimapUrl: layout.minimapUrl,
-        commonTest: testOnly.has(arena.arenaId),
-      }
-    : null;
+): MapVariantSummary | null {
+  const battleType = variantOf(arena.arenaId)?.battleType;
+  if (!battleType) return null;
+  const onslaught = buildOnslaught(arena);
+  return {
+    arenaId: arena.arenaId,
+    battleType,
+    minimapUrl: onslaught?.minimapUrl ?? minimapUrl(arena.arenaId),
+    commonTest: testOnly.has(arena.arenaId),
+  };
+}
+
+function variantSummaries(
+  arenas: WotSrcArena[],
+  testOnly: ReadonlySet<string>,
+): MapVariantSummary[] {
+  return arenas
+    .map((a) => variantSummary(a, testOnly))
+    .filter((v) => v !== null);
+}
+
+function variantLayouts(
+  arenas: WotSrcArena[],
+  testOnly: ReadonlySet<string>,
+): MapVariantLayout[] {
+  return arenas.flatMap((arena) => {
+    const summary = variantSummary(arena, testOnly);
+    if (!summary) return [];
+    const { width, height } = dimensions(arena);
+    return [
+      {
+        ...summary,
+        widthMeters: width,
+        heightMeters: height,
+        geometry: buildGeometry(arena),
+        onslaught: buildOnslaught(arena),
+      },
+    ];
+  });
 }
 
 // The map's display name (with any variant disambiguation, e.g. "Steppes
@@ -196,7 +227,7 @@ export function buildMapSummary(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
-  onslaughtArenas: WotSrcArena[] = [],
+  variantArenas: WotSrcArena[] = [],
   testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapSummary {
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
@@ -205,22 +236,23 @@ export function buildMapSummary(
     slug,
     battleTypes,
     runsRandomEvents(arena, battleTypes),
-    nightOf(onslaughtArenas, testOnlyArenas),
+    variantSummaries(variantArenas, testOnlyArenas),
     testOnlyArenas.has(arena.arenaId),
   );
 }
 
 /**
- * `onslaughtArenas` are the night Onslaught arenas the client ships beside this
- * map (`variantOf(...).foldedIntoBase`). They are the same map after dark, so
- * their layout belongs on its page rather than on a card of their own, and they
- * are appended after the map's own Onslaught mode.
+ * `variantArenas` are the arenas the client ships under this map's name for a
+ * mode of their own (`variantOf(...).foldedIntoBase`): the Waffenträger and Last
+ * Stand reskins, the Story Mode chapters, the Onslaught night versions. They are
+ * this map played elsewhere, so each becomes a view of its page rather than a
+ * card of its own.
  */
 export function buildMapDetail(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
-  onslaughtArenas: WotSrcArena[] = [],
+  variantArenas: WotSrcArena[] = [],
   testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapDetail {
   const { width, height } = dimensions(arena);
@@ -234,7 +266,7 @@ export function buildMapDetail(
       slug,
       battleTypes,
       randomEvents.length > 0,
-      nightOf(onslaughtArenas, testOnlyArenas),
+      variantSummaries(variantArenas, testOnlyArenas),
       testOnlyArenas.has(arena.arenaId),
     ),
     description: arena.description,
@@ -243,9 +275,8 @@ export function buildMapDetail(
     widthMeters: width,
     heightMeters: height,
     geometry: buildGeometry(arena),
-    onslaught: [arena, ...onslaughtArenas]
-      .map(buildOnslaught)
-      .filter((o) => o !== null),
+    onslaught: buildOnslaught(arena),
+    variants: variantLayouts(variantArenas, testOnlyArenas),
     randomEvents,
   };
 }

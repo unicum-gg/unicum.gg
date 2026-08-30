@@ -15,6 +15,21 @@ export const teamMarkers = z.object({
   team2: z.array(mapMarker),
 });
 
+export const mapVariantSummary = z
+  .object({
+    arenaId: z.string(),
+    battleType: mapBattleTypeField,
+    minimapUrl: z.string(),
+    commonTest: z.boolean().meta({
+      description:
+        "Whether only the Common Test client ships this variant's space, so it cannot be played on the live server yet.",
+    }),
+  })
+  .meta({
+    id: "MapVariantSummary",
+    description: "One variant of a map, as the gallery reads it.",
+  });
+
 export const mapSummary = z
   .object({
     arenaId: z.string(),
@@ -35,20 +50,10 @@ export const mapSummary = z
       description:
         "Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet.",
     }),
-    night: z
-      .object({
-        arenaId: z.string(),
-        minimapUrl: z.string(),
-        commonTest: z.boolean().meta({
-          description:
-            "Whether only the Common Test client ships this version, so it cannot be played on the live server yet.",
-        }),
-      })
-      .nullable()
-      .meta({
-        description:
-          "This map's night version for Onslaught (its own arena and minimap), null when it has none.",
-      }),
+    variants: z.array(mapVariantSummary).meta({
+      description:
+        "The arenas the client ships under this map's name for a mode of their own (Waffenträger, Last Stand, Story Mode, Onslaught night), each a view of this map rather than a map.",
+    }),
   })
   .meta({ id: "MapSummary", description: "A battle map's gallery summary." });
 

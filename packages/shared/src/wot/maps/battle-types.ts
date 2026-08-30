@@ -63,19 +63,43 @@ export type MapVariant = {
   foldedIntoBase: boolean;
 };
 
+// Every rule here folds: an arena named after another map, played in a mode of
+// its own, is that map's variant and belongs on its page as a view rather than
+// beside it as a card. A rule that should stand alone would set
+// `foldedIntoBase: false`.
 const VARIANT_RULES: {
   re: RegExp;
   tag: string;
   battleType: BattleType | null;
   foldedIntoBase?: boolean;
 }[] = [
-  { re: /^(.*)_last_stand$/, tag: "Last Stand", battleType: BattleType.LastStand },
-  { re: /^(.*)_ls\d+(?:_\d+)?$/, tag: "Last Stand", battleType: BattleType.LastStand },
-  { re: /^(.*)_wt$/, tag: "Waffenträger", battleType: BattleType.Waffentrager },
+  {
+    re: /^(.*)_last_stand$/,
+    tag: "Last Stand",
+    battleType: BattleType.LastStand,
+    foldedIntoBase: true,
+  },
+  {
+    re: /^(.*)_ls\d+(?:_\d+)?$/,
+    tag: "Last Stand",
+    battleType: BattleType.LastStand,
+    foldedIntoBase: true,
+  },
+  {
+    re: /^(.*)_wt$/,
+    tag: "Waffenträger",
+    battleType: BattleType.Waffentrager,
+    foldedIntoBase: true,
+  },
   // `_scc` = a Story Mode campaign chapter (team=1, story banks) that reuses its
   // base map's name, so it needs disambiguating ("Nordskar" -> "Nordskar (Story
   // Mode)"). Other Story Mode maps keep their own distinct names.
-  { re: /^(.*)_scc$/, tag: "Story Mode", battleType: BattleType.StoryMode },
+  {
+    re: /^(.*)_scc$/,
+    tag: "Story Mode",
+    battleType: BattleType.StoryMode,
+    foldedIntoBase: true,
+  },
   // `_comp7_nb` = the night version of a map for Onslaught, shipped as its own
   // arena beside the map it darkens: its own `spaces/<id>` geometry, a single
   // `comp7` gameplay type, the base map's own Onslaught spawns on a 1 km play
@@ -87,7 +111,9 @@ const VARIANT_RULES: {
   {
     re: /^(.*)_comp7_nb$/,
     tag: "Onslaught",
-    battleType: BattleType.Onslaught,
+    // The night arena's own battle type, which is what names and keys its view
+    // on the base map's page.
+    battleType: BattleType.OnslaughtNight,
     foldedIntoBase: true,
   },
 ];

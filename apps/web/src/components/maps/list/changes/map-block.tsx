@@ -18,7 +18,7 @@ export type FeedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
-  nightCommonTest: boolean;
+  variantCommonTest: boolean;
   changes: MapChangeRow[];
 };
 

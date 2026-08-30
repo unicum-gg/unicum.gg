@@ -1,6 +1,6 @@
 import {
   displayMapValue,
-  MAP_NIGHT_PREFIX,
+  MAP_VARIANT_PREFIX,
   MAP_PRESENT,
   MapChangeKind,
   parseMarkers,
@@ -44,7 +44,7 @@ function presenceSummary(
     case MapChangeKind.Presence:
       // The night arena arriving is the map gaining a version of itself, so it
       // says so rather than claiming the map entered the game.
-      if (field.startsWith(MAP_NIGHT_PREFIX)) {
+      if (field.startsWith(MAP_VARIANT_PREFIX)) {
         return gained ? `${label} added` : `${label} removed`;
       }
       // Inside the Common Test block nothing has reached a live server yet, so

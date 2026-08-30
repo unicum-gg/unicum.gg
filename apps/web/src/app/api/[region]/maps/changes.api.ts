@@ -38,9 +38,9 @@ export const changedMap = z
     slug: z.string(),
     name: z.string(),
     minimapUrl: z.string(),
-    nightCommonTest: z.boolean().meta({
+    variantCommonTest: z.boolean().meta({
       description:
-        "Whether this map's night version is only on the Common Test, so a change to it is not playable on the live server yet.",
+        "Whether one of this map's variants is only on the Common Test, so a change to it is not playable on the live server yet.",
     }),
     changes: z.array(mapChange),
   })

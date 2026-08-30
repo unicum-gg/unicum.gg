@@ -16,6 +16,35 @@ const MAP_TYPE_TABS = Object.values(BattleType).map((type) => ({
   segment: type,
 }));
 
+/**
+ * The variant pages that were folded into their base map, as permanent
+ * redirects onto the view that replaced them.
+ *
+ * Written out rather than derived: the catalogue no longer holds these slugs (it
+ * is what dropped them), and a redirect table has to name what it redirects.
+ * Each entry is a page that was live and indexed, so leaving it to 404 would be
+ * the one real cost of the fold.
+ */
+const mapVariantRedirects = [
+  ["steppes-waffentrager", "steppes", BattleType.Waffentrager],
+  ["redshire-waffentrager", "redshire", BattleType.Waffentrager],
+  ["siegfried-line-waffentrager", "siegfried-line", BattleType.Waffentrager],
+  ["nordskar-last-stand", "nordskar", BattleType.LastStand],
+  ["siegfried-line-last-stand", "siegfried-line", BattleType.LastStand],
+  ["nordskar-story-mode", "nordskar", BattleType.StoryMode],
+].flatMap(([from, to, view]) => [
+  {
+    source: `/:region(eu|na|asia)/maps/${from}`,
+    destination: `/:region/maps/${to}?view=${view}`,
+    permanent: true,
+  },
+  {
+    source: `/maps/${from}`,
+    destination: `/maps/${to}?view=${view}`,
+    permanent: true,
+  },
+]);
+
 export const redirects: NextConfig["redirects"] = async () => [
   // Tank detail: `?tab=performances` → `/tanks/is-7/performances`.
   ...legacyQueryRedirects({
@@ -96,4 +125,9 @@ export const redirects: NextConfig["redirects"] = async () => [
     destination: "/api/og/:region/tanks/:slug",
     permanent: true,
   },
+  // The map variants (Waffenträger, Last Stand, Story Mode) used to be cards of
+  // their own, so `/maps/steppes-waffentrager` was a real page and is indexed as
+  // one. They are views of their base map now, and the slug is gone with the
+  // card, so each old URL keeps its readers by landing on the view it named.
+  ...mapVariantRedirects,
 ];

@@ -36,11 +36,15 @@ async function GET__perf(
   const testOnly = new Set(
     [
       map.commonTest ? map.arenaId : null,
-      map.night?.commonTest ? map.night.arenaId : null,
+      ...map.variants.map((v) => (v.commonTest ? v.arenaId : null)),
     ].filter((id) => id !== null),
   );
   const [history, test] = await Promise.all([
-    getMapHistory(map.arenaId, map.night?.arenaId ?? null, testOnly),
+    getMapHistory(
+      map.arenaId,
+      map.variants.map((v) => v.arenaId),
+      testOnly,
+    ),
     getMapTestChanges(map.arenaId),
   ]);
   return jsonResponse(

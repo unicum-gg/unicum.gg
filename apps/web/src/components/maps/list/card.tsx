@@ -14,7 +14,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import {
   ONSLAUGHT_VIEW,
-  onslaughtViewKey,
+  variantViewKey,
 } from "@/components/maps/detail/minimap-viewer";
 import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { CAMO_META } from "@/components/maps/meta";
@@ -50,19 +50,17 @@ export function ThumbBases({ bases }: { bases: MapSummary["bases"] }) {
   );
 }
 
-/** What a card shows and where it links, from the tab it is shown under. The
- * Onslaught tabs open the map on the matching view, and the night one shows that
- * arena's own minimap, since the night version is a different space (its bases
- * are dropped with it: Onslaught has none). */
+/** What a card shows and where it links, from the tab it is shown under. A tab
+ * that names one of the map's variants opens the map on that variant's view and
+ * draws its minimap, since a variant is a different space (the map's own base
+ * flags go with it, they belong to the map's arena). */
 export function cardView(
   tab: BattleTab,
   map: MapSummary,
-): { viewParam?: string; night?: MapSummary["night"] } {
-  if (tab === BattleType.OnslaughtNight && map.night) {
-    return {
-      viewParam: onslaughtViewKey(map.arenaId, map.night.arenaId),
-      night: map.night,
-    };
+): { viewParam?: string; variant?: MapSummary["variants"][number] } {
+  const variant = map.variants.find((v) => v.battleType === tab);
+  if (variant) {
+    return { viewParam: variantViewKey(variant.battleType), variant };
   }
   if (tab === BattleType.Onslaught) return { viewParam: ONSLAUGHT_VIEW };
   return {};
@@ -72,15 +70,15 @@ export function MapCard({
   map,
   region,
   viewParam,
-  night,
+  variant,
 }: {
   map: MapSummary;
   region: Region;
   /** Carries the active battle-type view onto the detail link, so a click from
    * the Onslaught tab opens the map already on its Onslaught view. */
   viewParam?: string;
-  /** Draw the map's night arena instead of the map itself. */
-  night?: MapSummary["night"];
+  /** Draw one of the map's variant arenas instead of the map itself. */
+  variant?: MapSummary["variants"][number];
 }) {
   const camo = CAMO_META[map.camouflage];
   const CamoIcon = camo.icon;
@@ -94,15 +92,15 @@ export function MapCard({
     >
       <div className="relative aspect-square w-full overflow-hidden bg-fd-muted">
         <MinimapImage
-          src={night?.minimapUrl ?? map.minimapUrl}
-          arenaId={night?.arenaId ?? map.arenaId}
-          commonTest={night ? night.commonTest : map.commonTest}
+          src={variant?.minimapUrl ?? map.minimapUrl}
+          arenaId={variant?.arenaId ?? map.arenaId}
+          commonTest={variant ? variant.commonTest : map.commonTest}
           alt={`${map.name} minimap`}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
           className="transition-transform duration-300 group-hover:scale-105"
         />
-        {!night && <ThumbBases bases={map.bases} />}
-        {(night ? night.commonTest : map.commonTest) && (
+        {!variant && <ThumbBases bases={map.bases} />}
+        {(variant ? variant.commonTest : map.commonTest) && (
           <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm">
             <NightCommonTestBadge size={12} />
             Common Test

@@ -10,7 +10,7 @@ import {
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
-  type MapOnslaught,
+  type MapVariantLayout,
 } from "@unicum.gg/shared";
 import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { cn } from "@/lib/utils";
@@ -40,48 +40,31 @@ function teamSide(view: ViewGeometry, team: 1 | 2): string | null {
  * ends of that contract read the same constant. */
 export const ONSLAUGHT_VIEW = "onslaught";
 
-/** View key of the night Onslaught play area. The battle type's own value, so
- * `?view=onslaught_night` and the gallery tab `/maps/all/onslaught_night` name
- * the same thing, and the URL stays readable and stable rather than carrying an
- * internal arena id. */
-export const ONSLAUGHT_NIGHT_VIEW: string = BattleType.OnslaughtNight;
+/** The view key of one variant, which is its battle type: `?view=waffentrager`
+ * and the gallery tab `/maps/all/waffentrager` name the same thing, and the URL
+ * stays readable and stable rather than carrying an internal arena id. */
+export const variantViewKey = (battleType: BattleType): string => battleType;
 
-/** The view key of one Onslaught layout, from the map's arena and the layout's.
- * The map's own mode keeps the bare key (so the gallery's `?view=onslaught`
- * links keep landing on it); the night arena's layout takes the night key. A map
- * has at most one night version (`MapSummary.night` reads it as one), so the two
- * keys stay unique. */
-export function onslaughtViewKey(
-  mapArenaId: string,
-  layoutArenaId: string,
-): string {
-  return layoutArenaId === mapArenaId ? ONSLAUGHT_VIEW : ONSLAUGHT_NIGHT_VIEW;
-}
-
-/** The map's own Onslaught layout (the mode its arena definition declares), or
- * null when it only has a night one. Index 0 is not it: a map with no `comp7` of
- * its own but a night arena folded onto it starts the list with the night
- * layout. */
-export function ownOnslaught(detail: MapDetail): MapOnslaught | null {
-  return detail.onslaught.find((o) => o.arenaId === detail.arenaId) ?? null;
-}
-
-/** The layout of the map's night version, or null when it has none. */
-export function nightOnslaught(detail: MapDetail): MapOnslaught | null {
-  return detail.onslaught.find((o) => o.arenaId !== detail.arenaId) ?? null;
-}
-
-/** The Onslaught layout a view key selects, or null when the key names a random
- * battle mode instead. */
-export function onslaughtForKey(
+/** The variant a view key selects, or null when the key names one of the map's
+ * own views. */
+export function variantForKey(
   detail: MapDetail,
   key: string,
-): MapOnslaught | null {
+): MapVariantLayout | null {
   return (
-    detail.onslaught.find(
-      (o) => onslaughtViewKey(detail.arenaId, o.arenaId) === key,
+    detail.variants.find(
+      (v: MapVariantLayout) => variantViewKey(v.battleType) === key,
     ) ?? null
   );
+}
+
+/** Whether a view key is one of the map's Onslaught areas, its own or a
+ * variant's: those are played on a reduced space and always 7v7, which the
+ * page's stats follow. */
+export function isOnslaughtView(detail: MapDetail, key: string): boolean {
+  if (key === ONSLAUGHT_VIEW) return detail.onslaught !== null;
+  const variant = variantForKey(detail, key);
+  return variant?.onslaught != null;
 }
 
 // A selectable minimap view: one battle-context (a random mode, or Onslaught)
@@ -96,10 +79,10 @@ type MapView = ViewGeometry & {
   /** Whether the view's own space is only on the test client, which decides
    * which branch of the mirror its image comes from. */
   commonTest: boolean;
-  /** Whether this is the night layout. The pill wears the crest only here: on a
-   * map that is wholly test-only the title already says it, and repeating it on
-   * every pill would be noise. */
-  night: boolean;
+  /** Whether the view is one of the map's variants. The pill wears the crest
+   * only there: on a map that is wholly test-only the title already says it, and
+   * repeating it on every pill would be noise. */
+  variant: boolean;
   /** The arena the view's minimap belongs to, which is the map itself except on
    * a dedicated Onslaught arena's view: it is a different space, so its image
    * must not fall back to the map's own. */
@@ -115,7 +98,7 @@ function buildViews(detail: MapDetail): MapView[] {
     label: g.label,
     onslaught: false,
     commonTest: detail.commonTest,
-    night: false,
+    variant: false,
     arenaId: detail.arenaId,
     minimapUrl: detail.minimapUrl,
     widthMeters: detail.widthMeters,
@@ -125,30 +108,42 @@ function buildViews(detail: MapDetail): MapView[] {
     controlPoint: g.controlPoint,
     pois: [],
   }));
-  // A map with a night version has two Onslaught layouts: the one its own
-  // definition declares, and the night arena's. They are told apart by the arena
-  // they come from, so the second reads as the same mode after dark rather than
-  // as another mode.
-  for (const onslaught of detail.onslaught) {
-    const night = onslaught.arenaId !== detail.arenaId;
+  if (detail.onslaught) {
     views.push({
-      key: onslaughtViewKey(detail.arenaId, onslaught.arenaId),
-      label: night
-        ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
-        : BATTLE_TYPE_LABEL[BattleType.Onslaught],
+      key: ONSLAUGHT_VIEW,
+      label: BATTLE_TYPE_LABEL[BattleType.Onslaught],
       onslaught: true,
-      commonTest: night
-        ? (detail.night?.commonTest ?? false)
-        : detail.commonTest,
-      night,
-      arenaId: onslaught.arenaId,
-      minimapUrl: onslaught.minimapUrl,
-      widthMeters: onslaught.widthMeters,
-      heightMeters: onslaught.heightMeters,
+      commonTest: detail.commonTest,
+      variant: false,
+      arenaId: detail.arenaId,
+      minimapUrl: detail.onslaught.minimapUrl,
+      widthMeters: detail.onslaught.widthMeters,
+      heightMeters: detail.onslaught.heightMeters,
       bases: { team1: [], team2: [] },
-      spawns: onslaught.spawns,
-      controlPoint: onslaught.controlPoint,
-      pois: onslaught.pointsOfInterest,
+      spawns: detail.onslaught.spawns,
+      controlPoint: detail.onslaught.controlPoint,
+      pois: detail.onslaught.pointsOfInterest,
+    });
+  }
+  // Each variant is a whole arena of its own, so it gets one view: its Onslaught
+  // layout when that is what it is played on (the night versions), else the
+  // first of its own modes. A map is not played twice on the same space.
+  for (const variant of detail.variants) {
+    const geo = variant.onslaught ? null : (variant.geometry[0] ?? null);
+    views.push({
+      key: variantViewKey(variant.battleType),
+      label: BATTLE_TYPE_LABEL[variant.battleType],
+      onslaught: variant.onslaught !== null,
+      commonTest: variant.commonTest,
+      variant: true,
+      arenaId: variant.arenaId,
+      minimapUrl: variant.minimapUrl,
+      widthMeters: variant.onslaught?.widthMeters ?? variant.widthMeters,
+      heightMeters: variant.onslaught?.heightMeters ?? variant.heightMeters,
+      bases: geo?.bases ?? { team1: [], team2: [] },
+      spawns: variant.onslaught?.spawns ?? geo?.spawns ?? { team1: [], team2: [] },
+      controlPoint: variant.onslaught?.controlPoint ?? geo?.controlPoint ?? null,
+      pois: variant.onslaught?.pointsOfInterest ?? [],
     });
   }
   return views;
@@ -286,11 +281,11 @@ export function MinimapViewer({
               // on the text's baseline instead of beside it.
               className={cn(
                 pill,
-                v.night && v.commonTest && "inline-flex items-center gap-1.5",
+                v.variant && v.commonTest && "inline-flex items-center gap-1.5",
               )}
             >
               {v.label}
-              {v.night && v.commonTest && <NightCommonTestBadge />}
+              {v.variant && v.commonTest && <NightCommonTestBadge />}
             </button>
           ))}
         <div className="ml-auto flex flex-wrap items-center gap-2">

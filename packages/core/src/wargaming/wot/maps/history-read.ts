@@ -91,14 +91,14 @@ function groupByVersion(rows: MapChange[]): MapVersionChanges[] {
  */
 export async function getMapHistory(
   arenaId: string,
-  /** The map's night arena, whose changes belong on this page: it is folded onto
-   * this map and has no page of its own. */
-  nightArenaId?: string | null,
-  /** The arenas among those two whose space only the test client ships. Their
-   * rows are pending, not history. */
+  /** The map's variant arenas, whose changes belong on this page: they are
+   * folded onto this map and have no page of their own. */
+  variantArenaIds: string[] = [],
+  /** The arenas among those whose space only the test client ships. Their rows
+   * are pending, not history. */
   testOnly: ReadonlySet<string> = new Set(),
 ): Promise<MapHistory> {
-  const ids = nightArenaId ? [arenaId, nightArenaId] : [arenaId];
+  const ids = [arenaId, ...variantArenaIds];
   const [rows, names] = await Promise.all([
     db
       .select()
@@ -132,10 +132,13 @@ export async function getMapHistory(
     : rows;
   // The night arena's rows read as this map's, under the field that says which
   // of the two they describe.
-  const asMine = (r: MapChange): MapChange =>
-    r.arenaId === arenaId
-      ? r
-      : { ...r, arenaId, field: foldedMapChangeField(r.field) };
+  const asMine = (r: MapChange): MapChange => {
+    if (r.arenaId === arenaId) return r;
+    const battleType = variantOf(r.arenaId)?.battleType;
+    return battleType
+      ? { ...r, arenaId, field: foldedMapChangeField(battleType, r.field) }
+      : { ...r, arenaId };
+  };
   // A row about a space the live client does not ship is not history yet: it
   // leaves the versions for the pending block, where the test build's own
   // changes go. Split on the arena it was recorded against, before the fold
@@ -186,9 +189,9 @@ export type ChangedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
-  /** Whether this map's night version is one only the test client ships, so a
-   * row about it can say so rather than reading as something playable today. */
-  nightCommonTest: boolean;
+  /** Whether one of this map's variants is only on the test client, so a row
+   * about it can say so rather than reading as something playable today. */
+  variantCommonTest: boolean;
   changes: MapChangeEntryRow[];
 };
 
@@ -224,8 +227,11 @@ function attachChange(
 ): { arenaId: string; field: string } | null {
   if (listed(arenaId)) return { arenaId, field };
   const variant = variantOf(arenaId);
-  if (variant?.foldedIntoBase && listed(variant.baseId)) {
-    return { arenaId: variant.baseId, field: foldedMapChangeField(field) };
+  if (variant?.foldedIntoBase && variant.battleType && listed(variant.baseId)) {
+    return {
+      arenaId: variant.baseId,
+      field: foldedMapChangeField(variant.battleType, field),
+    };
   }
   return null;
 }
@@ -242,7 +248,7 @@ export async function getRecentMapChanges(
   // have a page.
   const tracked = [
     ...byId.keys(),
-    ...summaries.flatMap((m) => (m.night ? [m.night.arenaId] : [])),
+    ...summaries.flatMap((m) => m.variants.map((v) => v.arenaId)),
   ];
   const testOnly = testOnlyArenas(summaries);
 
@@ -314,7 +320,8 @@ export async function getRecentMapChanges(
             slug: map?.slug ?? arenaId,
             name: map?.name ?? arenaId,
             minimapUrl: map?.minimapUrl ?? "",
-            nightCommonTest: map?.night?.commonTest ?? false,
+            variantCommonTest:
+              map?.variants.some((v) => v.commonTest) ?? false,
             changes,
           };
         })
@@ -348,7 +355,7 @@ function testOnlyArenas(summaries: MapSummary[]): Set<string> {
   const out = new Set<string>();
   for (const m of summaries) {
     if (m.commonTest) out.add(m.arenaId);
-    if (m.night?.commonTest) out.add(m.night.arenaId);
+    for (const v of m.variants) if (v.commonTest) out.add(v.arenaId);
   }
   return out;
 }
@@ -424,7 +431,7 @@ export async function getPendingMapChanges(
           slug: map?.slug ?? arenaId,
           name: map?.name ?? arenaId,
           minimapUrl: map?.minimapUrl ?? "",
-          nightCommonTest: map?.night?.commonTest ?? false,
+          variantCommonTest: map?.variants.some((v) => v.commonTest) ?? false,
           changes,
         };
       })

@@ -1,8 +1,9 @@
-import type { Region } from "@unicum.gg/wargaming";
+import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
 import {
   BattleType,
   buildMapDetail,
   buildMapSummary,
+  variantOf,
   type MapDetail,
   type MapSummary,
 } from "@unicum.gg/shared";
@@ -12,23 +13,28 @@ import { getClanWarsArenaIds } from "./clan-wars";
 export { searchMaps, type MapSearchResult } from "./search";
 
 // The battle types the arena's own definition cannot give: Clan Wars, keyed by
-// the live Global Map pool, and Onslaught Night, which is a property of the
-// night arena folded onto the map rather than of the map's own definition.
+// the live Global Map pool, and one per variant folded onto the map, since what
+// a map is played as elsewhere is a property of that other arena rather than of
+// its own definition. A map earns the Waffenträger tab by having a Waffenträger
+// arena, exactly as it earns Onslaught Night by having a night one.
 function extraBattleTypes(
   arenaId: string,
   clanWars: Set<string>,
-  hasNightArena: boolean,
+  variants: WotSrcArena[],
 ): BattleType[] {
   const types: BattleType[] = [];
   if (clanWars.has(arenaId)) types.push(BattleType.ClanWars);
-  if (hasNightArena) types.push(BattleType.OnslaughtNight);
+  for (const variant of variants) {
+    const battleType = variantOf(variant.arenaId)?.battleType;
+    if (battleType && !types.includes(battleType)) types.push(battleType);
+  }
   return types;
 }
 
 /** Every battle map on a region as a lightweight gallery summary, name-sorted.
  * The catalogue is region-scoped but essentially identical across regions. */
 export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
-  const [{ arenas, index, onslaughtArenas, testOnlyArenas }, clanWars] =
+  const [{ arenas, index, variantArenas, testOnlyArenas }, clanWars] =
     await Promise.all([
       getMapCatalog(region),
       getClanWarsArenaIds(region),
@@ -37,13 +43,13 @@ export async function listMapSummaries(region: Region): Promise<MapSummary[]> {
   for (const arena of arenas.values()) {
     const slug = index.idToSlug.get(arena.arenaId);
     if (slug) {
-      const night = onslaughtArenas.get(arena.arenaId) ?? [];
+      const variants = variantArenas.get(arena.arenaId) ?? [];
       out.push(
         buildMapSummary(
           arena,
           slug,
-          extraBattleTypes(arena.arenaId, clanWars, night.length > 0),
-          night,
+          extraBattleTypes(arena.arenaId, clanWars, variants),
+          variants,
           testOnlyArenas,
         ),
       );
@@ -59,7 +65,7 @@ export async function getMapDetailBySlug(
   region: Region,
   slug: string,
 ): Promise<MapDetail | null> {
-  const { arenas, index, onslaughtArenas, testOnlyArenas } =
+  const { arenas, index, variantArenas, testOnlyArenas } =
     await getMapCatalog(region);
   const arenaId =
     index.slugToId.get(slug.toLowerCase()) ??
@@ -68,12 +74,12 @@ export async function getMapDetailBySlug(
   const arena = arenas.get(arenaId);
   if (!arena) return null;
   const clanWars = await getClanWarsArenaIds(region);
-  const night = onslaughtArenas.get(arenaId) ?? [];
+  const variants = variantArenas.get(arenaId) ?? [];
   return buildMapDetail(
     arena,
     index.idToSlug.get(arenaId) ?? slug,
-    extraBattleTypes(arenaId, clanWars, night.length > 0),
-    night,
+    extraBattleTypes(arenaId, clanWars, variants),
+    variants,
     testOnlyArenas,
   );
 }

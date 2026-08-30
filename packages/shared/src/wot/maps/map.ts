@@ -34,18 +34,24 @@ export type MapSummary = {
    * yet. Its minimap comes from the test branch of the mirror for the same
    * reason. */
   commonTest: boolean;
-  /** This map's night version for Onslaught, when it has one. It is an arena of
-   * its own, so the gallery links straight to its view and draws the minimap the
-   * layout itself resolved rather than guessing it from the id. Null on every
-   * map without one. */
-  night: {
-    arenaId: string;
-    minimapUrl: string;
-    /** Whether only the Common Test client ships this version: the live client
-     * declares the arena but carries no space for it, so it cannot be played
-     * there yet. */
-    commonTest: boolean;
-  } | null;
+  /** The map's variants: the arenas the client ships under this map's name for
+   * an event or a mode of their own (Waffenträger, Last Stand, Story Mode, the
+   * Onslaught night versions). They are views of this map rather than maps, so
+   * the gallery reads them here to draw the right minimap on the right tab and
+   * link straight to the matching view. */
+  variants: MapVariantSummary[];
+};
+
+/** One variant of a map, as the gallery needs it. */
+export type MapVariantSummary = {
+  /** The arena the variant is, which is a different space from the map's own. */
+  arenaId: string;
+  /** What it is played as, which names its tab and keys its view. */
+  battleType: BattleType;
+  minimapUrl: string;
+  /** Whether only the Common Test client ships its space, so it cannot be
+   * played on a live server yet. */
+  commonTest: boolean;
 };
 
 // An Onslaught capturable point of interest, projected onto the minimap. `type`
@@ -68,6 +74,19 @@ export type MapOnslaught = {
   pointsOfInterest: MapPoi[];
 };
 
+/** One variant of a map with everything a view of it needs: it is a whole arena,
+ * so it has its own play area, its own modes and possibly its own Onslaught
+ * layout (the night versions are exactly that). */
+export type MapVariantLayout = MapVariantSummary & {
+  widthMeters: number;
+  heightMeters: number;
+  /** The random-battle modes the variant's own arena declares. Empty on the ones
+   * that declare none (an Onslaught night arena has only `comp7`). */
+  geometry: MapModeGeometry[];
+  /** Its Onslaught layout, when its arena declares one. */
+  onslaught: MapOnslaught | null;
+};
+
 export type MapDetail = MapSummary & {
   description: string;
   /** Battle timer in seconds. */
@@ -76,11 +95,14 @@ export type MapDetail = MapSummary & {
   widthMeters: number;
   heightMeters: number;
   geometry: MapModeGeometry[];
-  /** The map's Onslaught layouts, newest last, empty when it has none. Usually
-   * one, the mode its own arena definition declares. A map with a night version
-   * carries that arena's layout as a second entry: same map, own space, own
-   * points. */
-  onslaught: MapOnslaught[];
+  /** The Onslaught layout the map's own arena definition declares, or null. A
+   * night version's layout is not here: it is a different arena, and lives in
+   * `variants` with everything else the map is played as elsewhere. */
+  onslaught: MapOnslaught | null;
+  /** The map's variants in full: each is its own arena, drawn as its own view.
+   * Ordered as the battle types are declared, so a page renders them the same
+   * way the gallery tabs do. */
+  variants: MapVariantLayout[];
   /** The random events that might fire on the map mid-battle; empty on the maps
    * that have none. */
   randomEvents: MapRandomEvent[];

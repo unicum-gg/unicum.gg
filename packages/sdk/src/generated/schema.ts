@@ -1791,8 +1791,8 @@ export interface components {
             slug: string;
             name: string;
             minimapUrl: string;
-            /** @description Whether this map's night version is only on the Common Test, so a change to it is not playable on the live server yet. */
-            nightCommonTest: boolean;
+            /** @description Whether one of this map's variants is only on the Common Test, so a change to it is not playable on the live server yet. */
+            variantCommonTest: boolean;
             changes: components["schemas"]["MapChange"][];
         };
         /** @description A tank's identity and the spec changes a game version made to it. */
@@ -2603,13 +2603,8 @@ export interface components {
             hasRandomEvents: boolean;
             /** @description Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet. */
             commonTest: boolean;
-            /** @description This map's night version for Onslaught (its own arena and minimap), null when it has none. */
-            night: {
-                arenaId: string;
-                minimapUrl: string;
-                /** @description Whether only the Common Test client ships this version, so it cannot be played on the live server yet. */
-                commonTest: boolean;
-            } | null;
+            /** @description The map's variants in full, each its own arena drawn as its own view. */
+            variants: components["schemas"]["mapVariantLayout"][];
             description: string;
             /** @description Battle timer in seconds. */
             roundLength: number;
@@ -2617,8 +2612,8 @@ export interface components {
             widthMeters: number;
             heightMeters: number;
             geometry: components["schemas"]["MapModeGeometry"][];
-            /** @description The map's Onslaught layouts, empty when it has none. A map rebuilt as its own Onslaught arena carries that layout as a second entry. */
-            onslaught: components["schemas"]["MapOnslaught"][];
+            /** @description The Onslaught layout the map's own arena declares, null when it has none. A night version's layout is in `variants`. */
+            onslaught: components["schemas"]["MapOnslaught"] | null;
             randomEvents: components["schemas"]["MapRandomEvent"][];
         };
         MapHistoryResponse: {
@@ -2730,13 +2725,28 @@ export interface components {
             hasRandomEvents: boolean;
             /** @description Whether only the Common Test client ships this map's space, so it cannot be played on the live server yet. */
             commonTest: boolean;
-            /** @description This map's night version for Onslaught (its own arena and minimap), null when it has none. */
-            night: {
-                arenaId: string;
-                minimapUrl: string;
-                /** @description Whether only the Common Test client ships this version, so it cannot be played on the live server yet. */
-                commonTest: boolean;
-            } | null;
+            /** @description The arenas the client ships under this map's name for a mode of their own (Waffenträger, Last Stand, Story Mode, Onslaught night), each a view of this map rather than a map. */
+            variants: components["schemas"]["MapVariantSummary"][];
+        };
+        /** @description One variant of a map, as the gallery reads it. */
+        mapVariantLayout: {
+            arenaId: string;
+            battleType: components["schemas"]["mapBattleTypeField"];
+            minimapUrl: string;
+            /** @description Whether only the Common Test client ships this variant's space, so it cannot be played on the live server yet. */
+            commonTest: boolean;
+            widthMeters: number;
+            heightMeters: number;
+            geometry: components["schemas"]["MapModeGeometry"][];
+            onslaught: components["schemas"]["MapOnslaught"] | null;
+        };
+        /** @description One variant of a map, as the gallery reads it. */
+        MapVariantSummary: {
+            arenaId: string;
+            battleType: components["schemas"]["mapBattleTypeField"];
+            minimapUrl: string;
+            /** @description Whether only the Common Test client ships this variant's space, so it cannot be played on the live server yet. */
+            commonTest: boolean;
         };
         MapVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];

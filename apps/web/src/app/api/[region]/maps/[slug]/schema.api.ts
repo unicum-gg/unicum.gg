@@ -1,7 +1,12 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it).
 import { z } from "zod";
 import { mapModeField } from "@/services/openapi/schemas";
-import { mapMarker, mapSummary, teamMarkers } from "../schema.api";
+import {
+  mapMarker,
+  mapSummary,
+  mapVariantSummary,
+  teamMarkers,
+} from "../schema.api";
 
 const mapModeGeometry = z
   .object({
@@ -62,6 +67,18 @@ const mapRandomEvent = z
   });
 
 /** Response of `GET /{region}/maps/{slug}` (a single map with its geometry). */
+const mapVariantLayout = mapVariantSummary
+  .extend({
+    widthMeters: z.number(),
+    heightMeters: z.number(),
+    geometry: z.array(mapModeGeometry),
+    onslaught: mapOnslaught.nullable(),
+  })
+  .meta({
+    id: "MapVariantLayout",
+    description: "A map's variant with everything a view of it needs.",
+  });
+
 export const MapDetailResponse = mapSummary
   .extend({
     description: z.string(),
@@ -70,9 +87,13 @@ export const MapDetailResponse = mapSummary
     widthMeters: z.number(),
     heightMeters: z.number(),
     geometry: z.array(mapModeGeometry),
-    onslaught: z.array(mapOnslaught).meta({
+    onslaught: mapOnslaught.nullable().meta({
       description:
-        "The map's Onslaught layouts, empty when it has none. A map rebuilt as its own Onslaught arena carries that layout as a second entry.",
+        "The Onslaught layout the map's own arena declares, null when it has none. A night version's layout is in `variants`.",
+    }),
+    variants: z.array(mapVariantLayout).meta({
+      description:
+        "The map's variants in full, each its own arena drawn as its own view.",
     }),
     randomEvents: z.array(mapRandomEvent),
   })

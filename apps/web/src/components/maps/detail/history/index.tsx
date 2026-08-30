@@ -19,10 +19,33 @@ import {
   MAP_HISTORY_TRACKING_START,
   BATTLE_TYPE_LABEL,
   BattleType,
-  MapChangeArea,
+  MAP_AREA_MAP,
+  MAP_AREA_ONSLAUGHT,
+  MAP_VARIANT_PREFIX,
   mapChangeArea,
+  type MapChangeArea,
   type MapDetail,
 } from "@unicum.gg/shared";
+
+/** The map's own rows first, then its Onslaught area, then the variants, so a
+ * version reads from the ground everyone plays outwards. */
+function areaRank(area: MapChangeArea): number {
+  if (area === MAP_AREA_MAP) return 0;
+  if (area === MAP_AREA_ONSLAUGHT) return 1;
+  return 2;
+}
+
+/** What to call an area above its rows. A variant area carries its battle type,
+ * so it names itself. */
+function areaLabel(area: MapChangeArea): string {
+  if (area === MAP_AREA_ONSLAUGHT) {
+    return BATTLE_TYPE_LABEL[BattleType.Onslaught];
+  }
+  const battleType = area.slice(MAP_VARIANT_PREFIX.length);
+  return battleType in BATTLE_TYPE_LABEL
+    ? BATTLE_TYPE_LABEL[battleType as BattleType]
+    : battleType;
+}
 
 const dateFmt = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
@@ -75,26 +98,26 @@ function VersionChanges({
   detail: MapDetail;
   changes: FormattedMapChange[];
 }) {
-  const areas = [
-    MapChangeArea.Map,
-    MapChangeArea.Onslaught,
-    MapChangeArea.OnslaughtNight,
-  ]
-    .map((area) => ({
-      area,
-      rows: changes.filter((c) => mapChangeArea(c.field) === area),
-    }))
-    .filter((section) => section.rows.length > 0);
+  // The areas a version actually touched, in the order the rows come in: the map
+  // first (its own changes are keyed without a prefix), then its Onslaught area,
+  // then one per variant. Derived rather than listed, so a new kind of variant
+  // needs nothing here.
+  const areas: { area: MapChangeArea; rows: FormattedMapChange[] }[] = [];
+  for (const change of changes) {
+    const area = mapChangeArea(change.field);
+    const section = areas.find((s) => s.area === area);
+    if (section) section.rows.push(change);
+    else areas.push({ area, rows: [change] });
+  }
+  areas.sort((a, b) => areaRank(a.area) - areaRank(b.area));
 
   return (
     <>
       {areas.map(({ area, rows }, i) => (
         <div key={area} className={i > 0 ? "border-t border-fd-border" : undefined}>
-          {areas.length > 1 && area !== MapChangeArea.Map ? (
+          {areas.length > 1 && area !== MAP_AREA_MAP ? (
             <div className="border-b border-fd-border px-4 py-2 text-xs uppercase tracking-wide text-fd-muted-foreground">
-              {area === MapChangeArea.OnslaughtNight
-                ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
-                : BATTLE_TYPE_LABEL[BattleType.Onslaught]}
+              {areaLabel(area)}
             </div>
           ) : null}
           <div className="grid sm:grid-cols-[minmax(0,1fr)_16rem]">
