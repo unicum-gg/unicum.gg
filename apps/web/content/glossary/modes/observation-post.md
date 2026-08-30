@@ -9,6 +9,11 @@ related:
   - onslaught
   - spotting
   - camouflage
+anchors:
+  labels:
+    - Observation Post
+    - Observation Posts
+    - Observation Posts (Onslaught)
 links:
   - target: onslaught
   - target: map

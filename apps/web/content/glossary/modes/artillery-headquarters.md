@@ -8,6 +8,10 @@ related:
   - onslaught
   - comms-center
   - observation-post
+anchors:
+  labels:
+    - Artillery Headquarters
+    - Artillery Headquarters (Onslaught)
 links:
   - target: onslaught
 ---

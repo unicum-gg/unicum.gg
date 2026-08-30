@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
 import ROUTES from "@/constants/routes";
@@ -64,7 +65,9 @@ export function MapBlock({ region, map }: { region: Region; map: FeedMap }) {
             key={change.field}
             className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm"
           >
-            <span className="text-fd-muted-foreground">{change.label}</span>
+            <span className="text-fd-muted-foreground">
+              <GlossaryLabel>{change.label}</GlossaryLabel>
+            </span>
             <span className="text-right font-medium tabular-nums">
               {change.before && change.after ? (
                 <>

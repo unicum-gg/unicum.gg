@@ -9,6 +9,11 @@ related:
   - onslaught
   - observation-post
   - spotting
+anchors:
+  labels:
+    - Comms Center
+    - Comms Centers
+    - Comms Centers (Onslaught)
 links:
   - target: onslaught
 ---

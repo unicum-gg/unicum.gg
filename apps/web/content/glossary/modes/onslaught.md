@@ -3,6 +3,7 @@ term: Onslaught
 aliases:
   - comp7
   - competitive 7
+  - onslaught night
 related:
   - ranked-battles
   - clan-wars

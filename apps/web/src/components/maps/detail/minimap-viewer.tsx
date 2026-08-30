@@ -12,6 +12,7 @@ import {
   type MapDetail,
   type MapOnslaught,
 } from "@unicum.gg/shared";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { MinimapLayers } from "@/components/maps/detail/minimap-layers";
 import { axisCells, MinimapGrid } from "@/components/maps/detail/minimap-grid";
@@ -354,7 +355,7 @@ export function MinimapViewer({
           {poiKinds.map((kind) => (
             <span key={kind} className="flex items-center gap-2">
               <Image src={poiUrl(kind)} alt="" width={28} height={28} />
-              {MAP_POI_LABEL[kind]}
+              <GlossaryLabel>{MAP_POI_LABEL[kind]}</GlossaryLabel>
             </span>
           ))}
           {eventsOn && (

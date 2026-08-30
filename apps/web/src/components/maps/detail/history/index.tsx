@@ -1,4 +1,5 @@
 import { Fragment } from "react";
+import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Panel,
   PanelContent,
@@ -105,7 +106,9 @@ function VersionChanges({
 function ChangeRow({ change }: { change: FormattedMapChange }) {
   return (
     <li className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm">
-      <span className="text-fd-muted-foreground">{change.label}</span>
+      <span className="text-fd-muted-foreground">
+              <GlossaryLabel>{change.label}</GlossaryLabel>
+            </span>
       <span className="text-right font-medium tabular-nums">
         {change.before && change.after ? (
           <>
