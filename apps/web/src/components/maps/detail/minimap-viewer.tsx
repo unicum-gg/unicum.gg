@@ -12,7 +12,7 @@ import {
   type MapDetail,
   type MapOnslaught,
 } from "@unicum.gg/shared";
-import { CommonTestBadge } from "@/components/entity/badges/common-test-badge";
+import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { cn } from "@/lib/utils";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
@@ -282,7 +282,7 @@ export function MinimapViewer({
               )}
             >
               {v.label}
-              {v.commonTest && <CommonTestBadge size={14} />}
+              {v.commonTest && <NightCommonTestBadge />}
             </button>
           ))}
         <div className="ml-auto flex flex-wrap items-center gap-2">

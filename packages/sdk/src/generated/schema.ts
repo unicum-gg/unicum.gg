@@ -1791,6 +1791,8 @@ export interface components {
             slug: string;
             name: string;
             minimapUrl: string;
+            /** @description Whether this map's night version is only on the Common Test, so a change to it is not playable on the live server yet. */
+            nightCommonTest: boolean;
             changes: components["schemas"]["MapChange"][];
         };
         /** @description A tank's identity and the spec changes a game version made to it. */

@@ -1,6 +1,8 @@
 "use client";
 
 import Link from "next/link";
+import { MAP_NIGHT_PREFIX } from "@unicum.gg/shared";
+import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
@@ -18,6 +20,7 @@ export type FeedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
+  nightCommonTest: boolean;
   changes: MapChangeRow[];
 };
 
@@ -65,8 +68,14 @@ export function MapBlock({ region, map }: { region: Region; map: FeedMap }) {
             key={change.field}
             className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm"
           >
-            <span className="text-fd-muted-foreground">
+            <span className="flex items-center gap-1.5 text-fd-muted-foreground">
               <GlossaryLabel>{change.label}</GlossaryLabel>
+              {/* A change to a version only the test client ships says so, or it
+                * reads as something the reader can go and play. */}
+              {map.nightCommonTest &&
+                change.field.startsWith(MAP_NIGHT_PREFIX) && (
+                  <NightCommonTestBadge />
+                )}
             </span>
             <span className="text-right font-medium tabular-nums">
               {change.before && change.after ? (

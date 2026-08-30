@@ -165,6 +165,9 @@ export type ChangedMap = {
   slug: string;
   name: string;
   minimapUrl: string;
+  /** Whether this map's night version is one only the test client ships, so a
+   * row about it can say so rather than reading as something playable today. */
+  nightCommonTest: boolean;
   changes: MapChangeEntryRow[];
 };
 
@@ -280,6 +283,7 @@ export async function getRecentMapChanges(
             slug: map?.slug ?? arenaId,
             name: map?.name ?? arenaId,
             minimapUrl: map?.minimapUrl ?? "",
+            nightCommonTest: map?.night?.commonTest ?? false,
             changes,
           };
         })
@@ -342,6 +346,7 @@ export async function getPendingMapChanges(
           slug: map?.slug ?? arenaId,
           name: map?.name ?? arenaId,
           minimapUrl: map?.minimapUrl ?? "",
+          nightCommonTest: map?.night?.commonTest ?? false,
           changes,
         };
       })

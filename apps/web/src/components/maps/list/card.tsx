@@ -16,7 +16,7 @@ import {
   ONSLAUGHT_VIEW,
   onslaughtViewKey,
 } from "@/components/maps/detail/minimap-viewer";
-import { Crest, CrestKind } from "@/components/entity/badges/crest";
+import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
@@ -102,11 +102,8 @@ export function MapCard({
         />
         {!night && <ThumbBases bases={map.bases} />}
         {night?.commonTest && (
-          <span
-            className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm"
-            aria-label="Only on the Common Test client"
-          >
-            <Crest kind={CrestKind.CommonTest} size={12} />
+          <span className="absolute bottom-2 left-2 inline-flex items-center gap-1 rounded-full bg-black/60 px-2 py-1 text-[11px] font-medium text-fd-foreground backdrop-blur-sm">
+            <NightCommonTestBadge size={12} />
             Common Test
           </span>
         )}
