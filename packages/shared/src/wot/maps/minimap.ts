@@ -6,10 +6,30 @@ import { iconUrl } from "@unicum.gg/wargaming";
 export const WOT_MAPS_REPO = "unicum-gg/wot.maps";
 export const WOT_MAPS_BRANCH = "WG";
 
+// The Common Test branch of the same mirror. A map reaches the test client
+// before the live one, and Wargaming sometimes ships an arena's definition to
+// the live client with the space itself still missing (the 2.4.0 Onslaught
+// arenas have an `arena_defs/<id>.xml` but no `<id>.pkg` in the live manifest,
+// so there is no `mmap.dds` to extract and the live branch has no image at all).
+// The catalogue still lists those maps, so their minimap is read from the test
+// branch instead of falling through to a placeholder.
+export const WOT_MAPS_BRANCH_CT = "WG_CT";
+
 /** HD (2048²) top-down minimap on the wot.maps mirror, keyed by arena id. Not
  * every arena has one; the client falls back to a placeholder on a 404. */
 export function minimapUrl(arenaId: string): string {
   return `https://raw.githubusercontent.com/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/maps/${arenaId}.webp`;
+}
+
+/** The same mirror image on the Common Test branch, or null when the URL is not
+ * a live wot.maps one (an already-test URL, or the wot.assets low-res icon).
+ * Derived from the URL rather than from a list of test-only arenas, so a map
+ * moves from the test branch to the live one the day the client ships its
+ * package, with no code change. */
+export function ctMinimapUrl(url: string): string | null {
+  const live = `/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/`;
+  if (!url.includes(live)) return null;
+  return url.replace(live, `/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH_CT}/`);
 }
 
 /** The Onslaught (comp7) minimap variant, a reduced play area shipped by most

@@ -106,8 +106,9 @@ const GEOMETRY_LABELS: Record<string, string> = {
   "spawns:team1": "Allied spawns",
   "spawns:team2": "Enemy spawns",
   controlPoint: "Control point",
-  "pointsOfInterest:strike": "Strike points",
-  "pointsOfInterest:recon": "Recon points",
+  "pointsOfInterest:strike": "Artillery Headquarters",
+  "pointsOfInterest:recon": "Comms Centers",
+  "pointsOfInterest:flare": "Observation Posts",
   // Kept for the rows recorded before the two kinds were tracked apart.
   pointsOfInterest: "Points of interest",
 };

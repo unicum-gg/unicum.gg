@@ -13,7 +13,9 @@ import { MapActionsMenu } from "@/components/maps/detail/actions-menu";
 import { CAMO_META } from "@/components/maps/meta";
 import {
   MinimapViewer,
-  ONSLAUGHT_VIEW,
+  onslaughtForKey,
+  onslaughtViewKey,
+  ownOnslaught,
 } from "@/components/maps/detail/minimap-viewer";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { MapVideosPanel } from "@/components/maps/detail/videos";
@@ -86,11 +88,17 @@ export function MapView({
 
   // The stats sidebar follows the minimap's selected view: Onslaught runs on a
   // reduced play area and is always 7v7, so those stats swap when it is picked.
+  // The first view the minimap opens on: the first random mode, else the map's
+  // own Onslaught layout, else whatever layout it does have (a map with only a
+  // night one).
+  const firstOnslaught = ownOnslaught(detail) ?? detail.onslaught[0];
   const [activeKey, setActiveKey] = useState<string>(
-    detail.geometry[0]?.mode ?? (detail.onslaught ? "onslaught" : ""),
+    detail.geometry[0]?.mode ??
+      (firstOnslaught
+        ? onslaughtViewKey(detail.arenaId, firstOnslaught.arenaId)
+        : ""),
   );
-  const onslaught =
-    activeKey === "onslaught" ? detail.onslaught : null;
+  const onslaught = onslaughtForKey(detail, activeKey);
   const width = onslaught?.widthMeters ?? detail.widthMeters;
   const height = onslaught?.heightMeters ?? detail.heightMeters;
   const teamSize = onslaught ? 7 : detail.maxPlayersInTeam;
@@ -114,7 +122,7 @@ export function MapView({
   // Events do not fire in Onslaught, which is played on its own reduced area, so
   // the line goes away with the rest of the view-synced stats when it is picked.
   const events = detail.randomEvents;
-  const showEvents = events.length > 0 && activeKey !== ONSLAUGHT_VIEW;
+  const showEvents = events.length > 0 && !onslaught;
   const hasAnyStat = hasSize || hasTime || hasTeam || hasModes || showEvents;
   const metaParts = [
     `${camo.label} camouflage`,

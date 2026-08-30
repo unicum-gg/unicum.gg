@@ -3,6 +3,7 @@
 import { useId } from "react";
 import {
   MapChangeArea,
+  MapPoiType,
   MARKER_MOVE_THRESHOLD_M,
   matchMarkers,
   ONSLAUGHT_MODE,
@@ -12,11 +13,11 @@ import {
 import Image from "next/image";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { buildArrows } from "@/components/maps/detail/history/arrows";
+import { ownOnslaught } from "@/components/maps/detail/minimap-viewer";
 import {
   BASE,
   CONTROL_POINT,
-  POI_RECON,
-  POI_STRIKE,
+  poiUrl,
   spawnUrl,
 } from "@/components/maps/detail/minimap-overlay";
 import type { FormattedMapChange } from "@/components/maps/change-format";
@@ -41,8 +42,13 @@ function iconFor(field: string, index: number): string {
   if (family === "bases:team2") return BASE.team2;
   if (family === "spawns:team1") return spawnUrl("team1", index);
   if (family === "spawns:team2") return spawnUrl("team2", index);
-  if (family === "pointsOfInterest:recon") return POI_RECON;
-  if (family.startsWith("pointsOfInterest")) return POI_STRIKE;
+  if (family === "pointsOfInterest:recon") return poiUrl(MapPoiType.CommsCenter);
+  if (family === "pointsOfInterest:flare") {
+    return poiUrl(MapPoiType.ObservationPost);
+  }
+  if (family.startsWith("pointsOfInterest")) {
+    return poiUrl(MapPoiType.ArtilleryHeadquarters);
+  }
   return CONTROL_POINT;
 }
 
@@ -102,7 +108,10 @@ function plan(
       (modeOf(c.field) === ONSLAUGHT_MODE) === (area === MapChangeArea.Onslaught),
   );
   if (geometry.length === 0) return null;
-  const onslaught = area === MapChangeArea.Onslaught ? detail.onslaught : null;
+  // The map's own Onslaught layout, which is the one the history is recorded
+  // against (a night arena's layout is a different arena, with its own history).
+  const onslaught =
+    area === MapChangeArea.Onslaught ? ownOnslaught(detail) : null;
   if (area === MapChangeArea.Onslaught && !onslaught) return null;
   const width = onslaught?.widthMeters ?? detail.widthMeters;
   const height = onslaught?.heightMeters ?? detail.heightMeters;

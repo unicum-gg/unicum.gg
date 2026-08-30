@@ -148,6 +148,7 @@ export function navSections(region: Region): NavSection[] {
           { type: BattleType.Random, id: "maps-random" },
           { type: BattleType.Frontline, id: "maps-frontline" },
           { type: BattleType.Onslaught, id: "maps-onslaught" },
+          { type: BattleType.OnslaughtNight, id: "maps-onslaught-night" },
           { type: BattleType.GrandBattle, id: "maps-grand-battle" },
           { type: BattleType.ClanWars, id: "maps-clan-wars" },
         ].map(({ type, id }) => ({

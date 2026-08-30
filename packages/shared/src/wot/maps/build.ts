@@ -22,9 +22,11 @@ function project(points: ArenaPoint[], arena: WotSrcArena) {
   return arena.boundingBox ? projectIn(points, arena.boundingBox) : [];
 }
 
-// Build the Onslaught (comp7) variant: its own reduced play area, minimap and
+// Build one Onslaught (comp7) layout: its own reduced play area, minimap and
 // geometry (central control point + per-team spawns). Uses the comp7 minimap
 // only when the mode references one, else falls back to the standard minimap.
+// The arena is either the map itself or a night Onslaught arena of it, which is
+// why every url here is keyed by `arena.arenaId` rather than the map's.
 function buildOnslaught(arena: WotSrcArena): MapOnslaught | null {
   const comp7 = arena.gameplay.find((g) => g.mode === "comp7");
   if (!comp7) return null;
@@ -32,6 +34,7 @@ function buildOnslaught(arena: WotSrcArena): MapOnslaught | null {
   if (!bb) return null;
   const usesVariant = (comp7.minimap ?? "").includes("comp7");
   return {
+    arenaId: arena.arenaId,
     minimapUrl: usesVariant
       ? onslaughtMinimapUrl(arena.arenaId)
       : minimapUrl(arena.arenaId),
@@ -144,6 +147,7 @@ function summaryOf(
   slug: string,
   battleTypes: BattleType[],
   hasRandomEvents: boolean,
+  night: MapSummary["night"],
 ): MapSummary {
   const { size } = dimensions(arena);
   return {
@@ -157,7 +161,20 @@ function summaryOf(
     minimapUrl: minimapUrl(arena.arenaId),
     bases: primaryBases(arena),
     hasRandomEvents,
+    night,
   };
+}
+
+// A map has at most one night arena, so the list the catalogue hands over is
+// read as "the night version, if there is one". Its minimap comes from the built
+// layout rather than from the id, so the gallery card and the page's night view
+// can never resolve to different images.
+function nightOf(onslaughtArenas: WotSrcArena[]): MapSummary["night"] {
+  const arena = onslaughtArenas[0];
+  const layout = arena ? buildOnslaught(arena) : null;
+  return layout && arena
+    ? { arenaId: arena.arenaId, minimapUrl: layout.minimapUrl }
+    : null;
 }
 
 // The map's display name (with any variant disambiguation, e.g. "Steppes
@@ -170,6 +187,7 @@ export function buildMapSummary(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
+  onslaughtArenas: WotSrcArena[] = [],
 ): MapSummary {
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
   return summaryOf(
@@ -177,13 +195,21 @@ export function buildMapSummary(
     slug,
     battleTypes,
     runsRandomEvents(arena, battleTypes),
+    nightOf(onslaughtArenas),
   );
 }
 
+/**
+ * `onslaughtArenas` are the night Onslaught arenas the client ships beside this
+ * map (`variantOf(...).foldedIntoBase`). They are the same map after dark, so
+ * their layout belongs on its page rather than on a card of their own, and they
+ * are appended after the map's own Onslaught mode.
+ */
 export function buildMapDetail(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
+  onslaughtArenas: WotSrcArena[] = [],
 ): MapDetail {
   const { width, height } = dimensions(arena);
   const battleTypes = allBattleTypes(arena, extraBattleTypes);
@@ -191,14 +217,22 @@ export function buildMapDetail(
     ? buildRandomEvents(arena.arenaId, arena.minimapLayers)
     : [];
   return {
-    ...summaryOf(arena, slug, battleTypes, randomEvents.length > 0),
+    ...summaryOf(
+      arena,
+      slug,
+      battleTypes,
+      randomEvents.length > 0,
+      nightOf(onslaughtArenas),
+    ),
     description: arena.description,
     roundLength: arena.roundLength,
     maxPlayersInTeam: arena.maxPlayersInTeam,
     widthMeters: width,
     heightMeters: height,
     geometry: buildGeometry(arena),
-    onslaught: buildOnslaught(arena),
+    onslaught: [arena, ...onslaughtArenas]
+      .map(buildOnslaught)
+      .filter((o) => o !== null),
     randomEvents,
   };
 }

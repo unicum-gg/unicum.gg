@@ -29,16 +29,25 @@ export type MapSummary = {
   /** Whether random events might fire on the map mid-battle, so the gallery can
    * flag it without carrying the events themselves. */
   hasRandomEvents: boolean;
+  /** This map's night version for Onslaught, when it has one. It is an arena of
+   * its own, so the gallery links straight to its view and draws the minimap the
+   * layout itself resolved rather than guessing it from the id. Null on every
+   * map without one. */
+  night: { arenaId: string; minimapUrl: string } | null;
 };
 
 // An Onslaught capturable point of interest, projected onto the minimap. `type`
-// mirrors the game's `pointsOfInterestUDO` type: 1 = strike, 2 = recon.
+// mirrors the game's `pointsOfInterestUDO` type, kept as the raw number so a
+// kind the game adds still reaches the client (see `MapPoiType`).
 export type MapPoi = { marker: MapMarker; type: number };
 
-// The Onslaught (comp7) variant of a map: its own reduced play area, minimap and
-// geometry (a central control point with per-team spawns). Present only on maps
-// that support Onslaught.
+// One Onslaught (comp7) layout of a map: its own reduced play area, minimap and
+// geometry (a central control point with per-team spawns).
 export type MapOnslaught = {
+  /** The arena the layout is read from. The map's own id for the Onslaught mode
+   * its arena definition declares, or the id of the night arena the client ships
+   * beside it, which is a different space with its own minimap. */
+  arenaId: string;
   minimapUrl: string;
   widthMeters: number;
   heightMeters: number;
@@ -55,9 +64,11 @@ export type MapDetail = MapSummary & {
   widthMeters: number;
   heightMeters: number;
   geometry: MapModeGeometry[];
-  /** Onslaught-specific minimap + geometry, or null when the map has no
-   * Onslaught configuration. */
-  onslaught: MapOnslaught | null;
+  /** The map's Onslaught layouts, newest last, empty when it has none. Usually
+   * one, the mode its own arena definition declares. A map with a night version
+   * carries that arena's layout as a second entry: same map, own space, own
+   * points. */
+  onslaught: MapOnslaught[];
   /** The random events that might fire on the map mid-battle; empty on the maps
    * that have none. */
   randomEvents: MapRandomEvent[];

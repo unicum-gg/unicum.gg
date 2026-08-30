@@ -1,7 +1,12 @@
 "use client";
 
 import { MapTrifoldIcon } from "@phosphor-icons/react/dist/ssr";
-import { lowResMinimapUrl, minimapUrl } from "@unicum.gg/shared";
+import {
+  ctMinimapUrl,
+  lowResMinimapUrl,
+  minimapUrl,
+  variantOf,
+} from "@unicum.gg/shared";
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -34,8 +39,21 @@ export function MinimapImage({
   className?: string;
 }) {
   const [failed, setFailed] = useState<string[]>([]);
+  // The test branch of the same mirror, for an arena the live client declares
+  // but does not ship the space of yet: it has no live image at all, so without
+  // this the card is a placeholder until the map's package reaches the live
+  // client. Only the folded arenas are probed there: every other arena either
+  // has its live image or has none anywhere, and a blind probe would cost every
+  // one of them a second failing optimizer round-trip.
+  const test = variantOf(arenaId)?.foldedIntoBase
+    ? [ctMinimapUrl(src), ctMinimapUrl(minimapUrl(arenaId))]
+    : [];
   const candidates = [
-    ...new Set([src, minimapUrl(arenaId), lowResMinimapUrl(arenaId)]),
+    ...new Set(
+      [src, ...test, minimapUrl(arenaId), lowResMinimapUrl(arenaId)].filter(
+        (c) => c !== null,
+      ),
+    ),
   ];
   const active = candidates.find((c) => !failed.includes(c));
   if (!active) {

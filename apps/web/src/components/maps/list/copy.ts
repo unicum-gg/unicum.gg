@@ -23,6 +23,8 @@ const BATTLE_TYPE_BLURB: Record<BattleType, string> = {
   [BattleType.BattleRoyale]: "the Steel Hunter last-tank-standing mode",
   [BattleType.Frontline]: "the 30v30 large-scale mode",
   [BattleType.Onslaught]: "the ranked 7v7 mode",
+  [BattleType.OnslaughtNight]:
+    "the ranked 7v7 mode after dark, on shorter view range",
   [BattleType.GrandBattle]: "the 30v30 tier X mode",
   [BattleType.ClanWars]: "clan wars and advances",
   [BattleType.Waffentrager]: "the Waffenträger event",

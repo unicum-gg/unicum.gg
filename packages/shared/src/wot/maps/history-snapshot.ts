@@ -3,6 +3,7 @@ import { BattleType, battleTypesForArena } from "./battle-types";
 import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw } from "./game-modes";
 import type { MapPoint } from "./geometry";
+import { mapPoiType, MapPoiType } from "./points-of-interest";
 import { buildRandomEvents } from "./random-events";
 import { MIRROR_TRACKING_START } from "../mirror-tracking";
 
@@ -92,9 +93,19 @@ const UNPLAYED_MODES = new Set([
   "sandbox",
 ]);
 
-/** The client's `pointsOfInterestUDO` type for a recon point; anything else is a
- * strike point. */
-const POI_RECON_TYPE = 2;
+/** The geometry key each kind of Point of Interest is tracked under. The first
+ * two keys are what the history was recorded with before the kinds were named
+ * after the points themselves, so they stay as they are. A kind the game adds
+ * later falls back to the artillery key, which keeps it in the history rather
+ * than dropping it silently. */
+const POI_KEY: Record<MapPoiType, string> = {
+  [MapPoiType.ArtilleryHeadquarters]: "pointsOfInterest:strike",
+  [MapPoiType.CommsCenter]: "pointsOfInterest:recon",
+  [MapPoiType.ObservationPost]: "pointsOfInterest:flare",
+};
+const POI_KEYS = Object.values(POI_KEY);
+const poiKeyOf = (type: number) =>
+  POI_KEY[mapPoiType(type) ?? MapPoiType.ArtilleryHeadquarters];
 
 /** Round to a tenth of a metre: below that, a coordinate difference is float
  * noise from the client's own re-exports, not a moved marker. */
@@ -138,17 +149,20 @@ export function buildMapSnapshotData(arena: WotSrcArena): MapSnapshotData {
     put("spawns:team1", g.spawns.team1);
     put("spawns:team2", g.spawns.team2);
     put("controlPoint", g.controlPoint ? [g.controlPoint] : []);
-    // Onslaught's two kinds of capturable point are different objectives with
+    // Onslaught's kinds of capturable point are different objectives with
     // different capture radii, and the game draws them with different icons, so
     // they are tracked apart: a recon point moving is not a strike point moving.
-    put(
-      "pointsOfInterest:strike",
-      g.pointsOfInterest.filter((poi) => poi.type !== POI_RECON_TYPE).map((poi) => poi.position),
-    );
-    put(
-      "pointsOfInterest:recon",
-      g.pointsOfInterest.filter((poi) => poi.type === POI_RECON_TYPE).map((poi) => poi.position),
-    );
+    // A kind with no points writes nothing (`put` skips an empty list), which is
+    // what makes a map swapping one kind for another read as both a loss and a
+    // gain: the old key goes missing and the new one appears.
+    for (const key of POI_KEYS) {
+      put(
+        key,
+        g.pointsOfInterest
+          .filter((poi) => poiKeyOf(poi.type) === key)
+          .map((poi) => poi.position),
+      );
+    }
   }
 
   return {

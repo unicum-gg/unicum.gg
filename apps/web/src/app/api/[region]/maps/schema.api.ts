@@ -31,6 +31,13 @@ export const mapSummary = z
     hasRandomEvents: z.boolean().meta({
       description: "Whether random events might fire on the map mid-battle.",
     }),
+    night: z
+      .object({ arenaId: z.string(), minimapUrl: z.string() })
+      .nullable()
+      .meta({
+        description:
+          "This map's night version for Onslaught (its own arena and minimap), null when it has none.",
+      }),
   })
   .meta({ id: "MapSummary", description: "A battle map's gallery summary." });
 

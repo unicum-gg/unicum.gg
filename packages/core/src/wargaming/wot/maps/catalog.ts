@@ -2,6 +2,7 @@ import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
 import {
   buildMapSlugIndex,
   mapDisplayName,
+  variantOf,
   type MapSlugIndex,
 } from "@unicum.gg/shared";
 import { getRedisClient } from "@unicum.gg/core/redis";
@@ -11,6 +12,10 @@ export type MapCatalog = {
   /** Deduped arenas keyed by arena id. */
   arenas: Map<string, WotSrcArena>;
   index: MapSlugIndex;
+  /** Night Onslaught arenas, keyed by the map they are a version of. They are
+   * deliberately absent from `arenas`: they are that map played in Onslaught
+   * after dark, not a map to list beside it. */
+  onslaughtArenas: Map<string, WotSrcArena[]>;
 };
 
 // The catalogue derives from static client scripts (only a game patch changes
@@ -21,19 +26,56 @@ const CACHE_TTL_MS = 24 * 60 * 60 * 1000;
 const REDIS_TTL_SECONDS = 24 * 60 * 60;
 // Bumped whenever a new field is read off the cached arenas: the value is the
 // serialized `WotSrcArena[]`, so a payload written by the previous deploy is a
-// day of `undefined` on any field that shipped with this one.
-const SHAPE_VERSION = 2;
+// day of `undefined` on any field that shipped with this one. Bumped too when
+// name resolution changes, since the names are resolved before the array is
+// serialized and a stale payload would keep serving the previous spelling (and
+// therefore the previous slugs) for a day.
+const SHAPE_VERSION = 3;
 const redisKey = (region: Region) => `mapcatalog:v${SHAPE_VERSION}:${region}`;
 const cache = new Map<Region, { value: MapCatalog; expiresAt: number }>();
 
 // The whole catalogue rebuilds deterministically from the sorted+deduped arena
-// array (both the id map and the slug index derive from it), so that array is
-// the only thing we serialize to share across workers.
-function catalogFromArenas(arenas: WotSrcArena[]): MapCatalog {
-  return {
-    arenas: new Map(arenas.map((a) => [a.arenaId, a])),
-    index: buildMapSlugIndex(arenas),
-  };
+// array (the id map, the slug index and the fold below all derive from it), so
+// that array is the only thing we serialize to share across workers. It holds
+// every arena, folded ones included, since which of them is a map of its own is
+// what this rebuilds.
+function catalogFromArenas(all: WotSrcArena[]): MapCatalog {
+  const onslaughtArenas = new Map<string, WotSrcArena[]>();
+  const folded: [WotSrcArena, string][] = [];
+  const maps: WotSrcArena[] = [];
+  for (const arena of all) {
+    const variant = variantOf(arena.arenaId);
+    if (variant?.foldedIntoBase) folded.push([arena, variant.baseId]);
+    else maps.push(arena);
+  }
+  const byId = new Map(maps.map((a) => [a.arenaId, a]));
+  let orphans = false;
+  for (const [arena, baseId] of folded) {
+    // A fold with no base map left to fold onto would drop the arena from the
+    // catalogue entirely, so it keeps its own card instead: Wargaming retiring
+    // the base map should cost us a name, not a map.
+    if (!byId.has(baseId)) {
+      maps.push(arena);
+      byId.set(arena.arenaId, arena);
+      orphans = true;
+      continue;
+    }
+    const list = onslaughtArenas.get(baseId);
+    if (list) list.push(arena);
+    else onslaughtArenas.set(baseId, [arena]);
+  }
+  // The caller hands the arenas over name-sorted and both the id map and the
+  // slug index inherit that order, so an orphan appended above has to be sorted
+  // back in rather than left at the end (the sitemap reads this order).
+  if (orphans) {
+    maps.sort((a, b) => a.name.localeCompare(b.name));
+    return {
+      arenas: new Map(maps.map((a) => [a.arenaId, a])),
+      index: buildMapSlugIndex(maps),
+      onslaughtArenas,
+    };
+  }
+  return { arenas: byId, index: buildMapSlugIndex(maps), onslaughtArenas };
 }
 
 /**

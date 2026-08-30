@@ -1,5 +1,11 @@
 import Image from "next/image";
-import { markerUrl, type MapMarker, type MapPoi } from "@unicum.gg/shared";
+import {
+  mapPoiType,
+  markerUrl,
+  MapPoiType,
+  type MapMarker,
+  type MapPoi,
+} from "@unicum.gg/shared";
 
 // The game's own minimap entry markers, extracted from the client battle atlas
 // into the wot.maps mirror. Ally reads green, enemy red, exactly as in-game.
@@ -23,15 +29,34 @@ export function spawnUrl(team: "team1" | "team2", i: number): string {
   return markerUrl(`spawn_${side}_${Math.min(i + 1, 4)}`);
 }
 
-// Onslaught points of interest: type 1 = strike, 2 = recon. Their capture zones
-// differ (strike 40 m, recon 20 m radius), so each is drawn to its own scale.
-export const POI_STRIKE = markerUrl("poi_strike");
-export const POI_RECON = markerUrl("poi_recon");
-function poiUrl(type: number): string {
-  return type === 2 ? POI_RECON : POI_STRIKE;
+// Onslaught points of interest, drawn with the game's own marker per kind.
+const POI_MARKER: Record<MapPoiType, string> = {
+  [MapPoiType.ArtilleryHeadquarters]: markerUrl("poi_strike"),
+  [MapPoiType.CommsCenter]: markerUrl("poi_recon"),
+  [MapPoiType.ObservationPost]: markerUrl("poi_flare"),
+};
+
+// Capture zones differ by kind (artillery 40 m, comms 20 m), so each is drawn to
+// its own scale. The Observation Post has no figure of its own published yet, so
+// it is drawn at the artillery one's.
+const POI_RADIUS_M: Record<MapPoiType, number> = {
+  [MapPoiType.ArtilleryHeadquarters]: 40,
+  [MapPoiType.CommsCenter]: 20,
+  [MapPoiType.ObservationPost]: 40,
+};
+
+/** A kind the game has added since is drawn as an artillery point rather than
+ * not at all: its position is right even when its icon is a guess. Exported
+ * because the legend reads the kinds through it too, so what the map draws and
+ * what the legend names can never disagree. */
+export const poiKindOf = (type: number): MapPoiType =>
+  mapPoiType(type) ?? MapPoiType.ArtilleryHeadquarters;
+
+export function poiUrl(type: number): string {
+  return POI_MARKER[poiKindOf(type)];
 }
 function poiRadiusM(type: number): number {
-  return type === 2 ? 20 : 40;
+  return POI_RADIUS_M[poiKindOf(type)];
 }
 
 function at(marker: MapMarker): React.CSSProperties {

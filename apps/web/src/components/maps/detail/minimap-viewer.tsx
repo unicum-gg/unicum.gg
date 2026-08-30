@@ -4,9 +4,13 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import {
   BASE_CAPTURE_RADIUS_M,
+  BATTLE_TYPE_LABEL,
+  BattleType,
+  MAP_POI_LABEL,
   SPAWN_DIRECTION_LABEL,
   spawnDirection,
   type MapDetail,
+  type MapOnslaught,
 } from "@unicum.gg/shared";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { MinimapLayers } from "@/components/maps/detail/minimap-layers";
@@ -15,8 +19,8 @@ import {
   BASE,
   CONTROL_POINT,
   Overlay,
-  POI_RECON,
-  POI_STRIKE,
+  poiKindOf,
+  poiUrl,
   spawnUrl,
   type ViewGeometry,
 } from "@/components/maps/detail/minimap-overlay";
@@ -33,11 +37,58 @@ function teamSide(view: ViewGeometry, team: 1 | 2): string | null {
  * ends of that contract read the same constant. */
 export const ONSLAUGHT_VIEW = "onslaught";
 
+/** View key of the night Onslaught play area. The battle type's own value, so
+ * `?view=onslaught_night` and the gallery tab `/maps/all/onslaught_night` name
+ * the same thing, and the URL stays readable and stable rather than carrying an
+ * internal arena id. */
+export const ONSLAUGHT_NIGHT_VIEW: string = BattleType.OnslaughtNight;
+
+/** The view key of one Onslaught layout, from the map's arena and the layout's.
+ * The map's own mode keeps the bare key (so the gallery's `?view=onslaught`
+ * links keep landing on it); the night arena's layout takes the night key. A map
+ * has at most one night version (`MapSummary.night` reads it as one), so the two
+ * keys stay unique. */
+export function onslaughtViewKey(
+  mapArenaId: string,
+  layoutArenaId: string,
+): string {
+  return layoutArenaId === mapArenaId ? ONSLAUGHT_VIEW : ONSLAUGHT_NIGHT_VIEW;
+}
+
+/** The map's own Onslaught layout (the mode its arena definition declares), or
+ * null when it only has a night one. Index 0 is not it: a map with no `comp7` of
+ * its own but a night arena folded onto it starts the list with the night
+ * layout. */
+export function ownOnslaught(detail: MapDetail): MapOnslaught | null {
+  return detail.onslaught.find((o) => o.arenaId === detail.arenaId) ?? null;
+}
+
+/** The Onslaught layout a view key selects, or null when the key names a random
+ * battle mode instead. */
+export function onslaughtForKey(
+  detail: MapDetail,
+  key: string,
+): MapOnslaught | null {
+  return (
+    detail.onslaught.find(
+      (o) => onslaughtViewKey(detail.arenaId, o.arenaId) === key,
+    ) ?? null
+  );
+}
+
 // A selectable minimap view: one battle-context (a random mode, or Onslaught)
 // with its own minimap image + play-area bounds on top of the shared geometry.
 type MapView = ViewGeometry & {
   key: string;
   label: string;
+  /** Whether the view is an Onslaught layout. Not derivable from the key any
+   * more: a night layout is keyed by its own arena, so a `=== ONSLAUGHT_VIEW`
+   * test would read it as a random-battle view. */
+  onslaught: boolean;
+  /** The arena the view's minimap belongs to, which is the map itself except on
+   * a dedicated Onslaught arena's view: it is a different space, so its image
+   * must not fall back to the map's own. */
+  arenaId: string;
   minimapUrl: string;
   widthMeters: number;
   heightMeters: number;
@@ -47,6 +98,8 @@ function buildViews(detail: MapDetail): MapView[] {
   const views: MapView[] = detail.geometry.map((g) => ({
     key: g.mode,
     label: g.label,
+    onslaught: false,
+    arenaId: detail.arenaId,
     minimapUrl: detail.minimapUrl,
     widthMeters: detail.widthMeters,
     heightMeters: detail.heightMeters,
@@ -55,17 +108,26 @@ function buildViews(detail: MapDetail): MapView[] {
     controlPoint: g.controlPoint,
     pois: [],
   }));
-  if (detail.onslaught) {
+  // A map with a night version has two Onslaught layouts: the one its own
+  // definition declares, and the night arena's. They are told apart by the arena
+  // they come from, so the second reads as the same mode after dark rather than
+  // as another mode.
+  for (const onslaught of detail.onslaught) {
+    const night = onslaught.arenaId !== detail.arenaId;
     views.push({
-      key: ONSLAUGHT_VIEW,
-      label: "Onslaught",
-      minimapUrl: detail.onslaught.minimapUrl,
-      widthMeters: detail.onslaught.widthMeters,
-      heightMeters: detail.onslaught.heightMeters,
+      key: onslaughtViewKey(detail.arenaId, onslaught.arenaId),
+      label: night
+        ? BATTLE_TYPE_LABEL[BattleType.OnslaughtNight]
+        : BATTLE_TYPE_LABEL[BattleType.Onslaught],
+      onslaught: true,
+      arenaId: onslaught.arenaId,
+      minimapUrl: onslaught.minimapUrl,
+      widthMeters: onslaught.widthMeters,
+      heightMeters: onslaught.heightMeters,
       bases: { team1: [], team2: [] },
-      spawns: detail.onslaught.spawns,
-      controlPoint: detail.onslaught.controlPoint,
-      pois: detail.onslaught.pointsOfInterest,
+      spawns: onslaught.spawns,
+      controlPoint: onslaught.controlPoint,
+      pois: onslaught.pointsOfInterest,
     });
   }
   return views;
@@ -134,7 +196,9 @@ export function MinimapViewer({
     // Onslaught view, draws none, and a map with no zone art opens on the
     // aftermath whatever `showAfter` says.
     const drawn =
-      showEvents && key !== ONSLAUGHT_VIEW && detail.randomEvents.length > 0;
+      showEvents &&
+      !views[viewIndex]?.onslaught &&
+      detail.randomEvents.length > 0;
     if (drawn) params.set("events", showAfter || !hasZones ? "after" : "zones");
     else params.delete("events");
     const qs = params.toString();
@@ -165,12 +229,13 @@ export function MinimapViewer({
   const hasGrid = width > 0 && height > 0;
   const hasBases =
     (view?.bases.team1.length ?? 0) + (view?.bases.team2.length ?? 0) > 0;
-  const hasStrike = view?.pois.some((p) => p.type !== 2) ?? false;
-  const hasRecon = view?.pois.some((p) => p.type === 2) ?? false;
+  // One legend entry per kind of point the view places, read through the same
+  // fallback the overlay draws with, so the legend never names a kind the map
+  // does not show, nor leaves a drawn marker unnamed.
+  const poiKinds = [...new Set((view?.pois ?? []).map((p) => poiKindOf(p.type)))];
   // Onslaught is played on its own reduced area and runs no events, so the
   // toggle only exists on the random-battle views.
-  const canShowEvents =
-    detail.randomEvents.length > 0 && view?.key !== ONSLAUGHT_VIEW;
+  const canShowEvents = detail.randomEvents.length > 0 && !view?.onslaught;
   const eventsOn = canShowEvents && showEvents;
   // Only the events that actually draw something in the half on screen, so the
   // legend below names what is drawn rather than every event on the map.
@@ -238,7 +303,7 @@ export function MinimapViewer({
         <MinimapImage
           key={view?.minimapUrl ?? detail.minimapUrl}
           src={view?.minimapUrl ?? detail.minimapUrl}
-          arenaId={detail.arenaId}
+          arenaId={view?.arenaId ?? detail.arenaId}
           alt={`${detail.name} minimap`}
           sizes="(max-width: 1024px) 100vw, 640px"
           priority
@@ -286,18 +351,12 @@ export function MinimapViewer({
               Control point
             </span>
           )}
-          {hasStrike && (
-            <span className="flex items-center gap-2">
-              <Image src={POI_STRIKE} alt="" width={28} height={28} />
-              Strike
+          {poiKinds.map((kind) => (
+            <span key={kind} className="flex items-center gap-2">
+              <Image src={poiUrl(kind)} alt="" width={28} height={28} />
+              {MAP_POI_LABEL[kind]}
             </span>
-          )}
-          {hasRecon && (
-            <span className="flex items-center gap-2">
-              <Image src={POI_RECON} alt="" width={28} height={28} />
-              Recon
-            </span>
-          )}
+          ))}
           {eventsOn && (
             <span className="flex items-center gap-2">
               {!afterOnly && (

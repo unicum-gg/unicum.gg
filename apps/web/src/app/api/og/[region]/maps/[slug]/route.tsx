@@ -27,6 +27,10 @@ function roundClock(seconds: number): string {
 
 // Satori (next/og) can't decode the WebP minimaps, so pull the map's minimap and
 // re-encode it as a PNG data URL, downscaled to a size that's plenty for the OG.
+// Only the map's own minimap is ever asked for here (a night arena has no slug,
+// so it has no card of its own), and a catalogued map's image is on the live
+// branch, so there is nothing to fall back to: a second candidate would only add
+// another 5 s timeout to the legacy arenas that have no minimap anywhere.
 async function minimapPngDataUrl(url: string): Promise<string | null> {
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
