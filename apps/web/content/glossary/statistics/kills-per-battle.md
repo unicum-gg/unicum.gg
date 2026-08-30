@@ -10,11 +10,13 @@ related:
   - dpg
   - alpha-damage
   - wn8
+  - destruction-ratio
 anchors:
   labels:
     - Frags
     - Kills
     - Kills per battle
+    - Tanks destroyed
 ---
 
 Average vehicles destroyed per battle, a measure of finishing rather than of damage.

@@ -8,6 +8,10 @@ related:
   - hit-points
   - damage-blocked
   - survival-rate
+  - destruction-ratio
+anchors:
+  labels:
+    - Damage ratio
 ---
 
 Damage dealt divided by damage received, a measure of how efficiently a player trades their hit points.

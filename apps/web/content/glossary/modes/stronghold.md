@@ -9,8 +9,13 @@ related:
   - advances
   - clan
   - clan-wars
+  - sr
+  - elo
 links:
   - target: stronghold
+anchors:
+  labels:
+    - Stronghold
 ---
 
 A clan's own base, built from buildings that produce industrial resource and unlock reserves, and the battles fought to supply it.

@@ -8,6 +8,11 @@ related:
   - wn8
   - wnx
   - battles
+  - wtr
+anchors:
+  labels:
+    - Personal rating
+    - Global rating
 ---
 
 Wargaming's own rating, shown in the game client and on the portal, which grows with the number of battles played as well as with performance.

@@ -10,6 +10,11 @@ related:
   - assault
   - high-explosive
   - farming
+  - base-defense
+anchors:
+  labels:
+    - Base capture
+    - Capture points
 ---
 
 Sitting in the enemy base circle to accumulate capture points, where taking damage resets your own contribution.

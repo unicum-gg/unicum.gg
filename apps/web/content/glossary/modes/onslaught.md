@@ -12,6 +12,10 @@ related:
   - observation-post
 links:
   - target: onslaught
+anchors:
+  labels:
+    - Onslaught
+    - Rating Points
 ---
 
 A seasonal seven against seven Tier X mode with role-based abilities and a rank ladder that resets each season.

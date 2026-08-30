@@ -13,6 +13,7 @@ anchors:
   labels:
     - XP
     - Experience
+    - Avg XP
 ---
 
 The currency earned per battle from damage, spotting, kills, capture and defence, spent on research and crew training.

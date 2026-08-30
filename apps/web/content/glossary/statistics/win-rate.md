@@ -14,6 +14,9 @@ anchors:
     - Win rate
     - Winrate
     - WR
+    - WR %
+    - Player WR
+    - Players' own winrate
 ---
 
 The share of battles a player has won, the one statistic that measures outcomes rather than personal output.

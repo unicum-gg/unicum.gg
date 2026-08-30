@@ -10,6 +10,9 @@ related:
   - booster
 links:
   - target: tank-economics
+anchors:
+  labels:
+    - Cost (credits)
 ---
 
 The main currency, earned every battle and spent on vehicles, modules, ammunition, repairs and equipment.

@@ -17,6 +17,10 @@ anchors:
   labels:
     - MoE
     - Marks of Excellence
+    - Marks
+    - 1 mark
+    - 2 marks
+    - 3 marks
 ---
 
 The one, two or three marks painted on a vehicle's barrel, awarded for sustaining combined damage in the top 65, 85 or 95 percent of everyone playing that vehicle on the server.
