@@ -31,8 +31,16 @@ async function GET__perf(
   if (!map) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
+  // A space the live client does not ship makes its rows pending rather than
+  // history, so the page shows them where the running test's own changes go.
+  const testOnly = new Set(
+    [
+      map.commonTest ? map.arenaId : null,
+      map.night?.commonTest ? map.night.arenaId : null,
+    ].filter((id) => id !== null),
+  );
   const [history, test] = await Promise.all([
-    getMapHistory(map.arenaId, map.night?.arenaId ?? null),
+    getMapHistory(map.arenaId, map.night?.arenaId ?? null, testOnly),
     getMapTestChanges(map.arenaId),
   ]);
   return jsonResponse(
@@ -49,7 +57,7 @@ async function GET__perf(
       present: history.present,
       tracked: history.tracked,
       testVersion: test.version,
-      testChanges: test.changes,
+      testChanges: [...test.changes, ...history.pending],
     },
     { headers: { "cache-control": "public, max-age=600" } },
   );

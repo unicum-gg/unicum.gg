@@ -55,7 +55,7 @@ export function PendingMapChanges({
         </p>
         <div className="divide-y divide-fd-border border-t border-fd-border">
           {maps.map((map) => (
-            <MapBlock key={map.arenaId} region={region} map={map} />
+            <MapBlock key={map.arenaId} region={region} map={map} pending />
           ))}
         </div>
       </PanelContent>

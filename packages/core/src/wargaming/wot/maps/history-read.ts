@@ -8,6 +8,7 @@ import {
   mapTestChanges,
   variantOf,
   type MapChange,
+  type MapSummary,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { listMapSummaries } from "./index";
@@ -29,6 +30,11 @@ export type MapVersionChanges = {
 /** A map's whole recorded history, plus when it entered the game. */
 export type MapHistory = {
   versions: MapVersionChanges[];
+  /** Changes recorded on a space the live client does not ship yet: the client
+   * declares the arena, so the rows exist, but nothing here has happened on a
+   * live server. They are handed back apart from the shipped history so the page
+   * can put them where the test build's own pending changes go. */
+  pending: MapChangeEntryRow[];
   /** The version the map was added in, null when it predates the tracking
    * window (in which case the reader is told it came before the first tracked
    * update rather than shown nothing). */
@@ -88,6 +94,9 @@ export async function getMapHistory(
   /** The map's night arena, whose changes belong on this page: it is folded onto
    * this map and has no page of its own. */
   nightArenaId?: string | null,
+  /** The arenas among those two whose space only the test client ships. Their
+   * rows are pending, not history. */
+  testOnly: ReadonlySet<string> = new Set(),
 ): Promise<MapHistory> {
   const ids = nightArenaId ? [arenaId, nightArenaId] : [arenaId];
   const [rows, names] = await Promise.all([
@@ -123,22 +132,34 @@ export async function getMapHistory(
     : rows;
   // The night arena's rows read as this map's, under the field that says which
   // of the two they describe.
-  const mine = inWindow.map((r) =>
+  const asMine = (r: MapChange): MapChange =>
     r.arenaId === arenaId
       ? r
-      : { ...r, arenaId, field: foldedMapChangeField(r.field) },
+      : { ...r, arenaId, field: foldedMapChangeField(r.field) };
+  // A row about a space the live client does not ship is not history yet: it
+  // leaves the versions for the pending block, where the test build's own
+  // changes go. Split on the arena it was recorded against, before the fold
+  // rewrites it.
+  const unshipped = new Set(
+    currentBuildRows(inWindow.filter((r) => testOnly.has(r.arenaId))),
   );
+  const shipped = inWindow.filter((r) => !unshipped.has(r)).map(asMine);
+  const pending = [...unshipped]
+    .map(asMine)
+    .map(({ field, previous, next }) => ({ field, previous, next }));
 
-  // Presence is the map's own: the night arena arriving is a change to this map,
-  // not the map entering the game.
-  const presence = mine.filter((r) => r.field === MAP_PRESENCE_FIELD);
+  // Presence is the map's own, and only what shipped: a map whose space the live
+  // client does not carry has not entered the game, whatever its arena
+  // definition says.
+  const presence = shipped.filter((r) => r.field === MAP_PRESENCE_FIELD);
   const lastPresence = presence[0] ?? null;
   const firstAdded = presence.filter((r) => r.next !== null).at(-1) ?? null;
   const present = !lastPresence || lastPresence.next !== null;
 
   return {
     tracked: names.length > 0,
-    versions: groupByVersion(mine),
+    versions: groupByVersion(shipped),
+    pending,
     addedVersion: firstAdded?.gameVersion ?? null,
     addedAt: firstAdded?.capturedAt ?? null,
     removedVersion: present ? null : (lastPresence?.gameVersion ?? null),
@@ -223,6 +244,7 @@ export async function getRecentMapChanges(
     ...byId.keys(),
     ...summaries.flatMap((m) => (m.night ? [m.night.arenaId] : [])),
   ];
+  const testOnly = testOnlyArenas(summaries);
 
   // The versions to show, before their contents: the feed keeps the most recent
   // handful, and the table grows by a patch's worth of rows at every update, so
@@ -253,11 +275,20 @@ export async function getRecentMapChanges(
     )
     .orderBy(desc(mapChanges.capturedAt), desc(mapChanges.id));
 
+  // The rows describing a space the live client cannot load today: they left
+  // history for the pending block, which reads them from the same table.
+  const unshipped = new Set(
+    currentBuildRows(rows.filter((r) => testOnly.has(r.arenaId))).map(
+      (r) => r.id,
+    ),
+  );
+
   const byVersion = new Map<
     string,
     { capturedAt: Date; maps: Map<string, MapChangeEntryRow[]> }
   >();
   for (const row of rows) {
+    if (unshipped.has(row.id)) continue;
     const on = attachChange(row.arenaId, row.field, (id) => byId.has(id));
     if (!on) continue;
     let group = byVersion.get(row.gameVersion);
@@ -292,6 +323,36 @@ export async function getRecentMapChanges(
     .sort((a, b) => b.capturedAt.getTime() - a.capturedAt.getTime());
 }
 
+/**
+ * Of an arena's rows, the ones that describe the state the client is in now:
+ * those of the newest version it was recorded at.
+ *
+ * What makes a row pending is that the live client cannot load the space it
+ * describes *today*. The seasonal arenas (the Waffenträger reskins, the arcade
+ * minigames) have come and gone for years, and those past arrivals were real:
+ * they shipped, were played, and left. Only the latest one is waiting.
+ */
+function currentBuildRows<T extends { arenaId: string; gameVersion: string }>(
+  rows: T[],
+): T[] {
+  const newest = new Map<string, string>();
+  for (const r of rows) {
+    if (!newest.has(r.arenaId)) newest.set(r.arenaId, r.gameVersion);
+  }
+  return rows.filter((r) => newest.get(r.arenaId) === r.gameVersion);
+}
+
+/** The arenas a catalogue's maps hold whose space only the test client ships,
+ * the map's own and its night version's alike. */
+function testOnlyArenas(summaries: MapSummary[]): Set<string> {
+  const out = new Set<string>();
+  for (const m of summaries) {
+    if (m.commonTest) out.add(m.arenaId);
+    if (m.night?.commonTest) out.add(m.night.arenaId);
+  }
+  return out;
+}
+
 /** What the running Common Test is about to change, per map. `version` is null
  * when no test is running (or the branch is not ahead of live), in which case
  * `maps` is empty. */
@@ -317,15 +378,32 @@ export type PendingMapChanges = {
 export async function getPendingMapChanges(
   region: Region,
 ): Promise<PendingMapChanges> {
-  const [summaries, rows] = await Promise.all([
+  const [summaries, rows, unshipped] = await Promise.all([
     listMapSummaries(region),
     db.select().from(mapTestChanges).orderBy(mapTestChanges.arenaId),
+    // The recorded changes of the arenas the live client declares but does not
+    // ship. They are in `map_changes` (the client did change), yet nothing about
+    // them has reached a live server, so they read as pending beside whatever
+    // the running test is about to do.
+    db.select().from(mapChanges).orderBy(desc(mapChanges.capturedAt)),
   ]);
-  if (rows.length === 0) return { version: null, maps: [] };
 
   const byId = new Map(summaries.map((m) => [m.arenaId, m]));
+  const testOnly = testOnlyArenas(summaries);
+  const pendingRows = [
+    ...rows.map((r) => ({ arenaId: r.arenaId, field: r.field, previous: r.previous, next: r.next })),
+    ...currentBuildRows(
+      unshipped.filter((r) => testOnly.has(r.arenaId)),
+    ).map((r) => ({
+      arenaId: r.arenaId,
+      field: r.field,
+      previous: r.previous,
+      next: r.next,
+    })),
+  ];
+  if (pendingRows.length === 0) return { version: null, maps: [] };
   const byArena = new Map<string, MapChangeEntryRow[]>();
-  for (const row of rows) {
+  for (const row of pendingRows) {
     const on = attachChange(row.arenaId, row.field, (id) => byId.has(id));
     if (!on) continue;
     const entries = byArena.get(on.arenaId) ?? [];

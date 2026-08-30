@@ -1,5 +1,4 @@
 import { Fragment } from "react";
-import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Panel,
@@ -20,7 +19,6 @@ import {
   MAP_HISTORY_TRACKING_START,
   BATTLE_TYPE_LABEL,
   BattleType,
-  MAP_NIGHT_PREFIX,
   MapChangeArea,
   mapChangeArea,
   type MapDetail,
@@ -102,15 +100,7 @@ function VersionChanges({
           <div className="grid sm:grid-cols-[minmax(0,1fr)_16rem]">
             <ul className="divide-y divide-fd-border">
               {rows.map((change) => (
-                <ChangeRow
-                  key={change.field}
-                  change={change}
-                  // The night version reached the client's arena list at this
-                  // update, but its space did not. The row carries that rather
-                  // than the section header, which a version touching one area
-                  // does not draw at all.
-                  commonTest={detail.night?.commonTest ?? false}
-                />
+                <ChangeRow key={change.field} change={change} />
               ))}
             </ul>
             <MinimapColumn detail={detail} changes={rows} area={area} />
@@ -121,22 +111,11 @@ function VersionChanges({
   );
 }
 
-function ChangeRow({
-  change,
-  commonTest,
-}: {
-  change: FormattedMapChange;
-  /** Whether the map's night version is one only the test client ships, which a
-   * row about it says so it does not read as something playable today. */
-  commonTest: boolean;
-}) {
+function ChangeRow({ change }: { change: FormattedMapChange }) {
   return (
     <li className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm">
-      <span className="flex items-center gap-1.5 text-fd-muted-foreground">
+      <span className="text-fd-muted-foreground">
         <GlossaryLabel>{change.label}</GlossaryLabel>
-        {commonTest && change.field.startsWith(MAP_NIGHT_PREFIX) && (
-          <NightCommonTestBadge />
-        )}
       </span>
       <span className="text-right font-medium tabular-nums">
         {change.before && change.after ? (
@@ -199,7 +178,7 @@ export function MapChangesHistory({
     .filter((s) => s.changes.length > 0);
 
   const pending = testChanges.map((c) =>
-    formatMapChange(c.field, c.previous, c.next),
+    formatMapChange(c.field, c.previous, c.next, true),
   );
 
   return (

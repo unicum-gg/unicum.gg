@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { MAP_NIGHT_PREFIX } from "@unicum.gg/shared";
-import { NightCommonTestBadge } from "@/components/maps/night-badge";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { MinimapImage } from "@/components/maps/minimap-image";
 import { formatMapChange } from "@/components/maps/change-format";
@@ -33,9 +31,19 @@ export type FeedMap = {
  * coordinates only mean something drawn on the map itself, which is what the
  * map's own history panel is for.
  */
-export function MapBlock({ region, map }: { region: Region; map: FeedMap }) {
+export function MapBlock({
+  region,
+  map,
+  pending = false,
+}: {
+  region: Region;
+  map: FeedMap;
+  /** Whether the block sits in the Common Test panel, where a presence row must
+   * not claim the map reached the game. */
+  pending?: boolean;
+}) {
   const changes = map.changes.map((c) =>
-    formatMapChange(c.field, c.previous, c.next),
+    formatMapChange(c.field, c.previous, c.next, pending),
   );
   if (changes.length === 0) return null;
 
@@ -68,14 +76,8 @@ export function MapBlock({ region, map }: { region: Region; map: FeedMap }) {
             key={change.field}
             className="flex items-baseline justify-between gap-4 px-4 py-2.5 text-sm"
           >
-            <span className="flex items-center gap-1.5 text-fd-muted-foreground">
+            <span className="text-fd-muted-foreground">
               <GlossaryLabel>{change.label}</GlossaryLabel>
-              {/* A change to a version only the test client ships says so, or it
-                * reads as something the reader can go and play. */}
-              {map.nightCommonTest &&
-                change.field.startsWith(MAP_NIGHT_PREFIX) && (
-                  <NightCommonTestBadge />
-                )}
             </span>
             <span className="text-right font-medium tabular-nums">
               {change.before && change.after ? (
