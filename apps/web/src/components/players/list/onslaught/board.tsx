@@ -15,6 +15,8 @@ import {
 } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -86,28 +88,35 @@ function SortHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() =>
+        setSort(
+          active
+            ? { col, dir: sort.dir === "asc" ? "desc" : "asc" }
+            : { col, dir: "desc" },
+        )
+      }
+      className={cn(
+        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead className={cn("text-right!", className)}>
-      <button
-        type="button"
-        onClick={() =>
-          setSort(
-            active
-              ? { col, dir: sort.dir === "asc" ? "desc" : "asc" }
-              : { col, dir: "desc" },
-          )
-        }
-        className={cn(
-          "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -326,7 +335,9 @@ export function OnslaughtBoard({
                 <TableHead className="w-16 text-center!">#</TableHead>
                 <TableHead>Player</TableHead>
                 <TableHead className="hidden w-28 text-right! sm:table-cell">
-                  Rank
+                  {/* The mode's own ladder, not a leaderboard position: the
+                      row's number is in the first column. */}
+                  <GlossaryLabel label="Onslaught">Rank</GlossaryLabel>
                 </TableHead>
                 <SortHead
                   col="battles"

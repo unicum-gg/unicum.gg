@@ -6,6 +6,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { PlayerName } from "@/components/entity/player-name";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { useState } from "react";
@@ -141,6 +142,23 @@ function SortableHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className={cn(
+        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
+        align === "end" && "justify-end",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead
       data-rating-col={ratingCol}
@@ -150,21 +168,11 @@ function SortableHead({
         headClassName,
       )}
     >
-      <button
-        type="button"
-        onClick={() => onToggle(column)}
-        className={cn(
-          "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-          align === "end" && "justify-end",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

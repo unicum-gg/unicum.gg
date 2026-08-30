@@ -1,5 +1,6 @@
 "use client";
 
+import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { PlayerName } from "@/components/entity/player-name";
 import { RankMedal } from "@/components/rank-medal";
@@ -75,7 +76,7 @@ export function TopPlayers({
                 </TableHead>
                 <TableHead>Player</TableHead>
                 <TableHead className="w-24 pr-4 text-right!">
-                  {metricLabel}
+                  <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
                 </TableHead>
               </TableRow>
             </TableHeader>

@@ -5,12 +5,7 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { TableHead } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { useGlossaryAnchor } from "@/components/glossary/anchor-context";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { cn } from "@/lib/utils";
 
 /** Sort direction and the active sort state (which column, which way), shared by
@@ -45,15 +40,12 @@ export function SortHead({
   children: ReactNode;
 }) {
   // The column's own definition when the glossary has one, so a header that
-  // already explained itself in three words now explains itself properly. The
-  // tooltip stays text: it hangs off a sort button, and a link inside one
-  // cannot be clicked before the tooltip closes.
+  // already explained itself in three words now explains itself properly.
   //
   // Matched on the heading the reader sees, not on `tip`: the tip is a sentence
   // about this column ("View range (m)"), never the term's name, so looking it
   // up by tip missed every column whose definition is anchored by label.
   const heading = typeof children === "string" ? children : undefined;
-  const term = useGlossaryAnchor()({ specKey: col, label: heading });
   const active = sort.key === col;
   const Icon = active
     ? sort.direction === SortDirection.Asc
@@ -80,27 +72,17 @@ export function SortHead({
   );
   return (
     <TableHead className={cn("p-0", headClassName)}>
-      {tip || term ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent className="max-w-xs">
-            {/* Both, when both exist: the tip says which column this is
-                ("Front hull armor"), the definition says what the thing is.
-                Dropping the tip made two columns sharing a term hover
-                identically. */}
-            {tip ? <span className="block">{tip}</span> : null}
-            {term ? (
-              <span className={tip ? "mt-1 block opacity-80" : undefined}>
-                <span className="font-medium">{term.term}</span>
-                {": "}
-                {term.short}
-              </span>
-            ) : null}
-          </TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
+      {/* The tip is the fallback lookup, not just a sentence: the nation, class
+          and tier columns are a glyph, and their tip is the only place their
+          name is written. */}
+      <GlossaryHeadTooltip
+        specKey={col}
+        label={heading}
+        fallbackLabel={tip}
+        tip={tip}
+      >
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

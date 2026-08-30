@@ -1,5 +1,6 @@
 "use client";
 
+import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -56,15 +57,17 @@ export function TankTopPlayers(
           </TableHead>
           <TableHead>Player</TableHead>
           <TableHead className="hidden w-24 text-right! sm:table-cell">
-            Battles
+            <GlossaryLabel>Battles</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! md:table-cell">
-            Avg dmg
+            <GlossaryLabel>Avg dmg</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-20 text-right! md:table-cell">
-            WR
+            <GlossaryLabel>WR</GlossaryLabel>
           </TableHead>
-          <TableHead className="w-24 pr-4 text-right!">{metricLabel}</TableHead>
+          <TableHead className="w-24 pr-4 text-right!">
+            <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

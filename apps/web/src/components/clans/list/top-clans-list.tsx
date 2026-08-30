@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
@@ -77,10 +78,12 @@ export function TopClansList({
           <TableHead>Clan</TableHead>
           <TableHead className="w-24 text-center!">Members</TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            WR
+            <GlossaryLabel>WR</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
-            {RATING_METRIC_LABEL[metric]}
+            <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
+              {RATING_METRIC_LABEL[metric]}
+            </GlossaryLabel>
           </TableHead>
         </TableRow>
       </TableHeader>

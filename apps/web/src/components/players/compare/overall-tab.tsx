@@ -122,7 +122,9 @@ export function OverallTab({
         kind: "higher",
         cells: avgTiers.map((t) => numCell(t, dec2Fmt)),
       },
-      statRow("Accuracy", "higher", (s) => {
+      // "Hit rate", like the player page: this is hits over shots, not the gun
+      // accuracy the tank pages measure in metres of dispersion.
+      statRow("Hit rate", "higher", (s) => {
         if (s.latest!.shots <= 0) return dashCell();
         const ratio = s.latest!.hits / s.latest!.shots;
         return { display: pctFmt.format(ratio), numeric: ratio };

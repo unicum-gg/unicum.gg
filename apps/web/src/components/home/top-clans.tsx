@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { Period } from "@/hooks/use-period";
 import { RankMedal } from "@/components/rank-medal";
@@ -96,7 +97,11 @@ export function TopClans({
                 </TableHead>
                 <TableHead>Clan</TableHead>
                 <TableHead className="w-24 pr-4 text-right!">
-                  Avg {metricLabel}
+                  {/* "Avg WN8" is WN8, averaged over the roster: a reader
+                      hovering it wants the rating, not the arithmetic. */}
+                  <GlossaryLabel label={metricLabel}>
+                    Avg {metricLabel}
+                  </GlossaryLabel>
                 </TableHead>
               </TableRow>
             </TableHeader>

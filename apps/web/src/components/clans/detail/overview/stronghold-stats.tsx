@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
@@ -279,7 +280,7 @@ export function ClanStrongholdStatsTable(
             {section.rows.map((row) => (
               <TableRow key={section.title + row.label}>
                 <TableCell className="py-1.5! font-medium">
-                  {row.label}
+                  <GlossaryLabel>{row.label}</GlossaryLabel>
                 </TableCell>
                 {loading ? (
                   <>

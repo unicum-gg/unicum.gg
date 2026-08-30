@@ -17,12 +17,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
@@ -61,14 +57,12 @@ function SortableHead({
   active,
   onSort,
   className,
-  tooltip,
   children,
 }: {
   sortKey: StrongholdSort;
   active: boolean;
   onSort: (s: StrongholdSort) => void;
   className?: string;
-  tooltip?: string;
   children: ReactNode;
 }) {
   const Icon = active ? CaretDownIcon : CaretUpDownIcon;
@@ -90,14 +84,11 @@ function SortableHead({
   );
   return (
     <TableHead className={cn("text-right!", className)}>
-      {tooltip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tooltip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
+      >
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -156,7 +147,6 @@ export function StrongholdTable({
               active={sort === StrongholdSort.Winrate}
               onSort={onSort}
               className="w-28"
-              tooltip="Win rate"
             >
               WR
             </SortableHead>
@@ -165,7 +155,6 @@ export function StrongholdTable({
               active={sort === StrongholdSort.Rating}
               onSort={onSort}
               className="w-24"
-              tooltip="Skirmish Rating. Win rate and battle volume weighted by the roster's average WG Personal Rating (rewards winning with a strong roster, discounts farming with weak accounts)."
             >
               SR
             </SortableHead>
@@ -174,7 +163,6 @@ export function StrongholdTable({
               active={sort === StrongholdSort.RatingBattles}
               onSort={onSort}
               className="w-24"
-              tooltip="Battles-based Stronghold Rating: the same SR with battle volume rewarded instead of only gated, so clans that have proven it over many battles rank higher."
             >
               SRB
             </SortableHead>

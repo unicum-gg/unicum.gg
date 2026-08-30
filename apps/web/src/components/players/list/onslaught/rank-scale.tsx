@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
@@ -55,7 +56,10 @@ export function OnslaughtRankScale({
         <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4!">Tier</TableHead>
+              {/* The rows are Onslaught's own ranks, not vehicle tiers. */}
+              <TableHead className="pl-4!">
+                <GlossaryLabel label="Onslaught">Tier</GlossaryLabel>
+              </TableHead>
               <TableHead className="pr-4">Meaning</TableHead>
             </TableRow>
           </TableHeader>

@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
@@ -94,22 +95,29 @@ function SortableHead({
   children: ReactNode;
 }) {
   const Icon = active ? CaretDownIcon : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onSort(sortKey)}
+      className={cn(
+        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead className={cn("text-right!", className)}>
-      <button
-        type="button"
-        onClick={() => onSort(sortKey)}
-        className={cn(
-          "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

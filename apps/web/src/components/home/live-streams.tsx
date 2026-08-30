@@ -17,6 +17,7 @@ import { AddChannelCta } from "@/components/home/add-channel-cta";
 import { FeaturedPlayer } from "@/components/home/featured-player";
 import { usePeriod } from "@/hooks/use-period";
 import { PeriodSelect } from "@/components/home/period-select";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { METRIC_VALUE, StreamRow } from "@/components/home/stream-row";
 import {
@@ -134,7 +135,9 @@ export function LiveStreams({
           <TableHead className="w-20 whitespace-nowrap text-right!">
             Viewers
           </TableHead>
-          <TableHead className="w-20 pr-4 text-right!">{metricLabel}</TableHead>
+          <TableHead className="w-20 pr-4 text-right!">
+            <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>

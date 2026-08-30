@@ -3,6 +3,7 @@
 import { Fragment, useMemo } from "react";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Table,
   TableBody,
@@ -106,7 +107,7 @@ export function TopMembersTab({
                   Player
                 </TableHead>
                 <TableHead className="text-right text-xs text-muted-foreground">
-                  {metricLabel}
+                  <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
                 </TableHead>
               </Fragment>
             ))}

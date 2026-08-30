@@ -37,12 +37,8 @@ import { TablePager, usePagination } from "@/components/table-pager";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -148,14 +144,16 @@ function SortableHead({
         headClassName,
       )}
     >
-      {tooltip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tooltip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
+      {/* The heading the reader sees when it is words, the tooltip when it is
+          an icon: the nation, class and tier columns show a glyph, and their
+          tip is the one place their name is written. */}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
+        fallbackLabel={tooltip}
+        tip={tooltip}
+      >
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

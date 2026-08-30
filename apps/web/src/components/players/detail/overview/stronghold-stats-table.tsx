@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { computeHR, hrColor, winrateColor, RATING_COLOR_CLASS, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
@@ -270,7 +271,9 @@ export function StrongholdStatsTable(
               };
           return (
             <TableRow key={row.label}>
-              <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
+              <TableCell className="py-1.5! font-medium">
+                <GlossaryLabel>{row.label}</GlossaryLabel>
+              </TableCell>
               {cells ? (
                 <>
                   <PeriodCells cell={cells.total} />
