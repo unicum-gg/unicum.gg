@@ -3,6 +3,7 @@ export * from "./badge-flags";
 export * from "./derived-stats";
 export * from "./refresh-policy";
 export * from "./language-inference";
+export * from "./last-battle";
 export * from "./detail";
 export * from "./lift-drag";
 export * from "./rating-history";

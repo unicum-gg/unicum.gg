@@ -220,7 +220,7 @@ export const PlayerDetailResponse = z.object({
       accountId: z.number(),
       nickname: z.string(),
       createdAt: z.coerce.date(),
-      lastBattleAt: z.coerce.date(),
+      lastBattleAt: z.coerce.date().nullable(),
       updatedAt: z.coerce.date(),
     })
     .loose(),

@@ -30,7 +30,8 @@ export function PlayerHeader(
         accountId: number;
         nickname: string;
         createdAt: Date;
-        lastBattleAt: Date;
+        /** Null when the account has never entered a battle. */
+        lastBattleAt: Date | null;
         updatedAt: Date;
         currentStint: ClanStint | null;
         inferredLanguages: string[];
@@ -91,10 +92,14 @@ export function PlayerHeader(
               Joined {format(createdAt, MONTH_FORMAT)}
             </span>
             <span className="hidden sm:inline">·</span>
-            <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
-              Last battle{" "}
-              {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
-            </span>
+            {lastBattleAt ? (
+              <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
+                Last battle{" "}
+                {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
+              </span>
+            ) : (
+              <span>Never played</span>
+            )}
             <span className="hidden sm:inline">·</span>
             <span>
               Updated{" "}

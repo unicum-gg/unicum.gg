@@ -49,7 +49,9 @@ export type PlayerDetailData = {
     accountId: number;
     nickname: string;
     createdAt: Date;
-    lastBattleAt: Date;
+    /** Null when the account has no battle to date: never played, or never
+     * fetched (see `lastBattleOrNull`, which is what maps both to null). */
+    lastBattleAt: Date | null;
     updatedAt: Date;
   };
   /** Previous nicknames of this account, newest first (empty until a rename is

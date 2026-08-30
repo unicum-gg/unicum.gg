@@ -2952,7 +2952,7 @@ export interface components {
                 /** Format: date-time */
                 createdAt: Date;
                 /** Format: date-time */
-                lastBattleAt: Date;
+                lastBattleAt: Date | null;
                 /** Format: date-time */
                 updatedAt: Date;
             };

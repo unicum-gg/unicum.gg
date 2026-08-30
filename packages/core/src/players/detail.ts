@@ -1,4 +1,4 @@
-import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData } from "@unicum.gg/shared";
+import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData, lastBattleOrNull } from "@unicum.gg/shared";
 import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
@@ -212,7 +212,7 @@ export async function buildPlayerDetail(args: {
       accountId,
       nickname: player.nickname,
       createdAt: player.createdAt ?? new Date(0),
-      lastBattleAt: player.lastBattleAt ?? new Date(0),
+      lastBattleAt: lastBattleOrNull(player.lastBattleAt),
       updatedAt: player.lastSeenAt,
     },
     nameHistory,
