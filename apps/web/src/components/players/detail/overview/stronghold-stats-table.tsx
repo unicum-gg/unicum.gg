@@ -9,7 +9,7 @@ import {
 import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
-import { computeHR, hrColor, winrateColor, RATING_COLOR_CLASS, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+import { computeHR, computeHRB, hrbColor, hrColor, winrateColor, RATING_COLOR_CLASS, type HRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
 
 // The Wins row colors its win rate with the mode's own scale. Defaults to the
 // random-battle 50%-anchored one; Steel Hunter passes its lower-baseline scale
@@ -44,23 +44,38 @@ export type RowDef = {
   render: (s: StrongholdStats) => Cell;
 };
 
-// Steel Hunter only: the HR rating, colored like the leaderboard. Appended as a
-// trailing row for the fallout mode (see StrongholdTab), so the other seven
-// stronghold-style modes keep their shared row set untouched. `computeHR`
-// returns null with no battles, which renders the em-dash placeholder.
-export const HR_ROW: RowDef = {
-  label: "HR",
-  render: (s) => {
-    const hr = computeHR({
-      battles: s.battles,
-      wins: s.wins,
-      avgXp: s.battleAvgXp,
-    });
-    return hr === null
-      ? EMPTY_CELL
-      : { primary: integerFmt.format(hr), color: hrColor(hr) };
-  },
-};
+// Steel Hunter only: the two Hunter ratings, colored like the leaderboard's
+// columns. Appended as trailing rows for the fallout mode (see StrongholdTab),
+// so the other seven stronghold-style modes keep their shared row set
+// untouched. Both computes return null with no battles, which renders the
+// em-dash placeholder.
+function hunterRow(
+  label: string,
+  compute: (s: HRInputs) => number | null,
+  color: (value: number) => RatingColor,
+): RowDef {
+  return {
+    label,
+    render: (s) => {
+      const value = compute({
+        battles: s.battles,
+        wins: s.wins,
+        avgXp: s.battleAvgXp,
+      });
+      return value === null
+        ? EMPTY_CELL
+        : { primary: integerFmt.format(value), color: color(value) };
+    },
+  };
+}
+
+// HRB reads the same period columns as HR, and deliberately so: it rewards
+// volume where HR discounts it, so a 24h column with a handful of runs lands
+// far below the total. That contrast is the rating's point, not a glitch.
+export const STEEL_HUNTER_ROWS: RowDef[] = [
+  hunterRow("HR", computeHR, hrColor),
+  hunterRow("HRB", computeHRB, hrbColor),
+];
 
 function buildRowDefs(wrColor: WinrateColorFn): RowDef[] {
   return [

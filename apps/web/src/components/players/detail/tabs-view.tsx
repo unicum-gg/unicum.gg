@@ -23,7 +23,7 @@ import {
   StrongholdTab,
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
-import { HR_ROW } from "@/components/players/detail/overview/stronghold-stats-table";
+import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/stronghold-stats-table";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
@@ -264,7 +264,9 @@ export function PlayerTabsView({
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}
-          trailingRows={mode === PlayerMode.SteelHunter ? [HR_ROW] : undefined}
+          trailingRows={
+            mode === PlayerMode.SteelHunter ? STEEL_HUNTER_ROWS : undefined
+          }
           winrateColorFn={
             mode === PlayerMode.SteelHunter ? steelHunterWinrateColor : undefined
           }
