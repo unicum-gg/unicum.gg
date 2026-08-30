@@ -50,8 +50,8 @@ function Stat({
  * each billing date rather than creeping daily, because that is when the money
  * leaves. A secondary line shows the monthly run-rate.
  *
- * Everything here is euros: that is what OVH invoices and what supporters pay,
- * so the whole computation stays in one currency and only the rendering
+ * Everything here is euros: that is what the host invoices and what supporters
+ * pay, so the whole computation stays in one currency and only the rendering
  * converts. `nowMs` comes from the server parent so the client renders the same
  * figures the prerendered HTML did.
  */

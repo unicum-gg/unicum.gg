@@ -9,8 +9,8 @@ import { getRedisClient } from "../redis";
 /**
  * Live EUR exchange rates, from UniRateAPI.
  *
- * Every amount the site holds is in euros (OVH invoices us, Stripe collects
- * pledges), and a visitor sees them in their region's currency. That conversion
+ * Every amount the site holds is in euros (the host invoices us, Stripe
+ * collects pledges), and a visitor sees them in their region's currency. That conversion
  * used to run off a rate hardcoded at the project's start, which drifted ~8% and
  * made every figure on /support and /coverage wrong in both directions. So the
  * rate is fetched, and never stored alongside the amounts.

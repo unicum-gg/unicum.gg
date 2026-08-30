@@ -62,8 +62,8 @@ export async function SupportView() {
                 entirely by the people who use it.
               </p>
               <p className="text-sm text-fd-muted-foreground">
-                It runs on a single OVH VPS, and every euro goes back into
-                the project: the server, the database, the
+                It runs on a single rented server, and every euro goes back
+                into the project: the server, the database, the
                 Wargaming-whitelisted egress IPs that let us refresh more
                 players, and the occasional push to get it in front of more
                 people. Supporters cover the monthly bill; anything extra goes

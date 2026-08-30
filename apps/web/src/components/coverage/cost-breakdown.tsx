@@ -27,8 +27,9 @@ export type InfraCosts = ExpenseLedger;
  * "spent since launch" figure is not simply today's rate times the days it has
  * run — the site started on a much smaller machine.
  *
- * Every amount arrives in euros — what OVH and the rest actually invoice — and
- * is converted here, at the live rate, into the visitor's regional currency.
+ * Every amount arrives in euros (what the host and the rest actually invoice)
+ * and is converted here, at the live rate, into the visitor's regional
+ * currency.
  * That is a client concern: these pages are prerendered, so the region (and
  * therefore the currency) is only known in the browser.
  */
@@ -45,9 +46,9 @@ export function CostBreakdown({ costs }: { costs: InfraCosts }) {
         </div>
         <div className="text-sm text-fd-muted-foreground">
           A fixed {money.format(costs.totalAnnualEur / 12, 2)}/month bill, no
-          surprises: one OVH VPS, no third-party SaaS in the data path. It only
-          grows when we outgrow the server (more Wargaming throughput means more
-          egress IPs).
+          surprises: one rented server, no third-party SaaS in the data path. It
+          only grows when we outgrow the server (more Wargaming throughput means
+          more egress IPs).
         </div>
       </div>
       <div className="space-y-1.5">

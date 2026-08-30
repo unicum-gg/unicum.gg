@@ -6,8 +6,9 @@
 // total being money that really left the account rather than an average.
 //
 // Recurring lines are **dated**. A hosting bill is not one number: the site
-// started on a small Contabo box and has moved twice since, so charging today's
-// rate against every day since launch would invent money that was never spent.
+// started on a small Contabo box and has moved three times since, so charging
+// today's rate against every day since launch would invent money that was
+// never spent.
 // Closing a line and opening the next one is also how the next migration gets
 // recorded, without touching the maths.
 //
@@ -119,20 +120,47 @@ const HOSTING: Expense[] = [
     // EUR 23.49 excl. VAT + 20% VAT, monthly no-commit billing.
     eur: 28.19,
     from: "2026-06-21",
+    to: "2026-08-30",
     note: "OVH VPS-4, 8 vCPU / 24 GB RAM / 200 GB NVMe",
+  }),
+  monthly({
+    label: "VPS hosting",
+    // EUR 40.27 excl. VAT + 20% VAT, monthly no-commit billing.
+    eur: 48.32,
+    from: "2026-08-30",
+    note: "netcup RS 4000 G12, 12 vCPU / 32 GB RAM / 1 TB NVMe",
   }),
 ];
 
-/** One additional OVH IPv4 per month. Each extra egress IP buys its own G-Core
- * per-IP rate budget, so Wargaming traffic can spread across them. */
-const EGRESS_IP_EUR_MONTHLY = 2.39;
-/** The day multi-IP egress went in (commits `dc6428a` through `de183f3`, all
- * within four hours of each other). Before this the site ran on the one address
- * that comes with the VPS, so nothing here is charged against the earlier
- * weeks. Nothing has touched `WG_EGRESS_*` or the proxy compose since, and that
- * compose has defined the same two proxies from its first commit, so the count
- * below has been constant over the whole period rather than merely current. */
-const EGRESS_IPS_FROM = "2026-07-17";
+/** One additional IPv4 per month at the current host. Each extra egress IP buys
+ * its own G-Core per-IP rate budget, so Wargaming traffic can spread across
+ * them. netcup bills EUR 1.68 excl. VAT; the OVH rate this replaced is recorded
+ * on the closed line below rather than here. */
+const EGRESS_IP_EUR_MONTHLY = 2.02;
+/** The day the current host took over, and therefore the earliest a line priced
+ * at its rate can start. */
+const EGRESS_IPS_FROM = "2026-08-30";
+
+// Egress-IP periods already paid for, closed and priced at the rate that was
+// actually billed at the time. These are recorded rather than derived for the
+// reason `buildExpenseLedger` explains: the live count only describes today, so
+// leaving history to it means every change silently reprices the past. The
+// OVH period ended with the move, and the machine it moved to runs on the one
+// address that comes with it, so there is no open line to succeed it yet.
+const EGRESS_IP_HISTORY: readonly Expense[] = [
+  monthly({
+    label: "Egress IPs",
+    // EUR 1.99 excl. VAT + 20% VAT, one additional OVH IPv4.
+    eur: 2.39,
+    // Multi-IP egress went in with commits `dc6428a` through `de183f3`, all
+    // within four hours of each other. Before that the site ran on the single
+    // address that came with the VPS, so nothing is charged against the
+    // earlier weeks.
+    from: "2026-07-17",
+    to: "2026-08-30",
+    note: "1 additional OVH IPv4 for multi-IP Wargaming throughput",
+  }),
+];
 
 // Deliberately absent: the OpenAI usage behind the daily changelog digest. It
 // is paid personally rather than out of the project, so putting it here would
@@ -155,11 +183,17 @@ const ONE_OFF_EXPENSES: readonly OneOffExpense[] = [
  * The full ledger. `additionalEgressIps` is passed in rather than read here so
  * this module stays client-safe: the count comes from server-only env on the
  * API side (`WG_EGRESS_*`), so the cost tracks reality as IPs are added or
- * dropped instead of being maintained by hand. Note this makes the egress line
- * the one place the cumulative reads a live value rather than a recorded one:
- * change the count and the whole multi-IP period is repriced. It is right today
- * because the count has not moved since `EGRESS_IPS_FROM`; the day it does,
- * close this line and open the next one, exactly like a hosting move.
+ * dropped instead of being maintained by hand.
+ *
+ * That live count now prices only the OPEN line, never the past. It used to
+ * price the whole multi-IP period, and on 2026-08-30 that cost the ledger its
+ * history: cutting `WG_EGRESS_*` back to a single entry during the move took
+ * the count to zero, and the two charges already paid in July and August
+ * vanished from the cumulative. A ledger that revises what was spent is not a
+ * ledger, so paid periods live in `EGRESS_IP_HISTORY` as closed lines and the
+ * count below only ever opens the current one. When IPs are added, this line
+ * appears from `EGRESS_IPS_FROM`; when they are dropped, close it there and
+ * append it to the history, exactly like a hosting move.
  */
 export function buildExpenseLedger(additionalEgressIps: number): ExpenseLedger {
   const lines: Expense[] = [
@@ -169,13 +203,14 @@ export function buildExpenseLedger(additionalEgressIps: number): ExpenseLedger {
       eur: 47.78,
       note: "unicum.gg, billed yearly",
     }),
+    ...EGRESS_IP_HISTORY,
     ...(additionalEgressIps > 0
       ? [
           monthly({
             label: "Egress IPs",
             eur: additionalEgressIps * EGRESS_IP_EUR_MONTHLY,
             from: EGRESS_IPS_FROM,
-            note: `${additionalEgressIps} additional OVH IPv4 for multi-IP Wargaming throughput`,
+            note: `${additionalEgressIps} additional IPv4 for multi-IP Wargaming throughput`,
           }),
         ]
       : []),

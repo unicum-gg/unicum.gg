@@ -1,7 +1,7 @@
 // Which currency our own money is shown in, and how it is formatted.
 //
-// Everything we hold is denominated in euros: OVH invoices us in EUR and Stripe
-// collects pledges in EUR. Nothing is ever stored converted — conversion
+// Everything we hold is denominated in euros: the host invoices us in EUR and
+// Stripe collects pledges in EUR. Nothing is ever stored converted — conversion
 // happens once, at display, against a live rate. A hardcoded rate is what made
 // every figure on /support and /coverage wrong.
 //
