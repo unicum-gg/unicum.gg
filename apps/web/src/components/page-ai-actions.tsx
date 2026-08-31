@@ -26,7 +26,7 @@ export function PageAiActions() {
     {
       label: "Open in ChatGPT",
       icon: <OpenAiIcon />,
-      href: `https://chatgpt.com/?${new URLSearchParams({ hints: "search", q })}`,
+      href: `https://chatgpt.com/?${new URLSearchParams({ hints: "search", prompt: q })}`,
     },
     {
       label: "Open in Claude",
