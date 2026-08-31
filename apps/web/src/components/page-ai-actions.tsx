@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   AnthropicIcon,
   OpenAiIcon,
-  PerplexityIcon,
+  SciraIcon,
 } from "@/components/brand-icons";
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu";
 import APP from "@/constants/app";
@@ -13,9 +13,12 @@ import APP from "@/constants/app";
 /**
  * Dropdown-menu items to hand the current page to an LLM: every page has a
  * Markdown twin (`<path>.md`, rendered by `/api/md`), so we deep-link
- * ChatGPT/Claude/Perplexity with a prompt pointing at that `.md` URL for the
- * model to read. Returns bare `<DropdownMenuItem>`s so a parent menu places them
- * inline.
+ * ChatGPT/Claude/Scira with a prompt pointing at that `.md` URL for the model to
+ * read. Returns bare `<DropdownMenuItem>`s so a parent menu places them inline.
+ *
+ * Perplexity was dropped: it disabled reading a URL a user hands it, and it is
+ * absent from Cloudflare's verified-bot directory, so our page challenge catches
+ * it. It answered from its own index instead of ever requesting the page.
  */
 export function PageAiActions() {
   const pathname = usePathname();
@@ -34,9 +37,9 @@ export function PageAiActions() {
       href: `https://claude.ai/new?${new URLSearchParams({ q })}`,
     },
     {
-      label: "Open in Perplexity",
-      icon: <PerplexityIcon />,
-      href: `https://www.perplexity.ai/search?${new URLSearchParams({ q })}`,
+      label: "Open in Scira AI",
+      icon: <SciraIcon />,
+      href: `https://scira.ai/?${new URLSearchParams({ q })}`,
     },
   ];
 
