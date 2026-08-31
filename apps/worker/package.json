@@ -10,6 +10,7 @@
     "changelog:dry": "pnpm changelog --dry",
     "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts",
     "reconcile-streamers": "tsx --env-file-if-exists=../web/.env.local src/scripts/reconcile-streamers.ts",
+    "sample-servers": "tsx --env-file-if-exists=../web/.env.local src/scripts/sample-servers.ts",
     "refresh-map-history": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-map-history.ts"
   },
   "dependencies": {

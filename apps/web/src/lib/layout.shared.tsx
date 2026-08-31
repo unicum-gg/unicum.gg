@@ -1,20 +1,14 @@
 import {
-  BookOpenIcon,
   DiscordLogoIcon,
-  FileCodeIcon,
   GithubLogoIcon,
-  HeartIcon,
-  PlugsConnectedIcon,
-  RobotIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { NavLogo } from "@/components/nav-logo";
-import { NavMoreMenu } from "@/components/nav-more-menu";
+import { NavMore } from "@/components/nav-more";
 import { NavSectionMenu } from "@/components/nav-section-menu";
 import { RatingSelector } from "@/components/rating-selector";
 import { RegionSelector } from "@/components/region-selector";
 import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
 
 // `sections` toggles the Players/Clans/Tanks + "More" site-navigation links, and
 // `selectors` the rating-metric + region pickers. The main site nav shows both,
@@ -50,50 +44,14 @@ export async function baseOptions({
               type: "custom",
               children: <NavSectionMenu section="maps" />,
             },
-            // The region-less surfaces (integrations + API), grouped under one
-            // dropdown so the main nav stays three sections. `custom` rather
-            // than fumadocs' `menu`, so the panel can be force-mounted and its
-            // links stay in the server HTML (see `NavMoreMenu`).
+            // Everything that is not one of the catalogue sections, under one
+            // dropdown so the main nav stays four. `custom` rather than
+            // fumadocs' `menu` because the panel is ours (see `NavMoreMenu`),
+            // and a component rather than a list because one of its
+            // destinations is regional (see `NavMore`).
             {
               type: "custom",
-              children: (
-                <NavMoreMenu
-                  text="More"
-                  items={[
-                    {
-                      text: "Discord bot",
-                      description:
-                        "Player, clan and tank stats as slash commands",
-                      url: ROUTES.BOT,
-                      icon: <RobotIcon />,
-                    },
-                    {
-                      text: "MCP server",
-                      description: "Connect Claude, ChatGPT or any MCP client",
-                      url: ROUTES.MCP,
-                      icon: <PlugsConnectedIcon />,
-                    },
-                    {
-                      text: "API",
-                      description: "Free public REST API, no key required",
-                      url: ROUTES.DOCS,
-                      icon: <FileCodeIcon />,
-                    },
-                    {
-                      text: "Glossary",
-                      description: "Every World of Tanks term, explained",
-                      url: ROUTES.GLOSSARY,
-                      icon: <BookOpenIcon />,
-                    },
-                    {
-                      text: "Support us",
-                      description: `Keep ${APP.NAME} free, open and ad-free`,
-                      url: ROUTES.SUPPORT,
-                      icon: <HeartIcon />,
-                    },
-                  ]}
-                />
-              ),
+              children: <NavMore />,
             },
           ] satisfies BaseLayoutProps["links"])
         : []),

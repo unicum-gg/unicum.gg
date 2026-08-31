@@ -147,6 +147,11 @@ const ROUTES = {
     region === Region.EU
       ? "/maps/changes"
       : pathcat("/:region/maps/changes", { region }),
+
+  // - Servers. The game's clusters and their population, which is a property of
+  //   the region rather than of the game, so it is regional all the way down.
+  SERVERS: (region: Region) =>
+    region === Region.EU ? "/servers" : pathcat("/:region/servers", { region }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
     const base =
       region === Region.EU

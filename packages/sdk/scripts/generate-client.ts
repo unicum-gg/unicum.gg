@@ -85,6 +85,28 @@ const RESOURCES: Resource[] = [
 ];
 
 /**
+ * A region-scoped namespace that addresses no entity. `/{region}/server/stats`
+ * hangs off `unicum.eu.server.stats()` rather than flattening into
+ * `unicum.eu.serverStats()`, which is what a region path with no resource entry
+ * otherwise becomes. Same idea as `GLOBALS`, one level down.
+ *
+ * `online` wires the SSE subscription the spec cannot express: an `/sse` path is
+ * auto-excluded, so the runtime helper is the only way it reaches the client.
+ */
+type RegionNamespace = { name: string; doc: string; online?: boolean };
+
+const REGION_NAMESPACES: RegionNamespace[] = [
+  {
+    name: "server",
+    doc: "This region's game servers: live population and its recorded history.",
+    online: true,
+  },
+];
+
+/** Name the players-online SSE subscription takes on a namespace declaring one. */
+const ONLINE_METHOD = "online";
+
+/**
  * A resource that is not region-scoped. Most are a flat namespace
  * (`unicum.streamers.list()`); one that addresses a single entity declares a
  * `key`, and then it also becomes callable: `unicum.glossary("wn8").detail()`,
@@ -104,6 +126,10 @@ type Global = {
 
 const GLOBALS: Global[] = [
   { name: "streamers", live: true },
+  // Plural and region-less on purpose, next to the region-scoped `server`
+  // namespace above: `/servers/…` is every region's servers at once, which is
+  // the only shape a comparison can take.
+  { name: "servers" },
   { name: "support" },
   {
     name: "glossary",
@@ -499,6 +525,24 @@ function bucketize(endpoints: Endpoint[]): Buckets {
     }
 
     const rest = segs.slice(1);
+
+    // A region-scoped namespace that names no entity: its endpoints become
+    // methods on `unicum.eu.<name>`, and a key deeper in would be an entity
+    // with its own client, which belongs in RESOURCES rather than being guessed
+    // at here.
+    const regionNs = REGION_NAMESPACES.find((n) => n.name === rest[0]);
+    if (regionNs) {
+      const sub = rest.slice(1);
+      if (sub.some(isParam)) {
+        b.unmapped.push(ep.path);
+      } else {
+        const m = sub.length === 0 ? NAMESPACE_LIST : camel(sub);
+        push(b.nsMember, regionNs.name, emitNamespaceMember(ep, m));
+        push(b.nsAssign, regionNs.name, emitNamespaceAssign(ep, m));
+      }
+      continue;
+    }
+
     const resource = byName.get(rest[0]);
     if (!resource) {
       // A region path carrying no key parameter is a plain method on the region
@@ -702,6 +746,32 @@ ${assigns}
   }`;
 }
 
+function renderRegionNamespaceType(ns: RegionNamespace, b: Buckets): string {
+  const online = ns.online
+    ? `  /** Live count of players online for this region (SSE). Browser-only. */
+  ${ONLINE_METHOD}(
+    onData: (payload: OnlinePayload) => void,
+    onError?: (error: Event) => void,
+  ): Unsubscribe;`
+    : "";
+  const members = nonEmpty(get(b.nsMember, ns.name, "\n"), online).join("\n");
+  return `type ${cap(ns.name)}Namespace = {\n${members}\n};`;
+}
+
+function renderRegionNamespaceGetter(ns: RegionNamespace, b: Buckets): string {
+  const online = ns.online
+    ? `    ns.${ONLINE_METHOD} = (onData, onError) =>
+      subscribeServerOnline(this.baseUrl, this.region, onData, onError);`
+    : "";
+  const assigns = nonEmpty(get(b.nsAssign, ns.name, "\n"), online).join("\n");
+  return `  /** ${ns.doc} */
+  get ${ns.name}(): ${cap(ns.name)}Namespace {
+    const ns = {} as ${cap(ns.name)}Namespace;
+${assigns}
+    return ns;
+  }`;
+}
+
 function renderGlobalInstanceClass(g: Global, b: Buckets): string {
   return `/** A single ${singular(g.name)} entry: unicum.${g.name}("..."). */
 class ${g.client} {
@@ -769,6 +839,12 @@ function render(b: Buckets): string {
   ].join("\n\n");
   const namespaceTypes = RESOURCES.map((r) => renderNamespaceType(r, b)).join("\n\n");
   const namespaceGetters = RESOURCES.map((r) => renderNamespaceGetter(r, b)).join("\n\n");
+  const regionNamespaceTypes = REGION_NAMESPACES.map((n) =>
+    renderRegionNamespaceType(n, b),
+  ).join("\n\n");
+  const regionNamespaceGetters = REGION_NAMESPACES.map((n) =>
+    renderRegionNamespaceGetter(n, b),
+  ).join("\n\n");
   const globalTypes = GLOBALS.map((g) => renderGlobalType(g, b)).join("\n\n");
   const globalGetters = GLOBALS.map((g) => renderGlobalGetter(g, b)).join("\n\n");
 
@@ -847,13 +923,7 @@ ${instanceClasses}
 
 ${namespaceTypes}
 
-type ServerNamespace = {
-  /** Live count of players online for this region (SSE). Browser-only. */
-  online(
-    onData: (payload: OnlinePayload) => void,
-    onError?: (error: Event) => void,
-  ): Unsubscribe;
-};
+${regionNamespaceTypes}
 
 /** Every resource scoped to one region: unicum.eu, unicum.region("na"). */
 class RegionClient {
@@ -869,13 +939,7 @@ ${namespaceGetters}
 
 ${b.region.join("\n\n")}
 
-  /** Server-wide live signals for this region. */
-  get server(): ServerNamespace {
-    return {
-      online: (onData, onError) =>
-        subscribeServerOnline(this.baseUrl, this.region, onData, onError),
-    };
-  }
+${regionNamespaceGetters}
 }
 ${ogBlock}
 ${globalTypes}

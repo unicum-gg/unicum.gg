@@ -31,6 +31,13 @@ export function footerColumns(region: Region): FooterColumn[] {
   const clans = sections.find((s) => s.id === "clans")!;
   const tanks = sections.find((s) => s.id === "tanks")!;
   const maps = sections.find((s) => s.id === "maps")!;
+  // A section holding a single page does not earn a column of its own, the same
+  // rule the navbar applies to its dropdowns: a heading with one entry under it
+  // reads as a column someone forgot to finish. Its link joins the first column,
+  // which is already where the region's own pages live.
+  const singlePage = sections
+    .filter((s) => s.links.length === 1)
+    .flatMap((s) => s.links);
 
   return [
     {
@@ -43,6 +50,7 @@ export function footerColumns(region: Region): FooterColumn[] {
         { label: "Top tanks", href: ROUTES.TANKS(region) },
         ...clans.links.slice(1), // Stronghold, Advances
         ...players.links.slice(1), // Onslaught, Steel Hunter
+        ...singlePage, // Server population
       ],
     },
     { title: "Tanks", links: tanks.links },

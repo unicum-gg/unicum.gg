@@ -12,6 +12,7 @@ import {
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
+import { PlayerPercentile } from "@/components/players/detail/overview/percentile";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { styles } from "@/lib/styles";
@@ -22,9 +23,10 @@ import type {
   PlayerClanHistoryFull,
   PlayerDerivedStats,
   RatingHistoryPoint,
-  RatingMetric,
   Stats,
 } from "@unicum.gg/shared";
+// A value, not just a type: the percentile panel is keyed by the metric enum.
+import { RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 // recharts is the heaviest dependency in the client bundle (107 KB gzipped,
@@ -90,6 +92,20 @@ export function OverallTab({
             current={current}
             periods={periods}
             derived={derived}
+          />
+        </PanelContent>
+        {/* Under the numbers rather than beside them: it says nothing new about
+            the player, it says what those same numbers are worth against the
+            region. Renders itself away until the aggregate lands. */}
+        <PanelContent className="p-0">
+          <PlayerPercentile
+            region={region}
+            winrate={current.battles > 0 ? current.wins / current.battles : null}
+            ratings={{
+              [RatingMetric.Wn7]: derived.wn7,
+              [RatingMetric.Wn8]: derived.wn8,
+              [RatingMetric.Wnx]: derived.wnx,
+            }}
           />
         </PanelContent>
       </Panel>

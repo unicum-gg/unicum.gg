@@ -9,7 +9,7 @@ import ROUTES from "@/constants/routes";
 import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
 import { mapsTabHref } from "@/components/maps/list/tabs";
 
-export type NavSectionId = "players" | "clans" | "tanks" | "maps";
+export type NavSectionId = "players" | "clans" | "tanks" | "maps" | "servers";
 
 export type NavLink = {
   /** Stable key, region-independent, used to attach a navbar icon. */
@@ -168,6 +168,23 @@ export function navSections(region: Region): NavSection[] {
           label: "Changes",
           href: ROUTES.MAPS_CHANGES(region),
           description: "Map reworks by update",
+        },
+      ],
+    },
+    {
+      // One page for now. It is its own section rather than a link tucked under
+      // Players because it is about the servers, not about who is on them, and
+      // because the per-server pages it will grow have nowhere else to hang.
+      id: "servers",
+      label: "Servers",
+      links: [
+        {
+          id: "servers-population",
+          // Read on its own in the footer's list, away from the "Servers"
+          // heading that used to carry the context, so it names the subject.
+          label: "Server population",
+          href: ROUTES.SERVERS(region),
+          description: "Players online, now and over time",
         },
       ],
     },

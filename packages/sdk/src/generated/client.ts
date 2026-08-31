@@ -387,6 +387,8 @@ class GlossaryTermClient {
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
+  /** Player distribution */
+  distribution(): RequestHandle<Data<"/{region}/players/distribution">>;
   /** Player languages */
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
   /** Onslaught leaderboard */
@@ -463,6 +465,8 @@ type MapsNamespace = ((slug: string) => MapClient) & {
 };
 
 type ServerNamespace = {
+  /** Server population */
+  stats(range: NonNullable<QueryOf<"/{region}/server/stats">>["range"]): RequestHandle<Data<"/{region}/server/stats">>;
   /** Live count of players online for this region (SSE). Browser-only. */
   online(
     onData: (payload: OnlinePayload) => void,
@@ -489,6 +493,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/compare", {
             params: { path: { region: this.region }, query: { names } },
+          }),
+      );
+    ns.distribution = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/distribution", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/players/distribution", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.languages = () =>
@@ -776,12 +788,20 @@ class RegionClient {
     );
   }
 
-  /** Server-wide live signals for this region. */
+  /** This region's game servers: live population and its recorded history. */
   get server(): ServerNamespace {
-    return {
-      online: (onData, onError) =>
-        subscribeServerOnline(this.baseUrl, this.region, onData, onError),
-    };
+    const ns = {} as ServerNamespace;
+    ns.stats = (range) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/server/stats", { region: this.region }, { range }),
+        () =>
+          this.api.GET("/{region}/server/stats", {
+            params: { path: { region: this.region }, query: { range } },
+          }),
+      );
+    ns.online = (onData, onError) =>
+      subscribeServerOnline(this.baseUrl, this.region, onData, onError);
+    return ns;
   }
 }
 
@@ -910,6 +930,11 @@ type StreamersNamespace = {
   ): Unsubscribe;
 };
 
+type ServersNamespace = {
+  /** Compare regions */
+  compare(range: NonNullable<QueryOf<"/servers/compare">>["range"]): RequestHandle<Data<"/servers/compare">>;
+};
+
 type SupportNamespace = {
   /** Funding progress */
   funding(): RequestHandle<Data<"/support/funding">>;
@@ -1006,6 +1031,16 @@ export class Unicum {
       );
     ns.live = (onData, onError) =>
       subscribeStreamersLive(this.baseUrl, onData, onError);
+    return ns;
+  }
+
+  /** Global (not region-scoped) servers. */
+  get servers(): ServersNamespace {
+    const ns = {} as ServersNamespace;
+    ns.compare = (range) =>
+      handle(buildUrl(this.baseUrl, "/servers/compare", undefined, { range }), () =>
+        this.api.GET("/servers/compare", { params: { query: { range } } }),
+      );
     return ns;
   }
 

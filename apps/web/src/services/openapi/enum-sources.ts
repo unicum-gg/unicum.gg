@@ -19,6 +19,7 @@ import {
   StrongholdTier,
 } from "@unicum.gg/shared/constants/stronghold";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
+import { ServerStatsRange } from "@unicum.gg/shared/wot/server-stats";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
 import { TankClient } from "@unicum.gg/shared/wot/tanks/common-test";
 import { TankAxis } from "@unicum.gg/shared/wot/tank-spec-fields";
@@ -40,6 +41,7 @@ import {
   FeedbackSentiment,
   FeedbackTopic,
 } from "@unicum.gg/shared/feedback/index";
+import { VehicleType } from "@unicum.gg/wargaming/api/wot/encyclopedia";
 import { Region } from "@unicum.gg/wargaming/region";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
@@ -81,6 +83,8 @@ export const OPENAPI_ENUM_SOURCES = {
   RATING_BLOCK: Object.values(RatingBlock),
   REVIEW_OUTCOME: Object.values(ReviewOutcome),
   SESSION_GRANULARITY: Object.values(SessionGranularity),
+  SERVER_STATS_RANGE: Object.values(ServerStatsRange),
+  VEHICLE_TYPE: Object.values(VehicleType),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),
   GLOSSARY_CATEGORY: Object.values(GlossaryCategory),

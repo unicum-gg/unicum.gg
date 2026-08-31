@@ -11,6 +11,7 @@ import {
   RatingConsensus,
   RatingMetric,
   ReviewOutcome,
+  ServerStatsRange,
   SessionGranularity,
   SpawnDirection,
   TankClient,
@@ -70,6 +71,19 @@ export const playerSessionsQuery = z.object({
       description: "Bucket size for the sessions.",
       "x-enum-source": "SESSION_GRANULARITY",
     } as EnumMeta),
+});
+
+/**
+ * How far back a server population series reads. Named `range` rather than
+ * `period`, which the leaderboards already own with a different value set: the
+ * doc's defaults and examples are keyed by parameter name across the whole API,
+ * so two endpoints sharing a name would have to share its default too.
+ */
+export const serverStatsQuery = z.object({
+  range: z.enum(ServerStatsRange).default(ServerStatsRange.Day).meta({
+    description: "How far back the population series reads.",
+    "x-enum-source": "SERVER_STATS_RANGE",
+  } as EnumMeta),
 });
 
 /** A player and one of their vehicles: the Service Record of that pair. */
@@ -394,6 +408,7 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   period: TopPlayersPeriod.Overall,
   metric: DEFAULT_RATING_METRIC,
   granularity: SessionGranularity.Daily,
+  range: ServerStatsRange.Day,
   client: TankClient.Live,
 };
 

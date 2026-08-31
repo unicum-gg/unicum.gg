@@ -103,6 +103,16 @@ async function main(): Promise<void> {
   );
   startCoverageTrendsCron();
 
+  const { startServerOnlineCron } = await import(
+    "@unicum.gg/core/wargaming/wot/server/sample-cron"
+  );
+  startServerOnlineCron();
+
+  const { startPlayerDistributionCron } = await import(
+    "@unicum.gg/core/players/distribution"
+  );
+  startPlayerDistributionCron();
+
   // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
   // real per-region req/s (all consumers, vs the rate-limit budget) is only
   // observable here, at the transport. Log it every 60s as requests/second.

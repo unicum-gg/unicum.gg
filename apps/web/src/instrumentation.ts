@@ -120,6 +120,16 @@ export async function register() {
       "@unicum.gg/core/coverage/trends-aggregate"
     );
     startCoverageTrendsCron();
+
+    const { startServerOnlineCron } = await import(
+      "@unicum.gg/core/wargaming/wot/server/sample-cron"
+    );
+    startServerOnlineCron();
+
+    const { startPlayerDistributionCron } = await import(
+      "@unicum.gg/core/players/distribution"
+    );
+    startPlayerDistributionCron();
   } finally {
     globalThis.__dbContext = "request";
   }
