@@ -7,6 +7,7 @@ import { TankCost } from "@/components/tanks/detail/cost";
 import { TankDetailTabs } from "@/components/tanks/detail/tab-bar";
 import { TankDetailTab } from "@/components/tanks/detail/tabs";
 import { TankRender } from "@/components/tanks/detail/render";
+import { TankStage } from "@/components/tanks/detail/viewer/stage";
 import { CommunityHeroBadge } from "@/components/tanks/detail/community/hero-badge";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import {
@@ -108,39 +109,44 @@ export function TankShell({
             inherited as a computed value from `body`, so it would not pick the
             re-resolved token on its own. */}
           <TankHero className="dark relative min-h-[300px] overflow-hidden text-fd-foreground sm:min-h-0 sm:aspect-[32/15]">
-            {/* The exact hangar-floor backdrop WG's own tankopedia detail page
-              uses (1920x900, matching the render), served from its portal CDN.
-              `latest` keeps the URL stable across client version bumps. Rendered
-              through next/image so it is resized/format-negotiated instead of
-              shipping the full-size webp as a CSS background. */}
-            {/* Wrapped rather than inset directly: `fill` writes its own inline
-              `inset: 0`, which no class can override. Same pixel of clearance
-              as the fades above. */}
-            <div className="pointer-events-none absolute inset-x-0 top-0 bottom-px overflow-hidden">
-              <Image
-                src={hangarBgUrl(region, "webp")}
-                alt=""
-                aria-hidden
-                fill
-                priority
-                sizes="100vw"
-                className="object-cover object-center"
-              />
-            </div>
-            {/* Soft spotlight behind the vehicle. */}
+            {/* Soft spotlight behind the vehicle. It is what lights the plate
+              once the model has replaced the photograph. */}
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 bg-[radial-gradient(52%_66%_at_57%_36%,var(--color-fd-secondary)/45%,transparent_72%)]"
             />
-            {/* High-res vehicle render, full-bleed (gunmarks / skill4ltu style). */}
-            <div className="pointer-events-none absolute inset-0">
+            {/* High-res vehicle render, full-bleed (gunmarks / skill4ltu style).
+              It stays the hero's first paint: the model behind it is megabytes
+              of meshes and textures, and a vehicle the geometry mirror does not
+              carry has nothing else to show. */}
+            <TankStage
+              code={meta.tag}
+              backdrop={
+                /* The exact hangar-floor backdrop WG's own tankopedia detail
+                  page uses (1920x900, matching the render), served from its
+                  portal CDN. `latest` keeps the URL stable across client version
+                  bumps. Wrapped rather than inset directly: `fill` writes its
+                  own inline `inset: 0`, which no class can override. */
+                <div className="absolute inset-x-0 top-0 bottom-px overflow-hidden">
+                  <Image
+                    src={hangarBgUrl(region, "webp")}
+                    alt=""
+                    aria-hidden
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover object-center"
+                  />
+                </div>
+              }
+            >
               <TankRender
                 tag={meta.tag}
                 region={region}
                 slug={slug}
                 name={meta.name}
               />
-            </div>
+            </TankStage>
             {/* Left fade keeps the title legible over the render. Kept tight to
               the left (clears by ~58%) so it darkens the title area, not the
               vehicle render sitting in the centre.
