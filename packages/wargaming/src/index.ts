@@ -10,6 +10,7 @@ export * from "./client";
 export * from "./region";
 export * from "./language";
 export * from "./assets-mirror";
+export * from "./models-mirror";
 export * from "./cdn";
 export * from "./api";
 export * from "./portal";
