@@ -66,6 +66,18 @@ export function makeClansTable(region: string) {
       // time the (heavy) /vehicles aggregation runs, so the clan page can show
       // "Tanks (N)" up front without re-running the ~300M-row DISTINCT ON.
       vehiclesCount: integer("vehicles_count"),
+      // Tournament honours, the clan twin of the columns on the player row and
+      // there for the same reason: the crest is drawn beside a tag on every
+      // board, and resolving it would walk the archive's rosters on each
+      // render. A clan wins a tournament when a team ATTRIBUTED to it wins one,
+      // which is the `clan_id` the mirror resolves from the roster as of the
+      // day it was played (see tournaments/clans).
+      tournamentWins: integer("tournament_wins").notNull().default(0),
+      tournamentFeaturedWins: integer("tournament_featured_wins")
+        .notNull()
+        .default(0),
+      tournamentBestTitle: text("tournament_best_title"),
+      tournamentBestAt: timestamp("tournament_best_at", { withTimezone: true }),
     },
     (t) => [
       uniqueIndex(`${region}_clans_tag_lower_idx`).on(t.tagLower),
