@@ -6,6 +6,7 @@ import {
   HeartIcon,
   PlugsConnectedIcon,
   PulseIcon,
+  RankingIcon,
   RobotIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { NavMoreMenu } from "@/components/nav-more-menu";
@@ -32,8 +33,15 @@ export function NavMore() {
       text="More"
       items={[
         {
-          // First: it is the only page here, the rest being integrations and
-          // pages about the project rather than about the game.
+          // First, with Servers: these two are the pages about the GAME, the
+          // rest being integrations and pages about the project. Regional, like
+          // Servers, which is the reason this menu became a Client Component.
+          text: "Tournaments",
+          description: "Brackets, rosters and results, region by region",
+          url: ROUTES.TOURNAMENTS(region),
+          icon: <RankingIcon />,
+        },
+        {
           text: "Servers",
           description: "Players online, now and over time",
           url: ROUTES.SERVERS(region),
