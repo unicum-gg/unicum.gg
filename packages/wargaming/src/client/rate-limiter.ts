@@ -10,6 +10,7 @@ export enum RateLimit {
   Wg = "wg",
   Portal = "portal",
   Stronghold = "stronghold",
+  Tournaments = "tournaments",
   None = "none",
 }
 
@@ -153,10 +154,33 @@ export const DEFAULT_STRONGHOLD_RPS: RegionRps = {
   [Region.ASIA]: 5,
 };
 
+// The tournament system (`worldoftanks.<tld>/tmsis/`) is a third service again:
+// not the G-Core-fronted API, not the clan portal. It sits behind the WoT
+// portal's own Cloudflare, whose thresholds are unpublished, so this is a
+// deliberate walking pace rather than a measured ceiling.
+//
+// It is its own pool for the same reason Stronghold is: the portal budget is
+// 1 rps and already fully spoken for by the clan backfill, so borrowing it would
+// have made a catalogue sweep starve the clan cron (the exact coupling the
+// stronghold cron was pulled out of). The tournament catalogue is small and
+// almost entirely immutable, a finished bracket never changes again, so even 3
+// rps only ever binds during the initial backfill.
+//
+// Host-wide rather than per-IP (see HOST_WIDE_POOLS): the limit here belongs to
+// Cloudflare in front of one host we also fetch player marks from, so spreading
+// over egress lanes would only multiply the hammer on a service whose tolerance
+// we cannot measure, and a block would take the profile marks down with it.
+export const DEFAULT_TOURNAMENTS_RPS: RegionRps = {
+  [Region.EU]: 3,
+  [Region.NA]: 3,
+  [Region.ASIA]: 3,
+};
+
 /** Pools whose ceiling belongs to the endpoint rather than to each source IP,
  * so it is split across egress lanes rather than replicated per lane. */
 const HOST_WIDE_POOLS: ReadonlySet<RateLimiterKind> = new Set([
   RateLimit.Stronghold,
+  RateLimit.Tournaments,
 ]);
 
 /**

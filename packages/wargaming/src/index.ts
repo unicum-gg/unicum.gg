@@ -14,6 +14,7 @@ export * from "./cdn";
 export * from "./api";
 export * from "./portal";
 export * from "./stronghold";
+export * from "./tournaments";
 export * from "./source";
 export * from "./fields";
 export * from "./query";

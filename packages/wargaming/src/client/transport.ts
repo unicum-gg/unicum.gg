@@ -10,6 +10,7 @@ import {
   DEFAULT_WG_RPS,
   DEFAULT_PORTAL_RPS,
   DEFAULT_STRONGHOLD_RPS,
+  DEFAULT_TOURNAMENTS_RPS,
   regionLanes,
 } from "./rate-limiter";
 import { CacheManager, type CacheOptions } from "./cache/manager";
@@ -56,6 +57,7 @@ const LANE_COUNTER_NAME: Record<RateLimiterKind, string> = {
   [RateLimit.Wg]: "api",
   [RateLimit.Portal]: "portal",
   [RateLimit.Stronghold]: "stronghold",
+  [RateLimit.Tournaments]: "tournaments",
 };
 
 /** Read and reset the per-region/lane egress request counts since the last drain. */
@@ -88,6 +90,7 @@ export type WargamingClientOptions = {
     wg?: Partial<RegionRps>;
     portal?: Partial<RegionRps>;
     stronghold?: Partial<RegionRps>;
+    tournaments?: Partial<RegionRps>;
     factory?: RateLimiterFactory;
   };
   /**
@@ -207,6 +210,7 @@ export class Transport {
     [RateLimit.Wg]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
     [RateLimit.Portal]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
     [RateLimit.Stronghold]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
+    [RateLimit.Tournaments]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
   };
   readonly #cache?: CacheManager;
 
@@ -241,6 +245,12 @@ export class Transport {
       [RateLimit.Stronghold]: regionLanes(
         { ...DEFAULT_STRONGHOLD_RPS, ...opts.rateLimit?.stronghold },
         RateLimit.Stronghold,
+        limiterFactory,
+        opts.egress,
+      ),
+      [RateLimit.Tournaments]: regionLanes(
+        { ...DEFAULT_TOURNAMENTS_RPS, ...opts.rateLimit?.tournaments },
+        RateLimit.Tournaments,
         limiterFactory,
         opts.egress,
       ),
