@@ -957,6 +957,8 @@ type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
   list(category?: NonNullable<QueryOf<"/glossary">>["category"]): RequestHandle<Data<"/glossary">>;
   /** Glossary anchors */
   anchors(): RequestHandle<Data<"/glossary/anchors">>;
+  /** Search the glossary */
+  search(q: NonNullable<QueryOf<"/glossary/search">>["q"]): RequestHandle<Data<"/glossary/search">>;
 };
 
 /**
@@ -1079,6 +1081,10 @@ export class Unicum {
     ns.anchors = () =>
       handle(buildUrl(this.baseUrl, "/glossary/anchors"), () =>
         this.api.GET("/glossary/anchors", {}),
+      );
+    ns.search = (q) =>
+      handle(buildUrl(this.baseUrl, "/glossary/search", undefined, { q }), () =>
+        this.api.GET("/glossary/search", { params: { query: { q } } }),
       );
     return ns;
   }
