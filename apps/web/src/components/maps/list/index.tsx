@@ -35,10 +35,14 @@ const CAMO_FILTERS: MapCamouflage[] = [
   MapCamouflage.Winter,
   MapCamouflage.Desert,
 ];
+// Every surfaced mode, in the order the map pages list them. Attack/Defense is
+// the one most maps actually carry (13 arenas against 6 for Assault), so a
+// gallery that offered the other three was filtering out the commonest answer.
 const MODE_FILTERS: MapGameMode[] = [
   MapGameMode.Standard,
   MapGameMode.Encounter,
   MapGameMode.Assault,
+  MapGameMode.AttackDefense,
 ];
 
 function toggle<T>(set: Set<T>, value: T): Set<T> {
