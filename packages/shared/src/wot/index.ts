@@ -15,3 +15,5 @@ export * from "./mirror-tracking";
 export * from "./tank-spec-fields";
 export * from "./tanks";
 export * from "./maps";
+export * from "./tournaments";
+export * from "./tournament-placements";
