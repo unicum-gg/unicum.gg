@@ -206,7 +206,15 @@ export function PlayerTanksTable({
     [metric],
   );
 
-  const { filtered, filters } = useTankFilters(vehicles, rangeCols, "battles");
+  // The filter hook names these for what they hold, since the tank catalogue
+  // already uses `moe`/`mom` for the region's thresholds. Mapped rather than
+  // renamed on the row, so the rest of the table keeps reading `moe`/`mom`.
+  const filterable = useMemo(
+    () =>
+      vehicles.map((v) => ({ ...v, gunMarks: v.moe, masteryBadge: v.mom })),
+    [vehicles],
+  );
+  const { filtered, filters } = useTankFilters(filterable, rangeCols, "battles");
   const sorted = useMemo(
     () => [...filtered].sort((a, b) => compareRows(a, b, sort, metric)),
     [filtered, sort, metric],

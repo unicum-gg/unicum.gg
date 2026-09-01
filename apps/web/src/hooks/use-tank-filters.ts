@@ -21,6 +21,13 @@ export type FilterableTank = {
   isCommonTest?: boolean;
   /** How many characteristics the test build changes on this vehicle. */
   testChanges?: number;
+  /** Marks of Excellence on the gun (0-3), and the Mark of Mastery badge
+   * (0-4). Only a player's garage carries these, so like the Common Test fields
+   * above they are optional and their controls hide themselves when nothing
+   * supplies them. Named for what they hold rather than `moe`/`mom`, which the
+   * catalogue already uses for the region's thresholds. */
+  gunMarks?: number | null;
+  masteryBadge?: number | null;
   name: string;
   shortName: string | null;
 };
@@ -62,6 +69,15 @@ export type TankFilters<T> = {
   setTestOnly: (v: boolean) => void;
   /** Whether a test is running at all, so the control can hide itself. */
   hasTestChanges: boolean;
+  /** Marks on the gun to keep, 0 meaning "no mark yet". Empty means no filter. */
+  moeSel: Set<number>;
+  toggleMoe: (v: number) => void;
+  /** Mastery badges to keep, 0 meaning "no badge yet". */
+  momSel: Set<number>;
+  toggleMom: (v: number) => void;
+  /** Whether the list carries marks / badges at all, so the rows can hide. */
+  hasMoe: boolean;
+  hasMom: boolean;
   rangeCol: string;
   setRangeCol: (k: string) => void;
   minVal: string;
@@ -120,9 +136,16 @@ export function useTankFilters<T extends FilterableTank>(
   // Kept out of `categorySel` on purpose: a test vehicle is still standard,
   // premium or reward, so this is a second axis rather than a fourth category.
   const [testOnly, setTestOnly] = useState(false);
+  const [moeSel, setMoeSel] = useState<Set<number>>(() => new Set());
+  const [momSel, setMomSel] = useState<Set<number>>(() => new Set());
   // No test running (or nothing changed): the control has nothing to filter.
   const hasTestChanges = useMemo(
     () => items.some((t) => t.isCommonTest || (t.testChanges ?? 0) > 0),
+    [items],
+  );
+  const hasMoe = useMemo(() => items.some((t) => t.gunMarks != null), [items]);
+  const hasMom = useMemo(
+    () => items.some((t) => t.masteryBadge != null),
     [items],
   );
 
@@ -150,6 +173,10 @@ export function useTankFilters<T extends FilterableTank>(
     const cat = parseSet(params.get("cat"));
     if (cat.size) setCategorySel(cat);
     if (params.get("test") === "1") setTestOnly(true);
+    const moe = parseNumSet(params.get("moe"));
+    if (moe.size) setMoeSel(moe);
+    const mom = parseNumSet(params.get("mom"));
+    if (mom.size) setMomSel(mom);
   }, []);
   /* eslint-enable react-hooks/set-state-in-effect */
 
@@ -176,6 +203,8 @@ export function useTankFilters<T extends FilterableTank>(
     // through `setStr`. Without it the Common Test chip was the one filter a
     // link could not carry.
     setOrDel("test", testOnly ? "1" : "");
+    setOrDel("moe", setStr(moeSel));
+    setOrDel("mom", setStr(momSel));
     // The range column is only meaningful with a bound, so only persist the
     // trio together.
     const hasRange = minVal.trim() !== "" || maxVal.trim() !== "";
@@ -196,6 +225,8 @@ export function useTankFilters<T extends FilterableTank>(
     rolesSel,
     categorySel,
     testOnly,
+    moeSel,
+    momSel,
     rangeCol,
     minVal,
     maxVal,
@@ -255,6 +286,17 @@ export function useTankFilters<T extends FilterableTank>(
       }
       // Either side of a Common Test: a vehicle it adds, or one it rebalances.
       if (testOnly && !t.isCommonTest && !(t.testChanges ?? 0)) return false;
+      // Gated on the list actually carrying marks, so a `?moe=` left on the URL
+      // (a shared link, a back-navigation from a profile) cannot empty the tank
+      // catalogue through a chip row that is not on screen to clear it. A null
+      // within a list that does carry them is "not read yet", which is not the
+      // same as no mark, so it never satisfies a selection.
+      if (hasMoe && moeSel.size > 0) {
+        if (t.gunMarks == null || !moeSel.has(t.gunMarks)) return false;
+      }
+      if (hasMom && momSel.size > 0) {
+        if (t.masteryBadge == null || !momSel.has(t.masteryBadge)) return false;
+      }
       if (
         activeRangeCol &&
         ((min != null && !Number.isNaN(min)) ||
@@ -291,6 +333,10 @@ export function useTankFilters<T extends FilterableTank>(
     rolesSel,
     categorySel,
     testOnly,
+    moeSel,
+    momSel,
+    hasMoe,
+    hasMom,
   ]);
 
   return {
@@ -311,6 +357,12 @@ export function useTankFilters<T extends FilterableTank>(
       testOnly,
       setTestOnly,
       hasTestChanges,
+      moeSel,
+      toggleMoe: (v) => toggleSet(setMoeSel, v),
+      momSel,
+      toggleMom: (v) => toggleSet(setMomSel, v),
+      hasMoe,
+      hasMom,
       rangeCol,
       setRangeCol,
       minVal,

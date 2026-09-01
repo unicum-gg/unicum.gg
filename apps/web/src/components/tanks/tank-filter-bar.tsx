@@ -21,6 +21,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Chip, ChipRow } from "@/components/ui/chip";
+import { MOE_COLORS, MoEIcon } from "@/components/tanks/moe-icon";
+import { MoMIcon } from "@/components/tanks/mom-icon";
 import { cn } from "@/lib/utils";
 import {
   VEHICLE_CLASS_LABEL_FULL,
@@ -38,6 +40,21 @@ const CATEGORY_OPTIONS = [
 // The presentational filter bar: search + tier/nation/type/role/category chips +
 // a min/max range on a chosen column. `searchNoun` labels the search placeholder
 // and `extra` hosts page-specific controls (e.g. a column selector).
+const MOE_OPTIONS = [
+  { value: 0, label: "No mark yet" },
+  { value: 1, label: "1 mark" },
+  { value: 2, label: "2 marks" },
+  { value: 3, label: "3 marks" },
+];
+
+const MOM_OPTIONS = [
+  { value: 0, label: "No badge yet" },
+  { value: 1, label: "3rd Class" },
+  { value: 2, label: "2nd Class" },
+  { value: 3, label: "1st Class" },
+  { value: 4, label: "Ace Tanker" },
+];
+
 export function TankFilterBar<T>({
   filters,
   searchNoun,
@@ -157,6 +174,63 @@ export function TankFilterBar<T>({
           )}
         </TooltipProvider>
       </ChipRow>
+      {/* Marks and badges: only a player's own garage carries them, so on the
+          catalogue these rows are not there at all rather than being present
+          and inert. "None" is a value like any other, since "which of my tanks
+          are still unmarked" is the question the profile's matrix links here
+          to answer. */}
+      {filters.hasMoe && (
+        <ChipRow>
+          <TooltipProvider delayDuration={100}>
+            {MOE_OPTIONS.map((o) => (
+              <Tooltip key={o.value}>
+                <TooltipTrigger asChild>
+                  <Chip
+                    active={filters.moeSel.has(o.value)}
+                    onClick={() => filters.toggleMoe(o.value)}
+                  >
+                    {o.value === 0 ? (
+                      <span className="text-[11px] font-medium">None</span>
+                    ) : (
+                      <MoEIcon
+                        bars={o.value as 1 | 2 | 3}
+                        color={MOE_COLORS[o.value as 1 | 2 | 3]}
+                      />
+                    )}
+                  </Chip>
+                </TooltipTrigger>
+                <TooltipContent>{o.label}</TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
+        </ChipRow>
+      )}
+      {filters.hasMom && (
+        <ChipRow>
+          <TooltipProvider delayDuration={100}>
+            {MOM_OPTIONS.map((o) => (
+              <Tooltip key={o.value}>
+                <TooltipTrigger asChild>
+                  <Chip
+                    active={filters.momSel.has(o.value)}
+                    onClick={() => filters.toggleMom(o.value)}
+                  >
+                    {o.value === 0 ? (
+                      <span className="text-[11px] font-medium">None</span>
+                    ) : (
+                      <MoMIcon
+                        mastery={o.value as 1 | 2 | 3 | 4}
+                        className="h-3.5"
+                      />
+                    )}
+                  </Chip>
+                </TooltipTrigger>
+                <TooltipContent>{o.label}</TooltipContent>
+              </Tooltip>
+            ))}
+          </TooltipProvider>
+        </ChipRow>
+      )}
       <div className="flex h-7 items-center overflow-hidden rounded-md border border-fd-border">
         <Select value={filters.activeRangeCol?.key} onValueChange={filters.setRangeCol}>
           <SelectTrigger
