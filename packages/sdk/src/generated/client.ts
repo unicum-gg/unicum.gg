@@ -100,6 +100,15 @@ class PlayerClient {
     );
   }
 
+  /** Player tournaments */
+  tournaments() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tournaments", path),
+      () => this.api.GET("/{region}/players/{nickname}/tournaments", { params: { path } }),
+    );
+  }
+
   /** Subscribe to live updates for this player (SSE). Browser-only. */
   live(onUpdate: (event: LiveUpdate) => void, onError?: (error: Event) => void): Unsubscribe {
     return subscribePlayerLive(this.baseUrl, this.region, this.nickname, onUpdate, onError);
@@ -193,6 +202,15 @@ class ClanClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/clans/{tag}/videos", path),
       () => this.api.GET("/{region}/clans/{tag}/videos", { params: { path } }),
+    );
+  }
+
+  /** Clan tournaments */
+  tournaments() {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/tournaments", path),
+      () => this.api.GET("/{region}/clans/{tag}/tournaments", { params: { path } }),
     );
   }
 
@@ -366,6 +384,34 @@ class MapClient {
   }
 }
 
+/** A single tournament: unicum.eu.tournaments("..."). */
+class TournamentClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly region: Region,
+    private readonly id: string,
+  ) {}
+
+  /** Tournament */
+  detail() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tournaments/{id}", path),
+      () => this.api.GET("/{region}/tournaments/{id}", { params: { path } }),
+    );
+  }
+
+  /** Tournament team */
+  team(teamId: string) {
+    const path = { region: this.region, id: this.id, teamId };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tournaments/{id}/team/{teamId}", path),
+      () => this.api.GET("/{region}/tournaments/{id}/team/{teamId}", { params: { path } }),
+    );
+  }
+}
+
 /** A single glossary entry: unicum.glossary("..."). */
 class GlossaryTermClient {
   constructor(
@@ -464,6 +510,11 @@ type MapsNamespace = ((slug: string) => MapClient) & {
     q: string,
     options?: SearchStreamOptions,
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/maps/search">>>;
+};
+
+type TournamentsNamespace = ((id: string) => TournamentClient) & {
+  /** Tournaments */
+  list(query?: QueryOf<"/{region}/tournaments">): RequestHandle<Data<"/{region}/tournaments">>;
 };
 
 type ServerNamespace = {
@@ -750,6 +801,20 @@ class RegionClient {
     return ns;
   }
 
+  get tournaments(): TournamentsNamespace {
+    const ns = ((id: string) =>
+      new TournamentClient(this.api, this.baseUrl, this.region, id)) as TournamentsNamespace;
+    ns.list = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tournaments", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/tournaments", {
+            params: { path: { region: this.region }, query },
+          }),
+      );
+    return ns;
+  }
+
   /** Coverage */
   coverage() {
     return handle(
@@ -829,6 +894,8 @@ type OgTanks = ((slug: string) => RequestHandle<unknown>) & {
   compare(slugs: NonNullable<QueryOf<"/og/{region}/tanks/compare">>["slugs"]): RequestHandle<unknown>;
 };
 
+type OgTournaments = (id: string) => RequestHandle<unknown>;
+
 /** The `/og/{region}/…` image cards, mirroring the entity paths: their `.url()`
  * is the stable PNG URL (used for og:image / embeds; not meant to be awaited). */
 class OgRegionClient {
@@ -907,6 +974,17 @@ class OgRegionClient {
           }),
       );
     return ns;
+  }
+
+  get tournaments(): OgTournaments {
+    return (id: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/tournaments/{id}", { region: this.region, id }),
+        () =>
+          this.api.GET("/og/{region}/tournaments/{id}", {
+            params: { path: { region: this.region, id } },
+          }),
+      );
   }
 }
 

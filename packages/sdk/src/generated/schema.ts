@@ -1559,6 +1559,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournaments
+         * @description Wargaming's own tournaments on a region, newest first: the nightly gold ladders, the seasonal clan championships, and the whole settled archive back to 2018. Filter by status to separate what can still be entered from what has already been played. Mirrored from the tournament system, which publishes none of this through the public game API.
+         */
+        get: operations["get-{region}-tournaments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/glossary": {
         parameters: {
             query?: never;
@@ -1679,6 +1699,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/clans/{tag}/tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan tournaments
+         * @description Every Wargaming tournament this clan has entered, newest first. The link does not exist upstream: the tournament system knows teams and account ids but never clans, so a team is tied to a clan by matching its roster against clan membership on the day it was played. 404 when the tag is unknown in this region; an empty list means the clan has simply never entered one.
+         */
+        get: operations["get-{region}-clans-{tag}-tournaments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/maps/{slug}": {
         parameters: {
             query?: never;
@@ -1731,6 +1771,66 @@ export interface paths {
          * @description Every published battle the community has linked on this map, newest approved first, whatever format it was played in and whatever it was played in. This is the read behind a tactic library: a Clan Wars or Advances battle is filed under the ground it was fought on and the side it was fought from, not under a vehicle, so the map is the only page it can be looked up from. Random battles come back alongside them, carrying the tank they were played in, and the page filters by format.
          */
         get: operations["get-{region}-maps-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/{nickname}/tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player tournaments
+         * @description Every Wargaming tournament this player has entered, newest first, with the team they played for and how far it got. Wargaming publishes tournaments from the tournament's side only, never the player's, so this record exists nowhere else. 404 when the nickname is unknown in this region; an empty list means the player has simply never entered one.
+         */
+        get: operations["get-{region}-players-{nickname}-tournaments"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tournaments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament
+         * @description One tournament in full: its rules and prize breakdown, its map pool with each map's per-side spawns, every registered team with its roster of account ids, and the whole bracket with per-match scores, maps and placements. 404 when the id is unknown on this region.
+         */
+        get: operations["get-{region}-tournaments-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tournaments/{id}/team/{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament team
+         * @description One team's roster, joined onto the accounts behind it: lifetime battles, win rate and ratings per player, plus the clan each one is in now. This is what turns a tournament roster from a list of names into something you can scout. 404 when the team is unknown on this tournament.
+         */
+        get: operations["get-{region}-tournaments-{id}-team-{teamId}"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1831,6 +1931,46 @@ export interface paths {
          * @description The tank's stats card as a stable, hash-free 1200×630 PNG (tier, class, best player, top WNX, with the vehicle render). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
          */
         get: operations["get-og-{region}-tanks-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tournaments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament OG card
+         * @description The tournament's card as a stable, hash-free 1200×630 PNG (organiser logo, title, status, field size, format, tier and prize). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-tournaments-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tournaments/{id}/team/{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament team OG card
+         * @description One team's card as a stable, hash-free 1200×630 PNG (team name, the clan it fielded, where it finished, roster size and average rating). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-tournaments-{id}-team-{teamId}"];
         put?: never;
         post?: never;
         delete?: never;
@@ -2020,6 +2160,12 @@ export interface components {
             vehiclesCount: number | null;
             /** @description Podium positions the clan currently holds, best rank first. Only the top three of each leaderboard qualify, so this is empty for almost every clan. */
             badges: components["schemas"]["ClanRankBadge"][];
+            /** @description Tournaments won by a team attributed to this clan. The attribution is resolved from each roster as of the day it played, so an old title stays with the clan that actually fielded it. */
+            tournamentWins: number;
+            /** @description How many of those wins came at an event Wargaming flags as featured. */
+            tournamentFeaturedWins: number;
+            /** @description The win worth naming: a featured event when there is one, else the most recent. Null when the clan has never won. */
+            tournamentBestTitle: string | null;
         };
         /**
          * @description Clan leaderboard time window.
@@ -2135,6 +2281,43 @@ export interface components {
             name: string;
             winrate?: number | null;
             badges?: components["schemas"]["ClanRankBadge"][];
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
+        };
+        /** @description One tournament a clan entered, and how its team finished. */
+        ClanTournamentEntry: {
+            tournamentId: number;
+            title: string;
+            status: components["schemas"]["tournamentStatusField"];
+            gameModes: components["schemas"]["tournamentGameModeField"][];
+            tierFrom: number | null;
+            tierTo: number | null;
+            /** @description Roster bounds, which is how the format reads (7v7, 1v1). */
+            minPlayersInTeam: number;
+            maxPlayersInTeam: number;
+            /** Format: date-time */
+            startAt: Date;
+            prize: string | null;
+            /** @description The organiser's logo. Not always a URL: some regions store a bare filename or a placeholder, so a caller should check the scheme before rendering it. */
+            logoUrl: string | null;
+            /** @description Wargaming's own editorial flag, which separates the branded championships from the automated dailies. */
+            isFeatured: boolean;
+            teamId: number;
+            /** @description The name the team entered under, which is whatever its captain typed and often not the clan tag. */
+            teamTitle: string;
+            teamStatus: components["schemas"]["tournamentTeamStatusField"];
+            /** @description How many of the roster were in this clan on the day. A team is attributed at a quarter of the format's team size, so a low count against a large format is a thin attribution. */
+            clanMembers: number | null;
+            /** @description Best placement the team reached across the tournament's stages. Null when nothing placed it: a team that never got past registration, and every team in a double-elimination bracket, which records no placement at all. */
+            bestPosition: number | null;
+        };
+        ClanTournamentsResponse: {
+            clanId: number;
+            tag: string;
+            entries: components["schemas"]["ClanTournamentEntry"][];
+            /** @description Entries whose team finished first in one of the brackets. */
+            wins: number;
         };
         /** @description A tank the clan has played, with battle-weighted averages and WN7/WN8/WNX ratings across all members. */
         ClanVehicle: {
@@ -2763,7 +2946,7 @@ export interface components {
          * @description Random-battle game mode a map supports.
          * @enum {string}
          */
-        mapModeField: "standard" | "encounter" | "assault";
+        mapModeField: "standard" | "encounter" | "assault" | "attack-defense";
         /** @description Base flags, team spawns and control point for one game mode. */
         MapModeGeometry: {
             mode: components["schemas"]["mapModeField"];
@@ -3016,6 +3199,10 @@ export interface components {
             /** @description Battles played in the mode over the season. */
             battles: number;
             is_verified?: boolean;
+            /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -3114,6 +3301,12 @@ export interface components {
             isSupporter: boolean;
             isVerified: boolean;
             twitchLogin: string | null;
+            /** @description How many Wargaming tournaments this account was on the winning roster of. Counts only tournaments that decided an overall winner: a draw played as parallel groups crowns a winner per group and none overall. */
+            tournamentWins: number;
+            /** @description How many of those wins came at an event Wargaming flags as featured, which is what separates a branded championship from a nightly gold ladder. */
+            tournamentFeaturedWins: number;
+            /** @description The win worth naming: a featured event when there is one, else the most recent. Null when the account has never won. */
+            tournamentBestTitle: string | null;
             current: components["schemas"]["PlayerStats"];
             periods: {
                 h24: components["schemas"]["PlayerStats"] | null;
@@ -3298,6 +3491,10 @@ export interface components {
                 color: string;
             } | null;
             is_verified?: boolean;
+            /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -3366,6 +3563,9 @@ export interface components {
             is_verified?: boolean;
             is_supporter?: boolean;
             twitch_login?: string | null;
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
         };
         /** @description One player's record on one vehicle. */
         PlayerTankDetail: {
@@ -3483,6 +3683,40 @@ export interface components {
         };
         PlayerTanksResponse: {
             tanks: components["schemas"]["PlayerVehicle"][];
+        };
+        /** @description One tournament a player entered, and how their team finished. */
+        PlayerTournamentEntry: {
+            tournamentId: number;
+            title: string;
+            status: components["schemas"]["tournamentStatusField"];
+            gameModes: components["schemas"]["tournamentGameModeField"][];
+            tierFrom: number | null;
+            tierTo: number | null;
+            /** @description Roster bounds, which is how the format reads (7v7, 1v1). */
+            minPlayersInTeam: number;
+            maxPlayersInTeam: number;
+            /** Format: date-time */
+            startAt: Date;
+            prize: string | null;
+            /** @description The organiser's logo. Not always a URL: some regions store a bare filename or a placeholder, so a caller should check the scheme before rendering it. */
+            logoUrl: string | null;
+            /** @description Wargaming's own editorial flag, which separates the branded championships from the automated dailies. */
+            isFeatured: boolean;
+            teamId: number;
+            /** @description The team this player entered under, as named for that tournament. */
+            teamTitle: string;
+            teamStatus: components["schemas"]["tournamentTeamStatusField"];
+            /** @description Whether this player registered the team. */
+            isCaptain: boolean;
+            /** @description Best placement the team reached across the tournament's stages. Null when nothing placed it: a team that never got past registration, and every team in a double-elimination bracket, which records no placement at all. */
+            bestPosition: number | null;
+        };
+        PlayerTournamentsResponse: {
+            accountId: number;
+            nickname: string;
+            entries: components["schemas"]["PlayerTournamentEntry"][];
+            /** @description Entries whose team finished first in one of the tournament's brackets. */
+            wins: number;
         };
         /** @description A tank the player has battles in, with per-battle averages and WN7/WN8/WNX ratings. */
         PlayerVehicle: {
@@ -3834,6 +4068,10 @@ export interface components {
             damage: number;
             frags: number;
             is_verified?: boolean;
+            /** @description Tournaments this account was on the winning roster of, for the winner's crest. */
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -4677,6 +4915,17 @@ export interface components {
         TankVideosResponse: {
             videos: components["schemas"]["tankVideo"][];
         };
+        /** @description The clan behind a tournament team. */
+        TeamClan: {
+            clanId: number;
+            /** @description The clan's CURRENT tag, so the badge links somewhere that resolves. A clan we no longer track keeps the tag its roster carried at the time. */
+            clanTag: string;
+            clanName: string | null;
+            clanColor: string | null;
+            clanEmblem: string | null;
+            /** @description How many of the roster were in that clan on the day, so a caller can judge how firm the attribution is. A team qualifies at a quarter of the format's team size. */
+            members: number;
+        };
         teamMarkers: {
             team1: components["schemas"]["mapMarker"][];
             team2: components["schemas"]["mapMarker"][];
@@ -4780,6 +5029,245 @@ export interface components {
             /** @description The ranked metric's value. */
             value: number;
         };
+        /**
+         * @description How a stage's teams are paired up.
+         * @enum {string}
+         */
+        tournamentBracketTypeField: "SE" | "DE" | "RR";
+        TournamentDetailResponse: {
+            id: number;
+            title: string;
+            /** @description Raw HTML, as the organiser wrote it. */
+            description: string;
+            status: components["schemas"]["tournamentStatusField"];
+            gameModes: components["schemas"]["tournamentGameModeField"][];
+            tierFrom: number | null;
+            tierTo: number | null;
+            minPlayersInTeam: number;
+            maxPlayersInTeam: number;
+            confirmedTeams: number;
+            /** @description The field's cap, when the format sets one. `confirmedTeams` says how many entered, never how many it takes. */
+            teamsLimit: number | null;
+            /** @description The sessions the tournament is played in. The title is the game SERVER ("EU 2"), which is what a captain needs on the night. */
+            schedule: {
+                title: string;
+                startAt: string;
+            }[];
+            /** Format: date-time */
+            startAt: Date;
+            /** Format: date-time */
+            endAt: Date;
+            /** Format: date-time */
+            registrationFrom: Date | null;
+            /** Format: date-time */
+            registrationTill: Date | null;
+            prize: string | null;
+            prizeTiers: components["schemas"]["TournamentPrizeTier"][];
+            rules: components["schemas"]["TournamentRulesSection"][];
+            mapPool: components["schemas"]["TournamentMapRef"][];
+            /** @description Total tier points a team may field at once, when the format caps it. */
+            totalLevelFrom: number | null;
+            totalLevelTo: number | null;
+            logoUrl: string | null;
+            teams: components["schemas"]["TournamentTeam"][];
+            stages: components["schemas"]["TournamentStage"][];
+        };
+        /**
+         * @description Battle type a tournament is played in.
+         * @enum {string}
+         */
+        tournamentGameModeField: "ctf" | "domination" | "assault2" | "comp7";
+        /** @description One bracket inside a stage: a knockout holds its whole tree in a single group, a group stage has one per pool. */
+        TournamentGroup: {
+            id: number;
+            order: number;
+            state: string;
+            teamsCount: number;
+            matches: components["schemas"]["TournamentMatch"][];
+            standings: components["schemas"]["TournamentStanding"][];
+        };
+        /** @description A tournament as the catalogue lists it. */
+        TournamentListItem: {
+            id: number;
+            title: string;
+            status: components["schemas"]["tournamentStatusField"];
+            gameModes: components["schemas"]["tournamentGameModeField"][];
+            /** @description Lowest vehicle tier allowed, null when the format sets no floor. */
+            tierFrom: number | null;
+            tierTo: number | null;
+            minPlayersInTeam: number;
+            maxPlayersInTeam: number;
+            /** @description Teams with a complete roster, so the ones actually drawn. */
+            confirmedTeams: number;
+            /** Format: date-time */
+            startAt: Date;
+            /** Format: date-time */
+            endAt: Date;
+            /**
+             * Format: date-time
+             * @description When registration closes. Null once it has.
+             */
+            registrationTill: Date | null;
+            /** @description The reward as the organiser wrote it ("Gold + Bonds + Cash!"). */
+            prize: string | null;
+            logoUrl: string | null;
+            isFeatured: boolean;
+        };
+        /** @description One map in a tournament's pool, resolved against the catalogue. */
+        TournamentMapRef: {
+            arenaId: string;
+            /** @description The map's page slug, or null for an arena the map catalogue does not know (a retired or event-only space). */
+            slug: string | null;
+            name: string | null;
+            minimapUrl: string | null;
+            /** @description Where each side starts, as percentages from the minimap's top-left, for this tournament's battle type. The arena's team 1 and team 2 are the sides a match's team 1 and team 2 are assigned to. */
+            spawns: components["schemas"]["teamMarkers"];
+            bases: components["schemas"]["teamMarkers"];
+            /** @description The single point both sides fight over, on modes that have one. */
+            controlPoint: components["schemas"]["mapMarker"] | null;
+            /** @description Onslaught's posts, typed by the game's own POI constants. Empty on every random-battle mode. */
+            pointsOfInterest: {
+                type: number;
+                marker: components["schemas"]["mapMarker"];
+            }[];
+            widthMeters: number;
+            /** @description The play area, which a point's capture radius is drawn against. */
+            heightMeters: number;
+        };
+        /** @description One tie in a bracket. */
+        TournamentMatch: {
+            uuid: string;
+            stageId: number;
+            groupId: number;
+            state: string;
+            /** @description In a knockout, the distance from the end: round 1 IS the final, 2 the semi-finals, and -1 the third-place match. In a round robin, the plain matchday. */
+            round: number;
+            position: number;
+            /** @description Null while the bracket has drawn the slot but not filled it. */
+            team1Id: number | null;
+            team2Id: number | null;
+            winnerTeamId: number | null;
+            /** @description Battles won. Null until the match is settled, which is not 0-0. */
+            winsTeam1: number | null;
+            winsTeam2: number | null;
+            /** @description The maps played, as the organiser wrote them ("Cliff, Sand River"). */
+            maps: string | null;
+            /** Format: date-time */
+            startAt: Date | null;
+            /** @description The uuid of the match the winner plays next, threading the tree. */
+            nextMatchForWinner: string | null;
+        };
+        /** @description One placement band and what it pays. Free text per line, so display material rather than amounts to sum: "500,000 Gold + 100,000 Bonds" is one string. */
+        TournamentPrizeTier: {
+            title: string;
+            order: number;
+            prizes: string[];
+        };
+        /** @description One roster line, joined onto the account behind it. */
+        TournamentRosterEntry: {
+            accountId: number;
+            /** @description The name the account carried when the roster was read. Kept verbatim so an old bracket reads as it was played. */
+            nickname: string;
+            /** @description "owner" for the captain, empty otherwise. */
+            role: string;
+            /** @description What the account is called today, when we track it. Differs from `nickname` for anyone who renamed since. */
+            currentNickname: string | null;
+            clanTag: string | null;
+            clanColor: string | null;
+            /** @description The clan they were in ON THE DAY, which is the tag the recorded nickname belongs beside. Wargaming freezes the nickname at the time of the tournament, so pairing it with today's clan would put a 2018 name next to a clan joined years later. */
+            recordedClanTag: string | null;
+            recordedClanColor: string | null;
+            /** @description Lifetime battles. Null for an account we have never sampled, which is absence rather than a zero. */
+            battles: number | null;
+            /** @description Lifetime win rate, 0-1. */
+            winrate: number | null;
+            wn8: number | null;
+            wnx: number | null;
+        };
+        /** @description One account on one team. */
+        TournamentRosterPlayer: {
+            accountId: number;
+            /** @description The name the account carried when the roster was read, not its current one: players rename, and a bracket from 2019 reads as it was played. */
+            nickname: string;
+            /** @description "owner" for the captain, empty otherwise. */
+            role: string;
+        };
+        /** @description One block of the rules. */
+        TournamentRulesSection: {
+            title: string;
+            /** @description Raw HTML, as the organiser wrote it. */
+            description: string;
+            order: number;
+        };
+        TournamentsListResponse: {
+            results: components["schemas"]["TournamentListItem"][];
+            /** @description Tournaments matching the filter, across every page. */
+            totalCount: number;
+        };
+        /** @description One phase of a tournament (a qualifier, a group stage, the playoffs). */
+        TournamentStage: {
+            id: number;
+            title: string;
+            bracketType: components["schemas"]["tournamentBracketTypeField"];
+            winnersPerGroup: number;
+            /** Format: date-time */
+            startAt: Date | null;
+            groups: components["schemas"]["TournamentGroup"][];
+        };
+        /** @description A team's line in a bracket table. */
+        TournamentStanding: {
+            teamId: number;
+            /** @description Placement within this bracket, not the tournament, and not dense (teams out in the same round share a rank). Null across a double-elimination bracket, which records only the seeding. */
+            position: number | null;
+            seed: number | null;
+            /** @description Only a round robin counts these. A knockout table carries the placement and leaves them at zero, which is absence, not a 0-0 record. */
+            wins: number;
+            losses: number;
+            draws: number;
+            points: number | null;
+        };
+        /**
+         * @description Where a tournament is in its lifecycle.
+         * @enum {string}
+         */
+        tournamentStatusField: "upcoming" | "registration_started" | "registration_finished" | "running" | "finished" | "complete";
+        /** @description One entry in a tournament. Teams are formed per tournament, not persistent: the same players enter next week's under a new name and a new id. */
+        TournamentTeam: {
+            id: number;
+            title: string;
+            status: components["schemas"]["tournamentTeamStatusField"];
+            ownerAccountId: number | null;
+            playersCount: number;
+            players: components["schemas"]["TournamentRosterPlayer"][];
+            /** @description How many of the roster we hold stats for, which is the denominator of the two averages below. A tournament roster can name accounts our coverage has never reached. */
+            ratedPlayers: number;
+            /** @description The roster's mean WN8 over its rated members, unweighted by battles so one veteran does not speak for the team. Null when none of them has been sampled. */
+            avgWn8: number | null;
+            avgWnx: number | null;
+            /** @description The roster's mean win rate over its rated members, as a fraction (0.54, not 54). */
+            avgWinrate: number | null;
+            /** @description How many of the roster played in the last 30 days, the denominator of the two recent averages below. It differs from ratedPlayers: a rostered account that has not played the window has no recent form to report. */
+            rated30dPlayers: number;
+            /** @description The roster's mean WN8 over the trailing 30 days, counting only members who played in it. Null when none of them did. */
+            avgWn830d: number | null;
+            /** @description The roster's mean WNX over the trailing 30 days, counting only members who played in it. Null when none of them did. */
+            avgWnx30d: number | null;
+            /** @description The clan this team fielded, resolved from clan membership AS OF THE DAY the tournament was played, not from where those players are now. Null for a mixed team, for a team split evenly between two clans, and for one whose accounts we do not track. */
+            clan: components["schemas"]["TeamClan"] | null;
+        };
+        TournamentTeamRosterResponse: {
+            id: number;
+            tournamentId: number;
+            title: string;
+            status: components["schemas"]["tournamentTeamStatusField"];
+            ownerAccountId: number | null;
+            players: components["schemas"]["TournamentRosterEntry"][];
+        };
+        /**
+         * @description Where a team stands in the registration flow.
+         * @enum {string}
+         */
+        tournamentTeamStatusField: "forming" | "confirmed" | "disqualified";
         /** @description What one vehicle class accounts for across the region. */
         TypeShare: {
             /**
@@ -6994,6 +7482,36 @@ export interface operations {
             };
         };
     };
+    "get-{region}-tournaments": {
+        parameters: {
+            query?: {
+                /** @description Only tournaments in this lifecycle state. */
+                status?: "upcoming" | "registration_started" | "registration_finished" | "running" | "finished" | "complete";
+                /** @description How many tournaments to return. */
+                limit?: number;
+                /** @description How many tournaments to skip. */
+                offset?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TournamentsListResponse"];
+                };
+            };
+        };
+    };
     "get-glossary": {
         parameters: {
             query?: {
@@ -7139,6 +7657,34 @@ export interface operations {
             };
         };
     };
+    "get-{region}-clans-{tag}-tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanTournamentsResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-maps-{slug}": {
         parameters: {
             query?: never;
@@ -7219,6 +7765,95 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["MapVideosResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTournamentsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tournaments-{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TournamentDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tournaments-{id}-team-{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+                /**
+                 * @description Team id within that tournament.
+                 * @example 123
+                 */
+                teamId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TournamentTeamRosterResponse"];
                 };
             };
         };
@@ -7345,6 +7980,67 @@ export interface operations {
                  * @example is-7
                  */
                 slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tournaments-{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tournaments-{id}-team-{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+                /**
+                 * @description Team id within that tournament.
+                 * @example 123
+                 */
+                teamId: string;
             };
             cookie?: never;
         };
