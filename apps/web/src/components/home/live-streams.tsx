@@ -46,6 +46,7 @@ import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { useLiveStreamers } from "@/hooks/use-live-streamers";
+import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 import { StreamChat } from "./stream-chat";
 import type { Region } from "@unicum.gg/wargaming";
@@ -129,7 +130,11 @@ export function LiveStreams({
 
   const streamersTable = (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr]:h-11">
-      <TableHeader>
+      {/* Stuck to the top of the scrolling list: the whole table lives inside
+          the rail now, so a plain header scrolled away and left the columns
+          unlabelled. On the cells rather than the row, which is what every
+          browser honours, and opaque so the rows do not read through it. */}
+      <TableHeader className="[&_th]:sticky [&_th]:top-0 [&_th]:z-10 [&_th]:bg-fd-background">
         <TableRow>
           <TableHead className="pl-4!">Player</TableHead>
           <TableHead className="w-20 whitespace-nowrap text-right!">
@@ -321,16 +326,29 @@ export function LiveStreams({
                   column: the panel height is the video's, and the list scrolls
                   inside. It also keeps the height identical whether the table or
                   the chat is shown. */}
-              <div
-                className={cn(
-                  theater
-                    ? "min-w-0 flex-1"
-                    : "lg:absolute lg:inset-0 lg:overflow-y-auto",
+              <ScrollRail
+                axis="y"
+                // The native scrollbar cut a permanent grey bar through the
+                // last column on Windows. The rail hides it and offers the
+                // caret only while there is more of the list to reach, which is
+                // the same affordance the tech tree and the header strips use.
+                containerClassName={cn(
+                  theater ? "min-w-0 flex-1" : "lg:absolute lg:inset-0",
                   !theater && chatOpen && "hidden",
                 )}
+                // The table primitive wraps itself in an `overflow-x-auto`
+                // container, and a sticky header resolves against its nearest
+                // SCROLLING ancestor: that wrapper, which does not scroll
+                // vertically, so the header rode up with the rows. Opened here
+                // so the rail's own box is what the header sticks to. Safe:
+                // this table is `table-fixed` and never scrolls sideways.
+                className="[&_[data-slot=table-container]]:overflow-visible"
+                // Clear of the sticky header, which the arrow sat on top of.
+                // The header row is `h-11`, plus the gap the other arrow keeps.
+                backButtonClassName="top-13"
               >
                 {streamersTable}
-              </div>
+              </ScrollRail>
               <div
                 className={cn(
                   theater &&
