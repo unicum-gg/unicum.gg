@@ -19,7 +19,13 @@ import {
   TankReviewStatus,
   VoterBracket,
 } from "@unicum.gg/shared";
-import { Region } from "@unicum.gg/wargaming";
+import {
+  BracketType,
+  Region,
+  TournamentGameMode,
+  TournamentStatus,
+  TournamentTeamStatus,
+} from "@unicum.gg/wargaming";
 // Imported from the dependency-free `period` modules (not the DB-heavy index)
 // so loading these schemas never pulls in the leaderboard logic.
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
@@ -47,6 +53,10 @@ import type { EnumSourceKey } from "./enum-sources";
 // Exported so a co-located `schema.api.ts` can carry the marker on a field that
 // belongs to its own endpoint, instead of hardcoding the values back.
 export type EnumMeta = z.core.GlobalMeta & { "x-enum-source": EnumSourceKey };
+
+/** Default page size of the tournament catalogue, shared by the handler and the
+ * documented default so the two cannot drift. */
+export const TOURNAMENTS_PAGE_SIZE = 50;
 
 export const regionPath = z.enum(Region).meta({
   description: "Game server region.",
@@ -106,6 +116,58 @@ export const tankParams = z.object({
 export const mapParams = z.object({
   region: regionPath,
   slug: z.string().meta({ description: "Map slug (e.g. prokhorovka)." }),
+});
+
+export const tournamentParams = z.object({
+  region: regionPath,
+  id: z.string().meta({ description: "Tournament id." }),
+});
+
+export const tournamentTeamParams = z.object({
+  region: regionPath,
+  id: z.string().meta({ description: "Tournament id." }),
+  teamId: z.string().meta({ description: "Team id within that tournament." }),
+});
+
+export const tournamentStatusField = z.enum(TournamentStatus).meta({
+  description: "Where a tournament is in its lifecycle.",
+  "x-enum-source": "TOURNAMENT_STATUS",
+} as EnumMeta);
+
+export const tournamentGameModeField = z.enum(TournamentGameMode).meta({
+  description: "Battle type a tournament is played in.",
+  "x-enum-source": "TOURNAMENT_GAME_MODE",
+} as EnumMeta);
+
+export const tournamentBracketTypeField = z.enum(BracketType).meta({
+  description: "How a stage's teams are paired up.",
+  "x-enum-source": "TOURNAMENT_BRACKET_TYPE",
+} as EnumMeta);
+
+export const tournamentTeamStatusField = z.enum(TournamentTeamStatus).meta({
+  description: "Where a team stands in the registration flow.",
+  "x-enum-source": "TOURNAMENT_TEAM_STATUS",
+} as EnumMeta);
+
+/**
+ * Which slice of the tournament catalogue to list.
+ *
+ * `limit`/`offset` are optional rather than `.default()`ed: a Zod default makes
+ * the field REQUIRED in the generated types, so the SDK's `list(query?)` would
+ * stop accepting a bare call. The defaults live in the handler, and are
+ * advertised through `QUERY_PARAM_DEFAULTS` like every other documented default.
+ */
+export const tournamentsQuery = z.object({
+  status: z.enum(TournamentStatus).optional().meta({
+    description: "Only tournaments in this lifecycle state.",
+    "x-enum-source": "TOURNAMENT_STATUS",
+  } as EnumMeta),
+  limit: z.coerce.number().int().min(1).max(100).optional().meta({
+    description: "How many tournaments to return.",
+  }),
+  offset: z.coerce.number().int().min(0).optional().meta({
+    description: "How many tournaments to skip.",
+  }),
 });
 
 export const mapModeField = z.enum(MapGameMode).meta({
@@ -410,6 +472,8 @@ export const QUERY_PARAM_DEFAULTS: Record<string, string> = {
   granularity: SessionGranularity.Daily,
   range: ServerStatsRange.Day,
   client: TankClient.Live,
+  limit: String(TOURNAMENTS_PAGE_SIZE),
+  offset: "0",
 };
 
 // next-openapi-gen drops `.meta({ example })` on path/query params (it injects a
@@ -440,6 +504,11 @@ export const playerSummary = z
     is_verified: z.boolean().optional(),
     is_supporter: z.boolean().optional(),
     twitch_login: z.string().nullable().optional(),
+    // Tournament honours, for the winner's crest. Counted apart because a
+    // featured event and a nightly gold ladder are not the same achievement.
+    tournament_wins: z.number().optional(),
+    tournament_featured_wins: z.number().optional(),
+    tournament_best_title: z.string().nullable().optional(),
   })
   .loose()
   .meta({
@@ -474,6 +543,11 @@ export const clanSummary = z
     // Battle-weighted mean lifetime win rate (0..1) of the roster.
     winrate: z.number().nullable().optional(),
     badges: z.array(clanRankBadge).optional(),
+    // Tournament honours, for the winner's crest beside the tag. Absent rather
+    // than zero when the clan has never won one.
+    tournament_wins: z.number().optional(),
+    tournament_featured_wins: z.number().optional(),
+    tournament_best_title: z.string().nullable().optional(),
   })
   .loose()
   .meta({

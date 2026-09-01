@@ -45,6 +45,12 @@ import {
 } from "@unicum.gg/shared/feedback/index";
 import { VehicleType } from "@unicum.gg/wargaming/api/wot/encyclopedia";
 import { Region } from "@unicum.gg/wargaming/region";
+import {
+  BracketType,
+  TournamentGameMode,
+  TournamentStatus,
+} from "@unicum.gg/wargaming/tournaments/wot/catalog";
+import { TournamentTeamStatus } from "@unicum.gg/wargaming/tournaments/wot/teams";
 import { TopPlayersPeriod } from "@unicum.gg/core/wargaming/wot/players/top/period";
 import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
 
@@ -93,6 +99,10 @@ export const OPENAPI_ENUM_SOURCES = {
   FEEDBACK_SENTIMENT: Object.values(FeedbackSentiment),
   GLOSSARY_CATEGORY: Object.values(GlossaryCategory),
   GLOSSARY_LINK_TARGET: Object.values(GlossaryLinkTarget),
+  TOURNAMENT_STATUS: Object.values(TournamentStatus),
+  TOURNAMENT_GAME_MODE: Object.values(TournamentGameMode),
+  TOURNAMENT_BRACKET_TYPE: Object.values(BracketType),
+  TOURNAMENT_TEAM_STATUS: Object.values(TournamentTeamStatus),
 } satisfies Record<string, readonly string[]>;
 
 /** Marker value a schema's `x-enum-source` may name. A typo is a compile error
