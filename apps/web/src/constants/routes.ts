@@ -166,13 +166,16 @@ const ROUTES = {
   SERVERS: (region: Region) =>
     region === Region.EU ? "/servers" : pathcat("/:region/servers", { region }),
 
-  // - Tournaments. Regional throughout: a tournament is run on one realm and
-  //   its teams are that realm's accounts, so there is no worldwide view to
-  //   shorten the EU path to.
+  // - Tournaments. The landing shortens for EU like every other catalogue's
+  //   does, Servers included, so the section has a URL without a region in it.
+  //   A tournament itself stays regional all the way down: it is run on one
+  //   realm and its teams are that realm's accounts.
   TOURNAMENT: (region: Region, id: number | string) =>
     pathcat("/:region/tournaments/:id", { region, id: String(id) }),
   TOURNAMENTS: (region: Region) =>
-    pathcat("/:region/tournaments", { region }),
+    region === Region.EU
+      ? "/tournaments"
+      : pathcat("/:region/tournaments", { region }),
   // `team` singular, mirroring the path Wargaming addresses a tournament team
   // on, so a habit from their site lands somewhere familiar.
   TOURNAMENT_TEAM: (region: Region, id: number | string, teamId: number | string) =>

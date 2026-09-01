@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import {
   isRegion,
+  Region,
   REGION_EMOJI,
   REGION_LABEL,
-  type Region,
 } from "@unicum.gg/wargaming";
 import {
   TournamentsBoard,
@@ -60,6 +60,16 @@ export default async function TournamentsPage({
 }) {
   const { region } = await params;
   if (!isRegion(region)) notFound();
+  // EU lives at /tournaments, the same shortcut /players and /maps carry, so
+  // the two paths are not one page under two URLs. The redirect belongs to THIS
+  // route and not to the render below, which the shortcut also calls: sharing
+  // it sent /tournaments to itself.
+  if (region === Region.EU) redirect(ROUTES.TOURNAMENTS(Region.EU));
+  return renderTournaments(region);
+}
+
+/** The catalogue itself, shared by the regional route and the EU shortcut. */
+export async function renderTournaments(region: Region) {
   const rows = await loadRows(region);
   // What a reader can act on right now, which is the one number worth putting
   // in the intro: the page holds a window of the archive, so a total would say
