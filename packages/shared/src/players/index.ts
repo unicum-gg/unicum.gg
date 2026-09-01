@@ -6,6 +6,7 @@ export * from "./language-inference";
 export * from "./last-battle";
 export * from "./detail";
 export * from "./lift-drag";
+export * from "./mark-progress";
 export * from "./rating-history";
 export * from "./sessions";
 export * from "./stats";

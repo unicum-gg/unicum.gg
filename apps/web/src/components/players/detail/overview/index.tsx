@@ -11,6 +11,7 @@ import {
 } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
+import { PlayerMarksPanels } from "@/components/players/detail/overview/marks";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
 import { PlayerPercentile } from "@/components/players/detail/overview/percentile";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
@@ -22,6 +23,7 @@ import type {
   PeriodStats,
   PlayerClanHistoryFull,
   PlayerDerivedStats,
+  PlayerMarkProgress,
   RatingHistoryPoint,
   Stats,
 } from "@unicum.gg/shared";
@@ -58,6 +60,13 @@ export type OverallData = {
   clanHistory: PlayerClanHistoryFull;
   nameHistory: NameHistoryEntry[];
   createdAt: Date;
+  /** Null while a payload cached under the previous shape is still being
+   * served (60s at most), or when the garage carries neither marks nor
+   * badges. */
+  markProgress: PlayerMarkProgress | null;
+  /** Where the marks matrix sends a reader who wants the whole list, with the
+   * cell's tier and level already selected. */
+  tanksHref: string;
   nowMs: number;
 };
 
@@ -77,6 +86,8 @@ export function OverallTab({
   clanHistory,
   nameHistory,
   createdAt,
+  markProgress,
+  tanksHref,
   nowMs,
 }: OverallData & { region: Region; nickname: string }) {
   return (
@@ -100,7 +111,9 @@ export function OverallTab({
         <PanelContent className="p-0">
           <PlayerPercentile
             region={region}
-            winrate={current.battles > 0 ? current.wins / current.battles : null}
+            winrate={
+              current.battles > 0 ? current.wins / current.battles : null
+            }
             ratings={{
               [RatingMetric.Wn7]: derived.wn7,
               [RatingMetric.Wn8]: derived.wn8,
@@ -163,6 +176,23 @@ export function OverallTab({
           />
         </PanelContent>
       </Panel>
+
+      {/* The panel renders nothing when the garage carries neither marks nor
+          badges, so the separator has to answer the same question or the page
+          shows two rules with nothing between them. */}
+      {markProgress &&
+        (markProgress.marks.byTier.length > 0 ||
+          markProgress.mastery.byTier.length > 0) && (
+          <>
+            <PanelSeparator />
+            <PlayerMarksPanels
+              region={region}
+              nickname={nickname}
+              progress={markProgress}
+              tanksHref={tanksHref}
+            />
+          </>
+        )}
 
       <PanelSeparator />
 

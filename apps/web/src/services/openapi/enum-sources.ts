@@ -19,6 +19,7 @@ import {
   StrongholdSort,
   StrongholdTier,
 } from "@unicum.gg/shared/constants/stronghold";
+import { MarkWindow } from "@unicum.gg/shared/players/mark-progress";
 import { SessionGranularity } from "@unicum.gg/shared/players/sessions";
 import { ServerStatsRange } from "@unicum.gg/shared/wot/server-stats";
 import { SpawnDirection } from "@unicum.gg/shared/wot/tanks/videos";
@@ -85,6 +86,7 @@ export const OPENAPI_ENUM_SOURCES = {
   RATING_BLOCK: Object.values(RatingBlock),
   REVIEW_OUTCOME: Object.values(ReviewOutcome),
   SESSION_GRANULARITY: Object.values(SessionGranularity),
+  MARK_WINDOW: Object.values(MarkWindow),
   SERVER_STATS_RANGE: Object.values(ServerStatsRange),
   VEHICLE_TYPE: Object.values(VehicleType),
   FEEDBACK_TOPIC: Object.values(FeedbackTopic),

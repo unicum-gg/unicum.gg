@@ -4,6 +4,7 @@ import type {
   PlayerDerivedStats,
 } from "./derived-stats";
 import type { LiftDragByMetric } from "./lift-drag";
+import type { PlayerMarkProgress } from "./mark-progress";
 import type { RatingHistoryPoint } from "./rating-history";
 import type { Stats } from "./stats";
 import type { StrongholdStats } from "./stronghold-stats";
@@ -79,6 +80,12 @@ export type PlayerDetailData = {
   // the garage. See `./valuation`.
   valuation: PlayerValuation;
   liftDrag: LiftDragByMetric;
+  // Marks of Excellence and Marks of Mastery across the garage, plus the
+  // vehicles the player's current form puts within reach of their next mark.
+  // Optional so a payload cached under the previous shape (the detail cache is
+  // a 60s TTL, so at most one minute of them) reads as absent rather than
+  // crashing the panel.
+  markProgress?: PlayerMarkProgress;
   ratingHistory: RatingHistoryPoint[];
   clanHistory: PlayerClanHistoryFull;
   strongholds: PlayerStrongholdModes;

@@ -179,6 +179,8 @@ export function PlayerTabsView({
     clanHistory: detail.clanHistory,
     nameHistory: detail.nameHistory,
     createdAt: detail.player.createdAt,
+    markProgress: detail.markProgress ?? null,
+    tanksHref: playerSectionHref(basePath, PlayerSection.Tanks),
     nowMs,
   };
   const strongholds: Record<StrongholdModeId, StrongholdData> = {
