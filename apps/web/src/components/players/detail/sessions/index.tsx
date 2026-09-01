@@ -7,12 +7,14 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
+import { MountOnVisible } from "@/components/mount-on-visible";
 import { SegmentedControl } from "@/components/segmented-control";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { SESSIONS_SKELETON_COLUMNS } from "./skeleton-columns";
 import {
   DEFAULT_RATING_METRIC,
   isRatingMetric,
+  RATING_METRIC_LABEL,
   SessionGranularity,
   type PlayerSession,
 } from "@unicum.gg/shared";
@@ -21,6 +23,8 @@ import { useCookie } from "@/hooks/use-cookie";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
+import { GRANULARITY_NOUN, sessionLabel } from "./labels";
+import { PlayerActivityChart } from "./activity-chart-lazy";
 import { PlayerSessionsTable } from "./table";
 
 const GRANULARITIES = [
@@ -28,34 +32,6 @@ const GRANULARITIES = [
   { id: SessionGranularity.Weekly, label: "Weekly" },
   { id: SessionGranularity.Monthly, label: "Monthly" },
 ];
-
-const dayFmt = new Intl.DateTimeFormat("en-US", {
-  weekday: "short",
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-const shortFmt = new Intl.DateTimeFormat("en-US", {
-  day: "numeric",
-  month: "short",
-  year: "numeric",
-  timeZone: "UTC",
-});
-const monthFmt = new Intl.DateTimeFormat("en-US", {
-  month: "long",
-  year: "numeric",
-  timeZone: "UTC",
-});
-
-function labelFor(period: string, granularity: SessionGranularity): string {
-  const d = new Date(`${period}T00:00:00Z`);
-  if (granularity === SessionGranularity.Monthly) return monthFmt.format(d);
-  if (granularity === SessionGranularity.Weekly) {
-    return `Week of ${shortFmt.format(d)}`;
-  }
-  return dayFmt.format(d);
-}
 
 /**
  * What a player has been playing, session by session.
@@ -120,12 +96,36 @@ export function SessionsTab({
               played.
             </p>
           ) : (
-            <PlayerSessionsTable
-              region={region}
-              sessions={sessions}
-              metric={metric}
-              dateLabel={(p) => labelFor(p, granularity)}
-            />
+            <>
+              {/* The shape of the same rows the table lists: when they played
+                  and how it went, before reading any single one of them.
+                  Deferred until it scrolls near the viewport, like the
+                  profile's rating chart. */}
+              <div className="border-b border-fd-border">
+                <div className="px-4 pt-3">
+                  <MountOnVisible placeholder={<div className="h-48 w-full" />}>
+                    <PlayerActivityChart
+                      sessions={sessions}
+                      granularity={granularity}
+                      metric={metric}
+                      metricLabel={RATING_METRIC_LABEL[metric]}
+                    />
+                  </MountOnVisible>
+                </div>
+                <p className="p-4 text-sm text-fd-muted-foreground">
+                  Bar height is battles played, colour is that{" "}
+                  {GRANULARITY_NOUN[granularity]}&apos;s{" "}
+                  {RATING_METRIC_LABEL[metric]}, in the same bands the site uses
+                  everywhere else.
+                </p>
+              </div>
+              <PlayerSessionsTable
+                region={region}
+                sessions={sessions}
+                metric={metric}
+                dateLabel={(p) => sessionLabel(p, granularity)}
+              />
+            </>
           )}
         </PanelContent>
       </Panel>
