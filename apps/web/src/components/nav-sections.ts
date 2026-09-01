@@ -152,7 +152,9 @@ export function navSections(region: Region): NavSection[] {
       links: [
         {
           id: "all-tournaments",
-          label: "All tournaments",
+          // Just "Tournaments": the section holds one page, so it is folded
+          // into another column in the footer and "All" qualifies nothing.
+          label: "Tournaments",
           href: ROUTES.TOURNAMENTS(region),
           description: "Every tournament, open and settled",
         },
