@@ -4,6 +4,7 @@ import { type NewTankMoe, moeByRegion } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { fetchMoeFromPoliroid } from "./poliroid";
+import { invalidateTankMoeCache } from "./index";
 
 // Poliroid recomputes daily; run just after the mastery cron (07:15) so both
 // poliroid mirrors settle in the same morning window.
@@ -45,6 +46,9 @@ export async function refreshTankMoe(region: Region): Promise<number> {
         },
       });
   }
+  // Fresh thresholds written: drop the cache so this process serves them at
+  // once (other processes pick them up within the TTL).
+  invalidateTankMoeCache(region);
   return rows.length;
 }
 

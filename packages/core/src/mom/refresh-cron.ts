@@ -4,6 +4,7 @@ import { type NewTankMom, momByRegion } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
 import { fetchMomFromPoliroid } from "./poliroid";
+import { invalidateTankMomCache } from "./index";
 
 // Poliroid recomputes daily; run shortly after the vehicles cron (07:00) so a
 // fresh tank added at a patch already has a catalogue row to hang mastery off.
@@ -47,6 +48,9 @@ export async function refreshTankMom(region: Region): Promise<number> {
         },
       });
   }
+  // Fresh thresholds written: drop the cache so this process serves them at
+  // once (other processes pick them up within the TTL).
+  invalidateTankMomCache(region);
   return rows.length;
 }
 
