@@ -19,11 +19,17 @@ const ROUTES = {
   //   rejects a query string on the callback path, not on this start URL).
   //   `callbackURL` is the same-origin path to land on once logged in (e.g.
   //   `/api/connect/twitch` to chain straight into linking Twitch).
-  AUTH_SIGN_IN: (region: Region, callbackURL?: string) =>
-    pathcat(
-      "/api/auth/sign-in/wargaming",
-      callbackURL ? { region, callbackURL } : { region },
-    ),
+  //   Built with URLSearchParams rather than `pathcat` like the rest of this
+  //   file, because `pathcat` concatenates query values verbatim: a
+  //   `callbackURL` carrying its own query (`/eu/maps/x?view=onslaught`) would
+  //   spill its params into ours, truncating the destination at the second `?`
+  //   and, if one of them happened to be named `region`, overriding the region
+  //   the player just picked in the login modal.
+  AUTH_SIGN_IN: (region: Region, callbackURL?: string) => {
+    const query = new URLSearchParams({ region });
+    if (callbackURL) query.set("callbackURL", callbackURL);
+    return `/api/auth/sign-in/wargaming?${query.toString()}`;
+  },
 
   // - Home
   HOME: (region: Region) =>
