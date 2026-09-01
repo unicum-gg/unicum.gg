@@ -16,6 +16,7 @@ import {
   MedalIcon,
   MoonStarsIcon,
   PencilRulerIcon,
+  RankingIcon,
   ScalesIcon,
   ShieldIcon,
   ShuffleIcon,
@@ -54,6 +55,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   "maps-grand-battle": <LightningIcon />,
   "maps-clan-wars": <ShieldIcon />,
   "map-changes": <PencilRulerIcon />,
+  "all-tournaments": <RankingIcon />,
 };
 
 /**

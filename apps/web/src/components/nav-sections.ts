@@ -9,7 +9,13 @@ import ROUTES from "@/constants/routes";
 import { TankTab, tankTabHref } from "@/components/tanks/list/tabs";
 import { mapsTabHref } from "@/components/maps/list/tabs";
 
-export type NavSectionId = "players" | "clans" | "tanks" | "maps" | "servers";
+export type NavSectionId =
+  | "players"
+  | "clans"
+  | "tanks"
+  | "maps"
+  | "tournaments"
+  | "servers";
 
 export type NavLink = {
   /** Stable key, region-independent, used to attach a navbar icon. */
@@ -137,6 +143,18 @@ export function navSections(region: Region): NavSection[] {
           label: "Videos",
           href: tankTabHref(tanks, TankTab.Videos),
           description: "Community gameplay",
+        },
+      ],
+    },
+    {
+      id: "tournaments",
+      label: "Tournaments",
+      links: [
+        {
+          id: "all-tournaments",
+          label: "All tournaments",
+          href: ROUTES.TOURNAMENTS(region),
+          description: "Every tournament, open and settled",
         },
       ],
     },

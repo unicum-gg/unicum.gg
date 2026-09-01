@@ -34,7 +34,8 @@ export function footerColumns(region: Region): FooterColumn[] {
   // A section holding a single page does not earn a column of its own, the same
   // rule the navbar applies to its dropdowns: a heading with one entry under it
   // reads as a column someone forgot to finish. Its link joins the first column,
-  // which is already where the region's own pages live.
+  // which is already where the region's own pages live. Tournaments is one of
+  // those, so it needs no entry of its own here.
   const singlePage = sections
     .filter((s) => s.links.length === 1)
     .flatMap((s) => s.links);
@@ -50,7 +51,7 @@ export function footerColumns(region: Region): FooterColumn[] {
         { label: "Top tanks", href: ROUTES.TANKS(region) },
         ...clans.links.slice(1), // Stronghold, Advances
         ...players.links.slice(1), // Onslaught, Steel Hunter
-        ...singlePage, // Server population
+        ...singlePage, // Server population, Tournaments
       ],
     },
     { title: "Tanks", links: tanks.links },
