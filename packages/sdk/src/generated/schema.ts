@@ -2862,6 +2862,46 @@ export interface components {
         MapVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
         };
+        /** @description A vehicle measured against the mark it has not earned yet: the region's combined-damage bar for that mark, the player's own combined damage over the window, and their ratio. Above 1 means the average already clears the bar. */
+        MarkReachEntry: {
+            tankId: number;
+            slug: string | null;
+            name: string;
+            tier: number;
+            tag: string;
+            type: string;
+            isPremium: boolean;
+            marks: number;
+            playingAt: number;
+            threshold: number;
+            combined: number;
+            ratio: number;
+            battles: number;
+            /**
+             * @description Which average the ratio was computed over: the last 30 days when the vehicle saw enough battles, its lifetime otherwise.
+             * @enum {string}
+             */
+            window: "recent" | "lifetime";
+        };
+        /** @description How many of the player's vehicles of one tier carry no mark, one, two or three Marks of Excellence. */
+        MarksTierRow: {
+            tier: number;
+            none: number;
+            mark1: number;
+            mark2: number;
+            mark3: number;
+            total: number;
+        };
+        /** @description How many of the player's vehicles of one tier carry no Mark of Mastery, 3rd, 2nd, 1st class or Ace Tanker. */
+        MasteryTierRow: {
+            tier: number;
+            none: number;
+            class3: number;
+            class2: number;
+            class1: number;
+            ace: number;
+            total: number;
+        };
         /** @description A JSON-RPC 2.0 response from the MCP endpoint (carries a method-specific `result` or a JSON-RPC `error`). */
         McpResponse: {
             jsonrpc: string;
@@ -3115,6 +3155,7 @@ export interface components {
                 wn8: components["schemas"]["liftDragByMetricEntry"];
                 wnx: components["schemas"]["liftDragByMetricEntry"];
             };
+            markProgress?: components["schemas"]["PlayerMarkProgress"];
             ratingHistory: components["schemas"]["RatingHistoryPoint"][];
             clanHistory: components["schemas"]["PlayerClanHistory"];
             strongholds: {
@@ -3182,6 +3223,29 @@ export interface components {
         };
         PlayerLanguagesResponse: {
             results: components["schemas"]["LanguageStat"][];
+        };
+        /** @description Marks of Excellence and Marks of Mastery across the garage, by tier, plus the vehicles closest to their next mark. */
+        PlayerMarkProgress: {
+            garage: number;
+            marks: {
+                total: {
+                    mark1: number;
+                    mark2: number;
+                    mark3: number;
+                };
+                byTier: components["schemas"]["MarksTierRow"][];
+                known: number;
+            };
+            mastery: {
+                total: {
+                    class3: number;
+                    class2: number;
+                    class1: number;
+                    ace: number;
+                };
+                byTier: components["schemas"]["MasteryTierRow"][];
+            };
+            reach: components["schemas"]["MarkReachEntry"][];
         };
         /** @description Inputs for a side-by-side player comparison: each player's row, latest snapshot and raw per-tank stats, plus the vehicle catalogue and WN8/WNX expected-value tables. */
         PlayersCompare: {
