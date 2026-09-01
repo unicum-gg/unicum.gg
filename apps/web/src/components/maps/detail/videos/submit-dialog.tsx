@@ -16,6 +16,7 @@ import {
 import type { Region } from "@unicum.gg/wargaming";
 import { UnicumError } from "@unicum.gg/sdk";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "@/components/login-button";
 import {
   Dialog,
   DialogContent,
@@ -213,11 +214,11 @@ export function SubmitTacticDialog({
 
   if (!session?.user) {
     return (
-      <Button asChild variant="outline" size="sm">
-        <a href={ROUTES.AUTH_SIGN_IN(region, backTo)}>
+      <LoginButton callbackURL={backTo}>
+        <Button variant="outline" size="sm">
           Log in to suggest a tactic
-        </a>
-      </Button>
+        </Button>
+      </LoginButton>
     );
   }
 

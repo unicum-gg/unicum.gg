@@ -1,3 +1,5 @@
+import { AUTH_REGION_COOKIE } from "@unicum.gg/shared";
+
 const STORAGE = {
   LOCAL_STORAGE: {
     HERO_VIDEO_PLAYING: "unicum.hero-video-playing",
@@ -16,6 +18,11 @@ const STORAGE = {
   },
   COOKIES: {
     REGION: "unicum.region",
+    // Region of the player's Wargaming ACCOUNT, written by the WG callback once
+    // a login has actually been verified. Distinct from REGION, which is only
+    // the data the reader is browsing: a NA player reading EU clans logs in on
+    // NA. The name is shared with `@unicum.gg/core/auth`, which writes it.
+    AUTH_REGION: AUTH_REGION_COOKIE,
     RATING: "unicum.rating",
     PERIOD: "unicum.period",
     // Free-XP pricing prefs shared across the tank page + economics table: the

@@ -3,9 +3,8 @@
 import { TwitchLogoIcon } from "@phosphor-icons/react/dist/ssr";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import ROUTES from "@/constants/routes";
+import { LoginButton } from "@/components/login-button";
 import { useHydrated } from "@/hooks/use-hydrated";
-import { useRegion } from "@/hooks/use-region";
 import { authClient, useSession } from "@/lib/auth-client";
 
 /**
@@ -17,7 +16,6 @@ import { authClient, useSession } from "@/lib/auth-client";
  */
 export function AddChannelCta() {
   const { data: session, isPending } = useSession();
-  const { region } = useRegion();
   const loggedIn = !!session?.user;
 
   // The session can already be resolved on the very first client render (read
@@ -77,8 +75,10 @@ export function AddChannelCta() {
   // Logged out → WG login (proves they own the account), then land on the
   // `/api/connect/twitch` endpoint which chains straight into the Twitch link.
   return (
-    <Button asChild variant="outline" size="sm" className="shrink-0">
-      <a href={ROUTES.AUTH_SIGN_IN(region, "/api/connect/twitch")}>{label}</a>
-    </Button>
+    <LoginButton callbackURL="/api/connect/twitch">
+      <Button variant="outline" size="sm" className="shrink-0">
+        {label}
+      </Button>
+    </LoginButton>
   );
 }

@@ -5,7 +5,11 @@ import { setSessionCookie } from "better-auth/cookies";
 import { handleOAuthUserInfo } from "better-auth/oauth2";
 import { isRegion } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
-import { env } from "@unicum.gg/shared";
+import {
+  AUTH_REGION_COOKIE,
+  AUTH_REGION_COOKIE_MAX_AGE,
+  env,
+} from "@unicum.gg/shared";
 
 const PROVIDER_ID = "wargaming";
 
@@ -192,6 +196,18 @@ export function wargaming(): BetterAuthPlugin {
             throw ctx.redirect(appUrl("/?auth=error"));
           }
           await setSessionCookie(ctx, result.data);
+          // Remember the region for the next login, now that WG has actually
+          // authenticated it. Writing it when the player clicked a region in
+          // the picker would record an attempt instead: someone who picks the
+          // wrong portal, finds a login form their account does not exist
+          // behind and backs out would leave a year-long cookie pointing at a
+          // region they have no account on, which the server-side resume
+          // points (`/api/connect/*`) then trust with no UI to correct them.
+          ctx.setCookie(AUTH_REGION_COOKIE, region, {
+            path: "/",
+            maxAge: AUTH_REGION_COOKIE_MAX_AGE,
+            sameSite: "lax",
+          });
           throw ctx.redirect(appUrl(callbackURL));
         },
       ),
