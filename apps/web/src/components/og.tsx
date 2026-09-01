@@ -115,3 +115,23 @@ export function StatCard({
     </div>
   );
 }
+
+/**
+ * The coloured `[TAG]`, for an OG card.
+ *
+ * The same rule the site's `ClanTag` follows: only the brackets take the clan's
+ * colour, the letters stay in the surrounding one. A twin rather than a shared
+ * component because Satori styles nothing from a class, so the DOM version's
+ * Tailwind means nothing here; this one is inline styles all the way down.
+ * `color` is expected to be normalised already (`normalizeTagColor`), since
+ * Wargaming stores it in three different notations.
+ */
+export function OgClanTag({ tag, color }: { tag: string; color: string }) {
+  return (
+    <>
+      <span style={{ color }}>[</span>
+      {tag}
+      <span style={{ color }}>]</span>
+    </>
+  );
+}

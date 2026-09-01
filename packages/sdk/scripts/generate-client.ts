@@ -82,6 +82,16 @@ const RESOURCES: Resource[] = [
     namespaceRoot: NAMESPACE_LIST,
     searchStream: true,
   },
+  {
+    // Keyed by the tournament system's own numeric id rather than a slug: a
+    // tournament has no stable name (the nightly ladders are all "1v1 Tier VI
+    // - 17:00 CEST - N°38"), so the id is the only thing that addresses one.
+    name: "tournaments",
+    key: "id",
+    client: "TournamentClient",
+    root: "detail",
+    namespaceRoot: NAMESPACE_LIST,
+  },
 ];
 
 /**
@@ -140,9 +150,19 @@ const GLOBALS: Global[] = [
 ];
 /** Region-scoped view prefixes (before `{region}`): `/og/{region}/…`. */
 const PREFIXES = ["og"] as const;
-/** Explicit manual exclusions (logged): the generic `/og` (no region to nest)
- * and `/mcp` (a POST JSON-RPC protocol transport, not a data endpoint). */
-const MANUAL_EXCLUDE = new Set<string>(["/og", "/mcp"]);
+/** Explicit manual exclusions (logged): the generic `/og` (no region to nest),
+ * `/mcp` (a POST JSON-RPC protocol transport, not a data endpoint), and the
+ * team OG card, whose path nests a second key under the resource key
+ * (`/og/{region}/tournaments/{id}/team/{teamId}`). The og tree models one key
+ * per resource: a root taking it, plus flat namespace methods. A second keyed
+ * level would have to make the ROOT CALL return a handle that is itself
+ * callable, which is a shape change rather than a mapping. The card stays
+ * documented and reachable by URL; only the fluent helper is absent. */
+const MANUAL_EXCLUDE = new Set<string>([
+  "/og",
+  "/mcp",
+  "/og/{region}/tournaments/{id}/team/{teamId}",
+]);
 
 const byName = new Map(RESOURCES.map((r) => [r.name, r]));
 const prefixNames = new Set<string>(PREFIXES);
@@ -666,6 +686,14 @@ function ogResources(b: Buckets): OgResource[] {
       if (afterRes.length === 1 && isParam(afterRes[0])) {
         rootPath = ep.path;
         key = afterRes[0].slice(1, -1);
+      } else if (afterRes.some(isParam)) {
+        // A parameter past the resource key has no place in this model, and
+        // camel-casing it would emit `{id}Team{teamId}` as a method name: not
+        // an identifier, so the generated file would not parse. Loud rather
+        // than silent, per the denylist rule.
+        console.warn(
+          `  UNMAPPED (og sub-resource with its own key): ${ep.path}`,
+        );
       } else {
         methods.push({ ep, name: camel(afterRes) });
       }
