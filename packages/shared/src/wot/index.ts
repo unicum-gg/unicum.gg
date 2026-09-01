@@ -8,6 +8,7 @@ export * from "./ratings";
 export * from "./server-online";
 export * from "./server-stats";
 export * from "./player-distribution";
+export * from "./tier-winrate";
 export * from "./tank-ratings";
 export * from "./tank-stats";
 export * from "./mirror-tracking";

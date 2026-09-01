@@ -7,6 +7,7 @@
 // enums from the barrels, the usual convention, only this build-tooling module
 // takes the deep-path exception.)
 import { RatingMetric } from "@unicum.gg/shared/constants/rating";
+import { RatingColor } from "@unicum.gg/shared/wot/ratings";
 import { GlossaryCategory } from "@unicum.gg/shared/glossary/category";
 import { GlossaryLinkTarget } from "@unicum.gg/shared/glossary/links";
 import { MapGameMode } from "@unicum.gg/shared/wot/maps/game-modes";
@@ -62,6 +63,7 @@ import { TopClansPeriod } from "@unicum.gg/core/wargaming/wot/clans/top/period";
 export const OPENAPI_ENUM_SOURCES = {
   REGION: Object.values(Region),
   METRIC: Object.values(RatingMetric),
+  RATING_COLOR: Object.values(RatingColor),
   PLAYER_PERIOD: Object.values(TopPlayersPeriod),
   CLAN_PERIOD: Object.values(TopClansPeriod),
   MAP_MODE: Object.values(MapGameMode),

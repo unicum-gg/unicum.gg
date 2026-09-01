@@ -399,6 +399,8 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   steelHunter(query?: QueryOf<"/{region}/players/steel-hunter">): RequestHandle<Data<"/{region}/players/steel-hunter">>;
   /** Top players */
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
+  /** Win rate by tier and rating band */
+  winrateByTier(): RequestHandle<Data<"/{region}/players/winrate-by-tier">>;
   /** Streamed player search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -541,6 +543,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/top", {
             params: { path: { region: this.region }, query },
+          }),
+      );
+    ns.winrateByTier = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/winrate-by-tier", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/players/winrate-by-tier", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.searchStream = (q, options) =>

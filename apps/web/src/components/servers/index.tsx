@@ -3,6 +3,7 @@ import {
   type ServerComparison,
   type ServerStats,
   ServerStatsRange,
+  type TierWinrate,
 } from "@unicum.gg/shared";
 import { REGION_EMOJI, REGION_LABEL, type Region } from "@unicum.gg/wargaming";
 import {
@@ -18,6 +19,7 @@ import { ServersDashboard } from "./dashboard";
 import { DistributionPanel } from "./distribution-panel";
 import { formatMoment } from "./format";
 import { ServersLiveHeader } from "./live-header";
+import { TierWinratePanel } from "./tier-winrate";
 
 /**
  * The servers page for one region.
@@ -52,7 +54,7 @@ function emptyStats(region: Region): ServerStats {
 }
 
 export async function ServersView({ region }: { region: Region }) {
-  const [stats, comparison, distribution] = await Promise.all([
+  const [stats, comparison, distribution, tierWinrate] = await Promise.all([
     buildSafe(
       () => unicum.region(region).server.stats(DEFAULT_RANGE),
       emptyStats(region),
@@ -69,6 +71,13 @@ export async function ServersView({ region }: { region: Region }) {
       .region(region)
       .players.distribution()
       .then((d) => d as unknown as PlayerDistribution)
+      .catch(() => null),
+    // Same deal: 404 until the nightly pass has rebuilt the grid for this
+    // region, which is a state the page renders by leaving the panel out.
+    unicum
+      .region(region)
+      .players.winrateByTier()
+      .then((g) => g as unknown as TierWinrate)
       .catch(() => null),
   ]);
 
@@ -131,6 +140,14 @@ export async function ServersView({ region }: { region: Region }) {
               />
             </PanelContent>
           </Panel>
+        </>
+      ) : null}
+
+      {tierWinrate ? (
+        <>
+          <PanelSeparator />
+
+          <TierWinratePanel grid={tierWinrate} region={region} />
         </>
       ) : null}
 

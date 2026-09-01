@@ -859,6 +859,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/players/winrate-by-tier": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Win rate by tier and rating band
+         * @description What each band of the region's players wins at each tier: the band's wins at that tier over its battles there. Rebuilt nightly as a by-product of the pass over the per-vehicle snapshots, the only place a win rate per tier exists. 404 until the first run. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-players-winrate-by-tier"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/achievements": {
         parameters: {
             query?: never;
@@ -4593,6 +4613,67 @@ export interface components {
             /** @description Battle-weighted mean win rate, 0..1. */
             winrate: number;
         };
+        /** @description What each band of a region's players wins at each tier of vehicle. */
+        TierWinrate: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /** @description Battles a player needs on a vehicle before it counts towards their tiers, so the grid describes the tiers as played by the people who play them. */
+            minBattles: number;
+            /** @description One grid per rating metric, so a reader's chosen metric is served rather than one being picked for them. */
+            metrics: {
+                wn7: components["schemas"]["TierWinrateCell"][];
+                wn8: components["schemas"]["TierWinrateCell"][];
+                wnx: components["schemas"]["TierWinrateCell"][];
+            };
+            /**
+             * Format: date-time
+             * @description When the grid was last rebuilt. It is a by-product of the nightly pass over the per-vehicle snapshots, so it moves once a day.
+             */
+            computedAt: Date | null;
+        };
+        /** @description What one rating band did at one tier. */
+        TierWinrateCell: {
+            tier: number;
+            /**
+             * @description Rating band the players of this cell belong to, on the metric this grid is filed under. The band's numeric edges are the site's own rating colour thresholds.
+             * @enum {string}
+             */
+            band: "veryBad" | "bad" | "belowAvg" | "average" | "good" | "veryGood" | "super" | "excellent" | "top";
+            /** @description Lower edge of the band, included. Null at the bottom of the scale. These are the edges the row was banded with, not today's thresholds, so a threshold that moves later cannot relabel a row it never measured. */
+            bandFrom: number | null;
+            /** @description Upper edge of the band, excluded. Null at the top of the scale. */
+            bandTo: number | null;
+            /** @description Accounts of the band with a qualifying vehicle at the tier. */
+            players: number;
+            battles: number;
+            wins: number;
+            /** @description Battle-weighted win rate, 0..1: the band's wins at this tier over its battles there, not the mean of its players' own win rates. */
+            winrate: number;
+        };
+        /** @description What each band of a region's players wins at each tier of vehicle. */
+        TierWinrateResponse: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            /** @description Battles a player needs on a vehicle before it counts towards their tiers, so the grid describes the tiers as played by the people who play them. */
+            minBattles: number;
+            /** @description One grid per rating metric, so a reader's chosen metric is served rather than one being picked for them. */
+            metrics: {
+                wn7: components["schemas"]["TierWinrateCell"][];
+                wn8: components["schemas"]["TierWinrateCell"][];
+                wnx: components["schemas"]["TierWinrateCell"][];
+            };
+            /**
+             * Format: date-time
+             * @description When the grid was last rebuilt. It is a by-product of the nightly pass over the per-vehicle snapshots, so it moves once a day.
+             */
+            computedAt: Date | null;
+        };
         TopClansResponse: {
             results: components["schemas"]["ClanSummary"][];
             computed_at: string | null;
@@ -5931,6 +6012,29 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TopPlayersResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-winrate-by-tier": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example example */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TierWinrate"];
                 };
             };
         };
