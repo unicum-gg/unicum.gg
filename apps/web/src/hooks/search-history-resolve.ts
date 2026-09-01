@@ -1,6 +1,6 @@
 "use client";
 
-import type { ClanSearchResult } from "@unicum.gg/shared";
+import type { ClanSearchResult, GlossarySummary } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
@@ -23,6 +23,8 @@ function emptyIds(): RegionIds {
 function collectIds(items: SearchHistoryItem[]): Map<Region, RegionIds> {
   const byRegion = new Map<Region, RegionIds>();
   for (const item of items) {
+    // The glossary has no region, so it is resolved on its own below.
+    if (item.kind === "glossary") continue;
     const ids = byRegion.get(item.region) ?? emptyIds();
     byRegion.set(item.region, ids);
     switch (item.kind) {
@@ -69,8 +71,9 @@ export async function resolveHistoryItems(
   if (items.length === 0) return fresh;
 
   const byRegion = collectIds(items);
-  await Promise.all(
-    [...byRegion].map(async ([region, ids]) => {
+  await Promise.all([
+    resolveGlossary(items, fresh),
+    ...[...byRegion].map(async ([region, ids]) => {
       try {
         const resolved = await unicum.region(region).searchResolve({
           players: csv(ids.players),
@@ -114,7 +117,39 @@ export async function resolveHistoryItems(
         // Region skipped: its entries keep the copy the store already holds.
       }
     }),
-  );
+  ]);
 
   return fresh;
+}
+
+/**
+ * The current entry for every pinned term.
+ *
+ * The catalogue ships with the build and is a few hundred entries, so there is
+ * nothing to look one term up by: the whole list is one cached request, and it
+ * is only made when the reader actually pinned a term. A slug that no longer
+ * exists is absent from the answer, and the caller keeps its copy, which is the
+ * same bargain every other kind gets.
+ */
+async function resolveGlossary(
+  items: SearchHistoryItem[],
+  fresh: Map<string, SearchHistoryItem>,
+): Promise<void> {
+  const slugs = new Set(
+    items.filter((i) => i.kind === "glossary").map((i) => i.term.slug),
+  );
+  if (slugs.size === 0) return;
+  try {
+    const { results } = await unicum.glossary.list();
+    for (const term of results) {
+      if (!slugs.has(term.slug)) continue;
+      const item: SearchHistoryItem = {
+        kind: "glossary",
+        term: term as unknown as GlossarySummary,
+      };
+      fresh.set(itemKey(item), item);
+    }
+  } catch {
+    // Glossary skipped: its entries keep the copy the store already holds.
+  }
 }

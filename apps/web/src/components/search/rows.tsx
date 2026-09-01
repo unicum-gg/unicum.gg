@@ -1,5 +1,6 @@
 "use client";
 
+import { BookOpenIcon } from "@phosphor-icons/react";
 import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
@@ -18,8 +19,12 @@ import { NationFlag } from "@/components/tanks/nation-flag";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { cn } from "@/lib/utils";
-import type { ClanSearchResult } from "@unicum.gg/shared";
-import { type MapCamouflage } from "@unicum.gg/shared";
+import type { ClanSearchResult, GlossarySummary } from "@unicum.gg/shared";
+import {
+  glossaryAcronym,
+  GLOSSARY_CATEGORY_LABEL,
+  type MapCamouflage,
+} from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 export function PlayerRow({ player }: { player: SearchPlayerResult }) {
@@ -127,6 +132,36 @@ export function MapRow({ map }: { map: MapSearchResult }) {
       </span>
       <span className={cn("shrink-0", camo.className)} title={`${camo.label} map`}>
         <CamoIcon weight="fill" className="size-3.5" />
+      </span>
+    </>
+  );
+}
+
+export function GlossaryRow({ term }: { term: GlossarySummary }) {
+  const acronym = glossaryAcronym(term);
+  return (
+    <>
+      <span className="flex min-w-0 items-center gap-2">
+        <BookOpenIcon className="size-4 shrink-0 text-fd-muted-foreground" />
+        {/* Holds its width against the definition beside it (two plain
+            `truncate` siblings share the shrinking, which clipped "Gun arc"
+            to "Gun..." with half the row empty), but capped and truncatable so
+            the longest names in the catalogue, past thirty characters, cannot
+            push the category and the favorite star off a phone-width row. */}
+        <span className="shrink-0 truncate font-medium max-w-[60%]">
+          {term.term}
+        </span>
+        {acronym ? (
+          <span className="shrink-0 text-xs text-fd-muted-foreground">
+            {acronym}
+          </span>
+        ) : null}
+        <span className="hidden truncate text-sm text-fd-muted-foreground sm:inline">
+          {term.short}
+        </span>
+      </span>
+      <span className="shrink-0 text-xs text-fd-muted-foreground">
+        {GLOSSARY_CATEGORY_LABEL[term.category]}
       </span>
     </>
   );
