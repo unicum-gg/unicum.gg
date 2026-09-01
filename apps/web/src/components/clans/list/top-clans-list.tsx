@@ -139,6 +139,10 @@ export function TopClansList({
                         : r.badges
                     }
                     region={region}
+                    tag={r.tag}
+                    tournamentWins={r.tournament_wins}
+                    tournamentFeaturedWins={r.tournament_featured_wins}
+                    tournamentBestTitle={r.tournament_best_title}
                     size={14}
                   />
                   {r.languages.length > 0 && (

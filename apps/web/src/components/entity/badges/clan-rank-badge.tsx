@@ -11,6 +11,7 @@ import {
 } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
+import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
 import {
   Tooltip,
   TooltipContent,
@@ -201,16 +202,39 @@ function OverflowBadge({
 export function ClanBadges({
   badges,
   region,
+  tag,
+  tournamentWins = 0,
+  tournamentFeaturedWins = 0,
+  tournamentBestTitle = null,
   size = 16,
   max = 3,
 }: {
   badges?: ClanRankBadgeData[] | null;
   region: Region;
+  /** Needed only by the tournament crest, which links to this clan's own
+   * Tournaments tab. Without it the crest still renders, just not as a link. */
+  tag?: string | null;
+  /** Tournaments a team attributed to this clan won. */
+  tournamentWins?: number;
+  tournamentFeaturedWins?: number;
+  tournamentBestTitle?: string | null;
   size?: number;
   /** How many crests to show before folding the rest into "+N". */
   max?: number;
 }) {
-  if (!badges?.length) return null;
+  // The tournament crest is not a placing, so it sits outside the fold: the
+  // "+N" counts board ranks, which are a set that can grow to seven, while this
+  // is one mark a clan either has or does not.
+  const trophy = (
+    <TournamentBadge
+      wins={tournamentWins}
+      featuredWins={tournamentFeaturedWins}
+      bestTitle={tournamentBestTitle}
+      href={tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined}
+      size={size}
+    />
+  );
+  if (!badges?.length) return trophy;
   // `max` is the total number of crests shown, the "+N" included. So once we
   // overflow, the "+N" takes one of those slots and only `max - 1` real crests
   // remain (4 placings, max 3 -> 2 crests + "+2"). The cluster is never wider
@@ -231,6 +255,7 @@ export function ClanBadges({
       {hidden.length > 0 && (
         <OverflowBadge hidden={hidden} region={region} size={size} />
       )}
+      {trophy}
     </>
   );
 }

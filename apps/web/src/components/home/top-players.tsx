@@ -132,7 +132,11 @@ function PlayerRow({
             <PlayerBadges
               region={region}
               accountId={player.account_id}
+                      nickname={player.nickname}
               verified={player.is_verified}
+              tournamentWins={player.tournament_wins}
+              tournamentFeaturedWins={player.tournament_featured_wins}
+              tournamentBestTitle={player.tournament_best_title}
               supporter={player.is_supporter}
               twitchLogin={player.twitch_login}
             />

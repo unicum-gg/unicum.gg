@@ -9,6 +9,7 @@ import { ClanNameHistory } from "@/components/clans/detail/name-history";
 import { ClanSection, ClanMode } from "@/components/clans/detail/tabs";
 import type { ClanNameHistoryEntry } from "@unicum.gg/core/clans/name-history";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import type { ClanTournamentRecord } from "@/components/clans/detail/tournaments/row";
 import {
   ClanTabsView,
   type ClanTabsInitialData,
@@ -45,7 +46,11 @@ export function ClanProfile({
   initialRatings,
   initialData,
   initialBadges,
+  initialTournamentWins,
+  initialTournamentFeaturedWins,
+  initialTournamentBestTitle,
   initialVehicles,
+  initialTournaments,
   initialVehiclesCount,
   initialVideos,
   initialNameHistory,
@@ -61,12 +66,18 @@ export function ClanProfile({
   initialRatings: ClanRatings;
   initialData: ClanTabsInitialData;
   initialVehicles: ClanVehicleRow[] | null;
+  initialTournaments: ClanTournamentRecord | null;
   initialVehiclesCount: number | null;
   /** Rendered by the server, so the tactics are in the HTML rather than fetched
    * once the browser has caught up. */
   initialVideos: TankVideoCardData[];
   initialNameHistory: ClanNameHistoryEntry[];
   initialBadges: ClanRankBadgeData[];
+  /** The clan's tournament honours, for the winner's crest. Seeded like the
+   * badges above and refreshed by the same overview read. */
+  initialTournamentWins: number;
+  initialTournamentFeaturedWins: number;
+  initialTournamentBestTitle: string | null;
 }) {
   const overviewReq = () => unicum.region(region).clans(tag).overview();
   const { data: overview, mutate: mutateOverview } = useSWR(
@@ -78,6 +89,9 @@ export function ClanProfile({
           nameHistory: r.nameHistory as unknown as ClanNameHistoryEntry[],
           vehiclesCount: r.vehiclesCount ?? null,
           badges: (r.badges ?? []) as unknown as ClanRankBadgeData[],
+          tournamentWins: r.tournamentWins ?? 0,
+          tournamentFeaturedWins: r.tournamentFeaturedWins ?? 0,
+          tournamentBestTitle: r.tournamentBestTitle ?? null,
         })),
     {
       fallbackData: {
@@ -86,6 +100,9 @@ export function ClanProfile({
         nameHistory: initialNameHistory,
         vehiclesCount: initialVehiclesCount,
         badges: initialBadges,
+        tournamentWins: initialTournamentWins,
+        tournamentFeaturedWins: initialTournamentFeaturedWins,
+        tournamentBestTitle: initialTournamentBestTitle,
       },
       revalidateOnMount: false,
     },
@@ -95,6 +112,11 @@ export function ClanProfile({
   const nameHistory = overview?.nameHistory ?? initialNameHistory;
   const vehiclesCount = overview?.vehiclesCount ?? initialVehiclesCount;
   const badges = overview?.badges ?? initialBadges;
+  const tournamentWins = overview?.tournamentWins ?? initialTournamentWins;
+  const tournamentFeaturedWins =
+    overview?.tournamentFeaturedWins ?? initialTournamentFeaturedWins;
+  const tournamentBestTitle =
+    overview?.tournamentBestTitle ?? initialTournamentBestTitle;
 
   // Incremented on each live tick; the tabs view refetches its sections when it
   // changes (see ClanTabsView's effect on `liveVersion`).
@@ -125,6 +147,9 @@ export function ClanProfile({
             members={initialData.members as ClanMemberStats[]}
             ratings={ratings}
             badges={badges}
+            tournamentWins={tournamentWins}
+            tournamentFeaturedWins={tournamentFeaturedWins}
+            tournamentBestTitle={tournamentBestTitle}
           />
         </PanelContent>
       </Panel>
@@ -143,6 +168,7 @@ export function ClanProfile({
         descriptionHtml={descriptionHtml}
         initialData={initialData}
         initialVehicles={initialVehicles}
+        initialTournaments={initialTournaments}
         initialVideos={initialVideos}
         liveVersion={liveVersion}
       />

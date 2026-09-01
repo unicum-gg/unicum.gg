@@ -137,6 +137,9 @@ export type OnslaughtRow = {
   is_verified: boolean;
   is_supporter: boolean;
   twitch_login: string | null;
+  tournament_wins: number;
+  tournament_featured_wins: number;
+  tournament_best_title: string | null;
 };
 
 export function OnslaughtBoard({
@@ -399,7 +402,11 @@ export function OnslaughtBoard({
                         <PlayerBadges
                           region={region}
                           accountId={r.account_id}
+                      nickname={r.nickname}
                           verified={r.is_verified}
+                          tournamentWins={r.tournament_wins}
+                          tournamentFeaturedWins={r.tournament_featured_wins}
+                          tournamentBestTitle={r.tournament_best_title}
                           supporter={r.is_supporter}
                           twitchLogin={r.twitch_login}
                         />

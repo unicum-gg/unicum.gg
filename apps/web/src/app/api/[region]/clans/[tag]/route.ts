@@ -41,7 +41,14 @@ export async function GET(
       getClanMembersCached(region, clanCached.info.id).catch(() => null),
       getClanNameHistory(region, clanCached.info.id),
       db
-        .select({ vehiclesCount: clans.vehiclesCount })
+        .select({
+          vehiclesCount: clans.vehiclesCount,
+          // The winner's crest, off the same row the vehicle count is on, so it
+          // costs nothing extra.
+          tournamentWins: clans.tournamentWins,
+          tournamentFeaturedWins: clans.tournamentFeaturedWins,
+          tournamentBestTitle: clans.tournamentBestTitle,
+        })
         .from(clans)
         .where(eq(clans.id, clanCached.info.id))
         .limit(1)
@@ -59,6 +66,9 @@ export async function GET(
       nameHistory,
       vehiclesCount: countRow?.vehiclesCount ?? null,
       badges: badges.get(clanCached.info.id) ?? [],
+      tournamentWins: countRow?.tournamentWins ?? 0,
+      tournamentFeaturedWins: countRow?.tournamentFeaturedWins ?? 0,
+      tournamentBestTitle: countRow?.tournamentBestTitle ?? null,
     });
   });
 }

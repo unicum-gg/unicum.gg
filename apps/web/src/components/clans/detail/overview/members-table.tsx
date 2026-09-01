@@ -385,6 +385,7 @@ export function ClanMembersTable(
                     <PlayerBadges
                       region={props.region}
                       accountId={m.accountId}
+                      nickname={m.name}
                       verified={m.isVerified}
                       supporter={m.isSupporter}
                       twitchLogin={m.twitchLogin}

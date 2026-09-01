@@ -67,6 +67,19 @@ export type PlayerDetailData = {
   // The Twitch login of this account's linked channel (for the streamer badge's
   // link), or null when the account is not a streamer.
   twitchLogin: string | null;
+  /**
+   * Tournament honours, for the winner's crest.
+   *
+   * Read off the denormalised player columns rather than the archive: a crest
+   * is drawn beside a nickname everywhere, and resolving it would walk every
+   * roster ever mirrored. `featuredWins` is separate because Wargaming's own
+   * flag is what tells a branded championship from a nightly gold ladder.
+   */
+  tournamentWins: number;
+  tournamentFeaturedWins: number;
+  /** The win worth naming in the tooltip: a featured event when there is one,
+   * else the most recent. */
+  tournamentBestTitle: string | null;
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;

@@ -14,6 +14,8 @@ export enum CrestKind {
   Supporter = "supporter",
   Streamer = "streamer",
   CommonTest = "common-test",
+  Tournament = "tournament",
+  TournamentFeatured = "tournament-featured",
 }
 
 // Flat-top regular hexagon in a 100×86.6 box: flat top/bottom edges (x 25–75),
@@ -27,11 +29,36 @@ const TINCTURE: Record<CrestKind, { fill: string; edge: string }> = {
   [CrestKind.Supporter]: { fill: BRAND_COLOR, edge: "#b8390f" },
   [CrestKind.Streamer]: { fill: "#9147ff", edge: "#6d28d9" },
   [CrestKind.CommonTest]: { fill: BRAND_COLOR, edge: "#b8390f" },
+  // Steel for a win, gold for one Wargaming flagged as featured: the two tiers
+  // have to be told apart at 16px, and hue is the only channel a crest this
+  // small has left once the charge is spoken for.
+  [CrestKind.Tournament]: { fill: "#9aa4b2", edge: "#5b6472" },
+  [CrestKind.TournamentFeatured]: { fill: "#f0b429", edge: "#b07407" },
 };
 
 // Muted tincture for the owner-only supporter states (hidden / invite): a slate
 // crest instead of the live accent, so it reads as "not active yet".
 const MUTED = { fill: "#8b8b8b", edge: "#5f5f5f" };
+
+// A cup, drawn once and worn by both tournament tinctures.
+//
+// A laurel would be the truer device (it is what Wargaming's own placement
+// medals use, and what `RankMedal` transcribes), but at 16px its two branches
+// collapse into an open ring that reads as a horseshoe. A cup keeps a
+// silhouette that survives the size: bowl, stem, foot, and two handles.
+const TOURNAMENT_CHARGE = (
+  <>
+    <g fill="#fff">
+      <path d="M35 20 H65 V33 C65 44 58 52 50 52 C42 52 35 44 35 33 Z" />
+      <path d="M46 52 H54 V62 H46 Z" />
+      <path d="M36 62 H64 V69 H36 Z" />
+    </g>
+    <g fill="none" stroke="#fff" strokeWidth="5" strokeLinecap="round">
+      <path d="M35 24 H29 C24 24 24 34 32 38" />
+      <path d="M65 24 H71 C76 24 76 34 68 38" />
+    </g>
+  </>
+);
 
 // White charges, centred on the hexagon (~50, 43.3).
 const CHARGE: Record<CrestKind, ReactNode> = {
@@ -52,6 +79,8 @@ const CHARGE: Record<CrestKind, ReactNode> = {
     />
   ),
   [CrestKind.Streamer]: <path d="M40 27 L67 43 L40 59 Z" fill="#fff" />,
+  [CrestKind.Tournament]: TOURNAMENT_CHARGE,
+  [CrestKind.TournamentFeatured]: TOURNAMENT_CHARGE,
   // Lettered rather than a device: "CT" is what the community calls it, and no
   // pictogram reads as "test build" at 16px.
   [CrestKind.CommonTest]: (
@@ -107,8 +136,14 @@ export function Crest({
       role="img"
       aria-hidden
       // A crest is a mark, not a control: keep the arrow rather than the text
-      // caret an inline SVG would otherwise inherit.
-      className={cn("inline-block shrink-0 cursor-default align-middle", className)}
+      // caret an inline SVG would otherwise inherit. Unless it IS a control:
+      // the rank, streamer and tournament crests are wrapped in a link, and the
+      // cursor set here would otherwise win over the anchor's own, leaving a
+      // clickable crest showing an arrow.
+      className={cn(
+        "inline-block shrink-0 cursor-default align-middle [a_&]:cursor-pointer",
+        className,
+      )}
       style={{ filter: "drop-shadow(0 1px 1.5px rgba(0,0,0,.28))" }}
     >
       <defs>

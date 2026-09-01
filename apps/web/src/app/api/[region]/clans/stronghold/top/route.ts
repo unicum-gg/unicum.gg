@@ -1,5 +1,5 @@
 import { isRegion } from "@unicum.gg/wargaming";
-import { resolveClanBadges } from "@unicum.gg/core/clans/badges";
+import { attachClanBadges } from "@/services/clans/attach-badges";
 import {
   StrongholdPeriod,
   StrongholdSort,
@@ -57,16 +57,17 @@ async function GET__perf(
     period,
     LIMIT,
   );
-  // One batched pair of indexed reads for the whole page, so every row can
-  // carry the placings it holds on the other boards.
-  const byClan = await resolveClanBadges(
-    region,
-    results.map((r) => r.clanId),
-  );
+  // A few batched indexed reads for the whole page, so every row carries the
+  // placings it holds on the other boards and the tournaments it has won. This
+  // board names its clan column `clanId`, so it is bridged to the shared
+  // attacher's `clan_id` and back.
+  const withIds = results.map((r) => ({ ...r, clan_id: r.clanId }));
+  const decorated = await attachClanBadges(region, withIds);
   return jsonResponse(StrongholdTopResponse, {
-    results: results.map((r) => {
-      const badges = byClan.get(r.clanId);
-      return badges?.length ? { ...r, badges } : r;
+    results: decorated.map((row) => {
+      const { clan_id, ...rest } = row;
+      void clan_id;
+      return rest;
     }),
   });
 }

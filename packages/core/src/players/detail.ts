@@ -240,6 +240,10 @@ export async function buildPlayerDetail(args: {
     isSupporter,
     isVerified,
     twitchLogin,
+    // Straight off the player row, written when a tournament settles.
+    tournamentWins: player.tournamentWins,
+    tournamentFeaturedWins: player.tournamentFeaturedWins,
+    tournamentBestTitle: player.tournamentBestTitle,
     current,
     periods,
     derived,

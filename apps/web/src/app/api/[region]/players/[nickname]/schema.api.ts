@@ -329,6 +329,18 @@ export const PlayerDetailResponse = z.object({
   isSupporter: z.boolean(),
   isVerified: z.boolean(),
   twitchLogin: z.string().nullable(),
+  tournamentWins: z.number().meta({
+    description:
+      "How many Wargaming tournaments this account was on the winning roster of. Counts only tournaments that decided an overall winner: a draw played as parallel groups crowns a winner per group and none overall.",
+  }),
+  tournamentFeaturedWins: z.number().meta({
+    description:
+      "How many of those wins came at an event Wargaming flags as featured, which is what separates a branded championship from a nightly gold ladder.",
+  }),
+  tournamentBestTitle: z.string().nullable().meta({
+    description:
+      "The win worth naming: a featured event when there is one, else the most recent. Null when the account has never won.",
+  }),
   current: playerStats,
   periods: z.object({
     h24: playerStats.nullable(),

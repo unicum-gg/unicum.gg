@@ -18,6 +18,11 @@ export type TopClanByLanguageResult = {
   winrate: number | null;
   /** Podium positions, attached by the route (see `TopClanResult`). */
   badges?: ClanRankBadge[];
+  /** Tournament honours, attached at the API boundary like the badges above.
+   * Absent when the clan has never won one. */
+  tournament_wins?: number;
+  tournament_featured_wins?: number;
+  tournament_best_title?: string | null;
 };
 
 // Higher floor on the global leaderboard so the headline list reads as

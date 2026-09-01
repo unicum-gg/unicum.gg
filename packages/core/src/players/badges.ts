@@ -1,6 +1,7 @@
-import { and, eq, inArray } from "drizzle-orm";
+import { and, eq, gt, inArray } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { streamers, subscription, user } from "@unicum.gg/shared";
+import { playersByRegion, streamers, subscription, user } from "@unicum.gg/shared";
+import type { Region } from "@unicum.gg/wargaming";
 
 /**
  * The public, per-player badge crests carried in leaderboard/list payloads.
@@ -17,6 +18,13 @@ export type PlayerBadges = {
   verified: boolean;
   supporter: boolean;
   twitchLogin: string | null;
+  /** Tournaments this account was on the winning roster of, and how many of
+   * those were events Wargaming flags as featured. Read off the denormalised
+   * player columns, so it costs one indexed lookup for the whole batch rather
+   * than a walk through the archive's rosters. */
+  tournamentWins: number;
+  tournamentFeaturedWins: number;
+  tournamentBestTitle: string | null;
 };
 
 // Stripe statuses that count as an active supporter (mirrors subscription/index).
@@ -45,7 +53,14 @@ export async function resolvePlayerBadges(
   const ensure = (id: number): PlayerBadges => {
     let entry = result.get(id);
     if (!entry) {
-      entry = { verified: false, supporter: false, twitchLogin: null };
+      entry = {
+        verified: false,
+        supporter: false,
+        twitchLogin: null,
+        tournamentWins: 0,
+        tournamentFeaturedWins: 0,
+        tournamentBestTitle: null,
+      };
       result.set(id, entry);
     }
     return entry;
@@ -55,7 +70,8 @@ export async function resolvePlayerBadges(
   for (const id of unique) idByEmail.set(synthEmail(region, id), id);
   const emails = [...idByEmail.keys()];
 
-  const [verifiedRows, supporterRows, streamerRows] = await Promise.all([
+  const players = playersByRegion[region as Region];
+  const [verifiedRows, supporterRows, streamerRows, winnerRows] = await Promise.all([
     // Verified: a connected user exists (login is Wargaming-only, so any user
     // for the synthetic email means the account was connected here).
     db.select({ email: user.email }).from(user).where(inArray(user.email, emails)),
@@ -78,6 +94,22 @@ export async function resolvePlayerBadges(
       .where(
         and(eq(streamers.region, region), inArray(streamers.accountId, unique)),
       ),
+    // Tournament honours, straight off the player row. Only the rows that hold
+    // one come back, which on any board is a handful of the batch.
+    db
+      .select({
+        accountId: players.accountId,
+        wins: players.tournamentWins,
+        featured: players.tournamentFeaturedWins,
+        bestTitle: players.tournamentBestTitle,
+      })
+      .from(players)
+      .where(
+        and(
+          inArray(players.accountId, unique),
+          gt(players.tournamentWins, 0),
+        ),
+      ),
   ]);
 
   for (const row of verifiedRows) {
@@ -89,6 +121,12 @@ export async function resolvePlayerBadges(
     if (id !== undefined) ensure(id).supporter = true;
   }
   for (const row of streamerRows) ensure(row.accountId).twitchLogin = row.twitchLogin;
+  for (const row of winnerRows) {
+    const entry = ensure(Number(row.accountId));
+    entry.tournamentWins = row.wins;
+    entry.tournamentFeaturedWins = row.featured;
+    entry.tournamentBestTitle = row.bestTitle;
+  }
 
   return result;
 }

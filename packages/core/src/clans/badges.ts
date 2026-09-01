@@ -1,8 +1,9 @@
-import { and, eq, inArray, lte } from "drizzle-orm";
+import { and, eq, gt, inArray, lte } from "drizzle-orm";
 import {
   CLAN_BADGE_MAX_RANK,
   ClanBoard,
   clanRatingsByRegion,
+  clansByRegion,
   sortClanBadges,
   strongholdRatingsByRegion,
   type ClanRankBadge,
@@ -91,4 +92,44 @@ export async function resolveClanBadges(
 
   for (const [clanId, list] of result) result.set(clanId, sortClanBadges(list));
   return result;
+}
+
+/**
+ * A clan's tournament honours, for the winner's crest beside its tag.
+ *
+ * Straight off the denormalised clan columns, so a board of a hundred rows
+ * costs one indexed lookup rather than a walk through the archive. Only the
+ * clans that hold a win come back; the rest are absent and read as none.
+ */
+export type ClanTournamentHonours = {
+  wins: number;
+  featuredWins: number;
+  bestTitle: string | null;
+};
+
+export async function resolveClanTournamentHonours(
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, ClanTournamentHonours>> {
+  const out = new Map<number, ClanTournamentHonours>();
+  const unique = [...new Set(clanIds)];
+  if (unique.length === 0) return out;
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({
+      id: clans.id,
+      wins: clans.tournamentWins,
+      featured: clans.tournamentFeaturedWins,
+      bestTitle: clans.tournamentBestTitle,
+    })
+    .from(clans)
+    .where(and(inArray(clans.id, unique), gt(clans.tournamentWins, 0)));
+  for (const row of rows) {
+    out.set(Number(row.id), {
+      wins: row.wins,
+      featuredWins: row.featured,
+      bestTitle: row.bestTitle,
+    });
+  }
+  return out;
 }
