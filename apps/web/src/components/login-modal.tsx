@@ -81,12 +81,11 @@ export function LoginModal({
   const suggested = remembered ?? browsing;
 
   return (
-    /* Wider than the dialog default (`sm:max-w-md`, which the share modal
-       keeps): with the three portals and the reassurance under them, that width
-       came out taller than it was wide. Still short of the `sm:max-w-3xl` the
-       video-submission forms use, since this is a choice between three things,
-       not a form. */
-    <DialogContent className="sm:max-w-xl">
+    /* The dialog default width (`sm:max-w-md`), same as the share modal. The
+       site's wide dialogs (`sm:max-w-3xl`) are the video-submission forms;
+       something you read and click once belongs in the narrow family, even
+       though the reassurance block makes it taller than it is wide. */
+    <DialogContent>
       <DialogHeader>
         <DialogTitle>Log in with Wargaming.net ID</DialogTitle>
         <DialogDescription>
