@@ -9,6 +9,7 @@ import {
 } from "@/components/players/detail/tabs";
 import { PlayerProfile } from "@/components/players/detail/view";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
+import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -107,6 +108,12 @@ function viewCopy(
     return {
       title: `${name} achievements (${regionLabel}), ${medals} medals earned`,
       description: `The ${medals} World of Tanks medals ${name} has earned on ${regionLabel}, from Kolobanov's and Pool's to the honorary ranks and epic medals, plus every one still left to earn.`,
+    };
+  }
+  if (view.section === PlayerSection.Tournaments) {
+    return {
+      title: `${name} tournaments (${regionLabel})`,
+      description: `Every Wargaming tournament ${name} has entered on ${regionLabel}: the team they played for, the format, and how far it got. A record Wargaming publishes from the tournament's side only, never the player's.`,
     };
   }
   if (view.section === PlayerSection.Value) {
@@ -299,6 +306,25 @@ async function PlayerProfileServer({
   // Same treatment again for the sessions list: server-rendered on a direct
   // landing so a crawler and the `.md` twin read the table rather than its
   // skeleton, and only in the bucket size the tab opens on.
+  // Same treatment for the tournament record: server-rendered on a direct
+  // landing so a crawler and the `.md` twin read the table rather than its
+  // skeleton.
+  //
+  // Caught rather than awaited bare, because the endpoint DOES 404: it resolves
+  // the nickname against our own players table, while the profile around it
+  // resolves live through Wargaming, so a player renamed since our last refresh
+  // has a working page and no row under that name. Letting that throw took the
+  // whole profile down over a tab. An absent record is a good answer anyway
+  // (most accounts have never entered one) and the browser re-fetches on mount.
+  const initialTournaments: PlayerTournamentRecord | null =
+    section === PlayerSection.Tournaments
+      ? await unicum
+          .region(region)
+          .players(decoded)
+          .tournaments()
+          .then((r) => r as unknown as PlayerTournamentRecord)
+          .catch(() => null)
+      : null;
   const initialSessions: PlayerSession[] | null =
     section === PlayerSection.Sessions
       ? ((
@@ -362,6 +388,7 @@ async function PlayerProfileServer({
         tankDetail={tankDetail}
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
+        initialTournaments={initialTournaments}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,

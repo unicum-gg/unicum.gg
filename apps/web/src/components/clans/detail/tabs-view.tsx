@@ -13,6 +13,8 @@ import {
 } from "@/components/clans/detail/tabs";
 import { ClanTanksTab } from "@/components/clans/detail/tanks";
 import { ClanBoostConsole } from "@/components/clans/detail/boost-console";
+import { ClanTournamentsTab } from "@/components/clans/detail/tournaments";
+import type { ClanTournamentRecord } from "@/components/clans/detail/tournaments/row";
 import { ClanVideosTab } from "@/components/clans/detail/videos";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import { RandomBattlesTab } from "@/components/clans/detail/overview";
@@ -65,6 +67,9 @@ export type ClanTabsViewProps = {
   // is in the initial HTML (SEO for `?section=tanks`); null otherwise, so the
   // section fetches on demand when first opened.
   initialVehicles: ClanVehicleRow[] | null;
+  /** The tournaments read, when the server rendered this section. Null when it
+   * rendered another one, which is when the browser fetches on demand. */
+  initialTournaments: ClanTournamentRecord | null;
   initialVideos: TankVideoCardData[];
   // Bumped by the parent (ClanProfile) on each LiveSync tick; watched below to
   // refetch every section. The single LiveSync subscription lives in the parent
@@ -84,6 +89,7 @@ export function ClanTabsView({
   descriptionHtml,
   initialData,
   initialVehicles,
+  initialTournaments,
   initialVideos,
   liveVersion,
 }: ClanTabsViewProps) {
@@ -128,13 +134,27 @@ export function ClanTabsView({
     },
   );
 
-  // Fetched whatever the section, because the nav labels the tab with the
-  // count. The tab itself is always offered, at zero included: an empty video
-  // tab is an invitation for a clan's first tactic. It is one small request,
-  // cached by SWR, and it is the same one the section renders from.
-  // Seeded by the server render, so the tactics are in the HTML and the tab
-  // knows its count on the first paint. SWR still revalidates, which is what
-  // picks up a tactic approved since the page was cached.
+  // Seeded by the server render when this is the section being rendered, the
+  // same deal Tanks gets: the rows are then in the HTML, so the tab paints
+  // filled on the first frame instead of flashing a skeleton, and the `.md`
+  // twin and crawlers see the table rather than a placeholder. Fetched on
+  // demand only when the reader switches to it from another section, which is
+  // why the request exists at all: most clans have never entered a tournament,
+  // and the read joins across the whole archive.
+  const onTournaments = section === ClanSection.Tournaments;
+  const seededTournaments = initialTournaments != null;
+  const { data: clanTournaments } = useSWR(
+    onTournaments ? clanApi.tournaments().url() : null,
+    () =>
+      clanApi
+        .tournaments()
+        .then((r) => r as unknown as ClanTournamentRecord),
+    {
+      fallbackData: initialTournaments ?? undefined,
+      revalidateOnMount: !seededTournaments,
+    },
+  );
+
   const { data: videos } = useSWR(
     `clan-videos:${region}:${tag}`,
     () => clanApi.videos().then((r) => r.videos as unknown as TankVideoCardData[]),
@@ -264,6 +284,8 @@ export function ClanTabsView({
 
       {onManage ? (
         <ClanBoostConsole region={region} tag={tag} clanId={clanId} />
+      ) : onTournaments ? (
+        <ClanTournamentsTab region={region} tag={tag} data={clanTournaments} />
       ) : onVideos ? (
         <ClanVideosTab
           region={region}

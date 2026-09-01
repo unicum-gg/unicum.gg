@@ -11,6 +11,7 @@
 //   /eu/players/Animal/tanks          Tanks
 //   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
+//   /eu/players/Animal/tournaments    Tournaments
 //   /eu/players/Animal/value          Value
 //
 // They used to be `?section=` / `?tab=` query params, which meant one indexable
@@ -22,6 +23,7 @@ export enum PlayerSection {
   Sessions = "sessions",
   Value = "value",
   Achievements = "achievements",
+  Tournaments = "tournaments",
 }
 
 export enum PlayerMode {
@@ -83,6 +85,12 @@ export const PLAYER_VIEWS: PlayerView[] = [
     label: "Achievements",
   },
   {
+    section: PlayerSection.Tournaments,
+    mode: PlayerMode.Overall,
+    segment: "tournaments",
+    label: "Tournaments",
+  },
+  {
     section: PlayerSection.Value,
     mode: PlayerMode.Overall,
     segment: "value",
@@ -96,6 +104,7 @@ export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
   { id: PlayerSection.Tanks, label: "Tanks" },
   { id: PlayerSection.Sessions, label: "Sessions" },
   { id: PlayerSection.Achievements, label: "Achievements" },
+  { id: PlayerSection.Tournaments, label: "Tournaments" },
   { id: PlayerSection.Value, label: "Value" },
 ];
 

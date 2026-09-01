@@ -27,6 +27,8 @@ import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/strongho
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
+import { TournamentsTab } from "@/components/players/detail/tournaments";
+import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
 import { SessionGranularity, steelHunterWinrateColor } from "@unicum.gg/shared";
@@ -85,6 +87,9 @@ export type PlayerTabsViewProps = {
   // Server-rendered cabinet for a direct `/achievements` landing; null
   // otherwise, so the tab fetches on demand.
   initialAchievements: PlayerAchievements | null;
+  /** Tournament record, server-rendered on a direct `/tournaments` landing;
+   * null otherwise, so the tab fetches on demand. */
+  initialTournaments: PlayerTournamentRecord | null;
 };
 
 export function PlayerTabsView({
@@ -101,6 +106,7 @@ export function PlayerTabsView({
   tankDetail,
   initialSessions,
   initialAchievements,
+  initialTournaments,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -140,6 +146,22 @@ export function PlayerTabsView({
     {
       fallbackData: initialAchievements ?? undefined,
       revalidateOnMount: !seededAchievements,
+    },
+  );
+
+  // Same on-demand shape as the cabinet: only this tab reads it, and a player
+  // who has never entered a tournament still pays for the query, so it waits
+  // until the tab is opened (null key = no request).
+  const tournamentsReq = () =>
+    unicum.region(region).players(nickname).tournaments();
+  const seededTournaments = initialTournaments != null;
+  const { data: tournaments } = useSWR(
+    section === PlayerSection.Tournaments ? tournamentsReq().url() : null,
+    () =>
+      tournamentsReq().then((r) => r as unknown as PlayerTournamentRecord),
+    {
+      fallbackData: initialTournaments ?? undefined,
+      revalidateOnMount: !seededTournaments,
     },
   );
 
@@ -197,7 +219,9 @@ export function PlayerTabsView({
   const onValue = section === PlayerSection.Value;
   const onAchievements = section === PlayerSection.Achievements;
   const onSessions = section === PlayerSection.Sessions;
-  const showModes = !onTanks && !onValue && !onAchievements && !onSessions;
+  const onTournaments = section === PlayerSection.Tournaments;
+  const showModes =
+    !onTanks && !onValue && !onAchievements && !onSessions && !onTournaments;
 
   return (
     <>
@@ -230,7 +254,14 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onSessions ? (
+      {onTournaments ? (
+        <TournamentsTab
+          region={region}
+          nickname={nickname}
+          data={tournaments ?? null}
+          loading={!tournaments}
+        />
+      ) : onSessions ? (
         <SessionsTab
           region={region}
           nickname={nickname}
