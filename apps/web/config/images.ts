@@ -8,6 +8,13 @@ export const images: NextConfig["images"] = {
     { protocol: "https", hostname: "eu.wargaming.net", pathname: "/clans/**" },
     { protocol: "https", hostname: "na.wargaming.net", pathname: "/clans/**" },
     { protocol: "https", hostname: "asia.wargaming.net", pathname: "/clans/**" },
+    // Tournament logos. The tournament system's CDN names its regions
+    // inconsistently (`tmswot-eu-` against `tms-static-na`), so all three are
+    // listed as they actually appear in the mirrored rows rather than guessed
+    // from a pattern.
+    { protocol: "https", hostname: "tmswot-eu-static.gcdn.co", pathname: "/**" },
+    { protocol: "https", hostname: "tms-static-na.gcdn.co", pathname: "/**" },
+    { protocol: "https", hostname: "tms-static-asia.gcdn.co", pathname: "/**" },
     { protocol: "https", hostname: "eu-wotp.wgcdn.co", pathname: "/**" },
     { protocol: "https", hostname: "na-wotp.wgcdn.co", pathname: "/**" },
     { protocol: "https", hostname: "sg-wotp.wgcdn.co", pathname: "/**" },

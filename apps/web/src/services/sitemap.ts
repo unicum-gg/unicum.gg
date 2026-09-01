@@ -9,6 +9,7 @@ import { db } from "@unicum.gg/core/db";
 import {
   clansByRegion,
   playersByRegion,
+  tournamentsByRegion,
 } from "@unicum.gg/shared";
 import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
@@ -35,7 +36,7 @@ export function createSitemapEntry(
 
 export type RegionCounts = Record<
   Region,
-  { clans: number; players: number; tanks: number }
+  { clans: number; players: number; tanks: number; tournaments: number }
 >;
 
 export async function getSitemapCounts(): Promise<RegionCounts> {
@@ -44,7 +45,7 @@ export async function getSitemapCounts(): Promise<RegionCounts> {
   // big one (EU).
   const counts = await Promise.all(
     REGIONS.map(async (region) => {
-      const [clans, players, tanks] = await Promise.all([
+      const [clans, players, tanks, tournaments] = await Promise.all([
         db
           .execute<{ count: string }>(
             sql`SELECT COUNT(*)::text AS count FROM ${clansByRegion[region]}`,
@@ -57,8 +58,16 @@ export async function getSitemapCounts(): Promise<RegionCounts> {
           .then((rows) => Number(rows[0]?.count ?? 0)),
         // Tanks come from the bounded catalogue, not a DB table.
         listTanks(region).then((t) => t.length),
+        // Only the mirrored ones: a catalogue row whose bracket has not been
+        // read yet renders an empty page, and the sitemap must not offer one.
+        db
+          .execute<{ count: string }>(
+            sql`SELECT COUNT(*)::text AS count FROM ${tournamentsByRegion[region]}
+                WHERE detail_synced_at IS NOT NULL`,
+          )
+          .then((rows) => Number(rows[0]?.count ?? 0)),
       ]);
-      return [region, { clans, players, tanks }] as const;
+      return [region, { clans, players, tanks, tournaments }] as const;
     }),
   );
   return Object.fromEntries(counts) as RegionCounts;

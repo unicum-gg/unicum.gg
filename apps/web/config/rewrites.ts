@@ -16,6 +16,10 @@ export const rewrites: NextConfig["rewrites"] = async () => [
     destination: "/:region/players/sitemap.xml/:id",
   },
   {
+    source: "/:region(eu|na|asia)/tournaments/sitemap-:id.xml",
+    destination: "/:region/tournaments/sitemap.xml/:id",
+  },
+  {
     source: "/:region(eu|na|asia)/tanks/sitemap-:id.xml",
     destination: "/:region/tanks/sitemap.xml/:id",
   },

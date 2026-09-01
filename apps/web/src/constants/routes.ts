@@ -79,6 +79,13 @@ const ROUTES = {
   // matching mode instead of the overview.
   PLAYER_STEEL_HUNTER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
+  // A player's Tournaments tab, where the winner's crest sends a reader: the
+  // crest says they have won, this is the record of what.
+  PLAYER_TOURNAMENTS: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/tournaments", { region, nickname }),
+  // A clan's Tournaments tab, the target of its own winner's crest.
+  CLAN_TOURNAMENTS: (region: Region, tag: string) =>
+    pathcat("/:region/clans/:tag/tournaments", { region, tag }),
   // One player's record on one vehicle, the game's Service Record. A URL of its
   // own rather than a panel state, so it can be linked, shared and reopened.
   PLAYER_TANK: (region: Region, nickname: string, slug: string) =>
@@ -158,6 +165,22 @@ const ROUTES = {
   //   the region rather than of the game, so it is regional all the way down.
   SERVERS: (region: Region) =>
     region === Region.EU ? "/servers" : pathcat("/:region/servers", { region }),
+
+  // - Tournaments. Regional throughout: a tournament is run on one realm and
+  //   its teams are that realm's accounts, so there is no worldwide view to
+  //   shorten the EU path to.
+  TOURNAMENT: (region: Region, id: number | string) =>
+    pathcat("/:region/tournaments/:id", { region, id: String(id) }),
+  TOURNAMENTS: (region: Region) =>
+    pathcat("/:region/tournaments", { region }),
+  // `team` singular, mirroring the path Wargaming addresses a tournament team
+  // on, so a habit from their site lands somewhere familiar.
+  TOURNAMENT_TEAM: (region: Region, id: number | string, teamId: number | string) =>
+    pathcat("/:region/tournaments/:id/team/:teamId", {
+      region,
+      id: String(id),
+      teamId: String(teamId),
+    }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
     const base =
       region === Region.EU
