@@ -29,6 +29,14 @@ const percent = new Intl.NumberFormat("en-US", {
   style: "percent",
   maximumFractionDigits: 1,
 });
+// A win rate always carries its decimal, even when it is a zero: the panels
+// print them in columns, and "59%" beside "59.8%" reads as a rounder number
+// rather than as the same precision.
+const winrate = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  minimumFractionDigits: 1,
+  maximumFractionDigits: 1,
+});
 
 export function formatPlayers(value: number): string {
   return players.format(Math.round(value));
@@ -41,6 +49,10 @@ export function formatPlayersCompact(value: number): string {
 
 export function formatShare(value: number): string {
   return percent.format(value);
+}
+
+export function formatWinrate(value: number): string {
+  return winrate.format(value);
 }
 
 // Memoized per zone: an `Intl.DateTimeFormat` is expensive to build and these

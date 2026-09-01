@@ -10,7 +10,7 @@ import {
 } from "@unicum.gg/shared";
 import { PanelTitle } from "@/components/panel";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
-import { formatShare } from "./format";
+import { formatShare, formatWinrate } from "./format";
 
 /**
  * Where the region's battles are actually fought: by tier, and by vehicle
@@ -166,7 +166,7 @@ function ShareTable({
                   className="px-4 py-2 text-right tabular-nums"
                   style={{ color: RATING_COLOR_HEX[winrateColor(row.winrate)] }}
                 >
-                  {(row.winrate * 100).toFixed(1)}%
+                  {formatWinrate(row.winrate)}
                 </td>
               </tr>
             ))}

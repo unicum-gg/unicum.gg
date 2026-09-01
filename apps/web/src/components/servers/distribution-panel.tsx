@@ -22,7 +22,10 @@ import { useCookie } from "@/hooks/use-cookie";
 import { DistributionChart } from "./distribution-chart";
 import { formatPlayers } from "./format";
 
-const formatWinrate = (value: number) => `${Math.round(value * 100)}%`;
+// Whole points, unlike `formatWinrate` in `./format`: these are histogram edges
+// and a median printed on an axis, where "47.0%" claims a precision the bucket
+// does not have. Named apart so the two never shadow each other in this folder.
+const formatWinrateCoarse = (value: number) => `${Math.round(value * 100)}%`;
 const formatRating = (value: number) => String(Math.round(value));
 
 /**
@@ -60,12 +63,12 @@ export function DistributionPanel({
         <Series
           title="Win rate"
           median={medianOf(distribution.winrate)}
-          format={formatWinrate}
+          format={formatWinrateCoarse}
         >
           <DistributionChart
             buckets={distribution.winrate}
             colorOf={winrateColor}
-            formatEdge={formatWinrate}
+            formatEdge={formatWinrateCoarse}
             ariaLabel="Win rate distribution across the region's tracked players"
           />
         </Series>
