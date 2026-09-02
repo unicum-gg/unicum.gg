@@ -52,16 +52,24 @@ export async function syncLive(region: Region): Promise<void> {
   await sweepCatalog(region);
   const ids = await pickLive(region);
   let mirrored = 0;
+  // Counted and reported because it is the visible trace of Wargaming purging a
+  // bracket we hold: without it, a tick that preserved twenty of them looks
+  // exactly like a tick where nothing happened.
+  let bracketsKept = 0;
   for (const id of ids) {
     try {
-      await mirrorTournament(region, id);
-      mirrored += 1;
+      const result = await mirrorTournament(region, id);
+      if (result) mirrored += 1;
+      if (result?.bracketKept) bracketsKept += 1;
     } catch (err) {
       console.error(`[tournaments-live-cron-${region}] ${id} failed:`, err);
     }
   }
   if (ids.length > 0) {
-    console.log(`[tournaments-live-cron-${region}] ${mirrored}/${ids.length} mirrored`);
+    console.log(
+      `[tournaments-live-cron-${region}] ${mirrored}/${ids.length} mirrored` +
+        (bracketsKept > 0 ? `, ${bracketsKept} bracket(s) kept` : ""),
+    );
   }
 }
 
@@ -74,13 +82,21 @@ export async function syncArchive(region: Region): Promise<void> {
   const ids = await pickUnmirrored(region, ARCHIVE_BATCH);
   if (ids.length === 0) return;
   let mirrored = 0;
+  // Counted and reported because it is the visible trace of Wargaming purging a
+  // bracket we hold: without it, a tick that preserved twenty of them looks
+  // exactly like a tick where nothing happened.
+  let bracketsKept = 0;
   for (const id of ids) {
     try {
-      await mirrorTournament(region, id);
-      mirrored += 1;
+      const result = await mirrorTournament(region, id);
+      if (result) mirrored += 1;
+      if (result?.bracketKept) bracketsKept += 1;
     } catch (err) {
       console.error(`[tournaments-archive-cron-${region}] ${id} failed:`, err);
     }
   }
-  console.log(`[tournaments-archive-cron-${region}] ${mirrored}/${ids.length} mirrored`);
+  console.log(
+    `[tournaments-archive-cron-${region}] ${mirrored}/${ids.length} mirrored` +
+      (bracketsKept > 0 ? `, ${bracketsKept} bracket(s) kept` : ""),
+  );
 }

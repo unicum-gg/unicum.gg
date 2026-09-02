@@ -14,11 +14,17 @@ import {
 } from "@unicum.gg/shared";
 import {
   type Region,
-  type TournamentDetail,
   type TournamentSummary,
   TournamentStatus,
 } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
+import { heldBracket } from "./bracket";
+import {
+  detailRow,
+  detailSet,
+  isScheduled,
+  summaryRow,
+} from "./scheduled";
 
 /**
  * Mirrors Wargaming's tournament system into our own tables.
@@ -81,32 +87,6 @@ function dedupe<T>(rows: T[], key: (row: T) => string): T[] {
   return [...byKey.values()];
 }
 
-function summaryRow(t: TournamentSummary) {
-  return {
-    id: t.id,
-    title: t.title,
-    description: t.description,
-    language: t.language,
-    status: t.status,
-    gameModes: t.gameModes as string[],
-    tierFrom: t.tierFrom,
-    tierTo: t.tierTo,
-    minPlayersInTeam: t.teamSize.min,
-    maxPlayersInTeam: t.teamSize.max,
-    teamsLimit: t.teamsLimit,
-    confirmedTeams: t.confirmedTeams,
-    startAt: t.startAt,
-    endAt: t.endAt,
-    registrationFrom: t.registrationFrom,
-    registrationTill: t.registrationTill,
-    prize: t.prize,
-    tags: t.tags,
-    logoUrl: t.logoUrl,
-    isFeatured: t.isFeatured,
-    syncedAt: new Date(),
-  };
-}
-
 /**
  * Upsert catalogue rows from a sweep.
  *
@@ -123,11 +103,12 @@ async function upsertSummaries(
   region: Region,
   tournaments: TournamentSummary[],
 ): Promise<void> {
-  if (tournaments.length === 0) return;
+  const scheduled = tournaments.filter(isScheduled);
+  if (scheduled.length === 0) return;
   const table = tournamentsByRegion[region];
   await db
     .insert(table)
-    .values(tournaments.map(summaryRow))
+    .values(scheduled.map(summaryRow))
     .onConflictDoUpdate({
       target: table.id,
       set: {
@@ -268,23 +249,40 @@ export type MirrorResult = {
   stages: number;
   matches: number;
   standings: number;
+  /** True when the fetch brought no bracket and the mirrored one was kept, so
+   * the zero counts above describe this pass rather than what we hold. */
+  bracketKept: boolean;
 };
 
 /**
  * Mirror one tournament in full: its detail, every registered team with its
  * roster, and the whole bracket with scores and placements.
  *
- * Children are replaced rather than merged, because the source has no notion of
+ * Rosters are replaced rather than merged, because the source has no notion of
  * a deleted row: a team that disbands and a player who leaves simply stop being
- * listed, so an upsert-only pass would keep them forever. Deleting and
- * re-inserting inside one transaction is the only way the mirror can shrink.
+ * listed, so an upsert-only pass would keep them forever, and deleting and
+ * re-inserting inside one transaction is the only way the mirror can shrink to
+ * match.
+ *
+ * The bracket is the exception, and it is a deliberate break in that rule
+ * rather than an oversight to tidy away. Wargaming purges the bracket of a
+ * routine tournament within a day or two of it being played, keeping the header
+ * and the rosters, so refetching one after the purge returns an empty tree that
+ * says nothing about what happened. Replacing on that would delete a finished
+ * bracket we hold and write nothing over it, which is the mirror destroying the
+ * one thing about these tournaments that exists nowhere else. So an incoming
+ * bracket that would SHRINK what we hold is refused: see `keepBracket` below.
+ * A bracket therefore cannot be corrected downward, and that is the trade.
  */
 export async function mirrorTournament(
   region: Region,
   tournamentId: number,
-): Promise<MirrorResult> {
+): Promise<MirrorResult | null> {
   const api = wg.region(region).tournaments;
   const detail = await api.get({ tournamentId });
+  // Null rather than a thrown error: an unscheduled tournament is a real state
+  // the system reports, not a failure, and the callers count the two apart.
+  if (!isScheduled(detail)) return null;
   const teams = await api.allTeams({ tournamentId });
   const stages = await api.stages({ tournamentId });
 
@@ -336,24 +334,56 @@ export async function mirrorTournament(
     (p) => `${p.teamId}:${p.accountId}`,
   );
 
+  // Decided before the transaction, because it is a question about what we
+  // already hold rather than about what arrived: a fetch that brought no bracket
+  // is only news when we had none either.
+  //
+  // Phrased as "would this shrink what we hold" rather than "did this arrive
+  // empty", because the purge upstream is not all-or-nothing. A tournament can
+  // come back with its stages intact and the tree under them gone, which an
+  // emptiness test reads as a bracket arriving and writes over the real one.
+  const held = await heldBracket(region, tournamentId);
+  const keepBracket = stages.length < held.stages || matches.length < held.matches;
+
   await db.transaction(async (tx) => {
     await tx
       .insert(tournamentsByRegion[region])
       .values(detailRow(detail))
       .onConflictDoUpdate({ target: tournamentsByRegion[region].id, set: detailSet() });
 
+    // Rosters are always replaced: the source has no notion of a deleted row, so
+    // a team that disbands simply stops being listed and only a delete can make
+    // the mirror shrink to match.
     for (const table of [
       tournamentTeamPlayersByRegion[region],
       tournamentTeamsByRegion[region],
-      tournamentStandingsByRegion[region],
-      tournamentMatchesByRegion[region],
-      tournamentGroupsByRegion[region],
-      tournamentStagesByRegion[region],
     ]) {
       await tx.delete(table).where(sql`${table.tournamentId} = ${tournamentId}`);
     }
 
-    if (stages.length > 0) {
+    // The bracket is NOT, when the fetch came back without one and we already
+    // hold it. Wargaming purges the bracket of a routine tournament within a day
+    // or two of it being played, keeping only the header and the rosters, while
+    // the handful it features keep theirs indefinitely. Our own passes then walk
+    // straight into that: the live pass mirrors a tournament while it is being
+    // played, bracket and all, and when it finally settles the status change
+    // clears `detail_synced_at` and hands it to the archive pass, which refetches
+    // it AFTER the purge. Replacing unconditionally meant deleting a finished
+    // bracket we had captured and writing an empty one over it, so the mirror
+    // destroyed the very thing it exists to keep, silently, days later, and only
+    // for the tournaments nobody else archives either.
+    if (!keepBracket) {
+      for (const table of [
+        tournamentStandingsByRegion[region],
+        tournamentMatchesByRegion[region],
+        tournamentGroupsByRegion[region],
+        tournamentStagesByRegion[region],
+      ]) {
+        await tx.delete(table).where(sql`${table.tournamentId} = ${tournamentId}`);
+      }
+    }
+
+    if (!keepBracket && stages.length > 0) {
       await tx.insert(tournamentStagesByRegion[region]).values(
         stages.map((s) => ({
           id: s.id,
@@ -369,7 +399,7 @@ export async function mirrorTournament(
         })),
       );
     }
-    if (groups.length > 0) {
+    if (!keepBracket && groups.length > 0) {
       await tx.insert(tournamentGroupsByRegion[region]).values(
         groups.map((g) => ({
           id: g.id,
@@ -403,7 +433,7 @@ export async function mirrorTournament(
     if (players.length > 0) {
       await tx.insert(tournamentTeamPlayersByRegion[region]).values(players);
     }
-    if (matches.length > 0) {
+    if (!keepBracket && matches.length > 0) {
       await tx.insert(tournamentMatchesByRegion[region]).values(
         matches.map((m) => ({
           uuid: m.uuid,
@@ -426,7 +456,7 @@ export async function mirrorTournament(
         })),
       );
     }
-    if (standings.length > 0) {
+    if (!keepBracket && standings.length > 0) {
       await tx.insert(tournamentStandingsByRegion[region]).values(
         standings.map(({ stageId, row }) => ({
           tournamentId,
@@ -487,54 +517,7 @@ export async function mirrorTournament(
     stages: stages.length,
     matches: matches.length,
     standings: standings.length,
+    bracketKept: keepBracket,
   };
 }
 
-function detailRow(t: TournamentDetail) {
-  return {
-    ...summaryRow(t),
-    prizeTiers: t.prizeTiers,
-    rules: t.rules,
-    mapPool: t.mapPool.map((m) => m.arenaId),
-    bracketTypes: t.bracketTypes as string[],
-    totalLevelFrom: t.totalLevelLimit?.from ?? null,
-    totalLevelTo: t.totalLevelLimit?.to ?? null,
-    schedule: t.schedule.map((s) => ({ title: s.title, startAt: s.startAt.toISOString() })),
-    // Only stamped once the bracket below it has been written, and only inside
-    // the same transaction, so a run that dies mid-mirror leaves the tournament
-    // pending rather than claiming a half-written bracket as done.
-    detailSyncedAt: new Date(),
-  };
-}
-
-function detailSet() {
-  return {
-    title: sql`excluded.title`,
-    description: sql`excluded.description`,
-    status: sql`excluded.status`,
-    gameModes: sql`excluded.game_modes`,
-    tierFrom: sql`excluded.tier_from`,
-    tierTo: sql`excluded.tier_to`,
-    minPlayersInTeam: sql`excluded.min_players_in_team`,
-    maxPlayersInTeam: sql`excluded.max_players_in_team`,
-    teamsLimit: sql`excluded.teams_limit`,
-    confirmedTeams: sql`excluded.confirmed_teams`,
-    startAt: sql`excluded.start_at`,
-    endAt: sql`excluded.end_at`,
-    registrationFrom: sql`excluded.registration_from`,
-    registrationTill: sql`excluded.registration_till`,
-    prize: sql`excluded.prize`,
-    prizeTiers: sql`excluded.prize_tiers`,
-    rules: sql`excluded.rules`,
-    tags: sql`excluded.tags`,
-    logoUrl: sql`excluded.logo_url`,
-    isFeatured: sql`excluded.is_featured`,
-    mapPool: sql`excluded.map_pool`,
-    bracketTypes: sql`excluded.bracket_types`,
-    totalLevelFrom: sql`excluded.total_level_from`,
-    totalLevelTo: sql`excluded.total_level_to`,
-    schedule: sql`excluded.schedule`,
-    detailSyncedAt: sql`excluded.detail_synced_at`,
-    syncedAt: sql`excluded.synced_at`,
-  };
-}

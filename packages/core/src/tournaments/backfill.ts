@@ -36,6 +36,7 @@ export async function backfillRegion(
 ): Promise<BackfillProgress> {
   let mirrored = 0;
   let failed = 0;
+  let skipped = 0;
   // A failure leaves the tournament unstamped, which is what lets the next run
   // retry it. Within THIS run that would be a loop: the claim is ordered by date
   // and knows nothing about attempts, so once only failing tournaments are left
@@ -44,7 +45,7 @@ export async function backfillRegion(
   // and now, and now".
   const attempted = new Set<number>();
   for (;;) {
-    const budget = limit === undefined ? CLAIM_SIZE : limit - mirrored - failed;
+    const budget = limit === undefined ? CLAIM_SIZE : limit - mirrored - failed - skipped;
     if (budget <= 0) break;
     const claimed = await pickUnmirrored(region, CLAIM_SIZE + attempted.size);
     const ids = claimed.filter((id) => !attempted.has(id)).slice(0, budget);
@@ -52,8 +53,12 @@ export async function backfillRegion(
     for (const id of ids) {
       attempted.add(id);
       try {
-        await mirrorTournament(region, id);
-        mirrored += 1;
+        // Null is an unscheduled tournament: nothing was mirrored, but the
+        // attempt still happened and must consume the caller's budget, or
+        // `--limit N` stops meaning anything and the pass walks the whole
+        // pending set while reporting N.
+        if (await mirrorTournament(region, id)) mirrored += 1;
+        else skipped += 1;
       } catch (err) {
         failed += 1;
         console.error(`[tournaments-backfill-${region}] ${id} failed:`, err);
