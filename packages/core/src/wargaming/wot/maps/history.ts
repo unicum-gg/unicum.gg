@@ -91,11 +91,13 @@ export type MapHistoryResult = {
  *
  * `arenas` must carry resolved display names (`resolveArenaNames`), since the
  * name is what tells a reworked map from a different map handed the same arena
- * id.
+ * id. `unnamed` is that call's own report of the arenas it could only humanize
+ * an id for, which are skipped: see the guard below.
  */
 export async function recordMapChanges(
   arenas: WotSrcArena[],
   gameVersion: string,
+  unnamed: ReadonlySet<string> = new Set(),
   capturedAt: Date = new Date(),
 ): Promise<MapHistoryResult> {
   const [latest, absent] = await Promise.all([
@@ -125,6 +127,21 @@ export async function recordMapChanges(
     if (!arena.hasDefinition) continue;
     const arenaId = arena.arenaId;
     seen.add(arenaId);
+    // An arena the client defines but does not name yet. Wargaming publishes an
+    // update in two waves, the arena definitions with the preload and the
+    // strings when it ships (update 2.4 left five days between them), so this is
+    // a normal state for a brand-new map and not an error.
+    //
+    // Skipped rather than recorded under the humanized id, because the snapshot
+    // is immutable per version and the identity is the name: recorded, the map
+    // is frozen as "28 Desert Comp7 Nb" for that version, and the day its real
+    // name lands `isSameMap` reads a different map at the same arena id, reports
+    // it as newly added and re-baselines. Waiting a tick costs nothing, since
+    // the version has not moved either.
+    //
+    // After `seen`, not before: the arena is in the client, it just has no name
+    // to record, and dropping it from `seen` would publish it as removed.
+    if (unnamed.has(arenaId)) continue;
     const data = buildMapSnapshotData(arena);
     const prev = latest.get(arenaId);
     const baseline = (): void => {

@@ -2,10 +2,11 @@ import type { Region, WotSrcArena } from "@unicum.gg/wargaming";
 import {
   buildMapSlugIndex,
   ctMinimapUrl,
-  mapDisplayName,
   minimapUrl,
+  resolveMapName,
   variantOf,
   type MapSlugIndex,
+  type ResolvedMapName,
 } from "@unicum.gg/shared";
 import { getRedisClient } from "@unicum.gg/core/redis";
 import { wg } from "../../client";
@@ -164,19 +165,30 @@ async function findTestOnlyArenas(ids: string[]): Promise<string[]> {
  * Exported because the history pipeline resolves the names of a past version's
  * arenas the same way: a map's name is how it is told apart from the different
  * map that later re-used its arena id.
+ *
+ * Returns the arena ids whose name is a humanized id rather than a real one,
+ * which the client leaves us for the days between an update's definitions and
+ * its strings. They are named well enough to draw a card, and must not be
+ * recorded: see `ResolvedMapName.resolved`.
  */
-export function resolveArenaNames(raw: WotSrcArena[]): void {
+export function resolveArenaNames(raw: WotSrcArena[]): Set<string> {
   const rawById = new Map(raw.map((a) => [a.arenaId, a]));
   const poName = (id: string) => rawById.get(id)?.name;
-  const nameCache = new Map<string, string>();
-  const nameOf = (id: string): string => {
+  const nameCache = new Map<string, ResolvedMapName>();
+  const nameOf = (id: string): ResolvedMapName => {
     const hit = nameCache.get(id);
     if (hit !== undefined) return hit;
-    const name = mapDisplayName(id, poName(id), nameOf);
-    nameCache.set(id, name);
-    return name;
+    const resolved = resolveMapName(id, poName(id), nameOf);
+    nameCache.set(id, resolved);
+    return resolved;
   };
-  for (const arena of raw) arena.name = nameOf(arena.arenaId);
+  const unnamed = new Set<string>();
+  for (const arena of raw) {
+    const { name, resolved } = nameOf(arena.arenaId);
+    arena.name = name;
+    if (!resolved) unnamed.add(arena.arenaId);
+  }
+  return unnamed;
 }
 
 // After name resolution, distinct maps carry distinct names, so this only folds
