@@ -9,19 +9,13 @@
 // pool's own pace (a few requests a second against one host), so a region takes
 // hours. Safe to interrupt and re-run: it only ever claims what is still
 // unmirrored, so a second run resumes rather than restarts.
-import { REGIONS, isRegion, type Region } from "@unicum.gg/wargaming";
+import type { Region } from "@unicum.gg/wargaming";
+import { numberArg, regionArgs } from "./args";
 import { seedRegion } from "@unicum.gg/core/tournaments/backfill";
 
-function parseArgs(): { regions: Region[]; limit?: number } {
-  const args = process.argv.slice(2);
-  const limitAt = args.indexOf("--limit");
-  const limit = limitAt >= 0 ? Number(args[limitAt + 1]) : undefined;
-  const named = args.filter((a) => isRegion(a)) as Region[];
-  return { regions: named.length > 0 ? named : [...REGIONS], limit };
-}
-
 async function main(): Promise<void> {
-  const { regions, limit } = parseArgs();
+  const regions = regionArgs();
+  const limit = numberArg("--limit");
   const start = Date.now();
   for (const region of regions) {
     const at = Date.now();

@@ -5,19 +5,12 @@
 // Local work only, no Wargaming call: each team's roster is matched against clan
 // membership as of the day the tournament was played. Safe to interrupt and
 // re-run, since each tournament is stamped as it completes.
-import { REGIONS, isRegion, type Region } from "@unicum.gg/wargaming";
+import { numberArg, regionArgs } from "./args";
 import { backfillTeamClans } from "@unicum.gg/core/tournaments/clans";
 
-function parseArgs(): { regions: Region[]; limit?: number } {
-  const args = process.argv.slice(2);
-  const limitAt = args.indexOf("--limit");
-  const limit = limitAt >= 0 ? Number(args[limitAt + 1]) : undefined;
-  const named = args.filter((a) => isRegion(a)) as Region[];
-  return { regions: named.length > 0 ? named : [...REGIONS], limit };
-}
-
 async function main(): Promise<void> {
-  const { regions, limit } = parseArgs();
+  const regions = regionArgs();
+  const limit = numberArg("--limit");
   for (const region of regions) {
     const at = Date.now();
     const result = await backfillTeamClans(region, {
