@@ -28,9 +28,20 @@ export type PlayerTournamentEntry = {
   bestPosition: number | null;
 };
 
+/** Someone this player has shared a tournament roster with. */
+export type PlayerTournamentTeammate = {
+  accountId: number;
+  nickname: string;
+  clanTag: string | null;
+  clanColor: string | null;
+  together: number;
+  lastAt: Date;
+};
+
 export type PlayerTournamentRecord = {
   accountId: number;
   nickname: string;
   entries: PlayerTournamentEntry[];
   wins: number;
+  teammates: PlayerTournamentTeammate[];
 };

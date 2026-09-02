@@ -14,6 +14,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import { PlayerTournamentsTable } from "./table";
 import { TOURNAMENTS_SKELETON_COLUMNS } from "./skeleton-columns";
 import type { PlayerTournamentRecord } from "./row";
+import { TournamentTeammates } from "./teammates";
 
 /** One headline number, matching the summary strip the other tabs use. */
 function Stat({ label, value }: { label: string; value: string }) {
@@ -87,6 +88,13 @@ export function TournamentsTab({
           )}
         </PanelContent>
       </Panel>
+      {!loading && (
+        <TournamentTeammates
+          region={region}
+          nickname={nickname}
+          teammates={data?.teammates ?? []}
+        />
+      )}
     </>
   );
 }

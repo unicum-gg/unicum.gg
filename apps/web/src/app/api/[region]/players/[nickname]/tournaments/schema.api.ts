@@ -46,6 +46,27 @@ export const playerTournamentEntry = z
     description: "One tournament a player entered, and how their team finished.",
   });
 
+export const playerTournamentTeammate = z
+  .object({
+    accountId: z.number(),
+    nickname: z.string().meta({
+      description:
+        "The teammate's name as it stands now, falling back to the name they last carried on a shared roster for an account we do not track.",
+    }),
+    clanTag: z.string().nullable(),
+    clanColor: z.string().nullable(),
+    together: z.number().meta({
+      description: "Tournaments the two entered on the same team.",
+    }),
+    lastAt: z.date().meta({
+      description: "The most recent tournament they played together.",
+    }),
+  })
+  .meta({
+    id: "PlayerTournamentTeammate",
+    description: "Someone this player has shared a tournament roster with.",
+  });
+
 /** Response of `GET /{region}/players/{nickname}/tournaments`. */
 export const PlayerTournamentsResponse = z.object({
   accountId: z.number(),
@@ -53,5 +74,9 @@ export const PlayerTournamentsResponse = z.object({
   entries: z.array(playerTournamentEntry),
   wins: z.number().meta({
     description: "Entries whose team finished first in one of the tournament's brackets.",
+  }),
+  teammates: z.array(playerTournamentTeammate).meta({
+    description:
+      "Who this player competes with, most-played-with first. Answerable only from the mirrored rosters: Wargaming's tournament system is addressable from the tournament's side alone.",
   }),
 });

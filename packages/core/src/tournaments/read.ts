@@ -568,13 +568,45 @@ export type PlayerTournamentEntry = {
   bestPosition: number | null;
 };
 
+/**
+ * Someone this player has shared a tournament roster with.
+ *
+ * A question only this mirror can answer. Wargaming's tournament system is
+ * addressable from the tournament's side alone, so "who does this player
+ * compete with" exists nowhere upstream: it falls out of the rosters, which
+ * carry account ids, once they are all in one place.
+ */
+export type PlayerTournamentTeammate = {
+  accountId: number;
+  /**
+   * The teammate's name as it stands now, so the row links to a profile that
+   * still resolves. Falls back to the name they last carried on a shared
+   * roster, for an account we never tracked.
+   */
+  nickname: string;
+  clanTag: string | null;
+  clanColor: string | null;
+  /** Tournaments the two entered on the same team. */
+  together: number;
+  /** The most recent of those, which is what separates a current teammate from
+   * one somebody played beside years ago. */
+  lastAt: Date;
+};
+
 export type PlayerTournamentRecord = {
   accountId: number;
   nickname: string;
   entries: PlayerTournamentEntry[];
   /** Entries whose team finished first in one of the tournament's brackets. */
   wins: number;
+  /** Most-played-with first. Bounded, since the tail of a regular's list is
+   * everyone they ever shared one roster with. */
+  teammates: PlayerTournamentTeammate[];
 };
+
+/** How many teammates the tab shows. Past this the list stops being "who do you
+ * play with" and becomes a directory of everyone met once. */
+const TEAMMATE_LIMIT = 24;
 
 /**
  * A player's tournament record: everything they have entered, newest first,
@@ -656,6 +688,63 @@ export async function getPlayerTournaments(
     placements.map((p) => [Number(p.teamId), p.best === null ? null : Number(p.best)]),
   );
 
+  // The teams are named by a subquery rather than by the `teamIds` array above,
+  // which the placements read a few lines up can afford and this one cannot. A
+  // regular here has thousands of entries (the busiest EU account has 4,491),
+  // so the array form ships one bind parameter per team and would eventually
+  // meet the driver's parameter ceiling; the subquery is also the faster plan,
+  // 79ms against the same account. The rosters of those teams ARE the
+  // teammates, so the panel is one grouped pass over them.
+  const clans = clansByRegion[region];
+  const mateRows = teamIds.length
+    ? await db
+        .select({
+          accountId: rosters.accountId,
+          // The name carried on the most recent shared roster, used only when
+          // the account is one we never tracked. `max()` would have given a name
+          // picked alphabetically, which for a player who renamed is simply the
+          // wrong one.
+          lastKnownNickname: sql<string>`(array_agg(${rosters.nickname}
+            ORDER BY ${t.startAt} DESC))[1]`,
+          together: sql<number>`count(DISTINCT ${rosters.tournamentId})::int`,
+          // Typed as a string, not a Date: an aggregate inside a raw fragment
+          // never reaches drizzle's timestamp mapper, so the driver hands back
+          // whatever it parsed. Converted below rather than declared as a Date
+          // it is not, which would have travelled as far as the endpoint's own
+          // schema validation before anything noticed.
+          lastAt: sql<string>`max(${t.startAt})`,
+          nickname: players.nickname,
+          clanTag: clans.tag,
+          clanColor: clans.color,
+        })
+        .from(rosters)
+        .innerJoin(t, eq(t.id, rosters.tournamentId))
+        .leftJoin(players, eq(players.accountId, rosters.accountId))
+        .leftJoin(clans, eq(clans.id, players.clanId))
+        .where(
+          and(
+            sql`${rosters.teamId} IN (SELECT ${rosters.teamId} FROM ${rosters}
+              WHERE ${rosters.accountId} = ${accountId})`,
+            sql`${rosters.accountId} <> ${accountId}`,
+          ),
+        )
+        .groupBy(rosters.accountId, players.nickname, clans.tag, clans.color)
+        .orderBy(
+          desc(sql`count(DISTINCT ${rosters.tournamentId})`),
+          desc(sql`max(${t.startAt})`),
+        )
+        .limit(TEAMMATE_LIMIT)
+    : [];
+
+  const teammates: PlayerTournamentTeammate[] = mateRows.map((m) => ({
+    accountId: Number(m.accountId),
+    nickname: m.nickname ?? m.lastKnownNickname,
+    clanTag: m.clanTag,
+    clanColor: m.clanColor,
+    together: Number(m.together),
+    lastAt: new Date(m.lastAt),
+  }));
+
   const entries = rows.map((r) => ({
     tournamentId: Number(r.tournamentId),
     title: r.title,
@@ -686,6 +775,7 @@ export async function getPlayerTournaments(
     // as a win. The crest refuses exactly that (see tournaments/winners), and
     // the summary strip sits on the same screen as the crest.
     wins: player.tournamentWins,
+    teammates,
   };
 }
 
