@@ -4,6 +4,11 @@ import type { Region } from "@unicum.gg/wargaming";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+  PANEL_ROW_CLASS,
+  PANEL_ROW_ICON_CELL_CLASS,
+  PANEL_ROW_VALUE_CELL_CLASS,
+} from "@/components/entity/panel-row";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 
@@ -110,7 +115,8 @@ export function VehicleRowSkeleton() {
   );
 }
 
-const ROW_CLASS =
-  "flex items-center gap-3 border-b border-fd-border/40 px-4 py-2 last:border-fd-border";
-const ICON_CELL_CLASS = "flex w-10 shrink-0 items-center justify-center";
-const VALUE_CELL_CLASS = "flex flex-col items-end gap-0.5 tabular-nums";
+// Shared with the panels that list something other than vehicles, so the two
+// cannot drift apart inside the same panel stack.
+const ROW_CLASS = PANEL_ROW_CLASS;
+const ICON_CELL_CLASS = PANEL_ROW_ICON_CELL_CLASS;
+const VALUE_CELL_CLASS = PANEL_ROW_VALUE_CELL_CLASS;
