@@ -2,6 +2,11 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import ROUTES from "@/constants/routes";
+import {
+  MAPS_TAB_ROOT as TAB_ROOT,
+  mapsTabFromPathname,
+  mapsTabHref,
+} from "@/components/maps/list/tabs";
 import { useRegion } from "@/hooks/use-region";
 import {
   Select,
@@ -47,6 +52,9 @@ const MAPS_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?maps(?:/|$)`);
 const MAP_SLUG_PATTERN = new RegExp(
   `^/(?:(?:${REGIONS.join("|")})/)?maps/([^/?#]+)`,
 );
+// The section root as it appears in THIS pathname, region prefix included or
+// not, which is what the tab helpers measure their segment against.
+const MAPS_BASE_PATTERN = new RegExp(`^/(?:(?:${REGIONS.join("|")})/)?maps`);
 // The changes feed is its own page under /maps, so it has to be recognised
 // before the slug pattern claims "changes" as a map name.
 const MAPS_CHANGES_PATTERN = new RegExp(
@@ -84,13 +92,15 @@ function targetForRegion(
   if (MAPS_CHANGES_PATTERN.test(pathname)) return ROUTES.MAPS_CHANGES(region);
   if (MAPS_PATTERN.test(pathname)) {
     // The same map in the new region, with its query (the mode view, the
-    // gallery's filters). The index has a `/all/<battle type>` segment, which
-    // the slug capture picks up and the route helper cannot rebuild, so the
-    // index falls back to the new region's own.
+    // gallery's filters). The gallery's `/all/<battle type>` segment is carried
+    // across like the tank page's tab is: it is a place in the section, and
+    // switching server should not also send the reader back to every battle
+    // type. `all` is not a slug, it is the tab root.
     const slug = pathname.match(MAP_SLUG_PATTERN)?.[1];
-    const base =
-      slug && slug !== "all" ? ROUTES.MAP(region, slug) : ROUTES.MAPS(region);
-    return `${base}${search}`;
+    if (slug && slug !== TAB_ROOT) return `${ROUTES.MAP(region, slug)}${search}`;
+    const currentBase = pathname.match(MAPS_BASE_PATTERN)?.[0] ?? ROUTES.MAPS(region);
+    const tab = mapsTabFromPathname(pathname, currentBase);
+    return `${mapsTabHref(ROUTES.MAPS(region), tab)}${search}`;
   }
   if (SERVERS_PATTERN.test(pathname)) return ROUTES.SERVERS(region);
   if (TOURNAMENTS_PATTERN.test(pathname)) return ROUTES.TOURNAMENTS(region);

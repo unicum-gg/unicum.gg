@@ -9,7 +9,11 @@ import { BattleType } from "@unicum.gg/shared";
 // They sit under an `/all` segment (`/maps/all/frontline`) so they can never
 // collide with a map slug: `/maps/frontline` would reserve that slug forever.
 // Mirrors what the tank index does.
-const TAB_ROOT = "all";
+/** The gallery's tab segment, exported so callers that read a maps pathname
+ * (the region selector) test against the same literal the hrefs are built
+ * from, rather than repeating "all" and drifting from it. */
+export const MAPS_TAB_ROOT = "all";
+const TAB_ROOT = MAPS_TAB_ROOT;
 
 /** The default tab, showing every map. Not a `BattleType` member on purpose:
  * `BattleType` describes what a map *is* (and rides the API/SDK), while "all"
