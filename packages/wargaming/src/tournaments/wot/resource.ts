@@ -45,7 +45,35 @@ const MAX_PAGE_SIZE = 100;
 type Envelope<T> = {
   status: string;
   data: { results: T; total_count?: number; page?: number };
+  error_code?: string;
 };
+
+/**
+ * An error the tournament system reported inside a 200 response.
+ *
+ * This host does not use HTTP status to say "no such tournament": asking for an
+ * id that does not exist answers `200 OK` with `{"status":"error",
+ * "error_code":"NOT_FOUND"}` and an empty `data`, so nothing in the transport
+ * fires and the parser is handed `undefined`. That surfaced as a TypeError deep
+ * in the field mapping, which a caller can neither branch on nor tell apart from
+ * a genuine failure, and telling those two apart is the whole point: a sweep
+ * over the id space must skip what does not exist while retrying what merely
+ * failed.
+ *
+ * The `path` is carried because the code alone is not enough to place the
+ * error: reading one tournament fans out into its teams, its stages and the
+ * tree under them, and those answer NOT_FOUND too, so a caller deciding whether
+ * an id exists has to know which request said so.
+ */
+export class TournamentApiError extends Error {
+  constructor(
+    public readonly code: string,
+    public readonly path: string,
+  ) {
+    super(`Tournament API error: ${code} on ${path}`);
+    this.name = "TournamentApiError";
+  }
+}
 
 /** A page of the tournament catalogue, plus the size of the full result set. */
 export type TournamentPage = {
@@ -84,11 +112,24 @@ export class TournamentsResource {
     return url;
   }
 
-  #get<T>(url: URL): Promise<Envelope<T>> {
-    return this.t.getJson<Envelope<T>>(url, {
+  // Checked here rather than in the transport: this host's envelope is its own
+  // (`error_code` as a flat string, against the WG API's nested `error.code`),
+  // and it reports the error under a 200. Shared by every read, including the
+  // ones whose payload is not a `results` list, so no endpoint is left able to
+  // hand back an error as if it were data.
+  #assertOk(res: { status?: string; error_code?: string }, url: URL): void {
+    if (res.status === "error") {
+      throw new TournamentApiError(res.error_code ?? "UNKNOWN", url.pathname);
+    }
+  }
+
+  async #get<T>(url: URL): Promise<Envelope<T>> {
+    const res = await this.t.getJson<Envelope<T>>(url, {
       region: this.region,
       limit: RateLimit.Tournaments,
     });
+    this.#assertOk(res, url);
+    return res;
   }
 
   /**
@@ -191,10 +232,15 @@ export class TournamentsResource {
    * has settled without pulling its whole record. */
   async status({ tournamentId }: { tournamentId: number }): Promise<TournamentStatus> {
     const url = this.#url(`/tournament/${tournamentId}/status/`);
-    const res = await this.t.getJson<{ data: { status: TournamentStatus } }>(url, {
-      region: this.region,
-      limit: RateLimit.Tournaments,
-    });
+    // Its payload is `data.status` rather than a `results` list, so it cannot go
+    // through `#get`, but it answers NOT_FOUND under a 200 exactly like the
+    // others and would otherwise return `undefined` typed as a status.
+    const res = await this.t.getJson<{
+      status?: string;
+      error_code?: string;
+      data: { status: TournamentStatus };
+    }>(url, { region: this.region, limit: RateLimit.Tournaments });
+    this.#assertOk(res, url);
     return res.data.status;
   }
 
