@@ -161,8 +161,16 @@ export type TournamentSummary = {
    * reported as a literal 0). */
   teamsLimit: number | null;
   confirmedTeams: number;
-  startAt: Date;
-  endAt: Date;
+  /**
+   * Null when the organiser has created the tournament but not scheduled it.
+   * The endpoint sends `0` for both bounds in that state, and a tournament can
+   * sit there with teams already registered, so this is a real value and not a
+   * parse failure. Mapping it to `new Date(0)` read as January 1970, which sorts
+   * to the bottom of every listing and, worse, makes an unplayed tournament look
+   * decades settled.
+   */
+  startAt: Date | null;
+  endAt: Date | null;
   registrationFrom: Date | null;
   registrationTill: Date | null;
   /** Free text ("Gold", "Gold + Bonds + Cash!"). The structured breakdown is
@@ -229,8 +237,8 @@ export function parseTournamentSummary(raw: RawTournament): TournamentSummary {
     },
     teamsLimit: raw.teams_limit || null,
     confirmedTeams: raw.summary.confirmed_teams,
-    startAt: new Date(raw.start_at * 1000),
-    endAt: new Date(raw.end_at * 1000),
+    startAt: at(raw.start_at),
+    endAt: at(raw.end_at),
     // `||`, not `??`: the summary encodes "unset" as 0 rather than null, so
     // nullish coalescing kept the zero and threw away the real timestamp
     // sitting in the registration entry beside it.
