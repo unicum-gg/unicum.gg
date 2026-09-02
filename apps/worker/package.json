@@ -13,6 +13,7 @@
     "sample-servers": "tsx --env-file-if-exists=../web/.env.local src/scripts/sample-servers.ts",
     "top-by-tank": "tsx --env-file-if-exists=../web/.env.local src/scripts/top-by-tank.ts",
     "refresh-map-history": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-map-history.ts",
+    "refresh-vehicles": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-vehicles.ts",
     "seed-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/seed-tournaments.ts",
     "enumerate-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/enumerate-tournaments.ts",
     "backfill-team-clans": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-team-clans.ts",
