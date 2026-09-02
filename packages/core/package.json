@@ -29,6 +29,7 @@
     "./tournaments/cron": "./src/tournaments/cron.ts",
     "./tournaments/read": "./src/tournaments/read.ts",
     "./tournaments/backfill": "./src/tournaments/backfill.ts",
+    "./tournaments/enumerate": "./src/tournaments/enumerate.ts",
     "./tournaments/winners": "./src/tournaments/winners.ts",
     "./clans/boost-workflow": "./src/clans/boost-workflow/index.ts",
     "./clans/boost-workflow/cron": "./src/clans/boost-workflow/cron.ts",
