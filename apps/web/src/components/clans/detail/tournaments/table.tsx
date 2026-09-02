@@ -160,7 +160,7 @@ export function ClanTournamentsTable({
                   />
                 )}
                 <Link
-                  href={ROUTES.TOURNAMENT(region, e.tournamentId)}
+                  href={ROUTES.TOURNAMENT_TEAM(region, e.tournamentId, e.teamId)}
                   className="font-medium hover:underline"
                   title={e.title}
                 >
@@ -170,9 +170,10 @@ export function ClanTournamentsTable({
               {/* How much of the roster was really the clan, since a team only
                   needs a quarter of the format to be attributed here. */}
               <TableCell className="truncate text-fd-muted-foreground">
-                <Link
-                  href={ROUTES.TOURNAMENT_TEAM(region, e.tournamentId, e.teamId)}
-                  className="hover:underline"
+                {/* Not a link: the title beside it already leads to this same
+                    team, and two anchors to one destination in one row read as
+                    two different places to go. */}
+                <span
                   title={
                     e.clanMembers === null
                       ? undefined
@@ -180,7 +181,7 @@ export function ClanTournamentsTable({
                   }
                 >
                   {e.teamTitle}
-                </Link>
+                </span>
               </TableCell>
               <TableCell className="hidden md:table-cell">
                 <TournamentStatusBadge status={e.status} settled />

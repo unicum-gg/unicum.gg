@@ -123,8 +123,12 @@ export function PlayerTournamentsTable({
                 {dateFmt.format(e.startAt)}
               </TableCell>
               <TableCell>
+                {/* The team rather than the tournament: this row is a record
+                    of what THIS player did, so the useful destination is their
+                    own team's page (its result, its roster), and the tournament
+                    itself is one click further on that page's breadcrumb. */}
                 <Link
-                  href={ROUTES.TOURNAMENT(region, e.tournamentId)}
+                  href={ROUTES.TOURNAMENT_TEAM(region, e.tournamentId, e.teamId)}
                   className="font-medium hover:underline"
                 >
                   {e.title}
