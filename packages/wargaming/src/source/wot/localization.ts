@@ -1,4 +1,9 @@
-import { localizationBranchFor, rawUrl, WotSrcBranch } from "./mirror";
+import {
+  localizationBranchFor,
+  rawUrl,
+  WOTSRC_CACHE_TTL_MS,
+  WotSrcBranch,
+} from "./mirror";
 
 const unquote = (line: string): string =>
   line
@@ -59,7 +64,28 @@ export function parsePo(text: string): Map<string, string> {
 
 // Each `.po` is a single shared file per client build, so fetch + parse it once
 // per (branch, file) and reuse across every tank.
-const cache = new Map<string, Promise<Map<string, string>>>();
+//
+// Expiring, on the same window as the raw fetches behind it (`WOTSRC_CACHE_TTL_MS`),
+// because the parsed map is what every caller actually reads and an entry with no
+// expiry outlives what it was parsed from. The worker runs for weeks, so a memo
+// filled once pins a `.po` to whatever the branch said the first time this process
+// asked, and the daily catalogue cron, whose entire job is to notice that the
+// client changed, would keep re-deriving a build that shipped a month ago.
+const cache = new Map<
+  string,
+  { pending: Promise<Map<string, string>>; expiresAt: number }
+>();
+
+function memoize(
+  key: string,
+  build: () => Promise<Map<string, string>>,
+): Promise<Map<string, string>> {
+  const hit = cache.get(key);
+  if (hit && hit.expiresAt > Date.now()) return hit.pending;
+  const pending = build();
+  cache.set(key, { pending, expiresAt: Date.now() + WOTSRC_CACHE_TTL_MS });
+  return pending;
+}
 
 /** One branch's copy of a `.po`, fetched and parsed once (memoized). Fails open
  * to an empty map so a localization hiccup just drops the strings. */
@@ -69,23 +95,17 @@ function loadBranchPo(
   fetchText: (url: string) => Promise<string>,
 ): Promise<Map<string, string>> {
   const key = `${branch}:${file}`;
-  let pending = cache.get(key);
-  if (!pending) {
-    pending = fetchText(
-      rawUrl(branch, `sources/res/text/lc_messages/${file}.po`),
-    )
+  return memoize(key, () =>
+    fetchText(rawUrl(branch, `sources/res/text/lc_messages/${file}.po`))
       .then(parsePo)
       // Fail open, but do not remember having done so: memoizing the empty map
-      // would turn one bad response into a process that never sees that file
-      // again, and this cache lives for the lifetime of a long-running worker.
-      // Dropping the entry lets the next caller retry.
+      // would make one bad response outlive the tick that produced it. Dropping
+      // the entry lets the next caller retry rather than wait out the TTL.
       .catch(() => {
         cache.delete(key);
         return new Map<string, string>();
-      });
-    cache.set(key, pending);
-  }
-  return pending;
+      }),
+  );
 }
 
 /**
@@ -105,10 +125,8 @@ export function loadPo(
 ): Promise<Map<string, string>> {
   const source = localizationBranchFor(branch);
   if (source === branch) return loadBranchPo(branch, file, fetchText);
-  const key = `${branch}:${file}:via:${source}`;
-  let pending = cache.get(key);
-  if (!pending) {
-    pending = Promise.all([
+  return memoize(`${branch}:${file}:via:${source}`, () =>
+    Promise.all([
       loadBranchPo(source, file, fetchText),
       loadBranchPo(branch, file, fetchText),
     ]).then(([translated, own]) => {
@@ -117,10 +135,8 @@ export function loadPo(
       const out = new Map(own);
       for (const [id, str] of translated) out.set(id, str);
       return out;
-    });
-    cache.set(key, pending);
-  }
-  return pending;
+    }),
+  );
 }
 
 /**
