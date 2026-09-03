@@ -133,6 +133,18 @@ function isMissingTournament(err: unknown, tournamentId: number): boolean {
   );
 }
 
+/**
+ * How many failures in a row end the walk.
+ *
+ * Not a retry policy but a blast radius. A walk covers tens of thousands of ids
+ * on a pool the live cron shares, so an upstream that starts refusing every
+ * request (a Cloudflare block on the host, an outage) would otherwise keep
+ * asking at three a second for hours, starving the cron behind it and logging
+ * one error per id. Missing ids do not count: the sequence is full of holes and
+ * meeting them is the job.
+ */
+const FAILURE_STREAK_LIMIT = 25;
+
 export async function enumerateRegion(
   region: Region,
   { from, to, limit, onProgress }: EnumerateOptions = {},
@@ -163,6 +175,7 @@ export async function enumerateRegion(
   let absent = 0;
   let unscheduled = 0;
   let failed = 0;
+  let streak = 0;
   let cursor: number | null = null;
 
   for (let id = hi; id >= lo; id--) {
@@ -175,15 +188,25 @@ export async function enumerateRegion(
       // nothing to store and nothing wrong: it arrives once it is scheduled.
       if (await mirrorTournament(region, id)) discovered += 1;
       else unscheduled += 1;
+      streak = 0;
     } catch (err) {
       // The system answers 200 with NOT_FOUND for an id it never issued, which
       // is an answer rather than a failure: the sequence has holes and walking
       // it means meeting them. Anything else is left unstamped for a later run.
       if (isMissingTournament(err, id)) {
         absent += 1;
+        streak = 0;
       } else {
         failed += 1;
+        streak += 1;
         console.error(`[tournaments-enumerate-${region}] ${id} failed:`, err);
+        if (streak >= FAILURE_STREAK_LIMIT) {
+          console.error(
+            `[tournaments-enumerate-${region}] stopping at ${id}: ` +
+              `${streak} consecutive failures. Resume with --from 1 --to ${id}.`,
+          );
+          break;
+        }
       }
     }
     onProgress?.({ region, scanned, discovered, absent, unscheduled, failed, cursor });

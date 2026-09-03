@@ -18,13 +18,8 @@ import {
   TournamentStatus,
 } from "@unicum.gg/wargaming";
 import { wg } from "@unicum.gg/core/wargaming/client";
-import { heldBracket } from "./bracket";
-import {
-  detailRow,
-  detailSet,
-  isScheduled,
-  summaryRow,
-} from "./scheduled";
+import { heldBracket, heldTeamCount } from "./bracket";
+import { detailRow, detailSet, isScheduled, summaryRow } from "./scheduled";
 
 /**
  * Mirrors Wargaming's tournament system into our own tables.
@@ -161,7 +156,9 @@ export async function sweepCatalog(
     : LIVE_STATUSES;
   let seen = 0;
   for (const status of statuses) {
-    for await (const page of wg.region(region).tournaments.listAll({ status })) {
+    for await (const page of wg
+      .region(region)
+      .tournaments.listAll({ status })) {
       await upsertSummaries(region, page);
       seen += page.length;
     }
@@ -196,7 +193,10 @@ export async function countPending(region: Region): Promise<number> {
  * mean mirroring it again on the next tick; {@link pickLive} carries those at
  * their own cadence.
  */
-export async function pickUnmirrored(region: Region, limit: number): Promise<number[]> {
+export async function pickUnmirrored(
+  region: Region,
+  limit: number,
+): Promise<number[]> {
   const table = tournamentsByRegion[region];
   const rows = await db
     .select({ id: table.id })
@@ -255,6 +255,31 @@ export type MirrorResult = {
 };
 
 /**
+ * How many rows go into one INSERT.
+ *
+ * Postgres accepts 65,535 bind parameters per statement and the widest child
+ * table here has seventeen columns, so a single-statement insert breaks at
+ * about 3,850 matches. That is not hypothetical: EU's 2018 open brackets run
+ * past it, and the failure took the whole transaction with it, so the walk of
+ * the id space lost the biggest tournaments in the archive rather than the
+ * bracket alone. Five hundred rows leaves an order of magnitude of headroom on
+ * the widest table and costs a handful of extra round trips on the few
+ * tournaments large enough to need them.
+ */
+const INSERT_CHUNK = 500;
+
+/** Insert in bounded batches, so a big tournament cannot exceed the parameter
+ * ceiling. Same transaction, so it is still all or nothing. */
+async function insertChunked<T>(
+  rows: T[],
+  insert: (batch: T[]) => Promise<unknown>,
+): Promise<void> {
+  for (let i = 0; i < rows.length; i += INSERT_CHUNK) {
+    await insert(rows.slice(i, i + INSERT_CHUNK));
+  }
+}
+
+/**
  * Mirror one tournament in full: its detail, every registered team with its
  * roster, and the whole bracket with scores and placements.
  *
@@ -300,7 +325,11 @@ export async function mirrorTournament(
     for (const group of await api.groups({ tournamentId, stageId: stage.id })) {
       groups.push(group);
       rawMatches.push(
-        ...(await api.matches({ tournamentId, stageId: stage.id, groupId: group.id })),
+        ...(await api.matches({
+          tournamentId,
+          stageId: stage.id,
+          groupId: group.id,
+        })),
       );
       for (const row of await api.groupStandings({
         tournamentId,
@@ -314,7 +343,10 @@ export async function mirrorTournament(
   // Same primary-key rule as the rosters below: one duplicate in the source
   // would take the whole tournament's insert down with it.
   const matches = dedupe(rawMatches, (m) => m.uuid);
-  const standings = dedupe(rawStandings, (s) => `${s.row.groupId}:${s.row.teamId}`);
+  const standings = dedupe(
+    rawStandings,
+    (s) => `${s.row.groupId}:${s.row.teamId}`,
+  );
 
   // Deduped on the primary key before the insert, not by `onConflictDoUpdate`:
   // Postgres rejects the whole statement when one INSERT carries the same
@@ -343,22 +375,41 @@ export async function mirrorTournament(
   // come back with its stages intact and the tree under them gone, which an
   // emptiness test reads as a bracket arriving and writes over the real one.
   const held = await heldBracket(region, tournamentId);
-  const keepBracket = stages.length < held.stages || matches.length < held.matches;
+  const keepBracket =
+    stages.length < held.stages || matches.length < held.matches;
+  // The rosters get the same refusal, for the same reason and a bigger stake.
+  // They were replaced unconditionally while the bracket was guarded, so a
+  // short answer from `allTeams` (a partial page, or Wargaming purging teams
+  // the way it purges brackets) would delete every team and every roster line
+  // and write back only what arrived, leaving the preserved matches pointing at
+  // teams that no longer exist. And the rosters are the one thing the id-space
+  // walk cannot recover for a purged tournament: the account ids on them are
+  // the join this whole mirror exists for.
+  const keepRosters =
+    teams.length < (await heldTeamCount(region, tournamentId));
 
   await db.transaction(async (tx) => {
     await tx
       .insert(tournamentsByRegion[region])
       .values(detailRow(detail))
-      .onConflictDoUpdate({ target: tournamentsByRegion[region].id, set: detailSet() });
+      .onConflictDoUpdate({
+        target: tournamentsByRegion[region].id,
+        set: detailSet(),
+      });
 
-    // Rosters are always replaced: the source has no notion of a deleted row, so
-    // a team that disbands simply stops being listed and only a delete can make
-    // the mirror shrink to match.
-    for (const table of [
-      tournamentTeamPlayersByRegion[region],
-      tournamentTeamsByRegion[region],
-    ]) {
-      await tx.delete(table).where(sql`${table.tournamentId} = ${tournamentId}`);
+    // Rosters are replaced when the answer is at least as complete as what we
+    // hold: the source has no notion of a deleted row, so a team that disbands
+    // simply stops being listed and only a delete can make the mirror shrink to
+    // match. A SHORTER answer is refused, see `keepRosters`.
+    if (!keepRosters) {
+      for (const table of [
+        tournamentTeamPlayersByRegion[region],
+        tournamentTeamsByRegion[region],
+      ]) {
+        await tx
+          .delete(table)
+          .where(sql`${table.tournamentId} = ${tournamentId}`);
+      }
     }
 
     // The bracket is NOT, when the fetch came back without one and we already
@@ -379,100 +430,114 @@ export async function mirrorTournament(
         tournamentGroupsByRegion[region],
         tournamentStagesByRegion[region],
       ]) {
-        await tx.delete(table).where(sql`${table.tournamentId} = ${tournamentId}`);
+        await tx
+          .delete(table)
+          .where(sql`${table.tournamentId} = ${tournamentId}`);
       }
     }
 
     if (!keepBracket && stages.length > 0) {
-      await tx.insert(tournamentStagesByRegion[region]).values(
-        stages.map((s) => ({
-          id: s.id,
-          tournamentId,
-          title: s.title,
-          description: s.description,
-          bracketType: s.bracketType as string,
-          drawManagement: s.drawManagement as string,
-          winnersPerGroup: s.winnersPerGroup,
-          groupsCount: s.groupsCount,
-          startAt: s.startAt,
-          endAt: s.endAt,
-        })),
+      await insertChunked(stages, (batch) =>
+        tx.insert(tournamentStagesByRegion[region]).values(
+          batch.map((s) => ({
+            id: s.id,
+            tournamentId,
+            title: s.title,
+            description: s.description,
+            bracketType: s.bracketType as string,
+            drawManagement: s.drawManagement as string,
+            winnersPerGroup: s.winnersPerGroup,
+            groupsCount: s.groupsCount,
+            startAt: s.startAt,
+            endAt: s.endAt,
+          })),
+        ),
       );
     }
     if (!keepBracket && groups.length > 0) {
-      await tx.insert(tournamentGroupsByRegion[region]).values(
-        groups.map((g) => ({
-          id: g.id,
-          tournamentId,
-          stageId: g.stageId,
-          order: g.order,
-          state: g.state as string,
-          teamsCount: g.teamsCount,
-          winnerRounds: g.winnerRounds,
-          looserRounds: g.looserRounds,
-        })),
+      await insertChunked(groups, (batch) =>
+        tx.insert(tournamentGroupsByRegion[region]).values(
+          batch.map((g) => ({
+            id: g.id,
+            tournamentId,
+            stageId: g.stageId,
+            order: g.order,
+            state: g.state as string,
+            teamsCount: g.teamsCount,
+            winnerRounds: g.winnerRounds,
+            looserRounds: g.looserRounds,
+          })),
+        ),
       );
     }
-    if (teams.length > 0) {
-      await tx.insert(tournamentTeamsByRegion[region]).values(
-        teams.map((t) => ({
-          id: t.id,
-          tournamentId,
-          title: t.title,
-          status: t.status as string,
-          ownerAccountId: t.ownerAccountId || null,
-          playersCount: t.playersCount,
-          maxPlayers: t.maxPlayers,
-          description: t.description,
-          isPasswordProtected: t.isPasswordProtected,
-          disqualifyReason: t.disqualifyReason,
-          updatedAt: new Date(),
-        })),
+    if (!keepRosters && teams.length > 0) {
+      await insertChunked(teams, (batch) =>
+        tx.insert(tournamentTeamsByRegion[region]).values(
+          batch.map((t) => ({
+            id: t.id,
+            tournamentId,
+            title: t.title,
+            status: t.status as string,
+            ownerAccountId: t.ownerAccountId || null,
+            playersCount: t.playersCount,
+            maxPlayers: t.maxPlayers,
+            description: t.description,
+            isPasswordProtected: t.isPasswordProtected,
+            disqualifyReason: t.disqualifyReason,
+            updatedAt: new Date(),
+          })),
+        ),
       );
     }
-    if (players.length > 0) {
-      await tx.insert(tournamentTeamPlayersByRegion[region]).values(players);
+    if (!keepRosters && players.length > 0) {
+      await insertChunked(players, (batch) =>
+        tx.insert(tournamentTeamPlayersByRegion[region]).values(batch),
+      );
     }
     if (!keepBracket && matches.length > 0) {
-      await tx.insert(tournamentMatchesByRegion[region]).values(
-        matches.map((m) => ({
-          uuid: m.uuid,
-          tournamentId,
-          stageId: m.stageId,
-          groupId: m.groupId,
-          state: m.state as string,
-          round: m.round,
-          position: m.position,
-          team1Id: m.team1?.id ?? null,
-          team2Id: m.team2?.id ?? null,
-          winnerTeamId: m.winnerTeamId,
-          winsTeam1: m.score?.team1 ?? null,
-          winsTeam2: m.score?.team2 ?? null,
-          draws: m.score?.draws ?? null,
-          maps: m.maps,
-          startAt: m.startAt,
-          nextMatchForWinner: m.nextMatchForWinner,
-          nextMatchForLooser: m.nextMatchForLooser,
-        })),
+      await insertChunked(matches, (batch) =>
+        tx.insert(tournamentMatchesByRegion[region]).values(
+          batch.map((m) => ({
+            uuid: m.uuid,
+            tournamentId,
+            stageId: m.stageId,
+            groupId: m.groupId,
+            state: m.state as string,
+            round: m.round,
+            position: m.position,
+            team1Id: m.team1?.id ?? null,
+            team2Id: m.team2?.id ?? null,
+            winnerTeamId: m.winnerTeamId,
+            winsTeam1: m.score?.team1 ?? null,
+            winsTeam2: m.score?.team2 ?? null,
+            draws: m.score?.draws ?? null,
+            maps: m.maps,
+            startAt: m.startAt,
+            nextMatchForWinner: m.nextMatchForWinner,
+            nextMatchForLooser: m.nextMatchForLooser,
+          })),
+        ),
       );
     }
     if (!keepBracket && standings.length > 0) {
-      await tx.insert(tournamentStandingsByRegion[region]).values(
-        standings.map(({ stageId, row }) => ({
-          tournamentId,
-          stageId,
-          groupId: row.groupId,
-          teamId: row.teamId,
-          position: row.position,
-          seed: row.seed,
-          wins: row.wins,
-          losses: row.losses,
-          draws: row.draws,
-          battlesPlayed: row.battlesPlayed,
-          tieBreakWins: row.tieBreakWins,
-          tieBreakLosses: row.tieBreakLosses,
-          points: row.points,
-        })),
+      await insertChunked(standings, (batch) =>
+        tx.insert(tournamentStandingsByRegion[region]).values(
+          batch.map(({ stageId, row }) => ({
+            tournamentId,
+            stageId,
+            groupId: row.groupId,
+            teamId: row.teamId,
+            position: row.position,
+            seed: row.seed,
+            wins: row.wins,
+            losses: row.losses,
+            draws: row.draws,
+            battlesPlayed: row.battlesPlayed,
+            tieBreakWins: row.tieBreakWins,
+            tieBreakLosses: row.tieBreakLosses,
+            points: row.points,
+          })),
+        ),
       );
     }
   });
@@ -483,9 +548,17 @@ export async function mirrorTournament(
   // it is logged and the tournament stays mirrored with its teams unattributed
   // until the next pass.
   try {
-    await storeTeamClans(region, tournamentId, detail.startAt, detail.teamSize.min);
+    await storeTeamClans(
+      region,
+      tournamentId,
+      detail.startAt,
+      detail.teamSize.min,
+    );
   } catch (err) {
-    console.error(`[tournaments-${region}] ${tournamentId} clan attribution failed:`, err);
+    console.error(
+      `[tournaments-${region}] ${tournamentId} clan attribution failed:`,
+      err,
+    );
   }
   // Rosters carry the nickname each player registered under, frozen at the time,
   // so a mirrored tournament is also a dated observation of names our own rename
@@ -494,7 +567,10 @@ export async function mirrorTournament(
   try {
     await recordRosterNames(region, tournamentId);
   } catch (err) {
-    console.error(`[tournaments-${region}] ${tournamentId} name history failed:`, err);
+    console.error(
+      `[tournaments-${region}] ${tournamentId} name history failed:`,
+      err,
+    );
   }
   // The winner's crest. Recomputed from the brackets rather than incremented,
   // because this runs again every time the draw moves, and scoped to everyone
@@ -507,7 +583,10 @@ export async function mirrorTournament(
     // be counted.
     await recordTournamentWinners(region, tournamentId);
   } catch (err) {
-    console.error(`[tournaments-${region}] ${tournamentId} winners failed:`, err);
+    console.error(
+      `[tournaments-${region}] ${tournamentId} winners failed:`,
+      err,
+    );
   }
 
   return {
@@ -520,4 +599,3 @@ export async function mirrorTournament(
     bracketKept: keepBracket,
   };
 }
-

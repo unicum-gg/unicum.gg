@@ -16,6 +16,11 @@ export type BackfillProgress = {
   region: Region;
   mirrored: number;
   failed: number;
+  /** Claimed, attempted, and not storable: a tournament with no dates yet.
+   * Reported because it spends the caller's budget, so a `--limit 40` run that
+   * met forty of them would otherwise print "0 mirrored, 0 failed" and read as
+   * a pass that did nothing. */
+  skipped: number;
   remaining: number;
 };
 
@@ -63,10 +68,16 @@ export async function backfillRegion(
         failed += 1;
         console.error(`[tournaments-backfill-${region}] ${id} failed:`, err);
       }
-      onProgress?.({ region, mirrored, failed, remaining: -1 });
+      onProgress?.({ region, mirrored, failed, skipped, remaining: -1 });
     }
   }
-  return { region, mirrored, failed, remaining: await countPending(region) };
+  return {
+    region,
+    mirrored,
+    failed,
+    skipped,
+    remaining: await countPending(region),
+  };
 }
 
 /**
