@@ -70,6 +70,7 @@ export function footerColumns(region: Region): FooterColumn[] {
       // we track, who pays for it, where the code lives, whether it is up.
       title: "Project",
       links: [
+        { label: "Badges", href: ROUTES.BADGES },
         { label: "Glossary", href: ROUTES.GLOSSARY },
         { label: "Coverage", href: ROUTES.COVERAGE(region) },
         { label: "Support us", href: ROUTES.SUPPORT },

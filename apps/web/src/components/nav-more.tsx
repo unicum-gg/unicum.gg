@@ -8,6 +8,7 @@ import {
   PulseIcon,
   RankingIcon,
   RobotIcon,
+  SealCheckIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { NavMoreMenu } from "@/components/nav-more-menu";
 import APP from "@/constants/app";
@@ -64,6 +65,12 @@ export function NavMore() {
           description: "Free public REST API, no key required",
           url: ROUTES.DOCS,
           icon: <FileCodeIcon />,
+        },
+        {
+          text: "Badges",
+          description: "Every crest a player or clan can earn, and how",
+          url: ROUTES.BADGES,
+          icon: <SealCheckIcon />,
         },
         {
           text: "Glossary",

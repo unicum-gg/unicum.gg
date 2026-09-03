@@ -46,6 +46,7 @@ const ROUTES = {
 
   // - Glossary (region-less by design: a definition reads the same on every
   //   server, so one URL per term rather than three of the same page).
+  BADGES: "/badges",
   GLOSSARY: "/glossary",
   GLOSSARY_TERM: (slug: string) => pathcat("/glossary/:slug", { slug }),
   GLOSSARY_CATEGORY: (category: string) =>
