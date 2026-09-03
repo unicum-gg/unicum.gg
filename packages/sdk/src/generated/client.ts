@@ -73,6 +73,15 @@ class PlayerClient {
     );
   }
 
+  /** Player Onslaught record */
+  onslaught() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/onslaught", path),
+      () => this.api.GET("/{region}/players/{nickname}/onslaught", { params: { path } }),
+    );
+  }
+
   /** Player sessions */
   sessions(granularity: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
     const path = { region: this.region, nickname: this.nickname };
@@ -447,6 +456,8 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
   /** Win rate by tier and rating band */
   winrateByTier(): RequestHandle<Data<"/{region}/players/winrate-by-tier">>;
+  /** Onslaught season history */
+  onslaughtHistory(season?: NonNullable<QueryOf<"/{region}/players/onslaught/history">>["season"]): RequestHandle<Data<"/{region}/players/onslaught/history">>;
   /** Streamed player search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -602,6 +613,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/winrate-by-tier", {
             params: { path: { region: this.region } },
+          }),
+      );
+    ns.onslaughtHistory = (season) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/onslaught/history", { region: this.region }, { season }),
+        () =>
+          this.api.GET("/{region}/players/onslaught/history", {
+            params: { path: { region: this.region }, query: { season } },
           }),
       );
     ns.searchStream = (q, options) =>
