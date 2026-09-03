@@ -11,6 +11,8 @@
 //   /eu/players/Animal/tanks          Tanks
 //   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
+//   /eu/players/Animal/steel-hunter   Overview + Steel Hunter
+//   /eu/players/Animal/onslaught      Overview + Onslaught
 //   /eu/players/Animal/tournaments    Tournaments
 //   /eu/players/Animal/value          Value
 //
@@ -36,6 +38,7 @@ export enum PlayerMode {
   ClanWarsVIII = "cw-viii",
   ClanWarsVI = "cw-vi",
   SteelHunter = "steel-hunter",
+  Onslaught = "onslaught",
 }
 
 /** A reachable (section, mode) pair, and the segment that addresses it. The
@@ -57,6 +60,7 @@ const MODE_VIEWS: PlayerView[] = [
   [PlayerMode.ClanWarsVIII, "cw-viii", "Clan Wars VIII"],
   [PlayerMode.ClanWarsVI, "cw-vi", "Clan Wars VI"],
   [PlayerMode.SteelHunter, "steel-hunter", "Steel Hunter"],
+  [PlayerMode.Onslaught, "onslaught", "Onslaught"],
 ].map(([mode, segment, label]) => ({
   section: PlayerSection.Overview,
   mode: mode as PlayerMode,

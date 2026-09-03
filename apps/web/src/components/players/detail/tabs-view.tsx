@@ -27,6 +27,10 @@ import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/strongho
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
+import {
+  OnslaughtTab,
+  type PlayerOnslaughtData,
+} from "@/components/players/detail/onslaught";
 import { TournamentsTab } from "@/components/players/detail/tournaments";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { ValueTab } from "@/components/players/detail/value";
@@ -46,7 +50,10 @@ import type { Region } from "@unicum.gg/wargaming";
 // a single stronghold-style table with a "no data yet" fallback. `label` fills
 // both the panel title (`{nickname}'s {label} stats`) and the empty message
 // (`No {label} data yet`).
-type StrongholdModeId = Exclude<PlayerMode, PlayerMode.Overall>;
+type StrongholdModeId = Exclude<
+  PlayerMode,
+  PlayerMode.Overall | PlayerMode.Onslaught
+>;
 const STRONGHOLD_MODES: {
   id: StrongholdModeId;
   label: string;
@@ -163,6 +170,19 @@ export function PlayerTabsView({
       fallbackData: initialTournaments ?? undefined,
       revalidateOnMount: !seededTournaments,
     },
+  );
+
+  // Same on-demand shape: the board lists only the few thousand players per
+  // region who reach Champion, so everyone else would pay for a query that comes
+  // back empty. It waits until the tab is opened.
+  const onslaughtReq = () =>
+    unicum.region(region).players(nickname).onslaught();
+  const onOnslaught =
+    section === PlayerSection.Overview && mode === PlayerMode.Onslaught;
+  const { data: onslaught } = useSWR(
+    onOnslaught ? onslaughtReq().url() : null,
+    () => onslaughtReq().then((r) => r as unknown as PlayerOnslaughtData),
+    { revalidateOnFocus: false, shouldRetryOnError: false },
   );
 
   // Same on-demand shape as the two above, plus a bucket size the reader picks.
@@ -292,6 +312,13 @@ export function PlayerTabsView({
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
+      ) : mode === PlayerMode.Onslaught ? (
+        <OnslaughtTab
+          region={region}
+          nickname={nickname}
+          data={onslaught ?? null}
+          loading={!onslaught}
+        />
       ) : (
         <StrongholdTab
           nickname={nickname}

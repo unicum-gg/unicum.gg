@@ -44,6 +44,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
   ONSLAUGHT_TIER_COLOR,
@@ -381,7 +382,11 @@ export function OnslaughtBoard({
                     </TableCell>
                     <TableCell>
                       <div className="flex min-w-0 items-center gap-2">
-                        <PlayerName region={region} player={identityFromRow(r)} />
+                        <PlayerName
+                          region={region}
+                          player={identityFromRow(r)}
+                          href={ROUTES.PLAYER_ONSLAUGHT(region, r.nickname)}
+                        />
                         {r.recordedNickname !== r.nickname ||
                         r.recordedClanTag !== r.clan_tag ? (
                           <span className="shrink-0 text-xs text-muted-foreground">

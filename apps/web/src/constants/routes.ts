@@ -79,6 +79,10 @@ const ROUTES = {
   // matching mode instead of the overview.
   PLAYER_STEEL_HUNTER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
+  // A player's Onslaught mode, so the Onslaught leaderboard links straight to
+  // the matching mode instead of the overview, like Steel Hunter above.
+  PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/onslaught", { region, nickname }),
   // A player's Tournaments tab, where the winner's crest sends a reader: the
   // crest says they have won, this is the record of what.
   PLAYER_TOURNAMENTS: (region: Region, nickname: string) =>
