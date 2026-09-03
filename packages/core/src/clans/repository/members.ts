@@ -8,7 +8,7 @@ import {
 } from "@unicum.gg/shared";
 import { discoverPlayersBackground } from "@unicum.gg/core/discovery/players";
 import { clanChannel, publish } from "@unicum.gg/core/live/pubsub";
-import type { Region } from "@unicum.gg/wargaming";
+import { clanRoleOrder, type Region } from "@unicum.gg/wargaming";
 import {
   type ClanMemberPeriodStats,
   type ClanMemberStats,
@@ -37,7 +37,12 @@ function memberStatsFromRow(
     name: row.name,
     role: row.role as ClanRole,
     roleLocalized: row.roleLocalized,
-    roleRank: row.roleRank,
+    // Ranked off the role name rather than the stored `role_rank`, which is a
+    // denormalisation of exactly this and therefore freezes whatever hierarchy
+    // was current when the clan was last refreshed. A full backfill sweep takes
+    // over two months, so a correction to the role list would otherwise take
+    // that long to reach every roster.
+    roleRank: clanRoleOrder(row.role),
     daysInClan: row.daysInClan,
     lastBattleTime: row.lastBattleTime,
     personalRating: row.personalRating,

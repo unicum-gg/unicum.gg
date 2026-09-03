@@ -18,6 +18,8 @@ export function makeClanMembersTable(region: string) {
       name: text("name").notNull(),
       role: text("role").notNull(),
       roleLocalized: text("role_localized").notNull(),
+      /** Seniority as of the last refresh. Readers rank on {@link role}
+       * instead, so this is only ever written. */
       roleRank: integer("role_rank").notNull(),
       daysInClan: integer("days_in_clan").notNull(),
       lastBattleTime: timestamp("last_battle_time", { withTimezone: true }),
