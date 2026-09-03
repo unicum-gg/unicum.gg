@@ -10,6 +10,7 @@ import { db } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { type Region } from "@unicum.gg/wargaming";
 import { wg } from "../../client";
+import { resolveLiveSeason } from "./onslaught-season";
 
 // Season metadata for the Onslaught board: the window it covers plus the rank
 // thresholds the display colors by (Elite / Master). Dates are ISO strings so
@@ -75,10 +76,36 @@ export type OnslaughtSeasonRef = {
 // (the client overwrites those files each year). Cached: a finished season's end
 // date never moves, so the answer is stable. Fails open to null (the caller then
 // uses the live branch).
-const mirrorCommitCache = new Map<string, string | null>();
-async function mirrorCommitAt(untilIso: string): Promise<string | null> {
+const mirrorCommitCache = new Map<string, string>();
+// Failures are remembered too, but only briefly, and that asymmetry is the whole
+// point. The answer for a finished season never changes, so a hit is cached for
+// good; a miss is usually the unauthenticated GitHub quota (60/hour per IP),
+// and caching THAT for the life of the process would serve the current year's
+// rank art for every past season until the next deploy, silently. Short enough
+// to heal on its own, long enough not to hammer the quota that caused it.
+const mirrorCommitFailures = new Map<string, number>();
+const MIRROR_COMMIT_RETRY_MS = 5 * 60 * 1000;
+// In-flight requests, so a cold process serving several ranked profiles at once
+// asks GitHub once per date rather than once per reader.
+const mirrorCommitInflight = new Map<string, Promise<string | null>>();
+
+export async function mirrorCommitAt(untilIso: string): Promise<string | null> {
   const cached = mirrorCommitCache.get(untilIso);
   if (cached !== undefined) return cached;
+  const failedAt = mirrorCommitFailures.get(untilIso);
+  if (failedAt != null && Date.now() - failedAt < MIRROR_COMMIT_RETRY_MS) {
+    return null;
+  }
+  const inflight = mirrorCommitInflight.get(untilIso);
+  if (inflight) return inflight;
+  const request = fetchMirrorCommit(untilIso).finally(() => {
+    mirrorCommitInflight.delete(untilIso);
+  });
+  mirrorCommitInflight.set(untilIso, request);
+  return request;
+}
+
+async function fetchMirrorCommit(untilIso: string): Promise<string | null> {
   let sha: string | null = null;
   try {
     const res = await fetch(
@@ -97,7 +124,8 @@ async function mirrorCommitAt(untilIso: string): Promise<string | null> {
   } catch {
     sha = null;
   }
-  mirrorCommitCache.set(untilIso, sha);
+  if (sha != null) mirrorCommitCache.set(untilIso, sha);
+  else mirrorCommitFailures.set(untilIso, Date.now());
   return sha;
 }
 
@@ -124,10 +152,14 @@ export async function getOnslaughtLeaderboard(
 
   // All seasons, newest first: the head is the current season (the default), the
   // whole list feeds the selector.
+  //
+  // NULLS LAST is load-bearing, not a formality: Postgres sorts DESC with nulls
+  // FIRST, so a season row written before its dates were published would take
+  // the head and be served as the current season, standings, thresholds and all.
   const allSeasons = await db
     .select()
     .from(seasons)
-    .orderBy(desc(seasons.startDate));
+    .orderBy(sql`${seasons.startDate} DESC NULLS LAST`);
   if (allSeasons.length === 0)
     return { season: null, seasons: [], results: [] };
 
@@ -163,18 +195,19 @@ export async function getOnslaughtLeaderboard(
     comp7.archiveYears().catch(() => [] as string[]),
   ]);
 
+  // The live season, resolved from the client taxonomy against our own archive
+  // (the client names a whole year at once, so its last entry is the year's last
+  // season, not the running one). Used for both the codename fallback below and
+  // the selector's entry for a season captured but not yet stamped.
+  const live = resolveLiveSeason(taxonomy, allSeasons, allSeasons[0]);
+
   // Codename/ordinal come from the frozen per-season stamp. Only the current
-  // season can be unstamped (a past season was stamped while it was live); fall
-  // back to the client taxonomy's latest season (the client localizes each
-  // season as it goes live, so the last is the current one).
+  // season can be unstamped (a past season was stamped while it was live).
   let codename = season.codename;
   let seasonOrdinal = season.seasonOrdinal;
-  if ((codename == null || seasonOrdinal == null) && isCurrent) {
-    const current = taxonomy?.seasons.at(-1) ?? null;
-    if (current) {
-      codename ??= current.name;
-      seasonOrdinal ??= current.ordinal;
-    }
+  if ((codename == null || seasonOrdinal == null) && isCurrent && live) {
+    codename ??= live.name;
+    seasonOrdinal ??= live.ordinal;
   }
 
   // The full selector list: every season the game has had, newest first. A
@@ -191,14 +224,25 @@ export async function getOnslaughtLeaderboard(
   // A just-captured current season isn't stamped yet; it is the live season, so
   // it carries the taxonomy's latest name until reconcile freezes it.
   const newest = allSeasons[0];
-  const liveName = taxonomy?.seasons.at(-1)?.name;
+  const liveName = live?.name;
   if (newest.codename == null && liveName && !dbByCodename.has(liveName)) {
     dbByCodename.set(liveName, newest.eventId);
   }
 
   const placed = new Set<string>();
   const seasonsList: OnslaughtSeasonRef[] = [];
-  for (const s of [...(taxonomy?.seasons ?? [])].reverse()) {
+  // Only the seasons of this year that have actually started. The client names
+  // all three from the year's first day, so listing the taxonomy as-is puts next
+  // quarter's seasons at the top of the picker, greyed out as though we were
+  // missing their data rather than them not having happened. Cut at the live
+  // season, which `resolveLiveSeason` has already located. If it could not be
+  // located, the whole year is listed rather than none: the picker showing one
+  // season too many is a smaller failure than it showing none at all.
+  const played =
+    live != null
+      ? (taxonomy?.seasons ?? []).filter((s) => s.index <= live.index)
+      : (taxonomy?.seasons ?? []);
+  for (const s of [...played].reverse()) {
     const eid = dbByCodename.get(s.name) ?? null;
     if (eid) placed.add(eid);
     seasonsList.push({
@@ -319,30 +363,51 @@ export async function reconcileOnslaught(
   const seasons = onslaughtSeasonsByRegion[region];
   const history = playerNameHistoryByRegion[region];
 
-  const [season] = await db
+  // NULLS LAST: a dateless row sorts first under Postgres' DESC default, and
+  // this picks the row whose identity gets frozen.
+  const allSeasons = await db
     .select()
     .from(seasons)
-    .orderBy(desc(seasons.startDate))
-    .limit(1);
+    .orderBy(sql`${seasons.startDate} DESC NULLS LAST`);
+  const season = allSeasons[0];
   if (!season) return { resolved: 0, formerNames: 0 };
 
-  // Freeze this (current) season's codename + rank-art ordinal once, from the
-  // client taxonomy's latest season (the client localizes each season as it goes
-  // live, so the last one is the current). Stamped only when missing, so a past
-  // season keeps the name it had while it was live (the localization resets to
-  // the new year once this year archives).
-  if (season.codename == null || season.seasonOrdinal == null) {
+  // Freeze the live season's identity. Stamped only when missing, so a past
+  // season keeps the name it had while it was live (the localization moves on to
+  // the next year once this one archives, and nothing could recover it after).
+  //
+  // The YEAR is stamped in its own right, and it matters more than it looks:
+  // it is unambiguous (the client names the running year outright), and it is
+  // what lets the NEXT season count its own position from our archive. A season
+  // that goes by without being stamped costs its successor that count.
+  if (
+    season.codename == null ||
+    season.seasonOrdinal == null ||
+    season.yearId == null
+  ) {
     const taxonomy = await wg
       .region(region)
       .source.comp7.seasonTaxonomy()
       .catch(() => null);
-    const current = taxonomy?.seasons.at(-1) ?? null;
-    if (current) {
+    const live = resolveLiveSeason(taxonomy, allSeasons, season);
+    if (taxonomy?.yearId == null) {
+      // Loud, because the failure is silent and the deadline is real: the
+      // client only names the running year, so a season that goes unstamped
+      // until the year rolls over can never be named at all. Reaching here
+      // means the year id could not be read from the client sources (the
+      // constant moved, or was rewritten in a shape the parser does not match).
+      console.warn(
+        `[onslaught-reconcile] ${region}: no year id from the client, leaving ${season.eventId} unstamped`,
+      );
+    }
+    if (taxonomy?.yearId != null || live != null) {
       await db
         .update(seasons)
         .set({
-          codename: season.codename ?? current.name,
-          seasonOrdinal: season.seasonOrdinal ?? current.ordinal,
+          yearId: season.yearId ?? taxonomy?.yearId ?? null,
+          yearName: season.yearName ?? taxonomy?.yearName ?? null,
+          codename: season.codename ?? live?.name ?? null,
+          seasonOrdinal: season.seasonOrdinal ?? live?.ordinal ?? null,
         })
         .where(eq(seasons.eventId, season.eventId));
     }

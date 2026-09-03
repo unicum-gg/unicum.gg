@@ -25,6 +25,15 @@ const ORDINALS = [
   "sixth",
 ] as const;
 
+/** "PHOENIX" as the client's own archive would write it, "Phoenix". */
+function titleCase(value: string | null): string | null {
+  if (value == null) return null;
+  return value.replace(
+    /\S+/g,
+    (word) => word[0].toUpperCase() + word.slice(1).toLowerCase(),
+  );
+}
+
 export interface Comp7Season {
   /** The ordinal word (`first`/`second`/`third`), matching the rank-art folder. */
   ordinal: string;
@@ -37,10 +46,23 @@ export interface Comp7Season {
 }
 
 export interface Comp7Taxonomy {
-  /** The current year's name, e.g. "Dragon" (from "YEAR OF THE DRAGON"). */
+  /** The current year's name, e.g. "Phoenix" (from "YEAR OF THE PHOENIX"). */
   yearName: string | null;
-  /** The current year's seasons, in release order (the last is the current one:
-   * the client localizes each season as it goes live). */
+  /**
+   * The current year's number, the client's own `COMP7_MASKOT_ID`: "5" was the
+   * Dragon year, "6" is the Phoenix year. It increments once per year, which
+   * makes it the identity of a chapter, and the only thing here that says WHICH
+   * year the season names below belong to.
+   */
+  yearId: string | null;
+  /**
+   * The current year's seasons, in release order.
+   *
+   * All three, from the year's first day: the client ships the whole year's
+   * names at once rather than adding each as it goes live. So the live season is
+   * NOT the last entry, and picking it needs a count of the seasons of this year
+   * that have already been played (see the season resolution in core).
+   */
   seasons: Comp7Season[];
 }
 
@@ -66,14 +88,21 @@ export class SourceComp7Resource {
   }
 
   async seasonTaxonomy(): Promise<Comp7Taxonomy> {
-    const po = await loadPo(
-      BRANCH_BY_REGION[this.region],
-      "comp7.comp7_ext",
-      (url) => this.#text(url),
+    const [po, yearId] = await Promise.all([
+      loadPo(BRANCH_BY_REGION[this.region], "comp7.comp7_ext", (url) =>
+        this.#text(url),
+      ),
+      this.yearId(),
+    ]);
+    // "ONSLAUGHT. YEAR OF THE PHOENIX". The heading is shouted, so the name is
+    // title-cased back: it is read as a name ("Year of the Phoenix"), and it is
+    // the same name `archiveYears()` returns once the year is over, where the
+    // client writes it as "Phoenix". Normalising here is what lets the two
+    // sources be compared at all.
+    const yearRaw = po.get("rewardsScreen/description/year");
+    const yearName = titleCase(
+      yearRaw?.match(/YEAR OF THE\s+(.+?)\s*$/i)?.[1]?.trim() ?? null,
     );
-    const yearRaw = po.get("rewardsScreen/description/year"); // "ONSLAUGHT. YEAR OF THE DRAGON"
-    const yearName =
-      yearRaw?.match(/YEAR OF THE\s+(.+?)\s*$/i)?.[1]?.trim() ?? null;
 
     const seasons: Comp7Season[] = [];
     for (let i = 0; i < ORDINALS.length; i++) {
@@ -87,7 +116,23 @@ export class SourceComp7Resource {
         shortName: po.get(`shortSeasonName/${ordinal}`)?.trim() ?? name.trim(),
       });
     }
-    return { yearName, seasons };
+    return { yearName, yearId, seasons };
+  }
+
+  /**
+   * The current year's number, from the client's `COMP7_MASKOT_ID`. Null on a
+   * fetch miss, which callers must treat as "unknown" rather than as a year:
+   * stamping a season with the wrong chapter is not recoverable, since the
+   * localization it would be re-derived from has moved on by then.
+   */
+  async yearId(): Promise<string | null> {
+    const text = await this.#text(
+      rawUrl(
+        BRANCH_BY_REGION[this.region],
+        "sources/res/comp7/scripts/common/comp7_common_const.py",
+      ),
+    ).catch(() => "");
+    return /COMP7_MASKOT_ID\s*=\s*'([^']+)'/.exec(text)?.[1] ?? null;
   }
 
   /**
