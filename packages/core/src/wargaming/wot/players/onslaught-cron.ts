@@ -29,11 +29,13 @@ const SCHEDULE = "50 5 * * *";
 /** Schedule the daily reconcile, per region so one slow region cannot stall the others. */
 export function startOnslaughtReconcileCron(): void {
   for (const region of REGIONS) {
-    scheduleCron(`onslaught-reconcile-cron-${region}`, SCHEDULE, async () => {
+    const name = `onslaught-reconcile-cron-${region}`;
+    const armed = scheduleCron(name, SCHEDULE, async () => {
       const { resolved, formerNames } = await reconcileOnslaught(region);
       console.log(
         `[onslaught-reconcile] ${region}: ${resolved} identities resolved, ${formerNames} former name(s) recorded`,
       );
     });
+    if (armed) console.log(`[${name}] scheduled (${SCHEDULE})`);
   }
 }

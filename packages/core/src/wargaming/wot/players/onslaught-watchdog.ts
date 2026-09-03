@@ -134,7 +134,7 @@ async function report(message: string): Promise<void> {
 
 /** Schedule the watchdog. One global job: it reads three small rows. */
 export function startOnslaughtWatchdogCron(): void {
-  scheduleCron("onslaught-watchdog", SCHEDULE, async () => {
+  const armed = scheduleCron("onslaught-watchdog", SCHEDULE, async () => {
     const readings = await checkCaptureFreshness();
     const summary = readings
       .map(
@@ -144,4 +144,5 @@ export function startOnslaughtWatchdogCron(): void {
       .join(" ");
     console.log(`[onslaught-watchdog] ${summary}`);
   });
+  if (armed) console.log(`[onslaught-watchdog] scheduled (${SCHEDULE})`);
 }
