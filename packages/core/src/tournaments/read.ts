@@ -9,6 +9,7 @@ import {
 } from "./clans";
 import { sanitizeTournamentHtml } from "./sanitize";
 import {
+  clanMembersByRegion,
   clansByRegion,
   playersByRegion,
   tournamentGroupsByRegion,
@@ -586,6 +587,14 @@ export type PlayerTournamentTeammate = {
   nickname: string;
   clanTag: string | null;
   clanColor: string | null;
+  /** The winner's crest, so a teammate is named the same way here as in every
+   * other list. The auth-backed badges are attached at the API boundary. */
+  tournamentWins: number;
+  tournamentFeaturedWins: number;
+  tournamentBestTitle: string | null;
+  isVerified?: boolean;
+  isSupporter?: boolean;
+  twitchLogin?: string | null;
   /** Tournaments the two entered on the same team. */
   together: number;
   /** The most recent of those, which is what separates a current teammate from
@@ -716,6 +725,13 @@ export async function getPlayerTournaments(
           nickname: players.nickname,
           clanTag: clans.tag,
           clanColor: clans.color,
+          // Denormalised on the player row, so the winner's crest costs this
+          // query nothing. The three that depend on auth (verified, supporter,
+          // streamer) are attached at the API boundary instead, like every
+          // other list on the site.
+          tournamentWins: players.tournamentWins,
+          tournamentFeaturedWins: players.tournamentFeaturedWins,
+          tournamentBestTitle: players.tournamentBestTitle,
         })
         .from(rosters)
         .innerJoin(t, eq(t.id, rosters.tournamentId))
@@ -728,7 +744,15 @@ export async function getPlayerTournaments(
             sql`${rosters.accountId} <> ${accountId}`,
           ),
         )
-        .groupBy(rosters.accountId, players.nickname, clans.tag, clans.color)
+        .groupBy(
+          rosters.accountId,
+          players.nickname,
+          clans.tag,
+          clans.color,
+          players.tournamentWins,
+          players.tournamentFeaturedWins,
+          players.tournamentBestTitle,
+        )
         .orderBy(
           desc(sql`count(DISTINCT ${rosters.tournamentId})`),
           desc(sql`max(${t.startAt})`),
@@ -741,6 +765,9 @@ export async function getPlayerTournaments(
     nickname: m.nickname ?? m.lastKnownNickname,
     clanTag: m.clanTag,
     clanColor: m.clanColor,
+    tournamentWins: m.tournamentWins ?? 0,
+    tournamentFeaturedWins: m.tournamentFeaturedWins ?? 0,
+    tournamentBestTitle: m.tournamentBestTitle ?? null,
     together: Number(m.together),
     lastAt: new Date(m.lastAt),
   }));
@@ -933,13 +960,47 @@ export type ClanTournamentEntry = {
   bestPosition: number | null;
 };
 
+/**
+ * One of the clan's own members, and what they have done in tournaments.
+ *
+ * Answers the question a captain actually has, which is who to field: the clan
+ * page already lists who is IN the clan, and this says which of them turns up
+ * to compete and which of them wins.
+ *
+ * Both counters are carried rather than a single score, because the ratio
+ * between them is the whole signal and a total hides it. KAIZN's most decorated
+ * member has 13 wins from 1,359 entries, the next has 6 from 87: the second
+ * wins seven times as often and would be invisible behind a leaderboard sorted
+ * on wins alone.
+ *
+ * The record is the player's WHOLE record, not what they won wearing this tag.
+ * A captain picking a line-up is judging the player, and a title won in a
+ * previous clan says as much about them as one won here.
+ */
+export type ClanTournamentPlayer = {
+  accountId: number;
+  nickname: string;
+  /** Tournaments they were on a roster for. */
+  entered: number;
+  /** The crest's own counter, so a member's row cannot contradict the mark
+   * beside their name. */
+  wins: number;
+  featuredWins: number;
+  lastAt: Date;
+};
+
 export type ClanTournamentRecord = {
   clanId: number;
   tag: string;
   entries: ClanTournamentEntry[];
   /** Entries whose team finished first in one of the tournament's brackets. */
   wins: number;
+  /** The clan's own members who compete, most decorated first. */
+  players: ClanTournamentPlayer[];
 };
+
+/** How many members the line-up panel shows. */
+const CLAN_PLAYER_LIMIT = 24;
 
 /**
  * Every tournament a clan has entered, newest first.
@@ -968,8 +1029,41 @@ export async function getClanTournaments(
   if (!clan) return null;
 
   const clanId = Number(clan.id);
-  const teams = tournamentTeamsByRegion[region];
+
   const t = tournamentsByRegion[region];
+  // Started here rather than after the entries read, because it needs nothing
+  // but `clanId`: the two run together and the tab pays the slower of them
+  // instead of their sum.
+  const members = clanMembersByRegion[region];
+  const players = playersByRegion[region];
+  const rosters = tournamentTeamPlayersByRegion[region];
+  const playerRowsPromise = db
+    .select({
+      accountId: players.accountId,
+      nickname: players.nickname,
+      wins: players.tournamentWins,
+      featuredWins: players.tournamentFeaturedWins,
+      entered: sql<number>`count(DISTINCT ${rosters.tournamentId})::int`,
+      lastAt: sql<string>`max(${t.startAt})`,
+    })
+    .from(members)
+    .innerJoin(players, eq(players.accountId, members.accountId))
+    .innerJoin(rosters, eq(rosters.accountId, members.accountId))
+    .innerJoin(t, eq(t.id, rosters.tournamentId))
+    .where(eq(members.clanId, clanId))
+    .groupBy(
+      players.accountId,
+      players.nickname,
+      players.tournamentWins,
+      players.tournamentFeaturedWins,
+    )
+    .orderBy(
+      desc(players.tournamentWins),
+      desc(sql`count(DISTINCT ${rosters.tournamentId})`),
+    )
+    .limit(CLAN_PLAYER_LIMIT);
+
+  const teams = tournamentTeamsByRegion[region];
 
   const rows = await db
     .select({
@@ -1037,6 +1131,22 @@ export async function getClanTournaments(
     bestPosition: bestByTeam.get(Number(r.teamId)) ?? null,
   }));
 
+  // The clan's current roster crossed with the tournament rosters. Members who
+  // have never entered are dropped, but everyone who has is kept, titled or
+  // not: three hundred entries without a win is not an empty row, it is a
+  // regular competitor, and knowing who in the clan actually turns up is half
+  // of what picking a line-up needs. What their row LEADS with changes instead
+  // (see the panel): a winner is announced by their titles, everyone else by
+  // how much they play.
+  //
+  // Winners first all the same, then the most active. Wins is a coarse measure
+  // of the first group and that is a known trade rather than a hidden one: the
+  // same members hold real podiums (one has 2 wins and 51 top-three finishes
+  // from 504 entries), but counting those means joining the standings, at 1.97s
+  // against 0.47s for this. The fix when it is wanted is a denormalised podium
+  // counter beside `tournament_wins`, which the winners pass already walks the
+  // standings to write.
+
   return {
     clanId,
     tag: clan.tag,
@@ -1044,5 +1154,13 @@ export async function getClanTournaments(
     // Same as the player twin above: the counter the crest is written from,
     // not a count of best-in-any-group.
     wins: clan.tournamentWins,
+    players: (await playerRowsPromise).map((r) => ({
+      accountId: Number(r.accountId),
+      nickname: r.nickname,
+      entered: Number(r.entered),
+      wins: r.wins ?? 0,
+      featuredWins: r.featuredWins ?? 0,
+      lastAt: new Date(r.lastAt),
+    })),
   };
 }

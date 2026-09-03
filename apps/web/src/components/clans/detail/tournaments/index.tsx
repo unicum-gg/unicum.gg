@@ -13,6 +13,7 @@ import type { Region } from "@unicum.gg/wargaming";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { CLAN_TOURNAMENTS_SKELETON_COLUMNS } from "./columns";
 import { ClanTournamentsTable } from "./table";
+import { ClanTournamentLineup } from "./lineup";
 import type { ClanTournamentRecord } from "./row";
 
 /**
@@ -77,6 +78,14 @@ export function ClanTournamentsTab({
         )}
       </PanelContent>
       </Panel>
+      {/* No loading guard: the panel renders nothing on an empty list, which
+          is what a clan with no competitors and a tab still loading both
+          look like. */}
+      <ClanTournamentLineup
+        region={region}
+        tag={tag}
+        players={data?.players ?? []}
+      />
     </>
   );
 }

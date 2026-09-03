@@ -29,9 +29,24 @@ export type ClanTournamentEntry = {
   bestPosition: number | null;
 };
 
+/** A member of the clan and their tournament record. */
+export type ClanTournamentPlayer = {
+  accountId: number;
+  nickname: string;
+  entered: number;
+  wins: number;
+  featuredWins: number;
+  lastAt: Date;
+  isVerified?: boolean;
+  isSupporter?: boolean;
+  twitchLogin?: string | null;
+  tournamentBestTitle?: string | null;
+};
+
 export type ClanTournamentRecord = {
   clanId: number;
   tag: string;
   entries: ClanTournamentEntry[];
   wins: number;
+  players: ClanTournamentPlayer[];
 };

@@ -1,6 +1,7 @@
 import { isRegion } from "@unicum.gg/wargaming";
 import { getClanTournaments } from "@unicum.gg/core/tournaments/read";
 import { jsonResponse } from "@/services/openapi/json-response";
+import { attachPlayerCrests } from "@/services/players/attach-badges";
 import { ClanTournamentsResponse } from "./schema.api";
 import { measured } from "@/services/perf";
 
@@ -32,7 +33,12 @@ async function GET__perf(
   if (!data) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-  return jsonResponse(ClanTournamentsResponse, data, {
-    headers: { "cache-control": "public, max-age=300" },
-  });
+  // The members' crests, attached here like every other list producer, so a
+  // name in the line-up reads the same as it does anywhere else on the site.
+  const playersWithBadges = await attachPlayerCrests(region, data.players);
+  return jsonResponse(
+    ClanTournamentsResponse,
+    { ...data, players: playersWithBadges },
+    { headers: { "cache-control": "public, max-age=300" } },
+  );
 }

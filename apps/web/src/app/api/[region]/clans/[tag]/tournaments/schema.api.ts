@@ -48,11 +48,36 @@ export const clanTournamentEntry = z
     description: "One tournament a clan entered, and how its team finished.",
   });
 
+export const clanTournamentPlayer = z
+  .object({
+    accountId: z.number(),
+    nickname: z.string(),
+    entered: z.number().meta({
+      description: "Tournaments this member was on a roster for.",
+    }),
+    wins: z.number(),
+    featuredWins: z.number(),
+    lastAt: z.date(),
+    isVerified: z.boolean().optional(),
+    isSupporter: z.boolean().optional(),
+    twitchLogin: z.string().nullable().optional(),
+    tournamentBestTitle: z.string().nullable().optional(),
+  })
+  .meta({
+    id: "ClanTournamentPlayer",
+    description:
+      "A member of the clan and their tournament record. Both counters are given rather than a single score: the ratio between them is the signal, and a member with 6 wins from 87 entries wins far more often than one with 13 from 1,359.",
+  });
+
 /** Response of `GET /{region}/clans/{tag}/tournaments`. */
 export const ClanTournamentsResponse = z.object({
   clanId: z.number(),
   tag: z.string(),
   entries: z.array(clanTournamentEntry),
+  players: z.array(clanTournamentPlayer).meta({
+    description:
+      "The clan's own members who compete, most decorated first. The record is each player's whole record, not only what they won wearing this tag.",
+  }),
   wins: z.number().meta({
     description: "Entries whose team finished first in one of the brackets.",
   }),
