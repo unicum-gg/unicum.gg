@@ -97,6 +97,9 @@ export type PlayerTabsViewProps = {
   /** Tournament record, server-rendered on a direct `/tournaments` landing;
    * null otherwise, so the tab fetches on demand. */
   initialTournaments: PlayerTournamentRecord | null;
+  /** Onslaught record, server-rendered on a direct `/onslaught` landing; null
+   * on every other view, where the client fetches it when the mode is opened. */
+  initialOnslaught: PlayerOnslaughtData | null;
 };
 
 export function PlayerTabsView({
@@ -114,6 +117,7 @@ export function PlayerTabsView({
   initialSessions,
   initialAchievements,
   initialTournaments,
+  initialOnslaught,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -179,10 +183,16 @@ export function PlayerTabsView({
     unicum.region(region).players(nickname).onslaught();
   const onOnslaught =
     section === PlayerSection.Overview && mode === PlayerMode.Onslaught;
+  const seededOnslaught = initialOnslaught != null;
   const { data: onslaught } = useSWR(
     onOnslaught ? onslaughtReq().url() : null,
     () => onslaughtReq().then((r) => r as unknown as PlayerOnslaughtData),
-    { revalidateOnFocus: false, shouldRetryOnError: false },
+    {
+      fallbackData: initialOnslaught ?? undefined,
+      revalidateOnMount: !seededOnslaught,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
   );
 
   // Same on-demand shape as the two above, plus a bucket size the reader picks.

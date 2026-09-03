@@ -10,6 +10,7 @@ import {
 import { PlayerProfile } from "@/components/players/detail/view";
 import { AccountLockedView } from "@/components/players/detail/account-locked";
 import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
+import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
@@ -325,6 +326,22 @@ async function PlayerProfileServer({
           .then((r) => r as unknown as PlayerTournamentRecord)
           .catch(() => null)
       : null;
+  // Same treatment for the Onslaught record, and it is a MODE rather than a
+  // section, so it keys off the mode row instead. Caught for the same reason as
+  // the tournaments above: this endpoint resolves the nickname against our own
+  // players table while the profile around it resolves live through Wargaming,
+  // so a player renamed since our last refresh has a working page and no row
+  // under that name, and letting that throw would take the profile down over a
+  // mode.
+  const initialOnslaught: PlayerOnslaughtData | null =
+    mode === PlayerMode.Onslaught
+      ? await unicum
+          .region(region)
+          .players(decoded)
+          .onslaught()
+          .then((r) => r as unknown as PlayerOnslaughtData)
+          .catch(() => null)
+      : null;
   const initialSessions: PlayerSession[] | null =
     section === PlayerSection.Sessions
       ? ((
@@ -389,6 +406,7 @@ async function PlayerProfileServer({
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
         initialTournaments={initialTournaments}
+        initialOnslaught={initialOnslaught}
       />
       {/* Fills the leftover height on short tabs (e.g. Value) so the side
           borders run down to the footer instead of stopping at the last panel,
