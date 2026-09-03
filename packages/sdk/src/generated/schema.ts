@@ -2133,6 +2133,9 @@ export interface components {
             isVerified?: boolean;
             isSupporter?: boolean;
             twitchLogin?: string | null;
+            tournamentWins?: number;
+            tournamentFeaturedWins?: number;
+            tournamentBestTitle?: string | null;
         };
         /** @description A member's aggregate stats over a period. */
         ClanMemberPeriodStats: {
@@ -2176,13 +2179,13 @@ export interface components {
         ClanPreviousClansResponse: {
             previousClans: components["schemas"]["PreviousClan"][];
         };
-        /** @description A podium position (rank 1 to 3) the clan currently holds on one leaderboard. */
+        /** @description A top-ten position the clan currently holds on one leaderboard. */
         ClanRankBadge: {
             /**
              * @description The leaderboard this placing is on.
              * @enum {string}
              */
-            board: "wn7" | "wn8" | "wnx" | "advances" | "t10" | "t8" | "t6";
+            board: "advances" | "t10" | "t8" | "t6";
             rank: number;
         };
         /** @description The clan's battle-weighted aggregate ratings: lifetime and 30-day WN7/WN8/WNX (weighted by lifetime and recent battles), plus the lifetime average win rate. */
@@ -2312,10 +2315,27 @@ export interface components {
             /** @description Best placement the team reached across the tournament's stages. Null when nothing placed it: a team that never got past registration, and every team in a double-elimination bracket, which records no placement at all. */
             bestPosition: number | null;
         };
+        /** @description A member of the clan and their tournament record. Both counters are given rather than a single score: the ratio between them is the signal, and a member with 6 wins from 87 entries wins far more often than one with 13 from 1,359. */
+        ClanTournamentPlayer: {
+            accountId: number;
+            nickname: string;
+            /** @description Tournaments this member was on a roster for. */
+            entered: number;
+            wins: number;
+            featuredWins: number;
+            /** Format: date-time */
+            lastAt: Date;
+            isVerified?: boolean;
+            isSupporter?: boolean;
+            twitchLogin?: string | null;
+            tournamentBestTitle?: string | null;
+        };
         ClanTournamentsResponse: {
             clanId: number;
             tag: string;
             entries: components["schemas"]["ClanTournamentEntry"][];
+            /** @description The clan's own members who compete, most decorated first. The record is each player's whole record, not only what they won wearing this tag. */
+            players: components["schemas"]["ClanTournamentPlayer"][];
             /** @description Entries whose team finished first in one of the brackets. */
             wins: number;
         };
@@ -3717,6 +3737,29 @@ export interface components {
             entries: components["schemas"]["PlayerTournamentEntry"][];
             /** @description Entries whose team finished first in one of the tournament's brackets. */
             wins: number;
+            /** @description Who this player competes with, most-played-with first. Answerable only from the mirrored rosters: Wargaming's tournament system is addressable from the tournament's side alone. */
+            teammates: components["schemas"]["PlayerTournamentTeammate"][];
+        };
+        /** @description Someone this player has shared a tournament roster with. */
+        PlayerTournamentTeammate: {
+            accountId: number;
+            /** @description The teammate's name as it stands now, falling back to the name they last carried on a shared roster for an account we do not track. */
+            nickname: string;
+            clanTag: string | null;
+            clanColor: string | null;
+            tournamentWins: number;
+            tournamentFeaturedWins: number;
+            tournamentBestTitle: string | null;
+            isVerified?: boolean;
+            isSupporter?: boolean;
+            twitchLogin?: string | null;
+            /** @description Tournaments the two entered on the same team. */
+            together: number;
+            /**
+             * Format: date-time
+             * @description The most recent tournament they played together.
+             */
+            lastAt: Date;
         };
         /** @description A tank the player has battles in, with per-battle averages and WN7/WN8/WNX ratings. */
         PlayerVehicle: {
@@ -5028,6 +5071,12 @@ export interface components {
             winrate: number;
             /** @description The ranked metric's value. */
             value: number;
+            is_verified?: boolean;
+            is_supporter?: boolean;
+            twitch_login?: string | null;
+            tournament_wins?: number;
+            tournament_featured_wins?: number;
+            tournament_best_title?: string | null;
         };
         /**
          * @description How a stage's teams are paired up.
@@ -5174,6 +5223,12 @@ export interface components {
             currentNickname: string | null;
             clanTag: string | null;
             clanColor: string | null;
+            isVerified?: boolean;
+            isSupporter?: boolean;
+            twitchLogin?: string | null;
+            tournamentWins?: number;
+            tournamentFeaturedWins?: number;
+            tournamentBestTitle?: string | null;
             /** @description The clan they were in ON THE DAY, which is the tag the recorded nickname belongs beside. Wargaming freezes the nickname at the time of the tournament, so pairing it with today's clan would put a 2018 name next to a clan joined years later. */
             recordedClanTag: string | null;
             recordedClanColor: string | null;
