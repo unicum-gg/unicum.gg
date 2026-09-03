@@ -1,15 +1,13 @@
 "use client";
 
-import Image from "next/image";
-import Link from "next/link";
 import { GlossaryLabel } from "@/components/glossary/label";
-import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanName } from "@/components/entity/clan-name";
+import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { Period } from "@/hooks/use-period";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
-import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import {
@@ -145,30 +143,13 @@ function ClanRow({
         )}
       </TableCell>
       <TableCell>
-        <Link
-          href={ROUTES.CLAN(region, clan.tag)}
-          className="flex items-center gap-3 hover:underline"
-        >
-          {clan.emblem ? (
-            <Image
-              src={clan.emblem}
-              alt=""
-              width={24}
-              height={24}
-              className="size-6 shrink-0 rounded"
-            />
-          ) : (
-            <span className="size-6 shrink-0 rounded bg-muted" />
-          )}
-          <span className="min-w-0 flex-1 truncate">
-            <ClanTag
-              tag={clan.tag}
-              color={clan.color}
-              className="font-mono font-semibold"
-            />{" "}
-            <span className="text-muted-foreground">{clan.name}</span>
-          </span>
-        </Link>
+        <ClanName
+          region={region}
+          clan={clanIdentityFromRow(clan)}
+          showEmblem
+          showName
+          size={14}
+        />
       </TableCell>
       <TableCell
         className={cn(

@@ -1,6 +1,4 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanName } from "@/components/entity/clan-name";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import {
@@ -12,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Skeleton } from "@/components/ui/skeleton";
-import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { PreviousClanRow } from "@/services/clans/previous-clans";
 import type { Region } from "@unicum.gg/wargaming";
@@ -82,32 +79,15 @@ export function PreviousClansTable(
                 )}
               </TableCell>
               <TableCell>
-                <Link
-                  href={ROUTES.CLAN(props.region, r.tag)}
-                  className="flex items-center gap-3 hover:underline"
-                >
-                  {r.emblem ? (
-                    <Image
-                      src={r.emblem}
-                      alt=""
-                      width={24}
-                      height={24}
-                      className="size-6 shrink-0 rounded"
-                    />
-                  ) : (
-                    <span className="size-6 shrink-0 rounded bg-muted" />
-                  )}
-                  <span className="flex min-w-0 flex-1 items-center gap-2">
-                    <span className="min-w-0 flex-1 truncate">
-                      <ClanTag
-                        tag={r.tag}
-                        color={r.color}
-                        className="font-mono font-semibold"
-                      />{" "}
-                      <span className="text-muted-foreground">{r.name}</span>
-                    </span>
-                    {r.languages.length > 0 && (
-                      <span className="hidden h-4 shrink-0 sm:inline-flex">
+                <ClanName
+                  region={props.region}
+                  clan={{ tag: r.tag, color: r.color, name: r.name, emblem: r.emblem }}
+                  showEmblem
+                  showName
+                  size={14}
+                  trailing={
+                    r.languages.length > 0 ? (
+                      <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
                         <LanguageFlags
                           languages={r.languages}
                           source="declared"
@@ -116,9 +96,9 @@ export function PreviousClansTable(
                           link={false}
                         />
                       </span>
-                    )}
-                  </span>
-                </Link>
+                    ) : null
+                  }
+                />
               </TableCell>
               <TableCell className="text-right tabular-nums">
                 {intFmt.format(r.totalCount)}

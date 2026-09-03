@@ -1,11 +1,9 @@
 "use client";
 
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
-import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
-import { ClanTag } from "@/components/entity/clan-tag";
+import { ClanName } from "@/components/entity/clan-name";
+import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { RosterBoostBadge } from "@/components/clans/roster-boost-badge";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
@@ -195,59 +193,33 @@ export function StrongholdTable({
                   )}
                 </TableCell>
                 <TableCell>
-                  {/* Badges are siblings of the row link (each crest
-                      links to its own board) and the link does not take
-                      `flex-1`, so they stay next to the name instead of
-                      drifting to the edge of the cell. */}
-                  <span className="flex items-center gap-2">
-                  <Link
-                    href={ROUTES.CLAN_STRONGHOLD(region, entry.tag, tier)}
-                    className="flex min-w-0 items-center gap-3 hover:underline"
-                  >
-                    {entry.emblem ? (
-                      <Image
-                        src={entry.emblem}
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="size-6 shrink-0 rounded"
-                      />
-                    ) : (
-                      <span className="size-6 shrink-0 rounded bg-muted" />
-                    )}
-                    <span className="flex min-w-0 items-center gap-2">
-                      <span className="min-w-0 truncate">
-                        <ClanTag
-                          tag={entry.tag}
-                          color={entry.color}
-                          className="font-mono font-semibold"
-                        />{" "}
-                        <span className="text-muted-foreground">
-                          {entry.name}
-                        </span>
-                      </span>
-                      <RosterBoostBadge boostRatio={entry.boostRatio} />
-                    </span>
-                  </Link>
-                  <ClanBadges
-                    badges={entry.badges?.filter(
-                      (b) => b.board !== CLAN_BOARD_BY_STRONGHOLD_TIER[tier],
-                    )}
+                  <ClanName
                     region={region}
+                    clan={clanIdentityFromRow(entry)}
+                    href={ROUTES.CLAN_STRONGHOLD(region, entry.tag, tier)}
+                    showEmblem
+                    showName
+                    // The board this table IS, so a row does not repeat its own
+                    // placing on every line.
+                    omitBoard={CLAN_BOARD_BY_STRONGHOLD_TIER[tier]}
                     size={14}
+                    trailing={
+                      <>
+                        <RosterBoostBadge boostRatio={entry.boostRatio} />
+                        {entry.languages.length > 0 && (
+                          <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                            <LanguageFlags
+                              languages={entry.languages}
+                              source="declared"
+                              size="s"
+                              region={region}
+                              link={false}
+                            />
+                          </span>
+                        )}
+                      </>
+                    }
                   />
-                  {entry.languages.length > 0 && (
-                    <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
-                      <LanguageFlags
-                        languages={entry.languages}
-                        source="declared"
-                        size="s"
-                        region={region}
-                        link={false}
-                      />
-                    </span>
-                  )}
-                  </span>
                 </TableCell>
                 <TableCell className="text-center text-muted-foreground tabular-nums">
                   {intFmt.format(entry.membersCount)}
