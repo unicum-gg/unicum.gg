@@ -116,6 +116,11 @@ async function main(): Promise<void> {
   const { startTournamentsCron } = await import("@unicum.gg/core/tournaments/cron");
   startTournamentsCron();
 
+  const { startOnslaughtReconcileCron } = await import(
+    "@unicum.gg/core/wargaming/wot/players/onslaught-cron"
+  );
+  startOnslaughtReconcileCron();
+
   // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
   // real per-region req/s (all consumers, vs the rate-limit budget) is only
   // observable here, at the transport. Log it every 60s as requests/second.
