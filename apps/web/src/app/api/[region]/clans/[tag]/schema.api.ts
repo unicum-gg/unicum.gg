@@ -49,6 +49,9 @@ export const clanMember = z
     isVerified: z.boolean().optional(),
     isSupporter: z.boolean().optional(),
     twitchLogin: z.string().nullable().optional(),
+    tournamentWins: z.number().optional(),
+    tournamentFeaturedWins: z.number().optional(),
+    tournamentBestTitle: z.string().nullable().optional(),
   })
   .loose()
   .meta({

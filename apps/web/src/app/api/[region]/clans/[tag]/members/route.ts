@@ -1,6 +1,6 @@
 import { loadClanDetailByTag } from "@/services/clans/detail";
 import { jsonResponse } from "@/services/openapi/json-response";
-import { resolvePlayerBadges } from "@unicum.gg/core/players/badges";
+import { attachPlayerCrests } from "@/services/players/attach-badges";
 import { isRegion } from "@unicum.gg/wargaming";
 import { ClanMembersResponse } from "./schema.api";
 import { measured } from "@/services/perf";
@@ -30,18 +30,6 @@ async function GET__perf(
   if (!detail) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-  const badges = await resolvePlayerBadges(
-    region,
-    detail.members.map((m) => m.accountId),
-  );
-  const members = detail.members.map((m) => {
-    const b = badges.get(m.accountId);
-    return {
-      ...m,
-      isVerified: b?.verified ?? false,
-      isSupporter: b?.supporter ?? false,
-      twitchLogin: b?.twitchLogin ?? null,
-    };
-  });
+  const members = await attachPlayerCrests(region, detail.members);
   return jsonResponse(ClanMembersResponse, { members });
 }

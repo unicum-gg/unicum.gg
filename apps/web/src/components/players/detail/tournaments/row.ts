@@ -34,6 +34,12 @@ export type PlayerTournamentTeammate = {
   nickname: string;
   clanTag: string | null;
   clanColor: string | null;
+  tournamentWins: number;
+  tournamentFeaturedWins: number;
+  tournamentBestTitle: string | null;
+  isVerified?: boolean;
+  isSupporter?: boolean;
+  twitchLogin?: string | null;
   together: number;
   lastAt: Date;
 };

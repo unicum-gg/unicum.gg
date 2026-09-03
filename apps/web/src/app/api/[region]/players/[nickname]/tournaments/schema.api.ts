@@ -55,6 +55,12 @@ export const playerTournamentTeammate = z
     }),
     clanTag: z.string().nullable(),
     clanColor: z.string().nullable(),
+    tournamentWins: z.number(),
+    tournamentFeaturedWins: z.number(),
+    tournamentBestTitle: z.string().nullable(),
+    isVerified: z.boolean().optional(),
+    isSupporter: z.boolean().optional(),
+    twitchLogin: z.string().nullable().optional(),
     together: z.number().meta({
       description: "Tournaments the two entered on the same team.",
     }),

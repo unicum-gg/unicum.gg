@@ -16,6 +16,12 @@ export const tournamentRosterEntry = z
     }),
     clanTag: z.string().nullable(),
     clanColor: z.string().nullable(),
+    isVerified: z.boolean().optional(),
+    isSupporter: z.boolean().optional(),
+    twitchLogin: z.string().nullable().optional(),
+    tournamentWins: z.number().optional(),
+    tournamentFeaturedWins: z.number().optional(),
+    tournamentBestTitle: z.string().nullable().optional(),
     recordedClanTag: z.string().nullable().meta({
       description:
         "The clan they were in ON THE DAY, which is the tag the recorded nickname belongs beside. Wargaming freezes the nickname at the time of the tournament, so pairing it with today's clan would put a 2018 name next to a clan joined years later.",

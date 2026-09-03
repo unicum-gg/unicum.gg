@@ -25,6 +25,13 @@ export type ClanMemberStats = PortalClanMember &
     isVerified?: boolean;
     isSupporter?: boolean;
     twitchLogin?: string | null;
+    // The winner's crest, from the same resolver as the three above. It already
+    // returned these and the members endpoint dropped them, so a member who had
+    // won a tournament wore the crest on the leaderboards and nothing in their
+    // own clan's roster.
+    tournamentWins?: number;
+    tournamentFeaturedWins?: number;
+    tournamentBestTitle?: string | null;
   };
 
 // Boost detection. A member reads as a "boost account" (an account with very

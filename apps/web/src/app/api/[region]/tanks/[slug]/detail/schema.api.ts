@@ -45,6 +45,15 @@ const topTankPlayer = z.object({
   avg_damage: z.number(),
   winrate: z.number(),
   value: z.number().meta({ description: "The ranked metric's value." }),
+  // The crests, so a player is named here exactly as on every other board.
+  // Optional: this payload is cached whole, and an entry written before these
+  // existed answers without them until it expires.
+  is_verified: z.boolean().optional(),
+  is_supporter: z.boolean().optional(),
+  twitch_login: z.string().nullable().optional(),
+  tournament_wins: z.number().optional(),
+  tournament_featured_wins: z.number().optional(),
+  tournament_best_title: z.string().nullable().optional(),
 });
 
 const researchPathItem = z.object({

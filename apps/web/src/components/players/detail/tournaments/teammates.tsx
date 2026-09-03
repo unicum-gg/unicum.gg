@@ -1,11 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
-import {
-  PANEL_ROW_CLASS,
-  PANEL_ROW_VALUE_CELL_CLASS,
-} from "@/components/entity/panel-row";
 import {
   Panel,
   PanelContent,
@@ -13,72 +7,11 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { RelativeTime } from "@/components/relative-time";
-import ROUTES from "@/constants/routes";
+import { PlayerPanelList } from "@/components/entity/player-panel-list";
 import type { Region } from "@unicum.gg/wargaming";
 import type { PlayerTournamentTeammate } from "./row";
 
 const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
-
-/** How many columns the list is dealt into at full width. */
-const COLUMNS = 3;
-
-/**
- * Dealt into balanced columns rather than filling each in turn, like the marks
- * panel's reach list: four rows across three columns read as two, one and one
- * otherwise. Empty columns are dropped, so a short list never draws a blank
- * card beside a populated one.
- */
-function columnsOf<T>(rows: T[], count: number): T[][] {
-  const per = Math.ceil(rows.length / count);
-  return Array.from({ length: count }, (_, i) =>
-    rows.slice(i * per, (i + 1) * per),
-  ).filter((column) => column.length > 0);
-}
-
-function TeammateRow({
-  region,
-  mate,
-}: {
-  region: Region;
-  mate: PlayerTournamentTeammate;
-}) {
-  return (
-    <li className={PANEL_ROW_CLASS}>
-      <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-medium">
-          <Link
-            href={ROUTES.PLAYER(region, mate.nickname)}
-            className="hover:underline"
-          >
-            {mate.nickname}
-          </Link>
-          {mate.clanTag && (
-            <>
-              {" "}
-              <ClanTag
-                tag={mate.clanTag}
-                color={mate.clanColor}
-                className="font-mono text-xs"
-              />
-            </>
-          )}
-        </div>
-        <div className="text-xs text-fd-muted-foreground">
-          Last <RelativeTime date={mate.lastAt} />
-        </div>
-      </div>
-      <div className={PANEL_ROW_VALUE_CELL_CLASS}>
-        <span className="text-sm font-semibold">
-          {intFmt.format(mate.together)}
-        </span>
-        <span className="text-xs text-fd-muted-foreground">
-          together
-        </span>
-      </div>
-    </li>
-  );
-}
 
 /**
  * Who this player competes with.
@@ -108,7 +41,6 @@ export function TournamentTeammates({
   // Nothing to say for an account that has only ever entered solo formats, and
   // an empty panel reads as a section that failed rather than as an answer.
   if (teammates.length === 0) return null;
-  const columns = columnsOf(teammates, COLUMNS);
 
   return (
     <>
@@ -124,23 +56,27 @@ export function TournamentTeammates({
               often first. Each row carries the last time they entered together.
             </p>
           </div>
-          {/* One column or three, never two: the rows are dealt into a fixed
-              number of cards, so a grid that drops to two at some width leaves
-              the third card wrapping under the first and one column reading
-              twice as long as its neighbour. Stacked below `lg`, the three
-              cards simply follow each other and the list still reads in
-              order. */}
-          <div className="grid gap-px border-t border-fd-border bg-fd-border lg:grid-cols-3">
-            {columns.map((column, i) => (
-              <div key={i} className="bg-fd-card">
-                <ul>
-                  {column.map((mate) => (
-                    <TeammateRow key={mate.accountId} region={region} mate={mate} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+          <PlayerPanelList
+            region={region}
+            entries={teammates.map((m) => ({
+              key: m.accountId,
+              lastAt: m.lastAt,
+              value: intFmt.format(m.together),
+              caption: "together",
+              player: {
+                nickname: m.nickname,
+                accountId: m.accountId,
+                clanTag: m.clanTag,
+                clanColor: m.clanColor,
+                isVerified: m.isVerified,
+                isSupporter: m.isSupporter,
+                twitchLogin: m.twitchLogin,
+                tournamentWins: m.tournamentWins,
+                tournamentFeaturedWins: m.tournamentFeaturedWins,
+                tournamentBestTitle: m.tournamentBestTitle,
+              },
+            }))}
+          />
         </PanelContent>
       </Panel>
     </>

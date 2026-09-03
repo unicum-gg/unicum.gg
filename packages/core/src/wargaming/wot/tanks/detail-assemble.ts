@@ -1,3 +1,4 @@
+import { withPlayerBadges } from "./top-player-badges";
 import { getTankBySlug } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { getTankMomByRegion } from "@unicum.gg/core/mom";
@@ -131,11 +132,21 @@ export async function assembleTankDetail(
     }),
   ]);
 
+  // The crests, folded into the payload rather than attached per request: this
+  // whole assembly is cached and served back as a raw string, so attaching them
+  // on the way out would mean parsing and re-serialising a large JSON on every
+  // view. The cost is staleness bounded by the cache, which a badge tolerates
+  // (a new supporter's mark appears a few hours late) and a leaderboard row
+  // without any crest at all does not, since it contradicts every other list on
+  // the site. `SHAPE_VERSION` is bumped alongside, or the entries already in
+  // Redis would come back missing these fields.
+  const topByMetricWithBadges = await withPlayerBadges(region, topByMetric);
+
   return {
     tankId,
     slug: canonicalSlug,
     meta,
-    topByMetric,
+    topByMetric: topByMetricWithBadges,
     serverStats,
     wn8Expected: wn8Map.get(tankId) ?? null,
     wnxExpected: wnxMap.get(tankId) ?? null,

@@ -44,7 +44,8 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  * a catalogue entry behind it.
  * v5: `variant` on the vehicle meta.
  */
-const SHAPE_VERSION = 5;
+// 6: the top players carry their crests (see `top-player-badges`).
+const SHAPE_VERSION = 6;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

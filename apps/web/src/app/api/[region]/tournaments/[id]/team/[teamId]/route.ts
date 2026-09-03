@@ -1,6 +1,7 @@
 import { isRegion } from "@unicum.gg/wargaming";
 import { getTeamRoster } from "@unicum.gg/core/tournaments/read";
 import { jsonResponse } from "@/services/openapi/json-response";
+import { attachPlayerCrests } from "@/services/players/attach-badges";
 import { TournamentTeamRosterResponse } from "./schema.api";
 import { measured } from "@/services/perf";
 
@@ -42,7 +43,11 @@ async function GET__perf(
   if (!data) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
-  return jsonResponse(TournamentTeamRosterResponse, data, {
+  // A roster names players, so it names them the way the rest of the site does.
+  // Attached here rather than in the read, like every other list producer, so
+  // the mirror stays free of auth concerns.
+  const players = await attachPlayerCrests(region, data.players);
+  return jsonResponse(TournamentTeamRosterResponse, { ...data, players }, {
     headers: { "cache-control": "public, max-age=300" },
   });
 }
