@@ -140,6 +140,10 @@ export async function getPlayerOnslaught(
   nickname: string;
   standings: PlayerOnslaughtStanding[];
   history: PlayerOnslaughtPoint[];
+  /** When the standings shown were last true, from the source's own
+   * recomputation stamp rather than our clock, so a reader can tell a live
+   * board from one that stopped moving. Unix seconds. */
+  lastRecalculationTs: number | null;
 } | null> {
   const players = playersByRegion[region];
   const ratings = onslaughtRatingsByRegion[region];
@@ -166,6 +170,7 @@ export async function getPlayerOnslaught(
       endDate: seasons.endDate,
       elitePosition: seasons.elitePosition,
       masterPosition: seasons.masterPosition,
+      lastRecalculationTs: seasons.lastRecalculationTs,
     })
     .from(players)
     .leftJoin(ratings, eq(ratings.accountId, players.accountId))
@@ -236,6 +241,7 @@ export async function getPlayerOnslaught(
   return {
     accountId,
     nickname: playerNickname,
+    lastRecalculationTs: rows[0]?.lastRecalculationTs ?? null,
     standings,
     history: points.map((p) => ({
       t: epoch(p.capturedAt),

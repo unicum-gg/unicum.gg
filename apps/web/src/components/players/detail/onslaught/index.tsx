@@ -20,6 +20,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import ROUTES from "@/constants/routes";
+import { RelativeTime } from "@/components/relative-time";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import { unicum } from "@/services/sdk";
 
@@ -140,7 +141,15 @@ export function OnslaughtTab({
           <PanelTitle>{nickname}&apos;s Onslaught record</PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
-          <Current standing={latest} region={region} />
+          <Current
+            standing={latest}
+            region={region}
+            updatedAt={
+              data?.lastRecalculationTs != null
+                ? new Date(data.lastRecalculationTs * 1000)
+                : null
+            }
+          />
           {climb.length >= 2 ? (
             <PlayerOnslaughtChart
               climb={climb}
@@ -165,9 +174,11 @@ export function OnslaughtTab({
 function Current({
   standing,
   region,
+  updatedAt,
 }: {
   standing: Standing;
   region: Region;
+  updatedAt: Date | null;
 }) {
   const tier = onslaughtTier(standing.rank, standing);
   const href = boardHref(region, standing, true);
@@ -204,6 +215,14 @@ function Current({
           {intFmt.format(standing.battles)} battles
           {standing.ended ? " · final" : " · live season"}
         </div>
+        {updatedAt ? (
+          // The same reading the board carries: when these standings were last
+          // true, from the source's own stamp. On a live season it is the
+          // difference between a rank someone still holds and one they held.
+          <div className="text-xs text-fd-muted-foreground">
+            Updated <RelativeTime date={updatedAt} title={updatedAt.toISOString()} />
+          </div>
+        ) : null}
       </div>
     </div>
   );

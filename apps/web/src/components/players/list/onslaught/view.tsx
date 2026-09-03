@@ -1,4 +1,5 @@
 import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
+import { RelativeTime } from "@/components/relative-time";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -51,6 +52,12 @@ export async function OnslaughtView({ region }: { region: Region }) {
   ]);
 
   const { season } = initial;
+  // Unix seconds from the source, so it is the instant the standings were
+  // recomputed and not the instant our page rendered.
+  const updatedAt =
+    season?.lastRecalculationTs != null
+      ? new Date(season.lastRecalculationTs * 1000)
+      : null;
   const seasonLine = season
     ? [
         season.codename ?? season.name,
@@ -79,7 +86,25 @@ export async function OnslaughtView({ region }: { region: Region }) {
             leaderboard, straight from the game&apos;s own standings.
           </p>
           {seasonLine ? (
-            <p className="mt-3 text-sm text-fd-muted-foreground">{seasonLine}</p>
+            <p className="mt-3 text-sm text-fd-muted-foreground">
+              {seasonLine}
+              {/* When these standings were true, which is the source's own
+                  recomputation time rather than when we asked. A reader needs
+                  to know whether they are looking at the board as it stands or
+                  at something that stopped moving, and on a live season the
+                  answer changes what they do next. Absolute in the HTML and
+                  relative on screen, so an ISR page half an hour old still
+                  reads the right distance. */}
+              {updatedAt ? (
+                <>
+                  {" · updated "}
+                  <RelativeTime
+                    date={updatedAt}
+                    title={updatedAt.toISOString()}
+                  />
+                </>
+              ) : null}
+            </p>
           ) : null}
         </PanelContent>
       </Panel>

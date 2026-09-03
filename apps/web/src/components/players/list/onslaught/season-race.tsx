@@ -8,6 +8,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { formatMoment, formatPlayers } from "@/components/servers/format";
+import { RelativeTime } from "@/components/relative-time";
 import { useDisplayZone } from "@/components/servers/use-display-zone";
 import type { unicum } from "@/services/sdk";
 import { CHAMPION, LEGEND_DARK, LEGEND_LIGHT } from "./season-race-colors";
@@ -88,8 +89,19 @@ export function OnslaughtSeasonRace({
           <Cell
             title="Ranked players"
             value={latest ? formatPlayers(latest.ranked) : null}
-            unit={
-              latest ? formatMoment(new Date(latest.t * 1000), zone) : undefined
+            // How old the whole panel is. Relative rather than a clock reading,
+            // because the question a reader has is whether these figures still
+            // describe the board, and "18 minutes ago" answers it where
+            // "02:10" makes them do the arithmetic. The exact instant stays on
+            // hover.
+            unit={latest ? undefined : " "}
+            footer={
+              latest ? (
+                <RelativeTime
+                  date={new Date(latest.t * 1000)}
+                  title={formatMoment(new Date(latest.t * 1000), zone)}
+                />
+              ) : null
             }
           />
         </dl>
@@ -111,11 +123,14 @@ function Cell({
   title,
   value,
   unit,
+  footer,
   swatch,
 }: {
   title: string;
   value: string | null;
   unit?: string;
+  /** Rendered where `unit` would be, when the line is a node rather than text. */
+  footer?: React.ReactNode;
   swatch?: { light: string; dark: string };
 }) {
   return (
@@ -125,7 +140,9 @@ function Cell({
         {title}
       </dt>
       <dd className="text-2xl font-semibold tabular-nums">{value ?? "—"}</dd>
-      <dd className="text-xs text-fd-muted-foreground">{unit ?? " "}</dd>
+      <dd className="text-xs text-fd-muted-foreground">
+        {footer ?? unit ?? " "}
+      </dd>
     </div>
   );
 }

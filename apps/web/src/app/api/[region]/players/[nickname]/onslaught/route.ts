@@ -39,6 +39,7 @@ async function GET__perf(
         account_id: data.accountId,
         nickname: data.nickname,
         standings: data.standings,
+        lastRecalculationTs: data.lastRecalculationTs,
         history: data.history,
       },
       { headers: { "cache-control": "public, max-age=300" } },

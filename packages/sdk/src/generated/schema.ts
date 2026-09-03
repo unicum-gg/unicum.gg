@@ -3535,6 +3535,8 @@ export interface components {
             nickname: string;
             /** @description Every season this player ranked in, newest first. Empty when they have never reached Champion, which is the common case. */
             standings: components["schemas"]["PlayerOnslaughtStanding"][];
+            /** @description Unix seconds of the source's last board recompute, so a reader can tell how fresh the standings are. */
+            lastRecalculationTs: number | null;
             /** @description The player's climb through the most recent season they ranked in, oldest first. */
             history: components["schemas"]["PlayerOnslaughtPoint"][];
         };
