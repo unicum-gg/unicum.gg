@@ -1,8 +1,8 @@
 "use client";
 
 import { GlossaryLabel } from "@/components/glossary/label";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { RankMedal } from "@/components/rank-medal";
 import { RelativeTime } from "@/components/relative-time";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -120,28 +120,7 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell>
-        <PlayerName
-          region={region}
-          nickname={player.nickname}
-          clan={
-            player.clan_tag
-              ? { tag: player.clan_tag, color: player.clan_color }
-              : null
-          }
-          badges={
-            <PlayerBadges
-              region={region}
-              accountId={player.account_id}
-                      nickname={player.nickname}
-              verified={player.is_verified}
-              tournamentWins={player.tournament_wins}
-              tournamentFeaturedWins={player.tournament_featured_wins}
-              tournamentBestTitle={player.tournament_best_title}
-              supporter={player.is_supporter}
-              twitchLogin={player.twitch_login}
-            />
-          }
-        />
+        <PlayerName region={region} player={identityFromRow(player)} />
       </TableCell>
       <TableCell
         className={cn("pr-4 text-right font-semibold tabular-nums", colorClass)}

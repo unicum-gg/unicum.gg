@@ -32,10 +32,10 @@ const STRONGHOLD_TIER = Object.fromEntries(
 ) as Partial<Record<ClanBoard, StrongholdTier>>;
 
 /**
- * Where clicking a crest goes. The three rating boards all live on `/clans`,
- * which shows whichever metric the viewer has selected: the metric is a
- * preference rather than a route, so there is no per-metric URL to send them
- * to. The stronghold boards each have their own page.
+ * Where clicking a crest goes: every board is a stronghold tier and every tier
+ * has its own page. The `/clans` fallback is kept for a board added to the enum
+ * before its page exists, which is what the reverse table's `Partial` allows
+ * for; it is unreachable today.
  */
 function boardHref(region: Region, board: ClanBoard): string {
   const tier = STRONGHOLD_TIER[board];
@@ -190,9 +190,10 @@ function OverflowBadge({
  * The whole cluster, already ordered by the resolver (best placing first).
  * Renders nothing when the clan holds no placing, so it is always safe to mount.
  *
- * A clan can hold up to seven placings (three ratings + four stronghold boards),
- * which would crowd the tag, so past `max` the rest fold into a single "+N"
- * crest whose tooltip still lists them. Because the list is pre-sorted, the ones
+ * A clan can hold up to four placings, one per stronghold board, so past `max`
+ * the rest fold into a single "+N" crest whose tooltip still lists them. The
+ * fold was sized when there were seven, the three rating boards included; it
+ * fires rarely now and is kept because nothing stops a fifth board being added. Because the list is pre-sorted, the ones
  * that stay visible are always the clan's best.
  *
  * Every crest is a link to its board, so this must not be mounted inside another

@@ -8,7 +8,6 @@ import {
 import { format } from "date-fns";
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { PlayerName } from "@/components/entity/player-name";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { useState } from "react";
 import {
   Table,
@@ -378,19 +377,24 @@ export function ClanMembersTable(
                 {idx + 1}
               </TableCell>
               <TableCell className="font-medium">
+                {/* The clan is the page's own subject, so the tag is not
+                    repeated on every one of its members. Everything else about
+                    the identity, crests included, is the site's usual format:
+                    this table used to pass no tournament fields, so a member
+                    who had won one wore nothing here and the crest on the home
+                    leaderboard. */}
                 <PlayerName
                   region={props.region}
-                  nickname={m.name}
-                  badges={
-                    <PlayerBadges
-                      region={props.region}
-                      accountId={m.accountId}
-                      nickname={m.name}
-                      verified={m.isVerified}
-                      supporter={m.isSupporter}
-                      twitchLogin={m.twitchLogin}
-                    />
-                  }
+                  player={{
+                    nickname: m.name,
+                    accountId: m.accountId,
+                    isVerified: m.isVerified,
+                    isSupporter: m.isSupporter,
+                    twitchLogin: m.twitchLogin,
+                    tournamentWins: m.tournamentWins,
+                    tournamentFeaturedWins: m.tournamentFeaturedWins,
+                    tournamentBestTitle: m.tournamentBestTitle,
+                  }}
                 />
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">

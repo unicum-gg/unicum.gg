@@ -2,7 +2,6 @@
 
 import { format } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
@@ -19,7 +18,7 @@ import {
   RefreshKind,
   useRefreshBeacon,
 } from "@/components/refresh-beacon";
-import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
 import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
@@ -283,22 +282,20 @@ function InfoRow({
         <span>
           <span className="font-medium">Created:</span>{" "}
           {format(clan.createdAt, DAY_FORMAT)} by{" "}
-          <Link
-            href={ROUTES.PLAYER(region, clan.creatorName)}
-            className="underline-offset-2 hover:underline"
-          >
-            {clan.creatorName}
-          </Link>
+          <PlayerName
+            region={region}
+            player={{ nickname: clan.creatorName }}
+            className="inline-flex align-baseline"
+          />
         </span>
         <span className="hidden sm:inline">·</span>
         <span>
           <span className="font-medium">Commander:</span>{" "}
-          <Link
-            href={ROUTES.PLAYER(region, commanderName)}
-            className="underline-offset-2 hover:underline"
-          >
-            {commanderName}
-          </Link>
+          <PlayerName
+            region={region}
+            player={{ nickname: commanderName }}
+            className="inline-flex align-baseline"
+          />
         </span>
         {clan.isDisbanded && (
           <>

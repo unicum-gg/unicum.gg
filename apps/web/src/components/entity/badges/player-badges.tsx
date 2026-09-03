@@ -7,55 +7,45 @@ import {
 import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
 import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
 import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
+import type { PlayerIdentity } from "@/components/entity/player-identity";
 
 /**
- * The public badge cluster shown after a nickname wherever a player appears
- * (leaderboards, clan members, search, tank top players). Drop into
- * `PlayerName`'s `badges` slot. The three crests (verified, supporter, streamer)
- * come from the row payload, resolved server-side, in a fixed order, and the
- * tournament crest rides with them. The live
- * pill is separate: it self-resolves from the shared streamers stream and only
- * shows while the player is actually streaming. Each renders nothing when it
- * doesn't apply, so this is always safe to mount.
+ * The crest cluster shown after a nickname, in a fixed order.
+ *
+ * Rendered by `PlayerName` rather than by its callers. It used to be a slot
+ * each table filled in itself, and the slot was duly forgotten: the clan
+ * members table passed no tournament fields, so a winner wore the crest on the
+ * home leaderboard and nothing in their own clan's list, and the tank page's
+ * top players got no crests at all. Reading them off one identity object is
+ * what makes the format the same everywhere by construction.
+ *
+ * Each badge renders nothing when it does not apply, so this is always safe to
+ * mount. The live pill is the odd one out: it resolves itself from the shared
+ * streamers stream and only shows while the player is actually on air, which is
+ * why it needs the account id and is skipped without one.
  */
 export function PlayerBadges({
   region,
-  accountId,
-  nickname = null,
-  verified = false,
-  supporter = false,
-  twitchLogin = null,
-  tournamentWins = 0,
-  tournamentFeaturedWins = 0,
-  tournamentBestTitle = null,
+  player,
 }: {
   region: Region;
-  accountId: number;
-  /** Needed only by the tournament crest, which links to this player's own
-   * Tournaments tab. Without it the crest still renders, just not as a link. */
-  nickname?: string | null;
-  verified?: boolean;
-  supporter?: boolean;
-  /** Twitch login when the account is a streamer; the crest links to it. */
-  twitchLogin?: string | null;
-  /** Tournaments this account was on the winning roster of. */
-  tournamentWins?: number;
-  tournamentFeaturedWins?: number;
-  tournamentBestTitle?: string | null;
+  player: PlayerIdentity;
 }) {
   return (
     <>
-      {verified && <VerifiedBadge />}
-      {supporter && <SupporterBadge state={SupporterBadgeState.Active} />}
-      {twitchLogin && <StreamerBadge login={twitchLogin} />}
+      {player.isVerified && <VerifiedBadge />}
+      {player.isSupporter && <SupporterBadge state={SupporterBadgeState.Active} />}
+      {player.twitchLogin && <StreamerBadge login={player.twitchLogin} />}
       <TournamentBadge
         region={region}
-        nickname={nickname}
-        wins={tournamentWins}
-        featuredWins={tournamentFeaturedWins}
-        bestTitle={tournamentBestTitle}
+        nickname={player.nickname}
+        wins={player.tournamentWins ?? 0}
+        featuredWins={player.tournamentFeaturedWins ?? 0}
+        bestTitle={player.tournamentBestTitle ?? null}
       />
-      <LiveBadge region={region} accountId={accountId} />
+      {player.accountId != null && (
+        <LiveBadge region={region} accountId={player.accountId} />
+      )}
     </>
   );
 }

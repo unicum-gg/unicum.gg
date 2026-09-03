@@ -1,20 +1,16 @@
 "use client";
 
 import { BookOpenIcon } from "@phosphor-icons/react";
-import Image from "next/image";
 import { toRoman } from "roman-numerals";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
 import { CAMO_META } from "@/components/maps/meta";
 import { MinimapImage } from "@/components/maps/minimap-image";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
-import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
-import {
-  SupporterBadge,
-  SupporterBadgeState,
-} from "@/components/entity/badges/supporter-badge";
+import { PlayerName } from "@/components/entity/player-name";
+import { ClanName } from "@/components/entity/clan-name";
+import { clanIdentityFromRow } from "@/components/entity/clan-identity";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { TankIcon } from "@/components/tanks/tank-icon";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
@@ -27,50 +23,50 @@ import {
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
-export function PlayerRow({ player }: { player: SearchPlayerResult }) {
+/** `link` is off: the row itself is the click target and picks the result. The
+ * crests keep their own links, which the row can hold now that it is an option
+ * rather than a button. */
+export function PlayerRow({
+  player,
+  region,
+}: {
+  player: SearchPlayerResult;
+  region: Region;
+}) {
   return (
-    <span className="flex min-w-0 items-center gap-1.5">
-      <span className="min-w-0 truncate font-medium">{player.nickname}</span>
-      {player.clan ? (
-        <ClanTag
-          tag={player.clan.tag}
-          color={player.clan.color}
-          className="shrink-0 font-mono text-xs font-semibold"
-        />
-      ) : null}
-      {player.is_verified && <VerifiedBadge />}
-      {player.is_supporter && (
-        <SupporterBadge state={SupporterBadgeState.Active} />
-      )}
-      {player.twitch_login && <StreamerBadge login={player.twitch_login} />}
-    </span>
+    <PlayerName
+      region={region}
+      link={false}
+      player={{
+        ...identityFromRow(player),
+        clanTag: player.clan?.tag,
+        clanColor: player.clan?.color,
+      }}
+    />
   );
 }
 
-export function ClanRow({ clan }: { clan: ClanSearchResult }) {
+export function ClanRow({
+  clan,
+  region,
+}: {
+  clan: ClanSearchResult;
+  region: Region;
+}) {
   return (
     <>
-      <span className="flex min-w-0 items-center gap-2">
-        {clan.emblem ? (
-          <Image
-            src={clan.emblem}
-            alt=""
-            width={20}
-            height={20}
-            className="size-5 shrink-0 rounded-sm"
-          />
-        ) : (
-          <span className="size-5 shrink-0" />
-        )}
-        <ClanTag
-          tag={clan.tag}
-          color={clan.color}
-          className="font-mono text-sm font-semibold"
-        />
-        <span className="truncate text-sm text-fd-muted-foreground">
-          {clan.name}
-        </span>
-      </span>
+      {/* `link` off: the dialog already wraps the row in one, and a rank crest
+          is itself a link. */}
+      <ClanName
+        region={region}
+        link={false}
+        clan={clanIdentityFromRow(clan)}
+        showEmblem
+        showName
+        size={14}
+        tagClassName="text-sm"
+        nameClassName="text-sm"
+      />
       <span className="shrink-0 text-xs text-fd-muted-foreground">
         {clan.members_count} members
       </span>

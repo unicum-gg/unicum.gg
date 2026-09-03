@@ -6,9 +6,8 @@ import {
   SignOutIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import { format } from "date-fns";
-import Link from "next/link";
 import { Skeleton } from "@/components/ui/skeleton";
-import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
 import {
   ClanEventType,
   type ClanRecentEvent,
@@ -119,12 +118,15 @@ export function ClanRecentActivity(
           className="flex flex-wrap items-center gap-x-3 gap-y-1 px-4 py-2 text-sm"
         >
           <EventIcon event={e} />
-          <Link
-            href={ROUTES.PLAYER(region, e.accountName)}
-            className="font-medium hover:underline"
-          >
-            {e.accountName || `#${e.accountId}`}
-          </Link>
+          {/* No clan tag: the clan is the page's own subject. An event whose
+              account we never resolved shows its id and does NOT link: the
+              placeholder is not a nickname, and routing it would send the
+              reader to a profile URL built from "#12345". */}
+          <PlayerName
+            region={region}
+            link={Boolean(e.accountName)}
+            player={{ nickname: e.accountName || `#${e.accountId}` }}
+          />
           <span>{changeText(e)}</span>
           <span className="ms-auto text-xs text-muted-foreground tabular-nums">
             {format(e.createdAt, "MMM d, yyyy 'at' h:mm a")}

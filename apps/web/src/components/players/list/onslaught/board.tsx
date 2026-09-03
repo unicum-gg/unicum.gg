@@ -14,11 +14,10 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { GlossaryLabel } from "@/components/glossary/label";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import {
   OnslaughtSeasonSelect,
@@ -45,7 +44,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import {
   ONSLAUGHT_TIER_COLOR,
@@ -383,33 +381,7 @@ export function OnslaughtBoard({
                     </TableCell>
                     <TableCell>
                       <div className="flex min-w-0 items-center gap-2">
-                        <Link
-                          href={ROUTES.PLAYER(region, r.nickname)}
-                          className="min-w-0 truncate hover:underline"
-                        >
-                          <span className="font-medium">{r.nickname}</span>
-                          {r.clan_tag ? (
-                            <>
-                              {" "}
-                              <ClanTag
-                                tag={r.clan_tag}
-                                color={r.clan_color}
-                                className="font-mono text-xs"
-                              />
-                            </>
-                          ) : null}
-                        </Link>
-                        <PlayerBadges
-                          region={region}
-                          accountId={r.account_id}
-                      nickname={r.nickname}
-                          verified={r.is_verified}
-                          tournamentWins={r.tournament_wins}
-                          tournamentFeaturedWins={r.tournament_featured_wins}
-                          tournamentBestTitle={r.tournament_best_title}
-                          supporter={r.is_supporter}
-                          twitchLogin={r.twitch_login}
-                        />
+                        <PlayerName region={region} player={identityFromRow(r)} />
                         {r.recordedNickname !== r.nickname ||
                         r.recordedClanTag !== r.clan_tag ? (
                           <span className="shrink-0 text-xs text-muted-foreground">

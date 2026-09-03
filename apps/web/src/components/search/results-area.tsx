@@ -56,6 +56,7 @@ export function ResultsArea({
     }
     return (
       <ul
+        role="listbox"
         ref={listRef}
         className="max-h-96 overflow-y-auto border-t border-fd-border py-1"
       >
@@ -85,8 +86,16 @@ export function ResultsArea({
               )}
               onMouseEnter={() => onHover(idx)}
             >
-              <button
-                type="button"
+              {/* An option, not a button. A row names a player or a clan, and
+                  those carry crests that are themselves links to a profile, a
+                  Twitch channel or a board: an anchor inside a button is
+                  invalid HTML, and clicking one navigated while the button's
+                  own handler never fired, leaving the dialog open over the page
+                  it had just opened. `role="option"` is what this row was
+                  semantically all along, and it holds interactive content. */}
+              <div
+                role="option"
+                aria-selected={isActive}
                 data-row-index={idx}
                 onClick={() => onPick(row)}
                 // `min-w-0` so a long row (a term and its definition) shrinks
@@ -95,7 +104,7 @@ export function ResultsArea({
                 className="flex min-w-0 flex-1 cursor-pointer items-center justify-between gap-3 px-3 py-2 text-left text-sm"
               >
                 <RowContent row={row} />
-              </button>
+              </div>
               <div className="flex shrink-0 items-center gap-1 pr-2">
                 {historyRow.isRecent ? (
                   <RowActionButton
@@ -131,9 +140,9 @@ export function ResultsArea({
 function RowContent({ row }: { row: SelectableRow }) {
   switch (row.type) {
     case "player":
-      return <PlayerRow player={row.player} />;
+      return <PlayerRow player={row.player} region={row.region} />;
     case "clan":
-      return <ClanRow clan={row.clan} />;
+      return <ClanRow clan={row.clan} region={row.region} />;
     case "tank":
       return <TankRow tank={row.tank} region={row.region} />;
     case "map":

@@ -1,8 +1,8 @@
 "use client";
 
 import { CrownSimpleIcon } from "@phosphor-icons/react";
-import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
+import { PlayerName } from "@/components/entity/player-name";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
   Table,
@@ -12,7 +12,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
@@ -44,6 +43,12 @@ export type RosterEntry = {
   currentNickname: string | null;
   clanTag: string | null;
   clanColor: string | null;
+  isVerified?: boolean;
+  isSupporter?: boolean;
+  twitchLogin?: string | null;
+  tournamentWins?: number;
+  tournamentFeaturedWins?: number;
+  tournamentBestTitle?: string | null;
   /** The clan they were in on the day, shown beside the recorded nickname. */
   recordedClanTag: string | null;
   recordedClanColor: string | null;
@@ -135,58 +140,61 @@ export function TeamRosterTable({
           return (
             <TableRow key={p.accountId}>
               <TableCell>
-                <span className="flex items-center gap-1.5">
-                  <Link
-                    href={ROUTES.PLAYER(region, linkName)}
-                    className="flex min-w-0 items-center gap-2 hover:underline"
-                  >
-                    <span className="min-w-0 truncate">
-                      <span className="font-medium">{linkName}</span>
-                      {p.clanTag && (
-                        <>
-                          {" "}
-                          <ClanTag
-                            tag={p.clanTag}
-                            color={p.clanColor}
-                            className="font-mono text-xs"
-                          />
-                        </>
+                <PlayerName
+                  region={region}
+                  // The link rides the CURRENT name: the recorded one may no
+                  // longer resolve, and a profile link that 404s is worse than
+                  // one that lands on the renamed account.
+                  player={{
+                    nickname: linkName,
+                    accountId: p.accountId,
+                    clanTag: p.clanTag,
+                    clanColor: p.clanColor,
+                    isVerified: p.isVerified,
+                    isSupporter: p.isSupporter,
+                    twitchLogin: p.twitchLogin,
+                    tournamentWins: p.tournamentWins,
+                    tournamentFeaturedWins: p.tournamentFeaturedWins,
+                    tournamentBestTitle: p.tournamentBestTitle,
+                  }}
+                  trailing={
+                    <>
+                      {p.accountId === ownerAccountId && (
+                        <CrownSimpleIcon
+                          weight="fill"
+                          className="size-3.5 shrink-0 text-amber-500"
+                          aria-label="Team captain"
+                        />
                       )}
-                    </span>
-                  </Link>
-                  {p.accountId === ownerAccountId && (
-                    <CrownSimpleIcon
-                      weight="fill"
-                      className="size-3.5 shrink-0 text-amber-500"
-                      aria-label="Team captain"
-                    />
-                  )}
-                  {/* What they were called AND what they wore, the way the
-                      Onslaught board shows a recorded identity. Wargaming
-                      freezes the nickname at the time of the tournament, so the
-                      clan beside it is resolved for that day too: pairing an
-                      old name with today's tag would invent a line-up that
-                      never played. Shown when either half has changed. */}
-                  {recorded && (
-                    <span
-                      className="shrink-0 truncate text-xs text-fd-muted-foreground"
-                      title={`Registered as ${p.nickname}`}
-                    >
-                      (as {p.nickname}
-                      {p.recordedClanTag && (
-                        <>
-                          {" "}
-                          <ClanTag
-                            tag={p.recordedClanTag}
-                            color={p.recordedClanColor}
-                            className="font-mono"
-                          />
-                        </>
+                      {/* What they were called AND what they wore, the way the
+                          Onslaught board shows a recorded identity. Wargaming
+                          freezes the nickname at the time of the tournament, so
+                          the clan beside it is resolved for that day too:
+                          pairing an old name with today's tag would invent a
+                          line-up that never played. Shown when either half has
+                          changed. */}
+                      {recorded && (
+                        <span
+                          className="shrink-0 truncate text-xs text-fd-muted-foreground"
+                          title={`Registered as ${p.nickname}`}
+                        >
+                          (as {p.nickname}
+                          {p.recordedClanTag && (
+                            <>
+                              {" "}
+                              <ClanTag
+                                tag={p.recordedClanTag}
+                                color={p.recordedClanColor}
+                                className="font-mono"
+                              />
+                            </>
+                          )}
+                          )
+                        </span>
                       )}
-                      )
-                    </span>
-                  )}
-                </span>
+                    </>
+                  }
+                />
               </TableCell>
               <TableCell className="text-right tabular-nums">
                 {p.battles === null ? (

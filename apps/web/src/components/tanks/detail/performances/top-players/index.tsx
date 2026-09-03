@@ -2,6 +2,7 @@
 
 import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -107,15 +108,7 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell className="min-w-0">
-        <PlayerName
-          region={region}
-          nickname={player.nickname}
-          clan={
-            player.clan_tag
-              ? { tag: player.clan_tag, color: player.clan_color }
-              : null
-          }
-        />
+        <PlayerName region={region} player={identityFromRow(player)} />
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
         {intFmt.format(player.battles)}

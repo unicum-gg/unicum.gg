@@ -1,7 +1,6 @@
 "use client";
 
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import Link from "next/link";
 import {
   type ReactNode,
   useCallback,
@@ -11,8 +10,8 @@ import {
   useState,
 } from "react";
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
@@ -325,34 +324,10 @@ export function SteelHunterBoard({
                     </TableCell>
                     <TableCell>
                       <span className="flex items-center gap-1.5">
-                        <Link
-                          href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
-                          className="flex min-w-0 items-center gap-3 hover:underline"
-                        >
-                          <span className="min-w-0 truncate">
-                            <span className="font-medium">{r.nickname}</span>
-                            {r.clan_tag ? (
-                              <>
-                                {" "}
-                                <ClanTag
-                                  tag={r.clan_tag}
-                                  color={r.clan_color}
-                                  className="font-mono text-xs"
-                                />
-                              </>
-                            ) : null}
-                          </span>
-                        </Link>
-                        <PlayerBadges
+                        <PlayerName
                           region={region}
-                          accountId={r.account_id}
-                      nickname={r.nickname}
-                          verified={r.is_verified}
-                          tournamentWins={r.tournament_wins}
-                          tournamentFeaturedWins={r.tournament_featured_wins}
-                          tournamentBestTitle={r.tournament_best_title}
-                          supporter={r.is_supporter}
-                          twitchLogin={r.twitch_login}
+                          player={identityFromRow(r)}
+                          href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
                         />
                       </span>
                     </TableCell>

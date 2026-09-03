@@ -1,7 +1,6 @@
 "use client";
 
 import { Fragment, useMemo } from "react";
-import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { GlossaryLabel } from "@/components/glossary/label";
 import {
@@ -13,7 +12,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type ClanMemberStats, RATING_COLOR_CLASS, type RatingColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { cn } from "@/lib/utils";
@@ -123,12 +122,13 @@ export function TopMembersTab({
                 <Fragment key={i}>
                   <TableCell className="font-medium">
                     {cell ? (
-                      <Link
-                        href={ROUTES.PLAYER(region, cell.member.name)}
-                        className="hover:underline"
-                      >
-                        {cell.member.name}
-                      </Link>
+                      <PlayerName
+                        region={region}
+                        player={{
+                          nickname: cell.member.name,
+                          accountId: cell.member.accountId,
+                        }}
+                      />
                     ) : (
                       <span className="text-muted-foreground">—</span>
                     )}
