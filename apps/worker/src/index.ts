@@ -121,6 +121,11 @@ async function main(): Promise<void> {
   );
   startOnslaughtReconcileCron();
 
+  const { startOnslaughtWatchdogCron } = await import(
+    "@unicum.gg/core/wargaming/wot/players/onslaught-watchdog"
+  );
+  startOnslaughtWatchdogCron();
+
   // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
   // real per-region req/s (all consumers, vs the rate-limit budget) is only
   // observable here, at the transport. Log it every 60s as requests/second.

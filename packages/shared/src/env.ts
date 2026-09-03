@@ -78,6 +78,11 @@ export const env = createEnv({
     // Optional: unset closes written opinions, and the stars keep working, since
     // they need no review.
     DISCORD_REVIEW_CHANNEL_ID: z.string().optional(),
+    // Private channel the capture watchdog reports to. Worker-only. Optional,
+    // and the watchdog still runs without it: the check is worth doing either
+    // way, and unset simply means it says so in the logs rather than in a
+    // channel, which is also what a local `pnpm dev` should do.
+    DISCORD_ALERTS_CHANNEL_ID: z.string().optional(),
     // OpenAI key for the changelog writer (AI SDK). Optional, same reason:
     // no key, no cron. Worker-only.
     OPENAI_API_KEY: z.string().optional(),
@@ -124,6 +129,7 @@ export const env = createEnv({
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     DISCORD_FEEDBACK_CHANNEL_ID: process.env.DISCORD_FEEDBACK_CHANNEL_ID,
     DISCORD_CHANGELOG_CHANNEL_ID: process.env.DISCORD_CHANGELOG_CHANNEL_ID,
+    DISCORD_ALERTS_CHANNEL_ID: process.env.DISCORD_ALERTS_CHANNEL_ID,
     DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     DISCORD_REVIEW_CHANNEL_ID: process.env.DISCORD_REVIEW_CHANNEL_ID,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
