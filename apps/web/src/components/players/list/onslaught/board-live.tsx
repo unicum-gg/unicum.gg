@@ -7,6 +7,7 @@ import {
   type OnslaughtRow,
 } from "@/components/players/list/onslaught/board";
 import { OnslaughtRankScale } from "@/components/players/list/onslaught/rank-scale";
+import { OnslaughtSeasonRace } from "@/components/players/list/onslaught/season-race";
 import {
   Panel,
   PanelContent,
@@ -27,6 +28,10 @@ type OnslaughtData = Awaited<
   ReturnType<ReturnType<typeof unicum.region>["players"]["onslaught"]>
 >;
 
+type HistoryData = Awaited<
+  ReturnType<ReturnType<typeof unicum.region>["players"]["onslaughtHistory"]>
+>;
+
 // Client owner of the season-dependent board. The page renders the CURRENT
 // season statically (ISR, like the other leaderboards), so it stays a cheap
 // cached read; a past season is picked with `?season=`, which the server ignores
@@ -36,9 +41,11 @@ type OnslaughtData = Awaited<
 export function OnslaughtBoardLive({
   region,
   initial,
+  initialHistory,
 }: {
   region: Region;
   initial: OnslaughtData;
+  initialHistory: HistoryData | null;
 }) {
   const params = useSearchParams();
   const seasonParam = params.get("season");
@@ -76,6 +83,30 @@ export function OnslaughtBoardLive({
     };
   }, [isPast, seasonParam, region]);
 
+  // The season's curve, fetched on its own so a failure there costs the page the
+  // panel and nothing else.
+  const [history, setHistory] = useState<{
+    id: string;
+    data: HistoryData | null;
+  } | null>(null);
+
+  useEffect(() => {
+    if (!isPast || !seasonParam) return;
+    let cancelled = false;
+    unicum
+      .region(region)
+      .players.onslaughtHistory(seasonParam)
+      .then((res) => {
+        if (!cancelled) setHistory({ id: seasonParam, data: res });
+      })
+      .catch(() => {
+        if (!cancelled) setHistory({ id: seasonParam, data: null });
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [isPast, seasonParam, region]);
+
   // Show the fetched standings once they match the requested season; otherwise
   // (current season, or a past one still loading, or a failed fetch) the server
   // data. Pending is derived: a requested past season with no matching settle yet.
@@ -83,6 +114,17 @@ export function OnslaughtBoardLive({
   const data = resolved?.data ?? initial;
   const showPending = isPast && settled?.id !== seasonParam;
   const season = data.season;
+  // Same rule for the curve, but gated on BOTH fetches, not just its own. The
+  // curve is a few hundred rows and the standings up to sixty thousand, so its
+  // request always settles first: gated on itself alone, picking a past season
+  // would draw that season's finished curve under the current season's board,
+  // titled "what it takes right now", for as long as the standings take.
+  const curve =
+    isPast
+      ? history?.id === seasonParam && settled?.id === seasonParam
+        ? history.data
+        : null
+      : initialHistory;
 
   return (
     <div
@@ -100,6 +142,16 @@ export function OnslaughtBoardLive({
         seasons={data.seasons}
         currentSeasonId={season?.eventId ?? null}
       />
+
+      {curve && curve.points.length > 0 ? (
+        <>
+          <PanelSeparator />
+          <OnslaughtSeasonRace
+            points={curve.points}
+            ended={season?.ended ?? false}
+          />
+        </>
+      ) : null}
 
       <PanelSeparator />
 
