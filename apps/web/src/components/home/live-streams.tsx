@@ -10,7 +10,6 @@ import {
   XIcon,
 } from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
-import Link from "next/link";
 import { useMemo, useState, useSyncExternalStore } from "react";
 import { DEFAULT_RATING_METRIC, isRatingMetric, RATING_METRIC_LABEL, RatingMetric, type LiveStreamer } from "@unicum.gg/shared";
 import { AddChannelCta } from "@/components/home/add-channel-cta";
@@ -18,7 +17,7 @@ import { FeaturedPlayer } from "@/components/home/featured-player";
 import { usePeriod } from "@/hooks/use-period";
 import { PeriodSelect } from "@/components/home/period-select";
 import { GlossaryLabel } from "@/components/glossary/label";
-import { ClanTag } from "@/components/entity/clan-tag";
+import { PlayerName } from "@/components/entity/player-name";
 import { METRIC_VALUE, StreamRow } from "@/components/home/stream-row";
 import {
   Panel,
@@ -41,7 +40,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import APP from "@/constants/app";
-import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { languageToCountryCode } from "@/lib/language-flags";
@@ -213,22 +211,18 @@ export function LiveStreams({
                     {active.title}
                   </p>
                   <p className="mt-0.5 truncate text-sm text-fd-muted-foreground">
-                    <Link
-                      href={ROUTES.PLAYER(active.region, active.nickname)}
-                      className="font-medium text-fd-foreground hover:underline"
-                    >
-                      {active.nickname}
-                    </Link>
-                    {active.clanTag ? (
-                      <>
-                        {" "}
-                        <ClanTag
-                          tag={active.clanTag}
-                          color={active.clanColor}
-                          className="font-mono text-xs"
-                        />
-                      </>
-                    ) : null}
+                    {/* No live pill and no streamer crest here: the card IS
+                        the stream, so both would say what the reader is already
+                        looking at. */}
+                    <PlayerName
+                      region={active.region}
+                      player={{
+                        nickname: active.nickname,
+                        clanTag: active.clanTag,
+                        clanColor: active.clanColor,
+                      }}
+                      className="inline-flex align-baseline text-fd-foreground"
+                    />
                     {" · "}
                     {intFmt.format(active.viewerCount)} viewers
                     <StreamLanguageFlag
