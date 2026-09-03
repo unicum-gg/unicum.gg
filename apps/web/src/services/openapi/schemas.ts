@@ -463,6 +463,14 @@ export const onslaughtQuery = z.object({
   }),
 });
 
+/** Which season's curve to load. No `limit`: a season's curve is read whole. */
+export const onslaughtHistoryQuery = z.object({
+  season: z.string().optional().meta({
+    description:
+      "Season event id to load (default the current season). From the seasons list on the leaderboard.",
+  }),
+});
+
 // next-openapi-gen doesn't serialize `.default()` on enum params, so the doc
 // defaults are applied when serving the spec (see `api/openapi.json/route.ts`),
 // keyed by query-param name. Sourced from the app constants so they can't drift.
