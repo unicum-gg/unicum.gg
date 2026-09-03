@@ -532,7 +532,7 @@ export const clanRankBadge = z
   .meta({
     id: "ClanRankBadge",
     description:
-      "A podium position (rank 1 to 3) the clan currently holds on one leaderboard.",
+      "A top-ten position the clan currently holds on one leaderboard.",
   });
 
 export const clanSummary = z
