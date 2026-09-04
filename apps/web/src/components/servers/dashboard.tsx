@@ -126,6 +126,9 @@ export function ServersDashboard({
             clusters={shown.clusters}
             range={shownRange}
             region={region}
+            total={shown.current}
+            peak={shown.peak}
+            average={shown.average}
           />
         </PanelContent>
       </Panel>

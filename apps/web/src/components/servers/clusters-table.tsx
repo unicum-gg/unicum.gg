@@ -4,6 +4,7 @@ import {
   SERVER_STATS_RANGE_LABEL,
   type ServerClusterStat,
   serverDisplayName,
+  type ServerRecord,
   type ServerStatsRange,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -26,10 +27,22 @@ export function ClustersTable({
   clusters,
   range,
   region,
+  total,
+  peak,
+  average,
 }: {
   clusters: ServerClusterStat[];
   range: ServerStatsRange;
   region: Region;
+  /** The region's own figures for the total row. They are read from the region
+   * series rather than summed down the columns: a peak is a moment, and the
+   * clusters do not peak at the same one, so adding their records invents an
+   * instant that never happened, a few thousand players above the real high on
+   * a normal EU day. The average survives the addition, being linear, but is
+   * taken from the same place so the row has one provenance rather than two. */
+  total: number | null;
+  peak: ServerRecord | null;
+  average: number;
 }) {
   // Before the early return: a hook must run on every render of this component,
   // and an empty cluster list is one of them.
@@ -103,6 +116,34 @@ export function ClustersTable({
             </tr>
           ))}
         </tbody>
+        <tfoot>
+          <tr className="border-t border-fd-border font-medium">
+            <td className="px-4 py-2">Total</td>
+            <td className="px-4 py-2 text-right tabular-nums">
+              {total == null ? (
+                <span className="text-fd-muted-foreground" title="Not reported">
+                  —
+                </span>
+              ) : (
+                formatPlayers(total)
+              )}
+            </td>
+            {/* The region is all of itself. Shown rather than left blank so the
+                column reads as shares of a whole that is named. */}
+            <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
+              {total == null ? "—" : formatShare(1)}
+            </td>
+            <td
+              className="px-4 py-2 text-right tabular-nums"
+              title={peak?.at ? formatMoment(peak.at, zone) : undefined}
+            >
+              {peak == null ? "—" : formatPlayers(peak.players)}
+            </td>
+            <td className="px-4 py-2 text-right tabular-nums text-fd-muted-foreground">
+              {formatPlayers(average)}
+            </td>
+          </tr>
+        </tfoot>
       </table>
     </div>
   );
