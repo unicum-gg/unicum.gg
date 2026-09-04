@@ -114,8 +114,17 @@ export type RegionRps = Record<Region, number>;
 // whitelisted source IPs, NOT by bumping these values, a higher *sustained*
 // per-IP rate just earns the per-IP ban (a short burst won't show it).
 // Overridable via client options.
+//
+// EU was held at 6 from May 2026, when the edge blocked us at anything near the
+// documented rate. Wargaming answered our ticket on 2026-09-04 saying they had
+// moved the public API to a bigger host and raised its worker count, and a probe
+// from the production IP confirmed it: 6566 calls over eight minutes at the
+// documented 20 rps, zero timeouts and nothing above 5s, where the old edge used
+// to stop answering within minutes and stay down for two hours. 12 rather than
+// the 20 we measured, to keep headroom: the threshold is unpublished, the probe
+// was minutes rather than days, and a trip still costs a two-hour block.
 export const DEFAULT_WG_RPS: RegionRps = {
-  [Region.EU]: 6,
+  [Region.EU]: 12,
   [Region.NA]: 8,
   [Region.ASIA]: 8,
 };

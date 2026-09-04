@@ -27,9 +27,21 @@ const cache: CacheOptions | undefined = redis ? { store: new RedisCacheStore(red
 // of `rps`: `rps` is the region's G-Core per-IP ceiling, not its interactive
 // demand, so a fraction would over-reserve the higher-ceiling regions (NA/Asia
 // at 8 rps have less traffic than EU at 6). A constant lane keeps interactive
-// responsive everywhere while `bg` grows with the region's ceiling (EU 4, NA/Asia
-// 6). Clamped so `bg` keeps at least 1.
-const INTERACTIVE_RESERVE_RPS = 2;
+// responsive everywhere while `bg` grows with the region's ceiling. Clamped so
+// `bg` keeps at least 1.
+//
+// Raised from 2 on 2026-09-04. The reserve is what a *visitor* can draw, and 2
+// stopped being enough once crawlers began walking the long tail of player
+// pages: each unseen player legitimately triggers a Wargaming refresh, so the
+// interactive lane saturated on its own and page renders queued behind other
+// page renders rather than behind the pipeline. The lane split was working, it
+// was simply too small. Measured at 1.86 rps of EU interactive traffic against a
+// 2 rps reserve, with the queue behind it reaching seventeen minutes.
+//
+// NA and Asia lose background lane to this (6 -> 4) and that is deliberate:
+// their pipelines are nowhere near their ceilings (10 and 78 calls in the same
+// fifteen minutes EU spent 1673), so the capacity was idle.
+const INTERACTIVE_RESERVE_RPS = 4;
 
 // True in the worker (its bootstrap sets `__dbContext = "background"`), false in
 // the web (requests stay "request"). Read live, not at setup: it decides which
