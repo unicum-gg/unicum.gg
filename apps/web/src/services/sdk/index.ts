@@ -71,3 +71,45 @@ export async function buildSafe<T>(
     return empty;
   }
 }
+
+/**
+ * A page's decorative data: rendered when it arrives in time, dropped when it
+ * does not. `buildSafe` deliberately propagates runtime errors so a failed
+ * revalidation keeps the last good page, which is right for data the page is
+ * *about*. It is wrong for an ornament, because it also propagates runtime
+ * *slowness*: nothing bounds how long an SDK call may take, so one slow
+ * upstream can hold a render open indefinitely.
+ *
+ * That is not theoretical. The home page's live-streamers rail needs a clan
+ * lookup that goes out to Wargaming, and the EU lane of that API is rate
+ * limited and shared with the background refresh crawl. On 2026-09-03 the queue
+ * behind it reached seventeen minutes, so every home render sat waiting on a
+ * card that shows nothing at all most of the time, and the page read as down
+ * while every other route answered in milliseconds.
+ *
+ * The deadline is therefore a property of the *caller*, not of the endpoint:
+ * this page would rather ship without the rail than not ship.
+ */
+export async function optional<T>(
+  fetcher: () => Promise<T>,
+  empty: T,
+  ms = 2_000,
+): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    return await Promise.race([
+      fetcher(),
+      new Promise<T>((resolve) => {
+        timer = setTimeout(() => {
+          console.warn(`[sdk] optional fetch exceeded ${ms}ms, rendering without it`);
+          resolve(empty);
+        }, ms);
+      }),
+    ]);
+  } catch (err) {
+    console.warn("[sdk] optional fetch failed, rendering without it:", err);
+    return empty;
+  } finally {
+    clearTimeout(timer);
+  }
+}
