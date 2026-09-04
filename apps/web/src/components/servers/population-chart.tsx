@@ -1,7 +1,14 @@
 "use client";
 
 import { useMemo } from "react";
-import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts";
+import {
+  Area,
+  CartesianGrid,
+  ComposedChart,
+  Line,
+  XAxis,
+  YAxis,
+} from "recharts";
 import {
   type ServerPopulationPoint,
   serverDisplayName,
@@ -82,22 +89,31 @@ export function PopulationChart({
   const zone = useDisplayZone();
   const config = useMemo(
     () =>
-      Object.fromEntries(
-        order.map(({ server }, position) => [
-          key(position),
-          {
-            label: serverDisplayName(region, server),
-            color: PALETTE[position % PALETTE.length],
-          },
-        ]),
-      ) satisfies ChartConfig,
+      ({
+        ...Object.fromEntries(
+          order.map(({ server }, position) => [
+            key(position),
+            {
+              label: serverDisplayName(region, server),
+              color: PALETTE[position % PALETTE.length],
+            },
+          ]),
+        ),
+        // Not one of the cluster hues: the total is a different kind of thing
+        // from the bands under it, and giving it a sixth palette colour would
+        // read as a sixth server.
+        total: { label: "Total", color: "var(--color-fd-foreground)" },
+      }) satisfies ChartConfig,
     [order, region],
   );
 
   const data = useMemo(
     () =>
       points.map((point) => {
-        const row: Record<string, number> = { t: point.at.getTime() };
+        const row: Record<string, number> = {
+          t: point.at.getTime(),
+          total: point.total,
+        };
         order.forEach(({ index }, position) => {
           row[key(position)] = point.values[index] ?? 0;
         });
@@ -129,7 +145,7 @@ export function PopulationChart({
       className="aspect-auto h-64 w-full"
       aria-label={`Players online per server over the last ${range}`}
     >
-      <AreaChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
+      <ComposedChart data={data} margin={{ left: 0, right: 8, top: 8, bottom: 0 }}>
         <CartesianGrid vertical={false} strokeDasharray="3 3" opacity={0.2} />
         <XAxis
           dataKey="t"
@@ -174,8 +190,27 @@ export function PopulationChart({
             isAnimationActive={false}
           />
         ))}
+        {/* Carried for the tooltip, never drawn. The areas are stacked, so the
+            top of the stack already IS the total: a stroke over it only doubled
+            the topmost band's edge, and the eye read the pair as one thick
+            border rather than as a figure of its own. What was actually missing
+            was the number, which the tooltip now lists under the clusters.
+            `stroke` stays set because recharts reports it as the series colour,
+            which is the swatch the tooltip draws; `strokeOpacity` hides the
+            curve without touching that. Out of the legend, which maps a colour
+            to a mark, and there is no mark here to find. */}
+        <Line
+          dataKey="total"
+          type="monotone"
+          stroke="var(--color-total)"
+          strokeOpacity={0}
+          legendType="none"
+          dot={false}
+          activeDot={false}
+          isAnimationActive={false}
+        />
         <ChartLegend content={<ChartLegendContent />} />
-      </AreaChart>
+      </ComposedChart>
     </ChartContainer>
   );
 }
