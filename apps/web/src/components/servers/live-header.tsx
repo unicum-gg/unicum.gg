@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  mergeServerOnline,
   rhythmDeviation,
   serverDisplayName,
   type ServerRhythmCell,
@@ -35,23 +36,12 @@ export function ServersLiveHeader({
 }) {
   const live = usePlayersOnline(region);
 
-  const total = live?.total ?? fallbackTotal;
-  // Listed in their own order rather than by population, like the table below:
-  // a label names a server now, so EU2 sitting above EU1 for the evening would
-  // look like a sort that broke.
-  const clusters = (
-    live
-      ? live.servers.map((s) => ({ server: s.server, current: s.players_online }))
-      : fallbackClusters
-  )
-    .slice()
-    .sort((a, b) =>
-      serverDisplayName(region, a.server).localeCompare(
-        serverDisplayName(region, b.server),
-        "en",
-        { numeric: true },
-      ),
-    );
+  const { total, servers: clusters } = mergeServerOnline(
+    region,
+    live,
+    fallbackTotal,
+    fallbackClusters,
+  );
 
   // Against the average for this weekday and hour, so "busy" means busy for a
   // Sunday evening rather than busy compared with a Tuesday at dawn.
@@ -96,7 +86,7 @@ export function ServersLiveHeader({
                 {serverDisplayName(region, cluster.server)}
               </span>
               <span className="tabular-nums text-fd-muted-foreground">
-                {cluster.current == null ? "—" : formatPlayers(cluster.current)}
+                {cluster.players == null ? "—" : formatPlayers(cluster.players)}
               </span>
             </li>
           ))}

@@ -1,4 +1,5 @@
 import { type Region, REGION_LABEL } from "@unicum.gg/wargaming";
+import type { OnlinePayload } from "./server-online";
 
 /**
  * Recorded population of the game's clusters: the client-safe shapes and the
@@ -78,6 +79,46 @@ export function serverDisplayName(region: Region, server: string): string {
   if (numeric === null) return server;
   const index = numeric % 100;
   return index > 0 ? `${REGION_LABEL[region]}${index}` : server;
+}
+
+/** One cluster as a reader sees it right now, whichever source answered. Null
+ * players means the cluster was absent from that reading rather than empty. */
+export type ServerClusterOnline = { server: string; players: number | null };
+
+/**
+ * What to show for "who is online", from the live stream when it is talking and
+ * from the last recorded sample when it is not.
+ *
+ * Both surfaces that show the count read through here: the servers page, which
+ * is handed the recorded figures by the server, and the top bar, which fetches
+ * them itself (the region is only known in the browser). Wargaming going quiet
+ * is normal operation rather than an error, so neither is allowed to blank out
+ * while a recorded sample exists, and they must not disagree about what to show
+ * when it does.
+ *
+ * Ordered by display name rather than by population, like the servers page's
+ * chips and table: a label names a server, so EU2 sitting above EU1 for an
+ * evening would read as a sort that broke.
+ */
+export function mergeServerOnline(
+  region: Region,
+  live: OnlinePayload,
+  fallbackTotal: number | null,
+  fallbackClusters: readonly { server: string; current: number | null }[],
+): { total: number | null; servers: ServerClusterOnline[] } {
+  const servers: ServerClusterOnline[] = live
+    ? live.servers.map((s) => ({ server: s.server, players: s.players_online }))
+    : fallbackClusters.map((c) => ({ server: c.server, players: c.current }));
+  return {
+    total: live?.total ?? fallbackTotal,
+    servers: servers.sort((a, b) =>
+      serverDisplayName(region, a.server).localeCompare(
+        serverDisplayName(region, b.server),
+        "en",
+        { numeric: true },
+      ),
+    ),
+  };
 }
 
 /** A population figure and the instant it was recorded. */
