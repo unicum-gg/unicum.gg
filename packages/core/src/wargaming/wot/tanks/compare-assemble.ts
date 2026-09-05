@@ -91,6 +91,8 @@ export interface CompareVehicle {
   modules: TankModuleNode[];
   configs: TankConfig[];
   modes: VehicleMode[];
+  /** Which of the client's mechanics this vehicle's second state is. */
+  mechanic: string | null;
   loadout: {
     slots: EquipmentSlot[];
     equipmentKeys: string[];
@@ -155,6 +157,9 @@ async function assembleVehicle(region: Region, ref: string) {
     fieldMods,
     skillTree,
     modes,
+    // A property of the vehicle rather than of a module combination, so it is
+    // read off whichever one answered: they all carry it.
+    mechanic: configs[0]?.specs.mechanic ?? null,
   };
 }
 
@@ -221,6 +226,7 @@ export async function assembleTankCompare(region: Region, refs: string[]) {
       modules: v.modules,
       configs: v.configs,
       modes: v.modes,
+      mechanic: v.mechanic,
       loadout: v.loadout
         ? {
             slots: v.loadout.slots,

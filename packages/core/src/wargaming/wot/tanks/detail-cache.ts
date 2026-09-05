@@ -38,8 +38,18 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *
  * v2: the community rating headline joined the payload.
  * v3: the client the characteristics were read from, and the test build offered.
+ * v4: what a shell does against sloped armour, its calibre, normalisation and
+ *     ricochet angle, which is what the hero needs to answer a shot at all.
+ * v5, v6: steps of the same unreleased branch, each superseded by the next
+ *     before any of them was deployed. The log has no entry of its own for
+ *     them because there is no deploy they could answer for. Nothing else here
+ *     may be left blank: a released generation with no reason recorded is the
+ *     one question this comment exists to answer.
+ * v7: what a shell becomes once a calibrating gun deploys.
+ * v8: which of the seven mechanics the vehicle's second state is.
+ * v9: the gun's depression and elevation, which were each other's.
  */
-const SHAPE_VERSION = 3;
+const SHAPE_VERSION = 9;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

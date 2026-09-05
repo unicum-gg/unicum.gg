@@ -29,8 +29,9 @@ export const TANK_COMPARE_TTL_SECONDS = 60 * 60;
  *
  * v1: the pre-versioned key, retired here.
  * v2: each column carries the game client it was read on, and the test build.
+ * v3: which of the seven mechanics each vehicle's second state is.
  */
-const SHAPE_VERSION = 2;
+const SHAPE_VERSION = 3;
 
 function key(region: Region, slugs: string[]): string {
   const columns = slugs.map((s) => s.toLowerCase()).join(",");

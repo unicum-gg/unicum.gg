@@ -29,7 +29,20 @@ export type TankConfigModules = {
  * `specs` shape is a `WotSrcSpec`, which is the `tank_specs` row shape (minus
  * `tag`), so the tank page renders it through the same `TankCharacteristics`
  * component as the stock row. */
-export type TankConfig = { modules: TankConfigModules; specs: WotSrcSpec };
+export type TankConfig = {
+  modules: TankConfigModules;
+  /**
+   * The wot-src keys the combination was derived from, one per slot.
+   *
+   * **The only name the geometry mirror shares with this side.** The mirror is
+   * read out of the game client and knows nothing of WG's module ids, but it
+   * publishes which piece each module draws under exactly these keys, so a
+   * reader who picks the E 100's 15 cm gun can be shown `Gun_06` rather than
+   * whichever piece happened to sort first.
+   */
+  keys: Record<Slot, string>;
+  specs: WotSrcSpec;
+};
 
 type Slot = keyof TankConfigModules;
 
@@ -97,6 +110,28 @@ const sqDist = (a: number[], b: number[]) =>
  * an empty array only when wot-src itself has nothing (the page then shows the
  * static stock specs, unchanged).
  */
+/**
+ * Generation of the config shape, in the key.
+ *
+ * Entries live for a day, so a field added to what a config publishes is a
+ * field absent from every warm entry until the TTL turns over. That is not a
+ * crash, which is what makes it worse: the reader silently loses whatever the
+ * new field was for. Adding the per-shell calibre, normalisation and ricochet
+ * cost the hero its live armour view on every vehicle whose configs happened to
+ * be warm, and the one tank that had been recomputed was the only one that
+ * worked. Bump this on any change to what `computeSpec` publishes.
+ *
+ * The same guard `tankdetail` keeps one layer up, for the same reason.
+ *
+ * v2: what a shell does against sloped armour, per shell.
+ * v3: a step of the same unreleased branch as v4, superseded before either was
+ *     deployed. Every generation that reached a deploy has its own line, which
+ *     is the whole use of this list.
+ * v4: what a shell becomes once a calibrating gun deploys.
+ * v5: the gun's depression and elevation, which were each other's.
+ */
+const SHAPE_VERSION = 5;
+
 export function getTankConfigs(
   region: Region,
   tankId: number,
@@ -107,7 +142,7 @@ export function getTankConfigs(
   // is cached here is region-scoped (module ids from that region's encyclopedia,
   // its CDN asset hosts), so a key naming only the branch would answer an EU
   // request with whichever region warmed it first.
-  return cachedInRedis(`wotsrc:configs:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
+  return cachedInRedis(`wotsrc:configs:v${SHAPE_VERSION}:${region}${branch ? `:${branch}` : ""}:${tankId}`, WOTSRC_TTL_SECONDS, () =>
     computeTankConfigs(region, tankId, modules, branch),
   );
 }
@@ -182,6 +217,7 @@ async function computeTankConfigs(
     byKey?.[slot].get(c.keys[slot]) ?? matchModule(slot, c.spec);
 
   return src.configs.map((c) => ({
+    keys: c.keys,
     modules: {
       gun: moduleId("gun", c),
       turret: moduleId("turret", c),

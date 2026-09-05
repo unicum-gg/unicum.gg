@@ -3,6 +3,7 @@ import { getAllTankSpecs } from "@unicum.gg/core/wargaming/wot/tanks/specs";
 import { getTankMomByRegion } from "@unicum.gg/core/mom";
 import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 import { getResearchPath } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
+import { getTankBasedOn } from "./based-on";
 import { getTankModules } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import {
   getTankStats,
@@ -98,6 +99,7 @@ export async function assembleTankDetail(
     hasHistory,
     testVersion,
     rating,
+    basedOn,
   ] = await Promise.all([
     getTopPlayersByTankAllMetrics(region, tankId, TOP_LIMIT),
     getTankStats(region, tankId),
@@ -129,6 +131,8 @@ export async function assembleTankDetail(
       votes: 0,
       reviewCount: 0,
     }),
+    // The vehicle this one was made from, where the client says it is one.
+    safe(() => getTankBasedOn(region, meta.tag, branch), null),
   ]);
 
   return {
@@ -143,6 +147,7 @@ export async function assembleTankDetail(
     moe: moeMap.get(tankId) ?? null,
     mom: momMap.get(tankId) ?? null,
     researchPath,
+    basedOn,
     modules,
     configs,
     loadout,
@@ -150,6 +155,11 @@ export async function assembleTankDetail(
     fieldMods,
     skillTree,
     modes,
+    // Which of the client's seven second states this vehicle's mode is, so the
+    // switch that engages it can be named for what it does rather than called a
+    // siege on a vehicle that has none. It is a property of the vehicle, so it
+    // is read off whichever module combination answered: they all carry it.
+    mechanic: configs[0]?.specs.mechanic ?? null,
     moeHistory,
     momHistory,
     hasHistory,
