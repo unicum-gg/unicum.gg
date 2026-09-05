@@ -163,7 +163,7 @@ export function wn8Color(value: number): RatingColor {
   return RatingColor.Top;
 }
 
-// Thresholds calibrated against tomato.gg/wnx's 24-step gradient,
+// Thresholds calibrated against the WNX gradient's 24 steps,
 // mapped onto our 9 RatingColor buckets (matching their color zones).
 export function wnxColor(value: number): RatingColor {
   if (value < 200) return RatingColor.VeryBad;

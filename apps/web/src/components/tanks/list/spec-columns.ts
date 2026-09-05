@@ -1,6 +1,6 @@
 // Column catalogue for the /tanks Specifications table. Drives both the table
 // (headers + cells + sorting) and the grouped column selector. Mirrors the
-// groups tomato.gg uses. Each column reads from a `TankSpecRow` (the flattened
+// groups a player reads them in. Each column reads from a `TankSpecRow` (the flattened
 // tank_specs row); some columns combine two fields (Speed, Depression/Elevation).
 
 export type TankSpecRow = {

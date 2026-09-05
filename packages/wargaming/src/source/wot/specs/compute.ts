@@ -213,7 +213,7 @@ export function computeSpec(
   const chassisArmor = isObject(C.armor) ? (C.armor as XmlNode) : {};
   const trackArmor = num(chassisArmor.leftTrack);
   // Each module also carries a `maxRegenHealth`: the HP it auto-repairs back to
-  // without a repair kit (the "repaired" value on tomato.gg/tanks.gg).
+  // without a repair kit, which a characteristics table calls "repaired".
   const trackHealth = num(C.maxHealth);
   const trackRepaired = num(C.maxRegenHealth);
   // The chassis stores a raw `repairTime`; the client divides it by the crew's

@@ -35,7 +35,8 @@ export type Row = {
 };
 export type Group = { title: string; rows: Row[] };
 
-// Grouped tank specifications, gunmarks/tanks.gg style. Values come straight from
+// Grouped tank specifications, in the groups a player reads them in. Values
+// come straight from
 // the global tank_specs catalogue (parsed from the game client). Missing values
 // (a spec that does not apply to this vehicle) render as a dash.
 export const GROUPS: Group[] = [
@@ -294,7 +295,7 @@ export const GROUPS: Group[] = [
 // Terminal (effective) forward speed on a terrain: the engine can only sustain
 // the speed where its power matches the rolling resistance, capped by the top
 // speed. From the game physics `power = weight * g * f * v`, with the rolling
-// coefficient `f = terrainResistance * 0.0738` (calibrated to the game/tanks.gg,
+// coefficient `f = terrainResistance * 0.0738` (calibrated to the game,
 // exact across vehicles): `v_kmh = 3657.5 * enginePower_hp / (weight_kg *
 // terrainResistance)`, then clamped to the top speed.
 const EFFECTIVE_SPEED_K = 3657.5;

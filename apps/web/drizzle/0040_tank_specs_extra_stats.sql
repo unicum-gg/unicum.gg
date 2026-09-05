@@ -1,4 +1,4 @@
--- Extra tank_specs columns for the fuller characteristics table (tanks.gg parity):
+-- Extra tank_specs columns for the fuller characteristics table:
 -- clip size + ammo capacity, penetration at 500m, and the fuel-tank / turret-ring
 -- (rotator) / viewport (surveying device) module HPs. All nullable; the vehicles
 -- cron backfills them on its next run. Hand-written because db:generate cannot see

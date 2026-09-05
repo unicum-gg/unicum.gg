@@ -68,8 +68,8 @@ function SpecGroup({
           const base = baseline ? specValue(baseline, row, baseline) : null;
           const color =
             value != null ? deltaColor(value, base, row) : undefined;
-          // Signed change vs the stock baseline, shown before the value like
-          // tomato.gg ("-0.97 ↓"); null when unchanged at display precision.
+          // Signed change vs the stock baseline, shown before the value
+          // ("-0.97 ↓"); null when unchanged at display precision.
           const delta = rowDelta(value, base, row);
           return (
             <div

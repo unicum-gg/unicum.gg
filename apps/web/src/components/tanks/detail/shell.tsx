@@ -179,7 +179,7 @@ export function TankShell({
                     aria-hidden
                     className="pointer-events-none absolute inset-0 bg-[radial-gradient(52%_66%_at_57%_36%,var(--color-fd-secondary)/45%,transparent_72%)]"
                   />
-                  {/* High-res vehicle render, full-bleed (gunmarks / skill4ltu style).
+                  {/* High-res vehicle render, full-bleed.
               It stays the hero's first paint: the model behind it is megabytes
               of meshes and textures, and a vehicle the geometry mirror does not
               carry has nothing else to show. */}

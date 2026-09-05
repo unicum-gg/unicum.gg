@@ -1,4 +1,4 @@
--- The auto-repair HP ("repaired" on tomato.gg/tanks.gg) each module regenerates
+-- The auto-repair HP (the "repaired" figure) each module regenerates
 -- to without a repair kit (the XML's `maxRegenHealth`), per module. Nullable;
 -- backfilled by the vehicles cron. Hand-written (db:generate can't see factory tables).
 ALTER TABLE "tank_specs" ADD COLUMN IF NOT EXISTS "track_repaired" real;
