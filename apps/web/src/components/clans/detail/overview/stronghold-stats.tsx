@@ -103,9 +103,34 @@ type SrRow = { label: string; sr: keyof ClanStrongholdSr };
 type SectionRow = ProjectionRow | SrRow;
 
 // One section per stronghold mode, mirroring the leaderboards, so each mode keeps
-// its own stats together (SR, ELO, battles, win rate) under a header rather than
-// scattering them. Advances shares Skirmish T10's ELO, so it lists no ELO row.
-const SECTIONS: { title: string; tier: StrongholdTier; rows: SectionRow[] }[] = [
+// its own stats together (SR, battles, win rate) under a header rather than
+// scattering them.
+//
+// The exception is the tier-X ELO. Wargaming rates a TIER, not a mode: in
+// `stronghold_info`, `stats["10"].elo` sits beside BOTH `sorties` (Skirmish) and
+// `fort_battles` (Advances), so one ladder is fed by the two modes. Filed under
+// either mode it contradicts that mode's own battle count, a clan that only
+// plays Advances showed an ELO climbing next to `Battles 0` under "Skirmish Tier
+// X", which reads as broken data and is not. So it heads the two tier-X sections
+// instead of sitting inside one of them. Tiers VI and VIII keep their ELO inline:
+// `fort_battles` is null there, so the tier and the mode are the same thing.
+const SECTIONS: {
+  title: string;
+  /** The leaderboard this section heads, and the anchor the boards deep-link to.
+   * Absent on the ELO band: it is a rating shared by two modes, not a board. */
+  tier?: StrongholdTier;
+  rows: SectionRow[];
+}[] = [
+  {
+    title: "Tier X ELO (Advances + Skirmish)",
+    rows: [
+      {
+        label: "ELO",
+        current: (s) => eloCell(s.eloT10),
+        delta: (s) => eloCell(s.eloT10, s.eloT10),
+      },
+    ],
+  },
   {
     title: "Advances (15v15)",
     tier: StrongholdTier.Advances,
@@ -128,11 +153,6 @@ const SECTIONS: { title: string; tier: StrongholdTier; rows: SectionRow[] }[] = 
     tier: StrongholdTier.T10,
     rows: [
       { label: "SR", sr: "t10" },
-      {
-        label: "ELO",
-        current: (s) => eloCell(s.eloT10),
-        delta: (s) => eloCell(s.eloT10, s.eloT10),
-      },
       {
         label: "Battles",
         current: (s) => battlesCell(s.skirmishBattlesT10),
@@ -256,7 +276,7 @@ export function ClanStrongholdStatsTable(
                 colSpan={5}
                 className="bg-muted/40 text-xs font-semibold text-muted-foreground uppercase"
               >
-                {loading ? (
+                {loading || !section.tier ? (
                   section.title
                 ) : (
                   // The header links to this mode's leaderboard, a contextual
