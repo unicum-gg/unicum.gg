@@ -51,8 +51,11 @@ function HeroSkeleton({ region }: { region: Region }) {
   return (
     <Panel className="border-b border-fd-border">
       {/* `dark` for the same reason as the loaded hero: the fades have to
-          darken the hangar photo in both themes. */}
-      <div className="dark relative min-h-[320px] overflow-hidden text-fd-foreground sm:min-h-[400px] lg:min-h-[470px]">
+          darken the hangar photo in both themes. And `bg-background` for the
+          same reason too: carrying `dark` resolves the tokens but paints
+          nothing, so until the photograph below has loaded there is the light
+          page behind near-white text. */}
+      <div className="dark relative min-h-[320px] overflow-hidden bg-background text-fd-foreground sm:min-h-[400px] lg:min-h-[470px]">
         <Image
           src={hangarBgUrl(region, "webp")}
           alt=""

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { ModuleType } from "@unicum.gg/wargaming";
 import type { TankSpec } from "@unicum.gg/shared";
 import type {
@@ -8,6 +8,11 @@ import type {
   TankModuleNode,
 } from "@unicum.gg/core/wargaming/wot/tanks/modules";
 import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
+import {
+  matchRound,
+  rankOf,
+  useAmmoChoice,
+} from "@/components/tanks/detail/ammo-context";
 
 /** A gun shell for the Ammunition panel: the WG shell (type/damage/penetration)
  * plus its wot-src muzzle velocity and splash radius. */
@@ -26,6 +31,19 @@ export type AmmoShell = ModuleShell & {
   shortName: string | null;
   kindName: string | null;
   name: string | null;
+  /**
+   * What this shell becomes once the gun is calibrated, where it can be.
+   *
+   * The Pz.Kpfw. Neu opens extra chambers in its gun and trades armour damage
+   * for penetrating power on the two shells its gun lists. Only those shells
+   * carry this, and only the figures the client actually restates.
+   */
+  calibrated?: {
+    normalization?: number;
+    ricochet?: number;
+    damage?: number;
+    penetrationLoss?: number;
+  } | null;
 };
 
 /** Show the selected shell's stats on a spec (the stored ones are the default AP
@@ -114,6 +132,7 @@ export function useAmmo(
         shortName: st.shortName,
         kindName: st.kindName,
         name: st.name,
+        calibrated: st.calibrated ?? null,
       }));
     }
     return shells.map((s) => {
@@ -145,15 +164,83 @@ export function useAmmo(
         shortName: st?.shortName ?? null,
         kindName: st?.kindName ?? null,
         name: st?.name ?? null,
+        calibrated: st?.calibrated ?? null,
       };
     });
   }, [gunShells, active]);
   const [activeShell, setActiveShell] = useState(initialShell);
-  const shellIdx = Math.min(activeShell, Math.max(ammoShells.length - 1, 0));
+  // **The round the hero is showing wins, where it is showing one.** The two
+  // pick the same shell from either end of the page, so the panel follows the
+  // vehicle above it as readily as the vehicle follows the panel.
+  const { picked, choose } = useAmmoChoice();
+  const shared = matchRound(
+    picked,
+    ammoShells.map((one) => ({
+      kind: one.type,
+      damage: one.damage,
+      penetration: one.penetration,
+    })),
+  );
+  const shellIdx =
+    shared >= 0 ? shared : Math.min(activeShell, Math.max(ammoShells.length - 1, 0));
+
+  // Published rather than only announced on a click, so a build arriving with a
+  // round already chosen (a shared link, a gun swapped under it) reaches the
+  // hero too. `choose` ignores a pick it is already holding, so this settles.
+  const current = ammoShells[shellIdx];
+  const rank = rankOf(
+    ammoShells.map((one) => ({
+      kind: one.type,
+      damage: one.damage,
+      penetration: one.penetration,
+    })),
+    shellIdx,
+  );
+  useEffect(() => {
+    choose(
+      current
+        ? {
+            kind: current.type,
+            damage: current.damage,
+            penetration: current.penetration,
+            nth: rank,
+          }
+        : null,
+    );
+  }, [current, rank, choose]);
 
   // The default shell is the first one; "dirty" once another is selected.
   const isDirty = shellIdx > 0;
-  const reset = useCallback(() => setActiveShell(0), []);
+  const reset = useCallback(() => {
+    setActiveShell(0);
+    choose(null);
+  }, [choose]);
+  const select = useCallback(
+    (next: number) => {
+      setActiveShell(next);
+      const one = ammoShells[next];
+      choose(
+        one
+          ? {
+              kind: one.type,
+              damage: one.damage,
+              penetration: one.penetration,
+              // Which of the rounds these three figures cannot tell apart, or
+              // the pick answers for whichever of them comes first.
+              nth: rankOf(
+                ammoShells.map((each) => ({
+                  kind: each.type,
+                  damage: each.damage,
+                  penetration: each.penetration,
+                })),
+                next,
+              ),
+            }
+          : null,
+      );
+    },
+    [ammoShells, choose],
+  );
 
-  return { ammoShells, shellIdx, setActiveShell, isDirty, reset };
+  return { ammoShells, shellIdx, setActiveShell: select, isDirty, reset };
 }

@@ -203,6 +203,7 @@ export default async function TankPage({
         fieldMods={detail.fieldMods as unknown as TankFieldMods | null}
         skillTree={detail.skillTree as unknown as TankSkillTree | null}
         modes={(detail.modes ?? []) as unknown as VehicleMode[]}
+        mechanic={detail.mechanic ?? null}
         researchPath={detail.researchPath as unknown as ResearchBranch}
         videos={videos}
         // Defaulted rather than assumed: the detail payload is cached for a day

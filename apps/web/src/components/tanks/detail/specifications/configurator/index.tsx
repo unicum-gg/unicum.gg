@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useBuildLink } from "@/components/tanks/detail/build-context";
 import type { Region } from "@unicum.gg/wargaming";
 import {
   TankClient,
@@ -60,6 +61,8 @@ type TankConfiguratorProps = {
   fieldMods: TankFieldModsData | null;
   skillTree: TankSkillTreeData | null;
   modes: VehicleMode[];
+  /** Which mechanic the vehicle's second state is, where it has one. */
+  mechanic?: string | null;
   nextTanks: ResearchPathItem[];
   /** The Common Test build that rebalances this vehicle, null when none does.
    * Its presence is what offers the reader the test client's numbers. */
@@ -186,6 +189,7 @@ function TankConfiguratorInner({
   fieldMods,
   skillTree,
   modes,
+  mechanic,
   nextTanks,
   testVersion,
   initialSetup,
@@ -238,6 +242,14 @@ function TankConfiguratorInner({
     onSetupTokenChange?.(setupToken);
   }, [setupToken, onSetupTokenChange]);
 
+  // And handed to the hero, whose own compare control has to take the build on
+  // screen with it. The portable one, since a comparison column opens on the
+  // top configuration where this page opens on stock.
+  const { publish } = useBuildLink();
+  useEffect(() => {
+    publish(build.portableSetupToken);
+  }, [build.portableSetupToken, publish]);
+
   const sections = loadoutSections(build, loadout, crew, fieldMods);
   const hasPanels = sections.left || sections.right;
 
@@ -256,6 +268,7 @@ function TankConfiguratorInner({
                 {clientSwitch}
                 <VehicleModeToggle
                   modes={modes}
+                  mechanic={mechanic}
                   active={build.mode.active}
                   onToggle={build.mode.toggle}
                 />

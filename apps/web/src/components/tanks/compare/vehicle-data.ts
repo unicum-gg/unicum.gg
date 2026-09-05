@@ -51,5 +51,6 @@ export function toBuildData(
     fieldMods: vehicle.fieldMods,
     skillTree: vehicle.skillTree,
     modes: vehicle.modes,
+    mechanic: vehicle.mechanic ?? null,
   };
 }

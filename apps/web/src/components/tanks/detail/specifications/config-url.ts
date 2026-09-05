@@ -54,6 +54,49 @@ export interface DecodedConfig {
   crewLevel?: number;
   /** The engaged driving mode (siege / rapid), or absent for travel. */
   mode?: VehicleModeKind;
+  /** What the hero was showing, where any of it was changed. */
+  hero?: HeroSetup;
+}
+
+/**
+ * What the reader has done to the vehicle in the hero, as far as it travels.
+ *
+ * **What is being looked at, not how the window is set.** A link that says
+ * "this tank, in the armour view, wearing Nemesis, hull down, taking APCR" is
+ * worth sending; one that also says the sender had it full screen, centred and
+ * with the tracks stopped is describing their desk. So the framing, the size,
+ * the drifting camera, the running tracks and the texture set stay out, and
+ * everything that changes what the picture is answering goes in.
+ */
+export interface HeroSetup {
+  /** `collision` or `live`, absent for the visual view the page opens on. */
+  view?: string;
+  /** The folder of the 3D style worn, which is a set of pieces of its own. */
+  cut?: string;
+  /** The 2D style worn, by the client's own id for it. */
+  paint?: number;
+  /** `winter` or `desert`, absent for the summer one a style is cut for. */
+  season?: string;
+  /** Marks of excellence painted on the barrel, 1 to 3. */
+  marks?: number;
+  /** Whether the vehicle is posed behind a ridge. */
+  hullDown?: boolean;
+  /**
+   * A shot the reader built rather than one the gun carries.
+   *
+   * Written whole, because a figure edited on its own is still a claim about a
+   * shell: three of these matching the round it started from and one that does
+   * not is exactly the question that was asked.
+   */
+  shot?: {
+    pen: number;
+    caliber: number;
+    norm: number;
+    ricochet: number;
+    kind: string;
+  };
+  /** Where the gun is pointed, as a fraction of a turn and degrees of pitch. */
+  aim?: { bearing: number; pitch: number };
 }
 
 /** The live selection to serialize. Defaults are omitted from the URL. */
@@ -78,6 +121,8 @@ export interface EncodeInput {
   crewLevel: number;
   /** The engaged driving mode, or null for travel (the default). */
   mode: VehicleModeKind | null;
+  /** What the hero is showing, where the reader has changed any of it. */
+  hero?: HeroSetup;
 }
 
 const csv = (parts: (string | number | null)[]): string =>
@@ -100,6 +145,14 @@ const K = {
   crewSkills: "k",
   crewLevel: "l",
   mode: "g",
+  view: "v",
+  cut: "t",
+  paint: "n",
+  season: "w",
+  marks: "x",
+  hullDown: "h",
+  shot: "o",
+  aim: "a",
 } as const;
 
 /** Build the compact inner query string, writing only what differs from the
@@ -144,6 +197,27 @@ function buildSetupString(input: EncodeInput): string {
   if (pct !== 100) add(K.crewLevel, String(pct));
 
   if (input.mode) add(K.mode, input.mode);
+
+  const hero = input.hero;
+  if (hero?.view) add(K.view, hero.view);
+  if (hero?.cut) add(K.cut, hero.cut);
+  if (hero?.paint != null) add(K.paint, String(hero.paint));
+  if (hero?.season) add(K.season, hero.season);
+  if (hero?.marks) add(K.marks, String(hero.marks));
+  if (hero?.hullDown) add(K.hullDown, "1");
+  if (hero?.shot)
+    add(
+      K.shot,
+      csv([
+        hero.shot.pen,
+        hero.shot.caliber,
+        hero.shot.norm,
+        hero.shot.ricochet,
+        hero.shot.kind,
+      ]),
+    );
+  if (hero?.aim)
+    add(K.aim, csv([hero.aim.bearing.toFixed(4), hero.aim.pitch.toFixed(2)]));
 
   return parts.join("&");
 }
@@ -221,6 +295,43 @@ function decodeConfig(params: URLSearchParams): DecodedConfig {
   const mode = params.get(K.mode);
   if (mode === VehicleModeKind.Siege || mode === VehicleModeKind.Rapid)
     out.mode = mode;
+
+  // The hero's half. Every field is read on its own and a malformed one is
+  // simply not read, so an edited link opens on the parts of it that parse
+  // rather than on nothing.
+  const hero: HeroSetup = {};
+  const view = params.get(K.view);
+  if (view === "collision" || view === "live") hero.view = view;
+  const cut = params.get(K.cut);
+  if (cut) hero.cut = cut;
+  const paint = Number(params.get(K.paint));
+  if (Number.isInteger(paint) && paint > 0) hero.paint = paint;
+  const season = params.get(K.season);
+  if (season === "winter" || season === "desert") hero.season = season;
+  const marks = Number(params.get(K.marks));
+  if (Number.isInteger(marks) && marks > 0 && marks <= 3) hero.marks = marks;
+  if (params.get(K.hullDown) === "1") hero.hullDown = true;
+  const shot = params.get(K.shot);
+  if (shot) {
+    const [pen, caliber, norm, ricochet, kind] = splitCsv(shot);
+    const figures = [pen, caliber, norm, ricochet].map(Number);
+    if (kind && figures.every((n) => Number.isFinite(n) && n >= 0)) {
+      hero.shot = {
+        pen: figures[0]!,
+        caliber: figures[1]!,
+        norm: figures[2]!,
+        ricochet: figures[3]!,
+        kind,
+      };
+    }
+  }
+  const aim = params.get(K.aim);
+  if (aim) {
+    const [bearing, pitch] = splitCsv(aim).map(Number);
+    if (Number.isFinite(bearing) && Number.isFinite(pitch))
+      hero.aim = { bearing: bearing!, pitch: pitch! };
+  }
+  if (Object.keys(hero).length > 0) out.hero = hero;
 
   return out;
 }

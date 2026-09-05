@@ -5,6 +5,11 @@ const STORAGE = {
     COOKIE_PREFERENCES: "unicum.cookie-preferences",
     SEARCH_HISTORY: "unicum.search-history",
     HIDE_STREAMS: "unicum.hide-streams",
+    // How a reader likes the tank viewer to show them a vehicle: the texture
+    // set, the wandering camera, the running tracks, the framing. Their own
+    // answers rather than the vehicle's, which is why they are kept here and
+    // not in the shared link.
+    VIEWER_PREFS: "unicum.viewer-prefs",
   },
   // BroadcastChannel names. Same `unicum.*` namespace as the rest: a channel
   // name is shared with every other script on the origin exactly like a storage

@@ -1,11 +1,5 @@
 "use client";
 
-import type { ReactNode } from "react";
-import {
-  CrosshairSimpleIcon,
-  GaugeIcon,
-  SteeringWheelIcon,
-} from "@phosphor-icons/react";
 import { VehicleModeKind, type VehicleMode } from "@unicum.gg/shared";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import {
@@ -16,28 +10,25 @@ import {
   effectLabel,
   fmtEffect,
 } from "@/components/tanks/detail/specifications/field-mods";
-
-const MODE_LABEL: Record<VehicleModeKind, string> = {
-  [VehicleModeKind.Siege]: "Siege",
-  [VehicleModeKind.Rapid]: "Rapid",
-};
-
-// WG ships no standalone icon for the drive modes, so these are Phosphor stand-ins:
-// a crosshair for the siege deploy (plant + aim), a gauge for the wheeled rapid
-// switch (top speed), and a steering wheel for the default travel state.
-const MODE_ICON: Record<VehicleModeKind, ReactNode> = {
-  [VehicleModeKind.Siege]: <CrosshairSimpleIcon className="size-3.5" weight="bold" />,
-  [VehicleModeKind.Rapid]: <GaugeIcon className="size-3.5" weight="bold" />,
-};
-const TRAVEL_ICON = <SteeringWheelIcon className="size-3.5" weight="bold" />;
+import {
+  modeLabel,
+  ModeIcon,
+  travelLabel,
+} from "@/components/tanks/detail/mode-marks";
 
 // The switch-time and gun-arc rows are shown alongside the ratio factors so the
 // tooltip is a complete picture of what engaging the mode does, not just the
 // characteristics that also have a table row.
-function ModeTooltip({ mode }: { mode: VehicleMode }) {
+function ModeTooltip({
+  mode,
+  mechanic,
+}: {
+  mode: VehicleMode;
+  mechanic: string | null;
+}) {
   return (
     <div className="w-56 space-y-2 text-xs">
-      <div className="font-medium">{MODE_LABEL[mode.kind]} mode</div>
+      <div className="font-medium">{modeLabel(mechanic, mode.kind)} mode</div>
       <div className="space-y-0.5 border-t border-background/20 pt-1.5 tabular-nums">
         {mode.factors.map((e, i) => (
           <div key={i} className="flex justify-between gap-3">
@@ -69,19 +60,26 @@ function ModeTooltip({ mode }: { mode: VehicleMode }) {
 }
 
 /**
- * The vehicle's alternate driving mode (siege deploy for Swedish TDs, rapid
- * switch for wheeled vehicles) as a compact segmented toggle, sat next to the
- * characteristics title: Travel is the base state, engaging a mode swaps the
- * handling/mobility characteristics on top of the current build. Renders nothing
- * for the vast majority of vehicles, which have no mode.
+ * The vehicle's second state as a compact segmented toggle, sat next to the
+ * characteristics title: the left segment is the state it is in before the
+ * switch, engaging the other swaps the handling and mobility characteristics on
+ * top of the current build. Renders nothing for the vast majority of vehicles,
+ * which have no second state.
+ *
+ * Both segments are named for the mechanic rather than for the siege the client
+ * tags all of them as, and by the same function the hero's mark uses, so the
+ * two switches offering the same act say the same words.
  */
 export function VehicleModeToggle({
   modes,
   active,
+  mechanic = null,
   onToggle,
 }: {
   modes: VehicleMode[];
   active: VehicleModeKind | null;
+  /** Which mechanic the second state is, where the caller knows it. */
+  mechanic?: string | null;
   onToggle: (kind: VehicleModeKind) => void;
 }) {
   if (modes.length === 0) return null;
@@ -89,8 +87,10 @@ export function VehicleModeToggle({
     <TooltipProvider delayDuration={100}>
       <SegmentedControl>
         <Segment
-          label="Travel"
-          icon={TRAVEL_ICON}
+          label={travelLabel(mechanic)}
+          icon={
+            <ModeIcon mechanic={mechanic} engaged={false} className="size-3.5" />
+          }
           active={active === null}
           // Clicking Travel disengages whichever mode is active.
           onClick={() => active !== null && onToggle(active)}
@@ -98,11 +98,13 @@ export function VehicleModeToggle({
         {modes.map((mode) => (
           <Segment
             key={mode.kind}
-            label={MODE_LABEL[mode.kind]}
-            icon={MODE_ICON[mode.kind]}
+            label={modeLabel(mechanic, mode.kind)}
+            icon={
+              <ModeIcon mechanic={mechanic} engaged className="size-3.5" />
+            }
             active={active === mode.kind}
             onClick={() => onToggle(mode.kind)}
-            tooltip={<ModeTooltip mode={mode} />}
+            tooltip={<ModeTooltip mode={mode} mechanic={mechanic} />}
           />
         ))}
       </SegmentedControl>

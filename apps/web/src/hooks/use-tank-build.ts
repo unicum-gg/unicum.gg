@@ -2,21 +2,7 @@
 
 import { useCallback, useMemo, useState } from "react";
 import type { ModuleType } from "@unicum.gg/wargaming";
-import {
-  applyCamouflage,
-  applyCamoNet,
-  applyConsumables,
-  applyCrewLevel,
-  applyCrewQualification,
-  applyCrewSkills,
-  applyDirectives,
-  applyEquipment,
-  applyFieldMods,
-  applyRepairs,
-  applyVehicleMode,
-  type TankSpec,
-  type VehicleMode,
-} from "@unicum.gg/shared";
+import { applyCamouflage, type TankSpec, type VehicleMode } from "@unicum.gg/shared";
 import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
 import type { TankCrew } from "@unicum.gg/core/wargaming/wot/tanks/crew";
 import type { TankFieldMods } from "@unicum.gg/core/wargaming/wot/tanks/field-mods";
@@ -34,7 +20,9 @@ import {
   stockConfigIdx,
   topConfigIdx,
 } from "@/lib/tank-configs";
-import { useAmmo, applyShell } from "@/hooks/use-ammo";
+import { useAmmo } from "@/hooks/use-ammo";
+import { composeSpecs } from "@/hooks/tank-build-specs";
+import { useHeroShown } from "@/components/tanks/detail/hero-context";
 import { useCrewConfig } from "@/hooks/use-crew-config";
 import { useFieldMods } from "@/hooks/use-field-mods";
 import { useLoadout } from "@/hooks/use-loadout";
@@ -52,6 +40,8 @@ export interface TankBuildData {
   fieldMods: TankFieldMods | null;
   skillTree: TankSkillTree | null;
   modes: VehicleMode[];
+  /** Which mechanic the vehicle's second state is, where it has one. */
+  mechanic?: string | null;
 }
 
 /** Which configuration an unseeded build opens on. The tank page opens on
@@ -133,6 +123,9 @@ export function useTankBuild(
   const selectedModules = active?.modules ?? null;
 
   const ammo = useAmmo(active, modules, seed.shell);
+  // What the picture above is showing, which the reader changed there and which
+  // the link they copy from here has to carry.
+  const { hero } = useHeroShown();
   const { ammoShells, shellIdx } = ammo;
 
   const specs: TankSpec | null = useMemo(() => {
@@ -182,99 +175,55 @@ export function useTankBuild(
   const { appliedSkillTree } = skillTreeState;
   const { appliedMode } = modeState;
 
-  // Characteristics reflect the selected shell first (it *replaces* base values:
-  // damage, penetration, velocity, cost), then modules + equipment + directives
-  // + consumables + crew skills scale on top. The shell must come first or a
-  // multiplier on a per-shell stat (Perfect Charge's +10% shell velocity) would
-  // be clobbered by the raw shell value.
-  const finalSpecs: TankSpec | null = useMemo(() => {
-    if (!specs) return specs;
-    const withShell = applyShell(specs, ammoShells[shellIdx]);
-    if (!withShell) return withShell;
-    // Driving mode (siege / rapid) is a base-state swap: it scales the handling
-    // and mobility characteristics by WG's mode-vs-travel ratios before anything
-    // else, so equipment, crew and field mods then compose on top of the
-    // deployed values (a mounted rammer speeds up the siege reload, etc.).
-    const withMode = appliedMode
-      ? applyVehicleMode(withShell, appliedMode, shellIdx)
-      : withShell;
-    // The crew's major-qualification level (the slider) degrades every
-    // crew-affected stat below 100%; nominal at 100%. Applied first, then the
-    // trained skills/perks build on top.
-    const withQual =
-      crewLevel < 1 ? applyCrewQualification(withMode, crewLevel) : withMode;
-    const withEquip = mounted.length ? applyEquipment(withQual, mounted) : withQual;
-    const withDirectives = appliedDirectives.length
-      ? applyDirectives(withEquip, appliedDirectives)
-      : withEquip;
-    const withConsumables = appliedConsumables.length
-      ? applyConsumables(withDirectives, appliedConsumables)
-      : withDirectives;
-    // Unlocked field modifications (base steps + chosen dual sides) OR skill-tree
-    // nodes (tier XI) — a vehicle has one system or the other, never both. Both
-    // are the same factor bag, so applyFieldMods handles them; the per-shell
-    // penetration mods gate on the selected shell.
-    const progressionMods = appliedFieldMods.length
-      ? appliedFieldMods
-      : appliedSkillTree;
-    const withFieldMods = progressionMods.length
-      ? applyFieldMods(withConsumables, progressionMods, shellIdx)
-      : withConsumables;
-    const withCrew = appliedCrewSkills.length
-      ? applyCrewSkills(withFieldMods, appliedCrewSkills, crewLevel)
-      : withFieldMods;
-    // Crew directives grant a skill at their boost multiplier, applied like a
-    // crew skill (each carries its own scale, so a full-strength level here).
-    const withCrewDirectives = appliedCrewDirectives.length
-      ? applyCrewSkills(withCrew, appliedCrewDirectives, 1)
-      : withCrew;
-    // Brothers in Arms + Improved Ventilation + food all raise the crew level.
-    const totalCrewLevel =
-      crewLevelIncrease + equipmentCrewLevel + consumableCrewLevel;
-    // The Repairs common skill, applied once at its crew-averaged coverage level
-    // (shortens the track repair time via the crew role factor), rather than
-    // compounded per member. The crew-level boost speeds it up further, in game.
-    const withRepair =
-      repairSkill && repairLevel > 0
-        ? applyRepairs(withCrewDirectives, repairLevel, totalCrewLevel)
-        : withCrewDirectives;
-    const withCrewLevel =
-      totalCrewLevel > 0 ? applyCrewLevel(withRepair, totalCrewLevel) : withRepair;
-    // Camo is stored at full Camouflage skill; re-base it to the skill's actual
-    // level (0 by default = the no-skill value shown as the baseline). The
-    // Concealment directive grants the skill (min level 1) and scales it.
-    const effCamoLevel = directiveCamo.granted
-      ? Math.max(camoLevel, 1) * directiveCamo.factor
-      : camoLevel;
-    const withCamo = applyCamouflage(withCrewLevel, effCamoLevel);
-    // Camo devices (net / low-noise exhaust) add their bonus on top of that.
-    const withNet =
-      camoBonuses.still > 0 || camoBonuses.moving > 0
-        ? applyCamoNet(withCamo, camoBonuses.still, camoBonuses.moving)
-        : withCamo;
-    return withNet;
-  }, [
-    specs,
-    appliedMode,
-    mounted,
-    appliedDirectives,
-    appliedCrewDirectives,
-    directiveCamo,
-    appliedConsumables,
-    appliedFieldMods,
-    appliedSkillTree,
-    appliedCrewSkills,
-    repairSkill,
-    repairLevel,
-    crewLevel,
-    crewLevelIncrease,
-    equipmentCrewLevel,
-    consumableCrewLevel,
-    camoLevel,
-    camoBonuses,
-    ammoShells,
-    shellIdx,
-  ]);
+  const finalSpecs: TankSpec | null = useMemo(
+    () =>
+      composeSpecs({
+        ammoShells,
+        appliedConsumables,
+        appliedCrewDirectives,
+        appliedCrewSkills,
+        appliedDirectives,
+        appliedFieldMods,
+        appliedMode,
+        appliedSkillTree,
+        camoBonuses,
+        camoLevel,
+        consumableCrewLevel,
+        crewLevel,
+        crewLevelIncrease,
+        directiveCamo,
+        equipmentCrewLevel,
+        mounted,
+        repairLevel,
+        repairSkill,
+        shellIdx,
+        specs,
+        modeActive: modeState.active,
+      }),
+    [
+      specs,
+      appliedMode,
+      modeState.active,
+      mounted,
+      appliedDirectives,
+      appliedCrewDirectives,
+      directiveCamo,
+      appliedConsumables,
+      appliedFieldMods,
+      appliedSkillTree,
+      appliedCrewSkills,
+      repairSkill,
+      repairLevel,
+      crewLevel,
+      crewLevelIncrease,
+      equipmentCrewLevel,
+      consumableCrewLevel,
+      camoLevel,
+      camoBonuses,
+      ammoShells,
+      shellIdx,
+    ],
+  );
 
   /** Mount a module, snapping to the configuration closest to the current one. */
   const select = useCallback(
@@ -356,6 +305,7 @@ export function useTankBuild(
       crewSkills: [...crewState.selectedSkills],
       crewLevel: crewState.crewLevel,
       mode: modeState.active,
+      hero,
     });
     },
     [
@@ -374,6 +324,7 @@ export function useTankBuild(
     crewState.selectedSkills,
     crewState.crewLevel,
     modeState.active,
+    hero,
     ],
   );
 

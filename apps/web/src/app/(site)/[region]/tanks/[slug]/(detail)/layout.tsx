@@ -12,6 +12,7 @@ import {
   loadTankDetail,
   loadTankVideos,
 } from "@/app/(site)/[region]/tanks/[slug]/detail";
+import { heroShells } from "@/components/tanks/detail/viewer/shell-rules";
 
 /**
  * What every tab of a tank page shares: the hero, the tab bar, and the video
@@ -97,6 +98,10 @@ export default async function TankLayout({
         videos={videos}
         available={availableTabs(detail)}
         rating={{ overall: rating.overall, votes: rating.votes }}
+        basedOn={detail.basedOn}
+        builds={detail.configs?.map((c) => ({ modules: c.modules, keys: c.keys }))}
+        mechanic={detail.mechanic}
+        shells={heroShells(detail)}
       >
         {children}
       </TankShell>

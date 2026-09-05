@@ -34,6 +34,7 @@ export function SpecificationsTab({
   fieldMods,
   skillTree,
   modes,
+  mechanic,
   researchPath,
   videos,
   testVersion,
@@ -50,6 +51,8 @@ export function SpecificationsTab({
   fieldMods: TankFieldMods | null;
   skillTree: TankSkillTree | null;
   modes: VehicleMode[];
+  /** Which mechanic the vehicle's second state is, where it has one. */
+  mechanic?: string | null;
   researchPath: ResearchBranch;
   videos: TankVideoCardData[];
   /** The Common Test build that rebalances this vehicle, null when none does. */
@@ -83,6 +86,7 @@ export function SpecificationsTab({
           fieldMods={fieldMods}
           skillTree={skillTree}
           modes={modes}
+          mechanic={mechanic}
           nextTanks={researchPath.next}
           testVersion={testVersion}
         />

@@ -28,10 +28,13 @@ export function CompareWithTank({
   slug,
   /** The build's portable setup token, or null when it is pristine. */
   setupToken,
+  /** How the mark is drawn, since the two places that offer it are not alike. */
+  triggerClassName = "inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground",
 }: {
   region: Region;
   slug: string;
   setupToken: string | null;
+  triggerClassName?: string;
 }) {
   const router = useRouter();
 
@@ -47,7 +50,7 @@ export function CompareWithTank({
       triggerAriaLabel="Compare with another tank"
       tooltip="Compare with another tank"
       placeholder="Compare with..."
-      triggerClassName="inline-flex size-7 shrink-0 cursor-pointer items-center justify-center rounded-md border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground transition-colors hover:bg-fd-secondary hover:text-fd-foreground"
+      triggerClassName={triggerClassName}
       triggerContent={<ScalesIcon className="size-3.5" weight="bold" />}
     />
   );
