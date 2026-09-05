@@ -119,6 +119,18 @@ export const tankConfig = z.object({
       description:
         "The WG module ids mounted in this configuration, one per slot (null when the tank has no module of that class).",
     }),
+  keys: z
+    .object({
+      gun: z.string(),
+      turret: z.string(),
+      engine: z.string(),
+      chassis: z.string(),
+      radio: z.string(),
+    })
+    .meta({
+      description:
+        "The game client's own name for each module in this configuration. The geometry mirror publishes which piece a module draws under exactly these keys, so a viewer can show the gun a reader picked rather than the vehicle's first.",
+    }),
   specs: z.looseObject({}).meta({
     description:
       "The full combat specification for this module combination, same shape as the top-level `specs` row.",

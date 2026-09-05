@@ -109,6 +109,13 @@ export const TankDetailResponse = z
         next: z.array(researchPathItem),
       })
       .nullable(),
+    basedOn: z
+      .object({ name: z.string(), slug: z.string() })
+      .nullable()
+      .meta({
+        description:
+          "The vehicle this one was made from, where the game client says it is one: a reissue or event variant drawing another tank's meshes, or a reskin shipping its own and pointing every hit tester at another tank's armour. Null where the vehicle stands on its own, and where the two share a name.",
+      }),
     modules: z.array(tankModuleNode).meta({
       description:
         "The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail.",
@@ -136,6 +143,10 @@ export const TankDetailResponse = z
     modes: z.array(vehicleMode).meta({
       description:
         "The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode.",
+    }),
+    mechanic: z.string().nullable().meta({
+      description:
+        "Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state.",
     }),
     moeHistory: z.array(
       z.object({

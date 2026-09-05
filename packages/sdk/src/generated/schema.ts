@@ -3453,6 +3453,8 @@ export interface components {
             /** @description Every selectable module combination with its derived specs, so a column re-renders its characteristics from the modules picked on it. */
             configs: components["schemas"]["tankConfig"][];
             modes: components["schemas"]["vehicleMode"][];
+            /** @description Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. Null for the vast majority of vehicles, which have no second state. */
+            mechanic: string | null;
             /** @description The vehicle's equipment slots plus the catalogue keys it can mount, resolved against `catalog`. Null when the wot-src catalogue has nothing for it. */
             loadout: {
                 slots: components["schemas"]["equipmentSlot"][];
@@ -3501,6 +3503,14 @@ export interface components {
                 engine: number | null;
                 chassis: number | null;
                 radio: number | null;
+            };
+            /** @description The game client's own name for each module in this configuration. The geometry mirror publishes which piece a module draws under exactly these keys, so a viewer can show the gun a reader picked rather than the vehicle's first. */
+            keys: {
+                gun: string;
+                turret: string;
+                engine: string;
+                chassis: string;
+                radio: string;
             };
             /** @description The full combat specification for this module combination, same shape as the top-level `specs` row. */
             specs: string;
@@ -3552,6 +3562,11 @@ export interface components {
                 lineage: components["schemas"]["researchPathItem"][];
                 next: components["schemas"]["researchPathItem"][];
             } | null;
+            /** @description The vehicle this one was made from, where the game client says it is one: a reissue or event variant drawing another tank's meshes, or a reskin shipping its own and pointing every hit tester at another tank's armour. Null where the vehicle stands on its own, and where the two share a name. */
+            basedOn: {
+                name: string;
+                slug: string;
+            } | null;
             /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
             modules: components["schemas"]["tankModuleNode"][];
             /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
@@ -3566,6 +3581,8 @@ export interface components {
             skillTree: components["schemas"]["tankSkillTree"] | null;
             /** @description The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode. */
             modes: components["schemas"]["vehicleMode"][];
+            /** @description Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state. */
+            mechanic: string | null;
             moeHistory: {
                 day: string;
                 mark1: number;
@@ -3639,6 +3656,11 @@ export interface components {
                 lineage: components["schemas"]["researchPathItem"][];
                 next: components["schemas"]["researchPathItem"][];
             } | null;
+            /** @description The vehicle this one was made from, where the game client says it is one: a reissue or event variant drawing another tank's meshes, or a reskin shipping its own and pointing every hit tester at another tank's armour. Null where the vehicle stands on its own, and where the two share a name. */
+            basedOn: {
+                name: string;
+                slug: string;
+            } | null;
             /** @description The module research DAG (nodes with unlock edges), in-game row order (gun, turret, engine, suspension, radio) then XP cost. Empty for tanks WG's Tankopedia doesn't detail. */
             modules: components["schemas"]["tankModuleNode"][];
             /** @description Every selectable module combination with its full derived specs, so the page re-renders the characteristics from the modules the user picks. Empty when the wot-src catalogue has nothing for the tank (the page shows the static stock specs). */
@@ -3653,6 +3675,8 @@ export interface components {
             skillTree: components["schemas"]["tankSkillTree"] | null;
             /** @description The alternate driving modes the vehicle can switch into (siege for Swedish TDs, rapid for wheeled vehicles), each as ratio factors over the base spec plus any gun-arc override. Empty for the vast majority of vehicles, which have no mode. */
             modes: components["schemas"]["vehicleMode"][];
+            /** @description Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. The client tags all of them the same way, so this is what tells them apart. Null for the vast majority of vehicles, which have no second state. */
+            mechanic: string | null;
             moeHistory: {
                 day: string;
                 mark1: number;

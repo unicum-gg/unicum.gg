@@ -60,6 +60,10 @@ const compareVehicle = z
         "Every selectable module combination with its derived specs, so a column re-renders its characteristics from the modules picked on it.",
     }),
     modes: z.array(vehicleMode),
+    mechanic: z.string().nullable().meta({
+      description:
+        "Which mechanic the vehicle's second state is, where it has one: siege, wheeled, dualGun, twinGun, turboshaftEngine, shellParamsSwitcher or lowChargeShot. Null for the vast majority of vehicles, which have no second state.",
+    }),
     loadout: z
       .object({
         slots: z.array(equipmentSlot),
