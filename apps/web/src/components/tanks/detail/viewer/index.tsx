@@ -1,39 +1,25 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { modelsRoot } from "@unicum.gg/wargaming";
+import { type RefObject, useEffect, useRef } from "react";
 
-// Where the geometry is read from. The mirror in production; a local tree in
-// development, since a freshly generated catalogue is eighteen gigabytes and
-// takes a while to reach GitHub. Point `NEXT_PUBLIC_MODELS_ROOT` at one with
-// `ln -s <out> apps/web/public/models` and `/models`.
-const MIRROR = process.env.NEXT_PUBLIC_MODELS_ROOT || modelsRoot();
-/**
- * How the picture this replaces was framed, fitted rather than guessed.
- *
- * WG's portal renders are all shot from one camera and none of its numbers are
- * published. They were recovered by driving this viewer through a sweep of
- * angles and distances and comparing the silhouette it draws against a real
- * render's: how tall the outline is for its width, and how much of its own box
- * it fills, pin the angle down to about a percent. Twenty degrees round and
- * twenty-six up, at a distance matching the width to within one percent.
- *
- * The anchor is where the model has to land afterwards, in fractions of the
- * canvas. It is deliberately not WG's published centroid: that measures a centre
- * of mass and this measures an outline, so the two do not coincide, and what
- * matters is only that the model sits where the picture sat.
- *
- * **Moving it a hundredth moves the vehicle two.** The offset is given as a
- * fraction of the frame and read as one of the half-frame either side of centre,
- * so a correction applied at face value overshoots by exactly double, which is
- * how the first attempt turned an error of three points below into three above.
- */
-const AZIMUTH = (20 * Math.PI) / 180;
-const ELEVATION = (26 * Math.PI) / 180;
-const DISTANCE = 0.725;
-const ANCHOR_X = 0.3950;
-const ANCHOR_Y = 0.3786;
-const CENTROID_Y = 0.496;
+import { AimDial } from "@/components/tanks/detail/viewer/aim-dial";
+import { ArmourReadout } from "@/components/tanks/detail/viewer/readout";
+import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
+import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
+import { Presentation } from "@/components/tanks/detail/viewer/presentation";
+import { ViewerControls } from "@/components/tanks/detail/viewer/controls";
+import { openStage } from "@/components/tanks/detail/viewer/open";
+import { useHeroAim } from "@/components/tanks/detail/viewer/use-hero-aim";
+import { useHeroDress } from "@/components/tanks/detail/viewer/use-hero-dress";
+import {
+  useHeroLink,
+  usePublishedHero,
+} from "@/components/tanks/detail/viewer/use-hero-link";
+import { useHeroDesk } from "@/components/tanks/detail/viewer/use-hero-desk";
+import { useHeroStage } from "@/components/tanks/detail/viewer/use-hero-stage";
+import { useHeroShot } from "@/components/tanks/detail/viewer/use-hero-shot";
+import type { Shot } from "@/services/tank-viewer/armour";
+
 
 // The vehicle, drawn from the geometry mirror, standing where the render was.
 //
@@ -41,292 +27,333 @@ const CENTROID_Y = 0.496;
 // megabytes of meshes and textures, so making it the hero's own content would
 // trade a fast page for a slow one. It is built behind the render and fades in
 // once it is ready, and a vehicle the mirror does not carry simply never fades.
-/**
- * Which vehicles the mirror carries, and the nation folder each sits under.
- *
- * The page knows a vehicle by the nation the scripts give it, `ussr`, and the
- * mirror files it under the one the content gives it, `russian`; nothing in
- * either says so, so the mirror publishes the mapping. It doubles as the list
- * of what exists, which is how a vehicle with no model is told apart from a
- * request that failed. Fetched once for the whole session: it is 26 KB and the
- * same file for every tank.
- */
-let index: Promise<Record<string, string>> | null = null;
-function carried(): Promise<Record<string, string>> {
-  index ??= fetch(`${MIRROR}/vehicles.json`)
-    .then((r) => (r.ok ? r.json() : {}))
-    .catch(() => ({}));
-  return index;
-}
 
 export function TankViewer({
   code,
-  onReady,
+  shells,
+  builds,
+  mechanic,
+  onAbsent,
+  column,
 }: {
   /** The code the game gives it, which is the folder's name, `R45_IS-7`. */
   code: string;
-  onReady?: () => void;
+  /**
+   * The shells the live view can answer for, by the gun that loads them, the
+   * standard one first within each.
+   *
+   * Empty, or missing what the rules need, and the live view is not offered at
+   * all: normalisation and the ricochet angle are not figures worth guessing.
+   */
+  shells?: Record<string, HeroShell[]>;
+  /**
+   * Every module combination, with the game's own name for each module.
+   *
+   * The configurator lives in a tab and the vehicle in the hero, so the two are
+   * siblings rather than parent and child: what they share is the URL the
+   * configurator already writes its choice into. Read from there, the hero can
+   * mount the gun the reader picked without either knowing about the other.
+   */
+  builds?: {
+    modules: Record<string, number | null>;
+    keys: Record<string, string>;
+  }[];
+  /**
+   * Which mechanic this vehicle's second state is, where it has one.
+   *
+   * The client tags all seven of them `siegeMode`, so the mark cannot be called
+   * "siege" for every vehicle that has one: a Panhard EBR locks its wheels for
+   * the road, an IS-3-II fires two guns, and this one recalibrates its shells.
+   */
+  mechanic?: string | null;
+  /**
+   * Said where this vehicle has no model to draw, rather than when one is
+   * ready. The caller shows its picture on that alone: waiting is not a state
+   * worth putting on the page, and having nothing to show is.
+   */
+  onAbsent?: () => void;
+  /**
+   * The page's column, which the vehicle is framed within rather than the
+   * canvas. The hero runs the full width of the window and the reading does
+   * not: the title, the panels and the controls all keep to this column, so a
+   * vehicle anchored to the canvas would slide away from them as the window
+   * widened. Absent, the canvas is its own frame.
+   */
+  column?: RefObject<HTMLElement | null>;
 }) {
+  const { fitted, opening } = useHeroLink(builds);
   const canvas = useRef<HTMLCanvasElement>(null);
-  const [shown, setShown] = useState(false);
-  // Only offered once the view has actually been moved: a button to undo
-  // something nobody has done yet is furniture.
-  const [moved, setMoved] = useState(false);
-  const reset = useRef<(() => void) | null>(null);
+  /**
+   * The outgoing view, held still while the new one takes its place.
+   *
+   * **A photograph rather than a blend.** The three views are not variations of
+   * one picture: two of them replace the render wholesale and the switch
+   * between reading a plate and reading a shot is a branch in the shader, not a
+   * factor to tween. Mixing them properly would mean computing both answers for
+   * every pixel of the crossing. Keeping the last frame and dissolving it costs
+   * one copy, and it reads the same.
+   */
+  const ghost = useRef<HTMLCanvasElement>(null);
+  const stage = useHeroStage({ canvas, ghost });
+  const { view, shown, hullDown, reading } = stage;
+  /**
+   * Which of them the view is answering for. The standard one until asked.
+   *
+   * **Shared with the Ammunition panel below**, so the two ends of the page
+   * agree on what is being fired. Matched on the round rather than handed
+   * across as a number: the panel offers what the gun loads and the hero only
+   * the rounds whose rules it can answer for, so the lists differ.
+   */
+  // **The rounds of the gun that is on the vehicle**, which is not always the
+  // one it was sold with. Falls back to the first build's, the way a page with
+  // nothing chosen on it shows the stock loadout.
+  const firing = useHeroShot({
+    shells,
+    builds,
+    fitted,
+    mechanic,
+    opensOn: opening.shot,
+  });
+  const { shell, deployed, engage } = firing;
+  const fire = useRef<((shot: Shot | null) => void) | null>(null);
+  // Read through a ref so a shell chosen after the model loaded reaches the
+  // rules without rebuilding the vehicle around it.
+  const shellRef = useRef<Shot | null | undefined>(shell);
+  useEffect(() => {
+    shellRef.current = shell;
+    // **The readout reads this ref every frame, and the picture does not.** The
+    // plates hold the shot in uniforms of their own, so a round nobody hands
+    // them leaves the vehicle painted for the last one while the panel under
+    // the cursor answers for the new one.
+    fire.current?.(shell);
+  }, [shell]);
+  const dressing = useHeroDress({ code, opening });
+  /** The dial's own updater, filled by it and called once an ask is taken. */
+  const aiming = useHeroAim({ deployed, mechanic, engage });
+  const { aim, watch, takeAim, aimed } = aiming;
 
+  const held = useRef<HTMLDivElement>(null);
+  const desk = useHeroDesk({ held, sharp: dressing.sharp });
+  const { liked, centred, presentation } = desk;
+  usePublishedHero({ view, dressing, firing, hullDown, aimed });
   useEffect(() => {
     const surface = canvas.current;
     if (!surface) return;
     let live = true;
-    let stop: (() => void) | undefined;
-
-    // Imported here rather than at the top so three and the loader stay out of
-    // the page's own bundle: a tank page that nobody rotates should not pay for
-    // a renderer.
-    void (async () => {
-      const [THREE, { OrbitControls }, { loadVisual }] = await Promise.all([
-        import("three"),
-        import("three/examples/jsm/controls/OrbitControls.js"),
-        import("./visual.js"),
-      ]);
-      const nation = (await carried())[code];
-      if (!live || !nation) return;
-
-      const renderer = new THREE.WebGLRenderer({ canvas: surface, antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.outputColorSpace = THREE.SRGBColorSpace;
-      renderer.toneMapping = THREE.NeutralToneMapping;
-
-      const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 200);
-      const controls = new OrbitControls(camera, surface);
-      controls.enableDamping = true;
-      controls.enablePan = false;
-      // The hero is a band, not a room: letting the camera under the floor or
-      // straight overhead shows the one angle the vehicle has nothing on.
-      controls.minPolarAngle = 0.35;
-      controls.maxPolarAngle = Math.PI / 2.05;
-
-      // **The pieces are hung off each other the way the vehicle is built**: the
-      // hull rides on the chassis, the turret sits on the hull, the gun in the
-      // turret. Where each ring is comes from the collision file, which is the
-      // only thing that knows: a mesh carries no idea of where it belongs.
-      //
-      // Left at the origin, as a first pass had them, every piece is drawn in
-      // the same place and the tank comes out as a heap with its tracks laid
-      // over its roof.
-      const armour = await fetch(`${MIRROR}/vehicles/${nation}/${code}/collision.json`)
-        .then((r) => (r.ok ? r.json() : null))
-        .catch(() => null);
-      if (!live) return;
-      const first = (prefix: string) =>
-        Object.keys(armour?.parts ?? {})
-          .sort()
-          .find((n) => n.startsWith(prefix));
-      const turretName = first("Turret") ?? "";
-
-      // Something for the vehicle to stand on.
-      //
-      // **A hangar floor, not a photograph of one.** The picture it replaces is
-      // shot from high above, so a model drawn at eye level on top of it reads
-      // as pasted on; a floor built in the same space as the vehicle is seen
-      // from wherever the vehicle is. It is a disc rather than a plane so it has
-      // no edge to run into, faded out at the rim so it has no horizon either,
-      // and a grid faint enough to give the eye a scale without becoming
-      // graph paper.
-      const floor = new THREE.Group();
-      const ground = new THREE.Mesh(
-        new THREE.CircleGeometry(26, 64),
-        new THREE.ShaderMaterial({
-          transparent: true,
-          uniforms: { tint: { value: new THREE.Color(0x1b1f27) } },
-          vertexShader: "varying vec2 vXy; void main() { vXy = position.xy; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }",
-          fragmentShader: `
-            uniform vec3 tint;
-            varying vec2 vXy;
-            void main() {
-              float away = length(vXy) / 26.0;
-              // Brightest under the vehicle and gone by the rim, which is what
-              // keeps the disc from ever showing its own edge.
-              float lit = smoothstep(1.0, 0.05, away);
-              gl_FragColor = vec4(tint, lit * 0.9);
-            }
-          `,
-        }),
-      );
-      ground.rotation.x = -Math.PI / 2;
-      const grid = new THREE.GridHelper(40, 40, 0x2b3444, 0x222833);
-      for (const line of Array.isArray(grid.material) ? grid.material : [grid.material]) {
-        line.transparent = true;
-        line.opacity = 0.35;
-      }
-      grid.position.y = 0.002;
-      floor.add(ground, grid);
-      scene.add(floor);
-
-      const vehicle = new THREE.Group();
-      const hull = new THREE.Group();
-      hull.position.fromArray(armour?.hullPosition ?? [0, 0, 0]);
-      const turret = new THREE.Group();
-      turret.position.fromArray(armour?.mounts?.turret ?? [0, 0, 0]);
-      const gun = new THREE.Group();
-      gun.position.fromArray(armour?.mounts?.guns?.[turretName] ?? [0, 0, 0]);
-      turret.add(gun);
-      hull.add(turret);
-      vehicle.add(hull);
-      scene.add(vehicle);
-
-      let built;
-      try {
-        built = await loadVisual({
-          renderer,
-          scene,
-          root: MIRROR,
-          vehicle: `${nation}/${code}`,
-          mounts: { scene: vehicle, hull, turret, gun },
-          definition: "sd",
-        });
-      } catch {
-        // A vehicle the mirror does not carry, or a build that failed: the
-        // render underneath is already the right thing to be looking at.
-        return;
-      }
-      if (!live) {
-        renderer.dispose();
-        return;
-      }
-      // The loader brings its own hangar, its four lamps and the exposure they
-      // were balanced against, and hands back the switch rather than throwing
-      // them at the renderer: the armour views share this canvas and draw flat
-      // answers an environment map would wash out. Nothing here draws anything
-      // else yet, but leaving it off is what left the vehicle lit by the
-      // renderer's defaults, a uniform gold with no reflection in it.
-      built.show(true);
-
-      // Framed on the vehicle rather than on a fixed distance, so a scout and a
-      // Maus both fill the band.
-      //
-      // **The gun is left out of the measurement.** A long barrel drags the
-      // bounding box a metre to one side, and centring that box shoves the hull
-      // the other way: a long-barrelled tank destroyer ends up parked in the
-      // corner. The picture this replaces anchors on the vehicle's centre of
-      // mass for the same reason, the barrel carrying almost no area, and hull
-      // and turret are the cheap way to the same place.
-      const withGun = new THREE.Box3().setFromObject(vehicle);
-      // Lifted out for the measurement and put straight back: the gun hangs off
-      // the turret, so there is no measuring the rest without detaching it.
-      turret.remove(gun);
-      const bounds = new THREE.Box3().setFromObject(vehicle);
-      turret.add(gun);
-      const centre = bounds.getCenter(new THREE.Vector3());
-      // The distance still has to clear the whole vehicle, gun included, or the
-      // barrel leaves the frame.
-      const radius = withGun.getSize(new THREE.Vector3()).length() / 2;
-      // The angle the pipeline's own viewer settles on, and the one an armour
-      // model is read from: far enough back that a scout and a Maus both fit,
-      // and off to one side so a face and a flank are in view at once. Copied
-      // rather than re-chosen, because a hero framed by taste drifts from the
-      // thing it is supposed to be showing.
-      const fit = (DISTANCE * radius) / Math.sin((camera.fov * Math.PI) / 360);
-      const towards = new THREE.Vector3(
-        Math.cos(ELEVATION) * Math.sin(AZIMUTH),
-        Math.sin(ELEVATION),
-        Math.cos(ELEVATION) * Math.cos(AZIMUTH),
-      );
-      controls.target.copy(centre);
-      camera.position.copy(centre).addScaledVector(towards, fit);
-      controls.update();
-      // The framing to come back to.
-      //
-      // Through the controls' own save and restore rather than by putting the
-      // camera back: with damping on they keep easing toward wherever the drag
-      // was heading, so a camera moved underneath them is dragged off again over
-      // the following frames and lands a couple of points from where it started.
-      const home = camera.position.clone();
-      controls.saveState();
-      reset.current = () => {
-        // Damping off for the one update that puts it back: the controls only
-        // clear the momentum left by a drag on an undamped pass, so restoring
-        // the saved state with damping on lands two points short and creeps.
-        controls.enableDamping = false;
-        controls.reset();
-        controls.update();
-        controls.enableDamping = true;
-        setMoved(false);
-      };
-      controls.addEventListener("change", () => {
-        setMoved(camera.position.distanceTo(home) > 0.05);
-      });
-
-      const resize = () => {
-        const { clientWidth: w, clientHeight: h } = surface;
-        if (!w || !h) return;
-        renderer.setSize(w, h, false);
-        camera.aspect = w / h;
-        // **Stand where the picture stood, so the swap is not a jump.**
-        //
-        // WG's portal renders put a vehicle's alpha centroid at a fixed place in
-        // their 1920x900 frame, and the render route re-frames our own mirror
-        // crops into that same layout; the hero is 32:15, the same ratio, so the
-        // picture maps onto it without cropping and that place is a plain
-        // fraction of the canvas. Framing the model dead centre instead put it a
-        // tenth of a width off, which is small enough to read as a nudge and
-        // large enough to see.
-        //
-        // Done with a view offset rather than by moving the camera: the frustum
-        // shifts and the camera does not, so orbiting still turns about the
-        // vehicle rather than about a point beside it.
-        camera.setViewOffset(w, h, (0.5 - ANCHOR_X) * w, (ANCHOR_Y - 0.5) * -h, w, h);
-        camera.updateProjectionMatrix();
-      };
-      resize();
-      const watching = new ResizeObserver(resize);
-      watching.observe(surface);
-
-      let frame = 0;
-      const draw = () => {
-        frame = requestAnimationFrame(draw);
-        controls.update();
-        renderer.render(scene, camera);
-      };
-      draw();
-      setShown(true);
-      onReady?.();
-
-      stop = () => {
-        cancelAnimationFrame(frame);
-        watching.disconnect();
-        controls.dispose();
-        renderer.dispose();
-      };
-    })();
+    // **Filled in the moment the loop exists, not when the build finishes.**
+    // A vehicle takes seconds to fetch and a reader can pick another gun in
+    // the middle of it. Read off the promise, the two ways of closing it
+    // arrived after the cleanup that needed them had already run, so an
+    // interrupted build left its loop, its observers and its listeners
+    // running on a canvas the next vehicle was about to draw on.
+    const closing: { freeze?: () => void; stop?: () => void } = {};
+    void openStage(
+      surface,
+      () => live,
+      {
+        held,
+        shellRef,
+        fire,
+        ...desk.handles,
+        ...stage.handles,
+        ...aiming.handles,
+        ...dressing.handles,
+        skin: dressing.skin,
+        liked,
+        column,
+      },
+      {
+        code,
+        skin: dressing.skin,
+        fitted,
+        liked,
+        opening,
+        applyStance: aiming.applyStance,
+        takeAim,
+        onAbsent,
+        column,
+      },
+      closing,
+    );
 
     return () => {
       live = false;
-      stop?.();
+      // **The vehicle being left stays on screen while the next one is built.**
+      // Torn down bare, the picture emptied the moment a reader clicked another
+      // tank and stayed empty for the ten seconds it takes to fetch and build
+      // one, then faded in from nothing. Holding the frame turns that into one
+      // vehicle giving way to another.
+      closing.freeze?.();
+      closing.stop?.();
     };
-  }, [code, onReady]);
+    // `opening` and `takeAim` are both fixed for the life of the component, so
+    // naming them here costs no rebuild: the link is read once into state and
+    // the aim is a callback over refs.
+  }, [
+    aiming.handles,
+    aiming.applyStance,
+    dressing.handles,
+    code,
+    column,
+    dressing.skin,
+    onAbsent,
+    fitted,
+    liked,
+    fire,
+    shellRef,
+    opening,
+    takeAim,
+    liked.centred,
+    desk.handles,
+    stage.handles,
+  ]);
 
+  const filling = presentation !== Presentation.Inline;
   return (
-    <>
+    // **The viewer holds its own box.** It used to be handed one by the stage,
+    // which is fine while the picture stays in the band and no use at all once
+    // it has to leave it: filling the window is this element becoming fixed,
+    // and filling the screen is the browser being handed this element.
+    <div
+      ref={held}
+      className={
+        filling ? "fixed inset-0 z-50 bg-background" : "absolute inset-0"
+      }
+    >
+      {/* Not in the column: it is put where the cursor is, and the cursor goes
+        wherever the picture does. */}
+      <ArmourReadout reading={reading} />
+      {/*
+        **Short enough to soften the edge, not long enough to be an arrival.**
+        Three quarters of a second read as the vehicle turning up, and a turning
+        up is a loading screen wearing something nicer. A fifth of a second sits
+        under the threshold where the eye follows a movement rather than finding
+        the picture already there, so it takes the hardness off the first frame
+        without putting a wait back on the page.
+      */}
       <canvas
         ref={canvas}
         aria-hidden
-        className={`absolute inset-0 h-full w-full transition-opacity duration-700 ${
-          shown ? "opacity-100" : "opacity-0"
-        }`}
+        className={`absolute inset-0 h-full w-full ${
+          stage.crossing ? "" : "transition-opacity duration-700"
+        } ${shown ? "opacity-100" : "opacity-0"}`}
       />
-      {shown && moved ? (
-        // Bottom left, which is the one corner of the hero nothing else claims:
-        // the title sits above it and the cost panel fills the other side.
-        <button
-          type="button"
-          onClick={() => reset.current?.()}
-          className="absolute bottom-3 left-3 rounded-md border border-fd-border/60 bg-fd-background/70 px-2.5 py-1.5 text-xs font-medium text-fd-muted-foreground backdrop-blur transition-colors hover:text-fd-foreground"
-        >
-          Reset view
-        </button>
+      {/*
+        The frame the last view left behind, dissolved over the new one. It is
+        transparent whenever nothing is crossing, and never takes the pointer:
+        the vehicle underneath stays turnable through it.
+      */}
+      <canvas
+        ref={ghost}
+        aria-hidden
+        className="pointer-events-none absolute inset-0 h-full w-full opacity-0"
+      />
+      {shown ? (
+        // **The panels are reading, so they keep to the column.** The picture
+        // runs to the edges of the window and they do not: left against the
+        // canvas they ended up out at the margins, further from the vehicle
+        // they describe on every wider screen, and lined up with nothing else
+        // on the page.
+        <div className={`pointer-events-none absolute inset-0 ${HERO_COLUMN}`}>
+          {/* **One stack, bottom left, rather than each panel placing itself.**
+            They did, and it held only while the row was short: the moment it
+            grew a shell to build it ran under the cost panel on the other side
+            and the legend sat on top of it. Stacked, the row can wrap and the
+            legend is pushed up by exactly as much as it grows. The width is
+            capped short of the cost panel for the same reason: the two share
+            this band and neither is told about the other. */}
+          {/*
+            Where the camera stands. It sits opposite the controls, in the
+            corner the reader is not reaching into, and lifts clear of the cost
+            panel while the picture is still in the band: the two share that
+            corner and neither is told about the other. Filling the window or
+            the screen leaves the panel behind, so it drops back down.
+          */}
+          {/* Pointer events are turned back on here because the band this sits
+            in has them off: the picture underneath has to stay draggable
+            through the chrome, so the column refuses them and each control
+            that wants them asks for itself. Without this the dial is drawn,
+            reads correctly, and cannot be pointed at. */}
+          <div
+            className="pointer-events-auto absolute right-3 z-10"
+            style={{
+              // Filling the window or the screen leaves the cost behind on the
+              // page, so there is nothing left to clear.
+              bottom: filling || desk.clearance === null ? 12 : desk.clearance,
+            }}
+          >
+            <AimDial
+              sweep={aiming.reach?.sweep}
+              arc={aiming.reach?.arc}
+              hullPitch={aiming.reach?.hullPitch}
+              aimRef={aim}
+              watchRef={watch}
+              onAim={takeAim}
+            />
+          </div>
+          {/* **One band, grouped by what each control is about.** The width is
+            capped short of the cost panel on the other side: the two share this
+            corner and neither is told about the other. */}
+          <div className="absolute bottom-3 left-3 max-w-[calc(100%-1.5rem)] sm:max-w-[calc(100%-21rem)]">
+            <ViewerControls
+              centred={centred}
+              onRecentre={() => desk.recentring(!centred)}
+              // Offered for anything that can be undone, which is not only the
+              // camera: a reader who has done nothing but point the gun still
+              // has something to put back.
+              resettable={
+                stage.moved || centred || aimed !== null || hullDown
+              }
+              onReset={stage.restore}
+              hullDown={hullDown}
+              onHullDown={() => stage.ridging(!hullDown)}
+              canDeploy={aiming.canDeploy}
+              mechanic={mechanic ?? null}
+              deployed={deployed}
+              onDeploy={aiming.setDeploy}
+              cinematic={desk.cinematic}
+              onCinematic={desk.setCinematic}
+              presentation={presentation}
+              onPresentation={desk.present}
+              shells={firing.loaded}
+              round={firing.round}
+              onRound={firing.setRound}
+              pen={firing.pen}
+              calibre={firing.calibre}
+              norm={firing.norm}
+              ricochet={firing.ricochet}
+              kind={firing.kind}
+              onTune={firing.tune}
+              onKind={firing.setKind}
+              carried={firing.loaded.map((one) => one.shot.kind)}
+              range={stage.range}
+              works={stage.works}
+              onWork={stage.operate}
+              rolls={stage.rolls}
+              rolling={desk.rolling}
+              onRolling={() => desk.setRolling((on) => !on)}
+              sharp={dressing.sharp}
+              sharpenable={dressing.sharpenable}
+              onSharpen={() => dressing.setSharp((on) => !on)}
+              marks={dressing.marks}
+              markable={dressing.markable}
+              onMarks={dressing.setMarks}
+              cuts={dressing.cuts}
+              cutNames={dressing.cutNames}
+              cut={dressing.skin}
+              onCut={dressing.cutInto}
+              wardrobe={dressing.wardrobe}
+              worn={dressing.worn}
+              onWear={dressing.wear}
+              season={dressing.season}
+              onSeason={dressing.setSeason}
+              view={view}
+              views={stage.views}
+              onView={stage.showing}
+            />
+          </div>
+        </div>
       ) : null}
-    </>
+    </div>
   );
 }
