@@ -1,34 +1,71 @@
 "use client";
 
 import { MapTrifoldIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  ctMinimapUrl,
+  lowResMinimapUrl,
+  minimapUrl,
+  variantOf,
+} from "@unicum.gg/shared";
 import Image from "next/image";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 // Minimap render with a graceful fallback: a handful of arenas (event-only
-// variants) have no PNG on the wot.assets mirror, so a 404 swaps to a neutral
-// placeholder instead of a broken image. `src` changes reset the error state on
-// their own (a new URL no longer matches `failedFor`), so navigating between
-// maps in a filtered grid never sticks on the placeholder.
+// variants) have no HD PNG on the wot.maps mirror, so a 404 drops to the
+// client's own low-res GUI icon, then to a neutral placeholder instead of a
+// broken image. The chain is derived from `arenaId` here rather than passed in,
+// so no caller can wire a fallback that resolves to the same URL as `src` (which
+// is how the changes feed ended up showing the placeholder for maps that do have
+// an icon). `src` changes reset the error state on their own (a new URL no
+// longer matches the failed list), so navigating between maps in a filtered grid
+// never sticks on the placeholder.
 export function MinimapImage({
   src,
-  fallbackSrc,
+  arenaId,
+  commonTest,
   alt,
   sizes,
   priority,
   className,
 }: {
+  /** The minimap to show, usually the arena's HD one but sometimes a mode
+   * variant (the Onslaught play area has its own image). */
   src: string;
-  /** Low-res minimap tried when `src` 404s (legacy event/arcade maps have no HD
-   * asset but ship a client GUI icon). A placeholder shows if both fail. */
-  fallbackSrc?: string;
+  /** The arena the minimap belongs to, the fallback chain is built from it. */
+  arenaId: string;
+  /** Whether the arena's space is only on the test client, in which case its
+   * image is only on that branch of the mirror too. */
+  commonTest?: boolean;
   alt: string;
   sizes?: string;
   priority?: boolean;
   className?: string;
 }) {
   const [failed, setFailed] = useState<string[]>([]);
-  const candidates = fallbackSrc ? [src, fallbackSrc] : [src];
+  // The test branch of the same mirror, for an arena the live client declares
+  // but does not ship the space of yet: it has no live image at all, so without
+  // this the card is a placeholder until the map's package reaches the live
+  // client. Every other arena either has its live image or has none anywhere, so
+  // a blind probe would cost each of them a second failing round-trip.
+  //
+  // Two signals, and either is enough. The catalogue's probe knows about the
+  // maps a summary was read for, and it fails towards "shipped", so a mirror
+  // blip during a cold build writes `false` into a payload cached for a day.
+  // The fold rule knows nothing about the mirror but is always right about the
+  // night arenas, and it covers the callers that have no summary at all.
+  const onTestBranch =
+    commonTest === true || variantOf(arenaId)?.foldedIntoBase === true;
+  const test = onTestBranch
+    ? [ctMinimapUrl(src), ctMinimapUrl(minimapUrl(arenaId))]
+    : [];
+  const candidates = [
+    ...new Set(
+      [src, ...test, minimapUrl(arenaId), lowResMinimapUrl(arenaId)].filter(
+        (c) => c !== null,
+      ),
+    ),
+  ];
   const active = candidates.find((c) => !failed.includes(c));
   if (!active) {
     return (

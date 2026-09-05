@@ -29,6 +29,9 @@ export type TankSlugIndex = {
  * every colliding tank gets the id appended ("is-7-5137") so the mapping stays
  * unique and stable. Empty slugs (a name with no alphanumerics) fall back to
  * the bare tank id.
+ *
+ * Hidden vehicles get no slug at all: they are not vehicles, so a URL pointing
+ * at one would resolve to a page with nothing behind it.
  */
 export function buildTankSlugIndex(
   encyclopedia: Record<string, VehicleMeta>,
@@ -36,6 +39,7 @@ export function buildTankSlugIndex(
   // Group tank ids by their base slug so we can detect collisions.
   const byBase = new Map<string, number[]>();
   for (const [idStr, meta] of Object.entries(encyclopedia)) {
+    if (meta.isHidden) continue;
     const id = Number(idStr);
     const base = slugifyTank(meta.shortName) || String(id);
     const list = byBase.get(base);

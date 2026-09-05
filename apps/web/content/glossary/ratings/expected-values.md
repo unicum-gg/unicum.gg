@@ -8,6 +8,10 @@ related:
   - wn8
   - wnx
   - wn7
+anchors:
+  labels:
+    - Expected damage (WN8)
+    - Expected winrate (WN8)
 ---
 
 The per-vehicle server averages a rating measures a player against: what a typical player produces in that exact tank.

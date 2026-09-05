@@ -2,15 +2,6 @@ import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/ency
 import { buildTankSlugIndex, type TankSlugIndex, type VehicleMeta } from "@unicum.gg/shared";
 import { Region } from "@unicum.gg/wargaming";
 
-// Some wot-src entries have no display name (retired IGR premiums, training-room
-// bot placeholders), so the parser falls back to the raw i18n key
-// (`GB08_Churchill_I_IGR`, `botVehicleType/heavyTank`). A real tank name never
-// contains an underscore or "VehicleType", so we hide these from every
-// catalogue surface. Central helper so there is one place to extend.
-function isDisplayableTank(name: string): boolean {
-  return !name.includes("_") && !name.includes("VehicleType");
-}
-
 // The slug index is derived from the (cached) encyclopedia, so it changes only
 // when the weekly vehicles cron runs. Memoized per region with the same 7-day
 // TTL; a miss just rebuilds from the in-memory encyclopedia (<1ms for ~1200
@@ -50,7 +41,9 @@ export async function getTankBySlug(
     (/^\d+$/.test(slug) && encyclopedia[slug] ? Number(slug) : undefined);
   if (tankId === undefined) return null;
   const meta = encyclopedia[String(tankId)];
-  if (!meta) return null;
+  // Hidden vehicles have no slug, but the numeric fallback would still reach one
+  // by id, and there is no tank behind it to render.
+  if (!meta || meta.isHidden) return null;
   return { tankId, slug: index.idToSlug.get(tankId) ?? slug, meta };
 }
 
@@ -101,7 +94,7 @@ export async function searchTanks(
   type Scored = { entry: TankSearchResult; score: number };
   const scored: Scored[] = [];
   for (const [idStr, meta] of Object.entries(encyclopedia)) {
-    if (!isDisplayableTank(meta.name)) continue; // untranslated internal variant
+    if (meta.isHidden) continue; // not a vehicle
     const name = meta.name.toLowerCase();
     const shortName = meta.shortName.toLowerCase();
     const tag = meta.tag.toLowerCase();
@@ -165,7 +158,10 @@ export async function getTanksByIds(
   const out: TankSearchResult[] = [];
   for (const tankId of new Set(tankIds)) {
     const meta = encyclopedia[String(tankId)];
-    if (!meta) continue;
+    // Hidden vehicles have no slug, so a row for one would carry the bare id as
+    // its href and the page behind it 404s. Dropped here like everywhere else
+    // rather than offered and then refused.
+    if (!meta || meta.isHidden) continue;
     out.push({
       tank_id: tankId,
       slug: index.idToSlug.get(tankId) ?? String(tankId),
@@ -195,7 +191,9 @@ export async function listTanks(region: Region): Promise<TankIdentity[]> {
   const out: TankIdentity[] = [];
   for (const [tankId, slug] of index.idToSlug) {
     const meta = encyclopedia[String(tankId)];
-    if (meta && isDisplayableTank(meta.name)) out.push({ tankId, slug, meta });
+    // No `isHidden` check: `buildTankSlugIndex` skips them, so none of them has
+    // a slug to iterate here in the first place.
+    if (meta) out.push({ tankId, slug, meta });
   }
   return out;
 }

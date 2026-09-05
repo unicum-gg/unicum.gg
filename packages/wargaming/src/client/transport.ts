@@ -2,12 +2,15 @@ import { Region, REGION_API_HOST, REGION_PORTAL_HOST } from "../region";
 import type { WgLanguage } from "../language";
 import {
   type RateLimiterFactory,
+  type RateLimiterKind,
   type RegionRps,
   type Lane,
   type EgressConfig,
   RateLimit,
   DEFAULT_WG_RPS,
   DEFAULT_PORTAL_RPS,
+  DEFAULT_STRONGHOLD_RPS,
+  DEFAULT_TOURNAMENTS_RPS,
   regionLanes,
 } from "./rate-limiter";
 import { CacheManager, type CacheOptions } from "./cache/manager";
@@ -42,10 +45,20 @@ function defaultCacheTtl(path: string): number {
 // Egress request counter, keyed `api:<region>` / `portal:<region>`. Incremented
 // in `#pickLane`, which every real network attempt passes through exactly once
 // (cache hits short-circuit before it), so this is the true count of requests
-// leaving for WG — including retries — across every consumer sharing the client.
+// leaving for WG, including retries, across every consumer sharing the client.
 // The proxy can't see this (CONNECT tunnels are opaque TLS), so it's the only
 // place the real per-region req/s is observable. Drain + log it on a heartbeat.
 const wgRequestCounts: Record<string, number> = {};
+
+// Counter prefix per lane pool. Short names because they are read on a
+// heartbeat line, and `api` rather than `wg` because that is what the log has
+// always called it.
+const LANE_COUNTER_NAME: Record<RateLimiterKind, string> = {
+  [RateLimit.Wg]: "api",
+  [RateLimit.Portal]: "portal",
+  [RateLimit.Stronghold]: "stronghold",
+  [RateLimit.Tournaments]: "tournaments",
+};
 
 /** Read and reset the per-region/lane egress request counts since the last drain. */
 export function drainWgRequestCounts(): Record<string, number> {
@@ -55,7 +68,7 @@ export function drainWgRequestCounts(): Record<string, number> {
 }
 
 export type WargamingClientOptions = {
-  /** WG `application_id` per region — a map or a resolver. */
+  /** WG `application_id` per region, a map or a resolver. */
   applicationId: Partial<Record<Region, string>> | ((region: Region) => string);
   /**
    * Default localization applied to every API call (the `language` param).
@@ -70,12 +83,14 @@ export type WargamingClientOptions = {
   /**
    * Override the per-region request-per-second caps, and/or supply a `factory`
    * to build shared/distributed limiters (e.g. Redis) instead of the default
-   * per-process in-memory buckets — required to keep one WG budget across
+   * per-process in-memory buckets, required to keep one WG budget across
    * multiple app instances.
    */
   rateLimit?: {
     wg?: Partial<RegionRps>;
     portal?: Partial<RegionRps>;
+    stronghold?: Partial<RegionRps>;
+    tournaments?: Partial<RegionRps>;
     factory?: RateLimiterFactory;
   };
   /**
@@ -99,6 +114,25 @@ export class WargamingApiError extends Error {
   }
 }
 
+/**
+ * A non-2xx HTTP response, carrying the status so callers can branch on it.
+ *
+ * The status matters beyond retry policy: on some endpoints a 404 is a real
+ * answer rather than a failure (the stronghold host answers 404 for a clan that
+ * has no Stronghold), and a caller that cannot tell 404 from "the host is down"
+ * can only swallow both.
+ */
+export class WargamingHttpError extends Error {
+  constructor(
+    public readonly status: number,
+    statusText: string,
+    public readonly path: string,
+  ) {
+    super(`HTTP ${status}: ${statusText} on ${path}`);
+    this.name = "WargamingHttpError";
+  }
+}
+
 type WgEnvelope<T> =
   | { status: "ok"; data: T; meta?: { count: number } }
   | { status: "error"; error: { code: number; message: string; field?: string; value?: string } };
@@ -118,8 +152,10 @@ const RETRIABLE_NODE_ERROR_CODES = new Set([
 
 function isRetriable(err: unknown): boolean {
   if (err instanceof WargamingApiError) return RETRIABLE_WG_CODES.has(err.code);
+  if (err instanceof WargamingHttpError) {
+    return err.status >= 500 || err.status === 408 || err.status === 429;
+  }
   if (err instanceof Error) {
-    if (/HTTP (5\d\d|408|429)/.test(err.message)) return true;
     if (err.name === "TimeoutError" || err.name === "AbortError") return true;
     if (err.message.includes("fetch failed")) return true;
     const cause = (err as Error & { cause?: unknown }).cause;
@@ -156,7 +192,7 @@ const FETCH_TIMEOUT_MS = 30_000;
 /**
  * Per-client transport: holds the config (app ids, headers, tracing) and the
  * per-region rate limiters, and exposes the fetch primitives every resource
- * uses. Nothing here is global — two clients are fully independent.
+ * uses. Nothing here is global, two clients are fully independent.
  */
 export class Transport {
   readonly #appId: (region: Region) => string;
@@ -169,17 +205,12 @@ export class Transport {
   readonly #fetch: typeof fetch;
   // Per region, the egress lanes to round-robin over (one per source IP, or a
   // single default lane with no dispatcher when egress is unset).
-  readonly #wgLanes: Record<Region, Lane[]>;
-  readonly #portalLanes: Record<Region, Lane[]>;
-  readonly #wgCursor: Record<Region, number> = {
-    [Region.EU]: 0,
-    [Region.NA]: 0,
-    [Region.ASIA]: 0,
-  };
-  readonly #portalCursor: Record<Region, number> = {
-    [Region.EU]: 0,
-    [Region.NA]: 0,
-    [Region.ASIA]: 0,
+  readonly #lanes: Record<RateLimiterKind, Record<Region, Lane[]>>;
+  readonly #cursors: Record<RateLimiterKind, Record<Region, number>> = {
+    [RateLimit.Wg]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
+    [RateLimit.Portal]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
+    [RateLimit.Stronghold]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
+    [RateLimit.Tournaments]: { [Region.EU]: 0, [Region.NA]: 0, [Region.ASIA]: 0 },
   };
   readonly #cache?: CacheManager;
 
@@ -198,18 +229,32 @@ export class Transport {
     this.#trace = opts.trace;
     this.#fetch = opts.egress?.fetchImpl ?? globalThis.fetch;
     const limiterFactory = opts.rateLimit?.factory;
-    this.#wgLanes = regionLanes(
-      { ...DEFAULT_WG_RPS, ...opts.rateLimit?.wg },
-      RateLimit.Wg,
-      limiterFactory,
-      opts.egress,
-    );
-    this.#portalLanes = regionLanes(
-      { ...DEFAULT_PORTAL_RPS, ...opts.rateLimit?.portal },
-      RateLimit.Portal,
-      limiterFactory,
-      opts.egress,
-    );
+    this.#lanes = {
+      [RateLimit.Wg]: regionLanes(
+        { ...DEFAULT_WG_RPS, ...opts.rateLimit?.wg },
+        RateLimit.Wg,
+        limiterFactory,
+        opts.egress,
+      ),
+      [RateLimit.Portal]: regionLanes(
+        { ...DEFAULT_PORTAL_RPS, ...opts.rateLimit?.portal },
+        RateLimit.Portal,
+        limiterFactory,
+        opts.egress,
+      ),
+      [RateLimit.Stronghold]: regionLanes(
+        { ...DEFAULT_STRONGHOLD_RPS, ...opts.rateLimit?.stronghold },
+        RateLimit.Stronghold,
+        limiterFactory,
+        opts.egress,
+      ),
+      [RateLimit.Tournaments]: regionLanes(
+        { ...DEFAULT_TOURNAMENTS_RPS, ...opts.rateLimit?.tournaments },
+        RateLimit.Tournaments,
+        limiterFactory,
+        opts.egress,
+      ),
+    };
     if (opts.cache?.enabled ?? true) {
       this.#cache = new CacheManager({ store: opts.cache?.store, maxSize: opts.cache?.maxSize });
     }
@@ -252,15 +297,23 @@ export class Transport {
    * `lane.dispatcher` to fetch so the request goes out the chosen source IP on
    * its own rate budget.
    */
-  #pickLane(kind: RateLimit.Wg | RateLimit.Portal, region: Region): Lane {
-    const lanes =
-      kind === RateLimit.Wg ? this.#wgLanes[region] : this.#portalLanes[region];
-    const cursor =
-      kind === RateLimit.Wg ? this.#wgCursor : this.#portalCursor;
+  /**
+   * The lane a low-level GET/POST should use, or undefined for `RateLimit.None`
+   * (and for a pooled limit with no region, which has no per-region bucket to
+   * draw from). Shared by `get`/`getJson`/`getText`/`postJson` so a new pool is
+   * wired in one place rather than in every primitive.
+   */
+  #laneFor(limit: RateLimit, region: Region | undefined): Lane | undefined {
+    if (limit === RateLimit.None || !region) return undefined;
+    return this.#pickLane(limit, region);
+  }
+
+  #pickLane(kind: RateLimiterKind, region: Region): Lane {
+    const lanes = this.#lanes[kind][region];
+    const cursor = this.#cursors[kind];
     const i = cursor[region] % lanes.length;
     cursor[region] = (i + 1) % lanes.length;
-    const laneKind = kind === RateLimit.Wg ? "api" : "portal";
-    const key = `${laneKind}:${region}`;
+    const key = `${LANE_COUNTER_NAME[kind]}:${region}`;
     wgRequestCounts[key] = (wgRequestCounts[key] ?? 0) + 1;
     return lanes[i]!;
   }
@@ -304,7 +357,7 @@ export class Transport {
     const url = new URL(`https://${REGION_API_HOST[region]}${path}`);
 
     // WG's auth-mutating endpoints (`auth/prolongate`, `auth/logout`) require
-    // POST and read their params — notably `access_token` — only from the form
+    // POST and read their params, notably `access_token`, only from the form
     // body: a GET with the token in the query string returns
     // ACCESS_TOKEN_NOT_SPECIFIED, so tokens never leak into URLs or logs. Send
     // everything in the body and never cache these.
@@ -357,7 +410,7 @@ export class Transport {
             signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
             dispatcher: lane.dispatcher,
           } as FetchInit);
-          if (!res.ok) throw new Error(`Wargaming API HTTP ${res.status}: ${res.statusText}`);
+          if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
           const envelope = (await res.json()) as WgEnvelope<T>;
           if (envelope.status === "error") {
             throw new WargamingApiError(envelope.error.message, envelope.error.field);
@@ -395,7 +448,7 @@ export class Transport {
             signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
             dispatcher: lane.dispatcher,
           } as FetchInit);
-          if (!res.ok) throw new Error(`portal HTTP ${res.status}: ${res.statusText}`);
+          if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
           return (await res.json()) as T;
         } catch (err) {
           if (isTimeoutError(err)) {
@@ -425,17 +478,14 @@ export class Transport {
       : { ...(opts?.headers ?? {}) };
     return this.#trace_(`get ${url.host}${url.pathname}`, () =>
       this.#withRetries(async () => {
-        let lane: Lane | undefined;
-        if (limit === RateLimit.Wg && region) lane = this.#pickLane(RateLimit.Wg, region);
-        else if (limit === RateLimit.Portal && region)
-          lane = this.#pickLane(RateLimit.Portal, region);
+        const lane = this.#laneFor(limit, region);
         if (lane) await lane.limiter.acquire();
         const res = await this.#fetch(url, {
           headers,
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
           dispatcher: lane?.dispatcher,
         } as FetchInit);
-        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText} on ${url.pathname}`);
+        if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
         return res;
       }),
     );
@@ -499,10 +549,7 @@ export class Transport {
     };
     return this.#trace_(`postJson ${url.host}${url.pathname}`, () =>
       this.#withRetries(async () => {
-        let lane: Lane | undefined;
-        if (limit === RateLimit.Wg && region) lane = this.#pickLane(RateLimit.Wg, region);
-        else if (limit === RateLimit.Portal && region)
-          lane = this.#pickLane(RateLimit.Portal, region);
+        const lane = this.#laneFor(limit, region);
         if (lane) await lane.limiter.acquire();
         const res = await this.#fetch(url, {
           method: "POST",
@@ -511,7 +558,7 @@ export class Transport {
           signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
           dispatcher: lane?.dispatcher,
         } as FetchInit);
-        if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText} on ${url.pathname}`);
+        if (!res.ok) throw new WargamingHttpError(res.status, res.statusText, url.pathname);
         return (await res.json()) as T;
       }),
     );

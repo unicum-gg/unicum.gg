@@ -1,8 +1,8 @@
 "use client";
 
 import { PlusIcon, XIcon } from "@phosphor-icons/react";
-import Link from "next/link";
 import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { CompareSlot } from "./comparison-table";
@@ -34,12 +34,14 @@ export function SlotHeader({
             canRemove ? "pr-1" : "pr-3",
           )}
         >
-          <Link
+          {/* The href keeps the REQUESTED spelling: a slot that resolved to
+              nothing still has to link somewhere, and that is the name the
+              reader typed. */}
+          <PlayerName
+            region={region}
+            player={{ nickname: slot.player?.nickname ?? slot.requested }}
             href={ROUTES.PLAYER(region, slot.requested)}
-            className="font-medium hover:underline"
-          >
-            {slot.player?.nickname ?? slot.requested}
-          </Link>
+          />
           {!slot.player && (
             <span className="text-xs text-destructive">not found</span>
           )}

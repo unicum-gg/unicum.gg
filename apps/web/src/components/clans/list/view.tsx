@@ -12,7 +12,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import { ClanBoard, RatingMetric } from "@unicum.gg/shared";
+import { RatingMetric } from "@unicum.gg/shared";
 import { languageToCountryCode } from "@/lib/language-flags";
 import { buildSafe, unicum } from "@/services/sdk";
 import type { TopClanByLanguageResult } from "@/services/wargaming/wot/clans/top/by-language";
@@ -204,12 +204,15 @@ export async function ClansLandingView({
           </div>
         </PanelHeader>
         <PanelContent className="p-0">
+          {/* No `omitBoard`: the crests a clan wears here are its stronghold
+              placings, which this table is not one of. The rating board had its
+              own crest and had to be hidden on its own page; it no longer
+              exists. */}
           <div data-rating-col="wn7">
             <TopClansBoard
               region={region}
               results={wn7Results}
               metric={RatingMetric.Wn7}
-              omitBoard={language ? undefined : ClanBoard.Wn7}
             />
           </div>
           <div data-rating-col="wn8">
@@ -217,7 +220,6 @@ export async function ClansLandingView({
               region={region}
               results={wn8Results}
               metric={RatingMetric.Wn8}
-              omitBoard={language ? undefined : ClanBoard.Wn8}
             />
           </div>
           <div data-rating-col="wnx">
@@ -225,7 +227,6 @@ export async function ClansLandingView({
               region={region}
               results={wnxResults}
               metric={RatingMetric.Wnx}
-              omitBoard={language ? undefined : ClanBoard.Wnx}
             />
           </div>
         </PanelContent>

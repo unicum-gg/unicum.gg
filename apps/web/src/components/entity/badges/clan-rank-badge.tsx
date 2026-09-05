@@ -11,6 +11,7 @@ import {
 } from "@unicum.gg/shared";
 import { type Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
+import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
 import {
   Tooltip,
   TooltipContent,
@@ -31,10 +32,10 @@ const STRONGHOLD_TIER = Object.fromEntries(
 ) as Partial<Record<ClanBoard, StrongholdTier>>;
 
 /**
- * Where clicking a crest goes. The three rating boards all live on `/clans`,
- * which shows whichever metric the viewer has selected: the metric is a
- * preference rather than a route, so there is no per-metric URL to send them
- * to. The stronghold boards each have their own page.
+ * Where clicking a crest goes: every board is a stronghold tier and every tier
+ * has its own page. The `/clans` fallback is kept for a board added to the enum
+ * before its page exists, which is what the reverse table's `Partial` allows
+ * for; it is unreachable today.
  */
 function boardHref(region: Region, board: ClanBoard): string {
   const tier = STRONGHOLD_TIER[board];
@@ -189,9 +190,10 @@ function OverflowBadge({
  * The whole cluster, already ordered by the resolver (best placing first).
  * Renders nothing when the clan holds no placing, so it is always safe to mount.
  *
- * A clan can hold up to seven placings (three ratings + four stronghold boards),
- * which would crowd the tag, so past `max` the rest fold into a single "+N"
- * crest whose tooltip still lists them. Because the list is pre-sorted, the ones
+ * A clan can hold up to four placings, one per stronghold board, so past `max`
+ * the rest fold into a single "+N" crest whose tooltip still lists them. The
+ * fold was sized when there were seven, the three rating boards included; it
+ * fires rarely now and is kept because nothing stops a fifth board being added. Because the list is pre-sorted, the ones
  * that stay visible are always the clan's best.
  *
  * Every crest is a link to its board, so this must not be mounted inside another
@@ -201,16 +203,39 @@ function OverflowBadge({
 export function ClanBadges({
   badges,
   region,
+  tag,
+  tournamentWins = 0,
+  tournamentFeaturedWins = 0,
+  tournamentBestTitle = null,
   size = 16,
   max = 3,
 }: {
   badges?: ClanRankBadgeData[] | null;
   region: Region;
+  /** Needed only by the tournament crest, which links to this clan's own
+   * Tournaments tab. Without it the crest still renders, just not as a link. */
+  tag?: string | null;
+  /** Tournaments a team attributed to this clan won. */
+  tournamentWins?: number;
+  tournamentFeaturedWins?: number;
+  tournamentBestTitle?: string | null;
   size?: number;
   /** How many crests to show before folding the rest into "+N". */
   max?: number;
 }) {
-  if (!badges?.length) return null;
+  // The tournament crest is not a placing, so it sits outside the fold: the
+  // "+N" counts board ranks, which are a set that can grow to seven, while this
+  // is one mark a clan either has or does not.
+  const trophy = (
+    <TournamentBadge
+      wins={tournamentWins}
+      featuredWins={tournamentFeaturedWins}
+      bestTitle={tournamentBestTitle}
+      href={tag ? ROUTES.CLAN_TOURNAMENTS(region, tag) : undefined}
+      size={size}
+    />
+  );
+  if (!badges?.length) return trophy;
   // `max` is the total number of crests shown, the "+N" included. So once we
   // overflow, the "+N" takes one of those slots and only `max - 1` real crests
   // remain (4 placings, max 3 -> 2 crests + "+2"). The cluster is never wider
@@ -231,6 +256,7 @@ export function ClanBadges({
       {hidden.length > 0 && (
         <OverflowBadge hidden={hidden} region={region} size={size} />
       )}
+      {trophy}
     </>
   );
 }

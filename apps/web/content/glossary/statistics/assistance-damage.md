@@ -15,6 +15,10 @@ anchors:
     - Assist
     - Assistance
     - Assisted damage
+    - Assisting damages
+    - Spotting damages
+    - Track damages
+    - Assists
 ---
 
 Damage an ally dealt to a target the player spotted or tracked, credited to the player who made the shot possible.

@@ -10,6 +10,12 @@ related:
   - assistance-damage
   - proxy-spotting
   - passive-scouting
+anchors:
+  labels:
+    - Tanks spotted
+    - Spotting
+    - Spots
+    - Spotted
 ---
 
 Making an enemy vehicle visible to your whole team, which is what turns a position into a target.

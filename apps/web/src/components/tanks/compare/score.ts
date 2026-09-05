@@ -1,4 +1,4 @@
-import type { TankSpec } from "@unicum.gg/shared";
+import { normalizeSpec, type SpecRange, type TankSpec } from "@unicum.gg/shared";
 import type { SpecRanges } from "@unicum.gg/core/wargaming/wot/tanks/spec-ranges";
 import { GROUPS, type Group, type Row } from "@/components/tanks/detail/specifications/characteristics/rows";
 
@@ -27,14 +27,16 @@ function scoredRows(group: Group): Row[] {
  * How far along the catalogue a value sits, 0 to 1, with the row's own sense of
  * "better": a lower reload and a higher DPM both score high.
  *
- * Clamped to the 5th-95th percentile band the endpoint measured, so the handful
- * of extreme vehicles (a 1 750-alpha derp gun) read as "top of the catalogue"
- * instead of stretching the scale until everything else looks identical.
+ * The placement itself is the shared `normalizeSpec` (clamped to the 5th-95th
+ * percentile band the endpoint measured, so the handful of extreme vehicles
+ * does not stretch the scale until everything else looks identical). All this
+ * adds is the direction, which is what separates scoring a vehicle from
+ * comparing two: there, position is the whole answer; here, a low reload has to
+ * come out high.
  */
-function normalize(value: number, range: { low: number; high: number }, row: Row) {
-  const t = (value - range.low) / (range.high - range.low);
-  const clamped = Math.min(1, Math.max(0, t));
-  return row.lowerBetter ? 1 - clamped : clamped;
+function normalize(value: number, range: SpecRange, row: Row) {
+  const placed = normalizeSpec(value, range);
+  return row.lowerBetter ? 1 - placed : placed;
 }
 
 /**

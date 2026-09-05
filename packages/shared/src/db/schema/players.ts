@@ -108,6 +108,26 @@ export function makePlayersTable(region: string) {
       // fetch resets both fields to zero/null.
       nullCount: integer("null_count").notNull().default(0),
       softDeletedAt: timestamp("soft_deleted_at", { withTimezone: true }),
+      // Tournament honours, denormalised here so the crest costs nothing to
+      // draw. Every table that shows a player already selects from this row,
+      // and the alternative is walking the tournament archive's rosters on each
+      // render, which is the same trap the clan attribution was pulled out of
+      // (see tournaments/clans). Written when a tournament settles, and by the
+      // backfill for the archive.
+      //
+      // `featuredWins` is kept apart because a win is not one thing: taking the
+      // nightly gold ladder and taking the AMD Clan Showdown are the same word
+      // and not the same achievement, and Wargaming's own `is_featured` is what
+      // separates the branded events from the automated dailies.
+      tournamentWins: integer("tournament_wins").notNull().default(0),
+      tournamentFeaturedWins: integer("tournament_featured_wins")
+        .notNull()
+        .default(0),
+      // The win worth naming in the crest's tooltip: a featured event when
+      // there is one, else the most recent. Stored rather than resolved, for
+      // the same reason as the counts.
+      tournamentBestTitle: text("tournament_best_title"),
+      tournamentBestAt: timestamp("tournament_best_at", { withTimezone: true }),
     },
     (t) => [
       uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId),

@@ -1,4 +1,5 @@
 import { OnslaughtBoardLive } from "@/components/players/list/onslaught/board-live";
+import { RelativeTime } from "@/components/relative-time";
 import { PlayersModeTabs } from "@/components/players/list/mode-tabs";
 import { Panel, PanelContent, PanelSeparator } from "@/components/panel";
 import { buildSafe, unicum } from "@/services/sdk";
@@ -8,6 +9,10 @@ import { Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
 // Onslaught's board is the whole ranked population (a few thousand, down to the
 // Master cutoff), not a top-N, so we pull it all; the API caps at its own max.
 const LIMIT = 60000;
+
+type OnslaughtHistory = Awaited<
+  ReturnType<ReturnType<typeof unicum.region>["players"]["onslaughtHistory"]>
+> | null;
 
 const dateFmt = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
@@ -25,12 +30,34 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
 // are picked with `?season=`, which a static page ignores, so `OnslaughtBoardLive`
 // reads it client-side and refetches that season through the SDK.
 export async function OnslaughtView({ region }: { region: Region }) {
-  const initial = await buildSafe(
-    () => unicum.region(region).players.onslaught({ limit: LIMIT }),
-    { season: null, seasons: [], results: [] },
-  );
+  // Both in one pass: the standings, and the curve of what a rank has cost while
+  // the season ran.
+  //
+  // The curve carries its own `catch`, and `buildSafe` is not it: that one only
+  // swallows during the build, and deliberately lets a runtime error through so
+  // a failed revalidation keeps serving the last good page. Inside a
+  // `Promise.all` that behaviour is contagious, so a 502 on the curve alone
+  // would take the whole leaderboard down with it. The board is the page; the
+  // curve is an extra, and it is allowed to be missing.
+  const [initial, history] = await Promise.all([
+    buildSafe(() => unicum.region(region).players.onslaught({ limit: LIMIT }), {
+      season: null,
+      seasons: [],
+      results: [],
+    }),
+    buildSafe(
+      () => unicum.region(region).players.onslaughtHistory(),
+      null as OnslaughtHistory,
+    ).catch(() => null as OnslaughtHistory),
+  ]);
 
   const { season } = initial;
+  // Unix seconds from the source, so it is the instant the standings were
+  // recomputed and not the instant our page rendered.
+  const updatedAt =
+    season?.lastRecalculationTs != null
+      ? new Date(season.lastRecalculationTs * 1000)
+      : null;
   const seasonLine = season
     ? [
         season.codename ?? season.name,
@@ -59,7 +86,25 @@ export async function OnslaughtView({ region }: { region: Region }) {
             leaderboard, straight from the game&apos;s own standings.
           </p>
           {seasonLine ? (
-            <p className="mt-3 text-sm text-fd-muted-foreground">{seasonLine}</p>
+            <p className="mt-3 text-sm text-fd-muted-foreground">
+              {seasonLine}
+              {/* When these standings were true, which is the source's own
+                  recomputation time rather than when we asked. A reader needs
+                  to know whether they are looking at the board as it stands or
+                  at something that stopped moving, and on a live season the
+                  answer changes what they do next. Absolute in the HTML and
+                  relative on screen, so an ISR page half an hour old still
+                  reads the right distance. */}
+              {updatedAt ? (
+                <>
+                  {" · updated "}
+                  <RelativeTime
+                    date={updatedAt}
+                    title={updatedAt.toISOString()}
+                  />
+                </>
+              ) : null}
+            </p>
           ) : null}
         </PanelContent>
       </Panel>
@@ -70,7 +115,11 @@ export async function OnslaughtView({ region }: { region: Region }) {
 
       <PanelSeparator />
 
-      <OnslaughtBoardLive region={region} initial={initial} />
+      <OnslaughtBoardLive
+        region={region}
+        initial={initial}
+        initialHistory={history}
+      />
     </div>
   );
 }

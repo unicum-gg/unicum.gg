@@ -9,6 +9,7 @@
 //   /eu/clans/FAME/stronghold    Overview + Stronghold
 //   /eu/clans/FAME/clan-wars     Overview + Clan Wars
 //   /eu/clans/FAME/tanks         Tanks
+//   /eu/clans/FAME/tournaments   Tournaments
 //   /eu/clans/FAME/manage        Manage (a tool, kept out of the index)
 //
 // They used to be `?section=` / `?tab=` query params, which meant one indexable
@@ -19,6 +20,8 @@ export enum ClanSection {
   Tanks = "tanks",
   /** The tactics this clan is credited on, filed from the map pages. */
   Videos = "videos",
+  /** Every tournament the clan has fielded a team in. */
+  Tournaments = "tournaments",
   // The Stronghold boost console. Visitors see a teaser; the controls only
   // render for officers of this clan, checked client-side.
   Manage = "manage",
@@ -71,6 +74,12 @@ export const CLAN_VIEWS: ClanView[] = [
     label: "Videos",
   },
   {
+    section: ClanSection.Tournaments,
+    mode: ClanMode.RandomBattles,
+    segment: "tournaments",
+    label: "Tournaments",
+  },
+  {
     section: ClanSection.Manage,
     mode: ClanMode.RandomBattles,
     segment: "manage",
@@ -83,6 +92,7 @@ export const CLAN_SECTIONS: { id: ClanSection; label: string }[] = [
   { id: ClanSection.Overview, label: "Overview" },
   { id: ClanSection.Tanks, label: "Tanks" },
   { id: ClanSection.Videos, label: "Videos" },
+  { id: ClanSection.Tournaments, label: "Tournaments" },
   { id: ClanSection.Manage, label: "Manage" },
 ];
 

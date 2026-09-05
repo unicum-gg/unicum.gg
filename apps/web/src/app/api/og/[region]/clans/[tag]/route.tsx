@@ -19,7 +19,12 @@ import {
   pctFmt,
   RATING_BG,
 } from "@/lib/og";
-import { BrandHeaderCell, RegionHeaderCell, StatCard } from "@/components/og";
+import {
+  BrandHeaderCell,
+  OgClanTag,
+  RegionHeaderCell,
+  StatCard,
+} from "@/components/og";
 import { getClanByTagCached } from "@unicum.gg/core/clans/repository";
 import { getClanMembersCached } from "@unicum.gg/core/clans/repository/members";
 import { isRegion } from "@unicum.gg/wargaming";
@@ -162,9 +167,7 @@ export async function GET(
                   whiteSpace: "nowrap",
                 }}
               >
-                <span style={{ color: tagColor }}>[</span>
-                {displayTag}
-                <span style={{ color: tagColor }}>]</span>
+                <OgClanTag tag={displayTag} color={tagColor} />
               </span>
               {name && (
                 <span

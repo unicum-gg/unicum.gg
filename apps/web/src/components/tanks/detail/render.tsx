@@ -13,11 +13,21 @@ export function TankRender({
   region,
   slug,
   name,
+  // The hero is the page's headline image, so it loads eagerly at full width.
+  // A grid of thumbnails wants neither: it passes its own `sizes` so the CDN
+  // serves a card-sized file, and drops the priority so the six of them queue
+  // behind what the reader is actually looking at.
+  priority = true,
+  sizes = "100vw",
+  className = "object-cover object-center drop-shadow-2xl",
 }: {
   tag: string;
   region: Region;
   slug: string;
   name: string;
+  priority?: boolean;
+  sizes?: string;
+  className?: string;
 }) {
   // Ordered by preference, advancing on the first image error:
   //  1. WG's hi-res portal render (best, when published).
@@ -39,7 +49,7 @@ export function TankRender({
   const [idx, setIdx] = useState(0);
   const src = candidates[idx];
   // Every candidate is now a baked 1920x900 portal-format image (the mirror route
-  // re-frames into that same layout), so they all fill the hero identically with
+  // re-frames into that same layout), so they all fill their box identically with
   // `object-cover object-center` — no per-tank CSS, no drift.
   return (
     <Image
@@ -47,10 +57,10 @@ export function TankRender({
       src={src}
       alt={name}
       fill
-      priority
-      sizes="100vw"
+      priority={priority}
+      sizes={sizes}
       onError={() => setIdx((i) => Math.min(i + 1, candidates.length - 1))}
-      className="object-cover object-center drop-shadow-2xl"
+      className={className}
     />
   );
 }

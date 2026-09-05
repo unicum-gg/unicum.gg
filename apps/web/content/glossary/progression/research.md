@@ -10,6 +10,9 @@ related:
   - module
   - credits
   - stock
+anchors:
+  labels:
+    - Research XP
 ---
 
 Spending a vehicle's experience to unlock its modules and the vehicles that follow it in the tree.

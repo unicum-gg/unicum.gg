@@ -9,7 +9,10 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { TableSkeleton } from "@/components/table-skeleton";
 import { PlayerHeader } from "@/components/players/detail/header";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
-import { StrongholdStatsTable } from "@/components/players/detail/overview/stronghold-stats-table";
+import {
+  STEEL_HUNTER_ROWS,
+  StrongholdStatsTable,
+} from "@/components/players/detail/overview/stronghold-stats-table";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { ValueTab } from "@/components/players/detail/value";
@@ -197,7 +200,12 @@ export function PlayerProfileSkeleton({
               </PanelTitle>
             </PanelHeader>
             <PanelContent className="p-0">
-              <StrongholdStatsTable loading />
+              <StrongholdStatsTable
+                loading
+                trailingRows={
+                  mode === PlayerMode.SteelHunter ? STEEL_HUNTER_ROWS : undefined
+                }
+              />
             </PanelContent>
           </Panel>
         </>

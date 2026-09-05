@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor } from "@unicum.gg/shared";
@@ -45,10 +46,19 @@ export function SteelHunterRatingScale() {
         <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4!">Tier</TableHead>
-              <TableHead className="text-right!">WR</TableHead>
-              <TableHead className="text-right!">HR</TableHead>
-              <TableHead className="pr-4 text-right!">HRB</TableHead>
+              {/* The rows are the colour bands, not vehicle tiers. */}
+              <TableHead className="pl-4!">
+                <GlossaryLabel label="Rating colors">Tier</GlossaryLabel>
+              </TableHead>
+              <TableHead className="text-right!">
+                <GlossaryLabel>WR</GlossaryLabel>
+              </TableHead>
+              <TableHead className="text-right!">
+                <GlossaryLabel>HR</GlossaryLabel>
+              </TableHead>
+              <TableHead className="pr-4 text-right!">
+                <GlossaryLabel>HRB</GlossaryLabel>
+              </TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>

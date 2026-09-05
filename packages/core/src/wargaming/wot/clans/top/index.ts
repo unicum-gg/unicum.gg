@@ -24,6 +24,11 @@ export type TopClanResult = {
   /** Podium positions, attached by the route rather than by this query: the
    * leaderboard SQL ranks one board, the badges span all of them. */
   badges?: ClanRankBadge[];
+  /** Tournament honours, attached at the API boundary like the badges above.
+   * Absent when the clan has never won one. */
+  tournament_wins?: number;
+  tournament_featured_wins?: number;
+  tournament_best_title?: string | null;
 };
 
 const MIN_MEMBERS = 50;

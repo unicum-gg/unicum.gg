@@ -3,11 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
+import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
 import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
 import { CompareWithButton } from "@/components/players/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon, RefreshKind } from "@/components/refresh-beacon";
 import { RelativeTime } from "@/components/relative-time";
+import { ScrollRail } from "@/components/scroll-rail";
 import { Skeleton } from "@/components/ui/skeleton";
 import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
@@ -30,12 +32,16 @@ export function PlayerHeader(
         accountId: number;
         nickname: string;
         createdAt: Date;
-        lastBattleAt: Date;
+        /** Null when the account has never entered a battle. */
+        lastBattleAt: Date | null;
         updatedAt: Date;
         currentStint: ClanStint | null;
         inferredLanguages: string[];
         supporterBadge: SupporterBadgeState | null;
         verified: boolean;
+        tournamentWins: number;
+        tournamentFeaturedWins: number;
+        tournamentBestTitle: string | null;
         twitchLogin: string | null;
       },
 ) {
@@ -54,6 +60,9 @@ export function PlayerHeader(
     inferredLanguages,
     supporterBadge,
     verified,
+    tournamentWins,
+    tournamentFeaturedWins,
+    tournamentBestTitle,
     twitchLogin,
   } = props;
 
@@ -63,9 +72,17 @@ export function PlayerHeader(
         <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
-            {(verified || supporterBadge || twitchLogin) && (
+            {(verified || supporterBadge || twitchLogin || tournamentWins > 0) && (
               <span className="ml-2 inline-flex items-center gap-1 align-middle">
                 {verified && <VerifiedBadge size={24} />}
+                <TournamentBadge
+                  region={region}
+                  nickname={nickname}
+                  wins={tournamentWins}
+                  featuredWins={tournamentFeaturedWins}
+                  bestTitle={tournamentBestTitle}
+                  size={24}
+                />
                 {supporterBadge && (
                   <SupporterBadge state={supporterBadge} size={24} />
                 )}
@@ -86,15 +103,27 @@ export function PlayerHeader(
           />
         </div>
         <div className="flex min-h-8 border-t border-fd-border sm:h-auto">
-          <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2">
+          {/* Scrolled rather than wrapped from `sm` up: the row is boxed in by
+              the clan block beside it, and a second line pushes the whole page
+              down. Below `sm` the header stacks and the row wraps as before,
+              since a phone has the height and not the width. */}
+          <ScrollRail
+            compact
+            containerClassName="flex-1"
+            className="flex flex-col items-start gap-y-0.5 px-4 py-2 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:whitespace-nowrap"
+          >
             <span title={format(createdAt, DAY_FORMAT)}>
               Joined {format(createdAt, MONTH_FORMAT)}
             </span>
             <span className="hidden sm:inline">·</span>
-            <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
-              Last battle{" "}
-              {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
-            </span>
+            {lastBattleAt ? (
+              <span title={format(lastBattleAt, "MMM d, yyyy 'at' h:mm a")}>
+                Last battle{" "}
+                {formatDistanceToNow(lastBattleAt, { addSuffix: true })}
+              </span>
+            ) : (
+              <span>Never played</span>
+            )}
             <span className="hidden sm:inline">·</span>
             <span>
               Updated{" "}
@@ -109,7 +138,7 @@ export function PlayerHeader(
               id={nickname}
               updatedAt={updatedAt}
             />
-          </div>
+          </ScrollRail>
           {inferredLanguages.length > 0 && (
             <div className="flex h-6 shrink-0 items-center self-end sm:h-full sm:self-auto">
               <LanguageFlags

@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
@@ -42,6 +43,9 @@ type RowInput = {
 // same rows (labels + order) — the skeleton can never drift from the real table.
 type RowDef = {
   label: string;
+  /** The term to look up, when the row's wording is not the term's own: this
+   * table's "Tier" is the average tier of the battles played, not a vehicle's. */
+  term?: string;
   ratingRow?: "wn7" | "wn8" | "wnx";
   cells: (input: RowInput) => PeriodCellSet;
 };
@@ -102,10 +106,15 @@ function statRow(
 function derivedRow(
   label: string,
   pick: (d: PlayerDerivedStats) => PeriodValues,
-  options: { color?: (v: number) => RatingColor; ratingRow?: RowDef["ratingRow"] } = {},
+  options: {
+    color?: (v: number) => RatingColor;
+    ratingRow?: RowDef["ratingRow"];
+    term?: string;
+  } = {},
 ): RowDef {
   return {
     label,
+    term: options.term,
     ratingRow: options.ratingRow,
     cells: ({ derived }) => cellsFrom(pick(derived), options.color),
   };
@@ -115,7 +124,7 @@ function derivedRow(
 // Battles, the four damage-breakdown rows after Damages, ratings last).
 const ROWS: RowDef[] = [
   statRow("Battles", (s) => ({ primary: integerFmt.format(s.battles) })),
-  derivedRow("Tier", (d) => d.tier),
+  derivedRow("Tier", (d) => d.tier, { term: "Average tier" }),
   statRow("Wins", (s) => ({
     primary: integerFmt.format(s.wins),
     secondary: pctOrDash(s.wins, s.battles),
@@ -307,7 +316,11 @@ export function PlayerStatsTable(
               key={row.label}
               data-rating-row={row.ratingRow}
             >
-              <TableCell className="py-1.5! font-medium">{row.label}</TableCell>
+              <TableCell className="py-1.5! font-medium">
+                <GlossaryLabel label={row.term ?? row.label}>
+                  {row.label}
+                </GlossaryLabel>
+              </TableCell>
               {cells ? (
                 <>
                   <PeriodCells cell={cells.total} />

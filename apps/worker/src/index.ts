@@ -39,6 +39,11 @@ async function main(): Promise<void> {
   );
   startClanBackfillCron();
 
+  const { startClanStrongholdCron } = await import(
+    "@unicum.gg/core/clans/stronghold-cron"
+  );
+  startClanStrongholdCron();
+
   const { startBoostWorkflowCron } = await import(
     "@unicum.gg/core/clans/boost-workflow/cron"
   );
@@ -75,6 +80,11 @@ async function main(): Promise<void> {
   );
   startLiveStreamersPoller();
 
+  const { startStreamerReconcileCron } = await import(
+    "@unicum.gg/core/twitch/reconcile-cron"
+  );
+  startStreamerReconcileCron();
+
   const { startChangelogCron } = await import("@unicum.gg/core/changelog/cron");
   startChangelogCron();
 
@@ -92,6 +102,29 @@ async function main(): Promise<void> {
     "@unicum.gg/core/coverage/trends-aggregate"
   );
   startCoverageTrendsCron();
+
+  const { startServerOnlineCron } = await import(
+    "@unicum.gg/core/wargaming/wot/server/sample-cron"
+  );
+  startServerOnlineCron();
+
+  const { startPlayerDistributionCron } = await import(
+    "@unicum.gg/core/players/distribution"
+  );
+  startPlayerDistributionCron();
+
+  const { startTournamentsCron } = await import("@unicum.gg/core/tournaments/cron");
+  startTournamentsCron();
+
+  const { startOnslaughtReconcileCron } = await import(
+    "@unicum.gg/core/wargaming/wot/players/onslaught-cron"
+  );
+  startOnslaughtReconcileCron();
+
+  const { startOnslaughtWatchdogCron } = await import(
+    "@unicum.gg/core/wargaming/wot/players/onslaught-watchdog"
+  );
+  startOnslaughtWatchdogCron();
 
   // WG egress rate meter. The proxy only sees opaque CONNECT tunnels, so the
   // real per-region req/s (all consumers, vs the rate-limit budget) is only

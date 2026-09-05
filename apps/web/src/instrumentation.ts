@@ -65,6 +65,11 @@ export async function register() {
     );
     startClanBackfillCron();
 
+    const { startClanStrongholdCron } = await import(
+      "@unicum.gg/core/clans/stronghold-cron"
+    );
+    startClanStrongholdCron();
+
     const { startBoostWorkflowCron } = await import(
       "@unicum.gg/core/clans/boost-workflow/cron"
     );
@@ -101,6 +106,11 @@ export async function register() {
     );
     startLiveStreamersPoller();
 
+    const { startStreamerReconcileCron } = await import(
+      "@unicum.gg/core/twitch/reconcile-cron"
+    );
+    startStreamerReconcileCron();
+
     const { startTankRatingsCron } = await import(
       "@unicum.gg/core/tanks/ratings-aggregate"
     );
@@ -110,6 +120,16 @@ export async function register() {
       "@unicum.gg/core/coverage/trends-aggregate"
     );
     startCoverageTrendsCron();
+
+    const { startServerOnlineCron } = await import(
+      "@unicum.gg/core/wargaming/wot/server/sample-cron"
+    );
+    startServerOnlineCron();
+
+    const { startPlayerDistributionCron } = await import(
+      "@unicum.gg/core/players/distribution"
+    );
+    startPlayerDistributionCron();
   } finally {
     globalThis.__dbContext = "request";
   }

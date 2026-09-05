@@ -9,6 +9,27 @@ const dailyPoint = z.object({
   count: z.number(),
 });
 
+// One dated cost line. `to` is null while the line is still being billed, so a
+// hosting move is recorded by closing the old line and opening the next one
+// rather than by editing a number in place.
+const expenseLine = z.object({
+  label: z.string(),
+  eurPerCharge: z.number().meta({
+    description: "What a single charge costs. Subscriptions are prepaid, so the cumulative spend counts whole charges, never fractions of them.",
+  }),
+  chargesPerYear: z.number().meta({
+    description: "Charges in a year: 12 monthly, 1 yearly.",
+  }),
+  eurAnnual: z.number(),
+  eurMonthly: z.number(),
+  from: z.string().meta({ description: "UTC day it started, YYYY-MM-DD." }),
+  to: z
+    .string()
+    .nullable()
+    .meta({ description: "UTC day it stopped, or null while still billed." }),
+  note: z.string().optional(),
+});
+
 const refreshPolicyBucket = z.object({
   // Inline literals: the generator cannot read an imported enum. Locked to
   // `ActivityBucket` in `@unicum.gg/shared/players/refresh-policy`.
@@ -80,15 +101,22 @@ export const CoverageResponse = z
     infrastructure: z.object({
       databaseBytes: z.number(),
       tables: z.array(z.object({ name: z.string(), bytes: z.number() })),
+      // Every amount is in EUR, the currency all of these are invoiced in.
+      // Nothing is stored converted: a client renders them in a regional
+      // currency with the live rates from `GET /rates`.
       costs: z.object({
-        breakdown: z.array(
+        recurring: z.array(expenseLine),
+        past: z.array(expenseLine),
+        oneOff: z.array(
           z.object({
             label: z.string(),
-            usdAnnual: z.number(),
+            eur: z.number(),
+            incurredAt: z.string(),
             note: z.string().optional(),
           }),
         ),
-        totalAnnualUsd: z.number(),
+        totalAnnualEur: z.number(),
+        totalOneOffEur: z.number(),
       }),
     }),
   })

@@ -1,11 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
+import { GlossaryLabel } from "@/components/glossary/label";
+import { ClanName } from "@/components/entity/clan-name";
+import { clanIdentityFromRow } from "@/components/entity/clan-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { ClanBoard, RatingMetric, RATING_METRIC_LABEL, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import ROUTES from "@/constants/routes";
 import {
   Table,
   TableBody,
@@ -77,10 +75,12 @@ export function TopClansList({
           <TableHead>Clan</TableHead>
           <TableHead className="w-24 text-center!">Members</TableHead>
           <TableHead className="hidden w-24 text-right! tabular-nums sm:table-cell">
-            WR
+            <GlossaryLabel>WR</GlossaryLabel>
           </TableHead>
           <TableHead className="w-24 text-right!">
-            {RATING_METRIC_LABEL[metric]}
+            <GlossaryLabel label={RATING_METRIC_LABEL[metric]}>
+              {RATING_METRIC_LABEL[metric]}
+            </GlossaryLabel>
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -97,59 +97,29 @@ export function TopClansList({
                 )}
               </TableCell>
               <TableCell>
-                {/* The badges are siblings of the row link, not children of it:
-                    each crest links to its own board, and an anchor inside an
-                    anchor is invalid. */}
-                <span className="flex items-center gap-2">
-                  {/* No `flex-1` on the link: it would eat the free width and
-                      push the crests to the far edge of the cell, away from the
-                      name they belong to. It shrinks (min-w-0 + truncate) only
-                      when the name is too long. */}
-                  <Link
-                    href={ROUTES.CLAN(region, r.tag)}
-                    className="flex min-w-0 items-center gap-3 hover:underline"
-                  >
-                    {r.emblem ? (
-                      <Image
-                        src={r.emblem}
-                        alt=""
-                        width={24}
-                        height={24}
-                        className="size-6 shrink-0 rounded"
-                      />
-                    ) : (
-                      <span className="size-6 shrink-0 rounded bg-muted" />
-                    )}
-                    <span className="min-w-0 truncate">
-                      <ClanTag
-                        tag={r.tag}
-                        color={r.color}
-                        className="font-mono font-semibold"
-                      />{" "}
-                      <span className="text-muted-foreground">{r.name}</span>
-                    </span>
-                  </Link>
-                  <ClanBadges
-                    badges={
-                      omitBoard
-                        ? r.badges?.filter((b) => b.board !== omitBoard)
-                        : r.badges
-                    }
-                    region={region}
-                    size={14}
-                  />
-                  {r.languages.length > 0 && (
-                    <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
-                      <LanguageFlags
-                        languages={r.languages}
-                        source="declared"
-                        size="s"
-                        region={region}
-                        link={false}
-                      />
-                    </span>
-                  )}
-                </span>
+                <ClanName
+                  region={region}
+                  clan={clanIdentityFromRow(r)}
+                  showEmblem
+                  showName
+                  omitBoard={omitBoard}
+                  size={14}
+                  // The name shrinks rather than stretching, so the crests stay
+                  // beside it instead of at the cell's far edge.
+                  trailing={
+                    r.languages.length > 0 ? (
+                      <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                        <LanguageFlags
+                          languages={r.languages}
+                          source="declared"
+                          size="s"
+                          region={region}
+                          link={false}
+                        />
+                      </span>
+                    ) : null
+                  }
+                />
               </TableCell>
               <TableCell className="text-center text-muted-foreground tabular-nums">
                 {intFmt.format(r.members_count)}

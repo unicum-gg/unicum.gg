@@ -9,6 +9,7 @@ related:
   - expected-values
   - recent-stats
   - rating-colors
+  - wtr
 links:
   - target: top-players
 anchors:

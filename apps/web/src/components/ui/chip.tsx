@@ -41,7 +41,11 @@ export const Chip = forwardRef<
       {...(asChild ? {} : { type: "button" as const })}
       {...props}
       className={cn(
-        "cursor-pointer whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
+        // `inline-flex`, not the button's default block box: the preflight
+        // sets `svg { display: block }`, so a chip carrying an icon (the
+        // Featured star) stacked it above its own label and grew taller than
+        // every chip beside it. Text-only chips are unaffected.
+        "inline-flex cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap border-r border-fd-border px-3 py-1.5 font-medium transition-colors last:border-r-0",
         active
           ? "bg-fd-secondary/50 text-fd-foreground"
           : "text-fd-muted-foreground hover:bg-fd-secondary/25 hover:text-fd-foreground",

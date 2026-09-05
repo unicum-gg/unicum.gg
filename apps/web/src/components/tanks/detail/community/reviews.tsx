@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {
   RATING_COLOR_HEX,
   VOTER_BRACKET_LABEL,
@@ -8,7 +7,7 @@ import {
 } from "@unicum.gg/shared";
 import { REGION_LABEL } from "@unicum.gg/wargaming";
 import { RelativeTime } from "@/components/relative-time";
-import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
 import { Stars } from "./stars";
 
 const intFmt = new Intl.NumberFormat("en-US");
@@ -55,12 +54,11 @@ function ReviewCard({ review }: { review: TankReview }) {
   return (
     <article className="flex flex-col gap-2 py-4 first:pt-0 last:pb-0">
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <Link
-          href={ROUTES.PLAYER(review.region, review.nickname)}
-          className="text-sm font-medium hover:underline"
-        >
-          {review.nickname}
-        </Link>
+        <PlayerName
+          region={review.region}
+          player={{ nickname: review.nickname }}
+          className="text-sm"
+        />
         {review.bracket === VoterBracket.Unknown ? null : (
           <span
             className="text-xs font-medium"

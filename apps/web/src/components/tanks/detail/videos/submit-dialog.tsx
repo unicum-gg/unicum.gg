@@ -5,6 +5,7 @@ import { mutate } from "swr";
 import { BattleFormat, BattleResult, MapGameMode } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "@/components/login-button";
 import {
   Dialog,
   DialogContent,
@@ -75,11 +76,11 @@ export function SubmitVideoDialog({
 
   if (!session?.user) {
     return (
-      <Button asChild variant="outline" size="sm">
-        <a href={ROUTES.AUTH_SIGN_IN(region, ROUTES.TANK(region, slug))}>
+      <LoginButton callbackURL={ROUTES.TANK(region, slug)}>
+        <Button variant="outline" size="sm">
           Log in to suggest a video
-        </a>
-      </Button>
+        </Button>
+      </LoginButton>
     );
   }
 

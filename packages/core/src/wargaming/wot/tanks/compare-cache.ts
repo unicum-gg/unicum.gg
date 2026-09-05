@@ -29,9 +29,12 @@ export const TANK_COMPARE_TTL_SECONDS = 60 * 60;
  *
  * v1: the pre-versioned key, retired here.
  * v2: each column carries the game client it was read on, and the test build.
- * v3: which of the seven mechanics each vehicle's second state is.
+ * v3: taken twice, and so meaningless: `isHidden` and `variant` on each
+ *     column's vehicle meta from one side, the vehicle's mechanic from the
+ *     other. The merge lands above it rather than continuing either.
+ * v4: both of those, which is what the merged payload carries.
  */
-const SHAPE_VERSION = 3;
+const SHAPE_VERSION = 4;
 
 function key(region: Region, slugs: string[]): string {
   const columns = slugs.map((s) => s.toLowerCase()).join(",");

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { usePathname } from "next/navigation";
 import { regionFromPathname } from "@unicum.gg/wargaming";
 import {
+  ChartLineUpIcon,
   ChatsCircleIcon,
   CoinsIcon,
   CrosshairIcon,
@@ -13,6 +14,9 @@ import {
   LightningIcon,
   MapTrifoldIcon,
   MedalIcon,
+  MoonStarsIcon,
+  PencilRulerIcon,
+  RankingIcon,
   ScalesIcon,
   ShieldIcon,
   ShuffleIcon,
@@ -35,6 +39,7 @@ const LINK_ICON: Record<string, ReactNode> = {
   "top-clans": <UsersThreeIcon />,
   stronghold: <ShieldIcon />,
   advances: <FlagBannerIcon />,
+  "tank-performances": <ChartLineUpIcon />,
   "tank-specs": <GaugeIcon />,
   "tank-economics": <CoinsIcon />,
   "tank-moe": <MedalIcon />,
@@ -46,8 +51,11 @@ const LINK_ICON: Record<string, ReactNode> = {
   "maps-random": <ShuffleIcon />,
   "maps-frontline": <FlagIcon />,
   "maps-onslaught": <SwordIcon />,
+  "maps-onslaught-night": <MoonStarsIcon />,
   "maps-grand-battle": <LightningIcon />,
   "maps-clan-wars": <ShieldIcon />,
+  "map-changes": <PencilRulerIcon />,
+  "all-tournaments": <RankingIcon />,
 };
 
 /**

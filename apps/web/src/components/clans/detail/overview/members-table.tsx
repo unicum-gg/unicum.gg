@@ -6,8 +6,8 @@ import {
   CaretUpIcon,
 } from "@phosphor-icons/react";
 import { format } from "date-fns";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { PlayerName } from "@/components/entity/player-name";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
 import { useState } from "react";
 import {
   Table,
@@ -141,6 +141,23 @@ function SortableHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className={cn(
+        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
+        align === "end" && "justify-end",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead
       data-rating-col={ratingCol}
@@ -150,21 +167,11 @@ function SortableHead({
         headClassName,
       )}
     >
-      <button
-        type="button"
-        onClick={() => onToggle(column)}
-        className={cn(
-          "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-          align === "end" && "justify-end",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -370,18 +377,24 @@ export function ClanMembersTable(
                 {idx + 1}
               </TableCell>
               <TableCell className="font-medium">
+                {/* The clan is the page's own subject, so the tag is not
+                    repeated on every one of its members. Everything else about
+                    the identity, crests included, is the site's usual format:
+                    this table used to pass no tournament fields, so a member
+                    who had won one wore nothing here and the crest on the home
+                    leaderboard. */}
                 <PlayerName
                   region={props.region}
-                  nickname={m.name}
-                  badges={
-                    <PlayerBadges
-                      region={props.region}
-                      accountId={m.accountId}
-                      verified={m.isVerified}
-                      supporter={m.isSupporter}
-                      twitchLogin={m.twitchLogin}
-                    />
-                  }
+                  player={{
+                    nickname: m.name,
+                    accountId: m.accountId,
+                    isVerified: m.isVerified,
+                    isSupporter: m.isSupporter,
+                    twitchLogin: m.twitchLogin,
+                    tournamentWins: m.tournamentWins,
+                    tournamentFeaturedWins: m.tournamentFeaturedWins,
+                    tournamentBestTitle: m.tournamentBestTitle,
+                  }}
                 />
               </TableCell>
               <TableCell className="hidden text-muted-foreground sm:table-cell">

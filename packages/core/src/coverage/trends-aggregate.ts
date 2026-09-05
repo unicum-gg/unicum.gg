@@ -19,24 +19,33 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
  * is structurally gone, not just cached over.
  */
 
-// Daily, not hourly, and 04:15 is both a free minute and a quiet hour.
+// Hourly at :15, which the hardware now affords.
 //
-// Hourly did not hold. The three reads below are full seq-scans, and on
-// 2026-08-23 the tick measured **156 seconds** for the three regions (`eu
-// recomputed in 130415ms`). While it ran, Postgres was monopolised,
-// `loadPlayerInitialData` went from 0.5s to 20s+, the web workers queued behind
-// it and the site answered 503. Once per hour meant that window opened 24 times
-// a day.
+// This was daily for a while, and the reason is worth keeping. The three reads
+// below are full seq-scans, and on the old OVH host the tick measured **156
+// seconds** for the three regions (`eu recomputed in 130415ms`). While it ran,
+// Postgres was monopolised, `loadPlayerInitialData` went from 0.5s to 20s+, the
+// web workers queued behind it and the site answered 503. At one tick per hour
+// that window opened 24 times a day, so the cadence had to go.
 //
-// The real fix is not this cadence, it is that the work is mostly wasted: a
-// player's FIRST snapshot never changes once written, and 29 of the 30 daily
-// buckets are closed for good. Only the current day still moves. Maintaining
-// those incrementally (a `first_snapshot_at` column filled once on insert, a
-// per-day rollup row frozen when the day ends) would make this cheap enough to
-// run on request, which is what the /coverage page actually wants: it is a live
-// dashboard, and a daily refresh degrades it to yesterday's photo. Until that
-// exists, daily is the cadence that keeps the site up.
-const COVERAGE_TRENDS_SCHEDULE = "15 4 * * *";
+// The same tick on the current host measures **31 seconds** (eu 23845ms, na
+// 4610ms, asia 2349ms, observed 2026-08-30 on the first run after the move).
+// The queries did not change, the disk and the cores did. A 31s scan every hour
+// is a cost this database absorbs without the request path noticing, so the
+// page goes back to being what it is meant to be: a live dashboard rather than
+// yesterday's photo.
+//
+// None of that makes the work less wasteful, and the real fix is still the same
+// one: a player's FIRST snapshot never changes once written, and 29 of the 30
+// daily buckets are closed for good. Only the current day still moves.
+// Maintaining those incrementally (a `first_snapshot_at` column filled once on
+// insert, a per-day rollup row frozen when the day ends) would make this cheap
+// enough to run on request. Until that exists, hourly is the cadence the
+// hardware pays for.
+//
+// If this ever moves to a smaller machine, measure the tick before trusting
+// this line: the 503s above are what a too-fast cadence costs.
+const COVERAGE_TRENDS_SCHEDULE = "15 * * * *";
 
 // Must match the read path's `buildDaySeries` window in the coverage service:
 // the cron fetches this many days of raw buckets, the reader renders the same

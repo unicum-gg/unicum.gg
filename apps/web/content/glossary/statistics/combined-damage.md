@@ -11,6 +11,7 @@ anchors:
   labels:
     - Combined damage
     - Damage + assist
+    - Combined damages
 ---
 
 Damage dealt plus assistance credited, the figure Marks of Excellence are measured on.

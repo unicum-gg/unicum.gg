@@ -49,6 +49,9 @@ export const clanMember = z
     isVerified: z.boolean().optional(),
     isSupporter: z.boolean().optional(),
     twitchLogin: z.string().nullable().optional(),
+    tournamentWins: z.number().optional(),
+    tournamentFeaturedWins: z.number().optional(),
+    tournamentBestTitle: z.string().nullable().optional(),
   })
   .loose()
   .meta({
@@ -165,5 +168,17 @@ export const ClanOverviewResponse = z.object({
   badges: z.array(clanRankBadge).meta({
     description:
       "Podium positions the clan currently holds, best rank first. Only the top three of each leaderboard qualify, so this is empty for almost every clan.",
+  }),
+  tournamentWins: z.number().meta({
+    description:
+      "Tournaments won by a team attributed to this clan. The attribution is resolved from each roster as of the day it played, so an old title stays with the clan that actually fielded it.",
+  }),
+  tournamentFeaturedWins: z.number().meta({
+    description:
+      "How many of those wins came at an event Wargaming flags as featured.",
+  }),
+  tournamentBestTitle: z.string().nullable().meta({
+    description:
+      "The win worth naming: a featured event when there is one, else the most recent. Null when the clan has never won.",
   }),
 });

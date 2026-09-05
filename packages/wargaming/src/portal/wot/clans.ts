@@ -1,6 +1,6 @@
 import { Region, REGION_PORTAL_HOST } from "../../region";
 import type { Transport } from "../../client/transport";
-import { ClanRole, ClanEventType } from "./clan-enums";
+import { ClanRole, ClanEventType, clanRoleOrder } from "./clan-enums";
 
 export { ClanRole, ClanEventType } from "./clan-enums";
 
@@ -19,6 +19,7 @@ export type PortalClanMember = {
   name: string;
   role: ClanRole;
   roleLocalized: string;
+  /** Seniority, 0 = commander, matching {@link clanRoleOrder}. */
   roleRank: number;
   daysInClan: number;
   lastBattleTime: Date | null;
@@ -164,7 +165,11 @@ export class PortalClansResource {
         name: m.name,
         role: m.role.name as ClanRole,
         roleLocalized: m.role.localized_name,
-        roleRank: m.role.rank,
+        // Not the raw `m.role.rank`: that one runs the other way and gives
+        // personnel officer and quartermaster the same 8, so it cannot order a
+        // roster. `clanRoleOrder` is that same seniority, made total and
+        // oriented like every other producer of this type.
+        roleRank: clanRoleOrder(m.role.name),
         daysInClan: m.days_in_clan ?? 0,
         lastBattleTime: m.last_battle_time ? new Date(m.last_battle_time * 1000) : null,
         personalRating: m.personal_rating,

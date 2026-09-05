@@ -9,6 +9,9 @@ related:
   - elite-status
   - gold
   - research
+anchors:
+  labels:
+    - Free XP
 ---
 
 Experience that can be spent on any vehicle or module, accumulated as a small share of everything earned and convertible from elite vehicles with gold.

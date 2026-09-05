@@ -19,3 +19,4 @@ export * from "./twitch";
 export * from "./feedback";
 export * from "./glossary";
 export * from "./wot";
+export * from "./finance";

@@ -15,6 +15,21 @@ export type VehicleMeta = {
   isReward: boolean;
   /** Only on the Common Test client: unreleased, and not in any player's stats. */
   isCommonTest: boolean;
+  /**
+   * Not a vehicle at all: a training-room bot, a story-mode prop, or something
+   * the client never names. None has a single battle on any region, so they are
+   * kept out of every catalogue surface, slugs included. Playable variants the
+   * client files apart (the cybercafe IGR reissues) are not this: they are in
+   * the catalogue, under a suffixed name.
+   */
+  isHidden: boolean;
+  /**
+   * The parallel catalogue this vehicle comes from, as it is spelled at the end
+   * of its name ("IGR"), or null for a normal one. The name carries it so slugs
+   * and lists stay unambiguous; this field is what lets the page mark it as a
+   * term rather than leave an unexplained acronym in the title.
+   */
+  variant: string | null;
   role: string | null;
   contourIcon: string | null;
   bigIcon: string | null;

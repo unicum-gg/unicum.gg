@@ -11,6 +11,9 @@ related:
   - wnx
   - unicum
   - win-rate
+anchors:
+  labels:
+    - Rating colors
 ---
 
 The nine-step colour scale the community reads ratings through, running from black at the bottom to dark purple at the top.

@@ -8,6 +8,7 @@ import {
   GLOSSARY_CATEGORY_LABEL,
   glossaryAcronym,
   glossaryLetter,
+  searchGlossaryTerms,
   type GlossaryCategory,
   type GlossarySummary,
 } from "@unicum.gg/shared";
@@ -18,20 +19,6 @@ import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 
 const LETTERS = [..."ABCDEFGHIJKLMNOPQRSTUVWXYZ", "#"];
-
-/** A term matches on its name, on any spelling it is known by, and on its
- * definition, so a reader who only remembers what a thing does still finds it. */
-function matches(term: GlossarySummary, query: string): boolean {
-  if (!query) return true;
-  const haystack = [term.term, ...term.aliases, term.short]
-    .join(" ")
-    .toLowerCase();
-  return query
-    .toLowerCase()
-    .split(/\s+/)
-    .filter(Boolean)
-    .every((word) => haystack.includes(word));
-}
 
 function TermCard({ term }: { term: GlossarySummary }) {
   const acronym = glossaryAcronym(term);
@@ -79,7 +66,14 @@ export function GlossaryIndex({
   const [query, setQuery] = useState("");
 
   const groups = useMemo(() => {
-    const visible = terms.filter((term) => matches(term, query));
+    // The same matcher the site search runs, asked for the whole catalogue
+    // rather than a section of five. It answers "does this term match" once, so
+    // a query cannot find a term here and miss it in the dialog: this page used
+    // to join name, aliases and definition into one haystack, which found terms
+    // the dialog could not and ranked nothing.
+    const visible = query.trim()
+      ? searchGlossaryTerms(terms, query)
+      : terms;
     const byLetter = new Map<string, GlossarySummary[]>();
     for (const term of visible) {
       const letter = glossaryLetter(term.term);

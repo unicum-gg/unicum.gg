@@ -15,12 +15,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { GlossaryLabel } from "@/components/glossary/label";
 import ROUTES from "@/constants/routes";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
@@ -67,25 +63,26 @@ export function PlayerSessionsTable({
         <TableHeader>
           <TableRow>
             <TableHead className="w-[1%] whitespace-nowrap">Date</TableHead>
-            <TableHead className="text-end">Battles</TableHead>
-            <TableHead className="text-end whitespace-nowrap">Avg tier</TableHead>
+            <TableHead className="text-end">
+              <GlossaryLabel>Battles</GlossaryLabel>
+            </TableHead>
+            <TableHead className="text-end whitespace-nowrap">
+              <GlossaryLabel>Avg tier</GlossaryLabel>
+            </TableHead>
             <TableHead className="text-end">Tanks</TableHead>
-            {columns.map((c) => (
-              <TableHead key={c.key} className="text-end whitespace-nowrap">
-                {c.tip ? (
-                  <Tooltip>
-                    <TooltipTrigger className="cursor-help">
-                      {c.header ? c.header(metric) : c.label}
-                    </TooltipTrigger>
-                    <TooltipContent>{c.tip}</TooltipContent>
-                  </Tooltip>
-                ) : c.header ? (
-                  c.header(metric)
-                ) : (
-                  c.label
-                )}
-              </TableHead>
-            ))}
+            {columns.map((c) => {
+              // The rating column's heading follows the reader's metric, so it
+              // is looked up on what it currently says ("WN8"), never on the
+              // column's own generic name.
+              const heading = c.header ? c.header(metric) : c.label;
+              return (
+                <TableHead key={c.key} className="text-end whitespace-nowrap">
+                  <GlossaryLabel label={heading} tip={c.tip}>
+                    {heading}
+                  </GlossaryLabel>
+                </TableHead>
+              );
+            })}
           </TableRow>
         </TableHeader>
         <TableBody>

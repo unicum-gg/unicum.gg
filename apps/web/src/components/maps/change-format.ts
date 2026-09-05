@@ -1,5 +1,6 @@
 import {
   displayMapValue,
+  MAP_VARIANT_PREFIX,
   MAP_PRESENT,
   MapChangeKind,
   parseMarkers,
@@ -32,14 +33,36 @@ export type FormattedMapChange = {
 };
 
 /** "gained"/"lost" phrasing for the properties that are simply there or not. */
-function presenceSummary(label: string, kind: MapChangeKind, gained: boolean) {
+function presenceSummary(
+  label: string,
+  kind: MapChangeKind,
+  gained: boolean,
+  field: string,
+  pending: boolean,
+) {
   switch (kind) {
     case MapChangeKind.Presence:
+      // The night arena arriving is the map gaining a version of itself, so it
+      // says so rather than claiming the map entered the game.
+      if (field.startsWith(MAP_VARIANT_PREFIX)) {
+        return gained ? `${label} added` : `${label} removed`;
+      }
+      // Inside the Common Test block nothing has reached a live server yet, so
+      // "added to the game" would contradict the block it sits in.
+      if (pending) {
+        return gained
+          ? "Added on the test client"
+          : "Removed on the test client";
+      }
       return gained ? "Added to the game" : "Removed from the game";
     case MapChangeKind.Mode:
       return gained ? `${label} mode added` : `${label} mode removed`;
     case MapChangeKind.BattleType:
       return gained ? `Now played in ${label}` : `No longer played in ${label}`;
+    case MapChangeKind.RandomEvent:
+      return gained
+        ? `${label} can now happen mid-battle`
+        : `${label} no longer happens`;
     default:
       return gained ? `${label} added` : `${label} removed`;
   }
@@ -67,6 +90,9 @@ export function formatMapChange(
   field: string,
   previous: string | null,
   next: string | null,
+  /** Whether the change is rendered in the Common Test block rather than in the
+   * shipped history, which changes how a presence row reads. */
+  pending = false,
 ): FormattedMapChange {
   const meta = resolveMapChangeField(field);
   const base = { field, label: meta.label, kind: meta.kind };
@@ -90,7 +116,8 @@ export function formatMapChange(
   if (
     (meta.kind === MapChangeKind.Presence ||
       meta.kind === MapChangeKind.Mode ||
-      meta.kind === MapChangeKind.BattleType) &&
+      meta.kind === MapChangeKind.BattleType ||
+      meta.kind === MapChangeKind.RandomEvent) &&
     isPresence
   ) {
     return {
@@ -98,7 +125,13 @@ export function formatMapChange(
       before: null,
       after: null,
       markers: null,
-      summary: presenceSummary(meta.label, meta.kind, next !== null),
+      summary: presenceSummary(
+        meta.label,
+        meta.kind,
+        next !== null,
+        field,
+        pending,
+      ),
     };
   }
 

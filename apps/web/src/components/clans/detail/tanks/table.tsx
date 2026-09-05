@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react";
 import { useMemo, useState } from "react";
 import { toRoman } from "roman-numerals";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { NationFlag } from "@/components/tanks/nation-flag";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import {
@@ -125,6 +126,24 @@ function SortableHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onToggle(column)}
+      className={cn(
+        "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
+        align === "center" && "justify-center",
+        align === "end" && "justify-end",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead
       className={cn(
@@ -133,22 +152,11 @@ function SortableHead({
         headClassName,
       )}
     >
-      <button
-        type="button"
-        onClick={() => onToggle(column)}
-        className={cn(
-          "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
-          align === "center" && "justify-center",
-          align === "end" && "justify-end",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

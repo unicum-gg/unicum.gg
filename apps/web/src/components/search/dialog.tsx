@@ -11,32 +11,24 @@ import {
   type SharedProps,
 } from "fumadocs-ui/components/dialog/search";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
-import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
-import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
-import type { MapSearchResult } from "@/app/api/[region]/maps/search/route";
-import { SearchSource, type ClanSearchResult } from "@unicum.gg/shared";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FilterBar, SearchType } from "@/components/search/filter-bar";
+import { ResultsArea } from "@/components/search/results-area";
 import {
-  type Outcome,
-  ResultsArea,
   type ResultsStatus,
   type Row,
   type SelectableRow,
-  deriveSection,
   flattenHistory,
   flattenSections,
-  previousOf,
   rowToItem,
   selectableRows,
-} from "@/components/search/results-area";
+} from "@/components/search/row-model";
+import { useSearchResults } from "@/components/search/use-search-results";
 import ROUTES from "@/constants/routes";
 import STORAGE from "@/constants/storage";
 import { useCookie } from "@/hooks/use-cookie";
 import { useSearchHistory } from "@/hooks/use-search-history";
-import { mergeSearchChunks } from "@/lib/search-merge";
 import { startNavigationProgress } from "@/components/navigation-progress";
-import { unicum } from "@/services/sdk";
 import { cn } from "@/lib/utils";
 import {
   isRegion,
@@ -44,7 +36,6 @@ import {
   regionFromPathname,
 } from "@unicum.gg/wargaming";
 
-const DEBOUNCE_MS = 250;
 const MIN_QUERY_LENGTH = 3;
 
 /** Destination of a result row. Shared by the prefetch and the navigation, so
@@ -54,6 +45,7 @@ function hrefForRow(row: SelectableRow): string {
     return ROUTES.PLAYER(row.region, row.player.nickname);
   if (row.type === "clan") return ROUTES.CLAN(row.region, row.clan.tag);
   if (row.type === "tank") return ROUTES.TANK(row.region, row.tank.slug);
+  if (row.type === "glossary") return ROUTES.GLOSSARY_TERM(row.term.slug);
   return ROUTES.MAP(row.region, row.map.slug);
 }
 
@@ -90,14 +82,6 @@ export default function SearchDialog(props: SharedProps) {
   };
   const [searchType, setSearchType] = useState<SearchType>(SearchType.All);
   const [query, setQuery] = useState("");
-  const [playersOutcome, setPlayersOutcome] =
-    useState<Outcome<SearchPlayerResult> | null>(null);
-  const [clansOutcome, setClansOutcome] =
-    useState<Outcome<ClanSearchResult> | null>(null);
-  const [tanksOutcome, setTanksOutcome] =
-    useState<Outcome<TankSearchResult> | null>(null);
-  const [mapsOutcome, setMapsOutcome] =
-    useState<Outcome<MapSearchResult> | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const {
     recent,
@@ -118,204 +102,16 @@ export default function SearchDialog(props: SharedProps) {
   }, [props.open, refreshHistory]);
 
   const trimmedQuery = query.trim();
-  const wantPlayers =
-    searchType === SearchType.All || searchType === SearchType.Players;
-  const wantClans =
-    searchType === SearchType.All || searchType === SearchType.Clans;
-  const wantTanks =
-    searchType === SearchType.All || searchType === SearchType.Tanks;
-  const wantMaps =
-    searchType === SearchType.All || searchType === SearchType.Maps;
-
-  const playersSection = useMemo(
-    () => deriveSection(wantPlayers, trimmedQuery, MIN_QUERY_LENGTH, playersOutcome),
-    [wantPlayers, trimmedQuery, playersOutcome],
+  const onFirstResults = useCallback(() => setActiveIndex(0), []);
+  const { sections, anyLoading, allErrored, allEmpty, reset } = useSearchResults(
+    {
+      region,
+      searchType,
+      trimmedQuery,
+      minQueryLength: MIN_QUERY_LENGTH,
+      onFirstResults,
+    },
   );
-  const clansSection = useMemo(
-    () => deriveSection(wantClans, trimmedQuery, MIN_QUERY_LENGTH, clansOutcome),
-    [wantClans, trimmedQuery, clansOutcome],
-  );
-  const tanksSection = useMemo(
-    () => deriveSection(wantTanks, trimmedQuery, MIN_QUERY_LENGTH, tanksOutcome),
-    [wantTanks, trimmedQuery, tanksOutcome],
-  );
-  const mapsSection = useMemo(
-    () => deriveSection(wantMaps, trimmedQuery, MIN_QUERY_LENGTH, mapsOutcome),
-    [wantMaps, trimmedQuery, mapsOutcome],
-  );
-
-  useEffect(() => {
-    // A disabled section (`!wantX`) or a too-short query is hidden by
-    // `deriveSection`, which also ignores an outcome left over from another
-    // query — so there's nothing to clear here, we just skip fetching.
-    if (trimmedQuery.length < MIN_QUERY_LENGTH) return;
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => {
-      if (wantPlayers) {
-        setPlayersOutcome((prev) => ({
-          status: "loading",
-          previous: previousOf(prev),
-          forQuery: trimmedQuery,
-        }));
-        void (async () => {
-          try {
-            // The two chunks merge into one capped list (exact match hoisted)
-            // instead of appending, so the section stays at one page and the
-            // count doesn't double when the WG chunk lands.
-            let local: SearchPlayerResult[] = [];
-            let remote: SearchPlayerResult[] = [];
-            const merged = () =>
-              mergeSearchChunks(local, remote, (r) => r.nickname, trimmedQuery);
-            for await (const chunk of unicum
-              .region(region)
-              .players.searchStream(trimmedQuery, {
-                signal: controller.signal,
-              })) {
-              const results = chunk.results as SearchPlayerResult[];
-              if (chunk.source === SearchSource.Local) local = results;
-              else remote = results;
-              // Partial: keep the loading indicator on until the stream ends.
-              setPlayersOutcome({
-                status: "streaming",
-                results: merged(),
-                forQuery: trimmedQuery,
-              });
-              if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            }
-            // Stream closed (remote chunk landed): settle to the final result.
-            setPlayersOutcome({
-              status: "ok",
-              results: merged(),
-              forQuery: trimmedQuery,
-            });
-          } catch (err) {
-            if ((err as Error)?.name === "AbortError") return;
-            setPlayersOutcome({ status: "error", forQuery: trimmedQuery });
-          }
-        })();
-      }
-
-      if (wantClans) {
-        setClansOutcome((prev) => ({
-          status: "loading",
-          previous: previousOf(prev),
-          forQuery: trimmedQuery,
-        }));
-        void (async () => {
-          try {
-            // Same merge-not-append as the players section (exact tag first).
-            let local: ClanSearchResult[] = [];
-            let remote: ClanSearchResult[] = [];
-            const merged = () =>
-              mergeSearchChunks(local, remote, (r) => r.tag, trimmedQuery);
-            for await (const chunk of unicum
-              .region(region)
-              .clans.searchStream(trimmedQuery, {
-                signal: controller.signal,
-              })) {
-              const results = chunk.results as ClanSearchResult[];
-              if (chunk.source === SearchSource.Local) local = results;
-              else remote = results;
-              // Partial: keep the loading indicator on until the stream ends.
-              setClansOutcome({
-                status: "streaming",
-                results: merged(),
-                forQuery: trimmedQuery,
-              });
-              if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            }
-            // Stream closed (remote chunk landed): settle to the final result.
-            setClansOutcome({
-              status: "ok",
-              results: merged(),
-              forQuery: trimmedQuery,
-            });
-          } catch (err) {
-            if ((err as Error)?.name === "AbortError") return;
-            setClansOutcome({ status: "error", forQuery: trimmedQuery });
-          }
-        })();
-      }
-
-      if (wantTanks) {
-        setTanksOutcome((prev) => ({
-          status: "loading",
-          previous: previousOf(prev),
-          forQuery: trimmedQuery,
-        }));
-        void (async () => {
-          try {
-            let acc: TankSearchResult[] = [];
-            for await (const chunk of unicum
-              .region(region)
-              .tanks.searchStream(trimmedQuery, {
-                signal: controller.signal,
-              })) {
-              acc = [...acc, ...(chunk.results as TankSearchResult[])];
-              // Partial: keep the loading indicator on until the stream ends.
-              setTanksOutcome({
-                status: "streaming",
-                results: acc,
-                forQuery: trimmedQuery,
-              });
-              if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            }
-            // Stream closed: settle to the final result.
-            setTanksOutcome({
-              status: "ok",
-              results: acc,
-              forQuery: trimmedQuery,
-            });
-          } catch (err) {
-            if ((err as Error)?.name === "AbortError") return;
-            setTanksOutcome({ status: "error", forQuery: trimmedQuery });
-          }
-        })();
-      }
-
-      if (wantMaps) {
-        setMapsOutcome((prev) => ({
-          status: "loading",
-          previous: previousOf(prev),
-          forQuery: trimmedQuery,
-        }));
-        void (async () => {
-          try {
-            let acc: MapSearchResult[] = [];
-            for await (const chunk of unicum
-              .region(region)
-              .maps.searchStream(trimmedQuery, {
-                signal: controller.signal,
-              })) {
-              acc = [...acc, ...(chunk.results as MapSearchResult[])];
-              // Partial: keep the loading indicator on until the stream ends.
-              setMapsOutcome({
-                status: "streaming",
-                results: acc,
-                forQuery: trimmedQuery,
-              });
-              if (chunk.source === SearchSource.Local) setActiveIndex(0);
-            }
-            // Stream closed: settle to the final result.
-            setMapsOutcome({
-              status: "ok",
-              results: acc,
-              forQuery: trimmedQuery,
-            });
-          } catch (err) {
-            if ((err as Error)?.name === "AbortError") return;
-            setMapsOutcome({ status: "error", forQuery: trimmedQuery });
-          }
-        })();
-      }
-    }, DEBOUNCE_MS);
-
-    return () => {
-      controller.abort();
-      clearTimeout(timer);
-    };
-  }, [trimmedQuery, region, wantPlayers, wantClans, wantTanks, wantMaps]);
 
   // When the input is empty, show the user's recent + favorite items
   // instead of a blank state. The search results take over the moment
@@ -326,21 +122,8 @@ export default function SearchDialog(props: SharedProps) {
     [queryIsEmpty, recent, favorites],
   );
   const searchRows = useMemo(
-    () =>
-      flattenSections(
-        region,
-        playersSection.visible,
-        clansSection.visible,
-        tanksSection.visible,
-        mapsSection.visible,
-      ),
-    [
-      region,
-      playersSection.visible,
-      clansSection.visible,
-      tanksSection.visible,
-      mapsSection.visible,
-    ],
+    () => flattenSections(region, sections),
+    [region, sections],
   );
   const rows = queryIsEmpty ? historyRows : searchRows;
   const selectable = useMemo(() => selectableRows(rows), [rows]);
@@ -355,23 +138,7 @@ export default function SearchDialog(props: SharedProps) {
     if (activeHref) router.prefetch(activeHref);
   }, [activeHref, router]);
 
-  const anyLoading =
-    playersSection.isLoading ||
-    clansSection.isLoading ||
-    tanksSection.isLoading ||
-    mapsSection.isLoading;
-  const allErrored =
-    playersSection.isError &&
-    clansSection.isError &&
-    tanksSection.isError &&
-    mapsSection.isError;
-  const allEmpty =
-    playersSection.isEmpty &&
-    clansSection.isEmpty &&
-    tanksSection.isEmpty &&
-    mapsSection.isEmpty;
   const hasAnyVisible = rows.length > 0;
-
   const showArea = hasAnyVisible || anyLoading || allErrored || allEmpty;
 
   // Freeze content during the close animation so the dialog doesn't flash empty
@@ -412,10 +179,7 @@ export default function SearchDialog(props: SharedProps) {
   function close() {
     props.onOpenChange?.(false);
     setQuery("");
-    setPlayersOutcome(null);
-    setClansOutcome(null);
-    setTanksOutcome(null);
-    setMapsOutcome(null);
+    reset();
   }
 
   function pickRow(row: SelectableRow) {
@@ -460,7 +224,7 @@ export default function SearchDialog(props: SharedProps) {
           <SearchDialogHeader>
             <SearchDialogIcon />
             <SearchDialogInput
-              placeholder="Search players, clans, tanks or maps"
+              placeholder="Search players, clans, tanks, maps or terms"
               onKeyDown={onKeyDown}
             />
             <SearchDialogClose />

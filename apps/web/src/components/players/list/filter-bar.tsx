@@ -32,6 +32,10 @@ export function LeaderboardFilterBar<T>({
         placeholder={`Search ${filters.totalCount.toLocaleString("en-US")} ${searchNoun}`}
         className="h-7 w-56 rounded-md border border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:border-fd-ring focus:outline-none"
       />
+      {/* Only when there is something to range over: a board that passes no
+          range column would otherwise render an empty select between two inputs
+          that filter nothing. */}
+      {filters.rangeCols.length > 0 && (
       <div className="flex h-7 items-center overflow-hidden rounded-md border border-fd-border">
         <Select value={filters.rangeCol} onValueChange={filters.setRangeCol}>
           <SelectTrigger
@@ -63,6 +67,7 @@ export function LeaderboardFilterBar<T>({
           className="h-full w-20 border-l border-fd-border bg-transparent px-3 text-xs text-fd-foreground placeholder:text-fd-muted-foreground focus:outline-none"
         />
       </div>
+      )}
       {extra}
       {filters.active && (
         <span className="text-xs text-fd-muted-foreground tabular-nums">

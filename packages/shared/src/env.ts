@@ -78,6 +78,11 @@ export const env = createEnv({
     // Optional: unset closes written opinions, and the stars keep working, since
     // they need no review.
     DISCORD_REVIEW_CHANNEL_ID: z.string().optional(),
+    // Private channel the capture watchdog reports to. Worker-only. Optional,
+    // and the watchdog still runs without it: the check is worth doing either
+    // way, and unset simply means it says so in the logs rather than in a
+    // channel, which is also what a local `pnpm dev` should do.
+    DISCORD_ALERTS_CHANNEL_ID: z.string().optional(),
     // OpenAI key for the changelog writer (AI SDK). Optional, same reason:
     // no key, no cron. Worker-only.
     OPENAI_API_KEY: z.string().optional(),
@@ -96,6 +101,10 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: z.string().optional(),
     STRIPE_WEBHOOK_SECRET: z.string().optional(),
     STRIPE_PRODUCT_ID: z.string().optional(),
+    // UniRateAPI key for the live EUR exchange rates the money figures are
+    // displayed with. Web-only. Optional so the worker/bot boot without it and
+    // the conversion degrades to showing euros rather than to a stale rate.
+    UNIRATE_API_KEY: z.string().optional(),
   },
   client: {
     NEXT_PUBLIC_APP_URL: z.url(),
@@ -120,6 +129,7 @@ export const env = createEnv({
     DISCORD_GUILD_ID: process.env.DISCORD_GUILD_ID,
     DISCORD_FEEDBACK_CHANNEL_ID: process.env.DISCORD_FEEDBACK_CHANNEL_ID,
     DISCORD_CHANGELOG_CHANNEL_ID: process.env.DISCORD_CHANGELOG_CHANNEL_ID,
+    DISCORD_ALERTS_CHANNEL_ID: process.env.DISCORD_ALERTS_CHANNEL_ID,
     DISCORD_VIDEO_CHANNEL_ID: process.env.DISCORD_VIDEO_CHANNEL_ID,
     DISCORD_REVIEW_CHANNEL_ID: process.env.DISCORD_REVIEW_CHANNEL_ID,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
@@ -128,6 +138,7 @@ export const env = createEnv({
     STRIPE_SECRET_KEY: process.env.STRIPE_SECRET_KEY,
     STRIPE_WEBHOOK_SECRET: process.env.STRIPE_WEBHOOK_SECRET,
     STRIPE_PRODUCT_ID: process.env.STRIPE_PRODUCT_ID,
+    UNIRATE_API_KEY: process.env.UNIRATE_API_KEY,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   emptyStringAsUndefined: true,

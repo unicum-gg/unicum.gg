@@ -1,5 +1,9 @@
 import { RATING_METRICS, RatingMetric, tankStatsByRegion, topPlayersByTankByRegion, buildWN8Fallback, computeWN7, computeWN8, computeWNX } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import {
+  createTierWinrateAccumulator,
+  writeTierWinrate,
+} from "@unicum.gg/core/players/tier-winrate";
 import { db, pgClient } from "@unicum.gg/core/db";
 import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { getVehicleEncyclopedia } from "@unicum.gg/core/wargaming/wot/tanks/encyclopedia";
@@ -85,6 +89,18 @@ export async function recomputeTopPlayersByTank(
 
   const byTank = new Map<number, TankTop>();
 
+  // What each rating band wins at each tier, collected in this same walk (see
+  // `players/tier-winrate`). It rides along rather than running its own scan
+  // because a win rate per tier lives nowhere but this table, and this is the
+  // one job that walks it.
+  //
+  // The player's four values ride every one of that player's rows, which
+  // repeats them ~140 times each, and the alternative was a Map of all 2.1M
+  // accounts held for the whole pass. Four narrow columns on a row already
+  // carrying twenty is the cheaper of the two here: this process has been
+  // memory-bound before and has never been bound by the width of this row.
+  const tierWinrate = createTierWinrateAccumulator(MIN_BATTLES);
+
   // Server-wide running totals per tank (all qualifying players), for the
   // "average player on this tank" panel. Accumulated in the same pass.
   type TankAgg = {
@@ -133,6 +149,17 @@ export async function recomputeTopPlayersByTank(
     const battles = Number(row.battles);
     if (battles < MIN_BATTLES) return;
     const wins = Number(row.wins);
+    tierWinrate.offer({
+      playerId: Number(row.player_id),
+      wn7: row.player_wn7 == null ? null : Number(row.player_wn7),
+      wn8: row.player_wn8 == null ? null : Number(row.player_wn8),
+      wnx: row.player_wnx == null ? null : Number(row.player_wnx),
+      playerBattles:
+        row.player_battles == null ? null : Number(row.player_battles),
+      tier: meta.tier,
+      battles,
+      wins,
+    });
     const tank: TankStats = {
       tank_id: tankId,
       mark_of_mastery: null,
@@ -259,7 +286,9 @@ export async function recomputeTopPlayersByTank(
            s.shots AS shots, s.piercings AS piercings,
            s.damage_blocked AS damage_blocked,
            s.marks_on_gun AS marks_on_gun, s.mark_of_mastery AS mark_of_mastery,
-           p.winrate AS player_winrate
+           p.winrate AS player_winrate, p.wn7 AS player_wn7,
+           p.wn8 AS player_wn8, p.wnx AS player_wnx,
+           p.battles AS player_battles
     FROM ${snapshots} s
     INNER JOIN ${players} p ON p.id = s.player_id
     WHERE s.battles >= ${MIN_BATTLES}
@@ -435,6 +464,12 @@ export async function recomputeTopPlayersByTank(
       await tx.insert(statsTable).values(statValues.slice(i, i + 1000));
     }
   });
+
+  // Its own transaction, after the leaderboard's: the grid is a by-product of
+  // this walk rather than part of the leaderboard, and holding ~300 more rows
+  // inside a transaction that already rewrites two large tables would widen the
+  // window in which the whole night's work can be lost to nothing.
+  await writeTierWinrate(region, tierWinrate.rows());
 
   return byTank.size;
 }

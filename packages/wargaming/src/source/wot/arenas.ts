@@ -35,6 +35,20 @@ export type ArenaGameplay = {
   pointsOfInterest: { position: ArenaPoint; type: number }[];
 };
 
+// One `<minimapLayers>` entry: an alternate minimap image the map ships beside
+// its standard `mmap.dds`, as a client resource path. The maps with Random
+// Events use these for their event art: a `_zone` layer (the danger area the
+// game paints on the minimap) and a `_destroyed` layer (the terrain once the
+// event has struck).
+export type ArenaMinimapLayer = {
+  /** The arena_def's own handle for the layer, e.g. `layer1`. */
+  layerId: string;
+  /** The layer's kind as the client declares it, e.g. `base`. */
+  layerType: string;
+  /** Client resource path, e.g. `spaces/04_himmelsdorf/mmap_crash01_airship_zone.dds`. */
+  path: string;
+};
+
 export type WotSrcArena = {
   /** The client arena id and geometry folder name, e.g. `05_prohorovka`. */
   arenaId: string;
@@ -54,6 +68,9 @@ export type WotSrcArena = {
   maxPlayersInTeam: number;
   /** Parsed gameplay types with their base/spawn geometry. */
   gameplay: ArenaGameplay[];
+  /** Alternate minimap images declared by `<minimapLayers>`; empty for the maps
+   * that ship only the standard one. */
+  minimapLayers: ArenaMinimapLayer[];
   /** Whether the client ships an `arena_defs/<id>.xml` for this arena. False for
    * the arenas known only to the localization (legacy event/arcade maps kept as
    * a minimap-only card), which is why an empty `gameplay` alone does not tell a
@@ -118,8 +135,34 @@ type RawArena = {
     vehicleCamouflageKind?: unknown;
     maxPlayersInTeam?: unknown;
     gameplayTypes?: Record<string, RawGameplay>;
+    minimapLayers?: RawMinimapLayers;
   };
 };
+
+type RawLayerNode = {
+  layerId?: unknown;
+  layerType?: unknown;
+  path?: unknown;
+};
+type RawMinimapLayers = { layer?: RawLayerNode | RawLayerNode[] };
+
+// Normalize a `<minimapLayers>` node (a single `<layer>` or an array of them)
+// into typed entries; drops any without a resource path.
+function parseMinimapLayers(raw: RawMinimapLayers | undefined): ArenaMinimapLayer[] {
+  const node = raw?.layer;
+  const list = Array.isArray(node) ? node : node != null ? [node] : [];
+  const out: ArenaMinimapLayer[] = [];
+  for (const l of list) {
+    const path = String(l?.path ?? "").trim();
+    if (!path) continue;
+    out.push({
+      layerId: String(l?.layerId ?? "").trim(),
+      layerType: String(l?.layerType ?? "").trim(),
+      path,
+    });
+  }
+  return out;
+}
 
 function parseGameplay(mode: string, raw: RawGameplay): ArenaGameplay {
   const bl = toPoint(raw.boundingBox?.bottomLeft);
@@ -176,6 +219,7 @@ export function parseArena(
     maxPlayersInTeam:
       Number.parseInt(String(root.maxPlayersInTeam ?? "15"), 10) || 15,
     gameplay,
+    minimapLayers: parseMinimapLayers(root.minimapLayers),
     hasDefinition: true,
   };
 }
@@ -196,6 +240,7 @@ function minimalArena(
     camouflage: "summer",
     maxPlayersInTeam: 0,
     gameplay: [],
+    minimapLayers: [],
     hasDefinition: false,
   };
 }

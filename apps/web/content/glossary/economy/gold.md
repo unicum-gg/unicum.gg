@@ -7,6 +7,9 @@ related:
   - free-experience
   - premium-ammo
   - clan-wars
+anchors:
+  labels:
+    - Cost (gold)
 ---
 
 The purchased currency, spent on premium time, premium vehicles, converting experience and retraining crews.

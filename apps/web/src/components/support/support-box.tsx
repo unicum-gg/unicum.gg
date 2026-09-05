@@ -10,7 +10,7 @@ import { Spinner } from "@/components/ui/spinner";
 import { Switch } from "@/components/ui/switch";
 import APP from "@/constants/app";
 import ROUTES from "@/constants/routes";
-import { useRegion } from "@/hooks/use-region";
+import { LoginButton } from "@/components/login-button";
 import { useSession } from "@/lib/auth-client";
 import { cn } from "@/lib/utils";
 
@@ -47,7 +47,6 @@ async function postJson(
  */
 export function SupportBox() {
   const { data: session, isPending } = useSession();
-  const { region } = useRegion();
   const router = useRouter();
   const [status, setStatus] = useState<MeStatus | null>(null);
   const [amount, setAmount] = useState("5");
@@ -155,11 +154,9 @@ export function SupportBox() {
         <p className="text-center text-sm text-muted-foreground">
           Log in with Wargaming to support {APP.NAME}.
         </p>
-        <Button asChild>
-          <a href={ROUTES.AUTH_SIGN_IN(region, ROUTES.SUPPORT)}>
-            Log in with Wargaming
-          </a>
-        </Button>
+        <LoginButton callbackURL={ROUTES.SUPPORT}>
+          <Button>Log in with Wargaming</Button>
+        </LoginButton>
       </div>
     );
   }

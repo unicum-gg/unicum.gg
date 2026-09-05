@@ -5,7 +5,7 @@ import { resolveHistoryItems } from "./search-history-resolve";
 import type { SearchPlayerResult } from "@/app/api/[region]/players/search/route";
 import STORAGE from "@/constants/storage";
 import type { Region } from "@unicum.gg/wargaming";
-import type { ClanSearchResult } from "@unicum.gg/shared";
+import type { ClanSearchResult, GlossarySummary } from "@unicum.gg/shared";
 import type { TankSearchResult } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import type { MapSearchResult } from "@unicum.gg/core/wargaming/wot/maps";
 
@@ -13,7 +13,10 @@ export type SearchHistoryItem =
   | { kind: "player"; region: Region; player: SearchPlayerResult }
   | { kind: "clan"; region: Region; clan: ClanSearchResult }
   | { kind: "tank"; region: Region; tank: TankSearchResult }
-  | { kind: "map"; region: Region; map: MapSearchResult };
+  | { kind: "map"; region: Region; map: MapSearchResult }
+  // Region-less, like the term's own page: a definition reads the same on every
+  // server, so a pinned term is one entry and not three.
+  | { kind: "glossary"; term: GlossarySummary };
 
 type SearchHistory = {
   recent: SearchHistoryItem[];
@@ -44,6 +47,8 @@ export function itemKey(item: SearchHistoryItem): string {
       return `t:${item.region}:${item.tank.tank_id}`;
     case "map":
       return `m:${item.region}:${item.map.arena_id}`;
+    case "glossary":
+      return `g:${item.term.slug}`;
   }
 }
 

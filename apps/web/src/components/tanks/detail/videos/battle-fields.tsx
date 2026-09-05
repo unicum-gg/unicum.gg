@@ -5,7 +5,6 @@ import useSWR from "swr";
 import {
   BATTLE_RESULT_LABEL,
   BattleResult,
-  lowResMinimapUrl,
   MAP_GAME_MODE_LABEL,
   MapGameMode,
   SPAWN_DIRECTION_LABEL,
@@ -239,7 +238,7 @@ function MapOption({ map }: { map: MapSummary }) {
       <span className="relative size-8 shrink-0 overflow-hidden rounded-sm bg-fd-muted">
         <MinimapImage
           src={map.minimapUrl}
-          fallbackSrc={lowResMinimapUrl(map.arenaId)}
+          arenaId={map.arenaId}
           alt=""
           sizes="32px"
         />

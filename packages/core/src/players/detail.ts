@@ -1,4 +1,4 @@
-import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData } from "@unicum.gg/shared";
+import { RatingMetric, buildPlayerDerivedStats, type PeriodStats, type PlayerDerivedStats, buildLiftDrag, type LiftDrag, buildPlayerTankRows, type PlayerTankRow, type Player, type PlayerSnapshot, type PlayerClanHistoryFull, EMPTY_CLAN_HISTORY, type PlayerDetailData, type StrongholdModeData, lastBattleOrNull } from "@unicum.gg/shared";
 import {
   cwAbsoluteStatsFromSnapshot,
   cwChampionStatsFromSnapshot,
@@ -51,6 +51,8 @@ import {
 } from "@unicum.gg/core/wargaming/wot/wn-expected";
 import type { TankStats } from "@unicum.gg/core/wargaming/wot/tanks";
 import { computePlayerValuation, type TankEconomics } from "@unicum.gg/shared";
+import { buildPlayerMarkProgress } from "@unicum.gg/shared";
+import { getTankMoeByRegion } from "@unicum.gg/core/moe";
 
 // The client-safe shapes (`PlayerDetailData`, the stronghold-mode types) and
 // the pure `EMPTY_CLAN_HISTORY` const live in `@unicum.gg/shared/players/detail`;
@@ -86,6 +88,7 @@ export async function buildPlayerDetail(args: {
     isVerified,
     twitchLogin,
     achievementCount,
+    moeThresholds,
   ] = await Promise.all([
     getVehicleEncyclopedia(region),
     getWN8ExpectedValues(),
@@ -101,6 +104,10 @@ export async function buildPlayerDetail(args: {
     // primary-key lookup on a table with one row per player, and it rides in
     // the parallel batch the detail already makes.
     countEarnedAchievements(region, player.id),
+    // The region's Marks of Excellence bars, for the profile's marks panel.
+    // A cached catalogue read (see `@unicum.gg/core/moe`), so it rides here
+    // without adding a scan per profile view.
+    getTankMoeByRegion(region),
   ]);
   // Public supporter badge: active, and not opted out via podium anonymity.
   const isSupporter = supporterSub
@@ -207,18 +214,36 @@ export async function buildPlayerDetail(args: {
     ),
   );
 
+  // Marks, mastery and the vehicles playing above their gun. Pure arithmetic
+  // over rows the payload already holds: `vehicles` carries the marks and
+  // badges, `periodTanks.d30` the recent form the reach estimate prefers over
+  // the lifetime average.
+  //
+  // Except when it is not recent at all: `periodTankDiff` hands back the whole
+  // `tanks` array when the 30-day baseline is the poisoned first snapshot, and
+  // the reach rows would then label a lifetime average as 30-day form. Identity
+  // is the check, since that is exactly how the fallback returns it.
+  const recentTanks = periodTanks.d30 === tanks ? null : periodTanks.d30;
+  const markProgress = tracedSync("markProgress", () =>
+    buildPlayerMarkProgress(vehicles, tanks, recentTanks, moeThresholds),
+  );
+
   return {
     player: {
       accountId,
       nickname: player.nickname,
       createdAt: player.createdAt ?? new Date(0),
-      lastBattleAt: player.lastBattleAt ?? new Date(0),
+      lastBattleAt: lastBattleOrNull(player.lastBattleAt),
       updatedAt: player.lastSeenAt,
     },
     nameHistory,
     isSupporter,
     isVerified,
     twitchLogin,
+    // Straight off the player row, written when a tournament settles.
+    tournamentWins: player.tournamentWins,
+    tournamentFeaturedWins: player.tournamentFeaturedWins,
+    tournamentBestTitle: player.tournamentBestTitle,
     current,
     periods,
     derived,
@@ -230,6 +255,7 @@ export async function buildPlayerDetail(args: {
       current.battles,
       region,
     ),
+    markProgress,
     liftDrag: tracedSync("liftDrag", () => ({
       wn7: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn7),
       wn8: buildLiftDrag(tanks, encyclopedia, wn8Expected, wnxExpected, RatingMetric.Wn8),

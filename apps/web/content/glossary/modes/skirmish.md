@@ -9,6 +9,9 @@ related:
   - clan
 links:
   - target: stronghold
+anchors:
+  labels:
+    - Skirmish
 ---
 
 The short Stronghold battle format, fought seven against seven or ten against ten at Tier VI, VIII or X for industrial resource.

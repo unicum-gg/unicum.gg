@@ -26,6 +26,7 @@ import {
   PanelTitle,
 } from "@/components/panel";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "@/components/login-button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
@@ -225,19 +226,14 @@ export function BoostConsolePreview({
               own, even when nobody is around to press the button.
             </p>
             {loggedOut === undefined ? null : loggedOut ? (
-              <Button asChild>
-                <a
-                  href={ROUTES.AUTH_SIGN_IN(
-                    region,
-                    clanViewHref(
-                      ROUTES.CLAN(region, tag),
-                      MANAGE_CLAN_VIEW,
-                    ),
-                  )}
-                >
-                  Log in with Wargaming to set it up
-                </a>
-              </Button>
+              <LoginButton
+                callbackURL={clanViewHref(
+                  ROUTES.CLAN(region, tag),
+                  MANAGE_CLAN_VIEW,
+                )}
+              >
+                <Button>Log in with Wargaming to set it up</Button>
+              </LoginButton>
             ) : (
               <p className="text-sm text-fd-muted-foreground">
                 Only an officer of this clan can set this up.

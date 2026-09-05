@@ -1,14 +1,17 @@
 import type { ArenaGameplay, ArenaPoint, WotSrcArena } from "@unicum.gg/wargaming";
-import { BattleType, battleTypesForArena } from "./battle-types";
+import { BattleType, battleTypesForArena, variantOf } from "./battle-types";
 import { mapCamouflage } from "./camouflage";
 import { gameModeFromRaw, MAP_GAME_MODE_LABEL, MapGameMode } from "./game-modes";
 import { projectPoint, type MapPoint } from "./geometry";
 import { minimapUrl, onslaughtMinimapUrl } from "./minimap";
+import { buildRandomEvents, hasRandomEventLayers } from "./random-events";
 import type {
   MapDetail,
   MapModeGeometry,
   MapOnslaught,
   MapSummary,
+  MapVariantLayout,
+  MapVariantSummary,
 } from "./map";
 
 type BoundingBox = { bottomLeft: MapPoint; upperRight: MapPoint };
@@ -21,9 +24,11 @@ function project(points: ArenaPoint[], arena: WotSrcArena) {
   return arena.boundingBox ? projectIn(points, arena.boundingBox) : [];
 }
 
-// Build the Onslaught (comp7) variant: its own reduced play area, minimap and
+// Build one Onslaught (comp7) layout: its own reduced play area, minimap and
 // geometry (central control point + per-team spawns). Uses the comp7 minimap
 // only when the mode references one, else falls back to the standard minimap.
+// The arena is either the map itself or a night Onslaught arena of it, which is
+// why every url here is keyed by `arena.arenaId` rather than the map's.
 function buildOnslaught(arena: WotSrcArena): MapOnslaught | null {
   const comp7 = arena.gameplay.find((g) => g.mode === "comp7");
   if (!comp7) return null;
@@ -31,6 +36,7 @@ function buildOnslaught(arena: WotSrcArena): MapOnslaught | null {
   if (!bb) return null;
   const usesVariant = (comp7.minimap ?? "").includes("comp7");
   return {
+    arenaId: arena.arenaId,
     minimapUrl: usesVariant
       ? onslaughtMinimapUrl(arena.arenaId)
       : minimapUrl(arena.arenaId),
@@ -107,6 +113,110 @@ function dimensions(arena: WotSrcArena) {
   return { width, height, size: Math.max(width, height) };
 }
 
+function allBattleTypes(
+  arena: WotSrcArena,
+  extraBattleTypes: BattleType[],
+): BattleType[] {
+  return [
+    ...battleTypesForArena(
+      arena.arenaId,
+      arena.gameplay.map((g) => g.mode),
+      arena.maxPlayersInTeam,
+    ),
+    ...extraBattleTypes,
+  ];
+}
+
+// Random events are a Random Battle feature, so they are only read off a map
+// that is played there. The scripted demolitions a Story Mode chapter ships as
+// the same kind of minimap layer are part of its scenario, not an event that may
+// or may not fire, and calling them one would misread the map.
+function runsRandomEvents(
+  arena: WotSrcArena,
+  battleTypes: BattleType[],
+): boolean {
+  return (
+    battleTypes.includes(BattleType.Random) &&
+    hasRandomEventLayers(arena.minimapLayers)
+  );
+}
+
+// The summary, once its battle types and event flag are known. Both are derived
+// twice otherwise, since the detail needs the battle types for its own events
+// and then spreads the summary on top.
+function summaryOf(
+  arena: WotSrcArena,
+  slug: string,
+  battleTypes: BattleType[],
+  hasRandomEvents: boolean,
+  variants: MapVariantSummary[],
+  commonTest: boolean,
+): MapSummary {
+  const { size } = dimensions(arena);
+  return {
+    arenaId: arena.arenaId,
+    slug,
+    name: arena.name,
+    camouflage: mapCamouflage(arena.camouflage),
+    sizeMeters: size,
+    modes: distinctModes(arena.gameplay),
+    battleTypes,
+    minimapUrl: minimapUrl(arena.arenaId),
+    bases: primaryBases(arena),
+    hasRandomEvents,
+    commonTest,
+    variants,
+  };
+}
+
+// A variant is a whole arena, so its minimap is the one its own layout resolved:
+// its Onslaught image when that is what it is played on (the night versions),
+// its standard one otherwise. Reading it here rather than deriving it from the
+// id is what keeps the gallery card and the page's view on the same image.
+function variantSummary(
+  arena: WotSrcArena,
+  testOnly: ReadonlySet<string>,
+): MapVariantSummary | null {
+  const battleType = variantOf(arena.arenaId)?.battleType;
+  if (!battleType) return null;
+  const onslaught = buildOnslaught(arena);
+  return {
+    arenaId: arena.arenaId,
+    battleType,
+    minimapUrl: onslaught?.minimapUrl ?? minimapUrl(arena.arenaId),
+    commonTest: testOnly.has(arena.arenaId),
+  };
+}
+
+function variantSummaries(
+  arenas: WotSrcArena[],
+  testOnly: ReadonlySet<string>,
+): MapVariantSummary[] {
+  return arenas
+    .map((a) => variantSummary(a, testOnly))
+    .filter((v) => v !== null);
+}
+
+function variantLayouts(
+  arenas: WotSrcArena[],
+  testOnly: ReadonlySet<string>,
+): MapVariantLayout[] {
+  return arenas.flatMap((arena) => {
+    const summary = variantSummary(arena, testOnly);
+    if (!summary) return [];
+    const { width, height } = dimensions(arena);
+    return [
+      {
+        ...summary,
+        widthMeters: width,
+        heightMeters: height,
+        geometry: buildGeometry(arena),
+        onslaught: buildOnslaught(arena),
+      },
+    ];
+  });
+}
+
 // The map's display name (with any variant disambiguation, e.g. "Steppes
 // (Waffenträger)") is resolved by the catalogue layer onto `arena.name` before
 // building. `extraBattleTypes` carries the dynamic types the static scripts
@@ -117,37 +227,48 @@ export function buildMapSummary(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
+  variantArenas: WotSrcArena[] = [],
+  testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapSummary {
-  const { size } = dimensions(arena);
-  const modes = distinctModes(arena.gameplay);
-  return {
-    arenaId: arena.arenaId,
+  const battleTypes = allBattleTypes(arena, extraBattleTypes);
+  return summaryOf(
+    arena,
     slug,
-    name: arena.name,
-    camouflage: mapCamouflage(arena.camouflage),
-    sizeMeters: size,
-    modes,
-    battleTypes: [
-      ...battleTypesForArena(
-        arena.arenaId,
-        arena.gameplay.map((g) => g.mode),
-        arena.maxPlayersInTeam,
-      ),
-      ...extraBattleTypes,
-    ],
-    minimapUrl: minimapUrl(arena.arenaId),
-    bases: primaryBases(arena),
-  };
+    battleTypes,
+    runsRandomEvents(arena, battleTypes),
+    variantSummaries(variantArenas, testOnlyArenas),
+    testOnlyArenas.has(arena.arenaId),
+  );
 }
 
+/**
+ * `variantArenas` are the arenas the client ships under this map's name for a
+ * mode of their own (`variantOf(...).foldedIntoBase`): the Waffenträger and Last
+ * Stand reskins, the Story Mode chapters, the Onslaught night versions. They are
+ * this map played elsewhere, so each becomes a view of its page rather than a
+ * card of its own.
+ */
 export function buildMapDetail(
   arena: WotSrcArena,
   slug: string,
   extraBattleTypes: BattleType[] = [],
+  variantArenas: WotSrcArena[] = [],
+  testOnlyArenas: ReadonlySet<string> = new Set(),
 ): MapDetail {
   const { width, height } = dimensions(arena);
+  const battleTypes = allBattleTypes(arena, extraBattleTypes);
+  const randomEvents = runsRandomEvents(arena, battleTypes)
+    ? buildRandomEvents(arena.arenaId, arena.minimapLayers)
+    : [];
   return {
-    ...buildMapSummary(arena, slug, extraBattleTypes),
+    ...summaryOf(
+      arena,
+      slug,
+      battleTypes,
+      randomEvents.length > 0,
+      variantSummaries(variantArenas, testOnlyArenas),
+      testOnlyArenas.has(arena.arenaId),
+    ),
     description: arena.description,
     roundLength: arena.roundLength,
     maxPlayersInTeam: arena.maxPlayersInTeam,
@@ -155,5 +276,7 @@ export function buildMapDetail(
     heightMeters: height,
     geometry: buildGeometry(arena),
     onslaught: buildOnslaught(arena),
+    variants: variantLayouts(variantArenas, testOnlyArenas),
+    randomEvents,
   };
 }

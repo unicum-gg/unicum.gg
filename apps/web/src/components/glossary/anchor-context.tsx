@@ -1,9 +1,10 @@
 "use client";
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
-import type {
-  GlossaryAnchorPayload,
-  GlossaryTooltipTerm,
+import {
+  unqualifyGlossaryLabel,
+  type GlossaryAnchorPayload,
+  type GlossaryTooltipTerm,
 } from "@unicum.gg/shared";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -33,10 +34,13 @@ export function GlossaryAnchorProvider({
     // them, so "Dispersion" must lead to Dispersion even though the value comes
     // from the column Accuracy defines. The column is what catches the rows
     // whose label is only a variant ("… moving").
+    const byLabel = (label: string | undefined) =>
+      label ? payload.byLabel[label.toLowerCase()] : undefined;
     return ({ specKey, label }) => {
       const slug =
-        (label ? payload.byLabel[label.toLowerCase()] : undefined) ??
-        (specKey ? payload.bySpecKey[specKey] : undefined);
+        byLabel(label) ??
+        (specKey ? payload.bySpecKey[specKey] : undefined) ??
+        byLabel(label ? (unqualifyGlossaryLabel(label) ?? undefined) : undefined);
       return slug ? (bySlug.get(slug) ?? null) : null;
     };
   }, [payload]);

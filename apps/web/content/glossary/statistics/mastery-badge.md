@@ -17,6 +17,10 @@ anchors:
     - Mastery
     - Marks of Mastery
     - Ace
+    - Ace Tanker
+    - 1st class
+    - 2nd class
+    - 3rd class
 ---
 
 A badge awarded for a single battle whose base experience beats a set share of everyone playing that vehicle, from third class up to Ace Tanker.

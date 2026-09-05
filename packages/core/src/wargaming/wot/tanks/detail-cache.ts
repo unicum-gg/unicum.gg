@@ -38,18 +38,23 @@ export const TANK_DETAIL_TTL_SECONDS = 26 * 60 * 60;
  *
  * v2: the community rating headline joined the payload.
  * v3: the client the characteristics were read from, and the test build offered.
- * v4: what a shell does against sloped armour, its calibre, normalisation and
- *     ricochet angle, which is what the hero needs to answer a shot at all.
- * v5, v6: steps of the same unreleased branch, each superseded by the next
- *     before any of them was deployed. The log has no entry of its own for
- *     them because there is no deploy they could answer for. Nothing else here
- *     may be left blank: a released generation with no reason recorded is the
- *     one question this comment exists to answer.
- * v7: what a shell becomes once a calibrating gun deploys.
- * v8: which of the seven mechanics the vehicle's second state is.
- * v9: the gun's depression and elevation, which were each other's.
+ * v4: `isHidden` on the vehicle meta. It also retires the entries written for
+ *     vehicles that are hidden from now on: the cache answers before the slug is
+ *     resolved, so without this they would keep serving a page that no longer
+ *     has a catalogue entry behind it.
+ * v5: `variant` on the vehicle meta.
+ * v6: the top players carry their crests (see `top-player-badges`).
+ * v7, v8, v9: taken twice, and so meaningless. The tank viewer was built on a
+ *     branch that ran this counter up to nine on its own while these were being
+ *     deployed from main, so each of those three numbers describes two
+ *     different shapes depending on which side wrote the entry. The merge lands
+ *     above the pair rather than continuing either.
+ * v10: what a shell does against sloped armour and what it becomes once a
+ *     calibrating gun deploys, which of the seven mechanics the vehicle's
+ *     second state is, the vehicle this one was made from, and the gun's
+ *     depression and elevation, which were each other's.
  */
-const SHAPE_VERSION = 9;
+const SHAPE_VERSION = 10;
 
 // The client is part of the key, not a second cache: the same tank on the test
 // build is a different payload under the same slug, and the two must never

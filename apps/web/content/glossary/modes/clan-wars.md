@@ -13,6 +13,11 @@ related:
   - gold
 links:
   - target: maps
+anchors:
+  labels:
+    - Clan Wars
+    - Global Map
+    - Provinces
 ---
 
 The campaign layer where clans fight for territory on a global map, with landing tournaments, province income and reward vehicles at the end of a season.

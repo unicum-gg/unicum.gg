@@ -12,6 +12,7 @@ import type { ClanTabsInitialData } from "@/components/clans/detail/tabs-view";
 import { JsonLd } from "@/components/json-ld";
 import APP from "@/constants/app";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
+import type { ClanTournamentRecord } from "@/components/clans/detail/tournaments/row";
 import ROUTES from "@/constants/routes";
 import { constructMetadata } from "@/lib/metadata";
 import { breadcrumbSchema, clanSchema } from "@/lib/schema-org";
@@ -35,7 +36,16 @@ const intFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 // endpoint owns the cold-cache path (resolve tag on WG + fetch live).
 async function loadOverview(region: Region, tag: string) {
   try {
-    const { clan, ratings, nameHistory, vehiclesCount, badges } = await unicum
+    const {
+      clan,
+      ratings,
+      nameHistory,
+      vehiclesCount,
+      badges,
+      tournamentWins,
+      tournamentFeaturedWins,
+      tournamentBestTitle,
+    } = await unicum
       .region(region)
       .clans(tag)
       .overview();
@@ -45,6 +55,9 @@ async function loadOverview(region: Region, tag: string) {
       nameHistory: nameHistory as unknown as ClanNameHistoryEntry[],
       vehiclesCount: vehiclesCount ?? null,
       badges: (badges ?? []) as unknown as ClanRankBadgeData[],
+      tournamentWins: tournamentWins ?? 0,
+      tournamentFeaturedWins: tournamentFeaturedWins ?? 0,
+      tournamentBestTitle: tournamentBestTitle ?? null,
     };
   } catch (error) {
     if (error instanceof UnicumError && error.status === 404) return null;
@@ -222,6 +235,7 @@ async function ClanProfileServer({
     stronghold,
     clanWars,
     vehicles,
+    tournaments,
     videos,
   ] = await Promise.all([
     clanApi.members(),
@@ -230,6 +244,13 @@ async function ClanProfileServer({
     clanApi.stronghold(),
     clanApi.clanWars(),
     section === ClanSection.Tanks ? clanApi.vehicles() : Promise.resolve(null),
+    // Like Tanks: rendered here when it is the section being served, so the
+    // table is in the HTML rather than fetched after hydration. Skipped
+    // otherwise, since the read joins across the whole tournament archive and
+    // most clans have never entered one.
+    section === ClanSection.Tournaments
+      ? clanApi.tournaments()
+      : Promise.resolve(null),
     // Always, whatever the section: the nav needs the count to decide whether
     // to offer the tab, and it is a small read. Rendered here rather than
     // fetched by the browser so the tactics are in the HTML, which is what the
@@ -248,6 +269,9 @@ async function ClanProfileServer({
     ? (vehicles.vehicles as unknown as ClanVehicleRow[])
     : null;
   const initialVideos = videos.videos as unknown as TankVideoCardData[];
+  const initialTournaments = tournaments
+    ? (tournaments as unknown as ClanTournamentRecord)
+    : null;
 
   const basePath = ROUTES.CLAN(region, clan.tag);
 
@@ -286,9 +310,13 @@ async function ClanProfileServer({
         initialRatings={ratings}
         initialData={initialData}
         initialVehicles={initialVehicles}
+        initialTournaments={initialTournaments}
         initialVehiclesCount={overview.vehiclesCount ?? null}
         initialVideos={initialVideos}
         initialBadges={overview.badges}
+        initialTournamentWins={overview.tournamentWins}
+        initialTournamentFeaturedWins={overview.tournamentFeaturedWins}
+        initialTournamentBestTitle={overview.tournamentBestTitle}
         initialNameHistory={
           overview.nameHistory as unknown as ClanNameHistoryEntry[]
         }

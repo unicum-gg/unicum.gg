@@ -22,10 +22,13 @@ function gameVersionOf(build: string): string {
   return build.split(".").slice(0, 3).join(".");
 }
 
-async function catalogFor(branch: WotSrcBranch): Promise<WotSrcArena[]> {
+/** A branch's arenas, named, plus the ids whose name the branch does not carry
+ * yet (`resolveArenaNames`). */
+type NamedCatalog = { arenas: WotSrcArena[]; unnamed: Set<string> };
+
+async function catalogFor(branch: WotSrcBranch): Promise<NamedCatalog> {
   const arenas = await wg.region(Region.EU).source.arenas.catalog(branch);
-  resolveArenaNames(arenas);
-  return arenas;
+  return { arenas, unnamed: resolveArenaNames(arenas) };
 }
 
 const snapshotsOf = (arenas: WotSrcArena[]): Map<string, MapSnapshotData> =>
@@ -57,14 +60,18 @@ export type MapRefreshResult = {
  */
 export async function refreshMapHistory(): Promise<MapRefreshResult> {
   const specs = wg.region(Region.EU).source.specs;
-  const [liveArenas, testArenas, liveBuild, testBuild] = await Promise.all([
+  const [liveCatalog, testCatalog, liveBuild, testBuild] = await Promise.all([
     catalogFor(BRANCH_BY_REGION[Region.EU]),
     // No test running, or a branch that cannot be read, simply leaves the live
     // history alone.
-    catalogFor(WotSrcBranch.CT).catch(() => [] as WotSrcArena[]),
+    catalogFor(WotSrcBranch.CT).catch(
+      (): NamedCatalog => ({ arenas: [], unnamed: new Set() }),
+    ),
     specs.branchVersion(BRANCH_BY_REGION[Region.EU]).catch(() => null),
     specs.branchVersion(WotSrcBranch.CT).catch(() => null),
   ]);
+  const { arenas: liveArenas, unnamed: liveUnnamed } = liveCatalog;
+  const testArenas = testCatalog.arenas;
 
   const result: MapRefreshResult = {
     version: null,
@@ -76,7 +83,7 @@ export async function refreshMapHistory(): Promise<MapRefreshResult> {
   const live = snapshotsOf(liveArenas);
   if (liveBuild && liveArenas.length > 0) {
     const version = gameVersionOf(liveBuild);
-    const recorded = await recordMapChanges(liveArenas, version);
+    const recorded = await recordMapChanges(liveArenas, version, liveUnnamed);
     result.version = version;
     result.changes = recorded.changes;
   }

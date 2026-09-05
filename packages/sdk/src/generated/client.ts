@@ -73,6 +73,15 @@ class PlayerClient {
     );
   }
 
+  /** Player Onslaught record */
+  onslaught() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/onslaught", path),
+      () => this.api.GET("/{region}/players/{nickname}/onslaught", { params: { path } }),
+    );
+  }
+
   /** Player sessions */
   sessions(granularity: NonNullable<QueryOf<"/{region}/players/{nickname}/sessions">>["granularity"]) {
     const path = { region: this.region, nickname: this.nickname };
@@ -97,6 +106,15 @@ class PlayerClient {
     return handle(
       buildUrl(this.baseUrl, "/{region}/players/{nickname}/tanks/{slug}", path),
       () => this.api.GET("/{region}/players/{nickname}/tanks/{slug}", { params: { path } }),
+    );
+  }
+
+  /** Player tournaments */
+  tournaments() {
+    const path = { region: this.region, nickname: this.nickname };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/players/{nickname}/tournaments", path),
+      () => this.api.GET("/{region}/players/{nickname}/tournaments", { params: { path } }),
     );
   }
 
@@ -196,6 +214,15 @@ class ClanClient {
     );
   }
 
+  /** Clan tournaments */
+  tournaments() {
+    const path = { region: this.region, tag: this.tag };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/clans/{tag}/tournaments", path),
+      () => this.api.GET("/{region}/clans/{tag}/tournaments", { params: { path } }),
+    );
+  }
+
   /** Subscribe to live updates for this clan (SSE). Browser-only. */
   live(onUpdate: (event: LiveUpdate) => void, onError?: (error: Event) => void): Unsubscribe {
     return subscribeClanLive(this.baseUrl, this.region, this.tag, onUpdate, onError);
@@ -283,6 +310,15 @@ class TankClient {
     );
   }
 
+  /** Similar tanks */
+  similar(limit?: NonNullable<QueryOf<"/{region}/tanks/{slug}/similar">>["limit"]) {
+    const path = { region: this.region, slug: this.slug };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tanks/{slug}/similar", path, { limit }),
+      () => this.api.GET("/{region}/tanks/{slug}/similar", { params: { path, query: { limit } } }),
+    );
+  }
+
   /** Tank specifications */
   specifications() {
     const path = { region: this.region, slug: this.slug };
@@ -357,6 +393,34 @@ class MapClient {
   }
 }
 
+/** A single tournament: unicum.eu.tournaments("..."). */
+class TournamentClient {
+  constructor(
+    private readonly api: ApiClient,
+    private readonly baseUrl: string,
+    private readonly region: Region,
+    private readonly id: string,
+  ) {}
+
+  /** Tournament */
+  detail() {
+    const path = { region: this.region, id: this.id };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tournaments/{id}", path),
+      () => this.api.GET("/{region}/tournaments/{id}", { params: { path } }),
+    );
+  }
+
+  /** Tournament team */
+  team(teamId: string) {
+    const path = { region: this.region, id: this.id, teamId };
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/tournaments/{id}/team/{teamId}", path),
+      () => this.api.GET("/{region}/tournaments/{id}/team/{teamId}", { params: { path } }),
+    );
+  }
+}
+
 /** A single glossary entry: unicum.glossary("..."). */
 class GlossaryTermClient {
   constructor(
@@ -378,6 +442,8 @@ class GlossaryTermClient {
 type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   /** Compare players */
   compare(names: NonNullable<QueryOf<"/{region}/players/compare">>["names"]): RequestHandle<Data<"/{region}/players/compare">>;
+  /** Player distribution */
+  distribution(): RequestHandle<Data<"/{region}/players/distribution">>;
   /** Player languages */
   languages(): RequestHandle<Data<"/{region}/players/languages">>;
   /** Onslaught leaderboard */
@@ -388,6 +454,10 @@ type PlayersNamespace = ((nickname: string) => PlayerClient) & {
   steelHunter(query?: QueryOf<"/{region}/players/steel-hunter">): RequestHandle<Data<"/{region}/players/steel-hunter">>;
   /** Top players */
   top(query?: QueryOf<"/{region}/players/top">): RequestHandle<Data<"/{region}/players/top">>;
+  /** Win rate by tier and rating band */
+  winrateByTier(): RequestHandle<Data<"/{region}/players/winrate-by-tier">>;
+  /** Onslaught season history */
+  onslaughtHistory(season?: NonNullable<QueryOf<"/{region}/players/onslaught/history">>["season"]): RequestHandle<Data<"/{region}/players/onslaught/history">>;
   /** Streamed player search: NDJSON chunks (local DB first, then Wargaming). */
   searchStream(
     q: string,
@@ -453,7 +523,14 @@ type MapsNamespace = ((slug: string) => MapClient) & {
   ): AsyncGenerator<SearchChunk<SearchItemOf<"/{region}/maps/search">>>;
 };
 
+type TournamentsNamespace = ((id: string) => TournamentClient) & {
+  /** Tournaments */
+  list(query?: QueryOf<"/{region}/tournaments">): RequestHandle<Data<"/{region}/tournaments">>;
+};
+
 type ServerNamespace = {
+  /** Server population */
+  stats(range: NonNullable<QueryOf<"/{region}/server/stats">>["range"]): RequestHandle<Data<"/{region}/server/stats">>;
   /** Live count of players online for this region (SSE). Browser-only. */
   online(
     onData: (payload: OnlinePayload) => void,
@@ -480,6 +557,14 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/compare", {
             params: { path: { region: this.region }, query: { names } },
+          }),
+      );
+    ns.distribution = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/distribution", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/players/distribution", {
+            params: { path: { region: this.region } },
           }),
       );
     ns.languages = () =>
@@ -520,6 +605,22 @@ class RegionClient {
         () =>
           this.api.GET("/{region}/players/top", {
             params: { path: { region: this.region }, query },
+          }),
+      );
+    ns.winrateByTier = () =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/winrate-by-tier", { region: this.region }),
+        () =>
+          this.api.GET("/{region}/players/winrate-by-tier", {
+            params: { path: { region: this.region } },
+          }),
+      );
+    ns.onslaughtHistory = (season) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/players/onslaught/history", { region: this.region }, { season }),
+        () =>
+          this.api.GET("/{region}/players/onslaught/history", {
+            params: { path: { region: this.region }, query: { season } },
           }),
       );
     ns.searchStream = (q, options) =>
@@ -719,6 +820,20 @@ class RegionClient {
     return ns;
   }
 
+  get tournaments(): TournamentsNamespace {
+    const ns = ((id: string) =>
+      new TournamentClient(this.api, this.baseUrl, this.region, id)) as TournamentsNamespace;
+    ns.list = (query) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/tournaments", { region: this.region }, query),
+        () =>
+          this.api.GET("/{region}/tournaments", {
+            params: { path: { region: this.region }, query },
+          }),
+      );
+    return ns;
+  }
+
   /** Coverage */
   coverage() {
     return handle(
@@ -767,12 +882,20 @@ class RegionClient {
     );
   }
 
-  /** Server-wide live signals for this region. */
+  /** This region's game servers: live population and its recorded history. */
   get server(): ServerNamespace {
-    return {
-      online: (onData, onError) =>
-        subscribeServerOnline(this.baseUrl, this.region, onData, onError),
-    };
+    const ns = {} as ServerNamespace;
+    ns.stats = (range) =>
+      handle(
+        buildUrl(this.baseUrl, "/{region}/server/stats", { region: this.region }, { range }),
+        () =>
+          this.api.GET("/{region}/server/stats", {
+            params: { path: { region: this.region }, query: { range } },
+          }),
+      );
+    ns.online = (onData, onError) =>
+      subscribeServerOnline(this.baseUrl, this.region, onData, onError);
+    return ns;
   }
 }
 
@@ -789,6 +912,8 @@ type OgPlayers = ((nickname: string) => RequestHandle<unknown>) & {
 type OgTanks = ((slug: string) => RequestHandle<unknown>) & {
   compare(slugs: NonNullable<QueryOf<"/og/{region}/tanks/compare">>["slugs"]): RequestHandle<unknown>;
 };
+
+type OgTournaments = (id: string) => RequestHandle<unknown>;
 
 /** The `/og/{region}/…` image cards, mirroring the entity paths: their `.url()`
  * is the stable PNG URL (used for og:image / embeds; not meant to be awaited). */
@@ -869,6 +994,17 @@ class OgRegionClient {
       );
     return ns;
   }
+
+  get tournaments(): OgTournaments {
+    return (id: string) =>
+      handle(
+        buildUrl(this.baseUrl, "/og/{region}/tournaments/{id}", { region: this.region, id }),
+        () =>
+          this.api.GET("/og/{region}/tournaments/{id}", {
+            params: { path: { region: this.region, id } },
+          }),
+      );
+  }
 }
 
 class OgClient {
@@ -901,6 +1037,11 @@ type StreamersNamespace = {
   ): Unsubscribe;
 };
 
+type ServersNamespace = {
+  /** Compare regions */
+  compare(range: NonNullable<QueryOf<"/servers/compare">>["range"]): RequestHandle<Data<"/servers/compare">>;
+};
+
 type SupportNamespace = {
   /** Funding progress */
   funding(): RequestHandle<Data<"/support/funding">>;
@@ -913,6 +1054,8 @@ type GlossaryNamespace = ((slug: string) => GlossaryTermClient) & {
   list(category?: NonNullable<QueryOf<"/glossary">>["category"]): RequestHandle<Data<"/glossary">>;
   /** Glossary anchors */
   anchors(): RequestHandle<Data<"/glossary/anchors">>;
+  /** Search the glossary */
+  search(q: NonNullable<QueryOf<"/glossary/search">>["q"]): RequestHandle<Data<"/glossary/search">>;
 };
 
 /**
@@ -975,6 +1118,14 @@ export class Unicum {
     );
   }
 
+  /** Exchange rates */
+  rates() {
+    return handle(
+      buildUrl(this.baseUrl, "/rates"),
+      () => this.api.GET("/rates", {}),
+    );
+  }
+
   /** OG image cards: unicum.og.eu.players("Animal").url() → /og/eu/players/Animal. */
   get og(): OgClient {
     return new OgClient(this.api, this.baseUrl);
@@ -989,6 +1140,16 @@ export class Unicum {
       );
     ns.live = (onData, onError) =>
       subscribeStreamersLive(this.baseUrl, onData, onError);
+    return ns;
+  }
+
+  /** Global (not region-scoped) servers. */
+  get servers(): ServersNamespace {
+    const ns = {} as ServersNamespace;
+    ns.compare = (range) =>
+      handle(buildUrl(this.baseUrl, "/servers/compare", undefined, { range }), () =>
+        this.api.GET("/servers/compare", { params: { query: { range } } }),
+      );
     return ns;
   }
 
@@ -1017,6 +1178,10 @@ export class Unicum {
     ns.anchors = () =>
       handle(buildUrl(this.baseUrl, "/glossary/anchors"), () =>
         this.api.GET("/glossary/anchors", {}),
+      );
+    ns.search = (q) =>
+      handle(buildUrl(this.baseUrl, "/glossary/search", undefined, { q }), () =>
+        this.api.GET("/glossary/search", { params: { query: { q } } }),
       );
     return ns;
   }

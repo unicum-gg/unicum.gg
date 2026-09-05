@@ -48,13 +48,17 @@ async function deriveMapsAt(region: Region, sha: string): Promise<VersionMaps> {
     transportAt(sha),
     region,
   ).catalog();
-  resolveArenaNames(arenas);
+  const unnamed = resolveArenaNames(arenas);
   return new Map(
     arenas
       // Only the maps the client actually defines: an arena known from the
       // localization alone has no geometry to diff, and its comings and goings
       // there track Wargaming's housekeeping rather than the game's map pool.
       .filter((a) => a.hasDefinition)
+      // And only the ones the client names, on the same rule as the forward
+      // pipeline: a humanized arena id is not an identity, and both halves feed
+      // the same per-version snapshot.
+      .filter((a) => !unnamed.has(a.arenaId))
       .map((a) => [a.arenaId, buildMapSnapshotData(a)]),
   );
 }

@@ -49,6 +49,13 @@ export async function GET() {
           pattern: `/${region}/tanks/sitemap-{id}.xml`,
           count: getSitemapCount(counts[region].tanks, URLS_PER_SITEMAP),
         },
+        // Every mirrored tournament. The biggest stream of the three regions
+        // combined (NA alone runs to thousands), and pages nothing else links
+        // to in bulk, so leaving them out kept them undiscoverable.
+        {
+          pattern: `/${region}/tournaments/sitemap-{id}.xml`,
+          count: getSitemapCount(counts[region].tournaments, URLS_PER_SITEMAP),
+        },
       ]),
     );
   } catch (err) {

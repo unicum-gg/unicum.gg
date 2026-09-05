@@ -15,6 +15,7 @@ export function CommonTestBadge({
   size = 16,
   changes,
   version,
+  description,
 }: {
   size?: number;
   /** Set on a released vehicle the test rebalances, to say how much. */
@@ -22,6 +23,9 @@ export function CommonTestBadge({
   /** The test build, e.g. `2.4.0.5415`. Set where the badge marks data read
    * from that build rather than the vehicle being unreleased. */
   version?: string;
+  /** What the badge says on something that is not a vehicle. The crest means the
+   * same thing everywhere, but "no battle statistics" only makes sense on one. */
+  description?: string;
 }) {
   const label = version ? `Common Test ${version}` : "Common Test";
   return (
@@ -31,18 +35,22 @@ export function CommonTestBadge({
           <span
             className="inline-flex"
             aria-label={
-              changes
-                ? `Changed by the Common Test: ${changes} characteristics`
-                : version
-                  ? `Read on the Common Test client, build ${version}`
-                  : "Common Test vehicle"
+              description
+                ? `Common Test: ${description}`
+                : changes
+                  ? `Changed by the Common Test: ${changes} characteristics`
+                  : version
+                    ? `Read on the Common Test client, build ${version}`
+                    : "Common Test vehicle"
             }
           >
             <Crest kind={CrestKind.CommonTest} size={size} />
           </span>
         </TooltipTrigger>
         <TooltipContent>
-          {changes
+          {description
+            ? `Common Test · ${description}`
+            : changes
             ? `Common Test changes ${changes} characteristic${changes > 1 ? "s" : ""} on this vehicle`
             : version
               ? `${label} · these are the test build's values, and Wargaming can still change them before the update ships`

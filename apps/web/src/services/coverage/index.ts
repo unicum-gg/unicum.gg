@@ -1,9 +1,10 @@
 import { sql } from "drizzle-orm";
 import { unstable_cache } from "next/cache";
-import APP from "@/constants/app";
 import { db } from "@unicum.gg/core/db";
 import { countBotGuilds } from "@unicum.gg/core/discord";
 import {
+  buildExpenseLedger,
+  type ExpenseLedger,
   clanMembersByRegion,
   clanRecentEventsByRegion,
   clanRefreshQueueByRegion,
@@ -83,21 +84,10 @@ export type CoverageStats = {
   infrastructure: {
     databaseBytes: number;
     tables: TableSize[];
-    costs: {
-      breakdown: { label: string; usdAnnual: number; note?: string }[];
-      totalAnnualUsd: number;
-    };
+    costs: ExpenseLedger;
   };
 };
 
-// OVH VPS-4, monthly no-commit billing. €23.49 HT + 20% VAT = €28.19 TTC/mo
-// ≈ $30.45/mo at ~1.08 USD/EUR.
-const HOSTING_USD_MONTHLY = 30.45;
-const DOMAIN_USD_ANNUAL = 51.6;
-
-// OVH additional IPv4, €2.39 TTC/mo ≈ $2.58. Each extra egress IP buys its own
-// G-Core per-IP rate budget so we can spread Wargaming traffic across them.
-const EGRESS_IP_USD_MONTHLY = 2.58;
 // Additional egress IPs = the distinct Wargaming egress targets we route through
 // minus the one primary IP included with the VPS. Derived from env so the cost
 // tracks reality automatically as we add or drop IPs (WG_EGRESS_* holds one
@@ -111,17 +101,17 @@ const ADDITIONAL_EGRESS_IPS = Math.max(
       .filter(Boolean),
   ).size - 1,
 );
-const EGRESS_IPS_USD_ANNUAL = ADDITIONAL_EGRESS_IPS * EGRESS_IP_USD_MONTHLY * 12;
-const TOTAL_ANNUAL_USD =
-  HOSTING_USD_MONTHLY * 12 + DOMAIN_USD_ANNUAL + EGRESS_IPS_USD_ANNUAL;
+
+const EXPENSES = buildExpenseLedger(ADDITIONAL_EGRESS_IPS);
 
 /**
- * Current monthly infrastructure cost (USD). A pure constant-derived figure (no
- * DB), so the funding endpoint and the top-bar mini bar can use it cheaply on
- * every request without touching the heavy coverage query.
+ * What the site costs, in euros (the currency every one of these is invoiced
+ * in). A pure constant-derived figure (no DB), so the funding endpoint and the
+ * top-bar mini bar can use it cheaply on every request without touching the
+ * heavy coverage query.
  */
-export function getMonthlyInfraCostUsd(): number {
-  return TOTAL_ANNUAL_USD / 12;
+export function getExpenseLedger(): ExpenseLedger {
+  return EXPENSES;
 }
 
 const DAYS_WINDOW = 30;
@@ -494,35 +484,7 @@ async function getCoverageStatsUncached(
         name: r.name,
         bytes: Number(r.bytes),
       })),
-      costs: {
-        breakdown: [
-          {
-            label: "VPS hosting",
-            usdAnnual: HOSTING_USD_MONTHLY * 12,
-            note: "OVH VPS-4, 8 vCPU / 24 GB RAM / 200 GB NVMe",
-          },
-          {
-            label: "Domain",
-            usdAnnual: DOMAIN_USD_ANNUAL,
-            note: `${APP.NAME}, billed yearly`,
-          },
-          ...(ADDITIONAL_EGRESS_IPS > 0
-            ? [
-                {
-                  label: "Egress IPs",
-                  usdAnnual: EGRESS_IPS_USD_ANNUAL,
-                  note: `${ADDITIONAL_EGRESS_IPS} additional OVH IPv4 for multi-IP Wargaming throughput`,
-                },
-              ]
-            : []),
-          {
-            label: "CDN, SSL, deploys",
-            usdAnnual: 0,
-            note: "Cloudflare free tier + Let's Encrypt + self-hosted Coolify",
-          },
-        ],
-        totalAnnualUsd: TOTAL_ANNUAL_USD,
-      },
+      costs: EXPENSES,
     },
   };
 }

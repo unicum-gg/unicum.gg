@@ -18,6 +18,12 @@ export const playerSearchHit = z
       .nullable()
       .meta({ description: "The player's clan tag and color, when tracked." }),
     is_verified: z.boolean().optional(),
+    tournament_wins: z.number().optional().meta({
+      description:
+        "Tournaments this account was on the winning roster of, for the winner's crest.",
+    }),
+    tournament_featured_wins: z.number().optional(),
+    tournament_best_title: z.string().nullable().optional(),
     is_supporter: z.boolean().optional(),
     twitch_login: z.string().nullable().optional(),
   })

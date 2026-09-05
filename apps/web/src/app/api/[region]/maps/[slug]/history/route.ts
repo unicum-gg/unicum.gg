@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 
 /**
  * Map changes history
- * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
+ * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
  * @pathParams mapParams
  * @response MapHistoryResponse
  * @tag Maps
@@ -31,8 +31,20 @@ async function GET__perf(
   if (!map) {
     return Response.json({ error: "not_found" }, { status: 404 });
   }
+  // A space the live client does not ship makes its rows pending rather than
+  // history, so the page shows them where the running test's own changes go.
+  const testOnly = new Set(
+    [
+      map.commonTest ? map.arenaId : null,
+      ...map.variants.map((v) => (v.commonTest ? v.arenaId : null)),
+    ].filter((id) => id !== null),
+  );
   const [history, test] = await Promise.all([
-    getMapHistory(map.arenaId),
+    getMapHistory(
+      map.arenaId,
+      map.variants.map((v) => v.arenaId),
+      testOnly,
+    ),
     getMapTestChanges(map.arenaId),
   ]);
   return jsonResponse(
@@ -49,7 +61,15 @@ async function GET__perf(
       present: history.present,
       tracked: history.tracked,
       testVersion: test.version,
-      testChanges: test.changes,
+      // The running test wins on a field both sides carry: they are two
+      // statements about the same property of the same arena, the test build's
+      // is the newer one, and the page keys its rows by field.
+      testChanges: [
+        ...test.changes,
+        ...history.pending.filter(
+          (row) => !test.changes.some((c) => c.field === row.field),
+        ),
+      ],
     },
     { headers: { "cache-control": "public, max-age=600" } },
   );

@@ -63,10 +63,17 @@ export function rawUrl(branch: WotSrcBranch, path: string): string {
 
 // The mirror's XML/PO files change only on a game patch. They are static between
 // patches and heavily shared across tanks (the per-nation component files back
-// every tank of that nation), so we cache each raw fetch for a day. Without this
-// the shared files are re-fetched once per tank, turning a single tank page into
-// ~9 GitHub-raw round trips. Passed as `cache` (ms) to `transport.getText`.
-export const WOTSRC_CACHE_TTL_MS = 24 * 60 * 60 * 1000;
+// every tank of that nation), so we cache each raw fetch. Without this the shared
+// files are re-fetched once per tank, turning a single tank page into ~9
+// GitHub-raw round trips. Passed as `cache` (ms) to `transport.getText`.
+//
+// It must stay STRICTLY SHORTER than the catalogue cron's period, and that is the
+// whole reason it is not a day. At a day it matched the cron exactly, so each tick
+// read a body the previous tick had cached and a build published in between was
+// picked up a tick late, or two: update 2.4 landed on the mirror on 28/08/2026 at
+// 17:47 and the map history recorded it on the 30th at 07:02. Shorter than the
+// period, every tick reads the mirror for real and the lag is the period itself.
+export const WOTSRC_CACHE_TTL_MS = 4 * 60 * 60 * 1000;
 
 export const BRANCH_BY_REGION: Record<Region, WotSrcBranch> = {
   [Region.EU]: WotSrcBranch.EU,

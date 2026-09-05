@@ -16,6 +16,8 @@ anchors:
     - penetration500
   labels:
     - Penetration
+    - Pen %
+    - Penetration ratio
 ---
 
 How much armor a shell can defeat, in millimetres, rolled plus or minus 25 percent on every shot and compared against the effective thickness it hits.

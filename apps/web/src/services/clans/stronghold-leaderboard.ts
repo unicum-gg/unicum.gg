@@ -8,6 +8,7 @@ import {
   strongholdRatingsByRegion,
   type ClanRankBadge,
   type ClanStrongholdSr,
+  type ClanStrongholdSrByPeriod,
 } from "@unicum.gg/shared";
 import { db } from "@unicum.gg/core/db";
 import type { Region } from "@unicum.gg/wargaming";
@@ -67,7 +68,7 @@ function orderExpr(sort: StrongholdSort) {
  * Region-scoped stronghold leaderboard for one (tier, period), sorted and capped
  * to the top `limit`. Reads the materialized `stronghold_ratings` table
  * (refreshed hourly by the top-clans cron from the snapshots x members
- * aggregation) as a cheap indexed scan on `(tier, period, sr DESC)` — no
+ * aggregation) as a cheap indexed scan on `(tier, period, sr DESC)`, no
  * per-request aggregation and no cache, so switching sort/period is instant
  * instead of paying the ~3s CTE on a cold cache.
  */
@@ -80,13 +81,10 @@ export async function getStrongholdLeaderboard(
 ): Promise<StrongholdLeaderboardEntry[]> {
   const table = strongholdRatingsByRegion[region];
   // Min-battles floor: SR has no volume brake, so a floor keeps a tiny lucky
-  // sample off the board. `battles` is the period's count, so the 30-day board
-  // uses a lighter floor (a third) than the all-time one, or a bursty Advances
-  // 30d board would go near-empty.
-  const minBattles =
-    period === StrongholdPeriod.Overall
-      ? STRONGHOLD_MIN_BATTLES[tier]
-      : Math.ceil(STRONGHOLD_MIN_BATTLES[tier] / 3);
+  // sample off the board. `battles` is the period's count and the floor is
+  // scaled to the same window (see STRONGHOLD_MIN_BATTLES), so a short board is
+  // selective on a day's worth of battles rather than on a lifetime's.
+  const minBattles = STRONGHOLD_MIN_BATTLES[tier][period];
   const rows = (await db.execute(sql`
     SELECT
       clan_id, tag, name, color, COALESCE(emblem, '') AS emblem, languages,
@@ -134,15 +132,19 @@ export async function getStrongholdLeaderboard(
 }
 
 /**
- * The clan's current (overall) SR per mode/tier, read from the materialized
- * `stronghold_ratings` table (the same SR the boards rank by). Returns null per
- * tier when the clan is below the ranking threshold or the region is unseeded.
- * Powers the SR rows in the clan page's stronghold section.
+ * The clan's SR per mode/tier for every window, read from the materialized
+ * `stronghold_ratings` table (the same SR the boards rank by). Null per tier when
+ * the clan played nothing in that window or the region is unseeded. Powers the SR
+ * rows in the clan page's stronghold section.
+ *
+ * Deliberately unfiltered by the board's min-battles floor: that floor decides
+ * who gets RANKED, not what a clan may read about itself, exactly as the player
+ * page shows a 24h WN8 for a player who would not make the 24h board.
  */
 export async function getClanStrongholdSr(
   region: Region,
   clanId: number,
-): Promise<{ overall: ClanStrongholdSr; d30: ClanStrongholdSr }> {
+): Promise<ClanStrongholdSrByPeriod> {
   const table = strongholdRatingsByRegion[region];
   const rows = (await db.execute(sql`
     SELECT tier, period, sr
@@ -166,8 +168,7 @@ export async function getClanStrongholdSr(
       t6: byTier.get(StrongholdTier.T6) ?? null,
     };
   };
-  return {
-    overall: build(StrongholdPeriod.Overall),
-    d30: build(StrongholdPeriod.Month),
-  };
+  return Object.fromEntries(
+    Object.values(StrongholdPeriod).map((period) => [period, build(period)]),
+  ) as ClanStrongholdSrByPeriod;
 }

@@ -37,12 +37,8 @@ import { TablePager, usePagination } from "@/components/table-pager";
 import { metricLabel } from "@/components/tanks/perf-columns";
 import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -148,14 +144,16 @@ function SortableHead({
         headClassName,
       )}
     >
-      {tooltip ? (
-        <Tooltip>
-          <TooltipTrigger asChild>{button}</TooltipTrigger>
-          <TooltipContent>{tooltip}</TooltipContent>
-        </Tooltip>
-      ) : (
-        button
-      )}
+      {/* The heading the reader sees when it is words, the tooltip when it is
+          an icon: the nation, class and tier columns show a glyph, and their
+          tip is the one place their name is written. */}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
+        fallbackLabel={tooltip}
+        tip={tooltip}
+      >
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -208,7 +206,15 @@ export function PlayerTanksTable({
     [metric],
   );
 
-  const { filtered, filters } = useTankFilters(vehicles, rangeCols, "battles");
+  // The filter hook names these for what they hold, since the tank catalogue
+  // already uses `moe`/`mom` for the region's thresholds. Mapped rather than
+  // renamed on the row, so the rest of the table keeps reading `moe`/`mom`.
+  const filterable = useMemo(
+    () =>
+      vehicles.map((v) => ({ ...v, gunMarks: v.moe, masteryBadge: v.mom })),
+    [vehicles],
+  );
+  const { filtered, filters } = useTankFilters(filterable, rangeCols, "battles");
   const sorted = useMemo(
     () => [...filtered].sort((a, b) => compareRows(a, b, sort, metric)),
     [filtered, sort, metric],
@@ -351,9 +357,10 @@ export function PlayerTanksTable({
                   <TableRow
                     key={r.tankId}
                     ref={selected ? selectedRowRef : undefined}
-                    // The row opens this player's record on the tank, which is
-                    // a URL of its own; the name inside still goes to the
-                    // vehicle's own page, so both destinations stay reachable.
+                    // The row opens this player's record on the tank, which
+                    // is a URL of its own. The name inside is a real link to
+                    // the same place, so the destination does not depend on
+                    // where in the row the reader clicked.
                     onClick={() => {
                       if (r.slug) {
                         // `scroll: false`: the reader is picking a row half way
@@ -417,7 +424,15 @@ export function PlayerTanksTable({
                         ) : null}
                         {r.slug ? (
                           <Link
-                            href={ROUTES.TANK(region, r.slug)}
+                            // Same destination as the row around it. Sending
+                            // the name to the vehicle's own page instead made
+                            // one row answer two ways depending on where it
+                            // was clicked, which reads as a broken link rather
+                            // than a second destination. The vehicle's page
+                            // stays one click away, from the heading of the
+                            // record this opens.
+                            href={ROUTES.PLAYER_TANK(region, nickname, r.slug)}
+                            scroll={false}
                             className="hover:underline"
                           >
                             {name}

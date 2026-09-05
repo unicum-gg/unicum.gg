@@ -13,6 +13,7 @@ anchors:
   labels:
     - Hit ratio
     - Hit rate
+    - Hit %
 ---
 
 The share of shells fired that hit a target, distinct from a gun's accuracy value.

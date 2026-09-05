@@ -2,11 +2,16 @@
 
 import { useId } from "react";
 import {
-  MapChangeArea,
+  MAP_AREA_MAP,
+  MAP_AREA_ONSLAUGHT,
+  MAP_VARIANT_PREFIX,
+  mapChangeArea,
+  splitVariantField,
+  type MapChangeArea,
+  type MapVariantLayout,
+  MapPoiType,
   MARKER_MOVE_THRESHOLD_M,
   matchMarkers,
-  minimapUrl,
-  ONSLAUGHT_MODE,
   type MapDetail,
   type MapHistoryPoint,
 } from "@unicum.gg/shared";
@@ -16,18 +21,21 @@ import { buildArrows } from "@/components/maps/detail/history/arrows";
 import {
   BASE,
   CONTROL_POINT,
-  POI_RECON,
-  POI_STRIKE,
+  poiUrl,
   spawnUrl,
 } from "@/components/maps/detail/minimap-overlay";
 import type { FormattedMapChange } from "@/components/maps/change-format";
 
 /** The gameplay token a geometry field belongs to (`geometry:comp7:spawns:team1`). */
-const modeOf = (field: string) => field.split(":")[1] ?? "";
+// A change recorded on a variant arena carries a `variant:<battleType>:` prefix,
+// which sits in front of the key these read, so it comes off first.
+const stripVariant = (field: string) =>
+  splitVariantField(field)?.field ?? field;
 
 /** The marker family a geometry field describes (`bases:team1`, `controlPoint`,
  * `pointsOfInterest:recon`, ...). */
-const familyOf = (field: string) => field.split(":").slice(2).join(":");
+const familyOf = (field: string) =>
+  stripVariant(field).split(":").slice(2).join(":");
 
 /**
  * The game's own minimap icon for a marker family.
@@ -42,8 +50,13 @@ function iconFor(field: string, index: number): string {
   if (family === "bases:team2") return BASE.team2;
   if (family === "spawns:team1") return spawnUrl("team1", index);
   if (family === "spawns:team2") return spawnUrl("team2", index);
-  if (family === "pointsOfInterest:recon") return POI_RECON;
-  if (family.startsWith("pointsOfInterest")) return POI_STRIKE;
+  if (family === "pointsOfInterest:recon") return poiUrl(MapPoiType.CommsCenter);
+  if (family === "pointsOfInterest:flare") {
+    return poiUrl(MapPoiType.ObservationPost);
+  }
+  if (family.startsWith("pointsOfInterest")) {
+    return poiUrl(MapPoiType.ArtilleryHeadquarters);
+  }
   return CONTROL_POINT;
 }
 
@@ -92,23 +105,43 @@ function HistoryMarker({
  * an Onslaught spawn drawn over the full map would be pointing at a place on a
  * different image, at a different scale.
  */
+/** The space an area is drawn on: the map's own Onslaught layout, a variant's
+ * (its Onslaught one when it has one, else the variant arena itself), or null
+ * for the map, which draws on its own minimap. */
+function spaceFor(
+  detail: MapDetail,
+  area: MapChangeArea,
+): { arenaId: string; minimapUrl: string; widthMeters: number; heightMeters: number } | null {
+  if (area === MAP_AREA_ONSLAUGHT) return detail.onslaught;
+  if (!area.startsWith(MAP_VARIANT_PREFIX)) return null;
+  const battleType = area.slice(MAP_VARIANT_PREFIX.length);
+  const variant = detail.variants.find(
+    (v: MapVariantLayout) => v.battleType === battleType,
+  );
+  if (!variant) return null;
+  return variant.onslaught ?? variant;
+}
+
 function plan(
   detail: MapDetail,
   changes: FormattedMapChange[],
   area: MapChangeArea,
 ) {
+  // The area a change belongs to is what the shared vocabulary says, so the
+  // three of them (the map, Onslaught, and the night arena) are told apart the
+  // same way here as in the rows beside this minimap.
   const geometry = changes.filter(
-    (c) =>
-      c.markers &&
-      (modeOf(c.field) === ONSLAUGHT_MODE) === (area === MapChangeArea.Onslaught),
+    (c) => c.markers && mapChangeArea(c.field) === area,
   );
   if (geometry.length === 0) return null;
-  const onslaught = area === MapChangeArea.Onslaught ? detail.onslaught : null;
-  if (area === MapChangeArea.Onslaught && !onslaught) return null;
-  const width = onslaught?.widthMeters ?? detail.widthMeters;
-  const height = onslaught?.heightMeters ?? detail.heightMeters;
+  // Each area draws on its own space: the map's, its Onslaught layout's, or a
+  // variant's, which is a different arena again.
+  const space = spaceFor(detail, area);
+  if (area !== MAP_AREA_MAP && !space) return null;
+  const width = space?.widthMeters ?? detail.widthMeters;
+  const height = space?.heightMeters ?? detail.heightMeters;
   if (width <= 0 || height <= 0) return null;
-  return { geometry, onslaught, width, height };
+  return { geometry, onslaught: space, width, height };
 }
 
 /** Whether this area has a minimap to draw for these changes. */
@@ -186,7 +219,7 @@ export function VersionMinimap({
     <div className="relative aspect-square w-full overflow-hidden">
       <MinimapImage
         src={onslaught?.minimapUrl ?? detail.minimapUrl}
-        fallbackSrc={minimapUrl(detail.arenaId)}
+        arenaId={onslaught?.arenaId ?? detail.arenaId}
         alt={`${detail.name} minimap`}
         sizes="(max-width: 1024px) 100vw, 20rem"
         className="opacity-70"

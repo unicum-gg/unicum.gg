@@ -1,7 +1,6 @@
 "use client";
 
 import { CaretDownIcon, CaretUpDownIcon } from "@phosphor-icons/react";
-import Link from "next/link";
 import {
   type ReactNode,
   useCallback,
@@ -10,8 +9,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import { RankMedal } from "@/components/rank-medal";
 import { TablePager, usePagination } from "@/components/table-pager";
@@ -74,6 +74,9 @@ export type SteelHunterRow = {
   is_verified: boolean;
   is_supporter: boolean;
   twitch_login: string | null;
+  tournament_wins: number;
+  tournament_featured_wins: number;
+  tournament_best_title: string | null;
 };
 
 // The board is ranked server-side, always descending (best first), so a header
@@ -94,22 +97,29 @@ function SortableHead({
   children: ReactNode;
 }) {
   const Icon = active ? CaretDownIcon : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() => onSort(sortKey)}
+      className={cn(
+        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead className={cn("text-right!", className)}>
-      <button
-        type="button"
-        onClick={() => onSort(sortKey)}
-        className={cn(
-          "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -314,30 +324,10 @@ export function SteelHunterBoard({
                     </TableCell>
                     <TableCell>
                       <span className="flex items-center gap-1.5">
-                        <Link
-                          href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
-                          className="flex min-w-0 items-center gap-3 hover:underline"
-                        >
-                          <span className="min-w-0 truncate">
-                            <span className="font-medium">{r.nickname}</span>
-                            {r.clan_tag ? (
-                              <>
-                                {" "}
-                                <ClanTag
-                                  tag={r.clan_tag}
-                                  color={r.clan_color}
-                                  className="font-mono text-xs"
-                                />
-                              </>
-                            ) : null}
-                          </span>
-                        </Link>
-                        <PlayerBadges
+                        <PlayerName
                           region={region}
-                          accountId={r.account_id}
-                          verified={r.is_verified}
-                          supporter={r.is_supporter}
-                          twitchLogin={r.twitch_login}
+                          player={identityFromRow(r)}
+                          href={ROUTES.PLAYER_STEEL_HUNTER(region, r.nickname)}
                         />
                       </span>
                     </TableCell>

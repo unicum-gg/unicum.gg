@@ -11,7 +11,9 @@ import {
 } from "@/components/panel";
 import { PlayerClansHistory } from "@/components/players/detail/overview/clans-history";
 import { PlayerNameHistory } from "@/components/players/detail/overview/name-history";
+import { PlayerMarksPanels } from "@/components/players/detail/overview/marks";
 import { PlayerStatsTable } from "@/components/players/detail/overview/stats-table";
+import { PlayerPercentile } from "@/components/players/detail/overview/percentile";
 import { RatingMetricInlineSelect } from "@/components/rating-metric-inline-select";
 import { TanksLiftDrag } from "@/components/players/detail/overview/tanks-lift-drag";
 import { styles } from "@/lib/styles";
@@ -21,10 +23,12 @@ import type {
   PeriodStats,
   PlayerClanHistoryFull,
   PlayerDerivedStats,
+  PlayerMarkProgress,
   RatingHistoryPoint,
-  RatingMetric,
   Stats,
 } from "@unicum.gg/shared";
+// A value, not just a type: the percentile panel is keyed by the metric enum.
+import { RatingMetric } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 
 // recharts is the heaviest dependency in the client bundle (107 KB gzipped,
@@ -56,6 +60,13 @@ export type OverallData = {
   clanHistory: PlayerClanHistoryFull;
   nameHistory: NameHistoryEntry[];
   createdAt: Date;
+  /** Null while a payload cached under the previous shape is still being
+   * served (60s at most), or when the garage carries neither marks nor
+   * badges. */
+  markProgress: PlayerMarkProgress | null;
+  /** Where the marks matrix sends a reader who wants the whole list, with the
+   * cell's tier and level already selected. */
+  tanksHref: string;
   nowMs: number;
 };
 
@@ -75,6 +86,8 @@ export function OverallTab({
   clanHistory,
   nameHistory,
   createdAt,
+  markProgress,
+  tanksHref,
   nowMs,
 }: OverallData & { region: Region; nickname: string }) {
   return (
@@ -90,6 +103,22 @@ export function OverallTab({
             current={current}
             periods={periods}
             derived={derived}
+          />
+        </PanelContent>
+        {/* Under the numbers rather than beside them: it says nothing new about
+            the player, it says what those same numbers are worth against the
+            region. Renders itself away until the aggregate lands. */}
+        <PanelContent className="p-0">
+          <PlayerPercentile
+            region={region}
+            winrate={
+              current.battles > 0 ? current.wins / current.battles : null
+            }
+            ratings={{
+              [RatingMetric.Wn7]: derived.wn7,
+              [RatingMetric.Wn8]: derived.wn8,
+              [RatingMetric.Wnx]: derived.wnx,
+            }}
           />
         </PanelContent>
       </Panel>
@@ -147,6 +176,23 @@ export function OverallTab({
           />
         </PanelContent>
       </Panel>
+
+      {/* The panel renders nothing when the garage carries neither marks nor
+          badges, so the separator has to answer the same question or the page
+          shows two rules with nothing between them. */}
+      {markProgress &&
+        (markProgress.marks.byTier.length > 0 ||
+          markProgress.mastery.byTier.length > 0) && (
+          <>
+            <PanelSeparator />
+            <PlayerMarksPanels
+              region={region}
+              nickname={nickname}
+              progress={markProgress}
+              tanksHref={tanksHref}
+            />
+          </>
+        )}
 
       <PanelSeparator />
 

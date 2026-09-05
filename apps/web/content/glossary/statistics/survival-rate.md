@@ -11,6 +11,9 @@ anchors:
   labels:
     - Survival
     - Survival rate
+    - Battles survived
+    - Survivability
+    - Survival %
 ---
 
 The share of battles a player finished alive, which reads as caution or as staying useful, depending on the rest of the account.

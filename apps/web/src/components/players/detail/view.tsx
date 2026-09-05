@@ -10,6 +10,8 @@ import { PlayerHeader } from "@/components/players/detail/header";
 import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import { PlayerMode, PlayerSection } from "@/components/players/detail/tabs";
 import { PlayerTabsView } from "@/components/players/detail/tabs-view";
+import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
+import type { PlayerOnslaughtData } from "@/components/players/detail/onslaught";
 import { useCookie } from "@/hooks/use-cookie";
 import STORAGE from "@/constants/storage";
 import { unicum } from "@/services/sdk";
@@ -45,6 +47,8 @@ export function PlayerProfile({
   tankDetail,
   initialSessions,
   initialAchievements,
+  initialTournaments,
+  initialOnslaught,
 }: {
   region: Region;
   nickname: string;
@@ -66,6 +70,10 @@ export function PlayerProfile({
   // Present only when Achievements is the section the server rendered, same
   // deal as `initialTanks`.
   initialAchievements: PlayerAchievements | null;
+  /** Same deal again for the tournament record. */
+  initialTournaments: PlayerTournamentRecord | null;
+  /** Onslaught record, server-rendered on a direct `/onslaught` landing. */
+  initialOnslaught: PlayerOnslaughtData | null;
 }) {
   // The active metric is client state (the cookie), not a server prop: the page
   // is statically cached and metric-agnostic (the payload carries all three
@@ -159,6 +167,9 @@ export function PlayerProfile({
             inferredLanguages={inferPlayerLanguages(detail.clanHistory, nowMs)}
             supporterBadge={supporterBadge}
             verified={detail.isVerified}
+            tournamentWins={detail.tournamentWins}
+            tournamentFeaturedWins={detail.tournamentFeaturedWins}
+            tournamentBestTitle={detail.tournamentBestTitle}
             twitchLogin={detail.twitchLogin}
           />
         </PanelContent>
@@ -178,6 +189,8 @@ export function PlayerProfile({
         tankDetail={tankDetail}
         initialSessions={initialSessions}
         initialAchievements={initialAchievements}
+        initialTournaments={initialTournaments}
+        initialOnslaught={initialOnslaught}
       />
     </>
   );

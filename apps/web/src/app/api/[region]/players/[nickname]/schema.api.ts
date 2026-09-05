@@ -1,6 +1,8 @@
 // Co-located response schema (`.api.ts` so next-openapi-gen scans it). Client-
 // safe (only zod): the player page parses with it.
 import { z } from "zod";
+import { MarkWindow } from "@unicum.gg/shared";
+import type { EnumMeta } from "@/services/openapi/schemas";
 
 // --- Player detail (GET /api/{region}/players/{nickname}) ---
 // Everything the player page renders, fully computed server-side (the
@@ -118,6 +120,95 @@ const liftDragByMetricEntry = z
   .object({ lift: z.array(liftDragRow), drag: z.array(liftDragRow) })
   .nullable();
 
+// Marks of Excellence / Mark of Mastery breakdown across the garage, plus the
+// vehicles the player's current form puts within reach of the next mark.
+const marksTierRow = z
+  .object({
+    tier: z.number(),
+    none: z.number(),
+    mark1: z.number(),
+    mark2: z.number(),
+    mark3: z.number(),
+    total: z.number(),
+  })
+  .meta({
+    id: "MarksTierRow",
+    description:
+      "How many of the player's vehicles of one tier carry no mark, one, two or three Marks of Excellence.",
+  });
+
+const masteryTierRow = z
+  .object({
+    tier: z.number(),
+    none: z.number(),
+    class3: z.number(),
+    class2: z.number(),
+    class1: z.number(),
+    ace: z.number(),
+    total: z.number(),
+  })
+  .meta({
+    id: "MasteryTierRow",
+    description:
+      "How many of the player's vehicles of one tier carry no Mark of Mastery, 3rd, 2nd, 1st class or Ace Tanker.",
+  });
+
+const markReachEntry = z
+  .object({
+    tankId: z.number(),
+    slug: z.string().nullable(),
+    name: z.string(),
+    tier: z.number(),
+    tag: z.string(),
+    type: z.string(),
+    isPremium: z.boolean(),
+    marks: z.number(),
+    playingAt: z.number(),
+    threshold: z.number(),
+    combined: z.number(),
+    ratio: z.number(),
+    battles: z.number(),
+    window: z.enum(MarkWindow).meta({
+      description:
+        "Which average the ratio was computed over: the last 30 days when the vehicle saw enough battles, its lifetime otherwise.",
+      "x-enum-source": "MARK_WINDOW",
+    } as EnumMeta),
+  })
+  .meta({
+    id: "MarkReachEntry",
+    description:
+      "A vehicle measured against the mark it has not earned yet: the region's combined-damage bar for that mark, the player's own combined damage over the window, and their ratio. Above 1 means the average already clears the bar.",
+  });
+
+const markProgress = z
+  .object({
+    garage: z.number(),
+    marks: z.object({
+      total: z.object({
+        mark1: z.number(),
+        mark2: z.number(),
+        mark3: z.number(),
+      }),
+      byTier: z.array(marksTierRow),
+      known: z.number(),
+    }),
+    mastery: z.object({
+      total: z.object({
+        class3: z.number(),
+        class2: z.number(),
+        class1: z.number(),
+        ace: z.number(),
+      }),
+      byTier: z.array(masteryTierRow),
+    }),
+    reach: z.array(markReachEntry),
+  })
+  .meta({
+    id: "PlayerMarkProgress",
+    description:
+      "Marks of Excellence and Marks of Mastery across the garage, by tier, plus the vehicles closest to their next mark.",
+  });
+
 const ratingMetricValues = z.object({
   wn7: z.number().nullable(),
   wn8: z.number().nullable(),
@@ -220,7 +311,7 @@ export const PlayerDetailResponse = z.object({
       accountId: z.number(),
       nickname: z.string(),
       createdAt: z.coerce.date(),
-      lastBattleAt: z.coerce.date(),
+      lastBattleAt: z.coerce.date().nullable(),
       updatedAt: z.coerce.date(),
     })
     .loose(),
@@ -238,6 +329,18 @@ export const PlayerDetailResponse = z.object({
   isSupporter: z.boolean(),
   isVerified: z.boolean(),
   twitchLogin: z.string().nullable(),
+  tournamentWins: z.number().meta({
+    description:
+      "How many Wargaming tournaments this account was on the winning roster of. Counts only tournaments that decided an overall winner: a draw played as parallel groups crowns a winner per group and none overall.",
+  }),
+  tournamentFeaturedWins: z.number().meta({
+    description:
+      "How many of those wins came at an event Wargaming flags as featured, which is what separates a branded championship from a nightly gold ladder.",
+  }),
+  tournamentBestTitle: z.string().nullable().meta({
+    description:
+      "The win worth naming: a featured event when there is one, else the most recent. Null when the account has never won.",
+  }),
   current: playerStats,
   periods: z.object({
     h24: playerStats.nullable(),
@@ -282,6 +385,9 @@ export const PlayerDetailResponse = z.object({
     wn8: liftDragByMetricEntry,
     wnx: liftDragByMetricEntry,
   }),
+  // Optional: a payload cached under the previous shape (60s TTL at most) has
+  // no such field, and the panel reads its absence as "not computed yet".
+  markProgress: markProgress.optional(),
   ratingHistory: z.array(ratingHistoryPoint),
   clanHistory: playerClanHistory,
   strongholds: z.object({

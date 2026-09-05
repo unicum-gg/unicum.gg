@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { RATING_BLOCK_MESSAGE, RatingBlock } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
 import { Button } from "@/components/ui/button";
+import { LoginButton } from "@/components/login-button";
 import ROUTES from "@/constants/routes";
 import { useHydrated } from "@/hooks/use-hydrated";
 import { useSession } from "@/lib/auth-client";
@@ -77,16 +78,9 @@ export function RatePanel({
         title={`Have you played the ${tankName}?`}
         body="Sign in with your Wargaming account to rate it. We read your record on this exact tank, which is what stops this page from becoming a poll of people who have never driven it."
       >
-        <Button asChild size="sm">
-          <a
-            href={ROUTES.AUTH_SIGN_IN(
-              region,
-              `${ROUTES.TANK(region, slug)}/community`,
-            )}
-          >
-            Sign in to rate it
-          </a>
-        </Button>
+        <LoginButton callbackURL={`${ROUTES.TANK(region, slug)}/community`}>
+          <Button size="sm">Sign in to rate it</Button>
+        </LoginButton>
       </Prompt>
     );
   }

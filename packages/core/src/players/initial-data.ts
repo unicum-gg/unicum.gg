@@ -45,6 +45,10 @@ type RawPlayer = {
   sh_avg_xp: number | null;
   null_count: number;
   soft_deleted_at: string | null;
+  tournament_wins: number;
+  tournament_featured_wins: number;
+  tournament_best_title: string | null;
+  tournament_best_at: string | null;
 };
 
 type RawPlayerSnapshot = {
@@ -237,6 +241,12 @@ function playerFromRaw(r: RawPlayer): Player {
     shAvgXp: r.sh_avg_xp,
     nullCount: r.null_count,
     softDeletedAt: r.soft_deleted_at ? new Date(r.soft_deleted_at) : null,
+    tournamentWins: r.tournament_wins ?? 0,
+    tournamentFeaturedWins: r.tournament_featured_wins ?? 0,
+    tournamentBestTitle: r.tournament_best_title,
+    tournamentBestAt: r.tournament_best_at
+      ? new Date(r.tournament_best_at)
+      : null,
   };
 }
 

@@ -6,8 +6,13 @@ aliases:
 related:
   - steel-hunter
   - win-rate
+  - hrb
 links:
   - target: steel-hunter
+anchors:
+  labels:
+    - HR
+    - Hunter rating
 ---
 
 The Steel Hunter performance rating used on unicum.gg, built from average experience per battle and win rate, discounted for small samples.

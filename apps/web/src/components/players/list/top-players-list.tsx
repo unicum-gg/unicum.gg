@@ -1,11 +1,9 @@
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
 import { GlossaryLabel } from "@/components/glossary/label";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { LanguageFlags } from "@/components/language-flags";
 import { RankMedal } from "@/components/rank-medal";
 import { RATING_METRIC_LABEL, RatingMetric, RATING_COLOR_CLASS, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
-import ROUTES from "@/constants/routes";
 import {
   Table,
   TableBody,
@@ -93,50 +91,25 @@ export function TopPlayersList({
                 )}
               </TableCell>
               <TableCell>
-                <span className="flex items-center gap-1.5">
-                  {/* No `flex-1` on the link: it would eat the free width and
-                      push the badges to the far edge of the cell, away from the
-                      nickname they belong to. It shrinks (min-w-0 + truncate)
-                      only when the name is too long. */}
-                  <Link
-                    href={ROUTES.PLAYER(region, r.nickname)}
-                    className="flex min-w-0 items-center gap-3 hover:underline"
-                  >
-                    <span className="min-w-0 truncate">
-                      <span className="font-medium">{r.nickname}</span>
-                      {r.clan_tag ? (
-                        <>
-                          {" "}
-                          <ClanTag
-                            tag={r.clan_tag}
-                            color={r.clan_color}
-                            className="font-mono text-xs"
-                          />
-                        </>
-                      ) : null}
-                    </span>
-                  </Link>
-                  <PlayerBadges
-                    region={region}
-                    accountId={r.account_id}
-                    verified={r.is_verified}
-                    supporter={r.is_supporter}
-                    twitchLogin={r.twitch_login}
-                  />
-                  {/* Lifted out of the link so the badges can sit next to the
-                      nickname; `ml-auto` keeps the flags on the right edge. */}
-                  {r.languages.length > 0 && (
-                    <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
-                      <LanguageFlags
-                        languages={r.languages}
-                        source="inferred"
-                        size="s"
-                        region={region}
-                        link={false}
-                      />
-                    </span>
-                  )}
-                </span>
+                <PlayerName
+                  region={region}
+                  player={identityFromRow(r)}
+                  // The name shrinks rather than stretching, so the crests stay
+                  // beside it instead of being pushed to the cell's far edge.
+                  trailing={
+                    r.languages.length > 0 ? (
+                      <span className="ml-auto hidden h-4 shrink-0 sm:inline-flex">
+                        <LanguageFlags
+                          languages={r.languages}
+                          source="inferred"
+                          size="s"
+                          region={region}
+                          link={false}
+                        />
+                      </span>
+                    ) : null
+                  }
+                />
               </TableCell>
               <TableCell className="text-right text-muted-foreground tabular-nums">
                 {intFmt.format(r.battles)}

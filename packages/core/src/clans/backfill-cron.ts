@@ -3,11 +3,10 @@ import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { db } from "@unicum.gg/core/db";
 import { clansByRegion } from "@unicum.gg/shared";
 import { REGIONS, type Region } from "@unicum.gg/wargaming";
-import { recordClanSnapshot } from "./snapshots";
+import { recordClanGlobalMapSnapshot } from "./snapshots";
 import { refreshClansByIdsBatch } from "./repository";
 import { refreshClanEvents } from "./repository/events";
 import { refreshClanMembers } from "./repository/members";
-import { fetchClanStronghold } from "@unicum.gg/core/wargaming/wot/clans/stronghold";
 import { fetchClanGlobalMap } from "@unicum.gg/core/wargaming/wot/clans/globalmap";
 
 const SCHEDULE = "* * * * * *";
@@ -18,7 +17,7 @@ const REQUEST_DELAY_MS = 250;
 /**
  * Schedules one independent cron per region. A slow region (G-Core timeouts
  * on EU portal calls) holds its own overlap guard but no longer blocks the
- * others — `clan-backfill-cron-na` and `clan-backfill-cron-asia` keep
+ * others, `clan-backfill-cron-na` and `clan-backfill-cron-asia` keep
  * draining at their own cadence.
  */
 export function startClanBackfillCron(): void {
@@ -115,13 +114,15 @@ export async function refreshDueClansForRegion(
             err,
           ),
         ),
-        Promise.all([
-          fetchClanStronghold(region, clanId),
-          fetchClanGlobalMap(region, clanId),
-        ]).then(([sh, gm]) => sh && recordClanSnapshot(region, clanId, sh, gm))
+        // Global Map only. The Stronghold half moved to its own per-region cron
+        // (`clans/stronghold-cron`): it lives on a different host with its own
+        // budget, and riding here meant it inherited this loop's pace, which is
+        // set by the 1 rps clan portal that members + events go through.
+        fetchClanGlobalMap(region, clanId)
+          .then((gm) => gm && recordClanGlobalMapSnapshot(region, clanId, gm))
           .catch((err) =>
             console.error(
-              `[clan-backfill-cron-${region}] stronghold ${clanId} failed:`,
+              `[clan-backfill-cron-${region}] global map ${clanId} failed:`,
               err,
             ),
           ),

@@ -32,6 +32,7 @@ import { constructMetadata } from "@/lib/metadata";
 import { tankVideoSchema } from "@/lib/schema-org";
 import {
   availableTabs,
+  loadSimilarTanks,
   loadTankDetail,
   loadTankRatings,
   loadTankVideos,
@@ -177,7 +178,10 @@ export default async function TankPage({
   const { region, slug } = await params;
   if (!isRegion(region)) notFound();
   const detail = await loadTankTab(region, slug, TankDetailTab.Specifications);
-  const videos = await loadTankVideos(region, detail.slug);
+  const [videos, similar] = await Promise.all([
+    loadTankVideos(region, detail.slug),
+    loadSimilarTanks(region, detail.slug),
+  ]);
 
   return (
     <>
@@ -206,6 +210,7 @@ export default async function TankPage({
         mechanic={detail.mechanic ?? null}
         researchPath={detail.researchPath as unknown as ResearchBranch}
         videos={videos}
+        similar={similar}
         // Defaulted rather than assumed: the detail payload is cached for a day
         // and served by an API that can be one deploy behind this render, so a
         // field this young has to be allowed to be missing.

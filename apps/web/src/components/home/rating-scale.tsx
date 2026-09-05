@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import {
@@ -45,16 +46,22 @@ export function RatingScale() {
         <Table className="mb-px! [&_td]:min-w-0! [&_th]:min-w-0! [&_tr]:h-11">
           <TableHeader>
             <TableRow>
-              <TableHead className="pl-4!">Tier</TableHead>
-              <TableHead className="text-right!">WR</TableHead>
+              {/* The rows are the colour bands, not vehicle tiers, so the
+                  heading is anchored on what it lists. */}
+              <TableHead className="pl-4!">
+                <GlossaryLabel label="Rating colors">Tier</GlossaryLabel>
+              </TableHead>
+              <TableHead className="text-right!">
+                <GlossaryLabel>WR</GlossaryLabel>
+              </TableHead>
               <TableHead data-rating-col="wn7" className="text-right!">
-                WN7
+                <GlossaryLabel>WN7</GlossaryLabel>
               </TableHead>
               <TableHead data-rating-col="wn8" className="text-right!">
-                WN8
+                <GlossaryLabel>WN8</GlossaryLabel>
               </TableHead>
               <TableHead data-rating-col="wnx" className="pr-4 text-right!">
-                WNX
+                <GlossaryLabel>WNX</GlossaryLabel>
               </TableHead>
             </TableRow>
           </TableHeader>

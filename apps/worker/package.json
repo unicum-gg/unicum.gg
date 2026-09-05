@@ -8,7 +8,17 @@
     "dev": "tsx watch --env-file-if-exists=../web/.env.local src/index.ts",
     "changelog": "NEXT_PUBLIC_APP_URL=https://unicum.gg tsx --env-file-if-exists=../web/.env.local src/scripts/changelog.ts",
     "changelog:dry": "pnpm changelog --dry",
-    "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts"
+    "coverage-trends": "tsx --env-file-if-exists=../web/.env.local src/scripts/coverage-trends.ts",
+    "reconcile-streamers": "tsx --env-file-if-exists=../web/.env.local src/scripts/reconcile-streamers.ts",
+    "sample-servers": "tsx --env-file-if-exists=../web/.env.local src/scripts/sample-servers.ts",
+    "top-by-tank": "tsx --env-file-if-exists=../web/.env.local src/scripts/top-by-tank.ts",
+    "refresh-map-history": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-map-history.ts",
+    "refresh-vehicles": "tsx --env-file-if-exists=../web/.env.local src/scripts/refresh-vehicles.ts",
+    "seed-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/seed-tournaments.ts",
+    "enumerate-tournaments": "tsx --env-file-if-exists=../web/.env.local src/scripts/enumerate-tournaments.ts",
+    "backfill-team-clans": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-team-clans.ts",
+    "backfill-tournament-wins": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-tournament-wins.ts",
+    "backfill-roster-names": "tsx --env-file-if-exists=../web/.env.local src/scripts/backfill-roster-names.ts"
   },
   "dependencies": {
     "@unicum.gg/core": "workspace:*",

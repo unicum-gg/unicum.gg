@@ -11,6 +11,9 @@
 //   /eu/players/Animal/tanks          Tanks
 //   /eu/players/Animal/sessions       Sessions
 //   /eu/players/Animal/achievements   Achievements
+//   /eu/players/Animal/steel-hunter   Overview + Steel Hunter
+//   /eu/players/Animal/onslaught      Overview + Onslaught
+//   /eu/players/Animal/tournaments    Tournaments
 //   /eu/players/Animal/value          Value
 //
 // They used to be `?section=` / `?tab=` query params, which meant one indexable
@@ -22,6 +25,7 @@ export enum PlayerSection {
   Sessions = "sessions",
   Value = "value",
   Achievements = "achievements",
+  Tournaments = "tournaments",
 }
 
 export enum PlayerMode {
@@ -34,6 +38,7 @@ export enum PlayerMode {
   ClanWarsVIII = "cw-viii",
   ClanWarsVI = "cw-vi",
   SteelHunter = "steel-hunter",
+  Onslaught = "onslaught",
 }
 
 /** A reachable (section, mode) pair, and the segment that addresses it. The
@@ -55,6 +60,7 @@ const MODE_VIEWS: PlayerView[] = [
   [PlayerMode.ClanWarsVIII, "cw-viii", "Clan Wars VIII"],
   [PlayerMode.ClanWarsVI, "cw-vi", "Clan Wars VI"],
   [PlayerMode.SteelHunter, "steel-hunter", "Steel Hunter"],
+  [PlayerMode.Onslaught, "onslaught", "Onslaught"],
 ].map(([mode, segment, label]) => ({
   section: PlayerSection.Overview,
   mode: mode as PlayerMode,
@@ -83,6 +89,12 @@ export const PLAYER_VIEWS: PlayerView[] = [
     label: "Achievements",
   },
   {
+    section: PlayerSection.Tournaments,
+    mode: PlayerMode.Overall,
+    segment: "tournaments",
+    label: "Tournaments",
+  },
+  {
     section: PlayerSection.Value,
     mode: PlayerMode.Overall,
     segment: "value",
@@ -96,6 +108,7 @@ export const PLAYER_SECTIONS: { id: PlayerSection; label: string }[] = [
   { id: PlayerSection.Tanks, label: "Tanks" },
   { id: PlayerSection.Sessions, label: "Sessions" },
   { id: PlayerSection.Achievements, label: "Achievements" },
+  { id: PlayerSection.Tournaments, label: "Tournaments" },
   { id: PlayerSection.Value, label: "Value" },
 ];
 

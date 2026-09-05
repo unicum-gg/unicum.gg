@@ -1,6 +1,8 @@
 "use client";
 
+import { GlossaryLabel } from "@/components/glossary/label";
 import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { RankMedal } from "@/components/rank-medal";
 import { RatingMetric, RATING_COLOR_CLASS, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -56,15 +58,17 @@ export function TankTopPlayers(
           </TableHead>
           <TableHead>Player</TableHead>
           <TableHead className="hidden w-24 text-right! sm:table-cell">
-            Battles
+            <GlossaryLabel>Battles</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-24 text-right! md:table-cell">
-            Avg dmg
+            <GlossaryLabel>Avg dmg</GlossaryLabel>
           </TableHead>
           <TableHead className="hidden w-20 text-right! md:table-cell">
-            WR
+            <GlossaryLabel>WR</GlossaryLabel>
           </TableHead>
-          <TableHead className="w-24 pr-4 text-right!">{metricLabel}</TableHead>
+          <TableHead className="w-24 pr-4 text-right!">
+            <GlossaryLabel label={metricLabel}>{metricLabel}</GlossaryLabel>
+          </TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -104,15 +108,7 @@ function PlayerRow({
         )}
       </TableCell>
       <TableCell className="min-w-0">
-        <PlayerName
-          region={region}
-          nickname={player.nickname}
-          clan={
-            player.clan_tag
-              ? { tag: player.clan_tag, color: player.clan_color }
-              : null
-          }
-        />
+        <PlayerName region={region} player={identityFromRow(player)} />
       </TableCell>
       <TableCell className="hidden text-right tabular-nums text-muted-foreground sm:table-cell">
         {intFmt.format(player.battles)}

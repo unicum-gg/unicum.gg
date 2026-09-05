@@ -35,7 +35,7 @@ import type {
   TopPlayersPeriod,
   TopPlayersSnapshot,
 } from "@unicum.gg/core/wargaming/wot/players/top";
-import { buildSafe, unicum } from "@/services/sdk";
+import { buildSafe, optional, unicum } from "@/services/sdk";
 import { type Region, REGIONS } from "@unicum.gg/wargaming";
 
 const TOP_LIMIT = 9;
@@ -118,7 +118,7 @@ export async function HomePage({
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "7d"))),
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "overall"))),
     Promise.all(RATING_METRICS.map((m) => playersTopByRegions(m, "30d"))),
-    buildSafe(() => unicum.streamers.list(), { results: [] }).then(
+    optional(() => unicum.streamers.list(), { results: [] }).then(
       (r) => r.results as unknown as LiveStreamer[],
     ),
   ]);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { useEffect, useState } from "react";
 import { signOut, useSession } from "@/lib/auth-client";
-import { useRegion } from "@/hooks/use-region";
+import { LoginButton } from "@/components/login-button";
 import ROUTES from "@/constants/routes";
 import { unicum } from "@/services/sdk";
 import { wgIdentityFromEmail } from "@/lib/wg-session";
@@ -13,14 +13,13 @@ type UserClanTag = { tag: string; name: string; color: string };
 
 /**
  * Top-bar Wargaming.net ID login, styled after WG's own discreet top-right
- * link. Logged out: a "Log in" link that kicks off the WG OpenID redirect for
- * the current region. Logged in: the nickname (linking to the player's own
- * profile, where account actions like connecting Twitch live), their current
- * clan tag, plus a log out.
+ * link. Logged out: a "Log in" link that opens the region picker, which is
+ * where the WG OpenID redirect is started from. Logged in: the nickname
+ * (linking to the player's own profile, where account actions like connecting
+ * Twitch live), their current clan tag, plus a log out.
  */
 export function LoginWidget() {
   const { data: session, isPending } = useSession();
-  const { region } = useRegion();
   // Keyed by user id so a stale tag from a previous session is never shown
   // (and so we never need a synchronous clear on logout).
   const [clan, setClan] = useState<{
@@ -109,11 +108,13 @@ export function LoginWidget() {
   }
 
   return (
-    <a
-      href={ROUTES.AUTH_SIGN_IN(region)}
-      className="shrink-0 font-medium text-fd-foreground transition-colors hover:text-brand"
-    >
-      Log in
-    </a>
+    <LoginButton>
+      <button
+        type="button"
+        className="shrink-0 cursor-pointer font-medium text-fd-foreground transition-colors hover:text-brand"
+      >
+        Log in
+      </button>
+    </LoginButton>
   );
 }

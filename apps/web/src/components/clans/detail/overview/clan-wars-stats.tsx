@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, RatingColor, type ClanGlobalMapStats, type ClanGlobalMapView } from "@unicum.gg/shared";
@@ -233,7 +234,7 @@ export function ClanWarsStatsTable(
             {section.rows.map((row) => (
               <TableRow key={section.title + row.label}>
                 <TableCell className="py-1.5! font-medium">
-                  {row.label}
+                  <GlossaryLabel>{row.label}</GlossaryLabel>
                 </TableCell>
                 {loading ? (
                   <>

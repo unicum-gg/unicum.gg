@@ -4,6 +4,7 @@ import type {
   PlayerDerivedStats,
 } from "./derived-stats";
 import type { LiftDragByMetric } from "./lift-drag";
+import type { PlayerMarkProgress } from "./mark-progress";
 import type { RatingHistoryPoint } from "./rating-history";
 import type { Stats } from "./stats";
 import type { StrongholdStats } from "./stronghold-stats";
@@ -49,7 +50,9 @@ export type PlayerDetailData = {
     accountId: number;
     nickname: string;
     createdAt: Date;
-    lastBattleAt: Date;
+    /** Null when the account has no battle to date: never played, or never
+     * fetched (see `lastBattleOrNull`, which is what maps both to null). */
+    lastBattleAt: Date | null;
     updatedAt: Date;
   };
   /** Previous nicknames of this account, newest first (empty until a rename is
@@ -64,6 +67,19 @@ export type PlayerDetailData = {
   // The Twitch login of this account's linked channel (for the streamer badge's
   // link), or null when the account is not a streamer.
   twitchLogin: string | null;
+  /**
+   * Tournament honours, for the winner's crest.
+   *
+   * Read off the denormalised player columns rather than the archive: a crest
+   * is drawn beside a nickname everywhere, and resolving it would walk every
+   * roster ever mirrored. `featuredWins` is separate because Wargaming's own
+   * flag is what tells a branded championship from a nightly gold ladder.
+   */
+  tournamentWins: number;
+  tournamentFeaturedWins: number;
+  /** The win worth naming in the tooltip: a featured event when there is one,
+   * else the most recent. */
+  tournamentBestTitle: string | null;
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;
@@ -77,6 +93,12 @@ export type PlayerDetailData = {
   // the garage. See `./valuation`.
   valuation: PlayerValuation;
   liftDrag: LiftDragByMetric;
+  // Marks of Excellence and Marks of Mastery across the garage, plus the
+  // vehicles the player's current form puts within reach of their next mark.
+  // Optional so a payload cached under the previous shape (the detail cache is
+  // a 60s TTL, so at most one minute of them) reads as absent rather than
+  // crashing the panel.
+  markProgress?: PlayerMarkProgress;
   ratingHistory: RatingHistoryPoint[];
   clanHistory: PlayerClanHistoryFull;
   strongholds: PlayerStrongholdModes;

@@ -14,9 +14,10 @@ import {
   useState,
 } from "react";
 import Image from "next/image";
-import Link from "next/link";
-import { ClanTag } from "@/components/entity/clan-tag";
-import { PlayerBadges } from "@/components/entity/badges/player-badges";
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { GlossaryLabel } from "@/components/glossary/label";
+import { PlayerName } from "@/components/entity/player-name";
+import { identityFromRow } from "@/components/entity/player-identity";
 import { LeaderboardFilterBar } from "@/components/players/list/filter-bar";
 import {
   OnslaughtSeasonSelect,
@@ -86,28 +87,35 @@ function SortHead({
       ? CaretUpIcon
       : CaretDownIcon
     : CaretUpDownIcon;
+  const button = (
+    <button
+      type="button"
+      onClick={() =>
+        setSort(
+          active
+            ? { col, dir: sort.dir === "asc" ? "desc" : "asc" }
+            : { col, dir: "desc" },
+        )
+      }
+      className={cn(
+        "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
+        active ? "text-foreground" : "",
+      )}
+    >
+      {children}
+      <Icon
+        weight="bold"
+        className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
+      />
+    </button>
+  );
   return (
     <TableHead className={cn("text-right!", className)}>
-      <button
-        type="button"
-        onClick={() =>
-          setSort(
-            active
-              ? { col, dir: sort.dir === "asc" ? "desc" : "asc" }
-              : { col, dir: "desc" },
-          )
-        }
-        className={cn(
-          "inline-flex cursor-pointer items-center gap-1.5 font-medium whitespace-nowrap select-none hover:text-foreground",
-          active ? "text-foreground" : "",
-        )}
+      <GlossaryHeadTooltip
+        label={typeof children === "string" ? children : undefined}
       >
-        {children}
-        <Icon
-          weight="bold"
-          className={cn("size-3.5", active ? "opacity-100" : "opacity-40")}
-        />
-      </button>
+        {button}
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }
@@ -128,6 +136,9 @@ export type OnslaughtRow = {
   is_verified: boolean;
   is_supporter: boolean;
   twitch_login: string | null;
+  tournament_wins: number;
+  tournament_featured_wins: number;
+  tournament_best_title: string | null;
 };
 
 export function OnslaughtBoard({
@@ -326,7 +337,9 @@ export function OnslaughtBoard({
                 <TableHead className="w-16 text-center!">#</TableHead>
                 <TableHead>Player</TableHead>
                 <TableHead className="hidden w-28 text-right! sm:table-cell">
-                  Rank
+                  {/* The mode's own ladder, not a leaderboard position: the
+                      row's number is in the first column. */}
+                  <GlossaryLabel label="Onslaught">Rank</GlossaryLabel>
                 </TableHead>
                 <SortHead
                   col="battles"
@@ -369,28 +382,10 @@ export function OnslaughtBoard({
                     </TableCell>
                     <TableCell>
                       <div className="flex min-w-0 items-center gap-2">
-                        <Link
-                          href={ROUTES.PLAYER(region, r.nickname)}
-                          className="min-w-0 truncate hover:underline"
-                        >
-                          <span className="font-medium">{r.nickname}</span>
-                          {r.clan_tag ? (
-                            <>
-                              {" "}
-                              <ClanTag
-                                tag={r.clan_tag}
-                                color={r.clan_color}
-                                className="font-mono text-xs"
-                              />
-                            </>
-                          ) : null}
-                        </Link>
-                        <PlayerBadges
+                        <PlayerName
                           region={region}
-                          accountId={r.account_id}
-                          verified={r.is_verified}
-                          supporter={r.is_supporter}
-                          twitchLogin={r.twitch_login}
+                          player={identityFromRow(r)}
+                          href={ROUTES.PLAYER_ONSLAUGHT(region, r.nickname)}
                         />
                         {r.recordedNickname !== r.nickname ||
                         r.recordedClanTag !== r.clan_tag ? (

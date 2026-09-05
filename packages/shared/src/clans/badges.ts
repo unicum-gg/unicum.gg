@@ -9,11 +9,19 @@ import { StrongholdTier } from "../constants/stronghold";
  * player page and search without any of them fetching anything extra.
  */
 
-/** A ranked board a clan can hold a position on. */
+/**
+ * The boards a clan can wear a placing from: the stronghold competitions, and
+ * only those.
+ *
+ * The clan RATING used to be here, as three boards and then as one, and it is
+ * deliberately gone. WN7, WN8 and WNX measure nearly the same thing, so their
+ * top tens were the same clans three times over: on EU, 30 places between 14
+ * clans, six of them on all three at once. Merging them into one crest fixed
+ * the duplication and left the deeper problem, which is that a rating placing
+ * is neither rare nor earned in a competition. The stronghold boards are: 40
+ * places between 32 distinct clans, because each tier is its own contest.
+ */
 export enum ClanBoard {
-  Wn7 = "wn7",
-  Wn8 = "wn8",
-  Wnx = "wnx",
   Advances = "advances",
   SkirmishT10 = "t10",
   SkirmishT8 = "t8",
@@ -24,10 +32,11 @@ export enum ClanBoard {
  * Only the top ten of a board earns a badge.
  *
  * A rank threshold rather than a percentile because the boards are wildly
- * different sizes (7.5k eligible clans on each rating board, 259 on Advances),
+ * different sizes (259 eligible clans on Advances against thousands on the
+ * lower skirmish tiers),
  * so a shared cut-off like "top 1%" would mean 75 clans on one and 2 on
- * another. Ten is ten everywhere, and it stays rare: 46 clans out of the 125k
- * on EU hold one, against 16 at a top-three cut-off.
+ * another. Ten is ten everywhere, and it stays rare: 32 clans on EU hold one of
+ * the 40 places the four boards offer, so the crest still means something.
  */
 export const CLAN_BADGE_MAX_RANK = 10;
 
@@ -43,9 +52,6 @@ export type ClanBadgeFlags = {
 };
 
 export const CLAN_BOARD_LABEL: Record<ClanBoard, string> = {
-  [ClanBoard.Wn7]: "WN7",
-  [ClanBoard.Wn8]: "WN8",
-  [ClanBoard.Wnx]: "WNX",
   [ClanBoard.Advances]: "Advances",
   [ClanBoard.SkirmishT10]: "Skirmish X",
   [ClanBoard.SkirmishT8]: "Skirmish VIII",
@@ -65,9 +71,6 @@ export const CLAN_BOARD_LABEL: Record<ClanBoard, string> = {
 export type ClanBoardTincture = { fill: string; edge: string };
 
 export const CLAN_BOARD_TINCTURE: Record<ClanBoard, ClanBoardTincture> = {
-  [ClanBoard.Wnx]: { fill: "#A855F7", edge: "#7E22CE" },
-  [ClanBoard.Wn8]: { fill: "#2563EB", edge: "#1E40AF" },
-  [ClanBoard.Wn7]: { fill: "#0891B2", edge: "#155E75" },
   [ClanBoard.Advances]: { fill: "#EF4444", edge: "#B91C1C" },
   [ClanBoard.SkirmishT10]: { fill: "#F59E0B", edge: "#B45309" },
   [ClanBoard.SkirmishT8]: { fill: "#10B981", edge: "#047857" },
@@ -88,32 +91,52 @@ export const CLAN_BOARD_BY_STRONGHOLD_TIER: Record<StrongholdTier, ClanBoard> = 
 
 /** Longer wording for the tooltip, where there is room to say which board. */
 export const CLAN_BOARD_DESCRIPTION: Record<ClanBoard, string> = {
-  [ClanBoard.Wn7]: "clan WN7 rating",
-  [ClanBoard.Wn8]: "clan WN8 rating",
-  [ClanBoard.Wnx]: "clan WNX rating",
   [ClanBoard.Advances]: "Advances stronghold rating",
   [ClanBoard.SkirmishT10]: "Tier X skirmish rating",
   [ClanBoard.SkirmishT8]: "Tier VIII skirmish rating",
   [ClanBoard.SkirmishT6]: "Tier VI skirmish rating",
 };
 
-/** Display order: the ratings first (the site's headline metric), then the
- * stronghold boards heaviest tier first, so a clan's badges always read in the
- * same sequence rather than in whatever order the query returned them. */
+/** How much a board weighs when two placings are otherwise equal: heaviest
+ * tier first. Being second in Advances is a bigger claim than being second on the
+ * tier VI skirmishes, and the order says so. */
 const BOARD_ORDER: ClanBoard[] = [
-  ClanBoard.Wnx,
-  ClanBoard.Wn8,
-  ClanBoard.Wn7,
   ClanBoard.Advances,
   ClanBoard.SkirmishT10,
   ClanBoard.SkirmishT8,
   ClanBoard.SkirmishT6,
 ];
 
+/**
+ * How impressive a placing reads, as a band rather than a raw rank.
+ *
+ * A podium is a podium wherever it was won, so first, second and third each
+ * stand on their own and everything from fourth to tenth is one band below.
+ * Sorting on the raw rank instead made the band invisible: fourth beat fifth by
+ * as much as first beat second, when only the first of those gaps is something
+ * a reader cares about.
+ */
+function rankBand(rank: number): number {
+  return rank <= 3 ? rank : 4;
+}
+
+/**
+ * A clan's placings, most impressive first.
+ *
+ * The order matters beyond tidiness: the cluster folds everything past `max`
+ * into a "+N", so this decides which crests a reader actually sees. Sorting on
+ * the rank alone put a first place on the tier VI skirmishes ahead of a second
+ * in Advances, and pushed the bigger claim into the fold.
+ *
+ * Band first, then the board, then the rank inside the band. So every podium
+ * comes before every top-ten, the heavier tier comes first among equals, and a
+ * clan's two second places read in a stable order.
+ */
 export function sortClanBadges(badges: ClanRankBadge[]): ClanRankBadge[] {
   return [...badges].sort(
     (a, b) =>
-      a.rank - b.rank ||
-      BOARD_ORDER.indexOf(a.board) - BOARD_ORDER.indexOf(b.board),
+      rankBand(a.rank) - rankBand(b.rank) ||
+      BOARD_ORDER.indexOf(a.board) - BOARD_ORDER.indexOf(b.board) ||
+      a.rank - b.rank,
   );
 }

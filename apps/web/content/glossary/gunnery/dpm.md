@@ -15,7 +15,7 @@ anchors:
     - DPM
 ---
 
-Damage per minute: how much a gun deals over a sustained exchange, alpha multiplied by how often it can fire.
+How much a gun deals over a sustained exchange, alpha multiplied by how often it can fire.
 
 DPM is the sustained counterpart to alpha. It answers what a gun produces if it never stops firing, which is what decides a long brawl where both vehicles are trading in the open.
 

@@ -23,10 +23,16 @@ import {
   StrongholdTab,
   type StrongholdData,
 } from "@/components/players/detail/overview/stronghold";
-import { HR_ROW } from "@/components/players/detail/overview/stronghold-stats-table";
+import { STEEL_HUNTER_ROWS } from "@/components/players/detail/overview/stronghold-stats-table";
 import { AchievementsTab } from "@/components/players/detail/achievements";
 import { SessionsTab } from "@/components/players/detail/sessions";
 import { TanksTab } from "@/components/players/detail/tanks";
+import {
+  OnslaughtTab,
+  type PlayerOnslaughtData,
+} from "@/components/players/detail/onslaught";
+import { TournamentsTab } from "@/components/players/detail/tournaments";
+import type { PlayerTournamentRecord } from "@/components/players/detail/tournaments/row";
 import { ValueTab } from "@/components/players/detail/value";
 import { unicum } from "@/services/sdk";
 import { SessionGranularity, steelHunterWinrateColor } from "@unicum.gg/shared";
@@ -44,7 +50,10 @@ import type { Region } from "@unicum.gg/wargaming";
 // a single stronghold-style table with a "no data yet" fallback. `label` fills
 // both the panel title (`{nickname}'s {label} stats`) and the empty message
 // (`No {label} data yet`).
-type StrongholdModeId = Exclude<PlayerMode, PlayerMode.Overall>;
+type StrongholdModeId = Exclude<
+  PlayerMode,
+  PlayerMode.Overall | PlayerMode.Onslaught
+>;
 const STRONGHOLD_MODES: {
   id: StrongholdModeId;
   label: string;
@@ -85,6 +94,12 @@ export type PlayerTabsViewProps = {
   // Server-rendered cabinet for a direct `/achievements` landing; null
   // otherwise, so the tab fetches on demand.
   initialAchievements: PlayerAchievements | null;
+  /** Tournament record, server-rendered on a direct `/tournaments` landing;
+   * null otherwise, so the tab fetches on demand. */
+  initialTournaments: PlayerTournamentRecord | null;
+  /** Onslaught record, server-rendered on a direct `/onslaught` landing; null
+   * on every other view, where the client fetches it when the mode is opened. */
+  initialOnslaught: PlayerOnslaughtData | null;
 };
 
 export function PlayerTabsView({
@@ -101,6 +116,8 @@ export function PlayerTabsView({
   tankDetail,
   initialSessions,
   initialAchievements,
+  initialTournaments,
+  initialOnslaught,
 }: PlayerTabsViewProps) {
   // Each reachable (section, mode) pair is a route of its own, so both come from
   // the server and change through a real navigation. That is what keeps the
@@ -143,6 +160,41 @@ export function PlayerTabsView({
     },
   );
 
+  // Same on-demand shape as the cabinet: only this tab reads it, and a player
+  // who has never entered a tournament still pays for the query, so it waits
+  // until the tab is opened (null key = no request).
+  const tournamentsReq = () =>
+    unicum.region(region).players(nickname).tournaments();
+  const seededTournaments = initialTournaments != null;
+  const { data: tournaments } = useSWR(
+    section === PlayerSection.Tournaments ? tournamentsReq().url() : null,
+    () =>
+      tournamentsReq().then((r) => r as unknown as PlayerTournamentRecord),
+    {
+      fallbackData: initialTournaments ?? undefined,
+      revalidateOnMount: !seededTournaments,
+    },
+  );
+
+  // Same on-demand shape: the board lists only the few thousand players per
+  // region who reach Champion, so everyone else would pay for a query that comes
+  // back empty. It waits until the tab is opened.
+  const onslaughtReq = () =>
+    unicum.region(region).players(nickname).onslaught();
+  const onOnslaught =
+    section === PlayerSection.Overview && mode === PlayerMode.Onslaught;
+  const seededOnslaught = initialOnslaught != null;
+  const { data: onslaught } = useSWR(
+    onOnslaught ? onslaughtReq().url() : null,
+    () => onslaughtReq().then((r) => r as unknown as PlayerOnslaughtData),
+    {
+      fallbackData: initialOnslaught ?? undefined,
+      revalidateOnMount: !seededOnslaught,
+      revalidateOnFocus: false,
+      shouldRetryOnError: false,
+    },
+  );
+
   // Same on-demand shape as the two above, plus a bucket size the reader picks.
   // Only the default one is ever server-rendered, so switching to Weekly is a
   // fetch and switching back is a cache hit.
@@ -179,6 +231,8 @@ export function PlayerTabsView({
     clanHistory: detail.clanHistory,
     nameHistory: detail.nameHistory,
     createdAt: detail.player.createdAt,
+    markProgress: detail.markProgress ?? null,
+    tanksHref: playerSectionHref(basePath, PlayerSection.Tanks),
     nowMs,
   };
   const strongholds: Record<StrongholdModeId, StrongholdData> = {
@@ -195,7 +249,9 @@ export function PlayerTabsView({
   const onValue = section === PlayerSection.Value;
   const onAchievements = section === PlayerSection.Achievements;
   const onSessions = section === PlayerSection.Sessions;
-  const showModes = !onTanks && !onValue && !onAchievements && !onSessions;
+  const onTournaments = section === PlayerSection.Tournaments;
+  const showModes =
+    !onTanks && !onValue && !onAchievements && !onSessions && !onTournaments;
 
   return (
     <>
@@ -228,7 +284,14 @@ export function PlayerTabsView({
         </>
       )}
 
-      {onSessions ? (
+      {onTournaments ? (
+        <TournamentsTab
+          region={region}
+          nickname={nickname}
+          data={tournaments ?? null}
+          loading={!tournaments}
+        />
+      ) : onSessions ? (
         <SessionsTab
           region={region}
           nickname={nickname}
@@ -259,12 +322,21 @@ export function PlayerTabsView({
         />
       ) : mode === PlayerMode.Overall ? (
         <OverallTab region={region} nickname={nickname} {...overall} />
+      ) : mode === PlayerMode.Onslaught ? (
+        <OnslaughtTab
+          region={region}
+          nickname={nickname}
+          data={onslaught ?? null}
+          loading={!onslaught}
+        />
       ) : (
         <StrongholdTab
           nickname={nickname}
           label={STRONGHOLD_MODES.find((s) => s.id === mode)?.label ?? ""}
           data={strongholds[mode]}
-          trailingRows={mode === PlayerMode.SteelHunter ? [HR_ROW] : undefined}
+          trailingRows={
+            mode === PlayerMode.SteelHunter ? STEEL_HUNTER_ROWS : undefined
+          }
           winrateColorFn={
             mode === PlayerMode.SteelHunter ? steelHunterWinrateColor : undefined
           }

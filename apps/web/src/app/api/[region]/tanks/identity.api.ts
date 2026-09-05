@@ -18,6 +18,14 @@ export const tankIdentity = z
     isCommonTest: z
       .boolean()
       .meta({ description: "Only on the Common Test client, not yet released." }),
+    isHidden: z.boolean().meta({
+      description:
+        "Not a vehicle at all (training bot, story-mode prop). Always false here: these are excluded from the catalogue.",
+    }),
+    variant: z.string().nullable().meta({
+      description:
+        "The parallel catalogue this vehicle comes from, spelled as the suffix its name ends with (\"IGR\" for the retired cybercafe reissues). Null for a normal vehicle.",
+    }),
     // Optional: the dataset endpoints carry it, the changes feed (which is
     // about what already shipped) has no use for it.
     testChanges: z.number().optional().meta({

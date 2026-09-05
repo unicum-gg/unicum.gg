@@ -15,9 +15,13 @@ anchors:
     - DPG
     - Damage per game
     - Avg damage
+    - Damages
+    - Avg dmg
+    - Dmg
+    - Average damage
 ---
 
-Damage per game: the average damage dealt per battle, the most quoted measure of personal output and the one most sensitive to which vehicles are played.
+The average damage dealt per battle, the most quoted measure of personal output and the one most sensitive to which vehicles are played.
 
 DPG is total damage divided by battles. On a single vehicle it is directly comparable between players, which is why it is the number quoted when someone claims a tank is good or bad in their hands.
 

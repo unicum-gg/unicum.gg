@@ -3,6 +3,12 @@ import {
   clansByRegion,
   DEFAULT_STEEL_HUNTER_SORT,
   HR_MIN_BATTLES,
+  HR_W_WIN,
+  HR_W_XP,
+  HR_WR_BASE,
+  HR_XP_BASE,
+  HRB_SCALE,
+  HRB_VOLUME_K,
   playersByRegion,
   SteelHunterSort,
 } from "@unicum.gg/shared";
@@ -26,15 +32,23 @@ export type TopSteelHunterResult = {
   frags: number;
 };
 
+// Every constant enters the expression as a float literal: `sh_battles` is an
+// integer column, so `sh_battles / 50` would truncate, and a bound parameter
+// would leave postgres with a type it cannot infer inside the arithmetic.
+function float(n: number): SQL {
+  return sql.raw(Number.isInteger(n) ? `${n}.0` : String(n));
+}
+
 // HRB, the battles-based Hunter Rating: the same HR effectiveness score (XP +
 // win rate) but with a growing `ln(1+battles/50)` volume reward instead of HR's
-// confidence brake, rescaled (×635) so the median matches HR's. See `hrbColor`
-// in @unicum.gg/shared for the canonical formula + calibration; computed inline
-// here (rather than a cached column) since it is a pure function of the cached
-// sh_* totals. The gate (sh_battles >= 100 AND hr NOT NULL) guarantees a
-// positive divisor and a non-null sh_avg_xp.
+// confidence brake, rescaled (×635) so the median matches HR's. The same formula
+// as `computeHRB` in @unicum.gg/shared, whose constants it reads, evaluated here
+// in SQL because the board ranks the whole population; computed inline (rather
+// than a cached column) since it is a pure function of the cached sh_* totals.
+// The gate (sh_battles >= 100 AND hr NOT NULL) guarantees a positive divisor and
+// a non-null sh_avg_xp.
 function hrbSql(players: (typeof playersByRegion)[Region]): SQL {
-  return sql`(635.0 * (0.5 * (${players.shAvgXp} / 1034.0) + 0.5 * ((${players.shWins}::float / ${players.shBattles}) / 0.41)) * ln(1 + ${players.shBattles} / 50.0))`;
+  return sql`(${float(HRB_SCALE)} * (${float(HR_W_XP)} * (${players.shAvgXp} / ${float(HR_XP_BASE)}) + ${float(HR_W_WIN)} * ((${players.shWins}::float / ${players.shBattles}) / ${float(HR_WR_BASE)})) * ln(1 + ${players.shBattles} / ${float(HRB_VOLUME_K)}))`;
 }
 
 // Per-column ORDER BY. HR rides the partial `*_players_hr_idx`; the derived

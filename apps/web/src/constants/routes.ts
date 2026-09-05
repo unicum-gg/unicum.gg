@@ -19,11 +19,17 @@ const ROUTES = {
   //   rejects a query string on the callback path, not on this start URL).
   //   `callbackURL` is the same-origin path to land on once logged in (e.g.
   //   `/api/connect/twitch` to chain straight into linking Twitch).
-  AUTH_SIGN_IN: (region: Region, callbackURL?: string) =>
-    pathcat(
-      "/api/auth/sign-in/wargaming",
-      callbackURL ? { region, callbackURL } : { region },
-    ),
+  //   Built with URLSearchParams rather than `pathcat` like the rest of this
+  //   file, because `pathcat` concatenates query values verbatim: a
+  //   `callbackURL` carrying its own query (`/eu/maps/x?view=onslaught`) would
+  //   spill its params into ours, truncating the destination at the second `?`
+  //   and, if one of them happened to be named `region`, overriding the region
+  //   the player just picked in the login modal.
+  AUTH_SIGN_IN: (region: Region, callbackURL?: string) => {
+    const query = new URLSearchParams({ region });
+    if (callbackURL) query.set("callbackURL", callbackURL);
+    return `/api/auth/sign-in/wargaming?${query.toString()}`;
+  },
 
   // - Home
   HOME: (region: Region) =>
@@ -40,6 +46,7 @@ const ROUTES = {
 
   // - Glossary (region-less by design: a definition reads the same on every
   //   server, so one URL per term rather than three of the same page).
+  BADGES: "/badges",
   GLOSSARY: "/glossary",
   GLOSSARY_TERM: (slug: string) => pathcat("/glossary/:slug", { slug }),
   GLOSSARY_CATEGORY: (category: string) =>
@@ -73,6 +80,17 @@ const ROUTES = {
   // matching mode instead of the overview.
   PLAYER_STEEL_HUNTER: (region: Region, nickname: string) =>
     pathcat("/:region/players/:nickname/steel-hunter", { region, nickname }),
+  // A player's Onslaught mode, so the Onslaught leaderboard links straight to
+  // the matching mode instead of the overview, like Steel Hunter above.
+  PLAYER_ONSLAUGHT: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/onslaught", { region, nickname }),
+  // A player's Tournaments tab, where the winner's crest sends a reader: the
+  // crest says they have won, this is the record of what.
+  PLAYER_TOURNAMENTS: (region: Region, nickname: string) =>
+    pathcat("/:region/players/:nickname/tournaments", { region, nickname }),
+  // A clan's Tournaments tab, the target of its own winner's crest.
+  CLAN_TOURNAMENTS: (region: Region, tag: string) =>
+    pathcat("/:region/clans/:tag/tournaments", { region, tag }),
   // One player's record on one vehicle, the game's Service Record. A URL of its
   // own rather than a panel state, so it can be linked, shared and reopened.
   PLAYER_TANK: (region: Region, nickname: string, slug: string) =>
@@ -147,6 +165,30 @@ const ROUTES = {
     region === Region.EU
       ? "/maps/changes"
       : pathcat("/:region/maps/changes", { region }),
+
+  // - Servers. The game's clusters and their population, which is a property of
+  //   the region rather than of the game, so it is regional all the way down.
+  SERVERS: (region: Region) =>
+    region === Region.EU ? "/servers" : pathcat("/:region/servers", { region }),
+
+  // - Tournaments. The landing shortens for EU like every other catalogue's
+  //   does, Servers included, so the section has a URL without a region in it.
+  //   A tournament itself stays regional all the way down: it is run on one
+  //   realm and its teams are that realm's accounts.
+  TOURNAMENT: (region: Region, id: number | string) =>
+    pathcat("/:region/tournaments/:id", { region, id: String(id) }),
+  TOURNAMENTS: (region: Region) =>
+    region === Region.EU
+      ? "/tournaments"
+      : pathcat("/:region/tournaments", { region }),
+  // `team` singular, mirroring the path Wargaming addresses a tournament team
+  // on, so a habit from their site lands somewhere familiar.
+  TOURNAMENT_TEAM: (region: Region, id: number | string, teamId: number | string) =>
+    pathcat("/:region/tournaments/:id/team/:teamId", {
+      region,
+      id: String(id),
+      teamId: String(teamId),
+    }),
   STRONGHOLD: (region: Region, tier?: StrongholdTier) => {
     const base =
       region === Region.EU

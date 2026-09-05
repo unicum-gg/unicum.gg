@@ -14,6 +14,7 @@ import { WgnClansResource } from "../api/wgn/clans";
 import { PortalClansResource } from "../portal/wot/clans";
 import { PortalProfileResource } from "../portal/wot/profile";
 import { StrongholdResource } from "../stronghold/wot";
+import { TournamentsResource } from "../tournaments/wot/resource";
 import { SourceVehiclesResource } from "../source/wot/vehicles";
 import { SourceArenasResource } from "../source/wot/arenas";
 import { SourceSpecsResource } from "../source/wot/specs";
@@ -110,12 +111,14 @@ class RegionClient {
   readonly api: ApiSurface;
   readonly portal: PortalSurface;
   readonly stronghold: StrongholdResource;
+  readonly tournaments: TournamentsResource;
   readonly source: SourceSurface;
 
   constructor(transport: Transport, region: Region) {
     this.api = new ApiSurface(transport, region);
     this.portal = new PortalSurface(transport, region);
     this.stronghold = new StrongholdResource(transport, region);
+    this.tournaments = new TournamentsResource(transport, region);
     this.source = new SourceSurface(transport, region);
   }
 }

@@ -1,7 +1,6 @@
 import { cookies, headers } from "next/headers";
 import { NextResponse } from "next/server";
 import { env } from "@unicum.gg/shared";
-import { isRegion, Region } from "@unicum.gg/wargaming";
 import { auth } from "@unicum.gg/core/auth";
 import { isSupporter } from "@unicum.gg/core/subscription";
 import {
@@ -9,7 +8,7 @@ import {
   isSupporterRoleEnabled,
 } from "@unicum.gg/core/discord/supporter-role";
 import ROUTES from "@/constants/routes";
-import STORAGE from "@/constants/storage";
+import { signInRegion } from "@/lib/auth-region";
 
 // Entry point for the supporter-role Discord link. Verifies the user is a
 // logged-in active supporter, then either links their Discord account (Better
@@ -32,8 +31,7 @@ export async function GET(): Promise<Response> {
 
   const session = await auth.api.getSession({ headers: requestHeaders });
   if (!session?.user) {
-    const stored = (await cookies()).get(STORAGE.COOKIES.REGION)?.value;
-    const region = stored && isRegion(stored) ? stored : Region.EU;
+    const region = signInRegion(await cookies());
     return NextResponse.redirect(
       new URL(
         ROUTES.AUTH_SIGN_IN(region, "/api/connect/discord"),

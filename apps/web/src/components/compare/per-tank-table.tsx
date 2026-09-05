@@ -1,5 +1,6 @@
 "use client";
 
+import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
 import {
   CaretDownIcon,
   CaretUpDownIcon,
@@ -49,13 +50,17 @@ export function SortToggle({
   onClick,
   align,
   children,
+  // Everything else lands on the button, which is what lets this be a tooltip
+  // trigger: Radix clones its handlers and aria attributes onto the child, and
+  // a component that destructures its props drops them without a word.
+  ...props
 }: {
   active: boolean;
   direction: SortDirection | null;
   onClick: () => void;
   align: "start" | "end";
   children: React.ReactNode;
-}) {
+} & React.ComponentProps<"button">) {
   const Icon =
     active && direction === SortDirection.Asc
       ? CaretUpIcon
@@ -66,6 +71,7 @@ export function SortToggle({
     <button
       type="button"
       onClick={onClick}
+      {...props}
       className={cn(
         "flex w-full cursor-pointer items-center gap-1.5 px-3 py-2 text-left font-medium select-none hover:text-foreground",
         align === "end" && "justify-end text-right",
@@ -95,14 +101,16 @@ export function SubHeadSort<TMetric extends string>({
   const active = !!sort && sameColumn(sort.column, column);
   return (
     <TableHead className="p-0">
-      <SortToggle
-        active={active}
-        direction={active ? sort!.direction : null}
-        onClick={() => onClick(column)}
-        align="end"
-      >
-        <span className="text-xs text-muted-foreground">{label}</span>
-      </SortToggle>
+      <GlossaryHeadTooltip label={label}>
+        <SortToggle
+          active={active}
+          direction={active ? sort!.direction : null}
+          onClick={() => onClick(column)}
+          align="end"
+        >
+          <span className="text-xs text-muted-foreground">{label}</span>
+        </SortToggle>
+      </GlossaryHeadTooltip>
     </TableHead>
   );
 }

@@ -8,8 +8,13 @@ related:
   - skirmish
   - clan-wars
   - clan
+  - sr
+  - elo
 links:
   - target: advances
+anchors:
+  labels:
+    - Advances
 ---
 
 The fifteen against fifteen Tier X Stronghold format, where clans attack each other's bases in scheduled events for a larger share of resource.

@@ -1,8 +1,8 @@
-import { and, eq, inArray, lte } from "drizzle-orm";
+import { and, eq, gt, inArray, lte } from "drizzle-orm";
 import {
   CLAN_BADGE_MAX_RANK,
   ClanBoard,
-  clanRatingsByRegion,
+  clansByRegion,
   sortClanBadges,
   strongholdRatingsByRegion,
   type ClanRankBadge,
@@ -35,7 +35,6 @@ export async function resolveClanBadges(
   const unique = [...new Set(clanIds)];
   if (unique.length === 0) return result;
 
-  const ratings = clanRatingsByRegion[region];
   const stronghold = strongholdRatingsByRegion[region];
 
   const push = (clanId: number, board: ClanBoard, rank: number) => {
@@ -44,45 +43,30 @@ export async function resolveClanBadges(
     else result.set(clanId, [{ board, rank }]);
   };
 
-  const [ratingRows, strongholdRows] = await Promise.all([
-    db
-      .select({
-        clanId: ratings.clanId,
-        metric: ratings.metric,
-        rank: ratings.rank,
-      })
-      .from(ratings)
-      .where(
-        and(
-          inArray(ratings.clanId, unique),
-          lte(ratings.rank, CLAN_BADGE_MAX_RANK),
-        ),
+  // Stronghold only. The clan ratings table was read here too, until the rating
+  // crest was dropped: its top ten was the same handful of clans on all three
+  // metrics, which is neither rare nor won in a competition. Removing the board
+  // removed the query with it rather than leaving one whose rows were all
+  // discarded on the way out.
+  const strongholdRows = await db
+    .select({
+      clanId: stronghold.clanId,
+      tier: stronghold.tier,
+      rank: stronghold.rank,
+    })
+    .from(stronghold)
+    .where(
+      and(
+        inArray(stronghold.clanId, unique),
+        eq(stronghold.period, STRONGHOLD_PERIOD),
+        lte(stronghold.rank, CLAN_BADGE_MAX_RANK),
       ),
-    db
-      .select({
-        clanId: stronghold.clanId,
-        tier: stronghold.tier,
-        rank: stronghold.rank,
-      })
-      .from(stronghold)
-      .where(
-        and(
-          inArray(stronghold.clanId, unique),
-          eq(stronghold.period, STRONGHOLD_PERIOD),
-          lte(stronghold.rank, CLAN_BADGE_MAX_RANK),
-        ),
-      ),
-  ]);
+    );
 
-  // `metric` and `tier` are text columns, and the enum values are exactly the
-  // strings they hold, so an unknown value (a board added to the table before
-  // it is added here) is skipped rather than rendered as a broken badge.
+  // `tier` is a text column and the enum values are exactly the strings it
+  // holds, so an unknown value (a board added to the table before it is added
+  // here) is skipped rather than rendered as a broken badge.
   const boards = new Set<string>(Object.values(ClanBoard));
-  for (const r of ratingRows) {
-    if (r.rank !== null && boards.has(r.metric)) {
-      push(r.clanId, r.metric as ClanBoard, r.rank);
-    }
-  }
   for (const r of strongholdRows) {
     if (r.rank !== null && boards.has(r.tier)) {
       push(r.clanId, r.tier as ClanBoard, r.rank);
@@ -91,4 +75,44 @@ export async function resolveClanBadges(
 
   for (const [clanId, list] of result) result.set(clanId, sortClanBadges(list));
   return result;
+}
+
+/**
+ * A clan's tournament honours, for the winner's crest beside its tag.
+ *
+ * Straight off the denormalised clan columns, so a board of a hundred rows
+ * costs one indexed lookup rather than a walk through the archive. Only the
+ * clans that hold a win come back; the rest are absent and read as none.
+ */
+export type ClanTournamentHonours = {
+  wins: number;
+  featuredWins: number;
+  bestTitle: string | null;
+};
+
+export async function resolveClanTournamentHonours(
+  region: Region,
+  clanIds: number[],
+): Promise<Map<number, ClanTournamentHonours>> {
+  const out = new Map<number, ClanTournamentHonours>();
+  const unique = [...new Set(clanIds)];
+  if (unique.length === 0) return out;
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({
+      id: clans.id,
+      wins: clans.tournamentWins,
+      featured: clans.tournamentFeaturedWins,
+      bestTitle: clans.tournamentBestTitle,
+    })
+    .from(clans)
+    .where(and(inArray(clans.id, unique), gt(clans.tournamentWins, 0)));
+  for (const row of rows) {
+    out.set(Number(row.id), {
+      wins: row.wins,
+      featuredWins: row.featured,
+      bestTitle: row.bestTitle,
+    });
+  }
+  return out;
 }

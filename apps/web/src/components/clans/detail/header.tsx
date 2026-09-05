@@ -2,7 +2,6 @@
 
 import { format } from "date-fns";
 import Image from "next/image";
-import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
 import { ClanBadges } from "@/components/entity/badges/clan-rank-badge";
 import type { ClanRankBadge as ClanRankBadgeData } from "@unicum.gg/shared";
@@ -19,7 +18,8 @@ import {
   RefreshKind,
   useRefreshBeacon,
 } from "@/components/refresh-beacon";
-import ROUTES from "@/constants/routes";
+import { PlayerName } from "@/components/entity/player-name";
+import { ScrollRail } from "@/components/scroll-rail";
 import { cn } from "@/lib/utils";
 import type { ClanFullInfo } from "@unicum.gg/core/wargaming/wot/clans/info";
 import { ClanRole } from "@unicum.gg/wargaming";
@@ -104,6 +104,9 @@ export function ClanHeader(
         /** Podium positions from the overview payload; empty for nearly every
          * clan, so the cluster usually renders nothing. */
         badges: ClanRankBadgeData[];
+        tournamentWins: number;
+        tournamentFeaturedWins: number;
+        tournamentBestTitle: string | null;
       },
 ) {
   const loading = "loading" in props;
@@ -161,7 +164,15 @@ export function ClanHeader(
                 would strand the crests next to the buttons instead of the name.
                 It keeps `min-w-0` so a long clan name still shrinks it, which is
                 what `AutoFitText` measures to scale the title down. */}
-            <ClanBadges badges={props.badges} region={region} size={24} />
+            <ClanBadges
+              badges={props.badges}
+              region={region}
+              tag={clan.tag}
+              tournamentWins={props.tournamentWins}
+              tournamentFeaturedWins={props.tournamentFeaturedWins}
+              tournamentBestTitle={props.tournamentBestTitle}
+              size={24}
+            />
             <RosterBoostBadge boostRatio={boostRatio} />
             <span className="ml-auto flex shrink-0 items-center gap-3">
               <CompareWithButton region={region} current={clan.tag} />
@@ -255,7 +266,15 @@ function InfoRow({
     members.find((m) => m.role === ClanRole.Commander)?.name ?? clan.leaderName;
   return (
     <div className={cn("border-t border-fd-border", className)}>
-      <div className="flex min-w-0 flex-1 flex-col items-start gap-y-0.5 px-4 py-1 text-xs text-muted-foreground sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-2 sm:py-0">
+      {/* Scrolled rather than wrapped from `sm` up: the row is boxed in by the
+          rating columns beside it, and a second line pushes the whole page
+          down. Below `sm` the header stacks and the row wraps as before, since
+          a phone has the height and not the width. */}
+      <ScrollRail
+        compact
+        containerClassName="flex-1"
+        className="flex flex-col items-start gap-y-0.5 px-4 py-1 text-xs text-muted-foreground sm:flex-row sm:flex-nowrap sm:items-center sm:gap-x-2 sm:py-0 sm:whitespace-nowrap"
+      >
         <span>
           <span className="font-medium">Members:</span> {clan.membersCount}
         </span>
@@ -263,22 +282,20 @@ function InfoRow({
         <span>
           <span className="font-medium">Created:</span>{" "}
           {format(clan.createdAt, DAY_FORMAT)} by{" "}
-          <Link
-            href={ROUTES.PLAYER(region, clan.creatorName)}
-            className="underline-offset-2 hover:underline"
-          >
-            {clan.creatorName}
-          </Link>
+          <PlayerName
+            region={region}
+            player={{ nickname: clan.creatorName }}
+            className="inline-flex align-baseline"
+          />
         </span>
         <span className="hidden sm:inline">·</span>
         <span>
           <span className="font-medium">Commander:</span>{" "}
-          <Link
-            href={ROUTES.PLAYER(region, commanderName)}
-            className="underline-offset-2 hover:underline"
-          >
-            {commanderName}
-          </Link>
+          <PlayerName
+            region={region}
+            player={{ nickname: commanderName }}
+            className="inline-flex align-baseline"
+          />
         </span>
         {clan.isDisbanded && (
           <>
@@ -299,7 +316,7 @@ function InfoRow({
           </>
         )}
         <RefreshIndicator {...beacon} />
-      </div>
+      </ScrollRail>
       {clan.languages.length > 0 && (
         <div className={cn("flex shrink-0 items-center", flagWrapperClassName)}>
           <LanguageFlags

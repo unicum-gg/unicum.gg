@@ -7,6 +7,7 @@ import {
 } from "@/components/panel";
 import { TankConfigurator } from "@/components/tanks/detail/specifications/configurator";
 import { TankResearchPath } from "@/components/tanks/detail/specifications/research-path";
+import { SimilarTanks } from "@/components/tanks/detail/similar";
 import { TankVideosPreview } from "@/components/tanks/detail/videos";
 import type { TankVideoCardData } from "@/components/tanks/detail/videos/card";
 import type { TankConfig } from "@unicum.gg/core/wargaming/wot/tanks/configs";
@@ -17,6 +18,7 @@ import type { TankModuleNode } from "@unicum.gg/core/wargaming/wot/tanks/modules
 import type { ResearchBranch } from "@unicum.gg/core/wargaming/wot/tanks/research-path";
 import type { TankSkillTree } from "@unicum.gg/core/wargaming/wot/tanks/skill-tree";
 import type { TankSpec, VehicleMeta, VehicleMode } from "@unicum.gg/shared";
+import type { SimilarTankRow } from "@/app/api/[region]/tanks/[slug]/similar/schema.api";
 import type { Region } from "@unicum.gg/wargaming";
 
 /** What the vehicle is: where it sits in its line, what it is made of, and what
@@ -37,6 +39,7 @@ export function SpecificationsTab({
   mechanic,
   researchPath,
   videos,
+  similar,
   testVersion,
 }: {
   region: Region;
@@ -55,6 +58,8 @@ export function SpecificationsTab({
   mechanic?: string | null;
   researchPath: ResearchBranch;
   videos: TankVideoCardData[];
+  /** The vehicles that play like this one. Empty when it cannot be placed. */
+  similar: SimilarTankRow[];
   /** The Common Test build that rebalances this vehicle, null when none does. */
   testVersion: string | null;
 }) {
@@ -117,6 +122,19 @@ export function SpecificationsTab({
         tankName={meta.name}
         videos={videos}
       />
+      {/* Last, deliberately: it is the section that sends the reader somewhere
+          else, so it comes after everything this page had to say. */}
+      {similar.length > 0 && (
+        <>
+          <PanelSeparator />
+          <SimilarTanks
+            region={region}
+            slug={slug}
+            tankName={meta.name}
+            results={similar}
+          />
+        </>
+      )}
     </>
   );
 }

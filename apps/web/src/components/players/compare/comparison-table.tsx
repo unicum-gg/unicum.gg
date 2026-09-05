@@ -1,5 +1,6 @@
 "use client";
 
+import { GlossaryLabel } from "@/components/glossary/label";
 import { bestIndex, type MetricRow } from "@/components/compare/cells";
 import {
   Table,
@@ -112,7 +113,9 @@ export function ComparisonTable({
           const best = bestIndex(row.cells, row.kind);
           return (
             <TableRow key={row.label}>
-              <TableCell className="font-medium">{row.label}</TableCell>
+              <TableCell className="font-medium">
+                <GlossaryLabel>{row.label}</GlossaryLabel>
+              </TableCell>
               {row.cells.map((cell, i) => (
                 <TableCell
                   key={i}
