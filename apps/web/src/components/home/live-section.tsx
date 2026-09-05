@@ -4,6 +4,7 @@ import { useSyncExternalStore } from "react";
 import type { LiveStreamer } from "@unicum.gg/shared";
 import { HomeHero } from "@/components/home/home-hero";
 import { LiveStreams } from "@/components/home/live-streams";
+import { useLiveStreamers } from "@/hooks/use-live-streamers";
 import STORAGE from "@/constants/storage";
 
 // localStorage-backed "hide the streamers rail" preference, so a visitor who
@@ -40,15 +41,23 @@ function setHidden(hidden: boolean): void {
  */
 export function LiveSection({ streamers }: { streamers: LiveStreamer[] }) {
   const hidden = useSyncExternalStore(subscribe, isHidden, () => false);
+  // Read through the SSE store rather than off the server render alone. The
+  // server list is a seed, not the truth: it comes from one call to Twitch at
+  // render time, so a hiccup there used to decide the rail was empty, fall
+  // through to the hero, and never mount the component that subscribes to the
+  // push channel. The rail could then only come back on a later successful
+  // revalidation, even though the worker kept publishing live streamers the
+  // whole time. Subscribing here lets the push put it back within seconds.
+  const live = useLiveStreamers(streamers);
 
-  if (streamers.length === 0) return <HomeHero />;
+  if (live.length === 0) return <HomeHero />;
   if (hidden) {
     return (
       <HomeHero
         onShowStreams={() => setHidden(false)}
-        streamingCount={streamers.length}
+        streamingCount={live.length}
       />
     );
   }
-  return <LiveStreams initial={streamers} onHide={() => setHidden(true)} />;
+  return <LiveStreams initial={live} onHide={() => setHidden(true)} />;
 }
