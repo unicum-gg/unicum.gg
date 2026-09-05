@@ -23,7 +23,19 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
   const rows = await db.select().from(streamers);
   if (rows.length === 0) return [];
 
-  const live = await getWotStreamsByLogin(rows.map((r) => r.twitchLogin));
+  // Degrades to "nobody is live" rather than propagating. Twitch is a third
+  // party on the request path of a decorative rail, so a failure there must cost
+  // the section and nothing else: the reader still gets the page, and the SSE
+  // channel (fed by the worker, which polls Twitch on its own) fills the rail in
+  // as soon as it publishes. Logged loudly because a silent empty rail reads
+  // exactly like "no streamer is live right now".
+  let live;
+  try {
+    live = await getWotStreamsByLogin(rows.map((r) => r.twitchLogin));
+  } catch (err) {
+    console.error("[live-streamers] Twitch lookup failed, serving none:", err);
+    return [];
+  }
   if (live.length === 0) return [];
   const byLogin = new Map(live.map((s) => [s.userLogin, s]));
 

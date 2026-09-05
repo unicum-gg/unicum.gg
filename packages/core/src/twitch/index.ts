@@ -14,6 +14,11 @@ const HELIX = "https://api.twitch.tv/helix";
 const TOKEN_URL = "https://id.twitch.tv/oauth2/token";
 /** Helix caps every batched lookup (`/streams`, `/users`) at this many values. */
 const HELIX_BATCH = 100;
+// Twitch answers in well under a second, so this is not a latency allowance: it
+// is there so a request that never answers cannot hang forever. `fetch` has no
+// default timeout, and a socket that opens and then goes quiet leaves the
+// promise pending for the life of the process.
+const TWITCH_TIMEOUT_MS = 10_000;
 
 export function isTwitchEnabled(): boolean {
   return Boolean(env.TWITCH_CLIENT_ID && env.TWITCH_CLIENT_SECRET);
@@ -77,13 +82,17 @@ async function appToken(): Promise<string> {
   const now = Date.now();
   if (tokenCache && tokenCache.expiresAt > now + 60_000) return tokenCache.token;
   if (tokenInFlight) return tokenInFlight;
-  tokenInFlight = (async () => {
+  const pending = (async () => {
     const body = new URLSearchParams({
       client_id: env.TWITCH_CLIENT_ID as string,
       client_secret: env.TWITCH_CLIENT_SECRET as string,
       grant_type: "client_credentials",
     });
-    const res = await fetch(TOKEN_URL, { method: "POST", body });
+    const res = await fetch(TOKEN_URL, {
+      method: "POST",
+      body,
+      signal: AbortSignal.timeout(TWITCH_TIMEOUT_MS),
+    });
     if (!res.ok) throw new Error(`Twitch token HTTP ${res.status}`);
     const json = (await res.json()) as {
       access_token: string;
@@ -95,11 +104,18 @@ async function appToken(): Promise<string> {
     };
     return json.access_token;
   })();
-  try {
-    return await tokenInFlight;
-  } finally {
-    tokenInFlight = null;
-  }
+  tokenInFlight = pending;
+  // Cleared from the promise itself rather than from the caller's `finally`.
+  // A caller awaiting a request that never answers never resumes, so its own
+  // `finally` never runs, and the dead promise would then be handed to every
+  // later call for the life of the process: one hung mint would take the whole
+  // Twitch integration down until a redeploy, long after Twitch recovered.
+  void pending
+    .catch(() => {})
+    .finally(() => {
+      if (tokenInFlight === pending) tokenInFlight = null;
+    });
+  return pending;
 }
 
 /** A non-2xx Helix response, carrying the status so callers can branch on it. */
@@ -124,6 +140,7 @@ async function helix<T>(
       "Client-Id": env.TWITCH_CLIENT_ID as string,
       Authorization: `Bearer ${token}`,
     },
+    signal: AbortSignal.timeout(TWITCH_TIMEOUT_MS),
   });
   if (res.status === 401 && retryOn401) {
     tokenCache = null;
