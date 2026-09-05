@@ -15,9 +15,28 @@ import { cn } from "@/lib/utils";
  * The caller supplies the `TooltipProvider`: a control whose segments have no
  * tooltip should not mount one.
  */
-export function SegmentedControl({ children }: { children: ReactNode }) {
+export function SegmentedControl({
+  children,
+  compact,
+}: {
+  children: ReactNode;
+  /**
+   * Sized to sit in a row of small buttons rather than beside a title.
+   *
+   * The comparison puts this next to the Setup button on every column, where
+   * the roomier version stood a third taller than everything around it. The
+   * padding goes rather than the grouping: the border is what says the two
+   * segments are one choice, and losing it would leave two loose buttons.
+   */
+  compact?: boolean;
+}) {
   return (
-    <div className="inline-flex items-center gap-1 rounded-lg border border-fd-border p-0.5">
+    <div
+      className={cn(
+        "inline-flex items-center rounded-lg border border-fd-border",
+        compact ? "gap-0.5" : "gap-1 p-0.5",
+      )}
+    >
       {children}
     </div>
   );
@@ -31,6 +50,7 @@ export function Segment({
   onClick,
   tooltip,
   disabled,
+  compact,
 }: {
   label: string;
   icon: ReactNode;
@@ -39,6 +59,8 @@ export function Segment({
   tooltip?: ReactNode;
   /** Set while the segment's data is still loading, so it can't be re-entered. */
   disabled?: boolean;
+  /** Matches the small buttons it shares a row with. See `SegmentedControl`. */
+  compact?: boolean;
 }) {
   const button = (
     <button
@@ -47,7 +69,10 @@ export function Segment({
       disabled={disabled}
       aria-pressed={active}
       className={cn(
-        "inline-flex cursor-pointer items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
+        "inline-flex cursor-pointer items-center gap-1 rounded-md font-medium transition-colors",
+        compact
+          ? "px-1.5 py-0.5 text-[0.6875rem]"
+          : "px-2.5 py-1 text-xs",
         active
           ? "bg-brand/10 text-brand ring-1 ring-brand/60"
           : "text-fd-muted-foreground hover:bg-fd-secondary/30",

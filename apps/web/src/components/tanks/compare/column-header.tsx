@@ -272,6 +272,7 @@ export function TankCompareColumnHeader({
         <VehicleModeToggle
           modes={data.modes}
           mechanic={data.mechanic ?? null}
+          compact
           active={build.mode.active}
           onToggle={build.mode.toggle}
         />

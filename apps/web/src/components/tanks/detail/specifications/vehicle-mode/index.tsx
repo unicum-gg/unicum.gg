@@ -74,22 +74,32 @@ export function VehicleModeToggle({
   modes,
   active,
   mechanic = null,
+  compact,
   onToggle,
 }: {
   modes: VehicleMode[];
   active: VehicleModeKind | null;
   /** Which mechanic the second state is, where the caller knows it. */
   mechanic?: string | null;
+  /**
+   * Sized for a row of small buttons rather than for a title.
+   *
+   * The comparison puts one of these on every column beside the Setup button,
+   * where the roomier size stood a third taller than everything around it.
+   */
+  compact?: boolean;
   onToggle: (kind: VehicleModeKind) => void;
 }) {
   if (modes.length === 0) return null;
+  const glyph = compact ? "size-3" : "size-3.5";
   return (
     <TooltipProvider delayDuration={100}>
-      <SegmentedControl>
+      <SegmentedControl compact={compact}>
         <Segment
+          compact={compact}
           label={travelLabel(mechanic)}
           icon={
-            <ModeIcon mechanic={mechanic} engaged={false} className="size-3.5" />
+            <ModeIcon mechanic={mechanic} engaged={false} className={glyph} />
           }
           active={active === null}
           // Clicking Travel disengages whichever mode is active.
@@ -98,10 +108,9 @@ export function VehicleModeToggle({
         {modes.map((mode) => (
           <Segment
             key={mode.kind}
+            compact={compact}
             label={modeLabel(mechanic, mode.kind)}
-            icon={
-              <ModeIcon mechanic={mechanic} engaged className="size-3.5" />
-            }
+            icon={<ModeIcon mechanic={mechanic} engaged className={glyph} />}
             active={active === mode.kind}
             onClick={() => onToggle(mode.kind)}
             tooltip={<ModeTooltip mode={mode} mechanic={mechanic} />}
