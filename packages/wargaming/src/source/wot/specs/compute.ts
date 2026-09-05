@@ -1,4 +1,5 @@
 import { num, numList, tokens, isObject } from "./index";
+import { readLoadout } from "./loadout";
 import type { XmlNode, WotSrcSpec } from "./index";
 
 /**
@@ -57,71 +58,7 @@ export function computeSpec(
   },
 ): WotSrcSpec {
   const { hull, C, T, G, E, R, F } = m;
-  // --- default shell + shot on the gun ---
-  const shots = isObject(G.shots) ? (G.shots as XmlNode) : {};
-  const shotEntries = Object.entries(shots).filter(([, v]) => isObject(v)) as [string, XmlNode][];
-  let defaultShot: [string, XmlNode] | undefined = shotEntries[0];
-  let bestPortion = -1;
-  for (const [name, shot] of shotEntries) {
-    const p = num((shot as XmlNode).defaultPortion) ?? 0;
-    if (p > bestPortion) {
-      bestPortion = p;
-      defaultShot = [name, shot];
-    }
-  }
-  const shot = defaultShot?.[1] ?? {};
-  const shellName = defaultShot?.[0];
-  const shell =
-    shellName && isObject(shared.shells[shellName]) ? (shared.shells[shellName] as XmlNode) : {};
-
-  // Per-shell muzzle velocity, splash radius and 500m penetration, keyed by
-  // shell kind (`ARMOR_PIERCING`, ... — the same value WG uses as the ammo
-  // `type`), since WG's ammo carries damage and (100m) penetration but not
-  // velocity, splash or the falloff. The shot's name is its shell's name;
-  // splash is null for non-HE shells, pen500 = piercingPower's 500m value.
-  // The `<icons>` header maps each shell's short `<icon>` name to its PNG file.
-  const iconMap = isObject(shared.shells.icons)
-    ? (shared.shells.icons as XmlNode)
-    : {};
-  const shellStats = shotEntries
-    .map(([name, sh]) => {
-      const def = isObject(shared.shells[name]) ? (shared.shells[name] as XmlNode) : {};
-      const type = String(def.kind ?? "");
-      const velocity = num(sh.speed);
-      const pp = numList(sh.piercingPower);
-      const pen500: number | null =
-        pp.length > 1 ? pp[1] : pp.length > 0 ? pp[0] : null;
-      // Each shell carries its own `<icon>` (e.g. `hc_premium`), not just the
-      // kind, so premium/variant shells show their real in-game icon (a premium
-      // HEAT is gold, not the standard silver `HOLLOW_CHARGE.png`).
-      const iconFile = tokens(iconMap[String(def.icon ?? "")])[0];
-      const icon = iconFile ? iconFile.replace(/\.png$/i, "") : null;
-      return type && velocity != null
-        ? {
-            type,
-            velocity,
-            splash: num(def.explosionRadius),
-            pen500,
-            icon,
-            cost: num(def.price),
-            // Damage (armor) and near penetration disambiguate two shells of the
-            // same kind (e.g. standard + premium HE), which the ammo panel
-            // matches against the WG shell so each gets its own icon/name.
-            damage: isObject(def.damage)
-              ? num((def.damage as XmlNode).armor)
-              : null,
-            pen: pp.length > 0 ? pp[0] : null,
-            // The shell's own localization ref (its specific name, e.g.
-            // `#ussr_vehicles:_122mm_UOF-471`); resolved to display names later
-            // (in `configs()`), so the batch catalog leaves the names null.
-            userString: String(def.userString ?? "") || null,
-            shortName: null as string | null,
-            kindName: null as string | null,
-            name: null as string | null,
-          }
-        : null;
-    })
-    .filter((s): s is NonNullable<typeof s> => s !== null);
+  const { shot, shell, shotEntries, shellStats } = readLoadout(G, shared);
 
   // --- economics ---
   // list.xml price is a plain string (credits) for tech-tree tanks, or an
@@ -201,11 +138,21 @@ export function computeSpec(
   }
 
   // pitch limits: "yaw angle yaw angle …" pairs; angles are the odd positions.
+  //
+  // **The client counts downwards.** `maxPitch` is how far the gun goes down and
+  // `minPitch`, written negative, how far it goes up, which is the opposite of
+  // the way the two are named here. Read the other way round every vehicle in
+  // the catalogue published its elevation as its depression: the IS-7 claimed 18
+  // degrees of gun depression and 6 of elevation where the game gives it about 6
+  // and 20. WG's own profile agrees with the reading below, arc for arc, and so
+  // does the shape of the data: the Pz.Kpfw. Neu's `maxPitch` drops to a single
+  // degree over one bearing sector, which is a gun that cannot look down over
+  // its own engine deck, never one that cannot look up.
   const pitch = isObject(G.pitchLimits) ? (G.pitchLimits as XmlNode) : {};
   const minAngles = numList(pitch.minPitch).filter((_, i) => i % 2 === 1);
   const maxAngles = numList(pitch.maxPitch).filter((_, i) => i % 2 === 1);
-  const depression = minAngles.length ? -Math.min(...minAngles) : null;
-  const elevation = maxAngles.length ? Math.max(...maxAngles) : null;
+  const depression = maxAngles.length ? Math.max(...maxAngles) : null;
+  const elevation = minAngles.length ? -Math.min(...minAngles) : null;
 
   // --- mobility ---
   const speeds = isObject(root.speedLimits) ? (root.speedLimits as XmlNode) : {};
@@ -318,6 +265,9 @@ export function computeSpec(
     tankId,
     tag,
     mechanics,
+    // Filled in by the caller, which is the only place that has both the
+    // vehicle's tags and its whole definition to look at.
+    mechanic: null,
     damage,
     moduleDamage,
     splashRadius,

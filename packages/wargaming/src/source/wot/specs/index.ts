@@ -1,4 +1,6 @@
 import { XMLParser } from "fast-xml-parser";
+import { isObject, num, numList, tokens, resolveModule, topModuleKey, type XmlNode } from "./xml";
+import type { TankConfigs, WotSrcConfig, WotSrcSpec } from "./spec";
 import { Region } from "../../../region";
 import type { Transport } from "../../../client/transport";
 import { RateLimit } from "../../../client/rate-limiter";
@@ -13,238 +15,21 @@ import {
   WotSrcBranch,
 } from "../mirror";
 import { derive, deriveConfigs } from "./derive";
+import {
+  calibratedShells,
+  switchesShells,
+  type CalibratedShell,
+} from "./calibration";
+import { mechanicOf } from "./mechanic";
 import { getShellKinds } from "./shell-kinds";
 import { resolveRef } from "../localization";
+export * from "./spec";
 
-/**
- * A fully-derived, top-configuration stat block for one vehicle, computed from
- * the raw WoT client XML (IzeBerg/wot-src mirror). Every field is the stock
- * value with the top module of each slot equipped (last module in document
- * order), no crew/equipment bonuses applied. `null` marks a value that does not
- * exist for that vehicle class (e.g. `intraClipReload` on a single-shot gun, or
- * `turretArmorFront` on a casemate TD).
- */
-/**
- * One derived stat block for a specific module combination, tagged by the
- * wot-src module keys that produced it. The keys are opaque wot-src identifiers
- * (e.g. `_AMX_50_120`); the consumer bridges them to WG moduleIds by matching a
- * few raw stats (`spec.reload`, `enginePower`, `turretTraverse`, `hullTraverse`,
- * `radioRange`) against WG's `vehicleprofiles`, since both sources derive from
- * the same game data and those numbers are identical.
- */
-export interface WotSrcConfig {
-  keys: {
-    chassis: string;
-    turret: string;
-    gun: string;
-    engine: string;
-    radio: string;
-  };
-  spec: WotSrcSpec;
-}
+export * from "./calibration";
+export * from "./mechanic";
 
-/** Every valid module combination for one tank, each fully derived. */
-export interface TankConfigs {
-  tankId: number;
-  tag: string;
-  configs: WotSrcConfig[];
-}
+export * from "./xml";
 
-export type WotSrcSpec = {
-  tankId: number;
-  tag: string;
-  // Tier-XI special-ability parameters from the top gun's `<mechanics>` block,
-  // keyed by path (`propellantAfterburnerGun/chargingPerSec`). Empty for the vast
-  // majority of vehicles, which have no mechanic.
-  mechanics: Record<string, number>;
-  // firepower
-  damage: number | null;
-  moduleDamage: number | null;
-  splashRadius: number | null;
-  reload: number | null;
-  rof: number | null;
-  intraClipReload: number | null;
-  clipSize: number | null;
-  dpm: number | null;
-  penetration: number | null;
-  penetration500: number | null;
-  caliber: number | null;
-  shellVelocity: number | null;
-  maxRange: number | null;
-  ammoCapacity: number | null;
-  // gun handling
-  accuracy: number | null;
-  aimTime: number | null;
-  dispMoving: number | null;
-  dispTankTraverse: number | null;
-  dispTurretTraverse: number | null;
-  dispAfterShot: number | null;
-  dispWhileDamaged: number | null;
-  gunArc: number | null;
-  depression: number | null;
-  elevation: number | null;
-  // mobility
-  speedForward: number | null;
-  speedBackward: number | null;
-  hullTraverse: number | null;
-  turretTraverse: number | null;
-  enginePower: number | null;
-  powerWeight: number | null;
-  terrainHard: number | null;
-  terrainMedium: number | null;
-  terrainSoft: number | null;
-  // survivability
-  health: number | null;
-  engineHealth: number | null;
-  engineFireChance: number | null;
-  hullArmorFront: number | null;
-  hullArmorSide: number | null;
-  hullArmorRear: number | null;
-  turretArmorFront: number | null;
-  turretArmorSide: number | null;
-  turretArmorRear: number | null;
-  trackArmor: number | null;
-  trackHealth: number | null;
-  trackRepaired: number | null;
-  trackRepairTime: number | null;
-  ammoRackHealth: number | null;
-  ammoRackRepaired: number | null;
-  engineRepaired: number | null;
-  fuelTankHealth: number | null;
-  fuelTankRepaired: number | null;
-  turretRingHealth: number | null;
-  turretRingRepaired: number | null;
-  viewportHealth: number | null;
-  viewportRepaired: number | null;
-  // other
-  weight: number | null;
-  viewRange: number | null;
-  radioRange: number | null;
-  camoStill: number | null;
-  camoMoving: number | null;
-  camoStillFiring: number | null;
-  camoMovingFiring: number | null;
-  // economics (from list.xml price + default shell price)
-  buyCredits: number | null;
-  buyGold: number | null;
-  shellCost: number | null;
-  ammoCost: number | null;
-  // Per-shell velocity, splash radius and 500m penetration by shell kind (WG's
-  // ammo lacks them); used by the ammo panel. Not a DB column — dropped before
-  // the upsert.
-  shellStats: {
-    type: string;
-    velocity: number;
-    splash: number | null;
-    pen500: number | null;
-    icon: string | null;
-    /** Per-shell price in credits (premium ammo included; all credit-priced). */
-    cost: number | null;
-    /** Armor damage and near penetration, to disambiguate two shells of the same
-     * kind when matching against the WG shell (kind alone is not unique). */
-    damage: number | null;
-    pen: number | null;
-    /** The shell's own localization ref (`#<file>:<key>`), resolved into `name`. */
-    userString: string | null;
-    /** Display names from WoT's localization, resolved by `configs()` for the
-     * ammo panel (null in the batch catalog, or when localization has no entry):
-     * `shortName` = the kind's short code (AP/HEAT/…), `kindName` = the kind's
-     * full name (High-Explosive/…), `name` = this specific shell's own name
-     * (e.g. `122 mm UOF-471`). */
-    shortName: string | null;
-    kindName: string | null;
-    name: string | null;
-  }[];
-};
-
-export type XmlNode = Record<string, unknown>;
-
-
-export function isObject(v: unknown): v is XmlNode {
-  return typeof v === "object" && v !== null && !Array.isArray(v);
-}
-
-/**
- * WoT XML leaves that carry a `<!--BW_String-->` comment are parsed as their
- * text value (comments are stripped by the parser config), so most numeric
- * leaves are plain strings. Some, however, are objects wrapping a `#text` (when
- * a leaf also has child elements). Read either shape as a number.
- */
-export function num(v: unknown): number | null {
-  if (v == null) return null;
-  if (typeof v === "number") return Number.isFinite(v) ? v : null;
-  if (typeof v === "string") {
-    const n = Number.parseFloat(v.trim());
-    return Number.isFinite(n) ? n : null;
-  }
-  if (isObject(v) && "#text" in v) return num((v as XmlNode)["#text"]);
-  return null;
-}
-
-/** First whitespace-separated token of a string leaf, as a number. */
-function firstNum(v: unknown): number | null {
-  if (v == null) return null;
-  const s = typeof v === "object" && isObject(v) && "#text" in v ? String(v["#text"]) : String(v);
-  const first = s.trim().split(/\s+/)[0];
-  const n = Number.parseFloat(first);
-  return Number.isFinite(n) ? n : null;
-}
-
-/** All whitespace-separated tokens of a string leaf, as numbers. */
-export function numList(v: unknown): number[] {
-  if (v == null) return [];
-  const s = typeof v === "object" && isObject(v) && "#text" in v ? String(v["#text"]) : String(v);
-  return s
-    .trim()
-    .split(/\s+/)
-    .map((t) => Number.parseFloat(t))
-    .filter((n) => Number.isFinite(n));
-}
-
-/** Whitespace-separated string tokens of a string leaf. */
-export function tokens(v: unknown): string[] {
-  if (v == null) return [];
-  const s = typeof v === "object" && isObject(v) && "#text" in v ? String(v["#text"]) : String(v);
-  return s.trim().split(/\s+/).filter(Boolean);
-}
-
-/** Deep-merge `override` onto `base`; scalar/array overrides win outright. */
-function deepMerge(base: unknown, override: unknown): unknown {
-  if (!isObject(base)) return override === undefined ? base : override;
-  if (!isObject(override)) return override === undefined ? base : override;
-  const out: XmlNode = { ...base };
-  for (const [k, v] of Object.entries(override)) {
-    out[k] = k in base ? deepMerge(base[k], v) : v;
-  }
-  return out;
-}
-
-/**
- * Module slots list their modules as child elements keyed by name; the LAST key
- * in document order is the TOP module. A `shared` sub-key (the container's own
- * marker, never a module) is skipped.
- */
-export function moduleKeys(slot: unknown): string[] {
-  if (!isObject(slot)) return [];
-  return Object.keys(slot).filter((k) => k !== "shared");
-}
-export function topModuleKey(slot: unknown): string | null {
-  const keys = moduleKeys(slot);
-  return keys.length ? keys[keys.length - 1] : null;
-}
-
-/**
- * Resolve a module to its full definition. `inline` is the vehicle-file block
- * (may be the literal string `"shared"`, or a partial object of overrides).
- * `sharedDef` is the component-file definition (or undefined). The result is a
- * deep-merge with vehicle-inline fields winning.
- */
-export function resolveModule(inline: unknown, sharedDef: unknown): XmlNode | null {
-  const inlineObj = isObject(inline) ? inline : {};
-  if (sharedDef === undefined) return isObject(inline) ? inline : null;
-  const merged = deepMerge(sharedDef, inlineObj);
-  return isObject(merged) ? merged : null;
-}
 
 /**
  * Vehicle specs from the IzeBerg/wot-src client-scripts mirror. Loops all
@@ -419,6 +204,33 @@ export class SourceSpecsResource {
     const vehXml = await this.#text(rawUrl(branch, `${base}/${match.tag}.xml`));
     const root = this.#root(parser, vehXml);
     const configs = deriveConfigs(tankId, match.tag, root, shared, match.entry);
+    // **What its shells become once the gun opens its extra chambers.**
+    //
+    // The deployed definition is fetched only where a gun declares the
+    // mechanic, which is a handful of vehicles: most of them have one of these
+    // files and almost none restates a shell in it, so asking every time would
+    // be a second request per tank for nothing.
+    //
+    // A vehicle that declares it and has no such file is not an error worth
+    // failing a whole spec over: it reads as a gun that calibrates nothing.
+    // Which of the seven mechanics its second state is, read from the tags the
+    // nation list carries and the blocks its own components declare.
+    const mechanic = mechanicOf(
+      root,
+      tokens(isObject(match.entry) ? match.entry.tags : null),
+    );
+    for (const c of configs) c.spec.mechanic = mechanic;
+    let calibrated = new Map<string, CalibratedShell>();
+    if (switchesShells(root)) {
+      try {
+        const deployed = await this.#text(
+          rawUrl(branch, `${base}/${match.tag}_siege_mode.xml`),
+        );
+        calibrated = calibratedShells(this.#root(parser, deployed));
+      } catch {
+        calibrated = new Map();
+      }
+    }
     // Label each shell from WoT's own localization (both memoized), not a
     // hand-kept map: the kind's short code + full name from `item_types.po`, and
     // the shell's specific name from its `userString` (in the nation `.po`),
@@ -439,6 +251,12 @@ export class SourceSpecsResource {
             ? `${caliber} mm ${specific}`
             : specific
           : null;
+        // Matched on the shell's own element name, which is what its reference
+        // ends with: `#germany_vehicles:_120_mm_Hartkern_…` is the same
+        // `_120_mm_Hartkern_…` the deployed `<shots>` block keys on.
+        const own = st.userString?.split(":").pop();
+        const changes = own ? calibrated.get(own) : undefined;
+        if (changes) st.calibrated = changes;
       }
     }
     return { tankId, tag: match.tag, configs };

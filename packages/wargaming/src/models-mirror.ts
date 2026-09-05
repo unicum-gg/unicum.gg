@@ -29,7 +29,18 @@ export function modelsRefFor(branch?: WotSrcBranch): string | undefined {
  * Where a consumer reads the mirror from.
  *
  * A viewer fetches dozens of files per vehicle and builds their paths itself,
- * so it wants the root rather than one URL at a time.
+ * so it wants the root rather than one URL at a time. It also wants to be able
+ * to point somewhere else entirely: a freshly generated catalogue is eighteen
+ * gigabytes and is read off a local tree long before it reaches the mirror,
+ * which a helper returning a whole github URL per file could not allow.
+ *
+ * Under the root the mirror keeps the client's own layout,
+ * `vehicles/russian/R45_IS-7`, because that is what the extraction reads and
+ * what makes a file findable from a client path. **The path comes from the
+ * index and is never built from the code**: a vehicle does not always draw from
+ * a folder of its own name, since an event reskin, a clan reissue and a code
+ * that drifted from the folder made for it all read another vehicle's meshes,
+ * so `G98_Waffentrager_E100_P` lives under `german/G98_Waffentrager_E100`.
  */
 export function modelsRoot(ref: string = MODELS_BRANCH): string {
   return `https://raw.githubusercontent.com/${MODELS_REPO}/${ref}`;
@@ -38,17 +49,6 @@ export function modelsRoot(ref: string = MODELS_BRANCH): string {
 /** Raw-content URL for `path` on the wot.models mirror. */
 export function modelUrl(path: string, ref: string = MODELS_BRANCH): string {
   return `https://raw.githubusercontent.com/${MODELS_REPO}/${ref}/${path}`;
-}
-
-/**
- * Where one vehicle's files live, by the nation folder and code the client uses.
- *
- * Not the tag a player sees and not our slug: the mirror keeps the client's own
- * layout, `vehicles/russian/R45_IS-7`, because that is what the extraction reads
- * and what makes a file findable from a client path.
- */
-export function vehicleModelUrl(nation: string, code: string, file: string, ref?: string): string {
-  return modelUrl(`vehicles/${nation}/${code}/${file}`, ref);
 }
 
 /** The catalogue of 2D styles, published once for the whole mirror rather than

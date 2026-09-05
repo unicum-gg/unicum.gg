@@ -11,6 +11,7 @@ export * from "./region";
 export * from "./language";
 export * from "./assets-mirror";
 export * from "./models-mirror";
+export * from "./models-shapes";
 export * from "./cdn";
 export * from "./api";
 export * from "./portal";
