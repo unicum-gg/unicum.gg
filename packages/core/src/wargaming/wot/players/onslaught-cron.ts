@@ -1,5 +1,6 @@
 import { REGIONS } from "@unicum.gg/wargaming";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
+import { refreshOnslaughtCrests } from "./onslaught-crest";
 import { reconcileOnslaught } from "./onslaught";
 
 /**
@@ -37,5 +38,47 @@ export function startOnslaughtReconcileCron(): void {
       );
     });
     if (armed) console.log(`[${name}] scheduled (${SCHEDULE})`);
+  }
+}
+
+/**
+ * How often the crest is recomputed from the standings.
+ *
+ * The capture writes every 15 minutes, so the crest follows at the same
+ * cadence, offset by two so it reads a pass that has landed rather than one
+ * in flight. It rode the daily reconcile first, and a day of lag is invisible
+ * everywhere the crest is worn EXCEPT the one page that also shows the current
+ * rank beside it: a player who crossed into Legend this morning sat under a
+ * violet pill wearing a steel-blue crest, which reads as a bug rather than as
+ * a badge that has not caught up.
+ *
+ * It is affordable because the source is small and the write is conditional.
+ * The recompute reads about 32,000 rows on EU and costs ~230ms, and rows are
+ * written only where a value actually changed, so between two seasons the job
+ * updates nothing at all.
+ */
+const CREST_SCHEDULE = "2,17,32,47 * * * *";
+
+/**
+ * Keep the Onslaught crest in step with the board it is read from.
+ *
+ * Separate from the reconcile above rather than folded into it, because they
+ * answer to different clocks: identity drifts over weeks and a rename can wait
+ * for the night, while a place on the board changes within the hour and is
+ * displayed next to the crest that claims it.
+ */
+export function startOnslaughtCrestCron(): void {
+  for (const region of REGIONS) {
+    const name = `onslaught-crest-cron-${region}`;
+    const armed = scheduleCron(name, CREST_SCHEDULE, async () => {
+      const crests = await refreshOnslaughtCrests(region);
+      // Logged only when something moved: at this cadence the honest answer is
+      // almost always zero, and a line every quarter hour saying so would bury
+      // the passes that did write.
+      if (crests > 0) {
+        console.log(`[onslaught-crest] ${region}: ${crests} crest(s) updated`);
+      }
+    });
+    if (armed) console.log(`[${name}] scheduled (${CREST_SCHEDULE})`);
   }
 }

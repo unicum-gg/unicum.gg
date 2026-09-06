@@ -116,10 +116,11 @@ async function main(): Promise<void> {
   const { startTournamentsCron } = await import("@unicum.gg/core/tournaments/cron");
   startTournamentsCron();
 
-  const { startOnslaughtReconcileCron } = await import(
+  const { startOnslaughtReconcileCron, startOnslaughtCrestCron } = await import(
     "@unicum.gg/core/wargaming/wot/players/onslaught-cron"
   );
   startOnslaughtReconcileCron();
+  startOnslaughtCrestCron();
 
   const { startOnslaughtWatchdogCron } = await import(
     "@unicum.gg/core/wargaming/wot/players/onslaught-watchdog"
