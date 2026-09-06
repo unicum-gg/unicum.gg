@@ -128,6 +128,19 @@ export function makePlayersTable(region: string) {
       // the same reason as the counts.
       tournamentBestTitle: text("tournament_best_title"),
       tournamentBestAt: timestamp("tournament_best_at", { withTimezone: true }),
+      // The Onslaught place this account has held, denormalised for the same
+      // reason as the tournament counts above: the crest is drawn beside a
+      // nickname on every board and roster, and answering it from the standings
+      // would join the archive on each of them.
+      //
+      // The tier is what picks the tincture, since Champion and Legend are not
+      // the same claim (on EU, 4173 accounts have held a place at all and 624
+      // reached Legend). The rank is what the tooltip names, because "#7 in the
+      // Azure Phoenix" says something "ranked" does not, and the season count
+      // separates a good run from a habit.
+      onslaughtBestTier: text("onslaught_best_tier"),
+      onslaughtBestRank: integer("onslaught_best_rank"),
+      onslaughtSeasons: integer("onslaught_seasons").notNull().default(0),
     },
     (t) => [
       uniqueIndex(`${region}_players_account_id_idx`).on(t.accountId),

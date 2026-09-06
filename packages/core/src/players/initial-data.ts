@@ -49,6 +49,9 @@ type RawPlayer = {
   tournament_featured_wins: number;
   tournament_best_title: string | null;
   tournament_best_at: string | null;
+  onslaught_best_tier: string | null;
+  onslaught_best_rank: number | null;
+  onslaught_seasons: number;
 };
 
 type RawPlayerSnapshot = {
@@ -247,6 +250,12 @@ function playerFromRaw(r: RawPlayer): Player {
     tournamentBestAt: r.tournament_best_at
       ? new Date(r.tournament_best_at)
       : null,
+    onslaughtBestTier: r.onslaught_best_tier,
+    onslaughtBestRank: r.onslaught_best_rank,
+    // Defaulted like the tournament counts above. The player CTE is a
+    // `SELECT *`, so the column arrives on its own, and the column is NOT NULL
+    // with a zero default; the guard is for the row that predates neither.
+    onslaughtSeasons: r.onslaught_seasons ?? 0,
   };
 }
 
