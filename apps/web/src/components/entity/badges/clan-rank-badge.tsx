@@ -13,6 +13,10 @@ import { type Region } from "@unicum.gg/wargaming";
 import ROUTES from "@/constants/routes";
 import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
 import {
+  BadgeCluster,
+  type ClusterBadge,
+} from "@/components/entity/badges/badge-cluster";
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -74,10 +78,6 @@ function TextCharge({ label }: { label: string }) {
   );
 }
 
-// Slate crest for the "+N" overflow: it is a count, not a placing, so it must
-// not borrow any board's colour.
-const OVERFLOW_TINCTURE = { fill: "#8b8b8b", edge: "#5f5f5f" };
-
 /**
  * One leaderboard placing, shown after a clan tag wherever the clan appears.
  *
@@ -134,59 +134,6 @@ export function ClanRankBadge({
 }
 
 /**
- * A slate "+N" crest standing in for the placings past the display cap, with a
- * tooltip that spells them out so nothing is hidden, only folded. Not a link:
- * it represents several boards at once, so there is no single place to send to.
- */
-function OverflowBadge({
-  hidden,
-  region,
-  size,
-}: {
-  hidden: ClanRankBadgeData[];
-  region: Region;
-  size: number;
-}) {
-  return (
-    <TooltipProvider>
-      {/* Kept open while the pointer is over the content so its rows can be
-          clicked: the "+N" crest is not itself a link (it stands for several
-          boards), so the folded placings are only reachable through here. */}
-      <Tooltip disableHoverableContent={false}>
-        <TooltipTrigger asChild>
-          <span
-            className="inline-flex shrink-0 cursor-default"
-            aria-label={`${hidden.length} more placings`}
-          >
-            <Crest
-              tincture={OVERFLOW_TINCTURE}
-              size={size}
-              charge={<TextCharge label={`+${hidden.length}`} />}
-            />
-          </span>
-        </TooltipTrigger>
-        <TooltipContent>
-          <span className="flex flex-col gap-0.5">
-            {hidden.map((b) => (
-              <Link
-                key={`${b.board}-${b.rank}`}
-                href={boardHref(region, b.board)}
-                className="hover:underline"
-              >
-                <span className="font-semibold">
-                  #{b.rank} {CLAN_BOARD_LABEL[b.board]}
-                </span>{" "}
-                · {CLAN_BOARD_DESCRIPTION[b.board]}
-              </Link>
-            ))}
-          </span>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-}
-
-/**
  * The whole cluster, already ordered by the resolver (best placing first).
  * Renders nothing when the clan holds no placing, so it is always safe to mount.
  *
@@ -236,26 +183,33 @@ export function ClanBadges({
     />
   );
   if (!badges?.length) return trophy;
-  // `max` is the total number of crests shown, the "+N" included. So once we
-  // overflow, the "+N" takes one of those slots and only `max - 1` real crests
-  // remain (4 placings, max 3 -> 2 crests + "+2"). The cluster is never wider
-  // than `max`.
-  const fold = badges.length > max;
-  const shown = fold ? badges.slice(0, max - 1) : badges;
-  const hidden = fold ? badges.slice(max - 1) : [];
+  // Folded by the same component the player crests use, so a clan and a player
+  // standing on the same row cannot cap their clusters differently.
+  const cluster: ClusterBadge[] = badges.map((b) => ({
+    key: `${b.board}-${b.rank}`,
+    href: boardHref(region, b.board),
+    label: (
+      <>
+        <span className="font-semibold">
+          #{b.rank} {CLAN_BOARD_LABEL[b.board]}
+        </span>{" "}
+        · {CLAN_BOARD_DESCRIPTION[b.board]}
+      </>
+    ),
+    // The bare crest for the fold's tooltip: same tincture and same rank
+    // charge as the badge, without the tooltip a nested one could not host.
+    crest: (
+      <Crest
+        tincture={CLAN_BOARD_TINCTURE[b.board]}
+        charge={<TextCharge label={String(b.rank)} />}
+      />
+    ),
+    tint: CLAN_BOARD_TINCTURE[b.board],
+    node: <ClanRankBadge badge={b} region={region} size={size} />,
+  }));
   return (
     <>
-      {shown.map((b) => (
-        <ClanRankBadge
-          key={`${b.board}-${b.rank}`}
-          badge={b}
-          region={region}
-          size={size}
-        />
-      ))}
-      {hidden.length > 0 && (
-        <OverflowBadge hidden={hidden} region={region} size={size} />
-      )}
+      <BadgeCluster badges={cluster} size={size} max={max} />
       {trophy}
     </>
   );
