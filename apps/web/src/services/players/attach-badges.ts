@@ -25,6 +25,9 @@ export type PlayerCrests = {
   tournamentWins: number;
   tournamentFeaturedWins: number;
   tournamentBestTitle: string | null;
+  onslaughtBestTier: string | null;
+  onslaughtBestRank: number | null;
+  onslaughtSeasons: number;
 };
 
 /** The snake_case shape, for rows that go out on the public API as they are. */
@@ -35,6 +38,9 @@ export type PlayerCrestsSnake = {
   tournament_wins: number;
   tournament_featured_wins: number;
   tournament_best_title: string | null;
+  onslaught_best_tier: string | null;
+  onslaught_best_rank: number | null;
+  onslaught_seasons: number;
 };
 
 async function crestsFor(
@@ -51,6 +57,9 @@ async function crestsFor(
       tournamentWins: b.tournamentWins,
       tournamentFeaturedWins: b.tournamentFeaturedWins,
       tournamentBestTitle: b.tournamentBestTitle,
+      onslaughtBestTier: b.onslaughtBestTier,
+      onslaughtBestRank: b.onslaughtBestRank,
+      onslaughtSeasons: b.onslaughtSeasons,
     });
   }
   return out;
@@ -63,6 +72,9 @@ const EMPTY: PlayerCrests = {
   tournamentWins: 0,
   tournamentFeaturedWins: 0,
   tournamentBestTitle: null,
+  onslaughtBestTier: null,
+  onslaughtBestRank: null,
+  onslaughtSeasons: 0,
 };
 
 /** Attach to rows keyed by a camelCase `accountId`. */
@@ -98,6 +110,9 @@ export async function attachPlayerBadges<T extends { account_id: number }>(
       tournament_wins: c.tournamentWins,
       tournament_featured_wins: c.tournamentFeaturedWins,
       tournament_best_title: c.tournamentBestTitle,
+      onslaught_best_tier: c.onslaughtBestTier,
+      onslaught_best_rank: c.onslaughtBestRank,
+      onslaught_seasons: c.onslaughtSeasons,
     };
   });
 }

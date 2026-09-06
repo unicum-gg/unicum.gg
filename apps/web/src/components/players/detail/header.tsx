@@ -2,9 +2,8 @@ import { format, formatDistanceToNow } from "date-fns";
 import Image from "next/image";
 import Link from "next/link";
 import { ClanTag } from "@/components/entity/clan-tag";
-import { VerifiedBadge } from "@/components/entity/badges/verified-badge";
-import { TournamentBadge } from "@/components/entity/badges/tournament-badge";
-import { StreamerBadge } from "@/components/entity/badges/streamer-badge";
+import { buildPlayerBadges } from "@/components/entity/badges/player-badges";
+import { BadgeCluster } from "@/components/entity/badges/badge-cluster";
 import { CompareWithButton } from "@/components/players/detail/compare-with-button";
 import { LanguageFlags } from "@/components/language-flags";
 import { RefreshBeacon, RefreshKind } from "@/components/refresh-beacon";
@@ -15,10 +14,7 @@ import ROUTES from "@/constants/routes";
 import { type Region } from "@unicum.gg/wargaming";
 import { LiveBadge } from "@/components/live-badge";
 import { PlayerActionsMenu } from "@/components/players/detail/actions-menu";
-import {
-  SupporterBadge,
-  SupporterBadgeState,
-} from "@/components/entity/badges/supporter-badge";
+import { SupporterBadgeState } from "@/components/entity/badges/supporter-badge";
 import type { ClanStint } from "@unicum.gg/shared";
 
 const MONTH_FORMAT = "MMM yyyy";
@@ -42,6 +38,9 @@ export function PlayerHeader(
         tournamentWins: number;
         tournamentFeaturedWins: number;
         tournamentBestTitle: string | null;
+        onslaughtBestTier: string | null;
+        onslaughtBestRank: number | null;
+        onslaughtSeasons: number;
         twitchLogin: string | null;
       },
 ) {
@@ -63,8 +62,30 @@ export function PlayerHeader(
     tournamentWins,
     tournamentFeaturedWins,
     tournamentBestTitle,
+    onslaughtBestTier,
+    onslaughtBestRank,
+    onslaughtSeasons,
     twitchLogin,
   } = props;
+
+  // Built by the shared resolver, so the header cannot fall behind the crests
+  // the rest of the site draws. It passes the supporter state through rather
+  // than a boolean: this is the only surface that shows the owner-only "hidden"
+  // and "invite" variants, which the inline cluster never sees.
+  const badges = buildPlayerBadges({
+    region,
+    nickname,
+    isVerified: verified,
+    supporterState: supporterBadge,
+    twitchLogin,
+    tournamentWins,
+    tournamentFeaturedWins,
+    tournamentBestTitle,
+    onslaughtBestTier,
+    onslaughtBestRank,
+    onslaughtSeasons,
+    size: 24,
+  });
 
   return (
     <header className="flex flex-col sm:flex-row sm:items-stretch">
@@ -72,21 +93,9 @@ export function PlayerHeader(
         <div className="flex min-w-0 flex-1 items-center gap-3 px-4 py-3">
           <h1 className="min-w-0 flex-1 font-heading text-2xl font-bold tracking-tight wrap-break-word sm:text-4xl">
             {nickname}
-            {(verified || supporterBadge || twitchLogin || tournamentWins > 0) && (
+            {badges.length > 0 && (
               <span className="ml-2 inline-flex items-center gap-1 align-middle">
-                {verified && <VerifiedBadge size={24} />}
-                <TournamentBadge
-                  region={region}
-                  nickname={nickname}
-                  wins={tournamentWins}
-                  featuredWins={tournamentFeaturedWins}
-                  bestTitle={tournamentBestTitle}
-                  size={24}
-                />
-                {supporterBadge && (
-                  <SupporterBadge state={supporterBadge} size={24} />
-                )}
-                {twitchLogin && <StreamerBadge login={twitchLogin} size={24} />}
+                <BadgeCluster badges={badges} size={24} />
               </span>
             )}
             <LiveBadge

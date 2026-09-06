@@ -244,6 +244,12 @@ export async function buildPlayerDetail(args: {
     tournamentWins: player.tournamentWins,
     tournamentFeaturedWins: player.tournamentFeaturedWins,
     tournamentBestTitle: player.tournamentBestTitle,
+    // Likewise, written by the Onslaught crest pass. The profile header draws
+    // its own badge row rather than going through `PlayerBadges`, so the crest
+    // has to reach it through the payload like the tournament one beside it.
+    onslaughtBestTier: player.onslaughtBestTier,
+    onslaughtBestRank: player.onslaughtBestRank,
+    onslaughtSeasons: player.onslaughtSeasons,
     current,
     periods,
     derived,

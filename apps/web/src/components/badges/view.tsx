@@ -75,7 +75,7 @@ function BadgeRow({
 }
 
 /** Counted rather than typed, so the hero cannot drift from the list. */
-const PLAYER_BADGE_COUNT = 5;
+const PLAYER_BADGE_COUNT = 7;
 
 const CLAN_BOARDS = [
   { board: ClanBoard.Advances, tier: StrongholdTier.Advances },
@@ -162,11 +162,40 @@ export function BadgesView() {
               name="Featured tournament winner"
               how="The same, won at an event Wargaming itself flags as featured: the branded championships and their qualifiers rather than the nightly ladders. Gold instead of steel."
             />
+            <BadgeRow
+              crest={<Crest kind={CrestKind.OnslaughtChampion} size={20} />}
+              name="Onslaught Champion"
+              how={
+                <>
+                  Reached the Champion rank in Onslaught, which is what it takes
+                  to appear on the{" "}
+                  <Link
+                    href={ROUTES.PLAYERS_ONSLAUGHT(Region.EU)}
+                    className="underline underline-offset-2"
+                  >
+                    ranked standings
+                  </Link>{" "}
+                  at all. Kept afterwards: a rating that falls back below the
+                  bar takes the place, not the fact that it was held.
+                </>
+              }
+            />
+            <BadgeRow
+              crest={<Crest kind={CrestKind.OnslaughtLegend} size={20} />}
+              name="Onslaught Legend"
+              how="Held a place inside the season's Legend cutoff, which is a position rather than a score: only so many exist at once, and the bar is judged against the season it was held in. Violet instead of steel blue, the colour the standings themselves paint Legend."
+            />
           </ul>
+          <p className="border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
+            A player carrying more than three folds the rest into a{" "}
+            <span className="font-medium">+N</span> crest, in the order above, so
+            a nickname stays readable in a table. Hovering it names them, and
+            each one still links where its own crest did.
+          </p>
           <p className="border-t border-fd-border px-4 py-2 text-sm text-fd-muted-foreground">
             A streamer who is on air also carries a red LIVE pill. That one is
             not earned and not kept: it appears when the stream starts and goes
-            when it ends.
+            when it ends, so it is never folded away.
           </p>
         </PanelContent>
       </Panel>

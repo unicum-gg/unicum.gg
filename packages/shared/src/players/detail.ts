@@ -80,6 +80,16 @@ export type PlayerDetailData = {
   /** The win worth naming in the tooltip: a featured event when there is one,
    * else the most recent. */
   tournamentBestTitle: string | null;
+  /**
+   * The best Onslaught rank this account has ever held: `legend`, `champion`,
+   * or null for the overwhelming majority who have never been on the board.
+   * Denormalised for the same reason as the tournament wins above.
+   */
+  onslaughtBestTier: string | null;
+  /** The best position held, across every season captured. */
+  onslaughtBestRank: number | null;
+  /** How many distinct seasons they were ranked in. */
+  onslaughtSeasons: number;
   current: Stats;
   periods: PeriodStats;
   derived: PlayerDerivedStats;

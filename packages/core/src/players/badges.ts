@@ -1,4 +1,4 @@
-import { and, eq, gt, inArray } from "drizzle-orm";
+import { and, eq, gt, inArray, isNotNull, or } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
 import { playersByRegion, streamers, subscription, user } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -25,6 +25,13 @@ export type PlayerBadges = {
   tournamentWins: number;
   tournamentFeaturedWins: number;
   tournamentBestTitle: string | null;
+  /** The best Onslaught place this account has ever held, and what it took.
+   * Null tier means never ranked, which is almost everybody: the board lists
+   * only players who reach Champion, a few thousand per region. Read off the
+   * same denormalised player row as the tournament honours beside it. */
+  onslaughtBestTier: string | null;
+  onslaughtBestRank: number | null;
+  onslaughtSeasons: number;
 };
 
 // Stripe statuses that count as an active supporter (mirrors subscription/index).
@@ -60,6 +67,9 @@ export async function resolvePlayerBadges(
         tournamentWins: 0,
         tournamentFeaturedWins: 0,
         tournamentBestTitle: null,
+        onslaughtBestTier: null,
+        onslaughtBestRank: null,
+        onslaughtSeasons: 0,
       };
       result.set(id, entry);
     }
@@ -71,7 +81,7 @@ export async function resolvePlayerBadges(
   const emails = [...idByEmail.keys()];
 
   const players = playersByRegion[region as Region];
-  const [verifiedRows, supporterRows, streamerRows, winnerRows] = await Promise.all([
+  const [verifiedRows, supporterRows, streamerRows, honourRows] = await Promise.all([
     // Verified: a connected user exists (login is Wargaming-only, so any user
     // for the synthetic email means the account was connected here).
     db.select({ email: user.email }).from(user).where(inArray(user.email, emails)),
@@ -94,20 +104,30 @@ export async function resolvePlayerBadges(
       .where(
         and(eq(streamers.region, region), inArray(streamers.accountId, unique)),
       ),
-    // Tournament honours, straight off the player row. Only the rows that hold
-    // one come back, which on any board is a handful of the batch.
+    // Earned honours, straight off the player row: tournaments and Onslaught in
+    // ONE query rather than two, since they live on the same table behind the
+    // same batch of ids and a second round trip would be a second connection
+    // out of a pool the busiest page already competes for. Only the rows
+    // holding at least one honour come back, which on any board is a handful of
+    // the batch.
     db
       .select({
         accountId: players.accountId,
         wins: players.tournamentWins,
         featured: players.tournamentFeaturedWins,
         bestTitle: players.tournamentBestTitle,
+        onslaughtTier: players.onslaughtBestTier,
+        onslaughtRank: players.onslaughtBestRank,
+        onslaughtSeasons: players.onslaughtSeasons,
       })
       .from(players)
       .where(
         and(
           inArray(players.accountId, unique),
-          gt(players.tournamentWins, 0),
+          or(
+            gt(players.tournamentWins, 0),
+            isNotNull(players.onslaughtBestTier),
+          ),
         ),
       ),
   ]);
@@ -121,11 +141,14 @@ export async function resolvePlayerBadges(
     if (id !== undefined) ensure(id).supporter = true;
   }
   for (const row of streamerRows) ensure(row.accountId).twitchLogin = row.twitchLogin;
-  for (const row of winnerRows) {
+  for (const row of honourRows) {
     const entry = ensure(Number(row.accountId));
     entry.tournamentWins = row.wins;
     entry.tournamentFeaturedWins = row.featured;
     entry.tournamentBestTitle = row.bestTitle;
+    entry.onslaughtBestTier = row.onslaughtTier;
+    entry.onslaughtBestRank = row.onslaughtRank;
+    entry.onslaughtSeasons = row.onslaughtSeasons;
   }
 
   return result;

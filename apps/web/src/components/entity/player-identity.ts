@@ -22,6 +22,12 @@ export type PlayerIdentity = {
   tournamentWins?: number;
   tournamentFeaturedWins?: number;
   tournamentBestTitle?: string | null;
+  /** The best Onslaught place ever held: the tier picks the crest's tincture,
+   * the rank is what its tooltip names, and the season count separates one good
+   * run from a habit. Absent for almost every player. */
+  onslaughtBestTier?: string | null;
+  onslaughtBestRank?: number | null;
+  onslaughtSeasons?: number;
 };
 
 /**
@@ -47,6 +53,9 @@ export function identityFromRow(row: {
   tournament_wins?: number;
   tournament_featured_wins?: number;
   tournament_best_title?: string | null;
+  onslaught_best_tier?: string | null;
+  onslaught_best_rank?: number | null;
+  onslaught_seasons?: number;
 }): PlayerIdentity {
   return {
     nickname: row.nickname,
@@ -59,5 +68,8 @@ export function identityFromRow(row: {
     tournamentWins: row.tournament_wins,
     tournamentFeaturedWins: row.tournament_featured_wins,
     tournamentBestTitle: row.tournament_best_title,
+    onslaughtBestTier: row.onslaught_best_tier,
+    onslaughtBestRank: row.onslaught_best_rank,
+    onslaughtSeasons: row.onslaught_seasons,
   };
 }

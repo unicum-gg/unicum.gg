@@ -517,6 +517,11 @@ export const playerSummary = z
     tournament_wins: z.number().optional(),
     tournament_featured_wins: z.number().optional(),
     tournament_best_title: z.string().nullable().optional(),
+    // The Onslaught place ever held, for its crest. Absent rather than null on
+    // the overwhelming majority, who have never been on the ranked board.
+    onslaught_best_tier: z.string().nullable().optional(),
+    onslaught_best_rank: z.number().nullable().optional(),
+    onslaught_seasons: z.number().optional(),
   })
   .loose()
   .meta({

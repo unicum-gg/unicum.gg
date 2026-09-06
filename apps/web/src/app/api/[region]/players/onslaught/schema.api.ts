@@ -34,6 +34,9 @@ export const onslaughtSummary = z
     }),
     tournament_featured_wins: z.number().optional(),
     tournament_best_title: z.string().nullable().optional(),
+    onslaught_best_tier: z.string().nullable().optional(),
+    onslaught_best_rank: z.number().nullable().optional(),
+    onslaught_seasons: z.number().optional(),
     is_supporter: z.boolean().optional(),
     twitch_login: z.string().nullable().optional(),
   })

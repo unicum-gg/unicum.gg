@@ -341,6 +341,18 @@ export const PlayerDetailResponse = z.object({
     description:
       "The win worth naming: a featured event when there is one, else the most recent. Null when the account has never won.",
   }),
+  onslaughtBestTier: z.string().nullable().meta({
+    description:
+      "The best Onslaught rank this account has ever held: legend, champion, or null for an account that has never been on the ranked board. A record rather than a current standing: a rating falling back under the entry bar takes the place, not the fact that it was held.",
+  }),
+  onslaughtBestRank: z.number().nullable().meta({
+    description:
+      "The best leaderboard position held, across every season captured. Null when the account has never been ranked.",
+  }),
+  onslaughtSeasons: z.number().meta({
+    description:
+      "How many distinct Onslaught seasons this account was ranked in. Zero for an account that never was.",
+  }),
   current: playerStats,
   periods: z.object({
     h24: playerStats.nullable(),

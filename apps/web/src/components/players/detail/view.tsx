@@ -170,6 +170,9 @@ export function PlayerProfile({
             tournamentWins={detail.tournamentWins}
             tournamentFeaturedWins={detail.tournamentFeaturedWins}
             tournamentBestTitle={detail.tournamentBestTitle}
+            onslaughtBestTier={detail.onslaughtBestTier}
+            onslaughtBestRank={detail.onslaughtBestRank}
+            onslaughtSeasons={detail.onslaughtSeasons}
             twitchLogin={detail.twitchLogin}
           />
         </PanelContent>
