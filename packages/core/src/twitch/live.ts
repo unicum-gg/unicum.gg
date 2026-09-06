@@ -1,7 +1,10 @@
 import { db } from "@unicum.gg/core/db";
 import { streamers, type LiveStreamer } from "@unicum.gg/shared";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
-import { getPlayerClansBatch } from "@unicum.gg/core/wargaming/wot/clans/listings";
+import {
+  getPlayerClansBatch,
+  type PlayerClanInfo,
+} from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 import { getWotStreamsByLogin } from "./index";
 
@@ -60,7 +63,21 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
         .map((r) => r.accountId);
       const [players, clans] = await Promise.all([
         getPlayersByAccounts(region, ids),
-        getPlayerClansBatch(region, ids),
+        // The clan tag is decoration, and it is the one thing here that leaves
+        // for Wargaming rather than our own database. WG's Asia endpoints go
+        // unreachable for long stretches (the transport logs 30s timeouts and
+        // then retries), so awaiting it plainly let a single Asia streamer
+        // going live take the whole rail down for everyone: the request never
+        // came back, and the home page fell through to the hero. The rest of
+        // the card is worth serving without a tag, which is how the onslaught
+        // reader already treats this same call.
+        getPlayerClansBatch(region, ids).catch((err) => {
+          console.error(
+            `[live-streamers] clan lookup failed for ${region}, serving without tags:`,
+            err,
+          );
+          return new Map<number, PlayerClanInfo>();
+        }),
       ]);
       perRegion.set(region, { players, clans });
     }),
