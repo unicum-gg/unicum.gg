@@ -17,6 +17,49 @@ import { getWotStreamsByLogin } from "./index";
  */
 export type { LiveStreamer } from "@unicum.gg/shared";
 
+// The clan tag is decoration, and it is the one thing on this path that leaves
+// for Wargaming rather than our own database. WG's Asia endpoints go
+// unreachable for long stretches, and the transport answers that by retrying:
+// five attempts over ~110s of backoff, each with its own 30s timeout. So the
+// call does eventually reject, minutes later, which is far too late for a
+// request a reader is waiting on. Catching the rejection is therefore not
+// enough on its own, and was not: a single Asia streamer going live took the
+// whole rail down for everyone, because the endpoint never came back and the
+// home page fell through to the hero.
+//
+// Bounded here instead, at a length that suits a decorative field. The lookup
+// is left running rather than cancelled (the transport owns its own retries),
+// its rejection is absorbed so it cannot surface as an unhandled one, and
+// whatever it eventually returns simply arrives too late to be used.
+const CLAN_TAGS_TIMEOUT_MS = 3_000;
+
+async function clanTagsOrNone(
+  region: Region,
+  accountIds: number[],
+): Promise<Map<number, PlayerClanInfo>> {
+  const none = new Map<number, PlayerClanInfo>();
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const expired = new Promise<Map<number, PlayerClanInfo>>((resolve) => {
+    timer = setTimeout(() => {
+      console.error(
+        `[live-streamers] clan tags for ${region} took over ${CLAN_TAGS_TIMEOUT_MS}ms, serving without them`,
+      );
+      resolve(none);
+    }, CLAN_TAGS_TIMEOUT_MS);
+  });
+  try {
+    return await Promise.race([
+      getPlayerClansBatch(region, accountIds).catch((err) => {
+        console.error(`[live-streamers] clan tags for ${region} failed:`, err);
+        return none;
+      }),
+      expired,
+    ]);
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 /**
  * Everyone in the `streamers` table who is live in the WoT category right now,
  * sorted by WNX (the UI re-sorts by the selected metric). Returns `[]` when the
@@ -63,21 +106,7 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
         .map((r) => r.accountId);
       const [players, clans] = await Promise.all([
         getPlayersByAccounts(region, ids),
-        // The clan tag is decoration, and it is the one thing here that leaves
-        // for Wargaming rather than our own database. WG's Asia endpoints go
-        // unreachable for long stretches (the transport logs 30s timeouts and
-        // then retries), so awaiting it plainly let a single Asia streamer
-        // going live take the whole rail down for everyone: the request never
-        // came back, and the home page fell through to the hero. The rest of
-        // the card is worth serving without a tag, which is how the onslaught
-        // reader already treats this same call.
-        getPlayerClansBatch(region, ids).catch((err) => {
-          console.error(
-            `[live-streamers] clan lookup failed for ${region}, serving without tags:`,
-            err,
-          );
-          return new Map<number, PlayerClanInfo>();
-        }),
+        clanTagsOrNone(region, ids),
       ]);
       perRegion.set(region, { players, clans });
     }),
