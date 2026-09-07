@@ -7,6 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 
 export type SkeletonColumn = {
@@ -14,6 +15,10 @@ export type SkeletonColumn = {
   // "w-28" for a name column.
   width: string;
   align?: "left" | "right" | "center";
+  /** Set on the columns the real table drops below `sm`. Without it the
+   * placeholder promises columns the loaded table does not draw, and the list
+   * visibly narrows the moment its rows arrive. */
+  hideOnMobile?: boolean;
 };
 
 // Justify the bar inside a fixed-height line-box, so the placeholder sits where
@@ -36,19 +41,28 @@ export function TableSkeleton({
   columns,
   rows = 10,
   header = true,
+  rail,
 }: {
   columns: SkeletonColumn[];
   rows?: number;
   header?: boolean;
+  /** Set when the table this stands in for is railed. Same reasoning as
+   * `hideOnMobile` one field up: without it the placeholder is a plain
+   * scrolling box and the loaded table is a rail, so the scrollbar and the
+   * arrow buttons appear the moment the rows land. */
+  rail?: boolean;
 }) {
   const rowIndexes = Array.from({ length: rows }, (_, i) => i);
   return (
-    <Table className="my-0! [&_td]:py-1.5! [&_th]:py-2!">
+    <Table rail={rail} className="my-0! [&_td]:py-1.5! [&_th]:py-2!">
       {header && (
         <TableHeader>
           <TableRow>
             {columns.map((col, c) => (
-              <TableHead key={c}>
+              <TableHead
+                key={c}
+                className={cn(col.hideOnMobile && styles.hiddenColumn)}
+              >
                 <div
                   className={cn(
                     "flex h-4 items-center",
@@ -66,7 +80,10 @@ export function TableSkeleton({
         {rowIndexes.map((r) => (
           <TableRow key={r}>
             {columns.map((col, c) => (
-              <TableCell key={c}>
+              <TableCell
+                key={c}
+                className={cn(col.hideOnMobile && styles.hiddenColumn)}
+              >
                 <div
                   className={cn(
                     "flex h-6 items-center",

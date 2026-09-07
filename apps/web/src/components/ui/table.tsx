@@ -1,23 +1,54 @@
 import React from "react"
 
+import { ScrollRail } from "@/components/scroll-rail"
 import { cn } from "@/lib/utils"
 
-function Table({ className, ...props }: React.ComponentProps<"table">) {
+/**
+ * `rail` swaps the plain scrolling box for the site's own scroller, which is
+ * what tells a reader there are columns past the right edge. Opt-in rather than
+ * the default: most tables fit, and a table that fits shows no arrow anyway, so
+ * the flag marks the ones known to overflow on a phone (the profile's sessions,
+ * tournaments and vehicle lists) rather than wrapping every table on the site in
+ * a client component.
+ */
+function Table({
+  className,
+  rail,
+  ...props
+}: React.ComponentProps<"table"> & { rail?: boolean }) {
+  const table = (
+    <div className="grow px-(--page-padding)">
+      <table
+        data-slot="table"
+        className={cn(
+          "w-full [&_th]:text-left",
+          className
+        )}
+        {...props}
+      />
+    </div>
+  )
+  if (rail) {
+    return (
+      // `stickyButtons`: a profile's vehicle list is thousands of pixels tall,
+      // so an arrow centred on the rail sits screens away from whatever row the
+      // reader is on.
+      <ScrollRail
+        stickyButtons
+        dataSlot="table-container"
+        containerClassName="-mx-(--page-padding) prose-table:my-[1.25em]"
+        className="flex"
+      >
+        {table}
+      </ScrollRail>
+    )
+  }
   return (
     <div
       data-slot="table-container"
       className="-mx-(--page-padding) flex overflow-x-auto prose-table:my-[1.25em]"
     >
-      <div className="grow px-(--page-padding)">
-        <table
-          data-slot="table"
-          className={cn(
-            "w-full [&_th]:text-left",
-            className
-          )}
-          {...props}
-        />
-      </div>
+      {table}
     </div>
   )
 }

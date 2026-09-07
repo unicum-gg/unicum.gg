@@ -39,6 +39,7 @@ export function ScrollRail({
   compact,
   axis = "x",
   backButtonClassName,
+  dataSlot,
   stickyButtons,
 }: {
   children: ReactNode;
@@ -57,6 +58,9 @@ export function ScrollRail({
   /** Overrides where the backwards arrow (up / left) sits. For a list with a
    * sticky header, which the arrow would otherwise cover. */
   backButtonClassName?: string;
+  /** Stamped on the scrolling box, so a caller that addresses its own scroller
+   * through a data attribute keeps doing so from inside a rail. */
+  dataSlot?: string;
   /**
    * Keep the arrows in view down a rail taller than the window.
    *
@@ -119,6 +123,7 @@ export function ScrollRail({
     >
       <div
         ref={ref}
+        data-slot={dataSlot}
         className={cn(
           "flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
           vertical ? "min-h-0 overflow-y-auto" : "min-w-0 overflow-x-auto",
