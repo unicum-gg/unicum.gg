@@ -21,7 +21,9 @@ import {
   isFeedbackModal,
 } from "./plugins/wot/commands/feedback.js";
 import {
+  handleVideoRejectModal,
   handleVideoReview,
+  isVideoRejectModal,
   isVideoReviewButton,
 } from "./plugins/wot/moderation/videos.js";
 import {
@@ -67,6 +69,12 @@ async function main(): Promise<void> {
     // state is in memory, and a card posted before a restart would go dead.
     if (interaction.isButton() && isVideoReviewButton(interaction.customId)) {
       void handleVideoReview(interaction);
+      return;
+    }
+    // Reject asks what was wrong before it settles anything, so its verdict
+    // arrives as a modal submission rather than as the press itself.
+    if (interaction.isModalSubmit() && isVideoRejectModal(interaction.customId)) {
+      void handleVideoRejectModal(interaction);
       return;
     }
     // The written opinions attached to a tank rating. Same routing rule and the

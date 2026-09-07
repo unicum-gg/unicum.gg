@@ -154,14 +154,42 @@ export async function postChannelEmbed(
  * listening for the presses. That listener is the gateway process (`apps/bot`),
  * not this REST client, so a caller reaching for this one is signing up for a
  * handler on the other side.
+ *
+ * Answers with the message id, so a card that describes something editable can
+ * be rewritten in place later rather than posted a second time. Null when the
+ * post failed, which every caller treats as best-effort: a card is how a
+ * moderator is told, never where the record lives.
  */
 export async function postChannelEmbedWithComponents(
   channelId: string,
   embed: APIEmbed,
   components: APIActionRowComponent<APIComponentInMessageActionRow>[],
-): Promise<boolean> {
-  const res = await botFetch(`/channels/${channelId}/messages`, {
+): Promise<string | null> {
+  const res = await botFetch<{ id: string }>(`/channels/${channelId}/messages`, {
     method: "POST",
+    body: JSON.stringify({ embeds: [embed], components }),
+  });
+  return res?.id ?? null;
+}
+
+/**
+ * Rewrite a card we posted earlier, embed and components alike.
+ *
+ * The queue is only useful while a card means one thing to do, so a submission
+ * corrected after it was posted rewrites its own card instead of leaving the
+ * moderator reading the battle it used to be. Best-effort like the post above,
+ * and for a stronger reason: the message may be gone (deleted, purged, a
+ * channel that changed), and an edit nobody can display must not fail the edit
+ * that was actually asked for.
+ */
+export async function editChannelEmbedWithComponents(
+  channelId: string,
+  messageId: string,
+  embed: APIEmbed,
+  components: APIActionRowComponent<APIComponentInMessageActionRow>[],
+): Promise<boolean> {
+  const res = await botFetch(`/channels/${channelId}/messages/${messageId}`, {
+    method: "PATCH",
     body: JSON.stringify({ embeds: [embed], components }),
   });
   return res !== null;
@@ -183,6 +211,53 @@ export async function postChannelMessage(
       content,
       allowed_mentions: { parse: ["everyone"] },
     }),
+  });
+  return res !== null;
+}
+
+/**
+ * Replace a message's components and nothing else.
+ *
+ * For a card whose text is still true but whose buttons no longer are: rewriting
+ * the embed as well would rebuild a description of a battle that has moved on,
+ * from data this caller no longer holds.
+ */
+export async function editChannelComponents(
+  channelId: string,
+  messageId: string,
+  components: APIActionRowComponent<APIComponentInMessageActionRow>[],
+): Promise<boolean> {
+  const res = await botFetch(`/channels/${channelId}/messages/${messageId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ components }),
+  });
+  return res !== null;
+}
+
+/**
+ * Send someone a direct message as the bot.
+ *
+ * Two calls, because Discord has no "message this user" endpoint: a DM channel
+ * is opened first (idempotent, it answers the existing one), then posted into.
+ *
+ * Best-effort by design, and it fails for ordinary reasons rather than broken
+ * ones: a bot may only DM someone who shares a server with it, and anyone can
+ * refuse DMs from server members. So a false here means "could not be told",
+ * never "something went wrong", and no caller may treat it as a failure of the
+ * thing it is reporting.
+ */
+export async function sendDirectMessage(
+  discordUserId: string,
+  embed: APIEmbed,
+): Promise<boolean> {
+  const channel = await botFetch<{ id: string }>("/users/@me/channels", {
+    method: "POST",
+    body: JSON.stringify({ recipient_id: discordUserId }),
+  });
+  if (!channel?.id) return false;
+  const res = await botFetch(`/channels/${channel.id}/messages`, {
+    method: "POST",
+    body: JSON.stringify({ embeds: [embed] }),
   });
   return res !== null;
 }

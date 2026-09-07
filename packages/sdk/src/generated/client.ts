@@ -866,6 +866,22 @@ class RegionClient {
     );
   }
 
+  /** Correct a suggestion */
+  videosEdit(body: BodyOf<"/{region}/videos/edit">) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/videos/edit", { region: this.region }),
+      () => this.api.POST("/{region}/videos/edit", { params: { path: { region: this.region } }, body }),
+    );
+  }
+
+  /** A suggestion, as its form */
+  videosEditable(query: QueryOf<"/{region}/videos/editable">) {
+    return handle(
+      buildUrl(this.baseUrl, "/{region}/videos/editable", { region: this.region }, query),
+      () => this.api.GET("/{region}/videos/editable", { params: { path: { region: this.region }, query } }),
+    );
+  }
+
   /** My queued videos */
   videosMine() {
     return handle(

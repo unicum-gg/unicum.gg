@@ -1,6 +1,9 @@
 import { headers } from "next/headers";
 import { auth } from "@unicum.gg/core/auth";
-import { listPendingVideosFor } from "@unicum.gg/core/tanks/videos-read";
+import {
+  listOwnedVideoIds,
+  listPendingVideosFor,
+} from "@unicum.gg/core/tanks/videos-read";
 import { isRegion } from "@unicum.gg/wargaming";
 import { jsonResponse } from "@/services/openapi/json-response";
 import { MyVideosResponse } from "./schema.api";
@@ -31,9 +34,12 @@ async function GET__perf(
   const session = await auth.api.getSession({ headers: await headers() });
   const noStore = { headers: { "cache-control": "no-store" } };
   if (!session?.user) {
-    return jsonResponse(MyVideosResponse, { videos: [] }, noStore);
+    return jsonResponse(MyVideosResponse, { videos: [], ownedIds: [] }, noStore);
   }
 
-  const videos = await listPendingVideosFor(region, session.user.id);
-  return jsonResponse(MyVideosResponse, { videos }, noStore);
+  const [videos, ownedIds] = await Promise.all([
+    listPendingVideosFor(region, session.user.id),
+    listOwnedVideoIds(session.user.id),
+  ]);
+  return jsonResponse(MyVideosResponse, { videos, ownedIds }, noStore);
 }

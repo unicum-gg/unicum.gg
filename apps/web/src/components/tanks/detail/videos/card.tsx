@@ -74,6 +74,11 @@ export type TankVideoCardData = {
   isPremium?: boolean;
   /** Set on the submitter's own rows that a moderator has not settled yet. */
   pending?: boolean;
+  /** Submitted by the reader, whatever its status. What makes a published row
+   * correctable: a queued one is only ever on screen for its own submitter, but
+   * a live one is on everybody's page, so the page has to be told which are
+   * theirs. */
+  mine?: boolean;
 };
 
 /**
@@ -247,6 +252,11 @@ export function TankVideoCard({
                 active={battle.id === playingId}
                 onPlay={player ? () => play(battle) : undefined}
                 href={watchHref(battle)}
+                onEdit={
+                  (battle.pending || battle.mine) && player
+                    ? () => player.edit(battle.id)
+                    : undefined
+                }
               />
             </li>
           ))}

@@ -1,5 +1,5 @@
 export interface paths {
-    "/{region}/clans/{tag}": {
+    "/{region}/players/search": {
         parameters: {
             query?: never;
             header?: never;
@@ -7,10 +7,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Clan overview
-         * @description The clan's profile and its battle-weighted aggregate ratings (lifetime and 30-day WN7/WN8/WNX plus the average win rate). The heavy per-category data lives on the dedicated sub-endpoints: `/members`, `/previous-clans`, `/activity`, `/stronghold`, `/clan-wars` and `/vehicles`. 404 if the region's clan with this tag doesn't exist.
+         * Search players
+         * @description Search players by nickname prefix (minimum 3 characters). Returns the combined result set in a single JSON response: our database hits first, then Wargaming API hits (deduped). Waits for the (rate-limited) Wargaming call, so it can be slower than the streamed variant. For progressive results, use `/search/ndjson`.
          */
-        get: operations["get-{region}-clans-{tag}"];
+        get: operations["get-{region}-players-search"];
         put?: never;
         post?: never;
         delete?: never;
@@ -19,7 +19,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/clans/compare": {
+    "/{region}/players/search/ndjson": {
         parameters: {
             query?: never;
             header?: never;
@@ -27,10 +27,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Compare clans
-         * @description Inputs for a side-by-side comparison of up to 4 clans (`?tags=a,b,c`): each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and the WN8/WNX expected-value tables. Dates are ISO 8601 strings.
+         * Search players (streamed)
+         * @description Search players by nickname prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives. For a single combined JSON response, use `/search`.
          */
-        get: operations["get-{region}-clans-compare"];
+        get: operations["get-{region}-players-search-ndjson"];
         put?: never;
         post?: never;
         delete?: never;
@@ -39,7 +39,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/clans/languages": {
+    "/{region}/players/top": {
         parameters: {
             query?: never;
             header?: never;
@@ -47,730 +47,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Clan languages
-         * @description Languages the region's clans declare, with total and strict (single-language) counts. Backs the by-language leaderboards.
+         * Top players
+         * @description Player leaderboard for a region.
          */
-        get: operations["get-{region}-clans-languages"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search clans
-         * @description Search clans by name or tag prefix (minimum 3 characters). Returns the combined result set in a single JSON response: our database hits first, then Wargaming API hits (deduped). Waits for the (rate-limited) Wargaming call, so it can be slower than the streamed variant. For progressive results, use `/search/ndjson`.
-         */
-        get: operations["get-{region}-clans-search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/top": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Top clans
-         * @description Clan leaderboard for a region.
-         */
-        get: operations["get-{region}-clans-top"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/activity": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan activity
-         * @description Recent join / leave / role-change events for the clan. 404 if the region's clan with this tag doesn't exist.
-         */
-        get: operations["get-{region}-clans-{tag}-activity"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/clan-wars": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan wars stats
-         * @description The clan's Global Map (Clan Wars) Elo, battles, wins and provinces per tier: `latest` is the current snapshot; each entry in `periods` is the change vs the snapshot 24h/7d/30d ago (null when there's no comparison point). 404 if the region's clan with this tag doesn't exist.
-         */
-        get: operations["get-{region}-clans-{tag}-clan-wars"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/enqueue": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Enqueue clan refresh
-         * @description Signals that a real browser is viewing this clan's page. Schedules a background refresh of the clan's data from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
-         */
-        post: operations["post-{region}-clans-{tag}-enqueue"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/members": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan members
-         * @description The clan's members with cached WN7/WN8/WNX ratings (overall and 30-day) and per-period aggregate stats. 404 if the region's clan with this tag doesn't exist.
-         */
-        get: operations["get-{region}-clans-{tag}-members"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/previous-clans": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan previous clans
-         * @description The clans the current members previously belonged to, with how many came from each. 404 if the region's clan with this tag doesn't exist.
-         */
-        get: operations["get-{region}-clans-{tag}-previous-clans"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan live stream
-         * @description Server-sent events (SSE) for live clan profile updates.
-         */
-        get: operations["get-{region}-clans-{tag}-sse"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/stronghold": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan stronghold stats
-         * @description The clan's Stronghold Elo and skirmish/advances stats per tier: `latest` is the current snapshot; each entry in `periods` is the change vs the snapshot 24h/7d/30d ago (null when there's no comparison point). 404 if the region's clan with this tag doesn't exist.
-         */
-        get: operations["get-{region}-clans-{tag}-stronghold"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/vehicles": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan vehicles
-         * @description Per-tank stats for a clan, aggregated across all members from their most recent tank snapshots: member count, total battles, battle-weighted average damage and XP, win rate, and WN7/WN8/WNX ratings. This is the heavy aggregation on the clan page, so it lives on its own endpoint and is loaded on demand.
-         */
-        get: operations["get-{region}-clans-{tag}-vehicles"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/{tag}/videos": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan videos
-         * @description Every published battle this clan is credited on, newest approved first: the tactics it called and the maps it called them on. A submitter names the clan when suggesting a competitive battle, and it is stored as an id rather than a tag, so a rename never strands the credit. Empty for a clan nobody has credited yet.
-         */
-        get: operations["get-{region}-clans-{tag}-videos"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/search/ndjson": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search clans (streamed)
-         * @description Search clans by name or tag prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives. For a single combined JSON response, use `/search`.
-         */
-        get: operations["get-{region}-clans-search-ndjson"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/clans/stronghold/top": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Stronghold clan leaderboard
-         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over the last 24 hours, 7 days, 30 days, or all-time. Top 100; cached ~10 min server-side.
-         */
-        get: operations["get-{region}-clans-stronghold-top"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/glossary": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Glossary
-         * @description Every World of Tanks term the site defines: game mechanics, vehicle statistics, battle formats, rating systems and community slang. Each entry carries a one-sentence definition, the other spellings it is searched by, and the section it belongs to. Alphabetical by term. Pass `category` to read one section.
-         */
-        get: operations["get-glossary"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/glossary/{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Glossary term
-         * @description One glossary term in full: its definition, the body of the entry with every mention of another term already resolved to that term's slug, the terms it relates to, and the pages of the site it points at.
-         */
-        get: operations["get-glossary-{slug}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/glossary/anchors": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Glossary anchors
-         * @description Where each glossary term attaches to the interface: the tank specification columns and the on-screen labels it defines, with the one-sentence definition to show for them. Small by construction (only anchored terms, listed once each), so a client can hold the whole thing and explain a table without another request.
-         */
-        get: operations["get-glossary-anchors"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/glossary/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search the glossary
-         * @description Search every term the site defines (minimum 3 characters), by name, by any other spelling it is known by, and failing both by its definition, so a reader who only remembers what a thing does still finds it. Ranks exact names first, then prefixes, then the rest. Region-less: a definition reads the same on every server.
-         */
-        get: operations["get-glossary-search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Maps
-         * @description Every World of Tanks battle map on a region: display name, minimap image, camouflage kind (summer/winter/desert), square size in metres, the random-battle modes it supports (Standard/Encounter/Assault), and whether random events might fire on it mid-battle. Derived from the game client scripts, so removed or event-reskin maps are included. One entry per distinct map, name-sorted.
-         */
-        get: operations["get-{region}-maps"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Map detail
-         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `randomEvents` carries the events that might fire on the map mid-battle, each with the minimap art of its danger area and of the ground it leaves behind. `slug` in the response is the canonical slug.
-         */
-        get: operations["get-{region}-maps-{slug}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/changes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Map changes feed
-         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, random events added to or dropped from a map, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
-         */
-        get: operations["get-{region}-maps-changes"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search maps
-         * @description Search the battle-map catalogue by name (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
-         */
-        get: operations["get-{region}-maps-search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/{slug}/history": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Map changes history
-         * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
-         */
-        get: operations["get-{region}-maps-{slug}-history"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/{slug}/videos": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Map videos
-         * @description Every published battle the community has linked on this map, newest approved first, whatever format it was played in and whatever it was played in. This is the read behind a tactic library: a Clan Wars or Advances battle is filed under the ground it was fought on and the side it was fought from, not under a vehicle, so the map is the only page it can be looked up from. Random battles come back alongside them, carrying the tank they were played in, and the page filters by format.
-         */
-        get: operations["get-{region}-maps-{slug}-videos"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/maps/search/ndjson": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search maps (streamed)
-         * @description Search the battle-map catalogue by name (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue. For a plain JSON response, use `/search`.
-         */
-        get: operations["get-{region}-maps-search-ndjson"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/mcp": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * MCP endpoint
-         * @description Model Context Protocol (MCP) server over a stateless Streamable HTTP transport. Point an MCP client at this URL to use unicum.gg's read API as MCP tools (the same player, clan and tank data as the REST endpoints). The POST body is a JSON-RPC 2.0 message (`initialize`, `tools/list`, `tools/call`, ...); the server replies with a JSON-RPC response or, when streaming, an SSE stream. `GET` opens the SSE stream and `DELETE` ends a session (transport-level, not documented separately).
-         */
-        post: operations["post-mcp"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Generic OG card
-         * @description A generic 1200×630 PNG social card with a customizable title and subtitle, used as the link-unfurl image for pages without a dedicated per-entity card.
-         */
-        get: operations["get-og"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/clans/{tag}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clan OG card
-         * @description The clan's stats card as a stable, hash-free 1200×630 PNG (members, average WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-clans-{tag}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/clans/compare": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Clans comparison OG card
-         * @description A side-by-side comparison card (up to 4 clans, WNX each) as a 1200×630 PNG.
-         */
-        get: operations["get-og-{region}-clans-compare"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/maps/{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Map OG card
-         * @description The battle map's card as a stable, hash-free 1200×630 PNG (minimap, size, battle time, team size, modes). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-maps-{slug}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/players/{nickname}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Player OG card
-         * @description The player's stats card as a stable, hash-free 1200×630 PNG (battles, WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-players-{nickname}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/players/compare": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Players comparison OG card
-         * @description A side-by-side comparison card (up to 4 players, WNX each) as a 1200×630 PNG.
-         */
-        get: operations["get-og-{region}-players-compare"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/tanks/{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tank OG card
-         * @description The tank's stats card as a stable, hash-free 1200×630 PNG (tier, class, best player, top WNX, with the vehicle render). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-tanks-{slug}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/tanks/compare": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tanks comparison OG card
-         * @description A side-by-side comparison card (up to 4 vehicles) as a 1200×630 PNG: each vehicle's render over the hangar floor, its tier and class, and its overall catalogue score.
-         */
-        get: operations["get-og-{region}-tanks-compare"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/tournaments/{id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tournament OG card
-         * @description The tournament's card as a stable, hash-free 1200×630 PNG (organiser logo, title, status, field size, format, tier and prize). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-tournaments-{id}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/og/{region}/tournaments/{id}/team/{teamId}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tournament team OG card
-         * @description One team's card as a stable, hash-free 1200×630 PNG (team name, the clan it fielded, where it finished, roster size and average rating). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
-         */
-        get: operations["get-og-{region}-tournaments-{id}-team-{teamId}"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/players/{nickname}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Player detail
-         * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Works for ANY player: cached data is served immediately; on a cold cache the account is resolved on Wargaming, fetched live and recorded (which also starts tracking it). 403 with error "account_locked" when the account exists but Wargaming has locked it (no stats available), 404 only when Wargaming doesn't know the nickname either. Dates are ISO 8601 strings.
-         */
-        get: operations["get-{region}-players-{nickname}"];
+        get: operations["get-{region}-players-top"];
         put?: never;
         post?: never;
         delete?: never;
@@ -859,7 +139,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/players/search": {
+    "/{region}/players/onslaught/history": {
         parameters: {
             query?: never;
             header?: never;
@@ -867,10 +147,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Search players
-         * @description Search players by nickname prefix (minimum 3 characters). Returns the combined result set in a single JSON response: our database hits first, then Wargaming API hits (deduped). Waits for the (rate-limited) Wargaming call, so it can be slower than the streamed variant. For progressive results, use `/search/ndjson`.
+         * Onslaught season history
+         * @description How an Onslaught season's leaderboard moved while it ran: how many players held a place, and what it cost to hold Legend or Champion, sampled through the season. The game recomputes its board every few minutes and serves only the current instant, keeping no history of its own, so this series exists because we recorded it.
          */
-        get: operations["get-{region}-players-search"];
+        get: operations["get-{region}-players-onslaught-history"];
         put?: never;
         post?: never;
         delete?: never;
@@ -899,26 +179,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/players/top": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Top players
-         * @description Player leaderboard for a region.
-         */
-        get: operations["get-{region}-players-top"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/{region}/players/winrate-by-tier": {
         parameters: {
             query?: never;
@@ -931,6 +191,26 @@ export interface paths {
          * @description What each band of the region's players wins at each tier: the band's wins at that tier over its battles there. Rebuilt nightly as a by-product of the pass over the per-vehicle snapshots, the only place a win rate per tier exists. 404 until the first run. Dates are ISO 8601 strings.
          */
         get: operations["get-{region}-players-winrate-by-tier"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/players/{nickname}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player detail
+         * @description Full player detail for a region: profile, random-battles totals with 24h/7d/30d period diffs, derived per-tank-breakdown stats (average tier, assistance damages, WN7/WN8/WNX), the tank-by-tank table with all three ratings, the tanks lifting or dragging the overall rating, rating history, clan history, and every non-random game mode's totals. Works for ANY player: cached data is served immediately; on a cold cache the account is resolved on Wargaming, fetched live and recorded (which also starts tracking it). 403 with error "account_locked" when the account exists but Wargaming has locked it (no stats available), 404 only when Wargaming doesn't know the nickname either. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-players-{nickname}"];
         put?: never;
         post?: never;
         delete?: never;
@@ -979,26 +259,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/players/{nickname}/enqueue": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Enqueue player refresh
-         * @description Signals that a real browser is viewing this player's page. Schedules a background refresh of the player's stats from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
-         */
-        post: operations["post-{region}-players-{nickname}-enqueue"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/{region}/players/{nickname}/onslaught": {
         parameters: {
             query?: never;
@@ -1039,26 +299,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/players/{nickname}/sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Player live stream
-         * @description Server-sent events (SSE) for live player profile updates.
-         */
-        get: operations["get-{region}-players-{nickname}-sse"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/{region}/players/{nickname}/tanks": {
         parameters: {
             query?: never;
@@ -1071,46 +311,6 @@ export interface paths {
          * @description Per-tank rows for a player: the tank-by-tank breakdown with per-battle averages and WN7/WN8/WNX ratings. This is the heavy list on the player page, so it lives on its own endpoint and is loaded on demand (a deep link to `?section=tanks` server-renders it; otherwise the client fetches it when the Tanks section is first opened). 404 when the player is unknown.
          */
         get: operations["get-{region}-players-{nickname}-tanks"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/players/onslaught/history": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Onslaught season history
-         * @description How an Onslaught season's leaderboard moved while it ran: how many players held a place, and what it cost to hold Legend or Champion, sampled through the season. The game recomputes its board every few minutes and serves only the current instant, keeping no history of its own, so this series exists because we recorded it.
-         */
-        get: operations["get-{region}-players-onslaught-history"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/players/search/ndjson": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search players (streamed)
-         * @description Search players by nickname prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives. For a single combined JSON response, use `/search`.
-         */
-        get: operations["get-{region}-players-search-ndjson"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1139,107 +339,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/servers/compare": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Compare regions
-         * @description Every region's total population on one timeline, for the requested range. Region-less by nature: comparing EU, NA and Asia is the point, and asking one region for the other two would be a strange shape. Cached for 60s server-side. Dates are ISO 8601 strings.
-         */
-        get: operations["get-servers-compare"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/server/stats": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Server population
-         * @description The region's recorded cluster population over the requested range, with each cluster's own peak and mean, the region's records, and the average population per weekday and hour (UTC) over the trailing four weeks. Wargaming publishes population as an instant and keeps no history, so this series only goes back to when the sampling started. Cached for 60s server-side. Dates are ISO 8601 strings.
-         */
-        get: operations["get-{region}-server-stats"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/server/online/sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Players online stream
-         * @description Server-sent events (SSE) of the region's live player count. Each event's data is a JSON object with the region total and the per-server breakdown, pushed whenever the count refreshes (about every 3 seconds).
-         */
-        get: operations["get-{region}-server-online-sse"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/streamers/live": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Live streamers
-         * @description Tracked players currently live on Twitch, across all regions, with their WN7/WN8/WNX ratings. Snapshot form of the `/streamers/live/sse` stream; cached ~30s server-side.
-         */
-        get: operations["get-streamers-live"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/streamers/live/sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Live streamers stream
-         * @description Server-sent events (SSE) of the tracked players currently live on Twitch in the World of Tanks category across all regions, ranked by WNX and pushed every few seconds. Each event's `data` is the same JSON array as `GET /api/streamers/live`.
-         */
-        get: operations["get-streamers-live-sse"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/feedback": {
+    "/{region}/players/{nickname}/enqueue": {
         parameters: {
             query?: never;
             header?: never;
@@ -1249,17 +349,17 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Send feedback
-         * @description Forward a message to the team's private Discord channel. Open to everyone, no key and no account: the sender's Wargaming identity is attached from the session when signed in, otherwise the feedback is anonymous. Rate limited per client. 404 when the feature is unconfigured, 400 on a bad body, 429 when rate limited, 502 when it could not be delivered.
+         * Enqueue player refresh
+         * @description Signals that a real browser is viewing this player's page. Schedules a background refresh of the player's stats from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
          */
-        post: operations["post-feedback"];
+        post: operations["post-{region}-players-{nickname}-enqueue"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/health": {
+    "/{region}/players/{nickname}/sse": {
         parameters: {
             query?: never;
             header?: never;
@@ -1267,10 +367,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Health check
-         * @description Liveness probe. Referenced as the `status` link relation in the
+         * Player live stream
+         * @description Server-sent events (SSE) for live player profile updates.
          */
-        get: operations["get-health"];
+        get: operations["get-{region}-players-{nickname}-sse"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1279,7 +379,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/rates": {
+    "/{region}/clans/search": {
         parameters: {
             query?: never;
             header?: never;
@@ -1287,10 +387,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Exchange rates
-         * @description Live EUR-based exchange rates for the currencies the site displays. Our own money figures (funding progress, infrastructure cost) are held in euros and converted at read time, so this is what a client needs to render them in a regional currency. Refreshed once a day; `updatedAt` is null when no live rate is available, in which case amounts should be shown in euros.
+         * Search clans
+         * @description Search clans by name or tag prefix (minimum 3 characters). Returns the combined result set in a single JSON response: our database hits first, then Wargaming API hits (deduped). Waits for the (rate-limited) Wargaming call, so it can be slower than the streamed variant. For progressive results, use `/search/ndjson`.
          */
-        get: operations["get-rates"];
+        get: operations["get-{region}-clans-search"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1299,7 +399,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/coverage": {
+    "/{region}/clans/search/ndjson": {
         parameters: {
             query?: never;
             header?: never;
@@ -1307,10 +407,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Coverage
-         * @description How much of the region the tracker covers: player/clan/snapshot counts, refresh-policy health (per activity bucket), 30-day discovery and snapshot trends, and infrastructure size/cost. Cached for 60s server-side. Dates are ISO 8601 strings.
+         * Search clans (streamed)
+         * @description Search clans by name or tag prefix (minimum 3 characters). Streams NDJSON (one JSON object per line): a `local` chunk from our database first (instant), then a `remote` chunk from the Wargaming API (deduped against local) as it arrives. For a single combined JSON response, use `/search`.
          */
-        get: operations["get-{region}-coverage"];
+        get: operations["get-{region}-clans-search-ndjson"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1319,7 +419,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/support/funding": {
+    "/{region}/clans/stronghold/top": {
         parameters: {
             query?: never;
             header?: never;
@@ -1327,10 +427,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Funding progress
-         * @description Compact cumulative funding progress: how much of the total spend since launch supporters have covered. Returns the percentage plus the raised and goal amounts in EUR (aggregate only). Powers the top-bar mini funding bar.
+         * Stronghold clan leaderboard
+         * @description The region's best stronghold clans for one mode/tier (Advances, tier X/VIII/VI skirmishes), ranked by SR (skirmish rating), Elo, battles, or win rate, over the last 24 hours, 7 days, 30 days, or all-time. Top 100; cached ~10 min server-side.
          */
-        get: operations["get-support-funding"];
+        get: operations["get-{region}-clans-stronghold-top"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1339,7 +439,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/support/podium": {
+    "/{region}/clans/top": {
         parameters: {
             query?: never;
             header?: never;
@@ -1347,10 +447,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Supporters podium
-         * @description Active supporters ranked by their current monthly pledge, highest first. The pledge amount is never exposed, only the ranking; anonymous supporters appear as "Anonymous".
+         * Top clans
+         * @description Clan leaderboard for a region.
          */
-        get: operations["get-support-podium"];
+        get: operations["get-{region}-clans-top"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1359,7 +459,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/search/resolve": {
+    "/{region}/clans/compare": {
         parameters: {
             query?: never;
             header?: never;
@@ -1367,10 +467,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Resolve saved search entries
-         * @description Current rows for a set of entries the caller has saved by id (the search dialog's favorites and recents), in the same shapes the four search endpoints return. Each list is optional and comma separated. Entries that no longer resolve are absent from the response rather than reported, so a caller can keep its own copy for those. Reads cached data only, with no live Wargaming call.
+         * Compare clans
+         * @description Inputs for a side-by-side comparison of up to 4 clans (`?tags=a,b,c`): each clan's profile, rated members and per-tank aggregates, plus the vehicle catalogue and the WN8/WNX expected-value tables. Dates are ISO 8601 strings.
          */
-        get: operations["get-{region}-search-resolve"];
+        get: operations["get-{region}-clans-compare"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1379,7 +479,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks": {
+    "/{region}/clans/languages": {
         parameters: {
             query?: never;
             header?: never;
@@ -1387,10 +487,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tanks performance
-         * @description Server-wide performance for every tank on a region, averaged over tracked players: win rate, average damage, WN7/WN8/WNX, kills-per-death, assistance, spots, hit and penetration rate, blocked damage and survival, plus Marks of Excellence / Mastery holder counts. One row per vehicle in the region's catalogue; `stats` is null until the by-tank cron has coverage.
+         * Clan languages
+         * @description Languages the region's clans declare, with total and strict (single-language) counts. Backs the by-language leaderboards.
          */
-        get: operations["get-{region}-tanks"];
+        get: operations["get-{region}-clans-languages"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1399,7 +499,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/videos": {
+    "/{region}/clans/{tag}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1407,10 +507,230 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Community videos
-         * @description Every published battle the community has suggested, newest approved first, whatever the tank. Each entry is a battle rather than a whole video, carrying the second it starts at, so one recording appears once per battle marked in it. The per-tank endpoint returns the same rows filtered to one tank; this one is what shows a video whole, with every tank it covers. Region-independent, the same list is served on every region.
+         * Clan overview
+         * @description The clan's profile and its battle-weighted aggregate ratings (lifetime and 30-day WN7/WN8/WNX plus the average win rate). The heavy per-category data lives on the dedicated sub-endpoints: `/members`, `/previous-clans`, `/activity`, `/stronghold`, `/clan-wars` and `/vehicles`. 404 if the region's clan with this tag doesn't exist.
          */
-        get: operations["get-{region}-videos"];
+        get: operations["get-{region}-clans-{tag}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan videos
+         * @description Every published battle this clan is credited on, newest approved first: the tactics it called and the maps it called them on. A submitter names the clan when suggesting a competitive battle, and it is stored as an id rather than a tag, so a rename never strands the credit. Empty for a clan nobody has credited yet.
+         */
+        get: operations["get-{region}-clans-{tag}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/members": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan members
+         * @description The clan's members with cached WN7/WN8/WNX ratings (overall and 30-day) and per-period aggregate stats. 404 if the region's clan with this tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-members"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/previous-clans": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan previous clans
+         * @description The clans the current members previously belonged to, with how many came from each. 404 if the region's clan with this tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-previous-clans"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/activity": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan activity
+         * @description Recent join / leave / role-change events for the clan. 404 if the region's clan with this tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-activity"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/stronghold": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan stronghold stats
+         * @description The clan's Stronghold Elo and skirmish/advances stats per tier: `latest` is the current snapshot; each entry in `periods` is the change vs the snapshot 24h/7d/30d ago (null when there's no comparison point). 404 if the region's clan with this tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-stronghold"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/clan-wars": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan wars stats
+         * @description The clan's Global Map (Clan Wars) Elo, battles, wins and provinces per tier: `latest` is the current snapshot; each entry in `periods` is the change vs the snapshot 24h/7d/30d ago (null when there's no comparison point). 404 if the region's clan with this tag doesn't exist.
+         */
+        get: operations["get-{region}-clans-{tag}-clan-wars"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/vehicles": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan vehicles
+         * @description Per-tank stats for a clan, aggregated across all members from their most recent tank snapshots: member count, total battles, battle-weighted average damage and XP, win rate, and WN7/WN8/WNX ratings. This is the heavy aggregation on the clan page, so it lives on its own endpoint and is loaded on demand.
+         */
+        get: operations["get-{region}-clans-{tag}-vehicles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/enqueue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Enqueue clan refresh
+         * @description Signals that a real browser is viewing this clan's page. Schedules a background refresh of the clan's data from the Wargaming API. Idempotent: calling it multiple times only raises the existing queue entry's priority, never duplicates work.
+         */
+        post: operations["post-{region}-clans-{tag}-enqueue"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/clans/{tag}/sse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan live stream
+         * @description Server-sent events (SSE) for live clan profile updates.
+         */
+        get: operations["get-{region}-clans-{tag}-sse"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search tanks
+         * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
+         */
+        get: operations["get-{region}-tanks-search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/search/ndjson": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search tanks (streamed)
+         * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue. For a plain JSON response, use `/search`.
+         */
+        get: operations["get-{region}-tanks-search-ndjson"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1439,7 +759,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}": {
+    "/{region}/tanks": {
         parameters: {
             query?: never;
             header?: never;
@@ -1447,10 +767,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tank performance
-         * @description Server-wide performance for one tank on a region, averaged over tracked players (win rate, average damage, WN7/WN8/WNX, and more), plus Marks of Excellence / Mastery holder counts. 404 if the region's catalogue has no vehicle with this slug.
+         * Tanks performance
+         * @description Server-wide performance for every tank on a region, averaged over tracked players: win rate, average damage, WN7/WN8/WNX, kills-per-death, assistance, spots, hit and penetration rate, blocked damage and survival, plus Marks of Excellence / Mastery holder counts. One row per vehicle in the region's catalogue; `stats` is null until the by-tank cron has coverage.
          */
-        get: operations["get-{region}-tanks-{slug}"];
+        get: operations["get-{region}-tanks"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1491,6 +811,146 @@ export interface paths {
          * @description Everything a side-by-side comparison of 2 to 4 vehicles renders (`?slugs=is-7,e-100`): each vehicle's specifications, module combinations, equipment slots, crew and progression, plus its server-average performance. The mountable catalogues (equipment, directives, consumables, crew skills) are hoisted out of the vehicles and described once under `catalog`, referenced by key, and `ranges` carries the catalogue-wide spread of every characteristic so a client can score a vehicle per category. A slug may suffix the game client to read the vehicle on (`?slugs=amx-13-90,amx-13-90@ct`), which is how a vehicle is compared against what the running Common Test makes of it, and every column carries back the `client` it was read on. Duplicate columns collapse, and a slug the catalogue doesn't know is dropped rather than failing the request, as long as two vehicles remain.
          */
         get: operations["get-{region}-tanks-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Community ratings board
+         * @description Every vehicle players have rated, with what they think of it and how far that is from what it actually does. `overallBayes` is the mean shrunk towards the site-wide average and is what the board sorts on, so a tank three people liked cannot sit above one four hundred have judged. `hype` is the community's rank inside the tier minus the tank's measured win-rate rank inside the same tier: sort it descending for the most overrated vehicles in the game, ascending for the most underrated. Vehicles nobody has rated are absent rather than returned with nulls, so an unrated tank is never read as a badly rated one. The votes are global, the identities are the region's catalogue.
+         */
+        get: operations["get-{region}-tanks-ratings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Community videos
+         * @description Every published battle the community has suggested, newest approved first, whatever the tank. Each entry is a battle rather than a whole video, carrying the second it starts at, so one recording appears once per battle marked in it. The per-tank endpoint returns the same rows filtered to one tank; this one is what shows a video whole, with every tank it covers. Region-independent, the same list is served on every region.
+         */
+        get: operations["get-{region}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos/edit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Correct a suggestion
+         * @description Rewrite a battle that was already suggested. The author may correct their own for as long as it has not been turned down, and a moderator may correct anyone's while holding the signed link the moderation channel hands out. The body is the submission's, so the same checks apply: the map and mode are validated against the catalogue, a random battle names its vehicle, and the one-row-per-battle rule still holds. The vehicle is the field this exists for, since the form never asks for it on the way in. A correction always goes back to the queue, so a video that was live comes down until it is approved again. 401 when signed out and no token is given, 403 on someone else's, 404 when submissions are unconfigured or the row is unknown, 409 when the correction lands on a battle we already hold.
+         */
+        post: operations["post-{region}-videos-edit"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos/editable": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * A suggestion, as its form
+         * @description One suggested battle in the shape the form that corrects it needs: the link rather than the video id, the team number rather than the direction derived from it, the tank and clan as the slug and tag the form searches by. Readable by its author, and by a moderator holding the signed link the moderation channel hands out. A row the caller may not edit is answered 403 rather than shown, since an unreviewed suggestion is visible to the person waiting on it and to nobody else. 401 when signed out and no token is given.
+         */
+        get: operations["get-{region}-videos-editable"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos/mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My queued videos
+         * @description The signed-in user's own suggestions that are still waiting on a moderator, wherever they were filed. Their own only: an unreviewed row is shown to the person waiting on it and to nobody else, which is also why this answers with an empty list rather than an error when signed out. Uncached for the same reason, unlike the published lists beside it. Not scoped to one tank or map: the page that renders it keeps the rows it is about.
+         */
+        get: operations["get-{region}-videos-mine"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/videos/suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Suggest a video
+         * @description Queue a YouTube link for moderation. Requires a signed-in Wargaming account, so a suggestion always carries who made it. The link must be a YouTube video we can embed, and its timestamp is what marks the battle. A submission is filed under the map it was fought on, which is checked against the catalogue along with the mode, so a battle cannot be filed under a map that never runs it. A random battle also names the vehicle and the damage; a competitive battle names neither, since a tactic belongs to the ground and the side rather than to one player's game. Nothing is published here: a moderator approves it first. 401 when signed out, 404 when submissions are unconfigured, 409 when that exact battle was already submitted.
+         */
+        post: operations["post-{region}-videos-suggest"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/specifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tanks specifications
+         * @description Combat specifications for every tank on a region: firepower (damage, DPM, penetration, accuracy, aim time), gun handling and dispersion, mobility (speed, traverse, terrain resistance, power-to-weight), survivability (hit points, armor, module health) and concealment / view range. One row per vehicle in the region's catalogue. Values are region-agnostic (WG balances vehicles identically across servers); only the catalogue differs per region.
+         */
+        get: operations["get-{region}-tanks-specifications"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1559,7 +1019,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/ratings": {
+    "/{region}/tanks/{slug}": {
         parameters: {
             query?: never;
             header?: never;
@@ -1567,92 +1027,12 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Community ratings board
-         * @description Every vehicle players have rated, with what they think of it and how far that is from what it actually does. `overallBayes` is the mean shrunk towards the site-wide average and is what the board sorts on, so a tank three people liked cannot sit above one four hundred have judged. `hype` is the community's rank inside the tier minus the tank's measured win-rate rank inside the same tier: sort it descending for the most overrated vehicles in the game, ascending for the most underrated. Vehicles nobody has rated are absent rather than returned with nulls, so an unrated tank is never read as a badly rated one. The votes are global, the identities are the region's catalogue.
+         * Tank performance
+         * @description Server-wide performance for one tank on a region, averaged over tracked players (win rate, average damage, WN7/WN8/WNX, and more), plus Marks of Excellence / Mastery holder counts. 404 if the region's catalogue has no vehicle with this slug.
          */
-        get: operations["get-{region}-tanks-ratings"];
+        get: operations["get-{region}-tanks-{slug}"];
         put?: never;
         post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/tanks/search": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search tanks
-         * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
-         */
-        get: operations["get-{region}-tanks-search"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/tanks/specifications": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tanks specifications
-         * @description Combat specifications for every tank on a region: firepower (damage, DPM, penetration, accuracy, aim time), gun handling and dispersion, mobility (speed, traverse, terrain resistance, power-to-weight), survivability (hit points, armor, module health) and concealment / view range. One row per vehicle in the region's catalogue. Values are region-agnostic (WG balances vehicles identically across servers); only the catalogue differs per region.
-         */
-        get: operations["get-{region}-tanks-specifications"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/videos/mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * My queued videos
-         * @description The signed-in user's own suggestions that are still waiting on a moderator, wherever they were filed. Their own only: an unreviewed row is shown to the person waiting on it and to nobody else, which is also why this answers with an empty list rather than an error when signed out. Uncached for the same reason, unlike the published lists beside it. Not scoped to one tank or map: the page that renders it keeps the rows it is about.
-         */
-        get: operations["get-{region}-videos-mine"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/videos/suggest": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /**
-         * Suggest a video
-         * @description Queue a YouTube link for moderation. Requires a signed-in Wargaming account, so a suggestion always carries who made it. The link must be a YouTube video we can embed, and its timestamp is what marks the battle. A submission is filed under the map it was fought on, which is checked against the catalogue along with the mode, so a battle cannot be filed under a map that never runs it. A random battle also names the vehicle and the damage; a competitive battle names neither, since a tactic belongs to the ground and the side rather than to one player's game. Nothing is published here: a moderator approves it first. 401 when signed out, 404 when submissions are unconfigured, 409 when that exact battle was already submitted.
-         */
-        post: operations["post-{region}-videos-suggest"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1679,26 +1059,6 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/economics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Tank economics
-         * @description Economics for one tank on a region: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1. 404 if the region's catalogue has no vehicle with this slug.
-         */
-        get: operations["get-{region}-tanks-{slug}-economics"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
     "/{region}/tanks/{slug}/history": {
         parameters: {
             query?: never;
@@ -1711,6 +1071,166 @@ export interface paths {
          * @description The characteristic changes a tank has gone through across game versions (buffs and nerfs to firepower, gun handling, mobility, survivability and concealment), grouped by version, newest first. Built forward from the moment tracking started, since Wargaming publishes no archive of past client versions. Values are raw stored values; apply each field's scale to display. 404 when the slug maps to no tank on the region.
          */
         get: operations["get-{region}-tanks-{slug}-history"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/rate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Rate a tank
+         * @description Cast or revise this account's opinion of a vehicle. Requires a signed-in Wargaming account that has actually played the tank: the endpoint reads the caller's own record on it and refuses with 403 below the battle threshold, which is what makes this average worth more than a poll of whoever showed up. One opinion per account per tank, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (battles, win rate, damage, the account's rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the tank it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown tank.
+         */
+        post: operations["post-{region}-tanks-{slug}-rate"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/rate/withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Withdraw my rating
+         * @description Take back this account's opinion of a vehicle, stars and written text together: what is being withdrawn is the whole verdict, not the sentence explaining it. A POST rather than a DELETE so it is reachable from the generated client, which speaks the two verbs the public API documents. Answering `removed: false` means there was nothing to take back, which is the outcome the caller asked for either way. 401 when signed out, 404 for an unknown tank.
+         */
+        post: operations["post-{region}-tanks-{slug}-rate-withdraw"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank community rating
+         * @description What players think of one vehicle, and what that opinion is worth. Unlike every other community average, a vote here can only be cast by an account that has actually taken the tank into battle, and each vote carries the voter's own record on it, so the response splits the verdict by how well the voters play and by which server they play on, alongside the star histograms and the optional per-axis radar. `hype` is the gap between where the community ranks the tank in its tier and where its measured win rate ranks it: positive means overrated, negative underrated. Region-independent, the same verdict is served everywhere; the region in the path only resolves the slug.
+         */
+        get: operations["get-{region}-tanks-{slug}-ratings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/ratings/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * My rating of this tank
+         * @description Whether the caller may rate this vehicle, on what evidence, and what they already said about it. The gate is the point: an account has to have taken the tank into battle before its opinion counts, so this answers with their own record on it, how many battles are still missing when they are short, and their existing vote if there is one (including a written opinion still waiting on a moderator, which only its author is shown). Signed out is not an error: it answers `signedIn: false` so the page can offer the sign-in rather than break. The rating is made under the caller's own Wargaming region, whatever region the page was opened on.
+         */
+        get: operations["get-{region}-tanks-{slug}-ratings-me"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/similar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Similar tanks
+         * @description The vehicles that play most like this one, best match first. Similarity is the distance between where each vehicle stands among the vehicles of its own tier, read on six aspects (firepower, gun handling, mobility, survivability, concealment, and how the server actually plays it), so a tier VIII and a tier X can be compared. Answers come from within one tier of this vehicle, and from the live game only. 404 if the region's catalogue has no vehicle with this slug.
+         */
+        get: operations["get-{region}-tanks-{slug}-similar"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank videos
+         * @description Community-suggested gameplay videos for one tank, newest approved first. Each entry is a battle rather than a whole video: it carries the second it starts at, so a three-hour stream VOD can be linked at the minute this tank is played. The map, mode and result are declared by the submitter and checked in moderation; the spawn direction is derived from the map's own geometry. Region-independent, the same list is served on every region. Suggesting one is a write, and lives on `/videos/suggest`.
+         */
+        get: operations["get-{region}-tanks-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/specifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank specifications
+         * @description Combat specifications for one tank on a region: firepower, gun handling, mobility, survivability, concealment and recon. 404 if the region's catalogue has no vehicle with this slug.
+         */
+        get: operations["get-{region}-tanks-{slug}-specifications"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/tanks/{slug}/economics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank economics
+         * @description Economics for one tank on a region: purchase price (credits / gold), shell and ammo cost, research XP from its direct parent, and total free XP to reach it from a tier 1. 404 if the region's catalogue has no vehicle with this slug.
+         */
+        get: operations["get-{region}-tanks-{slug}-economics"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1759,7 +1279,147 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/rate": {
+    "/streamers/live": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Live streamers
+         * @description Tracked players currently live on Twitch, across all regions, with their WN7/WN8/WNX ratings. Snapshot form of the `/streamers/live/sse` stream; cached ~30s server-side.
+         */
+        get: operations["get-streamers-live"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/streamers/live/sse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Live streamers stream
+         * @description Server-sent events (SSE) of the tracked players currently live on Twitch in the World of Tanks category across all regions, ranked by WNX and pushed every few seconds. Each event's `data` is the same JSON array as `GET /api/streamers/live`.
+         */
+        get: operations["get-streamers-live-sse"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/server/stats": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Server population
+         * @description The region's recorded cluster population over the requested range, with each cluster's own peak and mean, the region's records, and the average population per weekday and hour (UTC) over the trailing four weeks. Wargaming publishes population as an instant and keeps no history, so this series only goes back to when the sampling started. Cached for 60s server-side. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-server-stats"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/servers/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Compare regions
+         * @description Every region's total population on one timeline, for the requested range. Region-less by nature: comparing EU, NA and Asia is the point, and asking one region for the other two would be a strange shape. Cached for 60s server-side. Dates are ISO 8601 strings.
+         */
+        get: operations["get-servers-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/server/online/sse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Players online stream
+         * @description Server-sent events (SSE) of the region's live player count. Each event's data is a JSON object with the region total and the per-server breakdown, pushed whenever the count refreshes (about every 3 seconds).
+         */
+        get: operations["get-{region}-server-online-sse"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Coverage
+         * @description How much of the region the tracker covers: player/clan/snapshot counts, refresh-policy health (per activity bucket), 30-day discovery and snapshot trends, and infrastructure size/cost. Cached for 60s server-side. Dates are ISO 8601 strings.
+         */
+        get: operations["get-{region}-coverage"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/search/resolve": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Resolve saved search entries
+         * @description Current rows for a set of entries the caller has saved by id (the search dialog's favorites and recents), in the same shapes the four search endpoints return. Each list is optional and comma separated. Entries that no longer resolve are absent from the response rather than reported, so a caller can keep its own copy for those. Reads cached data only, with no live Wargaming call.
+         */
+        get: operations["get-{region}-search-resolve"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/feedback": {
         parameters: {
             query?: never;
             header?: never;
@@ -1769,17 +1429,17 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Rate a tank
-         * @description Cast or revise this account's opinion of a vehicle. Requires a signed-in Wargaming account that has actually played the tank: the endpoint reads the caller's own record on it and refuses with 403 below the battle threshold, which is what makes this average worth more than a poll of whoever showed up. One opinion per account per tank, so sending again replaces the previous one rather than adding to it. The evidence the vote rests on (battles, win rate, damage, the account's rating) is copied onto it at the moment it is cast, and the client version is stamped, so an opinion stays attached to the tank it was formed on. A written opinion is queued for moderation and never published here; the stars count immediately. The vote is recorded under the caller's own region, whatever region the page was opened on. 401 when signed out, 403 when the record is too thin, 404 for an unknown tank.
+         * Send feedback
+         * @description Forward a message to the team's private Discord channel. Open to everyone, no key and no account: the sender's Wargaming identity is attached from the session when signed in, otherwise the feedback is anonymous. Rate limited per client. 404 when the feature is unconfigured, 400 on a bad body, 429 when rate limited, 502 when it could not be delivered.
          */
-        post: operations["post-{region}-tanks-{slug}-rate"];
+        post: operations["post-feedback"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/ratings": {
+    "/health": {
         parameters: {
             query?: never;
             header?: never;
@@ -1787,10 +1447,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tank community rating
-         * @description What players think of one vehicle, and what that opinion is worth. Unlike every other community average, a vote here can only be cast by an account that has actually taken the tank into battle, and each vote carries the voter's own record on it, so the response splits the verdict by how well the voters play and by which server they play on, alongside the star histograms and the optional per-axis radar. `hype` is the gap between where the community ranks the tank in its tier and where its measured win rate ranks it: positive means overrated, negative underrated. Region-independent, the same verdict is served everywhere; the region in the path only resolves the slug.
+         * Health check
+         * @description Liveness probe. Referenced as the `status` link relation in the
          */
-        get: operations["get-{region}-tanks-{slug}-ratings"];
+        get: operations["get-health"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1799,7 +1459,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/similar": {
+    "/rates": {
         parameters: {
             query?: never;
             header?: never;
@@ -1807,10 +1467,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Similar tanks
-         * @description The vehicles that play most like this one, best match first. Similarity is the distance between where each vehicle stands among the vehicles of its own tier, read on six aspects (firepower, gun handling, mobility, survivability, concealment, and how the server actually plays it), so a tier VIII and a tier X can be compared. Answers come from within one tier of this vehicle, and from the live game only. 404 if the region's catalogue has no vehicle with this slug.
+         * Exchange rates
+         * @description Live EUR-based exchange rates for the currencies the site displays. Our own money figures (funding progress, infrastructure cost) are held in euros and converted at read time, so this is what a client needs to render them in a regional currency. Refreshed once a day; `updatedAt` is null when no live rate is available, in which case amounts should be shown in euros.
          */
-        get: operations["get-{region}-tanks-{slug}-similar"];
+        get: operations["get-rates"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1819,7 +1479,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/specifications": {
+    "/support/funding": {
         parameters: {
             query?: never;
             header?: never;
@@ -1827,10 +1487,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tank specifications
-         * @description Combat specifications for one tank on a region: firepower, gun handling, mobility, survivability, concealment and recon. 404 if the region's catalogue has no vehicle with this slug.
+         * Funding progress
+         * @description Compact cumulative funding progress: how much of the total spend since launch supporters have covered. Returns the percentage plus the raised and goal amounts in EUR (aggregate only). Powers the top-bar mini funding bar.
          */
-        get: operations["get-{region}-tanks-{slug}-specifications"];
+        get: operations["get-support-funding"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1839,7 +1499,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/videos": {
+    "/support/podium": {
         parameters: {
             query?: never;
             header?: never;
@@ -1847,10 +1507,10 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tank videos
-         * @description Community-suggested gameplay videos for one tank, newest approved first. Each entry is a battle rather than a whole video: it carries the second it starts at, so a three-hour stream VOD can be linked at the minute this tank is played. The map, mode and result are declared by the submitter and checked in moderation; the spawn direction is derived from the map's own geometry. Region-independent, the same list is served on every region. Suggesting one is a write, and lives on `/videos/suggest`.
+         * Supporters podium
+         * @description Active supporters ranked by their current monthly pledge, highest first. The pledge amount is never exposed, only the ranking; anonymous supporters appear as "Anonymous".
          */
-        get: operations["get-{region}-tanks-{slug}-videos"];
+        get: operations["get-support-podium"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1859,27 +1519,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/search/ndjson": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        /**
-         * Search tanks (streamed)
-         * @description Search the vehicle catalogue by name, short name or tag (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue. For a plain JSON response, use `/search`.
-         */
-        get: operations["get-{region}-tanks-search-ndjson"];
-        put?: never;
-        post?: never;
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
-    };
-    "/{region}/tanks/{slug}/rate/withdraw": {
+    "/mcp": {
         parameters: {
             query?: never;
             header?: never;
@@ -1889,17 +1529,17 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Withdraw my rating
-         * @description Take back this account's opinion of a vehicle, stars and written text together: what is being withdrawn is the whole verdict, not the sentence explaining it. A POST rather than a DELETE so it is reachable from the generated client, which speaks the two verbs the public API documents. Answering `removed: false` means there was nothing to take back, which is the outcome the caller asked for either way. 401 when signed out, 404 for an unknown tank.
+         * MCP endpoint
+         * @description Model Context Protocol (MCP) server over a stateless Streamable HTTP transport. Point an MCP client at this URL to use unicum.gg's read API as MCP tools (the same player, clan and tank data as the REST endpoints). The POST body is a JSON-RPC 2.0 message (`initialize`, `tools/list`, `tools/call`, ...); the server replies with a JSON-RPC response or, when streaming, an SSE stream. `GET` opens the SSE stream and `DELETE` ends a session (transport-level, not documented separately).
          */
-        post: operations["post-{region}-tanks-{slug}-rate-withdraw"];
+        post: operations["post-mcp"];
         delete?: never;
         options?: never;
         head?: never;
         patch?: never;
         trace?: never;
     };
-    "/{region}/tanks/{slug}/ratings/me": {
+    "/{region}/maps/search": {
         parameters: {
             query?: never;
             header?: never;
@@ -1907,10 +1547,90 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * My rating of this tank
-         * @description Whether the caller may rate this vehicle, on what evidence, and what they already said about it. The gate is the point: an account has to have taken the tank into battle before its opinion counts, so this answers with their own record on it, how many battles are still missing when they are short, and their existing vote if there is one (including a written opinion still waiting on a moderator, which only its author is shown). Signed out is not an error: it answers `signedIn: false` so the page can offer the sign-in rather than break. The rating is made under the caller's own Wargaming region, whatever region the page was opened on.
+         * Search maps
+         * @description Search the battle-map catalogue by name (minimum 3 characters), served from our in-memory catalogue. Returns the results in a single JSON response. For the streamed variant (a single `local` chunk), use `/search/ndjson`.
          */
-        get: operations["get-{region}-tanks-{slug}-ratings-me"];
+        get: operations["get-{region}-maps-search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/glossary/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search the glossary
+         * @description Search every term the site defines (minimum 3 characters), by name, by any other spelling it is known by, and failing both by its definition, so a reader who only remembers what a thing does still finds it. Ranks exact names first, then prefixes, then the rest. Region-less: a definition reads the same on every server.
+         */
+        get: operations["get-glossary-search"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/search/ndjson": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Search maps (streamed)
+         * @description Search the battle-map catalogue by name (minimum 3 characters). Streams NDJSON with a single `local` chunk served from our in-memory catalogue. For a plain JSON response, use `/search`.
+         */
+        get: operations["get-{region}-maps-search-ndjson"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Maps
+         * @description Every World of Tanks battle map on a region: display name, minimap image, camouflage kind (summer/winter/desert), square size in metres, the random-battle modes it supports (Standard/Encounter/Assault), and whether random events might fire on it mid-battle. Derived from the game client scripts, so removed or event-reskin maps are included. One entry per distinct map, name-sorted.
+         */
+        get: operations["get-{region}-maps"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map changes feed
+         * @description The global map-change feed: what every game version changed about the game's maps, newest version first and most-changed map first, plus what the running Common Test build is about to change. Play areas resized, game modes and battle types gained or lost, random events added to or dropped from a map, bases, spawns, control points and Onslaught points of interest moved, and maps added to or pulled from the client. Reconstructed from the client's own arena definitions, which Wargaming publishes no archive of. Limited to the maps the region's catalogue currently lists.
+         */
+        get: operations["get-{region}-maps-changes"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1939,7 +1659,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/{region}/tournaments/{id}": {
+    "/glossary": {
         parameters: {
             query?: never;
             header?: never;
@@ -1947,10 +1667,110 @@ export interface paths {
             cookie?: never;
         };
         /**
-         * Tournament
-         * @description One tournament in full: its rules and prize breakdown, its map pool with each map's per-side spawns, every registered team with its roster of account ids, and the whole bracket with per-match scores, maps and placements. 404 when the id is unknown on this region.
+         * Glossary
+         * @description Every World of Tanks term the site defines: game mechanics, vehicle statistics, battle formats, rating systems and community slang. Each entry carries a one-sentence definition, the other spellings it is searched by, and the section it belongs to. Alphabetical by term. Pass `category` to read one section.
          */
-        get: operations["get-{region}-tournaments-{id}"];
+        get: operations["get-glossary"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/glossary/anchors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Glossary anchors
+         * @description Where each glossary term attaches to the interface: the tank specification columns and the on-screen labels it defines, with the one-sentence definition to show for them. Small by construction (only anchored terms, listed once each), so a client can hold the whole thing and explain a table without another request.
+         */
+        get: operations["get-glossary-anchors"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Generic OG card
+         * @description A generic 1200×630 PNG social card with a customizable title and subtitle, used as the link-unfurl image for pages without a dedicated per-entity card.
+         */
+        get: operations["get-og"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/clans/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clans comparison OG card
+         * @description A side-by-side comparison card (up to 4 clans, WNX each) as a 1200×630 PNG.
+         */
+        get: operations["get-og-{region}-clans-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/players/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Players comparison OG card
+         * @description A side-by-side comparison card (up to 4 players, WNX each) as a 1200×630 PNG.
+         */
+        get: operations["get-og-{region}-players-compare"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tanks/compare": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tanks comparison OG card
+         * @description A side-by-side comparison card (up to 4 vehicles) as a 1200×630 PNG: each vehicle's render over the hangar floor, its tier and class, and its overall catalogue score.
+         */
+        get: operations["get-og-{region}-tanks-compare"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1979,6 +1799,66 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/maps/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map detail
+         * @description A single battle map with its full geometry: display name, description, minimap image, camouflage kind, size in metres, battle timer, team size, and per-mode base flags, team spawns and control point projected onto the minimap as percentage coordinates. `randomEvents` carries the events that might fire on the map mid-battle, each with the minimap art of its danger area and of the ground it leaves behind. `slug` in the response is the canonical slug.
+         */
+        get: operations["get-{region}-maps-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map changes history
+         * @description Everything a map has been through across game versions, grouped by version, newest first: play area resized, game modes and battle types gained or lost, random events added or dropped, bases, spawns, control points and Onslaught points of interest moved, and the map entering or leaving the client. Reconstructed from the client's own arena definitions back to update 1.13.0, plus what the running Common Test is about to change. 404 when the slug maps to no map on the region.
+         */
+        get: operations["get-{region}-maps-{slug}-history"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/{region}/maps/{slug}/videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map videos
+         * @description Every published battle the community has linked on this map, newest approved first, whatever format it was played in and whatever it was played in. This is the read behind a tactic library: a Clan Wars or Advances battle is filed under the ground it was fought on and the side it was fought from, not under a vehicle, so the map is the only page it can be looked up from. Random battles come back alongside them, carrying the tank they were played in, and the page filters by format.
+         */
+        get: operations["get-{region}-maps-{slug}-videos"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/players/{nickname}/tournaments": {
         parameters: {
             query?: never;
@@ -1999,6 +1879,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/{region}/tournaments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament
+         * @description One tournament in full: its rules and prize breakdown, its map pool with each map's per-side spawns, every registered team with its roster of account ids, and the whole bracket with per-match scores, maps and placements. 404 when the id is unknown on this region.
+         */
+        get: operations["get-{region}-tournaments-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/{region}/tournaments/{id}/team/{teamId}": {
         parameters: {
             query?: never;
@@ -2011,6 +1911,146 @@ export interface paths {
          * @description One team's roster, joined onto the accounts behind it: lifetime battles, win rate and ratings per player, plus the clan each one is in now. This is what turns a tournament roster from a list of names into something you can scout. 404 when the team is unknown on this tournament.
          */
         get: operations["get-{region}-tournaments-{id}-team-{teamId}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/glossary/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Glossary term
+         * @description One glossary term in full: its definition, the body of the entry with every mention of another term already resolved to that term's slug, the terms it relates to, and the pages of the site it points at.
+         */
+        get: operations["get-glossary-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/clans/{tag}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Clan OG card
+         * @description The clan's stats card as a stable, hash-free 1200×630 PNG (members, average WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-clans-{tag}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/maps/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Map OG card
+         * @description The battle map's card as a stable, hash-free 1200×630 PNG (minimap, size, battle time, team size, modes). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-maps-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/players/{nickname}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Player OG card
+         * @description The player's stats card as a stable, hash-free 1200×630 PNG (battles, WNX, 30-day WNX, win rate). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-players-{nickname}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tanks/{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tank OG card
+         * @description The tank's stats card as a stable, hash-free 1200×630 PNG (tier, class, best player, top WNX, with the vehicle render). Mirrors the page's link-unfurl image for embedding directly (Discord bot, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-tanks-{slug}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tournaments/{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament OG card
+         * @description The tournament's card as a stable, hash-free 1200×630 PNG (organiser logo, title, status, field size, format, tier and prize). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-tournaments-{id}"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/og/{region}/tournaments/{id}/team/{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Tournament team OG card
+         * @description One team's card as a stable, hash-free 1200×630 PNG (team name, the clan it fielded, where it finished, roster size and average rating). Mirrors the page's link-unfurl image for embedding directly (Discord, social share), without the route-group hash Next appends to the file convention's URL.
+         */
+        get: operations["get-og-{region}-tournaments-{id}-team-{teamId}"];
         put?: never;
         post?: never;
         delete?: never;
@@ -3201,6 +3241,7 @@ export interface components {
         };
         MyVideosResponse: {
             videos: components["schemas"]["videoBattleWithTank"][];
+            ownedIds: number[];
         };
         /** @description A 1200×630 PNG stats card. */
         ogImageResponse: string;
@@ -3285,6 +3326,9 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -3389,6 +3433,12 @@ export interface components {
             tournamentFeaturedWins: number;
             /** @description The win worth naming: a featured event when there is one, else the most recent. Null when the account has never won. */
             tournamentBestTitle: string | null;
+            /** @description The best Onslaught rank this account has ever held: legend, champion, or null for an account that has never been on the ranked board. A record rather than a current standing: a rating falling back under the entry bar takes the place, not the fact that it was held. */
+            onslaughtBestTier: string | null;
+            /** @description The best leaderboard position held, across every season captured. Null when the account has never been ranked. */
+            onslaughtBestRank: number | null;
+            /** @description How many distinct Onslaught seasons this account was ranked in. Zero for an account that never was. */
+            onslaughtSeasons: number;
             current: components["schemas"]["PlayerStats"];
             periods: {
                 h24: components["schemas"]["PlayerStats"] | null;
@@ -3618,6 +3668,9 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -3689,6 +3742,9 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
         };
         /** @description One player's record on one vehicle. */
         PlayerTankDetail: {
@@ -4218,6 +4274,9 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
             is_supporter?: boolean;
             twitch_login?: string | null;
         };
@@ -5062,21 +5121,7 @@ export interface components {
             teamSize: number | null;
             /** @description Tier the battle was fought at, on the same rule as team size. */
             tier: number | null;
-            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
-            clan: {
-                /**
-                 * @description Game server region.
-                 * @enum {string}
-                 */
-                region: "eu" | "na" | "asia";
-                id: number;
-                tag: string;
-                name: string;
-                /** @description The clan's own colour, which its tag is rendered in. */
-                color: string | null;
-                /** @description The clan's emblem, drawn beside its tag. */
-                emblem: string | null;
-            } | null;
+            clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
             /** @description Client version at the time the video was approved. */
@@ -5085,6 +5130,11 @@ export interface components {
         TankVideosResponse: {
             videos: components["schemas"]["tankVideo"][];
         };
+        /**
+         * @description Where a suggested video stands in moderation.
+         * @enum {string}
+         */
+        tankVideoStatusField: "pending" | "approved" | "rejected";
         /** @description The clan behind a tournament team. */
         TeamClan: {
             clanId: number;
@@ -5204,6 +5254,9 @@ export interface components {
             tournament_wins?: number;
             tournament_featured_wins?: number;
             tournament_best_title?: string | null;
+            onslaught_best_tier?: string | null;
+            onslaught_best_rank?: number | null;
+            onslaught_seasons?: number;
         };
         /**
          * @description How a stage's teams are paired up.
@@ -5516,21 +5569,7 @@ export interface components {
             teamSize: number | null;
             /** @description Tier the battle was fought at, on the same rule as team size. */
             tier: number | null;
-            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
-            clan: {
-                /**
-                 * @description Game server region.
-                 * @enum {string}
-                 */
-                region: "eu" | "na" | "asia";
-                id: number;
-                tag: string;
-                name: string;
-                /** @description The clan's own colour, which its tag is rendered in. */
-                color: string | null;
-                /** @description The clan's emblem, drawn beside its tag. */
-                emblem: string | null;
-            } | null;
+            clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
             /** @description Client version at the time the video was approved. */
@@ -5555,21 +5594,7 @@ export interface components {
             teamSize: number | null;
             /** @description Tier the battle was fought at, on the same rule as team size. */
             tier: number | null;
-            /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
-            clan: {
-                /**
-                 * @description Game server region.
-                 * @enum {string}
-                 */
-                region: "eu" | "na" | "asia";
-                id: number;
-                tag: string;
-                name: string;
-                /** @description The clan's own colour, which its tag is rendered in. */
-                color: string | null;
-                /** @description The clan's emblem, drawn beside its tag. */
-                emblem: string | null;
-            } | null;
+            clan: components["schemas"]["videoClanCredit"];
             /** @description Damage dealt plus assisted, as declared. Only ever set on a random battle. */
             combinedDamage: number | null;
             /** @description Client version at the time the video was approved. */
@@ -5586,6 +5611,69 @@ export interface components {
             role: string | null;
             isPremium: boolean;
             isReward: boolean;
+        };
+        /** @description Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit. */
+        videoClanCredit: {
+            /**
+             * @description Game server region.
+             * @enum {string}
+             */
+            region: "eu" | "na" | "asia";
+            id: number;
+            tag: string;
+            name: string;
+            /** @description The clan's own colour, which its tag is rendered in. */
+            color: string | null;
+            /** @description The clan's emblem, drawn beside its tag. */
+            emblem: string | null;
+        } | null;
+        VideoEditableResponse: {
+            id: number;
+            status: components["schemas"]["tankVideoStatusField"];
+            title: string;
+            /** @description YouTube link, rebuilt with the stored start time. */
+            url: string;
+            startSeconds: number;
+            arenaId: string | null;
+            mode: components["schemas"]["mapModeField"] | null;
+            spawnTeam: number | null;
+            result: components["schemas"]["battleResultField"] | null;
+            format: components["schemas"]["battleFormatField"];
+            tankSlug: string | null;
+            tankName: string | null;
+            combinedDamage: number | null;
+            teamSize: number | null;
+            tier: number | null;
+            clan: components["schemas"]["videoClanCredit"];
+            /** @description Why it was turned down, when it was. */
+            reviewNote: string | null;
+        };
+        VideoEditBody: {
+            /** @description YouTube link, timestamp included. */
+            url: string;
+            startSeconds?: number;
+            arenaId: string;
+            mode: components["schemas"]["mapModeField"];
+            spawnTeam: number;
+            result: components["schemas"]["battleResultField"];
+            format: components["schemas"]["battleFormatField"];
+            /** @description Vehicle the battle was played in, for a random battle. */
+            tankSlug?: string;
+            /** @description Damage dealt plus assisted, on a random battle. */
+            combinedDamage?: number;
+            teamSize?: number;
+            tier?: number;
+            /** @description Tag of the clan the battle was played for. */
+            clanTag?: string;
+            /** @description The suggestion being corrected. */
+            id: number;
+            /** @description Signed moderator link, from the moderation channel. */
+            token?: string;
+        };
+        VideoEditResponse: {
+            ok: boolean;
+            /** @description The correction took a published video back off the site. */
+            requeued: boolean;
         };
         VideoSuggestBody: {
             /** @description YouTube link, timestamp included. */
@@ -5641,92 +5729,18 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    "get-{region}-clans-{tag}": {
+    "get-{region}-players-search": {
         parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
+            query: {
                 /**
-                 * @description Clan tag.
-                 * @example example
+                 * @description Search prefix.
+                 * @example uni
                  */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanOverviewResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-compare": {
-        parameters: {
-            query: {
-                /** @description Clan tags to compare (2 to 4). */
-                tags: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClansCompare"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-languages": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanLanguagesResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-search": {
-        parameters: {
-            query: {
-                /** @description Search prefix. */
                 q: string;
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -5739,15 +5753,44 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ClanSearchResponse"];
+                    "application/json": components["schemas"]["PlayerSearchResponse"];
                 };
             };
         };
     };
-    "get-{region}-clans-top": {
+    "get-{region}-players-search-ndjson": {
+        parameters: {
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerSearchChunk"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-top": {
         parameters: {
             query?: {
-                period?: components["schemas"]["clanPeriodField"];
+                period?: "24h" | "7d" | "30d" | "overall";
                 /** @description Maximum number of rows to return. Out-of-range values are clamped. */
                 limit?: number;
                 metric?: "wn7" | "wn8" | "wnx";
@@ -5757,7 +5800,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -5770,23 +5813,21 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TopClansResponse"];
+                    "application/json": components["schemas"]["TopPlayersResponse"];
                 };
             };
         };
     };
-    "get-{region}-clans-{tag}-activity": {
+    "get-{region}-players-compare": {
         parameters: {
-            query?: never;
+            query: {
+                /** @description Player nicknames to compare (2 to 4). */
+                names: string[];
+            };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
             };
             cookie?: never;
         };
@@ -5798,23 +5839,18 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ClanActivityResponse"];
+                    "application/json": components["schemas"]["PlayersCompare"];
                 };
             };
         };
     };
-    "get-{region}-clans-{tag}-clan-wars": {
+    "get-{region}-players-distribution": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
             };
             cookie?: never;
         };
@@ -5826,23 +5862,355 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ClanWarsResponse"];
+                    "application/json": components["schemas"]["PlayerDistribution"];
                 };
             };
         };
     };
-    "post-{region}-clans-{tag}-enqueue": {
+    "get-{region}-players-languages": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerLanguagesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-onslaught": {
+        parameters: {
+            query?: {
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                /** @description Season event id to load (default the current season). From the seasons list in the response. */
+                season?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnslaughtResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-onslaught-history": {
+        parameters: {
+            query?: {
+                /** @description Season event id to load (default the current season). From the seasons list on the leaderboard. */
+                season?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OnslaughtHistoryResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-steel-hunter": {
+        parameters: {
+            query?: {
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                /** @description Ranking column (default hr). */
+                sort?: "hr" | "hrb" | "battles" | "winrate" | "survival" | "damage";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SteelHunterResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-winrate-by-tier": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TierWinrate"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Clan tag.
-                 * @example example
+                 * @description Player nickname.
+                 * @example Animal
                  */
-                tag: string;
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-achievements": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerAchievementsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-clan": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerClan"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-onslaught": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerOnslaughtResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-sessions": {
+        parameters: {
+            query: {
+                /** @description Bucket size for the sessions. */
+                granularity: "daily" | "weekly" | "monthly";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerSessions"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tanks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTanksResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tanks-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTankDetail"];
+                };
+            };
+        };
+    };
+    "post-{region}-players-{nickname}-enqueue": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
             };
             cookie?: never;
         };
@@ -5861,92 +6229,37 @@ export interface operations {
             };
         };
     };
-    "get-{region}-clans-{tag}-members": {
+    "get-{region}-players-{nickname}-sse": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Clan tag.
-                 * @example example
+                 * @description Player nickname.
+                 * @example Animal
                  */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanMembersResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-{tag}-previous-clans": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanPreviousClansResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-{tag}-sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
+                nickname: string;
             };
             cookie?: never;
         };
         requestBody?: never;
         responses: never;
     };
-    "get-{region}-clans-{tag}-stronghold": {
+    "get-{region}-clans-search": {
         parameters: {
-            query?: never;
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
             };
             cookie?: never;
         };
@@ -5958,63 +6271,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ClanStrongholdResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-{tag}-vehicles": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanVehiclesResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-clans-{tag}-videos": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanVideosResponse"];
+                    "application/json": components["schemas"]["ClanSearchResponse"];
                 };
             };
         };
@@ -6022,12 +6279,15 @@ export interface operations {
     "get-{region}-clans-search-ndjson": {
         parameters: {
             query: {
-                /** @description Search prefix. */
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
                 q: string;
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -6057,7 +6317,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -6075,38 +6335,21 @@ export interface operations {
             };
         };
     };
-    "get-glossary": {
+    "get-{region}-clans-top": {
         parameters: {
             query?: {
-                category?: components["schemas"]["glossaryCategoryField"];
+                period?: components["schemas"]["clanPeriodField"];
+                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
+                limit?: number;
+                metric?: "wn7" | "wn8" | "wnx";
+                language?: components["schemas"]["languageField"];
+                strict?: components["schemas"]["strictField"];
+                languages?: components["schemas"]["withLanguagesField"];
             };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GlossaryListResponse"];
-                };
-            };
-        };
-    };
-    "get-glossary-{slug}": {
-        parameters: {
-            query?: never;
             header?: never;
             path: {
-                /**
-                 * @description Term slug, e.g. `wn8`.
-                 * @example slug
-                 */
-                slug: string;
+                /** @example eu */
+                region: "eu" | "na" | "asia";
             };
             cookie?: never;
         };
@@ -6118,60 +6361,20 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["GlossaryTermResponse"];
+                    "application/json": components["schemas"]["TopClansResponse"];
                 };
             };
         };
     };
-    "get-glossary-anchors": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GlossaryAnchorsResponse"];
-                };
-            };
-        };
-    };
-    "get-glossary-search": {
+    "get-{region}-clans-compare": {
         parameters: {
             query: {
-                /** @description Search prefix. */
-                q: string;
+                /** @description Clan tags to compare (2 to 4). */
+                tags: string[];
             };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["GlossarySearchResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-maps": {
-        parameters: {
-            query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -6184,45 +6387,17 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MapsListResponse"];
+                    "application/json": components["schemas"]["ClansCompare"];
                 };
             };
         };
     };
-    "get-{region}-maps-{slug}": {
+    "get-{region}-clans-languages": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Map slug (e.g. prokhorovka).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MapDetailResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-maps-changes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -6235,174 +6410,21 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["MapChangesResponse"];
+                    "application/json": components["schemas"]["ClanLanguagesResponse"];
                 };
             };
         };
     };
-    "get-{region}-maps-search": {
-        parameters: {
-            query: {
-                /** @description Search prefix. */
-                q: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MapSearchResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-maps-{slug}-history": {
+    "get-{region}-clans-{tag}": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Map slug (e.g. prokhorovka).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MapHistoryResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-maps-{slug}-videos": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Map slug (e.g. prokhorovka).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MapVideosResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-maps-search-ndjson": {
-        parameters: {
-            query: {
-                /** @description Search prefix. */
-                q: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MapSearchChunk"];
-                };
-            };
-        };
-    };
-    "post-mcp": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["McpResponse"];
-                };
-            };
-        };
-    };
-    "get-og": {
-        parameters: {
-            query?: {
-                /** @description Card title. */
-                title?: string;
-                /** @description Card subtitle. */
-                subtitle?: string;
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
-                };
-            };
-        };
-    };
-    "get-og-{region}-clans-{tag}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
                  * @description Clan tag.
-                 * @example example
+                 * @example FAME
                  */
                 tag: string;
             };
@@ -6416,49 +6438,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanOverviewResponse"];
                 };
             };
         };
     };
-    "get-og-{region}-clans-compare": {
-        parameters: {
-            query: {
-                /** @description Clan tags to compare (2 to 4). */
-                tags: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
-                };
-            };
-        };
-    };
-    "get-og-{region}-maps-{slug}": {
+    "get-{region}-clans-{tag}-videos": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Map slug (e.g. prokhorovka).
-                 * @example slug
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                slug: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6470,23 +6466,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanVideosResponse"];
                 };
             };
         };
     };
-    "get-og-{region}-players-{nickname}": {
+    "get-{region}-clans-{tag}-members": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                nickname: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6498,49 +6494,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanMembersResponse"];
                 };
             };
         };
     };
-    "get-og-{region}-players-compare": {
-        parameters: {
-            query: {
-                /** @description Player nicknames to compare (2 to 4). */
-                names: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
-                };
-            };
-        };
-    };
-    "get-og-{region}-tanks-{slug}": {
+    "get-{region}-clans-{tag}-previous-clans": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                slug: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6552,49 +6522,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanPreviousClansResponse"];
                 };
             };
         };
     };
-    "get-og-{region}-tanks-compare": {
-        parameters: {
-            query: {
-                /** @description Vehicle slugs to compare (2 to 4). */
-                slugs: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
-                };
-            };
-        };
-    };
-    "get-og-{region}-tournaments-{id}": {
+    "get-{region}-clans-{tag}-activity": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Tournament id.
-                 * @example 123
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                id: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6606,28 +6550,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanActivityResponse"];
                 };
             };
         };
     };
-    "get-og-{region}-tournaments-{id}-team-{teamId}": {
+    "get-{region}-clans-{tag}-stronghold": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Tournament id.
-                 * @example 123
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                id: string;
-                /**
-                 * @description Team id within that tournament.
-                 * @example 123
-                 */
-                teamId: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6639,23 +6578,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "image/png": components["schemas"]["ogImageResponse"];
+                    "application/json": components["schemas"]["ClanStrongholdResponse"];
                 };
             };
         };
     };
-    "get-{region}-players-{nickname}": {
+    "get-{region}-clans-{tag}-clan-wars": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                nickname: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6667,231 +6606,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["PlayerDetailResponse"];
+                    "application/json": components["schemas"]["ClanWarsResponse"];
                 };
             };
         };
     };
-    "get-{region}-players-compare": {
-        parameters: {
-            query: {
-                /** @description Player nicknames to compare (2 to 4). */
-                names: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayersCompare"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-distribution": {
+    "get-{region}-clans-{tag}-vehicles": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerDistribution"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-languages": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerLanguagesResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-onslaught": {
-        parameters: {
-            query?: {
-                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
-                limit?: number;
-                /** @description Season event id to load (default the current season). From the seasons list in the response. */
-                season?: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OnslaughtResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-search": {
-        parameters: {
-            query: {
-                /** @description Search prefix. */
-                q: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerSearchResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-steel-hunter": {
-        parameters: {
-            query?: {
-                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
-                limit?: number;
-                /** @description Ranking column (default hr). */
-                sort?: "hr" | "hrb" | "battles" | "winrate" | "survival" | "damage";
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SteelHunterResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-top": {
-        parameters: {
-            query?: {
-                period?: "24h" | "7d" | "30d" | "overall";
-                /** @description Maximum number of rows to return. Out-of-range values are clamped. */
-                limit?: number;
-                metric?: "wn7" | "wn8" | "wnx";
-                language?: components["schemas"]["languageField"];
-                strict?: components["schemas"]["strictField"];
-                languages?: components["schemas"]["withLanguagesField"];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TopPlayersResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-winrate-by-tier": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TierWinrate"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-{nickname}-achievements": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                nickname: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6903,51 +6634,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["PlayerAchievementsResponse"];
+                    "application/json": components["schemas"]["ClanVehiclesResponse"];
                 };
             };
         };
     };
-    "get-{region}-players-{nickname}-clan": {
+    "post-{region}-clans-{tag}-enqueue": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                nickname: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerClan"];
-                };
-            };
-        };
-    };
-    "post-{region}-players-{nickname}-enqueue": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
+                tag: string;
             };
             cookie?: never;
         };
@@ -6966,146 +6669,36 @@ export interface operations {
             };
         };
     };
-    "get-{region}-players-{nickname}-onslaught": {
+    "get-{region}-clans-{tag}-sse": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
+                 * @description Clan tag.
+                 * @example FAME
                  */
-                nickname: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerOnslaughtResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-{nickname}-sessions": {
-        parameters: {
-            query: {
-                /** @description Bucket size for the sessions. */
-                granularity: "daily" | "weekly" | "monthly";
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerSessions"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-{nickname}-sse": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
+                tag: string;
             };
             cookie?: never;
         };
         requestBody?: never;
         responses: never;
     };
-    "get-{region}-players-{nickname}-tanks": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerTanksResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-onslaught-history": {
-        parameters: {
-            query?: {
-                /** @description Season event id to load (default the current season). From the seasons list on the leaderboard. */
-                season?: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OnslaughtHistoryResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-search-ndjson": {
+    "get-{region}-tanks-search": {
         parameters: {
             query: {
-                /** @description Search prefix. */
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
                 q: string;
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -7118,26 +6711,391 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["PlayerSearchChunk"];
+                    "application/json": components["schemas"]["TankSearchResponse"];
                 };
             };
         };
     };
-    "get-{region}-players-{nickname}-tanks-{slug}": {
+    "get-{region}-tanks-search-ndjson": {
+        parameters: {
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankSearchChunk"];
+                };
+            };
+        };
+    };
+    "get-{region}-ratings-mine": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OwnRatingsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankPerfResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-changes": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankChangesResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-compare": {
+        parameters: {
+            query: {
+                /** @description Vehicle slugs to compare (2 to 4). */
+                slugs: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TanksCompare"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankRatingBoardResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-videos": {
+        parameters: {
+            query?: {
+                /** @description Narrow to one video's battles, ordered by timestamp. */
+                videoId?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CommunityVideosResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-videos-edit": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["VideoEditBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VideoEditResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-videos-editable": {
+        parameters: {
+            query: {
+                /** @description The suggestion to read back. */
+                id: number;
+                /** @description Signed moderator link, from the moderation channel. */
+                token?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VideoEditableResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-videos-mine": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MyVideosResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-videos-suggest": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["VideoSuggestBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["VideoSuggestResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-specifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankSpecsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-economics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankEconomicsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-marks-of-excellence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankMoeResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-marks-of-mastery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankMasteryResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
-                /**
                  * @description Tank slug (e.g. is-7).
-                 * @example slug
+                 * @example is-7
                  */
                 slug: string;
             };
@@ -7151,44 +7109,26 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["PlayerTankDetail"];
+                    "application/json": components["schemas"]["TankPerfRow"];
                 };
             };
         };
     };
-    "get-servers-compare": {
+    "get-{region}-tanks-{slug}-detail": {
         parameters: {
-            query: {
-                /** @description How far back the population series reads. */
-                range: "day" | "week" | "month" | "year";
-            };
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ServerComparison"];
-                };
-            };
-        };
-    };
-    "get-{region}-server-stats": {
-        parameters: {
-            query: {
-                /** @description How far back the population series reads. */
-                range: "day" | "week" | "month" | "year";
+            query?: {
+                /** @description Which game client to read the vehicle's characteristics from. `ct` serves what the running Common Test build makes of it, so a tank can be inspected and configured the way the next update would ship it. Falls back to live when no test is running or when it leaves this vehicle alone. */
+                client?: "live" | "ct";
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
             };
             cookie?: never;
         };
@@ -7200,23 +7140,325 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["ServerStats"];
+                    "application/json": components["schemas"]["TankDetail"];
                 };
             };
         };
     };
-    "get-{region}-server-online-sse": {
+    "get-{region}-tanks-{slug}-history": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
             };
             cookie?: never;
         };
         requestBody?: never;
-        responses: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankHistoryResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-tanks-{slug}-rate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["TankRateBody"];
+            };
+        };
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankRateResponse"];
+                };
+            };
+        };
+    };
+    "post-{region}-tanks-{slug}-rate-withdraw": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankRateWithdrawResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-ratings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankRatingsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-ratings-me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankRatingMeResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-similar": {
+        parameters: {
+            query?: {
+                /** @description How many matches to return. Out-of-range values are clamped. */
+                limit?: number;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SimilarTanks"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankVideosResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-specifications": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankSpecRow"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-economics": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankEconRow"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-marks-of-excellence": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankMoeRow"];
+                };
+            };
+        };
+    };
+    "get-{region}-tanks-{slug}-marks-of-mastery": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TankMasteryRow"];
+                };
+            };
+        };
     };
     "get-streamers-live": {
         parameters: {
@@ -7247,6 +7489,123 @@ export interface operations {
         };
         requestBody?: never;
         responses: never;
+    };
+    "get-{region}-server-stats": {
+        parameters: {
+            query: {
+                /** @description How far back the population series reads. */
+                range: "day" | "week" | "month" | "year";
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServerStats"];
+                };
+            };
+        };
+    };
+    "get-servers-compare": {
+        parameters: {
+            query: {
+                /** @description How far back the population series reads. */
+                range: "day" | "week" | "month" | "year";
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServerComparison"];
+                };
+            };
+        };
+    };
+    "get-{region}-server-online-sse": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: never;
+    };
+    "get-{region}-coverage": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Coverage"];
+                };
+            };
+        };
+    };
+    "get-{region}-search-resolve": {
+        parameters: {
+            query?: {
+                /** @description Account ids, comma separated. */
+                players?: string;
+                /** @description Clan ids, comma separated. */
+                clans?: string;
+                /** @description Vehicle ids, comma separated. */
+                tanks?: string;
+                /** @description Arena ids, comma separated. */
+                maps?: string;
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchResolveResponse"];
+                };
+            };
+        };
     };
     "post-feedback": {
         parameters: {
@@ -7312,29 +7671,6 @@ export interface operations {
             };
         };
     };
-    "get-{region}-coverage": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["Coverage"];
-                };
-            };
-        };
-    };
     "get-support-funding": {
         parameters: {
             query?: never;
@@ -7375,46 +7711,11 @@ export interface operations {
             };
         };
     };
-    "get-{region}-search-resolve": {
-        parameters: {
-            query?: {
-                /** @description Account ids, comma separated. */
-                players?: string;
-                /** @description Clan ids, comma separated. */
-                clans?: string;
-                /** @description Vehicle ids, comma separated. */
-                tanks?: string;
-                /** @description Arena ids, comma separated. */
-                maps?: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SearchResolveResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks": {
+    "post-mcp": {
         parameters: {
             query?: never;
             header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
+            path?: never;
             cookie?: never;
         };
         requestBody?: never;
@@ -7425,238 +7726,23 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TankPerfResponse"];
+                    "application/json": components["schemas"]["McpResponse"];
                 };
             };
         };
     };
-    "get-{region}-videos": {
+    "get-{region}-maps-search": {
         parameters: {
-            query?: {
-                /** @description Narrow to one video's battles, ordered by timestamp. */
-                videoId?: string;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["CommunityVideosResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-ratings-mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["OwnRatingsResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
+            query: {
                 /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
+                 * @description Search prefix.
+                 * @example uni
                  */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankPerfRow"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-changes": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankChangesResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-compare": {
-        parameters: {
-            query: {
-                /** @description Vehicle slugs to compare (2 to 4). */
-                slugs: string[];
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TanksCompare"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-economics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankEconomicsResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-marks-of-excellence": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankMoeResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-marks-of-mastery": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankMasteryResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-ratings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankRatingBoardResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-search": {
-        parameters: {
-            query: {
-                /** @description Search prefix. */
                 q: string;
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -7669,383 +7755,49 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TankSearchResponse"];
+                    "application/json": components["schemas"]["MapSearchResponse"];
                 };
             };
         };
     };
-    "get-{region}-tanks-specifications": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankSpecsResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-videos-mine": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["MyVideosResponse"];
-                };
-            };
-        };
-    };
-    "post-{region}-videos-suggest": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["VideoSuggestBody"];
-            };
-        };
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["VideoSuggestResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-detail": {
-        parameters: {
-            query?: {
-                /** @description Which game client to read the vehicle's characteristics from. `ct` serves what the running Common Test build makes of it, so a tank can be inspected and configured the way the next update would ship it. Falls back to live when no test is running or when it leaves this vehicle alone. */
-                client?: "live" | "ct";
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankDetail"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-economics": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankEconRow"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-history": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankHistoryResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-marks-of-excellence": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankMoeRow"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-marks-of-mastery": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankMasteryRow"];
-                };
-            };
-        };
-    };
-    "post-{region}-tanks-{slug}-rate": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: {
-            content: {
-                "application/json": components["schemas"]["TankRateBody"];
-            };
-        };
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankRateResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-ratings": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankRatingsResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-similar": {
-        parameters: {
-            query?: {
-                /** @description How many matches to return. Out-of-range values are clamped. */
-                limit?: number;
-            };
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["SimilarTanks"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-specifications": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankSpecRow"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-{slug}-videos": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["TankVideosResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-tanks-search-ndjson": {
+    "get-glossary-search": {
         parameters: {
             query: {
-                /** @description Search prefix. */
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
+                q: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossarySearchResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-search-ndjson": {
+        parameters: {
+            query: {
+                /**
+                 * @description Search prefix.
+                 * @example uni
+                 */
                 q: string;
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -8058,23 +7810,18 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TankSearchChunk"];
+                    "application/json": components["schemas"]["MapSearchChunk"];
                 };
             };
         };
     };
-    "post-{region}-tanks-{slug}-rate-withdraw": {
+    "get-{region}-maps": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
             };
             cookie?: never;
         };
@@ -8086,23 +7833,18 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TankRateWithdrawResponse"];
+                    "application/json": components["schemas"]["MapsListResponse"];
                 };
             };
         };
     };
-    "get-{region}-tanks-{slug}-ratings-me": {
+    "get-{region}-maps-changes": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
-                /**
-                 * @description Tank slug (e.g. is-7).
-                 * @example slug
-                 */
-                slug: string;
             };
             cookie?: never;
         };
@@ -8114,7 +7856,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    "application/json": components["schemas"]["TankRatingMeResponse"];
+                    "application/json": components["schemas"]["MapChangesResponse"];
                 };
             };
         };
@@ -8131,7 +7873,7 @@ export interface operations {
             };
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
             };
             cookie?: never;
@@ -8149,12 +7891,297 @@ export interface operations {
             };
         };
     };
+    "get-glossary": {
+        parameters: {
+            query?: {
+                category?: components["schemas"]["glossaryCategoryField"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossaryListResponse"];
+                };
+            };
+        };
+    };
+    "get-glossary-anchors": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossaryAnchorsResponse"];
+                };
+            };
+        };
+    };
+    "get-og": {
+        parameters: {
+            query?: {
+                /** @description Card title. */
+                title?: string;
+                /** @description Card subtitle. */
+                subtitle?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-clans-compare": {
+        parameters: {
+            query: {
+                /** @description Clan tags to compare (2 to 4). */
+                tags: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-players-compare": {
+        parameters: {
+            query: {
+                /** @description Player nicknames to compare (2 to 4). */
+                names: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tanks-compare": {
+        parameters: {
+            query: {
+                /** @description Vehicle slugs to compare (2 to 4). */
+                slugs: string[];
+            };
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-clans-{tag}-tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClanTournamentsResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapDetailResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-history": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapHistoryResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-maps-{slug}-videos": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MapVideosResponse"];
+                };
+            };
+        };
+    };
+    "get-{region}-players-{nickname}-tournaments": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PlayerTournamentsResponse"];
+                };
+            };
+        };
+    };
     "get-{region}-tournaments-{id}": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
                  * @description Tournament id.
@@ -8177,68 +8204,12 @@ export interface operations {
             };
         };
     };
-    "get-{region}-clans-{tag}-tournaments": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Clan tag.
-                 * @example example
-                 */
-                tag: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["ClanTournamentsResponse"];
-                };
-            };
-        };
-    };
-    "get-{region}-players-{nickname}-tournaments": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @example example */
-                region: "eu" | "na" | "asia";
-                /**
-                 * @description Player nickname.
-                 * @example example
-                 */
-                nickname: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description Successful response */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["PlayerTournamentsResponse"];
-                };
-            };
-        };
-    };
     "get-{region}-tournaments-{id}-team-{teamId}": {
         parameters: {
             query?: never;
             header?: never;
             path: {
-                /** @example example */
+                /** @example eu */
                 region: "eu" | "na" | "asia";
                 /**
                  * @description Tournament id.
@@ -8262,6 +8233,205 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["TournamentTeamRosterResponse"];
+                };
+            };
+        };
+    };
+    "get-glossary-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description Term slug, e.g. `wn8`.
+                 * @example slug
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GlossaryTermResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-clans-{tag}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Clan tag.
+                 * @example FAME
+                 */
+                tag: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-maps-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Map slug (e.g. prokhorovka).
+                 * @example prokhorovka
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-players-{nickname}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Player nickname.
+                 * @example Animal
+                 */
+                nickname: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tanks-{slug}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tank slug (e.g. is-7).
+                 * @example is-7
+                 */
+                slug: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tournaments-{id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
+                };
+            };
+        };
+    };
+    "get-og-{region}-tournaments-{id}-team-{teamId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @example eu */
+                region: "eu" | "na" | "asia";
+                /**
+                 * @description Tournament id.
+                 * @example 123
+                 */
+                id: string;
+                /**
+                 * @description Team id within that tournament.
+                 * @example 123
+                 */
+                teamId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Successful response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "image/png": components["schemas"]["ogImageResponse"];
                 };
             };
         };

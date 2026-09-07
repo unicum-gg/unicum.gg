@@ -15,9 +15,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { UnicumError } from "@unicum.gg/sdk";
 import ROUTES from "@/constants/routes";
 import { useSession } from "@/lib/auth-client";
+import { apiErrorStatus } from "@/lib/api-error";
 import { unicum } from "@/services/sdk";
 import {
   BattleFields,
@@ -110,9 +110,7 @@ export function SubmitVideoDialog({
       // immediately, and on the player's seek bar, rather than after a reload.
       void mutate(ownVideosKey(region));
     } catch (err) {
-      // The SDK throws `UnicumError` on a non-2xx, carrying the status, so the
-      // two cases worth naming are still distinguishable.
-      const status = err instanceof UnicumError ? err.status : 0;
+      const status = apiErrorStatus(err);
       if (status === 409) {
         setError("That battle has already been suggested.");
       } else if (status === 422) {

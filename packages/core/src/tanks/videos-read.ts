@@ -3,6 +3,7 @@ import {
   BattleFormat,
   BattleResult,
   clansByRegion,
+  youtubeWatchUrl,
   FORMAT_TEAM_SIZE,
   FORMAT_TIER,
   SPAWN_DIRECTION_LABEL,
@@ -14,9 +15,13 @@ import {
 } from "@unicum.gg/shared";
 import { isRegion, type Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
-import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
+import {
+  getTanksByIds,
+  listTanks,
+} from "@unicum.gg/core/wargaming/wot/tanks/resolve";
 import {
   decorateVideos,
+  type ClanCredit,
   type CommunityVideo,
   type TankVideo,
 } from "@unicum.gg/core/tanks/video-rows";
@@ -89,6 +94,27 @@ export async function listPendingVideosFor(
     .orderBy(desc(tankVideos.submittedAt));
 
   return withTanks(region, rows);
+}
+
+/**
+ * The ids of every row this account submitted, whatever became of them.
+ *
+ * Ids alone, because the rows themselves are already on the page: a published
+ * video is in the public list everyone reads, and what the page is missing is
+ * only which of those are the reader's to correct. Answering the rows again
+ * would duplicate every one of them in the list.
+ *
+ * Unfiltered by status on purpose. A correction is worth offering on a video
+ * that is live (it is the case that sent us here: a battle filed under the
+ * wrong tank, noticed after it was published) and on one that was turned down,
+ * which is what the rejection reason exists for.
+ */
+export async function listOwnedVideoIds(userId: string): Promise<number[]> {
+  const rows = await db
+    .select({ id: tankVideos.id })
+    .from(tankVideos)
+    .where(eq(tankVideos.submittedBy, userId));
+  return rows.map((r) => r.id);
 }
 
 /**
@@ -235,4 +261,117 @@ async function withTanks(
     });
   });
   return out;
+}
+
+/**
+ * One suggestion, in the shape the form that would correct it needs.
+ *
+ * Not a slice of the published lists beside it: those answer what a reader
+ * sees, and this answers what a submitter typed, which is the part an edit
+ * replaces. So the video comes back as a link rather than an id and a second,
+ * the side as the team number rather than the direction derived from it, and
+ * the tank and the clan as the slug and the tag the form searches by.
+ *
+ * Whatever its status, including rejected: who is allowed to see and rewrite
+ * which row is the caller's to decide, and answering nothing here would leave
+ * a moderator unable to look at the one they were asked to look at.
+ */
+export type EditableVideo = {
+  id: number;
+  status: TankVideoStatus;
+  title: string;
+  url: string;
+  startSeconds: number;
+  arenaId: string | null;
+  mode: MapGameMode | null;
+  spawnTeam: number | null;
+  result: BattleResult | null;
+  format: BattleFormat;
+  tankSlug: string | null;
+  /** Named as well as identified: the form's tank field shows what is on the
+   * row before anyone touches it, and a slug is not a name. */
+  tankName: string | null;
+  combinedDamage: number | null;
+  teamSize: number | null;
+  tier: number | null;
+  /** The credit whole, not just its tag: a clan is drawn with its colour and
+   * its emblem everywhere else on the site, and the form that edits it has no
+   * reason to be the one place it reads as plain text. */
+  clan: ClanCredit | null;
+  /** Why it was turned down, when it was. Shown above the form, since it is the
+   * one thing that says which field to look at. */
+  reviewNote: string | null;
+  /** Better Auth id of the submitter, for the caller's own authorisation check.
+   * Never answered with: it identifies a person, and the form has no use for
+   * it. */
+  submittedBy: string | null;
+};
+
+export async function loadVideoForEdit(
+  region: Region,
+  id: number,
+): Promise<EditableVideo | null> {
+  const [row] = await db
+    .select()
+    .from(tankVideos)
+    .where(eq(tankVideos.id, id))
+    .limit(1);
+  if (!row) return null;
+
+  // Both resolved from ids, so a tank the catalogue renamed and a clan that
+  // changed tag still come back as something the form can search for. By id
+  // rather than by walking the catalogue: it is twelve hundred vehicles, and
+  // this wants one.
+  const [tank] =
+    row.tankId === null ? [] : await getTanksByIds(region, [row.tankId]);
+  // Decorated like every other read of this table, so the credit comes back in
+  // the one shape the rest of the site draws: resolved from the stored id, so a
+  // clan renamed since the submission still reads as it does today.
+  const [decorated] = await decorateVideos(region, [row]);
+
+  return {
+    id: row.id,
+    status: row.status as TankVideoStatus,
+    title: row.title,
+    url: youtubeWatchUrl(row.videoId, row.startSeconds),
+    startSeconds: row.startSeconds,
+    arenaId: row.arenaId,
+    mode: (row.mode as MapGameMode | null) ?? null,
+    spawnTeam: row.spawnTeam,
+    result: (row.result as BattleResult | null) ?? null,
+    format: row.format as BattleFormat,
+    tankSlug: tank?.slug ?? null,
+    tankName: tank?.name ?? null,
+    combinedDamage: row.combinedDamage,
+    teamSize: row.teamSize,
+    tier: row.tier,
+    clan: decorated?.clan ?? null,
+    reviewNote: row.reviewNote,
+    submittedBy: row.submittedBy,
+  };
+}
+
+/**
+ * Where one row is published, without loading the rest of it.
+ *
+ * Read by the moderation link, which only has to work out which page to open
+ * the correction dialog on. Null when the id is unknown.
+ */
+export async function loadVideoPlacement(id: number): Promise<{
+  tankId: number | null;
+  arenaId: string | null;
+  clanRegion: string | null;
+  clanId: number | null;
+} | null> {
+  const [row] = await db
+    .select({
+      tankId: tankVideos.tankId,
+      arenaId: tankVideos.arenaId,
+      clanRegion: tankVideos.clanRegion,
+      clanId: tankVideos.clanId,
+    })
+    .from(tankVideos)
+    .where(eq(tankVideos.id, id))
+    .limit(1);
+  return row ?? null;
 }

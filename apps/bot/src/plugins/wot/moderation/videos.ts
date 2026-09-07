@@ -3,7 +3,11 @@ import {
   ButtonBuilder,
   ButtonStyle,
   MessageFlags,
+  ModalBuilder,
+  TextInputBuilder,
+  TextInputStyle,
   type ButtonInteraction,
+  type ModalSubmitInteraction,
 } from "discord.js";
 import { APP_IDENTITY, env as sharedEnv } from "@unicum.gg/shared";
 import { env } from "../../../env.js";
@@ -20,9 +24,21 @@ import { env } from "../../../env.js";
  * collector, deliberately: a collector lives in memory and dies with the
  * process, which would leave a queue of dead buttons after every redeploy. A
  * `custom_id` is on Discord's side, so a card posted last week still works.
+ *
+ * Three presses, and only one of them settles anything on its own. Approve
+ * publishes. Reject asks what was wrong first, because a rejection with no
+ * reason is a dead end for the person who sent it, and most of them are a
+ * correction waiting to happen. Edit leaves Discord entirely: correcting a
+ * battle means a map catalogue, a spawn geometry and a tank search that five
+ * text boxes cannot hold, so the bot hands back a signed link to the real form.
  */
 
 const PREFIX = "video";
+/** The modal the Reject button opens. Its own prefix, since a modal submission
+ * is not a button press and the bot routes the two separately. */
+const REJECT_MODAL_PREFIX = "video-reject";
+const REASON_FIELD = "reason";
+const REASON_MAX_LENGTH = 400;
 
 /** The API base, same resolution as the SDK: the internal container in prod,
  * the public URL in dev. */
@@ -34,15 +50,27 @@ export function isVideoReviewButton(customId: string): boolean {
   return customId.startsWith(`${PREFIX}:`);
 }
 
-/** The card, once settled: the buttons go away so the channel reads as a queue
- * of things still to do rather than a wall of already-handled cards. */
-function settledRow(label: string): ActionRowBuilder<ButtonBuilder> {
+/** The same, for the rejection modal's submission. */
+export function isVideoRejectModal(customId: string): boolean {
+  return customId.startsWith(`${REJECT_MODAL_PREFIX}:`);
+}
+
+/** The card, once settled: the verdict goes grey so the channel reads as a
+ * queue of things still to do rather than a wall of already-handled cards.
+ * Edit stays, because a battle filed under the wrong tank is worth correcting
+ * whether or not someone has already approved it, and a correction sends it
+ * back through the queue anyway. */
+function settledRow(id: string, label: string): ActionRowBuilder<ButtonBuilder> {
   return new ActionRowBuilder<ButtonBuilder>().addComponents(
     new ButtonBuilder()
-      .setCustomId(`${PREFIX}:done`)
+      .setCustomId(`${PREFIX}:done:${id}`)
       .setLabel(label)
       .setStyle(ButtonStyle.Secondary)
       .setDisabled(true),
+    new ButtonBuilder()
+      .setCustomId(`${PREFIX}:edit:${id}`)
+      .setLabel("Edit")
+      .setStyle(ButtonStyle.Secondary),
   );
 }
 
@@ -54,9 +82,84 @@ export async function handleVideoReview(
   // pressed.
   if (action === "done") return;
 
-  const approved = action === "approve";
-  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+  // Everything below can reject on Discord's side alone (an interaction token
+  // that expired while the card sat unread, a 5xx, a rate limit), and these
+  // handlers are called as `void handle(...)` from a process that installs no
+  // `unhandledRejection` guard. Node's default is to throw on one, which takes
+  // the bot down and, after ten of those, has the platform stop it outright. A
+  // press that cannot be answered is an ordinary event, not a reason to die.
+  try {
+    if (action === "edit") return await handleEditRequest(interaction, rawId);
+    // Must be the first reply to the interaction: a modal cannot follow a defer.
+    if (action === "reject") return await askRejectReason(interaction, rawId);
 
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+    await settle(interaction, rawId, true, null);
+  } catch (err) {
+    console.error("[bot] video interaction failed:", err);
+  }
+}
+
+/** Ask what was wrong, so the submitter is told something they can act on. */
+async function askRejectReason(
+  interaction: ButtonInteraction,
+  rawId: string,
+): Promise<void> {
+  await interaction.showModal(
+    new ModalBuilder()
+      .setCustomId(`${REJECT_MODAL_PREFIX}:${rawId}`)
+      .setTitle("Turn this suggestion down")
+      .addComponents(
+        new ActionRowBuilder<TextInputBuilder>().addComponents(
+          new TextInputBuilder()
+            .setCustomId(REASON_FIELD)
+            .setLabel("Why")
+            .setStyle(TextInputStyle.Paragraph)
+            .setRequired(true)
+            .setMaxLength(REASON_MAX_LENGTH)
+            // Named cases rather than "reason": the useful answer is short and
+            // specific, and the submitter reads this verbatim.
+            .setPlaceholder(
+              "Timestamp is off, wrong map, not the tank claimed, damage doesn't match…",
+            ),
+        ),
+      ),
+  );
+}
+
+export async function handleVideoRejectModal(
+  interaction: ModalSubmitInteraction,
+): Promise<void> {
+  const [, rawId] = interaction.customId.split(":");
+  try {
+    await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+    await settle(
+      interaction,
+      rawId,
+      false,
+      interaction.fields.getTextInputValue(REASON_FIELD),
+    );
+  } catch (err) {
+    // `getTextInputValue` throws on a field Discord did not send, which is the
+    // same class of problem as a dead token: worth a line in the log, never
+    // worth the process.
+    console.error("[bot] video rejection failed:", err);
+  }
+}
+
+/**
+ * Record the verdict and take the card out of the queue.
+ *
+ * Shared by the two paths that reach one: Approve presses the button, Reject
+ * arrives from the modal carrying its reason. The card belongs to the message
+ * either way, which a modal submission still knows when it was opened from one.
+ */
+async function settle(
+  interaction: ButtonInteraction | ModalSubmitInteraction,
+  rawId: string,
+  approved: boolean,
+  note: string | null,
+): Promise<void> {
   try {
     const res = await fetch(`${apiBase}/internal/videos/${rawId}/review`, {
       method: "POST",
@@ -67,12 +170,14 @@ export async function handleVideoReview(
         // interaction, so the shared secret only authenticates the caller.
         authorization: `Bearer ${sharedEnv.CRON_SECRET}`,
       },
-      body: JSON.stringify({ approved, moderatorId: interaction.user.id }),
+      body: JSON.stringify({ approved, moderatorId: interaction.user.id, note }),
     });
 
     if (res.status === 409) {
       await interaction.editReply("Already handled by someone else.");
-      await interaction.message.edit({ components: [settledRow("Handled")] });
+      await interaction.message?.edit({
+        components: [settledRow(rawId, "Handled")],
+      });
       return;
     }
     if (!res.ok) throw new Error(`review endpoint returned ${res.status}`);
@@ -90,15 +195,59 @@ export async function handleVideoReview(
         ? data?.url
           ? `Approved. It is live: ${data.url}`
           : "Approved. It is live on the tank page."
-        : "Rejected. It stays out, and the same battle cannot be submitted again.",
+        : "Rejected. The submitter is told why, and can correct it from the site.",
     );
-    await interaction.message.edit({
-      components: [settledRow(`${label} by ${interaction.user.username}`)],
+    await interaction.message?.edit({
+      components: [settledRow(rawId, `${label} by ${interaction.user.username}`)],
     });
   } catch (err) {
     console.error("[bot] video review failed:", err);
+    // The apology is best-effort too: the reason the call failed is often the
+    // reason this one will.
+    await interaction
+      .editReply(
+        "Could not record that. The suggestion is untouched, try again in a moment.",
+      )
+      .catch(() => {});
+  }
+}
+
+/**
+ * Answer a press of Edit with a link to the form, visible to the moderator who
+ * pressed it and to nobody else.
+ *
+ * The API mints the link, since it holds the signing secret and the row: this
+ * side knows only who pressed.
+ */
+async function handleEditRequest(
+  interaction: ButtonInteraction,
+  rawId: string,
+): Promise<void> {
+  await interaction.deferReply({ flags: MessageFlags.Ephemeral });
+  try {
+    const res = await fetch(`${apiBase}/internal/videos/${rawId}/edit-link`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        authorization: `Bearer ${sharedEnv.CRON_SECRET}`,
+      },
+      body: JSON.stringify({ moderatorId: interaction.user.id }),
+    });
+    if (!res.ok) throw new Error(`edit-link endpoint returned ${res.status}`);
+    const data = (await res.json().catch(() => null)) as {
+      url?: string;
+    } | null;
+    if (!data?.url) throw new Error("edit-link endpoint answered no url");
+
     await interaction.editReply(
-      "Could not record that. The suggestion is untouched, try again in a moment.",
+      `Correct it here: ${data.url}\nThe link is yours alone and expires in 30 minutes. Saving sends the suggestion back to this queue.`,
     );
+  } catch (err) {
+    console.error("[bot] video edit link failed:", err);
+    await interaction
+      .editReply(
+        "Could not open that one for editing. The suggestion is untouched, try again in a moment.",
+      )
+      .catch(() => {});
   }
 }

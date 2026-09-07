@@ -28,6 +28,7 @@ import { TankAxis } from "@unicum.gg/shared/wot/tank-spec-fields";
 import {
   BattleFormat,
   BattleResult,
+  TankVideoStatus,
 } from "@unicum.gg/shared/db/schema/tank-videos";
 import {
   ReviewOutcome,
@@ -81,6 +82,7 @@ export const OPENAPI_ENUM_SOURCES = {
   STRONGHOLD_TIER: Object.values(StrongholdTier),
   STRONGHOLD_SORT: Object.values(StrongholdSort),
   BATTLE_RESULT: Object.values(BattleResult),
+  TANK_VIDEO_STATUS: Object.values(TankVideoStatus),
   BATTLE_FORMAT: Object.values(BattleFormat),
   SPAWN_DIRECTION: Object.values(SpawnDirection),
   TANK_CLIENT: Object.values(TankClient),

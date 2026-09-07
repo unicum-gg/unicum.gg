@@ -17,6 +17,7 @@ import {
   TankClient,
   TankRatingAxis,
   TankReviewStatus,
+  TankVideoStatus,
   VoterBracket,
 } from "@unicum.gg/shared";
 import {
@@ -195,6 +196,11 @@ export const battleFormatField = z.enum(BattleFormat).meta({
   "x-enum-source": "BATTLE_FORMAT",
 } as EnumMeta);
 
+export const tankVideoStatusField = z.enum(TankVideoStatus).meta({
+  description: "Where a suggested video stands in moderation.",
+  "x-enum-source": "TANK_VIDEO_STATUS",
+} as EnumMeta);
+
 export const spawnDirectionField = z.enum(SpawnDirection).meta({
   description: "Side of the map a team starts from.",
   "x-enum-source": "SPAWN_DIRECTION",
@@ -232,6 +238,33 @@ export const ratingConsensusField = z.enum(RatingConsensus).meta({
 } as EnumMeta);
 
 /**
+ * The clan a video credits, as the site draws one.
+ *
+ * Shared because two endpoints answer with it and they must agree: the lists
+ * that render a credit, and the form that edits one. A tag on its own is not
+ * enough for either, since a clan is read with its colour and its emblem
+ * everywhere it appears.
+ */
+export const videoClanCredit = z
+  .object({
+    region: regionPath,
+    id: z.number().int(),
+    tag: z.string(),
+    name: z.string(),
+    color: z.string().nullable().meta({
+      description: "The clan's own colour, which its tag is rendered in.",
+    }),
+    emblem: z.string().nullable().meta({
+      description: "The clan's emblem, drawn beside its tag.",
+    }),
+  })
+  .nullable()
+  .meta({
+    description:
+      "Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit.",
+  });
+
+/**
  * One community-suggested battle, marked in a video.
  *
  * Shared because four endpoints answer with it (a tank's list, a submitter's
@@ -264,24 +297,7 @@ export const videoBattle = z.object({
   tier: z.number().int().nullable().meta({
     description: "Tier the battle was fought at, on the same rule as team size.",
   }),
-  clan: z
-    .object({
-      region: regionPath,
-      id: z.number().int(),
-      tag: z.string(),
-      name: z.string(),
-      color: z.string().nullable().meta({
-        description: "The clan's own colour, which its tag is rendered in.",
-      }),
-      emblem: z.string().nullable().meta({
-        description: "The clan's emblem, drawn beside its tag.",
-      }),
-    })
-    .nullable()
-    .meta({
-      description:
-        "Clan the battle was played for, resolved from a stored id so a rename cannot strand the credit.",
-    }),
+  clan: videoClanCredit,
   combinedDamage: z.number().int().nullable().meta({
     description:
       "Damage dealt plus assisted, as declared. Only ever set on a random battle.",
@@ -322,6 +338,17 @@ export const videoBattleWithTank = videoBattle
   });
 
 export const MIN_QUERY_LENGTH = 3;
+
+/** Query of `GET /{region}/videos/editable`: which suggestion, and what lets a
+ * moderator read someone else's. */
+export const videoEditableQuery = z.object({
+  id: z.coerce.number().int().meta({
+    description: "The suggestion to read back.",
+  }),
+  token: z.string().optional().meta({
+    description: "Signed moderator link, from the moderation channel.",
+  }),
+});
 
 export const searchQuery = z.object({
   // Static description (no template literal): next-openapi-gen evaluates `.meta`

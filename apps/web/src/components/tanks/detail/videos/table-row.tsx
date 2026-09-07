@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { PencilSimpleIcon } from "@phosphor-icons/react";
 import { toRoman } from "roman-numerals";
 import {
   BATTLE_FORMAT_LABEL,
@@ -55,12 +56,15 @@ export function VideoTableRow({
   columns,
   active,
   onOpen,
+  onEdit,
 }: {
   battle: TankVideoCardData;
   region: Region;
   columns: VideoColumns;
   active: boolean;
   onOpen: () => void;
+  /** Opens the correction dialog, on a queued row of one's own. */
+  onEdit?: () => void;
 }) {
   const row = (
     <TableRow
@@ -168,7 +172,29 @@ export function VideoTableRow({
         </TableCell>
       )}
       <TableCell className="text-fd-muted-foreground">
-        {battle.channelName}
+        <span className="flex items-center justify-between gap-2">
+          {battle.channelName}
+          {/* Only ever on a row of one's own, which is the only kind that shows
+              up queued. In the last cell rather than a column of its own, since
+              a column that is empty on every published row would be a column
+              about nothing. The row itself opens the video, so the link stops
+              the click from reaching it. */}
+          {onEdit && (
+            <button
+              type="button"
+              onClick={(event) => {
+                // The whole row opens the video, so the pencil has to keep its
+                // click to itself.
+                event.stopPropagation();
+                onEdit();
+              }}
+              aria-label="Correct this suggestion"
+              className="shrink-0 cursor-pointer rounded-md p-1 transition-colors hover:bg-fd-muted hover:text-fd-foreground"
+            >
+              <PencilSimpleIcon className="size-3.5" />
+            </button>
+          )}
+        </span>
       </TableCell>
     </TableRow>
   );

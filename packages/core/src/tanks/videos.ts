@@ -1,46 +1,26 @@
-import { and, asc, desc, eq, inArray, sql } from "drizzle-orm";
-// Default-imported, not destructured at the import: the package is CommonJS,
-// and Node's ESM loader finds no named export on it. A bundler papers over
-// that, `tsx` does not, so the named form would break the day anything run
-// directly (the worker, a script) imported this module.
-import romanNumerals from "roman-numerals";
-
-const { toRoman } = romanNumerals as { toRoman: (n: number) => string };
+import { and, eq } from "drizzle-orm";
 import {
-  APP_IDENTITY,
-  BATTLE_FORMAT_LABEL,
-  BATTLE_RESULT_LABEL,
   BattleFormat,
   BattleResult,
-  FORMAT_TEAM_SIZE,
-  FORMAT_TIER,
-  BRAND_COLOR_INT,
-  env,
-  MAP_GAME_MODE_LABEL,
   parseYoutubeUrl,
-  SPAWN_DIRECTION_LABEL,
-  spawnDirection,
-  clansByRegion,
+  storedTeamSize,
+  storedTier,
   tankVideos,
   TankVideoStatus,
-  youtubeThumbnailUrl,
-  youtubeWatchUrl,
   type MapGameMode,
-  type SpawnDirection,
 } from "@unicum.gg/shared";
-import { isRegion, type Region } from "@unicum.gg/wargaming";
+import type { Region } from "@unicum.gg/wargaming";
 import { db } from "@unicum.gg/core/db";
-import {
-  discordBotEnabled,
-  postChannelEmbedWithComponents,
-} from "@unicum.gg/core/discord";
-import { getMapDetailBySlug } from "@unicum.gg/core/wargaming/wot/maps";
 import {
   postModerationCard,
   VIDEO_REVIEW_PREFIX,
 } from "@unicum.gg/core/tanks/video-moderation-card";
-import { listTanks } from "@unicum.gg/core/wargaming/wot/tanks/resolve";
-import { wg } from "@unicum.gg/core/wargaming/client";
+import {
+  currentGameVersion,
+  fetchOembed,
+  mapIsConsistent,
+  videoSubmissionsEnabled,
+} from "@unicum.gg/core/tanks/video-checks";
 
 /**
  * Community-suggested gameplay videos.
@@ -108,7 +88,8 @@ export type VideoSubmission = {
   submitterName: string;
 };
 
-export { VIDEO_REVIEW_PREFIX };
+export { VIDEO_REVIEW_PREFIX, videoSubmissionsEnabled };
+export type { Oembed } from "@unicum.gg/core/tanks/video-checks";
 
 export enum SubmitVideoOutcome {
   Queued = "queued",
@@ -126,59 +107,6 @@ export type SubmitVideoResult = {
   outcome: SubmitVideoOutcome;
   videoId?: string;
 };
-
-/** Submissions are only open when a moderator could actually see them. */
-export function videoSubmissionsEnabled(): boolean {
-  return discordBotEnabled() && Boolean(env.DISCORD_VIDEO_CHANNEL_ID);
-}
-
-/** What oEmbed answers with, for the card that shows it. */
-export type Oembed = { title: string; author_name: string };
-
-/**
- * What YouTube says a video is. oEmbed needs no API key and no quota, and it
- * fails exactly where we want to refuse anyway: a deleted, private or
- * embedding-disabled video answers 401/404, so a link nobody could watch never
- * reaches the queue.
- */
-async function fetchOembed(videoId: string): Promise<Oembed | null> {
-  const target = `https://www.youtube.com/watch?v=${videoId}`;
-  const res = await fetch(
-    `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(target)}`,
-    { signal: AbortSignal.timeout(8000) },
-  ).catch(() => null);
-  if (!res?.ok) return null;
-  const data = (await res.json().catch(() => null)) as Oembed | null;
-  return data?.title ? data : null;
-}
-
-/**
- * The client version in play, stamped at submission rather than asked for.
- *
- * Balance moves between patches, so a reader wants to know a video is two
- * patches old, but a submitter would be guessing. Null when WG does not answer:
- * an unknown version is better than a wrong one.
- */
-async function currentGameVersion(region: Region): Promise<string | null> {
-  return wg
-    .region(region)
-    .api.wot.encyclopedia.info({ fields: ["game_version"] })
-    .then((info) => info.game_version ?? null)
-    .catch(() => null);
-}
-
-/** Whether the declared map and mode exist and go together. A map that does not
- * run Assault must not carry an Assault video: the filter it feeds would then
- * lie about which battles happened where. */
-async function mapIsConsistent(
-  region: Region,
-  arenaId: string,
-  mode: MapGameMode,
-): Promise<boolean> {
-  const detail = await getMapDetailBySlug(region, arenaId).catch(() => null);
-  if (!detail) return false;
-  return detail.modes.includes(mode);
-}
 
 /**
  * Queue a suggestion and put its card in the moderation channel.
@@ -238,8 +166,8 @@ export async function submitTankVideo(
       combinedDamage: submission.combinedDamage,
       // Stored only where the format leaves them open, so a Clan Wars row never
       // depends on someone having typed 15 and X correctly.
-      teamSize: FORMAT_TEAM_SIZE[submission.format] ? null : submission.teamSize,
-      tier: FORMAT_TIER[submission.format] ? null : submission.tier,
+      teamSize: storedTeamSize(submission.format, submission.teamSize),
+      tier: storedTier(submission.format, submission.tier),
       clanRegion: submission.clanRegion ?? null,
       clanId: submission.clanId ?? null,
       gameVersion: await currentGameVersion(submission.region),
@@ -256,14 +184,33 @@ export async function submitTankVideo(
   // Best-effort: the row is queued either way, and a moderator can still find
   // it. Failing the submission because Discord hiccuped would ask the person to
   // send it again, which the unique index would then refuse as a duplicate.
-  await postModerationCard(row.id, ref, oembed, submission).catch((err) =>
-    console.error("[tank-videos] moderation card failed:", err),
-  );
+  const messageId = await postModerationCard(
+    row.id,
+    ref,
+    oembed,
+    submission,
+  ).catch((err) => {
+    console.error("[tank-videos] moderation card failed:", err);
+    return null;
+  });
+  // Kept so a correction rewrites this card rather than posting a second one.
+  // Written after the insert rather than in it, because the card cannot be
+  // posted before the row it carries the id of exists.
+  if (messageId) {
+    await db
+      .update(tankVideos)
+      .set({ discordMessageId: messageId })
+      .where(eq(tankVideos.id, row.id));
+  }
 
   return { outcome: SubmitVideoOutcome.Queued, videoId: ref.videoId };
 }
 
 export type ReviewedVideo = {
+  /** The submitter, so the caller can tell them what was decided, and the video
+   * itself, so the notice can show what it is about. */
+  submittedBy: string | null;
+  videoId: string;
   /** Null on a tactic, which has no tank page to drop from the cache. */
   tankId: number | null;
   /** The map it was fought on, whose page carries it either way. */
@@ -287,13 +234,22 @@ export async function reviewTankVideo(
   id: number,
   approved: boolean,
   moderatorId: string,
+  /** Why it was turned down, in the moderator's words. Stored on a rejection
+   * only: an approval that carried one would be a note about a video that is
+   * live, which nothing reads. */
+  note?: string | null,
 ): Promise<ReviewedVideo | null> {
   const status = approved
     ? TankVideoStatus.Approved
     : TankVideoStatus.Rejected;
   const [row] = await db
     .update(tankVideos)
-    .set({ status, reviewedAt: new Date(), reviewedBy: moderatorId })
+    .set({
+      status,
+      reviewedAt: new Date(),
+      reviewedBy: moderatorId,
+      reviewNote: approved ? null : (note?.trim() || null),
+    })
     .where(
       and(
         eq(tankVideos.id, id),
@@ -306,6 +262,8 @@ export async function reviewTankVideo(
       clanRegion: tankVideos.clanRegion,
       clanId: tankVideos.clanId,
       title: tankVideos.title,
+      submittedBy: tankVideos.submittedBy,
+      videoId: tankVideos.videoId,
     });
   return row ? { ...row, status } : null;
 }

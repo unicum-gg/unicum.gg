@@ -15,8 +15,13 @@ import type { MediaPlayerInstance } from "@vidstack/react";
 import { youtubeWatchUrl } from "@unicum.gg/shared";
 import useSWR from "swr";
 import type { Region } from "@unicum.gg/wargaming";
+import { ownVideosKey } from "@/components/videos/own-videos-key";
 import { useSession } from "@/lib/auth-client";
 import { unicum } from "@/services/sdk";
+import {
+  useVideoEditing,
+  VideoEditDialog,
+} from "@/components/videos/edit-dialog";
 import type { TankVideoCardData } from "./card";
 import { VideoPlayerSurface } from "./surface";
 import {
@@ -25,12 +30,7 @@ import {
   writeBattleParam,
 } from "./battle-param";
 
-/** SWR key for the reader's own queued battles. Exported so the form can drop
- * it after a submission: the row it just created belongs in the list right
- * away, not on the next reload. */
-export function ownVideosKey(region: Region): string {
-  return `videos:mine:${region}`;
-}
+export { ownVideosKey };
 
 /** The hero the player takes over, so a card can scroll it back into view when
  * the click happened further down the page. */
@@ -73,6 +73,11 @@ type TankVideoPlayer = {
    * the button up on its own, and one that loses it stops offering a dead
    * click. */
   registerForm: () => () => void;
+  /** Open the correction dialog on a queued row of one's own. Held here because
+   * the dialog is mounted once, above every list on the page, exactly like the
+   * player itself: the rows are what you press, the dialog is where it opens,
+   * and neither can own the other. */
+  edit: (id: number) => void;
 };
 
 const PlayerContext = createContext<TankVideoPlayer | null>(null);
@@ -140,10 +145,17 @@ export function TankVideoPlayerProvider({
       unicum
         .region(region)
         .videosMine()
-        .then((r) => r.videos as unknown as TankVideoCardData[]),
+        .then((r) => ({
+          queued: r.videos as unknown as TankVideoCardData[],
+          // Everything this account ever submitted, published rows included, so
+          // the lists can offer to correct the reader's own without fetching
+          // them a second time.
+          owned: new Set(r.ownedIds),
+        })),
   );
   const videos = useMemo(() => {
-    const queued = (mine ?? []).filter(
+    const owned = mine?.owned;
+    const queued = (mine?.queued ?? []).filter(
       (v) =>
         (!ownTankSlug || v.tankSlug === ownTankSlug) &&
         (!ownMapSlug || v.mapSlug === ownMapSlug) &&
@@ -153,9 +165,21 @@ export function TankVideoPlayerProvider({
         (!ownClanId ||
           (v.clan?.id === ownClanId && v.clan?.region === region)),
     );
+    // A row that has just been corrected is in both lists at once: the page was
+    // server-rendered while it was still published, and the queue answered
+    // after it went back for review. Left alone, it renders twice under one
+    // React key, once live and once greyed out. The queue is the newer of the
+    // two, so it wins.
+    const requeued = new Set(queued.map((v) => v.id));
+    const shown = published.filter((v) => !requeued.has(v.id));
+    // Published rows are marked rather than replaced: they are the same rows
+    // the page was given, plus the one thing it could not know.
+    const marked = owned?.size
+      ? shown.map((v) => (owned.has(v.id) ? { ...v, mine: true } : v))
+      : shown;
     return queued.length
-      ? [...published, ...queued.map((v) => ({ ...v, pending: true }))]
-      : published;
+      ? [...marked, ...queued.map((v) => ({ ...v, pending: true }))]
+      : marked;
   }, [published, mine, ownTankSlug, ownMapSlug, ownClanId, region]);
   /**
    * Which battle is playing, read from the URL rather than held beside it.
@@ -211,7 +235,7 @@ export function TankVideoPlayerProvider({
     // reason the published half is fetched whole: the page's list is scoped to
     // its own ground, so a battle queued on another map of the same recording
     // would be missing from the timeline it belongs to.
-    const queued = (mine ?? [])
+    const queued = (mine?.queued ?? [])
       .filter((v) => v.videoId === current.videoId)
       .map((v) => ({ ...v, pending: true }));
     return [...published, ...queued].sort(
@@ -241,6 +265,21 @@ export function TankVideoPlayerProvider({
   }, [anchorId]);
 
   const stop = useCallback(() => writeBattleParam(null), []);
+
+  // Which row the correction dialog is on, read from the URL for the same
+  // reason the battle is: a moderator arrives on a link that names it.
+  const { editingId, editToken, edit: setEditing } = useVideoEditing();
+  const edit = useCallback(
+    (id: number | null) => {
+      setEditing(id);
+      // Paused, like handing a moment to the suggestion form: the dialog holds
+      // a player of its own, and two videos talking at once is the thing to
+      // avoid. Not closed, since the reader is coming back to the page under
+      // it, and finding their battle again would be the second annoyance.
+      if (id !== null) playerRef.current?.pause();
+    },
+    [setEditing],
+  );
 
   const [suggestion, setSuggestion] = useState<TankVideoSuggestion | null>(null);
   // Counted, not a boolean: the tank page mounts the form twice, once per
@@ -294,6 +333,7 @@ export function TankVideoPlayerProvider({
       suggest,
       canSuggest: forms > 0,
       registerForm,
+      edit,
     }),
     [
       videos,
@@ -306,11 +346,27 @@ export function TankVideoPlayerProvider({
       suggest,
       forms,
       registerForm,
+      edit,
     ],
   );
 
   return (
-    <PlayerContext.Provider value={value}>{children}</PlayerContext.Provider>
+    <PlayerContext.Provider value={value}>
+      {children}
+      {/* One dialog above every list on the page, keyed on the row so each
+          opening starts from what is stored. Mounted here rather than beside a
+          row: the same form serves the pencil on a queued row and the link a
+          moderator arrives on, and only one of those has a row on screen. */}
+      {editingId !== null && (
+        <VideoEditDialog
+          key={editingId}
+          region={region}
+          id={editingId}
+          token={editToken ?? undefined}
+          onClose={() => edit(null)}
+        />
+      )}
+    </PlayerContext.Provider>
   );
 }
 

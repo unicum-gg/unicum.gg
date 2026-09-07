@@ -11,4 +11,9 @@ import { videoBattleWithTank } from "@/services/openapi/schemas";
  */
 export const MyVideosResponse = z.object({
   videos: z.array(videoBattleWithTank),
+  /** The ids of everything this account submitted, whatever became of it, so a
+   * page can tell which of the published rows it is already showing belong to
+   * the reader and offer to correct those. Ids alone: the rows are on the page
+   * already, and answering them again would list every one of them twice. */
+  ownedIds: z.array(z.number().int()),
 });

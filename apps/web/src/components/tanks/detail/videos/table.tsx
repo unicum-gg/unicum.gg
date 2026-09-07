@@ -90,7 +90,8 @@ export function VideosTable({
   // Which row is playing, when there is a hero above to play it. Read from the
   // player rather than from the click, so it follows the playhead into the next
   // battle of the same video, exactly like the cards.
-  const activeId = useTankVideoPlayer()?.activeId ?? null;
+  const player = useTankVideoPlayer();
+  const activeId = player?.activeId ?? null;
   const router = useRouter();
 
   // A column is drawn where at least one row has something to put in it. The
@@ -270,6 +271,11 @@ export function VideosTable({
                 columns={columns}
                 active={battle.id === activeId}
                 onOpen={() => open(battle)}
+                onEdit={
+                  (battle.pending || battle.mine) && player
+                    ? () => player.edit(battle.id)
+                    : undefined
+                }
               />
             ))}
           </TableBody>

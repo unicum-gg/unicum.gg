@@ -6,7 +6,7 @@ import {
   formatTimestamp,
   MAP_GAME_MODE_LABEL,
 } from "@unicum.gg/shared";
-import { MapPinIcon } from "@phosphor-icons/react";
+import { MapPinIcon, PencilSimpleIcon } from "@phosphor-icons/react";
 import {
   Tooltip,
   TooltipContent,
@@ -68,6 +68,7 @@ export function BattleRow({
   active,
   onPlay,
   href,
+  onEdit,
 }: {
   battle: TankVideoCardData;
   showTank: boolean;
@@ -76,6 +77,10 @@ export function BattleRow({
    * link to the tank's page, which is where it can be watched. */
   onPlay?: () => void;
   href: string | null;
+  /** Opens the correction dialog, on a queued row of one's own. Passed like
+   * `onPlay` beside it, since the dialog is the player provider's and this
+   * module is also used on cards mounted outside one. */
+  onEdit?: () => void;
 }) {
   // The map first, since it is what anyone scans for, then how the battle was
   // played, then which side of it they started from.
@@ -137,15 +142,53 @@ export function BattleRow({
     <span className={className}>{inside}</span>
   );
 
-  if (!battle.pending) return row;
+  // Nothing to add to a row that is neither the reader's nor waiting: it is
+  // just a link to a video.
+  if (!battle.pending && !onEdit) return row;
+
+  // The pencil goes on both kinds of row the reader owns. On a queued one it
+  // sits beside the note saying why the row is greyed out; on a published one
+  // it is the only thing that marks the row as theirs, and the row itself still
+  // opens the video, since checking the second one picked is the other thing it
+  // is for.
   return (
     <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>{row}</TooltipTrigger>
-        <TooltipContent>
-          Waiting on a moderator. Only you can see it.
-        </TooltipContent>
-      </Tooltip>
+      <span className="flex w-full items-center gap-1">
+        {battle.pending ? (
+          <Tooltip>
+            <TooltipTrigger asChild>{row}</TooltipTrigger>
+            <TooltipContent>
+              Waiting on a moderator. Only you can see it.
+            </TooltipContent>
+          </Tooltip>
+        ) : (
+          row
+        )}
+        {onEdit && (
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <button
+                type="button"
+                onClick={onEdit}
+                aria-label="Correct this suggestion"
+                className={cn(
+                  "shrink-0 cursor-pointer rounded-md p-1 transition-colors hover:bg-fd-muted hover:text-fd-foreground",
+                  battle.pending
+                    ? "text-fd-muted-foreground/50"
+                    : "text-fd-muted-foreground",
+                )}
+              >
+                <PencilSimpleIcon className="size-3.5" />
+              </button>
+            </TooltipTrigger>
+            <TooltipContent>
+              {battle.pending
+                ? "Correct it"
+                : "Correct it. It goes back for review, so it comes off the site until then."}
+            </TooltipContent>
+          </Tooltip>
+        )}
+      </span>
     </TooltipProvider>
   );
 }

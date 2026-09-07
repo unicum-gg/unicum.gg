@@ -14,7 +14,6 @@ import {
   MapGameMode,
 } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
-import { UnicumError } from "@unicum.gg/sdk";
 import { Button } from "@/components/ui/button";
 import { LoginButton } from "@/components/login-button";
 import {
@@ -48,6 +47,11 @@ import {
   VideoSourceFields,
   VIDEO_FORM_INPUT,
 } from "@/components/tanks/detail/videos/source-fields";
+import {
+  ClanField,
+  type ClanPick,
+} from "@/components/videos/picker-field";
+import { apiErrorCode, apiErrorStatus } from "@/lib/api-error";
 import ROUTES from "@/constants/routes";
 import { useSession } from "@/lib/auth-client";
 import { unicum } from "@/services/sdk";
@@ -57,23 +61,6 @@ import { unicum } from "@/services/sdk";
  * tank's page, where the vehicle is already known and does not have to be
  * picked out of a catalogue of twelve hundred. */
 const TACTIC_FORMATS = Object.values(BattleFormat).filter(isCompetitiveFormat);
-
-/**
- * The endpoint's own name for what went wrong, out of the body it answers with.
- *
- * Read rather than inferred from the status: the suggest endpoint answers 404
- * for four different things (submissions unconfigured, an unknown map, an
- * unknown tank, an unknown clan tag), and the clan field is filled by default
- * on a clan's page, so guessing from the status told a submitter standing on
- * [FAME]'s page that we do not track [FAME].
- */
-function errorCode(err: unknown): string | null {
-  if (!(err instanceof UnicumError)) return null;
-  const body = err.body;
-  if (typeof body !== "object" || body === null) return null;
-  const code = (body as { error?: unknown }).error;
-  return typeof code === "string" ? code : null;
-}
 
 /**
  * Suggest a tactic for this map.
@@ -134,7 +121,9 @@ export function SubmitTacticDialog({
     arenaId: map.arenaId,
   }));
   const [format, setFormat] = useState<string>("");
-  const [clanTag, setClanTag] = useState(creditedClan ?? "");
+  const [clan, setClan] = useState<ClanPick | null>(
+    creditedClan ? { tag: creditedClan } : null,
+  );
   const [teamSize, setTeamSize] = useState("");
   const [tier, setTier] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -169,7 +158,7 @@ export function SubmitTacticDialog({
     source.reset();
     setBattle({ ...EMPTY_BATTLE, arenaId: map.arenaId });
     setFormat("");
-    setClanTag(creditedClan ?? "");
+    setClan(creditedClan ? { tag: creditedClan } : null);
     setTeamSize("");
     setTier("");
     setError(null);
@@ -190,20 +179,22 @@ export function SubmitTacticDialog({
         format: format as BattleFormat,
         teamSize: teamSize ? Number(teamSize) : undefined,
         tier: tier ? Number(tier) : undefined,
-        clanTag: clanTag.trim() || undefined,
+        clanTag: clan?.tag,
       });
       setDone(true);
       // The queued row is the receipt: it belongs in the list under the video
       // immediately, and on the player's seek bar, rather than after a reload.
       void mutate(ownVideosKey(region));
     } catch (err) {
-      const status = err instanceof UnicumError ? err.status : 0;
+      const status = apiErrorStatus(err);
       if (status === 409) {
         setError("That battle has already been suggested.");
       } else if (status === 422) {
         setError("YouTube won't show that video (private, deleted or blocked).");
-      } else if (errorCode(err) === "clan_not_found") {
-        setError(`We don't track a clan tagged [${clanTag.trim()}] on ${region.toUpperCase()}.`);
+      } else if (apiErrorCode(err) === "clan_not_found") {
+        setError(
+          `We don't track a clan tagged [${clan?.tag}] on ${region.toUpperCase()}.`,
+        );
       } else {
         setError("Something went wrong. Try again in a moment.");
       }
@@ -333,24 +324,12 @@ export function SubmitTacticDialog({
                 </label>
               )}
 
-              <label className="flex flex-col gap-1 text-sm">
-                <span className="font-medium">
-                  Clan{" "}
-                  <span className="font-normal text-fd-muted-foreground">
-                    (optional)
-                  </span>
-                </span>
-                <input
-                  type="text"
-                  value={clanTag}
-                  onChange={(e) => setClanTag(e.target.value)}
-                  placeholder="FAME"
-                  className={VIDEO_FORM_INPUT}
-                />
-                <span className="text-xs text-fd-muted-foreground">
-                  Credited on the clan&apos;s own page.
-                </span>
-              </label>
+              <ClanField
+                region={region}
+                clan={clan}
+                onPick={setClan}
+                onClear={() => setClan(null)}
+              />
             </div>
 
             {error && <p className="text-sm text-red-500">{error}</p>}

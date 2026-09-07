@@ -16,7 +16,8 @@ import { Region } from "@unicum.gg/wargaming/region";
  *
  * Everything else is generated. Method signatures come straight from the spec:
  * a query with 0 params → `m()`, exactly 1 param → a bare positional arg
- * (`search(q)`, `compare(names: string[])`), 2+ → a `query?` object (`top(q?)`).
+ * (`search(q)`, `compare(names: string[])`), 2+ → a `query` object, optional
+ * when every parameter is (`top(q?)`).
  * Region resources (players/clans/tanks) get their configured ergonomic names;
  * the `/og/{region}/…` prefix mirrors the path into `unicum.og.eu.players("x")`.
  */
@@ -286,8 +287,13 @@ function qsig(ep: Endpoint): QSig {
       callQuery: `, query: { ${p.name} }`,
     };
   }
+  // Optional only when every parameter is: a query object holding a required
+  // parameter cannot be left out, and typing it as if it could made the
+  // generated call itself a type error (openapi-fetch is handed `undefined`
+  // where it demands the object).
+  const optional = ep.query.every((p) => !p.required) ? "?" : "";
   return {
-    typed: `query?: QueryOf<"${ep.path}">`,
+    typed: `query${optional}: QueryOf<"${ep.path}">`,
     arg: "query",
     urlArg: ", query",
     callQuery: ", query",
