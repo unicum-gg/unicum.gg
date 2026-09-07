@@ -37,16 +37,27 @@ declare global {
 export function getRedisClient(): Redis | null {
   if (globalThis.__redisClient !== undefined) return globalThis.__redisClient;
 
-  // `next build` reaches Redis at a different address than the running app.
-  // BuildKit gives every build step its own network sandbox, cut off from the
-  // Docker network the Redis service sits on, so the internal hostname in
-  // `REDIS_URL` does not resolve there (verified: "Name does not resolve" from
-  // an isolated network, while the published endpoint answers). That is not a
-  // cosmetic failure: without Redis the WG rate limiter has no bucket at all
-  // (the in-memory limiter is only installed when `REDIS_URL` is unset), so the
-  // build's parallel workers hit Wargaming unthrottled and get us throttled by
-  // G-Core mid-build. `REDIS_BUILD_URL` is the same instance at its published
-  // address, used only while building.
+  // `REDIS_BUILD_URL` is an escape hatch for a build that cannot reach Redis at
+  // the address the running app uses, and it should stay UNSET.
+  //
+  // It was added when BuildKit gave every build step its own network sandbox,
+  // where the service's Docker hostname did not resolve ("Name does not
+  // resolve" from an isolated network, while the published endpoint answered),
+  // and it held the published address instead. Pointing the build at Redis by
+  // IP is what makes it rot: the address moved with the host on 2026-08-30 and
+  // the variable did not, so from then on the build spent every page timing out
+  // against a decommissioned box. That is not cosmetic. Without Redis the WG
+  // rate limiter has no bucket at all (the in-memory one is only installed when
+  // `REDIS_URL` is unset), so the build logs `[wg rate-limit] Redis
+  // unavailable, proceeding unthrottled` and its parallel workers hit
+  // Wargaming with nothing holding them back, which is how G-Core bans us.
+  //
+  // The sandbox is gone: buildkitd runs with Docker's embedded DNS
+  // (`[dns] nameservers = ["127.0.0.11"]`), so a service hostname resolves
+  // while building exactly as it does at runtime, which is how `DATABASE_URL`
+  // and `NEXT_ISR_REDIS_URL` already reach their containers by name during
+  // prerendering. So the build reads `REDIS_URL` like everything else, and an
+  // override that names one address twice would only be waiting to disagree.
   const url =
     (isProductionBuild() ? env.REDIS_BUILD_URL : undefined) ?? env.REDIS_URL;
   if (!url) {
