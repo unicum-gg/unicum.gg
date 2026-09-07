@@ -109,6 +109,32 @@ export async function openStage(
     return;
   }
 
+  const hold = () =>
+    new Promise<void>((done) => {
+      const sheet = handles.ghost.current;
+      if (!sheet) return done();
+      requestAnimationFrame(() => {
+        sheet.width = surface.width;
+        sheet.height = surface.height;
+        sheet.getContext("2d")?.drawImage(surface, 0, 0);
+        sheet.style.transition = "none";
+        sheet.style.opacity = "1";
+        // Read back so the browser takes the jump to full before the fade
+        // is asked for, rather than folding the two into no transition.
+        void sheet.offsetWidth;
+        done();
+      });
+    });
+
+  /** Fade the held photograph off, once what replaced it has been drawn. */
+  const dissolve = () =>
+    requestAnimationFrame(() => {
+      const sheet = handles.ghost.current;
+      if (!sheet) return;
+      sheet.style.transition = `opacity ${VIEW_DISSOLVE}ms ease-out`;
+      sheet.style.opacity = "0";
+    });
+
   const made = await buildStage({
     surface,
     THREE,
@@ -124,6 +150,9 @@ export async function openStage(
     // The studio goes up as soon as it stands, so the band is never a dark
     // rectangle with a title over it while the vehicle is on its way.
     room: () => handles.setShown(true),
+    // The room, photographed with nothing in it, so the vehicle can be
+    // dissolved over it rather than appearing in it between two frames.
+    arriving: hold,
   });
   if (!made) {
     from.onAbsent?.();
@@ -169,22 +198,6 @@ export async function openStage(
     { ...handles, skin: from.skin },
   );
 
-  const hold = () =>
-    new Promise<void>((done) => {
-      const sheet = handles.ghost.current;
-      if (!sheet) return done();
-      requestAnimationFrame(() => {
-        sheet.width = surface.width;
-        sheet.height = surface.height;
-        sheet.getContext("2d")?.drawImage(surface, 0, 0);
-        sheet.style.transition = "none";
-        sheet.style.opacity = "1";
-        // Read back so the browser takes the jump to full before the fade
-        // is asked for, rather than folding the two into no transition.
-        void sheet.offsetWidth;
-        done();
-      });
-    });
   handles.show.current = (next: View) => {
     // **The one that mattered most.** A view is a different picture drawn
     // from the same scene, and without this the switch was made, the state
@@ -208,12 +221,7 @@ export async function openStage(
       frameOnce();
       wake(VIEW_DISSOLVE + 400);
       // Let the new view draw once under the held frame, then dissolve it.
-      requestAnimationFrame(() => {
-        const sheet = handles.ghost.current;
-        if (!sheet) return;
-        sheet.style.transition = `opacity ${VIEW_DISSOLVE}ms ease-out`;
-        sheet.style.opacity = "0";
-      });
+      dissolve();
     });
   };
 
@@ -331,6 +339,10 @@ export async function openStage(
   wake(2000);
   draw();
   handles.setShown(true);
+  // The vehicle has been drawn once under the photograph of the empty room
+  // taken just before it was shown, so the two can now be crossed: the fade
+  // the arrival used to get from the canvas itself, given back to it.
+  dissolve();
   // **And the camera stays exactly where it was.** Standing where the last
   // vehicle was seen from is what makes the two floors land on each other
   // while the tanks cross; sending it on to this vehicle's own framing

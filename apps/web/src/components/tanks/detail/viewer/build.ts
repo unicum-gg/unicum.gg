@@ -53,6 +53,7 @@ export async function buildStage({
   live,
   nudge,
   room,
+  arriving,
 }: {
   surface: HTMLCanvasElement;
   THREE: typeof import("three");
@@ -73,6 +74,16 @@ export async function buildStage({
    * one frame and are already built by then.
    */
   room?: () => void;
+  /**
+   * Called with the room on screen and the vehicle about to join it.
+   *
+   * **The fade the arrival used to have.** It was the canvas coming up from
+   * nothing, which worked while nothing was shown until the vehicle was ready.
+   * The room is shown first now, so that fade is spent on an empty studio and
+   * the tank simply appeared in it. This is where the room is photographed so
+   * the vehicle can be dissolved over it instead.
+   */
+  arriving?: () => Promise<void>;
   /** The modules the reader has picked, where they have picked any. */
   fitted?: Mounted;
   /** The 3D style being worn, by the folder the client publishes it under. */
@@ -236,6 +247,18 @@ export async function buildStage({
       // fetched: the reader waits in the room the vehicle arrives into rather
       // than in a void, and the room does not change under them when it does.
       ready: () => {
+        // **Sized here, because nothing has sized it yet.** The loop's own
+        // observer does it, and the loop does not exist until the vehicle is
+        // built: rendered before that, the room was drawn at the canvas's
+        // default three hundred by one hundred and fifty and stretched across
+        // the band, which is a blurred floor whose gradient lands nowhere near
+        // where it belongs.
+        const { clientWidth: w, clientHeight: h } = surface;
+        if (w && h) {
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+        }
         renderer.render(scene, camera);
         room?.();
       },
@@ -264,6 +287,7 @@ export async function buildStage({
   // answers an environment map would wash out. Nothing here draws anything
   // else yet, but leaving it off is what left the vehicle lit by the
   // renderer's defaults, a uniform gold with no reflection in it.
+  await arriving?.();
   built.show(true);
 
   // The armour, on the same mounts, so a turret aimed in one view is aimed
