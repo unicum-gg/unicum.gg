@@ -193,12 +193,6 @@ export async function buildStage({
   // Resolved on the canvas, so the floor takes the hero's own theme rather
   // than the page's: the hero is dark in both.
   hangar(THREE, scene, surface);
-  // Shown now rather than at the end: the room is what the vehicle arrives
-  // into, and a reader waiting in it is waiting in a place rather than in a
-  // void. One frame, painted directly, since the loop does not start until
-  // there is something to loop over.
-  renderer.render(scene, camera);
-  room?.();
   const vehicle = new THREE.Group();
   // **The point the body tips about, which is not where it hangs.** The
   // client names it along the hull and it is a metre out on some vehicles;
@@ -238,6 +232,13 @@ export async function buildStage({
       renderer,
       scene,
       root,
+      // Shown as soon as the studio is lit, which is before the meshes are
+      // fetched: the reader waits in the room the vehicle arrives into rather
+      // than in a void, and the room does not change under them when it does.
+      ready: () => {
+        renderer.render(scene, camera);
+        room?.();
+      },
       // **A 3D style is the same vehicle from another folder.** It is a
       // complete set of pieces with textures of its own, published beside
       // the vehicle, so wearing one is a different path and nothing else.

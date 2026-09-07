@@ -60,6 +60,15 @@ export type LoadVisual = {
   mounted?: Mounted;
   /** Lets a caller bust its own cache; identity by default. */
   fresh?: (url: string) => string;
+  /**
+   * Called once the room is lit, before a mesh has been fetched.
+   *
+   * **The picture can be shown from here and not before.** The studio is what
+   * decides the exposure and the environment, so a canvas revealed ahead of it
+   * draws the floor flat and then jumps the moment the vehicle lands and the
+   * real settings arrive with it.
+   */
+  ready?: () => void;
 };
 
 /** The ribbon the chassis carries is the game's cheap stand-in for a track. */
@@ -94,7 +103,45 @@ export async function loadVisual({
   definition = "hd",
   mounted,
   fresh = (u: string) => u,
+  ready,
 }: LoadVisual) {
+  // **The room, before anything stands in it.** It costs one cube render and
+  // depends on nothing the vehicle brings, so it is built first: the picture
+  // can then be shown while the meshes are still on their way, and shown as it
+  // will look rather than unlit at the wrong exposure. Revealed before this,
+  // the floor was drawn flat and jumped when the tank landed and the real
+  // exposure came with it, which reads as a glow arriving behind the vehicle.
+  const room = studio(renderer, scene);
+  const { environment, lights } = room;
+  /** The renderer as the visual view wants it, which the armour views undo. */
+  const lit = (on: boolean) => {
+    scene.environment = on ? environment : null;
+      scene.environment = on ? environment : null;
+      // Khronos PBR Neutral, not ACES. ACES is a film curve: it desaturates as
+      // it rolls off, which on a vehicle lit from every side turns paint to
+      // grey. Measured on the IS-7 at the same exposure it costs a third of the
+      // saturation the Neutral curve keeps (0.139 against 0.189), and the
+      // Neutral one exists precisely for showing an object as it is.
+      renderer.toneMapping = on
+        ? THREE.NeutralToneMapping
+        : THREE.NoToneMapping;
+      // Low, because the environment is doing the lighting.
+      //
+      // This was 2.1, which was itself a step down from a 2.8 chosen to make the
+      // average brightness match a capture of the game, and both were the same
+      // mistake made twice: turning the exposure up to make up for an
+      // environment that was turned down. What the texture holds, the rust on
+      // the fender, the weld beads, the panel lines, flattens into pale cream
+      // either way. The pair is what matters, and the pair is a bright
+      // environment read at a low exposure.
+      renderer.toneMappingExposure = 1.42;
+      // The armour views draw flat answers and must not be shadowed.
+      renderer.shadowMap.enabled = on;
+      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  };
+  lit(true);
+  ready?.();
+
   const model: MirrorModel = await (
     await fetch(fresh(`${root}/vehicles/${vehicle}/model.json`))
   ).json();
@@ -217,9 +264,6 @@ export async function loadVisual({
   const gear = runningGear({ model, parts, belts });
   const mechanics = mechanism(animated);
 
-  const room = studio(renderer, scene);
-  const { environment, lights } = room;
-
   const { mark, wear } = wardrobe({
     model,
     scene,
@@ -289,28 +333,7 @@ export async function loadVisual({
     show(on: boolean) {
       for (const part of parts) part.visible = on;
       lights.visible = on;
-      scene.environment = on ? environment : null;
-      // Khronos PBR Neutral, not ACES. ACES is a film curve: it desaturates as
-      // it rolls off, which on a vehicle lit from every side turns paint to
-      // grey. Measured on the IS-7 at the same exposure it costs a third of the
-      // saturation the Neutral curve keeps (0.139 against 0.189), and the
-      // Neutral one exists precisely for showing an object as it is.
-      renderer.toneMapping = on
-        ? THREE.NeutralToneMapping
-        : THREE.NoToneMapping;
-      // Low, because the environment is doing the lighting.
-      //
-      // This was 2.1, which was itself a step down from a 2.8 chosen to make the
-      // average brightness match a capture of the game, and both were the same
-      // mistake made twice: turning the exposure up to make up for an
-      // environment that was turned down. What the texture holds, the rust on
-      // the fender, the weld beads, the panel lines, flattens into pale cream
-      // either way. The pair is what matters, and the pair is a bright
-      // environment read at a low exposure.
-      renderer.toneMappingExposure = 1.42;
-      // The armour views draw flat answers and must not be shadowed.
-      renderer.shadowMap.enabled = on;
-      renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+      lit(on);
     },
     /** Whether this vehicle published axles for its wheels. */
     turns: gear.turns,
