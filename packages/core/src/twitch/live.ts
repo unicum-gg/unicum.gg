@@ -1,10 +1,8 @@
+import { inArray } from "drizzle-orm";
 import { db } from "@unicum.gg/core/db";
-import { streamers, type LiveStreamer } from "@unicum.gg/shared";
+import { clansByRegion, streamers, type LiveStreamer } from "@unicum.gg/shared";
 import { getPlayersByAccounts } from "@unicum.gg/core/players";
-import {
-  getPlayerClansBatch,
-  type PlayerClanInfo,
-} from "@unicum.gg/core/wargaming/wot/clans/listings";
+import type { PlayerClanInfo } from "@unicum.gg/core/wargaming/wot/clans/listings";
 import { isRegion, Region } from "@unicum.gg/wargaming";
 import { getWotStreamsByLogin } from "./index";
 
@@ -17,47 +15,43 @@ import { getWotStreamsByLogin } from "./index";
  */
 export type { LiveStreamer } from "@unicum.gg/shared";
 
-// The clan tag is decoration, and it is the one thing on this path that leaves
-// for Wargaming rather than our own database. WG's Asia endpoints go
-// unreachable for long stretches, and the transport answers that by retrying:
-// five attempts over ~110s of backoff, each with its own 30s timeout. So the
-// call does eventually reject, minutes later, which is far too late for a
-// request a reader is waiting on. Catching the rejection is therefore not
-// enough on its own, and was not: a single Asia streamer going live took the
-// whole rail down for everyone, because the endpoint never came back and the
-// home page fell through to the hero.
+// Clan tags come from our own `clans` table rather than from Wargaming.
 //
-// Bounded here instead, at a length that suits a decorative field. The lookup
-// is left running rather than cancelled (the transport owns its own retries),
-// its rejection is absorbed so it cannot surface as an unhandled one, and
-// whatever it eventually returns simply arrives too late to be used.
-const CLAN_TAGS_TIMEOUT_MS = 3_000;
-
-async function clanTagsOrNone(
+// They used to be fetched live, which put a third party on the request path of
+// a decorative field, and it cost the section twice. First WG's Asia endpoints
+// went unreachable and the unbounded call hung the whole endpoint, so it was
+// bounded at three seconds. Then the bound started firing on EU in the worker,
+// not because WG was slow but because the call queues behind the crons on the
+// region's rate-limit lane, so the rail lost every EU tag instead.
+//
+// Both were the same mistake: asking WG for something we already store. The
+// player rows fetched right beside this carry `clanId`, and the tag and colour
+// hang off it in one keyed read, so the tags are now free, always present, and
+// impossible to lose to an outage. They age with the clan crons rather than
+// being live, which is the correct trade for a label on a stream card.
+async function clanTagsOf(
   region: Region,
-  accountIds: number[],
+  players: Awaited<ReturnType<typeof getPlayersByAccounts>>,
 ): Promise<Map<number, PlayerClanInfo>> {
-  const none = new Map<number, PlayerClanInfo>();
-  let timer: ReturnType<typeof setTimeout> | undefined;
-  const expired = new Promise<Map<number, PlayerClanInfo>>((resolve) => {
-    timer = setTimeout(() => {
-      console.error(
-        `[live-streamers] clan tags for ${region} took over ${CLAN_TAGS_TIMEOUT_MS}ms, serving without them`,
-      );
-      resolve(none);
-    }, CLAN_TAGS_TIMEOUT_MS);
-  });
-  try {
-    return await Promise.race([
-      getPlayerClansBatch(region, accountIds).catch((err) => {
-        console.error(`[live-streamers] clan tags for ${region} failed:`, err);
-        return none;
-      }),
-      expired,
-    ]);
-  } finally {
-    clearTimeout(timer);
+  const out = new Map<number, PlayerClanInfo>();
+  const clanIdOf = new Map<number, number>();
+  for (const [accountId, player] of players) {
+    if (player.clanId) clanIdOf.set(accountId, player.clanId);
   }
+  const clanIds = [...new Set(clanIdOf.values())];
+  if (clanIds.length === 0) return out;
+
+  const clans = clansByRegion[region];
+  const rows = await db
+    .select({ id: clans.id, tag: clans.tag, color: clans.color })
+    .from(clans)
+    .where(inArray(clans.id, clanIds));
+  const byClanId = new Map(rows.map((r) => [r.id, r]));
+  for (const [accountId, clanId] of clanIdOf) {
+    const clan = byClanId.get(clanId);
+    if (clan) out.set(accountId, { tag: clan.tag, color: clan.color });
+  }
+  return out;
 }
 
 /**
@@ -96,7 +90,7 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
     Region,
     {
       players: Awaited<ReturnType<typeof getPlayersByAccounts>>;
-      clans: Awaited<ReturnType<typeof getPlayerClansBatch>>;
+      clans: Awaited<ReturnType<typeof clanTagsOf>>;
     }
   >();
   await Promise.all(
@@ -104,18 +98,15 @@ export async function getLiveStreamers(): Promise<LiveStreamer[]> {
       const ids = liveRows
         .filter((r) => r.region === region)
         .map((r) => r.accountId);
-      const [players, clans] = await Promise.all([
-        getPlayersByAccounts(region, ids),
-        clanTagsOrNone(region, ids),
-      ]);
-      perRegion.set(region, { players, clans });
+      const players = await getPlayersByAccounts(region, ids);
+      perRegion.set(region, { players, clans: await clanTagsOf(region, players) });
     }),
   );
 
   // Resolve each live row to its card inputs, dropping accounts we have no
   // cached player/stream for.
   type PlayersMap = Awaited<ReturnType<typeof getPlayersByAccounts>>;
-  type ClansMap = Awaited<ReturnType<typeof getPlayerClansBatch>>;
+  type ClansMap = Awaited<ReturnType<typeof clanTagsOf>>;
   type Resolved = {
     row: (typeof liveRows)[number];
     region: Region;
