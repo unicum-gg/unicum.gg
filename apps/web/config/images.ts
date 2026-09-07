@@ -24,18 +24,21 @@ export const images: NextConfig["images"] = {
     { protocol: "https", hostname: "api.worldoftanks.asia", pathname: "/static/**" },
     // Twitch live-stream thumbnails for the "streaming now" cards.
     { protocol: "https", hostname: "static-cdn.jtvnw.net", pathname: "/**" },
-    // Game GUI assets (e.g. equipment grade overlays) from our wot.assets
-    // mirror, so we don't commit copies of them into the repo.
+    // Our own mirrors, read through the CDN that fronts them: GitHub serves the
+    // raw files with five minutes of cache, which for an icon or a minimap
+    // means the optimizer re-fetches a file that has not changed since the
+    // client patched.
     {
       protocol: "https",
-      hostname: "raw.githubusercontent.com",
-      pathname: "/unicum-gg/wot.assets/**",
+      hostname: "cdn.jsdelivr.net",
+      pathname: "/gh/unicum-gg/**",
     },
-    // HD battle minimaps from our wot.maps mirror.
+    // The same mirrors read directly, which is what a page rendered before that
+    // move still names, and what the CDN falls back to.
     {
       protocol: "https",
       hostname: "raw.githubusercontent.com",
-      pathname: "/unicum-gg/wot.maps/**",
+      pathname: "/unicum-gg/**",
     },
     // YouTube thumbnails for the community video suggestions. Only the
     // thumbnail host, and only its `/vi/` path: the video ids are parsed and

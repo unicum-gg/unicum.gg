@@ -37,11 +37,25 @@ export function assetsRefFor(branch?: WotSrcBranch): string | undefined {
   return branch === WotSrcBranch.CT ? ASSETS_BRANCH_CT : undefined;
 }
 
-/** Raw-content URL for `path` on the wot.assets mirror. `ref` (a branch or a
- * commit SHA) defaults to the live branch; pass a commit SHA to pin the asset to
- * a past state (e.g. a season's art as it was while that season was live). */
+/**
+ * URL for `path` on the wot.assets mirror. `ref` (a branch or a commit SHA)
+ * defaults to the live branch; pass a commit SHA to pin the asset to a past
+ * state (e.g. a season's art as it was while that season was live).
+ *
+ * **Through a CDN, because GitHub serves raw files with five minutes of
+ * cache.** These are icons: three of them are CSS masks on every tank page and
+ * so cannot go through the image optimizer, and a well-dressed vehicle lists
+ * seven hundred style swatches. Five minutes means a reader downloads the lot
+ * again on their second visit to the same page.
+ *
+ * **A branch is safe to pin here, unlike on the geometry.** This mirror
+ * accumulates: WG pulls an event's art when the event ends and the extraction
+ * writes over its branch without clearing, so a file that exists never changes
+ * and a week of caching cannot go stale. What a new client adds is simply not
+ * cached yet.
+ */
 export function assetUrl(path: string, ref: string = ASSETS_BRANCH): string {
-  return `https://raw.githubusercontent.com/${ASSETS_REPO}/${ref}/${path}`;
+  return `https://cdn.jsdelivr.net/gh/${ASSETS_REPO}@${ref}/${path}`;
 }
 
 /** Raw-content URL under `gui/maps/icons/<path>`, the icon subtree every one of

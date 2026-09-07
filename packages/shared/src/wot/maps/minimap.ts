@@ -18,7 +18,7 @@ export const WOT_MAPS_BRANCH_CT = "WG_CT";
 /** HD (2048²) top-down minimap on the wot.maps mirror, keyed by arena id. Not
  * every arena has one; the client falls back to a placeholder on a 404. */
 export function minimapUrl(arenaId: string): string {
-  return `https://raw.githubusercontent.com/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/maps/${arenaId}.webp`;
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/maps/${arenaId}.webp`;
 }
 
 /** The same mirror image on the Common Test branch, or null when the URL is not
@@ -27,15 +27,19 @@ export function minimapUrl(arenaId: string): string {
  * moves from the test branch to the live one the day the client ships its
  * package, with no code change. */
 export function ctMinimapUrl(url: string): string | null {
-  const live = `/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/`;
+  // The CDN spells a ref with `@`, not as a path segment. Matched on the shape
+  // the builders above produce rather than on a remembered one: read against
+  // the old shape this simply found nothing, and every test-only map lost its
+  // minimap without a word.
+  const live = `/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/`;
   if (!url.includes(live)) return null;
-  return url.replace(live, `/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH_CT}/`);
+  return url.replace(live, `/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH_CT}/`);
 }
 
 /** The Onslaught (comp7) minimap variant, a reduced play area shipped by most
  * Onslaught maps (`<id>_comp7.webp` on the mirror). */
 export function onslaughtMinimapUrl(arenaId: string): string {
-  return `https://raw.githubusercontent.com/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/maps/${arenaId}_comp7.webp`;
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/maps/${arenaId}_comp7.webp`;
 }
 
 /** One of a map's alternate minimap layers on the mirror, keyed by the layer
@@ -46,7 +50,7 @@ export function onslaughtMinimapUrl(arenaId: string): string {
  * minimap. */
 export function minimapLayerUrl(arenaId: string, basename: string): string {
   const variant = basename.replace(/^mmap/, "");
-  return `https://raw.githubusercontent.com/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/maps/${arenaId}${variant}.webp`;
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/maps/${arenaId}${variant}.webp`;
 }
 
 // Low-res fallback minimap: the client's own baked GUI icon on the wot.assets
@@ -65,5 +69,5 @@ export function lowResMinimapUrl(arenaId: string): string {
  * GUI, so a single set lives on the primary branch. Names: `base_ally`,
  * `base_enemy`, `control_point`, `spawn_{ally,enemy}_{1..4}`. */
 export function markerUrl(name: string): string {
-  return `https://raw.githubusercontent.com/${WOT_MAPS_REPO}/${WOT_MAPS_BRANCH}/markers/${name}.png`;
+  return `https://cdn.jsdelivr.net/gh/${WOT_MAPS_REPO}@${WOT_MAPS_BRANCH}/markers/${name}.png`;
 }
