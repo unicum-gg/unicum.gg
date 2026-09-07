@@ -18,6 +18,7 @@ import { NationFlag } from "@/components/tanks/nation-flag";
 import { VehicleTypeIcon } from "@/components/tanks/vehicle-type-icon";
 import type { TankSearchResult } from "@/app/api/[region]/tanks/search/route";
 import { mergeSearchChunks } from "@/lib/search-merge";
+import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import { SearchSource } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -40,6 +41,7 @@ export function TankSearchPopover({
   triggerAriaLabel,
   tooltip,
   placeholder = "Search tank...",
+  matchTriggerWidth,
 }: {
   region: Region;
   excludeSlugs?: Set<string>;
@@ -49,6 +51,13 @@ export function TankSearchPopover({
   triggerAriaLabel: string;
   tooltip?: string;
   placeholder?: string;
+  /**
+   * Size the panel to the trigger and align it under its left edge, for a
+   * trigger that is a field rather than an icon: a combobox whose list is
+   * narrower than the box it drops from reads as a stray menu. Off by default,
+   * since the compare pages hang this off a 28px button.
+   */
+  matchTriggerWidth?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -131,12 +140,15 @@ export function TankSearchPopover({
         trigger
       )}
       <PopoverContent
-        align="end"
+        align={matchTriggerWidth ? "start" : "end"}
         onOpenAutoFocus={(e) => {
           e.preventDefault();
           inputRef.current?.focus();
         }}
-        className="max-w-[calc(100vw-1rem)] overflow-hidden p-0"
+        className={cn(
+          "max-w-[calc(100vw-1rem)] overflow-hidden p-0",
+          matchTriggerWidth && "w-(--radix-popover-trigger-width)",
+        )}
       >
         <div className="flex items-center gap-2 border-b border-fd-border px-3 py-2">
           <MagnifyingGlassIcon

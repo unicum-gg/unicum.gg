@@ -63,7 +63,7 @@ export function SlotHeader({
         <ClanSearchPopover
           region={region}
           excludeKeys={excludeKeys}
-          onPick={onAdd}
+          onPick={(clan) => onAdd(clan.tag)}
           triggerAriaLabel="Add clan"
           triggerClassName="inline-flex size-7 cursor-pointer items-center justify-center rounded-full border border-fd-border bg-fd-secondary/30 text-fd-muted-foreground hover:bg-fd-secondary hover:text-fd-foreground"
           triggerContent={<PlusIcon className="size-3.5" weight="bold" />}

@@ -15,6 +15,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { mergeSearchChunks } from "@/lib/search-merge";
+import { cn } from "@/lib/utils";
 import { unicum } from "@/services/sdk";
 import type { Region } from "@unicum.gg/wargaming";
 import { type ClanSearchResult, SearchSource } from "@unicum.gg/shared";
@@ -30,14 +31,24 @@ export function ClanSearchPopover({
   triggerContent,
   triggerAriaLabel,
   tooltip,
+  matchTriggerWidth,
 }: {
   region: Region;
   excludeKeys?: Set<string>;
-  onPick: (tag: string) => void;
+  /** The clan that was picked, whole: a tag on its own cannot be drawn with
+   * its colour or its emblem, which is how a clan reads everywhere else. */
+  onPick: (clan: ClanSearchResult) => void;
   triggerClassName: string;
   triggerContent: ReactNode;
   triggerAriaLabel: string;
   tooltip?: string;
+  /**
+   * Size the panel to the trigger and align it under its left edge, for a
+   * trigger that is a field rather than an icon: a combobox whose list is
+   * narrower than the box it drops from reads as a stray menu. Off by default,
+   * since the compare pages hang this off a 28px button.
+   */
+  matchTriggerWidth?: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -87,8 +98,8 @@ export function ClanSearchPopover({
     };
   }, [active, trimmed, region]);
 
-  function pick(tag: string) {
-    onPick(tag);
+  function pick(clan: ClanSearchResult) {
+    onPick(clan);
     setOpen(false);
     setQuery("");
   }
@@ -124,13 +135,16 @@ export function ClanSearchPopover({
         trigger
       )}
       <PopoverContent
-        align="end"
+        align={matchTriggerWidth ? "start" : "end"}
         // Focus the search field on open (not the Radix-default first item).
         onOpenAutoFocus={(e) => {
           e.preventDefault();
           inputRef.current?.focus();
         }}
-        className="max-w-[calc(100vw-1rem)] overflow-hidden p-0"
+        className={cn(
+          "max-w-[calc(100vw-1rem)] overflow-hidden p-0",
+          matchTriggerWidth && "w-(--radix-popover-trigger-width)",
+        )}
       >
         <div className="flex items-center gap-2 border-b border-fd-border px-3 py-2">
           <MagnifyingGlassIcon
@@ -167,7 +181,7 @@ export function ClanSearchPopover({
               <button
                 key={r.clan_id}
                 type="button"
-                onClick={() => pick(r.tag)}
+                onClick={() => pick(r)}
                 className="flex w-full cursor-pointer items-center justify-between gap-2 px-3 py-2 text-left text-sm hover:bg-fd-accent hover:text-fd-accent-foreground"
               >
                 <ClanTag tag={r.tag} color={r.color} className="font-mono" />

@@ -20,8 +20,8 @@ export function CompareWithButton({
     <ClanSearchPopover
       region={region}
       excludeKeys={excludeKeys}
-      onPick={(tag) => {
-        router.push(ROUTES.COMPARE_CLANS(region, [current, tag]));
+      onPick={(clan) => {
+        router.push(ROUTES.COMPARE_CLANS(region, [current, clan.tag]));
       }}
       triggerAriaLabel="Compare with another clan"
       tooltip="Compare with..."
