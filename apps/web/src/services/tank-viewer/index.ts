@@ -147,13 +147,30 @@ export async function loadVisual({
 
   /** What each piece brought with it, for the handful that bring an animation. */
   const animated: Animated[] = [];
-  for (const name of pieces) {
+  // **Fetched together, dressed one at a time.** Awaiting each piece before
+  // asking for the next made a vehicle a chain: measured on the E 100, the
+  // hull's mesh did not start until three and a half seconds in and its
+  // textures only after that, which is eight seconds of loading for under
+  // three megabytes on a connection that could have had it in two. The bytes
+  // are independent, so they are asked for at once.
+  //
+  // The dressing that follows stays sequential, and has to: the brush is a
+  // cursor saying which piece is being built, and the materials are shared
+  // across the vehicle, so two pieces reading it at once would paint each
+  // other's. It is a traversal over meshes already in memory, which costs
+  // nothing next to the network it used to be serialised behind.
+  const fetched = await Promise.all(
+    pieces.map(async (name) => ({
+      name,
+      gltf: await loader.loadAsync(
+        fresh(`${root}/vehicles/${vehicle}/${model.pieces[name].glb}`),
+      ),
+    })),
+  );
+  for (const { name, gltf } of fetched) {
     const piece = model.pieces[name];
     brush.part = partOf(name);
     brush.piece = name;
-    const gltf = await loader.loadAsync(
-      fresh(`${root}/vehicles/${vehicle}/${piece.glb}`),
-    );
     // A mesh drawn with several materials arrives as several meshes, so the
     // manifest's per-mesh lists are flattened into the same order.
     const order = (piece.meshes ?? []).flatMap((m) => m.materials);

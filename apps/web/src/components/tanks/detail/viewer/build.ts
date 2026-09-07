@@ -52,6 +52,7 @@ export async function buildStage({
   skin,
   live,
   nudge,
+  room,
 }: {
   surface: HTMLCanvasElement;
   THREE: typeof import("three");
@@ -62,6 +63,16 @@ export async function buildStage({
   at: string;
   /** The mirror everything hangs off, pinned to the build being read. */
   root: string;
+  /**
+   * Called once the room is standing, before the vehicle has been fetched.
+   *
+   * **A studio with nothing in it is still an answer.** The band was left
+   * empty until the whole vehicle had arrived, which on a cold visit is
+   * several seconds of a dark rectangle with a title over it: nothing said a
+   * tank was coming, so readers read it as broken. The floor and its grid cost
+   * one frame and are already built by then.
+   */
+  room?: () => void;
   /** The modules the reader has picked, where they have picked any. */
   fitted?: Mounted;
   /** The 3D style being worn, by the folder the client publishes it under. */
@@ -182,6 +193,12 @@ export async function buildStage({
   // Resolved on the canvas, so the floor takes the hero's own theme rather
   // than the page's: the hero is dark in both.
   hangar(THREE, scene, surface);
+  // Shown now rather than at the end: the room is what the vehicle arrives
+  // into, and a reader waiting in it is waiting in a place rather than in a
+  // void. One frame, painted directly, since the loop does not start until
+  // there is something to loop over.
+  renderer.render(scene, camera);
+  room?.();
   const vehicle = new THREE.Group();
   // **The point the body tips about, which is not where it hangs.** The
   // client names it along the hull and it is a metre out on some vehicles;

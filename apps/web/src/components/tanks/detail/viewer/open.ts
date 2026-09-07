@@ -121,6 +121,9 @@ export async function openStage(
     skin: from.skin,
     live,
     nudge: handles.nudge,
+    // The studio goes up as soon as it stands, so the band is never a dark
+    // rectangle with a title over it while the vehicle is on its way.
+    room: () => handles.setShown(true),
   });
   if (!made) {
     from.onAbsent?.();
