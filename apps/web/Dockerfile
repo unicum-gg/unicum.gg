@@ -91,6 +91,15 @@ RUN pnpm --filter @unicum.gg/web exec react-flagpack
 # prerendered empty. Halving the concurrency halves the streams. Not a secret,
 # so it is a plain ENV.
 ENV NEXT_BUILD_CPUS=2
+# The revision, which `config/build-id.ts` turns into the deploymentId Next
+# uses for version-skew protection. It has to be handed in: `.dockerignore`
+# drops `.git`, so there is no repository in here to read it from, and that
+# file now refuses to build for production without one. Declared here rather
+# than at the top of the file so it invalidates only this layer, which the
+# `COPY . .` above already invalidates on every commit anyway. Not a secret,
+# and a public commit sha in a public image's history is no leak.
+ARG DEPLOYMENT_ID
+ENV DEPLOYMENT_ID=${DEPLOYMENT_ID}
 RUN --mount=type=secret,id=build_env,required=true \
     set -a && . /run/secrets/build_env && set +a \
     && pnpm --filter @unicum.gg/web build

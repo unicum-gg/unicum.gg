@@ -125,6 +125,11 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:${{ github.sha }}
             ${{ env.IMAGE }}:latest
+          # The revision the build stamps onto its assets, so a reader who
+          # straddles a deploy is sent to one build rather than served a mix of
+          # two. The context has no `.git` to read it from.
+          build-args: |
+            DEPLOYMENT_ID=${{ github.sha }}
           # The build needs real credentials to prerender real pages. They arrive
           # as one dotenv secret rather than a list of build args: args persist in
           # the image history, and this image is public. One secret also means a
