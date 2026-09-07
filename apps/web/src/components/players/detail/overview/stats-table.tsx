@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,8 +10,10 @@ import {
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useStatsPeriod } from "@/hooks/use-period";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
+import { StrongholdPeriod, type Stats, type PeriodStats, type PeriodValues, type PlayerDerivedStats, RATING_COLOR_CLASS, type RatingColor, winrateColor, wn7Color, wn8Color, wnxColor } from "@unicum.gg/shared";
 
 const integerFmt = new Intl.NumberFormat("en-US", { maximumFractionDigits: 0 });
 const signedIntegerFmt = new Intl.NumberFormat("en-US", {
@@ -214,7 +218,7 @@ function PeriodCells({
   cell: Cell;
   hideOnMobile?: boolean;
 }) {
-  const hide = hideOnMobile ? "max-sm:hidden" : "";
+  const hide = hideOnMobile ? styles.hiddenFixedColumn : "";
   if (!cell.secondary) {
     return (
       <TableCell
@@ -258,7 +262,7 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
   return (
     <TableCell
       colSpan={2}
-      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+      className={cn("py-1.5! text-right", hideOnMobile && styles.hiddenFixedColumn)}
     >
       <Skeleton className="ml-auto h-4 w-12" />
     </TableCell>
@@ -277,33 +281,69 @@ export function PlayerStatsTable(
     | { current: Stats; periods: PeriodStats; derived: PlayerDerivedStats },
 ) {
   const loading = "loading" in props;
+  // Which of the four windows a phone shows. Read once here and passed down
+  // rather than read per cell: the table is 23 rows of four periods, and each
+  // read is a cookie subscription.
+  const [period] = useStatsPeriod();
+  const off = (p: StrongholdPeriod) => p !== period;
+  // Below `sm` the chosen window's two sub-columns take 22% each and the
+  // other three windows take none; from `sm` up all four are drawn.
+  const colClass = (p: StrongholdPeriod) =>
+    cn(off(p) ? "max-sm:w-0!" : "max-sm:w-[22%]", "sm:w-[9%]");
 
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
+      {/* One window at a time below `sm`, so its two sub-columns take 44% and
+          the stat names keep the rest. The other three collapse to nothing
+          rather than being removed, see `styles.hiddenFixedColumn`. */}
       <colgroup>
         <col />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
+        <col className={colClass(StrongholdPeriod.Overall)} />
+        <col className={colClass(StrongholdPeriod.Overall)} />
+        <col className={colClass(StrongholdPeriod.Day)} />
+        <col className={colClass(StrongholdPeriod.Day)} />
+        <col className={colClass(StrongholdPeriod.Week)} />
+        <col className={colClass(StrongholdPeriod.Week)} />
+        <col className={colClass(StrongholdPeriod.Month)} />
+        <col className={colClass(StrongholdPeriod.Month)} />
       </colgroup>
       <TableHeader>
         <TableRow>
           <TableHead>Stat</TableHead>
-          <TableHead className="text-right" colSpan={2}>
+          <TableHead
+            className={cn(
+              "text-right",
+              off(StrongholdPeriod.Overall) && styles.hiddenFixedColumn,
+            )}
+            colSpan={2}
+          >
             Total
           </TableHead>
-          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+          <TableHead
+            className={cn(
+              "text-right",
+              off(StrongholdPeriod.Day) && styles.hiddenFixedColumn,
+            )}
+            colSpan={2}
+          >
             Last 24h
           </TableHead>
-          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+          <TableHead
+            className={cn(
+              "text-right",
+              off(StrongholdPeriod.Week) && styles.hiddenFixedColumn,
+            )}
+            colSpan={2}
+          >
             Last 7d
           </TableHead>
-          <TableHead className="text-right" colSpan={2}>
+          <TableHead
+            className={cn(
+              "text-right",
+              off(StrongholdPeriod.Month) && styles.hiddenFixedColumn,
+            )}
+            colSpan={2}
+          >
             Last 30d
           </TableHead>
         </TableRow>
@@ -323,17 +363,29 @@ export function PlayerStatsTable(
               </TableCell>
               {cells ? (
                 <>
-                  <PeriodCells cell={cells.total} />
-                  <PeriodCells cell={cells.h24} hideOnMobile />
-                  <PeriodCells cell={cells.d7} hideOnMobile />
-                  <PeriodCells cell={cells.d30} />
+                  <PeriodCells
+                    cell={cells.total}
+                    hideOnMobile={off(StrongholdPeriod.Overall)}
+                  />
+                  <PeriodCells
+                    cell={cells.h24}
+                    hideOnMobile={off(StrongholdPeriod.Day)}
+                  />
+                  <PeriodCells
+                    cell={cells.d7}
+                    hideOnMobile={off(StrongholdPeriod.Week)}
+                  />
+                  <PeriodCells
+                    cell={cells.d30}
+                    hideOnMobile={off(StrongholdPeriod.Month)}
+                  />
                 </>
               ) : (
                 <>
-                  <PeriodSkeleton />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Overall)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Day)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Week)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Month)} />
                 </>
               )}
             </TableRow>

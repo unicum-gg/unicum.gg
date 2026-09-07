@@ -9,6 +9,7 @@ import {
 } from "@/components/panel";
 import { TaggedTitle } from "@/components/clans/detail/tagged-title";
 import { ClanStrongholdStatsTable } from "@/components/clans/detail/overview/stronghold-stats";
+import { StatsPeriodSelect } from "@/components/stats-period-select";
 import { styles } from "@/lib/styles";
 import type { ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -37,6 +38,7 @@ export function StrongholdTab({
             <TaggedTitle tag={tag} color={color}>
               stronghold stats
             </TaggedTitle>
+            {stronghold.latest && <StatsPeriodSelect />}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">

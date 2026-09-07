@@ -9,6 +9,7 @@ import {
 } from "@/components/panel";
 import { TaggedTitle } from "@/components/clans/detail/tagged-title";
 import { ClanWarsStatsTable } from "@/components/clans/detail/overview/clan-wars-stats";
+import { StatsPeriodSelect } from "@/components/stats-period-select";
 import { styles } from "@/lib/styles";
 import type { ClanGlobalMapView } from "@unicum.gg/shared";
 
@@ -32,6 +33,7 @@ export function ClanWarsTab({
             <TaggedTitle tag={tag} color={color}>
               clan wars stats
             </TaggedTitle>
+            {clanWars.latest && <StatsPeriodSelect />}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">

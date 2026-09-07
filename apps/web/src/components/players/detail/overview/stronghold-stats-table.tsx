@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Table,
   TableBody,
@@ -8,8 +10,10 @@ import {
 } from "@/components/ui/table";
 import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useStatsPeriod } from "@/hooks/use-period";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
-import { computeHR, computeHRB, hrbColor, hrColor, winrateColor, RATING_COLOR_CLASS, type HRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
+import { StrongholdPeriod, computeHR, computeHRB, hrbColor, hrColor, winrateColor, RATING_COLOR_CLASS, type HRInputs, type RatingColor, type StrongholdStats } from "@unicum.gg/shared";
 
 // The Wins row colors its win rate with the mode's own scale. Defaults to the
 // random-battle 50%-anchored one; Steel Hunter passes its lower-baseline scale
@@ -168,7 +172,7 @@ function PeriodCells({
   cell: Cell;
   hideOnMobile?: boolean;
 }) {
-  const hide = hideOnMobile ? "max-sm:hidden" : "";
+  const hide = hideOnMobile ? styles.hiddenFixedColumn : "";
   if (!cell.secondary) {
     return (
       <TableCell
@@ -217,7 +221,7 @@ function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
   return (
     <TableCell
       colSpan={2}
-      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+      className={cn("py-1.5! text-right", hideOnMobile && styles.hiddenFixedColumn)}
     >
       <Skeleton className="ml-auto h-4 w-12" />
     </TableCell>
@@ -244,32 +248,42 @@ export function StrongholdStatsTable(
     ...buildRowDefs(props.winrateColorFn ?? winrateColor),
     ...(props.trailingRows ?? []),
   ];
+  // Which of the four windows a phone shows, read once and passed down.
+  const [period] = useStatsPeriod();
+  const off = (p: StrongholdPeriod) => p !== period;
+  // Below `sm` the chosen window's two sub-columns take 22% each and the other
+  // three windows take none; from `sm` up all four are drawn.
+  const colClass = (p: StrongholdPeriod) =>
+    cn(off(p) ? "max-sm:w-0!" : "max-sm:w-[22%]", "sm:w-[9%]");
+  const headClass = (p: StrongholdPeriod) =>
+    cn("text-right", off(p) && styles.hiddenFixedColumn);
+
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
       <colgroup>
         <col />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="max-sm:w-0! sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
-        <col className="w-[20%] sm:w-[9%]" />
+        <col className={colClass(StrongholdPeriod.Overall)} />
+        <col className={colClass(StrongholdPeriod.Overall)} />
+        <col className={colClass(StrongholdPeriod.Day)} />
+        <col className={colClass(StrongholdPeriod.Day)} />
+        <col className={colClass(StrongholdPeriod.Week)} />
+        <col className={colClass(StrongholdPeriod.Week)} />
+        <col className={colClass(StrongholdPeriod.Month)} />
+        <col className={colClass(StrongholdPeriod.Month)} />
       </colgroup>
       <TableHeader>
         <TableRow>
           <TableHead>Stat</TableHead>
-          <TableHead className="text-right" colSpan={2}>
+          <TableHead className={headClass(StrongholdPeriod.Overall)} colSpan={2}>
             Total
           </TableHead>
-          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+          <TableHead className={headClass(StrongholdPeriod.Day)} colSpan={2}>
             Last 24h
           </TableHead>
-          <TableHead className="text-right max-sm:hidden" colSpan={2}>
+          <TableHead className={headClass(StrongholdPeriod.Week)} colSpan={2}>
             Last 7d
           </TableHead>
-          <TableHead className="text-right" colSpan={2}>
+          <TableHead className={headClass(StrongholdPeriod.Month)} colSpan={2}>
             Last 30d
           </TableHead>
         </TableRow>
@@ -291,17 +305,29 @@ export function StrongholdStatsTable(
               </TableCell>
               {cells ? (
                 <>
-                  <PeriodCells cell={cells.total} />
-                  <PeriodCells cell={cells.h24} hideOnMobile />
-                  <PeriodCells cell={cells.d7} hideOnMobile />
-                  <PeriodCells cell={cells.d30} />
+                  <PeriodCells
+                    cell={cells.total}
+                    hideOnMobile={off(StrongholdPeriod.Overall)}
+                  />
+                  <PeriodCells
+                    cell={cells.h24}
+                    hideOnMobile={off(StrongholdPeriod.Day)}
+                  />
+                  <PeriodCells
+                    cell={cells.d7}
+                    hideOnMobile={off(StrongholdPeriod.Week)}
+                  />
+                  <PeriodCells
+                    cell={cells.d30}
+                    hideOnMobile={off(StrongholdPeriod.Month)}
+                  />
                 </>
               ) : (
                 <>
-                  <PeriodSkeleton />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton hideOnMobile />
-                  <PeriodSkeleton />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Overall)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Day)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Week)} />
+                  <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Month)} />
                 </>
               )}
             </TableRow>

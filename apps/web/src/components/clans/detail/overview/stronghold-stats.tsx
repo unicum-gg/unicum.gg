@@ -1,3 +1,5 @@
+"use client";
+
 import { Fragment } from "react";
 import { CaretRightIcon } from "@phosphor-icons/react";
 import {
@@ -12,6 +14,8 @@ import { GlossaryLabel } from "@/components/glossary/label";
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
 import ROUTES from "@/constants/routes";
+import { STATS_PERIODS, useStatsPeriod } from "@/hooks/use-period";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import { RATING_COLOR_CLASS, strongholdRatingColor, strongholdWinrateColor, StrongholdPeriod, StrongholdTier, type ClanStrongholdSr, type ClanStrongholdStats, type ClanStrongholdView } from "@unicum.gg/shared";
 import type { Region } from "@unicum.gg/wargaming";
@@ -71,7 +75,7 @@ function PeriodCell({ cell, hideOnMobile }: { cell: Cell; hideOnMobile?: boolean
     <TableCell
       className={cn(
         "py-1.5! text-right tabular-nums",
-        hideOnMobile && "max-sm:hidden",
+        hideOnMobile && styles.hiddenFixedColumn,
         cell.className,
       )}
     >
@@ -84,7 +88,7 @@ function PeriodCell({ cell, hideOnMobile }: { cell: Cell; hideOnMobile?: boolean
 function PeriodSkeleton({ hideOnMobile }: { hideOnMobile?: boolean }) {
   return (
     <TableCell
-      className={cn("py-1.5! text-right", hideOnMobile && "max-sm:hidden")}
+      className={cn("py-1.5! text-right", hideOnMobile && styles.hiddenFixedColumn)}
     >
       <Skeleton className="ml-auto h-4 w-12" />
     </TableCell>
@@ -211,15 +215,6 @@ const SECTIONS: {
   },
 ];
 
-// The window each column shows, in the table's column order. The delta rows read
-// `periods.h24/d7/d30`; the SR rows read the same windows out of `sr`.
-const COLUMN_PERIODS = [
-  StrongholdPeriod.Overall,
-  StrongholdPeriod.Day,
-  StrongholdPeriod.Week,
-  StrongholdPeriod.Month,
-] as const;
-
 function srCell(v: number | null): Cell {
   if (v === null) return DASH;
   return {
@@ -240,22 +235,32 @@ export function ClanStrongholdStatsTable(
 ) {
   const loading = "loading" in props;
 
+  // Which of the four windows a phone shows, read once and passed down.
+  const [period] = useStatsPeriod();
+  const off = (p: StrongholdPeriod) => p !== period;
+  const colClass = (p: StrongholdPeriod) =>
+    cn(off(p) ? "max-sm:w-0!" : "max-sm:w-[44%]", "sm:w-[12%]");
+  const headClass = (p: StrongholdPeriod) =>
+    cn("text-right", off(p) && styles.hiddenFixedColumn);
+
   return (
     <Table className="my-0! table-fixed [&_td]:min-w-0 [&_tr>*+*]:border-l [&_tr>*:first-child]:pl-4! [&_tr>*]:border-border [&_th]:py-1! [&_td]:py-0.5!">
+      {/* One window at a time below `sm`, the one the title's select names, so
+          it takes 44% and the stat names keep the rest. */}
       <colgroup>
         <col />
-        <col className="w-[20%] sm:w-[12%]" />
-        <col className="max-sm:w-0! sm:w-[12%]" />
-        <col className="max-sm:w-0! sm:w-[12%]" />
-        <col className="w-[20%] sm:w-[12%]" />
+        <col className={colClass(StrongholdPeriod.Overall)} />
+        <col className={colClass(StrongholdPeriod.Day)} />
+        <col className={colClass(StrongholdPeriod.Week)} />
+        <col className={colClass(StrongholdPeriod.Month)} />
       </colgroup>
       <TableHeader>
         <TableRow>
           <TableHead>Stat</TableHead>
-          <TableHead className="text-right">Total</TableHead>
-          <TableHead className="text-right max-sm:hidden">Last 24h</TableHead>
-          <TableHead className="text-right max-sm:hidden">Last 7d</TableHead>
-          <TableHead className="text-right">Last 30d</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Overall)}>Total</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Day)}>Last 24h</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Week)}>Last 7d</TableHead>
+          <TableHead className={headClass(StrongholdPeriod.Month)}>Last 30d</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -304,38 +309,45 @@ export function ClanStrongholdStatsTable(
                 </TableCell>
                 {loading ? (
                   <>
-                    <PeriodSkeleton />
-                    <PeriodSkeleton hideOnMobile />
-                    <PeriodSkeleton hideOnMobile />
-                    <PeriodSkeleton />
+                    <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Overall)} />
+                    <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Day)} />
+                    <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Week)} />
+                    <PeriodSkeleton hideOnMobile={off(StrongholdPeriod.Month)} />
                   </>
                 ) : "sr" in row ? (
                   <>
-                    {COLUMN_PERIODS.map((period, i) => (
+                    {/* Not `period`: that name is the window a phone is
+                        showing, and shadowing it here would compare each
+                        column to itself. */}
+                    {STATS_PERIODS.map((p) => (
                       <PeriodCell
-                        key={period}
-                        cell={srCell(props.sr[period]?.[row.sr] ?? null)}
-                        hideOnMobile={i === 1 || i === 2}
+                        key={p}
+                        cell={srCell(props.sr[p]?.[row.sr] ?? null)}
+                        hideOnMobile={off(p)}
                       />
                     ))}
                   </>
                 ) : (
                   <>
-                    <PeriodCell cell={row.current(props.latest)} />
+                    <PeriodCell
+                      cell={row.current(props.latest)}
+                      hideOnMobile={off(StrongholdPeriod.Overall)}
+                    />
                     <PeriodCell
                       cell={
                         props.periods.h24 ? row.delta(props.periods.h24) : DASH
                       }
-                      hideOnMobile
+                      hideOnMobile={off(StrongholdPeriod.Day)}
                     />
                     <PeriodCell
                       cell={props.periods.d7 ? row.delta(props.periods.d7) : DASH}
-                      hideOnMobile
+                      hideOnMobile={off(StrongholdPeriod.Week)}
                     />
                     <PeriodCell
                       cell={
                         props.periods.d30 ? row.delta(props.periods.d30) : DASH
                       }
+                      hideOnMobile={off(StrongholdPeriod.Month)}
                     />
                   </>
                 )}

@@ -13,6 +13,7 @@ import {
   type StrongholdPeriods,
   type WinrateColorFn,
 } from "@/components/players/detail/overview/stronghold-stats-table";
+import { StatsPeriodSelect } from "@/components/stats-period-select";
 import { styles } from "@/lib/styles";
 import type { StrongholdStats } from "@unicum.gg/shared";
 
@@ -44,6 +45,9 @@ export function StrongholdTab({
         <PanelHeader>
           <PanelTitle>
             {nickname}&apos;s {label} stats
+            {/* Only with a table under it: over the "no data yet" message it
+                offered a choice that changed nothing. */}
+            {data.current !== null && <StatsPeriodSelect />}
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">
