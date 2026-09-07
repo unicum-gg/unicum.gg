@@ -26,15 +26,9 @@ const STALE = 20000;
 /**
  * How long a frame waits to be claimed before it lets itself go.
  *
- * **Nothing outside a viewer can release the sheet, and a reader can leave.**
- * It is put up by the outgoing vehicle's own teardown and taken down by the
- * incoming one, so a move that ends anywhere else, a tank the mirror does not
- * carry, a click through to the maps, closing the section, left the last tank
- * painted over whatever came next for the life of the page.
- *
- * Two windows rather than one: a viewer that is taking over says so as it
- * starts, and gets the long one to finish loading in. Nobody says so, and the
- * short one runs out.
+ * The backstop, not the mechanism: a frame is only ever put up for a viewer
+ * that has said it is coming, and this covers the one case where that viewer
+ * then leaves before it can claim what it asked for.
  */
 const UNCLAIMED = 2000;
 const CLAIMED = STALE;
@@ -47,6 +41,23 @@ type Held = {
 
 let sheet: HTMLCanvasElement | null = null;
 let held: Held | null = null;
+/**
+ * Whether the page being moved to is another vehicle's.
+ *
+ * **A frame is held for someone, or not at all.** The sheet exists to cover the
+ * moment between two vehicles, and nothing about the outgoing one says whether
+ * there is an incoming one: it is torn down the same way whether the reader
+ * picked another tank or left the section entirely. Held regardless, the last
+ * tank stayed painted over whatever came next, the home page, the maps, a
+ * player's profile, until the window above ran out.
+ *
+ * Read from the address rather than from the incoming viewer, which cannot be
+ * asked in time: the teardown and the next viewer's first line race, and which
+ * of them runs first depends on whether the router suspended. The address does
+ * not race. It is already the new one by the time a page is torn down, since
+ * that teardown is the transition committing.
+ */
+const TANK_PAGE = /^\/(?:[a-z]{2,4}\/)?tanks\/[^/]+/;
 let fading: ReturnType<typeof setTimeout> | null = null;
 /** Drops the sheet if no vehicle arrives to draw over it. */
 let abandoned: ReturnType<typeof setTimeout> | null = null;
@@ -84,6 +95,7 @@ function surfaceFor(): HTMLCanvasElement {
  * Keep this frame of the scene on screen, over the box it was drawn in.
  *
  * Called as a viewer is torn down, with the canvas it is about to dispose.
+ * Does nothing unless another viewer has said it is taking over.
  */
 export function hold(
   canvas: HTMLCanvasElement,
@@ -95,6 +107,9 @@ export function hold(
   // where this used to read its geometry from: the sheet was painted, lifted
   // and sized to nothing, so the room went out exactly as before.
   if (box.width < 1 || box.height < 1) return;
+  // Nobody is coming: this is a reader leaving the section, and the room they
+  // are leaving has no business following them onto the next page.
+  if (!TANK_PAGE.test(window.location.pathname)) return;
   const made = surfaceFor();
   if (fading) {
     clearTimeout(fading);
