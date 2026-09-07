@@ -25,12 +25,76 @@ const figtreeBold = fetch(
   "https://cdn.jsdelivr.net/fontsource/fonts/figtree@latest/latin-700-normal.ttf",
 ).then((res) => res.arrayBuffer());
 
-const unicumLogoDataUrl = readFile(
-  join(process.cwd(), "src/app/icon.svg"),
-  "utf-8",
-).then(
-  (svg) => `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`,
+// The shell every OG card shares: the same background, the same hairline border
+// and the same header height, so the generic card and the per-entity ones read
+// as one family rather than as two designs.
+export const OG_BG = "#161616";
+export const OG_BORDER = "1px solid #3F3F46";
+/** The brand header's own height: 20px of padding around a 48px logo, plus its
+ * bottom rule. Anything positioned against the header derives from this. */
+export const OG_HEADER_HEIGHT = 89;
+/** The crest reads in negative, so its body sits a shade above {@link OG_BG}. */
+export const OG_CREST_TINT = "#232327";
+/** The crest's own height/width, so a caller sizes it by height alone. */
+export const CREST_ASPECT = 1511.305 / 1104.586;
+
+// Read once per cold start. Both the wordmark's mark and the background crest
+// are derived from this one source, so they can never drift apart.
+const unicumIconSvg = readFile(join(process.cwd(), "src/app/icon.svg"), "utf-8");
+
+const svgDataUrl = (svg: string) =>
+  `data:image/svg+xml;base64,${Buffer.from(svg).toString("base64")}`;
+
+const unicumLogoDataUrl = unicumIconSvg.then(svgDataUrl);
+
+// The same mark, flattened into a background texture: the shield body takes a
+// tint a shade off the background and the mask strokes drop to the background
+// itself, so the drawing reads in negative instead of as a second logo beside
+// the wordmark.
+const unicumCrestDataUrl = unicumIconSvg.then((svg) =>
+  svgDataUrl(
+    svg
+      .replaceAll('fill="#f25322"', `fill="${OG_BG}"`)
+      .replaceAll('fill="#fff"', `fill="${OG_CREST_TINT}"`),
+  ),
 );
+
+export function loadOgCrest(): Promise<string> {
+  return unicumCrestDataUrl;
+}
+
+// Satori exposes no way to measure a string, so a card that wants to fit text
+// to a width has to estimate it. Per-character widths in em for Figtree bold,
+// bucketed by how wide the glyph actually is, then a margin on top so an
+// underestimate can never overflow the box. Measured against a rendered card:
+// "Glossary" at 108px draws 426px wide and this returns 468px, so the estimate
+// sits about a tenth over the truth rather than under it.
+const NARROW_GLYPHS = new Set([..."ijltfrI.,;:'!|()[]/ "]);
+const WIDE_GLYPHS = new Set([..."mwMW@"]);
+const WIDTH_MARGIN = 1.12;
+
+export function estimateTextWidth(text: string, fontSize: number): number {
+  let em = 0;
+  for (const char of text) {
+    if (NARROW_GLYPHS.has(char)) em += 0.3;
+    else if (WIDE_GLYPHS.has(char)) em += 0.85;
+    else if (char >= "A" && char <= "Z") em += 0.62;
+    else em += 0.53;
+  }
+  return em * WIDTH_MARGIN * fontSize;
+}
+
+/** The largest of `sizes` that fits `text` on one line, or the smallest. */
+export function fitTextSize(
+  text: string,
+  width: number,
+  sizes: readonly number[],
+): number {
+  return (
+    sizes.find((size) => estimateTextWidth(text, size) <= width) ??
+    sizes[sizes.length - 1]
+  );
+}
 
 // The hangar-floor scene WG's tankopedia detail page uses (the JPEG variant,
 // since Satori can't decode WebP). Constant across tanks, so we memoize per
