@@ -176,6 +176,15 @@ function NavigationProgressInner() {
   return (
     <div
       aria-hidden
+      // A dialog open on arrival (a moderator's correction link) marks
+      // everything behind it with the `aria-hidden` library's own
+      // `data-aria-hidden`, this bar included. Everything else it marks belongs
+      // to a subtree that is hydrated by then; this one is not, because
+      // `useSearchParams` puts it behind its own boundary, so React finds the
+      // attribute when it finally gets here and reports a mismatch on a bar
+      // that is decorative, empty and already hidden. There is no timing that
+      // avoids it, since the boundary resolves whenever its payload does.
+      suppressHydrationWarning
       className="nav-progress pointer-events-none fixed inset-x-0 top-0 z-100 h-0.5"
       style={{ opacity: visible ? 1 : 0 }}
     >
