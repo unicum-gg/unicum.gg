@@ -1,11 +1,12 @@
 "use client";
 
-import { type RefObject, useEffect, useRef } from "react";
+import { type RefObject, useEffect, useRef, useState } from "react";
 
 import { AimDial } from "@/components/tanks/detail/viewer/aim-dial";
 import { ArmourReadout } from "@/components/tanks/detail/viewer/readout";
 import type { HeroShell } from "@/components/tanks/detail/viewer/shell-rules";
 import { HERO_COLUMN } from "@/components/tanks/detail/viewer/column";
+import { VehicleWaiting } from "@/components/tanks/detail/viewer/waiting";
 import { Presentation } from "@/components/tanks/detail/viewer/presentation";
 import { ViewerControls } from "@/components/tanks/detail/viewer/controls";
 import { openStage } from "@/components/tanks/detail/viewer/open";
@@ -82,6 +83,14 @@ export function TankViewer({
   column?: RefObject<HTMLElement | null>;
 }) {
   const { fitted, opening } = useHeroLink(builds);
+  /**
+   * Whether the mirror turned out not to carry this vehicle.
+   *
+   * The band says a vehicle is on its way, so it has to be told when one is
+   * not: the render fades up in its place and a line under it still claiming
+   * to be loading would be the page contradicting itself.
+   */
+  const [absent, setAbsent] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
   /**
    * The outgoing view, held still while the new one takes its place.
@@ -170,7 +179,10 @@ export function TankViewer({
         opening,
         applyStance: aiming.applyStance,
         takeAim,
-        onAbsent,
+        onAbsent: () => {
+          setAbsent(true);
+          onAbsent?.();
+        },
         column,
       },
       closing,
@@ -248,6 +260,7 @@ export function TankViewer({
         aria-hidden
         className="pointer-events-none absolute inset-0 h-full w-full opacity-0"
       />
+      <VehicleWaiting show={!shown && !absent} />
       {shown ? (
         // **The panels are reading, so they keep to the column.** The picture
         // runs to the edges of the window and they do not: left against the
