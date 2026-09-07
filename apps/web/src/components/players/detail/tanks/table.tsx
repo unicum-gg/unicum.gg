@@ -39,6 +39,7 @@ import { TankFilterBar } from "@/components/tanks/tank-filter-bar";
 import { type RangeColumn, useTankFilters } from "@/hooks/use-tank-filters";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GlossaryHeadTooltip } from "@/components/glossary/head-tooltip";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 
@@ -140,7 +141,7 @@ function SortableHead({
     <TableHead
       className={cn(
         "p-0",
-        hideOnMobile && "hidden sm:table-cell",
+        hideOnMobile && styles.hiddenColumn,
         headClassName,
       )}
     >
@@ -291,7 +292,13 @@ export function PlayerTanksTable({
           </p>
         ) : (
           <>
-          <Table className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
+          {/* `rail`: the five columns a phone keeps still come to more than its
+              width, and the vehicle names are deliberately never wrapped, so
+              the list is read by scrolling sideways and needs to say so. */}
+          <Table
+            rail
+            className="my-0! [&_td]:py-1.5! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!"
+          >
             <TableHeader>
               <TableRow>
                 <SortableHead
@@ -382,14 +389,14 @@ export function PlayerTanksTable({
                         "bg-fd-secondary/40 [&>td:first-child]:border-l-2 [&>td:first-child]:border-l-brand",
                     )}
                   >
-                    <TableCell className="hidden text-center sm:table-cell">
+                    <TableCell className={cn("text-center", styles.hiddenColumn)}>
                       {r.nation ? (
                         <NationFlag nation={r.nation} region={region} />
                       ) : (
                         <span className="text-muted-foreground">—</span>
                       )}
                     </TableCell>
-                    <TableCell className="hidden text-center sm:table-cell">
+                    <TableCell className={cn("text-center", styles.hiddenColumn)}>
                       {r.type ? (
                         <VehicleTypeIcon type={r.type} premium={isPremium} />
                       ) : (
@@ -398,7 +405,8 @@ export function PlayerTanksTable({
                     </TableCell>
                     <TableCell
                       className={cn(
-                        "hidden text-center font-medium sm:table-cell",
+                        "text-center font-medium",
+                        styles.hiddenColumn,
                         isPremium && "text-[#FAB81B]",
                       )}
                     >
@@ -451,7 +459,7 @@ export function PlayerTanksTable({
                             "tabular-nums",
                             c.align === "center" && "text-center",
                             c.align === "end" && "text-right",
-                            c.hideOnMobile && "hidden sm:table-cell",
+                            c.hideOnMobile && styles.hiddenColumn,
                             className,
                           )}
                         >

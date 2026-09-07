@@ -18,13 +18,10 @@ import {
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { GlossaryLabel } from "@/components/glossary/label";
 import ROUTES from "@/constants/routes";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
-import {
-  DASH,
-  sessionIntFmt as intFmt,
-  visibleSessionColumns,
-} from "./columns";
+import { DASH, sessionIntFmt as intFmt, visibleSessionColumns } from "./columns";
 
 const dec1Fmt = new Intl.NumberFormat("en-US", {
   minimumFractionDigits: 1,
@@ -59,24 +56,35 @@ export function PlayerSessionsTable({
       {/* The same cell rhythm as the tank list beside it: no vertical margin
           from the prose styles, tighter rows, and the first and last columns
           padded off the panel edge. */}
-      <Table className="my-0! [&_td]:py-1.5! [&_th]:py-2! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!">
+      {/* `rail`: even down to five columns the row is wider than a phone, and a
+          hidden scrollbar says nothing about what is past the right edge. */}
+      <Table
+        rail
+        className="my-0! [&_td]:py-1.5! [&_th]:py-2! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!"
+      >
         <TableHeader>
           <TableRow>
             <TableHead className="w-[1%] whitespace-nowrap">Date</TableHead>
             <TableHead className="text-end">
               <GlossaryLabel>Battles</GlossaryLabel>
             </TableHead>
-            <TableHead className="text-end whitespace-nowrap">
+            <TableHead className={cn("text-end whitespace-nowrap", styles.hiddenColumn)}>
               <GlossaryLabel>Avg tier</GlossaryLabel>
             </TableHead>
-            <TableHead className="text-end">Tanks</TableHead>
+            <TableHead className={cn("text-end", styles.hiddenColumn)}>Tanks</TableHead>
             {columns.map((c) => {
               // The rating column's heading follows the reader's metric, so it
               // is looked up on what it currently says ("WN8"), never on the
               // column's own generic name.
               const heading = c.header ? c.header(metric) : c.label;
               return (
-                <TableHead key={c.key} className="text-end whitespace-nowrap">
+                <TableHead
+                  key={c.key}
+                  className={cn(
+                    "text-end whitespace-nowrap",
+                    c.hideOnMobile && styles.hiddenColumn,
+                  )}
+                >
                   <GlossaryLabel label={heading} tip={c.tip}>
                     {heading}
                   </GlossaryLabel>
@@ -109,16 +117,22 @@ export function PlayerSessionsTable({
                   <TableCell className="text-end">
                     {intFmt.format(s.battles)}
                   </TableCell>
-                  <TableCell className="text-end">
+                  <TableCell className={cn("text-end", styles.hiddenColumn)}>
                     {s.avgTier == null ? DASH : dec1Fmt.format(s.avgTier)}
                   </TableCell>
-                  <TableCell className="text-end">{s.tanks}</TableCell>
+                  <TableCell className={cn("text-end", styles.hiddenColumn)}>
+                    {s.tanks}
+                  </TableCell>
                   {columns.map((c) => {
                     const cell = c.cell(s, metric);
                     return (
                       <TableCell
                         key={c.key}
-                        className={cn("text-end", cell.className)}
+                        className={cn(
+                          "text-end",
+                          c.hideOnMobile && styles.hiddenColumn,
+                          cell.className,
+                        )}
                       >
                         {cell.node}
                       </TableCell>
@@ -156,14 +170,21 @@ export function PlayerSessionsTable({
                       <TableCell className="text-end">
                         {intFmt.format(v.battles)}
                       </TableCell>
-                      <TableCell />
-                      <TableCell />
+                      {/* The two the breakdown has nothing to put in (a vehicle
+                          is one tier and one tank), hidden with the columns
+                          they belong to so the row keeps its shape. */}
+                      <TableCell className={styles.hiddenColumn} />
+                      <TableCell className={styles.hiddenColumn} />
                       {columns.map((c) => {
                         const cell = c.cell(v, metric);
                         return (
                           <TableCell
                             key={c.key}
-                            className={cn("text-end", cell.className)}
+                            className={cn(
+                              "text-end",
+                              c.hideOnMobile && styles.hiddenColumn,
+                              cell.className,
+                            )}
                           >
                             {cell.node}
                           </TableCell>

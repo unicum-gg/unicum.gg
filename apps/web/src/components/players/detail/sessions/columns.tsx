@@ -41,6 +41,16 @@ export type SessionColumn = {
   /** The rating column follows the reader's metric, so its header moves. */
   header?: (metric: RatingMetric) => string;
   cell: (s: SessionStats, metric: RatingMetric) => SessionCell;
+  /**
+   * Left out below `sm`.
+   *
+   * All fourteen columns came to 1,359px against a phone's 390, so the whole
+   * table was read three and a half screens at a time and the date a row is
+   * about was gone by the third one. What stays is what a session is judged on
+   * (how much was played, how it went, how much damage): the rest is detail
+   * that keeps its place on any screen wide enough to show it.
+   */
+  hideOnMobile?: boolean;
   /** Whether the column has anything to say about this set of sessions. A
    * counter added to the snapshots after the fact only exists from that day on,
    * so the whole column would otherwise be dashes for a history recorded before
@@ -95,12 +105,14 @@ export const SESSION_COLUMNS: SessionColumn[] = [
   {
     key: "avgFrags",
     label: "Avg frags",
+    hideOnMobile: true,
     tip: "Enemies destroyed per battle",
     cell: (s) => num(s.avgFrags, dec2Fmt),
   },
   {
     key: "damageRatio",
     label: "Damage ratio",
+    hideOnMobile: true,
     tip: "Damage caused over damage received",
     cell: (s) => num(s.damageRatio, dec2Fmt),
     has: (s) => s.damageRatio != null,
@@ -108,6 +120,7 @@ export const SESSION_COLUMNS: SessionColumn[] = [
   {
     key: "kd",
     label: "Destruction ratio",
+    hideOnMobile: true,
     tip: "Enemies destroyed over vehicles lost",
     cell: (s) => num(s.kd, dec2Fmt),
     has: (s) => s.kd != null,
@@ -115,6 +128,7 @@ export const SESSION_COLUMNS: SessionColumn[] = [
   {
     key: "survivalRate",
     label: "Battles survived",
+    hideOnMobile: true,
     cell: (s) => ({
       node:
         s.survivalRate == null ? DASH : `${pct1Fmt.format(s.survivalRate * 100)}%`,
@@ -124,18 +138,21 @@ export const SESSION_COLUMNS: SessionColumn[] = [
   {
     key: "avgSpotted",
     label: "Avg spotted",
+    hideOnMobile: true,
     tip: "Enemies spotted per battle",
     cell: (s) => num(s.avgSpotted, dec2Fmt),
   },
   {
     key: "avgDefense",
     label: "Base defense",
+    hideOnMobile: true,
     tip: "Defence points per battle",
     cell: (s) => num(s.avgDefense, dec2Fmt),
   },
   {
     key: "avgXp",
     label: "Avg XP",
+    hideOnMobile: true,
     cell: (s) => num(s.avgXp, intFmt),
     has: (s) => s.avgXp != null,
   },

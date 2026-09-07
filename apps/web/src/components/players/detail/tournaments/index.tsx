@@ -76,7 +76,7 @@ export function TournamentsTab({
         </PanelHeader>
         <PanelContent className="p-0">
           {loading ? (
-            <TableSkeleton columns={TOURNAMENTS_SKELETON_COLUMNS} rows={10} />
+            <TableSkeleton rail columns={TOURNAMENTS_SKELETON_COLUMNS} rows={10} />
           ) : entries.length === 0 ? (
             <p className={cn(styles.mutedDescription, "p-4")}>
               This account has never entered a Wargaming tournament. They run

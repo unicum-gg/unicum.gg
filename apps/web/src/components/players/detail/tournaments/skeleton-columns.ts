@@ -6,9 +6,9 @@ import type { SkeletonColumn } from "@/components/table-skeleton";
 export const TOURNAMENTS_SKELETON_COLUMNS: SkeletonColumn[] = [
   { width: "w-24" }, // Date
   { width: "w-64" }, // Tournament
-  { width: "w-20" }, // Mode
-  { width: "w-10", align: "right" }, // Tier
-  { width: "w-12", align: "right" }, // Format
+  { width: "w-20", hideOnMobile: true }, // Mode
+  { width: "w-10", align: "right", hideOnMobile: true }, // Tier
+  { width: "w-12", align: "right", hideOnMobile: true }, // Format
   { width: "w-32" }, // Team
   { width: "w-12", align: "right" }, // Result
 ];

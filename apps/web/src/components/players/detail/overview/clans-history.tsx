@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { styles } from "@/lib/styles";
 import { cn } from "@/lib/utils";
 import type { Region } from "@unicum.gg/wargaming";
 import type { ClanStint, PlayerClanHistoryFull } from "@unicum.gg/shared";
@@ -134,7 +135,7 @@ function SortableHead({
       : CaretDownIcon
     : CaretUpDownIcon;
   return (
-    <TableHead className={cn("p-0", hideOnMobile && "hidden sm:table-cell")}>
+    <TableHead className={cn("p-0", hideOnMobile && styles.hiddenColumn)}>
       <button
         type="button"
         onClick={() => onToggle(column)}
@@ -218,7 +219,14 @@ export function PlayerClansHistory(
                 nowMs={nowMs}
               />
             </div>
-            <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!">
+            {/* `rail`: a date is one thing or it is nothing, so the three date
+                columns never wrap. On a phone that is wider than the screen,
+                and scrolling it is the honest answer: wrapping turned
+                "Nov 30, 2024" into three lines and every row into 130px. */}
+            <Table
+              rail
+              className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child>button]:pl-4! [&_thead_th:last-child>button]:pr-3!"
+            >
               <TableHeader>
               <TableRow>
                 <SortableHead column={SortColumn.Tag} state={sort} onToggle={toggleSort}>
@@ -269,7 +277,7 @@ export function PlayerClansHistory(
                     <TableCell>
                       <Link
                         href={clanHref}
-                        className="flex items-center gap-2 hover:underline"
+                        className="flex items-center gap-2 whitespace-nowrap hover:underline"
                       >
                         <Image
                           src={s.clan.emblem}
@@ -281,20 +289,20 @@ export function PlayerClansHistory(
                         {s.clan.name}
                       </Link>
                     </TableCell>
-                    <TableCell className="hidden sm:table-cell">
+                    <TableCell className={styles.hiddenColumn}>
                       {prettyRole(s.role)}
                     </TableCell>
-                    <TableCell className="hidden tabular-nums sm:table-cell">
+                    <TableCell className={cn("whitespace-nowrap tabular-nums", styles.hiddenColumn)}>
                       {format(s.joinedAt, DAY_FORMAT)}
                     </TableCell>
-                    <TableCell className="tabular-nums">
+                    <TableCell className="whitespace-nowrap tabular-nums">
                       {s.leftAt ? (
                         format(s.leftAt, DAY_FORMAT)
                       ) : (
                         <span className="text-muted-foreground">current</span>
                       )}
                     </TableCell>
-                    <TableCell className="text-right tabular-nums">
+                    <TableCell className="text-right whitespace-nowrap tabular-nums">
                       {formatDuration(s.joinedAt, s.leftAt)}
                     </TableCell>
                   </TableRow>
@@ -325,7 +333,13 @@ function ClansHistoryLoading({ nickname }: { nickname: string }) {
         <div className="p-4">
           <Skeleton className="h-19 w-full rounded-md" />
         </div>
-        <Table className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-3!">
+        {/* `rail` like the loaded table: without it the placeholder is a plain
+            scrolling box that fits a phone, and the rows it makes way for
+            arrive wider than the screen inside a rail with arrow buttons. */}
+        <Table
+          rail
+          className="my-0! border-t border-fd-border [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-3! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-3!"
+        >
           <TableHeader>
             <TableRow>
               {HEADS.map((h, i) => (
@@ -333,7 +347,7 @@ function ClansHistoryLoading({ nickname }: { nickname: string }) {
                   key={h}
                   className={cn(
                     "px-3 py-2",
-                    (i === 2 || i === 3) && "hidden sm:table-cell",
+                    (i === 2 || i === 3) && styles.hiddenColumn,
                     i === 5 && "text-right",
                   )}
                 >
@@ -354,10 +368,10 @@ function ClansHistoryLoading({ nickname }: { nickname: string }) {
                     <Skeleton className="h-4 w-32" />
                   </div>
                 </TableCell>
-                <TableCell className="hidden sm:table-cell">
+                <TableCell className={styles.hiddenColumn}>
                   <Skeleton className="h-4 w-20" />
                 </TableCell>
-                <TableCell className="hidden sm:table-cell">
+                <TableCell className={styles.hiddenColumn}>
                   <Skeleton className="h-4 w-20" />
                 </TableCell>
                 <TableCell>

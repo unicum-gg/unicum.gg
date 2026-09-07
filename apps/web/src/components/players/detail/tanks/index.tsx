@@ -68,7 +68,7 @@ export function TanksTab({
               />
             )}
             {loading ? (
-              <TableSkeleton columns={TANKS_SKELETON_COLUMNS} rows={12} />
+              <TableSkeleton rail columns={TANKS_SKELETON_COLUMNS} rows={12} />
             ) : (
               <PlayerTanksTable
                 region={region}

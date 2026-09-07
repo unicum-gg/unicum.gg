@@ -88,7 +88,7 @@ export function SessionsTab({
         </PanelHeader>
         <PanelContent className="p-0">
           {loading ? (
-            <TableSkeleton columns={SESSIONS_SKELETON_COLUMNS} rows={10} />
+            <TableSkeleton rail columns={SESSIONS_SKELETON_COLUMNS} rows={10} />
           ) : sessions.length === 0 ? (
             <p className={cn(styles.mutedDescription, "p-4")}>
               No session yet. They appear once this account has been sampled

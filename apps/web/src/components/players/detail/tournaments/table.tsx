@@ -20,6 +20,8 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import ROUTES from "@/constants/routes";
+import { styles } from "@/lib/styles";
+import { cn } from "@/lib/utils";
 import { TournamentStatusBadge } from "@/components/tournaments/status-badge";
 import {
   TOURNAMENT_GAME_MODE_LABEL,
@@ -35,6 +37,11 @@ const tierBandOrDash = (from: number | null, to: number | null) =>
   tierBand(from, to) ?? DASH;
 
 const DASH = "—";
+
+// The three that step aside on a phone. What identifies an entry is when it
+// was, what it was called, who it was played with and how it ended; the mode,
+// the tier band and the team size only qualify a tournament already found.
+const HIDE = styles.hiddenColumn;
 
 const dateFmt = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
@@ -104,14 +111,19 @@ export function PlayerTournamentsTable({
   return (
     <TooltipProvider delayDuration={150}>
       {/* The same cell rhythm as the sessions and tank tables beside it. */}
-      <Table className="my-0! [&_td]:py-1.5! [&_th]:py-2! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!">
+      <Table
+        rail
+        className="my-0! [&_td]:py-1.5! [&_th]:py-2! [&_tbody_td:first-child]:pl-4! [&_tbody_td:last-child]:pr-4! [&_thead_th:first-child]:pl-4! [&_thead_th:last-child]:pr-4!"
+      >
         <TableHeader>
           <TableRow>
             <TableHead className="w-[1%] whitespace-nowrap">Date</TableHead>
             <TableHead>Tournament</TableHead>
-            <TableHead className="whitespace-nowrap">Mode</TableHead>
-            <TableHead className="text-end">Tier</TableHead>
-            <TableHead className="text-end whitespace-nowrap">Format</TableHead>
+            <TableHead className={cn("whitespace-nowrap", HIDE)}>Mode</TableHead>
+            <TableHead className={cn("text-end", HIDE)}>Tier</TableHead>
+            <TableHead className={cn("text-end whitespace-nowrap", HIDE)}>
+              Format
+            </TableHead>
             <TableHead>Team</TableHead>
             <TableHead className="text-end whitespace-nowrap">Result</TableHead>
           </TableRow>
@@ -135,19 +147,29 @@ export function PlayerTournamentsTable({
                 </Link>
                 <TournamentStatusBadge status={e.status} className="ml-2" />
               </TableCell>
-              <TableCell className="whitespace-nowrap text-fd-muted-foreground">
+              <TableCell
+                className={cn(
+                  "whitespace-nowrap text-fd-muted-foreground",
+                  HIDE,
+                )}
+              >
                 {e.gameModes.map((m) => TOURNAMENT_GAME_MODE_LABEL[m]).join(", ") ||
                   DASH}
               </TableCell>
-              <TableCell className="text-end tabular-nums">
+              <TableCell className={cn("text-end tabular-nums", HIDE)}>
                 {tierBandOrDash(e.tierFrom, e.tierTo)}
               </TableCell>
-              <TableCell className="text-end whitespace-nowrap tabular-nums">
+              <TableCell
+                className={cn("text-end whitespace-nowrap tabular-nums", HIDE)}
+              >
                 <FormatCell min={e.minPlayersInTeam} max={e.maxPlayersInTeam} />
               </TableCell>
               <TableCell>
                 <span className="flex items-center gap-1.5">
-                  <span className="truncate">{e.teamTitle}</span>
+                  {/* Capped on a phone, where a team called after a sentence
+                      would push the result off the edge on its own. It already
+                      truncates, so the cap only decides where. */}
+                  <span className="truncate max-sm:max-w-20">{e.teamTitle}</span>
                   {e.isCaptain && (
                     <Tooltip>
                       <TooltipTrigger asChild>
