@@ -147,12 +147,6 @@ export async function openStage(
     skin: from.skin,
     live,
     nudge: handles.nudge,
-    // The studio goes up as soon as it stands, so the band is never a dark
-    // rectangle with a title over it while the vehicle is on its way.
-    room: () => handles.setShown(true),
-    // The room, photographed with nothing in it, so the vehicle can be
-    // dissolved over it rather than appearing in it between two frames.
-    arriving: hold,
   });
   if (!made) {
     from.onAbsent?.();
@@ -339,10 +333,6 @@ export async function openStage(
   wake(2000);
   draw();
   handles.setShown(true);
-  // The vehicle has been drawn once under the photograph of the empty room
-  // taken just before it was shown, so the two can now be crossed: the fade
-  // the arrival used to get from the canvas itself, given back to it.
-  dissolve();
   // **And the camera stays exactly where it was.** Standing where the last
   // vehicle was seen from is what makes the two floors land on each other
   // while the tanks cross; sending it on to this vehicle's own framing

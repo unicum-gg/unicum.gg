@@ -52,8 +52,6 @@ export async function buildStage({
   skin,
   live,
   nudge,
-  room,
-  arriving,
 }: {
   surface: HTMLCanvasElement;
   THREE: typeof import("three");
@@ -64,26 +62,6 @@ export async function buildStage({
   at: string;
   /** The mirror everything hangs off, pinned to the build being read. */
   root: string;
-  /**
-   * Called once the room is standing, before the vehicle has been fetched.
-   *
-   * **A studio with nothing in it is still an answer.** The band was left
-   * empty until the whole vehicle had arrived, which on a cold visit is
-   * several seconds of a dark rectangle with a title over it: nothing said a
-   * tank was coming, so readers read it as broken. The floor and its grid cost
-   * one frame and are already built by then.
-   */
-  room?: () => void;
-  /**
-   * Called with the room on screen and the vehicle about to join it.
-   *
-   * **The fade the arrival used to have.** It was the canvas coming up from
-   * nothing, which worked while nothing was shown until the vehicle was ready.
-   * The room is shown first now, so that fade is spent on an empty studio and
-   * the tank simply appeared in it. This is where the room is photographed so
-   * the vehicle can be dissolved over it instead.
-   */
-  arriving?: () => Promise<void>;
   /** The modules the reader has picked, where they have picked any. */
   fitted?: Mounted;
   /** The 3D style being worn, by the folder the client publishes it under. */
@@ -246,21 +224,16 @@ export async function buildStage({
       // Shown as soon as the studio is lit, which is before the meshes are
       // fetched: the reader waits in the room the vehicle arrives into rather
       // than in a void, and the room does not change under them when it does.
+      // **Sized before anything is drawn into it.** `setSize` is the loop's
+      // own observer and the loop does not exist yet, so a frame taken before
+      // it lands at the canvas's default three hundred by one hundred and
+      // fifty, stretched across a band eight times wider.
       ready: () => {
-        // **Sized here, because nothing has sized it yet.** The loop's own
-        // observer does it, and the loop does not exist until the vehicle is
-        // built: rendered before that, the room was drawn at the canvas's
-        // default three hundred by one hundred and fifty and stretched across
-        // the band, which is a blurred floor whose gradient lands nowhere near
-        // where it belongs.
         const { clientWidth: w, clientHeight: h } = surface;
-        if (w && h) {
-          renderer.setSize(w, h, false);
-          camera.aspect = w / h;
-          camera.updateProjectionMatrix();
-        }
-        renderer.render(scene, camera);
-        room?.();
+        if (!w || !h) return;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
       },
       // **A 3D style is the same vehicle from another folder.** It is a
       // complete set of pieces with textures of its own, published beside
@@ -287,7 +260,6 @@ export async function buildStage({
   // answers an environment map would wash out. Nothing here draws anything
   // else yet, but leaving it off is what left the vehicle lit by the
   // renderer's defaults, a uniform gold with no reflection in it.
-  await arriving?.();
   built.show(true);
 
   // The armour, on the same mounts, so a turret aimed in one view is aimed
