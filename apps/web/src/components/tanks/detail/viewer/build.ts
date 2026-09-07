@@ -6,7 +6,6 @@ import type { loadArmour } from "@/services/tank-viewer/armour";
 import type { loadVisual, Mounted } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
 import { hangar } from "@/components/tanks/detail/viewer/hangar";
-import { MIRROR } from "@/components/tanks/detail/viewer/mirror";
 import { SKIN_FOLDER } from "@/services/tank-viewer/styles";
 
 // Putting the room and the vehicle together.
@@ -48,6 +47,7 @@ export async function buildStage({
   loadVisual,
   loadArmour,
   at,
+  root,
   fitted,
   skin,
   live,
@@ -60,6 +60,8 @@ export async function buildStage({
   loadArmour: typeof import("@/services/tank-viewer/armour").loadArmour;
   /** Where this vehicle's geometry sits in the mirror. */
   at: string;
+  /** The mirror everything hangs off, pinned to the build being read. */
+  root: string;
   /** The modules the reader has picked, where they have picked any. */
   fitted?: Mounted;
   /** The 3D style being worn, by the folder the client publishes it under. */
@@ -121,7 +123,7 @@ export async function buildStage({
   // the same place and the tank comes out as a heap with its tracks laid
   // over its roof.
   const collision: Collision | null = await fetch(
-    `${MIRROR}/vehicles/${at}/collision.json`,
+    `${root}/vehicles/${at}/collision.json`,
   )
     .then((r) => (r.ok ? r.json() : null))
     .catch(() => null);
@@ -218,7 +220,7 @@ export async function buildStage({
     built = await loadVisual({
       renderer,
       scene,
-      root: MIRROR,
+      root,
       // **A 3D style is the same vehicle from another folder.** It is a
       // complete set of pieces with textures of its own, published beside
       // the vehicle, so wearing one is a different path and nothing else.

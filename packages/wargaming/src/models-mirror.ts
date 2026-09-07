@@ -46,6 +46,25 @@ export function modelsRoot(ref: string = MODELS_BRANCH): string {
   return `https://raw.githubusercontent.com/${MODELS_REPO}/${ref}`;
 }
 
+/**
+ * The same mirror, read through a CDN that will actually cache it.
+ *
+ * **GitHub serves the raw files with `max-age=300`.** Five minutes, on geometry
+ * that changes when the game patches: a vehicle is eleven megabytes across
+ * thirty files, so a reader who looks at five tanks and comes back to the first
+ * downloads it again. jsDelivr fronts the same repository with a week, sends the
+ * CORS and timing headers raw does not, and names a `.glb` as one rather than as
+ * an octet stream. The bytes are identical, which was checked rather than
+ * assumed.
+ *
+ * **Pin `ref` to a commit and the URL is immutable**, which is the whole point:
+ * a week of caching is only safe when a patch changes the address. Given a
+ * branch it is still a week, and a patch takes that long to reach a reader.
+ */
+export function modelsCdn(ref: string = MODELS_BRANCH): string {
+  return `https://cdn.jsdelivr.net/gh/${MODELS_REPO}@${ref}`;
+}
+
 /** Raw-content URL for `path` on the wot.models mirror. */
 export function modelUrl(path: string, ref: string = MODELS_BRANCH): string {
   return `https://raw.githubusercontent.com/${MODELS_REPO}/${ref}/${path}`;

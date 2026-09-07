@@ -9,7 +9,7 @@ import { fitVehicle, type Fitting } from "@/components/tanks/detail/viewer/fitti
 import { VIEW_DISSOLVE } from "@/components/tanks/detail/viewer/framing";
 import { inherited, release } from "@/components/tanks/detail/viewer/handover";
 import { runStage, type Page } from "@/components/tanks/detail/viewer/loop";
-import { carried } from "@/components/tanks/detail/viewer/mirror";
+import { mirror } from "@/components/tanks/detail/viewer/mirror";
 
 /**
  * How long the hero waits for the last of a vehicle's textures.
@@ -86,7 +86,11 @@ export async function openStage(
     import("@/services/tank-viewer"),
   ]);
   handles.setShown(false);
-  const at = (await carried())[from.code];
+  // The address and the index together: the address is pinned to the commit
+  // the index was read at, so a patch landing mid-session cannot pair one
+  // vehicle's manifest with another build's meshes.
+  const { root, vehicles } = await mirror();
+  const at = vehicles[from.code];
   if (!live()) return;
   // **Read after the first await, not before it.** Moving between vehicles
   // is a router transition: the new page is rendered while the old one is
@@ -112,6 +116,7 @@ export async function openStage(
     loadVisual,
     loadArmour,
     at,
+    root,
     fitted: from.fitted,
     skin: from.skin,
     live,
@@ -150,6 +155,7 @@ export async function openStage(
       gun,
       first,
       at,
+      root,
       wake,
       live,
       THREE,

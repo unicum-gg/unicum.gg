@@ -9,7 +9,6 @@ import type { loadVisual } from "@/services/tank-viewer";
 import type { Collision } from "@/services/tank-viewer/armour/plates";
 import { skinNames, wardrobeFor } from "@/services/tank-viewer/styles";
 import { DISTANCE } from "@/components/tanks/detail/viewer/framing";
-import { MIRROR } from "@/components/tanks/detail/viewer/mirror";
 import type { Rig } from "@/components/tanks/detail/viewer/rig";
 import { View } from "@/components/tanks/detail/viewer/views";
 
@@ -88,6 +87,7 @@ export function fitVehicle(
     gun,
     first,
     at,
+    root,
     wake,
     live,
     THREE,
@@ -109,6 +109,8 @@ export function fitVehicle(
     first: (prefix: string) => string | undefined;
     /** Where this vehicle's geometry sits in the mirror. */
     at: string;
+    /** The mirror everything hangs off, pinned to the build being read. */
+    root: string;
     wake: (ms?: number) => void;
     live: () => boolean;
     THREE: typeof import("three");
@@ -269,18 +271,18 @@ export function fitVehicle(
   if (!page.skin) {
     page.setCuts(built.skins);
   } else {
-    void fetch(`${MIRROR}/vehicles/${at}/model.json`)
+    void fetch(`${root}/vehicles/${at}/model.json`)
       .then((r) => (r.ok ? r.json() : null))
       .then((bare: { skins?: string[] } | null) => {
         if (live() && bare?.skins?.length) page.setCuts(bare.skins);
       })
       .catch(() => {});
   }
-  void skinNames(MIRROR).then((known) => {
+  void skinNames(root).then((known) => {
     if (live()) page.setCutNames(known);
   });
   if (built.styles) {
-    void wardrobeFor(MIRROR, at, built.styles).then((offered) => {
+    void wardrobeFor(root, at, built.styles).then((offered) => {
       if (!live()) return;
       page.setWardrobe(offered);
       // **The paint the link named, put on as the wardrobe arrives.** It
