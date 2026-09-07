@@ -60,18 +60,40 @@ export type PaintedMaterial = { uniforms: CamoUniforms; part: string; piece: str
  * by the amounts the client asks for, and nothing else about the material
  * changes.
  */
-export function withDetail(material: THREE.MeshStandardMaterial, values: Record<string, unknown>) {
+export function withDetail(
+  material: THREE.MeshStandardMaterial,
+  values: Record<string, unknown>,
+  /**
+   * The client's own detail map, where the mirror carries it.
+   *
+   * **The grain below was only ever a stand-in.** When it was written the file
+   * was in no package we could find, so the layer was rebuilt from a 256 pixel
+   * procedural noise. The extraction brings the real one back now: 2048 square,
+   * four channels, one file shared by every vehicle in the game. Its red
+   * channel is the fine one, measured rather than assumed: six times its energy
+   * is lost to a downsample where the alpha's is barely halved, which is the
+   * difference between a micro-grain and the coarse mask beside it.
+   */
+  map?: THREE.Texture | null,
+) {
   const tiling = values?.g_detailUVTiling;
   const gloss = Number(values?.g_detailPowerGloss ?? 0);
   const albedo = Number(values?.g_detailPowerAlbedo ?? 0);
   if (!Array.isArray(tiling) || !(gloss > 0 || albedo > 0)) return material;
   material.userData.detail = {
-    map: { value: GRAIN },
+    map: { value: map ?? GRAIN },
     tiling: { value: new THREE.Vector2(tiling[0] || 1, tiling[1] || 1) },
     gloss: { value: values.g_detailPowerGloss ?? 0 },
     albedo: { value: values.g_detailPowerAlbedo ?? 0 },
     // How far the layer carries, in metres. The client calls it
     // `g_detailPower` and gives 7 or 8 for a tank.
+    // **A close-up layer by nature, not by this number.** The hero frames a
+    // vehicle from 19.8 m and this is 7, so at rest the layer contributes
+    // nothing: only a reader who has zoomed in sees it at all. Carrying it to
+    // 40 changes the framed picture by 0.89 levels of grey, measured, because
+    // at that range one texel of a grain tiled four times across a panel is far
+    // under a screen pixel and mipmapping averages it to flat. So the short
+    // reach costs nothing and is left alone.
     reach: { value: values.g_detailPower || 8 },
   };
   return compile(material);
@@ -246,13 +268,13 @@ export function compile(material: THREE.MeshStandardMaterial) {
       .replace(
         "#include <roughnessmap_fragment>",
         `#include <roughnessmap_fragment>
-         float detail = (texture2D(detailMap, vMapUv * detailTiling).r - 0.5) * detailFade();
+         float detail = (texture2D(detailMap, vMapUv * detailTiling).a - 0.5) * detailFade();
          roughnessFactor = clamp(roughnessFactor + detail * detailGloss, 0.04, 1.0);`,
       )
       .replace(
         "#include <map_fragment>",
         `#include <map_fragment>
-         diffuseColor.rgb *= 1.0 + (texture2D(detailMap, vMapUv * detailTiling).r - 0.5) * detailAlbedo * detailFade();`,
+         diffuseColor.rgb *= 1.0 + (texture2D(detailMap, vMapUv * detailTiling).a - 0.5) * detailAlbedo * detailFade();`,
       );
   };
   return material;

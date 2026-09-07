@@ -3,6 +3,7 @@ import * as THREE from "three";
 import type { MirrorMaterial, MirrorModel, MirrorTexture } from "@unicum.gg/wargaming";
 import { compile, withDetail, type CamoUniforms, type PaintedMaterial } from "./shader";
 import { BLANK, FLAT } from "./textures";
+import { switched } from "./switches";
 
 // Turning the mirror's materials into the renderer's.
 //
@@ -223,7 +224,15 @@ export function materialShop(
       built.transparent = false;
     }
     materials[materials.length - 1].built = built;
-    return compile(withDetail(built, spec?.values ?? {}));
+    // `?relief=grain` puts the invented one back, for comparing the two on the
+    // same vehicle at the same angle.
+    return compile(
+      withDetail(
+        built,
+        spec?.values ?? {},
+        switched("relief") === "grain" ? null : texture(maps.metallicDetailMap),
+      ),
+    );
   }
   return {
     texture,
