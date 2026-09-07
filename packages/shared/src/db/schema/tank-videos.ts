@@ -116,6 +116,35 @@ export const FORMAT_TIER: Partial<Record<BattleFormat, number>> = {
   [BattleFormat.Onslaught]: 10,
 };
 
+/**
+ * What a row may actually store for these two, given its format.
+ *
+ * Three cases, and only the middle one is the submitter's: a format that fixes
+ * the value stores nothing (reading it back goes through the format), a format
+ * that leaves it open stores what was declared, and a random battle stores
+ * nothing at all, since "the tier it was fought at" is not a thing anyone
+ * declares about one.
+ *
+ * Applied by every write rather than trusted from a form: the correction dialog
+ * hides these inputs when the format stops offering them, but hiding an input
+ * does not clear the state behind it, and a hand-made request never had one.
+ */
+export function storedTeamSize(
+  format: BattleFormat,
+  declared: number | null | undefined,
+): number | null {
+  if (!isCompetitiveFormat(format)) return null;
+  return FORMAT_TEAM_SIZE[format] ? null : (declared ?? null);
+}
+
+export function storedTier(
+  format: BattleFormat,
+  declared: number | null | undefined,
+): number | null {
+  if (!isCompetitiveFormat(format)) return null;
+  return FORMAT_TIER[format] ? null : (declared ?? null);
+}
+
 export const tankVideos = pgTable(
   "tank_videos",
   {
@@ -187,6 +216,23 @@ export const tankVideos = pgTable(
     reviewedAt: timestamp("reviewed_at", { withTimezone: true }),
     /** Discord id of the moderator who pressed the button. */
     reviewedBy: text("reviewed_by"),
+    /** Why it was turned down, in the moderator's words. A rejection is usually
+     * a correction waiting to happen (a timestamp a few seconds off, a map named
+     * wrong), and without this the submitter has no way to know which. Null on
+     * an approval, and on the rejections recorded before it was asked for. */
+    reviewNote: text("review_note"),
+
+    /** The moderation card this row was posted on, so an edit can rewrite it
+     * rather than leave a card describing a battle that has since changed. Null
+     * on the rows queued before editing existed, and whenever the post failed:
+     * the submission stands either way, so nothing on the write path may depend
+     * on this being set. */
+    discordMessageId: text("discord_message_id"),
+    editedAt: timestamp("edited_at", { withTimezone: true }),
+    /** Discord id of the moderator who corrected someone else's submission,
+     * like `reviewedBy` above. Null when the author edited their own, which
+     * `submittedBy` already names. */
+    editedBy: text("edited_by"),
   },
   (t) => [
     // One row per battle. Same video for another tank, or the same tank at
@@ -209,6 +255,9 @@ export const tankVideos = pgTable(
     index("tank_videos_arena_status_idx").on(t.arenaId, t.status),
     // The moderation queue, oldest first.
     index("tank_videos_status_submitted_idx").on(t.status, t.submittedAt),
+    // A submitter's own rows. Read on every video page a signed-in reader
+    // opens, to know which of the published ones are theirs to correct.
+    index("tank_videos_submitter_idx").on(t.submittedBy),
   ],
 );
 
