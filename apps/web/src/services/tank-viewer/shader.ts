@@ -53,6 +53,21 @@ export type CamoUniforms = {
 export type PaintedMaterial = { uniforms: CamoUniforms; part: string; piece: string };
 
 /**
+ * Whether the vehicle's own texture coordinates are there to be read.
+ *
+ * **three declares `vMapUv` for the diffuse map and for nothing else**, so a
+ * patch that samples at the material's own coordinates has none to sample at
+ * unless the material carries one. It does not fail quietly: the identifier is
+ * undeclared, the whole fragment shader fails to compile, and the piece is
+ * never drawn. The T-34-85 arrived as a turret and two tracks floating over the
+ * gap its hull should have filled.
+ *
+ * A material with no albedo is one the mirror carries none for, so there is
+ * nothing for either layer to modulate in any case: it is drawn as it is.
+ */
+const readsUv = (material: THREE.MeshStandardMaterial) => material.map !== null;
+
+/**
  * Weave the detail layer into a standard material.
  *
  * three has no slot for this, so it is patched into the compiled shader: the
@@ -80,6 +95,7 @@ export function withDetail(
   const gloss = Number(values?.g_detailPowerGloss ?? 0);
   const albedo = Number(values?.g_detailPowerAlbedo ?? 0);
   if (!Array.isArray(tiling) || !(gloss > 0 || albedo > 0)) return material;
+  if (!readsUv(material)) return material;
   material.userData.detail = {
     map: { value: map ?? GRAIN },
     tiling: { value: new THREE.Vector2(tiling[0] || 1, tiling[1] || 1) },
@@ -235,7 +251,7 @@ export function compile(material: THREE.MeshStandardMaterial) {
          #include <opaque_fragment>`,
       );
     }
-    paintCamouflage(material, shader);
+    if (readsUv(material)) paintCamouflage(material, shader);
 
     const detail = material.userData.detail;
     if (!detail) return;
