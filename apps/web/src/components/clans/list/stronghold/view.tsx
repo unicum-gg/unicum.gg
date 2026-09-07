@@ -16,13 +16,7 @@ import {
   PanelSeparator,
   PanelTitle,
 } from "@/components/panel";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { PeriodInlineSelect } from "@/components/period-inline-select";
 import {
   type RangeColumn,
   useLeaderboardFilter,
@@ -32,6 +26,11 @@ import type { StrongholdLeaderboardEntry } from "@/services/clans/stronghold-lea
 import { unicum } from "@/services/sdk";
 import { isStrongholdPeriod, useStrongholdPeriod } from "@/hooks/use-period";
 import { type Region, REGION_EMOJI, REGION_LABEL } from "@unicum.gg/wargaming";
+
+// The board's own menu order, which is the enum's: shortest window first,
+// Overall last. Deliberately not the stats tables' `STATS_PERIODS`, whose
+// order is their column order and puts Overall first.
+const BOARD_PERIODS = Object.values(StrongholdPeriod);
 
 export function StrongholdLeaderboardView({
   region,
@@ -187,25 +186,12 @@ export function StrongholdLeaderboardView({
         <PanelHeader>
           <PanelTitle>
             Top {results.length} {STRONGHOLD_TIER_LABEL[tier]} clans ·{" "}
-            <Select
-              value={period}
-              onValueChange={(v) => setPeriod(v as StrongholdPeriod)}
-            >
-              <SelectTrigger
-                size="sm"
-                aria-label="Period"
-                className="-my-1 inline-flex! h-7! gap-1 px-1.5! py-0! align-middle text-xl! font-semibold [&_svg]:size-4"
-              >
-                <SelectValue>{STRONGHOLD_PERIOD_LABEL[period]}</SelectValue>
-              </SelectTrigger>
-              <SelectContent>
-                {Object.values(StrongholdPeriod).map((per) => (
-                  <SelectItem key={per} value={per}>
-                    {STRONGHOLD_PERIOD_LABEL[per]}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <PeriodInlineSelect
+              period={period}
+              periods={BOARD_PERIODS}
+              label={(p) => STRONGHOLD_PERIOD_LABEL[p]}
+              onChange={setPeriod}
+            />
           </PanelTitle>
         </PanelHeader>
         <PanelContent className="p-0">

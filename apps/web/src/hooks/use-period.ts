@@ -72,3 +72,31 @@ export function useStrongholdPeriod(): [
     setStored,
   ];
 }
+
+/**
+ * The same four windows, read by a stats table rather than by a board.
+ *
+ * The enum is called `StrongholdPeriod` because the stronghold leaderboards
+ * were the first thing that needed all four, but the axis belongs to the site:
+ * a profile asking "how did the last 7 days go" is asking the boards' question
+ * about one account. Sharing the cookie is the point rather than an accident,
+ * the reader names a window once and every surface that can honour it does.
+ */
+export const useStatsPeriod = useStrongholdPeriod;
+
+/**
+ * The four windows in the order a stats table lays its COLUMNS out: the career
+ * first, then the three that read back from now.
+ *
+ * Positional, and read as such: the clan stronghold table maps it straight onto
+ * a fixed `<colgroup>` under the literal Total/24h/7d/30d headings. So it is not
+ * a menu order and must not be reused as one, or reordering a dropdown would
+ * quietly file the 24h figures under "Total". A select that happens to want the
+ * same order says so itself.
+ */
+export const STATS_PERIODS = [
+  StrongholdPeriod.Overall,
+  StrongholdPeriod.Day,
+  StrongholdPeriod.Week,
+  StrongholdPeriod.Month,
+] as const;
