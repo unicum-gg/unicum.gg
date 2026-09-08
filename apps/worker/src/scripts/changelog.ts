@@ -21,7 +21,12 @@ async function main(): Promise<void> {
   const result = await publishChangelog({ dryRun, model });
 
   console.log(`\noutcome: ${result.outcome} (${result.commits} commits)\n`);
-  if (result.message) console.log(result.message);
+  // One message most weeks, several when the digest runs past what Discord
+  // accepts in one, so the preview shows where the split falls.
+  result.messages?.forEach((message, i, all) => {
+    if (all.length > 1) console.log(`--- part ${i + 1}/${all.length} ---`);
+    console.log(message);
+  });
   process.exit(0);
 }
 

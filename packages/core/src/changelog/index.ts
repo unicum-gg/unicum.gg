@@ -35,8 +35,9 @@ export enum ChangelogOutcome {
 export type ChangelogResult = {
   outcome: ChangelogOutcome;
   commits: number;
-  /** The rendered message, whenever there was one. */
-  message?: string;
+  /** The rendered messages, whenever there were any. A week's digest can run
+   * past what Discord accepts in one, so this is a list. */
+  messages?: string[];
 };
 
 export function changelogEnabled(): boolean {
@@ -76,29 +77,44 @@ export async function publishChangelog(
     return { outcome: ChangelogOutcome.NothingToSay, commits: commits.length };
   }
 
-  const message = renderChangelogMessage(draft);
+  const messages = renderChangelogMessage(draft);
   if (options.dryRun) {
     return {
       outcome: ChangelogOutcome.DryRun,
       commits: commits.length,
-      message,
+      messages,
     };
   }
 
-  const posted = await postChannelMessage(
-    env.DISCORD_CHANGELOG_CHANNEL_ID!,
-    message,
-  );
-  if (!posted) {
-    return {
-      outcome: ChangelogOutcome.Failed,
-      commits: commits.length,
+  for (const [i, message] of messages.entries()) {
+    const posted = await postChannelMessage(
+      env.DISCORD_CHANGELOG_CHANNEL_ID!,
       message,
-    };
+    );
+    if (posted) continue;
+    // Nothing reached the channel: leave the batch for the next run rather than
+    // swallow an update nobody ever saw.
+    if (i === 0) {
+      return {
+        outcome: ChangelogOutcome.Failed,
+        commits: commits.length,
+        messages,
+      };
+    }
+    // The update is already partly published, so the batch is consumed anyway:
+    // resending it next week would repost what the channel has read, which is
+    // worse than an update missing its last few lines.
+    console.error(
+      `[changelog] part ${i + 1}/${messages.length} did not post, the update is published short`,
+    );
+    break;
   }
 
-  // Only after Discord took it: a failed post must leave the batch for the next
-  // run rather than swallow an update nobody ever saw.
+  // Only after Discord took it.
   await writeLastPublished(head);
-  return { outcome: ChangelogOutcome.Posted, commits: commits.length, message };
+  return {
+    outcome: ChangelogOutcome.Posted,
+    commits: commits.length,
+    messages,
+  };
 }
