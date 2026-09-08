@@ -2,10 +2,12 @@ import { env } from "@unicum.gg/shared";
 import { scheduleCron } from "@unicum.gg/core/cron/scheduler";
 import { ChangelogOutcome, changelogEnabled, publishChangelog } from ".";
 
-// Daily at 18:00, late enough that a day's work is in. The cadence is env-driven
-// so moving to a weekly digest ("0 18 * * 4", Thursdays) is a variable change on
-// the worker, not a deploy.
-const DEFAULT_SCHEDULE = "0 18 * * *";
+// Thursdays at 18:00, one digest a week rather than one a day: a day of work is
+// a handful of entries and reads as noise in a community channel, a week of it
+// reads as an update. The cadence stays env-driven, so a different day or a
+// return to daily ("0 18 * * *") is a variable change on the worker, not a
+// deploy.
+const DEFAULT_SCHEDULE = "0 18 * * 4";
 
 // Read in Paris time, not the container's UTC: this is the hour a message shows
 // up in a community channel, so it is a human decision, and it should not drift

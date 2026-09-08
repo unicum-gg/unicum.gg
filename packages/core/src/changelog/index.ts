@@ -15,9 +15,11 @@ import { changelogWriterEnabled, isEmptyDraft, writeChangelog } from "./write";
  */
 
 /** How far back the first run (or one whose stored commit GitHub no longer
- * knows) reaches. Wide enough to cover a missed tick without reaching into a
- * batch already published. */
-const FALLBACK_HOURS = 48;
+ * knows) reaches: the week the digest covers, plus a day of slack for a tick
+ * that ran late. Wide enough to cover the window without reaching far into a
+ * batch already published, so it follows the cadence in `./cron`: left at the
+ * daily 48h it would have covered two days of a seven-day digest. */
+const FALLBACK_HOURS = 8 * 24;
 
 export enum ChangelogOutcome {
   /** Posted to the channel. */

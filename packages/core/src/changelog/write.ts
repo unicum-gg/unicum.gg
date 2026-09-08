@@ -15,9 +15,10 @@ import type { Commit } from "./commits";
  * sentences: the schema below is the contract, `message.ts` does the rendering.
  */
 
-// Sol, the flagship. The run is one short call a day, so the cost of the best
-// model is noise, and this text is public. `gpt-5.6-terra`/`-luna` are the
-// cheaper siblings if that ever stops being true.
+// Sol, the flagship. The run is one call a week, over a week of commit subjects,
+// so the cost of the best model is noise, and this text is public.
+// `gpt-5.6-terra`/`-luna` are the cheaper siblings if that ever stops being
+// true.
 const MODEL = "gpt-5.6";
 
 const draftSchema = z.object({
